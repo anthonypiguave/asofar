@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -31,8 +32,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class InMovimientosJpaController implements Serializable {
 
-    public InMovimientosJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public InMovimientosJpaController() {
+       this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

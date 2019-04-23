@@ -19,6 +19,7 @@ import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InTipoDocumento;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -26,8 +27,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class InTipoDocumentoJpaController implements Serializable {
 
-    public InTipoDocumentoJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public InTipoDocumentoJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

@@ -23,6 +23,7 @@ import ec.com.asofar.dto.SeUsuariosPK;
 import ec.com.asofar.dto.VeFactura;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -30,8 +31,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class SeUsuariosJpaController implements Serializable {
 
-    public SeUsuariosJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public SeUsuariosJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

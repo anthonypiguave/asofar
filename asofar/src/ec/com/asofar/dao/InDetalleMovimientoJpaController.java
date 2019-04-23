@@ -16,6 +16,7 @@ import ec.com.asofar.dto.InMovimientos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -23,8 +24,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class InDetalleMovimientoJpaController implements Serializable {
 
-    public InDetalleMovimientoJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public InDetalleMovimientoJpaController() {
+       this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

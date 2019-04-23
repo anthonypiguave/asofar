@@ -24,6 +24,7 @@ import ec.com.asofar.dto.PrPrestacionesPK;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -31,8 +32,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class PrPrestacionesJpaController implements Serializable {
 
-    public PrPrestacionesJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public PrPrestacionesJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

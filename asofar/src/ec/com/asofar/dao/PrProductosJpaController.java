@@ -25,6 +25,7 @@ import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrProductosPK;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -32,8 +33,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class PrProductosJpaController implements Serializable {
 
-    public PrProductosJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public PrProductosJpaController() {
+       this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

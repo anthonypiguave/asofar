@@ -23,6 +23,7 @@ import java.util.List;
 import ec.com.asofar.dto.InMovimientos;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -30,8 +31,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class CoOrdenComprasJpaController implements Serializable {
 
-    public CoOrdenComprasJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public CoOrdenComprasJpaController() {
+      this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

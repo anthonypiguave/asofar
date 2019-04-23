@@ -23,6 +23,7 @@ import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -30,8 +31,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class SeEmpresaJpaController implements Serializable {
 
-    public SeEmpresaJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public SeEmpresaJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 

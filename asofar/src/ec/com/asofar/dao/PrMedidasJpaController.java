@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -30,8 +31,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class PrMedidasJpaController implements Serializable {
 
-    public PrMedidasJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public PrMedidasJpaController() {
+       this.emf = Persistence.createEntityManagerFactory("asofarPU");
     }
     private EntityManagerFactory emf = null;
 
