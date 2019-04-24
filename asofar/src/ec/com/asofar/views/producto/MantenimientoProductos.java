@@ -5,8 +5,12 @@
  */
 package ec.com.asofar.views.producto;
 
+import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.dao.PrGruposJpaController;
+import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -18,11 +22,14 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class MantenimientoProductos extends javax.swing.JDialog {
 
-   
     PrGruposJpaController cgrupo = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<PrGrupos> listagrupo = cgrupo.findPrGruposEntities();
-    
-    
+    PrSubgruposJpaController csub = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrArticuloJpaController carti = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    List<PrGrupos> listgrupo = cgrupo.findPrGruposEntities();
+    List<PrSubgrupos> listsub = csub.findPrSubgruposEntities();
+    List<PrArticulo> listart = carti.findPrArticuloEntities();
+
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,12 +40,21 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     public void CargarArbol() {
         try {
             DefaultMutableTreeNode grupo = new DefaultMutableTreeNode();
-            List<PrGrupos> listagrupo =  cgrupo.findPrGruposEntities();
-            for (PrGrupos g : listagrupo) {
+
+            for (PrGrupos g : listgrupo) {
                 DefaultMutableTreeNode hgru = new DefaultMutableTreeNode();
                 hgru.setUserObject(g.getNombre());
                 grupo.add(hgru);
-            }
+                
+                for (PrSubgrupos sg : listsub) { 
+                    DefaultMutableTreeNode hsub = new DefaultMutableTreeNode();
+                    if(sg.getPrSubgruposPK().getIdGrupo()== g.getIdGrupo()){
+                    hsub.setUserObject(sg.getNombre());
+                    hgru.add(hsub);
+                    
+                    }
+                }
+            } 
 
             DefaultTreeModel model = new DefaultTreeModel(grupo);
             this.arbol.setModel(model);
@@ -142,7 +158,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
+                .addContainerGap(155, Short.MAX_VALUE)
                 .addComponent(BotonNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(156, 156, 156))
         );
@@ -167,7 +183,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
