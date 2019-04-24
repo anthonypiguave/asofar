@@ -20,16 +20,15 @@ import ec.com.asofar.dto.VeUnidadServicio;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrDetalleTarifarioJpaController implements Serializable {
 
-    public PrDetalleTarifarioJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public PrDetalleTarifarioJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -42,10 +41,10 @@ public class PrDetalleTarifarioJpaController implements Serializable {
             prDetalleTarifario.setPrDetalleTarifarioPK(new PrDetalleTarifarioPK());
         }
         prDetalleTarifario.getPrDetalleTarifarioPK().setIdPrestacion(prDetalleTarifario.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        prDetalleTarifario.getPrDetalleTarifarioPK().setIdEmpresa(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdEmpresa());
         prDetalleTarifario.getPrDetalleTarifarioPK().setIdSurcusal(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdSurcusal());
-        prDetalleTarifario.getPrDetalleTarifarioPK().setIdUnidadServicio(prDetalleTarifario.getVeUnidadServicio().getIdUnidadServicio());
         prDetalleTarifario.getPrDetalleTarifarioPK().setIdTarifario(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdTarifario());
+        prDetalleTarifario.getPrDetalleTarifarioPK().setIdUnidadServicio(prDetalleTarifario.getVeUnidadServicio().getIdUnidadServicio());
+        prDetalleTarifario.getPrDetalleTarifarioPK().setIdEmpresa(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -93,10 +92,10 @@ public class PrDetalleTarifarioJpaController implements Serializable {
 
     public void edit(PrDetalleTarifario prDetalleTarifario) throws NonexistentEntityException, Exception {
         prDetalleTarifario.getPrDetalleTarifarioPK().setIdPrestacion(prDetalleTarifario.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        prDetalleTarifario.getPrDetalleTarifarioPK().setIdEmpresa(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdEmpresa());
         prDetalleTarifario.getPrDetalleTarifarioPK().setIdSurcusal(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdSurcusal());
-        prDetalleTarifario.getPrDetalleTarifarioPK().setIdUnidadServicio(prDetalleTarifario.getVeUnidadServicio().getIdUnidadServicio());
         prDetalleTarifario.getPrDetalleTarifarioPK().setIdTarifario(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdTarifario());
+        prDetalleTarifario.getPrDetalleTarifarioPK().setIdUnidadServicio(prDetalleTarifario.getVeUnidadServicio().getIdUnidadServicio());
+        prDetalleTarifario.getPrDetalleTarifarioPK().setIdEmpresa(prDetalleTarifario.getPrTarifario().getPrTarifarioPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();

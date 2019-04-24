@@ -19,16 +19,15 @@ import ec.com.asofar.dto.SeRoles;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeOpcionesRolesJpaController implements Serializable {
 
-    public SeOpcionesRolesJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public SeOpcionesRolesJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -40,8 +39,8 @@ public class SeOpcionesRolesJpaController implements Serializable {
         if (seOpcionesRoles.getSeOpcionesRolesPK() == null) {
             seOpcionesRoles.setSeOpcionesRolesPK(new SeOpcionesRolesPK());
         }
-        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         seOpcionesRoles.getSeOpcionesRolesPK().setIdRol(seOpcionesRoles.getSeRoles().getIdRoles());
+        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -79,8 +78,8 @@ public class SeOpcionesRolesJpaController implements Serializable {
     }
 
     public void edit(SeOpcionesRoles seOpcionesRoles) throws NonexistentEntityException, Exception {
-        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         seOpcionesRoles.getSeOpcionesRolesPK().setIdRol(seOpcionesRoles.getSeRoles().getIdRoles());
+        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         EntityManager em = null;
         try {
             em = getEntityManager();

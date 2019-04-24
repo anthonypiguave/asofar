@@ -23,16 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrMedidasJpaController implements Serializable {
 
-    public PrMedidasJpaController() {
-       this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public PrMedidasJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -47,9 +46,9 @@ public class PrMedidasJpaController implements Serializable {
         if (prMedidas.getPrProductosList() == null) {
             prMedidas.setPrProductosList(new ArrayList<PrProductos>());
         }
+        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
         prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
-        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
         prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
         EntityManager em = null;
@@ -113,9 +112,9 @@ public class PrMedidasJpaController implements Serializable {
     }
 
     public void edit(PrMedidas prMedidas) throws IllegalOrphanException, NonexistentEntityException, Exception {
+        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
         prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
-        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
         prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
         EntityManager em = null;

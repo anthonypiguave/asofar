@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +23,15 @@ import ec.com.asofar.dto.PrPrestacionesPK;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrPrestacionesJpaController implements Serializable {
 
-    public PrPrestacionesJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public PrPrestacionesJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -55,7 +53,6 @@ public class PrPrestacionesJpaController implements Serializable {
             prPrestaciones.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
         }
         prPrestaciones.getPrPrestacionesPK().setIdEmpresa(prPrestaciones.getSeEmpresa().getIdEmpresa());
-        prPrestaciones.getPrPrestacionesPK().setIdPoducto(prPrestaciones.getPrProductos().getPrProductosPK().getIdProducto());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -64,11 +61,6 @@ public class PrPrestacionesJpaController implements Serializable {
             if (seEmpresa != null) {
                 seEmpresa = em.getReference(seEmpresa.getClass(), seEmpresa.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresa);
-            }
-            PrProductos prProductos = prPrestaciones.getPrProductos();
-            if (prProductos != null) {
-                prProductos = em.getReference(prProductos.getClass(), prProductos.getPrProductosPK());
-                prPrestaciones.setPrProductos(prProductos);
             }
             List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
             for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : prPrestaciones.getPrDetalleTarifarioList()) {
@@ -92,10 +84,6 @@ public class PrPrestacionesJpaController implements Serializable {
             if (seEmpresa != null) {
                 seEmpresa.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresa = em.merge(seEmpresa);
-            }
-            if (prProductos != null) {
-                prProductos.getPrPrestacionesList().add(prPrestaciones);
-                prProductos = em.merge(prProductos);
             }
             for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : prPrestaciones.getPrDetalleTarifarioList()) {
                 PrPrestaciones oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getPrPrestaciones();
@@ -139,7 +127,6 @@ public class PrPrestacionesJpaController implements Serializable {
 
     public void edit(PrPrestaciones prPrestaciones) throws IllegalOrphanException, NonexistentEntityException, Exception {
         prPrestaciones.getPrPrestacionesPK().setIdEmpresa(prPrestaciones.getSeEmpresa().getIdEmpresa());
-        prPrestaciones.getPrPrestacionesPK().setIdPoducto(prPrestaciones.getPrProductos().getPrProductosPK().getIdProducto());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -147,8 +134,6 @@ public class PrPrestacionesJpaController implements Serializable {
             PrPrestaciones persistentPrPrestaciones = em.find(PrPrestaciones.class, prPrestaciones.getPrPrestacionesPK());
             SeEmpresa seEmpresaOld = persistentPrPrestaciones.getSeEmpresa();
             SeEmpresa seEmpresaNew = prPrestaciones.getSeEmpresa();
-            PrProductos prProductosOld = persistentPrPrestaciones.getPrProductos();
-            PrProductos prProductosNew = prPrestaciones.getPrProductos();
             List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrPrestaciones.getPrDetalleTarifarioList();
             List<PrDetalleTarifario> prDetalleTarifarioListNew = prPrestaciones.getPrDetalleTarifarioList();
             List<InKardex> inKardexListOld = persistentPrPrestaciones.getInKardexList();
@@ -187,10 +172,6 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresaNew);
             }
-            if (prProductosNew != null) {
-                prProductosNew = em.getReference(prProductosNew.getClass(), prProductosNew.getPrProductosPK());
-                prPrestaciones.setPrProductos(prProductosNew);
-            }
             List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
             for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
                 prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
@@ -220,14 +201,6 @@ public class PrPrestacionesJpaController implements Serializable {
             if (seEmpresaNew != null && !seEmpresaNew.equals(seEmpresaOld)) {
                 seEmpresaNew.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresaNew = em.merge(seEmpresaNew);
-            }
-            if (prProductosOld != null && !prProductosOld.equals(prProductosNew)) {
-                prProductosOld.getPrPrestacionesList().remove(prPrestaciones);
-                prProductosOld = em.merge(prProductosOld);
-            }
-            if (prProductosNew != null && !prProductosNew.equals(prProductosOld)) {
-                prProductosNew.getPrPrestacionesList().add(prPrestaciones);
-                prProductosNew = em.merge(prProductosNew);
             }
             for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
                 if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
@@ -320,11 +293,6 @@ public class PrPrestacionesJpaController implements Serializable {
             if (seEmpresa != null) {
                 seEmpresa.getPrPrestacionesList().remove(prPrestaciones);
                 seEmpresa = em.merge(seEmpresa);
-            }
-            PrProductos prProductos = prPrestaciones.getPrProductos();
-            if (prProductos != null) {
-                prProductos.getPrPrestacionesList().remove(prPrestaciones);
-                prProductos = em.merge(prProductos);
             }
             em.remove(prPrestaciones);
             em.getTransaction().commit();

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "in_kardex")
@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InKardex.findByIdKardex", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idKardex = :idKardex")
     , @NamedQuery(name = "InKardex.findByIdEmpresa", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "InKardex.findByIdSucursal", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "InKardex.findByIdTipoBodega", query = "SELECT i FROM InKardex i WHERE i.idTipoBodega = :idTipoBodega")
     , @NamedQuery(name = "InKardex.findByIdBodega", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idBodega = :idBodega")
     , @NamedQuery(name = "InKardex.findByIdPrestaciones", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idPrestaciones = :idPrestaciones")
     , @NamedQuery(name = "InKardex.findByFechaMovimiento", query = "SELECT i FROM InKardex i WHERE i.fechaMovimiento = :fechaMovimiento")
@@ -61,6 +62,8 @@ public class InKardex implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InKardexPK inKardexPK;
+    @Column(name = "id_tipo_bodega")
+    private BigInteger idTipoBodega;
     @Column(name = "fecha_movimiento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaMovimiento;
@@ -102,15 +105,14 @@ public class InKardex implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumn(name = "id_bodega", referencedColumnName = "id_bodega", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private InBodega inBodega;
     @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
+    @JoinColumns({
+        @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrPrestaciones prPrestaciones;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento", insertable = false, updatable = false)
@@ -137,6 +139,14 @@ public class InKardex implements Serializable {
 
     public void setInKardexPK(InKardexPK inKardexPK) {
         this.inKardexPK = inKardexPK;
+    }
+
+    public BigInteger getIdTipoBodega() {
+        return idTipoBodega;
+    }
+
+    public void setIdTipoBodega(BigInteger idTipoBodega) {
+        this.idTipoBodega = idTipoBodega;
     }
 
     public Date getFechaMovimiento() {
@@ -281,14 +291,6 @@ public class InKardex implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    public InBodega getInBodega() {
-        return inBodega;
-    }
-
-    public void setInBodega(InBodega inBodega) {
-        this.inBodega = inBodega;
     }
 
     public SeSucursal getSeSucursal() {

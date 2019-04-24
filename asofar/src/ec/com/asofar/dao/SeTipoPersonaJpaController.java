@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.dao;
 
-import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -18,16 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeTipoPersonaJpaController implements Serializable {
 
-    public SeTipoPersonaJpaController() {
-       this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public SeTipoPersonaJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -45,18 +43,18 @@ public class SeTipoPersonaJpaController implements Serializable {
             em.getTransaction().begin();
             List<SePersonas> attachedSePersonasList = new ArrayList<SePersonas>();
             for (SePersonas sePersonasListSePersonasToAttach : seTipoPersona.getSePersonasList()) {
-                sePersonasListSePersonasToAttach = em.getReference(sePersonasListSePersonasToAttach.getClass(), sePersonasListSePersonasToAttach.getSePersonasPK());
+                sePersonasListSePersonasToAttach = em.getReference(sePersonasListSePersonasToAttach.getClass(), sePersonasListSePersonasToAttach.getIdPersona());
                 attachedSePersonasList.add(sePersonasListSePersonasToAttach);
             }
             seTipoPersona.setSePersonasList(attachedSePersonasList);
             em.persist(seTipoPersona);
             for (SePersonas sePersonasListSePersonas : seTipoPersona.getSePersonasList()) {
-                SeTipoPersona oldSeTipoPersonaOfSePersonasListSePersonas = sePersonasListSePersonas.getSeTipoPersona();
-                sePersonasListSePersonas.setSeTipoPersona(seTipoPersona);
+                SeTipoPersona oldIdTipoPersonaOfSePersonasListSePersonas = sePersonasListSePersonas.getIdTipoPersona();
+                sePersonasListSePersonas.setIdTipoPersona(seTipoPersona);
                 sePersonasListSePersonas = em.merge(sePersonasListSePersonas);
-                if (oldSeTipoPersonaOfSePersonasListSePersonas != null) {
-                    oldSeTipoPersonaOfSePersonasListSePersonas.getSePersonasList().remove(sePersonasListSePersonas);
-                    oldSeTipoPersonaOfSePersonasListSePersonas = em.merge(oldSeTipoPersonaOfSePersonasListSePersonas);
+                if (oldIdTipoPersonaOfSePersonasListSePersonas != null) {
+                    oldIdTipoPersonaOfSePersonasListSePersonas.getSePersonasList().remove(sePersonasListSePersonas);
+                    oldIdTipoPersonaOfSePersonasListSePersonas = em.merge(oldIdTipoPersonaOfSePersonasListSePersonas);
                 }
             }
             em.getTransaction().commit();
@@ -67,7 +65,7 @@ public class SeTipoPersonaJpaController implements Serializable {
         }
     }
 
-    public void edit(SeTipoPersona seTipoPersona) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(SeTipoPersona seTipoPersona) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -75,34 +73,28 @@ public class SeTipoPersonaJpaController implements Serializable {
             SeTipoPersona persistentSeTipoPersona = em.find(SeTipoPersona.class, seTipoPersona.getIdTipoPersona());
             List<SePersonas> sePersonasListOld = persistentSeTipoPersona.getSePersonasList();
             List<SePersonas> sePersonasListNew = seTipoPersona.getSePersonasList();
-            List<String> illegalOrphanMessages = null;
-            for (SePersonas sePersonasListOldSePersonas : sePersonasListOld) {
-                if (!sePersonasListNew.contains(sePersonasListOldSePersonas)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain SePersonas " + sePersonasListOldSePersonas + " since its seTipoPersona field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             List<SePersonas> attachedSePersonasListNew = new ArrayList<SePersonas>();
             for (SePersonas sePersonasListNewSePersonasToAttach : sePersonasListNew) {
-                sePersonasListNewSePersonasToAttach = em.getReference(sePersonasListNewSePersonasToAttach.getClass(), sePersonasListNewSePersonasToAttach.getSePersonasPK());
+                sePersonasListNewSePersonasToAttach = em.getReference(sePersonasListNewSePersonasToAttach.getClass(), sePersonasListNewSePersonasToAttach.getIdPersona());
                 attachedSePersonasListNew.add(sePersonasListNewSePersonasToAttach);
             }
             sePersonasListNew = attachedSePersonasListNew;
             seTipoPersona.setSePersonasList(sePersonasListNew);
             seTipoPersona = em.merge(seTipoPersona);
+            for (SePersonas sePersonasListOldSePersonas : sePersonasListOld) {
+                if (!sePersonasListNew.contains(sePersonasListOldSePersonas)) {
+                    sePersonasListOldSePersonas.setIdTipoPersona(null);
+                    sePersonasListOldSePersonas = em.merge(sePersonasListOldSePersonas);
+                }
+            }
             for (SePersonas sePersonasListNewSePersonas : sePersonasListNew) {
                 if (!sePersonasListOld.contains(sePersonasListNewSePersonas)) {
-                    SeTipoPersona oldSeTipoPersonaOfSePersonasListNewSePersonas = sePersonasListNewSePersonas.getSeTipoPersona();
-                    sePersonasListNewSePersonas.setSeTipoPersona(seTipoPersona);
+                    SeTipoPersona oldIdTipoPersonaOfSePersonasListNewSePersonas = sePersonasListNewSePersonas.getIdTipoPersona();
+                    sePersonasListNewSePersonas.setIdTipoPersona(seTipoPersona);
                     sePersonasListNewSePersonas = em.merge(sePersonasListNewSePersonas);
-                    if (oldSeTipoPersonaOfSePersonasListNewSePersonas != null && !oldSeTipoPersonaOfSePersonasListNewSePersonas.equals(seTipoPersona)) {
-                        oldSeTipoPersonaOfSePersonasListNewSePersonas.getSePersonasList().remove(sePersonasListNewSePersonas);
-                        oldSeTipoPersonaOfSePersonasListNewSePersonas = em.merge(oldSeTipoPersonaOfSePersonasListNewSePersonas);
+                    if (oldIdTipoPersonaOfSePersonasListNewSePersonas != null && !oldIdTipoPersonaOfSePersonasListNewSePersonas.equals(seTipoPersona)) {
+                        oldIdTipoPersonaOfSePersonasListNewSePersonas.getSePersonasList().remove(sePersonasListNewSePersonas);
+                        oldIdTipoPersonaOfSePersonasListNewSePersonas = em.merge(oldIdTipoPersonaOfSePersonasListNewSePersonas);
                     }
                 }
             }
@@ -123,7 +115,7 @@ public class SeTipoPersonaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -135,16 +127,10 @@ public class SeTipoPersonaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The seTipoPersona with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<SePersonas> sePersonasListOrphanCheck = seTipoPersona.getSePersonasList();
-            for (SePersonas sePersonasListOrphanCheckSePersonas : sePersonasListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SeTipoPersona (" + seTipoPersona + ") cannot be destroyed since the SePersonas " + sePersonasListOrphanCheckSePersonas + " in its sePersonasList field has a non-nullable seTipoPersona field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
+            List<SePersonas> sePersonasList = seTipoPersona.getSePersonasList();
+            for (SePersonas sePersonasListSePersonas : sePersonasList) {
+                sePersonasListSePersonas.setIdTipoPersona(null);
+                sePersonasListSePersonas = em.merge(sePersonasListSePersonas);
             }
             em.remove(seTipoPersona);
             em.getTransaction().commit();

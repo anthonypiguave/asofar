@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "ve_factura_detalle")
@@ -87,10 +87,14 @@ public class VeFacturaDetalle implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @JoinColumn(name = "id_factura", referencedColumnName = "id_factura", insertable = false, updatable = false)
+    @JoinColumns({
+        @JoinColumn(name = "id_factura", referencedColumnName = "id_factura", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private VeFactura veFactura;
-    @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
+    @JoinColumns({
+        @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrPrestaciones prPrestaciones;
     @JoinColumn(name = "id_unidad_servicio", referencedColumnName = "id_unidad_servicio", insertable = false, updatable = false)

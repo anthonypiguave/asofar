@@ -18,16 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeOpcionesMenuJpaController implements Serializable {
 
-    public SeOpcionesMenuJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public SeOpcionesMenuJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

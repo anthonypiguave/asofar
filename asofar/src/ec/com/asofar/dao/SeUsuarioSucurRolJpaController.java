@@ -20,16 +20,15 @@ import ec.com.asofar.dto.SeUsuarios;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeUsuarioSucurRolJpaController implements Serializable {
 
-    public SeUsuarioSucurRolJpaController() {
-       this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public SeUsuarioSucurRolJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -41,8 +40,8 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
         if (seUsuarioSucurRol.getSeUsuarioSucurRolPK() == null) {
             seUsuarioSucurRol.setSeUsuarioSucurRolPK(new SeUsuarioSucurRolPK());
         }
-        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdSucursal(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -59,7 +58,7 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
             }
             SeUsuarios idUsuario = seUsuarioSucurRol.getIdUsuario();
             if (idUsuario != null) {
-                idUsuario = em.getReference(idUsuario.getClass(), idUsuario.getSeUsuariosPK());
+                idUsuario = em.getReference(idUsuario.getClass(), idUsuario.getIdUsuario());
                 seUsuarioSucurRol.setIdUsuario(idUsuario);
             }
             em.persist(seUsuarioSucurRol);
@@ -89,8 +88,8 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
     }
 
     public void edit(SeUsuarioSucurRol seUsuarioSucurRol) throws NonexistentEntityException, Exception {
-        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdSucursal(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -111,7 +110,7 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
                 seUsuarioSucurRol.setSeSucursal(seSucursalNew);
             }
             if (idUsuarioNew != null) {
-                idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getSeUsuariosPK());
+                idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getIdUsuario());
                 seUsuarioSucurRol.setIdUsuario(idUsuarioNew);
             }
             seUsuarioSucurRol = em.merge(seUsuarioSucurRol);

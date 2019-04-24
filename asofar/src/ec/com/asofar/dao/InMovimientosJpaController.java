@@ -12,8 +12,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.CoOrdenCompras;
+import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.SeUsuarios;
@@ -24,16 +24,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class InMovimientosJpaController implements Serializable {
 
-    public InMovimientosJpaController() {
-       this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public InMovimientosJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -48,40 +47,36 @@ public class InMovimientosJpaController implements Serializable {
         if (inMovimientos.getInDetalleMovimientoList() == null) {
             inMovimientos.setInDetalleMovimientoList(new ArrayList<InDetalleMovimiento>());
         }
-        inMovimientos.getInMovimientosPK().setIdOrdenCompra(inMovimientos.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
-        inMovimientos.getInMovimientosPK().setIdBodega(inMovimientos.getInBodega().getInBodegaPK().getIdBodega());
+        inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getInBodega().getInBodegaPK().getIdEmpresa());
-        inMovimientos.getInMovimientosPK().setIdUsuario(inMovimientos.getSeUsuarios().getSeUsuariosPK().getIdUsuario());
-        inMovimientos.getInMovimientosPK().setIdProveedor(inMovimientos.getSePersonas().getSePersonasPK().getIdPersona());
-        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getInBodega().getInBodegaPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            InBodega inBodega = inMovimientos.getInBodega();
-            if (inBodega != null) {
-                inBodega = em.getReference(inBodega.getClass(), inBodega.getInBodegaPK());
-                inMovimientos.setInBodega(inBodega);
-            }
             CoOrdenCompras coOrdenCompras = inMovimientos.getCoOrdenCompras();
             if (coOrdenCompras != null) {
                 coOrdenCompras = em.getReference(coOrdenCompras.getClass(), coOrdenCompras.getCoOrdenComprasPK());
                 inMovimientos.setCoOrdenCompras(coOrdenCompras);
             }
-            SePersonas sePersonas = inMovimientos.getSePersonas();
-            if (sePersonas != null) {
-                sePersonas = em.getReference(sePersonas.getClass(), sePersonas.getSePersonasPK());
-                inMovimientos.setSePersonas(sePersonas);
+            InBodega inBodega = inMovimientos.getInBodega();
+            if (inBodega != null) {
+                inBodega = em.getReference(inBodega.getClass(), inBodega.getInBodegaPK());
+                inMovimientos.setInBodega(inBodega);
             }
-            InTipoDocumento idNumeroDocumento = inMovimientos.getIdNumeroDocumento();
-            if (idNumeroDocumento != null) {
-                idNumeroDocumento = em.getReference(idNumeroDocumento.getClass(), idNumeroDocumento.getIdTipoDocumento());
-                inMovimientos.setIdNumeroDocumento(idNumeroDocumento);
+            SePersonas idProveedor = inMovimientos.getIdProveedor();
+            if (idProveedor != null) {
+                idProveedor = em.getReference(idProveedor.getClass(), idProveedor.getIdPersona());
+                inMovimientos.setIdProveedor(idProveedor);
             }
-            SeUsuarios seUsuarios = inMovimientos.getSeUsuarios();
-            if (seUsuarios != null) {
-                seUsuarios = em.getReference(seUsuarios.getClass(), seUsuarios.getSeUsuariosPK());
-                inMovimientos.setSeUsuarios(seUsuarios);
+            InTipoDocumento inTipoDocumento = inMovimientos.getInTipoDocumento();
+            if (inTipoDocumento != null) {
+                inTipoDocumento = em.getReference(inTipoDocumento.getClass(), inTipoDocumento.getIdTipoDocumento());
+                inMovimientos.setInTipoDocumento(inTipoDocumento);
+            }
+            SeUsuarios idUsuario = inMovimientos.getIdUsuario();
+            if (idUsuario != null) {
+                idUsuario = em.getReference(idUsuario.getClass(), idUsuario.getIdUsuario());
+                inMovimientos.setIdUsuario(idUsuario);
             }
             List<InDetalleMovimiento> attachedInDetalleMovimientoList = new ArrayList<InDetalleMovimiento>();
             for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimientoToAttach : inMovimientos.getInDetalleMovimientoList()) {
@@ -90,33 +85,33 @@ public class InMovimientosJpaController implements Serializable {
             }
             inMovimientos.setInDetalleMovimientoList(attachedInDetalleMovimientoList);
             em.persist(inMovimientos);
-            if (inBodega != null) {
-                inBodega.getInMovimientosList().add(inMovimientos);
-                inBodega = em.merge(inBodega);
-            }
             if (coOrdenCompras != null) {
                 coOrdenCompras.getInMovimientosList().add(inMovimientos);
                 coOrdenCompras = em.merge(coOrdenCompras);
             }
-            if (sePersonas != null) {
-                sePersonas.getInMovimientosList().add(inMovimientos);
-                sePersonas = em.merge(sePersonas);
+            if (inBodega != null) {
+                inBodega.getInMovimientosList().add(inMovimientos);
+                inBodega = em.merge(inBodega);
             }
-            if (idNumeroDocumento != null) {
-                idNumeroDocumento.getInMovimientosList().add(inMovimientos);
-                idNumeroDocumento = em.merge(idNumeroDocumento);
+            if (idProveedor != null) {
+                idProveedor.getInMovimientosList().add(inMovimientos);
+                idProveedor = em.merge(idProveedor);
             }
-            if (seUsuarios != null) {
-                seUsuarios.getInMovimientosList().add(inMovimientos);
-                seUsuarios = em.merge(seUsuarios);
+            if (inTipoDocumento != null) {
+                inTipoDocumento.getInMovimientosList().add(inMovimientos);
+                inTipoDocumento = em.merge(inTipoDocumento);
+            }
+            if (idUsuario != null) {
+                idUsuario.getInMovimientosList().add(inMovimientos);
+                idUsuario = em.merge(idUsuario);
             }
             for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimiento : inMovimientos.getInDetalleMovimientoList()) {
-                InMovimientos oldIdMovimientosOfInDetalleMovimientoListInDetalleMovimiento = inDetalleMovimientoListInDetalleMovimiento.getIdMovimientos();
-                inDetalleMovimientoListInDetalleMovimiento.setIdMovimientos(inMovimientos);
+                InMovimientos oldInMovimientosOfInDetalleMovimientoListInDetalleMovimiento = inDetalleMovimientoListInDetalleMovimiento.getInMovimientos();
+                inDetalleMovimientoListInDetalleMovimiento.setInMovimientos(inMovimientos);
                 inDetalleMovimientoListInDetalleMovimiento = em.merge(inDetalleMovimientoListInDetalleMovimiento);
-                if (oldIdMovimientosOfInDetalleMovimientoListInDetalleMovimiento != null) {
-                    oldIdMovimientosOfInDetalleMovimientoListInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListInDetalleMovimiento);
-                    oldIdMovimientosOfInDetalleMovimientoListInDetalleMovimiento = em.merge(oldIdMovimientosOfInDetalleMovimientoListInDetalleMovimiento);
+                if (oldInMovimientosOfInDetalleMovimientoListInDetalleMovimiento != null) {
+                    oldInMovimientosOfInDetalleMovimientoListInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListInDetalleMovimiento);
+                    oldInMovimientosOfInDetalleMovimientoListInDetalleMovimiento = em.merge(oldInMovimientosOfInDetalleMovimientoListInDetalleMovimiento);
                 }
             }
             em.getTransaction().commit();
@@ -133,48 +128,44 @@ public class InMovimientosJpaController implements Serializable {
     }
 
     public void edit(InMovimientos inMovimientos) throws NonexistentEntityException, Exception {
-        inMovimientos.getInMovimientosPK().setIdOrdenCompra(inMovimientos.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
-        inMovimientos.getInMovimientosPK().setIdBodega(inMovimientos.getInBodega().getInBodegaPK().getIdBodega());
+        inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getInBodega().getInBodegaPK().getIdEmpresa());
-        inMovimientos.getInMovimientosPK().setIdUsuario(inMovimientos.getSeUsuarios().getSeUsuariosPK().getIdUsuario());
-        inMovimientos.getInMovimientosPK().setIdProveedor(inMovimientos.getSePersonas().getSePersonasPK().getIdPersona());
-        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getInBodega().getInBodegaPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             InMovimientos persistentInMovimientos = em.find(InMovimientos.class, inMovimientos.getInMovimientosPK());
-            InBodega inBodegaOld = persistentInMovimientos.getInBodega();
-            InBodega inBodegaNew = inMovimientos.getInBodega();
             CoOrdenCompras coOrdenComprasOld = persistentInMovimientos.getCoOrdenCompras();
             CoOrdenCompras coOrdenComprasNew = inMovimientos.getCoOrdenCompras();
-            SePersonas sePersonasOld = persistentInMovimientos.getSePersonas();
-            SePersonas sePersonasNew = inMovimientos.getSePersonas();
-            InTipoDocumento idNumeroDocumentoOld = persistentInMovimientos.getIdNumeroDocumento();
-            InTipoDocumento idNumeroDocumentoNew = inMovimientos.getIdNumeroDocumento();
-            SeUsuarios seUsuariosOld = persistentInMovimientos.getSeUsuarios();
-            SeUsuarios seUsuariosNew = inMovimientos.getSeUsuarios();
+            InBodega inBodegaOld = persistentInMovimientos.getInBodega();
+            InBodega inBodegaNew = inMovimientos.getInBodega();
+            SePersonas idProveedorOld = persistentInMovimientos.getIdProveedor();
+            SePersonas idProveedorNew = inMovimientos.getIdProveedor();
+            InTipoDocumento inTipoDocumentoOld = persistentInMovimientos.getInTipoDocumento();
+            InTipoDocumento inTipoDocumentoNew = inMovimientos.getInTipoDocumento();
+            SeUsuarios idUsuarioOld = persistentInMovimientos.getIdUsuario();
+            SeUsuarios idUsuarioNew = inMovimientos.getIdUsuario();
             List<InDetalleMovimiento> inDetalleMovimientoListOld = persistentInMovimientos.getInDetalleMovimientoList();
             List<InDetalleMovimiento> inDetalleMovimientoListNew = inMovimientos.getInDetalleMovimientoList();
-            if (inBodegaNew != null) {
-                inBodegaNew = em.getReference(inBodegaNew.getClass(), inBodegaNew.getInBodegaPK());
-                inMovimientos.setInBodega(inBodegaNew);
-            }
             if (coOrdenComprasNew != null) {
                 coOrdenComprasNew = em.getReference(coOrdenComprasNew.getClass(), coOrdenComprasNew.getCoOrdenComprasPK());
                 inMovimientos.setCoOrdenCompras(coOrdenComprasNew);
             }
-            if (sePersonasNew != null) {
-                sePersonasNew = em.getReference(sePersonasNew.getClass(), sePersonasNew.getSePersonasPK());
-                inMovimientos.setSePersonas(sePersonasNew);
+            if (inBodegaNew != null) {
+                inBodegaNew = em.getReference(inBodegaNew.getClass(), inBodegaNew.getInBodegaPK());
+                inMovimientos.setInBodega(inBodegaNew);
             }
-            if (idNumeroDocumentoNew != null) {
-                idNumeroDocumentoNew = em.getReference(idNumeroDocumentoNew.getClass(), idNumeroDocumentoNew.getIdTipoDocumento());
-                inMovimientos.setIdNumeroDocumento(idNumeroDocumentoNew);
+            if (idProveedorNew != null) {
+                idProveedorNew = em.getReference(idProveedorNew.getClass(), idProveedorNew.getIdPersona());
+                inMovimientos.setIdProveedor(idProveedorNew);
             }
-            if (seUsuariosNew != null) {
-                seUsuariosNew = em.getReference(seUsuariosNew.getClass(), seUsuariosNew.getSeUsuariosPK());
-                inMovimientos.setSeUsuarios(seUsuariosNew);
+            if (inTipoDocumentoNew != null) {
+                inTipoDocumentoNew = em.getReference(inTipoDocumentoNew.getClass(), inTipoDocumentoNew.getIdTipoDocumento());
+                inMovimientos.setInTipoDocumento(inTipoDocumentoNew);
+            }
+            if (idUsuarioNew != null) {
+                idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getIdUsuario());
+                inMovimientos.setIdUsuario(idUsuarioNew);
             }
             List<InDetalleMovimiento> attachedInDetalleMovimientoListNew = new ArrayList<InDetalleMovimiento>();
             for (InDetalleMovimiento inDetalleMovimientoListNewInDetalleMovimientoToAttach : inDetalleMovimientoListNew) {
@@ -184,14 +175,6 @@ public class InMovimientosJpaController implements Serializable {
             inDetalleMovimientoListNew = attachedInDetalleMovimientoListNew;
             inMovimientos.setInDetalleMovimientoList(inDetalleMovimientoListNew);
             inMovimientos = em.merge(inMovimientos);
-            if (inBodegaOld != null && !inBodegaOld.equals(inBodegaNew)) {
-                inBodegaOld.getInMovimientosList().remove(inMovimientos);
-                inBodegaOld = em.merge(inBodegaOld);
-            }
-            if (inBodegaNew != null && !inBodegaNew.equals(inBodegaOld)) {
-                inBodegaNew.getInMovimientosList().add(inMovimientos);
-                inBodegaNew = em.merge(inBodegaNew);
-            }
             if (coOrdenComprasOld != null && !coOrdenComprasOld.equals(coOrdenComprasNew)) {
                 coOrdenComprasOld.getInMovimientosList().remove(inMovimientos);
                 coOrdenComprasOld = em.merge(coOrdenComprasOld);
@@ -200,44 +183,52 @@ public class InMovimientosJpaController implements Serializable {
                 coOrdenComprasNew.getInMovimientosList().add(inMovimientos);
                 coOrdenComprasNew = em.merge(coOrdenComprasNew);
             }
-            if (sePersonasOld != null && !sePersonasOld.equals(sePersonasNew)) {
-                sePersonasOld.getInMovimientosList().remove(inMovimientos);
-                sePersonasOld = em.merge(sePersonasOld);
+            if (inBodegaOld != null && !inBodegaOld.equals(inBodegaNew)) {
+                inBodegaOld.getInMovimientosList().remove(inMovimientos);
+                inBodegaOld = em.merge(inBodegaOld);
             }
-            if (sePersonasNew != null && !sePersonasNew.equals(sePersonasOld)) {
-                sePersonasNew.getInMovimientosList().add(inMovimientos);
-                sePersonasNew = em.merge(sePersonasNew);
+            if (inBodegaNew != null && !inBodegaNew.equals(inBodegaOld)) {
+                inBodegaNew.getInMovimientosList().add(inMovimientos);
+                inBodegaNew = em.merge(inBodegaNew);
             }
-            if (idNumeroDocumentoOld != null && !idNumeroDocumentoOld.equals(idNumeroDocumentoNew)) {
-                idNumeroDocumentoOld.getInMovimientosList().remove(inMovimientos);
-                idNumeroDocumentoOld = em.merge(idNumeroDocumentoOld);
+            if (idProveedorOld != null && !idProveedorOld.equals(idProveedorNew)) {
+                idProveedorOld.getInMovimientosList().remove(inMovimientos);
+                idProveedorOld = em.merge(idProveedorOld);
             }
-            if (idNumeroDocumentoNew != null && !idNumeroDocumentoNew.equals(idNumeroDocumentoOld)) {
-                idNumeroDocumentoNew.getInMovimientosList().add(inMovimientos);
-                idNumeroDocumentoNew = em.merge(idNumeroDocumentoNew);
+            if (idProveedorNew != null && !idProveedorNew.equals(idProveedorOld)) {
+                idProveedorNew.getInMovimientosList().add(inMovimientos);
+                idProveedorNew = em.merge(idProveedorNew);
             }
-            if (seUsuariosOld != null && !seUsuariosOld.equals(seUsuariosNew)) {
-                seUsuariosOld.getInMovimientosList().remove(inMovimientos);
-                seUsuariosOld = em.merge(seUsuariosOld);
+            if (inTipoDocumentoOld != null && !inTipoDocumentoOld.equals(inTipoDocumentoNew)) {
+                inTipoDocumentoOld.getInMovimientosList().remove(inMovimientos);
+                inTipoDocumentoOld = em.merge(inTipoDocumentoOld);
             }
-            if (seUsuariosNew != null && !seUsuariosNew.equals(seUsuariosOld)) {
-                seUsuariosNew.getInMovimientosList().add(inMovimientos);
-                seUsuariosNew = em.merge(seUsuariosNew);
+            if (inTipoDocumentoNew != null && !inTipoDocumentoNew.equals(inTipoDocumentoOld)) {
+                inTipoDocumentoNew.getInMovimientosList().add(inMovimientos);
+                inTipoDocumentoNew = em.merge(inTipoDocumentoNew);
+            }
+            if (idUsuarioOld != null && !idUsuarioOld.equals(idUsuarioNew)) {
+                idUsuarioOld.getInMovimientosList().remove(inMovimientos);
+                idUsuarioOld = em.merge(idUsuarioOld);
+            }
+            if (idUsuarioNew != null && !idUsuarioNew.equals(idUsuarioOld)) {
+                idUsuarioNew.getInMovimientosList().add(inMovimientos);
+                idUsuarioNew = em.merge(idUsuarioNew);
             }
             for (InDetalleMovimiento inDetalleMovimientoListOldInDetalleMovimiento : inDetalleMovimientoListOld) {
                 if (!inDetalleMovimientoListNew.contains(inDetalleMovimientoListOldInDetalleMovimiento)) {
-                    inDetalleMovimientoListOldInDetalleMovimiento.setIdMovimientos(null);
+                    inDetalleMovimientoListOldInDetalleMovimiento.setInMovimientos(null);
                     inDetalleMovimientoListOldInDetalleMovimiento = em.merge(inDetalleMovimientoListOldInDetalleMovimiento);
                 }
             }
             for (InDetalleMovimiento inDetalleMovimientoListNewInDetalleMovimiento : inDetalleMovimientoListNew) {
                 if (!inDetalleMovimientoListOld.contains(inDetalleMovimientoListNewInDetalleMovimiento)) {
-                    InMovimientos oldIdMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento = inDetalleMovimientoListNewInDetalleMovimiento.getIdMovimientos();
-                    inDetalleMovimientoListNewInDetalleMovimiento.setIdMovimientos(inMovimientos);
+                    InMovimientos oldInMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento = inDetalleMovimientoListNewInDetalleMovimiento.getInMovimientos();
+                    inDetalleMovimientoListNewInDetalleMovimiento.setInMovimientos(inMovimientos);
                     inDetalleMovimientoListNewInDetalleMovimiento = em.merge(inDetalleMovimientoListNewInDetalleMovimiento);
-                    if (oldIdMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento != null && !oldIdMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento.equals(inMovimientos)) {
-                        oldIdMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListNewInDetalleMovimiento);
-                        oldIdMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento = em.merge(oldIdMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento);
+                    if (oldInMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento != null && !oldInMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento.equals(inMovimientos)) {
+                        oldInMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListNewInDetalleMovimiento);
+                        oldInMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento = em.merge(oldInMovimientosOfInDetalleMovimientoListNewInDetalleMovimiento);
                     }
                 }
             }
@@ -270,34 +261,34 @@ public class InMovimientosJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inMovimientos with id " + id + " no longer exists.", enfe);
             }
-            InBodega inBodega = inMovimientos.getInBodega();
-            if (inBodega != null) {
-                inBodega.getInMovimientosList().remove(inMovimientos);
-                inBodega = em.merge(inBodega);
-            }
             CoOrdenCompras coOrdenCompras = inMovimientos.getCoOrdenCompras();
             if (coOrdenCompras != null) {
                 coOrdenCompras.getInMovimientosList().remove(inMovimientos);
                 coOrdenCompras = em.merge(coOrdenCompras);
             }
-            SePersonas sePersonas = inMovimientos.getSePersonas();
-            if (sePersonas != null) {
-                sePersonas.getInMovimientosList().remove(inMovimientos);
-                sePersonas = em.merge(sePersonas);
+            InBodega inBodega = inMovimientos.getInBodega();
+            if (inBodega != null) {
+                inBodega.getInMovimientosList().remove(inMovimientos);
+                inBodega = em.merge(inBodega);
             }
-            InTipoDocumento idNumeroDocumento = inMovimientos.getIdNumeroDocumento();
-            if (idNumeroDocumento != null) {
-                idNumeroDocumento.getInMovimientosList().remove(inMovimientos);
-                idNumeroDocumento = em.merge(idNumeroDocumento);
+            SePersonas idProveedor = inMovimientos.getIdProveedor();
+            if (idProveedor != null) {
+                idProveedor.getInMovimientosList().remove(inMovimientos);
+                idProveedor = em.merge(idProveedor);
             }
-            SeUsuarios seUsuarios = inMovimientos.getSeUsuarios();
-            if (seUsuarios != null) {
-                seUsuarios.getInMovimientosList().remove(inMovimientos);
-                seUsuarios = em.merge(seUsuarios);
+            InTipoDocumento inTipoDocumento = inMovimientos.getInTipoDocumento();
+            if (inTipoDocumento != null) {
+                inTipoDocumento.getInMovimientosList().remove(inMovimientos);
+                inTipoDocumento = em.merge(inTipoDocumento);
+            }
+            SeUsuarios idUsuario = inMovimientos.getIdUsuario();
+            if (idUsuario != null) {
+                idUsuario.getInMovimientosList().remove(inMovimientos);
+                idUsuario = em.merge(idUsuario);
             }
             List<InDetalleMovimiento> inDetalleMovimientoList = inMovimientos.getInDetalleMovimientoList();
             for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimiento : inDetalleMovimientoList) {
-                inDetalleMovimientoListInDetalleMovimiento.setIdMovimientos(null);
+                inDetalleMovimientoListInDetalleMovimiento.setInMovimientos(null);
                 inDetalleMovimientoListInDetalleMovimiento = em.merge(inDetalleMovimientoListInDetalleMovimiento);
             }
             em.remove(inMovimientos);

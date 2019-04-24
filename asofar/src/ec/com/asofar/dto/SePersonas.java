@@ -9,10 +9,12 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -26,15 +28,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_personas")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SePersonas.findAll", query = "SELECT s FROM SePersonas s")
-    , @NamedQuery(name = "SePersonas.findByIdPersona", query = "SELECT s FROM SePersonas s WHERE s.sePersonasPK.idPersona = :idPersona")
-    , @NamedQuery(name = "SePersonas.findByIdTipoPersona", query = "SELECT s FROM SePersonas s WHERE s.sePersonasPK.idTipoPersona = :idTipoPersona")
+    , @NamedQuery(name = "SePersonas.findByIdPersona", query = "SELECT s FROM SePersonas s WHERE s.idPersona = :idPersona")
     , @NamedQuery(name = "SePersonas.findByCedula", query = "SELECT s FROM SePersonas s WHERE s.cedula = :cedula")
     , @NamedQuery(name = "SePersonas.findByNombres", query = "SELECT s FROM SePersonas s WHERE s.nombres = :nombres")
     , @NamedQuery(name = "SePersonas.findByApellidos", query = "SELECT s FROM SePersonas s WHERE s.apellidos = :apellidos")
@@ -51,8 +52,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SePersonas implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected SePersonasPK sePersonasPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_persona")
+    private Long idPersona;
     @Column(name = "cedula")
     private String cedula;
     @Column(name = "nombres")
@@ -82,35 +86,31 @@ public class SePersonas implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "estado")
     private Character estado;
-    @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private SeTipoPersona seTipoPersona;
+    @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona")
+    @ManyToOne
+    private SeTipoPersona idTipoPersona;
     @OneToMany(mappedBy = "idProveedor")
     private List<CoOrdenCompras> coOrdenComprasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sePersonas")
+    @OneToMany(mappedBy = "idProveedor")
     private List<InMovimientos> inMovimientosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sePersonas")
+    @OneToMany(mappedBy = "idPersona")
     private List<SeUsuarios> seUsuariosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sePersonas")
+    @OneToMany(mappedBy = "idCliente")
     private List<VeFactura> veFacturaList;
 
     public SePersonas() {
     }
 
-    public SePersonas(SePersonasPK sePersonasPK) {
-        this.sePersonasPK = sePersonasPK;
+    public SePersonas(Long idPersona) {
+        this.idPersona = idPersona;
     }
 
-    public SePersonas(long idPersona, long idTipoPersona) {
-        this.sePersonasPK = new SePersonasPK(idPersona, idTipoPersona);
+    public Long getIdPersona() {
+        return idPersona;
     }
 
-    public SePersonasPK getSePersonasPK() {
-        return sePersonasPK;
-    }
-
-    public void setSePersonasPK(SePersonasPK sePersonasPK) {
-        this.sePersonasPK = sePersonasPK;
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
     }
 
     public String getCedula() {
@@ -217,12 +217,12 @@ public class SePersonas implements Serializable {
         this.estado = estado;
     }
 
-    public SeTipoPersona getSeTipoPersona() {
-        return seTipoPersona;
+    public SeTipoPersona getIdTipoPersona() {
+        return idTipoPersona;
     }
 
-    public void setSeTipoPersona(SeTipoPersona seTipoPersona) {
-        this.seTipoPersona = seTipoPersona;
+    public void setIdTipoPersona(SeTipoPersona idTipoPersona) {
+        this.idTipoPersona = idTipoPersona;
     }
 
     @XmlTransient
@@ -264,7 +264,7 @@ public class SePersonas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (sePersonasPK != null ? sePersonasPK.hashCode() : 0);
+        hash += (idPersona != null ? idPersona.hashCode() : 0);
         return hash;
     }
 
@@ -275,7 +275,7 @@ public class SePersonas implements Serializable {
             return false;
         }
         SePersonas other = (SePersonas) object;
-        if ((this.sePersonasPK == null && other.sePersonasPK != null) || (this.sePersonasPK != null && !this.sePersonasPK.equals(other.sePersonasPK))) {
+        if ((this.idPersona == null && other.idPersona != null) || (this.idPersona != null && !this.idPersona.equals(other.idPersona))) {
             return false;
         }
         return true;
@@ -283,7 +283,7 @@ public class SePersonas implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.SePersonas[ sePersonasPK=" + sePersonasPK + " ]";
+        return "ec.com.asofar.dto.SePersonas[ idPersona=" + idPersona + " ]";
     }
     
 }

@@ -6,6 +6,7 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_prestaciones")
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PrPrestaciones.findAll", query = "SELECT p FROM PrPrestaciones p")
     , @NamedQuery(name = "PrPrestaciones.findByIdPrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idPrestacion = :idPrestacion")
     , @NamedQuery(name = "PrPrestaciones.findByIdEmpresa", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "PrPrestaciones.findByIdPoducto", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idPoducto = :idPoducto")
+    , @NamedQuery(name = "PrPrestaciones.findByIdPoducto", query = "SELECT p FROM PrPrestaciones p WHERE p.idPoducto = :idPoducto")
     , @NamedQuery(name = "PrPrestaciones.findByNombrePrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.nombrePrestacion = :nombrePrestacion")
     , @NamedQuery(name = "PrPrestaciones.findByEstado", query = "SELECT p FROM PrPrestaciones p WHERE p.estado = :estado")
     , @NamedQuery(name = "PrPrestaciones.findByAplicaIva", query = "SELECT p FROM PrPrestaciones p WHERE p.aplicaIva = :aplicaIva")})
@@ -40,6 +41,8 @@ public class PrPrestaciones implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrPrestacionesPK prPrestacionesPK;
+    @Column(name = "id_poducto")
+    private BigInteger idPoducto;
     @Column(name = "nombre_prestacion")
     private String nombrePrestacion;
     @Column(name = "estado")
@@ -53,9 +56,6 @@ public class PrPrestaciones implements Serializable {
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
-    @JoinColumn(name = "id_poducto", referencedColumnName = "id_producto", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private PrProductos prProductos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
     private List<VeFacturaDetalle> veFacturaDetalleList;
 
@@ -66,8 +66,8 @@ public class PrPrestaciones implements Serializable {
         this.prPrestacionesPK = prPrestacionesPK;
     }
 
-    public PrPrestaciones(long idPrestacion, long idEmpresa, long idPoducto) {
-        this.prPrestacionesPK = new PrPrestacionesPK(idPrestacion, idEmpresa, idPoducto);
+    public PrPrestaciones(long idPrestacion, long idEmpresa) {
+        this.prPrestacionesPK = new PrPrestacionesPK(idPrestacion, idEmpresa);
     }
 
     public PrPrestacionesPK getPrPrestacionesPK() {
@@ -76,6 +76,14 @@ public class PrPrestaciones implements Serializable {
 
     public void setPrPrestacionesPK(PrPrestacionesPK prPrestacionesPK) {
         this.prPrestacionesPK = prPrestacionesPK;
+    }
+
+    public BigInteger getIdPoducto() {
+        return idPoducto;
+    }
+
+    public void setIdPoducto(BigInteger idPoducto) {
+        this.idPoducto = idPoducto;
     }
 
     public String getNombrePrestacion() {
@@ -126,14 +134,6 @@ public class PrPrestaciones implements Serializable {
 
     public void setSeEmpresa(SeEmpresa seEmpresa) {
         this.seEmpresa = seEmpresa;
-    }
-
-    public PrProductos getPrProductos() {
-        return prProductos;
-    }
-
-    public void setPrProductos(PrProductos prProductos) {
-        this.prProductos = prProductos;
     }
 
     @XmlTransient

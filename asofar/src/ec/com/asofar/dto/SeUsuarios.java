@@ -9,12 +9,13 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -28,16 +29,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_usuarios")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SeUsuarios.findAll", query = "SELECT s FROM SeUsuarios s")
-    , @NamedQuery(name = "SeUsuarios.findByIdUsuario", query = "SELECT s FROM SeUsuarios s WHERE s.seUsuariosPK.idUsuario = :idUsuario")
-    , @NamedQuery(name = "SeUsuarios.findByIdPersona", query = "SELECT s FROM SeUsuarios s WHERE s.seUsuariosPK.idPersona = :idPersona")
-    , @NamedQuery(name = "SeUsuarios.findByIdTipoPersona", query = "SELECT s FROM SeUsuarios s WHERE s.seUsuariosPK.idTipoPersona = :idTipoPersona")
+    , @NamedQuery(name = "SeUsuarios.findByIdUsuario", query = "SELECT s FROM SeUsuarios s WHERE s.idUsuario = :idUsuario")
+    , @NamedQuery(name = "SeUsuarios.findByIdTipoPersona", query = "SELECT s FROM SeUsuarios s WHERE s.idTipoPersona = :idTipoPersona")
     , @NamedQuery(name = "SeUsuarios.findByEstado", query = "SELECT s FROM SeUsuarios s WHERE s.estado = :estado")
     , @NamedQuery(name = "SeUsuarios.findByUsuarioCreacion", query = "SELECT s FROM SeUsuarios s WHERE s.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "SeUsuarios.findByFechaCreacion", query = "SELECT s FROM SeUsuarios s WHERE s.fechaCreacion = :fechaCreacion")
@@ -52,8 +52,13 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SeUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected SeUsuariosPK seUsuariosPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_usuario")
+    private Long idUsuario;
+    @Column(name = "id_tipo_persona")
+    private BigInteger idTipoPersona;
     @Column(name = "estado")
     private Character estado;
     @Column(name = "usuario_creacion")
@@ -87,33 +92,35 @@ public class SeUsuarios implements Serializable {
     private Double sueldo;
     @OneToMany(mappedBy = "idUsuario")
     private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seUsuarios")
+    @OneToMany(mappedBy = "idUsuario")
     private List<InMovimientos> inMovimientosList;
-    @JoinColumns({
-        @JoinColumn(name = "id_persona", referencedColumnName = "id_persona", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private SePersonas sePersonas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seUsuarios")
+    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @ManyToOne
+    private SePersonas idPersona;
+    @OneToMany(mappedBy = "idUsuario")
     private List<VeFactura> veFacturaList;
 
     public SeUsuarios() {
     }
 
-    public SeUsuarios(SeUsuariosPK seUsuariosPK) {
-        this.seUsuariosPK = seUsuariosPK;
+    public SeUsuarios(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public SeUsuarios(long idUsuario, long idPersona, long idTipoPersona) {
-        this.seUsuariosPK = new SeUsuariosPK(idUsuario, idPersona, idTipoPersona);
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public SeUsuariosPK getSeUsuariosPK() {
-        return seUsuariosPK;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public void setSeUsuariosPK(SeUsuariosPK seUsuariosPK) {
-        this.seUsuariosPK = seUsuariosPK;
+    public BigInteger getIdTipoPersona() {
+        return idTipoPersona;
+    }
+
+    public void setIdTipoPersona(BigInteger idTipoPersona) {
+        this.idTipoPersona = idTipoPersona;
     }
 
     public Character getEstado() {
@@ -238,12 +245,12 @@ public class SeUsuarios implements Serializable {
         this.inMovimientosList = inMovimientosList;
     }
 
-    public SePersonas getSePersonas() {
-        return sePersonas;
+    public SePersonas getIdPersona() {
+        return idPersona;
     }
 
-    public void setSePersonas(SePersonas sePersonas) {
-        this.sePersonas = sePersonas;
+    public void setIdPersona(SePersonas idPersona) {
+        this.idPersona = idPersona;
     }
 
     @XmlTransient
@@ -258,7 +265,7 @@ public class SeUsuarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (seUsuariosPK != null ? seUsuariosPK.hashCode() : 0);
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
         return hash;
     }
 
@@ -269,7 +276,7 @@ public class SeUsuarios implements Serializable {
             return false;
         }
         SeUsuarios other = (SeUsuarios) object;
-        if ((this.seUsuariosPK == null && other.seUsuariosPK != null) || (this.seUsuariosPK != null && !this.seUsuariosPK.equals(other.seUsuariosPK))) {
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
             return false;
         }
         return true;
@@ -277,7 +284,7 @@ public class SeUsuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.SeUsuarios[ seUsuariosPK=" + seUsuariosPK + " ]";
+        return "ec.com.asofar.dto.SeUsuarios[ idUsuario=" + idUsuario + " ]";
     }
     
 }

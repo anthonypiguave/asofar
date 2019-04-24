@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Embeddable
 public class PrPrestacionesPK implements Serializable {
@@ -23,17 +23,13 @@ public class PrPrestacionesPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_empresa")
     private long idEmpresa;
-    @Basic(optional = false)
-    @Column(name = "id_poducto")
-    private long idPoducto;
 
     public PrPrestacionesPK() {
     }
 
-    public PrPrestacionesPK(long idPrestacion, long idEmpresa, long idPoducto) {
+    public PrPrestacionesPK(long idPrestacion, long idEmpresa) {
         this.idPrestacion = idPrestacion;
         this.idEmpresa = idEmpresa;
-        this.idPoducto = idPoducto;
     }
 
     public long getIdPrestacion() {
@@ -52,20 +48,11 @@ public class PrPrestacionesPK implements Serializable {
         this.idEmpresa = idEmpresa;
     }
 
-    public long getIdPoducto() {
-        return idPoducto;
-    }
-
-    public void setIdPoducto(long idPoducto) {
-        this.idPoducto = idPoducto;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) idPrestacion;
         hash += (int) idEmpresa;
-        hash += (int) idPoducto;
         return hash;
     }
 
@@ -82,15 +69,12 @@ public class PrPrestacionesPK implements Serializable {
         if (this.idEmpresa != other.idEmpresa) {
             return false;
         }
-        if (this.idPoducto != other.idPoducto) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrPrestacionesPK[ idPrestacion=" + idPrestacion + ", idEmpresa=" + idEmpresa + ", idPoducto=" + idPoducto + " ]";
+        return "ec.com.asofar.dto.PrPrestacionesPK[ idPrestacion=" + idPrestacion + ", idEmpresa=" + idEmpresa + " ]";
     }
     
 }

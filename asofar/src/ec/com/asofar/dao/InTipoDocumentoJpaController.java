@@ -19,16 +19,15 @@ import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InTipoDocumento;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class InTipoDocumentoJpaController implements Serializable {
 
-    public InTipoDocumentoJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public InTipoDocumentoJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -61,12 +60,12 @@ public class InTipoDocumentoJpaController implements Serializable {
             inTipoDocumento.setInKardexList(attachedInKardexList);
             em.persist(inTipoDocumento);
             for (InMovimientos inMovimientosListInMovimientos : inTipoDocumento.getInMovimientosList()) {
-                InTipoDocumento oldIdNumeroDocumentoOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getIdNumeroDocumento();
-                inMovimientosListInMovimientos.setIdNumeroDocumento(inTipoDocumento);
+                InTipoDocumento oldInTipoDocumentoOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getInTipoDocumento();
+                inMovimientosListInMovimientos.setInTipoDocumento(inTipoDocumento);
                 inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
-                if (oldIdNumeroDocumentoOfInMovimientosListInMovimientos != null) {
-                    oldIdNumeroDocumentoOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
-                    oldIdNumeroDocumentoOfInMovimientosListInMovimientos = em.merge(oldIdNumeroDocumentoOfInMovimientosListInMovimientos);
+                if (oldInTipoDocumentoOfInMovimientosListInMovimientos != null) {
+                    oldInTipoDocumentoOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
+                    oldInTipoDocumentoOfInMovimientosListInMovimientos = em.merge(oldInTipoDocumentoOfInMovimientosListInMovimientos);
                 }
             }
             for (InKardex inKardexListInKardex : inTipoDocumento.getInKardexList()) {
@@ -97,6 +96,14 @@ public class InTipoDocumentoJpaController implements Serializable {
             List<InKardex> inKardexListOld = persistentInTipoDocumento.getInKardexList();
             List<InKardex> inKardexListNew = inTipoDocumento.getInKardexList();
             List<String> illegalOrphanMessages = null;
+            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
+                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain InMovimientos " + inMovimientosListOldInMovimientos + " since its inTipoDocumento field is not nullable.");
+                }
+            }
             for (InKardex inKardexListOldInKardex : inKardexListOld) {
                 if (!inKardexListNew.contains(inKardexListOldInKardex)) {
                     if (illegalOrphanMessages == null) {
@@ -123,20 +130,14 @@ public class InTipoDocumentoJpaController implements Serializable {
             inKardexListNew = attachedInKardexListNew;
             inTipoDocumento.setInKardexList(inKardexListNew);
             inTipoDocumento = em.merge(inTipoDocumento);
-            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
-                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
-                    inMovimientosListOldInMovimientos.setIdNumeroDocumento(null);
-                    inMovimientosListOldInMovimientos = em.merge(inMovimientosListOldInMovimientos);
-                }
-            }
             for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
                 if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
-                    InTipoDocumento oldIdNumeroDocumentoOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getIdNumeroDocumento();
-                    inMovimientosListNewInMovimientos.setIdNumeroDocumento(inTipoDocumento);
+                    InTipoDocumento oldInTipoDocumentoOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getInTipoDocumento();
+                    inMovimientosListNewInMovimientos.setInTipoDocumento(inTipoDocumento);
                     inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
-                    if (oldIdNumeroDocumentoOfInMovimientosListNewInMovimientos != null && !oldIdNumeroDocumentoOfInMovimientosListNewInMovimientos.equals(inTipoDocumento)) {
-                        oldIdNumeroDocumentoOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
-                        oldIdNumeroDocumentoOfInMovimientosListNewInMovimientos = em.merge(oldIdNumeroDocumentoOfInMovimientosListNewInMovimientos);
+                    if (oldInTipoDocumentoOfInMovimientosListNewInMovimientos != null && !oldInTipoDocumentoOfInMovimientosListNewInMovimientos.equals(inTipoDocumento)) {
+                        oldInTipoDocumentoOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
+                        oldInTipoDocumentoOfInMovimientosListNewInMovimientos = em.merge(oldInTipoDocumentoOfInMovimientosListNewInMovimientos);
                     }
                 }
             }
@@ -181,6 +182,13 @@ public class InTipoDocumentoJpaController implements Serializable {
                 throw new NonexistentEntityException("The inTipoDocumento with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<InMovimientos> inMovimientosListOrphanCheck = inTipoDocumento.getInMovimientosList();
+            for (InMovimientos inMovimientosListOrphanCheckInMovimientos : inMovimientosListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This InTipoDocumento (" + inTipoDocumento + ") cannot be destroyed since the InMovimientos " + inMovimientosListOrphanCheckInMovimientos + " in its inMovimientosList field has a non-nullable inTipoDocumento field.");
+            }
             List<InKardex> inKardexListOrphanCheck = inTipoDocumento.getInKardexList();
             for (InKardex inKardexListOrphanCheckInKardex : inKardexListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
@@ -190,11 +198,6 @@ public class InTipoDocumentoJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<InMovimientos> inMovimientosList = inTipoDocumento.getInMovimientosList();
-            for (InMovimientos inMovimientosListInMovimientos : inMovimientosList) {
-                inMovimientosListInMovimientos.setIdNumeroDocumento(null);
-                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
             }
             em.remove(inTipoDocumento);
             em.getTransaction().commit();

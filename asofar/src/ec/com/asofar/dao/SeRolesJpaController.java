@@ -19,16 +19,15 @@ import java.util.List;
 import ec.com.asofar.dto.SeUsuarioSucurRol;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeRolesJpaController implements Serializable {
 
-    public SeRolesJpaController() {
-       this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public SeRolesJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

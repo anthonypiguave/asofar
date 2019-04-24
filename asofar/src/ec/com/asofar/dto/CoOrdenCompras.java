@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_orden_compras")
@@ -95,7 +95,7 @@ public class CoOrdenCompras implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "idOrdenCompra")
+    @OneToMany(mappedBy = "coOrdenCompras")
     private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
     @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)

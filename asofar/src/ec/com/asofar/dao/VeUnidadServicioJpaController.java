@@ -19,16 +19,15 @@ import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeUnidadServicio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class VeUnidadServicioJpaController implements Serializable {
 
-    public VeUnidadServicioJpaController() {
-       this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public VeUnidadServicioJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

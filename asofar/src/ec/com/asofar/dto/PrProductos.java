@@ -8,8 +8,6 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -19,16 +17,14 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_productos")
@@ -92,19 +88,13 @@ public class PrProductos implements Serializable {
         @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
         , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
         , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)})
+        , @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrMedidas prMedidas;
-    @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private PrTipoMedidas prTipoMedidas;
     @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private PrTipoPresentacion prTipoPresentacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prProductos")
-    private List<PrPrestaciones> prPrestacionesList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prProductos")
-    private List<PrProductoBodega> prProductoBodegaList;
 
     public PrProductos() {
     }
@@ -237,38 +227,12 @@ public class PrProductos implements Serializable {
         this.prMedidas = prMedidas;
     }
 
-    public PrTipoMedidas getPrTipoMedidas() {
-        return prTipoMedidas;
-    }
-
-    public void setPrTipoMedidas(PrTipoMedidas prTipoMedidas) {
-        this.prTipoMedidas = prTipoMedidas;
-    }
-
     public PrTipoPresentacion getPrTipoPresentacion() {
         return prTipoPresentacion;
     }
 
     public void setPrTipoPresentacion(PrTipoPresentacion prTipoPresentacion) {
         this.prTipoPresentacion = prTipoPresentacion;
-    }
-
-    @XmlTransient
-    public List<PrPrestaciones> getPrPrestacionesList() {
-        return prPrestacionesList;
-    }
-
-    public void setPrPrestacionesList(List<PrPrestaciones> prPrestacionesList) {
-        this.prPrestacionesList = prPrestacionesList;
-    }
-
-    @XmlTransient
-    public List<PrProductoBodega> getPrProductoBodegaList() {
-        return prProductoBodegaList;
-    }
-
-    public void setPrProductoBodegaList(List<PrProductoBodega> prProductoBodegaList) {
-        this.prProductoBodegaList = prProductoBodegaList;
     }
 
     @Override

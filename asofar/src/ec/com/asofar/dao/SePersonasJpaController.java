@@ -5,9 +5,7 @@
  */
 package ec.com.asofar.dao;
 
-import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -19,21 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.SePersonas;
-import ec.com.asofar.dto.SePersonasPK;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeFactura;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SePersonasJpaController implements Serializable {
 
-    public SePersonasJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public SePersonasJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -41,10 +37,7 @@ public class SePersonasJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(SePersonas sePersonas) throws PreexistingEntityException, Exception {
-        if (sePersonas.getSePersonasPK() == null) {
-            sePersonas.setSePersonasPK(new SePersonasPK());
-        }
+    public void create(SePersonas sePersonas) {
         if (sePersonas.getCoOrdenComprasList() == null) {
             sePersonas.setCoOrdenComprasList(new ArrayList<CoOrdenCompras>());
         }
@@ -57,15 +50,14 @@ public class SePersonasJpaController implements Serializable {
         if (sePersonas.getVeFacturaList() == null) {
             sePersonas.setVeFacturaList(new ArrayList<VeFactura>());
         }
-        sePersonas.getSePersonasPK().setIdTipoPersona(sePersonas.getSeTipoPersona().getIdTipoPersona());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            SeTipoPersona seTipoPersona = sePersonas.getSeTipoPersona();
-            if (seTipoPersona != null) {
-                seTipoPersona = em.getReference(seTipoPersona.getClass(), seTipoPersona.getIdTipoPersona());
-                sePersonas.setSeTipoPersona(seTipoPersona);
+            SeTipoPersona idTipoPersona = sePersonas.getIdTipoPersona();
+            if (idTipoPersona != null) {
+                idTipoPersona = em.getReference(idTipoPersona.getClass(), idTipoPersona.getIdTipoPersona());
+                sePersonas.setIdTipoPersona(idTipoPersona);
             }
             List<CoOrdenCompras> attachedCoOrdenComprasList = new ArrayList<CoOrdenCompras>();
             for (CoOrdenCompras coOrdenComprasListCoOrdenComprasToAttach : sePersonas.getCoOrdenComprasList()) {
@@ -81,7 +73,7 @@ public class SePersonasJpaController implements Serializable {
             sePersonas.setInMovimientosList(attachedInMovimientosList);
             List<SeUsuarios> attachedSeUsuariosList = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListSeUsuariosToAttach : sePersonas.getSeUsuariosList()) {
-                seUsuariosListSeUsuariosToAttach = em.getReference(seUsuariosListSeUsuariosToAttach.getClass(), seUsuariosListSeUsuariosToAttach.getSeUsuariosPK());
+                seUsuariosListSeUsuariosToAttach = em.getReference(seUsuariosListSeUsuariosToAttach.getClass(), seUsuariosListSeUsuariosToAttach.getIdUsuario());
                 attachedSeUsuariosList.add(seUsuariosListSeUsuariosToAttach);
             }
             sePersonas.setSeUsuariosList(attachedSeUsuariosList);
@@ -92,9 +84,9 @@ public class SePersonasJpaController implements Serializable {
             }
             sePersonas.setVeFacturaList(attachedVeFacturaList);
             em.persist(sePersonas);
-            if (seTipoPersona != null) {
-                seTipoPersona.getSePersonasList().add(sePersonas);
-                seTipoPersona = em.merge(seTipoPersona);
+            if (idTipoPersona != null) {
+                idTipoPersona.getSePersonasList().add(sePersonas);
+                idTipoPersona = em.merge(idTipoPersona);
             }
             for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : sePersonas.getCoOrdenComprasList()) {
                 SePersonas oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = coOrdenComprasListCoOrdenCompras.getIdProveedor();
@@ -106,38 +98,33 @@ public class SePersonasJpaController implements Serializable {
                 }
             }
             for (InMovimientos inMovimientosListInMovimientos : sePersonas.getInMovimientosList()) {
-                SePersonas oldSePersonasOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getSePersonas();
-                inMovimientosListInMovimientos.setSePersonas(sePersonas);
+                SePersonas oldIdProveedorOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getIdProveedor();
+                inMovimientosListInMovimientos.setIdProveedor(sePersonas);
                 inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
-                if (oldSePersonasOfInMovimientosListInMovimientos != null) {
-                    oldSePersonasOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
-                    oldSePersonasOfInMovimientosListInMovimientos = em.merge(oldSePersonasOfInMovimientosListInMovimientos);
+                if (oldIdProveedorOfInMovimientosListInMovimientos != null) {
+                    oldIdProveedorOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
+                    oldIdProveedorOfInMovimientosListInMovimientos = em.merge(oldIdProveedorOfInMovimientosListInMovimientos);
                 }
             }
             for (SeUsuarios seUsuariosListSeUsuarios : sePersonas.getSeUsuariosList()) {
-                SePersonas oldSePersonasOfSeUsuariosListSeUsuarios = seUsuariosListSeUsuarios.getSePersonas();
-                seUsuariosListSeUsuarios.setSePersonas(sePersonas);
+                SePersonas oldIdPersonaOfSeUsuariosListSeUsuarios = seUsuariosListSeUsuarios.getIdPersona();
+                seUsuariosListSeUsuarios.setIdPersona(sePersonas);
                 seUsuariosListSeUsuarios = em.merge(seUsuariosListSeUsuarios);
-                if (oldSePersonasOfSeUsuariosListSeUsuarios != null) {
-                    oldSePersonasOfSeUsuariosListSeUsuarios.getSeUsuariosList().remove(seUsuariosListSeUsuarios);
-                    oldSePersonasOfSeUsuariosListSeUsuarios = em.merge(oldSePersonasOfSeUsuariosListSeUsuarios);
+                if (oldIdPersonaOfSeUsuariosListSeUsuarios != null) {
+                    oldIdPersonaOfSeUsuariosListSeUsuarios.getSeUsuariosList().remove(seUsuariosListSeUsuarios);
+                    oldIdPersonaOfSeUsuariosListSeUsuarios = em.merge(oldIdPersonaOfSeUsuariosListSeUsuarios);
                 }
             }
             for (VeFactura veFacturaListVeFactura : sePersonas.getVeFacturaList()) {
-                SePersonas oldSePersonasOfVeFacturaListVeFactura = veFacturaListVeFactura.getSePersonas();
-                veFacturaListVeFactura.setSePersonas(sePersonas);
+                SePersonas oldIdClienteOfVeFacturaListVeFactura = veFacturaListVeFactura.getIdCliente();
+                veFacturaListVeFactura.setIdCliente(sePersonas);
                 veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
-                if (oldSePersonasOfVeFacturaListVeFactura != null) {
-                    oldSePersonasOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
-                    oldSePersonasOfVeFacturaListVeFactura = em.merge(oldSePersonasOfVeFacturaListVeFactura);
+                if (oldIdClienteOfVeFacturaListVeFactura != null) {
+                    oldIdClienteOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
+                    oldIdClienteOfVeFacturaListVeFactura = em.merge(oldIdClienteOfVeFacturaListVeFactura);
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findSePersonas(sePersonas.getSePersonasPK()) != null) {
-                throw new PreexistingEntityException("SePersonas " + sePersonas + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -145,15 +132,14 @@ public class SePersonasJpaController implements Serializable {
         }
     }
 
-    public void edit(SePersonas sePersonas) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        sePersonas.getSePersonasPK().setIdTipoPersona(sePersonas.getSeTipoPersona().getIdTipoPersona());
+    public void edit(SePersonas sePersonas) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            SePersonas persistentSePersonas = em.find(SePersonas.class, sePersonas.getSePersonasPK());
-            SeTipoPersona seTipoPersonaOld = persistentSePersonas.getSeTipoPersona();
-            SeTipoPersona seTipoPersonaNew = sePersonas.getSeTipoPersona();
+            SePersonas persistentSePersonas = em.find(SePersonas.class, sePersonas.getIdPersona());
+            SeTipoPersona idTipoPersonaOld = persistentSePersonas.getIdTipoPersona();
+            SeTipoPersona idTipoPersonaNew = sePersonas.getIdTipoPersona();
             List<CoOrdenCompras> coOrdenComprasListOld = persistentSePersonas.getCoOrdenComprasList();
             List<CoOrdenCompras> coOrdenComprasListNew = sePersonas.getCoOrdenComprasList();
             List<InMovimientos> inMovimientosListOld = persistentSePersonas.getInMovimientosList();
@@ -162,37 +148,9 @@ public class SePersonasJpaController implements Serializable {
             List<SeUsuarios> seUsuariosListNew = sePersonas.getSeUsuariosList();
             List<VeFactura> veFacturaListOld = persistentSePersonas.getVeFacturaList();
             List<VeFactura> veFacturaListNew = sePersonas.getVeFacturaList();
-            List<String> illegalOrphanMessages = null;
-            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
-                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain InMovimientos " + inMovimientosListOldInMovimientos + " since its sePersonas field is not nullable.");
-                }
-            }
-            for (SeUsuarios seUsuariosListOldSeUsuarios : seUsuariosListOld) {
-                if (!seUsuariosListNew.contains(seUsuariosListOldSeUsuarios)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain SeUsuarios " + seUsuariosListOldSeUsuarios + " since its sePersonas field is not nullable.");
-                }
-            }
-            for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
-                if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain VeFactura " + veFacturaListOldVeFactura + " since its sePersonas field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            if (seTipoPersonaNew != null) {
-                seTipoPersonaNew = em.getReference(seTipoPersonaNew.getClass(), seTipoPersonaNew.getIdTipoPersona());
-                sePersonas.setSeTipoPersona(seTipoPersonaNew);
+            if (idTipoPersonaNew != null) {
+                idTipoPersonaNew = em.getReference(idTipoPersonaNew.getClass(), idTipoPersonaNew.getIdTipoPersona());
+                sePersonas.setIdTipoPersona(idTipoPersonaNew);
             }
             List<CoOrdenCompras> attachedCoOrdenComprasListNew = new ArrayList<CoOrdenCompras>();
             for (CoOrdenCompras coOrdenComprasListNewCoOrdenComprasToAttach : coOrdenComprasListNew) {
@@ -210,7 +168,7 @@ public class SePersonasJpaController implements Serializable {
             sePersonas.setInMovimientosList(inMovimientosListNew);
             List<SeUsuarios> attachedSeUsuariosListNew = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListNewSeUsuariosToAttach : seUsuariosListNew) {
-                seUsuariosListNewSeUsuariosToAttach = em.getReference(seUsuariosListNewSeUsuariosToAttach.getClass(), seUsuariosListNewSeUsuariosToAttach.getSeUsuariosPK());
+                seUsuariosListNewSeUsuariosToAttach = em.getReference(seUsuariosListNewSeUsuariosToAttach.getClass(), seUsuariosListNewSeUsuariosToAttach.getIdUsuario());
                 attachedSeUsuariosListNew.add(seUsuariosListNewSeUsuariosToAttach);
             }
             seUsuariosListNew = attachedSeUsuariosListNew;
@@ -223,13 +181,13 @@ public class SePersonasJpaController implements Serializable {
             veFacturaListNew = attachedVeFacturaListNew;
             sePersonas.setVeFacturaList(veFacturaListNew);
             sePersonas = em.merge(sePersonas);
-            if (seTipoPersonaOld != null && !seTipoPersonaOld.equals(seTipoPersonaNew)) {
-                seTipoPersonaOld.getSePersonasList().remove(sePersonas);
-                seTipoPersonaOld = em.merge(seTipoPersonaOld);
+            if (idTipoPersonaOld != null && !idTipoPersonaOld.equals(idTipoPersonaNew)) {
+                idTipoPersonaOld.getSePersonasList().remove(sePersonas);
+                idTipoPersonaOld = em.merge(idTipoPersonaOld);
             }
-            if (seTipoPersonaNew != null && !seTipoPersonaNew.equals(seTipoPersonaOld)) {
-                seTipoPersonaNew.getSePersonasList().add(sePersonas);
-                seTipoPersonaNew = em.merge(seTipoPersonaNew);
+            if (idTipoPersonaNew != null && !idTipoPersonaNew.equals(idTipoPersonaOld)) {
+                idTipoPersonaNew.getSePersonasList().add(sePersonas);
+                idTipoPersonaNew = em.merge(idTipoPersonaNew);
             }
             for (CoOrdenCompras coOrdenComprasListOldCoOrdenCompras : coOrdenComprasListOld) {
                 if (!coOrdenComprasListNew.contains(coOrdenComprasListOldCoOrdenCompras)) {
@@ -248,36 +206,54 @@ public class SePersonasJpaController implements Serializable {
                     }
                 }
             }
+            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
+                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
+                    inMovimientosListOldInMovimientos.setIdProveedor(null);
+                    inMovimientosListOldInMovimientos = em.merge(inMovimientosListOldInMovimientos);
+                }
+            }
             for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
                 if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
-                    SePersonas oldSePersonasOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getSePersonas();
-                    inMovimientosListNewInMovimientos.setSePersonas(sePersonas);
+                    SePersonas oldIdProveedorOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getIdProveedor();
+                    inMovimientosListNewInMovimientos.setIdProveedor(sePersonas);
                     inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
-                    if (oldSePersonasOfInMovimientosListNewInMovimientos != null && !oldSePersonasOfInMovimientosListNewInMovimientos.equals(sePersonas)) {
-                        oldSePersonasOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
-                        oldSePersonasOfInMovimientosListNewInMovimientos = em.merge(oldSePersonasOfInMovimientosListNewInMovimientos);
+                    if (oldIdProveedorOfInMovimientosListNewInMovimientos != null && !oldIdProveedorOfInMovimientosListNewInMovimientos.equals(sePersonas)) {
+                        oldIdProveedorOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
+                        oldIdProveedorOfInMovimientosListNewInMovimientos = em.merge(oldIdProveedorOfInMovimientosListNewInMovimientos);
                     }
+                }
+            }
+            for (SeUsuarios seUsuariosListOldSeUsuarios : seUsuariosListOld) {
+                if (!seUsuariosListNew.contains(seUsuariosListOldSeUsuarios)) {
+                    seUsuariosListOldSeUsuarios.setIdPersona(null);
+                    seUsuariosListOldSeUsuarios = em.merge(seUsuariosListOldSeUsuarios);
                 }
             }
             for (SeUsuarios seUsuariosListNewSeUsuarios : seUsuariosListNew) {
                 if (!seUsuariosListOld.contains(seUsuariosListNewSeUsuarios)) {
-                    SePersonas oldSePersonasOfSeUsuariosListNewSeUsuarios = seUsuariosListNewSeUsuarios.getSePersonas();
-                    seUsuariosListNewSeUsuarios.setSePersonas(sePersonas);
+                    SePersonas oldIdPersonaOfSeUsuariosListNewSeUsuarios = seUsuariosListNewSeUsuarios.getIdPersona();
+                    seUsuariosListNewSeUsuarios.setIdPersona(sePersonas);
                     seUsuariosListNewSeUsuarios = em.merge(seUsuariosListNewSeUsuarios);
-                    if (oldSePersonasOfSeUsuariosListNewSeUsuarios != null && !oldSePersonasOfSeUsuariosListNewSeUsuarios.equals(sePersonas)) {
-                        oldSePersonasOfSeUsuariosListNewSeUsuarios.getSeUsuariosList().remove(seUsuariosListNewSeUsuarios);
-                        oldSePersonasOfSeUsuariosListNewSeUsuarios = em.merge(oldSePersonasOfSeUsuariosListNewSeUsuarios);
+                    if (oldIdPersonaOfSeUsuariosListNewSeUsuarios != null && !oldIdPersonaOfSeUsuariosListNewSeUsuarios.equals(sePersonas)) {
+                        oldIdPersonaOfSeUsuariosListNewSeUsuarios.getSeUsuariosList().remove(seUsuariosListNewSeUsuarios);
+                        oldIdPersonaOfSeUsuariosListNewSeUsuarios = em.merge(oldIdPersonaOfSeUsuariosListNewSeUsuarios);
                     }
+                }
+            }
+            for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
+                if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
+                    veFacturaListOldVeFactura.setIdCliente(null);
+                    veFacturaListOldVeFactura = em.merge(veFacturaListOldVeFactura);
                 }
             }
             for (VeFactura veFacturaListNewVeFactura : veFacturaListNew) {
                 if (!veFacturaListOld.contains(veFacturaListNewVeFactura)) {
-                    SePersonas oldSePersonasOfVeFacturaListNewVeFactura = veFacturaListNewVeFactura.getSePersonas();
-                    veFacturaListNewVeFactura.setSePersonas(sePersonas);
+                    SePersonas oldIdClienteOfVeFacturaListNewVeFactura = veFacturaListNewVeFactura.getIdCliente();
+                    veFacturaListNewVeFactura.setIdCliente(sePersonas);
                     veFacturaListNewVeFactura = em.merge(veFacturaListNewVeFactura);
-                    if (oldSePersonasOfVeFacturaListNewVeFactura != null && !oldSePersonasOfVeFacturaListNewVeFactura.equals(sePersonas)) {
-                        oldSePersonasOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
-                        oldSePersonasOfVeFacturaListNewVeFactura = em.merge(oldSePersonasOfVeFacturaListNewVeFactura);
+                    if (oldIdClienteOfVeFacturaListNewVeFactura != null && !oldIdClienteOfVeFacturaListNewVeFactura.equals(sePersonas)) {
+                        oldIdClienteOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
+                        oldIdClienteOfVeFacturaListNewVeFactura = em.merge(oldIdClienteOfVeFacturaListNewVeFactura);
                     }
                 }
             }
@@ -285,7 +261,7 @@ public class SePersonasJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                SePersonasPK id = sePersonas.getSePersonasPK();
+                Long id = sePersonas.getIdPersona();
                 if (findSePersonas(id) == null) {
                     throw new NonexistentEntityException("The sePersonas with id " + id + " no longer exists.");
                 }
@@ -298,7 +274,7 @@ public class SePersonasJpaController implements Serializable {
         }
     }
 
-    public void destroy(SePersonasPK id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -306,44 +282,34 @@ public class SePersonasJpaController implements Serializable {
             SePersonas sePersonas;
             try {
                 sePersonas = em.getReference(SePersonas.class, id);
-                sePersonas.getSePersonasPK();
+                sePersonas.getIdPersona();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The sePersonas with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<InMovimientos> inMovimientosListOrphanCheck = sePersonas.getInMovimientosList();
-            for (InMovimientos inMovimientosListOrphanCheckInMovimientos : inMovimientosListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SePersonas (" + sePersonas + ") cannot be destroyed since the InMovimientos " + inMovimientosListOrphanCheckInMovimientos + " in its inMovimientosList field has a non-nullable sePersonas field.");
-            }
-            List<SeUsuarios> seUsuariosListOrphanCheck = sePersonas.getSeUsuariosList();
-            for (SeUsuarios seUsuariosListOrphanCheckSeUsuarios : seUsuariosListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SePersonas (" + sePersonas + ") cannot be destroyed since the SeUsuarios " + seUsuariosListOrphanCheckSeUsuarios + " in its seUsuariosList field has a non-nullable sePersonas field.");
-            }
-            List<VeFactura> veFacturaListOrphanCheck = sePersonas.getVeFacturaList();
-            for (VeFactura veFacturaListOrphanCheckVeFactura : veFacturaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SePersonas (" + sePersonas + ") cannot be destroyed since the VeFactura " + veFacturaListOrphanCheckVeFactura + " in its veFacturaList field has a non-nullable sePersonas field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            SeTipoPersona seTipoPersona = sePersonas.getSeTipoPersona();
-            if (seTipoPersona != null) {
-                seTipoPersona.getSePersonasList().remove(sePersonas);
-                seTipoPersona = em.merge(seTipoPersona);
+            SeTipoPersona idTipoPersona = sePersonas.getIdTipoPersona();
+            if (idTipoPersona != null) {
+                idTipoPersona.getSePersonasList().remove(sePersonas);
+                idTipoPersona = em.merge(idTipoPersona);
             }
             List<CoOrdenCompras> coOrdenComprasList = sePersonas.getCoOrdenComprasList();
             for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coOrdenComprasList) {
                 coOrdenComprasListCoOrdenCompras.setIdProveedor(null);
                 coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
+            }
+            List<InMovimientos> inMovimientosList = sePersonas.getInMovimientosList();
+            for (InMovimientos inMovimientosListInMovimientos : inMovimientosList) {
+                inMovimientosListInMovimientos.setIdProveedor(null);
+                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
+            }
+            List<SeUsuarios> seUsuariosList = sePersonas.getSeUsuariosList();
+            for (SeUsuarios seUsuariosListSeUsuarios : seUsuariosList) {
+                seUsuariosListSeUsuarios.setIdPersona(null);
+                seUsuariosListSeUsuarios = em.merge(seUsuariosListSeUsuarios);
+            }
+            List<VeFactura> veFacturaList = sePersonas.getVeFacturaList();
+            for (VeFactura veFacturaListVeFactura : veFacturaList) {
+                veFacturaListVeFactura.setIdCliente(null);
+                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
             }
             em.remove(sePersonas);
             em.getTransaction().commit();
@@ -378,7 +344,7 @@ public class SePersonasJpaController implements Serializable {
         }
     }
 
-    public SePersonas findSePersonas(SePersonasPK id) {
+    public SePersonas findSePersonas(Long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(SePersonas.class, id);

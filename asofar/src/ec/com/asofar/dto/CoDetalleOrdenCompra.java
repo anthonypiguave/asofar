@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,25 +24,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
-
 @Entity
 @Table(name = "co_detalle_orden_compra")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CoDetalleOrdenCompra.findAll", query = "SELECT c FROM CoDetalleOrdenCompra c")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdEmpresa", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idProducto = :idProducto")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idGrupo = :idGrupo")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idSubgrupo = :idSubgrupo")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idArticulo = :idArticulo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoMarca", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoMarca = :idTipoMarca")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoMedidas = :idTipoMedidas")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoPresentacion = :idTipoPresentacion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByMarca", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.marca = :marca")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoModelado", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoModelado = :idTipoModelado")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByModelado", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.modelado = :modelado")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByCantidadTotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.cantidadTotal = :cantidadTotal")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByPrecioUnitario", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.precioUnitario = :precioUnitario")
@@ -59,8 +58,6 @@ public class CoDetalleOrdenCompra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_detalle_orden_compra")
     private Long idDetalleOrdenCompra;
-    @Column(name = "id_empresa")
-    private BigInteger idEmpresa;
     @Column(name = "linea_detalle")
     private BigInteger lineaDetalle;
     @Column(name = "descripcion")
@@ -73,12 +70,12 @@ public class CoDetalleOrdenCompra implements Serializable {
     private BigInteger idSubgrupo;
     @Column(name = "id_articulo")
     private BigInteger idArticulo;
-    @Column(name = "id_tipo_marca")
-    private BigInteger idTipoMarca;
+    @Column(name = "id_tipo_medidas")
+    private BigInteger idTipoMedidas;
+    @Column(name = "id_tipo_presentacion")
+    private BigInteger idTipoPresentacion;
     @Column(name = "marca")
     private String marca;
-    @Column(name = "id_tipo_modelado")
-    private BigInteger idTipoModelado;
     @Column(name = "modelado")
     private String modelado;
     @Column(name = "cantidad_total")
@@ -98,9 +95,12 @@ public class CoDetalleOrdenCompra implements Serializable {
     private BigDecimal descuento;
     @Column(name = "total")
     private BigDecimal total;
-    @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra")
+    @JoinColumns({
+        @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra")
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
+        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal")})
     @ManyToOne
-    private CoOrdenCompras idOrdenCompra;
+    private CoOrdenCompras coOrdenCompras;
 
     public CoDetalleOrdenCompra() {
     }
@@ -115,14 +115,6 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setIdDetalleOrdenCompra(Long idDetalleOrdenCompra) {
         this.idDetalleOrdenCompra = idDetalleOrdenCompra;
-    }
-
-    public BigInteger getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(BigInteger idEmpresa) {
-        this.idEmpresa = idEmpresa;
     }
 
     public BigInteger getLineaDetalle() {
@@ -173,12 +165,20 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.idArticulo = idArticulo;
     }
 
-    public BigInteger getIdTipoMarca() {
-        return idTipoMarca;
+    public BigInteger getIdTipoMedidas() {
+        return idTipoMedidas;
     }
 
-    public void setIdTipoMarca(BigInteger idTipoMarca) {
-        this.idTipoMarca = idTipoMarca;
+    public void setIdTipoMedidas(BigInteger idTipoMedidas) {
+        this.idTipoMedidas = idTipoMedidas;
+    }
+
+    public BigInteger getIdTipoPresentacion() {
+        return idTipoPresentacion;
+    }
+
+    public void setIdTipoPresentacion(BigInteger idTipoPresentacion) {
+        this.idTipoPresentacion = idTipoPresentacion;
     }
 
     public String getMarca() {
@@ -187,14 +187,6 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setMarca(String marca) {
         this.marca = marca;
-    }
-
-    public BigInteger getIdTipoModelado() {
-        return idTipoModelado;
-    }
-
-    public void setIdTipoModelado(BigInteger idTipoModelado) {
-        this.idTipoModelado = idTipoModelado;
     }
 
     public String getModelado() {
@@ -269,12 +261,12 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.total = total;
     }
 
-    public CoOrdenCompras getIdOrdenCompra() {
-        return idOrdenCompra;
+    public CoOrdenCompras getCoOrdenCompras() {
+        return coOrdenCompras;
     }
 
-    public void setIdOrdenCompra(CoOrdenCompras idOrdenCompra) {
-        this.idOrdenCompra = idOrdenCompra;
+    public void setCoOrdenCompras(CoOrdenCompras coOrdenCompras) {
+        this.coOrdenCompras = coOrdenCompras;
     }
 
     @Override

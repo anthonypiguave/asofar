@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_orden_pedido")
@@ -102,7 +102,7 @@ public class CoOrdenPedido implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @OneToMany(mappedBy = "idOrdenPedido")
+    @OneToMany(mappedBy = "coOrdenPedido")
     private List<CoDetalleOrdenPedido> coDetalleOrdenPedidoList;
 
     public CoOrdenPedido() {

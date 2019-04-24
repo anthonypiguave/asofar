@@ -21,16 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrTarifarioJpaController implements Serializable {
 
-    public PrTarifarioJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public PrTarifarioJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -45,8 +44,8 @@ public class PrTarifarioJpaController implements Serializable {
         if (prTarifario.getPrDetalleTarifarioList() == null) {
             prTarifario.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
         }
-        prTarifario.getPrTarifarioPK().setIdEmpresa(prTarifario.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         prTarifario.getPrTarifarioPK().setIdSurcusal(prTarifario.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        prTarifario.getPrTarifarioPK().setIdEmpresa(prTarifario.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -90,8 +89,8 @@ public class PrTarifarioJpaController implements Serializable {
     }
 
     public void edit(PrTarifario prTarifario) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        prTarifario.getPrTarifarioPK().setIdEmpresa(prTarifario.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         prTarifario.getPrTarifarioPK().setIdSurcusal(prTarifario.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        prTarifario.getPrTarifarioPK().setIdEmpresa(prTarifario.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_detalle_tarifario")
@@ -71,7 +71,9 @@ public class PrDetalleTarifario implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumn(name = "id_prestacion", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
+    @JoinColumns({
+        @JoinColumn(name = "id_prestacion", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrPrestaciones prPrestaciones;
     @JoinColumns({

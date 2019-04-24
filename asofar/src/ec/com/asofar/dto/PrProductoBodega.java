@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_producto_bodega")
@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PrProductoBodega.findByIdProducto", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idProducto = :idProducto")
     , @NamedQuery(name = "PrProductoBodega.findByIdEmpresa", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "PrProductoBodega.findByIdSucursal", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "PrProductoBodega.findByIdTipoBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idTipoBodega = :idTipoBodega")
     , @NamedQuery(name = "PrProductoBodega.findByEstado", query = "SELECT p FROM PrProductoBodega p WHERE p.estado = :estado")
     , @NamedQuery(name = "PrProductoBodega.findByStockMinimo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMinimo = :stockMinimo")
     , @NamedQuery(name = "PrProductoBodega.findByStockMaximo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMaximo = :stockMaximo")})
@@ -46,17 +47,11 @@ public class PrProductoBodega implements Serializable {
     private BigInteger stockMinimo;
     @Column(name = "stock_maximo")
     private BigInteger stockMaximo;
-    @JoinColumn(name = "id_bodega", referencedColumnName = "id_bodega", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private InBodega inBodega;
     @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private PrProductos prProductos;
 
     public PrProductoBodega() {
     }
@@ -65,8 +60,8 @@ public class PrProductoBodega implements Serializable {
         this.prProductoBodegaPK = prProductoBodegaPK;
     }
 
-    public PrProductoBodega(long idProductoBodega, long idBodega, long idProducto, long idEmpresa, long idSucursal) {
-        this.prProductoBodegaPK = new PrProductoBodegaPK(idProductoBodega, idBodega, idProducto, idEmpresa, idSucursal);
+    public PrProductoBodega(long idProductoBodega, long idBodega, long idProducto, long idEmpresa, long idSucursal, long idTipoBodega) {
+        this.prProductoBodegaPK = new PrProductoBodegaPK(idProductoBodega, idBodega, idProducto, idEmpresa, idSucursal, idTipoBodega);
     }
 
     public PrProductoBodegaPK getPrProductoBodegaPK() {
@@ -101,28 +96,12 @@ public class PrProductoBodega implements Serializable {
         this.stockMaximo = stockMaximo;
     }
 
-    public InBodega getInBodega() {
-        return inBodega;
-    }
-
-    public void setInBodega(InBodega inBodega) {
-        this.inBodega = inBodega;
-    }
-
     public SeSucursal getSeSucursal() {
         return seSucursal;
     }
 
     public void setSeSucursal(SeSucursal seSucursal) {
         this.seSucursal = seSucursal;
-    }
-
-    public PrProductos getPrProductos() {
-        return prProductos;
-    }
-
-    public void setPrProductos(PrProductos prProductos) {
-        this.prProductos = prProductos;
     }
 
     @Override

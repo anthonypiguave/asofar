@@ -12,20 +12,20 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.InMovimientos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class InDetalleMovimientoJpaController implements Serializable {
 
-    public InDetalleMovimientoJpaController() {
-       this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public InDetalleMovimientoJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -38,15 +38,24 @@ public class InDetalleMovimientoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            InMovimientos idMovimientos = inDetalleMovimiento.getIdMovimientos();
-            if (idMovimientos != null) {
-                idMovimientos = em.getReference(idMovimientos.getClass(), idMovimientos.getInMovimientosPK());
-                inDetalleMovimiento.setIdMovimientos(idMovimientos);
+            InTipoMovimiento idTipoMovimiento = inDetalleMovimiento.getIdTipoMovimiento();
+            if (idTipoMovimiento != null) {
+                idTipoMovimiento = em.getReference(idTipoMovimiento.getClass(), idTipoMovimiento.getIdTipoMovimiento());
+                inDetalleMovimiento.setIdTipoMovimiento(idTipoMovimiento);
+            }
+            InMovimientos inMovimientos = inDetalleMovimiento.getInMovimientos();
+            if (inMovimientos != null) {
+                inMovimientos = em.getReference(inMovimientos.getClass(), inMovimientos.getInMovimientosPK());
+                inDetalleMovimiento.setInMovimientos(inMovimientos);
             }
             em.persist(inDetalleMovimiento);
-            if (idMovimientos != null) {
-                idMovimientos.getInDetalleMovimientoList().add(inDetalleMovimiento);
-                idMovimientos = em.merge(idMovimientos);
+            if (idTipoMovimiento != null) {
+                idTipoMovimiento.getInDetalleMovimientoList().add(inDetalleMovimiento);
+                idTipoMovimiento = em.merge(idTipoMovimiento);
+            }
+            if (inMovimientos != null) {
+                inMovimientos.getInDetalleMovimientoList().add(inDetalleMovimiento);
+                inMovimientos = em.merge(inMovimientos);
             }
             em.getTransaction().commit();
         } finally {
@@ -62,20 +71,34 @@ public class InDetalleMovimientoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             InDetalleMovimiento persistentInDetalleMovimiento = em.find(InDetalleMovimiento.class, inDetalleMovimiento.getIdDetalleMovimiento());
-            InMovimientos idMovimientosOld = persistentInDetalleMovimiento.getIdMovimientos();
-            InMovimientos idMovimientosNew = inDetalleMovimiento.getIdMovimientos();
-            if (idMovimientosNew != null) {
-                idMovimientosNew = em.getReference(idMovimientosNew.getClass(), idMovimientosNew.getInMovimientosPK());
-                inDetalleMovimiento.setIdMovimientos(idMovimientosNew);
+            InTipoMovimiento idTipoMovimientoOld = persistentInDetalleMovimiento.getIdTipoMovimiento();
+            InTipoMovimiento idTipoMovimientoNew = inDetalleMovimiento.getIdTipoMovimiento();
+            InMovimientos inMovimientosOld = persistentInDetalleMovimiento.getInMovimientos();
+            InMovimientos inMovimientosNew = inDetalleMovimiento.getInMovimientos();
+            if (idTipoMovimientoNew != null) {
+                idTipoMovimientoNew = em.getReference(idTipoMovimientoNew.getClass(), idTipoMovimientoNew.getIdTipoMovimiento());
+                inDetalleMovimiento.setIdTipoMovimiento(idTipoMovimientoNew);
+            }
+            if (inMovimientosNew != null) {
+                inMovimientosNew = em.getReference(inMovimientosNew.getClass(), inMovimientosNew.getInMovimientosPK());
+                inDetalleMovimiento.setInMovimientos(inMovimientosNew);
             }
             inDetalleMovimiento = em.merge(inDetalleMovimiento);
-            if (idMovimientosOld != null && !idMovimientosOld.equals(idMovimientosNew)) {
-                idMovimientosOld.getInDetalleMovimientoList().remove(inDetalleMovimiento);
-                idMovimientosOld = em.merge(idMovimientosOld);
+            if (idTipoMovimientoOld != null && !idTipoMovimientoOld.equals(idTipoMovimientoNew)) {
+                idTipoMovimientoOld.getInDetalleMovimientoList().remove(inDetalleMovimiento);
+                idTipoMovimientoOld = em.merge(idTipoMovimientoOld);
             }
-            if (idMovimientosNew != null && !idMovimientosNew.equals(idMovimientosOld)) {
-                idMovimientosNew.getInDetalleMovimientoList().add(inDetalleMovimiento);
-                idMovimientosNew = em.merge(idMovimientosNew);
+            if (idTipoMovimientoNew != null && !idTipoMovimientoNew.equals(idTipoMovimientoOld)) {
+                idTipoMovimientoNew.getInDetalleMovimientoList().add(inDetalleMovimiento);
+                idTipoMovimientoNew = em.merge(idTipoMovimientoNew);
+            }
+            if (inMovimientosOld != null && !inMovimientosOld.equals(inMovimientosNew)) {
+                inMovimientosOld.getInDetalleMovimientoList().remove(inDetalleMovimiento);
+                inMovimientosOld = em.merge(inMovimientosOld);
+            }
+            if (inMovimientosNew != null && !inMovimientosNew.equals(inMovimientosOld)) {
+                inMovimientosNew.getInDetalleMovimientoList().add(inDetalleMovimiento);
+                inMovimientosNew = em.merge(inMovimientosNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -106,10 +129,15 @@ public class InDetalleMovimientoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inDetalleMovimiento with id " + id + " no longer exists.", enfe);
             }
-            InMovimientos idMovimientos = inDetalleMovimiento.getIdMovimientos();
-            if (idMovimientos != null) {
-                idMovimientos.getInDetalleMovimientoList().remove(inDetalleMovimiento);
-                idMovimientos = em.merge(idMovimientos);
+            InTipoMovimiento idTipoMovimiento = inDetalleMovimiento.getIdTipoMovimiento();
+            if (idTipoMovimiento != null) {
+                idTipoMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimiento);
+                idTipoMovimiento = em.merge(idTipoMovimiento);
+            }
+            InMovimientos inMovimientos = inDetalleMovimiento.getInMovimientos();
+            if (inMovimientos != null) {
+                inMovimientos.getInDetalleMovimientoList().remove(inDetalleMovimiento);
+                inMovimientos = em.merge(inMovimientos);
             }
             em.remove(inDetalleMovimiento);
             em.getTransaction().commit();

@@ -16,16 +16,15 @@ import ec.com.asofar.dto.CoOrdenCompras;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class CoDetalleOrdenCompraJpaController implements Serializable {
 
-    public CoDetalleOrdenCompraJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public CoDetalleOrdenCompraJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -38,15 +37,15 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CoOrdenCompras idOrdenCompra = coDetalleOrdenCompra.getIdOrdenCompra();
-            if (idOrdenCompra != null) {
-                idOrdenCompra = em.getReference(idOrdenCompra.getClass(), idOrdenCompra.getCoOrdenComprasPK());
-                coDetalleOrdenCompra.setIdOrdenCompra(idOrdenCompra);
+            CoOrdenCompras coOrdenCompras = coDetalleOrdenCompra.getCoOrdenCompras();
+            if (coOrdenCompras != null) {
+                coOrdenCompras = em.getReference(coOrdenCompras.getClass(), coOrdenCompras.getCoOrdenComprasPK());
+                coDetalleOrdenCompra.setCoOrdenCompras(coOrdenCompras);
             }
             em.persist(coDetalleOrdenCompra);
-            if (idOrdenCompra != null) {
-                idOrdenCompra.getCoDetalleOrdenCompraList().add(coDetalleOrdenCompra);
-                idOrdenCompra = em.merge(idOrdenCompra);
+            if (coOrdenCompras != null) {
+                coOrdenCompras.getCoDetalleOrdenCompraList().add(coDetalleOrdenCompra);
+                coOrdenCompras = em.merge(coOrdenCompras);
             }
             em.getTransaction().commit();
         } finally {
@@ -62,20 +61,20 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             CoDetalleOrdenCompra persistentCoDetalleOrdenCompra = em.find(CoDetalleOrdenCompra.class, coDetalleOrdenCompra.getIdDetalleOrdenCompra());
-            CoOrdenCompras idOrdenCompraOld = persistentCoDetalleOrdenCompra.getIdOrdenCompra();
-            CoOrdenCompras idOrdenCompraNew = coDetalleOrdenCompra.getIdOrdenCompra();
-            if (idOrdenCompraNew != null) {
-                idOrdenCompraNew = em.getReference(idOrdenCompraNew.getClass(), idOrdenCompraNew.getCoOrdenComprasPK());
-                coDetalleOrdenCompra.setIdOrdenCompra(idOrdenCompraNew);
+            CoOrdenCompras coOrdenComprasOld = persistentCoDetalleOrdenCompra.getCoOrdenCompras();
+            CoOrdenCompras coOrdenComprasNew = coDetalleOrdenCompra.getCoOrdenCompras();
+            if (coOrdenComprasNew != null) {
+                coOrdenComprasNew = em.getReference(coOrdenComprasNew.getClass(), coOrdenComprasNew.getCoOrdenComprasPK());
+                coDetalleOrdenCompra.setCoOrdenCompras(coOrdenComprasNew);
             }
             coDetalleOrdenCompra = em.merge(coDetalleOrdenCompra);
-            if (idOrdenCompraOld != null && !idOrdenCompraOld.equals(idOrdenCompraNew)) {
-                idOrdenCompraOld.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompra);
-                idOrdenCompraOld = em.merge(idOrdenCompraOld);
+            if (coOrdenComprasOld != null && !coOrdenComprasOld.equals(coOrdenComprasNew)) {
+                coOrdenComprasOld.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompra);
+                coOrdenComprasOld = em.merge(coOrdenComprasOld);
             }
-            if (idOrdenCompraNew != null && !idOrdenCompraNew.equals(idOrdenCompraOld)) {
-                idOrdenCompraNew.getCoDetalleOrdenCompraList().add(coDetalleOrdenCompra);
-                idOrdenCompraNew = em.merge(idOrdenCompraNew);
+            if (coOrdenComprasNew != null && !coOrdenComprasNew.equals(coOrdenComprasOld)) {
+                coOrdenComprasNew.getCoDetalleOrdenCompraList().add(coDetalleOrdenCompra);
+                coOrdenComprasNew = em.merge(coOrdenComprasNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -106,10 +105,10 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coDetalleOrdenCompra with id " + id + " no longer exists.", enfe);
             }
-            CoOrdenCompras idOrdenCompra = coDetalleOrdenCompra.getIdOrdenCompra();
-            if (idOrdenCompra != null) {
-                idOrdenCompra.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompra);
-                idOrdenCompra = em.merge(idOrdenCompra);
+            CoOrdenCompras coOrdenCompras = coDetalleOrdenCompra.getCoOrdenCompras();
+            if (coOrdenCompras != null) {
+                coOrdenCompras.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompra);
+                coOrdenCompras = em.merge(coOrdenCompras);
             }
             em.remove(coDetalleOrdenCompra);
             em.getTransaction().commit();

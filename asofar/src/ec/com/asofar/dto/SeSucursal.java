@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_sucursal")
@@ -71,8 +71,6 @@ public class SeSucursal implements Serializable {
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
-    private List<InBodega> inBodegaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<CoOrdenPedido> coOrdenPedidoList;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
@@ -189,15 +187,6 @@ public class SeSucursal implements Serializable {
 
     public void setSeUsuarioSucurRolList(List<SeUsuarioSucurRol> seUsuarioSucurRolList) {
         this.seUsuarioSucurRolList = seUsuarioSucurRolList;
-    }
-
-    @XmlTransient
-    public List<InBodega> getInBodegaList() {
-        return inBodegaList;
-    }
-
-    public void setInBodegaList(List<InBodega> inBodegaList) {
-        this.inBodegaList = inBodegaList;
     }
 
     @XmlTransient

@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "in_tipo_documento")
@@ -60,7 +60,7 @@ public class InTipoDocumento implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "idNumeroDocumento")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
     private List<InMovimientos> inMovimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
     private List<InKardex> inKardexList;

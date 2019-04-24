@@ -22,16 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrSubgruposJpaController implements Serializable {
 
-    public PrSubgruposJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public PrSubgruposJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -270,5 +269,5 @@ public class PrSubgruposJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

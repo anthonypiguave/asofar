@@ -12,22 +12,22 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.InKardex;
-import ec.com.asofar.dto.InTipoMovimiento;
+import ec.com.asofar.dto.InDetalleMovimiento;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.InKardex;
+import ec.com.asofar.dto.InTipoMovimiento;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class InTipoMovimientoJpaController implements Serializable {
 
-    public InTipoMovimientoJpaController() {
-    this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public InTipoMovimientoJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -36,6 +36,9 @@ public class InTipoMovimientoJpaController implements Serializable {
     }
 
     public void create(InTipoMovimiento inTipoMovimiento) {
+        if (inTipoMovimiento.getInDetalleMovimientoList() == null) {
+            inTipoMovimiento.setInDetalleMovimientoList(new ArrayList<InDetalleMovimiento>());
+        }
         if (inTipoMovimiento.getInKardexList() == null) {
             inTipoMovimiento.setInKardexList(new ArrayList<InKardex>());
         }
@@ -43,6 +46,12 @@ public class InTipoMovimientoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<InDetalleMovimiento> attachedInDetalleMovimientoList = new ArrayList<InDetalleMovimiento>();
+            for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimientoToAttach : inTipoMovimiento.getInDetalleMovimientoList()) {
+                inDetalleMovimientoListInDetalleMovimientoToAttach = em.getReference(inDetalleMovimientoListInDetalleMovimientoToAttach.getClass(), inDetalleMovimientoListInDetalleMovimientoToAttach.getIdDetalleMovimiento());
+                attachedInDetalleMovimientoList.add(inDetalleMovimientoListInDetalleMovimientoToAttach);
+            }
+            inTipoMovimiento.setInDetalleMovimientoList(attachedInDetalleMovimientoList);
             List<InKardex> attachedInKardexList = new ArrayList<InKardex>();
             for (InKardex inKardexListInKardexToAttach : inTipoMovimiento.getInKardexList()) {
                 inKardexListInKardexToAttach = em.getReference(inKardexListInKardexToAttach.getClass(), inKardexListInKardexToAttach.getInKardexPK());
@@ -50,6 +59,15 @@ public class InTipoMovimientoJpaController implements Serializable {
             }
             inTipoMovimiento.setInKardexList(attachedInKardexList);
             em.persist(inTipoMovimiento);
+            for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimiento : inTipoMovimiento.getInDetalleMovimientoList()) {
+                InTipoMovimiento oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento = inDetalleMovimientoListInDetalleMovimiento.getIdTipoMovimiento();
+                inDetalleMovimientoListInDetalleMovimiento.setIdTipoMovimiento(inTipoMovimiento);
+                inDetalleMovimientoListInDetalleMovimiento = em.merge(inDetalleMovimientoListInDetalleMovimiento);
+                if (oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento != null) {
+                    oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListInDetalleMovimiento);
+                    oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento = em.merge(oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento);
+                }
+            }
             for (InKardex inKardexListInKardex : inTipoMovimiento.getInKardexList()) {
                 InTipoMovimiento oldInTipoMovimientoOfInKardexListInKardex = inKardexListInKardex.getInTipoMovimiento();
                 inKardexListInKardex.setInTipoMovimiento(inTipoMovimiento);
@@ -73,6 +91,8 @@ public class InTipoMovimientoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             InTipoMovimiento persistentInTipoMovimiento = em.find(InTipoMovimiento.class, inTipoMovimiento.getIdTipoMovimiento());
+            List<InDetalleMovimiento> inDetalleMovimientoListOld = persistentInTipoMovimiento.getInDetalleMovimientoList();
+            List<InDetalleMovimiento> inDetalleMovimientoListNew = inTipoMovimiento.getInDetalleMovimientoList();
             List<InKardex> inKardexListOld = persistentInTipoMovimiento.getInKardexList();
             List<InKardex> inKardexListNew = inTipoMovimiento.getInKardexList();
             List<String> illegalOrphanMessages = null;
@@ -87,6 +107,13 @@ public class InTipoMovimientoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            List<InDetalleMovimiento> attachedInDetalleMovimientoListNew = new ArrayList<InDetalleMovimiento>();
+            for (InDetalleMovimiento inDetalleMovimientoListNewInDetalleMovimientoToAttach : inDetalleMovimientoListNew) {
+                inDetalleMovimientoListNewInDetalleMovimientoToAttach = em.getReference(inDetalleMovimientoListNewInDetalleMovimientoToAttach.getClass(), inDetalleMovimientoListNewInDetalleMovimientoToAttach.getIdDetalleMovimiento());
+                attachedInDetalleMovimientoListNew.add(inDetalleMovimientoListNewInDetalleMovimientoToAttach);
+            }
+            inDetalleMovimientoListNew = attachedInDetalleMovimientoListNew;
+            inTipoMovimiento.setInDetalleMovimientoList(inDetalleMovimientoListNew);
             List<InKardex> attachedInKardexListNew = new ArrayList<InKardex>();
             for (InKardex inKardexListNewInKardexToAttach : inKardexListNew) {
                 inKardexListNewInKardexToAttach = em.getReference(inKardexListNewInKardexToAttach.getClass(), inKardexListNewInKardexToAttach.getInKardexPK());
@@ -95,6 +122,23 @@ public class InTipoMovimientoJpaController implements Serializable {
             inKardexListNew = attachedInKardexListNew;
             inTipoMovimiento.setInKardexList(inKardexListNew);
             inTipoMovimiento = em.merge(inTipoMovimiento);
+            for (InDetalleMovimiento inDetalleMovimientoListOldInDetalleMovimiento : inDetalleMovimientoListOld) {
+                if (!inDetalleMovimientoListNew.contains(inDetalleMovimientoListOldInDetalleMovimiento)) {
+                    inDetalleMovimientoListOldInDetalleMovimiento.setIdTipoMovimiento(null);
+                    inDetalleMovimientoListOldInDetalleMovimiento = em.merge(inDetalleMovimientoListOldInDetalleMovimiento);
+                }
+            }
+            for (InDetalleMovimiento inDetalleMovimientoListNewInDetalleMovimiento : inDetalleMovimientoListNew) {
+                if (!inDetalleMovimientoListOld.contains(inDetalleMovimientoListNewInDetalleMovimiento)) {
+                    InTipoMovimiento oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento = inDetalleMovimientoListNewInDetalleMovimiento.getIdTipoMovimiento();
+                    inDetalleMovimientoListNewInDetalleMovimiento.setIdTipoMovimiento(inTipoMovimiento);
+                    inDetalleMovimientoListNewInDetalleMovimiento = em.merge(inDetalleMovimientoListNewInDetalleMovimiento);
+                    if (oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento != null && !oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento.equals(inTipoMovimiento)) {
+                        oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListNewInDetalleMovimiento);
+                        oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento = em.merge(oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento);
+                    }
+                }
+            }
             for (InKardex inKardexListNewInKardex : inKardexListNew) {
                 if (!inKardexListOld.contains(inKardexListNewInKardex)) {
                     InTipoMovimiento oldInTipoMovimientoOfInKardexListNewInKardex = inKardexListNewInKardex.getInTipoMovimiento();
@@ -145,6 +189,11 @@ public class InTipoMovimientoJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            List<InDetalleMovimiento> inDetalleMovimientoList = inTipoMovimiento.getInDetalleMovimientoList();
+            for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimiento : inDetalleMovimientoList) {
+                inDetalleMovimientoListInDetalleMovimiento.setIdTipoMovimiento(null);
+                inDetalleMovimientoListInDetalleMovimiento = em.merge(inDetalleMovimientoListInDetalleMovimiento);
             }
             em.remove(inTipoMovimiento);
             em.getTransaction().commit();

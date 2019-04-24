@@ -7,29 +7,26 @@ package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
+import ec.com.asofar.dto.PrProductoBodega;
+import ec.com.asofar.dto.PrProductoBodegaPK;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.InBodega;
-import ec.com.asofar.dto.PrProductoBodega;
-import ec.com.asofar.dto.PrProductoBodegaPK;
 import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.PrProductos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrProductoBodegaJpaController implements Serializable {
 
-    public PrProductoBodegaJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("asofarPU");
+    public PrProductoBodegaJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -41,41 +38,21 @@ public class PrProductoBodegaJpaController implements Serializable {
         if (prProductoBodega.getPrProductoBodegaPK() == null) {
             prProductoBodega.setPrProductoBodegaPK(new PrProductoBodegaPK());
         }
-        prProductoBodega.getPrProductoBodegaPK().setIdProducto(prProductoBodega.getPrProductos().getPrProductosPK().getIdProducto());
         prProductoBodega.getPrProductoBodegaPK().setIdSucursal(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        prProductoBodega.getPrProductoBodegaPK().setIdBodega(prProductoBodega.getInBodega().getInBodegaPK().getIdBodega());
         prProductoBodega.getPrProductoBodegaPK().setIdEmpresa(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            InBodega inBodega = prProductoBodega.getInBodega();
-            if (inBodega != null) {
-                inBodega = em.getReference(inBodega.getClass(), inBodega.getInBodegaPK());
-                prProductoBodega.setInBodega(inBodega);
-            }
             SeSucursal seSucursal = prProductoBodega.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 prProductoBodega.setSeSucursal(seSucursal);
             }
-            PrProductos prProductos = prProductoBodega.getPrProductos();
-            if (prProductos != null) {
-                prProductos = em.getReference(prProductos.getClass(), prProductos.getPrProductosPK());
-                prProductoBodega.setPrProductos(prProductos);
-            }
             em.persist(prProductoBodega);
-            if (inBodega != null) {
-                inBodega.getPrProductoBodegaList().add(prProductoBodega);
-                inBodega = em.merge(inBodega);
-            }
             if (seSucursal != null) {
                 seSucursal.getPrProductoBodegaList().add(prProductoBodega);
                 seSucursal = em.merge(seSucursal);
-            }
-            if (prProductos != null) {
-                prProductos.getPrProductoBodegaList().add(prProductoBodega);
-                prProductos = em.merge(prProductos);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -91,42 +68,20 @@ public class PrProductoBodegaJpaController implements Serializable {
     }
 
     public void edit(PrProductoBodega prProductoBodega) throws NonexistentEntityException, Exception {
-        prProductoBodega.getPrProductoBodegaPK().setIdProducto(prProductoBodega.getPrProductos().getPrProductosPK().getIdProducto());
         prProductoBodega.getPrProductoBodegaPK().setIdSucursal(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        prProductoBodega.getPrProductoBodegaPK().setIdBodega(prProductoBodega.getInBodega().getInBodegaPK().getIdBodega());
         prProductoBodega.getPrProductoBodegaPK().setIdEmpresa(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             PrProductoBodega persistentPrProductoBodega = em.find(PrProductoBodega.class, prProductoBodega.getPrProductoBodegaPK());
-            InBodega inBodegaOld = persistentPrProductoBodega.getInBodega();
-            InBodega inBodegaNew = prProductoBodega.getInBodega();
             SeSucursal seSucursalOld = persistentPrProductoBodega.getSeSucursal();
             SeSucursal seSucursalNew = prProductoBodega.getSeSucursal();
-            PrProductos prProductosOld = persistentPrProductoBodega.getPrProductos();
-            PrProductos prProductosNew = prProductoBodega.getPrProductos();
-            if (inBodegaNew != null) {
-                inBodegaNew = em.getReference(inBodegaNew.getClass(), inBodegaNew.getInBodegaPK());
-                prProductoBodega.setInBodega(inBodegaNew);
-            }
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 prProductoBodega.setSeSucursal(seSucursalNew);
             }
-            if (prProductosNew != null) {
-                prProductosNew = em.getReference(prProductosNew.getClass(), prProductosNew.getPrProductosPK());
-                prProductoBodega.setPrProductos(prProductosNew);
-            }
             prProductoBodega = em.merge(prProductoBodega);
-            if (inBodegaOld != null && !inBodegaOld.equals(inBodegaNew)) {
-                inBodegaOld.getPrProductoBodegaList().remove(prProductoBodega);
-                inBodegaOld = em.merge(inBodegaOld);
-            }
-            if (inBodegaNew != null && !inBodegaNew.equals(inBodegaOld)) {
-                inBodegaNew.getPrProductoBodegaList().add(prProductoBodega);
-                inBodegaNew = em.merge(inBodegaNew);
-            }
             if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
                 seSucursalOld.getPrProductoBodegaList().remove(prProductoBodega);
                 seSucursalOld = em.merge(seSucursalOld);
@@ -134,14 +89,6 @@ public class PrProductoBodegaJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getPrProductoBodegaList().add(prProductoBodega);
                 seSucursalNew = em.merge(seSucursalNew);
-            }
-            if (prProductosOld != null && !prProductosOld.equals(prProductosNew)) {
-                prProductosOld.getPrProductoBodegaList().remove(prProductoBodega);
-                prProductosOld = em.merge(prProductosOld);
-            }
-            if (prProductosNew != null && !prProductosNew.equals(prProductosOld)) {
-                prProductosNew.getPrProductoBodegaList().add(prProductoBodega);
-                prProductosNew = em.merge(prProductosNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -172,20 +119,10 @@ public class PrProductoBodegaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The prProductoBodega with id " + id + " no longer exists.", enfe);
             }
-            InBodega inBodega = prProductoBodega.getInBodega();
-            if (inBodega != null) {
-                inBodega.getPrProductoBodegaList().remove(prProductoBodega);
-                inBodega = em.merge(inBodega);
-            }
             SeSucursal seSucursal = prProductoBodega.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal.getPrProductoBodegaList().remove(prProductoBodega);
                 seSucursal = em.merge(seSucursal);
-            }
-            PrProductos prProductos = prProductoBodega.getPrProductos();
-            if (prProductos != null) {
-                prProductos.getPrProductoBodegaList().remove(prProductoBodega);
-                prProductos = em.merge(prProductos);
             }
             em.remove(prProductoBodega);
             em.getTransaction().commit();
@@ -241,5 +178,5 @@ public class PrProductoBodegaJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

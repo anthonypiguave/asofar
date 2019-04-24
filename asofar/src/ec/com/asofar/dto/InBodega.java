@@ -13,9 +13,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "in_bodega")
@@ -63,20 +60,8 @@ public class InBodega implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumn(name = "id_tipo_bodega", referencedColumnName = "id_tipo_bodega", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private InTipoBodega inTipoBodega;
-    @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private SeSucursal seSucursal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inBodega")
     private List<InMovimientos> inMovimientosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inBodega")
-    private List<InKardex> inKardexList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inBodega")
-    private List<PrProductoBodega> prProductoBodegaList;
 
     public InBodega() {
     }
@@ -145,22 +130,6 @@ public class InBodega implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public InTipoBodega getInTipoBodega() {
-        return inTipoBodega;
-    }
-
-    public void setInTipoBodega(InTipoBodega inTipoBodega) {
-        this.inTipoBodega = inTipoBodega;
-    }
-
-    public SeSucursal getSeSucursal() {
-        return seSucursal;
-    }
-
-    public void setSeSucursal(SeSucursal seSucursal) {
-        this.seSucursal = seSucursal;
-    }
-
     @XmlTransient
     public List<InMovimientos> getInMovimientosList() {
         return inMovimientosList;
@@ -168,24 +137,6 @@ public class InBodega implements Serializable {
 
     public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
         this.inMovimientosList = inMovimientosList;
-    }
-
-    @XmlTransient
-    public List<InKardex> getInKardexList() {
-        return inKardexList;
-    }
-
-    public void setInKardexList(List<InKardex> inKardexList) {
-        this.inKardexList = inKardexList;
-    }
-
-    @XmlTransient
-    public List<PrProductoBodega> getPrProductoBodegaList() {
-        return prProductoBodegaList;
-    }
-
-    public void setPrProductoBodegaList(List<PrProductoBodega> prProductoBodegaList) {
-        this.prProductoBodegaList = prProductoBodegaList;
     }
 
     @Override
