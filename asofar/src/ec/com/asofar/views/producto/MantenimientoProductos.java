@@ -41,6 +41,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         DefaultTreeModel model =new DefaultTreeModel(grupo);
         this.arbol.setModel(model);
         } catch (Exception e) {
+            
             System.out.println("Error" + e.getMessage());
         }
     }
