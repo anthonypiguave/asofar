@@ -13,7 +13,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.CoOrdenCompras;
-import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.SeUsuarios;
@@ -48,7 +47,7 @@ public class InMovimientosJpaController implements Serializable {
             inMovimientos.setInDetalleMovimientoList(new ArrayList<InDetalleMovimiento>());
         }
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getInBodega().getInBodegaPK().getIdEmpresa());
+        inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -57,11 +56,6 @@ public class InMovimientosJpaController implements Serializable {
             if (coOrdenCompras != null) {
                 coOrdenCompras = em.getReference(coOrdenCompras.getClass(), coOrdenCompras.getCoOrdenComprasPK());
                 inMovimientos.setCoOrdenCompras(coOrdenCompras);
-            }
-            InBodega inBodega = inMovimientos.getInBodega();
-            if (inBodega != null) {
-                inBodega = em.getReference(inBodega.getClass(), inBodega.getInBodegaPK());
-                inMovimientos.setInBodega(inBodega);
             }
             SePersonas idProveedor = inMovimientos.getIdProveedor();
             if (idProveedor != null) {
@@ -88,10 +82,6 @@ public class InMovimientosJpaController implements Serializable {
             if (coOrdenCompras != null) {
                 coOrdenCompras.getInMovimientosList().add(inMovimientos);
                 coOrdenCompras = em.merge(coOrdenCompras);
-            }
-            if (inBodega != null) {
-                inBodega.getInMovimientosList().add(inMovimientos);
-                inBodega = em.merge(inBodega);
             }
             if (idProveedor != null) {
                 idProveedor.getInMovimientosList().add(inMovimientos);
@@ -129,7 +119,7 @@ public class InMovimientosJpaController implements Serializable {
 
     public void edit(InMovimientos inMovimientos) throws NonexistentEntityException, Exception {
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getInBodega().getInBodegaPK().getIdEmpresa());
+        inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -137,8 +127,6 @@ public class InMovimientosJpaController implements Serializable {
             InMovimientos persistentInMovimientos = em.find(InMovimientos.class, inMovimientos.getInMovimientosPK());
             CoOrdenCompras coOrdenComprasOld = persistentInMovimientos.getCoOrdenCompras();
             CoOrdenCompras coOrdenComprasNew = inMovimientos.getCoOrdenCompras();
-            InBodega inBodegaOld = persistentInMovimientos.getInBodega();
-            InBodega inBodegaNew = inMovimientos.getInBodega();
             SePersonas idProveedorOld = persistentInMovimientos.getIdProveedor();
             SePersonas idProveedorNew = inMovimientos.getIdProveedor();
             InTipoDocumento inTipoDocumentoOld = persistentInMovimientos.getInTipoDocumento();
@@ -150,10 +138,6 @@ public class InMovimientosJpaController implements Serializable {
             if (coOrdenComprasNew != null) {
                 coOrdenComprasNew = em.getReference(coOrdenComprasNew.getClass(), coOrdenComprasNew.getCoOrdenComprasPK());
                 inMovimientos.setCoOrdenCompras(coOrdenComprasNew);
-            }
-            if (inBodegaNew != null) {
-                inBodegaNew = em.getReference(inBodegaNew.getClass(), inBodegaNew.getInBodegaPK());
-                inMovimientos.setInBodega(inBodegaNew);
             }
             if (idProveedorNew != null) {
                 idProveedorNew = em.getReference(idProveedorNew.getClass(), idProveedorNew.getIdPersona());
@@ -182,14 +166,6 @@ public class InMovimientosJpaController implements Serializable {
             if (coOrdenComprasNew != null && !coOrdenComprasNew.equals(coOrdenComprasOld)) {
                 coOrdenComprasNew.getInMovimientosList().add(inMovimientos);
                 coOrdenComprasNew = em.merge(coOrdenComprasNew);
-            }
-            if (inBodegaOld != null && !inBodegaOld.equals(inBodegaNew)) {
-                inBodegaOld.getInMovimientosList().remove(inMovimientos);
-                inBodegaOld = em.merge(inBodegaOld);
-            }
-            if (inBodegaNew != null && !inBodegaNew.equals(inBodegaOld)) {
-                inBodegaNew.getInMovimientosList().add(inMovimientos);
-                inBodegaNew = em.merge(inBodegaNew);
             }
             if (idProveedorOld != null && !idProveedorOld.equals(idProveedorNew)) {
                 idProveedorOld.getInMovimientosList().remove(inMovimientos);
@@ -265,11 +241,6 @@ public class InMovimientosJpaController implements Serializable {
             if (coOrdenCompras != null) {
                 coOrdenCompras.getInMovimientosList().remove(inMovimientos);
                 coOrdenCompras = em.merge(coOrdenCompras);
-            }
-            InBodega inBodega = inMovimientos.getInBodega();
-            if (inBodega != null) {
-                inBodega.getInMovimientosList().remove(inMovimientos);
-                inBodega = em.merge(inBodega);
             }
             SePersonas idProveedor = inMovimientos.getIdProveedor();
             if (idProveedor != null) {

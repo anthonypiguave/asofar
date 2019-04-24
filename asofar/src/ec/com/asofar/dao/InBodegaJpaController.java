@@ -5,21 +5,18 @@
  */
 package ec.com.asofar.dao;
 
-import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InBodegaPK;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.InMovimientos;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -40,29 +37,11 @@ public class InBodegaJpaController implements Serializable {
         if (inBodega.getInBodegaPK() == null) {
             inBodega.setInBodegaPK(new InBodegaPK());
         }
-        if (inBodega.getInMovimientosList() == null) {
-            inBodega.setInMovimientosList(new ArrayList<InMovimientos>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListInMovimientosToAttach : inBodega.getInMovimientosList()) {
-                inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosList.add(inMovimientosListInMovimientosToAttach);
-            }
-            inBodega.setInMovimientosList(attachedInMovimientosList);
             em.persist(inBodega);
-            for (InMovimientos inMovimientosListInMovimientos : inBodega.getInMovimientosList()) {
-                InBodega oldInBodegaOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getInBodega();
-                inMovimientosListInMovimientos.setInBodega(inBodega);
-                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
-                if (oldInBodegaOfInMovimientosListInMovimientos != null) {
-                    oldInBodegaOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
-                    oldInBodegaOfInMovimientosListInMovimientos = em.merge(oldInBodegaOfInMovimientosListInMovimientos);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findInBodega(inBodega.getInBodegaPK()) != null) {
@@ -76,45 +55,12 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public void edit(InBodega inBodega) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(InBodega inBodega) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            InBodega persistentInBodega = em.find(InBodega.class, inBodega.getInBodegaPK());
-            List<InMovimientos> inMovimientosListOld = persistentInBodega.getInMovimientosList();
-            List<InMovimientos> inMovimientosListNew = inBodega.getInMovimientosList();
-            List<String> illegalOrphanMessages = null;
-            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
-                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain InMovimientos " + inMovimientosListOldInMovimientos + " since its inBodega field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
-                inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosListNew.add(inMovimientosListNewInMovimientosToAttach);
-            }
-            inMovimientosListNew = attachedInMovimientosListNew;
-            inBodega.setInMovimientosList(inMovimientosListNew);
             inBodega = em.merge(inBodega);
-            for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
-                if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
-                    InBodega oldInBodegaOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getInBodega();
-                    inMovimientosListNewInMovimientos.setInBodega(inBodega);
-                    inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
-                    if (oldInBodegaOfInMovimientosListNewInMovimientos != null && !oldInBodegaOfInMovimientosListNewInMovimientos.equals(inBodega)) {
-                        oldInBodegaOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
-                        oldInBodegaOfInMovimientosListNewInMovimientos = em.merge(oldInBodegaOfInMovimientosListNewInMovimientos);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -132,7 +78,7 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public void destroy(InBodegaPK id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(InBodegaPK id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -143,17 +89,6 @@ public class InBodegaJpaController implements Serializable {
                 inBodega.getInBodegaPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inBodega with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<InMovimientos> inMovimientosListOrphanCheck = inBodega.getInMovimientosList();
-            for (InMovimientos inMovimientosListOrphanCheckInMovimientos : inMovimientosListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This InBodega (" + inBodega + ") cannot be destroyed since the InMovimientos " + inMovimientosListOrphanCheckInMovimientos + " in its inMovimientosList field has a non-nullable inBodega field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(inBodega);
             em.getTransaction().commit();
