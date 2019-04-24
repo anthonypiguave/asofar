@@ -18,30 +18,32 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class MantenimientoProductos extends javax.swing.JDialog {
 
-    PrGrupos Egrupo=new PrGrupos();
-    PrGruposJpaController Cgrupo = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+   
+    PrGruposJpaController cgrupo = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<PrGrupos> listagrupo = cgrupo.findPrGruposEntities();
+    
+    
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-       CargarArbol();
+
+        CargarArbol();
     }
-    
-    
+
     public void CargarArbol() {
         try {
-             DefaultMutableTreeNode grupo = new DefaultMutableTreeNode(Egrupo.getNombre());
-        List <PrGrupos> listagrupo=Cgrupo.findPrGruposEntities();
-        for(PrGrupos g:listagrupo){
-            DefaultMutableTreeNode hgru = new DefaultMutableTreeNode();
-            hgru.setUserObject(g);
-            grupo.add(hgru);
-        }
-        
-        DefaultTreeModel model =new DefaultTreeModel(grupo);
-        this.arbol.setModel(model);
+            DefaultMutableTreeNode grupo = new DefaultMutableTreeNode();
+            List<PrGrupos> listagrupo =  cgrupo.findPrGruposEntities();
+            for (PrGrupos g : listagrupo) {
+                DefaultMutableTreeNode hgru = new DefaultMutableTreeNode();
+                hgru.setUserObject(g.getNombre());
+                grupo.add(hgru);
+            }
+
+            DefaultTreeModel model = new DefaultTreeModel(grupo);
+            this.arbol.setModel(model);
         } catch (Exception e) {
-            
+
             System.out.println("Error" + e.getMessage());
         }
     }
@@ -192,7 +194,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
     private void BotonNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoProductoActionPerformed
         // TODO add your handling code here:
-        NuevoProducto np= new NuevoProducto(new javax.swing.JFrame(), true);
+        NuevoProducto np = new NuevoProducto(new javax.swing.JFrame(), true);
         np.setVisible(true);
     }//GEN-LAST:event_BotonNuevoProductoActionPerformed
 
