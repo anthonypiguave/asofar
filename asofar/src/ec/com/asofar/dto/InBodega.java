@@ -8,19 +8,15 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -60,8 +56,6 @@ public class InBodega implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inBodega")
-    private List<InMovimientos> inMovimientosList;
 
     public InBodega() {
     }
@@ -128,15 +122,6 @@ public class InBodega implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    @XmlTransient
-    public List<InMovimientos> getInMovimientosList() {
-        return inMovimientosList;
-    }
-
-    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
-        this.inMovimientosList = inMovimientosList;
     }
 
     @Override

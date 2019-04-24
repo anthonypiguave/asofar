@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "InMovimientos.findByIdTipoDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "InMovimientos.findByAnioDocumento", query = "SELECT i FROM InMovimientos i WHERE i.anioDocumento = :anioDocumento")
     , @NamedQuery(name = "InMovimientos.findByIdEmpresa", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "InMovimientos.findByIdBodega", query = "SELECT i FROM InMovimientos i WHERE i.idBodega = :idBodega")
+    , @NamedQuery(name = "InMovimientos.findByIdTipoBodega", query = "SELECT i FROM InMovimientos i WHERE i.idTipoBodega = :idTipoBodega")
     , @NamedQuery(name = "InMovimientos.findByEstado", query = "SELECT i FROM InMovimientos i WHERE i.estado = :estado")
     , @NamedQuery(name = "InMovimientos.findByBodegaDestino", query = "SELECT i FROM InMovimientos i WHERE i.bodegaDestino = :bodegaDestino")
     , @NamedQuery(name = "InMovimientos.findBySucursalDestino", query = "SELECT i FROM InMovimientos i WHERE i.sucursalDestino = :sucursalDestino")
@@ -53,6 +55,10 @@ public class InMovimientos implements Serializable {
     protected InMovimientosPK inMovimientosPK;
     @Column(name = "anio_documento")
     private String anioDocumento;
+    @Column(name = "id_bodega")
+    private BigInteger idBodega;
+    @Column(name = "id_tipo_bodega")
+    private BigInteger idTipoBodega;
     @Column(name = "estado")
     private String estado;
     @Column(name = "bodega_destino")
@@ -79,13 +85,6 @@ public class InMovimientos implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")})
     @ManyToOne(optional = false)
     private CoOrdenCompras coOrdenCompras;
-    @JoinColumns({
-        @JoinColumn(name = "id_bodega", referencedColumnName = "id_bodega")
-        , @JoinColumn(name = "id_tipo_bodega", referencedColumnName = "id_tipo_bodega")
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")})
-    @ManyToOne(optional = false)
-    private InBodega inBodega;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_persona")
     @ManyToOne
     private SePersonas idProveedor;
@@ -121,6 +120,22 @@ public class InMovimientos implements Serializable {
 
     public void setAnioDocumento(String anioDocumento) {
         this.anioDocumento = anioDocumento;
+    }
+
+    public BigInteger getIdBodega() {
+        return idBodega;
+    }
+
+    public void setIdBodega(BigInteger idBodega) {
+        this.idBodega = idBodega;
+    }
+
+    public BigInteger getIdTipoBodega() {
+        return idTipoBodega;
+    }
+
+    public void setIdTipoBodega(BigInteger idTipoBodega) {
+        this.idTipoBodega = idTipoBodega;
     }
 
     public String getEstado() {
@@ -202,14 +217,6 @@ public class InMovimientos implements Serializable {
 
     public void setCoOrdenCompras(CoOrdenCompras coOrdenCompras) {
         this.coOrdenCompras = coOrdenCompras;
-    }
-
-    public InBodega getInBodega() {
-        return inBodega;
-    }
-
-    public void setInBodega(InBodega inBodega) {
-        this.inBodega = inBodega;
     }
 
     public SePersonas getIdProveedor() {

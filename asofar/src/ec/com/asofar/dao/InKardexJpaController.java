@@ -42,10 +42,10 @@ public class InKardexJpaController implements Serializable {
             inKardex.setInKardexPK(new InKardexPK());
         }
         inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
+        inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inKardex.getInKardexPK().setIdPrestaciones(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
-        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -102,10 +102,10 @@ public class InKardexJpaController implements Serializable {
 
     public void edit(InKardex inKardex) throws NonexistentEntityException, Exception {
         inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
+        inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inKardex.getInKardexPK().setIdPrestaciones(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
-        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();

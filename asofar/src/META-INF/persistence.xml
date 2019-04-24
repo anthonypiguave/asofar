@@ -2,40 +2,40 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="asofarPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>ec.com.asofar.dto.PrSubgrupos</class>
-    <class>ec.com.asofar.dto.CoDetalleOrdenPedido</class>
-    <class>ec.com.asofar.dto.InKardex</class>
-    <class>ec.com.asofar.dto.SePersonas</class>
-    <class>ec.com.asofar.dto.PrDetalleTarifario</class>
-    <class>ec.com.asofar.dto.SeEmpresa</class>
-    <class>ec.com.asofar.dto.InMovimientos</class>
-    <class>ec.com.asofar.dto.SeOpcionesRoles</class>
-    <class>ec.com.asofar.dto.InBodega</class>
-    <class>ec.com.asofar.dto.PrPrestaciones</class>
-    <class>ec.com.asofar.dto.SeUsuarios</class>
-    <class>ec.com.asofar.dto.CoDetalleOrdenCompra</class>
-    <class>ec.com.asofar.dto.PrProductos</class>
-    <class>ec.com.asofar.dto.PrGrupos</class>
-    <class>ec.com.asofar.dto.VeUnidadServicio</class>
-    <class>ec.com.asofar.dto.PrArticulo</class>
-    <class>ec.com.asofar.dto.SeRoles</class>
-    <class>ec.com.asofar.dto.InTipoMovimiento</class>
-    <class>ec.com.asofar.dto.SeSucursal</class>
-    <class>ec.com.asofar.dto.SeOpcionesMenu</class>
-    <class>ec.com.asofar.dto.CoOrdenCompras</class>
-    <class>ec.com.asofar.dto.InTipoBodega</class>
-    <class>ec.com.asofar.dto.PrMedidas</class>
-    <class>ec.com.asofar.dto.InTipoDocumento</class>
-    <class>ec.com.asofar.dto.PrTipoMedidas</class>
-    <class>ec.com.asofar.dto.VeFactura</class>
-    <class>ec.com.asofar.dto.PrProductoBodega</class>
-    <class>ec.com.asofar.dto.SeUsuarioSucurRol</class>
-    <class>ec.com.asofar.dto.InDetalleMovimiento</class>
     <class>ec.com.asofar.dto.SeTipoPersona</class>
-    <class>ec.com.asofar.dto.CoOrdenPedido</class>
-    <class>ec.com.asofar.dto.PrTipoPresentacion</class>
-    <class>ec.com.asofar.dto.VeFacturaDetalle</class>
+    <class>ec.com.asofar.dto.InBodega</class>
+    <class>ec.com.asofar.dto.SePersonas</class>
     <class>ec.com.asofar.dto.PrTarifario</class>
+    <class>ec.com.asofar.dto.InDetalleMovimiento</class>
+    <class>ec.com.asofar.dto.InTipoDocumento</class>
+    <class>ec.com.asofar.dto.SeRoles</class>
+    <class>ec.com.asofar.dto.CoDetalleOrdenCompra</class>
+    <class>ec.com.asofar.dto.SeUsuarios</class>
+    <class>ec.com.asofar.dto.PrPrestaciones</class>
+    <class>ec.com.asofar.dto.PrTipoPresentacion</class>
+    <class>ec.com.asofar.dto.PrGrupos</class>
+    <class>ec.com.asofar.dto.PrSubgrupos</class>
+    <class>ec.com.asofar.dto.CoOrdenPedido</class>
+    <class>ec.com.asofar.dto.SeOpcionesMenu</class>
+    <class>ec.com.asofar.dto.SeSucursal</class>
+    <class>ec.com.asofar.dto.PrProductoBodega</class>
+    <class>ec.com.asofar.dto.InTipoMovimiento</class>
+    <class>ec.com.asofar.dto.PrDetalleTarifario</class>
+    <class>ec.com.asofar.dto.VeFactura</class>
+    <class>ec.com.asofar.dto.PrArticulo</class>
+    <class>ec.com.asofar.dto.PrTipoMedidas</class>
+    <class>ec.com.asofar.dto.VeUnidadServicio</class>
+    <class>ec.com.asofar.dto.SeEmpresa</class>
+    <class>ec.com.asofar.dto.PrMedidas</class>
+    <class>ec.com.asofar.dto.SeOpcionesRoles</class>
+    <class>ec.com.asofar.dto.PrProductos</class>
+    <class>ec.com.asofar.dto.VeFacturaDetalle</class>
+    <class>ec.com.asofar.dto.SeUsuarioSucurRol</class>
+    <class>ec.com.asofar.dto.InKardex</class>
+    <class>ec.com.asofar.dto.CoDetalleOrdenPedido</class>
+    <class>ec.com.asofar.dto.InTipoBodega</class>
+    <class>ec.com.asofar.dto.InMovimientos</class>
+    <class>ec.com.asofar.dto.CoOrdenCompras</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://173.212.207.238:57635/bd_farmacia_desa?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="farmacia"/>
