@@ -12,6 +12,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import java.util.logging.Level;
@@ -204,11 +205,11 @@ int x,y;
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void llenarCampos(PrSubgrupos obj){
+    public void llenarCampos(PrSubgrupos obj){        
         jTextField1.setText(obj.getPrGrupos().getNombre());
         jTextField2.setText(obj.getNombre());
-        jTextField3.setText(obj.getFechaCreacion().toString());
-        jTextField4.setText(obj.getFechaActualizacion().toString());
+        jTextField3.setText(Fecha.getStringFecha(new java.sql.Date(obj.getFechaCreacion().getTime())));
+        jTextField4.setText(Fecha.getStringFecha(new java.sql.Date(obj.getFechaActualizacion().getTime())));
         
     }
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
