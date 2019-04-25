@@ -250,6 +250,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
                 if((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))){
                     obj = lista.get(i);
                   if(obj != null)  {
+                      setVisible(false);
                       EditarSubgrupos es = new EditarSubgrupos(new  javax.swing.JFrame(),true,obj);
                       es.setVisible(true);
                   }

@@ -31,6 +31,7 @@ int x,y;
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cargarDatos();
     }
 
     /**
@@ -185,7 +186,7 @@ int x,y;
 
             lista = cSubgrupos.findPrSubgruposEntities();
             
-            Tablas.listarSubgrupos(lista, tbsubgrupos);
+            Tablas.listarSubgruposIn(lista, tbsubgrupos);
 
         } catch (Exception e) {
         }
@@ -215,6 +216,7 @@ int x,y;
                 if((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))){
                     obj = lista.get(i);
                   if(obj != null)  {
+                      setVisible(false);
                       EditarSubgruposIn es = new EditarSubgruposIn(new  javax.swing.JFrame(),true,obj);
                       ;
                       es.setVisible(true);
