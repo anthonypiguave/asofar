@@ -6,11 +6,20 @@
 package ec.com.asofar.views.Supgrupos;
 
 import ec.com.asofar.dao.PrGruposJpaController;
+import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.dao.SeEmpresaJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,14 +27,23 @@ import java.util.List;
  */
 public class NuevoSubgrupo extends javax.swing.JDialog {
 int x,y;
+Date d = new Date();
+ PrSubgruposJpaController psc = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+ObtenerDTO od = new ObtenerDTO();
     PrGruposJpaController pgc = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
 List<PrGrupos> pg;
+List<SeEmpresa> se;
+SeEmpresaJpaController secont = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+SeEmpresa empresa = new SeEmpresa();
+    PrSubgrupos ps = new PrSubgrupos();
     public NuevoSubgrupo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         pg = pgc.findPrGruposEntities();
+        se = secont.findSeEmpresaEntities();
         llenarCombo(pg);
+        empresa = se.get(0);
     }
 
     /**
@@ -42,8 +60,9 @@ List<PrGrupos> pg;
         btncancelar = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
         cbgrupo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -77,8 +96,17 @@ List<PrGrupos> pg;
 
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnguardar.setText("GUARDAR");
+        btnguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguardarActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("ELEGIR GRUPO");
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setText("ELEGIR GRUPO:");
+
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setText("NOMBRE:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,10 +122,12 @@ List<PrGrupos> pg;
                         .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(jLabel2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(txtnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                             .addComponent(cbgrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
@@ -110,7 +140,9 @@ List<PrGrupos> pg;
                     .addComponent(jLabel2)
                     .addComponent(cbgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btncancelar)
@@ -153,6 +185,23 @@ List<PrGrupos> pg;
         setLocation(point.x-x,point.y-y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        
+       ps.setNombre(txtnombre.getText());
+       ps.setIdEmpresa(empresa);
+       ps.setEstado("A");
+       ps.setPrGrupos(od.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
+       ps.setUsuarioActualizacion(BigInteger.valueOf(1));
+       ps.setUsuarioCreacion(BigInteger.valueOf(1));
+       ps.setFechaActualizacion(d);
+       ps.setFechaCreacion(d);
+    try {
+        psc.create(ps);
+    } catch (Exception ex) {
+        Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_btnguardarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,7 +229,7 @@ List<PrGrupos> pg;
         }
         //</editor-fold>
         //</editor-fold>
-
+ PrSubgruposJpaController prc = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -202,7 +251,8 @@ List<PrGrupos> pg;
     private javax.swing.JComboBox<String> cbgrupo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
 }

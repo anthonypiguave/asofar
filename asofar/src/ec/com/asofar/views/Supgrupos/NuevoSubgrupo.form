@@ -57,10 +57,13 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField1" pref="153" max="32767" attributes="0"/>
+                              <Component id="txtnombre" pref="153" max="32767" attributes="0"/>
                               <Component id="cbgrupo" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -79,7 +82,10 @@
                       <Component id="cbgrupo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtnombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="126" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btncancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -129,13 +135,19 @@
             </Property>
             <Property name="text" type="java.lang.String" value="GUARDAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ELEGIR GRUPO"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Ubuntu" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="ELEGIR GRUPO:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txtnombre">
         </Component>
         <Component class="javax.swing.JComboBox" name="cbgrupo">
           <Properties>
@@ -146,6 +158,14 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Ubuntu" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="NOMBRE:"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
