@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ValidarDTO {
 
-    public boolean ValidarInBodega(String nombre){
+    public static boolean ValidarInBodega(String nombre){
         InBodegaJpaController control=new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<InBodega> lista=control.findInBodegaEntities();
@@ -31,7 +31,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarInTipoBodega(String nombre){
+    public static boolean ValidarInTipoBodega(String nombre){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<InTipoBodega> lista=control.findInTipoBodegaEntities();
@@ -46,7 +46,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarInTipoDocumento(String nombre){
+    public static boolean ValidarInTipoDocumento(String nombre){
         InTipoDocumentoJpaController control=new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<InTipoDocumento> lista=control.findInTipoDocumentoEntities();
@@ -61,7 +61,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarInTipoMovimiento(String nombre){
+    public static boolean ValidarInTipoMovimiento(String nombre){
         InTipoMovimientoJpaController control=new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<InTipoMovimiento> lista=control.findInTipoMovimientoEntities();
@@ -77,7 +77,7 @@ public class ValidarDTO {
     
     }
     
-    public boolean ValidarPrArticulo(String nombre){
+    public static boolean ValidarPrArticulo(String nombre){
         PrArticuloJpaController control=new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<PrArticulo> lista=control.findPrArticuloEntities();
@@ -92,7 +92,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarPrGrupos(String nombre){
+    public static boolean ValidarPrGrupos(String nombre){
         PrGruposJpaController control=new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<PrGrupos> lista=control.findPrGruposEntities();
@@ -107,7 +107,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarPrPrestaciones(String nombre){
+    public static boolean ValidarPrPrestaciones(String nombre){
         PrPrestacionesJpaController control=new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<PrPrestaciones> lista=control.findPrPrestacionesEntities();
@@ -122,7 +122,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarPrSubGrupos(String nombre){
+    public static boolean ValidarPrSubGrupos(String nombre){
         PrSubgruposJpaController control=new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor = false;
         List<PrSubgrupos> lista=control.findPrSubgruposEntities();
@@ -137,7 +137,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarPrTipoMedidas(String nombre){
+    public static boolean ValidarPrTipoMedidas(String nombre){
         PrTipoMedidasJpaController control=new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor = false;
         List<PrTipoMedidas> lista=control.findPrTipoMedidasEntities();
@@ -152,7 +152,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarPrTipoPresentacion(String nombre){
+    public static boolean ValidarPrTipoPresentacion(String nombre){
         PrTipoPresentacionJpaController control=new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<PrTipoPresentacion> lista=control.findPrTipoPresentacionEntities();
@@ -167,7 +167,7 @@ public class ValidarDTO {
     
     
     }
-    public boolean ValidarSeRoles(String nombre){
+    public static boolean ValidarSeRoles(String nombre){
         SeRolesJpaController control=new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor= false;
         List<SeRoles> lista=control.findSeRolesEntities();
@@ -182,7 +182,7 @@ public class ValidarDTO {
     
     
     }
-public boolean ValidarSeTipoPersona(String nombre){
+public static boolean ValidarSeTipoPersona(String nombre){
         SeTipoPersonaJpaController control=new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor= false;
         List<SeTipoPersona> lista=control.findSeTipoPersonaEntities();
@@ -197,7 +197,7 @@ public boolean ValidarSeTipoPersona(String nombre){
     
     
     }
-    public boolean ValidarVeUnidadServicio(String nombre){
+    public static boolean ValidarVeUnidadServicio(String nombre){
         VeUnidadServicioJpaController control=new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
         List<VeUnidadServicio> lista=control.findVeUnidadServicioEntities();

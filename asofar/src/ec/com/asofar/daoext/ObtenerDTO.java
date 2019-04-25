@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ObtenerDTO {
     
-    public InBodega ObtenerInBodega(String nombre){
+    public static InBodega ObtenerInBodega(String nombre){
         InBodegaJpaController control=new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         InBodega dto=new InBodega();
         List<InBodega> lista=control.findInBodegaEntities();
@@ -31,7 +31,7 @@ public class ObtenerDTO {
     
     
     }
-    public InTipoBodega ObtenerInTipoBodega(String nombre){
+    public static InTipoBodega ObtenerInTipoBodega(String nombre){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         InTipoBodega dto=new InTipoBodega();
         List<InTipoBodega> lista=control.findInTipoBodegaEntities();
@@ -46,7 +46,7 @@ public class ObtenerDTO {
     
     
     }
-    public InTipoDocumento ObtenerInTipoDocumento(String nombre){
+    public static InTipoDocumento ObtenerInTipoDocumento(String nombre){
         InTipoDocumentoJpaController control=new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
         InTipoDocumento dto=new InTipoDocumento();
         List<InTipoDocumento> lista=control.findInTipoDocumentoEntities();
@@ -61,7 +61,7 @@ public class ObtenerDTO {
     
     
     }
-    public InTipoMovimiento ObtenerInTipoMovimiento(String nombre){
+    public static InTipoMovimiento ObtenerInTipoMovimiento(String nombre){
         InTipoMovimientoJpaController control=new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
         InTipoMovimiento dto=new InTipoMovimiento();
         List<InTipoMovimiento> lista=control.findInTipoMovimientoEntities();
@@ -77,7 +77,7 @@ public class ObtenerDTO {
     
     }
     
-    public PrArticulo ObtenerPrArticulo(String nombre){
+    public static PrArticulo ObtenerPrArticulo(String nombre){
         PrArticuloJpaController control=new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrArticulo dto=new PrArticulo();
         List<PrArticulo> lista=control.findPrArticuloEntities();
@@ -92,7 +92,7 @@ public class ObtenerDTO {
     
     
     }
-    public PrGrupos ObtenerPrGrupos(String nombre){
+    public static PrGrupos ObtenerPrGrupos(String nombre){
         PrGruposJpaController control=new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrGrupos dto=new PrGrupos();
         List<PrGrupos> lista=control.findPrGruposEntities();
@@ -107,7 +107,7 @@ public class ObtenerDTO {
     
     
     }
-    public PrPrestaciones ObtenerPrPrestaciones(String nombre){
+    public static PrPrestaciones ObtenerPrPrestaciones(String nombre){
         PrPrestacionesJpaController control=new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrPrestaciones dto=new PrPrestaciones();
         List<PrPrestaciones> lista=control.findPrPrestacionesEntities();
@@ -122,7 +122,7 @@ public class ObtenerDTO {
     
     
     }
-    public PrSubgrupos ObtenerPrSubGrupos(String nombre){
+    public static PrSubgrupos ObtenerPrSubGrupos(String nombre){
         PrSubgruposJpaController control=new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrSubgrupos dto=new PrSubgrupos();
         List<PrSubgrupos> lista=control.findPrSubgruposEntities();
@@ -137,7 +137,7 @@ public class ObtenerDTO {
     
     
     }
-    public PrTipoMedidas ObtenerPrTipoMedidas(String nombre){
+    public static PrTipoMedidas ObtenerPrTipoMedidas(String nombre){
         PrTipoMedidasJpaController control=new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrTipoMedidas dto=new PrTipoMedidas();
         List<PrTipoMedidas> lista=control.findPrTipoMedidasEntities();
@@ -152,7 +152,7 @@ public class ObtenerDTO {
     
     
     }
-    public PrTipoPresentacion ObtenerPrTipoPresentacion(String nombre){
+    public static PrTipoPresentacion ObtenerPrTipoPresentacion(String nombre){
         PrTipoPresentacionJpaController control=new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrTipoPresentacion dto=new PrTipoPresentacion();
         List<PrTipoPresentacion> lista=control.findPrTipoPresentacionEntities();
@@ -167,7 +167,7 @@ public class ObtenerDTO {
     
     
     }
-    public SeRoles ObtenerSeRoles(String nombre){
+    public static SeRoles ObtenerSeRoles(String nombre){
         SeRolesJpaController control=new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeRoles dto=new SeRoles();
         List<SeRoles> lista=control.findSeRolesEntities();
@@ -182,7 +182,7 @@ public class ObtenerDTO {
     
     
     }
-public SeTipoPersona ObtenerSeTipoPersona(String nombre){
+public static SeTipoPersona ObtenerSeTipoPersona(String nombre){
         SeTipoPersonaJpaController control=new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeTipoPersona dto=new SeTipoPersona();
         List<SeTipoPersona> lista=control.findSeTipoPersonaEntities();
@@ -197,7 +197,7 @@ public SeTipoPersona ObtenerSeTipoPersona(String nombre){
     
     
     }
-    public VeUnidadServicio ObtenerVeUnidadServicio(String nombre){
+    public static VeUnidadServicio ObtenerVeUnidadServicio(String nombre){
         VeUnidadServicioJpaController control=new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
         VeUnidadServicio dto=new VeUnidadServicio();
         List<VeUnidadServicio> lista=control.findVeUnidadServicioEntities();
