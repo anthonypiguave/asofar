@@ -88,6 +88,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        arbol.setRootVisible(false);
         jScrollPane1.setViewportView(arbol);
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
