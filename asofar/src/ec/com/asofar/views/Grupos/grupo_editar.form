@@ -136,7 +136,7 @@
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="AGREGAR GRUPO"/>
+            <Property name="text" type="java.lang.String" value="EDITAR GRUPO"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
