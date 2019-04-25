@@ -12,6 +12,7 @@ import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -207,6 +208,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
             Object o[] = null;
 
             lista = cSubgrupos.findPrSubgruposEntities();
+            
             Tablas.listarSubgrupos(lista, tbsubgrupos);
 
         } catch (Exception e) {
@@ -223,6 +225,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
+
         setVisible(false);
         NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(), true);
         ns.setVisible(true);
@@ -244,7 +247,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             id = tbsubgrupos.getSelectedRow();
             for(int i = 0 ;i < lista.size();i++){
-                if(Long.valueOf(tbsubgrupos.getValueAt(id, 0).toString()) == lista.get(i).getPrSubgruposPK().getIdSubgrupo()){
+                if((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))){
                     obj = lista.get(i);
                   if(obj != null)  {
                       EditarSubgrupos es = new EditarSubgrupos(new  javax.swing.JFrame(),true,obj);
