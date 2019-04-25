@@ -21,45 +21,53 @@ import javax.swing.tree.DefaultTreeModel;
  * @author alumno
  */
 public class MantenimientoProductos extends javax.swing.JDialog {
-
+    
     PrGruposJpaController cgrupo = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrSubgruposJpaController csub = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrArticuloJpaController carti = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    
     List<PrGrupos> listgrupo = cgrupo.findPrGruposEntities();
     List<PrSubgrupos> listsub = csub.findPrSubgruposEntities();
     List<PrArticulo> listart = carti.findPrArticuloEntities();
-
+    
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        setLocationRelativeTo(null);
         CargarArbol();
     }
-
+    
     public void CargarArbol() {
         try {
             DefaultMutableTreeNode grupo = new DefaultMutableTreeNode();
-
+            
             for (PrGrupos g : listgrupo) {
                 DefaultMutableTreeNode hgru = new DefaultMutableTreeNode();
                 hgru.setUserObject(g.getNombre());
                 grupo.add(hgru);
                 
-                for (PrSubgrupos sg : listsub) { 
+                for (PrSubgrupos sg : listsub) {                    
                     DefaultMutableTreeNode hsub = new DefaultMutableTreeNode();
-                    if(sg.getPrSubgruposPK().getIdGrupo()== g.getIdGrupo()){
-                    hsub.setUserObject(sg.getNombre());
-                    hgru.add(hsub);
-                    
+                    if (sg.getPrSubgruposPK().getIdGrupo() == g.getIdGrupo()) {
+                        hsub.setUserObject(sg.getNombre());
+                        hgru.add(hsub);
+                        
                     }
+                    for (PrArticulo a : listart) {
+                        DefaultMutableTreeNode hart = new DefaultMutableTreeNode();
+                        if (a.getPrArticuloPK().getIdSubgrupo() == sg.getPrSubgruposPK().getIdSubgrupo()) {
+                            hart.setUserObject(a.getNombreArticulo());
+                            hsub.add(hart);
+                        }
+                    }
+                    
                 }
-            } 
-
+            }            
+            
             DefaultTreeModel model = new DefaultTreeModel(grupo);
             this.arbol.setModel(model);
         } catch (Exception e) {
-
+            
             System.out.println("Error" + e.getMessage());
         }
     }
