@@ -7,6 +7,7 @@ package ec.com.asofar.util;
 
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,40 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
             Filas[0] = lista.get(i).getIdGrupo().toString();
+            Filas[1] = lista.get(i).getNombre();
+            Filas[2] = lista.get(i).getEstado();
+            Filas[3] = lista.get(i).getFechaCreacion().toString();
+            Filas[4] = lista.get(i).getFechaActualizacion().toString();
+
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        }
+
+    }
+    public static void listarSubgrupos(List<PrSubgrupos> lista, JTable Tabla) {
+        int[] a = {5, 30, 30, 10, 15};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"COD.", "NOMBRE", "ESTADO", "FECHA CREACION", "FECHA ACTUALIZACION"};
+        String[] Filas = new String[5];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = lista.get(i).getPrSubgruposPK().toString();
             Filas[1] = lista.get(i).getNombre();
             Filas[2] = lista.get(i).getEstado();
             Filas[3] = lista.get(i).getFechaCreacion().toString();

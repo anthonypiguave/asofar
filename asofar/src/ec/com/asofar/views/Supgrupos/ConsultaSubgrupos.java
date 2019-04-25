@@ -5,22 +5,33 @@
  */
 package ec.com.asofar.views.Supgrupos;
 
+import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 
 /**
  *
  * @author admin1
  */
 public class ConsultaSubgrupos extends javax.swing.JDialog {
-    int y,x;
+
+    int y, x;
     /**
      * Creates new form ConsultaSubgrupos
      */
+    List<PrSubgrupos> lista;
+    PrSubgrupos obj;
+    PrSubgruposJpaController cSubgrupos = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     public ConsultaSubgrupos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cargarDatos();
     }
 
     /**
@@ -84,6 +95,11 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbsubgrupos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbsubgruposMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbsubgrupos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -185,7 +201,17 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        public void cargarDatos() {
 
+        try {
+            Object o[] = null;
+
+            lista = cSubgrupos.findPrSubgruposEntities();
+            Tablas.listarSubgrupos(lista, tbsubgrupos);
+
+        } catch (Exception e) {
+        }
+    }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
         y = evt.getY();
@@ -193,12 +219,12 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
         setVisible(false);
-        NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(),true);
+        NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(), true);
         ns.setVisible(true);
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
@@ -208,9 +234,36 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
     private void btninactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninactivosActionPerformed
         setVisible(false);
-        ConsultaSubgruposIn csi = new ConsultaSubgruposIn(new javax.swing.JFrame(),true);
+        ConsultaSubgruposIn csi = new ConsultaSubgruposIn(new javax.swing.JFrame(), true);
         csi.setVisible(true);
     }//GEN-LAST:event_btninactivosActionPerformed
+
+    private void tbsubgruposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbsubgruposMousePressed
+                int id = 0;
+                obj = null;
+        if (evt.getClickCount() == 2) {
+            id = tbsubgrupos.getSelectedRow();
+            for(int i = 0 ;i < lista.size();i++){
+                if(Long.valueOf(tbsubgrupos.getValueAt(id, 0).toString()) == lista.get(i).getPrSubgruposPK().getIdSubgrupo()){
+                    obj = lista.get(i);
+                  if(obj != null)  {
+                      EditarSubgrupos es = new EditarSubgrupos(new  javax.swing.JFrame(),true,obj);
+                      es.setVisible(true);
+                  }
+                }
+            }
+//            lista = crud.listarProveedores(Long.valueOf("1"));
+//            
+//            (tabla.getValueAt(id, 0).toString(), lista);
+//            System.out.println("si pasa algo"+proveedor.getCedula_ruc());
+//            if (proveedor != null) {
+//                Editar_Proveedor ep = new Editar_Proveedor(new javax.swing.JFrame(), true, proveedor);
+//                setVisible(false);
+//                ep.setVisible(true);
+
+            
+        }
+    }//GEN-LAST:event_tbsubgruposMousePressed
 
     /**
      * @param args the command line arguments
@@ -237,6 +290,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultaSubgrupos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
