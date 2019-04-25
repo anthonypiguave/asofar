@@ -54,9 +54,6 @@ public class PrProductos implements Serializable {
     @Lob
     @Column(name = "codigo_barra")
     private String codigoBarra;
-    @Lob
-    @Column(name = "cod_fabricante")
-    private String codFabricante;
     @Column(name = "descontinuado")
     private String descontinuado;
     @Column(name = "nombre_producto")
@@ -84,6 +81,9 @@ public class PrProductos implements Serializable {
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
+    @JoinColumn(name = "cod_fabricante", referencedColumnName = "id_fabricante")
+    @ManyToOne
+    private PrFabricante codFabricante;
     @JoinColumns({
         @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
         , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
@@ -121,14 +121,6 @@ public class PrProductos implements Serializable {
 
     public void setCodigoBarra(String codigoBarra) {
         this.codigoBarra = codigoBarra;
-    }
-
-    public String getCodFabricante() {
-        return codFabricante;
-    }
-
-    public void setCodFabricante(String codFabricante) {
-        this.codFabricante = codFabricante;
     }
 
     public String getDescontinuado() {
@@ -217,6 +209,14 @@ public class PrProductos implements Serializable {
 
     public void setSeEmpresa(SeEmpresa seEmpresa) {
         this.seEmpresa = seEmpresa;
+    }
+
+    public PrFabricante getCodFabricante() {
+        return codFabricante;
+    }
+
+    public void setCodFabricante(PrFabricante codFabricante) {
+        this.codFabricante = codFabricante;
     }
 
     public PrMedidas getPrMedidas() {

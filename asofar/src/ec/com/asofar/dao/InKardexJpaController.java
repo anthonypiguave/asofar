@@ -41,11 +41,11 @@ public class InKardexJpaController implements Serializable {
         if (inKardex.getInKardexPK() == null) {
             inKardex.setInKardexPK(new InKardexPK());
         }
-        inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
+        inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
         inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
         inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inKardex.getInKardexPK().setIdPrestaciones(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -101,11 +101,11 @@ public class InKardexJpaController implements Serializable {
     }
 
     public void edit(InKardex inKardex) throws NonexistentEntityException, Exception {
-        inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
+        inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
         inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
         inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inKardex.getInKardexPK().setIdPrestaciones(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
         EntityManager em = null;
         try {
             em = getEntityManager();

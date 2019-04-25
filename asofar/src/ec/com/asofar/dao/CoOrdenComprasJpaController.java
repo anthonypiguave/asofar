@@ -49,8 +49,8 @@ public class CoOrdenComprasJpaController implements Serializable {
         if (coOrdenCompras.getInMovimientosList() == null) {
             coOrdenCompras.setInMovimientosList(new ArrayList<InMovimientos>());
         }
-        coOrdenCompras.getCoOrdenComprasPK().setIdEmpresa(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         coOrdenCompras.getCoOrdenComprasPK().setIdSucursal(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        coOrdenCompras.getCoOrdenComprasPK().setIdEmpresa(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -118,8 +118,8 @@ public class CoOrdenComprasJpaController implements Serializable {
     }
 
     public void edit(CoOrdenCompras coOrdenCompras) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        coOrdenCompras.getCoOrdenComprasPK().setIdEmpresa(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         coOrdenCompras.getCoOrdenComprasPK().setIdSucursal(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        coOrdenCompras.getCoOrdenComprasPK().setIdEmpresa(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();

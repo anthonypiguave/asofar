@@ -20,7 +20,6 @@ import ec.com.asofar.dto.VeUnidadServicio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-
 /**
  *
  * @author ADMIN
