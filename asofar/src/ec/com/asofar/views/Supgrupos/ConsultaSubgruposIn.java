@@ -5,8 +5,14 @@
  */
 package ec.com.asofar.views.Supgrupos;
 
+import com.sun.javafx.sg.prism.NGArc;
+import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 
 /**
  *
@@ -14,6 +20,10 @@ import java.awt.Point;
  */
 public class ConsultaSubgruposIn extends javax.swing.JDialog {
 int x,y;
+ List<PrSubgrupos> lista;
+    PrSubgrupos obj;
+    PrSubgruposJpaController cSubgrupos = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     /**
      * Creates new form ConsultaSubgruposIn
      */
@@ -41,7 +51,6 @@ int x,y;
         tbsubgrupos = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
         btnreporte = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -83,6 +92,11 @@ int x,y;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbsubgrupos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbsubgruposMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbsubgrupos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -109,9 +123,6 @@ int x,y;
         btnreporte.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnreporte.setText("IMPRIMIR");
 
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton1.setText("ACTIVAR");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,9 +143,7 @@ int x,y;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(btnreporte, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(141, 141, 141)
                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -151,9 +160,8 @@ int x,y;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnreporte, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnreporte, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,6 +178,18 @@ int x,y;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void cargarDatos() {
+
+        try {
+            Object o[] = null;
+
+            lista = cSubgrupos.findPrSubgruposEntities();
+            
+            Tablas.listarSubgrupos(lista, tbsubgrupos);
+
+        } catch (Exception e) {
+        }
+    }
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x-x,point.y-y);
@@ -186,6 +206,24 @@ int x,y;
         cs.setVisible(true);
     }//GEN-LAST:event_btnsalirActionPerformed
 
+    private void tbsubgruposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbsubgruposMousePressed
+        int id = 0;
+                obj = null;
+        if (evt.getClickCount() == 2) {
+            id = tbsubgrupos.getSelectedRow();
+            for(int i = 0 ;i < lista.size();i++){
+                if((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))){
+                    obj = lista.get(i);
+                  if(obj != null)  {
+                      EditarSubgruposIn es = new EditarSubgruposIn(new  javax.swing.JFrame(),true,obj);
+                      ;
+                      es.setVisible(true);
+                  }
+                }
+            }
+        }
+    }//GEN-LAST:event_tbsubgruposMousePressed
+    
     /**
      * @param args the command line arguments
      */
@@ -232,7 +270,6 @@ int x,y;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnreporte;
     private javax.swing.JButton btnsalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

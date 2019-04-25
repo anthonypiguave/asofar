@@ -92,7 +92,41 @@ public class Tablas {
         }
 
     }
+        
+    public static void listarSubgruposIn(List<PrSubgrupos> lista, JTable Tabla) {
+        int[] a = {5, 30, 30, 10, 15};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"N.GRUPO","N.SUBGRUPO", "FECHA CREACION", "FECHA ACTUALIZACION"};
+        String[] Filas = new String[5];
+        model = new DefaultTableModel(null, Co);
 
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            
+            if(lista.get(i).getEstado().equals("I")){
+            Filas[0] = lista.get(i).getPrGrupos().getNombre();
+            Filas[1] = lista.get(i).getNombre();
+            Filas[2] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
+            Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
+
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
+        }
+
+    }    
     public static DefaultTableModel VaciarTabla(JTable tabla) {
         DefaultTableModel lab
                 = (DefaultTableModel) tabla.getModel();

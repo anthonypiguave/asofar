@@ -66,9 +66,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                   <Component id="btnreporte" min="-2" pref="105" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="105" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                   <Component id="btnsalir" min="-2" pref="105" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -89,9 +87,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnsalir" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btnreporte" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -175,6 +172,9 @@
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbsubgruposMousePressed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -197,14 +197,6 @@
               <Font name="Ubuntu" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="IMPRIMIR"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="ACTIVAR"/>
           </Properties>
         </Component>
       </SubComponents>
