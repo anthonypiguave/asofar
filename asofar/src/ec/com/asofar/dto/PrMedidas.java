@@ -69,6 +69,9 @@ public class PrMedidas implements Serializable {
         , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrArticulo prArticulo;
+    @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private PrTipoMedidas prTipoMedidas;
     @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private PrTipoPresentacion prTipoPresentacion;
@@ -147,6 +150,14 @@ public class PrMedidas implements Serializable {
 
     public void setPrArticulo(PrArticulo prArticulo) {
         this.prArticulo = prArticulo;
+    }
+
+    public PrTipoMedidas getPrTipoMedidas() {
+        return prTipoMedidas;
+    }
+
+    public void setPrTipoMedidas(PrTipoMedidas prTipoMedidas) {
+        this.prTipoMedidas = prTipoMedidas;
     }
 
     public PrTipoPresentacion getPrTipoPresentacion() {

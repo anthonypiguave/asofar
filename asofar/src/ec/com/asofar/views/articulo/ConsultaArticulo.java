@@ -9,6 +9,7 @@ import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import ec.com.asofar.views.Supgrupos.EditarSubgrupos;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     PrArticuloJpaController articon = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
     
     List<PrArticulo> listap= articon.findPrArticuloEntities();
-    
+    PrArticulo obj= new PrArticulo();
 
     /**
      * Creates new form ConsultaArticulo
@@ -27,6 +28,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     public ConsultaArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(this);
         Tablas.listaArticulos(listap, tabla);
     }
 
@@ -58,6 +60,11 @@ public class ConsultaArticulo extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -113,6 +120,25 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         IngresarArticulo ingre= new IngresarArticulo(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+        // TODO add your handling code here:
+        int id = 0;
+                obj = null;
+        if (evt.getClickCount() == 2) {
+            id = tabla.getSelectedRow();
+            for(int i = 0 ;i < listap.size();i++){
+                if((tabla.getValueAt(id, 3).toString().equals(listap.get(i).getNombreArticulo()))){
+                    obj = listap.get(i);
+                  if(obj != null)  {
+                      setVisible(false);
+                      EditarArticulo es = new EditarArticulo(new  javax.swing.JFrame(),true,obj);
+                      es.setVisible(true);
+                  }
+                }
+            }
+        }
+    }//GEN-LAST:event_tablaMousePressed
 
     /**
      * @param args the command line arguments
