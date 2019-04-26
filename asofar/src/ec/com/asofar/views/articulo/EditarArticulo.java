@@ -5,16 +5,27 @@
  */
 package ec.com.asofar.views.articulo;
 
+import ec.com.asofar.dao.PrArticuloJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrArticulo;
+import ec.com.asofar.dto.PrArticuloPK;
+import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Estado;
 import ec.com.asofar.views.Supgrupos.ConsultaSubgrupos;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ADMIN
  */
+
+
 public class EditarArticulo extends javax.swing.JDialog {
 
+    PrArticuloJpaController control= new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+    
+    PrArticulo obj1=null;
+            
     /**
      * Creates new form EditarArticulo
      */
@@ -26,7 +37,9 @@ public class EditarArticulo extends javax.swing.JDialog {
     public EditarArticulo(java.awt.Frame parent, boolean modal,PrArticulo prar) {
         
         super(parent, modal);
+        
         initComponents();
+        obj1=prar;
         setLocationRelativeTo(this);
         llenar(prar);
         
@@ -84,6 +97,11 @@ public class EditarArticulo extends javax.swing.JDialog {
         });
 
         jButton2.setText("ACTUALIZAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,10 +172,32 @@ public class EditarArticulo extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);
-        cs.setVisible(true);
+       Actualizar();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            PrArticulo arti=new PrArticulo();
+         boolean valor1=ValidarDTO.ValidarPrArticulo(articulo.getText());
+            if (valor1 == true && !obj1.getNombreArticulo().equals(articulo.getText())) {
+                JOptionPane.showMessageDialog(this, "Articulo ya existente");
+            }  else {
+            arti=obj1;
+       
+        arti.setPrArticuloPK(obj1.getPrArticuloPK());
+        arti.setNombreArticulo(articulo.getText());
+        arti.setEstado(Estado.ObtenerEstado(estado.getSelectedItem().toString()));
+        
+        control.edit(arti);
+        JOptionPane.showMessageDialog(this, "Aticulo actualizado");
+        Actualizar();
+            }
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +210,11 @@ public class EditarArticulo extends javax.swing.JDialog {
         subgrupo.setText(prar.getPrSubgrupos().getNombre());
         articulo.setText(prar.getNombreArticulo());
         estado.setSelectedItem(Estado.ObtenerEstado(prar.getEstado()));
+    }
+    public void Actualizar(){
+    setVisible(false);
+        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);
+        cs.setVisible(true);
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

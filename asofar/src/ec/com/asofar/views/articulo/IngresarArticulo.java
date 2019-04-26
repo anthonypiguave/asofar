@@ -194,6 +194,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         arti.setEstado(valor);
         control2.create(arti);
                JOptionPane.showMessageDialog(this, "Articulo Guardado :)"); 
+               Actualizar();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -204,12 +205,14 @@ public class IngresarArticulo extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 //       
-        setVisible(false);
-        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);
-        cs.setVisible(true);
+        Actualizar();
     
     }//GEN-LAST:event_jButton1ActionPerformed
-
+public void Actualizar(){
+    setVisible(false);
+        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);
+        cs.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */

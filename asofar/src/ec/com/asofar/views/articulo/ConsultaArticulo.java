@@ -30,6 +30,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(this);
         Tablas.listaArticulos(listap, tabla);
+        
     }
 
     /**
@@ -71,6 +72,11 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         jLabel1.setText("Articulos");
 
         jButton1.setText("VOLVER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("INGRESAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +145,10 @@ public class ConsultaArticulo extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tablaMousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
