@@ -65,7 +65,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
 
         jButton1.setText("VOLVER");
 
-        jButton2.setText("Ingresar");
+        jButton2.setText("INGRESAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

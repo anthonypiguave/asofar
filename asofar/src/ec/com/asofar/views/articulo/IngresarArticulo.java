@@ -252,6 +252,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         // TODO add your handling code here:
 //       
     setVisible(false);
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
