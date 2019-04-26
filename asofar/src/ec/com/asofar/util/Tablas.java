@@ -7,6 +7,8 @@ package ec.com.asofar.util;
 
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
 import java.util.ArrayList;
@@ -198,4 +200,67 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         }
 
     }
+    
+    
+    public static void TablaMedida(List<PrMedidas> listamedida, JTable tabla) {
+        int[] a = {40, 50, 20};
+        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(tabla);
+        String[] b = {"TIPO MEDIDA", "TIPO PRESENTACION", "ESTADO"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        tabla.setShowGrid(true);
+        for (int i = 0; i < listamedida.size(); i++) {
+            filas[0] = listamedida.get(i).;
+            filas[1] = listamedida.get(i).getPrTipoPresentacion().getNombre();
+            filas[2] = listamedida.get(i).getEstado();
+            model.addRow(filas);
+            tabla.setModel(model);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr1);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+        }
+    }
+
+     public static void TablaProducto(List<PrProductos> listaprod, JTable tabla) {
+        int[] a = {5, 300, 20};
+        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(tabla);
+        String[] b = {"ID", "NOMBRE" ,"COD BARRA", "FABRICANTE" , "RECETA", "ESTADO"};
+        String[] filas = new String[6];
+        model = new DefaultTableModel(null, b);
+        tabla.setShowGrid(true);
+        for (int i = 0; i < listaprod.size(); i++) {
+            filas[0] = String.valueOf(listaprod.get(i).getPrProductosPK().getIdProducto());
+            filas[1] = listaprod.get(i).getNombreProducto();
+            filas[2] = listaprod.get(i).getCodigoBarra();
+            filas[3] = listaprod.get(i).getCodFabricante().getNombre();
+            filas[4] = listaprod.get(i).getReceta();
+            filas[5] = listaprod.get(i).getEstado();
+            model.addRow(filas);
+            tabla.setModel(model);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            tabla.getColumnModel().getColumn(3).setCellRenderer(dtcr1);
+            tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            tabla.getColumnModel().getColumn(4).setCellRenderer(dtcr1);
+            tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            tabla.getColumnModel().getColumn(5).setCellRenderer(dtcr1);
+        }
+    }
+    
 }
