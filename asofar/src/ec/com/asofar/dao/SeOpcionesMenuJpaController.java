@@ -7,12 +7,12 @@ package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dto.SeOpcionesMenu;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.SeOpcionesMenu;
 import ec.com.asofar.dto.SeOpcionesRoles;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +38,35 @@ public class SeOpcionesMenuJpaController implements Serializable {
         if (seOpcionesMenu.getSeOpcionesRolesList() == null) {
             seOpcionesMenu.setSeOpcionesRolesList(new ArrayList<SeOpcionesRoles>());
         }
+        if (seOpcionesMenu.getSeOpcionesMenuList() == null) {
+            seOpcionesMenu.setSeOpcionesMenuList(new ArrayList<SeOpcionesMenu>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            SeOpcionesMenu idPadre = seOpcionesMenu.getIdPadre();
+            if (idPadre != null) {
+                idPadre = em.getReference(idPadre.getClass(), idPadre.getIdOpcionesMenu());
+                seOpcionesMenu.setIdPadre(idPadre);
+            }
             List<SeOpcionesRoles> attachedSeOpcionesRolesList = new ArrayList<SeOpcionesRoles>();
             for (SeOpcionesRoles seOpcionesRolesListSeOpcionesRolesToAttach : seOpcionesMenu.getSeOpcionesRolesList()) {
                 seOpcionesRolesListSeOpcionesRolesToAttach = em.getReference(seOpcionesRolesListSeOpcionesRolesToAttach.getClass(), seOpcionesRolesListSeOpcionesRolesToAttach.getSeOpcionesRolesPK());
                 attachedSeOpcionesRolesList.add(seOpcionesRolesListSeOpcionesRolesToAttach);
             }
             seOpcionesMenu.setSeOpcionesRolesList(attachedSeOpcionesRolesList);
+            List<SeOpcionesMenu> attachedSeOpcionesMenuList = new ArrayList<SeOpcionesMenu>();
+            for (SeOpcionesMenu seOpcionesMenuListSeOpcionesMenuToAttach : seOpcionesMenu.getSeOpcionesMenuList()) {
+                seOpcionesMenuListSeOpcionesMenuToAttach = em.getReference(seOpcionesMenuListSeOpcionesMenuToAttach.getClass(), seOpcionesMenuListSeOpcionesMenuToAttach.getIdOpcionesMenu());
+                attachedSeOpcionesMenuList.add(seOpcionesMenuListSeOpcionesMenuToAttach);
+            }
+            seOpcionesMenu.setSeOpcionesMenuList(attachedSeOpcionesMenuList);
             em.persist(seOpcionesMenu);
+            if (idPadre != null) {
+                idPadre.getSeOpcionesMenuList().add(seOpcionesMenu);
+                idPadre = em.merge(idPadre);
+            }
             for (SeOpcionesRoles seOpcionesRolesListSeOpcionesRoles : seOpcionesMenu.getSeOpcionesRolesList()) {
                 SeOpcionesMenu oldSeOpcionesMenuOfSeOpcionesRolesListSeOpcionesRoles = seOpcionesRolesListSeOpcionesRoles.getSeOpcionesMenu();
                 seOpcionesRolesListSeOpcionesRoles.setSeOpcionesMenu(seOpcionesMenu);
@@ -56,6 +74,15 @@ public class SeOpcionesMenuJpaController implements Serializable {
                 if (oldSeOpcionesMenuOfSeOpcionesRolesListSeOpcionesRoles != null) {
                     oldSeOpcionesMenuOfSeOpcionesRolesListSeOpcionesRoles.getSeOpcionesRolesList().remove(seOpcionesRolesListSeOpcionesRoles);
                     oldSeOpcionesMenuOfSeOpcionesRolesListSeOpcionesRoles = em.merge(oldSeOpcionesMenuOfSeOpcionesRolesListSeOpcionesRoles);
+                }
+            }
+            for (SeOpcionesMenu seOpcionesMenuListSeOpcionesMenu : seOpcionesMenu.getSeOpcionesMenuList()) {
+                SeOpcionesMenu oldIdPadreOfSeOpcionesMenuListSeOpcionesMenu = seOpcionesMenuListSeOpcionesMenu.getIdPadre();
+                seOpcionesMenuListSeOpcionesMenu.setIdPadre(seOpcionesMenu);
+                seOpcionesMenuListSeOpcionesMenu = em.merge(seOpcionesMenuListSeOpcionesMenu);
+                if (oldIdPadreOfSeOpcionesMenuListSeOpcionesMenu != null) {
+                    oldIdPadreOfSeOpcionesMenuListSeOpcionesMenu.getSeOpcionesMenuList().remove(seOpcionesMenuListSeOpcionesMenu);
+                    oldIdPadreOfSeOpcionesMenuListSeOpcionesMenu = em.merge(oldIdPadreOfSeOpcionesMenuListSeOpcionesMenu);
                 }
             }
             em.getTransaction().commit();
@@ -72,8 +99,12 @@ public class SeOpcionesMenuJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             SeOpcionesMenu persistentSeOpcionesMenu = em.find(SeOpcionesMenu.class, seOpcionesMenu.getIdOpcionesMenu());
+            SeOpcionesMenu idPadreOld = persistentSeOpcionesMenu.getIdPadre();
+            SeOpcionesMenu idPadreNew = seOpcionesMenu.getIdPadre();
             List<SeOpcionesRoles> seOpcionesRolesListOld = persistentSeOpcionesMenu.getSeOpcionesRolesList();
             List<SeOpcionesRoles> seOpcionesRolesListNew = seOpcionesMenu.getSeOpcionesRolesList();
+            List<SeOpcionesMenu> seOpcionesMenuListOld = persistentSeOpcionesMenu.getSeOpcionesMenuList();
+            List<SeOpcionesMenu> seOpcionesMenuListNew = seOpcionesMenu.getSeOpcionesMenuList();
             List<String> illegalOrphanMessages = null;
             for (SeOpcionesRoles seOpcionesRolesListOldSeOpcionesRoles : seOpcionesRolesListOld) {
                 if (!seOpcionesRolesListNew.contains(seOpcionesRolesListOldSeOpcionesRoles)) {
@@ -86,6 +117,10 @@ public class SeOpcionesMenuJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            if (idPadreNew != null) {
+                idPadreNew = em.getReference(idPadreNew.getClass(), idPadreNew.getIdOpcionesMenu());
+                seOpcionesMenu.setIdPadre(idPadreNew);
+            }
             List<SeOpcionesRoles> attachedSeOpcionesRolesListNew = new ArrayList<SeOpcionesRoles>();
             for (SeOpcionesRoles seOpcionesRolesListNewSeOpcionesRolesToAttach : seOpcionesRolesListNew) {
                 seOpcionesRolesListNewSeOpcionesRolesToAttach = em.getReference(seOpcionesRolesListNewSeOpcionesRolesToAttach.getClass(), seOpcionesRolesListNewSeOpcionesRolesToAttach.getSeOpcionesRolesPK());
@@ -93,7 +128,22 @@ public class SeOpcionesMenuJpaController implements Serializable {
             }
             seOpcionesRolesListNew = attachedSeOpcionesRolesListNew;
             seOpcionesMenu.setSeOpcionesRolesList(seOpcionesRolesListNew);
+            List<SeOpcionesMenu> attachedSeOpcionesMenuListNew = new ArrayList<SeOpcionesMenu>();
+            for (SeOpcionesMenu seOpcionesMenuListNewSeOpcionesMenuToAttach : seOpcionesMenuListNew) {
+                seOpcionesMenuListNewSeOpcionesMenuToAttach = em.getReference(seOpcionesMenuListNewSeOpcionesMenuToAttach.getClass(), seOpcionesMenuListNewSeOpcionesMenuToAttach.getIdOpcionesMenu());
+                attachedSeOpcionesMenuListNew.add(seOpcionesMenuListNewSeOpcionesMenuToAttach);
+            }
+            seOpcionesMenuListNew = attachedSeOpcionesMenuListNew;
+            seOpcionesMenu.setSeOpcionesMenuList(seOpcionesMenuListNew);
             seOpcionesMenu = em.merge(seOpcionesMenu);
+            if (idPadreOld != null && !idPadreOld.equals(idPadreNew)) {
+                idPadreOld.getSeOpcionesMenuList().remove(seOpcionesMenu);
+                idPadreOld = em.merge(idPadreOld);
+            }
+            if (idPadreNew != null && !idPadreNew.equals(idPadreOld)) {
+                idPadreNew.getSeOpcionesMenuList().add(seOpcionesMenu);
+                idPadreNew = em.merge(idPadreNew);
+            }
             for (SeOpcionesRoles seOpcionesRolesListNewSeOpcionesRoles : seOpcionesRolesListNew) {
                 if (!seOpcionesRolesListOld.contains(seOpcionesRolesListNewSeOpcionesRoles)) {
                     SeOpcionesMenu oldSeOpcionesMenuOfSeOpcionesRolesListNewSeOpcionesRoles = seOpcionesRolesListNewSeOpcionesRoles.getSeOpcionesMenu();
@@ -102,6 +152,23 @@ public class SeOpcionesMenuJpaController implements Serializable {
                     if (oldSeOpcionesMenuOfSeOpcionesRolesListNewSeOpcionesRoles != null && !oldSeOpcionesMenuOfSeOpcionesRolesListNewSeOpcionesRoles.equals(seOpcionesMenu)) {
                         oldSeOpcionesMenuOfSeOpcionesRolesListNewSeOpcionesRoles.getSeOpcionesRolesList().remove(seOpcionesRolesListNewSeOpcionesRoles);
                         oldSeOpcionesMenuOfSeOpcionesRolesListNewSeOpcionesRoles = em.merge(oldSeOpcionesMenuOfSeOpcionesRolesListNewSeOpcionesRoles);
+                    }
+                }
+            }
+            for (SeOpcionesMenu seOpcionesMenuListOldSeOpcionesMenu : seOpcionesMenuListOld) {
+                if (!seOpcionesMenuListNew.contains(seOpcionesMenuListOldSeOpcionesMenu)) {
+                    seOpcionesMenuListOldSeOpcionesMenu.setIdPadre(null);
+                    seOpcionesMenuListOldSeOpcionesMenu = em.merge(seOpcionesMenuListOldSeOpcionesMenu);
+                }
+            }
+            for (SeOpcionesMenu seOpcionesMenuListNewSeOpcionesMenu : seOpcionesMenuListNew) {
+                if (!seOpcionesMenuListOld.contains(seOpcionesMenuListNewSeOpcionesMenu)) {
+                    SeOpcionesMenu oldIdPadreOfSeOpcionesMenuListNewSeOpcionesMenu = seOpcionesMenuListNewSeOpcionesMenu.getIdPadre();
+                    seOpcionesMenuListNewSeOpcionesMenu.setIdPadre(seOpcionesMenu);
+                    seOpcionesMenuListNewSeOpcionesMenu = em.merge(seOpcionesMenuListNewSeOpcionesMenu);
+                    if (oldIdPadreOfSeOpcionesMenuListNewSeOpcionesMenu != null && !oldIdPadreOfSeOpcionesMenuListNewSeOpcionesMenu.equals(seOpcionesMenu)) {
+                        oldIdPadreOfSeOpcionesMenuListNewSeOpcionesMenu.getSeOpcionesMenuList().remove(seOpcionesMenuListNewSeOpcionesMenu);
+                        oldIdPadreOfSeOpcionesMenuListNewSeOpcionesMenu = em.merge(oldIdPadreOfSeOpcionesMenuListNewSeOpcionesMenu);
                     }
                 }
             }
@@ -144,6 +211,16 @@ public class SeOpcionesMenuJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            SeOpcionesMenu idPadre = seOpcionesMenu.getIdPadre();
+            if (idPadre != null) {
+                idPadre.getSeOpcionesMenuList().remove(seOpcionesMenu);
+                idPadre = em.merge(idPadre);
+            }
+            List<SeOpcionesMenu> seOpcionesMenuList = seOpcionesMenu.getSeOpcionesMenuList();
+            for (SeOpcionesMenu seOpcionesMenuListSeOpcionesMenu : seOpcionesMenuList) {
+                seOpcionesMenuListSeOpcionesMenu.setIdPadre(null);
+                seOpcionesMenuListSeOpcionesMenu = em.merge(seOpcionesMenuListSeOpcionesMenu);
             }
             em.remove(seOpcionesMenu);
             em.getTransaction().commit();

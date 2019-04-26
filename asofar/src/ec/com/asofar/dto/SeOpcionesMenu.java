@@ -16,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -68,6 +70,11 @@ public class SeOpcionesMenu implements Serializable {
     private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seOpcionesMenu")
     private List<SeOpcionesRoles> seOpcionesRolesList;
+    @OneToMany(mappedBy = "idPadre")
+    private List<SeOpcionesMenu> seOpcionesMenuList;
+    @JoinColumn(name = "id_padre", referencedColumnName = "id_opciones_menu")
+    @ManyToOne
+    private SeOpcionesMenu idPadre;
 
     public SeOpcionesMenu() {
     }
@@ -147,6 +154,23 @@ public class SeOpcionesMenu implements Serializable {
 
     public void setSeOpcionesRolesList(List<SeOpcionesRoles> seOpcionesRolesList) {
         this.seOpcionesRolesList = seOpcionesRolesList;
+    }
+
+    @XmlTransient
+    public List<SeOpcionesMenu> getSeOpcionesMenuList() {
+        return seOpcionesMenuList;
+    }
+
+    public void setSeOpcionesMenuList(List<SeOpcionesMenu> seOpcionesMenuList) {
+        this.seOpcionesMenuList = seOpcionesMenuList;
+    }
+
+    public SeOpcionesMenu getIdPadre() {
+        return idPadre;
+    }
+
+    public void setIdPadre(SeOpcionesMenu idPadre) {
+        this.idPadre = idPadre;
     }
 
     @Override

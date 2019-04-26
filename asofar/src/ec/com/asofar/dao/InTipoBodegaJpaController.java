@@ -6,7 +6,6 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import ec.com.asofar.dto.InTipoBodega;
 import java.io.Serializable;
 import java.util.List;
@@ -32,18 +31,13 @@ public class InTipoBodegaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(InTipoBodega inTipoBodega) throws PreexistingEntityException, Exception {
+    public void create(InTipoBodega inTipoBodega) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(inTipoBodega);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findInTipoBodega(inTipoBodega.getIdTipoBodega()) != null) {
-                throw new PreexistingEntityException("InTipoBodega " + inTipoBodega + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();

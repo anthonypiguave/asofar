@@ -11,8 +11,10 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -199,15 +201,8 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
         public void cargarDatos() {
 
-        try {
-            Object o[] = null;
-
             lista = cSubgrupos.findPrSubgruposEntities();
-            
             Tablas.listarSubgrupos(lista, tbsubgrupos);
-
-        } catch (Exception e) {
-        }
     }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();

@@ -16,7 +16,6 @@ import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrMedidasPK;
-import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrTipoPresentacion;
 import ec.com.asofar.dto.PrProductos;
 import java.util.ArrayList;
@@ -46,11 +45,10 @@ public class PrMedidasJpaController implements Serializable {
         if (prMedidas.getPrProductosList() == null) {
             prMedidas.setPrProductosList(new ArrayList<PrProductos>());
         }
-        prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
-        prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
-        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
+        prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
+        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -59,11 +57,6 @@ public class PrMedidasJpaController implements Serializable {
             if (prArticulo != null) {
                 prArticulo = em.getReference(prArticulo.getClass(), prArticulo.getPrArticuloPK());
                 prMedidas.setPrArticulo(prArticulo);
-            }
-            PrTipoMedidas prTipoMedidas = prMedidas.getPrTipoMedidas();
-            if (prTipoMedidas != null) {
-                prTipoMedidas = em.getReference(prTipoMedidas.getClass(), prTipoMedidas.getIdTipoMedidas());
-                prMedidas.setPrTipoMedidas(prTipoMedidas);
             }
             PrTipoPresentacion prTipoPresentacion = prMedidas.getPrTipoPresentacion();
             if (prTipoPresentacion != null) {
@@ -80,10 +73,6 @@ public class PrMedidasJpaController implements Serializable {
             if (prArticulo != null) {
                 prArticulo.getPrMedidasList().add(prMedidas);
                 prArticulo = em.merge(prArticulo);
-            }
-            if (prTipoMedidas != null) {
-                prTipoMedidas.getPrMedidasList().add(prMedidas);
-                prTipoMedidas = em.merge(prTipoMedidas);
             }
             if (prTipoPresentacion != null) {
                 prTipoPresentacion.getPrMedidasList().add(prMedidas);
@@ -112,11 +101,10 @@ public class PrMedidasJpaController implements Serializable {
     }
 
     public void edit(PrMedidas prMedidas) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
-        prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
-        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
+        prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
+        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -124,8 +112,6 @@ public class PrMedidasJpaController implements Serializable {
             PrMedidas persistentPrMedidas = em.find(PrMedidas.class, prMedidas.getPrMedidasPK());
             PrArticulo prArticuloOld = persistentPrMedidas.getPrArticulo();
             PrArticulo prArticuloNew = prMedidas.getPrArticulo();
-            PrTipoMedidas prTipoMedidasOld = persistentPrMedidas.getPrTipoMedidas();
-            PrTipoMedidas prTipoMedidasNew = prMedidas.getPrTipoMedidas();
             PrTipoPresentacion prTipoPresentacionOld = persistentPrMedidas.getPrTipoPresentacion();
             PrTipoPresentacion prTipoPresentacionNew = prMedidas.getPrTipoPresentacion();
             List<PrProductos> prProductosListOld = persistentPrMedidas.getPrProductosList();
@@ -146,10 +132,6 @@ public class PrMedidasJpaController implements Serializable {
                 prArticuloNew = em.getReference(prArticuloNew.getClass(), prArticuloNew.getPrArticuloPK());
                 prMedidas.setPrArticulo(prArticuloNew);
             }
-            if (prTipoMedidasNew != null) {
-                prTipoMedidasNew = em.getReference(prTipoMedidasNew.getClass(), prTipoMedidasNew.getIdTipoMedidas());
-                prMedidas.setPrTipoMedidas(prTipoMedidasNew);
-            }
             if (prTipoPresentacionNew != null) {
                 prTipoPresentacionNew = em.getReference(prTipoPresentacionNew.getClass(), prTipoPresentacionNew.getIdTipoPresentacion());
                 prMedidas.setPrTipoPresentacion(prTipoPresentacionNew);
@@ -169,14 +151,6 @@ public class PrMedidasJpaController implements Serializable {
             if (prArticuloNew != null && !prArticuloNew.equals(prArticuloOld)) {
                 prArticuloNew.getPrMedidasList().add(prMedidas);
                 prArticuloNew = em.merge(prArticuloNew);
-            }
-            if (prTipoMedidasOld != null && !prTipoMedidasOld.equals(prTipoMedidasNew)) {
-                prTipoMedidasOld.getPrMedidasList().remove(prMedidas);
-                prTipoMedidasOld = em.merge(prTipoMedidasOld);
-            }
-            if (prTipoMedidasNew != null && !prTipoMedidasNew.equals(prTipoMedidasOld)) {
-                prTipoMedidasNew.getPrMedidasList().add(prMedidas);
-                prTipoMedidasNew = em.merge(prTipoMedidasNew);
             }
             if (prTipoPresentacionOld != null && !prTipoPresentacionOld.equals(prTipoPresentacionNew)) {
                 prTipoPresentacionOld.getPrMedidasList().remove(prMedidas);
@@ -241,11 +215,6 @@ public class PrMedidasJpaController implements Serializable {
             if (prArticulo != null) {
                 prArticulo.getPrMedidasList().remove(prMedidas);
                 prArticulo = em.merge(prArticulo);
-            }
-            PrTipoMedidas prTipoMedidas = prMedidas.getPrTipoMedidas();
-            if (prTipoMedidas != null) {
-                prTipoMedidas.getPrMedidasList().remove(prMedidas);
-                prTipoMedidas = em.merge(prTipoMedidas);
             }
             PrTipoPresentacion prTipoPresentacion = prMedidas.getPrTipoPresentacion();
             if (prTipoPresentacion != null) {

@@ -63,8 +63,8 @@ public class PrArticulo implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_grupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrSubgrupos prSubgrupos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prArticulo")
