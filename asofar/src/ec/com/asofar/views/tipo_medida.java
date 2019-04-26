@@ -19,6 +19,7 @@ public class tipo_medida extends javax.swing.JDialog {
 
     List<PrTipoMedidas> listamedida;
     PrTipoMedidasJpaController pjc = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     /**
      * Creates new form tipo_medida
      */
@@ -27,7 +28,7 @@ public class tipo_medida extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         MostrarMedida();
-        
+
     }
 
     private void MostrarMedida() {
@@ -39,6 +40,7 @@ public class tipo_medida extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
