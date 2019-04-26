@@ -30,6 +30,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
     public IngresarArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(this);
         ObtenerGrupo();
     }
 
@@ -67,7 +68,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
 
         jLabel5.setText("Estado:");
 
-        jButton1.setText("Volver");
+        jButton1.setText("CANCELAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -203,7 +204,9 @@ public class IngresarArticulo extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 //       
-    setVisible(false);
+        setVisible(false);
+        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);
+        cs.setVisible(true);
     
     }//GEN-LAST:event_jButton1ActionPerformed
 
