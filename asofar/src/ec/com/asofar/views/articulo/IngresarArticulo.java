@@ -87,16 +87,6 @@ public class IngresarArticulo extends javax.swing.JDialog {
                 grupoItemStateChanged(evt);
             }
         });
-        grupo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                grupoMousePressed(evt);
-            }
-        });
-        grupo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                grupoKeyPressed(evt);
-            }
-        });
 
         subgrupo.setEnabled(false);
 
@@ -125,7 +115,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
                     .addComponent(jLabel5))
                 .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(grupo, 0, 181, Short.MAX_VALUE)
+                    .addComponent(grupo, 0, 172, Short.MAX_VALUE)
                     .addComponent(subgrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(articulo)
                     .addComponent(estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -161,44 +151,6 @@ public class IngresarArticulo extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void grupoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_grupoKeyPressed
-        // TODO add your handling code here:
-//        subgrupo.setEnabled(true);
-//        
-//        String nombre=grupo.getSelectedItem().toString();
-//        
-//        PrGrupos gru = ObtenerDTO.ObtenerPrGrupos(nombre);
-//        String[] grupo2=null;
-//        
-//        grupo2[0]="Elija una Opcion..";
-//        
-//        for (int i = 1; i <= gru.getPrSubgruposList().size(); i++) {
-//            grupo2[i]=gru.getPrSubgruposList().get(i-1).getNombre();
-//        }
-//        
-//        
-//        subgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(grupo2));
-    }//GEN-LAST:event_grupoKeyPressed
-
-    private void grupoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grupoMousePressed
-        // TODO add your handling code here:
-//         subgrupo.setEnabled(true);
-//        
-//        String nombre=grupo.getSelectedItem().toString();
-//        
-//        PrGrupos gru = ObtenerDTO.ObtenerPrGrupos(nombre);
-//        String[] grupo2=null;
-//        
-//        grupo2[0]="Elija una Opcion..";
-//        
-//        for (int i = 1; i <= gru.getPrSubgruposList().size(); i++) {
-//            grupo2[i]=gru.getPrSubgruposList().get(i-1).getNombre();
-//        }
-//        
-//        
-//        subgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(grupo2));
-    }//GEN-LAST:event_grupoMousePressed
 
     private void grupoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_grupoItemStateChanged
         // TODO add your handling code here:
