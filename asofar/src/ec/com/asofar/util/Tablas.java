@@ -142,7 +142,7 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
 
     }
     public static void TablaTipoMedida(List<PrTipoMedidas> listamedida, JTable tabla) {
-        int[] a = {5, 300, 20};
+        int[] a = {5, 100, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
         DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
         dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -214,7 +214,7 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         model = new DefaultTableModel(null, b);
         tabla.setShowGrid(true);
         for (int i = 0; i < listamedida.size(); i++) {
-            filas[0] = listamedida.get(i).;
+            filas[0] = listamedida.get(i).getPrTipoMedidas().getNombreTipoMedida();
             filas[1] = listamedida.get(i).getPrTipoPresentacion().getNombre();
             filas[2] = listamedida.get(i).getEstado();
             model.addRow(filas);

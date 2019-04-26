@@ -300,10 +300,10 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     private void arbolValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolValueChanged
         // TODO add your handling code here:
         try {
-            TreePath objecto = arbol.getSelectionPath();
+            TreePath objeto = arbol.getSelectionPath();
 
-            System.out.println(objecto.getPathComponent(3));
-            PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objecto.getPathComponent(3).toString());
+            System.out.println(objeto.getPathComponent(3));
+            PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
             Tablas.TablaMedida(arti.getPrMedidasList(), tabla_med);
         } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
