@@ -141,6 +141,11 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         }
         //</editor-fold>
 
+        
+        
+        
+        
+        
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
