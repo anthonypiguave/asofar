@@ -84,6 +84,11 @@ public class NuevoProducto extends javax.swing.JDialog {
 
         BotonGuardar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
         BotonGuardar.setText("GUARDAR");
+        BotonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonGuardarActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -313,6 +318,10 @@ public class NuevoProducto extends javax.swing.JDialog {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x-x,point.y-y);
     }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void BotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonGuardarActionPerformed
 
     /**
      * @param args the command line arguments
