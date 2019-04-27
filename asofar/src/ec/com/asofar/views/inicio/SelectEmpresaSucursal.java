@@ -40,11 +40,11 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         System.out.println(id);
         ComboEmpresa(id);
-        
+
     }
 
     public void ComboEmpresa(Long id) {
-        List<SeSucursal> ls= null;
+        List<SeSucursal> ls = null;
         SeSucursalJpaController sc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
         List<SeUsuarioSucurRol> listausr = null;
         SeEmpresa empresa = new SeEmpresa();
@@ -61,8 +61,8 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
                     if (listausr.get(j).getSeSucursal().getSeEmpresa().getIdEmpresa() == listaempresa.get(i).getIdEmpresa()) {
                         cbempresa.addItem(listaempresa.get(i).getNombreComercial());
                         ls = sc.findSeSucursalEntities();
-                        for(int o = 0 ; o < ls.size();o++){
-                            if(ls.get(o).getSeEmpresa().getIdEmpresa()== listaempresa.get(i).getIdEmpresa()){
+                        for (int o = 0; o < ls.size(); o++) {
+                            if (ls.get(o).getSeEmpresa().getIdEmpresa() == listaempresa.get(i).getIdEmpresa()) {
                                 cbsucursal.addItem(ls.get(o).getNombreComercial());
                             }
                         }
@@ -234,10 +234,10 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
         SeSucursalJpaController sejc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
         listasucursal = sejc.findSeSucursalEntities();
         for (int i = 0; i < listasucursal.size(); i++) {
-            if(listasucursal.get(i).getSeEmpresa().getIdEmpresa() == empresa.getIdEmpresa() ){
+            if (listasucursal.get(i).getSeEmpresa().getIdEmpresa() == empresa.getIdEmpresa()) {
                 cbsucursal.addItem(listasucursal.get(i).getNombreComercial());
             }
-            
+
         }
     }//GEN-LAST:event_cbempresaActionPerformed
 

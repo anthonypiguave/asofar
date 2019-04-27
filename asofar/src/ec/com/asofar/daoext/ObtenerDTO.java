@@ -212,4 +212,18 @@ public static SeTipoPersona ObtenerSeTipoPersona(String nombre){
     
     
     }
+
+    public static SeEmpresa ObtenerSeEmpresa(String objeto) {
+           SeEmpresaJpaController control=new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeEmpresa dto=new SeEmpresa();
+        List<SeEmpresa> lista=control.findSeEmpresaEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getNombreComercial().equals(objeto)){
+            dto=lista.get(i);
+            }
+        }
+        
+        return dto;
+    }
 }
