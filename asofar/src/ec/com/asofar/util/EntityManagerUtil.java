@@ -24,5 +24,16 @@ public class EntityManagerUtil {
         
     
     }
+      public static boolean ObtenerEntityManagerConnection(){
+        
+        EntityManagerFactory emf = ObtenerEntityManager();
+        
+//        emf = Persistence.createEntityManagerFactory("asofarPU");
+        
+        return emf.isOpen();
+        
+    
+    }
+    
     
 }
