@@ -5,22 +5,72 @@
  */
 package ec.com.asofar.views.inicio;
 
+import ec.com.asofar.dao.SeEmpresaJpaController;
+import ec.com.asofar.dao.SeSucursalJpaController;
+import ec.com.asofar.dao.SeUsuarioSucurRolJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarioSucurRol;
+import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 
 /**
  *
  * @author admin1
  */
 public class SelectEmpresaSucursal extends javax.swing.JDialog {
-int x,y;
+
+    int x, y;
+
     /**
      * Creates new form SelectEmpresaSucursal
      */
     public SelectEmpresaSucursal(java.awt.Frame parent, boolean modal) {
-        super(parent, modal=false);
+        super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    public SelectEmpresaSucursal(java.awt.Frame parent, boolean modal, Long id) {
+        super(parent, modal = false);
+        initComponents();
+        setLocationRelativeTo(null);
+        System.out.println(id);
+        ComboEmpresa(id);
+        
+    }
+
+    public void ComboEmpresa(Long id) {
+        List<SeSucursal> ls= null;
+        SeSucursalJpaController sc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
+        List<SeUsuarioSucurRol> listausr = null;
+        SeEmpresa empresa = new SeEmpresa();
+        SeUsuarioSucurRolJpaController susrjc = new SeUsuarioSucurRolJpaController(EntityManagerUtil.ObtenerEntityManager());
+        listausr = susrjc.findSeUsuarioSucurRolEntities();
+//        listausr.get(0).getSeSucursal().getSeEmpresa();
+        List<SeEmpresa> listaempresa = null;
+        SeEmpresaJpaController sejc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        listaempresa = sejc.findSeEmpresaEntities();
+        for (int j = 0; j < listausr.size(); j++) {
+            if (listausr.get(j).getIdUsuario().getIdUsuario() == id) {
+                System.out.println(listausr.get(0).getEstado());
+                for (int i = 0; i < listaempresa.size(); i++) {
+                    if (listausr.get(j).getSeSucursal().getSeEmpresa().getIdEmpresa() == listaempresa.get(i).getIdEmpresa()) {
+                        cbempresa.addItem(listaempresa.get(i).getNombreComercial());
+                        ls = sc.findSeSucursalEntities();
+                        for(int o = 0 ; o < ls.size();o++){
+                            if(ls.get(o).getSeEmpresa().getIdEmpresa()== listaempresa.get(i).getIdEmpresa()){
+                                cbsucursal.addItem(ls.get(o).getNombreComercial());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+//        return listaempresa;
     }
 
     /**
@@ -67,13 +117,16 @@ int x,y;
         jLabel2.setText("SELECCIONE EMPRESA:");
 
         cbempresa.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        cbempresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbempresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbempresaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
         jLabel3.setText("SELECCIONE SUCURSAL:");
 
         cbsucursal.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        cbsucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(53, 173, 57));
@@ -153,7 +206,7 @@ int x,y;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
-        Login lg = new Login(new javax.swing.JFrame(),true);
+        Login lg = new Login(new javax.swing.JFrame(), true);
         lg.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -170,8 +223,23 @@ int x,y;
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void cbempresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbempresaActionPerformed
+        // TODO add your handling code here:
+        String objeto = cbempresa.getSelectedItem().toString();
+        SeEmpresa empresa = ObtenerDTO.ObtenerSeEmpresa(objeto);
+        List<SeSucursal> listasucursal;
+        SeSucursalJpaController sejc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
+        listasucursal = sejc.findSeSucursalEntities();
+        for (int i = 0; i < listasucursal.size(); i++) {
+            if(listasucursal.get(i).getSeEmpresa().getIdEmpresa() == empresa.getIdEmpresa() ){
+                cbsucursal.addItem(listasucursal.get(i).getNombreComercial());
+            }
+            
+        }
+    }//GEN-LAST:event_cbempresaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,22 +5,34 @@
  */
 package ec.com.asofar.views.inicio;
 
+import ec.com.asofar.dao.SeUsuariosJpaController;
+import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.AES;
+
+import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author admin1
  */
 public class Login extends javax.swing.JDialog {
-int x,y;
-    /**
-     * Creates new form Login
-     */
+
+    int x, y;
+    SeUsuariosJpaController uc = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeUsuarios> ul;
+    AES aes = new AES();
+
     public Login(java.awt.Frame parent, boolean modal) {
-        super(parent, modal=false);
+        super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
+
     }
 
     /**
@@ -39,7 +51,7 @@ int x,y;
         txtusuario = new javax.swing.JTextField();
         btningresar = new javax.swing.JButton();
         btningresar1 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -108,7 +120,7 @@ int x,y;
                         .addGap(122, 122, 122)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtusuario, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1))))
+                            .addComponent(txtpassword))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,7 +134,7 @@ int x,y;
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,10 +156,61 @@ int x,y;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void iniciarSesion() {
+        String usuario = txtusuario.getText();
+        String password = txtpassword.getText();
+        String dc = aes.encrypt(password);
+        if (txtusuario.getText().length() < 4) {
+            JOptionPane.showMessageDialog(null, "Ingrese un usuario válido");
+        } else if (txtusuario.getText().length() < 4) {
+            JOptionPane.showMessageDialog(null, "Ingrese una contraseña válida");
+        } else {
+            SeUsuarios u = new SeUsuarios();
+            ul = uc.findSeUsuariosEntities();
+
+            for (int i = 0; i < ul.size(); i++) {
+                System.out.println("ola");
+                if (ul.get(i).getNombreUsuario().equals(usuario)) {
+                    System.out.println("ola2");
+                    if (ul.get(i).getPassword().equals(dc)) {
+                        System.out.println(ul.get(0).getIdUsuario().toString());
+                        SelectEmpresaSucursal ses = new SelectEmpresaSucursal(new javax.swing.JFrame(), true, ul.get(i).getIdUsuario());
+                        ses.setVisible(true);
+                    }
+                }
+            }
+//            obj.setCorreo(txtUsuario.getText());
+//            obj.setPassword(txtContrasenia.getText());
+//            System.out.println("contraseña "+txtContrasenia.getText());
+//            obj.setIp_equipo(Operaciones.getIpDispositivo());
+////            obj.setIp_publico(Operaciones.getIpPublica().getIp_publica_full());
+//            obj.setDir_ip_completa(Operaciones.getIpLocalCompleta());
+//            obj.setUsuario_equipo(Operaciones.getNombreDispositivo());
+//            try {
+//            String a =  cr.Iniciar_sesion(obj);
+//            //JOptionPane.showMessageDialog(this, a);
+//                objeto = devuelveObjeto(txtUsuario.getText(), listar);
+//                if (objeto != null) {
+//                    //System.out.println("holaaaaa");
+//                    FrmPrincipal acc = new FrmPrincipal(objeto,objeto.getCargo());
+//                    acc.setVisible(true);
+//                    dispose();
+//                    listar.clear();
+//                    listar = cr.get_listar_usuario();
+//                }else{
+//                    JOptionPane.showMessageDialog(this, "Usuario no existe!!!");
+//                    txtUsuario.setText("");
+//                    txtContrasenia.setText("");
+//                }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(this, e);
+//            }
+//            
+        }
+    }
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
         setVisible(false);
-        SelectEmpresaSucursal ses = new SelectEmpresaSucursal(new javax.swing.JFrame(),true);
-        ses.setVisible(true);
+        iniciarSesion();
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -157,7 +220,7 @@ int x,y;
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     /**
@@ -209,7 +272,7 @@ int x,y;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }
