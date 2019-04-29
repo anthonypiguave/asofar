@@ -32,6 +32,23 @@ public class ObtenerDTO {
     
     
     }
+          public static SeUsuarios ObtenerUsuarios(Long id){
+        SeUsuariosJpaController control=new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
+       SeUsuarios dto=new SeUsuarios();
+        List<SeUsuarios> lista=control.findSeUsuariosEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdUsuario()==id){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    
        public static InBodega ObtenerInBodega(int id){
         InBodegaJpaController control=new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         InBodega dto=new InBodega();
@@ -416,6 +433,20 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
         return dto;
     
     
+    }
+       public static SeSucursal ObtenerSeSucursal(String objeto) {
+           SeSucursalJpaController control=new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeSucursal dto=new SeSucursal();
+        List<SeSucursal> lista=control.findSeSucursalEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getNombreComercial().equals(objeto)){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
     }
 
     public static SeEmpresa ObtenerSeEmpresa(String objeto) {

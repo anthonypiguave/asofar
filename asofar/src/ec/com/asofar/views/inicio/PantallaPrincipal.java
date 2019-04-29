@@ -5,11 +5,16 @@
  */
 package ec.com.asofar.views.inicio;
 
-
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.Fondo;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Menu;
 import java.awt.Toolkit;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -23,9 +28,37 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     public PantallaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-        this.setExtendedState(MAXIMIZED_BOTH);        
-        this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height),BorderLayout.CENTER);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
+        JMenu meOpciones = new JMenu();
+        meOpciones.setLabel("INVENTARIO");
+        JMenu mei = new JMenu();
+        mei.setLabel("MANTENIMIENTO");
+         JMenuItem mei2 = new JMenuItem();
+        mei2.setLabel("MANTENIMIENTO DE GRUPOS");
+        mei.add(mei2);
+        meOpciones.add(mei);
+        meMenuBase.add(meOpciones);
+        
+        
+    }
 
+    public PantallaPrincipal(SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
+         JMenu meOpciones = new JMenu();
+        meOpciones.setLabel("INVENTARIO");
+        JMenu mei = new JMenu();
+        mei.setLabel("MANTENIMIENTO");
+         JMenuItem mei2 = new JMenuItem();
+        mei2.setLabel("MANTENIMIENTO DE GRUPOS");
+        mei.add(mei2);
+        meOpciones.add(mei);
+        meMenuBase.add(meOpciones);
+        
+        
     }
 
     /**
@@ -37,43 +70,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        meMenuBase = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jMenu1.setText("INVENTARIO");
-        jMenu1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jScrollPane1.setViewportView(jTextPane1);
 
-        jMenu3.setText("MANTENIMIENTO");
-        jMenu3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-
-        jMenuItem1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jMenuItem1.setText("TIPO");
-        jMenu3.add(jMenuItem1);
-
-        jMenuItem2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jMenuItem2.setText("SUPTIPO");
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jMenuItem3.setText("ARTICULO");
-        jMenu3.add(jMenuItem3);
-
-        jMenu1.add(jMenu3);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(meMenuBase);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,7 +89,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         pack();
@@ -92,6 +98,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -125,12 +132,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JMenuBar meMenuBase;
     // End of variables declaration//GEN-END:variables
 }

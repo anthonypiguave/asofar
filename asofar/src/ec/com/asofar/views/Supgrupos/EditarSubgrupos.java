@@ -7,6 +7,7 @@ package ec.com.asofar.views.Supgrupos;
 
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
+import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
@@ -29,7 +30,7 @@ int x,y;
      * Creates new form NuevoSubgrupo
      */
      PrSubgrupos pr;
-     PrSubgruposJpaController prc = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+     SubGruposExt prc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
      Date d = new Date();
     public EditarSubgrupos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

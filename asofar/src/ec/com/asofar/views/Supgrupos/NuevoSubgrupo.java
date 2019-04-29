@@ -9,6 +9,7 @@ import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
@@ -28,7 +29,7 @@ import java.util.logging.Logger;
 public class NuevoSubgrupo extends javax.swing.JDialog {
 int x,y;
 Date d = new Date();
- PrSubgruposJpaController psc = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SubGruposExt psc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
 ObtenerDTO od = new ObtenerDTO();
     PrGruposJpaController pgc = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
 List<PrGrupos> pg;

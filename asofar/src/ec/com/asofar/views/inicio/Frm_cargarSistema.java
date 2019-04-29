@@ -28,7 +28,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
     PrSubgrupos pr = new PrSubgrupos();
     public Frm_cargarSistema() {
         initComponents();
-                Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/Frm/imagen/Asofar.jpeg").getImage();
+                Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/util/Asofar.jpeg").getImage();
 
         this.setIconImage(logof);
         setLocationRelativeTo(null);
@@ -40,7 +40,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
         imagenes();
     }
         public void imagenes() {
-        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/Frm/imagen/Asofar.jpeg").getImage();
+        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/util/Asofar.jpeg").getImage();
         Icon fondoLogo = new ImageIcon(logof.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
         lbImagen.setIcon(fondoLogo);
         this.repaint();

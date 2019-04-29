@@ -7,6 +7,7 @@ package ec.com.asofar.views.Supgrupos;
 
 import com.sun.javafx.sg.prism.NGArc;
 import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -22,7 +23,7 @@ public class ConsultaSubgruposIn extends javax.swing.JDialog {
 int x,y;
  List<PrSubgrupos> lista;
     PrSubgrupos obj;
-    PrSubgruposJpaController cSubgrupos = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
 
     /**
      * Creates new form ConsultaSubgruposIn
