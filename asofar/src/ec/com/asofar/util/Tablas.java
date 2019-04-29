@@ -6,6 +6,7 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.dto.PrArticulo;
+import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrProductos;
@@ -162,6 +163,31 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
             tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
             tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
             tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+        }
+    }
+    public static void TablaFabricante(List<PrFabricante> listafabri, JTable tabla) {
+        int[] a = {5, 30, 20};
+        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(tabla);
+        String[] b = {"ID", "NOMBRE", "ESTADO"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        tabla.setShowGrid(true);
+        for (int i = 0; i < listafabri.size(); i++) {
+            filas[0] = String.valueOf(listafabri.get(i).getIdFabricante());
+            filas[1] = listafabri.get(i).getNombre();
+            filas[2] = listafabri.get(i).getEstado();
+            model.addRow(filas);
+            tabla.setModel(model);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr1);
             tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
             tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
         }

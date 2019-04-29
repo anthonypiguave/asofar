@@ -24,6 +24,7 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreBodega().equals(nombre)){
             dto=lista.get(i);
+            break;
             }
         }
         
@@ -31,6 +32,23 @@ public class ObtenerDTO {
     
     
     }
+       public static InBodega ObtenerInBodega(int id){
+        InBodegaJpaController control=new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InBodega dto=new InBodega();
+        List<InBodega> lista=control.findInBodegaEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getInBodegaPK().getIdBodega()==id){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    
     public static InTipoBodega ObtenerInTipoBodega(String nombre){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         InTipoBodega dto=new InTipoBodega();
@@ -39,6 +57,23 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombre().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static InTipoBodega ObtenerInTipoBodega(int id){
+        InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InTipoBodega dto=new InTipoBodega();
+        List<InTipoBodega> lista=control.findInTipoBodegaEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdTipoBodega()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -54,6 +89,23 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreDocumento().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static InTipoDocumento ObtenerInTipoDocumento(int id){
+        InTipoDocumentoJpaController control=new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InTipoDocumento dto=new InTipoDocumento();
+        List<InTipoDocumento> lista=control.findInTipoDocumentoEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdTipoDocumento()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -69,6 +121,7 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreMovimiento().equals(nombre)){
             dto=lista.get(i);
+            break;
             }
         }
         
@@ -76,7 +129,22 @@ public class ObtenerDTO {
     
     
     }
+    public static InTipoMovimiento ObtenerInTipoMovimiento(int id){
+        InTipoMovimientoJpaController control=new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InTipoMovimiento dto=new InTipoMovimiento();
+        List<InTipoMovimiento> lista=control.findInTipoMovimientoEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdTipoMovimiento()==id){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
     
+    
+    }
     public static PrArticulo ObtenerPrArticulo(String nombre){
         PrArticuloJpaController control=new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrArticulo dto=new PrArticulo();
@@ -85,6 +153,23 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreArticulo().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static PrArticulo ObtenerPrArticulo(int id){
+        PrArticuloJpaController control=new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrArticulo dto=new PrArticulo();
+        List<PrArticulo> lista=control.findPrArticuloEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getPrArticuloPK().getIdArticulo()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -100,6 +185,23 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombre().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static PrGrupos ObtenerPrGrupos(int id){
+        PrGruposJpaController control=new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrGrupos dto=new PrGrupos();
+        List<PrGrupos> lista=control.findPrGruposEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdGrupo()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -115,6 +217,7 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombrePrestacion().equals(nombre)){
             dto=lista.get(i);
+            break;
             }
         }
         
@@ -122,7 +225,23 @@ public class ObtenerDTO {
     
     
     }
-    public static PrSubgrupos ObtenerPrSubGrupos(String nombre){
+    public static PrPrestaciones ObtenerPrPrestaciones(int id){
+        PrPrestacionesJpaController control=new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrPrestaciones dto=new PrPrestaciones();
+        List<PrPrestaciones> lista=control.findPrPrestacionesEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getPrPrestacionesPK().getIdPrestacion()==id){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+     public static PrSubgrupos ObtenerPrSubGrupos(String nombre){
         PrSubgruposJpaController control=new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrSubgrupos dto=new PrSubgrupos();
         List<PrSubgrupos> lista=control.findPrSubgruposEntities();
@@ -130,6 +249,23 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombre().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static PrSubgrupos ObtenerPrSubGrupos(int id){
+        PrSubgruposJpaController control=new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrSubgrupos dto=new PrSubgrupos();
+        List<PrSubgrupos> lista=control.findPrSubgruposEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getPrSubgruposPK().getIdSubgrupo()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -145,6 +281,7 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreTipoMedida().equals(nombre)){
             dto=lista.get(i);
+            break;
             }
         }
         
@@ -160,6 +297,23 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombre().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static PrTipoPresentacion ObtenerPrTipoPresentacion(int id){
+        PrTipoPresentacionJpaController control=new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrTipoPresentacion dto=new PrTipoPresentacion();
+        List<PrTipoPresentacion> lista=control.findPrTipoPresentacionEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdTipoPresentacion()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -175,6 +329,23 @@ public class ObtenerDTO {
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombre().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static SeRoles ObtenerSeRoles(int id){
+        SeRolesJpaController control=new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeRoles dto=new SeRoles();
+        List<SeRoles> lista=control.findSeRolesEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdRoles()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -190,6 +361,23 @@ public static SeTipoPersona ObtenerSeTipoPersona(String nombre){
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombre().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+public static SeTipoPersona ObtenerSeTipoPersona(int id){
+        SeTipoPersonaJpaController control=new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeTipoPersona dto=new SeTipoPersona();
+        List<SeTipoPersona> lista=control.findSeTipoPersonaEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdTipoPersona()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -205,6 +393,23 @@ public static SeTipoPersona ObtenerSeTipoPersona(String nombre){
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreUnidadServicio().equals(nombre)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    public static VeUnidadServicio ObtenerVeUnidadServicio(int id){
+        VeUnidadServicioJpaController control=new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
+        VeUnidadServicio dto=new VeUnidadServicio();
+        List<VeUnidadServicio> lista=control.findVeUnidadServicioEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdUnidadServicio()==id){
+            dto=lista.get(i);
+            break;
             }
         }
         
@@ -221,6 +426,35 @@ public static SeTipoPersona ObtenerSeTipoPersona(String nombre){
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreComercial().equals(objeto)){
             dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    }
+     public static SeEmpresa ObtenerSeEmpresa(int id) {
+           SeEmpresaJpaController control=new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeEmpresa dto=new SeEmpresa();
+        List<SeEmpresa> lista=control.findSeEmpresaEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdEmpresa()==id){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    }
+     public static PrMedidas ObtenerPrMedidas(PrMedidasPK objeto) {
+           PrMedidasJpaController control=new PrMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrMedidas dto=new PrMedidas();
+        List<PrMedidas> lista=control.findPrMedidasEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getPrMedidasPK()==objeto){
+            dto=lista.get(i);
+            break;
             }
         }
         
