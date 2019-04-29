@@ -7,13 +7,11 @@ package ec.com.asofar.views.Grupos;
 
 import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
-import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
-import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.*;
 import ec.com.asofar.views.Supgrupos.NuevoSubgrupo;
 import java.awt.MouseInfo;
@@ -32,7 +30,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class grupo_modificar extends javax.swing.JDialog {
+public class AgregarGruposForm extends javax.swing.JDialog {
 
     int x, y;
     Date d = new Date();
@@ -40,35 +38,37 @@ public class grupo_modificar extends javax.swing.JDialog {
     List<PrGrupos> listagrupo;
     List<SeEmpresa> listaempresa;
     PrGrupos pr = new PrGrupos();
-    PrGrupos pr2 = new PrGrupos();
-    SeEmpresa se = null;
+    SeEmpresa se = new SeEmpresa();
     PrGruposJpaController prj = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeEmpresaJpaController spj = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
      * Creates new form tipo_medida_agregar
      */
-    public grupo_modificar(java.awt.Frame parent, boolean modal) {
+    public AgregarGruposForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
 
+        listagrupo = prj.findPrGruposEntities();
+        listaempresa = spj.findSeEmpresaEntities();
+        se = listaempresa.get(0);
     }
 
-    public grupo_modificar(java.awt.Frame parent, boolean modal, PrGrupos obj) {
+    public AgregarGruposForm(java.awt.Frame parent, boolean modal, PrGrupos obj1) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(parent);
-        pr2 = obj;
-        llenar(obj);
 
+        listagrupo = prj.findPrGruposEntities();
+        listaempresa = spj.findSeEmpresaEntities();
+        se = listaempresa.get(0);
     }
 
-    public void llenar(PrGrupos obj) {
-
-        txtNombreactual.setText(obj.getNombre());
-        txtFecha.setText(Fecha.getStringFecha(new java.sql.Date(obj.getFechaCreacion().getTime())));
-
+    public static String FechaActual() {
+        java.util.Date fecha = new java.util.Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        return formatoFecha.format(fecha);
     }
 
     @SuppressWarnings("unchecked")
@@ -80,12 +80,7 @@ public class grupo_modificar extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNuevo = new javax.swing.JTextField();
-        txtNombreactual = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        brnEliminar = new javax.swing.JButton();
-        txtFecha = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -108,7 +103,7 @@ public class grupo_modificar extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EDITAR GRUPO");
+        jLabel1.setText("AGREGAR GRUPO");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -121,73 +116,40 @@ public class grupo_modificar extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("Nuevo Nombre:");
-
-        txtNombreactual.setEditable(false);
-
-        jLabel4.setText("Nuevo Actual:");
-
-        brnEliminar.setText("Eliminar");
-        brnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                brnEliminarActionPerformed(evt);
-            }
-        });
-
-        txtFecha.setEditable(false);
-
-        jLabel5.setText("Fecha de Creacion");
+        jLabel3.setText("Nombre:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(brnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(txtNombreactual)
-                            .addComponent(txtNuevo))
-                        .addGap(209, 209, 209))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNombreactual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGrabar)
-                    .addComponent(btnCancelar)
-                    .addComponent(brnEliminar))
+                    .addComponent(btnCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -195,7 +157,7 @@ public class grupo_modificar extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,44 +167,49 @@ public class grupo_modificar extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jLabel1MousePressed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+
+        setVisible(false);
+
+        ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+        cg.setVisible(false);
+
+
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
-        setVisible(false);
-        ConsultaGrupos cg = new ConsultaGrupos(new javax.swing.JFrame(), true);
-        cg.setVisible(true);
-
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel1MousePressed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-        pr = pr2;
 
-        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de modificar los datos?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
-            if ("".equals(txtNuevo.getText())) {
+            if ("".equals(txtNombre.getText())) {
                 JOptionPane.showMessageDialog(null, "Ingrese un nombre!");
             } else {
 
-                pr.setIdGrupo(pr2.getIdGrupo());
                 pr.setIdEmpresa(se);
-                pr.setNombre(txtNuevo.getText());
+                pr.setNombre(txtNombre.getText());
+                pr.setEstado("A");
+                pr.setUsuarioCreacion(BigInteger.valueOf(1));
+                pr.setFechaCreacion(d);
+                pr.setUsuarioActualizacion(BigInteger.valueOf(1));
                 pr.setFechaActualizacion(d);
                 try {
-                    prj.edit(pr);
-                    JOptionPane.showMessageDialog(null, "Datos modificados correctamente!");
+                    prj.create(pr);
+                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                     setVisible(false);
-                    ConsultaGrupos cg = new ConsultaGrupos(new javax.swing.JFrame(), true);
+                    ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
                     cg.setVisible(true);
+
                 } catch (Exception ex) {
                     Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -250,33 +217,7 @@ public class grupo_modificar extends javax.swing.JDialog {
         } else {
 
         }
-
-
     }//GEN-LAST:event_btnGrabarActionPerformed
-
-    private void brnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnEliminarActionPerformed
-        pr = pr2;
-
-        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar los datos?", "", JOptionPane.YES_NO_OPTION);
-
-        if (r == JOptionPane.YES_OPTION) {
-            pr.setEstado("I");
-            try {
-                prj.edit(pr2);
-                JOptionPane.showMessageDialog(this, "Grupo Eliminado correctamente");
-                setVisible(false);
-                ConsultaGrupos cg = new ConsultaGrupos(new javax.swing.JFrame(), true);
-                cg.setVisible(true);
-            } catch (Exception ex) {
-                Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-
-        }
-
-
-    }//GEN-LAST:event_brnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,14 +236,206 @@ public class grupo_modificar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(grupo_modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(grupo_modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(grupo_modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(grupo_modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -371,7 +504,7 @@ public class grupo_modificar extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                grupo_modificar dialog = new grupo_modificar(new javax.swing.JFrame(), true);
+                AgregarGruposForm dialog = new AgregarGruposForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -384,17 +517,12 @@ public class grupo_modificar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton brnEliminar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtNombreactual;
-    private javax.swing.JTextField txtNuevo;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
 }

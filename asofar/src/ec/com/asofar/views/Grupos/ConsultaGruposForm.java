@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class ConsultaGrupos extends javax.swing.JDialog {
+public class ConsultaGruposForm extends javax.swing.JDialog {
 
     List<PrGrupos> lista;
     PrGrupos pg;
@@ -27,7 +27,7 @@ public class ConsultaGrupos extends javax.swing.JDialog {
     
 
   
-    public ConsultaGrupos(java.awt.Frame parent, boolean modal) {
+    public ConsultaGruposForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         cargarInformacion();
@@ -35,8 +35,6 @@ public class ConsultaGrupos extends javax.swing.JDialog {
         
     }
     
-
-   /////////////
     private void cargarInformacion() {
         Object o[] = null;
         try {
@@ -156,7 +154,7 @@ public class ConsultaGrupos extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnagregarnuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                        .addComponent(btnagregarnuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                         .addGap(242, 242, 242)
                         .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -204,7 +202,7 @@ public class ConsultaGrupos extends javax.swing.JDialog {
 
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
         setVisible(false);
-        grupo_agregar ga = new grupo_agregar(new javax.swing.JFrame(), true);
+        AgregarGruposForm ga = new AgregarGruposForm(new javax.swing.JFrame(), true);
         ga.setVisible(true);
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
@@ -230,7 +228,7 @@ public class ConsultaGrupos extends javax.swing.JDialog {
                 if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     pg = lista.get(i);
                     if (pg != null) {
-                        grupo_modificar es = new grupo_modificar(new javax.swing.JFrame(), true, pg);
+                        ModificarGruposForm es = new ModificarGruposForm(new javax.swing.JFrame(), true, pg);
                         es.setVisible(true);
                     }
                 }
@@ -255,14 +253,22 @@ public class ConsultaGrupos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGrupos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGrupos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGrupos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGrupos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaGruposForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -275,7 +281,7 @@ public class ConsultaGrupos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultaGrupos dialog = new ConsultaGrupos(new javax.swing.JFrame(), true);
+                ConsultaGruposForm dialog = new ConsultaGruposForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
