@@ -214,6 +214,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
 
         setVisible(false);
         ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+        cg.dispose();
         cg.setVisible(true);
 
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -227,6 +228,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Grupo Activado");
             setVisible(false);
             ConsultaGruposInactivosForm cs = new ConsultaGruposInactivosForm(new javax.swing.JFrame(), true);
+            cs.dispose();
             cs.setVisible(true);
         } catch (NonexistentEntityException ex) {
 

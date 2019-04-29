@@ -24,17 +24,15 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
     PrGrupos pg;
     PrGruposJpaController pGrupos = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     int y, x;
-    
 
-  
     public ConsultaGruposInactivosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         cargarInformacion();
         setLocationRelativeTo(null);
-        
+
     }
-    
+
     private void cargarInformacion() {
         Object o[] = null;
         try {
@@ -46,7 +44,6 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
 
         }
 
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -193,6 +190,7 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
+        
 
         } else {
 

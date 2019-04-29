@@ -219,6 +219,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
 
         setVisible(false);
         ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+        cg.dispose();
         cg.setVisible(true);
 
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -242,6 +243,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Datos modificados correctamente!");
                     setVisible(false);
                     ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+                    cg.dispose();
                     cg.setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
@@ -266,6 +268,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Grupo Eliminado correctamente");
                 setVisible(false);
                 ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+                cg.dispose();
                 cg.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);

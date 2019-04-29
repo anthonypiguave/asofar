@@ -19,33 +19,33 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class ConsultaGruposForm extends javax.swing.JDialog {
-    
+
     List<PrGrupos> lista;
     PrGrupos pg;
     PrGruposJpaController pGrupos = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     int y, x;
-    
+
     public ConsultaGruposForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         cargarInformacion();
         setLocationRelativeTo(null);
-        
+
     }
-    
+
     private void cargarInformacion() {
         Object o[] = null;
         try {
-            
+
             lista = pGrupos.findPrGruposEntities();
             System.out.println(lista.get(0).getIdGrupo());
             Tablas.listarGrupos(lista, tbGrupos);
         } catch (Exception e) {
-            
+
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -134,7 +134,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setText("INACTIVOS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,19 +216,19 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        
+
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
-        
+
         if (r == JOptionPane.YES_OPTION) {
-            setVisible(false);
-            
+            dispose();
+
         } else {
-            
+
         }
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void tbGruposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGruposMousePressed
-        
+
         int id = 0;
         pg = null;
         if (evt.getClickCount() == 2) {
@@ -266,21 +266,21 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ConsultaGruposForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(ConsultaGruposForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(ConsultaGruposForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultaGruposForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
