@@ -27,7 +27,7 @@ public class Tablas {
 
     static DefaultTableModel model;
 
-public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
+    public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
@@ -64,41 +64,80 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         }
 
     }
-        public static void listarSubgrupos(List<PrSubgrupos> lista, JTable Tabla) {
+
+    public static void listarGruposInactivos(List<PrGrupos> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"N.GRUPO","N.SUBGRUPO", "FECHA CREACION", "FECHA ACTUALIZACION"};
+        String[] Co = {"COD.", "NOMBRE", "ESTADO", "FECHA CREACION", "FECHA ACTUALIZACION"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            
-            if(lista.get(i).getEstado().equals("A")){
-            Filas[0] = lista.get(i).getPrGrupos().getNombre();
-            Filas[1] = lista.get(i).getNombre();
-            Filas[2] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
-            Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
 
-            model.addRow(Filas);
-            Tabla.setModel(model);
-            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            if (lista.get(i).getEstado().equals("I")) {
+                Filas[0] = lista.get(i).getIdGrupo().toString();
+                Filas[1] = lista.get(i).getNombre();
+                Filas[2] = lista.get(i).getEstado();
+                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
+                Filas[4] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             }
         }
 
     }
-        
+
+    public static void listarSubgrupos(List<PrSubgrupos> lista, JTable Tabla) {
+        int[] a = {5, 30, 30, 10, 15};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"N.GRUPO", "N.SUBGRUPO", "FECHA CREACION", "FECHA ACTUALIZACION"};
+        String[] Filas = new String[5];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+                Filas[0] = lista.get(i).getPrGrupos().getNombre();
+                Filas[1] = lista.get(i).getNombre();
+                Filas[2] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
+                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
+        }
+
+    }
+
     public static void listarSubgruposIn(List<PrSubgrupos> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -106,33 +145,34 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"N.GRUPO","N.SUBGRUPO", "FECHA CREACION", "FECHA ACTUALIZACION"};
+        String[] Co = {"N.GRUPO", "N.SUBGRUPO", "FECHA CREACION", "FECHA ACTUALIZACION"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            
-            if(lista.get(i).getEstado().equals("I")){
-            Filas[0] = lista.get(i).getPrGrupos().getNombre();
-            Filas[1] = lista.get(i).getNombre();
-            Filas[2] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
-            Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
 
-            model.addRow(Filas);
-            Tabla.setModel(model);
-            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            if (lista.get(i).getEstado().equals("I")) {
+                Filas[0] = lista.get(i).getPrGrupos().getNombre();
+                Filas[1] = lista.get(i).getNombre();
+                Filas[2] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
+                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
 
-    }    
+    }
+
     public static DefaultTableModel VaciarTabla(JTable tabla) {
         DefaultTableModel lab
                 = (DefaultTableModel) tabla.getModel();
@@ -142,6 +182,7 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         return lab;
 
     }
+
     public static void TablaTipoMedida(List<PrTipoMedidas> listamedida, JTable tabla) {
         int[] a = {5, 100, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
@@ -167,6 +208,7 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
             tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
         }
     }
+
     public static void TablaFabricante(List<PrFabricante> listafabri, JTable tabla) {
         int[] a = {5, 30, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
@@ -192,6 +234,7 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
             tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
         }
     }
+
     public static void listaArticulos(List<PrArticulo> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -226,8 +269,7 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         }
 
     }
-    
-    
+
     public static void TablaMedida(List<PrMedidas> listamedida, JTable tabla) {
         int[] a = {40, 50, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
@@ -254,14 +296,14 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         }
     }
 
-     public static void TablaProducto(List<PrProductos> listaprod, JTable tabla) {
+    public static void TablaProducto(List<PrProductos> listaprod, JTable tabla) {
         int[] a = {5, 300, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
         DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
         dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
         dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(tabla);
-        String[] b = {"ID", "NOMBRE" ,"COD BARRA", "FABRICANTE" , "RECETA", "ESTADO"};
+        String[] b = {"ID", "NOMBRE", "COD BARRA", "FABRICANTE", "RECETA", "ESTADO"};
         String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
         tabla.setShowGrid(true);
@@ -288,5 +330,5 @@ public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
             tabla.getColumnModel().getColumn(5).setCellRenderer(dtcr1);
         }
     }
-    
+
 }

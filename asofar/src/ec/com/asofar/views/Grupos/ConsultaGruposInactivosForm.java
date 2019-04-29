@@ -18,14 +18,16 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class ConsultaGruposForm extends javax.swing.JDialog {
-    
+public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
+
     List<PrGrupos> lista;
     PrGrupos pg;
     PrGruposJpaController pGrupos = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     int y, x;
     
-    public ConsultaGruposForm(java.awt.Frame parent, boolean modal) {
+
+  
+    public ConsultaGruposInactivosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         cargarInformacion();
@@ -36,16 +38,17 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     private void cargarInformacion() {
         Object o[] = null;
         try {
-            
+
             lista = pGrupos.findPrGruposEntities();
             System.out.println(lista.get(0).getIdGrupo());
-            Tablas.listarGrupos(lista, tbGrupos);
+            Tablas.listarGruposInactivos(lista, tbGrupos);
         } catch (Exception e) {
-            
+
         }
+
         
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -57,9 +60,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbGrupos = new javax.swing.JTable();
-        btnagregarnuevo = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -118,27 +119,11 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        btnagregarnuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnagregarnuevo.setText("AGREGAR");
-        btnagregarnuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnagregarnuevoActionPerformed(evt);
-            }
-        });
-
         btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnsalir.setText("SALIR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
-            }
-        });
-
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jButton1.setText("INACTIVOS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -159,11 +144,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
                         .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnagregarnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -178,10 +159,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnagregarnuevo)
-                    .addComponent(btnsalir)
-                    .addComponent(jButton1))
+                .addComponent(btnsalir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -209,26 +187,20 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
-    private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
-        setVisible(false);
-        AgregarGruposForm ga = new AgregarGruposForm(new javax.swing.JFrame(), true);
-        ga.setVisible(true);
-    }//GEN-LAST:event_btnagregarnuevoActionPerformed
-
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        
+
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
-        
+
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
-            
+
         } else {
-            
+
         }
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void tbGruposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGruposMousePressed
-        
+
         int id = 0;
         pg = null;
         if (evt.getClickCount() == 2) {
@@ -237,20 +209,13 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
                 if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     pg = lista.get(i);
                     if (pg != null) {
-                        ModificarGruposForm es = new ModificarGruposForm(new javax.swing.JFrame(), true, pg);
+                        ModificarGruposInactivosForm es = new ModificarGruposInactivosForm(new javax.swing.JFrame(), true, pg);
                         es.setVisible(true);
                     }
                 }
             }
-        }
     }//GEN-LAST:event_tbGruposMousePressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        ConsultaGruposInactivosForm cgi = new ConsultaGruposInactivosForm(new javax.swing.JFrame(), true);
-        cgi.setVisible(true);
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -266,25 +231,33 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGruposForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+            java.util.logging.Logger.getLogger(ConsultaGruposInactivosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGruposForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+            java.util.logging.Logger.getLogger(ConsultaGruposInactivosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGruposForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+            java.util.logging.Logger.getLogger(ConsultaGruposInactivosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaGruposForm.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaGruposInactivosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -305,7 +278,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultaGruposForm dialog = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+                ConsultaGruposInactivosForm dialog = new ConsultaGruposInactivosForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -318,9 +291,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnagregarnuevo;
     private javax.swing.JButton btnsalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
