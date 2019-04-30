@@ -51,8 +51,6 @@ public class PrPrestaciones implements Serializable {
     private String aplicaIva;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
     private List<PrDetalleTarifario> prDetalleTarifarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
-    private List<InKardex> inKardexList;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
@@ -117,15 +115,6 @@ public class PrPrestaciones implements Serializable {
 
     public void setPrDetalleTarifarioList(List<PrDetalleTarifario> prDetalleTarifarioList) {
         this.prDetalleTarifarioList = prDetalleTarifarioList;
-    }
-
-    @XmlTransient
-    public List<InKardex> getInKardexList() {
-        return inKardexList;
-    }
-
-    public void setInKardexList(List<InKardex> inKardexList) {
-        this.inKardexList = inKardexList;
     }
 
     public SeEmpresa getSeEmpresa() {

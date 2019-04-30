@@ -10,7 +10,6 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,8 +61,8 @@ public class InTipoMovimiento implements Serializable {
     private Date fechaActualizacion;
     @OneToMany(mappedBy = "idTipoMovimiento")
     private List<InDetalleMovimiento> inDetalleMovimientoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoMovimiento")
-    private List<InKardex> inKardexList;
+    @OneToMany(mappedBy = "idTipoMovimiento")
+    private List<InMovimientos> inMovimientosList;
 
     public InTipoMovimiento() {
     }
@@ -130,12 +129,12 @@ public class InTipoMovimiento implements Serializable {
     }
 
     @XmlTransient
-    public List<InKardex> getInKardexList() {
-        return inKardexList;
+    public List<InMovimientos> getInMovimientosList() {
+        return inMovimientosList;
     }
 
-    public void setInKardexList(List<InKardex> inKardexList) {
-        this.inKardexList = inKardexList;
+    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
+        this.inMovimientosList = inMovimientosList;
     }
 
     @Override

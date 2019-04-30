@@ -15,9 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.InTipoDocumento;
-import ec.com.asofar.dto.InTipoMovimiento;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,11 +39,9 @@ public class InKardexJpaController implements Serializable {
         if (inKardex.getInKardexPK() == null) {
             inKardex.setInKardexPK(new InKardexPK());
         }
-        inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
-        inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
         inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inKardex.getInKardexPK().setIdPrestaciones(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -55,37 +51,19 @@ public class InKardexJpaController implements Serializable {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 inKardex.setSeSucursal(seSucursal);
             }
-            PrPrestaciones prPrestaciones = inKardex.getPrPrestaciones();
-            if (prPrestaciones != null) {
-                prPrestaciones = em.getReference(prPrestaciones.getClass(), prPrestaciones.getPrPrestacionesPK());
-                inKardex.setPrPrestaciones(prPrestaciones);
-            }
             InTipoDocumento inTipoDocumento = inKardex.getInTipoDocumento();
             if (inTipoDocumento != null) {
                 inTipoDocumento = em.getReference(inTipoDocumento.getClass(), inTipoDocumento.getIdTipoDocumento());
                 inKardex.setInTipoDocumento(inTipoDocumento);
-            }
-            InTipoMovimiento inTipoMovimiento = inKardex.getInTipoMovimiento();
-            if (inTipoMovimiento != null) {
-                inTipoMovimiento = em.getReference(inTipoMovimiento.getClass(), inTipoMovimiento.getIdTipoMovimiento());
-                inKardex.setInTipoMovimiento(inTipoMovimiento);
             }
             em.persist(inKardex);
             if (seSucursal != null) {
                 seSucursal.getInKardexList().add(inKardex);
                 seSucursal = em.merge(seSucursal);
             }
-            if (prPrestaciones != null) {
-                prPrestaciones.getInKardexList().add(inKardex);
-                prPrestaciones = em.merge(prPrestaciones);
-            }
             if (inTipoDocumento != null) {
                 inTipoDocumento.getInKardexList().add(inKardex);
                 inTipoDocumento = em.merge(inTipoDocumento);
-            }
-            if (inTipoMovimiento != null) {
-                inTipoMovimiento.getInKardexList().add(inKardex);
-                inTipoMovimiento = em.merge(inTipoMovimiento);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -101,11 +79,9 @@ public class InKardexJpaController implements Serializable {
     }
 
     public void edit(InKardex inKardex) throws NonexistentEntityException, Exception {
-        inKardex.getInKardexPK().setIdEmpresa(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
-        inKardex.getInKardexPK().setIdTipoMovimiento(inKardex.getInTipoMovimiento().getIdTipoMovimiento());
         inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inKardex.getInKardexPK().setIdPrestaciones(inKardex.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -113,27 +89,15 @@ public class InKardexJpaController implements Serializable {
             InKardex persistentInKardex = em.find(InKardex.class, inKardex.getInKardexPK());
             SeSucursal seSucursalOld = persistentInKardex.getSeSucursal();
             SeSucursal seSucursalNew = inKardex.getSeSucursal();
-            PrPrestaciones prPrestacionesOld = persistentInKardex.getPrPrestaciones();
-            PrPrestaciones prPrestacionesNew = inKardex.getPrPrestaciones();
             InTipoDocumento inTipoDocumentoOld = persistentInKardex.getInTipoDocumento();
             InTipoDocumento inTipoDocumentoNew = inKardex.getInTipoDocumento();
-            InTipoMovimiento inTipoMovimientoOld = persistentInKardex.getInTipoMovimiento();
-            InTipoMovimiento inTipoMovimientoNew = inKardex.getInTipoMovimiento();
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 inKardex.setSeSucursal(seSucursalNew);
             }
-            if (prPrestacionesNew != null) {
-                prPrestacionesNew = em.getReference(prPrestacionesNew.getClass(), prPrestacionesNew.getPrPrestacionesPK());
-                inKardex.setPrPrestaciones(prPrestacionesNew);
-            }
             if (inTipoDocumentoNew != null) {
                 inTipoDocumentoNew = em.getReference(inTipoDocumentoNew.getClass(), inTipoDocumentoNew.getIdTipoDocumento());
                 inKardex.setInTipoDocumento(inTipoDocumentoNew);
-            }
-            if (inTipoMovimientoNew != null) {
-                inTipoMovimientoNew = em.getReference(inTipoMovimientoNew.getClass(), inTipoMovimientoNew.getIdTipoMovimiento());
-                inKardex.setInTipoMovimiento(inTipoMovimientoNew);
             }
             inKardex = em.merge(inKardex);
             if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
@@ -144,14 +108,6 @@ public class InKardexJpaController implements Serializable {
                 seSucursalNew.getInKardexList().add(inKardex);
                 seSucursalNew = em.merge(seSucursalNew);
             }
-            if (prPrestacionesOld != null && !prPrestacionesOld.equals(prPrestacionesNew)) {
-                prPrestacionesOld.getInKardexList().remove(inKardex);
-                prPrestacionesOld = em.merge(prPrestacionesOld);
-            }
-            if (prPrestacionesNew != null && !prPrestacionesNew.equals(prPrestacionesOld)) {
-                prPrestacionesNew.getInKardexList().add(inKardex);
-                prPrestacionesNew = em.merge(prPrestacionesNew);
-            }
             if (inTipoDocumentoOld != null && !inTipoDocumentoOld.equals(inTipoDocumentoNew)) {
                 inTipoDocumentoOld.getInKardexList().remove(inKardex);
                 inTipoDocumentoOld = em.merge(inTipoDocumentoOld);
@@ -159,14 +115,6 @@ public class InKardexJpaController implements Serializable {
             if (inTipoDocumentoNew != null && !inTipoDocumentoNew.equals(inTipoDocumentoOld)) {
                 inTipoDocumentoNew.getInKardexList().add(inKardex);
                 inTipoDocumentoNew = em.merge(inTipoDocumentoNew);
-            }
-            if (inTipoMovimientoOld != null && !inTipoMovimientoOld.equals(inTipoMovimientoNew)) {
-                inTipoMovimientoOld.getInKardexList().remove(inKardex);
-                inTipoMovimientoOld = em.merge(inTipoMovimientoOld);
-            }
-            if (inTipoMovimientoNew != null && !inTipoMovimientoNew.equals(inTipoMovimientoOld)) {
-                inTipoMovimientoNew.getInKardexList().add(inKardex);
-                inTipoMovimientoNew = em.merge(inTipoMovimientoNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -202,20 +150,10 @@ public class InKardexJpaController implements Serializable {
                 seSucursal.getInKardexList().remove(inKardex);
                 seSucursal = em.merge(seSucursal);
             }
-            PrPrestaciones prPrestaciones = inKardex.getPrPrestaciones();
-            if (prPrestaciones != null) {
-                prPrestaciones.getInKardexList().remove(inKardex);
-                prPrestaciones = em.merge(prPrestaciones);
-            }
             InTipoDocumento inTipoDocumento = inKardex.getInTipoDocumento();
             if (inTipoDocumento != null) {
                 inTipoDocumento.getInKardexList().remove(inKardex);
                 inTipoDocumento = em.merge(inTipoDocumento);
-            }
-            InTipoMovimiento inTipoMovimiento = inKardex.getInTipoMovimiento();
-            if (inTipoMovimiento != null) {
-                inTipoMovimiento.getInKardexList().remove(inKardex);
-                inTipoMovimiento = em.merge(inTipoMovimiento);
             }
             em.remove(inKardex);
             em.getTransaction().commit();

@@ -21,23 +21,19 @@ public class InMovimientosPK implements Serializable {
     @Column(name = "id_movimientos")
     private long idMovimientos;
     @Basic(optional = false)
-    @Column(name = "id_numero_documento")
-    private long idNumeroDocumento;
-    @Basic(optional = false)
     @Column(name = "id_tipo_documento")
     private long idTipoDocumento;
     @Basic(optional = false)
-    @Column(name = "id_empresa")
-    private long idEmpresa;
+    @Column(name = "anio_documento")
+    private String anioDocumento;
 
     public InMovimientosPK() {
     }
 
-    public InMovimientosPK(long idMovimientos, long idNumeroDocumento, long idTipoDocumento, long idEmpresa) {
+    public InMovimientosPK(long idMovimientos, long idTipoDocumento, String anioDocumento) {
         this.idMovimientos = idMovimientos;
-        this.idNumeroDocumento = idNumeroDocumento;
         this.idTipoDocumento = idTipoDocumento;
-        this.idEmpresa = idEmpresa;
+        this.anioDocumento = anioDocumento;
     }
 
     public long getIdMovimientos() {
@@ -48,14 +44,6 @@ public class InMovimientosPK implements Serializable {
         this.idMovimientos = idMovimientos;
     }
 
-    public long getIdNumeroDocumento() {
-        return idNumeroDocumento;
-    }
-
-    public void setIdNumeroDocumento(long idNumeroDocumento) {
-        this.idNumeroDocumento = idNumeroDocumento;
-    }
-
     public long getIdTipoDocumento() {
         return idTipoDocumento;
     }
@@ -64,21 +52,20 @@ public class InMovimientosPK implements Serializable {
         this.idTipoDocumento = idTipoDocumento;
     }
 
-    public long getIdEmpresa() {
-        return idEmpresa;
+    public String getAnioDocumento() {
+        return anioDocumento;
     }
 
-    public void setIdEmpresa(long idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setAnioDocumento(String anioDocumento) {
+        this.anioDocumento = anioDocumento;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) idMovimientos;
-        hash += (int) idNumeroDocumento;
         hash += (int) idTipoDocumento;
-        hash += (int) idEmpresa;
+        hash += (anioDocumento != null ? anioDocumento.hashCode() : 0);
         return hash;
     }
 
@@ -92,13 +79,10 @@ public class InMovimientosPK implements Serializable {
         if (this.idMovimientos != other.idMovimientos) {
             return false;
         }
-        if (this.idNumeroDocumento != other.idNumeroDocumento) {
-            return false;
-        }
         if (this.idTipoDocumento != other.idTipoDocumento) {
             return false;
         }
-        if (this.idEmpresa != other.idEmpresa) {
+        if ((this.anioDocumento == null && other.anioDocumento != null) || (this.anioDocumento != null && !this.anioDocumento.equals(other.anioDocumento))) {
             return false;
         }
         return true;
@@ -106,7 +90,7 @@ public class InMovimientosPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InMovimientosPK[ idMovimientos=" + idMovimientos + ", idNumeroDocumento=" + idNumeroDocumento + ", idTipoDocumento=" + idTipoDocumento + ", idEmpresa=" + idEmpresa + " ]";
+        return "ec.com.asofar.dto.InMovimientosPK[ idMovimientos=" + idMovimientos + ", idTipoDocumento=" + idTipoDocumento + ", anioDocumento=" + anioDocumento + " ]";
     }
     
 }

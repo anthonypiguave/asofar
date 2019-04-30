@@ -92,8 +92,6 @@ public class SeUsuarios implements Serializable {
     private Double sueldo;
     @OneToMany(mappedBy = "idUsuario")
     private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
-    @OneToMany(mappedBy = "idUsuario")
-    private List<InMovimientos> inMovimientosList;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne
     private SePersonas idPersona;
@@ -234,15 +232,6 @@ public class SeUsuarios implements Serializable {
 
     public void setSeUsuarioSucurRolList(List<SeUsuarioSucurRol> seUsuarioSucurRolList) {
         this.seUsuarioSucurRolList = seUsuarioSucurRolList;
-    }
-
-    @XmlTransient
-    public List<InMovimientos> getInMovimientosList() {
-        return inMovimientosList;
-    }
-
-    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
-        this.inMovimientosList = inMovimientosList;
     }
 
     public SePersonas getIdPersona() {

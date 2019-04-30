@@ -17,7 +17,6 @@ import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrProductosPK;
-import ec.com.asofar.dto.PrTipoPresentacion;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,12 +40,12 @@ public class PrProductosJpaController implements Serializable {
         if (prProductos.getPrProductosPK() == null) {
             prProductos.setPrProductosPK(new PrProductosPK());
         }
-        prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
-        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
         prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
-        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrTipoPresentacion().getIdTipoPresentacion());
-        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
+        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
+        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
+        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,11 +65,6 @@ public class PrProductosJpaController implements Serializable {
                 prMedidas = em.getReference(prMedidas.getClass(), prMedidas.getPrMedidasPK());
                 prProductos.setPrMedidas(prMedidas);
             }
-            PrTipoPresentacion prTipoPresentacion = prProductos.getPrTipoPresentacion();
-            if (prTipoPresentacion != null) {
-                prTipoPresentacion = em.getReference(prTipoPresentacion.getClass(), prTipoPresentacion.getIdTipoPresentacion());
-                prProductos.setPrTipoPresentacion(prTipoPresentacion);
-            }
             em.persist(prProductos);
             if (seEmpresa != null) {
                 seEmpresa.getPrProductosList().add(prProductos);
@@ -83,10 +77,6 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidas != null) {
                 prMedidas.getPrProductosList().add(prProductos);
                 prMedidas = em.merge(prMedidas);
-            }
-            if (prTipoPresentacion != null) {
-                prTipoPresentacion.getPrProductosList().add(prProductos);
-                prTipoPresentacion = em.merge(prTipoPresentacion);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -102,12 +92,12 @@ public class PrProductosJpaController implements Serializable {
     }
 
     public void edit(PrProductos prProductos) throws NonexistentEntityException, Exception {
-        prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
-        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
         prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
-        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrTipoPresentacion().getIdTipoPresentacion());
-        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
+        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
+        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
+        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -119,8 +109,6 @@ public class PrProductosJpaController implements Serializable {
             PrFabricante codFabricanteNew = prProductos.getCodFabricante();
             PrMedidas prMedidasOld = persistentPrProductos.getPrMedidas();
             PrMedidas prMedidasNew = prProductos.getPrMedidas();
-            PrTipoPresentacion prTipoPresentacionOld = persistentPrProductos.getPrTipoPresentacion();
-            PrTipoPresentacion prTipoPresentacionNew = prProductos.getPrTipoPresentacion();
             if (seEmpresaNew != null) {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 prProductos.setSeEmpresa(seEmpresaNew);
@@ -132,10 +120,6 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidasNew != null) {
                 prMedidasNew = em.getReference(prMedidasNew.getClass(), prMedidasNew.getPrMedidasPK());
                 prProductos.setPrMedidas(prMedidasNew);
-            }
-            if (prTipoPresentacionNew != null) {
-                prTipoPresentacionNew = em.getReference(prTipoPresentacionNew.getClass(), prTipoPresentacionNew.getIdTipoPresentacion());
-                prProductos.setPrTipoPresentacion(prTipoPresentacionNew);
             }
             prProductos = em.merge(prProductos);
             if (seEmpresaOld != null && !seEmpresaOld.equals(seEmpresaNew)) {
@@ -161,14 +145,6 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidasNew != null && !prMedidasNew.equals(prMedidasOld)) {
                 prMedidasNew.getPrProductosList().add(prProductos);
                 prMedidasNew = em.merge(prMedidasNew);
-            }
-            if (prTipoPresentacionOld != null && !prTipoPresentacionOld.equals(prTipoPresentacionNew)) {
-                prTipoPresentacionOld.getPrProductosList().remove(prProductos);
-                prTipoPresentacionOld = em.merge(prTipoPresentacionOld);
-            }
-            if (prTipoPresentacionNew != null && !prTipoPresentacionNew.equals(prTipoPresentacionOld)) {
-                prTipoPresentacionNew.getPrProductosList().add(prProductos);
-                prTipoPresentacionNew = em.merge(prTipoPresentacionNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -213,11 +189,6 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidas != null) {
                 prMedidas.getPrProductosList().remove(prProductos);
                 prMedidas = em.merge(prMedidas);
-            }
-            PrTipoPresentacion prTipoPresentacion = prProductos.getPrTipoPresentacion();
-            if (prTipoPresentacion != null) {
-                prTipoPresentacion.getPrProductosList().remove(prProductos);
-                prTipoPresentacion = em.merge(prTipoPresentacion);
             }
             em.remove(prProductos);
             em.getTransaction().commit();

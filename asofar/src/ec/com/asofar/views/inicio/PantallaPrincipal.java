@@ -5,14 +5,20 @@
  */
 package ec.com.asofar.views.inicio;
 
+import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeOpcionesMenu;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
+import ec.com.asofar.views.Supgrupos.ConsultaSubgrupos;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Menu;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.EventListener;
+import java.util.List;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -25,6 +31,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form PantallaPrincipal
      */
+    List<SeOpcionesMenu> lista = null;
+    SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
+
     public PantallaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -34,13 +43,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         meOpciones.setLabel("INVENTARIO");
         JMenu mei = new JMenu();
         mei.setLabel("MANTENIMIENTO");
-         JMenuItem mei2 = new JMenuItem();
+        JMenuItem mei2 = new JMenuItem();
         mei2.setLabel("MANTENIMIENTO DE GRUPOS");
         mei.add(mei2);
         meOpciones.add(mei);
         meMenuBase.add(meOpciones);
-        
-        
+
     }
 
     public PantallaPrincipal(SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -48,17 +56,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
-         JMenu meOpciones = new JMenu();
-        meOpciones.setLabel("INVENTARIO");
-        JMenu mei = new JMenu();
-        mei.setLabel("MANTENIMIENTO");
-         JMenuItem mei2 = new JMenuItem();
-        mei2.setLabel("MANTENIMIENTO DE GRUPOS");
-        mei.add(mei2);
-        meOpciones.add(mei);
-        meMenuBase.add(meOpciones);
-        
-        
+//        JMenu meOpciones = new JMenu();
+//        meOpciones.setLabel("INVENTARIO");
+//        JMenu mei = new JMenu();
+//        mei.setLabel("MANTENIMIENTO");
+//        JMenuItem mei2 = new JMenuItem();
+//        mei2.setLabel("MANTENIMIENTO DE GRUPOS");
+//        mei.add(mei2);
+//        meOpciones.add(mei);
+//        meMenuBase.add(meOpciones);
+        lista = cSubgrupos.ObtenerMenu(us);
+        cargarMenu(lista);
+
     }
 
     /**
@@ -98,7 +107,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -122,6 +130,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PantallaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -129,6 +138,63 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 new PantallaPrincipal().setVisible(true);
             }
         });
+    }
+    public void cargarMenu(List<SeOpcionesMenu> lis){
+        JMenu menu=null;
+        for(int i = 0 ; i < lis.size();i++){
+            if(lis.get(i).getIdPadre() == null){
+                 menu = new JMenu(lis.get(i).getNombre());
+              
+                 meMenuBase.add(menu);
+            }
+        }
+        for(int i = 0 ; i < lis.size();i++){
+            if(lis.get(i).getSeOpcionesMenuList() != null){
+                
+                
+                if(lis.get(i).getIdPadre()!=null){
+                String valor2=lis.get(i).getIdPadre().getNombre();
+                for (int j = 0; j < meMenuBase.getMenuCount(); j++) {
+                    String valor1= meMenuBase.getMenu(j).getText();
+                    if(valor1.equals(valor2)){
+                    JMenu menu2 = new JMenu(lis.get(i).getNombre());
+                        List<SeOpcionesMenu> lista2 = lis.get(i).getSeOpcionesMenuList();
+                        for (int k = 0; k < lista2.size(); k++) {
+                            for (int l = 0; l < lis.size(); l++) {
+                                if(lis.get(l)==lista2.get(k)){
+                                JMenuItem item = new JMenuItem(lista2.get(k).getNombre());
+                            menu2.add(item);
+                            
+                           item.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        
+                                        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
+                                        cs.setVisible(true);
+                                        
+                                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                    }
+                                });
+                           
+                           
+                                }
+                                
+                            }
+                            
+                        }
+                        System.out.println(valor1+" "+valor2);
+                        meMenuBase.getMenu(j).add(menu2); 
+                    } 
+                }
+                
+                }
+                
+                
+               
+                
+            }
+        }
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
