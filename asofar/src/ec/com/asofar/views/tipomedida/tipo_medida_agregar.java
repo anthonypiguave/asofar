@@ -65,6 +65,11 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
                 nombre_tfFocusLost(evt);
             }
         });
+        nombre_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre_tfKeyTyped(evt);
+            }
+        });
 
         jButton1.setText("Grabar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +167,15 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
         // TODO add your handling code here:
         nombre_tf.setText(nombre_tf.getText().toUpperCase());
     }//GEN-LAST:event_nombre_tfFocusLost
+
+    private void nombre_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_tfKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_nombre_tfKeyTyped
 
     /**
      * @param args the command line arguments
