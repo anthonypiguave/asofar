@@ -150,7 +150,6 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
         medidas.setNombreTipoMedida(nombre_tf.getText());
         medidas.setEstado("A");
         medidas.setUsuarioCreacion(null);
-        
         medidas.setFechaCreacion(null);
         medidas.setUsuarioActualizacion(null);
         medidas.setFechaActualizacion(null);

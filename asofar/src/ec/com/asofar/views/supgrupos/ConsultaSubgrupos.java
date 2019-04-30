@@ -35,6 +35,9 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     List<PrSubgrupos> lista;
     PrSubgrupos obj;
     SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
+    SeUsuarios us1;
+    SeEmpresa em1;
+    SeSucursal su1;
 
     public ConsultaSubgrupos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -47,6 +50,9 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cargarDatos();
+        us1=us;
+        em1=em;
+        su1=su;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,7 +234,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
 
         setVisible(false);
-        NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(), true);
+        NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(), true,us1,em1,su1);
         ns.setVisible(true);
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
