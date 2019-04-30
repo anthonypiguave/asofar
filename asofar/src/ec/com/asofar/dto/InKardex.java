@@ -106,9 +106,6 @@ public class InKardex implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private PrProductos prProductos;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private InTipoDocumento inTipoDocumento;
@@ -282,14 +279,6 @@ public class InKardex implements Serializable {
 
     public void setSeSucursal(SeSucursal seSucursal) {
         this.seSucursal = seSucursal;
-    }
-
-    public PrProductos getPrProductos() {
-        return prProductos;
-    }
-
-    public void setPrProductos(PrProductos prProductos) {
-        this.prProductos = prProductos;
     }
 
     public InTipoDocumento getInTipoDocumento() {

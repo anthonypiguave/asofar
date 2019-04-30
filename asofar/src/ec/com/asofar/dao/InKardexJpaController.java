@@ -15,7 +15,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.InTipoDocumento;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -40,10 +39,9 @@ public class InKardexJpaController implements Serializable {
         if (inKardex.getInKardexPK() == null) {
             inKardex.setInKardexPK(new InKardexPK());
         }
+        inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
         inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inKardex.getInKardexPK().setIdProducto(inKardex.getPrProductos().getPrProductosPK().getIdProducto());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -52,11 +50,6 @@ public class InKardexJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 inKardex.setSeSucursal(seSucursal);
-            }
-            PrProductos prProductos = inKardex.getPrProductos();
-            if (prProductos != null) {
-                prProductos = em.getReference(prProductos.getClass(), prProductos.getPrProductosPK());
-                inKardex.setPrProductos(prProductos);
             }
             InTipoDocumento inTipoDocumento = inKardex.getInTipoDocumento();
             if (inTipoDocumento != null) {
@@ -67,10 +60,6 @@ public class InKardexJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getInKardexList().add(inKardex);
                 seSucursal = em.merge(seSucursal);
-            }
-            if (prProductos != null) {
-                prProductos.getInKardexList().add(inKardex);
-                prProductos = em.merge(prProductos);
             }
             if (inTipoDocumento != null) {
                 inTipoDocumento.getInKardexList().add(inKardex);
@@ -90,10 +79,9 @@ public class InKardexJpaController implements Serializable {
     }
 
     public void edit(InKardex inKardex) throws NonexistentEntityException, Exception {
+        inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
         inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inKardex.getInKardexPK().setIdProducto(inKardex.getPrProductos().getPrProductosPK().getIdProducto());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -101,17 +89,11 @@ public class InKardexJpaController implements Serializable {
             InKardex persistentInKardex = em.find(InKardex.class, inKardex.getInKardexPK());
             SeSucursal seSucursalOld = persistentInKardex.getSeSucursal();
             SeSucursal seSucursalNew = inKardex.getSeSucursal();
-            PrProductos prProductosOld = persistentInKardex.getPrProductos();
-            PrProductos prProductosNew = inKardex.getPrProductos();
             InTipoDocumento inTipoDocumentoOld = persistentInKardex.getInTipoDocumento();
             InTipoDocumento inTipoDocumentoNew = inKardex.getInTipoDocumento();
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 inKardex.setSeSucursal(seSucursalNew);
-            }
-            if (prProductosNew != null) {
-                prProductosNew = em.getReference(prProductosNew.getClass(), prProductosNew.getPrProductosPK());
-                inKardex.setPrProductos(prProductosNew);
             }
             if (inTipoDocumentoNew != null) {
                 inTipoDocumentoNew = em.getReference(inTipoDocumentoNew.getClass(), inTipoDocumentoNew.getIdTipoDocumento());
@@ -125,14 +107,6 @@ public class InKardexJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getInKardexList().add(inKardex);
                 seSucursalNew = em.merge(seSucursalNew);
-            }
-            if (prProductosOld != null && !prProductosOld.equals(prProductosNew)) {
-                prProductosOld.getInKardexList().remove(inKardex);
-                prProductosOld = em.merge(prProductosOld);
-            }
-            if (prProductosNew != null && !prProductosNew.equals(prProductosOld)) {
-                prProductosNew.getInKardexList().add(inKardex);
-                prProductosNew = em.merge(prProductosNew);
             }
             if (inTipoDocumentoOld != null && !inTipoDocumentoOld.equals(inTipoDocumentoNew)) {
                 inTipoDocumentoOld.getInKardexList().remove(inKardex);
@@ -175,11 +149,6 @@ public class InKardexJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getInKardexList().remove(inKardex);
                 seSucursal = em.merge(seSucursal);
-            }
-            PrProductos prProductos = inKardex.getPrProductos();
-            if (prProductos != null) {
-                prProductos.getInKardexList().remove(inKardex);
-                prProductos = em.merge(prProductos);
             }
             InTipoDocumento inTipoDocumento = inKardex.getInTipoDocumento();
             if (inTipoDocumento != null) {
