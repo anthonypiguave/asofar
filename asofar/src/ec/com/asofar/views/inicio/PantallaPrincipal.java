@@ -12,6 +12,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
+import ec.com.asofar.util.Reflection;
 import ec.com.asofar.views.Supgrupos.ConsultaSubgrupos;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
@@ -164,15 +165,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                 if(lis.get(l)==lista2.get(k)){
                                 JMenuItem item = new JMenuItem(lista2.get(k).getNombre());
                             menu2.add(item);
-                            
+                            String ruta=lista2.get(k).getRuta();
                            item.addActionListener(new ActionListener() {
                                     @Override
                                     public void actionPerformed(ActionEvent e) {
+                                        Reflection re= new Reflection();
                                         
-                                        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
-                                        cs.setVisible(true);
+                                        re.Llamar(ruta);
                                         
-                                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                         //To change body of generated methods, choose Tools | Templates.
                                     }
                                 });
                            
