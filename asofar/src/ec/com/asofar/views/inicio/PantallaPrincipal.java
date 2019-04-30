@@ -33,6 +33,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      * Creates new form PantallaPrincipal
      */
     List<SeOpcionesMenu> lista = null;
+    SeUsuarios us1;
+    SeEmpresa em1; 
+    SeSucursal su1;
     SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
 
     public PantallaPrincipal() {
@@ -57,15 +60,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
-//        JMenu meOpciones = new JMenu();
-//        meOpciones.setLabel("INVENTARIO");
-//        JMenu mei = new JMenu();
-//        mei.setLabel("MANTENIMIENTO");
-//        JMenuItem mei2 = new JMenuItem();
-//        mei2.setLabel("MANTENIMIENTO DE GRUPOS");
-//        mei.add(mei2);
-//        meOpciones.add(mei);
-//        meMenuBase.add(meOpciones);
+      us1=us;
+      em1= em;
+      su1=su;
         lista = cSubgrupos.ObtenerMenu(us);
         cargarMenu(lista);
 
@@ -140,6 +137,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    public static SeUsuarios obtenerUsuario(){
+        return null;
+    
+    }
     public void cargarMenu(List<SeOpcionesMenu> lis){
         JMenu menu=null;
         for(int i = 0 ; i < lis.size();i++){
@@ -171,7 +172,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     public void actionPerformed(ActionEvent e) {
                                         Reflection re= new Reflection();
                                         
-                                        re.Llamar(ruta);
+                                        re.Llamar(ruta,us1,em1,su1);
                                         
                                          //To change body of generated methods, choose Tools | Templates.
                                     }
