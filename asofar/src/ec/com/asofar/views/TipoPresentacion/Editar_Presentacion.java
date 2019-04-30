@@ -61,7 +61,6 @@ public class Editar_Presentacion extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(254, 254, 254));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setToolTipText("");
 
@@ -166,7 +165,7 @@ public class Editar_Presentacion extends javax.swing.JDialog {
             Tipo_presentacion a = new Tipo_presentacion(new javax.swing.JFrame(), true);
             a.setVisible(true);
         } catch (Exception e) {
-            System.err.println(e);     
+            System.err.println(e.getMessage() + "Hola");     
         }
         
 

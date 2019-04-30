@@ -186,6 +186,7 @@
             <Component class="javax.swing.JButton" name="BotonNuevaMedida">
               <Properties>
                 <Property name="text" type="java.lang.String" value="NUEVA MEDIDA"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonNuevaMedidaActionPerformed"/>
@@ -277,6 +278,7 @@
                   <Color blue="63" green="ab" red="65" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="NUEVO PRODUCTO"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonNuevoProductoActionPerformed"/>

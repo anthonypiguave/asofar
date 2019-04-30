@@ -43,10 +43,9 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         try {
             modelo = (new DefaultTableModel(
                     null, new String[]{
-                        "id_Presentacion", "Nombre", "Estado", "Fecha"
+                        "id_Presentacion", "Nombre", "Estado"
                     }) {
                 Class[] types = new Class[]{
-                    java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class
@@ -82,7 +81,6 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 modelo.setValueAt(pre.get(i).getIdTipoPresentacion(), i, 0);
                 modelo.setValueAt(pre.get(i).getNombre(), i, 1);
                 modelo.setValueAt(pre.get(i).getEstado(), i, 2);
-                modelo.setValueAt(pre.get(i).getFechaCreacion(), i, 3);
             }
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
