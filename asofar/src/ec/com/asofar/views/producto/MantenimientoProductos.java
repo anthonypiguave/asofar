@@ -352,6 +352,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             } else {
                 System.out.println("nooooo");
                 BotonNuevaMedida.setEnabled(false);
+                
+                
             }
 
         } catch (Exception e) {
