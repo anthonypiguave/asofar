@@ -6,6 +6,7 @@
 package ec.com.asofar.views.articulo;
 
 import ec.com.asofar.dao.PrArticuloJpaController;
+import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author ADMIN
  */
 public class ConsultaArticulo extends javax.swing.JDialog {
-    PrArticuloJpaController articon = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrArticuloJpaControllerExt articon = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     int x,y;
     List<PrArticulo> listap= articon.findPrArticuloEntities();
     PrArticulo obj= new PrArticulo();

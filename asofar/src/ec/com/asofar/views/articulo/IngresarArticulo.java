@@ -8,6 +8,7 @@ package ec.com.asofar.views.articulo;
 import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
@@ -24,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class IngresarArticulo extends javax.swing.JDialog {
     PrGruposJpaController control = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
-    PrArticuloJpaController control2 = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrArticuloJpaControllerExt control2 = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     List<PrGrupos> lista= control.findPrGruposEntities();
     int x,y;
     /**

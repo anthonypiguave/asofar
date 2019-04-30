@@ -11,9 +11,14 @@ import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrMedidasPK;
 import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.dto.PrTipoMedidas;
+import ec.com.asofar.dto.PrTipoPresentacion;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import ec.com.asofar.views.articulo.EditarArticulo;
 import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -135,6 +140,11 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         ));
         tabla_med.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tabla_med.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabla_medMousePressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(tabla_med);
 
         BotonNuevaMedida.setText("NUEVA MEDIDA");
@@ -260,7 +270,6 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(142, 142, 142))))
         );
@@ -338,6 +347,21 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         setVisible(false);
         nv.setVisible(true);
     }//GEN-LAST:event_BotonNuevaMedidaActionPerformed
+
+    private void tabla_medMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_medMousePressed
+        // TODO add your handling code here:
+      
+        TreePath objeto = arbol.getSelectionPath();
+        if (evt.getClickCount() == 1) {
+            
+            PrArticulo arti=ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
+            PrTipoMedidas  medi=ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
+            PrTipoPresentacion  pre=ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
+            
+//            PrMedidas obj2=ObtenerDTO.ObtenerPrMedidas(arti,medi,p);
+//            Tablas.TablaProducto(obj2.getPrProductosList(), tabla_prod);
+        }
+    }//GEN-LAST:event_tabla_medMousePressed
 
     /**
      * @param args the command line arguments

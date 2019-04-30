@@ -6,6 +6,7 @@
 package ec.com.asofar.views.articulo;
 
 import ec.com.asofar.dao.PrArticuloJpaController;
+import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrArticuloPK;
@@ -24,7 +25,7 @@ import javax.swing.JOptionPane;
 
 public class EditarArticulo extends javax.swing.JDialog {
     int x,y;
-    PrArticuloJpaController control= new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrArticuloJpaControllerExt control= new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     
     PrArticulo obj1=null;
             
