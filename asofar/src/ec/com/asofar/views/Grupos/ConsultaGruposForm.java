@@ -7,6 +7,9 @@ package ec.com.asofar.views.Grupos;
 
 import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -26,6 +29,13 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     int y, x;
 
     public ConsultaGruposForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        cargarInformacion();
+        setLocationRelativeTo(null);
+
+    }
+       public ConsultaGruposForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         cargarInformacion();

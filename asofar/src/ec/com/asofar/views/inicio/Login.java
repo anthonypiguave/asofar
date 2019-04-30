@@ -82,6 +82,7 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setText("CONTRASEÑA:");
 
         txtusuario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtusuario.setText("ANGEL");
 
         btningresar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btningresar.setForeground(new java.awt.Color(75, 162, 73));
@@ -96,6 +97,8 @@ public class Login extends javax.swing.JDialog {
         btningresar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btningresar1.setForeground(new java.awt.Color(254, 254, 254));
         btningresar1.setText("SALIR");
+
+        txtpassword.setText("1234");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

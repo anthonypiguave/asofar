@@ -10,6 +10,9 @@ package ec.com.asofar.views.Supgrupos;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -39,7 +42,12 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         cargarDatos();
     }
-
+     public ConsultaSubgrupos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        cargarDatos();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
