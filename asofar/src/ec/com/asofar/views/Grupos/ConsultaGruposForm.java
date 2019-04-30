@@ -38,7 +38,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         try {
 
             lista = pGrupos.findPrGruposEntities();
-            System.out.println(lista.get(0).getIdGrupo());
+//            System.out.println(lista.get(0).getIdGrupo());
             Tablas.listarGrupos(lista, tbGrupos);
         } catch (Exception e) {
 
@@ -222,6 +222,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         if (r == JOptionPane.YES_OPTION) {
             dispose();
 
+//            asdfg12345
         } else {
 
         }

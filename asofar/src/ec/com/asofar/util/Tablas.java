@@ -208,33 +208,7 @@ public class Tablas {
             tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
         }
     }
-
-    public static void TablaFabricante(List<PrFabricante> listafabri, JTable tabla) {
-        int[] a = {5, 30, 20};
-        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
-        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
-        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
-        model = VaciarTabla(tabla);
-        String[] b = {"ID", "NOMBRE", "ESTADO"};
-        String[] filas = new String[3];
-        model = new DefaultTableModel(null, b);
-        tabla.setShowGrid(true);
-        for (int i = 0; i < listafabri.size(); i++) {
-            filas[0] = String.valueOf(listafabri.get(i).getIdFabricante());
-            filas[1] = listafabri.get(i).getNombre();
-            filas[2] = listafabri.get(i).getEstado();
-            model.addRow(filas);
-            tabla.setModel(model);
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
-            tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr1);
-            tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
-        }
-    }
-
+    
     public static void listaArticulos(List<PrArticulo> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -328,6 +302,62 @@ public class Tablas {
             tabla.getColumnModel().getColumn(4).setCellRenderer(dtcr1);
             tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
             tabla.getColumnModel().getColumn(5).setCellRenderer(dtcr1);
+        }
+    }
+    
+     public static void TablaFabricante(List<PrFabricante> listafabri, JTable tabla) {
+        int[] a = {5, 30, 20};
+        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(tabla);
+        String[] b = {"ID", "NOMBRE"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        tabla.setShowGrid(true);
+
+        for (int i = 0; i < listafabri.size(); i++) {
+            if (listafabri.get(i).getEstado().equals("A")) {
+                filas[0] = String.valueOf(listafabri.get(i).getIdFabricante());
+                filas[1] = listafabri.get(i).getNombre();
+
+                model.addRow(filas);
+                tabla.setModel(model);
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr1);
+
+            }
+        }
+    }
+    
+     public static void TablaFabricanteInac(List<PrFabricante> listafabri, JTable tabla) {
+        int[] a = {5, 30, 20};
+        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(tabla);
+        String[] b = {"ID", "NOMBRE"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        tabla.setShowGrid(true);
+
+        for (int i = 0; i < listafabri.size(); i++) {
+            if (listafabri.get(i).getEstado().equals("I")) {
+                filas[0] = String.valueOf(listafabri.get(i).getIdFabricante());
+                filas[1] = listafabri.get(i).getNombre();
+
+                model.addRow(filas);
+                tabla.setModel(model);
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr1);
+
+            }
         }
     }
 

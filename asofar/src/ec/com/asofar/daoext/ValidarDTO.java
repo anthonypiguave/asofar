@@ -213,4 +213,19 @@ public static boolean ValidarSeTipoPersona(String nombre){
     
     }
     
+     public static boolean ValidarFab(String nombre) {
+        PrFabricanteJpaController control = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
+        boolean valor = false;
+        List<PrFabricante> lista = control.findPrFabricanteEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                valor = true;
+            }
+        }
+
+        return valor;
+
+    }
+    
 }
