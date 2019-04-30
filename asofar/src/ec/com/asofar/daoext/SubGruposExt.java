@@ -6,7 +6,12 @@
 package ec.com.asofar.daoext;
 
 import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.dto.SeOpcionesMenu;
+import ec.com.asofar.dto.SeUsuarios;
+import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 /**
  *
@@ -17,7 +22,27 @@ public class SubGruposExt extends PrSubgruposJpaController {
     public SubGruposExt(EntityManagerFactory emf) {
         super(emf);
     }
-    public void ObtenerMenu(){
-    
+    public  List<SeOpcionesMenu> ObtenerMenu(SeUsuarios user){
+        
+        EntityManager em = getEntityManager();
+        List<SeOpcionesMenu> lista = null;
+        String nativeQuery ="SELECT DISTINCT om.* "
+                + "FROM se_usuarios us , se_usuario_sucur_rol usr , se_opciones_roles orl, se_opciones_menu om "
+                + "WHERE usr.id_usuario="+user.getIdUsuario()+" and "
+                + "usr.id_roles= orl.id_rol and "
+                + "orl.id_opciones_menu = om.id_opciones_menu";
+        Query query = em.createNativeQuery(nativeQuery, SeOpcionesMenu.class);
+//        query.setParameter("iduser", user.getIdUsuario());
+        
+        lista = query.getResultList();
+//        "SELECT OM \n" +
+//                  "FROM SeUsuarios US , SeUsuarioSucurRol USR, SeOpcionesRoles ORl, SeOpcionesMenu OM "
+//                + "where USR.IdUsuario=?iduser and "
+//                + "USR.IdRoles=ORl.IdRol and "
+//                + "ORL.IdOpcionesMenu=OM.IdOpcionesMenu"
+        
+
+        return lista;
     }
+  
 }
