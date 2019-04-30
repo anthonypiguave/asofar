@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views;
+package ec.com.asofar.views.tipomedida;
 
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -17,8 +18,10 @@ import java.util.List;
  */
 public class tipo_medida extends javax.swing.JDialog {
 
+    PrTipoMedidas medidas = new PrTipoMedidas();
     List<PrTipoMedidas> listamedida;
     PrTipoMedidasJpaController pjc = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
+    String valor = "";
 
     /**
      * Creates new form tipo_medida
@@ -27,18 +30,35 @@ public class tipo_medida extends javax.swing.JDialog {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
-        MostrarMedida();
-
+        setLocationRelativeTo(null);
+        MostrarMedidaActiva();
     }
 
-    private void MostrarMedida() {
-        Object o[] = null;
+    private void MostrarMedidaActiva() {
         try {
             listamedida = pjc.findPrTipoMedidasEntities();
-            System.out.println(listamedida.get(0).getNombreTipoMedida());
-            Tablas.TablaTipoMedida(listamedida, medida_tb);
+            Tablas.TablaTipoMedidaActivo(listamedida, medida_tb);
+
         } catch (Exception e) {
         }
+    }
+
+    private void MostrarMedidaInactiva() {
+        try {
+            listamedida = pjc.findPrTipoMedidasEntities();
+            Tablas.TablaTipoMedidaInactivo(listamedida, medida_tb);
+        } catch (Exception e) {
+        }
+    }
+
+    private PrTipoMedidas devuelveObjeto(Long id) {
+        listamedida = pjc.findPrTipoMedidasEntities();
+        for (int i = 0; i < listamedida.size(); i++) {
+            if (Objects.equals(listamedida.get(i).getIdTipoMedidas(), id)) {
+                medidas = listamedida.get(i);
+            }
+        }
+        return medidas;
     }
 
     /**
@@ -51,11 +71,12 @@ public class tipo_medida extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
+        toolbar = new javax.swing.JToolBar();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        busqueda_tf = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        estado_cb = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -66,11 +87,20 @@ public class tipo_medida extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jToolBar1.setRollover(true);
+        toolbar.setRollover(true);
 
         jLabel2.setText("Buscar:");
-        jToolBar1.add(jLabel2);
-        jToolBar1.add(jTextField1);
+        toolbar.add(jLabel2);
+
+        busqueda_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                busqueda_tfKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                busqueda_tfKeyReleased(evt);
+            }
+        });
+        toolbar.add(busqueda_tf);
 
         jButton1.setText("Agregar");
         jButton1.setFocusable(false);
@@ -81,7 +111,7 @@ public class tipo_medida extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        toolbar.add(jButton1);
 
         jButton2.setText("Editar");
         jButton2.setFocusable(false);
@@ -92,13 +122,31 @@ public class tipo_medida extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        toolbar.add(jButton2);
+
+        estado_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
+        estado_cb.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                estado_cbItemStateChanged(evt);
+            }
+        });
+        estado_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estado_cbActionPerformed(evt);
+            }
+        });
+        toolbar.add(estado_cb);
 
         jButton3.setText("Volver");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        toolbar.add(jButton3);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -132,6 +180,7 @@ public class tipo_medida extends javax.swing.JDialog {
                 .addGap(0, 0, 0))
         );
 
+        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TIPO MEDIDA");
 
@@ -144,14 +193,14 @@ public class tipo_medida extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -173,17 +222,70 @@ public class tipo_medida extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        setVisible(false);
+        setVisible(false);
         tipo_medida_agregar tma = new tipo_medida_agregar(new javax.swing.JFrame(), true);
         tma.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-//        setVisible(false);
-        tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true);
-        tme.setVisible(true);
+        String id = (String) medida_tb.getValueAt(medida_tb.getSelectedRow(), 0);
+        setVisible(false);
+        medidas = devuelveObjeto(Long.parseLong(id));
+        if (medidas != null) {
+            tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
+            tme.setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void busqueda_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busqueda_tfKeyTyped
+       char  c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String text = (""+c).toUpperCase();
+            c = text.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_busqueda_tfKeyTyped
+
+    private void busqueda_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busqueda_tfKeyReleased
+        // TODO add your handling code here:
+        valor = busqueda_tf.getText();
+        Tablas.filtro(valor, medida_tb);
+        
+
+    }//GEN-LAST:event_busqueda_tfKeyReleased
+
+    private void estado_cbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_estado_cbItemStateChanged
+        // TODO add your handling code here:
+//        if (estado_cb.getSelectedIndex() == 0) {
+////            listamedida.clear();
+//            busqueda_tf.setText("");
+//            MostrarMedidaActiva();
+////            listamedida = pjc.findPrTipoMedidasEntities();
+////            Tablas.TablaTipoMedidaActivo(listamedida, medida_tb);
+//        } else {
+//            busqueda_tf.setText("");
+//            MostrarMedidaInactiva();
+//        }   
+    }//GEN-LAST:event_estado_cbItemStateChanged
+
+    private void estado_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estado_cbActionPerformed
+        if (estado_cb.getSelectedIndex() == 0) {
+//            listamedida.clear();
+            busqueda_tf.setText("");
+            MostrarMedidaActiva();
+//            listamedida = pjc.findPrTipoMedidasEntities();
+//            Tablas.TablaTipoMedidaActivo(listamedida, medida_tb);
+        } else {
+            busqueda_tf.setText("");
+            MostrarMedidaInactiva();
+        }   
+    }//GEN-LAST:event_estado_cbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +314,20 @@ public class tipo_medida extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -229,6 +345,8 @@ public class tipo_medida extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField busqueda_tf;
+    private javax.swing.JComboBox<String> estado_cb;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -237,8 +355,7 @@ public class tipo_medida extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable medida_tb;
+    private javax.swing.JToolBar toolbar;
     // End of variables declaration//GEN-END:variables
 }

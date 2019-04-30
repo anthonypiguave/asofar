@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.TipoPresentacion;
+package ec.com.asofar.views.tipopresentacion;
 
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
 import ec.com.asofar.dto.PrTipoPresentacion;

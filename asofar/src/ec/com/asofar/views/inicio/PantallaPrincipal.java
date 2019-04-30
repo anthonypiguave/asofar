@@ -13,7 +13,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
 import ec.com.asofar.util.Reflection;
-import ec.com.asofar.views.Supgrupos.ConsultaSubgrupos;
+import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
