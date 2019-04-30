@@ -35,7 +35,8 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
 
     }
-       public ConsultaGruposForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+
+    public ConsultaGruposForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         cargarInformacion();
@@ -44,11 +45,9 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     }
 
     private void cargarInformacion() {
-        Object o[] = null;
         try {
 
             lista = pGrupos.findPrGruposEntities();
-//            System.out.println(lista.get(0).getIdGrupo());
             Tablas.listarGrupos(lista, tbGrupos);
         } catch (Exception e) {
 

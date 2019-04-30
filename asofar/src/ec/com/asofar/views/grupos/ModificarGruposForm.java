@@ -125,7 +125,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
 
         txtNombreactual.setEditable(false);
 
-        jLabel4.setText("Nuevo Actual:");
+        jLabel4.setText("Nombre Actual:");
 
         brnEliminar.setText("Eliminar");
         brnEliminar.addActionListener(new java.awt.event.ActionListener() {
