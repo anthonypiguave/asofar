@@ -10,7 +10,6 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,25 +29,25 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ADMIN
  */
 @Entity
-@Table(name = "pr_tipo_presentacion")
+@Table(name = "in_motivos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrTipoPresentacion.findAll", query = "SELECT p FROM PrTipoPresentacion p")
-    , @NamedQuery(name = "PrTipoPresentacion.findByIdTipoPresentacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.idTipoPresentacion = :idTipoPresentacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByNombre", query = "SELECT p FROM PrTipoPresentacion p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "PrTipoPresentacion.findByEstado", query = "SELECT p FROM PrTipoPresentacion p WHERE p.estado = :estado")
-    , @NamedQuery(name = "PrTipoPresentacion.findByUsuarioCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByFechaCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByUsuarioActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByFechaActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaActualizacion = :fechaActualizacion")})
-public class PrTipoPresentacion implements Serializable {
+    @NamedQuery(name = "InMotivos.findAll", query = "SELECT i FROM InMotivos i")
+    , @NamedQuery(name = "InMotivos.findByIdMotivo", query = "SELECT i FROM InMotivos i WHERE i.idMotivo = :idMotivo")
+    , @NamedQuery(name = "InMotivos.findByNombre", query = "SELECT i FROM InMotivos i WHERE i.nombre = :nombre")
+    , @NamedQuery(name = "InMotivos.findByEstado", query = "SELECT i FROM InMotivos i WHERE i.estado = :estado")
+    , @NamedQuery(name = "InMotivos.findByUsuarioCreacion", query = "SELECT i FROM InMotivos i WHERE i.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "InMotivos.findByFechaCreacion", query = "SELECT i FROM InMotivos i WHERE i.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "InMotivos.findByUsuarioActualizacion", query = "SELECT i FROM InMotivos i WHERE i.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "InMotivos.findByFechaActualizacion", query = "SELECT i FROM InMotivos i WHERE i.fechaActualizacion = :fechaActualizacion")})
+public class InMotivos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_tipo_presentacion")
-    private Long idTipoPresentacion;
+    @Column(name = "id_motivo")
+    private Long idMotivo;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "estado")
@@ -63,22 +62,22 @@ public class PrTipoPresentacion implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTipoPresentacion")
-    private List<PrMedidas> prMedidasList;
+    @OneToMany(mappedBy = "idMotivo")
+    private List<InMovimientos> inMovimientosList;
 
-    public PrTipoPresentacion() {
+    public InMotivos() {
     }
 
-    public PrTipoPresentacion(Long idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
+    public InMotivos(Long idMotivo) {
+        this.idMotivo = idMotivo;
     }
 
-    public Long getIdTipoPresentacion() {
-        return idTipoPresentacion;
+    public Long getIdMotivo() {
+        return idMotivo;
     }
 
-    public void setIdTipoPresentacion(Long idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
+    public void setIdMotivo(Long idMotivo) {
+        this.idMotivo = idMotivo;
     }
 
     public String getNombre() {
@@ -130,29 +129,29 @@ public class PrTipoPresentacion implements Serializable {
     }
 
     @XmlTransient
-    public List<PrMedidas> getPrMedidasList() {
-        return prMedidasList;
+    public List<InMovimientos> getInMovimientosList() {
+        return inMovimientosList;
     }
 
-    public void setPrMedidasList(List<PrMedidas> prMedidasList) {
-        this.prMedidasList = prMedidasList;
+    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
+        this.inMovimientosList = inMovimientosList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoPresentacion != null ? idTipoPresentacion.hashCode() : 0);
+        hash += (idMotivo != null ? idMotivo.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PrTipoPresentacion)) {
+        if (!(object instanceof InMotivos)) {
             return false;
         }
-        PrTipoPresentacion other = (PrTipoPresentacion) object;
-        if ((this.idTipoPresentacion == null && other.idTipoPresentacion != null) || (this.idTipoPresentacion != null && !this.idTipoPresentacion.equals(other.idTipoPresentacion))) {
+        InMotivos other = (InMotivos) object;
+        if ((this.idMotivo == null && other.idMotivo != null) || (this.idMotivo != null && !this.idMotivo.equals(other.idMotivo))) {
             return false;
         }
         return true;
@@ -160,7 +159,7 @@ public class PrTipoPresentacion implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrTipoPresentacion[ idTipoPresentacion=" + idTipoPresentacion + " ]";
+        return "ec.com.asofar.dto.InMotivos[ idMotivo=" + idMotivo + " ]";
     }
     
 }

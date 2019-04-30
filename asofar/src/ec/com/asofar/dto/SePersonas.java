@@ -91,8 +91,6 @@ public class SePersonas implements Serializable {
     private SeTipoPersona idTipoPersona;
     @OneToMany(mappedBy = "idProveedor")
     private List<CoOrdenCompras> coOrdenComprasList;
-    @OneToMany(mappedBy = "idProveedor")
-    private List<InMovimientos> inMovimientosList;
     @OneToMany(mappedBy = "idPersona")
     private List<SeUsuarios> seUsuariosList;
     @OneToMany(mappedBy = "idCliente")
@@ -232,15 +230,6 @@ public class SePersonas implements Serializable {
 
     public void setCoOrdenComprasList(List<CoOrdenCompras> coOrdenComprasList) {
         this.coOrdenComprasList = coOrdenComprasList;
-    }
-
-    @XmlTransient
-    public List<InMovimientos> getInMovimientosList() {
-        return inMovimientosList;
-    }
-
-    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
-        this.inMovimientosList = inMovimientosList;
     }
 
     @XmlTransient

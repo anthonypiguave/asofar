@@ -12,11 +12,10 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.PrProductos;
-import java.util.ArrayList;
-import java.util.List;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrTipoPresentacion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -36,9 +35,6 @@ public class PrTipoPresentacionJpaController implements Serializable {
     }
 
     public void create(PrTipoPresentacion prTipoPresentacion) {
-        if (prTipoPresentacion.getPrProductosList() == null) {
-            prTipoPresentacion.setPrProductosList(new ArrayList<PrProductos>());
-        }
         if (prTipoPresentacion.getPrMedidasList() == null) {
             prTipoPresentacion.setPrMedidasList(new ArrayList<PrMedidas>());
         }
@@ -46,12 +42,6 @@ public class PrTipoPresentacionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<PrProductos> attachedPrProductosList = new ArrayList<PrProductos>();
-            for (PrProductos prProductosListPrProductosToAttach : prTipoPresentacion.getPrProductosList()) {
-                prProductosListPrProductosToAttach = em.getReference(prProductosListPrProductosToAttach.getClass(), prProductosListPrProductosToAttach.getPrProductosPK());
-                attachedPrProductosList.add(prProductosListPrProductosToAttach);
-            }
-            prTipoPresentacion.setPrProductosList(attachedPrProductosList);
             List<PrMedidas> attachedPrMedidasList = new ArrayList<PrMedidas>();
             for (PrMedidas prMedidasListPrMedidasToAttach : prTipoPresentacion.getPrMedidasList()) {
                 prMedidasListPrMedidasToAttach = em.getReference(prMedidasListPrMedidasToAttach.getClass(), prMedidasListPrMedidasToAttach.getPrMedidasPK());
@@ -59,15 +49,6 @@ public class PrTipoPresentacionJpaController implements Serializable {
             }
             prTipoPresentacion.setPrMedidasList(attachedPrMedidasList);
             em.persist(prTipoPresentacion);
-            for (PrProductos prProductosListPrProductos : prTipoPresentacion.getPrProductosList()) {
-                PrTipoPresentacion oldPrTipoPresentacionOfPrProductosListPrProductos = prProductosListPrProductos.getPrTipoPresentacion();
-                prProductosListPrProductos.setPrTipoPresentacion(prTipoPresentacion);
-                prProductosListPrProductos = em.merge(prProductosListPrProductos);
-                if (oldPrTipoPresentacionOfPrProductosListPrProductos != null) {
-                    oldPrTipoPresentacionOfPrProductosListPrProductos.getPrProductosList().remove(prProductosListPrProductos);
-                    oldPrTipoPresentacionOfPrProductosListPrProductos = em.merge(oldPrTipoPresentacionOfPrProductosListPrProductos);
-                }
-            }
             for (PrMedidas prMedidasListPrMedidas : prTipoPresentacion.getPrMedidasList()) {
                 PrTipoPresentacion oldPrTipoPresentacionOfPrMedidasListPrMedidas = prMedidasListPrMedidas.getPrTipoPresentacion();
                 prMedidasListPrMedidas.setPrTipoPresentacion(prTipoPresentacion);
@@ -91,19 +72,9 @@ public class PrTipoPresentacionJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             PrTipoPresentacion persistentPrTipoPresentacion = em.find(PrTipoPresentacion.class, prTipoPresentacion.getIdTipoPresentacion());
-            List<PrProductos> prProductosListOld = persistentPrTipoPresentacion.getPrProductosList();
-            List<PrProductos> prProductosListNew = prTipoPresentacion.getPrProductosList();
             List<PrMedidas> prMedidasListOld = persistentPrTipoPresentacion.getPrMedidasList();
             List<PrMedidas> prMedidasListNew = prTipoPresentacion.getPrMedidasList();
             List<String> illegalOrphanMessages = null;
-            for (PrProductos prProductosListOldPrProductos : prProductosListOld) {
-                if (!prProductosListNew.contains(prProductosListOldPrProductos)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrProductos " + prProductosListOldPrProductos + " since its prTipoPresentacion field is not nullable.");
-                }
-            }
             for (PrMedidas prMedidasListOldPrMedidas : prMedidasListOld) {
                 if (!prMedidasListNew.contains(prMedidasListOldPrMedidas)) {
                     if (illegalOrphanMessages == null) {
@@ -115,13 +86,6 @@ public class PrTipoPresentacionJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            List<PrProductos> attachedPrProductosListNew = new ArrayList<PrProductos>();
-            for (PrProductos prProductosListNewPrProductosToAttach : prProductosListNew) {
-                prProductosListNewPrProductosToAttach = em.getReference(prProductosListNewPrProductosToAttach.getClass(), prProductosListNewPrProductosToAttach.getPrProductosPK());
-                attachedPrProductosListNew.add(prProductosListNewPrProductosToAttach);
-            }
-            prProductosListNew = attachedPrProductosListNew;
-            prTipoPresentacion.setPrProductosList(prProductosListNew);
             List<PrMedidas> attachedPrMedidasListNew = new ArrayList<PrMedidas>();
             for (PrMedidas prMedidasListNewPrMedidasToAttach : prMedidasListNew) {
                 prMedidasListNewPrMedidasToAttach = em.getReference(prMedidasListNewPrMedidasToAttach.getClass(), prMedidasListNewPrMedidasToAttach.getPrMedidasPK());
@@ -130,17 +94,6 @@ public class PrTipoPresentacionJpaController implements Serializable {
             prMedidasListNew = attachedPrMedidasListNew;
             prTipoPresentacion.setPrMedidasList(prMedidasListNew);
             prTipoPresentacion = em.merge(prTipoPresentacion);
-            for (PrProductos prProductosListNewPrProductos : prProductosListNew) {
-                if (!prProductosListOld.contains(prProductosListNewPrProductos)) {
-                    PrTipoPresentacion oldPrTipoPresentacionOfPrProductosListNewPrProductos = prProductosListNewPrProductos.getPrTipoPresentacion();
-                    prProductosListNewPrProductos.setPrTipoPresentacion(prTipoPresentacion);
-                    prProductosListNewPrProductos = em.merge(prProductosListNewPrProductos);
-                    if (oldPrTipoPresentacionOfPrProductosListNewPrProductos != null && !oldPrTipoPresentacionOfPrProductosListNewPrProductos.equals(prTipoPresentacion)) {
-                        oldPrTipoPresentacionOfPrProductosListNewPrProductos.getPrProductosList().remove(prProductosListNewPrProductos);
-                        oldPrTipoPresentacionOfPrProductosListNewPrProductos = em.merge(oldPrTipoPresentacionOfPrProductosListNewPrProductos);
-                    }
-                }
-            }
             for (PrMedidas prMedidasListNewPrMedidas : prMedidasListNew) {
                 if (!prMedidasListOld.contains(prMedidasListNewPrMedidas)) {
                     PrTipoPresentacion oldPrTipoPresentacionOfPrMedidasListNewPrMedidas = prMedidasListNewPrMedidas.getPrTipoPresentacion();
@@ -182,13 +135,6 @@ public class PrTipoPresentacionJpaController implements Serializable {
                 throw new NonexistentEntityException("The prTipoPresentacion with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<PrProductos> prProductosListOrphanCheck = prTipoPresentacion.getPrProductosList();
-            for (PrProductos prProductosListOrphanCheckPrProductos : prProductosListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This PrTipoPresentacion (" + prTipoPresentacion + ") cannot be destroyed since the PrProductos " + prProductosListOrphanCheckPrProductos + " in its prProductosList field has a non-nullable prTipoPresentacion field.");
-            }
             List<PrMedidas> prMedidasListOrphanCheck = prTipoPresentacion.getPrMedidasList();
             for (PrMedidas prMedidasListOrphanCheckPrMedidas : prMedidasListOrphanCheck) {
                 if (illegalOrphanMessages == null) {

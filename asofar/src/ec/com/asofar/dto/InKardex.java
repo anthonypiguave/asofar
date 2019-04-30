@@ -34,11 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InKardex.findByIdKardex", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idKardex = :idKardex")
     , @NamedQuery(name = "InKardex.findByIdEmpresa", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "InKardex.findByIdSucursal", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "InKardex.findByIdTipoBodega", query = "SELECT i FROM InKardex i WHERE i.idTipoBodega = :idTipoBodega")
     , @NamedQuery(name = "InKardex.findByIdBodega", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idBodega = :idBodega")
-    , @NamedQuery(name = "InKardex.findByIdPrestaciones", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idPrestaciones = :idPrestaciones")
+    , @NamedQuery(name = "InKardex.findByIdProducto", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idProducto = :idProducto")
     , @NamedQuery(name = "InKardex.findByFechaMovimiento", query = "SELECT i FROM InKardex i WHERE i.fechaMovimiento = :fechaMovimiento")
-    , @NamedQuery(name = "InKardex.findByIdTipoMovimiento", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idTipoMovimiento = :idTipoMovimiento")
     , @NamedQuery(name = "InKardex.findByIdTipoDocumento", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "InKardex.findByAnioDocumento", query = "SELECT i FROM InKardex i WHERE i.anioDocumento = :anioDocumento")
     , @NamedQuery(name = "InKardex.findByNumeroDocumento", query = "SELECT i FROM InKardex i WHERE i.numeroDocumento = :numeroDocumento")
@@ -62,8 +60,6 @@ public class InKardex implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InKardexPK inKardexPK;
-    @Column(name = "id_tipo_bodega")
-    private BigInteger idTipoBodega;
     @Column(name = "fecha_movimiento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaMovimiento;
@@ -110,17 +106,12 @@ public class InKardex implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @JoinColumns({
-        @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
+    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private PrPrestaciones prPrestaciones;
+    private PrProductos prProductos;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private InTipoDocumento inTipoDocumento;
-    @JoinColumn(name = "id_tipo_movimiento", referencedColumnName = "id_tipo_movimiento", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private InTipoMovimiento inTipoMovimiento;
 
     public InKardex() {
     }
@@ -129,8 +120,8 @@ public class InKardex implements Serializable {
         this.inKardexPK = inKardexPK;
     }
 
-    public InKardex(long idKardex, long idEmpresa, long idSucursal, long idBodega, long idPrestaciones, long idTipoMovimiento, long idTipoDocumento) {
-        this.inKardexPK = new InKardexPK(idKardex, idEmpresa, idSucursal, idBodega, idPrestaciones, idTipoMovimiento, idTipoDocumento);
+    public InKardex(long idKardex, long idEmpresa, long idSucursal, long idBodega, long idProducto, long idTipoDocumento) {
+        this.inKardexPK = new InKardexPK(idKardex, idEmpresa, idSucursal, idBodega, idProducto, idTipoDocumento);
     }
 
     public InKardexPK getInKardexPK() {
@@ -139,14 +130,6 @@ public class InKardex implements Serializable {
 
     public void setInKardexPK(InKardexPK inKardexPK) {
         this.inKardexPK = inKardexPK;
-    }
-
-    public BigInteger getIdTipoBodega() {
-        return idTipoBodega;
-    }
-
-    public void setIdTipoBodega(BigInteger idTipoBodega) {
-        this.idTipoBodega = idTipoBodega;
     }
 
     public Date getFechaMovimiento() {
@@ -301,12 +284,12 @@ public class InKardex implements Serializable {
         this.seSucursal = seSucursal;
     }
 
-    public PrPrestaciones getPrPrestaciones() {
-        return prPrestaciones;
+    public PrProductos getPrProductos() {
+        return prProductos;
     }
 
-    public void setPrPrestaciones(PrPrestaciones prPrestaciones) {
-        this.prPrestaciones = prPrestaciones;
+    public void setPrProductos(PrProductos prProductos) {
+        this.prProductos = prProductos;
     }
 
     public InTipoDocumento getInTipoDocumento() {
@@ -315,14 +298,6 @@ public class InKardex implements Serializable {
 
     public void setInTipoDocumento(InTipoDocumento inTipoDocumento) {
         this.inTipoDocumento = inTipoDocumento;
-    }
-
-    public InTipoMovimiento getInTipoMovimiento() {
-        return inTipoMovimiento;
-    }
-
-    public void setInTipoMovimiento(InTipoMovimiento inTipoMovimiento) {
-        this.inTipoMovimiento = inTipoMovimiento;
     }
 
     @Override

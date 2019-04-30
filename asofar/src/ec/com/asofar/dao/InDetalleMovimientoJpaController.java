@@ -13,7 +13,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.InTipoMovimiento;
-import ec.com.asofar.dto.InMovimientos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,19 +42,10 @@ public class InDetalleMovimientoJpaController implements Serializable {
                 idTipoMovimiento = em.getReference(idTipoMovimiento.getClass(), idTipoMovimiento.getIdTipoMovimiento());
                 inDetalleMovimiento.setIdTipoMovimiento(idTipoMovimiento);
             }
-            InMovimientos inMovimientos = inDetalleMovimiento.getInMovimientos();
-            if (inMovimientos != null) {
-                inMovimientos = em.getReference(inMovimientos.getClass(), inMovimientos.getInMovimientosPK());
-                inDetalleMovimiento.setInMovimientos(inMovimientos);
-            }
             em.persist(inDetalleMovimiento);
             if (idTipoMovimiento != null) {
                 idTipoMovimiento.getInDetalleMovimientoList().add(inDetalleMovimiento);
                 idTipoMovimiento = em.merge(idTipoMovimiento);
-            }
-            if (inMovimientos != null) {
-                inMovimientos.getInDetalleMovimientoList().add(inDetalleMovimiento);
-                inMovimientos = em.merge(inMovimientos);
             }
             em.getTransaction().commit();
         } finally {
@@ -73,15 +63,9 @@ public class InDetalleMovimientoJpaController implements Serializable {
             InDetalleMovimiento persistentInDetalleMovimiento = em.find(InDetalleMovimiento.class, inDetalleMovimiento.getIdDetalleMovimiento());
             InTipoMovimiento idTipoMovimientoOld = persistentInDetalleMovimiento.getIdTipoMovimiento();
             InTipoMovimiento idTipoMovimientoNew = inDetalleMovimiento.getIdTipoMovimiento();
-            InMovimientos inMovimientosOld = persistentInDetalleMovimiento.getInMovimientos();
-            InMovimientos inMovimientosNew = inDetalleMovimiento.getInMovimientos();
             if (idTipoMovimientoNew != null) {
                 idTipoMovimientoNew = em.getReference(idTipoMovimientoNew.getClass(), idTipoMovimientoNew.getIdTipoMovimiento());
                 inDetalleMovimiento.setIdTipoMovimiento(idTipoMovimientoNew);
-            }
-            if (inMovimientosNew != null) {
-                inMovimientosNew = em.getReference(inMovimientosNew.getClass(), inMovimientosNew.getInMovimientosPK());
-                inDetalleMovimiento.setInMovimientos(inMovimientosNew);
             }
             inDetalleMovimiento = em.merge(inDetalleMovimiento);
             if (idTipoMovimientoOld != null && !idTipoMovimientoOld.equals(idTipoMovimientoNew)) {
@@ -91,14 +75,6 @@ public class InDetalleMovimientoJpaController implements Serializable {
             if (idTipoMovimientoNew != null && !idTipoMovimientoNew.equals(idTipoMovimientoOld)) {
                 idTipoMovimientoNew.getInDetalleMovimientoList().add(inDetalleMovimiento);
                 idTipoMovimientoNew = em.merge(idTipoMovimientoNew);
-            }
-            if (inMovimientosOld != null && !inMovimientosOld.equals(inMovimientosNew)) {
-                inMovimientosOld.getInDetalleMovimientoList().remove(inDetalleMovimiento);
-                inMovimientosOld = em.merge(inMovimientosOld);
-            }
-            if (inMovimientosNew != null && !inMovimientosNew.equals(inMovimientosOld)) {
-                inMovimientosNew.getInDetalleMovimientoList().add(inDetalleMovimiento);
-                inMovimientosNew = em.merge(inMovimientosNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -133,11 +109,6 @@ public class InDetalleMovimientoJpaController implements Serializable {
             if (idTipoMovimiento != null) {
                 idTipoMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimiento);
                 idTipoMovimiento = em.merge(idTipoMovimiento);
-            }
-            InMovimientos inMovimientos = inDetalleMovimiento.getInMovimientos();
-            if (inMovimientos != null) {
-                inMovimientos.getInDetalleMovimientoList().remove(inDetalleMovimiento);
-                inMovimientos = em.merge(inMovimientos);
             }
             em.remove(inDetalleMovimiento);
             em.getTransaction().commit();

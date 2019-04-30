@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SeOpcionesMenu.findAll", query = "SELECT s FROM SeOpcionesMenu s")
     , @NamedQuery(name = "SeOpcionesMenu.findByIdOpcionesMenu", query = "SELECT s FROM SeOpcionesMenu s WHERE s.idOpcionesMenu = :idOpcionesMenu")
     , @NamedQuery(name = "SeOpcionesMenu.findByNombre", query = "SELECT s FROM SeOpcionesMenu s WHERE s.nombre = :nombre")
+    , @NamedQuery(name = "SeOpcionesMenu.findByOrden", query = "SELECT s FROM SeOpcionesMenu s WHERE s.orden = :orden")
     , @NamedQuery(name = "SeOpcionesMenu.findByDescripcion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.descripcion = :descripcion")
+    , @NamedQuery(name = "SeOpcionesMenu.findByRuta", query = "SELECT s FROM SeOpcionesMenu s WHERE s.ruta = :ruta")
     , @NamedQuery(name = "SeOpcionesMenu.findByEstado", query = "SELECT s FROM SeOpcionesMenu s WHERE s.estado = :estado")
     , @NamedQuery(name = "SeOpcionesMenu.findByUsuarioCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "SeOpcionesMenu.findByFechaCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.fechaCreacion = :fechaCreacion")
@@ -54,8 +56,12 @@ public class SeOpcionesMenu implements Serializable {
     private Long idOpcionesMenu;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "orden")
+    private BigInteger orden;
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "ruta")
+    private String ruta;
     @Column(name = "estado")
     private Character estado;
     @Column(name = "usuario_creacion")
@@ -99,12 +105,28 @@ public class SeOpcionesMenu implements Serializable {
         this.nombre = nombre;
     }
 
+    public BigInteger getOrden() {
+        return orden;
+    }
+
+    public void setOrden(BigInteger orden) {
+        this.orden = orden;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
 
     public Character getEstado() {

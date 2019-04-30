@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,6 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "InDetalleMovimiento.findAll", query = "SELECT i FROM InDetalleMovimiento i")
     , @NamedQuery(name = "InDetalleMovimiento.findByIdDetalleMovimiento", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idDetalleMovimiento = :idDetalleMovimiento")
+    , @NamedQuery(name = "InDetalleMovimiento.findByIdMovimientos", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idMovimientos = :idMovimientos")
+    , @NamedQuery(name = "InDetalleMovimiento.findByIdTipoDocumento", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idTipoDocumento = :idTipoDocumento")
+    , @NamedQuery(name = "InDetalleMovimiento.findByIdNumeroDocumento", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idNumeroDocumento = :idNumeroDocumento")
+    , @NamedQuery(name = "InDetalleMovimiento.findByIdEmpresa", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "InDetalleMovimiento.findByAnioDocumento", query = "SELECT i FROM InDetalleMovimiento i WHERE i.anioDocumento = :anioDocumento")
     , @NamedQuery(name = "InDetalleMovimiento.findByLineaDetalle", query = "SELECT i FROM InDetalleMovimiento i WHERE i.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "InDetalleMovimiento.findByDescripcion", query = "SELECT i FROM InDetalleMovimiento i WHERE i.descripcion = :descripcion")
@@ -54,6 +57,14 @@ public class InDetalleMovimiento implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_detalle_movimiento")
     private Long idDetalleMovimiento;
+    @Column(name = "id_movimientos")
+    private BigInteger idMovimientos;
+    @Column(name = "id_tipo_documento")
+    private BigInteger idTipoDocumento;
+    @Column(name = "id_numero_documento")
+    private BigInteger idNumeroDocumento;
+    @Column(name = "id_empresa")
+    private BigInteger idEmpresa;
     @Column(name = "anio_documento")
     private String anioDocumento;
     @Column(name = "linea_detalle")
@@ -82,13 +93,6 @@ public class InDetalleMovimiento implements Serializable {
     @JoinColumn(name = "id_tipo_movimiento", referencedColumnName = "id_tipo_movimiento")
     @ManyToOne
     private InTipoMovimiento idTipoMovimiento;
-    @JoinColumns({
-        @JoinColumn(name = "id_movimientos", referencedColumnName = "id_movimientos")
-        , @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
-        , @JoinColumn(name = "id_numero_documento", referencedColumnName = "id_numero_documento")})
-    @ManyToOne
-    private InMovimientos inMovimientos;
 
     public InDetalleMovimiento() {
     }
@@ -103,6 +107,38 @@ public class InDetalleMovimiento implements Serializable {
 
     public void setIdDetalleMovimiento(Long idDetalleMovimiento) {
         this.idDetalleMovimiento = idDetalleMovimiento;
+    }
+
+    public BigInteger getIdMovimientos() {
+        return idMovimientos;
+    }
+
+    public void setIdMovimientos(BigInteger idMovimientos) {
+        this.idMovimientos = idMovimientos;
+    }
+
+    public BigInteger getIdTipoDocumento() {
+        return idTipoDocumento;
+    }
+
+    public void setIdTipoDocumento(BigInteger idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
+    }
+
+    public BigInteger getIdNumeroDocumento() {
+        return idNumeroDocumento;
+    }
+
+    public void setIdNumeroDocumento(BigInteger idNumeroDocumento) {
+        this.idNumeroDocumento = idNumeroDocumento;
+    }
+
+    public BigInteger getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(BigInteger idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public String getAnioDocumento() {
@@ -199,14 +235,6 @@ public class InDetalleMovimiento implements Serializable {
 
     public void setIdTipoMovimiento(InTipoMovimiento idTipoMovimiento) {
         this.idTipoMovimiento = idTipoMovimiento;
-    }
-
-    public InMovimientos getInMovimientos() {
-        return inMovimientos;
-    }
-
-    public void setInMovimientos(InMovimientos inMovimientos) {
-        this.inMovimientos = inMovimientos;
     }
 
     @Override

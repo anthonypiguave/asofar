@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -105,8 +104,6 @@ public class CoOrdenCompras implements Serializable {
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_persona")
     @ManyToOne
     private SePersonas idProveedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coOrdenCompras")
-    private List<InMovimientos> inMovimientosList;
 
     public CoOrdenCompras() {
     }
@@ -278,15 +275,6 @@ public class CoOrdenCompras implements Serializable {
 
     public void setIdProveedor(SePersonas idProveedor) {
         this.idProveedor = idProveedor;
-    }
-
-    @XmlTransient
-    public List<InMovimientos> getInMovimientosList() {
-        return inMovimientosList;
-    }
-
-    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
-        this.inMovimientosList = inMovimientosList;
     }
 
     @Override

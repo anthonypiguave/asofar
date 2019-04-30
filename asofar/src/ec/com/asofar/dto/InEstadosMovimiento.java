@@ -10,7 +10,6 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,25 +29,25 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ADMIN
  */
 @Entity
-@Table(name = "pr_tipo_presentacion")
+@Table(name = "in_estados_movimiento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrTipoPresentacion.findAll", query = "SELECT p FROM PrTipoPresentacion p")
-    , @NamedQuery(name = "PrTipoPresentacion.findByIdTipoPresentacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.idTipoPresentacion = :idTipoPresentacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByNombre", query = "SELECT p FROM PrTipoPresentacion p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "PrTipoPresentacion.findByEstado", query = "SELECT p FROM PrTipoPresentacion p WHERE p.estado = :estado")
-    , @NamedQuery(name = "PrTipoPresentacion.findByUsuarioCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByFechaCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByUsuarioActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "PrTipoPresentacion.findByFechaActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaActualizacion = :fechaActualizacion")})
-public class PrTipoPresentacion implements Serializable {
+    @NamedQuery(name = "InEstadosMovimiento.findAll", query = "SELECT i FROM InEstadosMovimiento i")
+    , @NamedQuery(name = "InEstadosMovimiento.findByIdEstadoMovimiento", query = "SELECT i FROM InEstadosMovimiento i WHERE i.idEstadoMovimiento = :idEstadoMovimiento")
+    , @NamedQuery(name = "InEstadosMovimiento.findByNombre", query = "SELECT i FROM InEstadosMovimiento i WHERE i.nombre = :nombre")
+    , @NamedQuery(name = "InEstadosMovimiento.findByEstado", query = "SELECT i FROM InEstadosMovimiento i WHERE i.estado = :estado")
+    , @NamedQuery(name = "InEstadosMovimiento.findByUsuarioCreacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "InEstadosMovimiento.findByFechaCreacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "InEstadosMovimiento.findByUsuarioActualizacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "InEstadosMovimiento.findByFechaActualizacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.fechaActualizacion = :fechaActualizacion")})
+public class InEstadosMovimiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_tipo_presentacion")
-    private Long idTipoPresentacion;
+    @Column(name = "id_estado_movimiento")
+    private Long idEstadoMovimiento;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "estado")
@@ -63,22 +62,22 @@ public class PrTipoPresentacion implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTipoPresentacion")
-    private List<PrMedidas> prMedidasList;
+    @OneToMany(mappedBy = "idEstado")
+    private List<InMovimientos> inMovimientosList;
 
-    public PrTipoPresentacion() {
+    public InEstadosMovimiento() {
     }
 
-    public PrTipoPresentacion(Long idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
+    public InEstadosMovimiento(Long idEstadoMovimiento) {
+        this.idEstadoMovimiento = idEstadoMovimiento;
     }
 
-    public Long getIdTipoPresentacion() {
-        return idTipoPresentacion;
+    public Long getIdEstadoMovimiento() {
+        return idEstadoMovimiento;
     }
 
-    public void setIdTipoPresentacion(Long idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
+    public void setIdEstadoMovimiento(Long idEstadoMovimiento) {
+        this.idEstadoMovimiento = idEstadoMovimiento;
     }
 
     public String getNombre() {
@@ -130,29 +129,29 @@ public class PrTipoPresentacion implements Serializable {
     }
 
     @XmlTransient
-    public List<PrMedidas> getPrMedidasList() {
-        return prMedidasList;
+    public List<InMovimientos> getInMovimientosList() {
+        return inMovimientosList;
     }
 
-    public void setPrMedidasList(List<PrMedidas> prMedidasList) {
-        this.prMedidasList = prMedidasList;
+    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
+        this.inMovimientosList = inMovimientosList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoPresentacion != null ? idTipoPresentacion.hashCode() : 0);
+        hash += (idEstadoMovimiento != null ? idEstadoMovimiento.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PrTipoPresentacion)) {
+        if (!(object instanceof InEstadosMovimiento)) {
             return false;
         }
-        PrTipoPresentacion other = (PrTipoPresentacion) object;
-        if ((this.idTipoPresentacion == null && other.idTipoPresentacion != null) || (this.idTipoPresentacion != null && !this.idTipoPresentacion.equals(other.idTipoPresentacion))) {
+        InEstadosMovimiento other = (InEstadosMovimiento) object;
+        if ((this.idEstadoMovimiento == null && other.idEstadoMovimiento != null) || (this.idEstadoMovimiento != null && !this.idEstadoMovimiento.equals(other.idEstadoMovimiento))) {
             return false;
         }
         return true;
@@ -160,7 +159,7 @@ public class PrTipoPresentacion implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrTipoPresentacion[ idTipoPresentacion=" + idTipoPresentacion + " ]";
+        return "ec.com.asofar.dto.InEstadosMovimiento[ idEstadoMovimiento=" + idEstadoMovimiento + " ]";
     }
     
 }

@@ -13,10 +13,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.dto.CoOrdenCompras;
+import ec.com.asofar.dto.SePersonas;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.InMovimientos;
-import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeFactura;
 import javax.persistence.EntityManager;
@@ -41,9 +40,6 @@ public class SePersonasJpaController implements Serializable {
         if (sePersonas.getCoOrdenComprasList() == null) {
             sePersonas.setCoOrdenComprasList(new ArrayList<CoOrdenCompras>());
         }
-        if (sePersonas.getInMovimientosList() == null) {
-            sePersonas.setInMovimientosList(new ArrayList<InMovimientos>());
-        }
         if (sePersonas.getSeUsuariosList() == null) {
             sePersonas.setSeUsuariosList(new ArrayList<SeUsuarios>());
         }
@@ -65,12 +61,6 @@ public class SePersonasJpaController implements Serializable {
                 attachedCoOrdenComprasList.add(coOrdenComprasListCoOrdenComprasToAttach);
             }
             sePersonas.setCoOrdenComprasList(attachedCoOrdenComprasList);
-            List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListInMovimientosToAttach : sePersonas.getInMovimientosList()) {
-                inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosList.add(inMovimientosListInMovimientosToAttach);
-            }
-            sePersonas.setInMovimientosList(attachedInMovimientosList);
             List<SeUsuarios> attachedSeUsuariosList = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListSeUsuariosToAttach : sePersonas.getSeUsuariosList()) {
                 seUsuariosListSeUsuariosToAttach = em.getReference(seUsuariosListSeUsuariosToAttach.getClass(), seUsuariosListSeUsuariosToAttach.getIdUsuario());
@@ -95,15 +85,6 @@ public class SePersonasJpaController implements Serializable {
                 if (oldIdProveedorOfCoOrdenComprasListCoOrdenCompras != null) {
                     oldIdProveedorOfCoOrdenComprasListCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListCoOrdenCompras);
                     oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListCoOrdenCompras);
-                }
-            }
-            for (InMovimientos inMovimientosListInMovimientos : sePersonas.getInMovimientosList()) {
-                SePersonas oldIdProveedorOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getIdProveedor();
-                inMovimientosListInMovimientos.setIdProveedor(sePersonas);
-                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
-                if (oldIdProveedorOfInMovimientosListInMovimientos != null) {
-                    oldIdProveedorOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
-                    oldIdProveedorOfInMovimientosListInMovimientos = em.merge(oldIdProveedorOfInMovimientosListInMovimientos);
                 }
             }
             for (SeUsuarios seUsuariosListSeUsuarios : sePersonas.getSeUsuariosList()) {
@@ -142,8 +123,6 @@ public class SePersonasJpaController implements Serializable {
             SeTipoPersona idTipoPersonaNew = sePersonas.getIdTipoPersona();
             List<CoOrdenCompras> coOrdenComprasListOld = persistentSePersonas.getCoOrdenComprasList();
             List<CoOrdenCompras> coOrdenComprasListNew = sePersonas.getCoOrdenComprasList();
-            List<InMovimientos> inMovimientosListOld = persistentSePersonas.getInMovimientosList();
-            List<InMovimientos> inMovimientosListNew = sePersonas.getInMovimientosList();
             List<SeUsuarios> seUsuariosListOld = persistentSePersonas.getSeUsuariosList();
             List<SeUsuarios> seUsuariosListNew = sePersonas.getSeUsuariosList();
             List<VeFactura> veFacturaListOld = persistentSePersonas.getVeFacturaList();
@@ -159,13 +138,6 @@ public class SePersonasJpaController implements Serializable {
             }
             coOrdenComprasListNew = attachedCoOrdenComprasListNew;
             sePersonas.setCoOrdenComprasList(coOrdenComprasListNew);
-            List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
-                inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosListNew.add(inMovimientosListNewInMovimientosToAttach);
-            }
-            inMovimientosListNew = attachedInMovimientosListNew;
-            sePersonas.setInMovimientosList(inMovimientosListNew);
             List<SeUsuarios> attachedSeUsuariosListNew = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListNewSeUsuariosToAttach : seUsuariosListNew) {
                 seUsuariosListNewSeUsuariosToAttach = em.getReference(seUsuariosListNewSeUsuariosToAttach.getClass(), seUsuariosListNewSeUsuariosToAttach.getIdUsuario());
@@ -203,23 +175,6 @@ public class SePersonasJpaController implements Serializable {
                     if (oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras != null && !oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.equals(sePersonas)) {
                         oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListNewCoOrdenCompras);
                         oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras);
-                    }
-                }
-            }
-            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
-                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
-                    inMovimientosListOldInMovimientos.setIdProveedor(null);
-                    inMovimientosListOldInMovimientos = em.merge(inMovimientosListOldInMovimientos);
-                }
-            }
-            for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
-                if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
-                    SePersonas oldIdProveedorOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getIdProveedor();
-                    inMovimientosListNewInMovimientos.setIdProveedor(sePersonas);
-                    inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
-                    if (oldIdProveedorOfInMovimientosListNewInMovimientos != null && !oldIdProveedorOfInMovimientosListNewInMovimientos.equals(sePersonas)) {
-                        oldIdProveedorOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
-                        oldIdProveedorOfInMovimientosListNewInMovimientos = em.merge(oldIdProveedorOfInMovimientosListNewInMovimientos);
                     }
                 }
             }
@@ -295,11 +250,6 @@ public class SePersonasJpaController implements Serializable {
             for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coOrdenComprasList) {
                 coOrdenComprasListCoOrdenCompras.setIdProveedor(null);
                 coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
-            }
-            List<InMovimientos> inMovimientosList = sePersonas.getInMovimientosList();
-            for (InMovimientos inMovimientosListInMovimientos : inMovimientosList) {
-                inMovimientosListInMovimientos.setIdProveedor(null);
-                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
             }
             List<SeUsuarios> seUsuariosList = sePersonas.getSeUsuariosList();
             for (SeUsuarios seUsuariosListSeUsuarios : seUsuariosList) {

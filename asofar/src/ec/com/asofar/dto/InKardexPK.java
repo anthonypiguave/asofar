@@ -30,11 +30,8 @@ public class InKardexPK implements Serializable {
     @Column(name = "id_bodega")
     private long idBodega;
     @Basic(optional = false)
-    @Column(name = "id_prestaciones")
-    private long idPrestaciones;
-    @Basic(optional = false)
-    @Column(name = "id_tipo_movimiento")
-    private long idTipoMovimiento;
+    @Column(name = "id_producto")
+    private long idProducto;
     @Basic(optional = false)
     @Column(name = "id_tipo_documento")
     private long idTipoDocumento;
@@ -42,13 +39,12 @@ public class InKardexPK implements Serializable {
     public InKardexPK() {
     }
 
-    public InKardexPK(long idKardex, long idEmpresa, long idSucursal, long idBodega, long idPrestaciones, long idTipoMovimiento, long idTipoDocumento) {
+    public InKardexPK(long idKardex, long idEmpresa, long idSucursal, long idBodega, long idProducto, long idTipoDocumento) {
         this.idKardex = idKardex;
         this.idEmpresa = idEmpresa;
         this.idSucursal = idSucursal;
         this.idBodega = idBodega;
-        this.idPrestaciones = idPrestaciones;
-        this.idTipoMovimiento = idTipoMovimiento;
+        this.idProducto = idProducto;
         this.idTipoDocumento = idTipoDocumento;
     }
 
@@ -84,20 +80,12 @@ public class InKardexPK implements Serializable {
         this.idBodega = idBodega;
     }
 
-    public long getIdPrestaciones() {
-        return idPrestaciones;
+    public long getIdProducto() {
+        return idProducto;
     }
 
-    public void setIdPrestaciones(long idPrestaciones) {
-        this.idPrestaciones = idPrestaciones;
-    }
-
-    public long getIdTipoMovimiento() {
-        return idTipoMovimiento;
-    }
-
-    public void setIdTipoMovimiento(long idTipoMovimiento) {
-        this.idTipoMovimiento = idTipoMovimiento;
+    public void setIdProducto(long idProducto) {
+        this.idProducto = idProducto;
     }
 
     public long getIdTipoDocumento() {
@@ -115,8 +103,7 @@ public class InKardexPK implements Serializable {
         hash += (int) idEmpresa;
         hash += (int) idSucursal;
         hash += (int) idBodega;
-        hash += (int) idPrestaciones;
-        hash += (int) idTipoMovimiento;
+        hash += (int) idProducto;
         hash += (int) idTipoDocumento;
         return hash;
     }
@@ -140,10 +127,7 @@ public class InKardexPK implements Serializable {
         if (this.idBodega != other.idBodega) {
             return false;
         }
-        if (this.idPrestaciones != other.idPrestaciones) {
-            return false;
-        }
-        if (this.idTipoMovimiento != other.idTipoMovimiento) {
+        if (this.idProducto != other.idProducto) {
             return false;
         }
         if (this.idTipoDocumento != other.idTipoDocumento) {
@@ -154,7 +138,7 @@ public class InKardexPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InKardexPK[ idKardex=" + idKardex + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idBodega=" + idBodega + ", idPrestaciones=" + idPrestaciones + ", idTipoMovimiento=" + idTipoMovimiento + ", idTipoDocumento=" + idTipoDocumento + " ]";
+        return "ec.com.asofar.dto.InKardexPK[ idKardex=" + idKardex + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idBodega=" + idBodega + ", idProducto=" + idProducto + ", idTipoDocumento=" + idTipoDocumento + " ]";
     }
     
 }

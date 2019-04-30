@@ -15,11 +15,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrDetalleTarifario;
-import java.util.ArrayList;
-import java.util.List;
-import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrPrestacionesPK;
+import java.util.ArrayList;
+import java.util.List;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -46,9 +45,6 @@ public class PrPrestacionesJpaController implements Serializable {
         if (prPrestaciones.getPrDetalleTarifarioList() == null) {
             prPrestaciones.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
         }
-        if (prPrestaciones.getInKardexList() == null) {
-            prPrestaciones.setInKardexList(new ArrayList<InKardex>());
-        }
         if (prPrestaciones.getVeFacturaDetalleList() == null) {
             prPrestaciones.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
         }
@@ -68,12 +64,6 @@ public class PrPrestacionesJpaController implements Serializable {
                 attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
             }
             prPrestaciones.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
-            List<InKardex> attachedInKardexList = new ArrayList<InKardex>();
-            for (InKardex inKardexListInKardexToAttach : prPrestaciones.getInKardexList()) {
-                inKardexListInKardexToAttach = em.getReference(inKardexListInKardexToAttach.getClass(), inKardexListInKardexToAttach.getInKardexPK());
-                attachedInKardexList.add(inKardexListInKardexToAttach);
-            }
-            prPrestaciones.setInKardexList(attachedInKardexList);
             List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : prPrestaciones.getVeFacturaDetalleList()) {
                 veFacturaDetalleListVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -92,15 +82,6 @@ public class PrPrestacionesJpaController implements Serializable {
                 if (oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario != null) {
                     oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListPrDetalleTarifario);
                     oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario);
-                }
-            }
-            for (InKardex inKardexListInKardex : prPrestaciones.getInKardexList()) {
-                PrPrestaciones oldPrPrestacionesOfInKardexListInKardex = inKardexListInKardex.getPrPrestaciones();
-                inKardexListInKardex.setPrPrestaciones(prPrestaciones);
-                inKardexListInKardex = em.merge(inKardexListInKardex);
-                if (oldPrPrestacionesOfInKardexListInKardex != null) {
-                    oldPrPrestacionesOfInKardexListInKardex.getInKardexList().remove(inKardexListInKardex);
-                    oldPrPrestacionesOfInKardexListInKardex = em.merge(oldPrPrestacionesOfInKardexListInKardex);
                 }
             }
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : prPrestaciones.getVeFacturaDetalleList()) {
@@ -136,8 +117,6 @@ public class PrPrestacionesJpaController implements Serializable {
             SeEmpresa seEmpresaNew = prPrestaciones.getSeEmpresa();
             List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrPrestaciones.getPrDetalleTarifarioList();
             List<PrDetalleTarifario> prDetalleTarifarioListNew = prPrestaciones.getPrDetalleTarifarioList();
-            List<InKardex> inKardexListOld = persistentPrPrestaciones.getInKardexList();
-            List<InKardex> inKardexListNew = prPrestaciones.getInKardexList();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentPrPrestaciones.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = prPrestaciones.getVeFacturaDetalleList();
             List<String> illegalOrphanMessages = null;
@@ -147,14 +126,6 @@ public class PrPrestacionesJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its prPrestaciones field is not nullable.");
-                }
-            }
-            for (InKardex inKardexListOldInKardex : inKardexListOld) {
-                if (!inKardexListNew.contains(inKardexListOldInKardex)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain InKardex " + inKardexListOldInKardex + " since its prPrestaciones field is not nullable.");
                 }
             }
             for (VeFacturaDetalle veFacturaDetalleListOldVeFacturaDetalle : veFacturaDetalleListOld) {
@@ -179,13 +150,6 @@ public class PrPrestacionesJpaController implements Serializable {
             }
             prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
             prPrestaciones.setPrDetalleTarifarioList(prDetalleTarifarioListNew);
-            List<InKardex> attachedInKardexListNew = new ArrayList<InKardex>();
-            for (InKardex inKardexListNewInKardexToAttach : inKardexListNew) {
-                inKardexListNewInKardexToAttach = em.getReference(inKardexListNewInKardexToAttach.getClass(), inKardexListNewInKardexToAttach.getInKardexPK());
-                attachedInKardexListNew.add(inKardexListNewInKardexToAttach);
-            }
-            inKardexListNew = attachedInKardexListNew;
-            prPrestaciones.setInKardexList(inKardexListNew);
             List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
                 veFacturaDetalleListNewVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListNewVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListNewVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -210,17 +174,6 @@ public class PrPrestacionesJpaController implements Serializable {
                     if (oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario != null && !oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.equals(prPrestaciones)) {
                         oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListNewPrDetalleTarifario);
                         oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario);
-                    }
-                }
-            }
-            for (InKardex inKardexListNewInKardex : inKardexListNew) {
-                if (!inKardexListOld.contains(inKardexListNewInKardex)) {
-                    PrPrestaciones oldPrPrestacionesOfInKardexListNewInKardex = inKardexListNewInKardex.getPrPrestaciones();
-                    inKardexListNewInKardex.setPrPrestaciones(prPrestaciones);
-                    inKardexListNewInKardex = em.merge(inKardexListNewInKardex);
-                    if (oldPrPrestacionesOfInKardexListNewInKardex != null && !oldPrPrestacionesOfInKardexListNewInKardex.equals(prPrestaciones)) {
-                        oldPrPrestacionesOfInKardexListNewInKardex.getInKardexList().remove(inKardexListNewInKardex);
-                        oldPrPrestacionesOfInKardexListNewInKardex = em.merge(oldPrPrestacionesOfInKardexListNewInKardex);
                     }
                 }
             }
@@ -271,13 +224,6 @@ public class PrPrestacionesJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable prPrestaciones field.");
-            }
-            List<InKardex> inKardexListOrphanCheck = prPrestaciones.getInKardexList();
-            for (InKardex inKardexListOrphanCheckInKardex : inKardexListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the InKardex " + inKardexListOrphanCheckInKardex + " in its inKardexList field has a non-nullable prPrestaciones field.");
             }
             List<VeFacturaDetalle> veFacturaDetalleListOrphanCheck = prPrestaciones.getVeFacturaDetalleList();
             for (VeFacturaDetalle veFacturaDetalleListOrphanCheckVeFacturaDetalle : veFacturaDetalleListOrphanCheck) {
