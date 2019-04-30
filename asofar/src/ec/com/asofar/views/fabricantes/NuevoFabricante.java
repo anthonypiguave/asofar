@@ -131,6 +131,8 @@ public class NuevoFabricante extends javax.swing.JDialog {
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+        ConsultaFab a = new ConsultaFab(new javax.swing.JFrame(), true);
+        a.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     /**

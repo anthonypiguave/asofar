@@ -47,6 +47,11 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
         jLabel4.setText("NUEVA MEDIDA");
 
         jButton1.setText("Grabar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +122,10 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
         tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
         tm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
