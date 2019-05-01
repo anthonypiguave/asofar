@@ -30,7 +30,7 @@ public class SubGruposExt extends PrSubgruposJpaController {
                 + "FROM se_usuarios us , se_usuario_sucur_rol usr , se_opciones_roles orl, se_opciones_menu om "
                 + "WHERE usr.id_usuario="+user.getIdUsuario()+" and "
                 + "usr.id_roles= orl.id_rol and "
-                + "orl.id_opciones_menu = om.id_opciones_menu";
+                + "orl.id_opciones_menu = om.id_opciones_menu order by om.id_padre , om.orden";
         Query query = em.createNativeQuery(nativeQuery, SeOpcionesMenu.class);
 //        query.setParameter("iduser", user.getIdUsuario());
         
