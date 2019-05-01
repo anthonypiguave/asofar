@@ -123,6 +123,12 @@ public class ModificarGruposForm extends javax.swing.JDialog {
 
         jLabel3.setText("Nuevo Nombre:");
 
+        txtNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoKeyTyped(evt);
+            }
+        });
+
         txtNombreactual.setEditable(false);
 
         jLabel4.setText("Nombre Actual:");
@@ -280,6 +286,14 @@ public class ModificarGruposForm extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_brnEliminarActionPerformed
+
+    private void txtNuevoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNuevoKeyTyped
 
     /**
      * @param args the command line arguments

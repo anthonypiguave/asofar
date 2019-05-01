@@ -118,6 +118,12 @@ public class AgregarGruposForm extends javax.swing.JDialog {
 
         jLabel3.setText("Nombre:");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -207,8 +213,8 @@ public class AgregarGruposForm extends javax.swing.JDialog {
                     prj.create(pr);
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                     setVisible(false);
-                   
-                    ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);       
+
+                    ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
                     cg.dispose();
                     cg.setVisible(true);
 
@@ -220,6 +226,15 @@ public class AgregarGruposForm extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     /**
      * @param args the command line arguments
