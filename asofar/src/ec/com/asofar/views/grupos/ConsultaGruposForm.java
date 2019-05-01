@@ -268,10 +268,10 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
-        char c = evt.getKeyChar();
-        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+        char c = evt.getKeyChar(); 
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
-            evt.consume();
+            evt.consume(); 
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
 

@@ -289,7 +289,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
 
     private void txtNuevoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoKeyTyped
         char c = evt.getKeyChar();
-        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
