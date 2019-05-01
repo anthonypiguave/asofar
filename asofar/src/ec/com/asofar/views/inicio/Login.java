@@ -32,7 +32,6 @@ public class Login extends javax.swing.JDialog {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
-
     }
 
     /**
@@ -170,45 +169,14 @@ public class Login extends javax.swing.JDialog {
         } else {
             SeUsuarios u = new SeUsuarios();
             ul = uc.findSeUsuariosEntities();
-
             for (int i = 0; i < ul.size(); i++) {
-                System.out.println("ola");
                 if (ul.get(i).getNombreUsuario().equals(usuario)) {
-                    System.out.println("ola2");
                     if (ul.get(i).getPassword().equals(dc)) {
-                        System.out.println(ul.get(0).getIdUsuario().toString());
                         SelectEmpresaSucursal ses = new SelectEmpresaSucursal(new javax.swing.JFrame(), true, ul.get(i).getIdUsuario());
                         ses.setVisible(true);
                     }
                 }
             }
-//            obj.setCorreo(txtUsuario.getText());
-//            obj.setPassword(txtContrasenia.getText());
-//            System.out.println("contraseña "+txtContrasenia.getText());
-//            obj.setIp_equipo(Operaciones.getIpDispositivo());
-////            obj.setIp_publico(Operaciones.getIpPublica().getIp_publica_full());
-//            obj.setDir_ip_completa(Operaciones.getIpLocalCompleta());
-//            obj.setUsuario_equipo(Operaciones.getNombreDispositivo());
-//            try {
-//            String a =  cr.Iniciar_sesion(obj);
-//            //JOptionPane.showMessageDialog(this, a);
-//                objeto = devuelveObjeto(txtUsuario.getText(), listar);
-//                if (objeto != null) {
-//                    //System.out.println("holaaaaa");
-//                    FrmPrincipal acc = new FrmPrincipal(objeto,objeto.getCargo());
-//                    acc.setVisible(true);
-//                    dispose();
-//                    listar.clear();
-//                    listar = cr.get_listar_usuario();
-//                }else{
-//                    JOptionPane.showMessageDialog(this, "Usuario no existe!!!");
-//                    txtUsuario.setText("");
-//                    txtContrasenia.setText("");
-//                }
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(this, e);
-//            }
-//            
         }
     }
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed

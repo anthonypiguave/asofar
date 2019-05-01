@@ -10,7 +10,7 @@ import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.Supgrupos.EditarSubgrupos;
+import ec.com.asofar.views.supgrupos.EditarSubgrupos;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;

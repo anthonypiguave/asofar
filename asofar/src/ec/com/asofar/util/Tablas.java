@@ -14,10 +14,13 @@ import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -26,6 +29,21 @@ import javax.swing.table.DefaultTableModel;
 public class Tablas {
 
     static DefaultTableModel model;
+
+    public static void filtro(String valor, JTable Tabla) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        Tabla.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + valor));
+    }
+
+    public static DefaultTableModel VaciarTabla(JTable tabla) {
+        DefaultTableModel lab
+                = (DefaultTableModel) tabla.getModel();
+        while (lab.getRowCount() > 0) {
+            lab.removeRow(0);
+        }
+        return lab;
+    }
 
     public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
@@ -173,17 +191,7 @@ public class Tablas {
 
     }
 
-    public static DefaultTableModel VaciarTabla(JTable tabla) {
-        DefaultTableModel lab
-                = (DefaultTableModel) tabla.getModel();
-        while (lab.getRowCount() > 0) {
-            lab.removeRow(0);
-        }
-        return lab;
-
-    }
-
-    public static void TablaTipoMedida(List<PrTipoMedidas> listamedida, JTable tabla) {
+    public static void TablaTipoMedidaActivo(List<PrTipoMedidas> listamedida, JTable tabla) {
         int[] a = {5, 100, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
         DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
@@ -195,20 +203,50 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         tabla.setShowGrid(true);
         for (int i = 0; i < listamedida.size(); i++) {
-            filas[0] = String.valueOf(listamedida.get(i).getIdTipoMedidas());
-            filas[1] = listamedida.get(i).getNombreTipoMedida();
-            filas[2] = listamedida.get(i).getEstado();
-            model.addRow(filas);
-            tabla.setModel(model);
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
-            tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
-            tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+            if (listamedida.get(i).getEstado().equals("A")) {
+                filas[0] = String.valueOf(listamedida.get(i).getIdTipoMedidas());
+                filas[1] = listamedida.get(i).getNombreTipoMedida();
+                filas[2] = listamedida.get(i).getEstado();
+                model.addRow(filas);
+                tabla.setModel(model);
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
+                tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+            }
         }
     }
     
+    public static void TablaTipoMedidaInactivo(List<PrTipoMedidas> listamedida, JTable tabla) {
+        int[] a = {5, 100, 20};
+        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(tabla);
+        String[] b = {"ID", "MEDIDA", "ESTADO"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        tabla.setShowGrid(true);
+        for (int i = 0; i < listamedida.size(); i++) {
+            if (listamedida.get(i).getEstado().equals("I")) {
+                filas[0] = String.valueOf(listamedida.get(i).getIdTipoMedidas());
+                filas[1] = listamedida.get(i).getNombreTipoMedida();
+                filas[2] = listamedida.get(i).getEstado();
+                model.addRow(filas);
+                tabla.setModel(model);
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
+                tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+            }
+        }
+    }
+
     public static void listaArticulos(List<PrArticulo> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -304,8 +342,8 @@ public class Tablas {
             tabla.getColumnModel().getColumn(5).setCellRenderer(dtcr1);
         }
     }
-    
-     public static void TablaFabricante(List<PrFabricante> listafabri, JTable tabla) {
+
+    public static void TablaFabricante(List<PrFabricante> listafabri, JTable tabla) {
         int[] a = {5, 30, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
         DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
@@ -332,8 +370,8 @@ public class Tablas {
             }
         }
     }
-    
-     public static void TablaFabricanteInac(List<PrFabricante> listafabri, JTable tabla) {
+
+    public static void TablaFabricanteInac(List<PrFabricante> listafabri, JTable tabla) {
         int[] a = {5, 30, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
         DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();

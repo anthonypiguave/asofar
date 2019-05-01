@@ -13,7 +13,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
 import ec.com.asofar.util.Reflection;
-import ec.com.asofar.views.Supgrupos.ConsultaSubgrupos;
+import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
 import java.awt.BorderLayout;
 import java.awt.PopupMenu;
 import java.awt.Toolkit;
@@ -66,6 +66,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         su1 = su;
         lista = cSubgrupos.ObtenerMenu(us);
         cargarMenu(lista);
+        
 
     }
 
@@ -179,15 +180,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
                             //To change body of generated methods, choose Tools | Templates.
                         }
+                        
+
                     });
                                     }
                                 }
                             }
                             meMenuBase.getMenu(j).add(menu);
                         }
+
                     }
 
                 }
+
             } else {
 //                menu3[i]=lis.get(i).getNombre();
 
@@ -248,10 +253,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     
                 }
 
+
             }
 
         }
-//        
+
 
     }
 

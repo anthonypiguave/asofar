@@ -12,7 +12,7 @@ import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrArticuloPK;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Estado;
-import ec.com.asofar.views.Supgrupos.ConsultaSubgrupos;
+import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.JOptionPane;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.Supgrupos;
+package ec.com.asofar.views.supgrupos;
 
 import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
@@ -13,6 +13,8 @@ import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -42,9 +44,19 @@ SeEmpresa empresa = new SeEmpresa();
         initComponents();
         setLocationRelativeTo(null);
         pg = pgc.findPrGruposEntities();
-        se = secont.findSeEmpresaEntities();
+//        se = secont.findSeEmpresaEntities();
         llenarCombo(pg);
-        empresa = se.get(0);
+//        empresa = se.get(0);
+    }
+        public NuevoSubgrupo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        pg = pgc.findPrGruposEntities();
+//        se = secont.findSeEmpresaEntities();
+        llenarCombo(pg);
+        empresa=em;
+//        empresa = se.get(0);
     }
 
     /**

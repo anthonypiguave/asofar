@@ -37,49 +37,60 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     PrGruposJpaController cgrupo = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrSubgruposJpaController csub = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrArticuloJpaController carti = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+
     List<PrGrupos> listgrupo = cgrupo.findPrGruposEntities();
     List<PrSubgrupos> listsub = csub.findPrSubgruposEntities();
     List<PrArticulo> listart = carti.findPrArticuloEntities();
-    
+
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         CargarArbol();
     }
-    
+
     public void CargarArbol() {
         try {
             DefaultMutableTreeNode grupo = new DefaultMutableTreeNode();
-            
+
             for (PrGrupos g : listgrupo) {
                 DefaultMutableTreeNode hgru = new DefaultMutableTreeNode();
-                hgru.setUserObject(g.getNombre());
-                grupo.add(hgru);
-                
-                for (PrSubgrupos sg : listsub) {                    
-                    DefaultMutableTreeNode hsub = new DefaultMutableTreeNode();
-                    if (sg.getPrSubgruposPK().getIdGrupo() == g.getIdGrupo()) {
-                        hsub.setUserObject(sg.getNombre());
-                        hgru.add(hsub);
-                        
-                    }
-                    for (PrArticulo a : listart) {
-                        DefaultMutableTreeNode hart = new DefaultMutableTreeNode();
-                        if (a.getPrArticuloPK().getIdSubgrupo() == sg.getPrSubgruposPK().getIdSubgrupo()) {
-                            hart.setUserObject(a.getNombreArticulo());
-                            hsub.add(hart);
+
+                //  hgru.setUserObject(g.getNombre());
+                if (g.getEstado().equals("A")) {
+                    hgru.setUserObject(g.getNombre());
+                    grupo.add(hgru);
+
+                    for (PrSubgrupos sg : listsub) {
+                        DefaultMutableTreeNode hsub = new DefaultMutableTreeNode();
+
+                        if (sg.getPrSubgruposPK().getIdGrupo() == g.getIdGrupo()) {
+
+                            if (sg.getEstado().equals("A")) {
+                                hsub.setUserObject(sg.getNombre());
+                                hgru.add(hsub);
+
+                            }
+                            for (PrArticulo a : listart) {
+                                DefaultMutableTreeNode hart = new DefaultMutableTreeNode();
+                                if (a.getPrArticuloPK().getIdSubgrupo() == sg.getPrSubgruposPK().getIdSubgrupo()) {
+                                    if (a.getEstado().equals("A")) {
+                                        hart.setUserObject(a.getNombreArticulo());
+                                        hsub.add(hart);
+                                    }
+
+                                }
+                            }
                         }
+
                     }
-                    
                 }
-            }            
-            
+            }
+
             DefaultTreeModel model = new DefaultTreeModel(grupo);
             this.arbol.setModel(model);
         } catch (Exception e) {
-            
+
             System.out.println("Error" + e.getMessage());
         }
     }
@@ -148,6 +159,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         jScrollPane3.setViewportView(tabla_med);
 
         BotonNuevaMedida.setText("NUEVA MEDIDA");
+        BotonNuevaMedida.setEnabled(false);
         BotonNuevaMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonNuevaMedidaActionPerformed(evt);
@@ -199,6 +211,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         BotonNuevoProducto.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
         BotonNuevoProducto.setForeground(new java.awt.Color(101, 171, 99));
         BotonNuevoProducto.setText("NUEVO PRODUCTO");
+        BotonNuevoProducto.setEnabled(false);
         BotonNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonNuevoProductoActionPerformed(evt);
@@ -329,10 +342,20 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             TreePath objeto = arbol.getSelectionPath();
-            
-            System.out.println(objeto.getPathComponent(3));
-            PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
-            Tablas.TablaMedida(arti.getPrMedidasList(), tabla_med);
+            if (evt.getPath().getPathCount() == 4) {
+                System.out.println(objeto.getPathComponent(3));
+                PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
+
+                BotonNuevaMedida.setEnabled(true);
+                Tablas.TablaMedida(arti.getPrMedidasList(), tabla_med);
+                System.out.println("eeeee");
+            } else {
+                System.out.println("nooooo");
+                BotonNuevaMedida.setEnabled(false);
+                
+                
+            }
+
         } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
         }
@@ -350,14 +373,14 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
     private void tabla_medMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_medMousePressed
         // TODO add your handling code here:
-      
+
         TreePath objeto = arbol.getSelectionPath();
         if (evt.getClickCount() == 1) {
-            
-            PrArticulo arti=ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
-            PrTipoMedidas  medi=ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
-            PrTipoPresentacion  pre=ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
-            
+
+            PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
+            PrTipoMedidas medi = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
+            PrTipoPresentacion pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
+            //  BotonNuevaMedida.setEnabled(false);
 //            PrMedidas obj2=ObtenerDTO.ObtenerPrMedidas(arti,medi,p);
 //            Tablas.TablaProducto(obj2.getPrProductosList(), tabla_prod);
         }

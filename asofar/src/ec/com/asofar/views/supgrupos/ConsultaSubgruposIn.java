@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.Supgrupos;
+package ec.com.asofar.views.supgrupos;
 
 import com.sun.javafx.sg.prism.NGArc;
 import ec.com.asofar.dao.PrSubgruposJpaController;
