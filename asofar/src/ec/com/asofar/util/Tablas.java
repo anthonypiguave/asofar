@@ -29,6 +29,7 @@ import javax.swing.table.TableRowSorter;
 public class Tablas {
 
     static DefaultTableModel model;
+    private boolean[] editable = {false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -37,12 +38,12 @@ public class Tablas {
     }
 
     public static DefaultTableModel VaciarTabla(JTable tabla) {
-        DefaultTableModel lab
+        DefaultTableModel tab
                 = (DefaultTableModel) tabla.getModel();
-        while (lab.getRowCount() > 0) {
-            lab.removeRow(0);
+        while (tab.getRowCount() > 0) {
+            tab.removeRow(0);
         }
-        return lab;
+        return tab;
     }
 
     public static void listarGrupos(List<PrGrupos> lista, JTable Tabla) {
@@ -218,7 +219,7 @@ public class Tablas {
             }
         }
     }
-    
+
     public static void TablaTipoMedidaInactivo(List<PrTipoMedidas> listamedida, JTable tabla) {
         int[] a = {5, 100, 20};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
@@ -289,14 +290,23 @@ public class Tablas {
         dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
         dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(tabla);
+
         String[] b = {"TIPO MEDIDA", "TIPO PRESENTACION", "ESTADO"};
-        String[] filas = new String[3];
+
+        String[] filas = new String[2];
+        Boolean[] fila3 = new Boolean[1];
+
         model = new DefaultTableModel(null, b);
         tabla.setShowGrid(true);
         for (int i = 0; i < listamedida.size(); i++) {
             filas[0] = listamedida.get(i).getPrTipoMedidas().getNombreTipoMedida();
             filas[1] = listamedida.get(i).getPrTipoPresentacion().getNombre();
-            filas[2] = listamedida.get(i).getEstado();
+            if (listamedida.get(i).getEstado().equals("A")) {
+                fila3[0] = true;
+            } else {
+                fila3[0] = false;
+            }
+
             model.addRow(filas);
             tabla.setModel(model);
             tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -306,6 +316,41 @@ public class Tablas {
             tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
             tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
         }
+    }
+
+    public  void TablaMedida2(List<PrMedidas> listamedida, JTable tabla) {
+
+        tabla.setDefaultRenderer(Object.class, new Render());
+        model = new DefaultTableModel(new String[]{"TIPO MEDIDA", "TIPO PRESENTACION", "ESTADO"}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return editable[column];
+            }
+        };
+        if (listamedida.size() > 0) {
+
+            for (int i = 0; i < listamedida.size(); i++) {
+                Object filas[] = new Object[3];
+                filas[0] = listamedida.get(i).getPrTipoMedidas().getNombreTipoMedida();
+                filas[1] = listamedida.get(i).getPrTipoPresentacion().getNombre();
+                if (listamedida.get(i).getEstado().equals("A")) {
+                    filas[2] = true;
+                } else {
+                    filas[2] = false;
+                }
+                model.addRow(filas);
+            }
+        }
+        tabla.setModel(model);
+
     }
 
     public static void TablaProducto(List<PrProductos> listaprod, JTable tabla) {

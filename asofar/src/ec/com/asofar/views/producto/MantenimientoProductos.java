@@ -7,12 +7,14 @@ package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.dao.PrGruposJpaController;
+import ec.com.asofar.dao.PrMedidasJpaController;
+import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
-import ec.com.asofar.dto.PrMedidasPK;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrTipoPresentacion;
@@ -21,7 +23,6 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.articulo.EditarArticulo;
 import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -40,10 +41,15 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     PrGruposJpaController cgrupo = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrSubgruposJpaController csub = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrArticuloJpaController carti = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrMedidasJpaController cmed = new PrMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductosJpaController cprod = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     List<PrGrupos> listgrupo = cgrupo.findPrGruposEntities();
     List<PrSubgrupos> listsub = csub.findPrSubgruposEntities();
     List<PrArticulo> listart = carti.findPrArticuloEntities();
+    List<PrMedidas> listmed = cmed.findPrMedidasEntities();
+    List<PrProductos> listprod = cprod.findPrProductosEntities();
+    Tablas tt = new Tablas();
 
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -56,6 +62,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         CargarArbol();
+
     }
 
     public void CargarArbol() {
@@ -100,7 +107,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             this.arbol.setModel(model);
         } catch (Exception e) {
 
-            System.out.println("Error" + e.getMessage());
+            System.out.println("Error al cargar arbol " + e.getMessage());
         }
     }
 
@@ -150,15 +157,20 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         tabla_med.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Seleccione un articulo para cargar los datos..."
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabla_med.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tabla_med.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -205,10 +217,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         tabla_prod.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Seleccione una medida para cargar los productos..."
@@ -355,17 +364,17 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                 PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
 
                 BotonNuevaMedida.setEnabled(true);
-                Tablas.TablaMedida(arti.getPrMedidasList(), tabla_med);
+                tt.TablaMedida2(arti.getPrMedidasList(), tabla_med);
+                //   Tablas.TablaMedida2(arti.getPrMedidasList(), tabla_med);
                 System.out.println("eeeee");
             } else {
                 System.out.println("nooooo");
                 BotonNuevaMedida.setEnabled(false);
-                
-                
+
             }
 
         } catch (Exception e) {
-            System.out.println("Error" + e.getMessage());
+            System.out.println("Error.." + e.getMessage() + e);
         }
     }//GEN-LAST:event_arbolValueChanged
 
@@ -381,14 +390,33 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
     private void tabla_medMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_medMousePressed
         // TODO add your handling code here:
+        int fila, colu = 0;
 
+//        fila = tabla_med.getSelectedRow();
+//        colu= tabla_med.getSelectedColumn();
         TreePath objeto = arbol.getSelectionPath();
+        //   System.out.println("asdff" + tabla_med.getValueAt(fila, colu));
+
+        //   tabla_med.getCellSelectionEnabled();
+        // if (objeto.getPathCount() == 4) {
         if (evt.getClickCount() == 1) {
 
-            PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
-            PrTipoMedidas medi = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
-            PrTipoPresentacion pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
-            //  BotonNuevaMedida.setEnabled(false);
+            fila = tabla_med.getSelectedRow();
+            colu = tabla_med.getSelectedColumn();
+            System.out.println("asdff" + tabla_med.getValueAt(fila, colu));
+
+            for (int i = 0; i < listmed.size(); i++) {
+                if (tabla_med.getValueAt(fila, 0).equals(listmed.get(i).getPrMedidasPK())) {
+                    PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(listmed.get(i).getPrMedidasPK());
+                    Tablas.TablaProducto(obj.getPrProductosList(), tabla_prod);
+                }
+
+            }
+            //      }
+
+//            PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
+//            PrTipoMedidas medi = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
+//            PrTipoPresentacion pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
 //            PrMedidas obj2=ObtenerDTO.ObtenerPrMedidas(arti,medi,p);
 //            Tablas.TablaProducto(obj2.getPrProductosList(), tabla_prod);
         }

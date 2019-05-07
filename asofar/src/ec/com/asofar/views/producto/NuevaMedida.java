@@ -39,15 +39,16 @@ public class NuevaMedida extends javax.swing.JDialog {
     public NuevaMedida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(this);
         CargarTipoMedida();
         CargarTipoPresentacion();
     }
 
     public NuevaMedida(java.awt.Frame parent, boolean modal, PrArticulo arti) {
         super(parent, modal);
-        arti2 = arti;
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(this);
+        arti2 = arti;
         grup.setText(arti.getPrSubgrupos().getPrGrupos().getNombre());
         sub.setText(arti.getPrSubgrupos().getNombre());
         art.setText(arti.getNombreArticulo());
@@ -200,42 +201,44 @@ public class NuevaMedida extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             PrMedidas med = new PrMedidas();
-            
+
             med.setPrArticulo(arti2);
             med.setPrTipoMedidas(ObtenerDTO.ObtenerPrTipoMedidas(tipo_med.getSelectedItem().toString()));
             med.setPrTipoPresentacion(ObtenerDTO.ObtenerPrTipoPresentacion(tipo_pres.getSelectedItem().toString()));
             med.setEstado("A");
             med.setUsuarioCreacion(BigInteger.valueOf(1));
             med.setFechaCreacion(Fecha.FechaSql());
-            
+
             controlm.create(med);
             JOptionPane.showMessageDialog(null, "Medida guardada con exito! ");
             setVisible(false);
             MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
             mp.setVisible(true);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo guardar "  + e.getMessage());
             System.out.println("Error al guardar" + e.getMessage());
         }
-        
+
     }//GEN-LAST:event_BotonAceptarActionPerformed
-    
+
     public void CargarTipoMedida() {
-        
+
         for (int i = 0; i < listtipom.size(); i++) {
-            
-            tipo_med.addItem(listtipom.get(i).getNombreTipoMedida());
+            if (listtipom.get(i).getEstado().equals("A")) {
+                tipo_med.addItem(listtipom.get(i).getNombreTipoMedida());
+            }
         }
-        
     }
 
     public void CargarTipoPresentacion() {
-        
+
         for (int i = 0; i < listtipop.size(); i++) {
-            
-            tipo_pres.addItem(listtipop.get(i).getNombre());
-            
+            if (listtipop.get(i).getEstado().equals("A")) {
+                tipo_pres.addItem(listtipop.get(i).getNombre());
+            }
+
         }
-        
+
     }
 
     /**
