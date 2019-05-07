@@ -16,6 +16,9 @@ import ec.com.asofar.dto.PrMedidasPK;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrTipoPresentacion;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.articulo.EditarArticulo;
@@ -43,6 +46,12 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     List<PrArticulo> listart = carti.findPrArticuloEntities();
 
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        CargarArbol();
+    }
+     public MantenimientoProductos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -324,8 +333,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         setVisible(false);
-        PantallaPrincipal pp = new PantallaPrincipal();
-        pp.setVisible(true);
+       
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed

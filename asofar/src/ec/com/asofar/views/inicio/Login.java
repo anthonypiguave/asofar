@@ -180,8 +180,9 @@ public class Login extends javax.swing.JDialog {
         }
     }
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        setVisible(false);
+        
         iniciarSesion();
+        setVisible(false);
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed

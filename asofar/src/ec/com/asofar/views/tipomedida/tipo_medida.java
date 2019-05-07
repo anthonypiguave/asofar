@@ -7,6 +7,9 @@ package ec.com.asofar.views.tipomedida;
 
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dto.PrTipoMedidas;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
@@ -27,6 +30,13 @@ public class tipo_medida extends javax.swing.JDialog {
      * Creates new form tipo_medida
      */
     public tipo_medida(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        MostrarMedidaActiva();
+    }
+     public tipo_medida(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -240,7 +250,7 @@ public class tipo_medida extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void busqueda_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busqueda_tfKeyTyped

@@ -7,6 +7,9 @@ package ec.com.asofar.views.tipopresentacion;
 
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
 import ec.com.asofar.dto.PrTipoPresentacion;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
 import java.sql.Date;
@@ -31,6 +34,12 @@ public class Tipo_presentacion extends javax.swing.JDialog {
      * Creates new form NewJDialog
      */
     public Tipo_presentacion(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        CrearModelo();
+        CargarInformacion();
+    }
+    public Tipo_presentacion(java.awt.Frame parent, boolean modal,SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         CrearModelo();
@@ -187,7 +196,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        System.exit(0);
+        setVisible(false);
 
     }//GEN-LAST:event_btnsalirActionPerformed
 

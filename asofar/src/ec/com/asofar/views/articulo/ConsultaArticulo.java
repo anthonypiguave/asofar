@@ -8,6 +8,9 @@ package ec.com.asofar.views.articulo;
 import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.dto.PrArticulo;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.supgrupos.EditarSubgrupos;
@@ -29,6 +32,13 @@ public class ConsultaArticulo extends javax.swing.JDialog {
      * Creates new form ConsultaArticulo
      */
     public ConsultaArticulo(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        Tablas.listaArticulos(listap, tabla);
+        
+    }
+    public ConsultaArticulo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
