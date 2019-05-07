@@ -27,6 +27,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     PrGrupos pg;
     PrGruposJpaController pGrupos = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     int y, x;
+    String valor = "";
 
     public ConsultaGruposForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -95,10 +96,13 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("BUSCAR:");
 
-        txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtfiltro.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
             }
         });
 
@@ -268,12 +272,18 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
-        char c = evt.getKeyChar(); 
+        char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
             getToolkit().beep();
-            evt.consume(); 
+            evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
+
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+
+        valor = txtfiltro.getText();
+        Tablas.filtro(valor, tbGrupos);
+    }//GEN-LAST:event_txtfiltroKeyReleased
 
     /**
      * @param args the command line arguments
