@@ -1,47 +1,31 @@
 
 package ec.com.asofar.views.usuario;
 
-import com.farmacia.conponentes.Filtros_modulo_seguridad;
-import com.farmacia.conponentes.Tablas;
-import com.farmacia.dao.CRUD;
-import com.farmacia.entities1.ClaseReporte;
-import com.farmacia.entities1.Listar_usuario;
+
+import ec.com.asofar.daoext.SePersonasJpaControllerExt;
+import ec.com.asofar.dto.SePersonas;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JRViewer;
 
-
-/**
- *
- * @author carlos
- */
 public class Mostrar_usuario extends javax.swing.JDialog {
-    int x,y;
-    CRUD crud = new CRUD();
-    ArrayList<Listar_usuario> listar = null;
-    ArrayList<Listar_usuario> listar2 = null;
-    Listar_usuario objeto = null;
-    Filtros_modulo_seguridad fil = new Filtros_modulo_seguridad();
-    int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-    int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+ SePersonasJpaControllerExt pc = new SePersonasJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
+ List<SePersonas> lista_persona;
     public Mostrar_usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        listar = crud.get_listar_usuario();
-        Tablas.cargarJoinUsuario(jtUsuario, listar);
+        lista_persona = pc.findSePersonasEntities();
+        Tablas.listarPersonas(lista_persona, jtPersonas);
+       
     }
 
     
@@ -52,13 +36,10 @@ public class Mostrar_usuario extends javax.swing.JDialog {
 
         jPanel3 = new javax.swing.JPanel();
         btnReporte = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
-        btnListar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtUsuario = new javax.swing.JTable();
-        cbFiltro = new javax.swing.JComboBox<>();
+        jtPersonas = new javax.swing.JTable();
         txtFiltro = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -77,26 +58,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
             }
         });
 
-        btnBuscar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/buscar1.jpg"))); // NOI18N
-        btnBuscar.setText("BUSCAR");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
-        btnListar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/base-de-datos.png"))); // NOI18N
-        btnListar.setText("LISTAR");
-        btnListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarActionPerformed(evt);
-            }
-        });
-
         btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/eliminar1.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +68,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(1, 1, 1), 2));
 
-        jtUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        jtPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -117,15 +79,15 @@ public class Mostrar_usuario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtUsuarioMouseClicked(evt);
+                jtPersonasMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtUsuarioMousePressed(evt);
+                jtPersonasMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jtUsuario);
+        jScrollPane1.setViewportView(jtPersonas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,9 +100,6 @@ public class Mostrar_usuario extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
 
-        cbFiltro.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "CODIGO", "CEDULA", "APELLIDO", "FECHA", "ACTIVO", "INACTIVO" }));
-
         txtFiltro.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         txtFiltro.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -149,7 +108,6 @@ public class Mostrar_usuario extends javax.swing.JDialog {
         });
 
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icono/agregarCliente.png"))); // NOI18N
         jButton2.setText("NUEVO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +119,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("USUARIOS");
+        jLabel1.setText("PERSONAS");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -184,14 +142,8 @@ public class Mostrar_usuario extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(132, 132, 132)
-                        .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)))
+                        .addGap(387, 387, 387)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,11 +159,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -236,16 +184,16 @@ public class Mostrar_usuario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public Listar_usuario devuelveObjeto(String datos, ArrayList<Listar_usuario> listarobj) {
-        Listar_usuario objeto1 = null;
-        for (int i = 0; i < listarobj.size(); i++) {
-            if (datos.equals(listarobj.get(i).getId_sesion().toString())) {
-                objeto1 = listarobj.get(i);
-                break;
-            }
-        }
-        return objeto1;
-    }
+//    public Listar_usuario devuelveObjeto(String datos, ArrayList<Listar_usuario> listarobj) {
+//        Listar_usuario objeto1 = null;
+//        for (int i = 0; i < listarobj.size(); i++) {
+//            if (datos.equals(listarobj.get(i).getId_sesion().toString())) {
+//                objeto1 = listarobj.get(i);
+//                break;
+//            }
+//        }
+//        return objeto1;
+//    }
     
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         //System.exit(0);
@@ -260,103 +208,26 @@ public class Mostrar_usuario extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    public void filtroUsuario(){
-        String f = txtFiltro.getText().toUpperCase();
-        int pos = cbFiltro.getSelectedIndex();
-        Listar_usuario lu = new Listar_usuario();
-        
-        
-            if (f=="" && pos == 0) {
-            listar = crud.get_listar_usuario();
-            Tablas.cargarJoinUsuario(jtUsuario, listar);
-            //JOptionPane.showMessageDialog(this, "por favor seleccione un filtro");
-        }
-        if (pos == 1) {
-            lu.setId_sesion(Long.valueOf(f));
-            listar2 = crud.filtroCodigoUs(lu);
-            Tablas.cargarJoinUsuario(jtUsuario, listar2);
-            if (jtUsuario.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "el usuario no existe");
-            }
-        }
-        if (pos == 2) {
-            lu.setCedula(f);
-            listar2 = crud.filtroCedulaUs(lu);
-            Tablas.cargarJoinUsuario(jtUsuario, listar2);
-            if (jtUsuario.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "el usuario no existe");
-            }
-        }
-        if (pos == 3) {
-            lu.setApellidos(f);
-            listar2 = crud.filtroApellidoUs(lu);
-            Tablas.cargarJoinUsuario(jtUsuario, listar2);
-            if (jtUsuario.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "el usuario no existe");
-            }
-        }
-        if (pos == 4) {
-            lu.setFecha_registro(f);
-            listar2 = crud.filtroFechaUs(lu);
-            Tablas.cargarJoinUsuario(jtUsuario, listar2);
-            if (jtUsuario.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "Asegurese de escribir correctamente "
-                        + "el formato de fecha: AAAA-MM-DD o el usuario no existe");
-            }
-        }
-        if (pos == 5) {
-            lu.setId_estado(Long.valueOf("1"));
-            listar2 = crud.filtroEstadoUs(lu);
-            Tablas.cargarJoinUsuario(jtUsuario, listar2);
-            if (jtUsuario.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "No hay usuarios activos");
-                txtFiltro.setText("");
-            }
-        }
-        if (pos == 6) {
-            lu.setId_estado(Long.valueOf("2"));
-            listar2 = crud.filtroEstadoUs(lu);
-            Tablas.cargarJoinUsuario(jtUsuario, listar2);
-            if (jtUsuario.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "No hay usuarios inactivos");
-                txtFiltro.setText("");
-            }
-        }
-    }
-    
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-    filtroUsuario();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        String query = "";
-        query = fil.comboTodoUsuario();
-        listar = crud.filtroBusquedaUsuario(query);
-        Tablas.cargarJoinUsuario(jtUsuario, listar);
-        query = "";
-        txtFiltro.setText("");
-    }//GEN-LAST:event_btnListarActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Registrar_usuario ru = new Registrar_usuario(new javax.swing.JFrame(), true);
         ru.setVisible(true);
 //        ipv.clear();
         listar = crud.get_listar_usuario();
-        Tablas.cargarJoinUsuario(jtUsuario, listar);
+        Tablas.cargarJoinUsuario(jtPersonas, listar);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         ArrayList tablac = new ArrayList();
-        for(int i=0;i<jtUsuario.getRowCount();i++){
-            ClaseReporte tabla1 = new ClaseReporte(jtUsuario.getValueAt(i,0).toString(),
-                    jtUsuario.getValueAt(i,1).toString(),
-                    jtUsuario.getValueAt(i,2).toString(),
-                    jtUsuario.getValueAt(i,3).toString(),
-                    jtUsuario.getValueAt(i,4).toString(),
-                    String.valueOf(jtUsuario.getValueAt(i,5)),
-                    jtUsuario.getValueAt(i,6).toString(),
-                    String.valueOf(jtUsuario.getValueAt(i,7)),
-                    jtUsuario.getValueAt(i,8).toString());                   
+        for(int i=0;i<jtPersonas.getRowCount();i++){
+            ClaseReporte tabla1 = new ClaseReporte(jtPersonas.getValueAt(i,0).toString(),
+                    jtPersonas.getValueAt(i,1).toString(),
+                    jtPersonas.getValueAt(i,2).toString(),
+                    jtPersonas.getValueAt(i,3).toString(),
+                    jtPersonas.getValueAt(i,4).toString(),
+                    String.valueOf(jtPersonas.getValueAt(i,5)),
+                    jtPersonas.getValueAt(i,6).toString(),
+                    String.valueOf(jtPersonas.getValueAt(i,7)),
+                    jtPersonas.getValueAt(i,8).toString());                   
             tablac.add(tabla1);}
         try{
             String dir = System.getProperty("user.dir")+"/Reportes/"+"Mostrar_usuario.jasper";
@@ -374,30 +245,30 @@ public class Mostrar_usuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnReporteActionPerformed
 
-    private void jtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsuarioMouseClicked
+    private void jtPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtUsuarioMouseClicked
+    }//GEN-LAST:event_jtPersonasMouseClicked
 
-    private void jtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsuarioMousePressed
+    private void jtPersonasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMousePressed
         int i = 0;
         try {
             if (evt.getClickCount() == 2) {
-                i = jtUsuario.getSelectedRow();
-                objeto = devuelveObjeto(jtUsuario.getValueAt(i, 0).toString(), listar);
+                i = jtPersonas.getSelectedRow();
+                objeto = devuelveObjeto(jtPersonas.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
                     actualizar_usuario acc = new actualizar_usuario(new javax.swing.JFrame(), true, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     listar = crud.get_listar_usuario();
-                    Tablas.cargarJoinUsuario(jtUsuario, listar);
+                    Tablas.cargarJoinUsuario(jtPersonas, listar);
                 }
 
             }
         } catch (Exception e) {
             Logger.getLogger(Mostrar_usuario.class.getName()).log(Level.SEVERE, null, e);
         }
-    }//GEN-LAST:event_jtUsuarioMousePressed
+    }//GEN-LAST:event_jtPersonasMousePressed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
@@ -456,17 +327,14 @@ public class Mostrar_usuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnListar;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtUsuario;
+    private javax.swing.JTable jtPersonas;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
