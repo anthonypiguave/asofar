@@ -218,9 +218,13 @@ public void MostrarTipoBodega() {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setVisible(false);
-        tipo_bodega_editar tbe = new tipo_bodega_editar(new javax.swing.JFrame(), true);
-        tbe.setVisible(true);
+//        String id = (String) tbl_bodega.getValueAt(tbl_bodega.getSelectedRow(), 0);
+//        setVisible(false);
+//        medidas = devuelveObjeto(Long.parseLong(id));
+//        if (medidas != null) {
+//            tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
+//            tme.setVisible(true);
+//        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void estado_cbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_estado_cbItemStateChanged

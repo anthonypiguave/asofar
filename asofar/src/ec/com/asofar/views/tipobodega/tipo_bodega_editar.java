@@ -23,22 +23,18 @@ import java.util.logging.Logger;
  */
 public class tipo_bodega_editar extends javax.swing.JDialog {
 
-    List<SeEmpresa> listaempresa = null;
-    SeEmpresa empresa = new SeEmpresa();
-    SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-    /**
-     * Creates new form tipo_bodega_editar
-     */
-    List<PrTipoMedidas> listamedida;
-    InTipoBodega tipobodega = new InTipoBodega();
-    InTipoBodegaJpaController tbc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoBodega bodega;
 
     public tipo_bodega_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        cbx_estado.addItem("A");
-        cbx_estado.addItem("I");
+
+    }
+
+    public tipo_bodega_editar(java.awt.Frame parent, boolean modal, InTipoBodega staticmedidas) {
+        super(parent, modal);
+        initComponents();
+
     }
 
     /**
@@ -149,26 +145,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        listaempresa = sjc.findSeEmpresaEntities();
-        empresa = listaempresa.get(0);
 
-//        tipobodega.setIdEmpresa(empresa);
-        tipobodega.setNombre(txtnom_bodega.getText());
-        tipobodega.setEstado(cbx_estado.getSelectedItem().toString());
-        tipobodega.setIdUsuarioCreacion(null);
-        tipobodega.setFechaCreacion(null);
-        tipobodega.setIdUsuarioActualizacion(null);
-        tipobodega.setFechaActualizacion(null);
-        try {
-            tbc.edit(tipobodega);
-
-            setVisible(false);
-            tipo_bodega tm = new tipo_bodega(new javax.swing.JFrame(), true);
-            tm.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
