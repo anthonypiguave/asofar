@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.tipomedida;
+package ec.com.asofar.views.tipobodega;
 
-import ec.com.asofar.dao.PrTipoMedidasJpaController;
+import ec.com.asofar.dao.InTipoBodegaJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
-import ec.com.asofar.dto.PrTipoMedidas;
+import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.views.tipomedida.tipo_medida_agregar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,33 +19,23 @@ import java.util.logging.Logger;
  *
  * @author admin1
  */
-public class tipo_medida_editar extends javax.swing.JDialog {
+public class tipo_bodega_agregar extends javax.swing.JDialog {
 
-    static PrTipoMedidas staticmedidas;
-    PrTipoMedidas medidas;
-    List<PrTipoMedidas> listamedida;
-    PrTipoMedidasJpaController pjc = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-    //experimental
+    InTipoBodega tipobodega = new InTipoBodega();
+    InTipoBodegaJpaController tbc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+////////////
     List<SeEmpresa> listaempresa = null;
     SeEmpresa empresa = new SeEmpresa();
     SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
-     * Creates new form tipo_medida_agregar
+     * Creates new form tipo_bodega_agregar
      */
-    public tipo_medida_editar(java.awt.Frame parent, boolean modal) {
+    public tipo_bodega_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
-    }
-
-    public tipo_medida_editar(java.awt.Frame parent, boolean modal, PrTipoMedidas staticmedidas) {
-        super(parent, modal);
-        initComponents();
-        medidas = staticmedidas;
-        nombre_tf.setText(medidas.getNombreTipoMedida());
-        estado_cb.addItem("A");
-        estado_cb.addItem("I");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -58,21 +49,30 @@ public class tipo_medida_editar extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        nombre_tf = new javax.swing.JTextField();
+        txtnom_bodega = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        estado_cb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         jLabel2.setText("Nombre:");
 
-        jLabel3.setText("Estado:");
-
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("EDITAR MEDIDA");
+        jLabel4.setText("NUEVA  BODEGA");
+
+        txtnom_bodega.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtnom_bodegaFocusLost(evt);
+            }
+        });
+        txtnom_bodega.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnom_bodegaKeyTyped(evt);
+            }
+        });
 
         jButton1.setText("Grabar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -97,18 +97,14 @@ public class tipo_medida_editar extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nombre_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estado_cb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtnom_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -120,11 +116,7 @@ public class tipo_medida_editar extends javax.swing.JDialog {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nombre_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(estado_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnom_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -140,40 +132,44 @@ public class tipo_medida_editar extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
-        tm.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void txtnom_bodegaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnom_bodegaFocusLost
+ 
+        txtnom_bodega.setText(txtnom_bodega.getText().toUpperCase());
+    }//GEN-LAST:event_txtnom_bodegaFocusLost
+
+    private void txtnom_bodegaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnom_bodegaKeyTyped
+
+    }//GEN-LAST:event_txtnom_bodegaKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         listaempresa = sjc.findSeEmpresaEntities();
         empresa = listaempresa.get(0);
-        
-        medidas.setIdEmpresa(empresa);
-        medidas.setNombreTipoMedida(nombre_tf.getText());
-        medidas.setEstado(estado_cb.getSelectedItem().toString());
-        medidas.setUsuarioCreacion(null);
-        medidas.setFechaCreacion(null);
-        medidas.setUsuarioActualizacion(null);
-        medidas.setFechaActualizacion(null);
+//        tipobodega.setIdEmpresa(empresa);
+        tipobodega.setNombre(txtnom_bodega.getText());
+        tipobodega.setEstado("A");
+        tipobodega.setIdUsuarioCreacion(null);
+        tipobodega.setFechaCreacion(null);
+        tipobodega.setIdUsuarioActualizacion(null);
+        tipobodega.setFechaActualizacion(null);
         try {
-            pjc.edit(medidas);
+            tbc.create(tipobodega);
             setVisible(false);
-            tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
-            tm.setVisible(true);
+            tipo_bodega tb = new tipo_bodega(new javax.swing.JFrame(), true);
+            tb.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,26 +182,26 @@ public class tipo_medida_editar extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_bodega_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_bodega_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_bodega_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_bodega_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                tipo_medida_editar dialog = new tipo_medida_editar(new javax.swing.JFrame(), true);
+                tipo_bodega_agregar dialog = new tipo_bodega_agregar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -218,14 +214,11 @@ public class tipo_medida_editar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> estado_cb;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField nombre_tf;
+    private javax.swing.JTextField txtnom_bodega;
     // End of variables declaration//GEN-END:variables
-
 }

@@ -5,8 +5,8 @@
  */
 package ec.com.asofar.views.usuario;
 
-import com.farmacia.dao.CRUD;
-import com.farmacia.entities1.Nombre_local;
+//import com.farmacia.dao.CRUD;
+//import com.farmacia.entities1.Nombre_local;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class Ruc extends javax.swing.JDialog {
      * Creates new form Ruc
      */
     
-    CRUD crud = new CRUD();
+//    CRUD crud = new CRUD();
     
     public Ruc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -140,49 +140,49 @@ public class Ruc extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    public void Actualizar(){
-        String ruc = txtRuc.getText();
-        
-        if (" ".equals(ruc) || "".equals(ruc))  {
-            int r = JOptionPane.showConfirmDialog(null, "¿Está seguro de guardar?", "", JOptionPane.YES_NO_OPTION);
-
-        if (r == JOptionPane.YES_OPTION) {
-            Nombre_local nl = new Nombre_local();
-            nl.setRuc_local(ruc);
-            
-            try {
-                /*String a =  */crud.RucLocal(nl);
-                JOptionPane.showMessageDialog(this, "Ruc eliminado");
-            } catch (Exception e) {
-                //JOptionPane.showMessageDialog(this, e);
-            }
-            setVisible(false);
-        }
-        }else{
-            int r = JOptionPane.showConfirmDialog(null, "¿Está seguro de guardar?", "", JOptionPane.YES_NO_OPTION);
-
-        if (r == JOptionPane.YES_OPTION) {
-            Nombre_local nl = new Nombre_local();
-            nl.setRuc_local(ruc);
-            
-            try {
-                String a =  crud.RucLocal(nl);
-                JOptionPane.showMessageDialog(this, a);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e);
-            }
-            setVisible(false);
-        }
-        }  
+////    public void Actualizar(){
+////        String ruc = txtRuc.getText();
+////        
+////        if (" ".equals(ruc) || "".equals(ruc))  {
+////            int r = JOptionPane.showConfirmDialog(null, "¿Está seguro de guardar?", "", JOptionPane.YES_NO_OPTION);
+////
+////        if (r == JOptionPane.YES_OPTION) {
+//////            Nombre_local nl = new Nombre_local();
+////            nl.setRuc_local(ruc);
+////            
+////            try {
+////                /*String a =  */crud.RucLocal(nl);
+////                JOptionPane.showMessageDialog(this, "Ruc eliminado");
+////            } catch (Exception e) {
+////                //JOptionPane.showMessageDialog(this, e);
+////            }
+////            setVisible(false);
+////        }
+////        }else{
+////            int r = JOptionPane.showConfirmDialog(null, "¿Está seguro de guardar?", "", JOptionPane.YES_NO_OPTION);
+////
+////        if (r == JOptionPane.YES_OPTION) {
+////            Nombre_local nl = new Nombre_local();
+////            nl.setRuc_local(ruc);
+////            
+////            try {
+////                String a =  crud.RucLocal(nl);
+////                JOptionPane.showMessageDialog(this, a);
+////            } catch (Exception e) {
+////                JOptionPane.showMessageDialog(this, e);
+////            }
+////            setVisible(false);
+////        }
+////        }  
 //        if (ruc.length() < 10 ) {
 //            JOptionPane.showMessageDialog(this, "Ingrese un número de cédula o ruc válido");
 //        }
-        if (ruc.length() > 13) {
-            JOptionPane.showMessageDialog(this, "Ha sobrepasado la cantidad de números válidos");
-        }
-    }
+//        if (ruc.length() > 13) {
+//            JOptionPane.showMessageDialog(this, "Ha sobrepasado la cantidad de números válidos");
+//        }
+//    }
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Actualizar();
+//        Actualizar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
@@ -195,7 +195,7 @@ public class Ruc extends javax.swing.JDialog {
 
     private void txtRucKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Actualizar();
+//            Actualizar();
         }
     }//GEN-LAST:event_txtRucKeyPressed
 

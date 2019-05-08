@@ -5,9 +5,9 @@
  */
 package ec.com.asofar.views.usuario;
 
-import com.farmacia.conponentes.Tablas;
-import com.farmacia.dao.CRUD;
-import com.farmacia.entities1.Nombre_local;
+//import com.farmacia.conponentes.Tablas;
+//import com.farmacia.dao.CRUD;
+//import com.farmacia.entities1.Nombre_local;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -20,37 +20,37 @@ import javax.swing.JOptionPane;
  */
 public class Local extends javax.swing.JDialog {
     int x,y;
-    CRUD crud = new CRUD();
-    ArrayList<Nombre_local> listar = null;
-    
+//    CRUD crud = new CRUD();
+//    ArrayList<Nombre_local> listar = null;
+//    
     /**
      * Creates new form Local
      */
     public Local(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        listar = crud.listar_local();
-        Tablas.cargarLocal(jtLocal, listar);
+//        listar = crud.listar_local();
+//        Tablas.cargarLocal(jtLocal, listar);
         botonGuardarValidar();
         setLocationRelativeTo(null);
-        ruc();
+//        ruc();
     }
 
-    public void ruc(){
-        String a = crud.ruc_local();
-        if (crud.ruc_local() == null) {
-            lbRuc.setText(crud.ruc_local());
-        }
-        else if("".equals(crud.ruc_local())){
-            lbRuc.setText(crud.ruc_local());
-        }
-        else if(" ".equals(a) || "  ".equals(a) || "   ".equals(a) || "    ".equals(a) || "     ".equals(a)){
-            lbRuc.setText(crud.ruc_local());
-        }
-        else{
-            lbRuc.setText("RUC: "+crud.ruc_local());
-        }
-    }
+//    public void ruc(){
+//        String a = crud.ruc_local();
+//        if (crud.ruc_local() == null) {
+//            lbRuc.setText(crud.ruc_local());
+//        }
+//        else if("".equals(crud.ruc_local())){
+//            lbRuc.setText(crud.ruc_local());
+//        }
+//        else if(" ".equals(a) || "  ".equals(a) || "   ".equals(a) || "    ".equals(a) || "     ".equals(a)){
+//            lbRuc.setText(crud.ruc_local());
+//        }
+//        else{
+//            lbRuc.setText("RUC: "+crud.ruc_local());
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -356,48 +356,48 @@ public class Local extends javax.swing.JDialog {
             btnRuc.setEnabled(valor);
     }
     
-    public void guardar(){
-        String dir = txtDireccion.getText();
-        String nomb = txtNombre.getText();
-        String tel = txtTelefono.getText();
-        
-        if (tel.length() < 6 ) {
-            JOptionPane.showMessageDialog(this, "Ingrese un número válido");
-        }else if (tel.length() > 12) {
-            JOptionPane.showMessageDialog(this, "Ha sobrepasado la cantidad de números válido");
-        }else if (nomb.length() < 3) {
-            JOptionPane.showMessageDialog(this, "Ingrese un nombre válido");
-        }
-        else if (dir.length() < 5) {
-            JOptionPane.showMessageDialog(this, "Ingrese una dirección válida");
-        }else if((tel == null || dir == null) || nomb == null){
-            JOptionPane.showMessageDialog(this, "Por favor revise los campos");
-        } else {
-            Nombre_local nl = new Nombre_local();
-            nl.setNombre(nomb);
-            nl.setDireccion(dir);
-            nl.setTelefono_pv(tel);
-            
-            try {
-                String a =  crud.CrearLocal(nl);
-                JOptionPane.showMessageDialog(this, a);
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e);
-            }
-            
-            txtDireccion.setText("");
-            txtNombre.setText("");
-            txtTelefono.setText("");
-        }
-    }
+//    public void guardar(){
+//        String dir = txtDireccion.getText();
+//        String nomb = txtNombre.getText();
+//        String tel = txtTelefono.getText();
+//        
+//        if (tel.length() < 6 ) {
+//            JOptionPane.showMessageDialog(this, "Ingrese un número válido");
+//        }else if (tel.length() > 12) {
+//            JOptionPane.showMessageDialog(this, "Ha sobrepasado la cantidad de números válido");
+//        }else if (nomb.length() < 3) {
+//            JOptionPane.showMessageDialog(this, "Ingrese un nombre válido");
+//        }
+//        else if (dir.length() < 5) {
+//            JOptionPane.showMessageDialog(this, "Ingrese una dirección válida");
+//        }else if((tel == null || dir == null) || nomb == null){
+//            JOptionPane.showMessageDialog(this, "Por favor revise los campos");
+//        } else {
+////            Nombre_local nl = new Nombre_local();
+//            nl.setNombre(nomb);
+//            nl.setDireccion(dir);
+//            nl.setTelefono_pv(tel);
+//            
+//            try {
+////                String a =  crud.CrearLocal(nl);
+//                JOptionPane.showMessageDialog(this, a);
+//
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(this, e);
+//            }
+//            
+//            txtDireccion.setText("");
+//            txtNombre.setText("");
+//            txtTelefono.setText("");
+//        }
+//    }
     
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 //        guardar();
         if (jtLocal != null) {
-            Actualizar();
+//            Actualizar();
         }else{
-            guardar();
+//            guardar();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -426,52 +426,52 @@ public class Local extends javax.swing.JDialog {
         habilitar(true);
     }//GEN-LAST:event_btnHabilitarActionPerformed
 
-    public void Actualizar(){
-        String dir = txtDireccion.getText();
-        String nomb = txtNombre.getText();
-        String tel = txtTelefono.getText();
-        
-        if (tel.length() < 6 ) {
-            JOptionPane.showMessageDialog(this, "Ingrese un número válido");
-        }else if (tel.length() > 12) {
-            JOptionPane.showMessageDialog(this, "Ha sobrepasado la cantidad de números válido");
-        }else if (nomb.length() < 3) {
-            JOptionPane.showMessageDialog(this, "Ingrese un nombre válido");
-        }
-        else if (dir.length() < 5) {
-            JOptionPane.showMessageDialog(this, "Ingrese una dirección válida");
-        }else if((tel == null || dir == null) || nomb == null){
-            JOptionPane.showMessageDialog(this, "Por favor revise los campos");
-        } else {
-            int r = JOptionPane.showConfirmDialog(null, "¿Está seguro de actualizar?", "", JOptionPane.YES_NO_OPTION);
-
-        if (r == JOptionPane.YES_OPTION) {
-            Nombre_local nl = new Nombre_local();
-            nl.setNombre(nomb);
-            nl.setDireccion(dir);
-            nl.setTelefono_pv(tel);
-            
-            try {
-                String a =  crud.ActualizarLocal(nl);
-                JOptionPane.showMessageDialog(this, a);
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e);
-            }
-            ArrayList<Nombre_local> listar = crud.listar_local();
-            Tablas.cargarLocal(jtLocal, listar);
-            
-            txtDireccion.setEnabled(false);
-            txtNombre.setEnabled(false);
-            txtTelefono.setEnabled(false);
-            
-            txtDireccion.setText("");
-            txtNombre.setText("");
-            txtTelefono.setText("");
-        }
-        }   
-    }
-    
+//    public void Actualizar(){
+//        String dir = txtDireccion.getText();
+//        String nomb = txtNombre.getText();
+//        String tel = txtTelefono.getText();
+//        
+//        if (tel.length() < 6 ) {
+//            JOptionPane.showMessageDialog(this, "Ingrese un número válido");
+//        }else if (tel.length() > 12) {
+//            JOptionPane.showMessageDialog(this, "Ha sobrepasado la cantidad de números válido");
+//        }else if (nomb.length() < 3) {
+//            JOptionPane.showMessageDialog(this, "Ingrese un nombre válido");
+//        }
+//        else if (dir.length() < 5) {
+//            JOptionPane.showMessageDialog(this, "Ingrese una dirección válida");
+//        }else if((tel == null || dir == null) || nomb == null){
+//            JOptionPane.showMessageDialog(this, "Por favor revise los campos");
+//        } else {
+//            int r = JOptionPane.showConfirmDialog(null, "¿Está seguro de actualizar?", "", JOptionPane.YES_NO_OPTION);
+//
+//        if (r == JOptionPane.YES_OPTION) {
+//            Nombre_local nl = new Nombre_local();
+//            nl.setNombre(nomb);
+//            nl.setDireccion(dir);
+//            nl.setTelefono_pv(tel);
+//            
+//            try {
+//                String a =  crud.ActualizarLocal(nl);
+//                JOptionPane.showMessageDialog(this, a);
+//
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(this, e);
+//            }
+//            ArrayList<Nombre_local> listar = crud.listar_local();
+//            Tablas.cargarLocal(jtLocal, listar);
+//            
+//            txtDireccion.setEnabled(false);
+//            txtNombre.setEnabled(false);
+//            txtTelefono.setEnabled(false);
+//            
+//            txtDireccion.setText("");
+//            txtNombre.setText("");
+//            txtTelefono.setText("");
+//        }
+//        }   
+//    }
+//    
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char c = evt.getKeyChar();
         if (Character.isDigit(c)) {
@@ -501,9 +501,9 @@ public class Local extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (jtLocal != null) {
             txtDireccion.setText(txtDireccion.getText().toUpperCase());
-            Actualizar();
+//            Actualizar();
         }else{
-            guardar();
+//            guardar();
         }
         }
     }//GEN-LAST:event_txtDireccionKeyPressed
@@ -516,9 +516,9 @@ public class Local extends javax.swing.JDialog {
         Ruc r = new Ruc(new javax.swing.JFrame(), true);
         r.setVisible(true);
 //        ipv.clear();
-        ruc();
-        listar = crud.listar_local();
-        Tablas.cargarLocal(jtLocal, listar);
+//        ruc();
+//        listar = crud.listar_local();
+//        Tablas.cargarLocal(jtLocal, listar);
     }//GEN-LAST:event_btnRucActionPerformed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
