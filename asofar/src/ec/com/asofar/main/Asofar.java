@@ -6,10 +6,7 @@
 package ec.com.asofar.main;
 
 import ec.com.asofar.views.inicio.Frm_cargarSistema;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
