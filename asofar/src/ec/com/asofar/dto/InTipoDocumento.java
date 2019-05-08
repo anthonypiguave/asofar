@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "InTipoDocumento.findAll", query = "SELECT i FROM InTipoDocumento i")
     , @NamedQuery(name = "InTipoDocumento.findByIdTipoDocumento", query = "SELECT i FROM InTipoDocumento i WHERE i.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "InTipoDocumento.findByNombreDocumento", query = "SELECT i FROM InTipoDocumento i WHERE i.nombreDocumento = :nombreDocumento")
+    , @NamedQuery(name = "InTipoDocumento.findByEstado", query = "SELECT i FROM InTipoDocumento i WHERE i.estado = :estado")
     , @NamedQuery(name = "InTipoDocumento.findByUsuarioCreacion", query = "SELECT i FROM InTipoDocumento i WHERE i.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "InTipoDocumento.findByFechaCreacion", query = "SELECT i FROM InTipoDocumento i WHERE i.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "InTipoDocumento.findByUsuarioActualizacion", query = "SELECT i FROM InTipoDocumento i WHERE i.usuarioActualizacion = :usuarioActualizacion")
@@ -50,6 +51,8 @@ public class InTipoDocumento implements Serializable {
     private Long idTipoDocumento;
     @Column(name = "nombre_documento")
     private String nombreDocumento;
+    @Column(name = "estado")
+    private String estado;
     @Column(name = "usuario_creacion")
     private BigInteger usuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -58,8 +61,7 @@ public class InTipoDocumento implements Serializable {
     @Column(name = "usuario_actualizacion")
     private BigInteger usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaActualizacion;
+    private String fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
     private List<InMovimientos> inMovimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
@@ -88,6 +90,14 @@ public class InTipoDocumento implements Serializable {
         this.nombreDocumento = nombreDocumento;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public BigInteger getUsuarioCreacion() {
         return usuarioCreacion;
     }
@@ -112,11 +122,11 @@ public class InTipoDocumento implements Serializable {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
-    public Date getFechaActualizacion() {
+    public String getFechaActualizacion() {
         return fechaActualizacion;
     }
 
-    public void setFechaActualizacion(Date fechaActualizacion) {
+    public void setFechaActualizacion(String fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
     }
 
