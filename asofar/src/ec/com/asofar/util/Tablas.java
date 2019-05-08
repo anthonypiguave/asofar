@@ -13,6 +13,7 @@ import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
+import ec.com.asofar.dto.SePersonas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -84,8 +85,8 @@ public class Tablas {
         }
 
     }
-
-    public static void listarGruposInactivos(List<PrGrupos> lista, JTable Tabla) {
+    
+        public static void listarGruposInactivos(List<PrGrupos> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
@@ -119,6 +120,44 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
                 Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             }
+        }
+
+    }
+
+    public static void listarPersonas(List<SePersonas> lista, JTable Tabla) {
+        int[] a = {5, 30, 30, 10, 15};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"CEDULA.", "NOMBRES", "APELLIDOS", "DIRECCION", "CORREO"};
+        String[] Filas = new String[5];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+
+//            if (lista.get(i).getEstado().equals("A")) {
+                Filas[0] = lista.get(i).getCedula();
+                Filas[1] = lista.get(i).getNombres();
+                Filas[2] = lista.get(i).getApellidos();
+                Filas[3] = lista.get(i).getDireccion();
+                Filas[4] = lista.get(i).getCorreo();
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+//            }
         }
 
     }

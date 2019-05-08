@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class SeOpcionesRolesJpaController implements Serializable {
 
@@ -39,8 +39,8 @@ public class SeOpcionesRolesJpaController implements Serializable {
         if (seOpcionesRoles.getSeOpcionesRolesPK() == null) {
             seOpcionesRoles.setSeOpcionesRolesPK(new SeOpcionesRolesPK());
         }
-        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         seOpcionesRoles.getSeOpcionesRolesPK().setIdRol(seOpcionesRoles.getSeRoles().getIdRoles());
+        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -78,8 +78,8 @@ public class SeOpcionesRolesJpaController implements Serializable {
     }
 
     public void edit(SeOpcionesRoles seOpcionesRoles) throws NonexistentEntityException, Exception {
-        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         seOpcionesRoles.getSeOpcionesRolesPK().setIdRol(seOpcionesRoles.getSeRoles().getIdRoles());
+        seOpcionesRoles.getSeOpcionesRolesPK().setIdOpcionesMenu(seOpcionesRoles.getSeOpcionesMenu().getIdOpcionesMenu());
         EntityManager em = null;
         try {
             em = getEntityManager();

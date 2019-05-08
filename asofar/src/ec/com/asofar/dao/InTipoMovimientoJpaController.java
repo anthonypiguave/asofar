@@ -11,17 +11,16 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.InDetalleMovimiento;
-import java.util.ArrayList;
-import java.util.List;
 import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.InTipoMovimiento;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class InTipoMovimientoJpaController implements Serializable {
 
@@ -35,9 +34,6 @@ public class InTipoMovimientoJpaController implements Serializable {
     }
 
     public void create(InTipoMovimiento inTipoMovimiento) {
-        if (inTipoMovimiento.getInDetalleMovimientoList() == null) {
-            inTipoMovimiento.setInDetalleMovimientoList(new ArrayList<InDetalleMovimiento>());
-        }
         if (inTipoMovimiento.getInMovimientosList() == null) {
             inTipoMovimiento.setInMovimientosList(new ArrayList<InMovimientos>());
         }
@@ -45,12 +41,6 @@ public class InTipoMovimientoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<InDetalleMovimiento> attachedInDetalleMovimientoList = new ArrayList<InDetalleMovimiento>();
-            for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimientoToAttach : inTipoMovimiento.getInDetalleMovimientoList()) {
-                inDetalleMovimientoListInDetalleMovimientoToAttach = em.getReference(inDetalleMovimientoListInDetalleMovimientoToAttach.getClass(), inDetalleMovimientoListInDetalleMovimientoToAttach.getIdDetalleMovimiento());
-                attachedInDetalleMovimientoList.add(inDetalleMovimientoListInDetalleMovimientoToAttach);
-            }
-            inTipoMovimiento.setInDetalleMovimientoList(attachedInDetalleMovimientoList);
             List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListInMovimientosToAttach : inTipoMovimiento.getInMovimientosList()) {
                 inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
@@ -58,15 +48,6 @@ public class InTipoMovimientoJpaController implements Serializable {
             }
             inTipoMovimiento.setInMovimientosList(attachedInMovimientosList);
             em.persist(inTipoMovimiento);
-            for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimiento : inTipoMovimiento.getInDetalleMovimientoList()) {
-                InTipoMovimiento oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento = inDetalleMovimientoListInDetalleMovimiento.getIdTipoMovimiento();
-                inDetalleMovimientoListInDetalleMovimiento.setIdTipoMovimiento(inTipoMovimiento);
-                inDetalleMovimientoListInDetalleMovimiento = em.merge(inDetalleMovimientoListInDetalleMovimiento);
-                if (oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento != null) {
-                    oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListInDetalleMovimiento);
-                    oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento = em.merge(oldIdTipoMovimientoOfInDetalleMovimientoListInDetalleMovimiento);
-                }
-            }
             for (InMovimientos inMovimientosListInMovimientos : inTipoMovimiento.getInMovimientosList()) {
                 InTipoMovimiento oldIdTipoMovimientoOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getIdTipoMovimiento();
                 inMovimientosListInMovimientos.setIdTipoMovimiento(inTipoMovimiento);
@@ -90,17 +71,8 @@ public class InTipoMovimientoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             InTipoMovimiento persistentInTipoMovimiento = em.find(InTipoMovimiento.class, inTipoMovimiento.getIdTipoMovimiento());
-            List<InDetalleMovimiento> inDetalleMovimientoListOld = persistentInTipoMovimiento.getInDetalleMovimientoList();
-            List<InDetalleMovimiento> inDetalleMovimientoListNew = inTipoMovimiento.getInDetalleMovimientoList();
             List<InMovimientos> inMovimientosListOld = persistentInTipoMovimiento.getInMovimientosList();
             List<InMovimientos> inMovimientosListNew = inTipoMovimiento.getInMovimientosList();
-            List<InDetalleMovimiento> attachedInDetalleMovimientoListNew = new ArrayList<InDetalleMovimiento>();
-            for (InDetalleMovimiento inDetalleMovimientoListNewInDetalleMovimientoToAttach : inDetalleMovimientoListNew) {
-                inDetalleMovimientoListNewInDetalleMovimientoToAttach = em.getReference(inDetalleMovimientoListNewInDetalleMovimientoToAttach.getClass(), inDetalleMovimientoListNewInDetalleMovimientoToAttach.getIdDetalleMovimiento());
-                attachedInDetalleMovimientoListNew.add(inDetalleMovimientoListNewInDetalleMovimientoToAttach);
-            }
-            inDetalleMovimientoListNew = attachedInDetalleMovimientoListNew;
-            inTipoMovimiento.setInDetalleMovimientoList(inDetalleMovimientoListNew);
             List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
                 inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
@@ -109,23 +81,6 @@ public class InTipoMovimientoJpaController implements Serializable {
             inMovimientosListNew = attachedInMovimientosListNew;
             inTipoMovimiento.setInMovimientosList(inMovimientosListNew);
             inTipoMovimiento = em.merge(inTipoMovimiento);
-            for (InDetalleMovimiento inDetalleMovimientoListOldInDetalleMovimiento : inDetalleMovimientoListOld) {
-                if (!inDetalleMovimientoListNew.contains(inDetalleMovimientoListOldInDetalleMovimiento)) {
-                    inDetalleMovimientoListOldInDetalleMovimiento.setIdTipoMovimiento(null);
-                    inDetalleMovimientoListOldInDetalleMovimiento = em.merge(inDetalleMovimientoListOldInDetalleMovimiento);
-                }
-            }
-            for (InDetalleMovimiento inDetalleMovimientoListNewInDetalleMovimiento : inDetalleMovimientoListNew) {
-                if (!inDetalleMovimientoListOld.contains(inDetalleMovimientoListNewInDetalleMovimiento)) {
-                    InTipoMovimiento oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento = inDetalleMovimientoListNewInDetalleMovimiento.getIdTipoMovimiento();
-                    inDetalleMovimientoListNewInDetalleMovimiento.setIdTipoMovimiento(inTipoMovimiento);
-                    inDetalleMovimientoListNewInDetalleMovimiento = em.merge(inDetalleMovimientoListNewInDetalleMovimiento);
-                    if (oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento != null && !oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento.equals(inTipoMovimiento)) {
-                        oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento.getInDetalleMovimientoList().remove(inDetalleMovimientoListNewInDetalleMovimiento);
-                        oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento = em.merge(oldIdTipoMovimientoOfInDetalleMovimientoListNewInDetalleMovimiento);
-                    }
-                }
-            }
             for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
                 if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
                     inMovimientosListOldInMovimientos.setIdTipoMovimiento(null);
@@ -171,11 +126,6 @@ public class InTipoMovimientoJpaController implements Serializable {
                 inTipoMovimiento.getIdTipoMovimiento();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inTipoMovimiento with id " + id + " no longer exists.", enfe);
-            }
-            List<InDetalleMovimiento> inDetalleMovimientoList = inTipoMovimiento.getInDetalleMovimientoList();
-            for (InDetalleMovimiento inDetalleMovimientoListInDetalleMovimiento : inDetalleMovimientoList) {
-                inDetalleMovimientoListInDetalleMovimiento.setIdTipoMovimiento(null);
-                inDetalleMovimientoListInDetalleMovimiento = em.merge(inDetalleMovimientoListInDetalleMovimiento);
             }
             List<InMovimientos> inMovimientosList = inTipoMovimiento.getInMovimientosList();
             for (InMovimientos inMovimientosListInMovimientos : inMovimientosList) {
