@@ -10,6 +10,7 @@ import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -19,6 +20,7 @@ public class tipo_bodega extends javax.swing.JDialog {
 
     List<InTipoBodega> TipoBodega;
     InTipoBodegaJpaController Tb = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoBodega tipobodega = new InTipoBodega();
 
     /**
      * Creates new form tipo_bodega
@@ -218,15 +220,23 @@ public void MostrarTipoBodega() {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        String id = (String) tbl_bodega.getValueAt(tbl_bodega.getSelectedRow(), 0);
-//        setVisible(false);
-//        medidas = devuelveObjeto(Long.parseLong(id));
-//        if (medidas != null) {
-//            tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
-//            tme.setVisible(true);
-//        }
+        String id = (String) tbl_bodega.getValueAt(tbl_bodega.getSelectedRow(), 0);
+        setVisible(false);
+        tipobodega = devuelveObjeto(Long.parseLong(id));
+        if (tipobodega != null) {
+            tipo_bodega_editar tme = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega);
+            tme.setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    private InTipoBodega devuelveObjeto(Long id) {
+        TipoBodega = Tb.findInTipoBodegaEntities();
+        for (int i = 0; i < TipoBodega.size(); i++) {
+            if (Objects.equals(TipoBodega.get(i).getIdTipoBodega(), id)) {
+                tipobodega = TipoBodega.get(i);
+            }
+        }
+        return tipobodega;
+    }
     private void estado_cbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_estado_cbItemStateChanged
 
     }//GEN-LAST:event_estado_cbItemStateChanged

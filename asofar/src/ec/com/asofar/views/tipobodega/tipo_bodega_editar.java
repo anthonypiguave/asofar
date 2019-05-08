@@ -31,10 +31,13 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
 
     }
 
-    public tipo_bodega_editar(java.awt.Frame parent, boolean modal, InTipoBodega staticmedidas) {
+    public tipo_bodega_editar(java.awt.Frame parent, boolean modal, InTipoBodega staticbodega) {
         super(parent, modal);
         initComponents();
-
+        bodega = staticbodega;
+        txtnom_bodega.setText(bodega.getNombre());
+        cbx_estado.addItem("A");
+        cbx_estado.addItem("I");
     }
 
     /**
