@@ -6,6 +6,7 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.dto.InTipoBodega;
+import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
@@ -32,6 +33,7 @@ public class Tablas {
 
     static DefaultTableModel model;
     private boolean[] editable = {false, false, true};
+    private static boolean[] editable1 = {false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -509,5 +511,48 @@ public static void TablaTipobodegaActivo(List<InTipoBodega> listabodega, JTable 
                 tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
             }
         }
+    }
+public static void tabla_documento(JTable tabla, List<InTipoDocumento> lista) {
+        
+        InTipoDocumento vo=new InTipoDocumento();
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO","ESTADO"}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return editable1[column];
+            }
+        };
+
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+                // model.addRow(new Object[]{});
+                Object fila[] = new Object[3];
+                vo = lista.get(i);
+                fila[0] = vo.getIdTipoDocumento();
+                fila[1] = vo.getNombreDocumento();
+                String ac = (String) vo.getEstado();
+                if ("A".equals(ac)) {
+                    fila[2] = true;
+                } else {
+                    fila[2] = false;
+                }
+                
+
+                dt.addRow(fila);
+
+            }
+
+        }
+
+        tabla.setModel(dt);
+
     }
 }
