@@ -6,13 +6,16 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Embeddable
 public class InMovimientosPK implements Serializable {
@@ -25,12 +28,13 @@ public class InMovimientosPK implements Serializable {
     private long idTipoDocumento;
     @Basic(optional = false)
     @Column(name = "anio_documento")
-    private String anioDocumento;
+    @Temporal(TemporalType.DATE)
+    private Date anioDocumento;
 
     public InMovimientosPK() {
     }
 
-    public InMovimientosPK(long idMovimientos, long idTipoDocumento, String anioDocumento) {
+    public InMovimientosPK(long idMovimientos, long idTipoDocumento, Date anioDocumento) {
         this.idMovimientos = idMovimientos;
         this.idTipoDocumento = idTipoDocumento;
         this.anioDocumento = anioDocumento;
@@ -52,11 +56,11 @@ public class InMovimientosPK implements Serializable {
         this.idTipoDocumento = idTipoDocumento;
     }
 
-    public String getAnioDocumento() {
+    public Date getAnioDocumento() {
         return anioDocumento;
     }
 
-    public void setAnioDocumento(String anioDocumento) {
+    public void setAnioDocumento(Date anioDocumento) {
         this.anioDocumento = anioDocumento;
     }
 

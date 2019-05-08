@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "in_tipo_movimiento")
@@ -59,8 +59,6 @@ public class InTipoMovimiento implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "idTipoMovimiento")
-    private List<InDetalleMovimiento> inDetalleMovimientoList;
     @OneToMany(mappedBy = "idTipoMovimiento")
     private List<InMovimientos> inMovimientosList;
 
@@ -117,15 +115,6 @@ public class InTipoMovimiento implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    @XmlTransient
-    public List<InDetalleMovimiento> getInDetalleMovimientoList() {
-        return inDetalleMovimientoList;
-    }
-
-    public void setInDetalleMovimientoList(List<InDetalleMovimiento> inDetalleMovimientoList) {
-        this.inDetalleMovimientoList = inDetalleMovimientoList;
     }
 
     @XmlTransient

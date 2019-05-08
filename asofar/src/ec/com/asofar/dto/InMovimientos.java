@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "in_movimientos")
@@ -32,17 +32,21 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InMovimientos.findByIdMovimientos", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idMovimientos = :idMovimientos")
     , @NamedQuery(name = "InMovimientos.findByIdTipoDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "InMovimientos.findByAnioDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.anioDocumento = :anioDocumento")
-    , @NamedQuery(name = "InMovimientos.findByIdNumeroDocumento", query = "SELECT i FROM InMovimientos i WHERE i.idNumeroDocumento = :idNumeroDocumento")
+    , @NamedQuery(name = "InMovimientos.findByIdBodegaOrigen", query = "SELECT i FROM InMovimientos i WHERE i.idBodegaOrigen = :idBodegaOrigen")
     , @NamedQuery(name = "InMovimientos.findByIdEmpresa", query = "SELECT i FROM InMovimientos i WHERE i.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "InMovimientos.findByIdSucursal", query = "SELECT i FROM InMovimientos i WHERE i.idSucursal = :idSucursal")
-    , @NamedQuery(name = "InMovimientos.findByIdBodega", query = "SELECT i FROM InMovimientos i WHERE i.idBodega = :idBodega")
     , @NamedQuery(name = "InMovimientos.findByIdUsuario", query = "SELECT i FROM InMovimientos i WHERE i.idUsuario = :idUsuario")
-    , @NamedQuery(name = "InMovimientos.findByIdTipoBodega", query = "SELECT i FROM InMovimientos i WHERE i.idTipoBodega = :idTipoBodega")
     , @NamedQuery(name = "InMovimientos.findByBodegaDestino", query = "SELECT i FROM InMovimientos i WHERE i.bodegaDestino = :bodegaDestino")
     , @NamedQuery(name = "InMovimientos.findBySucursalDestino", query = "SELECT i FROM InMovimientos i WHERE i.sucursalDestino = :sucursalDestino")
+    , @NamedQuery(name = "InMovimientos.findByFechaSistema", query = "SELECT i FROM InMovimientos i WHERE i.fechaSistema = :fechaSistema")
+    , @NamedQuery(name = "InMovimientos.findByFechaTransferencia", query = "SELECT i FROM InMovimientos i WHERE i.fechaTransferencia = :fechaTransferencia")
+    , @NamedQuery(name = "InMovimientos.findByFechaRecepcion", query = "SELECT i FROM InMovimientos i WHERE i.fechaRecepcion = :fechaRecepcion")
     , @NamedQuery(name = "InMovimientos.findByObservacion", query = "SELECT i FROM InMovimientos i WHERE i.observacion = :observacion")
     , @NamedQuery(name = "InMovimientos.findByIdProveedor", query = "SELECT i FROM InMovimientos i WHERE i.idProveedor = :idProveedor")
     , @NamedQuery(name = "InMovimientos.findByIdOrdenCompra", query = "SELECT i FROM InMovimientos i WHERE i.idOrdenCompra = :idOrdenCompra")
+    , @NamedQuery(name = "InMovimientos.findByFechaOrden", query = "SELECT i FROM InMovimientos i WHERE i.fechaOrden = :fechaOrden")
+    , @NamedQuery(name = "InMovimientos.findByIdFactura", query = "SELECT i FROM InMovimientos i WHERE i.idFactura = :idFactura")
+    , @NamedQuery(name = "InMovimientos.findByFechaFactura", query = "SELECT i FROM InMovimientos i WHERE i.fechaFactura = :fechaFactura")
     , @NamedQuery(name = "InMovimientos.findByIdUsuarioCreacion", query = "SELECT i FROM InMovimientos i WHERE i.idUsuarioCreacion = :idUsuarioCreacion")
     , @NamedQuery(name = "InMovimientos.findByFechaCreacion", query = "SELECT i FROM InMovimientos i WHERE i.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "InMovimientos.findByIdUsuarioActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.idUsuarioActualizacion = :idUsuarioActualizacion")
@@ -52,28 +56,41 @@ public class InMovimientos implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InMovimientosPK inMovimientosPK;
-    @Column(name = "id_numero_documento")
-    private BigInteger idNumeroDocumento;
+    @Column(name = "id_bodega_origen")
+    private BigInteger idBodegaOrigen;
     @Column(name = "id_empresa")
     private BigInteger idEmpresa;
     @Column(name = "id_sucursal")
     private BigInteger idSucursal;
-    @Column(name = "id_bodega")
-    private BigInteger idBodega;
     @Column(name = "id_usuario")
     private BigInteger idUsuario;
-    @Column(name = "id_tipo_bodega")
-    private BigInteger idTipoBodega;
     @Column(name = "bodega_destino")
     private String bodegaDestino;
     @Column(name = "sucursal_destino")
     private String sucursalDestino;
+    @Column(name = "fecha_sistema")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaSistema;
+    @Column(name = "fecha_transferencia")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaTransferencia;
+    @Column(name = "fecha_recepcion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaRecepcion;
     @Column(name = "observacion")
     private String observacion;
     @Column(name = "id_proveedor")
     private BigInteger idProveedor;
     @Column(name = "id_orden_compra")
     private BigInteger idOrdenCompra;
+    @Column(name = "fecha_orden")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaOrden;
+    @Column(name = "id_factura")
+    private BigInteger idFactura;
+    @Column(name = "fecha_factura")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaFactura;
     @Column(name = "id_usuario_creacion")
     private BigInteger idUsuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -104,7 +121,7 @@ public class InMovimientos implements Serializable {
         this.inMovimientosPK = inMovimientosPK;
     }
 
-    public InMovimientos(long idMovimientos, long idTipoDocumento, String anioDocumento) {
+    public InMovimientos(long idMovimientos, long idTipoDocumento, Date anioDocumento) {
         this.inMovimientosPK = new InMovimientosPK(idMovimientos, idTipoDocumento, anioDocumento);
     }
 
@@ -116,12 +133,12 @@ public class InMovimientos implements Serializable {
         this.inMovimientosPK = inMovimientosPK;
     }
 
-    public BigInteger getIdNumeroDocumento() {
-        return idNumeroDocumento;
+    public BigInteger getIdBodegaOrigen() {
+        return idBodegaOrigen;
     }
 
-    public void setIdNumeroDocumento(BigInteger idNumeroDocumento) {
-        this.idNumeroDocumento = idNumeroDocumento;
+    public void setIdBodegaOrigen(BigInteger idBodegaOrigen) {
+        this.idBodegaOrigen = idBodegaOrigen;
     }
 
     public BigInteger getIdEmpresa() {
@@ -140,28 +157,12 @@ public class InMovimientos implements Serializable {
         this.idSucursal = idSucursal;
     }
 
-    public BigInteger getIdBodega() {
-        return idBodega;
-    }
-
-    public void setIdBodega(BigInteger idBodega) {
-        this.idBodega = idBodega;
-    }
-
     public BigInteger getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(BigInteger idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public BigInteger getIdTipoBodega() {
-        return idTipoBodega;
-    }
-
-    public void setIdTipoBodega(BigInteger idTipoBodega) {
-        this.idTipoBodega = idTipoBodega;
     }
 
     public String getBodegaDestino() {
@@ -178,6 +179,30 @@ public class InMovimientos implements Serializable {
 
     public void setSucursalDestino(String sucursalDestino) {
         this.sucursalDestino = sucursalDestino;
+    }
+
+    public Date getFechaSistema() {
+        return fechaSistema;
+    }
+
+    public void setFechaSistema(Date fechaSistema) {
+        this.fechaSistema = fechaSistema;
+    }
+
+    public Date getFechaTransferencia() {
+        return fechaTransferencia;
+    }
+
+    public void setFechaTransferencia(Date fechaTransferencia) {
+        this.fechaTransferencia = fechaTransferencia;
+    }
+
+    public Date getFechaRecepcion() {
+        return fechaRecepcion;
+    }
+
+    public void setFechaRecepcion(Date fechaRecepcion) {
+        this.fechaRecepcion = fechaRecepcion;
     }
 
     public String getObservacion() {
@@ -202,6 +227,30 @@ public class InMovimientos implements Serializable {
 
     public void setIdOrdenCompra(BigInteger idOrdenCompra) {
         this.idOrdenCompra = idOrdenCompra;
+    }
+
+    public Date getFechaOrden() {
+        return fechaOrden;
+    }
+
+    public void setFechaOrden(Date fechaOrden) {
+        this.fechaOrden = fechaOrden;
+    }
+
+    public BigInteger getIdFactura() {
+        return idFactura;
+    }
+
+    public void setIdFactura(BigInteger idFactura) {
+        this.idFactura = idFactura;
+    }
+
+    public Date getFechaFactura() {
+        return fechaFactura;
+    }
+
+    public void setFechaFactura(Date fechaFactura) {
+        this.fechaFactura = fechaFactura;
     }
 
     public BigInteger getIdUsuarioCreacion() {

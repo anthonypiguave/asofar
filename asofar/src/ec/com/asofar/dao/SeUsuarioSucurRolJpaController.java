@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
@@ -24,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class SeUsuarioSucurRolJpaController implements Serializable {
 
@@ -237,5 +236,5 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }
