@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "InTipoMovimiento.findAll", query = "SELECT i FROM InTipoMovimiento i")
     , @NamedQuery(name = "InTipoMovimiento.findByIdTipoMovimiento", query = "SELECT i FROM InTipoMovimiento i WHERE i.idTipoMovimiento = :idTipoMovimiento")
     , @NamedQuery(name = "InTipoMovimiento.findByNombreMovimiento", query = "SELECT i FROM InTipoMovimiento i WHERE i.nombreMovimiento = :nombreMovimiento")
+    , @NamedQuery(name = "InTipoMovimiento.findByEstado", query = "SELECT i FROM InTipoMovimiento i WHERE i.estado = :estado")
     , @NamedQuery(name = "InTipoMovimiento.findByUsuarioCreacion", query = "SELECT i FROM InTipoMovimiento i WHERE i.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "InTipoMovimiento.findByFechaCreacion", query = "SELECT i FROM InTipoMovimiento i WHERE i.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "InTipoMovimiento.findByUsuarioActuliazacion", query = "SELECT i FROM InTipoMovimiento i WHERE i.usuarioActuliazacion = :usuarioActuliazacion")
@@ -49,6 +50,8 @@ public class InTipoMovimiento implements Serializable {
     private Long idTipoMovimiento;
     @Column(name = "nombre_movimiento")
     private String nombreMovimiento;
+    @Column(name = "estado")
+    private String estado;
     @Column(name = "usuario_creacion")
     private BigInteger usuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -83,6 +86,14 @@ public class InTipoMovimiento implements Serializable {
 
     public void setNombreMovimiento(String nombreMovimiento) {
         this.nombreMovimiento = nombreMovimiento;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public BigInteger getUsuarioCreacion() {

@@ -545,6 +545,7 @@ public static void tabla_documento(JTable tabla, List<InTipoDocumento> lista) {
                     fila[2] = false;
                 }
                 
+                
 
                 dt.addRow(fila);
 
