@@ -228,25 +228,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                             meMenuBase.getMenu(j).add(item);
                            
                         }
-                         for (int k = 0; k < meMenuBase.getMenu(j).getMenuComponentCount(); k++) {
-                                
-                                if (meMenuBase.getMenu(j).getMenuComponent(k).getName().equals(lis.get(i).getIdPadre().getNombre())) {
-                            item = new JMenuItem(lis.get(i).getNombre());
-                            String ruta = lis.get(i).getRuta();
-                            item.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    Reflection re = new Reflection();
-
-                                    re.Llamar(ruta, us1, em1, su1);
-
-                                    //To change body of generated methods, choose Tools | Templates.
-                                }
-                            });
-                           
-                            
-                                }   
-                            }
+////                         for (int k = 0; k < meMenuBase.getMenu(j).getMenuComponentCount(); k++) {
+////                                
+////                                if (meMenuBase.getMenu(j).getMenuComponent(k).getName().equals(lis.get(i).getIdPadre().getNombre())) {
+////                            item = new JMenuItem(lis.get(i).getNombre());
+////                            String ruta = lis.get(i).getRuta();
+////                            item.addActionListener(new ActionListener() {
+////                                @Override
+////                                public void actionPerformed(ActionEvent e) {
+////                                    Reflection re = new Reflection();
+////
+////                                    re.Llamar(ruta, us1, em1, su1);
+////
+////                                    //To change body of generated methods, choose Tools | Templates.
+////                                }
+////                            });
+////                           
+////                            
+////                                }   
+////                            }
 //                     if(meMenuBase.getMenu(j).getMenuComponent(i)){}
                     }
                     
