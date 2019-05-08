@@ -24,6 +24,11 @@ import java.util.logging.Logger;
 public class tipo_bodega_editar extends javax.swing.JDialog {
 
     InTipoBodega bodega;
+    InTipoBodegaJpaController pjc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+//
+    List<SeEmpresa> listaempresa = null;
+    SeEmpresa empresa = new SeEmpresa();
+    SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public tipo_bodega_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -148,7 +153,24 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listaempresa = sjc.findSeEmpresaEntities();
+        empresa = listaempresa.get(0);
 
+       
+        bodega.setNombre(txtnom_bodega.getText());
+        bodega.setEstado(cbx_estado.getSelectedItem().toString());
+        bodega.setIdUsuarioCreacion(null);
+        bodega.setFechaCreacion(null);
+        bodega.setIdUsuarioActualizacion(null);
+        bodega.setFechaActualizacion(null);
+        try {
+            pjc.edit(bodega);
+            setVisible(false);
+            tipo_bodega tm = new tipo_bodega(new javax.swing.JFrame(), true);
+            tm.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
