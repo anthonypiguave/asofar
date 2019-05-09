@@ -13,6 +13,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -102,13 +103,11 @@ public class tipo_medida_editar extends javax.swing.JDialog {
                             .addComponent(jLabel3))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(nombre_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estado_cb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(estado_cb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -157,7 +156,6 @@ public class tipo_medida_editar extends javax.swing.JDialog {
         // TODO add your handling code here:
         listaempresa = sjc.findSeEmpresaEntities();
         empresa = listaempresa.get(0);
-        
         medidas.setIdEmpresa(empresa);
         medidas.setNombreTipoMedida(nombre_tf.getText());
         medidas.setEstado(estado_cb.getSelectedItem().toString());
@@ -173,6 +171,7 @@ public class tipo_medida_editar extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO CON EXITO");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

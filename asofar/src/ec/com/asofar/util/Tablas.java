@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.util;
 
+import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
@@ -49,6 +50,63 @@ public class Tablas {
             tab.removeRow(0);
         }
         return tab;
+    }
+    public static void listarmotivo(List<InMotivos> lista, JTable Tabla) {
+        int[] a = {5, 30, 30};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"Id","NOMBRE"};
+        String[] Filas = new String[3];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+                Filas[0] = String.valueOf(lista.get(i).getIdMotivo());
+                Filas[1] = lista.get(i).getNombre();                
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);                
+            }
+        }
+
+    }
+    
+    public static void listarmotivoin(List<InMotivos> lista, JTable Tabla) {
+        int[] a = {5, 30, 30};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"Id","NOMBRE"};
+        String[] Filas = new String[3];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("I")) {
+                Filas[0] = String.valueOf(lista.get(i).getIdMotivo());
+                Filas[1] = lista.get(i).getNombre();                
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);                
+            }
+        }
+
     }
     
     public static void listaTipoMovimiento(List<InTipoMovimiento> lista, JTable Tabla) {
