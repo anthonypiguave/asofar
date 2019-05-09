@@ -1,22 +1,15 @@
 package ec.com.asofar.views.usuario;
 
 import ec.com.asofar.daoext.SePersonasJpaControllerExt;
-import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.supgrupos.EditarSubgrupos;
-import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class Mostrar_persona extends javax.swing.JDialog {
