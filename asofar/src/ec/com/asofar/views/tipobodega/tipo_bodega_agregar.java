@@ -160,7 +160,7 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
         try {
             tbc.create(tipobodega);
             setVisible(false);
-            tipo_bodega tb = new tipo_bodega(new javax.swing.JFrame(), true);
+            consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
             tb.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
