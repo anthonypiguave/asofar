@@ -1,13 +1,14 @@
-
 package ec.com.asofar.views.usuario;
 
 import ec.com.asofar.daoext.SePersonasJpaControllerExt;
+import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import ec.com.asofar.views.supgrupos.EditarSubgrupos;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -18,39 +19,38 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-
-
 public class Mostrar_persona extends javax.swing.JDialog {
-    int x,y;
-   
+
+    int x, y;
+    SePersonas obj;
+    List<SePersonas> lista_persona;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-    SePersonasJpaControllerExt persona_controller = 
-            new SePersonasJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
+    SePersonasJpaControllerExt persona_controller
+            = new SePersonasJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
+
     public Mostrar_persona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        List<SePersonas> lista_persona = 
-                persona_controller.findSePersonasEntities();
+        lista_persona
+                = persona_controller.findSePersonasEntities();
         Tablas.listarPersonas(lista_persona, jtPersonas);
-        
+
     }
-    
-        public Mostrar_persona(java.awt.Frame parent, boolean modal,SeUsuarios us, SeEmpresa em, SeSucursal su) {
+
+    public Mostrar_persona(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        us1=us;
-        List<SePersonas> lista_persona = 
-                persona_controller.findSePersonasEntities();
+        us1 = us;
+        lista_persona
+                = persona_controller.findSePersonasEntities();
         Tablas.listarPersonas(lista_persona, jtPersonas);
-     
+
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -205,8 +205,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
- 
-    
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         //System.exit(0);
         int r = JOptionPane.showConfirmDialog(null, "¿Desea salir del módulo usuario?", "", JOptionPane.YES_NO_OPTION);
@@ -215,25 +214,25 @@ public class Mostrar_persona extends javax.swing.JDialog {
 //            System.exit(0);
             setVisible(false);
         } else {
-    }
-        
-        
+        }
+
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    public void filtroUsuario(){
-  
+    public void filtroUsuario() {
+
     }
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Registrar_persona ru = new Registrar_persona(new javax.swing.JFrame(), true, us1);
         setVisible(false);
         ru.setVisible(true);
 //        ipv.clear();
-      
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-  
+
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void jtPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMouseClicked
@@ -241,24 +240,30 @@ public class Mostrar_persona extends javax.swing.JDialog {
     }//GEN-LAST:event_jtPersonasMouseClicked
 
     private void jtPersonasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMousePressed
-//        int i = 0;
-//        try {
-//            if (evt.getClickCount() == 2) {
-//                i = jtUsuario.getSelectedRow();
-//                objeto = devuelveObjeto(jtUsuario.getValueAt(i, 0).toString(), listar);
-//                if (objeto != null) {
-//                    System.out.println("holaaaaa");
-//                    actualizar_usuario acc = new actualizar_usuario(new javax.swing.JFrame(), true, objeto);
-//                    acc.setVisible(true);
-//                    listar.clear();
-//                    listar = crud.get_listar_usuario();
-//                    Tablas.cargarJoinUsuario(jtUsuario, listar);
-//                }
-//
-//            }
-//        } catch (Exception e) {
-//            Logger.getLogger(Mostrar_usuario.class.getName()).log(Level.SEVERE, null, e);
-//        }
+        int id = 0;
+        obj = null;
+        if (evt.getClickCount() == 2) {
+            id = jtPersonas.getSelectedRow();
+            for (int i = 0; i < lista_persona.size(); i++) {
+                if ((jtPersonas.getValueAt(id, 0).toString().equals(lista_persona.get(i).getCedula()))) {
+                    obj = lista_persona.get(i);
+                    if (obj != null) {
+                        setVisible(false);
+                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1);
+                        es.setVisible(true);
+                    }
+                }
+            }
+//            lista = crud.listarProveedores(Long.valueOf("1"));
+//            
+//            (tabla.getValueAt(id, 0).toString(), lista);
+//            System.out.println("si pasa algo"+proveedor.getCedula_ruc());
+//            if (proveedor != null) {
+//                Editar_Proveedor ep = new Editar_Proveedor(new javax.swing.JFrame(), true, proveedor);
+//                setVisible(false);
+//                ep.setVisible(true);
+
+        }
     }//GEN-LAST:event_jtPersonasMousePressed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed

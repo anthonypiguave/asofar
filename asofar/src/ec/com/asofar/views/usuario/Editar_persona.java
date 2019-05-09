@@ -5,20 +5,24 @@
  */
 package ec.com.asofar.views.usuario;
 
-//import com.farmacia.conponentes.Formulario;
-//import com.farmacia.dao.CRUD;
-//import com.farmacia.entities1.ClaseReporte;
-//import com.farmacia.entities1.Estado_usuario;
-//import com.farmacia.entities1.Genero;
-//import com.farmacia.entities1.Listar_usuario;
-//import com.farmacia.entities1.Rol_U;
-//import com.farmacia.entities1.Usuario_S;
-//import com.farmacia.operaciones.Operaciones;
+import ec.com.asofar.dao.SePersonasJpaController;
+import ec.com.asofar.dao.SeTipoPersonaJpaController;
+import ec.com.asofar.dao.exceptions.NonexistentEntityException;
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.SePersonasJpaControllerExt;
+import ec.com.asofar.dto.SePersonas;
+import ec.com.asofar.dto.SeTipoPersona;
+import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.Calendario;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fecha;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -39,27 +43,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author alumno
  */
 public class Editar_persona extends javax.swing.JDialog {
-     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+    SePersonas obj;
+    SePersonasJpaControllerExt persona_controller
+            = new SePersonasJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
+    int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-//    CRUD crud = new CRUD();
-//    String imagen = "";
-//    ArrayList<Usuario_S> lista = null;
-//    ArrayList<Genero> lista1 = null;
-//    ArrayList<Rol_U> lista2 = null;
-//    ArrayList<Estado_usuario> lista3 = null;
-    
-//    ArrayList<Genero> lista1 = crud.listarGenero();
-//    ArrayList<Rol_U> lista2 = crud.listarRol();
-//    ArrayList<Estado_usuario> lista3 = crud.listarEstado();
-    
-//    Listar_usuario obj1 = null;
-    String ro =null;
+    private Date fecha1 = null;
+    String ro = null;
     String est = null;
-    String gen =null;
+    String gen = null;
     private String rutaimagen = "";
     public String fil;
-
-    
+     List<SePersonas> lista_persona;
+    SePersonas persona1;
+    SeTipoPersonaJpaController tpc
+            = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    java.util.Date fechaActual = new java.util.Date();
+SeUsuarios us1;
+SePersonasJpaController mp =
+            new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
     /**
      * Creates new form Registrar
      */
@@ -68,6 +70,18 @@ public class Editar_persona extends javax.swing.JDialog {
         initComponents();
     }
     
+    public Editar_persona(java.awt.Frame parent, boolean modal, SePersonas persona,SeUsuarios us) {
+        super(parent, modal);
+        initComponents();
+        persona1 = persona;
+        us1=us;
+        cargarValores(persona);
+        CargarRol();
+        lista_persona
+                = persona_controller.findSePersonasEntities();
+
+    }
+
 //    public Editar_persona(java.awt.Frame parent, boolean modal,Listar_usuario obj2) {
 //        super(parent, modal);
 //        setUndecorated(true);
@@ -113,21 +127,35 @@ public class Editar_persona extends javax.swing.JDialog {
 //        txtConven.setText(obj1.getConvencional());
 //        getPicture2(obj1.getRuta_imagen());
 //    }
-    
-    public void bloqueo(boolean opc){
-        txtApellido.setEnabled(opc);
-        txtCedula.setEnabled(opc);
-        txtCell.setEnabled(opc);
+    public void bloqueo() {
+               
+        obj = null;
+        
+            for (int i = 0; i < lista_persona.size(); i++) {
+                if (persona1.getIdPersona() == lista_persona.get(i).getIdPersona() ) {
+                    obj = lista_persona.get(i);
+                    try {
+                        mp.destroy(lista_persona.get(i).getIdPersona());
+//                    if (obj != null) {
+//                        setVisible(false);
+//                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1);
+//                        es.setVisible(true);
+//                    }
+                    } catch (NonexistentEntityException ex) {
+                        Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                
+            }
+//            lista = crud.listarProveedores(Long.valueOf("1"));
+//            
+//            (tabla.getValueAt(id, 0).toString(), lista);
+//            System.out.println("si pasa algo"+proveedor.getCedula_ruc());
+//            if (proveedor != null) {
+//                Editar_Proveedor ep = new Editar_Proveedor(new javax.swing.JFrame(), true, proveedor);
+//                setVisible(false);
+//                ep.setVisible(true);
 
-        txtConven.setEnabled(opc);
-        txtCorreo.setEnabled(opc);
-        txtDireccion.setEnabled(opc);
-        txtNombre.setEnabled(opc);
-      
-        lbImagen.setEnabled(opc);
-        btnGuardar.setEnabled(opc);
-        btnImagen.setEnabled(opc);
-        btnLimpiarImg.setEnabled(opc);
+        }
     }
 
     /**
@@ -147,7 +175,6 @@ public class Editar_persona extends javax.swing.JDialog {
         btnSalir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnHabilitar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -165,7 +192,7 @@ public class Editar_persona extends javax.swing.JDialog {
         txtConven = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        fecha1 = new javax.swing.JTextField();
+        fecha = new javax.swing.JTextField();
         BotonFecha1 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         cbTipoPersona1 = new javax.swing.JComboBox<>();
@@ -180,7 +207,6 @@ public class Editar_persona extends javax.swing.JDialog {
         lbImagen.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnLimpiarImg.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        btnLimpiarImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/salir1.png"))); // NOI18N
         btnLimpiarImg.setText("BORRAR FOTO");
         btnLimpiarImg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +215,6 @@ public class Editar_persona extends javax.swing.JDialog {
         });
 
         btnImagen.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        btnImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icono/agregarCliente.png"))); // NOI18N
         btnImagen.setText("AGREGAR FOTO");
         btnImagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,7 +255,6 @@ public class Editar_persona extends javax.swing.JDialog {
         );
 
         btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/eliminar1.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +263,6 @@ public class Editar_persona extends javax.swing.JDialog {
         });
 
         btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/guardar.jpg"))); // NOI18N
         btnGuardar.setText("ACTUALIZAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,19 +271,10 @@ public class Editar_persona extends javax.swing.JDialog {
         });
 
         btnHabilitar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnHabilitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icono/Activar.png"))); // NOI18N
-        btnHabilitar.setText("HABILITAR");
+        btnHabilitar.setText("ELIMINAR");
         btnHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHabilitarActionPerformed(evt);
-            }
-        });
-
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        jButton1.setText("IMPRIMIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -282,6 +296,7 @@ public class Editar_persona extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("CEDULA:");
 
+        txtCedula.setEditable(false);
         txtCedula.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -365,11 +380,11 @@ public class Editar_persona extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("F. NACIMIENTO :");
 
-        fecha1.setEditable(false);
-        fecha1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        fecha1.addActionListener(new java.awt.event.ActionListener() {
+        fecha.setEditable(false);
+        fecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        fecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fecha1ActionPerformed(evt);
+                fechaActionPerformed(evt);
             }
         });
 
@@ -415,26 +430,29 @@ public class Editar_persona extends javax.swing.JDialog {
                             .addComponent(txtDireccion)
                             .addComponent(cbTipoPersona1, 0, 160, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCell, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtConven, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(fecha1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BotonFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCell, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtConven, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -463,7 +481,7 @@ public class Editar_persona extends javax.swing.JDialog {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -484,9 +502,7 @@ public class Editar_persona extends javax.swing.JDialog {
                         .addComponent(btnHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -509,8 +525,7 @@ public class Editar_persona extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -539,13 +554,30 @@ public class Editar_persona extends javax.swing.JDialog {
         String pass = "";
 //        getPicture(pass);
     }//GEN-LAST:event_btnImagenActionPerformed
-    
-    
+
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-      Guardar();
+        Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
-    public void Guardar(){
-        
+    public void Guardar() {
+//        persona1.setCedula(txtCedula.getText());
+        persona1.setNombres(txtNombre.getText());
+        persona1.setApellidos(txtApellido.getText());
+        persona1.setTelefono(txtCell.getText());
+        persona1.setTelefono2(txtConven.getText());
+        persona1.setCorreo(txtCorreo.getText());
+        persona1.setFechaNacimiento(fecha1);
+        persona1.setDireccion(txtDireccion.getText());
+        persona1.setFechaActualizacion(fechaActual);
+        persona1.setUsuarioActualizacion(BigInteger.valueOf(us1.getIdUsuario()));
+        SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona1.getSelectedItem().toString());
+        persona1.setIdTipoPersona(tp);
+
+        try {
+            mp.edit(persona1);
+        } catch (Exception ex) {
+            Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
@@ -558,35 +590,15 @@ public class Editar_persona extends javax.swing.JDialog {
     }//GEN-LAST:event_btnImagenKeyPressed
 
     private void btnHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilitarActionPerformed
-//        bloqueo(true);
+        bloqueo();
     }//GEN-LAST:event_btnHabilitarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//    ArrayList dato = new ArrayList();
-//    ClaseReporte datos = new ClaseReporte(txtId.getText(),cbEstado.getSelectedItem().toString(),txtCedula.getText(),txtNombre.getText(),txtApellido.getText(),cbGenero.getSelectedItem().toString(),cbRol.getSelectedItem().toString(),txtObservacion.getText(),txtCell.getText(),txtConven.getText(),txtCorreo.getText(),txtDireccion.getText(),txtPass.getText(),txtConPass.getText(),imagen);
-//    dato.add(datos);   
-//    try {
-//            String dir = System.getProperty("user.dir")+"/Reportes/"+"Editar_persona.jasper";
-//            JasperReport reporte = (JasperReport)JRLoader.loadObject(dir);
-//            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(dato));
-//            JDialog frame = new JDialog(this);
-//            JRViewer viewer = new JRViewer(jprint);
-//            frame.add(viewer);
-//            frame.setSize(new Dimension(ancho/2,alto/2));
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-//            viewer.setFitWidthZoomRatio();
-//        } catch (JRException ex) {
-//            Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
         //        char c = evt.getKeyChar();
         //        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
-            //            getToolkit().beep();
-            //            evt.consume();
-            //        }
+        //            getToolkit().beep();
+        //            evt.consume();
+        //        }
     }//GEN-LAST:event_txtCedulaKeyTyped
 
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
@@ -648,35 +660,35 @@ public class Editar_persona extends javax.swing.JDialog {
         char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
         char n = 'ç', o = '´', p = '`', q = '¨', r = 'Ñ', s = '·', t = 'ñ';
         if (Character.isWhitespace(c) || c == mas || c == por || c == div || c == dp
-            || c == pc || c == c2 || c == p1 || c == p2 || c == lla1 || c == lla2
-            || c == el || c == el2 || c == co || c == co2 || c == c3 || c == d || c == e
-            || c == col || c == a || c == b || c == e2 || c == f || c == g || c == h
-            || c == i || c == j || c == k || c == l || c == m || c == n || c == o || c == p
-            || c == q || c == r || c == s || c == t) {
+                || c == pc || c == c2 || c == p1 || c == p2 || c == lla1 || c == lla2
+                || c == el || c == el2 || c == co || c == co2 || c == c3 || c == d || c == e
+                || c == col || c == a || c == b || c == e2 || c == f || c == g || c == h
+                || c == i || c == j || c == k || c == l || c == m || c == n || c == o || c == p
+                || c == q || c == r || c == s || c == t) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtCorreoKeyTyped
 
-    private void fecha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecha1ActionPerformed
+    private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fecha1ActionPerformed
+    }//GEN-LAST:event_fechaActionPerformed
 
     private void BotonFecha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFecha1ActionPerformed
-        ////////////        // TODO add your handling code here:
-//        Calendario calen = new Calendario(new javax.swing.JFrame(), true);
-//        calen.setVisible(true);
-//        fecha1 = calen.getFecha();
-//        int com = Fecha.compararFecha(fecha1, (Date) Fecha.FechaSql());
-//
-//        if (com == 1 || com == 0) {
-//            JOptionPane.showMessageDialog(null, "Fecha invalida");
-//            fecha1 = null;
-//            fecha.setText(" ");
-//        } else {
-//            fecha.setText(Fecha.getStringFecha(fecha1));
-//
-//        }
+        //////////        // TODO add your handling code here:
+        Calendario calen = new Calendario(new javax.swing.JFrame(), true);
+        calen.setVisible(true);
+        fecha1 = calen.getFecha();
+        int com = Fecha.compararFecha(fecha1, (Date) Fecha.FechaSql());
+
+        if (com == 1 || com == 0) {
+            JOptionPane.showMessageDialog(null, "Fecha invalida");
+            fecha = null;
+            fecha.setText(" ");
+        } else {
+            fecha.setText(Fecha.getStringFecha(fecha1));
+
+        }
     }//GEN-LAST:event_BotonFecha1ActionPerformed
 
 //    public void VaciarImagen() {
@@ -691,7 +703,6 @@ public class Editar_persona extends javax.swing.JDialog {
 //        lbImagen.setIcon(newIcono);
 //        imagen = fil;
 //    }
-
 //    private void getPicture(String path) {
 //        JFileChooser dig = new JFileChooser(path);
 //        dig.setFileFilter(new FileNameExtensionFilter("Archivos de imagen",
@@ -710,18 +721,27 @@ public class Editar_persona extends javax.swing.JDialog {
 //            System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
 //        }
 //    }
-//    
-    private void getPicture2(String path) {
-            lbImagen.setIcon(new ImageIcon(path));
-            ImageIcon icon = new ImageIcon(path);
-            Image img = icon.getImage();
-            Image newimg = img.getScaledInstance(lbImagen.getWidth(),lbImagen.getHeight(),Image.SCALE_DEFAULT);
-            ImageIcon newIcono = new ImageIcon(newimg);
-            lbImagen.setIcon(newIcono);       
-            System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
-            System.out.println("ruta= "+rutaimagen +"\n"+
-                                "ruta2 "+fil);
+    public void CargarRol() {
+        List<SeTipoPersona> listar = tpc.findSeTipoPersonaEntities();
+        for (int i = 0; i < listar.size(); i++) {
+
+            cbTipoPersona1.addItem(listar.get(i).getNombre());
         }
+        cbTipoPersona1.setSelectedItem(persona1.getIdTipoPersona().getNombre());
+
+    }
+
+    private void getPicture2(String path) {
+        lbImagen.setIcon(new ImageIcon(path));
+        ImageIcon icon = new ImageIcon(path);
+        Image img = icon.getImage();
+        Image newimg = img.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon newIcono = new ImageIcon(newimg);
+        lbImagen.setIcon(newIcono);
+        System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
+        System.out.println("ruta= " + rutaimagen + "\n"
+                + "ruta2 " + fil);
+    }
 
 //    public void Guardar() {
 //        if (txtCedula.getText() == null ) {
@@ -811,7 +831,6 @@ public class Editar_persona extends javax.swing.JDialog {
 //            
 //        }
 //    }
-
     /**
      * @param args the command line arguments
      */
@@ -870,32 +889,19 @@ public class Editar_persona extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonFecha;
     private javax.swing.JButton BotonFecha1;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnHabilitar;
     private javax.swing.JButton btnImagen;
     private javax.swing.JButton btnLimpiarImg;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cbTipoPersona;
     private javax.swing.JComboBox<String> cbTipoPersona1;
     private javax.swing.JTextField fecha;
-    private javax.swing.JTextField fecha1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -903,22 +909,27 @@ public class Editar_persona extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lbImagen;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtApellido1;
     private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtCedula1;
     private javax.swing.JTextField txtCell;
-    private javax.swing.JTextField txtCell1;
     private javax.swing.JTextField txtConven;
-    private javax.swing.JTextField txtConven1;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtCorreo1;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDireccion1;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarValores(SePersonas persona) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        txtCedula.setText(persona.getCedula());
+        txtNombre.setText(persona.getNombres());
+        txtApellido.setText(persona.getApellidos());
+        txtDireccion.setText(persona.getDireccion());
+        txtCorreo.setText(persona.getCorreo());
+        txtCell.setText(persona.getTelefono());
+        txtConven.setText(persona.getTelefono2());
+        txtCorreo.setText(persona.getCorreo());
+        fecha.setText(Fecha.getStringFecha(new java.sql.Date(persona.getFechaNacimiento().getTime())));
+    }
 }
