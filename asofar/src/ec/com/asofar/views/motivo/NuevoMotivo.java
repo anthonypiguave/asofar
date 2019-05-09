@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.motivo;
 
+import ec.com.asofar.views.motivo.*;
 import ec.com.asofar.dao.InMotivosJpaController;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dto.InMotivos;
@@ -20,20 +21,20 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class EditarMotivo extends javax.swing.JDialog {
+public class NuevoMotivo extends javax.swing.JDialog {
     int x,y;
-    InMotivos imo = null;
+    InMotivos imo = new InMotivos();
     InMotivosJpaController imcont = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
     Date d = new Date();
     /**
      * Creates new form EditarMotivo
      */
-    public EditarMotivo(java.awt.Frame parent, boolean modal) {
+    public NuevoMotivo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        setLocationRelativeTo(null);
     }
-    public EditarMotivo(java.awt.Frame parent, boolean modal,InMotivos im) {
+    public NuevoMotivo(java.awt.Frame parent, boolean modal,InMotivos im) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -55,7 +56,6 @@ public class EditarMotivo extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtnombre = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -67,7 +67,7 @@ public class EditarMotivo extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ACTUALIZAR MOTIVO");
+        jLabel1.setText("NUEVO MOTIVO");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -95,16 +95,6 @@ public class EditarMotivo extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(1, 1, 1));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(254, 254, 254));
-        jButton2.setText("DESACTIVAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(49, 126, 51));
         btnguardar.setText("GUARDAR");
@@ -119,19 +109,18 @@ public class EditarMotivo extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,7 +134,6 @@ public class EditarMotivo extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
                     .addComponent(btnguardar))
                 .addGap(0, 17, Short.MAX_VALUE))
         );
@@ -182,17 +170,16 @@ public class EditarMotivo extends javax.swing.JDialog {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         if(txtnombre.getText().length()>2){
         imo.setNombre(txtnombre.getText());
-        imo.setFechaActualizacion(d);
+        imo.setFechaCreacion(d);
+        imo.setEstado("A");
     try {
-        imcont.edit(imo);
-        JOptionPane.showMessageDialog(this, "MOTIVO ACTUALIZADO");
+        imcont.create(imo);
+        JOptionPane.showMessageDialog(this, "NUEVO MOTIVO AGREGADO");
         setVisible(false);
         ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
-        cm.setVisible(true);
-    } catch (NonexistentEntityException ex) {
-        Logger.getLogger(EditarMotivo.class.getName()).log(Level.SEVERE, null, ex);
+        cm.setVisible(true);    
     } catch (Exception ex) {
-        Logger.getLogger(EditarMotivo.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(NuevoMotivo.class.getName()).log(Level.SEVERE, null, ex);
     }}else{
             JOptionPane.showMessageDialog(null,"COMPLETE TODOS LOS CAMPOS");
         }
@@ -203,21 +190,6 @@ public class EditarMotivo extends javax.swing.JDialog {
         ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
         cm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        imo.setEstado("I");
-    try {
-        imcont.edit(imo);
-         JOptionPane.showMessageDialog(this, "MOTIVO DESACTIVADO");
-         setVisible(false);
-         ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
-         cm.setVisible(true);
-    } catch (NonexistentEntityException ex) {
-        Logger.getLogger(EditarMotivo.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
-        Logger.getLogger(EditarMotivo.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,20 +208,21 @@ public class EditarMotivo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoMotivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EditarMotivo dialog = new EditarMotivo(new javax.swing.JFrame(), true);
+                NuevoMotivo dialog = new NuevoMotivo(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -264,7 +237,6 @@ public class EditarMotivo extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

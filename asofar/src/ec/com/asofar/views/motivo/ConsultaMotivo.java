@@ -153,6 +153,11 @@ public class ConsultaMotivo extends javax.swing.JDialog {
         jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(47, 121, 45));
         jButton3.setText("NUEVO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -267,6 +272,12 @@ public class ConsultaMotivo extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tbmotivosMousePressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        setVisible(false);
+        NuevoMotivo nm = new NuevoMotivo(new javax.swing.JFrame(),true);
+        nm.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
