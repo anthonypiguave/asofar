@@ -44,6 +44,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             System.out.println(listaDocumento.size());
         }
         btn_guardar.setVisible(false);
+        
     }
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
