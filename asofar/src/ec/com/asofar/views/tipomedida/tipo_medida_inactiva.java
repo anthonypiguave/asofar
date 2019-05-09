@@ -216,7 +216,7 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
             medidas = devuelveObjeto(Long.parseLong(id), listamedida);
             if (medidas != null) {
                 setVisible(false);
-                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
+                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas, usuarios, empresa);
                 tme.setVisible(true);
             }
         } else {
@@ -227,7 +227,7 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
+        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, usuarios, empresa, sucursal);
         tm.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -253,7 +253,7 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
             medidas = devuelveObjeto(Long.parseLong(medida_tb.getValueAt(id, 0).toString()), listamedida);
             if (medidas != null) {
                 setVisible(false);
-                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
+                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas, usuarios, empresa);
                 tme.setVisible(true);
             }
         }
@@ -284,6 +284,102 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(tipo_medida_inactiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

@@ -57,7 +57,6 @@ public class tipo_medida extends javax.swing.JDialog {
         try {
             listamedida = pjc.findPrTipoMedidasEntities();
             Tablas.TablaTipoMedidaActivo(listamedida, medida_tb);
-
         } catch (Exception e) {
         }
     }
@@ -237,7 +236,7 @@ public class tipo_medida extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        tipo_medida_agregar tma = new tipo_medida_agregar(new javax.swing.JFrame(), true);
+        tipo_medida_agregar tma = new tipo_medida_agregar(new javax.swing.JFrame(), true, usuarios, empresa);
         tma.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -248,7 +247,7 @@ public class tipo_medida extends javax.swing.JDialog {
             medidas = devuelveObjeto(Long.parseLong(id), listamedida);
             if (medidas != null) {
                 setVisible(false);
-                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
+                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas, usuarios, empresa);
                 tme.setVisible(true);
             }
         } else {
@@ -290,7 +289,7 @@ public class tipo_medida extends javax.swing.JDialog {
             medidas = devuelveObjeto(Long.parseLong(medida_tb.getValueAt(id, 0).toString()), listamedida);
             if (medidas != null) {
                 setVisible(false);
-                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
+                tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas, usuarios, empresa);
                 tme.setVisible(true);
             }
         }
@@ -321,6 +320,54 @@ public class tipo_medida extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(tipo_medida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
