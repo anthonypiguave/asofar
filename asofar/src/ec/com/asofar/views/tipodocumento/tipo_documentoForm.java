@@ -29,6 +29,12 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     public tipo_documentoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        MostrarMedidaActiva();
+        System.out.println("holaaa");
+        listaDocumento = ptm.findInTipoDocumentoEntities();
+        for (int i = 0; i < listaDocumento.size(); i++) {
+            System.out.println(listaDocumento.size());
+        }
     }
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -39,6 +45,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     private void MostrarMedidaActiva() {
         try {
             listaDocumento = ptm.findInTipoDocumentoEntities();
+            for(InTipoDocumento y : listaDocumento){
+                System.out.println(y.getNombreDocumento());
+            }
             Tablas.tabla_documento(tb_documento,listaDocumento);
 
         } catch (Exception e) {
@@ -81,7 +90,6 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 
             }
         ));
-        tb_documento.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(tb_documento);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

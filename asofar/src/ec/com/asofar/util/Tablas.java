@@ -546,7 +546,7 @@ public static void tabla_documento(JTable tabla, List<InTipoDocumento> lista) {
         
         InTipoDocumento vo=new InTipoDocumento();
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO","ESTADO"}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO","ESTADO",}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class

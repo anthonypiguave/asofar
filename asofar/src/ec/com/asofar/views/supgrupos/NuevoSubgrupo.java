@@ -29,16 +29,18 @@ import java.util.logging.Logger;
  * @author admin1
  */
 public class NuevoSubgrupo extends javax.swing.JDialog {
-int x,y;
-Date d = new Date();
+
+    int x, y;
+    Date d = new Date();
     SubGruposExt psc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
-ObtenerDTO od = new ObtenerDTO();
+    ObtenerDTO od = new ObtenerDTO();
     PrGruposJpaController pgc = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
-List<PrGrupos> pg;
-List<SeEmpresa> se;
-SeEmpresaJpaController secont = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
-SeEmpresa empresa = new SeEmpresa();
+    List<PrGrupos> pg;
+    List<SeEmpresa> se;
+    SeEmpresaJpaController secont = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeEmpresa empresa = new SeEmpresa();
     PrSubgrupos ps = new PrSubgrupos();
+
     public NuevoSubgrupo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -48,14 +50,15 @@ SeEmpresa empresa = new SeEmpresa();
         llenarCombo(pg);
 //        empresa = se.get(0);
     }
-        public NuevoSubgrupo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+
+    public NuevoSubgrupo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         pg = pgc.findPrGruposEntities();
 //        se = secont.findSeEmpresaEntities();
         llenarCombo(pg);
-        empresa=em;
+        empresa = em;
 //        empresa = se.get(0);
     }
 
@@ -177,15 +180,15 @@ SeEmpresa empresa = new SeEmpresa();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void llenarCombo(List<PrGrupos> pg){
-       for(int i=0;i<pg.size();i++){
-           cbgrupo.addItem(pg.get(i).getNombre());
-       }
+    public void llenarCombo(List<PrGrupos> pg) {
+        for (int i = 0; i < pg.size(); i++) {
+            cbgrupo.addItem(pg.get(i).getNombre());
+        }
     }
-    
+
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         setVisible(false);
-        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
+        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
         cs.setVisible(true);
     }//GEN-LAST:event_btncancelarActionPerformed
 
@@ -196,27 +199,27 @@ SeEmpresa empresa = new SeEmpresa();
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        
-       ps.setNombre(txtnombre.getText());
-       ps.setIdEmpresa(empresa);
-       ps.setEstado("A");
-       ps.setPrGrupos(od.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
-       ps.setUsuarioActualizacion(BigInteger.valueOf(1));
-       ps.setUsuarioCreacion(BigInteger.valueOf(1));
-       ps.setFechaActualizacion(d);
-       ps.setFechaCreacion(d);
-    try {
-        psc.create(ps);
-        setVisible(false);
-        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
-        cs.setVisible(true);
-    } catch (Exception ex) {
-        Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
-    }
+
+        ps.setNombre(txtnombre.getText());
+        ps.setIdEmpresa(empresa);
+        ps.setEstado("A");
+        ps.setPrGrupos(od.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
+        ps.setUsuarioActualizacion(BigInteger.valueOf(1));
+        ps.setUsuarioCreacion(BigInteger.valueOf(1));
+        ps.setFechaActualizacion(d);
+        ps.setFechaCreacion(d);
+        try {
+            psc.create(ps);
+            setVisible(false);
+            ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
+            cs.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     /**
@@ -246,7 +249,7 @@ SeEmpresa empresa = new SeEmpresa();
         }
         //</editor-fold>
         //</editor-fold>
- PrSubgruposJpaController prc = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrSubgruposJpaController prc = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
