@@ -211,6 +211,7 @@ public void Actualizar(){
     setVisible(false);
 //        TipoMovimientoForm cs = new TipoMovimientoForm(new javax.swing.JFrame(),true);
 //        cs.setVisible(true);
+
     }
     /**
      * @param args the command line arguments
