@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.tipodocumento;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.dto.InTipoDocumento;
@@ -13,7 +14,14 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -35,6 +43,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         for (int i = 0; i < listaDocumento.size(); i++) {
             System.out.println(listaDocumento.size());
         }
+        btn_guardar.setVisible(false);
     }
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -42,18 +51,26 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         initComponents();
         MostrarMedidaActiva();
     }
+
     private void MostrarMedidaActiva() {
         try {
             listaDocumento = ptm.findInTipoDocumentoEntities();
-            for(InTipoDocumento y : listaDocumento){
+            for (InTipoDocumento y : listaDocumento) {
                 System.out.println(y.getNombreDocumento());
             }
-            Tablas.tabla_documento(tb_documento,listaDocumento);
+            Tablas.tabla_documento(tb_documento, listaDocumento);
 
         } catch (Exception e) {
-            System.out.println("error documento: "+e.getMessage());
+            System.out.println("error documento: " + e.getMessage());
         }
+
     }
+
+    public void DetectarCambio() {
+        
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +91,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         estado_cb = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +108,11 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 
             }
         ));
+        tb_documento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_documentoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_documento);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -173,6 +196,17 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             }
         });
         toolbar.add(jButton3);
+
+        btn_guardar.setText("guardar");
+        btn_guardar.setFocusable(false);
+        btn_guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
+        toolbar.add(btn_guardar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,6 +299,50 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 //        setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void tb_documentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_documentoMouseClicked
+        int pos=tb_documento.getSelectedRow();
+        
+     //  int valor=devuelveObjeto();
+        for (int i = 0; i < tb_documento.getRowCount(); i++) {
+            String a = transformarboolean((boolean)tb_documento.getValueAt(i, 2));
+            String b = listaDocumento.get(i).getEstado().toString();       
+            if(!a.equals(b)){
+             btn_guardar.setVisible(true);
+             break;
+            }
+        }
+        
+    }//GEN-LAST:event_tb_documentoMouseClicked
+//    public int devuelveObjeto(String datos, ArrayList<Precios> listarobj) {
+//        int objeto1 = 0;
+//        for (int i = 0; i < listarobj.size(); i++) {
+//            if (datos.equals(listarobj.get(i).getId_precio().toString())) {
+//                objeto1 = listarobj.get(i);
+//                break;
+//            }
+//        }
+//        return objeto1;
+//    }
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+       ArrayList<String> queryL1 = new ArrayList<String>();String cad1="";
+        boolean estado = false;
+        for (int i = 0; i < tb_documento.getRowCount(); i++) {
+            estado = (boolean) tb_documento.getValueAt(i, 2);
+            String est = transformarboolean(estado);
+            cad1 = "update in_tipo_documento set estado = '"+estado+"' where id_tipo_documento ="+tb_documento.getValueAt(i, 0)+";";
+ 
+            queryL1.add(cad1);
+            System.out.println(cad1);
+        }
+        
+    }//GEN-LAST:event_btn_guardarActionPerformed
+    public String transformarboolean(boolean valor) {
+        if (valor == true) {
+            return "A";
+        } else {
+            return "I";
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -309,6 +387,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_guardar;
     private javax.swing.JTextField busqueda_tf;
     private javax.swing.JComboBox<String> estado_cb;
     private javax.swing.JButton jButton1;
