@@ -12,6 +12,8 @@ import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.util.EntityManagerUtil;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,6 +26,7 @@ import java.util.logging.Logger;
 public class tipo_bodega_editar extends javax.swing.JDialog {
 
     InTipoBodega bodega;
+    int x,y;
     InTipoBodegaJpaController pjc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
 //
     List<SeEmpresa> listaempresa = null;
@@ -39,6 +42,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     public tipo_bodega_editar(java.awt.Frame parent, boolean modal, InTipoBodega staticbodega) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         bodega = staticbodega;
         txtnom_bodega.setText(bodega.getNombre());
         cbx_estado.addItem("A");
@@ -57,11 +61,11 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtnom_bodega = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         cbx_estado = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,9 +74,6 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         jLabel2.setText("Nombre:");
 
         jLabel3.setText("Estado:");
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("EDITAR  BODEGA");
 
         txtnom_bodega.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -94,11 +95,27 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("EDITAR TIPO BODEGA");
+        jLabel1.setOpaque(true);
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel1MouseDragged(evt);
+            }
+        });
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,12 +133,13 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtnom_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,6 +203,16 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         txtnom_bodega.setText(txtnom_bodega.getText().toUpperCase());
     }//GEN-LAST:event_txtnom_bodegaFocusLost
 
+    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel1MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -231,9 +259,9 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbx_estado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtnom_bodega;
     // End of variables declaration//GEN-END:variables
