@@ -19,7 +19,12 @@ import ec.com.asofar.util.Fecha;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +57,7 @@ public class Editar_persona extends javax.swing.JDialog {
     String ro = null;
     String est = null;
     String gen = null;
-    private String rutaimagen = "";
+//    private String rutaimagen = "";
     public String fil;
      List<SePersonas> lista_persona;
     SePersonas persona1;
@@ -62,6 +67,8 @@ public class Editar_persona extends javax.swing.JDialog {
 SeUsuarios us1;
 SePersonasJpaController mp =
             new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
+String rutaimagen="";
+ String Destino;
     /**
      * Creates new form Registrar
      */
@@ -79,6 +86,7 @@ SePersonasJpaController mp =
         CargarRol();
         lista_persona
                 = persona_controller.findSePersonasEntities();
+        Destino = "/home/admin1/NetBeansProjects/asof/";
 
     }
 
@@ -552,8 +560,45 @@ SePersonasJpaController mp =
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
         String pass = "";
-//        getPicture(pass);
+        getPicture(pass);
     }//GEN-LAST:event_btnImagenActionPerformed
+// private void getPicture2(String path) {
+//        //JFileChooser dig = new JFileChooser(path);
+//        //dig.setFileFilter(new FileNameExtensionFilter("Archivos de imagen",
+//              //  "tif", "jpg", "jpeg", "png", "gif"));
+//        //int opcion = dig.showOpenDialog(this);
+//        //if (opcion == JFileChooser.APPROVE_OPTION) {
+//            //fot = dig.getSelectedFile().getPath();
+//            //rutaimagen = dig.getSelectedFile().getPath();
+//            rutaimagen = path;
+//            lbImagen.setIcon(new ImageIcon(path));
+//            ImageIcon icon = new ImageIcon(path);
+//            Image img = icon.getImage();
+//            Image newimg = img.getScaledInstance(110,106, java.awt.Image.SCALE_SMOOTH);
+//            ImageIcon newIcono = new ImageIcon(newimg);
+//            lbImagen.setIcon(newIcono);            
+////            System.out.println(fot + " Foto " + imagen.getWidth() + " " + imagen.getHeight());
+////            System.out.println("ruta= "+rutaimagen +"\n"+
+////                                "ruta2 "+fot);
+//        }
+    private void getPicture(String path) {
+        JFileChooser dig = new JFileChooser(path);
+        dig.setFileFilter(new FileNameExtensionFilter("Archivos de imagen",
+                "tif", "jpg", "jpeg", "png", "gif"));
+        int opcion = dig.showOpenDialog(this);
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            String fil = dig.getSelectedFile().getPath();
+            lbImagen.setIcon(new ImageIcon(fil));
+            ImageIcon icon = new ImageIcon(fil);
+            Image img = icon.getImage();
+            Image newimg = img.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT/*259, 221, java.awt.Image.SCALE_SMOOTH*/);
+            ImageIcon newIcono = new ImageIcon(newimg);
+            lbImagen.setIcon(newIcono);
+
+             rutaimagen = fil;
+            System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
+        }
+    }
 
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -572,6 +617,7 @@ SePersonasJpaController mp =
         persona1.setUsuarioActualizacion(BigInteger.valueOf(us1.getIdUsuario()));
         SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona1.getSelectedItem().toString());
         persona1.setIdTipoPersona(tp);
+        persona1.setRutaImagen(rutaimagen);
 
         try {
             mp.edit(persona1);
@@ -730,7 +776,16 @@ SePersonasJpaController mp =
         cbTipoPersona1.setSelectedItem(persona1.getIdTipoPersona().getNombre());
 
     }
+        public void copiarImagen(String origen) {
+        Path origenPath = FileSystems.getDefault().getPath(origen);
+        Path destinoPath = FileSystems.getDefault().getPath(Destino);
 
+        try {
+            Files.move(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
     private void getPicture2(String path) {
         lbImagen.setIcon(new ImageIcon(path));
         ImageIcon icon = new ImageIcon(path);
@@ -738,9 +793,9 @@ SePersonasJpaController mp =
         Image newimg = img.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT);
         ImageIcon newIcono = new ImageIcon(newimg);
         lbImagen.setIcon(newIcono);
-        System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
-        System.out.println("ruta= " + rutaimagen + "\n"
-                + "ruta2 " + fil);
+//        System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
+//        System.out.println("ruta= " + rutaimagen + "\n"
+//                + "ruta2 " + fil);
     }
 
 //    public void Guardar() {
@@ -931,5 +986,7 @@ SePersonasJpaController mp =
         txtConven.setText(persona.getTelefono2());
         txtCorreo.setText(persona.getCorreo());
         fecha.setText(Fecha.getStringFecha(new java.sql.Date(persona.getFechaNacimiento().getTime())));
+        getPicture2(persona.getRutaImagen());
+        copiarImagen(rutaimagen);
     }
 }

@@ -9,10 +9,12 @@ import ec.com.asofar.dao.SePersonasJpaController;
 import ec.com.asofar.dao.SeRolesJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.daoext.SeRolesJpaControllerExt;
-
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import ec.com.asofar.dto.SePersonas;
-import ec.com.asofar.dto.SeRoles;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.Calendario;
@@ -22,12 +24,13 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 //import java.util.Date;
 import java.sql.Date;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -38,17 +41,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Registrar_persona extends javax.swing.JDialog {
 
-    SeRolesJpaController mn = 
-            new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    SePersonasJpaController mp =
-            new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
-    SeTipoPersonaJpaController tpc =
-            new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeRolesJpaController mn
+            = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SePersonasJpaController mp
+            = new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeTipoPersonaJpaController tpc
+            = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
     private Date fecha1 = null;
     SeUsuarios us1;
     SePersonas persona = new SePersonas();
     java.util.Date fechaActual = new java.util.Date();
-    String rutaimagen;
+    String rutaimagen = "";
+    String Destino;
+
     public Registrar_persona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
@@ -59,19 +64,20 @@ public class Registrar_persona extends javax.swing.JDialog {
 //        imagenes();
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         CargarRol();
-        
+
     }
 
     public Registrar_persona(java.awt.Frame parent, boolean modal, SeUsuarios us) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
-        us1=us;
+        us1 = us;
         this.setLocationRelativeTo(null);
 //        Habilitar(false);
 //        imagenes();
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         CargarRol();
+        Destino = "/home/admin1/NetBeansProjects/asof/";
     }
 
     /**
@@ -615,13 +621,24 @@ public class Registrar_persona extends javax.swing.JDialog {
             ImageIcon newIcono = new ImageIcon(newimg);
             lbImagen.setIcon(newIcono);
 
-             rutaimagen = fil;
+            rutaimagen = fil;
             System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
         }
     }
 
+    public void copiarImagen(String origen) {
+        Path origenPath = FileSystems.getDefault().getPath(origen);
+        Path destinoPath = FileSystems.getDefault().getPath(Destino);
+
+        try {
+            Files.move(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
     public void Guardar() {
-        
+
         persona.setCedula(txtCedula.getText());
         persona.setNombres(txtNombre.getText());
         persona.setApellidos(txtApellido.getText());
@@ -630,14 +647,14 @@ public class Registrar_persona extends javax.swing.JDialog {
         persona.setCorreo(txtCorreo.getText());
         persona.setFechaNacimiento(fecha1);
         persona.setDireccion(txtDireccion.getText());
-        persona.setFechaActualizacion(fechaActual );
+        persona.setFechaActualizacion(fechaActual);
         persona.setFechaCreacion(fechaActual);
         persona.setUsuarioCreacion(BigInteger.valueOf(us1.getIdUsuario()));
         persona.setUsuarioActualizacion(BigInteger.valueOf(us1.getIdUsuario()));
         SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona.getSelectedItem().toString());
         persona.setIdTipoPersona(tp);
-        
-        
+        persona.setRutaImagen(rutaimagen);
+        copiarImagen(Destino);
         mp.create(persona);
     }
 
