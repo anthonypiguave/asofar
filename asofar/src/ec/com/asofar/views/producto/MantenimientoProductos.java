@@ -14,6 +14,7 @@ import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrMedidasPK;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
@@ -50,7 +51,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     List<PrMedidas> listmed = cmed.findPrMedidasEntities();
     List<PrProductos> listprod = cprod.findPrProductosEntities();
     Tablas tt = new Tablas();
-     String valor = "";
+    String valor = "";
 
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -58,7 +59,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         CargarArbol();
     }
-     public MantenimientoProductos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+
+    public MantenimientoProductos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -80,13 +82,10 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
                     for (PrSubgrupos sg : listsub) {
                         DefaultMutableTreeNode hsub = new DefaultMutableTreeNode();
-
                         if (sg.getPrSubgruposPK().getIdGrupo() == g.getIdGrupo()) {
-
                             if (sg.getEstado().equals("A")) {
                                 hsub.setUserObject(sg.getNombre());
                                 hgru.add(hsub);
-
                             }
                             for (PrArticulo a : listart) {
                                 DefaultMutableTreeNode hart = new DefaultMutableTreeNode();
@@ -95,7 +94,6 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                                         hart.setUserObject(a.getNombreArticulo());
                                         hsub.add(hart);
                                     }
-
                                 }
                             }
                         }
@@ -107,7 +105,6 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             DefaultTreeModel model = new DefaultTreeModel(grupo);
             this.arbol.setModel(model);
         } catch (Exception e) {
-
             System.out.println("Error al cargar arbol " + e.getMessage());
         }
     }
@@ -129,14 +126,14 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla_med = new javax.swing.JTable();
         BotonNuevaMedida = new javax.swing.JButton();
-        txtfiltro1 = new javax.swing.JTextField();
+        txtfiltro = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_prod = new javax.swing.JTable();
         BotonNuevoProducto = new javax.swing.JButton();
-        txtfiltro = new javax.swing.JTextField();
+        txtfiltro1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         BotonSalir = new javax.swing.JButton();
@@ -192,13 +189,13 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         });
 
-        txtfiltro1.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        txtfiltro1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtfiltro1KeyReleased(evt);
-            }
+        txtfiltro.setFont(new java.awt.Font("Ubuntu", 0, 10)); // NOI18N
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtfiltro1KeyTyped(evt);
+                txtfiltroKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
             }
         });
 
@@ -218,7 +215,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                                 .addGap(83, 83, 83)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtfiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(195, 195, 195)
                                 .addComponent(BotonNuevaMedida)))
@@ -235,7 +232,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtfiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,13 +267,13 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         });
 
-        txtfiltro.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtfiltroKeyReleased(evt);
-            }
+        txtfiltro1.setFont(new java.awt.Font("Ubuntu", 0, 10)); // NOI18N
+        txtfiltro1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtfiltroKeyTyped(evt);
+                txtfiltro1KeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltro1KeyReleased(evt);
             }
         });
 
@@ -292,7 +289,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                 .addGap(92, 92, 92)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtfiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -310,7 +307,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -402,7 +399,6 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         setVisible(false);
-       
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -422,7 +418,6 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             if (evt.getPath().getPathCount() == 4) {
                 System.out.println(objeto.getPathComponent(3));
                 PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
-
                 BotonNuevaMedida.setEnabled(true);
                 tt.TablaMedida2(arti.getPrMedidasList(), tabla_med);
                 //   Tablas.TablaMedida2(arti.getPrMedidasList(), tabla_med);
@@ -430,9 +425,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             } else {
                 System.out.println("nooooo");
                 BotonNuevaMedida.setEnabled(false);
-
             }
-
         } catch (Exception e) {
             System.out.println("Error.." + e.getMessage() + e);
         }
@@ -449,67 +442,61 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     }//GEN-LAST:event_BotonNuevaMedidaActionPerformed
 
     private void tabla_medMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_medMousePressed
-        // TODO add your handling code here:
-        int fila, colu = 0;
 
-//        fila = tabla_med.getSelectedRow();
-//        colu= tabla_med.getSelectedColumn();
-        TreePath objeto = arbol.getSelectionPath();
-        //   System.out.println("asdff" + tabla_med.getValueAt(fila, colu));
+        int b = 0;
 
-        //   tabla_med.getCellSelectionEnabled();
-        // if (objeto.getPathCount() == 4) {
         if (evt.getClickCount() == 1) {
 
-            fila = tabla_med.getSelectedRow();
-            colu = tabla_med.getSelectedColumn();
-            System.out.println("asdff" + tabla_med.getValueAt(fila, colu));
+            PrArticulo arti = new PrArticulo();
+            PrTipoMedidas tipo = new PrTipoMedidas();
+            PrTipoPresentacion pre = new PrTipoPresentacion();
+            TreePath objeto = arbol.getSelectionPath();
+            String valor = objeto.getPathComponent(3).toString();
+            arti = ObtenerDTO.ObtenerPrArticulo(valor);
+            tipo = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
+            pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
+            System.out.println(pre +""+ arti + tipo);
+            PrMedidasPK pk = new PrMedidasPK(arti.getPrArticuloPK().getIdArticulo(), arti.getPrArticuloPK().getIdGrupo(), arti.getPrArticuloPK().getIdSubgrupo(), pre.getIdTipoPresentacion(), tipo.getIdTipoMedidas());
+            PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(pk);
+            System.out.println(obj + " Hola Mundoo " + pk);
 
-            for (int i = 0; i < listmed.size(); i++) {
-                if (tabla_med.getValueAt(fila, 0).equals(listmed.get(i).getPrMedidasPK())) {
-                    PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(listmed.get(i).getPrMedidasPK());
-                    Tablas.TablaProducto(obj.getPrProductosList(), tabla_prod);
-                }
+            Tablas.TablaProducto(obj.getPrProductosList(), tabla_prod);
+            BotonNuevoProducto.setEnabled(true);
+//                } else {
+//                    
+//                }
 
-            }
-            //      }
-
-//            PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(objeto.getPathComponent(3).toString());
-//            PrTipoMedidas medi = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
-//            PrTipoPresentacion pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
-//            PrMedidas obj2=ObtenerDTO.ObtenerPrMedidas(arti,medi,p);
-//            Tablas.TablaProducto(obj2.getPrProductosList(), tabla_prod);
         }
     }//GEN-LAST:event_tabla_medMousePressed
 
-    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+    private void txtfiltro1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltro1KeyReleased
+        // TODO add your handling code here:
+        valor = txtfiltro1.getText();
+        Tablas.filtro(valor, tabla_prod);
+    }//GEN-LAST:event_txtfiltro1KeyReleased
 
+    private void txtfiltro1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltro1KeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtfiltro1KeyTyped
+
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+        // TODO add your handling code here:
         valor = txtfiltro.getText();
         Tablas.filtro(valor, tabla_med);
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
+        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
-
-    private void txtfiltro1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltro1KeyReleased
-        // TODO add your handling code here:
-         valor = txtfiltro.getText();
-        Tablas.filtro(valor, tabla_prod);
-    }//GEN-LAST:event_txtfiltro1KeyReleased
-
-    private void txtfiltro1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltro1KeyTyped
-        // TODO add your handling code here:
-         char c = evt.getKeyChar();
-        if (Character.isSpaceChar(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtfiltro1KeyTyped
 
     /**
      * @param args the command line arguments

@@ -5,7 +5,25 @@
  */
 package ec.com.asofar.daoext;
 
-import ec.com.asofar.dto.*;
+import ec.com.asofar.dao.InBodegaJpaController;
+import ec.com.asofar.dto.PrTipoMedidas;
+import ec.com.asofar.dto.PrArticulo;
+import ec.com.asofar.dto.PrTipoPresentacion;
+import ec.com.asofar.dto.PrPrestaciones;
+import ec.com.asofar.dto.InTipoMovimiento;
+import ec.com.asofar.dto.InTipoDocumento;
+import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.SeRoles;
+import ec.com.asofar.dto.PrMedidasPK;
+import ec.com.asofar.dto.InBodega;
+import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.VeUnidadServicio;
+import ec.com.asofar.dto.SeTipoPersona;
+import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.InTipoBodega;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
@@ -32,7 +50,7 @@ public class ObtenerDTO {
     
     
     }
-          public static SeUsuarios ObtenerUsuarios(Long id){
+          public static SeUsuarios ObtenerUsuarios(String id){
         SeUsuariosJpaController control=new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
        SeUsuarios dto=new SeUsuarios();
         List<SeUsuarios> lista=control.findSeUsuariosEntities();
@@ -483,9 +501,17 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
         List<PrMedidas> lista=control.findPrMedidasEntities();
         
         for (int i = 0; i <lista.size(); i++) {
-            if(lista.get(i).getPrMedidasPK()==objeto){
-            dto=lista.get(i);
-            break;
+            if(lista.get(i).getPrMedidasPK().getIdArticulo()==objeto.getIdArticulo()){
+                if(lista.get(i).getPrMedidasPK().getIdGrupo()==objeto.getIdGrupo()){
+                    if(lista.get(i).getPrMedidasPK().getIdSubgrupo()==objeto.getIdSubgrupo()){
+                        if(lista.get(i).getPrMedidasPK().getIdTipoMedidas()==objeto.getIdTipoMedidas()){
+                            if(lista.get(i).getPrMedidasPK().getIdTipoPresentacion()==objeto.getIdTipoPresentacion()){
+                                dto=lista.get(i);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
         

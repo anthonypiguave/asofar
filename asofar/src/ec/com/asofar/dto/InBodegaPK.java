@@ -106,7 +106,7 @@ public class InBodegaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InBodegaPK[ idBodega=" + idBodega + ", idTipoBodega=" + idTipoBodega + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + " ]";
+        return "ec.com.asofar.dao.InBodegaPK[ idBodega=" + idBodega + ", idTipoBodega=" + idTipoBodega + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + " ]";
     }
     
 }

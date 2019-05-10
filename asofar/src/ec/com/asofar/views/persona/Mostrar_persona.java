@@ -1,4 +1,4 @@
-package ec.com.asofar.views.usuario;
+package ec.com.asofar.views.persona;
 
 import ec.com.asofar.daoext.SePersonasJpaControllerExt;
 import ec.com.asofar.dto.SeEmpresa;
@@ -22,6 +22,8 @@ public class Mostrar_persona extends javax.swing.JDialog {
     SePersonasJpaControllerExt persona_controller
             = new SePersonasJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
+    SeEmpresa em1; 
+    SeSucursal su1;
 
     public Mostrar_persona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -38,6 +40,8 @@ public class Mostrar_persona extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         us1 = us;
+        em1 = em;
+        su1= su;
         lista_persona
                 = persona_controller.findSePersonasEntities();
         Tablas.listarPersonas(lista_persona, jtPersonas);
@@ -187,22 +191,14 @@ public class Mostrar_persona extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        //System.exit(0);
-        int r = JOptionPane.showConfirmDialog(null, "¿Desea salir del módulo usuario?", "", JOptionPane.YES_NO_OPTION);
 
-        if (r == JOptionPane.YES_OPTION) {
-//            System.exit(0);
             setVisible(false);
-        } else {
-        }
-
-
     }//GEN-LAST:event_btnSalirActionPerformed
 
    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Registrar_persona ru = new Registrar_persona(new javax.swing.JFrame(), true, us1);
+        Registrar_persona ru = new Registrar_persona(new javax.swing.JFrame(), true, us1,em1,su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -220,8 +216,9 @@ public class Mostrar_persona extends javax.swing.JDialog {
                 if ((jtPersonas.getValueAt(id, 0).toString().equals(lista_persona.get(i).getCedula()))) {
                     obj = lista_persona.get(i);
                     if (obj != null) {
+                        
+                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1,em1,su1);
                         setVisible(false);
-                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1);
                         es.setVisible(true);
                     }
                 }

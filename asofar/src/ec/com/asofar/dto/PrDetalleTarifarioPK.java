@@ -138,7 +138,7 @@ public class PrDetalleTarifarioPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrDetalleTarifarioPK[ idDetalleTarifario=" + idDetalleTarifario + ", idTarifario=" + idTarifario + ", idPrestacion=" + idPrestacion + ", idEmpresa=" + idEmpresa + ", idSurcusal=" + idSurcusal + ", idUnidadServicio=" + idUnidadServicio + " ]";
+        return "ec.com.asofar.dao.PrDetalleTarifarioPK[ idDetalleTarifario=" + idDetalleTarifario + ", idTarifario=" + idTarifario + ", idPrestacion=" + idPrestacion + ", idEmpresa=" + idEmpresa + ", idSurcusal=" + idSurcusal + ", idUnidadServicio=" + idUnidadServicio + " ]";
     }
     
 }

@@ -291,7 +291,7 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetalleOrdenCompra[ idDetalleOrdenCompra=" + idDetalleOrdenCompra + " ]";
+        return "ec.com.asofar.dao.CoDetalleOrdenCompra[ idDetalleOrdenCompra=" + idDetalleOrdenCompra + " ]";
     }
     
 }

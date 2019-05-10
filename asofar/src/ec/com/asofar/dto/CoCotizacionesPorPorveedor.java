@@ -66,17 +66,17 @@ public class CoCotizacionesPorPorveedor implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;
     @Column(name = "usuario_ingreso")
-    private BigInteger usuarioIngreso;
+    private String usuarioIngreso;
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
-    private BigInteger usuarioActualizacion;
+    private String usuarioActualizacion;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne
     private CoProveedores idProveedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coCotizacionesPorPorveedor")
-    private List<CoDetCotizacionPorProveedor> coDetCotizacionPorProveedorList;
+    private List<CoDetalleCotizacionPorProveedor> coDetalleCotizacionPorProveedorList;
 
     public CoCotizacionesPorPorveedor() {
     }
@@ -145,11 +145,11 @@ public class CoCotizacionesPorPorveedor implements Serializable {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public BigInteger getUsuarioIngreso() {
+    public String getUsuarioIngreso() {
         return usuarioIngreso;
     }
 
-    public void setUsuarioIngreso(BigInteger usuarioIngreso) {
+    public void setUsuarioIngreso(String usuarioIngreso) {
         this.usuarioIngreso = usuarioIngreso;
     }
 
@@ -161,11 +161,11 @@ public class CoCotizacionesPorPorveedor implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public BigInteger getUsuarioActualizacion() {
+    public String getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
-    public void setUsuarioActualizacion(BigInteger usuarioActualizacion) {
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
@@ -178,12 +178,12 @@ public class CoCotizacionesPorPorveedor implements Serializable {
     }
 
     @XmlTransient
-    public List<CoDetCotizacionPorProveedor> getCoDetCotizacionPorProveedorList() {
-        return coDetCotizacionPorProveedorList;
+    public List<CoDetalleCotizacionPorProveedor> getCoDetalleCotizacionPorProveedorList() {
+        return coDetalleCotizacionPorProveedorList;
     }
 
-    public void setCoDetCotizacionPorProveedorList(List<CoDetCotizacionPorProveedor> coDetCotizacionPorProveedorList) {
-        this.coDetCotizacionPorProveedorList = coDetCotizacionPorProveedorList;
+    public void setCoDetalleCotizacionPorProveedorList(List<CoDetalleCotizacionPorProveedor> coDetalleCotizacionPorProveedorList) {
+        this.coDetalleCotizacionPorProveedorList = coDetalleCotizacionPorProveedorList;
     }
 
     @Override
@@ -208,7 +208,7 @@ public class CoCotizacionesPorPorveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoCotizacionesPorPorveedor[ coCotizacionesPorPorveedorPK=" + coCotizacionesPorPorveedorPK + " ]";
+        return "ec.com.asofar.dao.CoCotizacionesPorPorveedor[ coCotizacionesPorPorveedorPK=" + coCotizacionesPorPorveedorPK + " ]";
     }
     
 }

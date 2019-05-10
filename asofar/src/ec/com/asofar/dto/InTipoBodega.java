@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,9 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InTipoBodega.findByIdTipoBodega", query = "SELECT i FROM InTipoBodega i WHERE i.idTipoBodega = :idTipoBodega")
     , @NamedQuery(name = "InTipoBodega.findByNombre", query = "SELECT i FROM InTipoBodega i WHERE i.nombre = :nombre")
     , @NamedQuery(name = "InTipoBodega.findByEstado", query = "SELECT i FROM InTipoBodega i WHERE i.estado = :estado")
-    , @NamedQuery(name = "InTipoBodega.findByIdUsuarioCreacion", query = "SELECT i FROM InTipoBodega i WHERE i.idUsuarioCreacion = :idUsuarioCreacion")
+    , @NamedQuery(name = "InTipoBodega.findByUsuarioCreacion", query = "SELECT i FROM InTipoBodega i WHERE i.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "InTipoBodega.findByFechaCreacion", query = "SELECT i FROM InTipoBodega i WHERE i.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "InTipoBodega.findByIdUsuarioActualizacion", query = "SELECT i FROM InTipoBodega i WHERE i.idUsuarioActualizacion = :idUsuarioActualizacion")
+    , @NamedQuery(name = "InTipoBodega.findByUsuarioActualizacion", query = "SELECT i FROM InTipoBodega i WHERE i.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "InTipoBodega.findByFechaActualizacion", query = "SELECT i FROM InTipoBodega i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InTipoBodega implements Serializable {
 
@@ -49,13 +48,13 @@ public class InTipoBodega implements Serializable {
     private String nombre;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "id_usuario_creacion")
-    private BigInteger idUsuarioCreacion;
+    @Column(name = "usuario_creacion")
+    private String usuarioCreacion;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
-    @Column(name = "id_usuario_actualizacion")
-    private BigInteger idUsuarioActualizacion;
+    @Column(name = "usuario_actualizacion")
+    private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
@@ -91,12 +90,12 @@ public class InTipoBodega implements Serializable {
         this.estado = estado;
     }
 
-    public BigInteger getIdUsuarioCreacion() {
-        return idUsuarioCreacion;
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
     }
 
-    public void setIdUsuarioCreacion(BigInteger idUsuarioCreacion) {
-        this.idUsuarioCreacion = idUsuarioCreacion;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
     public Date getFechaCreacion() {
@@ -107,12 +106,12 @@ public class InTipoBodega implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigInteger getIdUsuarioActualizacion() {
-        return idUsuarioActualizacion;
+    public String getUsuarioActualizacion() {
+        return usuarioActualizacion;
     }
 
-    public void setIdUsuarioActualizacion(BigInteger idUsuarioActualizacion) {
-        this.idUsuarioActualizacion = idUsuarioActualizacion;
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
+        this.usuarioActualizacion = usuarioActualizacion;
     }
 
     public Date getFechaActualizacion() {
@@ -145,7 +144,7 @@ public class InTipoBodega implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InTipoBodega[ idTipoBodega=" + idTipoBodega + " ]";
+        return "ec.com.asofar.dao.InTipoBodega[ idTipoBodega=" + idTipoBodega + " ]";
     }
     
 }
