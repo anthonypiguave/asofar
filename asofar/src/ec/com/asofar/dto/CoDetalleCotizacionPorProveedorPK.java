@@ -15,8 +15,11 @@ import javax.persistence.Embeddable;
  * @author admin1
  */
 @Embeddable
-public class CoItemsCotizacionPK implements Serializable {
+public class CoDetalleCotizacionPorProveedorPK implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "id_cotizaciones_por_porveedor")
+    private long idCotizacionesPorPorveedor;
     @Basic(optional = false)
     @Column(name = "id_cotizacion")
     private long idCotizacion;
@@ -26,14 +29,27 @@ public class CoItemsCotizacionPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_sucursal")
     private long idSucursal;
+    @Basic(optional = false)
+    @Column(name = "linea_detalle")
+    private long lineaDetalle;
 
-    public CoItemsCotizacionPK() {
+    public CoDetalleCotizacionPorProveedorPK() {
     }
 
-    public CoItemsCotizacionPK(long idCotizacion, long idEmpresa, long idSucursal) {
+    public CoDetalleCotizacionPorProveedorPK(long idCotizacionesPorPorveedor, long idCotizacion, long idEmpresa, long idSucursal, long lineaDetalle) {
+        this.idCotizacionesPorPorveedor = idCotizacionesPorPorveedor;
         this.idCotizacion = idCotizacion;
         this.idEmpresa = idEmpresa;
         this.idSucursal = idSucursal;
+        this.lineaDetalle = lineaDetalle;
+    }
+
+    public long getIdCotizacionesPorPorveedor() {
+        return idCotizacionesPorPorveedor;
+    }
+
+    public void setIdCotizacionesPorPorveedor(long idCotizacionesPorPorveedor) {
+        this.idCotizacionesPorPorveedor = idCotizacionesPorPorveedor;
     }
 
     public long getIdCotizacion() {
@@ -60,22 +76,35 @@ public class CoItemsCotizacionPK implements Serializable {
         this.idSucursal = idSucursal;
     }
 
+    public long getLineaDetalle() {
+        return lineaDetalle;
+    }
+
+    public void setLineaDetalle(long lineaDetalle) {
+        this.lineaDetalle = lineaDetalle;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (int) idCotizacionesPorPorveedor;
         hash += (int) idCotizacion;
         hash += (int) idEmpresa;
         hash += (int) idSucursal;
+        hash += (int) lineaDetalle;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CoItemsCotizacionPK)) {
+        if (!(object instanceof CoDetalleCotizacionPorProveedorPK)) {
             return false;
         }
-        CoItemsCotizacionPK other = (CoItemsCotizacionPK) object;
+        CoDetalleCotizacionPorProveedorPK other = (CoDetalleCotizacionPorProveedorPK) object;
+        if (this.idCotizacionesPorPorveedor != other.idCotizacionesPorPorveedor) {
+            return false;
+        }
         if (this.idCotizacion != other.idCotizacion) {
             return false;
         }
@@ -85,12 +114,15 @@ public class CoItemsCotizacionPK implements Serializable {
         if (this.idSucursal != other.idSucursal) {
             return false;
         }
+        if (this.lineaDetalle != other.lineaDetalle) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoItemsCotizacionPK[ idCotizacion=" + idCotizacion + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + " ]";
+        return "ec.com.asofar.dao.CoDetalleCotizacionPorProveedorPK[ idCotizacionesPorPorveedor=" + idCotizacionesPorPorveedor + ", idCotizacion=" + idCotizacion + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", lineaDetalle=" + lineaDetalle + " ]";
     }
     
 }

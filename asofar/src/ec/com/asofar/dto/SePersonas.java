@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -48,8 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SePersonas.findByFechaCreacion", query = "SELECT s FROM SePersonas s WHERE s.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "SePersonas.findByUsuarioActualizacion", query = "SELECT s FROM SePersonas s WHERE s.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "SePersonas.findByFechaActualizacion", query = "SELECT s FROM SePersonas s WHERE s.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "SePersonas.findByEstado", query = "SELECT s FROM SePersonas s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SePersonas.findByRutaImagen", query = "SELECT s FROM SePersonas s WHERE s.rutaImagen = :rutaImagen")})
+    , @NamedQuery(name = "SePersonas.findByEstado", query = "SELECT s FROM SePersonas s WHERE s.estado = :estado")})
 public class SePersonas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,19 +74,17 @@ public class SePersonas implements Serializable {
     @Column(name = "telefono2")
     private String telefono2;
     @Column(name = "usuario_creacion")
-    private BigInteger usuarioCreacion;
+    private String usuarioCreacion;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @Column(name = "usuario_actualizacion")
-    private BigInteger usuarioActualizacion;
+    private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @Column(name = "estado")
     private Character estado;
-    @Column(name = "ruta_imagen")
-    private String rutaImagen;
     @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona idTipoPersona;
@@ -178,11 +174,11 @@ public class SePersonas implements Serializable {
         this.telefono2 = telefono2;
     }
 
-    public BigInteger getUsuarioCreacion() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setUsuarioCreacion(BigInteger usuarioCreacion) {
+    public void setUsuarioCreacion(String usuarioCreacion) {
         this.usuarioCreacion = usuarioCreacion;
     }
 
@@ -194,11 +190,11 @@ public class SePersonas implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigInteger getUsuarioActualizacion() {
+    public String getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
-    public void setUsuarioActualizacion(BigInteger usuarioActualizacion) {
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
@@ -216,14 +212,6 @@ public class SePersonas implements Serializable {
 
     public void setEstado(Character estado) {
         this.estado = estado;
-    }
-
-    public String getRutaImagen() {
-        return rutaImagen;
-    }
-
-    public void setRutaImagen(String rutaImagen) {
-        this.rutaImagen = rutaImagen;
     }
 
     public SeTipoPersona getIdTipoPersona() {
@@ -283,7 +271,7 @@ public class SePersonas implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.SePersonas[ idPersona=" + idPersona + " ]";
+        return "ec.com.asofar.dao.SePersonas[ idPersona=" + idPersona + " ]";
     }
     
 }

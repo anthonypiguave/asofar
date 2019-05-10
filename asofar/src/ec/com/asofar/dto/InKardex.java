@@ -311,7 +311,7 @@ public class InKardex implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InKardex[ inKardexPK=" + inKardexPK + " ]";
+        return "ec.com.asofar.dao.InKardex[ inKardexPK=" + inKardexPK + " ]";
     }
     
 }

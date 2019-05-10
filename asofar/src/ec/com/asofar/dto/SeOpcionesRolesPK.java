@@ -90,7 +90,7 @@ public class SeOpcionesRolesPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.SeOpcionesRolesPK[ idOpcionesRoles=" + idOpcionesRoles + ", idOpcionesMenu=" + idOpcionesMenu + ", idRol=" + idRol + " ]";
+        return "ec.com.asofar.dao.SeOpcionesRolesPK[ idOpcionesRoles=" + idOpcionesRoles + ", idOpcionesMenu=" + idOpcionesMenu + ", idRol=" + idRol + " ]";
     }
     
 }

@@ -90,7 +90,7 @@ public class PrArticuloPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrArticuloPK[ idArticulo=" + idArticulo + ", idGrupo=" + idGrupo + ", idSubgrupo=" + idSubgrupo + " ]";
+        return "ec.com.asofar.dao.PrArticuloPK[ idArticulo=" + idArticulo + ", idGrupo=" + idGrupo + ", idSubgrupo=" + idSubgrupo + " ]";
     }
     
 }
