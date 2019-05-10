@@ -445,10 +445,10 @@ public class Editar_persona extends javax.swing.JDialog {
         persona1.setFechaNacimiento(fecha1);
         persona1.setDireccion(txtDireccion.getText());
         persona1.setFechaActualizacion(fechaActual);
-        persona1.setUsuarioActualizacion(BigInteger.valueOf(us1.getIdUsuario()));
+        persona1.setUsuarioActualizacion(us1.getIdUsuario());
         SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona1.getSelectedItem().toString());
         persona1.setIdTipoPersona(tp);
-        persona1.setRutaImagen(rutaimagen);
+     
 
         try {
             mp.edit(persona1);

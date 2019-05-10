@@ -501,8 +501,8 @@ public class Registrar_persona extends javax.swing.JDialog {
         persona.setDireccion(txtDireccion.getText());
         persona.setFechaActualizacion(fechaActual);
         persona.setFechaCreacion(fechaActual);
-        persona.setUsuarioCreacion(BigInteger.valueOf(us1.getIdUsuario()));
-        persona.setUsuarioActualizacion(BigInteger.valueOf(us1.getIdUsuario()));
+        persona.setUsuarioCreacion(us1.getIdUsuario());
+        persona.setUsuarioActualizacion(us1.getIdUsuario());
         SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona.getSelectedItem().toString());
         persona.setIdTipoPersona(tp);
         

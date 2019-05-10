@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.daoext;
 
+import ec.com.asofar.dao.InBodegaJpaController;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrTipoPresentacion;
