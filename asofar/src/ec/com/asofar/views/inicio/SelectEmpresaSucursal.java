@@ -25,7 +25,7 @@ import java.util.List;
 public class SelectEmpresaSucursal extends javax.swing.JDialog {
 
     int x, y;
-    Long id;
+    String id;
 
     /**
      * Creates new form SelectEmpresaSucursal
@@ -36,7 +36,7 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
 
-    public SelectEmpresaSucursal(java.awt.Frame parent, boolean modal, Long id) {
+    public SelectEmpresaSucursal(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
@@ -47,7 +47,7 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
 
     }
 
-    public void comboEmpresa(Long id) {
+    public void comboEmpresa(String id) {
         List<SeSucursal> ls = null;
         SeSucursalJpaController sc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
         List<SeUsuarioSucurRol> listausr = null;

@@ -32,7 +32,7 @@ public class ObtenerDTO {
     
     
     }
-          public static SeUsuarios ObtenerUsuarios(Long id){
+          public static SeUsuarios ObtenerUsuarios(String id){
         SeUsuariosJpaController control=new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
        SeUsuarios dto=new SeUsuarios();
         List<SeUsuarios> lista=control.findSeUsuariosEntities();
