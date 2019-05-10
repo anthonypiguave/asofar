@@ -5,16 +5,35 @@
  */
 package ec.com.asofar.views.tipodocumento;
 
+import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dto.InTipoDocumento;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.EntityManagerUtil;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author admin1
  */
 public class tipo_documentoEditarForm extends javax.swing.JDialog {
 
-    /**
-     * Creates new form tipo_documentoEditarForm1
-     */
+    int x, y;
+    InTipoDocumento documento = new InTipoDocumento();
+    List<InTipoDocumento> listaDocumento;
+    InTipoDocumentoJpaController ptm = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    String valor = "";
     public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+    public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
     }
@@ -148,21 +167,31 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
             InTipoDocumento listnue = new InTipoDocumento();
             listnue.setNombreDocumento(txtnom_documento.getText());
             listnue.setEstado("A");
-            listnue.setUsuarioCreacion(null);
-            listnue.setFechaCreacion(null);
             listnue.setUsuarioActualizacion(null);
             listnue.setFechaActualizacion(null);
             try {
-                ptm.create(listnue);
+                ptm.edit(listnue);
                 setVisible(false);
                 tipo_documentoForm tb = new tipo_documentoForm(new javax.swing.JFrame(), true);
                 tb.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(tipo_documento_agregarForm.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(tipo_documentoEditarForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+    public boolean ver_exis_doc(String valor) {
+        boolean aux = false;
+        listaDocumento = ptm.findInTipoDocumentoEntities();
+        for (int i = 0; i < listaDocumento.size(); i++) {
+            if (listaDocumento.get(i).getNombreDocumento().equals(valor)) {
+                aux = true;
+            } else {
+                aux = false;
+            }
 
+        }
+        return aux;
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
     }//GEN-LAST:event_jButton2ActionPerformed

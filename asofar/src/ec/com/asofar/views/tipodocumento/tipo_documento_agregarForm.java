@@ -11,6 +11,8 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +27,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     InTipoDocumento documento = new InTipoDocumento();
     List<InTipoDocumento> listaDocumento;
     InTipoDocumentoJpaController ptm = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    String valor = "";
+    String valor = "";int x, y;
 
     public tipo_documento_agregarForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -161,8 +163,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
             listnue.setEstado("A");
             listnue.setUsuarioCreacion(null);
             listnue.setFechaCreacion(null);
-            listnue.setUsuarioActualizacion(null);
-            listnue.setFechaActualizacion(null);
+            
             try {
                 ptm.create(listnue);
                 setVisible(false);
