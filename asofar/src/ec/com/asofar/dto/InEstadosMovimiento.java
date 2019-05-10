@@ -158,7 +158,7 @@ public class InEstadosMovimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.InEstadosMovimiento[ idEstadoMovimiento=" + idEstadoMovimiento + " ]";
+        return "ec.com.asofar.dto.InEstadosMovimiento[ idEstadoMovimiento=" + idEstadoMovimiento + " ]";
     }
     
 }

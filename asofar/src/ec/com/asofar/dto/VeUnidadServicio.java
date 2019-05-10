@@ -182,7 +182,7 @@ public class VeUnidadServicio implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.VeUnidadServicio[ idUnidadServicio=" + idUnidadServicio + " ]";
+        return "ec.com.asofar.dto.VeUnidadServicio[ idUnidadServicio=" + idUnidadServicio + " ]";
     }
     
 }

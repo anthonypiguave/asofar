@@ -170,7 +170,7 @@ public class SeRoles implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeRoles[ idRoles=" + idRoles + " ]";
+        return "ec.com.asofar.dto.SeRoles[ idRoles=" + idRoles + " ]";
     }
     
 }

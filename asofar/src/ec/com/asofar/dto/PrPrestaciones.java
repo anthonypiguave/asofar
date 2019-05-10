@@ -156,7 +156,7 @@ public class PrPrestaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.PrPrestaciones[ prPrestacionesPK=" + prPrestacionesPK + " ]";
+        return "ec.com.asofar.dto.PrPrestaciones[ prPrestacionesPK=" + prPrestacionesPK + " ]";
     }
     
 }

@@ -172,7 +172,7 @@ public class PrTipoMedidas implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.PrTipoMedidas[ idTipoMedidas=" + idTipoMedidas + " ]";
+        return "ec.com.asofar.dto.PrTipoMedidas[ idTipoMedidas=" + idTipoMedidas + " ]";
     }
     
 }

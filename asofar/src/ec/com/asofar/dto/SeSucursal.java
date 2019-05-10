@@ -281,7 +281,7 @@ public class SeSucursal implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeSucursal[ seSucursalPK=" + seSucursalPK + " ]";
+        return "ec.com.asofar.dto.SeSucursal[ seSucursalPK=" + seSucursalPK + " ]";
     }
     
 }

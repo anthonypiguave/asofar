@@ -169,7 +169,7 @@ public class InTipoDocumento implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.InTipoDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
+        return "ec.com.asofar.dto.InTipoDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
     }
     
 }

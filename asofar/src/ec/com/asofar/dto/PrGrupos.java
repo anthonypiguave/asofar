@@ -172,7 +172,7 @@ public class PrGrupos implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.PrGrupos[ idGrupo=" + idGrupo + " ]";
+        return "ec.com.asofar.dto.PrGrupos[ idGrupo=" + idGrupo + " ]";
     }
     
 }
