@@ -32,7 +32,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         usuario_lista
                 = usuario_controller.findSeUsuariosEntities();
-        Tablas.listarPersonas(lista_persona, jtPersonas);
+        Tablas.listarPersonas(usuario_lista, jtPersonas);
 
     }
 
@@ -43,9 +43,9 @@ public class Mostrar_persona extends javax.swing.JDialog {
         us1 = us;
         em1 = em;
         su1= su;
-        lista_persona
-                = persona_controller.findSePersonasEntities();
-        Tablas.listarPersonas(lista_persona, jtPersonas);
+      usuario_lista
+                = usuario_controller.findSeUsuariosEntities();
+        Tablas.listarPersonas(usuario_lista, jtPersonas);
 
     }
 
