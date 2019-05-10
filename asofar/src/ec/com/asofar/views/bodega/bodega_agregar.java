@@ -10,6 +10,7 @@ import ec.com.asofar.dao.InTipoBodegaJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.InBodega;
+import ec.com.asofar.dto.InBodegaPK;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -34,12 +35,9 @@ public class bodega_agregar extends javax.swing.JDialog {
     InBodega bod = new InBodega();
     InTipoBodegaJpaController pgc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
     InBodegaJpaController ib = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    /**
-     * Creates new form bodega
-     */
-    List<SeEmpresa> listaempresa = null;
-    SeEmpresa empresa = new SeEmpresa();
-    SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeEmpresa em1;
+    SeSucursal su1;
+    SeUsuarios usu1;
 
     public bodega_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -55,6 +53,9 @@ public class bodega_agregar extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         TiBo = pgc.findInTipoBodegaEntities();
         llenarCombo(TiBo);
+        usu1=us;
+        su1=su;
+        em1=em;
     }
 
     public void llenarCombo(List<InTipoBodega> TiBo) {
@@ -214,21 +215,23 @@ public class bodega_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        listaempresa = sjc.findSeEmpresaEntities();
-        empresa = listaempresa.get(0);
-//        InBodega b = new InBodega();
+
         InTipoBodega tb = new InTipoBodega();
         
         tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-//        tipobodega.setIdEmpresa(empresa);
-        System.out.println("sdfg "+ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString()));
+        
+        InBodegaPK inBodegaPK = new InBodegaPK();
+        
+        inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());     
+        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
+        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
+        bod.setInBodegaPK(inBodegaPK);
+       
         bod.setNombreBodega(txtNombre.getText());
         bod.setEstado("A");
-//        bod.getInBodegaPK().setIdTipoBodega(tb.getIdTipoBodega());
-        bod.getInBodegaPK().setIdTipoBodega(1);
-     
+        bod.setUsuarioCreacion(/*usu1.getNombreUsuario()*/null);
         bod.setFechaCreacion(null);
-        
+        bod.setUsuarioActualizacion(null);
         bod.setFechaActualizacion(null);
         try {
             ib.create(bod);
