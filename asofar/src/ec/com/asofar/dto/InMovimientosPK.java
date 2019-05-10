@@ -94,7 +94,7 @@ public class InMovimientosPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.InMovimientosPK[ idMovimientos=" + idMovimientos + ", idTipoDocumento=" + idTipoDocumento + ", anioDocumento=" + anioDocumento + " ]";
+        return "ec.com.asofar.dto.InMovimientosPK[ idMovimientos=" + idMovimientos + ", idTipoDocumento=" + idTipoDocumento + ", anioDocumento=" + anioDocumento + " ]";
     }
     
 }

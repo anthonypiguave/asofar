@@ -217,7 +217,7 @@ public class SeOpcionesMenu implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeOpcionesMenu[ idOpcionesMenu=" + idOpcionesMenu + " ]";
+        return "ec.com.asofar.dto.SeOpcionesMenu[ idOpcionesMenu=" + idOpcionesMenu + " ]";
     }
     
 }

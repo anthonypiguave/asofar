@@ -229,7 +229,7 @@ public class CoDetItemsCotizacion implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoDetItemsCotizacion[ coDetItemsCotizacionPK=" + coDetItemsCotizacionPK + " ]";
+        return "ec.com.asofar.dto.CoDetItemsCotizacion[ coDetItemsCotizacionPK=" + coDetItemsCotizacionPK + " ]";
     }
     
 }

@@ -258,7 +258,7 @@ public class SeEmpresa implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeEmpresa[ idEmpresa=" + idEmpresa + " ]";
+        return "ec.com.asofar.dto.SeEmpresa[ idEmpresa=" + idEmpresa + " ]";
     }
     
 }

@@ -74,7 +74,7 @@ public class SeSucursalPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeSucursalPK[ idSucursal=" + idSucursal + ", idEmpresa=" + idEmpresa + " ]";
+        return "ec.com.asofar.dto.SeSucursalPK[ idSucursal=" + idSucursal + ", idEmpresa=" + idEmpresa + " ]";
     }
     
 }

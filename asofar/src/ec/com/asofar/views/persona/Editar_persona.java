@@ -18,32 +18,11 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.Calendario;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-//import net.sf.jasperreports.engine.JRException;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-//import net.sf.jasperreports.engine.util.JRLoader;
-//import net.sf.jasperreports.view.JRViewer;
 
 /**
  *
@@ -442,7 +421,7 @@ public class Editar_persona extends javax.swing.JDialog {
         persona1.setTelefono(txtCell.getText());
         persona1.setTelefono2(txtConven.getText());
         persona1.setCorreo(txtCorreo.getText());
-        persona1.setFechaNacimiento(fecha1);
+        persona1.setFechaNacimiento(persona1.getFechaNacimiento());
         persona1.setDireccion(txtDireccion.getText());
         persona1.setFechaActualizacion(fechaActual);
         persona1.setUsuarioActualizacion(us1.getIdUsuario());

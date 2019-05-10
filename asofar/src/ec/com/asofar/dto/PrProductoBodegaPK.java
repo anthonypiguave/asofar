@@ -138,7 +138,7 @@ public class PrProductoBodegaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.PrProductoBodegaPK[ idProductoBodega=" + idProductoBodega + ", idBodega=" + idBodega + ", idProducto=" + idProducto + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idTipoBodega=" + idTipoBodega + " ]";
+        return "ec.com.asofar.dto.PrProductoBodegaPK[ idProductoBodega=" + idProductoBodega + ", idBodega=" + idBodega + ", idProducto=" + idProducto + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idTipoBodega=" + idTipoBodega + " ]";
     }
     
 }

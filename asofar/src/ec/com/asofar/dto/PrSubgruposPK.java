@@ -74,7 +74,7 @@ public class PrSubgruposPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.PrSubgruposPK[ idSubgrupo=" + idSubgrupo + ", idGrupo=" + idGrupo + " ]";
+        return "ec.com.asofar.dto.PrSubgruposPK[ idSubgrupo=" + idSubgrupo + ", idGrupo=" + idGrupo + " ]";
     }
     
 }

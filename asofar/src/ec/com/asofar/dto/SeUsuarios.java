@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,18 +34,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SeUsuarios.findAll", query = "SELECT s FROM SeUsuarios s")
     , @NamedQuery(name = "SeUsuarios.findByIdUsuario", query = "SELECT s FROM SeUsuarios s WHERE s.idUsuario = :idUsuario")
-    , @NamedQuery(name = "SeUsuarios.findByIdTipoPersona", query = "SELECT s FROM SeUsuarios s WHERE s.idTipoPersona = :idTipoPersona")
     , @NamedQuery(name = "SeUsuarios.findByEstado", query = "SELECT s FROM SeUsuarios s WHERE s.estado = :estado")
     , @NamedQuery(name = "SeUsuarios.findByUsuarioCreacion", query = "SELECT s FROM SeUsuarios s WHERE s.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "SeUsuarios.findByFechaCreacion", query = "SELECT s FROM SeUsuarios s WHERE s.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "SeUsuarios.findByUsuarioActualizacion", query = "SELECT s FROM SeUsuarios s WHERE s.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "SeUsuarios.findByFechaActualizacion", query = "SELECT s FROM SeUsuarios s WHERE s.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "SeUsuarios.findByCorreo", query = "SELECT s FROM SeUsuarios s WHERE s.correo = :correo")
-    , @NamedQuery(name = "SeUsuarios.findByTelefono", query = "SELECT s FROM SeUsuarios s WHERE s.telefono = :telefono")
-    , @NamedQuery(name = "SeUsuarios.findByTelefono2", query = "SELECT s FROM SeUsuarios s WHERE s.telefono2 = :telefono2")
-    , @NamedQuery(name = "SeUsuarios.findByDepartamento", query = "SELECT s FROM SeUsuarios s WHERE s.departamento = :departamento")
-    , @NamedQuery(name = "SeUsuarios.findByNombreUsuario", query = "SELECT s FROM SeUsuarios s WHERE s.nombreUsuario = :nombreUsuario")
-    , @NamedQuery(name = "SeUsuarios.findBySueldo", query = "SELECT s FROM SeUsuarios s WHERE s.sueldo = :sueldo")})
+    , @NamedQuery(name = "SeUsuarios.findByNombreUsuario", query = "SELECT s FROM SeUsuarios s WHERE s.nombreUsuario = :nombreUsuario")})
 public class SeUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,8 +47,6 @@ public class SeUsuarios implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_usuario")
     private String idUsuario;
-    @Column(name = "id_tipo_persona")
-    private BigInteger idTipoPersona;
     @Column(name = "estado")
     private Character estado;
     @Column(name = "usuario_creacion")
@@ -68,25 +59,11 @@ public class SeUsuarios implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @Column(name = "correo")
-    private String correo;
-    @Column(name = "telefono")
-    private String telefono;
-    @Column(name = "telefono2")
-    private String telefono2;
-    @Column(name = "departamento")
-    private String departamento;
     @Column(name = "nombre_usuario")
     private String nombreUsuario;
     @Lob
     @Column(name = "password")
     private String password;
-    @Lob
-    @Column(name = "foto")
-    private byte[] foto;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "sueldo")
-    private Double sueldo;
     @OneToMany(mappedBy = "idUsuario")
     private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
@@ -108,14 +85,6 @@ public class SeUsuarios implements Serializable {
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public BigInteger getIdTipoPersona() {
-        return idTipoPersona;
-    }
-
-    public void setIdTipoPersona(BigInteger idTipoPersona) {
-        this.idTipoPersona = idTipoPersona;
     }
 
     public Character getEstado() {
@@ -158,38 +127,6 @@ public class SeUsuarios implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getTelefono2() {
-        return telefono2;
-    }
-
-    public void setTelefono2(String telefono2) {
-        this.telefono2 = telefono2;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -204,22 +141,6 @@ public class SeUsuarios implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
-    public Double getSueldo() {
-        return sueldo;
-    }
-
-    public void setSueldo(Double sueldo) {
-        this.sueldo = sueldo;
     }
 
     @XmlTransient
@@ -270,7 +191,7 @@ public class SeUsuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeUsuarios[ idUsuario=" + idUsuario + " ]";
+        return "ec.com.asofar.dto.SeUsuarios[ idUsuario=" + idUsuario + " ]";
     }
     
 }
