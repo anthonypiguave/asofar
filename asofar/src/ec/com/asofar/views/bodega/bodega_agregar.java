@@ -221,9 +221,11 @@ public class bodega_agregar extends javax.swing.JDialog {
         
         tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
 //        tipobodega.setIdEmpresa(empresa);
+        System.out.println("sdfg "+ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString()));
         bod.setNombreBodega(txtNombre.getText());
         bod.setEstado("A");
-        bod.getInBodegaPK().setIdTipoBodega(tb.getIdTipoBodega());
+//        bod.getInBodegaPK().setIdTipoBodega(tb.getIdTipoBodega());
+        bod.getInBodegaPK().setIdTipoBodega(1);
         bod.setIdUsuarioCreacion(null);
         bod.setFechaCreacion(null);
         bod.setIdUsuarioActualizacion(null);
