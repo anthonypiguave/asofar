@@ -139,7 +139,6 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
         if (ban == true) {
             JOptionPane.showMessageDialog(this, "DOCUMENTO EXISTENTE");
         } else {
-
             //empresa = listaempresa.get(0);
             //        tipobodega.setIdEmpresa(empresa);
             InTipoDocumento listnue = new InTipoDocumento();
