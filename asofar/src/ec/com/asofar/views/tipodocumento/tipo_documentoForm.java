@@ -9,6 +9,7 @@ import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabe
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.dto.InTipoDocumento;
+import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
@@ -19,8 +20,10 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -47,7 +50,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             System.out.println(listaDocumento.size());
         }
         btn_guardar.setVisible(false);
-        
+
     }
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -71,7 +74,6 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     }
 
     public void DetectarCambio() {
-        
 
     }
 
@@ -268,16 +270,32 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        // TODO add your handling code here:
-//        String id = (String) medida_tb.getValueAt(medida_tb.getSelectedRow(), 0);
-//        setVisible(false);
-//        medidas = devuelveObjeto(Long.parseLong(id));
-//        if (medidas != null) {
-//            tipo_medida_editar tme = new tipo_medida_editar(new javax.swing.JFrame(), true, medidas);
-////            tme.setVisible(true);
-//        }
+
+        int i = tb_documento.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN DOCUMENTO");
+        } else {
+            listaDocumento = ptm.findInTipoDocumentoEntities();
+            String id = (String) tb_documento.getValueAt(tb_documento.getSelectedRow(), 0);
+            setVisible(false);
+            documento = devuelveObjeto(Long.parseLong(id), listaDocumento);
+            if (documento != null) {
+                tipo_documentoEditarForm tme = new tipo_documentoEditarForm(new javax.swing.JFrame(), true);
+                tme.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public InTipoDocumento devuelveObjeto(Long id, List<InTipoDocumento> listadoc) {
+        listaDocumento = ptm.findInTipoDocumentoEntities();
+        InTipoDocumento doc = new InTipoDocumento();
+        for (int i = 0; i < listadoc.size(); i++) {
+            if (Objects.equals(listadoc.get(i).getIdTipoDocumento(), id)) {
+                doc = listadoc.get(i);
+            }
+        }
+        return doc;
+    }
     private void estado_cbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_estado_cbItemStateChanged
         // TODO add your handling code here:
         //        if (estado_cb.getSelectedIndex() == 0) {
@@ -311,32 +329,33 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tb_documentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_documentoMouseClicked
-        int pos=tb_documento.getSelectedRow();
-        
-     //  int valor=devuelveObjeto();
+        int pos = tb_documento.getSelectedRow();
+
+        //  int valor=devuelveObjeto();
         for (int i = 0; i < tb_documento.getRowCount(); i++) {
-            String a = transformarboolean((boolean)tb_documento.getValueAt(i, 2));
-            String b = listaDocumento.get(i).getEstado().toString();       
-            if(!a.equals(b)){
-             btn_guardar.setVisible(true);
-             break;
+            String a = transformarboolean((boolean) tb_documento.getValueAt(i, 2));
+            String b = listaDocumento.get(i).getEstado().toString();
+            if (!a.equals(b)) {
+                btn_guardar.setVisible(true);
+                break;
             }
         }
-        
+
     }//GEN-LAST:event_tb_documentoMouseClicked
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-       ArrayList<String> queryL1 = new ArrayList<String>();String cad1="";
+        ArrayList<String> queryL1 = new ArrayList<String>();
+        String cad1 = "";
         boolean estado = false;
         for (int i = 0; i < tb_documento.getRowCount(); i++) {
             estado = (boolean) tb_documento.getValueAt(i, 2);
             String est = transformarboolean(estado);
-            cad1 = "update in_tipo_documento set estado = '"+estado+"' where id_tipo_documento ="+tb_documento.getValueAt(i, 0)+";";
- 
+            cad1 = "update in_tipo_documento set estado = '" + estado + "' where id_tipo_documento =" + tb_documento.getValueAt(i, 0) + ";";
+
             queryL1.add(cad1);
             System.out.println(cad1);
         }
-        
+
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
@@ -355,6 +374,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             return "I";
         }
     }
+
     /**
      * @param args the command line arguments
      */
