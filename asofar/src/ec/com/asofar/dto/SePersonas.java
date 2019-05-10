@@ -48,7 +48,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SePersonas.findByFechaCreacion", query = "SELECT s FROM SePersonas s WHERE s.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "SePersonas.findByUsuarioActualizacion", query = "SELECT s FROM SePersonas s WHERE s.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "SePersonas.findByFechaActualizacion", query = "SELECT s FROM SePersonas s WHERE s.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "SePersonas.findByEstado", query = "SELECT s FROM SePersonas s WHERE s.estado = :estado")})
+    , @NamedQuery(name = "SePersonas.findByEstado", query = "SELECT s FROM SePersonas s WHERE s.estado = :estado")
+    , @NamedQuery(name = "SePersonas.findByRutaImagen", query = "SELECT s FROM SePersonas s WHERE s.rutaImagen = :rutaImagen")})
 public class SePersonas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -86,6 +87,8 @@ public class SePersonas implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "estado")
     private Character estado;
+    @Column(name = "ruta_imagen")
+    private String rutaImagen;
     @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona idTipoPersona;
@@ -213,6 +216,14 @@ public class SePersonas implements Serializable {
 
     public void setEstado(Character estado) {
         this.estado = estado;
+    }
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
     }
 
     public SeTipoPersona getIdTipoPersona() {

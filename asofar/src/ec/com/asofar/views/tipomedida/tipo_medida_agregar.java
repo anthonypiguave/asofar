@@ -9,10 +9,15 @@ import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fecha;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,12 +27,10 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
 
     PrTipoMedidas medidas = new PrTipoMedidas();
     List<PrTipoMedidas> listamedida;
+    SeUsuarios usuarios;
+    SeEmpresa empresa;
+    SeSucursal sucursal;
     PrTipoMedidasJpaController pjc = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-    //experimental
-    List<SeEmpresa> listaempresa = null;
-    SeEmpresa empresa = new SeEmpresa();
-    SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
      * Creates new form tipo_medida_agregar
@@ -35,6 +38,14 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
     public tipo_medida_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public tipo_medida_agregar(java.awt.Frame parent, boolean modal, SeUsuarios staticusuarios, SeEmpresa staticempresa) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        usuarios = staticusuarios;
+        empresa = staticempresa;
     }
 
     /**
@@ -138,28 +149,38 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
+        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, usuarios, empresa, sucursal);
         tm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        listaempresa = sjc.findSeEmpresaEntities();
-        empresa = listaempresa.get(0);
+        boolean pru = true;
         medidas.setIdEmpresa(empresa);
         medidas.setNombreTipoMedida(nombre_tf.getText());
         medidas.setEstado("A");
-        medidas.setUsuarioCreacion(null);
-        medidas.setFechaCreacion(null);
-        medidas.setUsuarioActualizacion(null);
-        medidas.setFechaActualizacion(null);
+        medidas.setUsuarioCreacion(BigInteger.valueOf(usuarios.getIdUsuario()));
+        medidas.setFechaCreacion(Fecha.FechaSql());
         try {
-            pjc.create(medidas);
-            setVisible(false);
-            tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
-            tm.setVisible(true);
+            listamedida = pjc.findPrTipoMedidasEntities();
+            for (int i = 0; i < listamedida.size(); i++) {
+                System.out.println(listamedida.get(i).getNombreTipoMedida());
+                if (listamedida.get(i).getNombreTipoMedida().equals(nombre_tf.getText())) {
+                    JOptionPane.showMessageDialog(null, "REGISTRO EXISTENTE");
+                    pru = false;
+                    break;
+                }
+            }
+            if (pru = true) {
+                pjc.create(medidas);
+                JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO CON EXITO");
+                setVisible(false);
+                tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, usuarios, empresa, sucursal);
+                tm.setVisible(true);
+            }
         } catch (Exception ex) {
             Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -202,6 +223,54 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(tipo_medida_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

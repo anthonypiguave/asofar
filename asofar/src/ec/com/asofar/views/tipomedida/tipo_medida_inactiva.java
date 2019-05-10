@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author ms24m
  */
-public class tipo_medida extends javax.swing.JDialog {
+public class tipo_medida_inactiva extends javax.swing.JDialog {
 
     PrTipoMedidas medidas = new PrTipoMedidas();
     List<PrTipoMedidas> listamedida;
@@ -34,29 +34,29 @@ public class tipo_medida extends javax.swing.JDialog {
     /**
      * Creates new form tipo_medida
      */
-    public tipo_medida(java.awt.Frame parent, boolean modal) {
+    public tipo_medida_inactiva(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        MostrarMedidaActiva();
+        MostrarMedidaInactiva();
     }
 
-    public tipo_medida(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public tipo_medida_inactiva(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        MostrarMedidaActiva();
+        MostrarMedidaInactiva();
         usuarios = us;
         empresa = em;
         sucursal = su;
     }
 
-    private void MostrarMedidaActiva() {
+    private void MostrarMedidaInactiva() {
         try {
             listamedida = pjc.findPrTipoMedidasEntities();
-            Tablas.TablaTipoMedidaActivo(listamedida, medida_tb);
+            Tablas.TablaTipoMedidaInactivo(listamedida, medida_tb);
         } catch (Exception e) {
         }
     }
@@ -84,9 +84,7 @@ public class tipo_medida extends javax.swing.JDialog {
         toolbar = new javax.swing.JToolBar();
         jLabel2 = new javax.swing.JLabel();
         busqueda_tf = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -112,17 +110,6 @@ public class tipo_medida extends javax.swing.JDialog {
         });
         toolbar.add(busqueda_tf);
 
-        jButton1.setText("Agregar");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        toolbar.add(jButton1);
-
         jButton2.setText("Editar");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -133,17 +120,6 @@ public class tipo_medida extends javax.swing.JDialog {
             }
         });
         toolbar.add(jButton2);
-
-        jButton4.setText("Inactivos");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        toolbar.add(jButton4);
 
         jButton3.setText("Volver");
         jButton3.setFocusable(false);
@@ -195,7 +171,7 @@ public class tipo_medida extends javax.swing.JDialog {
 
         jLabel1.setBackground(new java.awt.Color(0, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("TIPO MEDIDA");
+        jLabel1.setText("TIPO MEDIDA INACTIVA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -233,13 +209,6 @@ public class tipo_medida extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        tipo_medida_agregar tma = new tipo_medida_agregar(new javax.swing.JFrame(), true, usuarios, empresa);
-        tma.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if (medida_tb.getSelectedRow() >= 0) {
@@ -258,6 +227,8 @@ public class tipo_medida extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, usuarios, empresa, sucursal);
+        tm.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void busqueda_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busqueda_tfKeyTyped
@@ -274,13 +245,6 @@ public class tipo_medida extends javax.swing.JDialog {
         valor = busqueda_tf.getText();
         Tablas.filtro(valor, medida_tb);
     }//GEN-LAST:event_busqueda_tfKeyReleased
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        tipo_medida_inactiva tmi = new tipo_medida_inactiva(new javax.swing.JFrame(), true, usuarios, empresa, sucursal);
-        tmi.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void medida_tbMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medida_tbMousePressed
         // TODO add your handling code here:
@@ -312,14 +276,78 @@ public class tipo_medida extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_medida_inactiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_medida_inactiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_medida_inactiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tipo_medida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tipo_medida_inactiva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -388,7 +416,7 @@ public class tipo_medida extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                tipo_medida dialog = new tipo_medida(new javax.swing.JFrame(), true);
+                tipo_medida_inactiva dialog = new tipo_medida_inactiva(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -402,10 +430,8 @@ public class tipo_medida extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField busqueda_tf;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

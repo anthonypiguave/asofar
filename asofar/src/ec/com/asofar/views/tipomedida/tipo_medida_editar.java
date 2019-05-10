@@ -9,10 +9,15 @@ import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fecha;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,13 +27,13 @@ public class tipo_medida_editar extends javax.swing.JDialog {
 
     static PrTipoMedidas staticmedidas;
     PrTipoMedidas medidas;
+    SeUsuarios usuarios;
+    SeEmpresa empresa;
+    SeSucursal sucursal;
     List<PrTipoMedidas> listamedida;
     PrTipoMedidasJpaController pjc = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-    //experimental
-    List<SeEmpresa> listaempresa = null;
-    SeEmpresa empresa = new SeEmpresa();
-    SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    
 
     /**
      * Creates new form tipo_medida_agregar
@@ -38,10 +43,13 @@ public class tipo_medida_editar extends javax.swing.JDialog {
         initComponents();
     }
 
-    public tipo_medida_editar(java.awt.Frame parent, boolean modal, PrTipoMedidas staticmedidas) {
+    public tipo_medida_editar(java.awt.Frame parent, boolean modal, PrTipoMedidas staticmedidas, SeUsuarios staticusuarios, SeEmpresa staticempresa) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         medidas = staticmedidas;
+        usuarios = staticusuarios;
+        empresa = staticempresa;
         nombre_tf.setText(medidas.getNombreTipoMedida());
         estado_cb.addItem("A");
         estado_cb.addItem("I");
@@ -149,26 +157,22 @@ public class tipo_medida_editar extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
+        tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, usuarios, empresa, sucursal);
         tm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        listaempresa = sjc.findSeEmpresaEntities();
-        empresa = listaempresa.get(0);
-        
         medidas.setIdEmpresa(empresa);
         medidas.setNombreTipoMedida(nombre_tf.getText());
         medidas.setEstado(estado_cb.getSelectedItem().toString());
-        medidas.setUsuarioCreacion(null);
-        medidas.setFechaCreacion(null);
-        medidas.setUsuarioActualizacion(null);
-        medidas.setFechaActualizacion(null);
+        medidas.setUsuarioActualizacion(BigInteger.valueOf(usuarios.getIdUsuario()));
+        medidas.setFechaActualizacion(Fecha.FechaSql());
         try {
             pjc.edit(medidas);
+            JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO CON EXITO");
             setVisible(false);
-            tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true);
+            tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, usuarios, empresa, sucursal);
             tm.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
