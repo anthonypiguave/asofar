@@ -5,6 +5,8 @@
  */
 package ec.com.asofar.util;
 
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoDocumento;
@@ -642,6 +644,33 @@ public static void tabla_documento(JTable tabla, List<InTipoDocumento> lista) {
         }
 
         tabla.setModel(dt);
+    }
+ public static void listarBodega(List<InBodega> lista, JTable Tabla) {
+        int[] a = {5, 30, 80,20};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"CODIGO", "BODEGA","TIPO DE BODEGA", "ESTADO"};
+        String[] Filas = new String[4];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = ""+lista.get(i).getInBodegaPK().getIdBodega();
+            Filas[1] = lista.get(i).getNombreBodega();
+            Filas[2] = ObtenerDTO.ObtenerInTipoBodega(lista.get(i).getInBodegaPK().getIdTipoBodega()).getNombre();
+            Filas[3] = lista.get(i).getEstado();            
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        }
 
     }
 }

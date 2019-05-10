@@ -314,16 +314,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_tb_documentoMouseClicked
-//    public int devuelveObjeto(String datos, ArrayList<Precios> listarobj) {
-//        int objeto1 = 0;
-//        for (int i = 0; i < listarobj.size(); i++) {
-//            if (datos.equals(listarobj.get(i).getId_precio().toString())) {
-//                objeto1 = listarobj.get(i);
-//                break;
-//            }
-//        }
-//        return objeto1;
-//    }
+
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
        ArrayList<String> queryL1 = new ArrayList<String>();String cad1="";
         boolean estado = false;

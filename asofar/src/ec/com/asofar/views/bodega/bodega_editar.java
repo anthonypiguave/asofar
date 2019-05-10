@@ -6,34 +6,33 @@
 package ec.com.asofar.views.bodega;
 
 import ec.com.asofar.dao.InTipoBodegaJpaController;
-import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InTipoBodega;
-import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author admin1
  */
-public class bodega extends javax.swing.JDialog {
+public class bodega_editar extends javax.swing.JDialog {
 
     int x, y;
-    ObtenerDTO od = new ObtenerDTO();
     List<InTipoBodega> TiBo;
-    InTipoBodega ps = new InTipoBodega();
     InTipoBodegaJpaController pgc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    SeEmpresa empresa = new SeEmpresa();
+
     /**
-     * Creates new form bodega
+     * Creates new form bodega_editar
      */
-    public bodega(java.awt.Frame parent, boolean modal) {
+    public bodega_editar(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        llenarCombo(TiBo);
+    }
+
+    public bodega_editar(java.awt.Frame parent, boolean modal, InBodega bod) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);        
@@ -41,15 +40,8 @@ public class bodega extends javax.swing.JDialog {
         llenarCombo(TiBo);
     }
 
-    public bodega(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
-        initComponents();
-        setLocationRelativeTo(null);
-        TiBo = pgc.findInTipoBodegaEntities();
-        llenarCombo(TiBo);
-    }
-
     public void llenarCombo(List<InTipoBodega> TiBo) {
+
         for (int i = 0; i < TiBo.size(); i++) {
             cbxTipoBodega.addItem(TiBo.get(i).getNombre());
         }
@@ -64,8 +56,6 @@ public class bodega extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        btncancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -75,17 +65,6 @@ public class bodega extends javax.swing.JDialog {
         btnguardar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel2.setText("ELEGIR GRUPO:");
-
-        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btncancelar.setText("CANCELAR");
-        btncancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelarActionPerformed(evt);
-            }
-        });
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -94,7 +73,7 @@ public class bodega extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NUEVA BODEGA");
+        jLabel1.setText("EDITAR BODEGA");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -122,7 +101,7 @@ public class bodega extends javax.swing.JDialog {
         });
 
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnguardar.setText("GUARDAR");
+        btnguardar.setText("ACTUALIZAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
@@ -179,9 +158,7 @@ public class bodega extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -197,31 +174,11 @@ public class bodega extends javax.swing.JDialog {
         y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
-    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-
-    }//GEN-LAST:event_btncancelarActionPerformed
-
     private void btncancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar1ActionPerformed
-
+        setVisible(false);
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-//        ps.setNombre(txtNombre.getText());
-////        ps.setIdEmpresa(empresa);
-//        ps.setEstado("A");
-//        ps.setPrGrupos(od.ObtenerPrGrupos(cbxTipoBodega.getSelectedItem().toString()));
-////        ps.setUsuarioActualizacion(BigInteger.valueOf(1));
-////        ps.setUsuarioCreacion(BigInteger.valueOf(1));
-//        ps.setFechaActualizacion(d);
-//        ps.setFechaCreacion(d);
-//        try {
-//            psc.create(ps);
-//            setVisible(false);
-//            ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
-//            cs.setVisible(true);
-//        } catch (Exception ex) {
-//            Logger.getLogger(bodega.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -242,20 +199,20 @@ public class bodega extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                bodega dialog = new bodega(new javax.swing.JFrame(), true);
+                bodega_editar dialog = new bodega_editar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -268,12 +225,10 @@ public class bodega extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncancelar;
     private javax.swing.JButton btncancelar1;
     private javax.swing.JButton btnguardar;
     private javax.swing.JComboBox<String> cbxTipoBodega;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

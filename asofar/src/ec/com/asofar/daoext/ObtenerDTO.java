@@ -82,7 +82,7 @@ public class ObtenerDTO {
     
     
     }
-    public static InTipoBodega ObtenerInTipoBodega(int id){
+    public static InTipoBodega ObtenerInTipoBodega(Long id){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         InTipoBodega dto=new InTipoBodega();
         List<InTipoBodega> lista=control.findInTipoBodegaEntities();
