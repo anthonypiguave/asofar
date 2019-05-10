@@ -5,6 +5,20 @@
  */
 package ec.com.asofar.daoext;
 
+import ec.com.asofar.dao.InBodegaJpaController;
+import ec.com.asofar.dao.InTipoBodegaJpaController;
+import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dao.InTipoMovimientoJpaController;
+import ec.com.asofar.dao.PrArticuloJpaController;
+import ec.com.asofar.dao.PrFabricanteJpaController;
+import ec.com.asofar.dao.PrGruposJpaController;
+import ec.com.asofar.dao.PrPrestacionesJpaController;
+import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.dao.PrTipoMedidasJpaController;
+import ec.com.asofar.dao.PrTipoPresentacionJpaController;
+import ec.com.asofar.dao.SeRolesJpaController;
+import ec.com.asofar.dao.SeTipoPersonaJpaController;
+import ec.com.asofar.dao.VeUnidadServicioJpaController;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrTipoPresentacion;

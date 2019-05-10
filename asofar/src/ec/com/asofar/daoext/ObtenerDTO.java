@@ -501,9 +501,17 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
         List<PrMedidas> lista=control.findPrMedidasEntities();
         
         for (int i = 0; i <lista.size(); i++) {
-            if(lista.get(i).getPrMedidasPK()==objeto){
-            dto=lista.get(i);
-            break;
+            if(lista.get(i).getPrMedidasPK().getIdArticulo()==objeto.getIdArticulo()){
+                if(lista.get(i).getPrMedidasPK().getIdGrupo()==objeto.getIdGrupo()){
+                    if(lista.get(i).getPrMedidasPK().getIdSubgrupo()==objeto.getIdSubgrupo()){
+                        if(lista.get(i).getPrMedidasPK().getIdTipoMedidas()==objeto.getIdTipoMedidas()){
+                            if(lista.get(i).getPrMedidasPK().getIdTipoPresentacion()==objeto.getIdTipoPresentacion()){
+                                dto=lista.get(i);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
         

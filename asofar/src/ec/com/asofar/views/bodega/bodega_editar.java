@@ -35,9 +35,17 @@ public class bodega_editar extends javax.swing.JDialog {
     public bodega_editar(java.awt.Frame parent, boolean modal, InBodega bod) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);        
+        setLocationRelativeTo(null);
         TiBo = pgc.findInTipoBodegaEntities();
         llenarCombo(TiBo);
+        llenartxt(bod);
+        
+    }
+
+    private void llenartxt(InBodega obj) {
+        for (int i = 0; i < TiBo.size(); i++) {
+            txtNombre.setText(TiBo.get(i).getNombre());
+        }
     }
 
     public void llenarCombo(List<InTipoBodega> TiBo) {
@@ -175,7 +183,7 @@ public class bodega_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void btncancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar1ActionPerformed
-        setVisible(false);
+    
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
