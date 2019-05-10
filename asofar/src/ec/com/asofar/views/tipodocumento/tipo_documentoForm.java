@@ -57,6 +57,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         MostrarMedidaActiva();
+        System.out.println("nombre es "+us.getNombreUsuario());
     }
 
     private void MostrarMedidaActiva() {
@@ -287,8 +288,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public InTipoDocumento devuelveObjeto(Long id, List<InTipoDocumento> listadoc) {
-        
+    public InTipoDocumento devuelveObjeto(Long id, List<InTipoDocumento> listadoc) {  
         InTipoDocumento doc = null;
         for (int i = 0; i < listadoc.size(); i++) {
             if (Objects.equals(listadoc.get(i).getIdTipoDocumento(), id)) {
