@@ -213,9 +213,9 @@ public class AgregarGruposForm extends javax.swing.JDialog {
                 pr.setIdEmpresa(se);
                 pr.setNombre(txtNombre.getText());
                 pr.setEstado("A");
-                pr.setUsuarioCreacion(BigInteger.valueOf(1));
+//                pr.setUsuarioCreacion(BigInteger.valueOf(1));
                 pr.setFechaCreacion(d);
-                pr.setUsuarioActualizacion(BigInteger.valueOf(1));
+//                pr.setUsuarioActualizacion(BigInteger.valueOf(1));
                 pr.setFechaActualizacion(d);
                 try {
                     prj.create(pr);

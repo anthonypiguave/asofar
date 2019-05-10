@@ -208,8 +208,8 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
         ps.setIdEmpresa(empresa);
         ps.setEstado("A");
         ps.setPrGrupos(od.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
-        ps.setUsuarioActualizacion(BigInteger.valueOf(1));
-        ps.setUsuarioCreacion(BigInteger.valueOf(1));
+        ps.setUsuarioActualizacion(String.valueOf(1));
+        ps.setUsuarioCreacion(String.valueOf(1));
         ps.setFechaActualizacion(d);
         ps.setFechaCreacion(d);
         try {

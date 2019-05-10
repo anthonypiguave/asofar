@@ -206,7 +206,7 @@ public class NuevaMedida extends javax.swing.JDialog {
             med.setPrTipoMedidas(ObtenerDTO.ObtenerPrTipoMedidas(tipo_med.getSelectedItem().toString()));
             med.setPrTipoPresentacion(ObtenerDTO.ObtenerPrTipoPresentacion(tipo_pres.getSelectedItem().toString()));
             med.setEstado("A");
-            med.setUsuarioCreacion(BigInteger.valueOf(1));
+            med.setUsuarioCreacion(String.valueOf(1));
             med.setFechaCreacion(Fecha.FechaSql());
 
             controlm.create(med);

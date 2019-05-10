@@ -19,7 +19,7 @@ import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrSubgrupos;
-import ec.com.asofar.dto.*;
+import ec.com.asofar.dao.*;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 
