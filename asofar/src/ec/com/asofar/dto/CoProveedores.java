@@ -7,6 +7,7 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,9 +44,14 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoProveedores.findByTipoPersona", query = "SELECT c FROM CoProveedores c WHERE c.tipoPersona = :tipoPersona")
     , @NamedQuery(name = "CoProveedores.findByIdPais", query = "SELECT c FROM CoProveedores c WHERE c.idPais = :idPais")
     , @NamedQuery(name = "CoProveedores.findByContribuyenteEspecial", query = "SELECT c FROM CoProveedores c WHERE c.contribuyenteEspecial = :contribuyenteEspecial")
-    , @NamedQuery(name = "CoProveedores.findByEsPublico", query = "SELECT c FROM CoProveedores c WHERE c.esPublico = :esPublico")
+    , @NamedQuery(name = "CoProveedores.findByCodigoContribuyente", query = "SELECT c FROM CoProveedores c WHERE c.codigoContribuyente = :codigoContribuyente")
     , @NamedQuery(name = "CoProveedores.findByObservaciones", query = "SELECT c FROM CoProveedores c WHERE c.observaciones = :observaciones")
-    , @NamedQuery(name = "CoProveedores.findByNombreComercial", query = "SELECT c FROM CoProveedores c WHERE c.nombreComercial = :nombreComercial")})
+    , @NamedQuery(name = "CoProveedores.findByNombreComercial", query = "SELECT c FROM CoProveedores c WHERE c.nombreComercial = :nombreComercial")
+    , @NamedQuery(name = "CoProveedores.findByUsuarioCreacion", query = "SELECT c FROM CoProveedores c WHERE c.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "CoProveedores.findByFechaCreacion", query = "SELECT c FROM CoProveedores c WHERE c.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "CoProveedores.findByUsuarioActualizacion", query = "SELECT c FROM CoProveedores c WHERE c.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "CoProveedores.findByFechaActualizacion", query = "SELECT c FROM CoProveedores c WHERE c.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "CoProveedores.findByEstado", query = "SELECT c FROM CoProveedores c WHERE c.estado = :estado")})
 public class CoProveedores implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,12 +80,24 @@ public class CoProveedores implements Serializable {
     private BigInteger idPais;
     @Column(name = "contribuyente_especial")
     private String contribuyenteEspecial;
-    @Column(name = "es_publico")
-    private String esPublico;
+    @Column(name = "codigo_contribuyente")
+    private String codigoContribuyente;
     @Column(name = "observaciones")
     private String observaciones;
     @Column(name = "nombre_comercial")
     private String nombreComercial;
+    @Column(name = "usuario_creacion")
+    private BigInteger usuarioCreacion;
+    @Column(name = "fecha_creacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+    @Column(name = "usuario_actualizacion")
+    private BigInteger usuarioActualizacion;
+    @Column(name = "fecha_actualizacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaActualizacion;
+    @Column(name = "estado")
+    private Character estado;
     @OneToMany(mappedBy = "idProveedor")
     private List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList;
 
@@ -176,12 +196,12 @@ public class CoProveedores implements Serializable {
         this.contribuyenteEspecial = contribuyenteEspecial;
     }
 
-    public String getEsPublico() {
-        return esPublico;
+    public String getCodigoContribuyente() {
+        return codigoContribuyente;
     }
 
-    public void setEsPublico(String esPublico) {
-        this.esPublico = esPublico;
+    public void setCodigoContribuyente(String codigoContribuyente) {
+        this.codigoContribuyente = codigoContribuyente;
     }
 
     public String getObservaciones() {
@@ -198,6 +218,46 @@ public class CoProveedores implements Serializable {
 
     public void setNombreComercial(String nombreComercial) {
         this.nombreComercial = nombreComercial;
+    }
+
+    public BigInteger getUsuarioCreacion() {
+        return usuarioCreacion;
+    }
+
+    public void setUsuarioCreacion(BigInteger usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public BigInteger getUsuarioActualizacion() {
+        return usuarioActualizacion;
+    }
+
+    public void setUsuarioActualizacion(BigInteger usuarioActualizacion) {
+        this.usuarioActualizacion = usuarioActualizacion;
+    }
+
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Character getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Character estado) {
+        this.estado = estado;
     }
 
     @XmlTransient

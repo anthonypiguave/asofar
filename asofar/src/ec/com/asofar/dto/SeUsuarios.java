@@ -12,8 +12,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -53,10 +51,9 @@ public class SeUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    private String idUsuario;
     @Column(name = "id_tipo_persona")
     private BigInteger idTipoPersona;
     @Column(name = "estado")
@@ -101,15 +98,15 @@ public class SeUsuarios implements Serializable {
     public SeUsuarios() {
     }
 
-    public SeUsuarios(Long idUsuario) {
+    public SeUsuarios(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 

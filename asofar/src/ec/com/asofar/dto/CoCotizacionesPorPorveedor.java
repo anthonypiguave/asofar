@@ -8,8 +8,6 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -17,12 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -75,8 +71,6 @@ public class CoCotizacionesPorPorveedor implements Serializable {
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne
     private CoProveedores idProveedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coCotizacionesPorPorveedor")
-    private List<CoDetCotizacionPorProveedor> coDetCotizacionPorProveedorList;
 
     public CoCotizacionesPorPorveedor() {
     }
@@ -175,15 +169,6 @@ public class CoCotizacionesPorPorveedor implements Serializable {
 
     public void setIdProveedor(CoProveedores idProveedor) {
         this.idProveedor = idProveedor;
-    }
-
-    @XmlTransient
-    public List<CoDetCotizacionPorProveedor> getCoDetCotizacionPorProveedorList() {
-        return coDetCotizacionPorProveedorList;
-    }
-
-    public void setCoDetCotizacionPorProveedorList(List<CoDetCotizacionPorProveedor> coDetCotizacionPorProveedorList) {
-        this.coDetCotizacionPorProveedorList = coDetCotizacionPorProveedorList;
     }
 
     @Override
