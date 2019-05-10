@@ -132,6 +132,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
 
     private void txtnom_documentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnom_documentoKeyTyped
 
+        
     }//GEN-LAST:event_txtnom_documentoKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
