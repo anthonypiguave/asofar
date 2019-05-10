@@ -166,7 +166,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         try {
             pjc.edit(bodega);
             setVisible(false);
-            tipo_bodega tm = new tipo_bodega(new javax.swing.JFrame(), true);
+            consulta_tipo_bodega tm = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
             tm.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,7 +176,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        tipo_bodega tb = new tipo_bodega(new javax.swing.JFrame(), true);
+        consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
         tb.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

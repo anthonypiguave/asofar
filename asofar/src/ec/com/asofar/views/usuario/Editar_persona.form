@@ -222,7 +222,7 @@
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="ACTUALIZAR USUARIO"/>
+            <Property name="text" type="java.lang.String" value="ACTUALIZAR PERSONA"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>

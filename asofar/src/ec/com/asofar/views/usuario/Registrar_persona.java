@@ -48,6 +48,7 @@ public class Registrar_persona extends javax.swing.JDialog {
     SeUsuarios us1;
     SePersonas persona = new SePersonas();
     java.util.Date fechaActual = new java.util.Date();
+    String rutaimagen;
     public Registrar_persona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
@@ -614,7 +615,7 @@ public class Registrar_persona extends javax.swing.JDialog {
             ImageIcon newIcono = new ImageIcon(newimg);
             lbImagen.setIcon(newIcono);
 
-            // rutaimagen = Cadenas.getPathMysql(dig.getSelectedFile().getPath());
+             rutaimagen = fil;
             System.out.println(fil + " Foto " + lbImagen.getWidth() + " " + lbImagen.getHeight());
         }
     }
@@ -635,6 +636,7 @@ public class Registrar_persona extends javax.swing.JDialog {
         persona.setUsuarioActualizacion(BigInteger.valueOf(us1.getIdUsuario()));
         SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona.getSelectedItem().toString());
         persona.setIdTipoPersona(tp);
+        
         
         mp.create(persona);
     }
