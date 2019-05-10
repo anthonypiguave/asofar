@@ -14,6 +14,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
 import java.math.BigInteger;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -155,12 +156,13 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        java.util.Date fechaActual = new java.util.Date();
         boolean pru = true;
         medidas.setIdEmpresa(empresa);
         medidas.setNombreTipoMedida(nombre_tf.getText());
         medidas.setEstado("A");
-        medidas.setUsuarioCreacion(BigInteger.valueOf(usuarios.getIdUsuario()));
-        medidas.setFechaCreacion(Fecha.FechaSql());
+        medidas.setUsuarioCreacion(String.valueOf(usuarios.getIdUsuario()));
+        medidas.setFechaCreacion(fechaActual);
         try {
             listamedida = pjc.findPrTipoMedidasEntities();
             for (int i = 0; i < listamedida.size(); i++) {
@@ -171,7 +173,7 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
                     break;
                 }
             }
-            if (pru = true) {
+            if (pru == true) {
                 pjc.create(medidas);
                 JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO CON EXITO");
                 setVisible(false);

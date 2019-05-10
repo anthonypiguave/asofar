@@ -177,9 +177,9 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
        
         bodega.setNombre(txtnom_bodega.getText());
         bodega.setEstado(cbx_estado.getSelectedItem().toString());
-        bodega.setIdUsuarioCreacion(null);
+//        bodega.setIdUsuarioCreacion(null);
         bodega.setFechaCreacion(null);
-        bodega.setIdUsuarioActualizacion(null);
+//        bodega.setIdUsuarioActualizacion(null);
         bodega.setFechaActualizacion(null);
         try {
             pjc.edit(bodega);

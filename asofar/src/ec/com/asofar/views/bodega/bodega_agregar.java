@@ -226,9 +226,9 @@ public class bodega_agregar extends javax.swing.JDialog {
         bod.setEstado("A");
 //        bod.getInBodegaPK().setIdTipoBodega(tb.getIdTipoBodega());
         bod.getInBodegaPK().setIdTipoBodega(1);
-        bod.setIdUsuarioCreacion(null);
+     
         bod.setFechaCreacion(null);
-        bod.setIdUsuarioActualizacion(null);
+        
         bod.setFechaActualizacion(null);
         try {
             ib.create(bod);
