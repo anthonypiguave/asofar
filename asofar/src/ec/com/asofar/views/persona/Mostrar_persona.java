@@ -1,4 +1,4 @@
-package ec.com.asofar.views.usuario;
+package ec.com.asofar.views.persona;
 
 import ec.com.asofar.daoext.SePersonasJpaControllerExt;
 import ec.com.asofar.dto.SeEmpresa;
