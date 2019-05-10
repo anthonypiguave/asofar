@@ -453,8 +453,9 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             TreePath objeto = arbol.getSelectionPath();
             String valor = objeto.getPathComponent(3).toString();
             arti = ObtenerDTO.ObtenerPrArticulo(valor);
-            tipo = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
-            pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
+            tipo = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
+            pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
+            System.out.println(pre +""+ arti + tipo);
             PrMedidasPK pk = new PrMedidasPK(arti.getPrArticuloPK().getIdArticulo(), arti.getPrArticuloPK().getIdGrupo(), arti.getPrArticuloPK().getIdSubgrupo(), pre.getIdTipoPresentacion(), tipo.getIdTipoMedidas());
             PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(pk);
             System.out.println(obj + " Hola Mundoo " + pk);

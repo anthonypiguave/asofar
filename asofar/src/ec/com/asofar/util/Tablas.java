@@ -486,7 +486,7 @@ public class Tablas {
     }
 
     public static void TablaProducto(List<PrProductos> listaprod, JTable tabla) {
-        int[] a = {5, 300, 20};
+        int[] a = {10, 50, 125,100, 50, 50};
         DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
         DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
         dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
