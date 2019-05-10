@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -36,9 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "PrFabricante.findByIdFabricante", query = "SELECT p FROM PrFabricante p WHERE p.idFabricante = :idFabricante")
     , @NamedQuery(name = "PrFabricante.findByNombre", query = "SELECT p FROM PrFabricante p WHERE p.nombre = :nombre")
     , @NamedQuery(name = "PrFabricante.findByEstado", query = "SELECT p FROM PrFabricante p WHERE p.estado = :estado")
-    , @NamedQuery(name = "PrFabricante.findByIdUsuarioCreacion", query = "SELECT p FROM PrFabricante p WHERE p.idUsuarioCreacion = :idUsuarioCreacion")
+    , @NamedQuery(name = "PrFabricante.findByUsuarioCreacion", query = "SELECT p FROM PrFabricante p WHERE p.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "PrFabricante.findByFechaCreacion", query = "SELECT p FROM PrFabricante p WHERE p.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "PrFabricante.findByIdUsuarioActualizacion", query = "SELECT p FROM PrFabricante p WHERE p.idUsuarioActualizacion = :idUsuarioActualizacion")
+    , @NamedQuery(name = "PrFabricante.findByUsuarioActualizacion", query = "SELECT p FROM PrFabricante p WHERE p.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "PrFabricante.findByFechaActualizacion", query = "SELECT p FROM PrFabricante p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrFabricante implements Serializable {
 
@@ -52,13 +51,13 @@ public class PrFabricante implements Serializable {
     private String nombre;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "id_usuario_creacion")
-    private BigInteger idUsuarioCreacion;
+    @Column(name = "usuario_creacion")
+    private String usuarioCreacion;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
-    @Column(name = "id_usuario_actualizacion")
-    private BigInteger idUsuarioActualizacion;
+    @Column(name = "usuario_actualizacion")
+    private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
@@ -96,12 +95,12 @@ public class PrFabricante implements Serializable {
         this.estado = estado;
     }
 
-    public BigInteger getIdUsuarioCreacion() {
-        return idUsuarioCreacion;
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
     }
 
-    public void setIdUsuarioCreacion(BigInteger idUsuarioCreacion) {
-        this.idUsuarioCreacion = idUsuarioCreacion;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
     public Date getFechaCreacion() {
@@ -112,12 +111,12 @@ public class PrFabricante implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigInteger getIdUsuarioActualizacion() {
-        return idUsuarioActualizacion;
+    public String getUsuarioActualizacion() {
+        return usuarioActualizacion;
     }
 
-    public void setIdUsuarioActualizacion(BigInteger idUsuarioActualizacion) {
-        this.idUsuarioActualizacion = idUsuarioActualizacion;
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
+        this.usuarioActualizacion = usuarioActualizacion;
     }
 
     public Date getFechaActualizacion() {
@@ -159,7 +158,7 @@ public class PrFabricante implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrFabricante[ idFabricante=" + idFabricante + " ]";
+        return "ec.com.asofar.dao.PrFabricante[ idFabricante=" + idFabricante + " ]";
     }
     
 }

@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -54,12 +53,12 @@ public class InTipoDocumento implements Serializable {
     @Column(name = "estado")
     private String estado;
     @Column(name = "usuario_creacion")
-    private BigInteger usuarioCreacion;
+    private String usuarioCreacion;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @Column(name = "usuario_actualizacion")
-    private BigInteger usuarioActualizacion;
+    private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     private String fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
@@ -98,11 +97,11 @@ public class InTipoDocumento implements Serializable {
         this.estado = estado;
     }
 
-    public BigInteger getUsuarioCreacion() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setUsuarioCreacion(BigInteger usuarioCreacion) {
+    public void setUsuarioCreacion(String usuarioCreacion) {
         this.usuarioCreacion = usuarioCreacion;
     }
 
@@ -114,11 +113,11 @@ public class InTipoDocumento implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigInteger getUsuarioActualizacion() {
+    public String getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
-    public void setUsuarioActualizacion(BigInteger usuarioActualizacion) {
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
@@ -170,7 +169,7 @@ public class InTipoDocumento implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InTipoDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
+        return "ec.com.asofar.dao.InTipoDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
     }
     
 }

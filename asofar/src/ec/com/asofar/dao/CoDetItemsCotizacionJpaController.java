@@ -38,8 +38,8 @@ public class CoDetItemsCotizacionJpaController implements Serializable {
         if (coDetItemsCotizacion.getCoDetItemsCotizacionPK() == null) {
             coDetItemsCotizacion.setCoDetItemsCotizacionPK(new CoDetItemsCotizacionPK());
         }
-        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdSucursal(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
+        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         EntityManager em = null;
         try {
@@ -69,8 +69,8 @@ public class CoDetItemsCotizacionJpaController implements Serializable {
     }
 
     public void edit(CoDetItemsCotizacion coDetItemsCotizacion) throws NonexistentEntityException, Exception {
-        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdSucursal(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
+        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         EntityManager em = null;
         try {

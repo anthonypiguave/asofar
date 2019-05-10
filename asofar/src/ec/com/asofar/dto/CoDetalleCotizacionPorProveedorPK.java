@@ -15,7 +15,7 @@ import javax.persistence.Embeddable;
  * @author admin1
  */
 @Embeddable
-public class CoDetCotizacionPorProveedorPK implements Serializable {
+public class CoDetalleCotizacionPorProveedorPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "id_cotizaciones_por_porveedor")
@@ -33,10 +33,10 @@ public class CoDetCotizacionPorProveedorPK implements Serializable {
     @Column(name = "linea_detalle")
     private long lineaDetalle;
 
-    public CoDetCotizacionPorProveedorPK() {
+    public CoDetalleCotizacionPorProveedorPK() {
     }
 
-    public CoDetCotizacionPorProveedorPK(long idCotizacionesPorPorveedor, long idCotizacion, long idEmpresa, long idSucursal, long lineaDetalle) {
+    public CoDetalleCotizacionPorProveedorPK(long idCotizacionesPorPorveedor, long idCotizacion, long idEmpresa, long idSucursal, long lineaDetalle) {
         this.idCotizacionesPorPorveedor = idCotizacionesPorPorveedor;
         this.idCotizacion = idCotizacion;
         this.idEmpresa = idEmpresa;
@@ -98,10 +98,10 @@ public class CoDetCotizacionPorProveedorPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CoDetCotizacionPorProveedorPK)) {
+        if (!(object instanceof CoDetalleCotizacionPorProveedorPK)) {
             return false;
         }
-        CoDetCotizacionPorProveedorPK other = (CoDetCotizacionPorProveedorPK) object;
+        CoDetalleCotizacionPorProveedorPK other = (CoDetalleCotizacionPorProveedorPK) object;
         if (this.idCotizacionesPorPorveedor != other.idCotizacionesPorPorveedor) {
             return false;
         }
@@ -122,7 +122,7 @@ public class CoDetCotizacionPorProveedorPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetCotizacionPorProveedorPK[ idCotizacionesPorPorveedor=" + idCotizacionesPorPorveedor + ", idCotizacion=" + idCotizacion + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", lineaDetalle=" + lineaDetalle + " ]";
+        return "ec.com.asofar.dao.CoDetalleCotizacionPorProveedorPK[ idCotizacionesPorPorveedor=" + idCotizacionesPorPorveedor + ", idCotizacion=" + idCotizacion + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", lineaDetalle=" + lineaDetalle + " ]";
     }
     
 }

@@ -47,9 +47,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InMovimientos.findByFechaOrden", query = "SELECT i FROM InMovimientos i WHERE i.fechaOrden = :fechaOrden")
     , @NamedQuery(name = "InMovimientos.findByIdFactura", query = "SELECT i FROM InMovimientos i WHERE i.idFactura = :idFactura")
     , @NamedQuery(name = "InMovimientos.findByFechaFactura", query = "SELECT i FROM InMovimientos i WHERE i.fechaFactura = :fechaFactura")
-    , @NamedQuery(name = "InMovimientos.findByIdUsuarioCreacion", query = "SELECT i FROM InMovimientos i WHERE i.idUsuarioCreacion = :idUsuarioCreacion")
+    , @NamedQuery(name = "InMovimientos.findByUsuarioCreacion", query = "SELECT i FROM InMovimientos i WHERE i.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "InMovimientos.findByFechaCreacion", query = "SELECT i FROM InMovimientos i WHERE i.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "InMovimientos.findByIdUsuarioActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.idUsuarioActualizacion = :idUsuarioActualizacion")
+    , @NamedQuery(name = "InMovimientos.findByUsuarioActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "InMovimientos.findByFechaActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InMovimientos implements Serializable {
 
@@ -91,13 +91,13 @@ public class InMovimientos implements Serializable {
     @Column(name = "fecha_factura")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFactura;
-    @Column(name = "id_usuario_creacion")
-    private BigInteger idUsuarioCreacion;
+    @Column(name = "usuario_creacion")
+    private String usuarioCreacion;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
-    @Column(name = "id_usuario_actualizacion")
-    private BigInteger idUsuarioActualizacion;
+    @Column(name = "usuario_actualizacion")
+    private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
@@ -253,12 +253,12 @@ public class InMovimientos implements Serializable {
         this.fechaFactura = fechaFactura;
     }
 
-    public BigInteger getIdUsuarioCreacion() {
-        return idUsuarioCreacion;
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
     }
 
-    public void setIdUsuarioCreacion(BigInteger idUsuarioCreacion) {
-        this.idUsuarioCreacion = idUsuarioCreacion;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
     public Date getFechaCreacion() {
@@ -269,12 +269,12 @@ public class InMovimientos implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigInteger getIdUsuarioActualizacion() {
-        return idUsuarioActualizacion;
+    public String getUsuarioActualizacion() {
+        return usuarioActualizacion;
     }
 
-    public void setIdUsuarioActualizacion(BigInteger idUsuarioActualizacion) {
-        this.idUsuarioActualizacion = idUsuarioActualizacion;
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
+        this.usuarioActualizacion = usuarioActualizacion;
     }
 
     public Date getFechaActualizacion() {
@@ -339,7 +339,7 @@ public class InMovimientos implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InMovimientos[ inMovimientosPK=" + inMovimientosPK + " ]";
+        return "ec.com.asofar.dao.InMovimientos[ inMovimientosPK=" + inMovimientosPK + " ]";
     }
     
 }

@@ -26,29 +26,29 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author admin1
  */
 @Entity
-@Table(name = "co_det_cotizacion_por_proveedor")
+@Table(name = "co_detalle_cotizacion_por_proveedor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoDetCotizacionPorProveedor.findAll", query = "SELECT c FROM CoDetCotizacionPorProveedor c")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.coDetCotizacionPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.coDetCotizacionPorProveedorPK.idCotizacion = :idCotizacion")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.coDetCotizacionPorProveedorPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByIdSucursal", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.coDetCotizacionPorProveedorPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByLineaDetalle", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.coDetCotizacionPorProveedorPK.lineaDetalle = :lineaDetalle")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByDescripcion", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByIdProducto", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.idProducto = :idProducto")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByValorMinimoReferencial", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.valorMinimoReferencial = :valorMinimoReferencial")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByValorMaximoReferencial", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.valorMaximoReferencial = :valorMaximoReferencial")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByCantidadPedido", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.cantidadPedido = :cantidadPedido")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByCantidadCotizado", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.cantidadCotizado = :cantidadCotizado")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByPrecioUnitarioNeto", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.precioUnitarioNeto = :precioUnitarioNeto")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByEstado", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoDetCotizacionPorProveedor.findByFecha", query = "SELECT c FROM CoDetCotizacionPorProveedor c WHERE c.fecha = :fecha")})
-public class CoDetCotizacionPorProveedor implements Serializable {
+    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findAll", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idCotizacion = :idCotizacion")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdSucursal", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByLineaDetalle", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.lineaDetalle = :lineaDetalle")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByDescripcion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.descripcion = :descripcion")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdProducto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.idProducto = :idProducto")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMinimoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMinimoReferencial = :valorMinimoReferencial")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMaximoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMaximoReferencial = :valorMaximoReferencial")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByCantidadPedido", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.cantidadPedido = :cantidadPedido")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByCantidadCotizado", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.cantidadCotizado = :cantidadCotizado")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByPrecioUnitarioNeto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.precioUnitarioNeto = :precioUnitarioNeto")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByEstado", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.estado = :estado")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByFecha", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.fecha = :fecha")})
+public class CoDetalleCotizacionPorProveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected CoDetCotizacionPorProveedorPK coDetCotizacionPorProveedorPK;
+    protected CoDetalleCotizacionPorProveedorPK coDetalleCotizacionPorProveedorPK;
     @Column(name = "descripcion")
     private String descripcion;
     @Column(name = "id_producto")
@@ -77,23 +77,23 @@ public class CoDetCotizacionPorProveedor implements Serializable {
     @ManyToOne(optional = false)
     private CoCotizacionesPorPorveedor coCotizacionesPorPorveedor;
 
-    public CoDetCotizacionPorProveedor() {
+    public CoDetalleCotizacionPorProveedor() {
     }
 
-    public CoDetCotizacionPorProveedor(CoDetCotizacionPorProveedorPK coDetCotizacionPorProveedorPK) {
-        this.coDetCotizacionPorProveedorPK = coDetCotizacionPorProveedorPK;
+    public CoDetalleCotizacionPorProveedor(CoDetalleCotizacionPorProveedorPK coDetalleCotizacionPorProveedorPK) {
+        this.coDetalleCotizacionPorProveedorPK = coDetalleCotizacionPorProveedorPK;
     }
 
-    public CoDetCotizacionPorProveedor(long idCotizacionesPorPorveedor, long idCotizacion, long idEmpresa, long idSucursal, long lineaDetalle) {
-        this.coDetCotizacionPorProveedorPK = new CoDetCotizacionPorProveedorPK(idCotizacionesPorPorveedor, idCotizacion, idEmpresa, idSucursal, lineaDetalle);
+    public CoDetalleCotizacionPorProveedor(long idCotizacionesPorPorveedor, long idCotizacion, long idEmpresa, long idSucursal, long lineaDetalle) {
+        this.coDetalleCotizacionPorProveedorPK = new CoDetalleCotizacionPorProveedorPK(idCotizacionesPorPorveedor, idCotizacion, idEmpresa, idSucursal, lineaDetalle);
     }
 
-    public CoDetCotizacionPorProveedorPK getCoDetCotizacionPorProveedorPK() {
-        return coDetCotizacionPorProveedorPK;
+    public CoDetalleCotizacionPorProveedorPK getCoDetalleCotizacionPorProveedorPK() {
+        return coDetalleCotizacionPorProveedorPK;
     }
 
-    public void setCoDetCotizacionPorProveedorPK(CoDetCotizacionPorProveedorPK coDetCotizacionPorProveedorPK) {
-        this.coDetCotizacionPorProveedorPK = coDetCotizacionPorProveedorPK;
+    public void setCoDetalleCotizacionPorProveedorPK(CoDetalleCotizacionPorProveedorPK coDetalleCotizacionPorProveedorPK) {
+        this.coDetalleCotizacionPorProveedorPK = coDetalleCotizacionPorProveedorPK;
     }
 
     public String getDescripcion() {
@@ -179,18 +179,18 @@ public class CoDetCotizacionPorProveedor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (coDetCotizacionPorProveedorPK != null ? coDetCotizacionPorProveedorPK.hashCode() : 0);
+        hash += (coDetalleCotizacionPorProveedorPK != null ? coDetalleCotizacionPorProveedorPK.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CoDetCotizacionPorProveedor)) {
+        if (!(object instanceof CoDetalleCotizacionPorProveedor)) {
             return false;
         }
-        CoDetCotizacionPorProveedor other = (CoDetCotizacionPorProveedor) object;
-        if ((this.coDetCotizacionPorProveedorPK == null && other.coDetCotizacionPorProveedorPK != null) || (this.coDetCotizacionPorProveedorPK != null && !this.coDetCotizacionPorProveedorPK.equals(other.coDetCotizacionPorProveedorPK))) {
+        CoDetalleCotizacionPorProveedor other = (CoDetalleCotizacionPorProveedor) object;
+        if ((this.coDetalleCotizacionPorProveedorPK == null && other.coDetalleCotizacionPorProveedorPK != null) || (this.coDetalleCotizacionPorProveedorPK != null && !this.coDetalleCotizacionPorProveedorPK.equals(other.coDetalleCotizacionPorProveedorPK))) {
             return false;
         }
         return true;
@@ -198,7 +198,7 @@ public class CoDetCotizacionPorProveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetCotizacionPorProveedor[ coDetCotizacionPorProveedorPK=" + coDetCotizacionPorProveedorPK + " ]";
+        return "ec.com.asofar.dao.CoDetalleCotizacionPorProveedor[ coDetalleCotizacionPorProveedorPK=" + coDetalleCotizacionPorProveedorPK + " ]";
     }
     
 }

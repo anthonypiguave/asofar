@@ -122,7 +122,7 @@ public class PrMedidasPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrMedidasPK[ idArticulo=" + idArticulo + ", idGrupo=" + idGrupo + ", idSubgrupo=" + idSubgrupo + ", idTipoPresentacion=" + idTipoPresentacion + ", idTipoMedidas=" + idTipoMedidas + " ]";
+        return "ec.com.asofar.dao.PrMedidasPK[ idArticulo=" + idArticulo + ", idGrupo=" + idGrupo + ", idSubgrupo=" + idSubgrupo + ", idTipoPresentacion=" + idTipoPresentacion + ", idTipoMedidas=" + idTipoMedidas + " ]";
     }
     
 }

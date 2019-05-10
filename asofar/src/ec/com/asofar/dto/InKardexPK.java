@@ -138,7 +138,7 @@ public class InKardexPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InKardexPK[ idKardex=" + idKardex + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idBodega=" + idBodega + ", idProducto=" + idProducto + ", idTipoDocumento=" + idTipoDocumento + " ]";
+        return "ec.com.asofar.dao.InKardexPK[ idKardex=" + idKardex + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idBodega=" + idBodega + ", idProducto=" + idProducto + ", idTipoDocumento=" + idTipoDocumento + " ]";
     }
     
 }

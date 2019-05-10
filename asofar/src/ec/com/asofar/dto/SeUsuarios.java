@@ -12,8 +12,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -53,21 +51,20 @@ public class SeUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    private String idUsuario;
     @Column(name = "id_tipo_persona")
     private BigInteger idTipoPersona;
     @Column(name = "estado")
     private Character estado;
     @Column(name = "usuario_creacion")
-    private BigInteger usuarioCreacion;
+    private String usuarioCreacion;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @Column(name = "usuario_actualizacion")
-    private BigInteger usuarioActualizacion;
+    private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
@@ -101,15 +98,15 @@ public class SeUsuarios implements Serializable {
     public SeUsuarios() {
     }
 
-    public SeUsuarios(Long idUsuario) {
+    public SeUsuarios(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -129,11 +126,11 @@ public class SeUsuarios implements Serializable {
         this.estado = estado;
     }
 
-    public BigInteger getUsuarioCreacion() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setUsuarioCreacion(BigInteger usuarioCreacion) {
+    public void setUsuarioCreacion(String usuarioCreacion) {
         this.usuarioCreacion = usuarioCreacion;
     }
 
@@ -145,11 +142,11 @@ public class SeUsuarios implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigInteger getUsuarioActualizacion() {
+    public String getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
-    public void setUsuarioActualizacion(BigInteger usuarioActualizacion) {
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
@@ -273,7 +270,7 @@ public class SeUsuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.SeUsuarios[ idUsuario=" + idUsuario + " ]";
+        return "ec.com.asofar.dao.SeUsuarios[ idUsuario=" + idUsuario + " ]";
     }
     
 }
