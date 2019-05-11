@@ -15,6 +15,9 @@ import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +29,8 @@ public class consulta_bodega extends javax.swing.JDialog {
     List<InBodega> lista = bodega.findInBodegaEntities();
     String valor = "";
     int x, y;
-    InBodega obj = new InBodega();
+    InBodega bodegaL = new InBodega();
+    InBodega objeto;
 
     /**
      * Creates new form bodega
@@ -218,23 +222,43 @@ public class consulta_bodega extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_bodegaMouseReleased
 
     private void tbl_bodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bodegaMousePressed
-        int id = 0;
-        obj = null;
+//        int id = 0;
+//        bodegaL = null;
+//        if (evt.getClickCount() == 2) {
+//            id = tbl_bodega.getSelectedRow();
+//            for (int i = 0; i < lista.size(); i++) {
+//                    bodegaL = lista.get(i);
+//                    if (bodegaL != null) {
+//                        setVisible(false);
+//                        bodega_editar es = new bodega_editar(new javax.swing.JFrame(), true,bodegaL);
+//                        es.setVisible(true);
+//                        System.out.println("hoal "+bodegaL.getNombreBodega());
+//                    }
+//                
+//            }
+//        }
         if (evt.getClickCount() == 2) {
-            id = tbl_bodega.getSelectedRow();
-            for (int i = 0; i < lista.size(); i++) {
-                    obj = lista.get(i);
-                    if (obj != null) {
-                        setVisible(false);
-                        bodega_editar es = new bodega_editar(new javax.swing.JFrame(), true,obj);
-                        es.setVisible(true);
-                        System.out.println("hoal "+obj.getNombreBodega());
-                    }
-                
+            int id = tbl_bodega.getSelectedRow();
+//            objeto = devuelveObjeto(tbl_bodega.getValueAt(id, 0), objeto);
+            if (objeto != null) {
+                bodega_editar em = new bodega_editar(new javax.swing.JFrame(), true, objeto);
+                setVisible(false);
+                em.setVisible(true);
+
             }
         }
-    }//GEN-LAST:event_tbl_bodegaMousePressed
 
+    }//GEN-LAST:event_tbl_bodegaMousePressed
+    public InBodega devuelveObjeto(Long id, List<InBodega> listabod) {
+        InBodega doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getInBodegaPK().getIdBodega(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
@@ -267,7 +291,7 @@ public class consulta_bodega extends javax.swing.JDialog {
         setVisible(false);
         bodega_agregar ingre = new bodega_agregar(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
