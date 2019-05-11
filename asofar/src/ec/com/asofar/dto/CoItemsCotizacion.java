@@ -76,6 +76,8 @@ public class CoItemsCotizacion implements Serializable {
     @Column(name = "procesado")
     private String procesado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coItemsCotizacion")
+    private List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coItemsCotizacion")
     private List<CoDetItemsCotizacion> coDetItemsCotizacionList;
 
     public CoItemsCotizacion() {
@@ -186,6 +188,15 @@ public class CoItemsCotizacion implements Serializable {
     }
 
     @XmlTransient
+    public List<CoCotizacionesPorPorveedor> getCoCotizacionesPorPorveedorList() {
+        return coCotizacionesPorPorveedorList;
+    }
+
+    public void setCoCotizacionesPorPorveedorList(List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList) {
+        this.coCotizacionesPorPorveedorList = coCotizacionesPorPorveedorList;
+    }
+
+    @XmlTransient
     public List<CoDetItemsCotizacion> getCoDetItemsCotizacionList() {
         return coDetItemsCotizacionList;
     }
@@ -216,7 +227,7 @@ public class CoItemsCotizacion implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoItemsCotizacion[ coItemsCotizacionPK=" + coItemsCotizacionPK + " ]";
+        return "ec.com.asofar.dto.CoItemsCotizacion[ coItemsCotizacionPK=" + coItemsCotizacionPK + " ]";
     }
     
 }

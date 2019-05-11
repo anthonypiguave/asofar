@@ -275,7 +275,7 @@ public class VeFacturaDetalle implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.VeFacturaDetalle[ veFacturaDetallePK=" + veFacturaDetallePK + " ]";
+        return "ec.com.asofar.dto.VeFacturaDetalle[ veFacturaDetallePK=" + veFacturaDetallePK + " ]";
     }
     
 }

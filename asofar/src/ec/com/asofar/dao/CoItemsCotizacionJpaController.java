@@ -13,11 +13,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import java.util.ArrayList;
+import java.util.List;
 import ec.com.asofar.dto.CoDetItemsCotizacion;
 import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.CoItemsCotizacionPK;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -40,6 +41,9 @@ public class CoItemsCotizacionJpaController implements Serializable {
         if (coItemsCotizacion.getCoItemsCotizacionPK() == null) {
             coItemsCotizacion.setCoItemsCotizacionPK(new CoItemsCotizacionPK());
         }
+        if (coItemsCotizacion.getCoCotizacionesPorPorveedorList() == null) {
+            coItemsCotizacion.setCoCotizacionesPorPorveedorList(new ArrayList<CoCotizacionesPorPorveedor>());
+        }
         if (coItemsCotizacion.getCoDetItemsCotizacionList() == null) {
             coItemsCotizacion.setCoDetItemsCotizacionList(new ArrayList<CoDetItemsCotizacion>());
         }
@@ -47,6 +51,12 @@ public class CoItemsCotizacionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<CoCotizacionesPorPorveedor> attachedCoCotizacionesPorPorveedorList = new ArrayList<CoCotizacionesPorPorveedor>();
+            for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach : coItemsCotizacion.getCoCotizacionesPorPorveedorList()) {
+                coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach = em.getReference(coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach.getClass(), coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach.getCoCotizacionesPorPorveedorPK());
+                attachedCoCotizacionesPorPorveedorList.add(coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach);
+            }
+            coItemsCotizacion.setCoCotizacionesPorPorveedorList(attachedCoCotizacionesPorPorveedorList);
             List<CoDetItemsCotizacion> attachedCoDetItemsCotizacionList = new ArrayList<CoDetItemsCotizacion>();
             for (CoDetItemsCotizacion coDetItemsCotizacionListCoDetItemsCotizacionToAttach : coItemsCotizacion.getCoDetItemsCotizacionList()) {
                 coDetItemsCotizacionListCoDetItemsCotizacionToAttach = em.getReference(coDetItemsCotizacionListCoDetItemsCotizacionToAttach.getClass(), coDetItemsCotizacionListCoDetItemsCotizacionToAttach.getCoDetItemsCotizacionPK());
@@ -54,6 +64,15 @@ public class CoItemsCotizacionJpaController implements Serializable {
             }
             coItemsCotizacion.setCoDetItemsCotizacionList(attachedCoDetItemsCotizacionList);
             em.persist(coItemsCotizacion);
+            for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor : coItemsCotizacion.getCoCotizacionesPorPorveedorList()) {
+                CoItemsCotizacion oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListCoCotizacionesPorPorveedor = coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor.getCoItemsCotizacion();
+                coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor.setCoItemsCotizacion(coItemsCotizacion);
+                coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor = em.merge(coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor);
+                if (oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListCoCotizacionesPorPorveedor != null) {
+                    oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListCoCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorList().remove(coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor);
+                    oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListCoCotizacionesPorPorveedor = em.merge(oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListCoCotizacionesPorPorveedor);
+                }
+            }
             for (CoDetItemsCotizacion coDetItemsCotizacionListCoDetItemsCotizacion : coItemsCotizacion.getCoDetItemsCotizacionList()) {
                 CoItemsCotizacion oldCoItemsCotizacionOfCoDetItemsCotizacionListCoDetItemsCotizacion = coDetItemsCotizacionListCoDetItemsCotizacion.getCoItemsCotizacion();
                 coDetItemsCotizacionListCoDetItemsCotizacion.setCoItemsCotizacion(coItemsCotizacion);
@@ -82,9 +101,19 @@ public class CoItemsCotizacionJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             CoItemsCotizacion persistentCoItemsCotizacion = em.find(CoItemsCotizacion.class, coItemsCotizacion.getCoItemsCotizacionPK());
+            List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorListOld = persistentCoItemsCotizacion.getCoCotizacionesPorPorveedorList();
+            List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorListNew = coItemsCotizacion.getCoCotizacionesPorPorveedorList();
             List<CoDetItemsCotizacion> coDetItemsCotizacionListOld = persistentCoItemsCotizacion.getCoDetItemsCotizacionList();
             List<CoDetItemsCotizacion> coDetItemsCotizacionListNew = coItemsCotizacion.getCoDetItemsCotizacionList();
             List<String> illegalOrphanMessages = null;
+            for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListOldCoCotizacionesPorPorveedor : coCotizacionesPorPorveedorListOld) {
+                if (!coCotizacionesPorPorveedorListNew.contains(coCotizacionesPorPorveedorListOldCoCotizacionesPorPorveedor)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain CoCotizacionesPorPorveedor " + coCotizacionesPorPorveedorListOldCoCotizacionesPorPorveedor + " since its coItemsCotizacion field is not nullable.");
+                }
+            }
             for (CoDetItemsCotizacion coDetItemsCotizacionListOldCoDetItemsCotizacion : coDetItemsCotizacionListOld) {
                 if (!coDetItemsCotizacionListNew.contains(coDetItemsCotizacionListOldCoDetItemsCotizacion)) {
                     if (illegalOrphanMessages == null) {
@@ -96,6 +125,13 @@ public class CoItemsCotizacionJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            List<CoCotizacionesPorPorveedor> attachedCoCotizacionesPorPorveedorListNew = new ArrayList<CoCotizacionesPorPorveedor>();
+            for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach : coCotizacionesPorPorveedorListNew) {
+                coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach = em.getReference(coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach.getClass(), coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach.getCoCotizacionesPorPorveedorPK());
+                attachedCoCotizacionesPorPorveedorListNew.add(coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach);
+            }
+            coCotizacionesPorPorveedorListNew = attachedCoCotizacionesPorPorveedorListNew;
+            coItemsCotizacion.setCoCotizacionesPorPorveedorList(coCotizacionesPorPorveedorListNew);
             List<CoDetItemsCotizacion> attachedCoDetItemsCotizacionListNew = new ArrayList<CoDetItemsCotizacion>();
             for (CoDetItemsCotizacion coDetItemsCotizacionListNewCoDetItemsCotizacionToAttach : coDetItemsCotizacionListNew) {
                 coDetItemsCotizacionListNewCoDetItemsCotizacionToAttach = em.getReference(coDetItemsCotizacionListNewCoDetItemsCotizacionToAttach.getClass(), coDetItemsCotizacionListNewCoDetItemsCotizacionToAttach.getCoDetItemsCotizacionPK());
@@ -104,6 +140,17 @@ public class CoItemsCotizacionJpaController implements Serializable {
             coDetItemsCotizacionListNew = attachedCoDetItemsCotizacionListNew;
             coItemsCotizacion.setCoDetItemsCotizacionList(coDetItemsCotizacionListNew);
             coItemsCotizacion = em.merge(coItemsCotizacion);
+            for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor : coCotizacionesPorPorveedorListNew) {
+                if (!coCotizacionesPorPorveedorListOld.contains(coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor)) {
+                    CoItemsCotizacion oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor = coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor.getCoItemsCotizacion();
+                    coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor.setCoItemsCotizacion(coItemsCotizacion);
+                    coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor = em.merge(coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor);
+                    if (oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor != null && !oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor.equals(coItemsCotizacion)) {
+                        oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorList().remove(coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor);
+                        oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor = em.merge(oldCoItemsCotizacionOfCoCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedor);
+                    }
+                }
+            }
             for (CoDetItemsCotizacion coDetItemsCotizacionListNewCoDetItemsCotizacion : coDetItemsCotizacionListNew) {
                 if (!coDetItemsCotizacionListOld.contains(coDetItemsCotizacionListNewCoDetItemsCotizacion)) {
                     CoItemsCotizacion oldCoItemsCotizacionOfCoDetItemsCotizacionListNewCoDetItemsCotizacion = coDetItemsCotizacionListNewCoDetItemsCotizacion.getCoItemsCotizacion();
@@ -145,6 +192,13 @@ public class CoItemsCotizacionJpaController implements Serializable {
                 throw new NonexistentEntityException("The coItemsCotizacion with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorListOrphanCheck = coItemsCotizacion.getCoCotizacionesPorPorveedorList();
+            for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListOrphanCheckCoCotizacionesPorPorveedor : coCotizacionesPorPorveedorListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This CoItemsCotizacion (" + coItemsCotizacion + ") cannot be destroyed since the CoCotizacionesPorPorveedor " + coCotizacionesPorPorveedorListOrphanCheckCoCotizacionesPorPorveedor + " in its coCotizacionesPorPorveedorList field has a non-nullable coItemsCotizacion field.");
+            }
             List<CoDetItemsCotizacion> coDetItemsCotizacionListOrphanCheck = coItemsCotizacion.getCoDetItemsCotizacionList();
             for (CoDetItemsCotizacion coDetItemsCotizacionListOrphanCheckCoDetItemsCotizacion : coDetItemsCotizacionListOrphanCheck) {
                 if (illegalOrphanMessages == null) {

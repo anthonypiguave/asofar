@@ -245,7 +245,7 @@ public class PrProductos implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.PrProductos[ prProductosPK=" + prProductosPK + " ]";
+        return "ec.com.asofar.dto.PrProductos[ prProductosPK=" + prProductosPK + " ]";
     }
     
 }

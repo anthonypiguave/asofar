@@ -299,7 +299,7 @@ public class CoOrdenPedido implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoOrdenPedido[ coOrdenPedidoPK=" + coOrdenPedidoPK + " ]";
+        return "ec.com.asofar.dto.CoOrdenPedido[ coOrdenPedidoPK=" + coOrdenPedidoPK + " ]";
     }
     
 }

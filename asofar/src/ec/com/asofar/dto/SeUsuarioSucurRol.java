@@ -171,7 +171,7 @@ public class SeUsuarioSucurRol implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeUsuarioSucurRol[ seUsuarioSucurRolPK=" + seUsuarioSucurRolPK + " ]";
+        return "ec.com.asofar.dto.SeUsuarioSucurRol[ seUsuarioSucurRolPK=" + seUsuarioSucurRolPK + " ]";
     }
     
 }

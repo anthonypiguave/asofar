@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.usuario;
 
-import ec.com.asofar.views.persona.*;
 import ec.com.asofar.dao.SePersonasJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
@@ -19,25 +18,11 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.Calendario;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 //import net.sf.jasperreports.engine.JRException;
 //import net.sf.jasperreports.engine.JasperFillManager;
 //import net.sf.jasperreports.engine.JasperPrint;
@@ -50,7 +35,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author alumno
  */
-public class Editar_persona extends javax.swing.JDialog {
+public class Editar_usuario extends javax.swing.JDialog {
 
     SePersonas obj;
     SePersonasJpaControllerExt persona_controller
@@ -64,7 +49,7 @@ public class Editar_persona extends javax.swing.JDialog {
 //    private String rutaimagen = "";
     public String fil;
     List<SePersonas> lista_persona;
-    SePersonas persona1;
+    SeUsuarios usuario1;
     SeTipoPersonaJpaController tpc
             = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
     java.util.Date fechaActual = new java.util.Date();
@@ -74,19 +59,19 @@ public class Editar_persona extends javax.swing.JDialog {
     SePersonasJpaController mp
             = new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
     String rutaimagen = "";
-    public Editar_persona(java.awt.Frame parent, boolean modal) {
+    public Editar_usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public Editar_persona(java.awt.Frame parent, boolean modal, SePersonas persona, SeUsuarios us,SeEmpresa em,SeSucursal su) {
+    public Editar_usuario(java.awt.Frame parent, boolean modal, SeUsuarios usuario, SeUsuarios us,SeEmpresa em,SeSucursal su) {
         super(parent, modal);
         initComponents();
-        persona1 = persona;
+        usuario1 = usuario;
         us1 = us;
         em1=em;
         su1=su;
-        cargarValores(persona);
+        cargarValores(usuario);
         CargarRol();
         lista_persona
                 = persona_controller.findSePersonasEntities();
@@ -98,13 +83,13 @@ public class Editar_persona extends javax.swing.JDialog {
         obj = null;
 
         for (int i = 0; i < lista_persona.size(); i++) {
-            if (persona1.getIdPersona() == lista_persona.get(i).getIdPersona()) {
+            if (usuario1.getIdPersona() == lista_persona.get(i).getIdPersona()) {
                 obj = lista_persona.get(i);
                 try {
                     mp.destroy(lista_persona.get(i).getIdPersona());
 
                 } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Editar_usuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
@@ -437,27 +422,27 @@ public class Editar_persona extends javax.swing.JDialog {
         Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
     public void Guardar() {
-//        persona1.setCedula(txtCedula.getText());
-        persona1.setNombres(txtNombre.getText());
-        persona1.setApellidos(txtApellido.getText());
-        persona1.setTelefono(txtCell.getText());
-        persona1.setTelefono2(txtConven.getText());
-        persona1.setCorreo(txtCorreo.getText());
-        persona1.setFechaNacimiento(fecha1);
-        persona1.setDireccion(txtDireccion.getText());
-        persona1.setFechaActualizacion(fechaActual);
-        persona1.setUsuarioActualizacion(us1.getIdUsuario());
+//        usuario1.setCedula(txtCedula.getText());
+        usuario1.setNombres(txtNombre.getText());
+        usuario1.setApellidos(txtApellido.getText());
+        usuario1.setTelefono(txtCell.getText());
+        usuario1.setTelefono2(txtConven.getText());
+        usuario1.setCorreo(txtCorreo.getText());
+        usuario1.setFechaNacimiento(fecha1);
+        usuario1.setDireccion(txtDireccion.getText());
+        usuario1.setFechaActualizacion(fechaActual);
+        usuario1.setUsuarioActualizacion(us1.getIdUsuario());
         SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona1.getSelectedItem().toString());
-        persona1.setIdTipoPersona(tp);
+        usuario1.setIdTipoPersona(tp);
      
 
         try {
-            mp.edit(persona1);
-            Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+            mp.edit(usuario1);
+            Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true);
             setVisible(false);
             setVisible(true);
         } catch (Exception ex) {
-            Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Editar_usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -568,13 +553,13 @@ public class Editar_persona extends javax.swing.JDialog {
 
             cbTipoPersona1.addItem(listar.get(i).getNombre());
         }
-        cbTipoPersona1.setSelectedItem(persona1.getIdTipoPersona().getNombre());
+        cbTipoPersona1.setSelectedItem(usuario1.getIdTipoPersona().getNombre());
 
     }
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Editar_persona dialog = new Editar_persona(new javax.swing.JFrame(), true);
+                Editar_usuario dialog = new Editar_usuario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -614,15 +599,15 @@ public class Editar_persona extends javax.swing.JDialog {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarValores(SePersonas persona) {
-        txtCedula.setText(persona.getCedula());
-        txtNombre.setText(persona.getNombres());
-        txtApellido.setText(persona.getApellidos());
-        txtDireccion.setText(persona.getDireccion());
-        txtCorreo.setText(persona.getCorreo());
-        txtCell.setText(persona.getTelefono());
-        txtConven.setText(persona.getTelefono2());
-        txtCorreo.setText(persona.getCorreo());
-        fecha.setText(Fecha.getStringFecha(new java.sql.Date(persona.getFechaNacimiento().getTime())));
+    private void cargarValores(SeUsuarios usuario) {
+        txtCedula.setText(usuario.getCedula());
+        txtNombre.setText(usuario.getNombres());
+        txtApellido.setText(usuario.getApellidos());
+        txtDireccion.setText(usuario.getDireccion());
+        txtCorreo.setText(usuario.getCorreo());
+        txtCell.setText(usuario.getTelefono());
+        txtConven.setText(usuario.getTelefono2());
+        txtCorreo.setText(usuario.getCorreo());
+        fecha.setText(Fecha.getStringFecha(new java.sql.Date(usuario.getFechaNacimiento().getTime())));
     }
 }

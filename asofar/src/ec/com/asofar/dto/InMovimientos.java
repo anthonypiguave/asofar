@@ -339,7 +339,7 @@ public class InMovimientos implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.InMovimientos[ inMovimientosPK=" + inMovimientosPK + " ]";
+        return "ec.com.asofar.dto.InMovimientos[ inMovimientosPK=" + inMovimientosPK + " ]";
     }
     
 }

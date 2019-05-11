@@ -291,7 +291,7 @@ public class CoProveedores implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoProveedores[ idProveedor=" + idProveedor + " ]";
+        return "ec.com.asofar.dto.CoProveedores[ idProveedor=" + idProveedor + " ]";
     }
     
 }
