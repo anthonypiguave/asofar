@@ -90,7 +90,7 @@ public class CoOrdenPedidoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoOrdenPedidoPK[ idOrdenPedido=" + idOrdenPedido + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + " ]";
+        return "ec.com.asofar.dto.CoOrdenPedidoPK[ idOrdenPedido=" + idOrdenPedido + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + " ]";
     }
     
 }

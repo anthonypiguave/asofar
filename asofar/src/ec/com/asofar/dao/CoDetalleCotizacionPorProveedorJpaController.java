@@ -38,10 +38,10 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
         if (coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK() == null) {
             coDetalleCotizacionPorProveedor.setCoDetalleCotizacionPorProveedorPK(new CoDetalleCotizacionPorProveedorPK());
         }
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdSucursal(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdSucursal());
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacion(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdCotizacion());
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdSucursal(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdSucursal());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdEmpresa(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdEmpresa());
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -70,10 +70,10 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
     }
 
     public void edit(CoDetalleCotizacionPorProveedor coDetalleCotizacionPorProveedor) throws NonexistentEntityException, Exception {
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdSucursal(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdSucursal());
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacion(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdCotizacion());
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdSucursal(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdSucursal());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdEmpresa(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdEmpresa());
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorPorveedor().getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor());
         EntityManager em = null;
         try {
             em = getEntityManager();

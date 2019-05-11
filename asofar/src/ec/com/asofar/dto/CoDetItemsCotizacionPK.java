@@ -106,7 +106,7 @@ public class CoDetItemsCotizacionPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoDetItemsCotizacionPK[ idCotizacion=" + idCotizacion + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", lineaDetalle=" + lineaDetalle + " ]";
+        return "ec.com.asofar.dto.CoDetItemsCotizacionPK[ idCotizacion=" + idCotizacion + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", lineaDetalle=" + lineaDetalle + " ]";
     }
     
 }

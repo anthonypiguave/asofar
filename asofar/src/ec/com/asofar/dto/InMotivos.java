@@ -158,7 +158,7 @@ public class InMotivos implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.InMotivos[ idMotivo=" + idMotivo + " ]";
+        return "ec.com.asofar.dto.InMotivos[ idMotivo=" + idMotivo + " ]";
     }
     
 }

@@ -1,9 +1,7 @@
 package ec.com.asofar.usuario;
 
-import ec.com.asofar.views.persona.*;
-import ec.com.asofar.daoext.SePersonasJpaControllerExt;
+import ec.com.asofar.dao.SeUsuariosJpaController;
 import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -11,41 +9,40 @@ import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
-import javax.swing.JOptionPane;
 
-public class Mostrar_persona extends javax.swing.JDialog {
+public class Mostrar_usuario extends javax.swing.JDialog {
 
     int x, y;
-    SePersonas obj;
-    List<SePersonas> lista_persona;
+    SeUsuarios obj;
+    List<SeUsuarios> usuario_lista;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-    SePersonasJpaControllerExt persona_controller
-            = new SePersonasJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
+    SeUsuariosJpaController usuario_controller
+            = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
     SeEmpresa em1; 
     SeSucursal su1;
 
-    public Mostrar_persona(java.awt.Frame parent, boolean modal) {
+    public Mostrar_usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        lista_persona
-                = persona_controller.findSePersonasEntities();
-        Tablas.listarPersonas(lista_persona, jtPersonas);
+        usuario_lista
+                = usuario_controller.findSeUsuariosEntities();
+        Tablas.listarUsuarios(usuario_lista, jtPersonas);
 
     }
 
-    public Mostrar_persona(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public Mostrar_usuario(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         us1 = us;
         em1 = em;
         su1= su;
-        lista_persona
-                = persona_controller.findSePersonasEntities();
-        Tablas.listarPersonas(lista_persona, jtPersonas);
+      usuario_lista
+                = usuario_controller.findSeUsuariosEntities();
+        Tablas.listarUsuarios(usuario_lista, jtPersonas);
 
     }
 
@@ -199,7 +196,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Registrar_persona ru = new Registrar_persona(new javax.swing.JFrame(), true, us1,em1,su1);
+        Registrar_usuario ru = new Registrar_usuario(new javax.swing.JFrame(), true, us1,em1,su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -213,12 +210,12 @@ public class Mostrar_persona extends javax.swing.JDialog {
         obj = null;
         if (evt.getClickCount() == 2) {
             id = jtPersonas.getSelectedRow();
-            for (int i = 0; i < lista_persona.size(); i++) {
-                if ((jtPersonas.getValueAt(id, 0).toString().equals(lista_persona.get(i).getCedula()))) {
-                    obj = lista_persona.get(i);
+            for (int i = 0; i < usuario_lista.size(); i++) {
+                if ((jtPersonas.getValueAt(id, 0).toString().equals(usuario_lista.get(i).getIdUsuario()))) {
+                    obj = usuario_lista.get(i);
                     if (obj != null) {
                         
-                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1,em1,su1);
+                        Editar_usuario es = new Editar_usuario(new javax.swing.JFrame(), true, obj,us1,em1,su1);
                         setVisible(false);
                         es.setVisible(true);
                     }
@@ -250,7 +247,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Mostrar_persona dialog = new Mostrar_persona(new javax.swing.JFrame(), true);
+                Mostrar_usuario dialog = new Mostrar_usuario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -144,7 +144,7 @@ public class InTipoBodega implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.InTipoBodega[ idTipoBodega=" + idTipoBodega + " ]";
+        return "ec.com.asofar.dto.InTipoBodega[ idTipoBodega=" + idTipoBodega + " ]";
     }
     
 }

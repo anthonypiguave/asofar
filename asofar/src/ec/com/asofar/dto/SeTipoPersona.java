@@ -158,7 +158,7 @@ public class SeTipoPersona implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.SeTipoPersona[ idTipoPersona=" + idTipoPersona + " ]";
+        return "ec.com.asofar.dto.SeTipoPersona[ idTipoPersona=" + idTipoPersona + " ]";
     }
     
 }

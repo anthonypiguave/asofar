@@ -222,7 +222,7 @@ public class PrDetalleTarifario implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.PrDetalleTarifario[ prDetalleTarifarioPK=" + prDetalleTarifarioPK + " ]";
+        return "ec.com.asofar.dto.PrDetalleTarifario[ prDetalleTarifarioPK=" + prDetalleTarifarioPK + " ]";
     }
     
 }

@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -72,6 +73,12 @@ public class CoCotizacionesPorPorveedor implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
+    @JoinColumns({
+        @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private CoItemsCotizacion coItemsCotizacion;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne
     private CoProveedores idProveedor;
@@ -169,6 +176,14 @@ public class CoCotizacionesPorPorveedor implements Serializable {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
+    public CoItemsCotizacion getCoItemsCotizacion() {
+        return coItemsCotizacion;
+    }
+
+    public void setCoItemsCotizacion(CoItemsCotizacion coItemsCotizacion) {
+        this.coItemsCotizacion = coItemsCotizacion;
+    }
+
     public CoProveedores getIdProveedor() {
         return idProveedor;
     }
@@ -208,7 +223,7 @@ public class CoCotizacionesPorPorveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoCotizacionesPorPorveedor[ coCotizacionesPorPorveedorPK=" + coCotizacionesPorPorveedorPK + " ]";
+        return "ec.com.asofar.dto.CoCotizacionesPorPorveedor[ coCotizacionesPorPorveedorPK=" + coCotizacionesPorPorveedorPK + " ]";
     }
     
 }

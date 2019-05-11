@@ -198,7 +198,7 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dao.CoDetalleCotizacionPorProveedor[ coDetalleCotizacionPorProveedorPK=" + coDetalleCotizacionPorProveedorPK + " ]";
+        return "ec.com.asofar.dto.CoDetalleCotizacionPorProveedor[ coDetalleCotizacionPorProveedorPK=" + coDetalleCotizacionPorProveedorPK + " ]";
     }
     
 }
