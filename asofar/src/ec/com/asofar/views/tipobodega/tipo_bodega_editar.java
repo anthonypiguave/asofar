@@ -44,7 +44,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         bodega = staticbodega;
-        txtnom_bodega.setText(bodega.getNombre());
+        
         cbx_estado.addItem("A");
         cbx_estado.addItem("I");
     }

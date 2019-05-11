@@ -21,6 +21,8 @@ public class bodega_editar extends javax.swing.JDialog {
 
     int x, y;
     List<InTipoBodega> TiBo;
+    InBodega Bod;
+
     InTipoBodegaJpaController pgc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
@@ -36,17 +38,19 @@ public class bodega_editar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        Bod = bod;
         TiBo = pgc.findInTipoBodegaEntities();
+        txtNombre.setText(Bod.getNombreBodega());
         llenarCombo(TiBo);
-        llenartxt(bod);
-        
+//        llenartxt(bod);
+
     }
 
-    private void llenartxt(InBodega obj) {
-        for (int i = 0; i < TiBo.size(); i++) {
-            txtNombre.setText(TiBo.get(i).getNombre());
-        }
-    }
+//    private void llenartxt(InBodega obj) {
+//        for (int i = 0; i < Bod.size(); i++) {
+//            txtNombre.setText(Bod.get(i).getNombreBodega());
+//        }
+//    }
 
     public void llenarCombo(List<InTipoBodega> TiBo) {
 
@@ -183,7 +187,9 @@ public class bodega_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void btncancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar1ActionPerformed
-    
+        setVisible(false);
+        consulta_bodega es = new consulta_bodega(new javax.swing.JFrame(), true);
+        es.setVisible(true);
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed

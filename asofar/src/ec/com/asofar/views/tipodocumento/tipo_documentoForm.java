@@ -50,13 +50,13 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             System.out.println(listaDocumento.size());
         }
         btn_guardar.setVisible(false);
-
     }
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         MostrarMedidaActiva();
+        System.out.println("nombre es "+us.getNombreUsuario());
     }
 
     private void MostrarMedidaActiva() {
@@ -276,22 +276,23 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "SELECCIONE UN DOCUMENTO");
         } else {
             listaDocumento = ptm.findInTipoDocumentoEntities();
-            String id = (String) tb_documento.getValueAt(tb_documento.getSelectedRow(), 0);
+            Long id1 = Long.valueOf(tb_documento.getValueAt(i, 0).toString());
             setVisible(false);
-            documento = devuelveObjeto(Long.parseLong(id), listaDocumento);
+            documento = devuelveObjeto(id1, listaDocumento);
             if (documento != null) {
-                tipo_documentoEditarForm tme = new tipo_documentoEditarForm(new javax.swing.JFrame(), true);
-                tme.setVisible(true);
+                //tipo_documentoEditarForm tme = new tipo_documentoEditarForm(new javax.swing.JFrame(), true);
+                //tme.setVisible(true);
+                System.out.println("la vaca lola "+documento.getNombreDocumento());
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public InTipoDocumento devuelveObjeto(Long id, List<InTipoDocumento> listadoc) {
-        listaDocumento = ptm.findInTipoDocumentoEntities();
-        InTipoDocumento doc = new InTipoDocumento();
+    public InTipoDocumento devuelveObjeto(Long id, List<InTipoDocumento> listadoc) {  
+        InTipoDocumento doc = null;
         for (int i = 0; i < listadoc.size(); i++) {
             if (Objects.equals(listadoc.get(i).getIdTipoDocumento(), id)) {
                 doc = listadoc.get(i);
+                break;
             }
         }
         return doc;
