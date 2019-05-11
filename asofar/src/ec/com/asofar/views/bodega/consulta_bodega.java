@@ -228,6 +228,7 @@ public class consulta_bodega extends javax.swing.JDialog {
                         setVisible(false);
                         bodega_editar es = new bodega_editar(new javax.swing.JFrame(), true,obj);
                         es.setVisible(true);
+                        System.out.println("hoal "+obj.getNombreBodega());
                     }
                 
             }
