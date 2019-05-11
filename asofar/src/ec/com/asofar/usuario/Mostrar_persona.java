@@ -59,7 +59,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPersonas = new javax.swing.JTable();
         txtFiltro = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -116,14 +115,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        jButton2.setText("NUEVO");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setBackground(new java.awt.Color(0, 153, 153));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
@@ -156,8 +147,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(211, 211, 211)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(303, 303, 303))
         );
@@ -170,9 +159,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -198,12 +185,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
 
    
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Registrar_persona ru = new Registrar_persona(new javax.swing.JFrame(), true, us1,em1,su1);
-        setVisible(false);
-        ru.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jtPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPersonasMouseClicked
@@ -217,16 +198,24 @@ public class Mostrar_persona extends javax.swing.JDialog {
                 if ((jtPersonas.getValueAt(id, 0).toString().equals(lista_persona.get(i).getCedula()))) {
                     obj = lista_persona.get(i);
                     if (obj != null) {
+                        setObj(obj);
                         
-                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1,em1,su1);
                         setVisible(false);
-                        es.setVisible(true);
+                        
                     }
                 }
             }
 
         }
     }//GEN-LAST:event_jtPersonasMousePressed
+
+    public SePersonas getObj() {
+        return obj;
+    }
+
+    public void setObj(SePersonas obj) {
+        this.obj = obj;
+    }
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
@@ -264,7 +253,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
