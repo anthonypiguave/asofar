@@ -13,6 +13,9 @@ import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrTipoPresentacion;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
 import java.math.BigInteger;
@@ -27,11 +30,15 @@ import javax.swing.JOptionPane;
 public class NuevaMedida extends javax.swing.JDialog {
 
     PrTipoMedidasJpaController controltm = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<PrTipoMedidas> listtipom = controltm.findPrTipoMedidasEntities();
     PrTipoPresentacionJpaController controltp = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<PrTipoPresentacion> listtipop = controltp.findPrTipoPresentacionEntities();
-    PrArticulo arti2 = null;
     PrMedidasJpaController controlm = new PrMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    List<PrTipoMedidas> listtipom = controltm.findPrTipoMedidasEntities();
+    List<PrTipoPresentacion> listtipop = controltp.findPrTipoPresentacionEntities();
+
+    PrArticulo arti2 = null;
+    SeUsuarios us1;
+    SeEmpresa em1;
 
     /**
      * Creates new form NuevaMedidaç
@@ -44,7 +51,7 @@ public class NuevaMedida extends javax.swing.JDialog {
         CargarTipoPresentacion();
     }
 
-    public NuevaMedida(java.awt.Frame parent, boolean modal, PrArticulo arti) {
+    public NuevaMedida(java.awt.Frame parent, boolean modal, PrArticulo arti, SeUsuarios us, SeEmpresa em) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(this);
@@ -54,6 +61,9 @@ public class NuevaMedida extends javax.swing.JDialog {
         art.setText(arti.getNombreArticulo());
         CargarTipoMedida();
         CargarTipoPresentacion();
+        us1 = us;
+        em1 = em;
+
     }
 
     /**
@@ -203,11 +213,11 @@ public class NuevaMedida extends javax.swing.JDialog {
             PrMedidas med = new PrMedidas();
 
             med.setPrArticulo(arti2);
+            med.setUsuarioCreacion(us1.getIdUsuario());
+            med.setFechaCreacion(Fecha.FechaSql());
             med.setPrTipoMedidas(ObtenerDTO.ObtenerPrTipoMedidas(tipo_med.getSelectedItem().toString()));
             med.setPrTipoPresentacion(ObtenerDTO.ObtenerPrTipoPresentacion(tipo_pres.getSelectedItem().toString()));
             med.setEstado("A");
-            med.setUsuarioCreacion(String.valueOf(1));
-            med.setFechaCreacion(Fecha.FechaSql());
 
             controlm.create(med);
             JOptionPane.showMessageDialog(null, "Medida guardada con exito! ");
@@ -215,7 +225,7 @@ public class NuevaMedida extends javax.swing.JDialog {
             MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
             mp.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se pudo guardar "  + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se pudo guardar " + e.getMessage());
             System.out.println("Error al guardar" + e.getMessage());
         }
 
@@ -266,6 +276,8 @@ public class NuevaMedida extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NuevaMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

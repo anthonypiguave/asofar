@@ -6,12 +6,20 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrFabricanteJpaController;
+import ec.com.asofar.dao.PrProductosJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fecha;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +29,15 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     int x, y;
     PrFabricanteJpaController cfab = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductosJpaController cprod = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     List<PrFabricante> listfab = cfab.findPrFabricanteEntities();
+    List<PrProductos> listprod = cprod.findPrProductosEntities();
+
+    PrMedidas med1 = null;
+    SeUsuarios us1;
+    SeEmpresa em1;
+
 
     /**
      * Creates new form NuevoProducto
@@ -34,10 +50,16 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     }
 
-    public NuevoProducto(java.awt.Frame parent, boolean modal, PrMedidas med) {
+    public NuevoProducto(java.awt.Frame parent, boolean modal, PrMedidas med, SeUsuarios us, SeEmpresa em) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         CargarTextFields(med);
+        CargarComboFab();
+        med1 = med;
+        us1 = us;
+        em1 = em;
+       
     }
 
     private void CargarTextFields(PrMedidas med) {
@@ -50,10 +72,10 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     private void CargarComboFab() {
         for (int i = 0; i < listfab.size(); i++) {
-            if(listfab.get(i).getEstado().equals("A")){
+            if (listfab.get(i).getEstado().equals("A")) {
                 combofab.addItem(listfab.get(i).getNombre());
             }
-            
+
         }
     }
 
@@ -359,7 +381,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -372,9 +394,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -399,6 +419,31 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     private void BotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGuardarActionPerformed
         // TODO add your handling code here:
+        try {
+            PrProductos obj = new PrProductos();
+            obj.setPrMedidas(med1);
+            
+            obj.setUsuarioCreacion(us1.getIdUsuario());
+            obj.setSeEmpresa(em1);
+            obj.setFechaCreacion(Fecha.FechaSql());
+            obj.setCodigoBarra(cod_barra.getText());
+            obj.setCodFabricante(ObtenerDTO.ObtenerPrFabricante(combofab.getSelectedItem().toString()));
+            obj.setNombreProducto(nom.getText());
+            obj.setRegistroSanitarioLocal(local.getText());
+            obj.setRegistroSanitarioExtranjero(extran.getText());
+            obj.setReceta(receta.getSelectedItem().toString());
+            obj.setDescontinuado(desc.getSelectedItem().toString());
+            obj.setEstado("A");
+            System.out.println("Hola");
+            cprod.create(obj);
+            JOptionPane.showMessageDialog(null, "Nuevo producto guardado ");
+            setVisible(false);
+            MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
+            mp.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("Error al guardar prod " + e.getMessage());
+        }
+
     }//GEN-LAST:event_BotonGuardarActionPerformed
 
     /**
@@ -426,6 +471,8 @@ public class NuevoProducto extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
