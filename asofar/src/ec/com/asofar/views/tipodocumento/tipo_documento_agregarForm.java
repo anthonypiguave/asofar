@@ -28,6 +28,9 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     List<InTipoDocumento> listaDocumento;
     InTipoDocumentoJpaController ptm = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";int x, y;
+    SeEmpresa em1;
+    SeSucursal su1;
+    SeUsuarios usu1;
 
     public tipo_documento_agregarForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -38,7 +41,9 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     public tipo_documento_agregarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
-
+        usu1=us;
+        su1=su;
+        em1=em;
     }
 
     /**
@@ -51,7 +56,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     private void initComponents() {
 
         txtnom_documento = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -69,10 +74,10 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Grabar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Grabar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -119,7 +124,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtnom_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 23, Short.MAX_VALUE))))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
         );
@@ -133,7 +138,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
                     .addComponent(txtnom_documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnGuardar)
                     .addComponent(jButton2))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -151,17 +156,18 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
         
     }//GEN-LAST:event_txtnom_documentoKeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         boolean ban = ver_exis_doc(txtnom_documento.getText());
         if (ban == true) {
             JOptionPane.showMessageDialog(this, "DOCUMENTO EXISTENTE");
         } else {
             //empresa = listaempresa.get(0);
             //        tipobodega.setIdEmpresa(empresa);
+            
             InTipoDocumento listnue = new InTipoDocumento();
             listnue.setNombreDocumento(txtnom_documento.getText());
             listnue.setEstado("A");
-            listnue.setUsuarioCreacion(null);
+            listnue.setUsuarioCreacion(usu1.getNombreUsuario());
             listnue.setFechaCreacion(null);
             
             try {
@@ -173,7 +179,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
                 Logger.getLogger(tipo_documento_agregarForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
     public boolean ver_exis_doc(String valor) {
         boolean aux = false;
         listaDocumento = ptm.findInTipoDocumentoEntities();
@@ -245,7 +251,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
