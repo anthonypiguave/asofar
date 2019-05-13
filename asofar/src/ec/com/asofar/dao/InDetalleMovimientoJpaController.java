@@ -6,7 +6,7 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dto.InDetalleMovimiento;
+//import ec.com.asofar.dto.InDetalleMovimiento;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
