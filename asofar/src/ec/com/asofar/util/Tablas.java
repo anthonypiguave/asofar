@@ -261,7 +261,7 @@ public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"USUARIO", "NOMBRES", "DEPARTAMENTO", "FECHA CREACION", "CORREO"};
+        String[] Co = {"USUARIO", "NOMBRES", "CORREO", "FECHA CREACION", "FECHA ACTUALIZACION"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
 
@@ -271,9 +271,9 @@ public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
 //            if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getNombreUsuario();
-                Filas[2] = lista.get(i).getDepartamento();
-                Filas[3] = String.valueOf(lista.get(i).getFechaActualizacion());
-                Filas[4] = lista.get(i).getCorreo();
+                Filas[2] =  lista.get(i).getIdPersona().getCorreo();
+                Filas[3] = String.valueOf(lista.get(i).getFechaCreacion());
+                Filas[4] = String.valueOf(lista.get(i).getFechaActualizacion());
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
