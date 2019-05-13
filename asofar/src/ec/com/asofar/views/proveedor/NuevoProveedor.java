@@ -16,7 +16,7 @@ import java.awt.Point;
 public class NuevoProveedor extends javax.swing.JDialog {
     int x,y;
     CoProveedores cpro = new CoProveedores();
-    CoProveedores cpcont
+    CoProveedores cpcont;
     /**
      * Creates new form NuevoProveedor
      */

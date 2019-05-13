@@ -60,7 +60,8 @@ public class InTipoDocumento implements Serializable {
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
-    private String fechaActualizacion;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
     private List<InMovimientos> inMovimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
@@ -121,11 +122,11 @@ public class InTipoDocumento implements Serializable {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
-    public String getFechaActualizacion() {
+    public Date getFechaActualizacion() {
         return fechaActualizacion;
     }
 
-    public void setFechaActualizacion(String fechaActualizacion) {
+    public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
     }
 

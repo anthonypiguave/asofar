@@ -46,8 +46,8 @@ public class CoCotizacionesPorPorveedorJpaController implements Serializable {
             coCotizacionesPorPorveedor.setCoDetalleCotizacionPorProveedorList(new ArrayList<CoDetalleCotizacionPorProveedor>());
         }
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdCotizacion(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
-        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdSucursal(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdEmpresa(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
+        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdSucursal(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -101,8 +101,8 @@ public class CoCotizacionesPorPorveedorJpaController implements Serializable {
 
     public void edit(CoCotizacionesPorPorveedor coCotizacionesPorPorveedor) throws IllegalOrphanException, NonexistentEntityException, Exception {
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdCotizacion(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
-        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdSucursal(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdEmpresa(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
+        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdSucursal(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
