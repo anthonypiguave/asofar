@@ -178,7 +178,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
             try {
                 ptm.create(listnue);
                 setVisible(false);
-                tipo_documentoForm tb = new tipo_documentoForm(new javax.swing.JFrame(), true);
+                tipo_documentoForm tb = new tipo_documentoForm(new javax.swing.JFrame(), true, usu1,em1, su1);
                 tb.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(tipo_documento_agregarForm.class.getName()).log(Level.SEVERE, null, ex);

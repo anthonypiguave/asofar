@@ -272,12 +272,13 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         } else {
             listaDocumento = ptm.findInTipoDocumentoEntities();
             Long id1 = Long.valueOf(tb_documento.getValueAt(i, 0).toString());
-            setVisible(false);
+            
             documento = devuelveObjeto(id1, listaDocumento);
             if (documento != null) {
-                //tipo_documentoEditarForm tme = new tipo_documentoEditarForm(new javax.swing.JFrame(), true);
-                //tme.setVisible(true);
-                System.out.println("la vaca lola "+documento.getNombreDocumento());
+                setVisible(false);
+                tipo_documentoEditarForm tme = new tipo_documentoEditarForm(new javax.swing.JFrame(), true,usu1,em1,su1,documento);
+                tme.setVisible(true);
+               
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

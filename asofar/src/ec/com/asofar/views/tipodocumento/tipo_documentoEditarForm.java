@@ -11,6 +11,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fecha;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
@@ -33,9 +34,11 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su,InTipoDocumento po_doc) {
         super(parent, modal);
         initComponents();
+         //System.out.println("la vaca lola "+documento.getNombreDocumento());
+        txtnom_documento.setText(po_doc.getNombreDocumento());
     }
 
     /**
@@ -168,7 +171,7 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
             listnue.setNombreDocumento(txtnom_documento.getText());
             listnue.setEstado("A");
             listnue.setUsuarioActualizacion(null);
-            listnue.setFechaActualizacion(null);
+            listnue.setFechaActualizacion(Fecha.fecha_Hora_actual_jx());
             try {
                 ptm.edit(listnue);
                 setVisible(false);
