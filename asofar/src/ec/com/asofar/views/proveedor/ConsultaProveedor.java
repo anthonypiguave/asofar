@@ -5,9 +5,15 @@
  */
 package ec.com.asofar.views.proveedor;
 
+import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -15,6 +21,10 @@ import java.awt.Point;
  */
 public class ConsultaProveedor extends javax.swing.JDialog {
     int x,y;
+    CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+    CoProveedores cpro = new CoProveedores();
+    String valor = "";
+    List<CoProveedores> lista;
     /**
      * Creates new form ConsultaProveedor
      */
@@ -22,6 +32,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        Cargardatos();
     }
 
     /**
@@ -73,6 +84,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        tbproveedor.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tbproveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -81,16 +93,22 @@ public class ConsultaProveedor extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NOMBRE", "DIRECCION", "NUMERO IDENTIFICACION", "NOMBRE COMERCIAL"
             }
         ));
+        tbproveedor.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tbproveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbproveedorMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbproveedor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,6 +200,10 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void Cargardatos(){
+        lista = cpcont.findCoProveedoresEntities();
+        Tablas.listarProveedor(lista, tbproveedor);
+    }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
        x = evt.getX();
        y = evt.getY();
@@ -199,7 +221,9 @@ public class ConsultaProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
+        NuevoProveedor np = new NuevoProveedor(new javax.swing.JFrame(),true);
+        np.setVisible(true);
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btninactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninactivosActionPerformed
@@ -207,6 +231,24 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         ConsultaProveedorInactivo cpi = new ConsultaProveedorInactivo(new javax.swing.JFrame(),true);
         cpi.setVisible(true);
     }//GEN-LAST:event_btninactivosActionPerformed
+
+    private void tbproveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproveedorMousePressed
+        int id = 0;
+        cpro = null;
+        if(evt.getClickCount() == 2){
+            id = tbproveedor.getSelectedRow();
+            for(int i =0;i<lista.size();i++){
+                if((tbproveedor.getValueAt(id,1).toString().equals(lista.get(i).getNombre()))){
+                    cpro = lista.get(i);
+                    if(cpro != null){
+                        setVisible(false);
+                        EditarProveedor ep = new EditarProveedor(new javax.swing.JFrame(),true);
+                        ep.setVisible(true),
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_tbproveedorMousePressed
 
     /**
      * @param args the command line arguments
