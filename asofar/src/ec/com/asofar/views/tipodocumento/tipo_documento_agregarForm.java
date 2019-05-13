@@ -11,6 +11,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fecha;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
@@ -44,6 +45,8 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
         usu1=us;
         su1=su;
         em1=em;
+        String fech = Fecha.fecha_Hora_actual_jx();
+        System.out.println("exacto: "+fech);
     }
 
     /**

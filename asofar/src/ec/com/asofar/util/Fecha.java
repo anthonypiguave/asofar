@@ -6,6 +6,8 @@
 package ec.com.asofar.util;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -13,6 +15,10 @@ import java.util.Calendar;
  * @author Usuario
  */
 public class Fecha {
+
+    static java.util.Date date = new java.util.Date();
+    static DateFormat hourdateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+    static String FechaActual;
 
     public static int compararFecha(Date fecha1, Date fecha2) {
         int val = 0;
@@ -98,5 +104,11 @@ public class Fecha {
             gui = "Diciembre";
         }
         return gui;
+    }
+
+    public static String fecha_Hora_actual_jx() {
+        FechaActual="";
+        FechaActual = hourdateFormat.format(date);
+        return FechaActual;
     }
 }
