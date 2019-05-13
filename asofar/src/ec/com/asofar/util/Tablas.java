@@ -289,7 +289,7 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
 
-//            if (lista.get(i).getEstado().equals("A")) {
+            if (lista.get(i).getEstado().equals('A')) {
                 Filas[0] = lista.get(i).getCedula();
                 Filas[1] = lista.get(i).getNombres();
                 Filas[2] = lista.get(i).getApellidos();
@@ -308,7 +308,7 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
                 Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-//            }
+            }
         }
 
     }

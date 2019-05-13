@@ -7,7 +7,6 @@ package ec.com.asofar.views.persona;
 
 import ec.com.asofar.dao.SePersonasJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
-import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.SePersonasJpaControllerExt;
 import ec.com.asofar.dto.SeEmpresa;
@@ -18,8 +17,6 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.Calendario;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
-import ec.com.asofar.views.grupo.ConsultaGruposForm;
-import ec.com.asofar.views.supgrupos.NuevoSubgrupo;
 import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,16 +50,17 @@ public class Editar_persona extends javax.swing.JDialog {
     SeSucursal su1;
     SePersonasJpaController mp
             = new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
-    String rutaimagen = "";
 
     public Editar_persona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public Editar_persona(java.awt.Frame parent, boolean modal, SePersonas persona, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         persona1 = persona;
         us1 = us;
         em1 = em;
@@ -83,10 +81,10 @@ public class Editar_persona extends javax.swing.JDialog {
             persona1.setEstado('I');
             try {
                 mp.edit(persona1);
-                 JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
+                JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
                 Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
                 setVisible(false);
-                setVisible(true);
+                mp.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -385,7 +383,7 @@ public class Editar_persona extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,10 +403,7 @@ public class Editar_persona extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(225, 225, 225))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
