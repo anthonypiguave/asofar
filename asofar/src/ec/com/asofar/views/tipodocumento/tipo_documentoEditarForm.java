@@ -172,6 +172,7 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
             listnue.setEstado("A");
             listnue.setUsuarioActualizacion(null);
             listnue.setFechaActualizacion(Fecha.fecha_Hora_actual_jx());
+            
             try {
                 ptm.edit(listnue);
                 setVisible(false);
