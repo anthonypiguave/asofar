@@ -242,8 +242,8 @@ public class ConsultaProveedor extends javax.swing.JDialog {
                     cpro = lista.get(i);
                     if(cpro != null){
                         setVisible(false);
-                        EditarProveedor ep = new EditarProveedor(new javax.swing.JFrame(),true);
-                        ep.setVisible(true),
+                        //EditarProveedor ep = new EditarProveedor(new javax.swing.JFrame(),true);
+                        //ep.setVisible(true);
                     }
                 }
             }

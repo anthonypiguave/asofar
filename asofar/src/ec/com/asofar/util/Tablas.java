@@ -57,18 +57,18 @@ public class Tablas {
     }
     
     public static void listarProveedor(List<CoProveedores> lista, JTable Tabla) {
-        int[] a = {30, 30, 30, 30};
+        int[] a = {30, 30, 40, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"NOMBRE","DIRECCION","NUMERO IDENTIFICACION","NOMBRE COMERCIAL"};
+        String[] Co = {"NOMBRE","DIRECCION","No. IDENTIFICACION","NOMBRE COMERCIAL"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getEstado().equals("A")) {
+            if (lista.get(i).getEstado().equals('A')) {
                 Filas[0] = lista.get(i).getNombre();
                 Filas[1] = lista.get(i).getDireccion();
                 Filas[2] = lista.get(i).getNumeroIdentificacion();
@@ -88,18 +88,18 @@ public class Tablas {
     }
     
     public static void listarProveedorin(List<CoProveedores> lista, JTable Tabla) {
-        int[] a = {30, 30, 30, 30};
+        int[] a = {30, 30, 40, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"NOMBRE","DIRECCION","NUMERO IDENTIFICACION","NOMBRE COMERCIAL"};
+        String[] Co = {"NOMBRE","DIRECCION","No. IDENTIFICACION","NOMBRE COMERCIAL"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getEstado().equals("I")) {
+            if (lista.get(i).getEstado().equals('I')) {
                 Filas[0] = lista.get(i).getNombre();
                 Filas[1] = lista.get(i).getDireccion();
                 Filas[2] = lista.get(i).getNumeroIdentificacion();

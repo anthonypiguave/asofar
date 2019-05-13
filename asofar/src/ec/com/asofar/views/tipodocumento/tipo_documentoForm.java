@@ -5,7 +5,7 @@
  */
 package ec.com.asofar.views.tipodocumento;
 
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+//import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.dto.InTipoDocumento;
