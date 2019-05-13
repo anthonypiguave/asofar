@@ -12,6 +12,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.AES;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.Dimension;
 import java.sql.Date;
@@ -39,7 +40,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
     SePersonas objPersona;
     SeUsuarios usuario = new SeUsuarios();
     java.util.Date fechaActual = new java.util.Date();
-    String rutaimagen = "";
+    AES aes = new AES();
 
     public Registrar_usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -76,13 +77,13 @@ public class Registrar_usuario extends javax.swing.JDialog {
         txtIdUsuario = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtPersona = new javax.swing.JTextField();
-        txtClave = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        txtClaveConfirm = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         txtCell = new javax.swing.JTextField();
         BotonFecha = new javax.swing.JButton();
+        txtClave = new javax.swing.JPasswordField();
+        txtClaveConfirm = new javax.swing.JPasswordField();
         btnSalir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -130,35 +131,11 @@ public class Registrar_usuario extends javax.swing.JDialog {
             }
         });
 
-        txtClave.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        txtClave.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtClaveFocusLost(evt);
-            }
-        });
-        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtClaveKeyTyped(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("E-MAIL :");
 
         jLabel14.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel14.setText("TELEFONO :");
-
-        txtClaveConfirm.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        txtClaveConfirm.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtClaveConfirmFocusLost(evt);
-            }
-        });
-        txtClaveConfirm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtClaveConfirmKeyTyped(evt);
-            }
-        });
 
         txtCorreo.setEditable(false);
         txtCorreo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -199,22 +176,18 @@ public class Registrar_usuario extends javax.swing.JDialog {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(txtClaveConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtIdUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtClave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtClaveConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotonFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -231,14 +204,14 @@ public class Registrar_usuario extends javax.swing.JDialog {
                     .addComponent(txtPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtClaveConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtClaveConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,14 +251,12 @@ public class Registrar_usuario extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -330,14 +301,6 @@ public class Registrar_usuario extends javax.swing.JDialog {
         txtPersona.setText(txtPersona.getText().toUpperCase());
     }//GEN-LAST:event_txtPersonaFocusLost
 
-    private void txtClaveFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtClaveFocusLost
-        txtClave.setText(txtClave.getText().toUpperCase());
-    }//GEN-LAST:event_txtClaveFocusLost
-
-    private void txtClaveConfirmFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtClaveConfirmFocusLost
-        txtClaveConfirm.setText(txtClaveConfirm.getText().toUpperCase());
-    }//GEN-LAST:event_txtClaveConfirmFocusLost
-
     private void txtIdUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdUsuarioKeyTyped
 
     }//GEN-LAST:event_txtIdUsuarioKeyTyped
@@ -349,14 +312,6 @@ public class Registrar_usuario extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtPersonaKeyTyped
-
-    private void txtClaveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtClaveKeyTyped
 
     private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
         char c = evt.getKeyChar();
@@ -373,10 +328,6 @@ public class Registrar_usuario extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtCellKeyTyped
-
-    private void txtClaveConfirmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveConfirmKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClaveConfirmKeyTyped
 
 
     private void txtIdUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdUsuarioKeyReleased
@@ -405,10 +356,10 @@ public class Registrar_usuario extends javax.swing.JDialog {
             usuario.setIdPersona(objPersona);
             usuario.setUsuarioCreacion(us1.getNombreUsuario());
             usuario.setUsuarioActualizacion(us1.getNombreUsuario());
-            usuario.setPassword(txtClave.getText());
+            usuario.setPassword(aes.encrypt(txtClave.getText()));
             try {
                 tpc.create(usuario);
-                JOptionPane.showMessageDialog(this, "USUARIO INGRESADO CORRECTAMENTE");
+                JOptionPane.showMessageDialog(this, "USUARIO ACTUALIZADO CORRECTAMENTE");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
@@ -453,8 +404,8 @@ public class Registrar_usuario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtCell;
-    private javax.swing.JTextField txtClave;
-    private javax.swing.JTextField txtClaveConfirm;
+    private javax.swing.JPasswordField txtClave;
+    private javax.swing.JPasswordField txtClaveConfirm;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtPersona;

@@ -6,6 +6,7 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InTipoBodega;
@@ -54,6 +55,69 @@ public class Tablas {
         }
         return tab;
     }
+    
+    public static void listarProveedor(List<CoProveedores> lista, JTable Tabla) {
+        int[] a = {30, 30, 40, 50};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"NOMBRE","DIRECCION","No. IDENTIFICACION","NOMBRE COMERCIAL"};
+        String[] Filas = new String[5];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals('A')) {
+                Filas[0] = lista.get(i).getNombre();
+                Filas[1] = lista.get(i).getDireccion();
+                Filas[2] = lista.get(i).getNumeroIdentificacion();
+                Filas[3] = lista.get(i).getNombreComercial();                
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);                
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
+        }
+    }
+    
+    public static void listarProveedorin(List<CoProveedores> lista, JTable Tabla) {
+        int[] a = {30, 30, 40, 50};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"NOMBRE","DIRECCION","No. IDENTIFICACION","NOMBRE COMERCIAL"};
+        String[] Filas = new String[5];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals('I')) {
+                Filas[0] = lista.get(i).getNombre();
+                Filas[1] = lista.get(i).getDireccion();
+                Filas[2] = lista.get(i).getNumeroIdentificacion();
+                Filas[3] = lista.get(i).getNombreComercial();                
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);                
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
+        }
+    }
+    
     public static void listarmotivo(List<InMotivos> lista, JTable Tabla) {
         int[] a = {5, 30, 30};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -64,14 +128,11 @@ public class Tablas {
         String[] Co = {"Id","NOMBRE"};
         String[] Filas = new String[3];
         model = new DefaultTableModel(null, Co);
-
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-
             if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = String.valueOf(lista.get(i).getIdMotivo());
                 Filas[1] = lista.get(i).getNombre();                
-
                 model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -151,17 +212,14 @@ public class Tablas {
         String[] Co = {"COD.", "NOMBRE", "ESTADO", "FECHA CREACION", "FECHA ACTUALIZACION"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
-
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-
             if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getIdGrupo().toString();
                 Filas[1] = lista.get(i).getNombre();
                 Filas[2] = lista.get(i).getEstado();
                 Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
                 Filas[4] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
-
                 model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -261,7 +319,7 @@ public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"USUARIO", "NOMBRES", "DEPARTAMENTO", "FECHA CREACION", "CORREO"};
+        String[] Co = {"USUARIO", "NOMBRES", "CORREO", "FECHA CREACION", "FECHA ACTUALIZACION"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
 
@@ -271,9 +329,9 @@ public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
 //            if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getNombreUsuario();
-                Filas[2] = lista.get(i).getDepartamento();
-                Filas[3] = String.valueOf(lista.get(i).getFechaActualizacion());
-                Filas[4] = lista.get(i).getCorreo();
+                Filas[2] =  lista.get(i).getIdPersona().getCorreo();
+                Filas[3] = String.valueOf(lista.get(i).getFechaCreacion());
+                Filas[4] = String.valueOf(lista.get(i).getFechaActualizacion());
 
                 model.addRow(Filas);
                 Tabla.setModel(model);

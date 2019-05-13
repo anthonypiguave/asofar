@@ -5,10 +5,16 @@
  */
 package ec.com.asofar.views.proveedor;
 
+import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.CoProveedores_;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.proveedor.*;
 import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 
 /**
  *
@@ -16,6 +22,9 @@ import java.awt.Point;
  */
 public class ConsultaProveedorInactivo extends javax.swing.JDialog {
     int x,y;
+    List<CoProveedores> lista;
+    CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+    CoProveedores cpro = new CoProveedores();
     /**
      * Creates new form ConsultaProveedor
      */
@@ -23,6 +32,7 @@ public class ConsultaProveedorInactivo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        Cargardatos();
     }
 
     /**
@@ -89,7 +99,7 @@ public class ConsultaProveedorInactivo extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,6 +165,10 @@ public class ConsultaProveedorInactivo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        public void Cargardatos (){
+            lista = cpcont.findCoProveedoresEntities();
+            Tablas.listarProveedorin(lista, tbproveedor);
+        }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
        x = evt.getX();
        y = evt.getY();

@@ -73,21 +73,14 @@ public class Editar_persona extends javax.swing.JDialog {
 
     public void bloqueo() {
 
-        obj = null;
-
-        for (int i = 0; i < lista_persona.size(); i++) {
-            if (persona1.getIdPersona() == lista_persona.get(i).getIdPersona()) {
-                obj = lista_persona.get(i);
-                try {
-                    mp.destroy(lista_persona.get(i).getIdPersona());
-
-                } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-
+      persona1.setEstado('I');
+        try {
+            mp.edit(persona1);
+        } catch (Exception ex) {
+            Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
         }
+                
+         
     }
 
     @SuppressWarnings("unchecked")
