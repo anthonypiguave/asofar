@@ -37,8 +37,11 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     InTipoDocumento documento = new InTipoDocumento();
     List<InTipoDocumento> listaDocumento;
     InTipoDocumentoJpaController ptm = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    String valor = "";
+    String buscar = "";
     int x, y;
+    SeEmpresa em1;
+    SeSucursal su1;
+    SeUsuarios usu1;
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -49,7 +52,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         for (int i = 0; i < listaDocumento.size(); i++) {
             System.out.println(listaDocumento.size());
         }
-        btn_guardar.setVisible(false);
+        btn_guardar.setEnabled(false);
     }
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -57,6 +60,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         initComponents();
         MostrarMedidaActiva();
         System.out.println("nombre es "+us.getNombreUsuario());
+        usu1=us;
+        su1=su;
+        em1=em;
     }
 
     private void MostrarMedidaActiva() {
@@ -89,11 +95,10 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         btn_guardar = new javax.swing.JButton();
-        estado_cb = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_buscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_documento = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -122,18 +127,6 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             }
         });
 
-        estado_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
-        estado_cb.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                estado_cbItemStateChanged(evt);
-            }
-        });
-        estado_cb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estado_cbActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Editar");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -156,6 +149,12 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 
         jLabel2.setText("Buscar:");
 
+        txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_buscarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -166,37 +165,30 @@ public class tipo_documentoForm extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(estado_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_guardar)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(estado_cb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btn_guardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -253,8 +245,8 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(14, 14, 14)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -265,7 +257,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        tipo_documento_agregarForm tma = new tipo_documento_agregarForm(new javax.swing.JFrame(), true);
+        tipo_documento_agregarForm tma = new tipo_documento_agregarForm(new javax.swing.JFrame(), true,usu1,em1,su1);
         tma.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -297,36 +289,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         }
         return doc;
     }
-    private void estado_cbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_estado_cbItemStateChanged
-        // TODO add your handling code here:
-        //        if (estado_cb.getSelectedIndex() == 0) {
-        ////            listamedida.clear();
-        //            busqueda_tf.setText("");
-        //            MostrarMedidaActiva();
-        ////            listamedida = pjc.findPrTipoMedidasEntities();
-        ////            Tablas.TablaTipoMedidaActivo(listamedida, medida_tb);
-        //        } else {
-        //            busqueda_tf.setText("");
-        //            MostrarMedidaInactiva();
-        //        }
-    }//GEN-LAST:event_estado_cbItemStateChanged
-
-    private void estado_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estado_cbActionPerformed
-//        if (estado_cb.getSelectedIndex() == 0) {
-//            //            listamedida.clear();
-//            busqueda_tf.setText("");
-//            MostrarMedidaActiva();
-//            //            listamedida = pjc.findPrTipoMedidasEntities();
-//            //            Tablas.TablaTipoMedidaActivo(listamedida, medida_tb);
-//        } else {
-//            busqueda_tf.setText("");
-//            MostrarMedidaInactiva();
-//        }
-    }//GEN-LAST:event_estado_cbActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 //        // TODO add your handling code here:
-//        setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tb_documentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_documentoMouseClicked
@@ -337,7 +302,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             String a = transformarboolean((boolean) tb_documento.getValueAt(i, 2));
             String b = listaDocumento.get(i).getEstado().toString();
             if (!a.equals(b)) {
-                btn_guardar.setVisible(true);
+                btn_guardar.setEnabled(true);
                 break;
             }
         }
@@ -368,6 +333,11 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
+
+    private void txt_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyReleased
+      buscar = txt_buscar.getText();
+      Tablas.filtro(buscar, tb_documento);
+    }//GEN-LAST:event_txt_buscarKeyReleased
     public String transformarboolean(boolean valor) {
         if (valor == true) {
             return "A";
@@ -421,7 +391,6 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_guardar;
-    private javax.swing.JComboBox<String> estado_cb;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -429,7 +398,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tb_documento;
+    private javax.swing.JTextField txt_buscar;
     // End of variables declaration//GEN-END:variables
 }
