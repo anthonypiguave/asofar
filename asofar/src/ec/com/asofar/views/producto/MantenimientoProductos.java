@@ -50,8 +50,12 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     List<PrArticulo> listart = carti.findPrArticuloEntities();
     List<PrMedidas> listmed = cmed.findPrMedidasEntities();
     List<PrProductos> listprod = cprod.findPrProductosEntities();
+    
     Tablas tt = new Tablas();
     String valor = "";
+    SeUsuarios us1;
+    SeEmpresa em1;
+    SeSucursal su1;
 
     public MantenimientoProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -65,6 +69,9 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         CargarArbol();
+        us1 = us;
+        em1 = em;
+        su1 = su;
 
     }
 
@@ -393,7 +400,20 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
     private void BotonNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoProductoActionPerformed
         // TODO add your handling code here:
-        NuevoProducto np = new NuevoProducto(new javax.swing.JFrame(), true);
+        PrArticulo arti = new PrArticulo();
+        PrTipoMedidas tipo = new PrTipoMedidas();
+        PrTipoPresentacion pre = new PrTipoPresentacion();
+        TreePath objeto = arbol.getSelectionPath();
+        String valor = objeto.getPathComponent(3).toString();
+        arti = ObtenerDTO.ObtenerPrArticulo(valor);
+        tipo = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
+        pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
+        System.out.println(pre + "" + arti + tipo);
+        PrMedidasPK pk = new PrMedidasPK(arti.getPrArticuloPK().getIdArticulo(), arti.getPrArticuloPK().getIdGrupo(), arti.getPrArticuloPK().getIdSubgrupo(), pre.getIdTipoPresentacion(), tipo.getIdTipoMedidas());
+        PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(pk);
+
+         NuevoProducto np = new NuevoProducto(new javax.swing.JFrame(), true, obj, us1, em1);
+        setVisible(false);
         np.setVisible(true);
     }//GEN-LAST:event_BotonNuevoProductoActionPerformed
 
@@ -436,15 +456,12 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         TreePath objeto = arbol.getSelectionPath();
         String valor = objeto.getPathComponent(3).toString();
         PrArticulo arti = ObtenerDTO.ObtenerPrArticulo(valor);
-        NuevaMedida nv = new NuevaMedida(new javax.swing.JFrame(), true, arti);
+        NuevaMedida nv = new NuevaMedida(new javax.swing.JFrame(), true, arti, us1, em1);
         setVisible(false);
         nv.setVisible(true);
     }//GEN-LAST:event_BotonNuevaMedidaActionPerformed
 
     private void tabla_medMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_medMousePressed
-
-        int b = 0;
-
         if (evt.getClickCount() == 1) {
 
             PrArticulo arti = new PrArticulo();
@@ -455,16 +472,13 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             arti = ObtenerDTO.ObtenerPrArticulo(valor);
             tipo = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
             pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
-            System.out.println(pre +""+ arti + tipo);
+            System.out.println(pre + "" + arti + tipo);
             PrMedidasPK pk = new PrMedidasPK(arti.getPrArticuloPK().getIdArticulo(), arti.getPrArticuloPK().getIdGrupo(), arti.getPrArticuloPK().getIdSubgrupo(), pre.getIdTipoPresentacion(), tipo.getIdTipoMedidas());
             PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(pk);
             System.out.println(obj + " Hola Mundoo " + pk);
 
             Tablas.TablaProducto(obj.getPrProductosList(), tabla_prod);
             BotonNuevoProducto.setEnabled(true);
-//                } else {
-//                    
-//                }
 
         }
     }//GEN-LAST:event_tabla_medMousePressed
@@ -523,6 +537,10 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MantenimientoProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

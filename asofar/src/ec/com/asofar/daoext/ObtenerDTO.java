@@ -25,6 +25,7 @@ import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
+import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 
@@ -517,4 +518,20 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
         
         return dto;
     }
+     
+      public static PrFabricante ObtenerPrFabricante(String nombre) {
+        PrFabricanteJpaController control = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrFabricante dto = new PrFabricante();
+        List<PrFabricante> lista = control.findPrFabricanteEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+    }
+      
 }
