@@ -44,10 +44,9 @@ public class Registrar_persona extends javax.swing.JDialog {
     SeUsuarios us1;
     SeEmpresa em1;
     SeSucursal su1;
+    List<SePersonas> lista_persona;
     SePersonas persona = new SePersonas();
     java.util.Date fechaActual = new java.util.Date();
-    String rutaimagen = "";
-    
 
     public Registrar_persona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -70,9 +69,10 @@ public class Registrar_persona extends javax.swing.JDialog {
         em1 = em;
         su1 = su;
         this.setLocationRelativeTo(null);
-        this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
+        this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight() - 1));
         CargarRol();
-       
+        lista_persona = mp.findSePersonasEntities();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -331,7 +331,7 @@ public class Registrar_persona extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PERSONA NUEVA");
+        jLabel1.setText("NUEVA PERSONA");
         jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -404,7 +404,23 @@ public class Registrar_persona extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDireccionFocusLost
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
-
+        char car = evt.getKeyChar();
+        //System.out.println(car);
+        if (txtCedula.getText().length() == 9 || txtCedula.getText().length() == 12) {
+            // evt.consume();
+            Habilitar(true);
+            //System.out.println(cedula.getText().length());
+        } else {
+            Habilitar(false);
+            // System.out.println("hhhh:  "+cedula.getText().length());
+        }
+        if (txtCedula.getText().length() > 12) {
+            evt.consume();
+            Habilitar(true);
+        }
+        if (car < '0' || car > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCedulaKeyTyped
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
@@ -478,7 +494,7 @@ public class Registrar_persona extends javax.swing.JDialog {
         int com = Fecha.compararFecha(fecha1, (Date) Fecha.FechaSql());
 
         if (com == 1 || com == 0) {
-            JOptionPane.showMessageDialog(null, "Fecha invalida");
+            JOptionPane.showMessageDialog(null, "FECHA INVALIDA");
             fecha1 = null;
             fecha.setText(" ");
         } else {
@@ -487,32 +503,51 @@ public class Registrar_persona extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BotonFechaActionPerformed
 
- 
-
     public void Guardar() {
+        SePersonas obj = null;
+        int r = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO DE GUARDAR LOS DATOS?", "", JOptionPane.YES_NO_OPTION);
 
-        persona.setCedula(txtCedula.getText());
-        persona.setNombres(txtNombre.getText());
-        persona.setApellidos(txtApellido.getText());
-        persona.setTelefono(txtCell.getText());
-        persona.setTelefono2(txtConven.getText());
-        persona.setCorreo(txtCorreo.getText());
-        persona.setFechaNacimiento(fecha1);
-        persona.setDireccion(txtDireccion.getText());
-        persona.setFechaActualizacion(fechaActual);
-        persona.setFechaCreacion(fechaActual);
-        persona.setUsuarioCreacion(us1.getIdUsuario());
-        persona.setUsuarioActualizacion(us1.getIdUsuario());
-        SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona.getSelectedItem().toString());
-        persona.setIdTipoPersona(tp);
-        
-        
-        mp.create(persona);
+        if (r == JOptionPane.YES_OPTION) {
+            for (int i = 0; i < lista_persona.size(); i++) {
+                if ((lista_persona.get(i).getCedula()).equals(txtCedula.getText())) {
+                    obj = lista_persona.get(i);
+                }
+            }
+            if (obj == null) {
+                JOptionPane.showMessageDialog(null, "PERSONA YA EXISTE");
+            } else {
+                if ("".equals(txtNombre.getText())
+                        || "".equals(txtApellido.getText())
+                        || "".equals(txtCorreo.getText())
+                        || "".equals(txtCell.getText())
+                        || "".equals(txtDireccion.getText())) {
+                    persona.setCedula(txtCedula.getText());
+                    persona.setNombres(txtNombre.getText());
+                    persona.setApellidos(txtApellido.getText());
+                    persona.setTelefono(txtCell.getText());
+                    persona.setTelefono2(txtConven.getText());
+                    persona.setCorreo(txtCorreo.getText());
+                    persona.setFechaNacimiento(fecha1);
+                    persona.setDireccion(txtDireccion.getText());
+                    persona.setFechaActualizacion(fechaActual);
+                    persona.setFechaCreacion(fechaActual);
+                    persona.setUsuarioCreacion(us1.getIdUsuario());
+                    persona.setUsuarioActualizacion(us1.getIdUsuario());
+                    SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona.getSelectedItem().toString());
+                    persona.setIdTipoPersona(tp);
 
-        
-        Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
-        setVisible(false);
-        setVisible(true);
+                    mp.create(persona);
+
+                    Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+                    setVisible(false);
+                    setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "DEBE LLENAR EL FORMULARIO");
+                }
+            }
+        } else {
+
+        }
     }
 
     public void CargarRol() {
@@ -599,4 +634,9 @@ public class Registrar_persona extends javax.swing.JDialog {
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void Habilitar(boolean b) {
+        btnGuardar.setEnabled(b);
+
+    }
 }

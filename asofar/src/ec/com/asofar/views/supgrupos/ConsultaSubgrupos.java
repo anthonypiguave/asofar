@@ -5,9 +5,6 @@
  */
 package ec.com.asofar.views.supgrupos;
 
-
-
-import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
@@ -17,9 +14,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,15 +40,17 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         cargarDatos();
     }
-     public ConsultaSubgrupos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+
+    public ConsultaSubgrupos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         cargarDatos();
-        us1=us;
-        em1=em;
-        su1=su;
+        us1 = us;
+        em1 = em;
+        su1 = su;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -218,8 +215,8 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
         public void cargarDatos() {
 
-            lista = cSubgrupos.findPrSubgruposEntities();
-            Tablas.listarSubgrupos(lista, tbsubgrupos);
+        lista = cSubgrupos.findPrSubgruposEntities();
+        Tablas.listarSubgrupos(lista, tbsubgrupos);
     }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
@@ -234,12 +231,21 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
 
         setVisible(false);
-        NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(), true,us1,em1,su1);
+        NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(), true, us1, em1, su1);
         ns.setVisible(true);
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        setVisible(false);
+
+        int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+            setVisible(false);
+
+//            asdfg12345
+        } else {
+
+        }
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btninactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninactivosActionPerformed
@@ -249,30 +255,21 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     }//GEN-LAST:event_btninactivosActionPerformed
 
     private void tbsubgruposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbsubgruposMousePressed
-                int id = 0;
-                obj = null;
+        int id = 0;
+        obj = null;
         if (evt.getClickCount() == 2) {
             id = tbsubgrupos.getSelectedRow();
-            for(int i = 0 ;i < lista.size();i++){
-                if((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))){
+            for (int i = 0; i < lista.size(); i++) {
+                if ((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     obj = lista.get(i);
-                  if(obj != null)  {
-                      setVisible(false);
-                      EditarSubgrupos es = new EditarSubgrupos(new  javax.swing.JFrame(),true,obj);
-                      es.setVisible(true);
-                  }
+                    if (obj != null) {
+                        setVisible(false);
+                        EditarSubgrupos es = new EditarSubgrupos(new javax.swing.JFrame(), true, obj);
+                        es.setVisible(true);
+                    }
                 }
             }
-//            lista = crud.listarProveedores(Long.valueOf("1"));
-//            
-//            (tabla.getValueAt(id, 0).toString(), lista);
-//            System.out.println("si pasa algo"+proveedor.getCedula_ruc());
-//            if (proveedor != null) {
-//                Editar_Proveedor ep = new Editar_Proveedor(new javax.swing.JFrame(), true, proveedor);
-//                setVisible(false);
-//                ep.setVisible(true);
 
-            
         }
     }//GEN-LAST:event_tbsubgruposMousePressed
 
