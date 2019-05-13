@@ -16,6 +16,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.views.grupo.ConsultaGruposForm;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigInteger;
@@ -23,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,12 +34,15 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
 
     int x, y;
     Date d = new Date();
-    SubGruposExt psc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
+    SubGruposExt psc
+            = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
+    PrGruposJpaController pgc
+            = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeEmpresaJpaController secont
+            = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
     ObtenerDTO od = new ObtenerDTO();
-    PrGruposJpaController pgc = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<PrGrupos> pg;
     List<SeEmpresa> se;
-    SeEmpresaJpaController secont = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeEmpresa empresa = new SeEmpresa();
     PrSubgrupos ps = new PrSubgrupos();
 
@@ -76,7 +81,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
         btncancelar = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         cbgrupo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
 
@@ -121,7 +126,17 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("ELEGIR GRUPO:");
 
-        txtnombre.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         cbgrupo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
 
@@ -144,7 +159,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -158,7 +173,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
                     .addComponent(cbgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -204,23 +219,49 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
-        ps.setNombre(txtnombre.getText());
-        ps.setIdEmpresa(empresa);
-        ps.setEstado("A");
-        ps.setPrGrupos(od.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
-        ps.setUsuarioActualizacion(String.valueOf(1));
-        ps.setUsuarioCreacion(String.valueOf(1));
-        ps.setFechaActualizacion(d);
-        ps.setFechaCreacion(d);
-        try {
-            psc.create(ps);
-            setVisible(false);
-            ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
-            cs.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+            if ("".equals(txtNombre.getText())) {
+                JOptionPane.showMessageDialog(null, "Ingrese un nombre!");
+            } else {
+                ps.setNombre(txtNombre.getText());
+                ps.setIdEmpresa(empresa);
+                ps.setEstado("A");
+                ps.setPrGrupos(ObtenerDTO.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
+                ps.setUsuarioActualizacion(String.valueOf(1));
+                ps.setUsuarioCreacion(String.valueOf(1));
+                ps.setFechaActualizacion(d);
+                ps.setFechaCreacion(d);
+                try {
+                    psc.create(ps);
+                    JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
+                    ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
+                    setVisible(false);
+                    cs.setVisible(true);
+
+                } catch (Exception ex) {
+                    Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+
         }
+
+
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        txtNombre.setText(txtNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreFocusLost
 
     /**
      * @param args the command line arguments
@@ -273,6 +314,6 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

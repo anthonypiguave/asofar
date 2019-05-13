@@ -11,6 +11,7 @@ import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
+import ec.com.asofar.views.grupo.ConsultaGruposForm;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.text.SimpleDateFormat;
@@ -25,21 +26,23 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class EditarSubgrupos extends javax.swing.JDialog {
-int x,y;
+
+    int x, y;
     /**
      * Creates new form NuevoSubgrupo
      */
-     PrSubgrupos pr;
-     SubGruposExt prc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
-     Date d = new Date();
+    PrSubgrupos pr;
+    SubGruposExt prc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
+    Date d = new Date();
+
     public EditarSubgrupos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         ;
     }
-    
-     public EditarSubgrupos(java.awt.Frame parent, boolean modal,PrSubgrupos obj) {
+
+    public EditarSubgrupos(java.awt.Frame parent, boolean modal, PrSubgrupos obj) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -63,7 +66,7 @@ int x,y;
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -122,7 +125,12 @@ int x,y;
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("PERTENECE AL GRUPO:");
 
-        jTextField2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("FECHA DE CREACION:");
@@ -170,7 +178,7 @@ int x,y;
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                                     .addComponent(jTextField4))
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(36, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -185,7 +193,7 @@ int x,y;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -215,17 +223,17 @@ int x,y;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void llenarCampos(PrSubgrupos obj){        
+
+    public void llenarCampos(PrSubgrupos obj) {
         jTextField1.setText(obj.getPrGrupos().getNombre());
-        jTextField2.setText(obj.getNombre());
+        txtNombre.setText(obj.getNombre());
         jTextField3.setText(Fecha.getStringFecha(new java.sql.Date(obj.getFechaCreacion().getTime())));
         jTextField4.setText(Fecha.getStringFecha(new java.sql.Date(obj.getFechaActualizacion().getTime())));
-        
+
     }
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         setVisible(false);
-        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
+        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
         cs.setVisible(true);
     }//GEN-LAST:event_btncancelarActionPerformed
 
@@ -236,7 +244,7 @@ int x,y;
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -244,36 +252,57 @@ int x,y;
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        pr.setNombre(jTextField2.getText());
-        pr.setFechaActualizacion(d);
-    try {
-        prc.edit(pr);
-        JOptionPane.showMessageDialog(this, "Subgrupo Actualizado");
-        setVisible(false);
-        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
-        cs.setVisible(true);
-    } catch (NonexistentEntityException ex) {
-        Logger.getLogger(EditarSubgrupos.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
-        Logger.getLogger(EditarSubgrupos.class.getName()).log(Level.SEVERE, null, ex);
-    }
+
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de modificar los datos?", "", JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+            if ("".equals(txtNombre.getText())) {
+                JOptionPane.showMessageDialog(null, "Ingrese un nombre!");
+            } else {
+
+                pr.setNombre(txtNombre.getText());
+                pr.setFechaActualizacion(d);
+                try {
+                    prc.edit(pr);
+                    JOptionPane.showMessageDialog(null, "Datos modificados correctamente!");
+                    ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
+                    setVisible(false);
+                    cs.setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+
+        }
+
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        pr.setEstado("I");
-    try {
-        prc.edit(pr);
-         JOptionPane.showMessageDialog(this, "Subgrupo Eliminado");
-         setVisible(false);
-         ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
-         cs.setVisible(true);
-    } catch (NonexistentEntityException ex) {
-        Logger.getLogger(EditarSubgrupos.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
-        Logger.getLogger(EditarSubgrupos.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ELIMINAR LOS DATOS?", "", JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+            pr.setEstado("I");
+            try {
+                prc.edit(pr);
+                JOptionPane.showMessageDialog(this, "SUBGRUPO ELIMINADO");
+                ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
+                setVisible(false);
+                cs.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
+
     }//GEN-LAST:event_btneliminarActionPerformed
-    
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        txtNombre.setText(txtNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -330,8 +359,8 @@ int x,y;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

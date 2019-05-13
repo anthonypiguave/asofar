@@ -18,6 +18,8 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.Calendario;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
+import ec.com.asofar.views.grupo.ConsultaGruposForm;
+import ec.com.asofar.views.supgrupos.NuevoSubgrupo;
 import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -47,23 +49,24 @@ public class Editar_persona extends javax.swing.JDialog {
             = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
     java.util.Date fechaActual = new java.util.Date();
     SeUsuarios us1;
-    SeEmpresa em1; 
+    SeEmpresa em1;
     SeSucursal su1;
     SePersonasJpaController mp
             = new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
     String rutaimagen = "";
+
     public Editar_persona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public Editar_persona(java.awt.Frame parent, boolean modal, SePersonas persona, SeUsuarios us,SeEmpresa em,SeSucursal su) {
+    public Editar_persona(java.awt.Frame parent, boolean modal, SePersonas persona, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         persona1 = persona;
         us1 = us;
-        em1=em;
-        su1=su;
+        em1 = em;
+        su1 = su;
         cargarValores(persona);
         CargarRol();
         lista_persona
@@ -73,14 +76,25 @@ public class Editar_persona extends javax.swing.JDialog {
 
     public void bloqueo() {
 
-      persona1.setEstado('I');
-        try {
-            mp.edit(persona1);
-        } catch (Exception ex) {
-            Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ELIMINAR EL USUARIO?", "", JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+
+            persona1.setEstado('I');
+            try {
+                mp.edit(persona1);
+                 JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
+                Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+                setVisible(false);
+                setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
         }
-                
-         
+
     }
 
     @SuppressWarnings("unchecked")
@@ -409,28 +423,34 @@ public class Editar_persona extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
     public void Guardar() {
 //        persona1.setCedula(txtCedula.getText());
-        persona1.setNombres(txtNombre.getText());
-        persona1.setApellidos(txtApellido.getText());
-        persona1.setTelefono(txtCell.getText());
-        persona1.setTelefono2(txtConven.getText());
-        persona1.setCorreo(txtCorreo.getText());
-        persona1.setFechaNacimiento(persona1.getFechaNacimiento());
-        persona1.setDireccion(txtDireccion.getText());
-        persona1.setFechaActualizacion(fechaActual);
-        persona1.setUsuarioActualizacion(us1.getIdUsuario());
-        SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona1.getSelectedItem().toString());
-        persona1.setIdTipoPersona(tp);
-     
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ACTUALIZAR LA PERSONA?", "", JOptionPane.YES_NO_OPTION);
 
-        try {
-            mp.edit(persona1);
-            Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
-            setVisible(false);
-            setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+        if (r == JOptionPane.YES_OPTION) {
+
+            persona1.setNombres(txtNombre.getText());
+            persona1.setApellidos(txtApellido.getText());
+            persona1.setTelefono(txtCell.getText());
+            persona1.setTelefono2(txtConven.getText());
+            persona1.setCorreo(txtCorreo.getText());
+            persona1.setFechaNacimiento(persona1.getFechaNacimiento());
+            persona1.setDireccion(txtDireccion.getText());
+            persona1.setFechaActualizacion(fechaActual);
+            persona1.setUsuarioActualizacion(us1.getIdUsuario());
+            SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona1.getSelectedItem().toString());
+            persona1.setIdTipoPersona(tp);
+
+            try {
+                mp.edit(persona1);
+                Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+                setVisible(false);
+                setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
+
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -542,6 +562,7 @@ public class Editar_persona extends javax.swing.JDialog {
         cbTipoPersona1.setSelectedItem(persona1.getIdTipoPersona().getNombre());
 
     }
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
