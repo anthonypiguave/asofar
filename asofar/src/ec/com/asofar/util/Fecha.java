@@ -18,7 +18,7 @@ public class Fecha {
 
     static java.util.Date date = new java.util.Date();
     static DateFormat hourdateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-    static String FechaActual;
+    static Date FechaActual;
 
     public static int compararFecha(Date fecha1, Date fecha2) {
         int val = 0;
@@ -106,9 +106,9 @@ public class Fecha {
         return gui;
     }
 
-    public static String fecha_Hora_actual_jx() {
-        FechaActual="";
-        FechaActual = hourdateFormat.format(date);
-        return FechaActual;
+    public static java.util.Date fecha_Hora_actual_jx() {
+        java.util.Date act=null;
+        act = new java.util.Date();
+        return act;
     }
 }
