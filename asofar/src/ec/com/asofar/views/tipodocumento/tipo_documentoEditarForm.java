@@ -30,6 +30,9 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
     List<InTipoDocumento> listaDocumento;
     InTipoDocumentoJpaController ptm = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";
+    SeEmpresa em1;
+    SeSucursal su1;
+    SeUsuarios usu1;
     public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -37,6 +40,9 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
     public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su,InTipoDocumento po_doc) {
         super(parent, modal);
         initComponents();
+        usu1 = us;
+        su1 = su;
+        em1 = em;
          //System.out.println("la vaca lola "+documento.getNombreDocumento());
         txtnom_documento.setText(po_doc.getNombreDocumento());
     }
@@ -170,13 +176,13 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
             InTipoDocumento listnue = new InTipoDocumento();
             listnue.setNombreDocumento(txtnom_documento.getText());
             listnue.setEstado("A");
-            listnue.setUsuarioActualizacion(null);
+            listnue.setUsuarioActualizacion(usu1.getNombreUsuario());
             listnue.setFechaActualizacion(Fecha.fecha_Hora_actual_jx());
             
             try {
                 ptm.edit(listnue);
                 setVisible(false);
-                tipo_documentoForm tb = new tipo_documentoForm(new javax.swing.JFrame(), true);
+                tipo_documentoForm tb = new tipo_documentoForm(new javax.swing.JFrame(), true,usu1,em1, su1);
                 tb.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(tipo_documentoEditarForm.class.getName()).log(Level.SEVERE, null, ex);
