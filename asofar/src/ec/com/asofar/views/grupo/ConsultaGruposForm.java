@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ec.com.asofar.views.grupo;
 
 import ec.com.asofar.dao.PrGruposJpaController;
@@ -44,6 +40,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
 
     }
+    
 
     private void cargarInformacion() {
         try {
@@ -97,6 +94,11 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfiltroFocusLost(evt);
+            }
+        });
         txtfiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfiltroActionPerformed(evt);
@@ -300,6 +302,10 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfiltroActionPerformed
+
+    private void txtfiltroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfiltroFocusLost
+    
+    }//GEN-LAST:event_txtfiltroFocusLost
 
     /**
      * @param args the command line arguments

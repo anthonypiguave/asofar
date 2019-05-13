@@ -11,8 +11,11 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fecha;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +30,8 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     InTipoDocumento documento = new InTipoDocumento();
     List<InTipoDocumento> listaDocumento;
     InTipoDocumentoJpaController ptm = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    String valor = "";int x, y;
+    String valor = "";
+    int x, y;
     SeEmpresa em1;
     SeSucursal su1;
     SeUsuarios usu1;
@@ -41,9 +45,12 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     public tipo_documento_agregarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
-        usu1=us;
-        su1=su;
-        em1=em;
+        usu1 = us;
+        su1 = su;
+        em1 = em;
+//        Date now = new Date(System.currentTimeMillis());
+//        System.out.println(Fecha.fecha_Hora_actual_jx());
+        //System.out.println(now);
     }
 
     /**
@@ -153,7 +160,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
 
     private void txtnom_documentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnom_documentoKeyTyped
 
-        
+
     }//GEN-LAST:event_txtnom_documentoKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -161,15 +168,13 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
         if (ban == true) {
             JOptionPane.showMessageDialog(this, "DOCUMENTO EXISTENTE");
         } else {
-            //empresa = listaempresa.get(0);
-            //        tipobodega.setIdEmpresa(empresa);
-            
+                    
             InTipoDocumento listnue = new InTipoDocumento();
             listnue.setNombreDocumento(txtnom_documento.getText());
             listnue.setEstado("A");
             listnue.setUsuarioCreacion(usu1.getNombreUsuario());
-            listnue.setFechaCreacion(null);
-            
+            listnue.setFechaCreacion(Fecha.fecha_Hora_actual_jx());
+
             try {
                 ptm.create(listnue);
                 setVisible(false);

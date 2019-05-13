@@ -127,6 +127,11 @@ public class AgregarGruposForm extends javax.swing.JDialog {
         jLabel3.setText("NOMBRE:");
 
         txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
@@ -184,9 +189,9 @@ public class AgregarGruposForm extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         setVisible(false);
-        ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
-        cg.dispose();
-        cg.setVisible(true);
+//        ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+//        cg.dispose();
+//        cg.setVisible(true);
 
 
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -242,6 +247,10 @@ public class AgregarGruposForm extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        txtNombre.setText(txtNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreFocusLost
 
     /**
      * @param args the command line arguments

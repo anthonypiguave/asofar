@@ -130,6 +130,11 @@ public class ModificarGruposForm extends javax.swing.JDialog {
         });
 
         txtNombreactual.setEditable(false);
+        txtNombreactual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreactualFocusLost(evt);
+            }
+        });
 
         jLabel4.setText("Nombre Actual:");
 
@@ -224,9 +229,9 @@ public class ModificarGruposForm extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         setVisible(false);
-        ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
-        cg.dispose();
-        cg.setVisible(true);
+//        ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+//        cg.dispose();
+//        cg.setVisible(true);
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -294,6 +299,11 @@ public class ModificarGruposForm extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtNuevoKeyTyped
+
+    private void txtNombreactualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreactualFocusLost
+       
+        txtNuevo.setText(txtNuevo.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreactualFocusLost
 
     /**
      * @param args the command line arguments
