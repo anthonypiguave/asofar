@@ -199,9 +199,12 @@ public class EditarMotivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(null, "SEGURO QUE DESEA SALIR", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
+        if(opcion == JOptionPane.YES_OPTION){
         setVisible(false);
         ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
         cm.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

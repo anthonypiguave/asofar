@@ -5,26 +5,11 @@
  */
 package ec.com.asofar.views.caja;
 
-import ec.com.asofar.views.grupo.*;
-import ec.com.asofar.dao.PrGruposJpaController;
-import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.dto.PrGrupos;
-import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.util.Fecha;
-import ec.com.asofar.views.*;
-import ec.com.asofar.views.supgrupos.NuevoSubgrupo;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.math.BigInteger;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
@@ -240,11 +225,11 @@ public class CrearCajaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreFocusLost
 
     private void txtCodFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodFocusLost
-      
+
     }//GEN-LAST:event_txtCodFocusLost
 
     private void txtCodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodKeyTyped
-    
+
     }//GEN-LAST:event_txtCodKeyTyped
 
     /**

@@ -20,11 +20,13 @@ import javax.persistence.EntityManager;
  * @author admin1
  */
 public class ConsultaProveedor extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoProveedores cpro = new CoProveedores();
     String valor = "";
     List<CoProveedores> lista;
+
     /**
      * Creates new form ConsultaProveedor
      */
@@ -81,6 +83,14 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
+            }
+        });
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -150,23 +160,26 @@ public class ConsultaProveedor extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(133, 133, 133)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btninactivos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btninactivos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,18 +213,18 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void Cargardatos(){
+    public void Cargardatos() {
         lista = cpcont.findCoProveedoresEntities();
         Tablas.listarProveedor(lista, tbproveedor);
     }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-       x = evt.getX();
-       y = evt.getY();
+        x = evt.getX();
+        y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -222,33 +235,47 @@ public class ConsultaProveedor extends javax.swing.JDialog {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         setVisible(false);
-        NuevoProveedor np = new NuevoProveedor(new javax.swing.JFrame(),true);
+        NuevoProveedor np = new NuevoProveedor(new javax.swing.JFrame(), true);
         np.setVisible(true);
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btninactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninactivosActionPerformed
         setVisible(false);
-        ConsultaProveedorInactivo cpi = new ConsultaProveedorInactivo(new javax.swing.JFrame(),true);
+        ConsultaProveedorInactivo cpi = new ConsultaProveedorInactivo(new javax.swing.JFrame(), true);
         cpi.setVisible(true);
     }//GEN-LAST:event_btninactivosActionPerformed
 
     private void tbproveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproveedorMousePressed
         int id = 0;
         cpro = null;
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             id = tbproveedor.getSelectedRow();
-            for(int i =0;i<lista.size();i++){
-                if((tbproveedor.getValueAt(id,1).toString().equals(lista.get(i).getNombre()))){
+            for (int i = 0; i < lista.size(); i++) {
+                if ((tbproveedor.getValueAt(id, 0).toString().equals(lista.get(i).getNombre()))) {
                     cpro = lista.get(i);
-                    if(cpro != null){
+                    if (cpro != null) {
                         setVisible(false);
-                        //EditarProveedor ep = new EditarProveedor(new javax.swing.JFrame(),true);
-                        //ep.setVisible(true);
+                        EditarProveedor ep = new EditarProveedor(new javax.swing.JFrame(), true, cpro);
+                        ep.setVisible(true);
                     }
                 }
             }
         }
     }//GEN-LAST:event_tbproveedorMousePressed
+
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+        valor = txtfiltro.getText();
+        Tablas.filtro(valor, tbproveedor);
+
+    }//GEN-LAST:event_txtfiltroKeyReleased
+
+    private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtfiltroKeyTyped
 
     /**
      * @param args the command line arguments

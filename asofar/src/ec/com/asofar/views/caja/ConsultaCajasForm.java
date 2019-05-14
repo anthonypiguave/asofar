@@ -47,11 +47,10 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         try {
 
             lista = vCaja.findVeCajaEntities();
-            Tablas.listarCajas(lista, tbGrupos);
+            Tablas.listarCajas(lista, tbCajas);
         } catch (Exception e) {
 
         }
-        
 
     }
 
@@ -65,7 +64,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         txtfiltro = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbGrupos = new javax.swing.JTable();
+        tbCajas = new javax.swing.JTable();
         btnagregarnuevo = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -95,7 +94,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("BUSCAR:");
 
-        txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         txtfiltro.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtfiltroFocusLost(evt);
@@ -117,7 +116,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        tbGrupos.setModel(new javax.swing.table.DefaultTableModel(
+        tbCajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -125,12 +124,12 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbGrupos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbCajas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbGruposMousePressed(evt);
+                tbCajasMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbGrupos);
+        jScrollPane1.setViewportView(tbCajas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -262,7 +261,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnsalirActionPerformed
 
-    private void tbGruposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGruposMousePressed
+    private void tbCajasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCajasMousePressed
 
 //        int id = 0;
 //        pg = null;
@@ -278,11 +277,11 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
 //                }
 //            }
 //        }
-    }//GEN-LAST:event_tbGruposMousePressed
+    }//GEN-LAST:event_tbCajasMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ConsultaGruposInactivosForm cgi = new ConsultaGruposInactivosForm(new javax.swing.JFrame(), true);
+        ConsultaCajaInactivasForm cgi = new ConsultaCajaInactivasForm(new javax.swing.JFrame(), true);
         cgi.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -298,7 +297,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
 
         valor = txtfiltro.getText();
-        Tablas.filtro(valor, tbGrupos);
+        Tablas.filtro(valor, tbCajas);
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
@@ -431,7 +430,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbGrupos;
+    private javax.swing.JTable tbCajas;
     private javax.swing.JTextField txtfiltro;
     // End of variables declaration//GEN-END:variables
 }
