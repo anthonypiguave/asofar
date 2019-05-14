@@ -436,9 +436,10 @@ public class Editar_persona extends javax.swing.JDialog {
 
             try {
                 mp.edit(persona1);
-                Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+                JOptionPane.showMessageDialog(null, "PERSONA ACTUALIZADA");
+                Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true, us1, em1, su1);
                 setVisible(false);
-                setVisible(true);
+                mp.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -447,7 +448,9 @@ public class Editar_persona extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
+        mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilitarActionPerformed

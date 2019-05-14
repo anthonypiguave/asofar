@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrTarifarioJpaController implements Serializable {
 
@@ -44,8 +44,8 @@ public class PrTarifarioJpaController implements Serializable {
         if (prTarifario.getPrDetalleTarifarioList() == null) {
             prTarifario.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
         }
-        prTarifario.getPrTarifarioPK().setIdSurcusal(prTarifario.getSeSucursal().getSeSucursalPK().getIdSucursal());
         prTarifario.getPrTarifarioPK().setIdEmpresa(prTarifario.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        prTarifario.getPrTarifarioPK().setIdSurcusal(prTarifario.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -89,8 +89,8 @@ public class PrTarifarioJpaController implements Serializable {
     }
 
     public void edit(PrTarifario prTarifario) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        prTarifario.getPrTarifarioPK().setIdSurcusal(prTarifario.getSeSucursal().getSeSucursalPK().getIdSucursal());
         prTarifario.getPrTarifarioPK().setIdEmpresa(prTarifario.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        prTarifario.getPrTarifarioPK().setIdSurcusal(prTarifario.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();

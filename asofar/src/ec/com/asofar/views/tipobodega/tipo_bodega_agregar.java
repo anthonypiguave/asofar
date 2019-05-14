@@ -196,7 +196,9 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        setVisible(false);
+        consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
+        tb.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
@@ -234,6 +236,7 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(tipo_bodega_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
