@@ -366,7 +366,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
 
             Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
             setVisible(false);
-            setVisible(true);
+            mp.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN");
         }

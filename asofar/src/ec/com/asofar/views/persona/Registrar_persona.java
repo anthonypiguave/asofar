@@ -72,6 +72,7 @@ public class Registrar_persona extends javax.swing.JDialog {
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight() - 1));
         CargarRol();
         lista_persona = mp.findSePersonasEntities();
+        System.out.println(us1.getIdUsuario());
 
     }
 
@@ -543,7 +544,7 @@ public class Registrar_persona extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
                     Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
                     setVisible(false);
-                    setVisible(true);
+                    mp.setVisible(true);
                 }
 
             }
