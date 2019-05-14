@@ -22,9 +22,7 @@ import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
-import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
@@ -327,7 +325,7 @@ public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
 
-//            if (lista.get(i).getEstado().equals("A")) {
+            if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getNombreUsuario();
                 Filas[2] =  lista.get(i).getIdPersona().getCorreo();
@@ -346,7 +344,7 @@ public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
                 Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-//            }
+            }
         }
 
     }
