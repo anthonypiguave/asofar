@@ -769,4 +769,31 @@ public static void tabla_documento(JTable tabla, List<InTipoDocumento> lista) {
         }
 
     }
+ public static void TablaTipoBodegaInactivo(List<InTipoBodega> lista, JTable tabla) {
+        int[] a = {5, 100, 20};
+        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(tabla);
+        String[] b = {"ID", "MEDIDA", "ESTADO"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals("I")) {
+                filas[0] = String.valueOf(lista.get(i).getIdTipoBodega());
+                filas[1] = lista.get(i).getNombre();
+                filas[2] = lista.get(i).getEstado();
+                model.addRow(filas);
+                tabla.setModel(model);
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
+                tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+            }
+        }
+    }
 }
