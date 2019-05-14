@@ -1,4 +1,4 @@
-package ec.com.asofar.usuario;
+package ec.com.asofar.views.usuarios;
 
 import ec.com.asofar.dao.SeUsuariosJpaController;
 import ec.com.asofar.dto.SeEmpresa;
@@ -189,7 +189,6 @@ public class Mostrar_usuario extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
             setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
