@@ -7,13 +7,11 @@ package ec.com.asofar.views.proveedor;
 
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
-import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,25 +22,29 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class NuevoProveedor extends javax.swing.JDialog {
+public class EditarProveedor extends javax.swing.JDialog {
     int x,y;
-    CoProveedores cpro = new CoProveedores();
+    CoProveedores cprov = new CoProveedores();
     CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     Date d = new Date();
     SeTipoPersona stp = new SeTipoPersona();
-    List<SeTipoPersona> listartipop;
-    SeTipoPersonaJpaController tipopcont = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeTipoPersona> listatipop;
+    SeTipoPersonaJpaController stpcont = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
     /**
-     * Creates new form NuevoProveedor
+     * Creates new form EditarProveedor
      */
-    public NuevoProveedor(java.awt.Frame parent, boolean modal) {
+    public EditarProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        listartipop = tipopcont.findSeTipoPersonaEntities();
-        combotipopersona();
-        setLocationRelativeTo(null);
     }
-    
+    public EditarProveedor(java.awt.Frame parent, boolean modal,CoProveedores cpro) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        cprov = cpro;
+        LlenarDatos(cpro);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,11 +81,13 @@ public class NuevoProveedor extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtobservacion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
         cbpais = new javax.swing.JComboBox<>();
+        btninactivar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -91,7 +95,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NUEVO PROVEEDOR");
+        jLabel1.setText("ACTUALIZAR PROVEEDOR");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -199,27 +203,37 @@ public class NuevoProveedor extends javax.swing.JDialog {
 
         txtobservacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(64, 145, 64));
-        jButton1.setText("GUARDAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnactualizar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnactualizar.setForeground(new java.awt.Color(64, 145, 64));
+        btnactualizar.setText("ACTUALIZAR");
+        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnactualizarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 28, 35));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(254, 254, 254));
-        jButton2.setText("CANCELAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btncancelar.setBackground(new java.awt.Color(153, 28, 35));
+        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btncancelar.setForeground(new java.awt.Color(254, 254, 254));
+        btncancelar.setText("CANCELAR");
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btncancelarActionPerformed(evt);
             }
         });
 
         cbpais.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbpais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btninactivar.setBackground(new java.awt.Color(1, 1, 1));
+        btninactivar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btninactivar.setForeground(new java.awt.Color(254, 254, 254));
+        btninactivar.setText("DESACTIVAR");
+        btninactivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btninactivarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -267,7 +281,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
                                             .addComponent(jLabel7))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtidentificacion, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                             .addComponent(cbtipopersona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -292,12 +306,14 @@ public class NuevoProveedor extends javax.swing.JDialog {
                         .addComponent(jLabel13)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btninactivar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,8 +361,9 @@ public class NuevoProveedor extends javax.swing.JDialog {
                 .addComponent(txtobservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnactualizar)
+                    .addComponent(btncancelar)
+                    .addComponent(btninactivar))
                 .addGap(0, 19, Short.MAX_VALUE))
         );
 
@@ -366,13 +383,31 @@ public class NuevoProveedor extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    
-    public void combotipopersona(){        
-        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>());
-        for(int i =0;i< listartipop.size();i++){
-            cbtipopersona.addItem(listartipop.get(i).getNombre());
-        }
+    public void LlenarDatos(CoProveedores cpro){
+        txtnombre.setText(cpro.getNombre());
+        txtdireccion.setText(cpro.getDireccion());
+        txttelefono.setText(cpro.getTelefono1());
+        txttelfseg.setText(cpro.getTelefono2());
+        txtpaginaweb.setText(cpro.getPaginaWeb());
+        txtidentificacion.setText(cpro.getNumeroIdentificacion());
+        txtemail.setText(cpro.getEmail());
+        //combo tipopersona
+        //combo pais
+        txtnombrecomercial.setText(cpro.getNombreComercial());
+        //combo contribuyente especial
+        txtcodigocont.setText(cpro.getCodigoContribuyente());
+        txtobservacion.setText(cpro.getObservaciones());
     }
+    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x-x,point.y-y);
+    }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel1MousePressed
+
     private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttelefonoActionPerformed
@@ -397,52 +432,56 @@ public class NuevoProveedor extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnombrecomercialActionPerformed
 
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jLabel1MousePressed
-
-    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-        Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
-    }//GEN-LAST:event_jLabel1MouseDragged
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setVisible(false);
-        ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
-        cp.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
         if(txtnombre.getText().length()>2 || txtnombrecomercial.getText().length()>2 || txtidentificacion.getText().length()>2){
-        cpro.setNombre(txtnombre.getText());
-        cpro.setDireccion(txtdireccion.getText());
-        cpro.setTelefono1(txttelefono.getText());
-        cpro.setTelefono2(txttelfseg.getText());
-        cpro.setPaginaWeb(txtpaginaweb.getText());
-        cpro.setNumeroIdentificacion(txtidentificacion.getText());
-        cpro.setEmail(txtemail.getText());
-        cpro.setTipoPersona(cbtipopersona.getSelectedItem().toString());
-        //cpro.setIdPais(BigInteger.valueOf(cbpais.getSelectedIndex()));
-        cpro.setNombreComercial(txtnombrecomercial.getText());
-        cpro.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
-        cpro.setCodigoContribuyente(txtcodigocont.getText());
-        cpro.setObservaciones(txtobservacion.getText());
-        cpro.setFechaCreacion(d);
-        cpro.setEstado('A');
-    try {
-        cpcont.create(cpro);
-        JOptionPane.showMessageDialog(this, "NUEVO PROVEEDOR CREADO");
+            cprov.setNombre(txtnombre.getText());
+            cprov.setDireccion(txtdireccion.getText());
+            cprov.setTelefono1(txttelefono.getText());
+            cprov.setTelefono2(txttelfseg.getText());
+            cprov.setPaginaWeb(txtpaginaweb.getText());
+            cprov.setNumeroIdentificacion(txtidentificacion.getText());
+            cprov.setEmail(txtemail.getText());
+            cprov.setTipoPersona(cbtipopersona.getSelectedItem().toString());
+            //cpro.setIdPais(BigInteger.valueOf(cbpais.getSelectedIndex()));
+            cprov.setNombreComercial(txtnombrecomercial.getText());
+            cprov.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
+            cprov.setCodigoContribuyente(txtcodigocont.getText());
+            cprov.setObservaciones(txtobservacion.getText());
+            cprov.setEstado('A');
+            try {
+                cpcont.edit(cprov);
+                JOptionPane.showMessageDialog(this, "PROVEEDOR ACTUALIZADO");
+                setVisible(false);
+                ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
+                cp.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(EditarProveedor.class.getName()).log(Level.SEVERE, null, ex);
+            }}else{
+                JOptionPane.showMessageDialog(null,"ERROR CAMPOS OBLIGATORIOS INCOMPLETOS");
+            }
+    }//GEN-LAST:event_btnactualizarActionPerformed
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(null, "SEGURO QUE DESEA SALIR", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
+        if(opcion == JOptionPane.YES_OPTION){
         setVisible(false);
         ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
-        cp.setVisible(true);    
-    } catch (Exception ex) {
-        Logger.getLogger(NuevoProveedor.class.getName()).log(Level.SEVERE, null, ex);
-    }}else{
-            JOptionPane.showMessageDialog(null,"COMPLETE TODOS LOS CAMPOS");
-        }
+        cp.setVisible(true);}
+    }//GEN-LAST:event_btncancelarActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btninactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninactivarActionPerformed
+        cprov.setEstado('I');
+        try {
+            cpcont.edit(cprov);
+            JOptionPane.showMessageDialog(null,"PROVEEDOR DESACTIVADO");
+            setVisible(false);
+            ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
+            cp.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(EditarProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btninactivarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,20 +500,20 @@ public class NuevoProveedor extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoProveedor dialog = new NuevoProveedor(new javax.swing.JFrame(), true);
+                EditarProveedor dialog = new EditarProveedor(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -487,11 +526,12 @@ public class NuevoProveedor extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnactualizar;
+    private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btninactivar;
     private javax.swing.JComboBox<String> cbcontribuyente;
     private javax.swing.JComboBox<String> cbpais;
     private javax.swing.JComboBox<String> cbtipopersona;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

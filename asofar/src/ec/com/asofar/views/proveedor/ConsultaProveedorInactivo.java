@@ -14,6 +14,7 @@ import ec.com.asofar.views.proveedor.*;
 import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class ConsultaProveedorInactivo extends javax.swing.JDialog {
     List<CoProveedores> lista;
     CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoProveedores cpro = new CoProveedores();
+    String valor =  "";
     /**
      * Creates new form ConsultaProveedor
      */
@@ -79,6 +81,14 @@ public class ConsultaProveedorInactivo extends javax.swing.JDialog {
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
+            }
+        });
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -93,6 +103,11 @@ public class ConsultaProveedorInactivo extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbproveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbproveedorMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbproveedor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -184,6 +199,38 @@ public class ConsultaProveedorInactivo extends javax.swing.JDialog {
         ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
         cp.setVisible(true);
     }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+        valor = txtfiltro.getText();
+        Tablas.filtro(valor, tbproveedor);
+    }//GEN-LAST:event_txtfiltroKeyReleased
+
+    private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
+        char c = evt.getKeyChar();
+        if(Character.isSpaceChar(c)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtfiltroKeyTyped
+
+    private void tbproveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproveedorMousePressed
+        int id =0;
+        cpro = null;
+        if(evt.getClickCount()==2){
+            id = tbproveedor.getSelectedRow();
+            for(int i=0;i<lista.size();i++){
+                if((tbproveedor.getValueAt(id,0).toString().equals(lista.get(i).getNombre()))){
+                    cpro = lista.get(i);
+                    if(cpro != null){
+                        setVisible(false);
+                        EditarProveedorInactivo epi = new EditarProveedorInactivo(new javax.swing.JFrame(),true,cpro);
+                        epi.setVisible(true);
+                    }
+                }
+            }
+        }
+                
+    }//GEN-LAST:event_tbproveedorMousePressed
 
     /**
      * @param args the command line arguments
