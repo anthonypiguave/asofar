@@ -511,7 +511,7 @@ public class Registrar_persona extends javax.swing.JDialog {
                     obj = lista_persona.get(i);
                 }
             }
-            if (obj == null) {
+            if (obj != null) {
                 JOptionPane.showMessageDialog(null, "PERSONA YA EXISTE");
             } else {
                 if ("".equals(txtNombre.getText())
@@ -519,6 +519,10 @@ public class Registrar_persona extends javax.swing.JDialog {
                         || "".equals(txtCorreo.getText())
                         || "".equals(txtCell.getText())
                         || "".equals(txtDireccion.getText())) {
+
+                    JOptionPane.showMessageDialog(null, "DEBE LLENAR EL FORMULARIO");
+                } else {
+
                     persona.setCedula(txtCedula.getText());
                     persona.setNombres(txtNombre.getText());
                     persona.setApellidos(txtApellido.getText());
@@ -526,6 +530,7 @@ public class Registrar_persona extends javax.swing.JDialog {
                     persona.setTelefono2(txtConven.getText());
                     persona.setCorreo(txtCorreo.getText());
                     persona.setFechaNacimiento(fecha1);
+                    persona.setEstado('A');
                     persona.setDireccion(txtDireccion.getText());
                     persona.setFechaActualizacion(fechaActual);
                     persona.setFechaCreacion(fechaActual);
@@ -535,13 +540,12 @@ public class Registrar_persona extends javax.swing.JDialog {
                     persona.setIdTipoPersona(tp);
 
                     mp.create(persona);
-
+                    JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
                     Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
                     setVisible(false);
                     setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "DEBE LLENAR EL FORMULARIO");
                 }
+
             }
         } else {
 
@@ -561,37 +565,7 @@ public class Registrar_persona extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registrar_persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registrar_persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registrar_persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registrar_persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Registrar_persona dialog = new Registrar_persona(new javax.swing.JFrame(), true);
