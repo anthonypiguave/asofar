@@ -81,7 +81,12 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setText("CONTRASEÑA:");
 
         txtusuario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtusuario.setText("ANGEL");
+        txtusuario.setText("apiguave");
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
+            }
+        });
 
         btningresar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btningresar.setForeground(new java.awt.Color(75, 162, 73));
@@ -102,7 +107,12 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        txtpassword.setText("1234");
+        txtpassword.setText("12345");
+        txtpassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -203,6 +213,14 @@ public class Login extends javax.swing.JDialog {
     private void btningresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btningresar1ActionPerformed
+
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioActionPerformed
+
+    private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpasswordActionPerformed
 
     /**
      * @param args the command line arguments

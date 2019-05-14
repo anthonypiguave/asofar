@@ -57,7 +57,7 @@ public class ObtenerDTO {
         List<SeUsuarios> lista=control.findSeUsuariosEntities();
         
         for (int i = 0; i <lista.size(); i++) {
-            if(lista.get(i).getIdUsuario()==id){
+            if(lista.get(i).getIdUsuario().equals(id)){
             dto=lista.get(i);
             break;
             }
