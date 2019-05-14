@@ -215,11 +215,12 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
+        
         SeUsuarios us = ObtenerDTO.ObtenerUsuarios(id);
         SeEmpresa em = ObtenerDTO.ObtenerSeEmpresa(cbempresa.getSelectedItem().toString());
         SeSucursal su = ObtenerDTO.ObtenerSeSucursal(cbsucursal.getSelectedItem().toString());
         PantallaPrincipal pp = new PantallaPrincipal(us, em, su);
+        setVisible(false);
         pp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

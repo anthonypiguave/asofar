@@ -325,7 +325,7 @@ public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
 
-            if (lista.get(i).getEstado().equals("A")) {
+            if (lista.get(i).getEstado().equals('A')) {
                 Filas[0] = lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getNombreUsuario();
                 Filas[2] =  lista.get(i).getIdPersona().getCorreo();
