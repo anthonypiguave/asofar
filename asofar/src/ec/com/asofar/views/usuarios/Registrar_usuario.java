@@ -103,7 +103,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
         jLabel3.setText("CLAVE:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel4.setText("ID_USUARIO :");
+        jLabel4.setText("USUARIO :");
 
         txtIdUsuario.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         txtIdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {

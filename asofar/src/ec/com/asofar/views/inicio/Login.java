@@ -96,6 +96,11 @@ public class Login extends javax.swing.JDialog {
         btningresar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btningresar1.setForeground(new java.awt.Color(254, 254, 254));
         btningresar1.setText("SALIR");
+        btningresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btningresar1ActionPerformed(evt);
+            }
+        });
 
         txtpassword.setText("1234");
 
@@ -170,7 +175,7 @@ public class Login extends javax.swing.JDialog {
             SeUsuarios u = new SeUsuarios();
             ul = uc.findSeUsuariosEntities();
             for (int i = 0; i < ul.size(); i++) {
-                if (ul.get(i).getNombreUsuario().equals(usuario)) {
+                if (ul.get(i).getIdUsuario().equals(usuario)) {
                     if (ul.get(i).getPassword().equals(dc)) {
                         SelectEmpresaSucursal ses = new SelectEmpresaSucursal(new javax.swing.JFrame(), true, ul.get(i).getIdUsuario());
                         ses.setVisible(true);
@@ -194,6 +199,10 @@ public class Login extends javax.swing.JDialog {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void btningresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btningresar1ActionPerformed
 
     /**
      * @param args the command line arguments
