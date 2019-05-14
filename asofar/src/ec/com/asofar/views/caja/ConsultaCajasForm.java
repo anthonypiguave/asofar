@@ -242,7 +242,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
 
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
         setVisible(false);
-        AgregarGruposForm ga = new AgregarGruposForm(new javax.swing.JFrame(), true);
+        CrearCajaForm ga = new CrearCajaForm(new javax.swing.JFrame(), true);
         ga.setVisible(true);
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
