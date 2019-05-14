@@ -5,11 +5,17 @@
  */
 package ec.com.asofar.views.caja;
 
+import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.VeCaja;
+import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +27,9 @@ public class CrearCajaForm extends javax.swing.JDialog {
     int x, y;
     Date d = new Date();
     ObtenerDTO od = new ObtenerDTO();
-    
+    VeCaja vc = new VeCaja();
+    VeCajaJpaController vCaja = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeEmpresa se = new SeEmpresa();
 
     /**
      * Creates new form tipo_medida_agregar
@@ -51,8 +59,6 @@ public class CrearCajaForm extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        estado_cb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -125,9 +131,6 @@ public class CrearCajaForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel5.setText("ESTADO:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,16 +146,9 @@ public class CrearCajaForm extends javax.swing.JDialog {
                             .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(102, 102, 102))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, 18))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(24, 24, 24)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(estado_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -171,11 +167,7 @@ public class CrearCajaForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(estado_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGrabar)
                     .addComponent(btnCancelar))
@@ -213,7 +205,32 @@ public class CrearCajaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
 
+        if (r == JOptionPane.YES_OPTION) {
+            if ("".equals(txtNombre.getText())) {
+                JOptionPane.showMessageDialog(null, "Ingrese un nombre!");
+            } else {
+
+                vc.setNombre(txtNombre.getText());
+                vc.setEstado("A");
+                vc.setFechaCreacion(d);
+                vc.setFechaActualizacion(d);
+                try {
+                    vCaja.create(vc);
+                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                    setVisible(false);
+
+                    ConsultaCajasForm cg = new ConsultaCajasForm(new javax.swing.JFrame(), true);
+                    cg.setVisible(true);
+
+                } catch (Exception ex) {
+
+                }
+            }
+        } else {
+
+        }
 
     }//GEN-LAST:event_btnGrabarActionPerformed
 
@@ -1301,11 +1318,9 @@ public class CrearCajaForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGrabar;
-    private javax.swing.JComboBox<String> estado_cb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCod;
     private javax.swing.JTextField txtNombre;
