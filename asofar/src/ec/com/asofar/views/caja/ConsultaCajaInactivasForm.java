@@ -1,9 +1,6 @@
 package ec.com.asofar.views.caja;
 
-import ec.com.asofar.views.grupo.*;
-import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dao.VeCajaJpaController;
-import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -188,6 +185,7 @@ public class ConsultaCajaInactivasForm extends javax.swing.JDialog {
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
+        
         
     }//GEN-LAST:event_jLabel1MouseDragged
 
