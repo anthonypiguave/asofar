@@ -5,9 +5,20 @@
  */
 package ec.com.asofar.views.proveedor;
 
+import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.SeTipoPersonaJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.SeTipoPersona;
+import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,15 +27,22 @@ import java.awt.Point;
 public class NuevoProveedor extends javax.swing.JDialog {
     int x,y;
     CoProveedores cpro = new CoProveedores();
-    CoProveedores cpcont;
+    CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+    Date d = new Date();
+    SeTipoPersona stp = new SeTipoPersona();
+    List<SeTipoPersona> listartipop;
+    SeTipoPersonaJpaController tipopcont = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
     /**
      * Creates new form NuevoProveedor
      */
     public NuevoProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        listartipop = tipopcont.findSeTipoPersonaEntities();
+        combotipopersona();
+        setLocationRelativeTo(null);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -155,9 +173,9 @@ public class NuevoProveedor extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel11.setText("CONTRIBUYENTE ESPECIAL:");
 
-        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NATURAL", "JURIDICA" }));
 
-        cbcontribuyente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbcontribuyente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
         jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel12.setText("CODIGO CONTRIBUYENTE:");
@@ -344,7 +362,14 @@ public class NuevoProveedor extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    public void combotipopersona(){        
+        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>());
+        for(int i =0;i< listartipop.size();i++){
+            cbtipopersona.addItem(listartipop.get(i).getNombre());
+        }
+    }
     private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttelefonoActionPerformed
@@ -386,18 +411,29 @@ public class NuevoProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(txtnombre.getText().length()>2 || txtnombrecomercial.getText().length()>2){
+        if(txtnombre.getText().length()>2 || txtnombrecomercial.getText().length()>2 || txtidentificacion.getText().length()>2){
         cpro.setNombre(txtnombre.getText());
-        imo.setFechaCreacion(d);
-        imo.setEstado("A");
+        cpro.setDireccion(txtdireccion.getText());
+        cpro.setTelefono1(txttelefono.getText());
+        cpro.setTelefono2(txttelfseg.getText());
+        cpro.setPaginaWeb(txtpaginaweb.getText());
+        cpro.setNumeroIdentificacion(txtidentificacion.getText());
+        cpro.setEmail(txtemail.getText());
+        cpro.setTipoPersona(cbtipopersona.getSelectedItem().toString());
+        //cpro.setIdPais(BigInteger.valueOf(cbpais.getSelectedIndex()));
+        cpro.setNombreComercial(txtnombrecomercial.getText());
+        cpro.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
+        cpro.setCodigoContribuyente(txtcodigocont.getText());
+        cpro.setObservaciones(txtobservacion.getText());
+        cpro.setEstado('A');
     try {
-        imcont.create(imo);
-        JOptionPane.showMessageDialog(this, "NUEVO MOTIVO AGREGADO");
+        cpcont.create(cpro);
+        JOptionPane.showMessageDialog(this, "NUEVO PROVEEDOR CREADO");
         setVisible(false);
-        ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
-        cm.setVisible(true);    
+        ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
+        cp.setVisible(true);    
     } catch (Exception ex) {
-        Logger.getLogger(NuevoMotivo.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(NuevoProveedor.class.getName()).log(Level.SEVERE, null, ex);
     }}else{
             JOptionPane.showMessageDialog(null,"COMPLETE TODOS LOS CAMPOS");
         }
