@@ -1,4 +1,3 @@
-
 package ec.com.asofar.views.caja;
 
 import ec.com.asofar.views.grupo.*;
@@ -41,7 +40,6 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
 
     }
-    
 
     private void cargarInformacion() {
         try {
@@ -263,20 +261,20 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
 
     private void tbCajasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCajasMousePressed
 
-//        int id = 0;
-//        pg = null;
-//        if (evt.getClickCount() == 2) {
-//            id = tbGrupos.getSelectedRow();
-//            for (int i = 0; i < lista.size(); i++) {
-//                if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
-//                    pg = lista.get(i);
-//                    if (pg != null) {
-//                        ModificarGruposForm es = new ModificarGruposForm(new javax.swing.JFrame(), true, pg);
-//                        es.setVisible(true);
-//                    }
-//                }
-//            }
-//        }
+        int id = 0;
+        vc = null;
+        if (evt.getClickCount() == 2) {
+            id = tbCajas.getSelectedRow();
+            for (int i = 0; i < lista.size(); i++) {
+                if ((tbCajas.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
+                    vc = lista.get(i);
+                    if (vc != null) {
+                        ModificarCajasForm es = new ModificarCajasForm(new javax.swing.JFrame(), true, vc);
+                        es.setVisible(true);
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_tbCajasMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -305,7 +303,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroActionPerformed
 
     private void txtfiltroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfiltroFocusLost
-    
+
     }//GEN-LAST:event_txtfiltroFocusLost
 
     /**

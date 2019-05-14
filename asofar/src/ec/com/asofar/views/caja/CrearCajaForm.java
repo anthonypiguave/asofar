@@ -21,6 +21,7 @@ public class CrearCajaForm extends javax.swing.JDialog {
     int x, y;
     Date d = new Date();
     ObtenerDTO od = new ObtenerDTO();
+    
 
     /**
      * Creates new form tipo_medida_agregar
