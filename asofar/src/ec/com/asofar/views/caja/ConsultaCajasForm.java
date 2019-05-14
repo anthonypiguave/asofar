@@ -51,6 +51,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         } catch (Exception e) {
 
         }
+        
 
     }
 
