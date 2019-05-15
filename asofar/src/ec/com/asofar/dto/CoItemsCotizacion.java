@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,11 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoItemsCotizacion.findByIdCotizacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idCotizacion = :idCotizacion")
     , @NamedQuery(name = "CoItemsCotizacion.findByIdEmpresa", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoItemsCotizacion.findByIdSucursal", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "CoItemsCotizacion.findByIdTipoCompra", query = "SELECT c FROM CoItemsCotizacion c WHERE c.idTipoCompra = :idTipoCompra")
-    , @NamedQuery(name = "CoItemsCotizacion.findByIdDepartamento", query = "SELECT c FROM CoItemsCotizacion c WHERE c.idDepartamento = :idDepartamento")
     , @NamedQuery(name = "CoItemsCotizacion.findByFechaEmision", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaEmision = :fechaEmision")
     , @NamedQuery(name = "CoItemsCotizacion.findByIdEstado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.idEstado = :idEstado")
-    , @NamedQuery(name = "CoItemsCotizacion.findByIdTipoDocumento", query = "SELECT c FROM CoItemsCotizacion c WHERE c.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "CoItemsCotizacion.findByEstado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.estado = :estado")
     , @NamedQuery(name = "CoItemsCotizacion.findByUsuarioCreacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "CoItemsCotizacion.findByFechaCreacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaCreacion = :fechaCreacion")
@@ -50,17 +49,11 @@ public class CoItemsCotizacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoItemsCotizacionPK coItemsCotizacionPK;
-    @Column(name = "id_tipo_compra")
-    private BigInteger idTipoCompra;
-    @Column(name = "id_departamento")
-    private BigInteger idDepartamento;
     @Column(name = "fecha_emision")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEmision;
     @Column(name = "id_estado")
     private BigInteger idEstado;
-    @Column(name = "id_tipo_documento")
-    private BigInteger idTipoDocumento;
     @Column(name = "estado")
     private String estado;
     @Column(name = "usuario_creacion")
@@ -77,6 +70,15 @@ public class CoItemsCotizacion implements Serializable {
     private String procesado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coItemsCotizacion")
     private List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList;
+    @JoinColumn(name = "id_tipo_compra", referencedColumnName = "id_in_tipo_compra")
+    @ManyToOne
+    private InTipoCompra idTipoCompra;
+    @JoinColumn(name = "id_departamento", referencedColumnName = "id_tipo_departamento")
+    @ManyToOne
+    private InTipoDepartamento idDepartamento;
+    @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
+    @ManyToOne
+    private InTipoDocumento idTipoDocumento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coItemsCotizacion")
     private List<CoDetItemsCotizacion> coDetItemsCotizacionList;
 
@@ -99,22 +101,6 @@ public class CoItemsCotizacion implements Serializable {
         this.coItemsCotizacionPK = coItemsCotizacionPK;
     }
 
-    public BigInteger getIdTipoCompra() {
-        return idTipoCompra;
-    }
-
-    public void setIdTipoCompra(BigInteger idTipoCompra) {
-        this.idTipoCompra = idTipoCompra;
-    }
-
-    public BigInteger getIdDepartamento() {
-        return idDepartamento;
-    }
-
-    public void setIdDepartamento(BigInteger idDepartamento) {
-        this.idDepartamento = idDepartamento;
-    }
-
     public Date getFechaEmision() {
         return fechaEmision;
     }
@@ -129,14 +115,6 @@ public class CoItemsCotizacion implements Serializable {
 
     public void setIdEstado(BigInteger idEstado) {
         this.idEstado = idEstado;
-    }
-
-    public BigInteger getIdTipoDocumento() {
-        return idTipoDocumento;
-    }
-
-    public void setIdTipoDocumento(BigInteger idTipoDocumento) {
-        this.idTipoDocumento = idTipoDocumento;
     }
 
     public String getEstado() {
@@ -194,6 +172,30 @@ public class CoItemsCotizacion implements Serializable {
 
     public void setCoCotizacionesPorPorveedorList(List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList) {
         this.coCotizacionesPorPorveedorList = coCotizacionesPorPorveedorList;
+    }
+
+    public InTipoCompra getIdTipoCompra() {
+        return idTipoCompra;
+    }
+
+    public void setIdTipoCompra(InTipoCompra idTipoCompra) {
+        this.idTipoCompra = idTipoCompra;
+    }
+
+    public InTipoDepartamento getIdDepartamento() {
+        return idDepartamento;
+    }
+
+    public void setIdDepartamento(InTipoDepartamento idDepartamento) {
+        this.idDepartamento = idDepartamento;
+    }
+
+    public InTipoDocumento getIdTipoDocumento() {
+        return idTipoDocumento;
+    }
+
+    public void setIdTipoDocumento(InTipoDocumento idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
     }
 
     @XmlTransient
