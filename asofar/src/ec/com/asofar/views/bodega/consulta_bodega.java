@@ -275,7 +275,7 @@ public class consulta_bodega extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setVisible(false);
+//        setVisible(false);
         bodega_agregar ingre = new bodega_agregar(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
 

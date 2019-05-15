@@ -7,11 +7,15 @@ package ec.com.asofar.views.tipobodega;
 
 import ec.com.asofar.dao.InTipoBodegaJpaController;
 import ec.com.asofar.dto.InTipoBodega;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -21,8 +25,10 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
-    List<InTipoBodega> tipobodega;
+    List<InTipoBodega> TipoBodega;
     InTipoBodegaJpaController tbc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoBodega tipobodega = new InTipoBodega();
+    List<InTipoBodega> lista = tbc.findInTipoBodegaEntities();
 
     /**
      * Creates new form tipo_bodega_inactivos
@@ -30,12 +36,21 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
     public consulta_tipo_bodega_inactivos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        MostrarMedidaInactiva();
+    }
+
+    public consulta_tipo_bodega_inactivos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        MostrarMedidaInactiva();
     }
 
     private void MostrarMedidaInactiva() {
         try {
-            tipobodega = tbc.findInTipoBodegaEntities();
-            Tablas.TablaTipoBodegaInactivo(tipobodega, tbl_tipobodega);
+            TipoBodega = tbc.findInTipoBodegaEntities();
+            Tablas.TablaTipoBodegaInactivo(TipoBodega, tbl_tipobodegainactivos);
         } catch (Exception e) {
         }
     }
@@ -51,7 +66,7 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_tipobodega = new javax.swing.JTable();
+        tbl_tipobodegainactivos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         busqueda_tf = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -61,7 +76,7 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tbl_tipobodega.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_tipobodegainactivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,12 +87,12 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_tipobodega.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_tipobodegainactivos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbl_tipobodegaMousePressed(evt);
+                tbl_tipobodegainactivosMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl_tipobodega);
+        jScrollPane1.setViewportView(tbl_tipobodegainactivos);
 
         jLabel2.setText("Buscar:");
 
@@ -169,10 +184,33 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbl_tipobodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tipobodegaMousePressed
+    private void tbl_tipobodegainactivosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tipobodegainactivosMousePressed
+        int id = 0;
+        if (evt.getClickCount() == 2) {
+            id = tbl_tipobodegainactivos.getSelectedRow();
+            tipobodega = devuelveObjeto(Long.valueOf(tbl_tipobodegainactivos.getValueAt(id, 0).toString()), lista);
+            System.out.println("hols 1 ");
+            if (tipobodega != null) {
+                System.out.println("hols 2");
+                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega);
+//                setVisible(false);
+                ep.setVisible(true);
 
-    }//GEN-LAST:event_tbl_tipobodegaMousePressed
-
+                TipoBodega = tbc.findInTipoBodegaEntities();
+                Tablas.TablaTipoBodegaInactivo(TipoBodega, tbl_tipobodegainactivos);
+            }
+        }
+    }//GEN-LAST:event_tbl_tipobodegainactivosMousePressed
+    public InTipoBodega devuelveObjeto(Long id, List<InTipoBodega> listabod) {
+        InTipoBodega doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getIdTipoBodega(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
     private void busqueda_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busqueda_tfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_busqueda_tfActionPerformed
@@ -188,7 +226,7 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
 
     private void busqueda_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busqueda_tfKeyReleased
         valor = busqueda_tf.getText();
-        Tablas.filtro(valor, tbl_tipobodega);
+        Tablas.filtro(valor, tbl_tipobodegainactivos);
     }//GEN-LAST:event_busqueda_tfKeyReleased
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
@@ -257,6 +295,6 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_tipobodega;
+    private javax.swing.JTable tbl_tipobodegainactivos;
     // End of variables declaration//GEN-END:variables
 }
