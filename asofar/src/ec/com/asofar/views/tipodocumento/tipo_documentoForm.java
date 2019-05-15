@@ -60,6 +60,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         MostrarMedidaActiva();
         System.out.println("nombre es "+us.getNombreUsuario());
         usu1=us;

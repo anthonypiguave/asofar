@@ -40,6 +40,7 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
     public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su,InTipoDocumento po_doc) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         usu1 = us;
         su1 = su;
         em1 = em;
