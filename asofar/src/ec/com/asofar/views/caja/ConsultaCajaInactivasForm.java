@@ -203,20 +203,20 @@ public class ConsultaCajaInactivasForm extends javax.swing.JDialog {
 
     private void tbCajaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCajaMousePressed
 
-//        int id = 0;
-//        pg = null;
-//        if (evt.getClickCount() == 2) {
-//            id = tbGrupos.getSelectedRow();
-//            for (int i = 0; i < lista.size(); i++) {
-//                if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
-//                    pg = lista.get(i);
-//                    if (pg != null) {
-//                        ModificarGruposInactivosForm es = new ModificarGruposInactivosForm(new javax.swing.JFrame(), true, pg);
-//                        es.setVisible(true);
-//                    }
-//                }
-//            }
-//        }
+        int id = 0;
+        vc = null;
+        if (evt.getClickCount() == 2) {
+            id = tbCaja.getSelectedRow();
+            for (int i = 0; i < lista.size(); i++) {
+                if ((tbCaja.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
+                    vc = lista.get(i);
+                    if (vc != null) {
+                        ModificarCajasForm es = new ModificarCajasForm(new javax.swing.JFrame(), true, vc);
+                        es.setVisible(true);
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_tbCajaMousePressed
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped

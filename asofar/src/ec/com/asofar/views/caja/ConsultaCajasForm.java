@@ -253,8 +253,8 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         if (r == JOptionPane.YES_OPTION) {
             dispose();
 
-//            asdfg12345
         } else {
+            
 
         }
     }//GEN-LAST:event_btnsalirActionPerformed
