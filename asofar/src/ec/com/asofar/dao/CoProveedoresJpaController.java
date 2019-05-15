@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
 import ec.com.asofar.dto.CoProveedores;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class CoProveedoresJpaController implements Serializable {
 
@@ -41,6 +42,11 @@ public class CoProveedoresJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            SeTipoPersona tipoPersona = coProveedores.getTipoPersona();
+            if (tipoPersona != null) {
+                tipoPersona = em.getReference(tipoPersona.getClass(), tipoPersona.getIdTipoPersona());
+                coProveedores.setTipoPersona(tipoPersona);
+            }
             List<CoCotizacionesPorPorveedor> attachedCoCotizacionesPorPorveedorList = new ArrayList<CoCotizacionesPorPorveedor>();
             for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach : coProveedores.getCoCotizacionesPorPorveedorList()) {
                 coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach = em.getReference(coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach.getClass(), coCotizacionesPorPorveedorListCoCotizacionesPorPorveedorToAttach.getCoCotizacionesPorPorveedorPK());
@@ -48,6 +54,10 @@ public class CoProveedoresJpaController implements Serializable {
             }
             coProveedores.setCoCotizacionesPorPorveedorList(attachedCoCotizacionesPorPorveedorList);
             em.persist(coProveedores);
+            if (tipoPersona != null) {
+                tipoPersona.getCoProveedoresList().add(coProveedores);
+                tipoPersona = em.merge(tipoPersona);
+            }
             for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor : coProveedores.getCoCotizacionesPorPorveedorList()) {
                 CoProveedores oldIdProveedorOfCoCotizacionesPorPorveedorListCoCotizacionesPorPorveedor = coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor.getIdProveedor();
                 coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor.setIdProveedor(coProveedores);
@@ -71,8 +81,14 @@ public class CoProveedoresJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             CoProveedores persistentCoProveedores = em.find(CoProveedores.class, coProveedores.getIdProveedor());
+            SeTipoPersona tipoPersonaOld = persistentCoProveedores.getTipoPersona();
+            SeTipoPersona tipoPersonaNew = coProveedores.getTipoPersona();
             List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorListOld = persistentCoProveedores.getCoCotizacionesPorPorveedorList();
             List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorListNew = coProveedores.getCoCotizacionesPorPorveedorList();
+            if (tipoPersonaNew != null) {
+                tipoPersonaNew = em.getReference(tipoPersonaNew.getClass(), tipoPersonaNew.getIdTipoPersona());
+                coProveedores.setTipoPersona(tipoPersonaNew);
+            }
             List<CoCotizacionesPorPorveedor> attachedCoCotizacionesPorPorveedorListNew = new ArrayList<CoCotizacionesPorPorveedor>();
             for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach : coCotizacionesPorPorveedorListNew) {
                 coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach = em.getReference(coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach.getClass(), coCotizacionesPorPorveedorListNewCoCotizacionesPorPorveedorToAttach.getCoCotizacionesPorPorveedorPK());
@@ -81,6 +97,14 @@ public class CoProveedoresJpaController implements Serializable {
             coCotizacionesPorPorveedorListNew = attachedCoCotizacionesPorPorveedorListNew;
             coProveedores.setCoCotizacionesPorPorveedorList(coCotizacionesPorPorveedorListNew);
             coProveedores = em.merge(coProveedores);
+            if (tipoPersonaOld != null && !tipoPersonaOld.equals(tipoPersonaNew)) {
+                tipoPersonaOld.getCoProveedoresList().remove(coProveedores);
+                tipoPersonaOld = em.merge(tipoPersonaOld);
+            }
+            if (tipoPersonaNew != null && !tipoPersonaNew.equals(tipoPersonaOld)) {
+                tipoPersonaNew.getCoProveedoresList().add(coProveedores);
+                tipoPersonaNew = em.merge(tipoPersonaNew);
+            }
             for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListOldCoCotizacionesPorPorveedor : coCotizacionesPorPorveedorListOld) {
                 if (!coCotizacionesPorPorveedorListNew.contains(coCotizacionesPorPorveedorListOldCoCotizacionesPorPorveedor)) {
                     coCotizacionesPorPorveedorListOldCoCotizacionesPorPorveedor.setIdProveedor(null);
@@ -126,6 +150,11 @@ public class CoProveedoresJpaController implements Serializable {
                 coProveedores.getIdProveedor();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coProveedores with id " + id + " no longer exists.", enfe);
+            }
+            SeTipoPersona tipoPersona = coProveedores.getTipoPersona();
+            if (tipoPersona != null) {
+                tipoPersona.getCoProveedoresList().remove(coProveedores);
+                tipoPersona = em.merge(tipoPersona);
             }
             List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList = coProveedores.getCoCotizacionesPorPorveedorList();
             for (CoCotizacionesPorPorveedor coCotizacionesPorPorveedorListCoCotizacionesPorPorveedor : coCotizacionesPorPorveedorList) {

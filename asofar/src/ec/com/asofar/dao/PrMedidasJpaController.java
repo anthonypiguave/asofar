@@ -26,7 +26,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class PrMedidasJpaController implements Serializable {
 
@@ -48,9 +48,9 @@ public class PrMedidasJpaController implements Serializable {
         }
         prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
+        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
         prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
-        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -114,9 +114,9 @@ public class PrMedidasJpaController implements Serializable {
     public void edit(PrMedidas prMedidas) throws IllegalOrphanException, NonexistentEntityException, Exception {
         prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
+        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
         prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
-        prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();

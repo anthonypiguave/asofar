@@ -16,12 +16,13 @@ import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.VeDetalleCaja;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.VeFactura;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class VeCajaJpaController implements Serializable {
 
@@ -38,6 +39,9 @@ public class VeCajaJpaController implements Serializable {
         if (veCaja.getVeDetalleCajaList() == null) {
             veCaja.setVeDetalleCajaList(new ArrayList<VeDetalleCaja>());
         }
+        if (veCaja.getVeFacturaList() == null) {
+            veCaja.setVeFacturaList(new ArrayList<VeFactura>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -48,6 +52,12 @@ public class VeCajaJpaController implements Serializable {
                 attachedVeDetalleCajaList.add(veDetalleCajaListVeDetalleCajaToAttach);
             }
             veCaja.setVeDetalleCajaList(attachedVeDetalleCajaList);
+            List<VeFactura> attachedVeFacturaList = new ArrayList<VeFactura>();
+            for (VeFactura veFacturaListVeFacturaToAttach : veCaja.getVeFacturaList()) {
+                veFacturaListVeFacturaToAttach = em.getReference(veFacturaListVeFacturaToAttach.getClass(), veFacturaListVeFacturaToAttach.getVeFacturaPK());
+                attachedVeFacturaList.add(veFacturaListVeFacturaToAttach);
+            }
+            veCaja.setVeFacturaList(attachedVeFacturaList);
             em.persist(veCaja);
             for (VeDetalleCaja veDetalleCajaListVeDetalleCaja : veCaja.getVeDetalleCajaList()) {
                 VeCaja oldVeCajaOfVeDetalleCajaListVeDetalleCaja = veDetalleCajaListVeDetalleCaja.getVeCaja();
@@ -56,6 +66,15 @@ public class VeCajaJpaController implements Serializable {
                 if (oldVeCajaOfVeDetalleCajaListVeDetalleCaja != null) {
                     oldVeCajaOfVeDetalleCajaListVeDetalleCaja.getVeDetalleCajaList().remove(veDetalleCajaListVeDetalleCaja);
                     oldVeCajaOfVeDetalleCajaListVeDetalleCaja = em.merge(oldVeCajaOfVeDetalleCajaListVeDetalleCaja);
+                }
+            }
+            for (VeFactura veFacturaListVeFactura : veCaja.getVeFacturaList()) {
+                VeCaja oldIdCajaOfVeFacturaListVeFactura = veFacturaListVeFactura.getIdCaja();
+                veFacturaListVeFactura.setIdCaja(veCaja);
+                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
+                if (oldIdCajaOfVeFacturaListVeFactura != null) {
+                    oldIdCajaOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
+                    oldIdCajaOfVeFacturaListVeFactura = em.merge(oldIdCajaOfVeFacturaListVeFactura);
                 }
             }
             em.getTransaction().commit();
@@ -74,6 +93,8 @@ public class VeCajaJpaController implements Serializable {
             VeCaja persistentVeCaja = em.find(VeCaja.class, veCaja.getIdCaja());
             List<VeDetalleCaja> veDetalleCajaListOld = persistentVeCaja.getVeDetalleCajaList();
             List<VeDetalleCaja> veDetalleCajaListNew = veCaja.getVeDetalleCajaList();
+            List<VeFactura> veFacturaListOld = persistentVeCaja.getVeFacturaList();
+            List<VeFactura> veFacturaListNew = veCaja.getVeFacturaList();
             List<String> illegalOrphanMessages = null;
             for (VeDetalleCaja veDetalleCajaListOldVeDetalleCaja : veDetalleCajaListOld) {
                 if (!veDetalleCajaListNew.contains(veDetalleCajaListOldVeDetalleCaja)) {
@@ -93,6 +114,13 @@ public class VeCajaJpaController implements Serializable {
             }
             veDetalleCajaListNew = attachedVeDetalleCajaListNew;
             veCaja.setVeDetalleCajaList(veDetalleCajaListNew);
+            List<VeFactura> attachedVeFacturaListNew = new ArrayList<VeFactura>();
+            for (VeFactura veFacturaListNewVeFacturaToAttach : veFacturaListNew) {
+                veFacturaListNewVeFacturaToAttach = em.getReference(veFacturaListNewVeFacturaToAttach.getClass(), veFacturaListNewVeFacturaToAttach.getVeFacturaPK());
+                attachedVeFacturaListNew.add(veFacturaListNewVeFacturaToAttach);
+            }
+            veFacturaListNew = attachedVeFacturaListNew;
+            veCaja.setVeFacturaList(veFacturaListNew);
             veCaja = em.merge(veCaja);
             for (VeDetalleCaja veDetalleCajaListNewVeDetalleCaja : veDetalleCajaListNew) {
                 if (!veDetalleCajaListOld.contains(veDetalleCajaListNewVeDetalleCaja)) {
@@ -102,6 +130,23 @@ public class VeCajaJpaController implements Serializable {
                     if (oldVeCajaOfVeDetalleCajaListNewVeDetalleCaja != null && !oldVeCajaOfVeDetalleCajaListNewVeDetalleCaja.equals(veCaja)) {
                         oldVeCajaOfVeDetalleCajaListNewVeDetalleCaja.getVeDetalleCajaList().remove(veDetalleCajaListNewVeDetalleCaja);
                         oldVeCajaOfVeDetalleCajaListNewVeDetalleCaja = em.merge(oldVeCajaOfVeDetalleCajaListNewVeDetalleCaja);
+                    }
+                }
+            }
+            for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
+                if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
+                    veFacturaListOldVeFactura.setIdCaja(null);
+                    veFacturaListOldVeFactura = em.merge(veFacturaListOldVeFactura);
+                }
+            }
+            for (VeFactura veFacturaListNewVeFactura : veFacturaListNew) {
+                if (!veFacturaListOld.contains(veFacturaListNewVeFactura)) {
+                    VeCaja oldIdCajaOfVeFacturaListNewVeFactura = veFacturaListNewVeFactura.getIdCaja();
+                    veFacturaListNewVeFactura.setIdCaja(veCaja);
+                    veFacturaListNewVeFactura = em.merge(veFacturaListNewVeFactura);
+                    if (oldIdCajaOfVeFacturaListNewVeFactura != null && !oldIdCajaOfVeFacturaListNewVeFactura.equals(veCaja)) {
+                        oldIdCajaOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
+                        oldIdCajaOfVeFacturaListNewVeFactura = em.merge(oldIdCajaOfVeFacturaListNewVeFactura);
                     }
                 }
             }
@@ -144,6 +189,11 @@ public class VeCajaJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            List<VeFactura> veFacturaList = veCaja.getVeFacturaList();
+            for (VeFactura veFacturaListVeFactura : veFacturaList) {
+                veFacturaListVeFactura.setIdCaja(null);
+                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
             }
             em.remove(veCaja);
             em.getTransaction().commit();
