@@ -422,7 +422,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
         cpro.setPaginaWeb(txtpaginaweb.getText());
         cpro.setNumeroIdentificacion(txtidentificacion.getText());
         cpro.setEmail(txtemail.getText());
-        cpro.setTipoPersona(cbtipopersona.getSelectedItem().toString());
+        cpro.setTipoPersona(ObtenerDTO.ObtenerSeTipoPersona(cbtipopersona.getSelectedItem().toString()));
         //cpro.setIdPais(BigInteger.valueOf(cbpais.getSelectedIndex()));
         cpro.setNombreComercial(txtnombrecomercial.getText());
         cpro.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());

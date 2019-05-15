@@ -7,6 +7,7 @@ package ec.com.asofar.views.proveedor;
 
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -42,7 +43,9 @@ public class EditarProveedor extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cprov = cpro;
+        cargarcombotipo();
         LlenarDatos(cpro);
+        
     }
 
     /**
@@ -178,7 +181,7 @@ public class EditarProveedor extends javax.swing.JDialog {
         jLabel11.setText("CONTRIBUYENTE ESPECIAL:");
 
         cbtipopersona.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NATURAL", "JURIDICA" }));
+        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", " " }));
 
         cbcontribuyente.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbcontribuyente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
@@ -383,6 +386,17 @@ public class EditarProveedor extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    public void cargarcombotipo(){
+        listatipop = stpcont.findSeTipoPersonaEntities();
+        for (int i = 0; i <listatipop.size(); i++) {
+            cbtipopersona.addItem(listatipop.get(i).getNombre());
+        }
+        for (int i = 0; i <listatipop.size(); i++) {
+            if(cprov.getTipoPersona().getIdTipoPersona() == listatipop.get(i).getIdTipoPersona()){
+                cbtipopersona.setSelectedItem(listatipop.get(i).getNombre());
+            }
+        }
+    }
     public void LlenarDatos(CoProveedores cpro){
         txtnombre.setText(cpro.getNombre());
         txtdireccion.setText(cpro.getDireccion());
@@ -441,7 +455,7 @@ public class EditarProveedor extends javax.swing.JDialog {
             cprov.setPaginaWeb(txtpaginaweb.getText());
             cprov.setNumeroIdentificacion(txtidentificacion.getText());
             cprov.setEmail(txtemail.getText());
-            cprov.setTipoPersona(cbtipopersona.getSelectedItem().toString());
+            cprov.setTipoPersona(ObtenerDTO.ObtenerSeTipoPersona(cbtipopersona.getSelectedItem().toString()));
             //cpro.setIdPais(BigInteger.valueOf(cbpais.getSelectedIndex()));
             cprov.setNombreComercial(txtnombrecomercial.getText());
             cprov.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
