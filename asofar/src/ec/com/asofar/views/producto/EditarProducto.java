@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class NuevoProducto extends javax.swing.JDialog {
+public class EditarProducto extends javax.swing.JDialog {
 
     int x, y;
     PrFabricanteJpaController cfab = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -35,15 +35,14 @@ public class NuevoProducto extends javax.swing.JDialog {
     List<PrFabricante> listfab = cfab.findPrFabricanteEntities();
     List<PrProductos> listprod = cprod.findPrProductosEntities();
 
-    PrMedidas med1 = null;
+    PrProductos pro1 = null;
     SeUsuarios us1;
     SeEmpresa em1;
-
 
     /**
      * Creates new form NuevoProducto
      */
-    public NuevoProducto(java.awt.Frame parent, boolean modal) {
+    public EditarProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -51,24 +50,34 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     }
 
-    public NuevoProducto(java.awt.Frame parent, boolean modal, PrMedidas med, SeUsuarios us, SeEmpresa em) {
+    public EditarProducto(java.awt.Frame parent, boolean modal, PrProductos pro, SeUsuarios us, SeEmpresa em) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        CargarTextFields(med);
         CargarComboFab();
-        med1 = med;
+        CargarTextFields(pro);
+
+        pro1 = pro;
         us1 = us;
         em1 = em;
-       
+
     }
 
-    private void CargarTextFields(PrMedidas med) {
-        grupo.setText(med.getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre());
-        sub.setText(med.getPrArticulo().getPrSubgrupos().getNombre());
-        arti.setText(med.getPrArticulo().getNombreArticulo());
-        tip_med.setText(med.getPrTipoMedidas().getNombreTipoMedida());
-        tip_pres.setText(med.getPrTipoPresentacion().getNombre());
+    private void CargarTextFields(PrProductos pro) {
+        grupo.setText(pro.getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre());
+        sub.setText(pro.getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre());
+        arti.setText(pro.getPrMedidas().getPrArticulo().getNombreArticulo());
+        tip_med.setText(pro.getPrMedidas().getPrTipoMedidas().getNombreTipoMedida());
+        tip_pres.setText(pro.getPrMedidas().getPrTipoPresentacion().getNombre());
+        cod_barra.setText(pro.getCodigoBarra());
+        String valor = String.valueOf(pro.getCodFabricante().getIdFabricante());
+        combofab.setSelectedIndex(Integer.valueOf(valor));
+        nom.setText(pro.getNombreProducto());
+        local.setText(pro.getRegistroSanitarioLocal());
+        extran.setText(pro.getRegistroSanitarioExtranjero());
+        receta.setSelectedItem(pro.getReceta());
+        desc.setSelectedItem(pro.getDescontinuado());
+
     }
 
     private void CargarComboFab() {
@@ -422,11 +431,11 @@ public class NuevoProducto extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             PrProductos obj = new PrProductos();
-            obj.setPrMedidas(med1);
-            
-            obj.setUsuarioCreacion(us1.getIdUsuario());
+            obj = pro1;
+            obj.setUsuarioActualizacion(us1.getIdUsuario());
             obj.setSeEmpresa(em1);
-            obj.setFechaCreacion(new Date());
+
+            obj.setFechaActualizacion(new Date());
             obj.setCodigoBarra(cod_barra.getText());
             obj.setCodFabricante(ObtenerDTO.ObtenerPrFabricante(combofab.getSelectedItem().toString()));
             obj.setNombreProducto(nom.getText());
@@ -436,8 +445,8 @@ public class NuevoProducto extends javax.swing.JDialog {
             obj.setDescontinuado(desc.getSelectedItem().toString());
             obj.setEstado("A");
             System.out.println("Hola");
-            cprod.create(obj);
-            JOptionPane.showMessageDialog(null, "Nuevo producto guardado ");
+            cprod.edit(obj);
+            JOptionPane.showMessageDialog(null, "Producto Actualizado");
             setVisible(false);
             MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
             mp.setVisible(true);
@@ -464,14 +473,18 @@ public class NuevoProducto extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -480,7 +493,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true);
+                EditarProducto dialog = new EditarProducto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

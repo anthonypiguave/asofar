@@ -26,6 +26,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.PrFabricante;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 
@@ -67,6 +68,23 @@ public class ObtenerDTO {
     
     
     }
+          public static PrProductos ObtenerProducto(String id){
+        PrProductosJpaController control=new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
+       PrProductos dto=new PrProductos();
+        List<PrProductos> lista=control.findPrProductosEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(String.valueOf(lista.get(i).getPrProductosPK().getIdProducto()).equals(id)){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+    
     
        public static InBodega ObtenerInBodega(int id){
         InBodegaJpaController control=new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
