@@ -27,6 +27,7 @@ import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 
@@ -43,6 +44,22 @@ public class ObtenerDTO {
         
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getNombreBodega().equals(nombre)){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+     public static VeCaja ObtenerVeCaja(String nombre){
+        VeCajaJpaController control=new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        VeCaja dto=new VeCaja();
+        List<VeCaja> lista=control.findVeCajaEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getNombre().equals(nombre)){
             dto=lista.get(i);
             break;
             }

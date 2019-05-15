@@ -45,6 +45,7 @@
     <class>ec.com.asofar.dto.PrMedidas</class>
     <class>ec.com.asofar.dto.SeTipoPersona</class>
     <class>ec.com.asofar.dto.CoDetalleCotizacionPorProveedor</class>
+    <class>prueba.Entidad</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://173.212.207.238:57635/bd_farmacia_desa?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="farmacia"/>
