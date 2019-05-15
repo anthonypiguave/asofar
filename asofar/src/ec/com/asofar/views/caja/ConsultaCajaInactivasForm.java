@@ -38,7 +38,6 @@ public class ConsultaCajaInactivasForm extends javax.swing.JDialog {
 
         }
 
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -185,8 +184,8 @@ public class ConsultaCajaInactivasForm extends javax.swing.JDialog {
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
-        
-        
+
+
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -211,7 +210,7 @@ public class ConsultaCajaInactivasForm extends javax.swing.JDialog {
                 if ((tbCaja.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     vc = lista.get(i);
                     if (vc != null) {
-                        ModificarCajasForm es = new ModificarCajasForm(new javax.swing.JFrame(), true, vc);
+                        ModificarCajasInactivasForm es = new ModificarCajasInactivasForm(new javax.swing.JFrame(), true, vc);
                         es.setVisible(true);
                     }
                 }
