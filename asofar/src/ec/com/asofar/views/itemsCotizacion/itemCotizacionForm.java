@@ -111,13 +111,13 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-        Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x, point.y - y);
+       // Point point = MouseInfo.getPointerInfo().getLocation();
+      //  setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        x = evt.getX();
-        y = evt.getY();
+     //   x = evt.getX();
+     //   y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
     /**
