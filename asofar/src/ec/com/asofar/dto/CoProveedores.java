@@ -8,21 +8,20 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoProveedores.findByPaginaWeb", query = "SELECT c FROM CoProveedores c WHERE c.paginaWeb = :paginaWeb")
     , @NamedQuery(name = "CoProveedores.findByNumeroIdentificacion", query = "SELECT c FROM CoProveedores c WHERE c.numeroIdentificacion = :numeroIdentificacion")
     , @NamedQuery(name = "CoProveedores.findByEmail", query = "SELECT c FROM CoProveedores c WHERE c.email = :email")
-    , @NamedQuery(name = "CoProveedores.findByTipoPersona", query = "SELECT c FROM CoProveedores c WHERE c.tipoPersona = :tipoPersona")
     , @NamedQuery(name = "CoProveedores.findByIdPais", query = "SELECT c FROM CoProveedores c WHERE c.idPais = :idPais")
     , @NamedQuery(name = "CoProveedores.findByContribuyenteEspecial", query = "SELECT c FROM CoProveedores c WHERE c.contribuyenteEspecial = :contribuyenteEspecial")
     , @NamedQuery(name = "CoProveedores.findByCodigoContribuyente", query = "SELECT c FROM CoProveedores c WHERE c.codigoContribuyente = :codigoContribuyente")
@@ -74,8 +72,6 @@ public class CoProveedores implements Serializable {
     private String numeroIdentificacion;
     @Column(name = "email")
     private String email;
-    @Column(name = "tipo_persona")
-    private String tipoPersona;
     @Column(name = "id_pais")
     private BigInteger idPais;
     @Column(name = "contribuyente_especial")
@@ -98,8 +94,9 @@ public class CoProveedores implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "estado")
     private Character estado;
-    @OneToMany(mappedBy = "idProveedor")
-    private List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList;
+    @JoinColumn(name = "tipo_persona", referencedColumnName = "id_tipo_persona")
+    @ManyToOne
+    private SeTipoPersona tipoPersona;
 
     public CoProveedores() {
     }
@@ -170,14 +167,6 @@ public class CoProveedores implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getTipoPersona() {
-        return tipoPersona;
-    }
-
-    public void setTipoPersona(String tipoPersona) {
-        this.tipoPersona = tipoPersona;
     }
 
     public BigInteger getIdPais() {
@@ -260,13 +249,12 @@ public class CoProveedores implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public List<CoCotizacionesPorPorveedor> getCoCotizacionesPorPorveedorList() {
-        return coCotizacionesPorPorveedorList;
+    public SeTipoPersona getTipoPersona() {
+        return tipoPersona;
     }
 
-    public void setCoCotizacionesPorPorveedorList(List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList) {
-        this.coCotizacionesPorPorveedorList = coCotizacionesPorPorveedorList;
+    public void setTipoPersona(SeTipoPersona tipoPersona) {
+        this.tipoPersona = tipoPersona;
     }
 
     @Override
