@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 public class NuevoProveedor extends javax.swing.JDialog {
     int x,y;
     CoProveedores cpro = new CoProveedores();
+    List<CoProveedores>lista;
     CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     Date d = new Date();
     SeTipoPersona stp = new SeTipoPersona();
@@ -174,7 +175,6 @@ public class NuevoProveedor extends javax.swing.JDialog {
         jLabel11.setText("CONTRIBUYENTE ESPECIAL:");
 
         cbtipopersona.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NATURAL", "JURIDICA" }));
 
         cbcontribuyente.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbcontribuyente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
@@ -414,7 +414,23 @@ public class NuevoProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(txtnombre.getText().length()>2 || txtnombrecomercial.getText().length()>2 || txtidentificacion.getText().length()>2){
+        int responsive = JOptionPane.showConfirmDialog(null,"","SEGURO DESEA GUARDAR LOS DATOS",JOptionPane.YES_NO_OPTION);
+        if(responsive == JOptionPane.YES_OPTION){        
+            for (int i = 0; i < lista.size(); i++) {
+                if ((lista.get(i).getNumeroIdentificacion()).equals(txtidentificacion.getText())) {
+                    cpro = lista.get(i);
+                }
+            }
+            if (cpro != null) {
+                JOptionPane.showMessageDialog(null, "PERSONA YA EXISTE");
+            } else {
+                if ("".equals(txtnombre.getText())
+                        || "".equals(txtnombrecomercial.getText())
+                        || "".equals(txtidentificacion.getText())
+                        || "".equals(txtemail.getText())
+                        || "".equals(txtdireccion.getText())) {
+                    JOptionPane.showMessageDialog(null, "DEBE LLENAR EL FORMULARIO");
+                } else {
         cpro.setNombre(txtnombre.getText());
         cpro.setDireccion(txtdireccion.getText());
         cpro.setTelefono1(txttelefono.getText());
@@ -438,10 +454,10 @@ public class NuevoProveedor extends javax.swing.JDialog {
         cp.setVisible(true);    
     } catch (Exception ex) {
         Logger.getLogger(NuevoProveedor.class.getName()).log(Level.SEVERE, null, ex);
-    }}else{
-            JOptionPane.showMessageDialog(null,"COMPLETE TODOS LOS CAMPOS");
+    }
+                }
+            }
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

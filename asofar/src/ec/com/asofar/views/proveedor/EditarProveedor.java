@@ -181,7 +181,7 @@ public class EditarProveedor extends javax.swing.JDialog {
         jLabel11.setText("CONTRIBUYENTE ESPECIAL:");
 
         cbtipopersona.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", " " }));
+        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
 
         cbcontribuyente.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbcontribuyente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
@@ -395,7 +395,7 @@ public class EditarProveedor extends javax.swing.JDialog {
             if(cprov.getTipoPersona().getIdTipoPersona() == listatipop.get(i).getIdTipoPersona()){
                 cbtipopersona.setSelectedItem(listatipop.get(i).getNombre());
             }
-        }
+                }        
     }
     public void LlenarDatos(CoProveedores cpro){
         txtnombre.setText(cpro.getNombre());
@@ -404,11 +404,10 @@ public class EditarProveedor extends javax.swing.JDialog {
         txttelfseg.setText(cpro.getTelefono2());
         txtpaginaweb.setText(cpro.getPaginaWeb());
         txtidentificacion.setText(cpro.getNumeroIdentificacion());
-        txtemail.setText(cpro.getEmail());
-        //combo tipopersona
+        txtemail.setText(cpro.getEmail());        
         //combo pais
         txtnombrecomercial.setText(cpro.getNombreComercial());
-        //combo contribuyente especial
+        cbcontribuyente.setSelectedItem(cprov.getContribuyenteEspecial());
         txtcodigocont.setText(cpro.getCodigoContribuyente());
         txtobservacion.setText(cpro.getObservaciones());
     }
