@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "in_kardex")

@@ -5,7 +5,7 @@
  */
 package ec.com.asofar.views.supgrupos;
 
-import com.sun.javafx.sg.prism.NGArc;
+//import com.sun.javafx.sg.prism.NGArc;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrSubgrupos;

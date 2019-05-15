@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.VeFacturaDetalle;
@@ -26,7 +27,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class VeFacturaJpaController implements Serializable {
 
@@ -61,6 +62,11 @@ public class VeFacturaJpaController implements Serializable {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 veFactura.setSeSucursal(seSucursal);
             }
+            VeCaja idCaja = veFactura.getIdCaja();
+            if (idCaja != null) {
+                idCaja = em.getReference(idCaja.getClass(), idCaja.getIdCaja());
+                veFactura.setIdCaja(idCaja);
+            }
             SeUsuarios idUsuario = veFactura.getIdUsuario();
             if (idUsuario != null) {
                 idUsuario = em.getReference(idUsuario.getClass(), idUsuario.getIdUsuario());
@@ -80,6 +86,10 @@ public class VeFacturaJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getVeFacturaList().add(veFactura);
                 seSucursal = em.merge(seSucursal);
+            }
+            if (idCaja != null) {
+                idCaja.getVeFacturaList().add(veFactura);
+                idCaja = em.merge(idCaja);
             }
             if (idUsuario != null) {
                 idUsuario.getVeFacturaList().add(veFactura);
@@ -118,6 +128,8 @@ public class VeFacturaJpaController implements Serializable {
             SePersonas idClienteNew = veFactura.getIdCliente();
             SeSucursal seSucursalOld = persistentVeFactura.getSeSucursal();
             SeSucursal seSucursalNew = veFactura.getSeSucursal();
+            VeCaja idCajaOld = persistentVeFactura.getIdCaja();
+            VeCaja idCajaNew = veFactura.getIdCaja();
             SeUsuarios idUsuarioOld = persistentVeFactura.getIdUsuario();
             SeUsuarios idUsuarioNew = veFactura.getIdUsuario();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentVeFactura.getVeFacturaDetalleList();
@@ -141,6 +153,10 @@ public class VeFacturaJpaController implements Serializable {
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 veFactura.setSeSucursal(seSucursalNew);
+            }
+            if (idCajaNew != null) {
+                idCajaNew = em.getReference(idCajaNew.getClass(), idCajaNew.getIdCaja());
+                veFactura.setIdCaja(idCajaNew);
             }
             if (idUsuarioNew != null) {
                 idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getIdUsuario());
@@ -169,6 +185,14 @@ public class VeFacturaJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getVeFacturaList().add(veFactura);
                 seSucursalNew = em.merge(seSucursalNew);
+            }
+            if (idCajaOld != null && !idCajaOld.equals(idCajaNew)) {
+                idCajaOld.getVeFacturaList().remove(veFactura);
+                idCajaOld = em.merge(idCajaOld);
+            }
+            if (idCajaNew != null && !idCajaNew.equals(idCajaOld)) {
+                idCajaNew.getVeFacturaList().add(veFactura);
+                idCajaNew = em.merge(idCajaNew);
             }
             if (idUsuarioOld != null && !idUsuarioOld.equals(idUsuarioNew)) {
                 idUsuarioOld.getVeFacturaList().remove(veFactura);
@@ -238,6 +262,11 @@ public class VeFacturaJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getVeFacturaList().remove(veFactura);
                 seSucursal = em.merge(seSucursal);
+            }
+            VeCaja idCaja = veFactura.getIdCaja();
+            if (idCaja != null) {
+                idCaja.getVeFacturaList().remove(veFactura);
+                idCaja = em.merge(idCaja);
             }
             SeUsuarios idUsuario = veFactura.getIdUsuario();
             if (idUsuario != null) {

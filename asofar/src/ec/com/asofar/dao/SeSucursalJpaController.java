@@ -31,7 +31,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class SeSucursalJpaController implements Serializable {
 
