@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.usuario;
+package ec.com.asofar.views.usuarios;
 
 import ec.com.asofar.dao.SePersonasJpaController;
 import ec.com.asofar.dao.SeRolesJpaController;
@@ -14,7 +14,6 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.AES;
 import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.views.persona.Editar_persona;
 import java.awt.Dimension;
 import java.sql.Date;
 import java.util.List;
@@ -26,8 +25,8 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class Editar_usuario extends javax.swing.JDialog {
-
+public class Registrar_usuario extends javax.swing.JDialog {
+    
     SeRolesJpaController mn
             = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SePersonasJpaController mp
@@ -42,32 +41,30 @@ public class Editar_usuario extends javax.swing.JDialog {
     SeUsuarios usuario = new SeUsuarios();
     java.util.Date fechaActual = new java.util.Date();
     AES aes = new AES();
-
-    public Editar_usuario(java.awt.Frame parent, boolean modal) {
+    
+    public Registrar_usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
-
+        
         this.setLocationRelativeTo(null);
-
+        
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight() - 1));
-
+        
     }
-
-    public Editar_usuario(java.awt.Frame parent, boolean modal,SeUsuarios us_crear, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    
+    public Registrar_usuario(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
-        usuario= us_crear;
         us1 = us;
         em1 = em;
         su1 = su;
         this.setLocationRelativeTo(null);
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
-        cargarDatos(usuario);
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -84,13 +81,12 @@ public class Editar_usuario extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtCell = new javax.swing.JTextField();
-        BotonUsuario = new javax.swing.JButton();
-        txtClaveConfirm = new javax.swing.JPasswordField();
+        BotonFecha = new javax.swing.JButton();
         txtClave = new javax.swing.JPasswordField();
+        txtClaveConfirm = new javax.swing.JPasswordField();
         btnSalir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -107,7 +103,7 @@ public class Editar_usuario extends javax.swing.JDialog {
         jLabel3.setText("CLAVE:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel4.setText("ID_USUARIO :");
+        jLabel4.setText("USUARIO :");
 
         txtIdUsuario.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         txtIdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -157,11 +153,11 @@ public class Editar_usuario extends javax.swing.JDialog {
             }
         });
 
-        BotonUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        BotonUsuario.setText("...");
-        BotonUsuario.addActionListener(new java.awt.event.ActionListener() {
+        BotonFecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BotonFecha.setText("...");
+        BotonFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonUsuarioActionPerformed(evt);
+                BotonFechaActionPerformed(evt);
             }
         });
 
@@ -180,24 +176,20 @@ public class Editar_usuario extends javax.swing.JDialog {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtClave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtClaveConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BotonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,18 +203,16 @@ public class Editar_usuario extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(txtClaveConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BotonFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClaveConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCell, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,16 +243,8 @@ public class Editar_usuario extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EDITAR USUARIO");
+        jLabel1.setText("USUARIO NUEVA");
         jLabel1.setOpaque(true);
-
-        btnEliminar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnEliminar.setText("ELIMINAR");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -274,8 +256,6 @@ public class Editar_usuario extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -290,8 +270,7 @@ public class Editar_usuario extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -315,7 +294,10 @@ public class Editar_usuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
+        mp.setVisible(true);
+        
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtPersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPersonaFocusLost
@@ -349,14 +331,14 @@ public class Editar_usuario extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtCellKeyTyped
-
+    
 
     private void txtIdUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdUsuarioKeyReleased
-
+        
 
     }//GEN-LAST:event_txtIdUsuarioKeyReleased
 
-    private void BotonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonUsuarioActionPerformed
+    private void BotonFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFechaActionPerformed
         Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true, us1, em1, su1);
         mp.setVisible(true);
         objPersona = mp.getObj();
@@ -364,16 +346,12 @@ public class Editar_usuario extends javax.swing.JDialog {
         txtCell.setText(objPersona.getTelefono());
         txtCorreo.setText(objPersona.getCorreo());
 
-    }//GEN-LAST:event_BotonUsuarioActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        bloqueo();
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
+    }//GEN-LAST:event_BotonFechaActionPerformed
+    
     public void Guardar() {
         if (txtClave.getText().equals(txtClaveConfirm.getText())
                 || txtIdUsuario.getText().length() >= 2) {
-//            usuario.setIdUsuario(txtIdUsuario.getText());
+            usuario.setIdUsuario(txtIdUsuario.getText());
             usuario.setNombreUsuario(txtPersona.getText());
             usuario.setEstado('A');
             usuario.setFechaActualizacion(fechaActual);
@@ -381,14 +359,14 @@ public class Editar_usuario extends javax.swing.JDialog {
             usuario.setIdPersona(objPersona);
             usuario.setUsuarioCreacion(us1.getNombreUsuario());
             usuario.setUsuarioActualizacion(us1.getNombreUsuario());
-            usuario.setPassword(txtClave.getText());
+            usuario.setPassword(aes.encrypt(txtClave.getText()));
             try {
-                tpc.edit(usuario);
-                JOptionPane.showMessageDialog(this, "USUARIO INGRESADO CORRECTAMENTE");
+                tpc.create(usuario);
+                JOptionPane.showMessageDialog(this, "EXITO AL GUARDAR");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
-
+            
             Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
             setVisible(false);
             mp.setVisible(true);
@@ -403,7 +381,7 @@ public class Editar_usuario extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Editar_usuario dialog = new Editar_usuario(new javax.swing.JFrame(), true);
+                Registrar_usuario dialog = new Registrar_usuario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -416,8 +394,7 @@ public class Editar_usuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonUsuario;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton BotonFecha;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
@@ -436,23 +413,4 @@ public class Editar_usuario extends javax.swing.JDialog {
     private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtPersona;
     // End of variables declaration//GEN-END:variables
-
-    private void cargarDatos(SeUsuarios usuario) {
-        txtIdUsuario.setText(usuario.getIdUsuario());
-        txtPersona.setText(usuario.getNombreUsuario());
-        txtClaveConfirm.setText(aes.decrypt(usuario.getPassword()));
-        txtClave.setText(aes.decrypt(usuario.getPassword()));
-        txtCorreo.setText(usuario.getIdPersona().getCorreo());
-        txtCell.setText(usuario.getIdPersona().getTelefono());
-        
-    }
-
-    private void bloqueo() {
-        usuario.setEstado('I');
-        try {
-            tpc.edit(usuario);
-        } catch (Exception ex) {
-            Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

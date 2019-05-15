@@ -34,7 +34,7 @@ public class bodega_agregar extends javax.swing.JDialog {
     InTipoBodega ps = new InTipoBodega();
     InBodega bod = new InBodega();
     InTipoBodegaJpaController pgc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    InBodegaJpaController ib = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InBodegaJpaController bc = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeEmpresa em1;
     SeSucursal su1;
     SeUsuarios usu1;
@@ -219,12 +219,12 @@ public class bodega_agregar extends javax.swing.JDialog {
         InTipoBodega tb = new InTipoBodega();
         
         tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-        
+        System.out.println("bodega "+tb);
         InBodegaPK inBodegaPK = new InBodegaPK();
         
         inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());     
-        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
-        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
+//        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
+//        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
         bod.setInBodegaPK(inBodegaPK);
        
         bod.setNombreBodega(txtNombre.getText());
@@ -234,7 +234,7 @@ public class bodega_agregar extends javax.swing.JDialog {
         bod.setUsuarioActualizacion(null);
         bod.setFechaActualizacion(null);
         try {
-            ib.create(bod);
+            bc.create(bod);
             setVisible(false);
             consulta_bodega tbv = new consulta_bodega(new javax.swing.JFrame(), true);
             tbv.setVisible(true);
@@ -269,6 +269,8 @@ public class bodega_agregar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(bodega_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

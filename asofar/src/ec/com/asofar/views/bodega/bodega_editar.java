@@ -5,13 +5,18 @@
  */
 package ec.com.asofar.views.bodega;
 
+import ec.com.asofar.dao.InBodegaJpaController;
 import ec.com.asofar.dao.InTipoBodegaJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InBodega;
+import ec.com.asofar.dto.InBodegaPK;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,18 +25,23 @@ import java.util.List;
 public class bodega_editar extends javax.swing.JDialog {
 
     int x, y;
+    ObtenerDTO od = new ObtenerDTO();
     List<InTipoBodega> TiBo;
+    InTipoBodega TB;
+    List<InBodega> Bo;
     InBodega Bod;
+    InTipoBodega ps = new InTipoBodega();
+    InBodega bod = new InBodega();
 
-    InTipoBodegaJpaController pgc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoBodegaJpaController tbc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InBodegaJpaController bc = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InBodega obj1=null;
+    
 
-    /**
-     * Creates new form bodega_editar
-     */
     public bodega_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        llenarCombo(TiBo);
+//        llenarCombo();
     }
 
     public bodega_editar(java.awt.Frame parent, boolean modal, InBodega bod) {
@@ -39,24 +49,29 @@ public class bodega_editar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         Bod = bod;
-        TiBo = pgc.findInTipoBodegaEntities();
+        TiBo = tbc.findInTipoBodegaEntities();
+        Bo = bc.findInBodegaEntities();
         txtNombre.setText(Bod.getNombreBodega());
-        llenarCombo(TiBo);
-//        llenartxt(bod);
+        llenarCombo();
 
     }
 
-//    private void llenartxt(InBodega obj) {
-//        for (int i = 0; i < Bod.size(); i++) {
-//            txtNombre.setText(Bod.get(i).getNombreBodega());
-//        }
-//    }
+    public void llenarCombo() {
+        List<InTipoBodega> listar = tbc.findInTipoBodegaEntities();
+//        List<InBodega> listar2 = bc.findInBodegaEntities();
+        for (int i = 0; i < listar.size(); i++) {
 
-    public void llenarCombo(List<InTipoBodega> TiBo) {
-
-        for (int i = 0; i < TiBo.size(); i++) {
-            cbxTipoBodega.addItem(TiBo.get(i).getNombre());
+            cbxTipoBodega.addItem(listar.get(i).getNombre());
+            System.out.println("todo " + listar.get(i).getIdTipoBodega()+"--");
         }
+        for (int i = 0; i < listar.size(); i++) {
+            System.out.println(" "+Bod.getInBodegaPK().getIdTipoBodega());
+            if (listar.get(i).getIdTipoBodega().equals(Bod.getInBodegaPK().getIdTipoBodega())) {
+                cbxTipoBodega.setSelectedItem(listar.get(i).getNombre());
+                
+            }
+        }
+        
     }
 
     /**
@@ -193,7 +208,26 @@ public class bodega_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-
+        try {
+            InBodega bod= new InBodega();
+//         boolean valor1=ValidarDTO.ValidarInBodega(txtNombre.getText());
+//            if (valor1 == true && !obj1.getNombreBodega().equals(txtNombre.getText())) {
+//                JOptionPane.showMessageDialog(this, "Bodega ya existente");
+//            }  else {
+            bod=obj1;
+       
+        bod.setInBodegaPK(obj1.getInBodegaPK());
+        bod.setNombreBodega(txtNombre.getText());
+//        arti.setEstado(Estado.ObtenerEstado(estado.getSelectedItem().toString()));
+        
+        bc.edit(bod);
+        JOptionPane.showMessageDialog(this, "Bodega  actualizada");
+//        Actualizar();
+//            }
+//        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     /**
@@ -221,6 +255,7 @@ public class bodega_editar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */

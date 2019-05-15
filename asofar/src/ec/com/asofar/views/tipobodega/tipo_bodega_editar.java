@@ -171,7 +171,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        listaempresa = sjc.findSeEmpresaEntities();
+         listaempresa = sjc.findSeEmpresaEntities();
         empresa = listaempresa.get(0);
 
        
@@ -238,6 +238,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(tipo_bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
