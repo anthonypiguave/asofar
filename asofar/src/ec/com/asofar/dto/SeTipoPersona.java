@@ -41,9 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SeTipoPersona.findByFechaActualizacion", query = "SELECT s FROM SeTipoPersona s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class SeTipoPersona implements Serializable {
 
-    @OneToMany(mappedBy = "tipoPersona")
-    private List<CoProveedores> coProveedoresList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,6 +63,8 @@ public class SeTipoPersona implements Serializable {
     private Date fechaActualizacion;
     @OneToMany(mappedBy = "idTipoPersona")
     private List<SePersonas> sePersonasList;
+    @OneToMany(mappedBy = "tipoPersona")
+    private List<CoProveedores> coProveedoresList;
 
     public SeTipoPersona() {
     }
@@ -139,6 +138,15 @@ public class SeTipoPersona implements Serializable {
         this.sePersonasList = sePersonasList;
     }
 
+    @XmlTransient
+    public List<CoProveedores> getCoProveedoresList() {
+        return coProveedoresList;
+    }
+
+    public void setCoProveedoresList(List<CoProveedores> coProveedoresList) {
+        this.coProveedoresList = coProveedoresList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -162,15 +170,6 @@ public class SeTipoPersona implements Serializable {
     @Override
     public String toString() {
         return "ec.com.asofar.dto.SeTipoPersona[ idTipoPersona=" + idTipoPersona + " ]";
-    }
-
-    @XmlTransient
-    public List<CoProveedores> getCoProveedoresList() {
-        return coProveedoresList;
-    }
-
-    public void setCoProveedoresList(List<CoProveedores> coProveedoresList) {
-        this.coProveedoresList = coProveedoresList;
     }
     
 }

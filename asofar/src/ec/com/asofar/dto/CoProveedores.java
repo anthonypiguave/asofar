@@ -8,6 +8,7 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -94,6 +97,8 @@ public class CoProveedores implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "estado")
     private Character estado;
+    @OneToMany(mappedBy = "idProveedor")
+    private List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList;
     @JoinColumn(name = "tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona tipoPersona;
@@ -247,6 +252,15 @@ public class CoProveedores implements Serializable {
 
     public void setEstado(Character estado) {
         this.estado = estado;
+    }
+
+    @XmlTransient
+    public List<CoCotizacionesPorPorveedor> getCoCotizacionesPorPorveedorList() {
+        return coCotizacionesPorPorveedorList;
+    }
+
+    public void setCoCotizacionesPorPorveedorList(List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList) {
+        this.coCotizacionesPorPorveedorList = coCotizacionesPorPorveedorList;
     }
 
     public SeTipoPersona getTipoPersona() {

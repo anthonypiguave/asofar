@@ -12,9 +12,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SePersonas;
-import ec.com.asofar.dto.SeTipoPersona;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.SeTipoPersona;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -37,6 +38,9 @@ public class SeTipoPersonaJpaController implements Serializable {
         if (seTipoPersona.getSePersonasList() == null) {
             seTipoPersona.setSePersonasList(new ArrayList<SePersonas>());
         }
+        if (seTipoPersona.getCoProveedoresList() == null) {
+            seTipoPersona.setCoProveedoresList(new ArrayList<CoProveedores>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,6 +51,12 @@ public class SeTipoPersonaJpaController implements Serializable {
                 attachedSePersonasList.add(sePersonasListSePersonasToAttach);
             }
             seTipoPersona.setSePersonasList(attachedSePersonasList);
+            List<CoProveedores> attachedCoProveedoresList = new ArrayList<CoProveedores>();
+            for (CoProveedores coProveedoresListCoProveedoresToAttach : seTipoPersona.getCoProveedoresList()) {
+                coProveedoresListCoProveedoresToAttach = em.getReference(coProveedoresListCoProveedoresToAttach.getClass(), coProveedoresListCoProveedoresToAttach.getIdProveedor());
+                attachedCoProveedoresList.add(coProveedoresListCoProveedoresToAttach);
+            }
+            seTipoPersona.setCoProveedoresList(attachedCoProveedoresList);
             em.persist(seTipoPersona);
             for (SePersonas sePersonasListSePersonas : seTipoPersona.getSePersonasList()) {
                 SeTipoPersona oldIdTipoPersonaOfSePersonasListSePersonas = sePersonasListSePersonas.getIdTipoPersona();
@@ -55,6 +65,15 @@ public class SeTipoPersonaJpaController implements Serializable {
                 if (oldIdTipoPersonaOfSePersonasListSePersonas != null) {
                     oldIdTipoPersonaOfSePersonasListSePersonas.getSePersonasList().remove(sePersonasListSePersonas);
                     oldIdTipoPersonaOfSePersonasListSePersonas = em.merge(oldIdTipoPersonaOfSePersonasListSePersonas);
+                }
+            }
+            for (CoProveedores coProveedoresListCoProveedores : seTipoPersona.getCoProveedoresList()) {
+                SeTipoPersona oldTipoPersonaOfCoProveedoresListCoProveedores = coProveedoresListCoProveedores.getTipoPersona();
+                coProveedoresListCoProveedores.setTipoPersona(seTipoPersona);
+                coProveedoresListCoProveedores = em.merge(coProveedoresListCoProveedores);
+                if (oldTipoPersonaOfCoProveedoresListCoProveedores != null) {
+                    oldTipoPersonaOfCoProveedoresListCoProveedores.getCoProveedoresList().remove(coProveedoresListCoProveedores);
+                    oldTipoPersonaOfCoProveedoresListCoProveedores = em.merge(oldTipoPersonaOfCoProveedoresListCoProveedores);
                 }
             }
             em.getTransaction().commit();
@@ -73,6 +92,8 @@ public class SeTipoPersonaJpaController implements Serializable {
             SeTipoPersona persistentSeTipoPersona = em.find(SeTipoPersona.class, seTipoPersona.getIdTipoPersona());
             List<SePersonas> sePersonasListOld = persistentSeTipoPersona.getSePersonasList();
             List<SePersonas> sePersonasListNew = seTipoPersona.getSePersonasList();
+            List<CoProveedores> coProveedoresListOld = persistentSeTipoPersona.getCoProveedoresList();
+            List<CoProveedores> coProveedoresListNew = seTipoPersona.getCoProveedoresList();
             List<SePersonas> attachedSePersonasListNew = new ArrayList<SePersonas>();
             for (SePersonas sePersonasListNewSePersonasToAttach : sePersonasListNew) {
                 sePersonasListNewSePersonasToAttach = em.getReference(sePersonasListNewSePersonasToAttach.getClass(), sePersonasListNewSePersonasToAttach.getIdPersona());
@@ -80,6 +101,13 @@ public class SeTipoPersonaJpaController implements Serializable {
             }
             sePersonasListNew = attachedSePersonasListNew;
             seTipoPersona.setSePersonasList(sePersonasListNew);
+            List<CoProveedores> attachedCoProveedoresListNew = new ArrayList<CoProveedores>();
+            for (CoProveedores coProveedoresListNewCoProveedoresToAttach : coProveedoresListNew) {
+                coProveedoresListNewCoProveedoresToAttach = em.getReference(coProveedoresListNewCoProveedoresToAttach.getClass(), coProveedoresListNewCoProveedoresToAttach.getIdProveedor());
+                attachedCoProveedoresListNew.add(coProveedoresListNewCoProveedoresToAttach);
+            }
+            coProveedoresListNew = attachedCoProveedoresListNew;
+            seTipoPersona.setCoProveedoresList(coProveedoresListNew);
             seTipoPersona = em.merge(seTipoPersona);
             for (SePersonas sePersonasListOldSePersonas : sePersonasListOld) {
                 if (!sePersonasListNew.contains(sePersonasListOldSePersonas)) {
@@ -95,6 +123,23 @@ public class SeTipoPersonaJpaController implements Serializable {
                     if (oldIdTipoPersonaOfSePersonasListNewSePersonas != null && !oldIdTipoPersonaOfSePersonasListNewSePersonas.equals(seTipoPersona)) {
                         oldIdTipoPersonaOfSePersonasListNewSePersonas.getSePersonasList().remove(sePersonasListNewSePersonas);
                         oldIdTipoPersonaOfSePersonasListNewSePersonas = em.merge(oldIdTipoPersonaOfSePersonasListNewSePersonas);
+                    }
+                }
+            }
+            for (CoProveedores coProveedoresListOldCoProveedores : coProveedoresListOld) {
+                if (!coProveedoresListNew.contains(coProveedoresListOldCoProveedores)) {
+                    coProveedoresListOldCoProveedores.setTipoPersona(null);
+                    coProveedoresListOldCoProveedores = em.merge(coProveedoresListOldCoProveedores);
+                }
+            }
+            for (CoProveedores coProveedoresListNewCoProveedores : coProveedoresListNew) {
+                if (!coProveedoresListOld.contains(coProveedoresListNewCoProveedores)) {
+                    SeTipoPersona oldTipoPersonaOfCoProveedoresListNewCoProveedores = coProveedoresListNewCoProveedores.getTipoPersona();
+                    coProveedoresListNewCoProveedores.setTipoPersona(seTipoPersona);
+                    coProveedoresListNewCoProveedores = em.merge(coProveedoresListNewCoProveedores);
+                    if (oldTipoPersonaOfCoProveedoresListNewCoProveedores != null && !oldTipoPersonaOfCoProveedoresListNewCoProveedores.equals(seTipoPersona)) {
+                        oldTipoPersonaOfCoProveedoresListNewCoProveedores.getCoProveedoresList().remove(coProveedoresListNewCoProveedores);
+                        oldTipoPersonaOfCoProveedoresListNewCoProveedores = em.merge(oldTipoPersonaOfCoProveedoresListNewCoProveedores);
                     }
                 }
             }
@@ -131,6 +176,11 @@ public class SeTipoPersonaJpaController implements Serializable {
             for (SePersonas sePersonasListSePersonas : sePersonasList) {
                 sePersonasListSePersonas.setIdTipoPersona(null);
                 sePersonasListSePersonas = em.merge(sePersonasListSePersonas);
+            }
+            List<CoProveedores> coProveedoresList = seTipoPersona.getCoProveedoresList();
+            for (CoProveedores coProveedoresListCoProveedores : coProveedoresList) {
+                coProveedoresListCoProveedores.setTipoPersona(null);
+                coProveedoresListCoProveedores = em.merge(coProveedoresListCoProveedores);
             }
             em.remove(seTipoPersona);
             em.getTransaction().commit();

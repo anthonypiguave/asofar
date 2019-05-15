@@ -73,15 +73,15 @@ public class CoCotizacionesPorPorveedor implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
+    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
+    @ManyToOne
+    private CoProveedores idProveedor;
     @JoinColumns({
         @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false)
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private CoItemsCotizacion coItemsCotizacion;
-    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
-    @ManyToOne
-    private CoProveedores idProveedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coCotizacionesPorPorveedor")
     private List<CoDetalleCotizacionPorProveedor> coDetalleCotizacionPorProveedorList;
 
@@ -176,20 +176,20 @@ public class CoCotizacionesPorPorveedor implements Serializable {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
-    public CoItemsCotizacion getCoItemsCotizacion() {
-        return coItemsCotizacion;
-    }
-
-    public void setCoItemsCotizacion(CoItemsCotizacion coItemsCotizacion) {
-        this.coItemsCotizacion = coItemsCotizacion;
-    }
-
     public CoProveedores getIdProveedor() {
         return idProveedor;
     }
 
     public void setIdProveedor(CoProveedores idProveedor) {
         this.idProveedor = idProveedor;
+    }
+
+    public CoItemsCotizacion getCoItemsCotizacion() {
+        return coItemsCotizacion;
+    }
+
+    public void setCoItemsCotizacion(CoItemsCotizacion coItemsCotizacion) {
+        this.coItemsCotizacion = coItemsCotizacion;
     }
 
     @XmlTransient
