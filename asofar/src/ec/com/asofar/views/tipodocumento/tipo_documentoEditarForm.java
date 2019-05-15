@@ -33,17 +33,20 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
     SeEmpresa em1;
     SeSucursal su1;
     SeUsuarios usu1;
+
     public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su,InTipoDocumento po_doc) {
+
+    public tipo_documentoEditarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, InTipoDocumento po_doc) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         usu1 = us;
         su1 = su;
         em1 = em;
-         //System.out.println("la vaca lola "+documento.getNombreDocumento());
+        documento = po_doc;//System.out.println("la vaca lola "+documento.getNombreDocumento());
         txtnom_documento.setText(po_doc.getNombreDocumento());
     }
 
@@ -173,16 +176,19 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
         } else {
             //empresa = listaempresa.get(0);
             //        tipobodega.setIdEmpresa(empresa);
-            InTipoDocumento listnue = new InTipoDocumento();
-            listnue.setNombreDocumento(txtnom_documento.getText());
-            listnue.setEstado("A");
-            listnue.setUsuarioActualizacion(usu1.getNombreUsuario());
-            listnue.setFechaActualizacion(Fecha.fecha_Hora_actual_jx());
-            
             try {
+                System.out.println("id " + documento.getIdTipoDocumento());
+                InTipoDocumento listnue = new InTipoDocumento();
+                listnue = documento;
+                listnue.setNombreDocumento(txtnom_documento.getText());
+                listnue.setEstado("A");
+                listnue.setUsuarioActualizacion(usu1.getNombreUsuario());
+                listnue.setFechaActualizacion(Fecha.fecha_Hora_actual_jx());
+                //listnue.setIdTipoDocumento(documento.getIdTipoDocumento());
+
                 ptm.edit(listnue);
                 setVisible(false);
-                tipo_documentoForm tb = new tipo_documentoForm(new javax.swing.JFrame(), true,usu1,em1, su1);
+                tipo_documentoForm tb = new tipo_documentoForm(new javax.swing.JFrame(), true, usu1, em1, su1);
                 tb.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(tipo_documentoEditarForm.class.getName()).log(Level.SEVERE, null, ex);

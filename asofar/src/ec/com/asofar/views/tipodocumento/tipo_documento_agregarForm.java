@@ -45,6 +45,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
     public tipo_documento_agregarForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         usu1 = us;
         su1 = su;
         em1 = em;
