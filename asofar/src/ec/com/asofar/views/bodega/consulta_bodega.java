@@ -222,28 +222,15 @@ public class consulta_bodega extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_bodegaMouseReleased
 
     private void tbl_bodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bodegaMousePressed
-//        int id = 0;
-//        bodegaL = null;
-//        if (evt.getClickCount() == 2) {
-//            id = tbl_bodega.getSelectedRow();
-//            for (int i = 0; i < lista.size(); i++) {
-//                    bodegaL = lista.get(i);
-//                    if (bodegaL != null) {
-//                        setVisible(false);
-//                        bodega_editar es = new bodega_editar(new javax.swing.JFrame(), true,bodegaL);
-//                        es.setVisible(true);
-//                        System.out.println("hoal "+bodegaL.getNombreBodega());
-//                    }
-//                
-//            }
-//        }
+
+        int id = 0;
         if (evt.getClickCount() == 2) {
-            int id = tbl_bodega.getSelectedRow();
-//            objeto = devuelveObjeto(tbl_bodega.getValueAt(id, 0), objeto);
-            if (objeto != null) {
-                bodega_editar em = new bodega_editar(new javax.swing.JFrame(), true, objeto);
+            id = tbl_bodega.getSelectedRow();
+            bodegaL = devuelveObjeto(Long.valueOf(tbl_bodega.getValueAt(id, 0).toString()), lista);
+            if (bodegaL != null) {
+                bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL);
                 setVisible(false);
-                em.setVisible(true);
+                ep.setVisible(true);
 
             }
         }
@@ -288,7 +275,7 @@ public class consulta_bodega extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setVisible(false);
+//        setVisible(false);
         bodega_agregar ingre = new bodega_agregar(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
 
@@ -323,6 +310,8 @@ public class consulta_bodega extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(consulta_bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

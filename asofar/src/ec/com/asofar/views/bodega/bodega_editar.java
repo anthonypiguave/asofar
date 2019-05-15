@@ -5,13 +5,20 @@
  */
 package ec.com.asofar.views.bodega;
 
+import ec.com.asofar.dao.InBodegaJpaController;
 import ec.com.asofar.dao.InTipoBodegaJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InBodega;
+import ec.com.asofar.dto.InBodegaPK;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,43 +27,53 @@ import java.util.List;
 public class bodega_editar extends javax.swing.JDialog {
 
     int x, y;
+    ObtenerDTO od = new ObtenerDTO();
     List<InTipoBodega> TiBo;
-    InBodega Bod;
+    InTipoBodega TB;
+    List<InBodega> Bo;
+    InBodega Bodega;
+    InTipoBodega ps = new InTipoBodega();
+    InBodega bodeg = new InBodega();
 
-    InTipoBodegaJpaController pgc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoBodegaJpaController tbc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InBodegaJpaController bc = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InBodega obj1 = null;
 
-    /**
-     * Creates new form bodega_editar
-     */
     public bodega_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        llenarCombo(TiBo);
+//        llenarCombo();
     }
 
     public bodega_editar(java.awt.Frame parent, boolean modal, InBodega bod) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        Bod = bod;
-        TiBo = pgc.findInTipoBodegaEntities();
-        txtNombre.setText(Bod.getNombreBodega());
-        llenarCombo(TiBo);
-//        llenartxt(bod);
+        Bodega = bod;
+        TiBo = tbc.findInTipoBodegaEntities();
+        Bo = bc.findInBodegaEntities();
+        txtNombre.setText(Bodega.getNombreBodega());
+        llenarCombo();
+        cbx_estado.addItem("A");
+        cbx_estado.addItem("I");
 
     }
 
-//    private void llenartxt(InBodega obj) {
-//        for (int i = 0; i < Bod.size(); i++) {
-//            txtNombre.setText(Bod.get(i).getNombreBodega());
-//        }
-//    }
-
-    public void llenarCombo(List<InTipoBodega> TiBo) {
-
-        for (int i = 0; i < TiBo.size(); i++) {
-            cbxTipoBodega.addItem(TiBo.get(i).getNombre());
+    public void llenarCombo() {
+        List<InTipoBodega> listar = tbc.findInTipoBodegaEntities();
+//        List<InBodega> listar2 = bc.findInBodegaEntities();
+        for (int i = 0; i < listar.size(); i++) {
+            if (!"I".equals(TiBo.get(i).getEstado())) {
+                cbxTipoBodega.addItem(listar.get(i).getNombre());
+            }
         }
+        for (int i = 0; i < listar.size(); i++) {
+            if (listar.get(i).getIdTipoBodega().equals(Bodega.getInBodegaPK().getIdTipoBodega())) {
+                cbxTipoBodega.setSelectedItem(listar.get(i).getNombre());
+                System.out.println("seleccionado " + listar.get(i).getIdTipoBodega());
+            }
+        }
+
     }
 
     /**
@@ -76,6 +93,8 @@ public class bodega_editar extends javax.swing.JDialog {
         btncancelar1 = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cbx_estado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,6 +139,9 @@ public class bodega_editar extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setText("ESTADO :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,21 +149,29 @@ public class bodega_editar extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel4)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbxTipoBodega, 0, 167, Short.MAX_VALUE)
-                            .addComponent(txtNombre)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxTipoBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbx_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,15 +181,19 @@ public class bodega_editar extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbxTipoBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbx_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,7 +204,7 @@ public class bodega_editar extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -193,6 +227,37 @@ public class bodega_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        java.util.Date fechaActual = new java.util.Date();
+        InBodega bod = new InBodega();
+        bod = obj1;
+        Long id = null;
+        bodeg = ObtenerDTO.ObtenerInBodega(cbxTipoBodega.getSelectedItem().toString());
+        System.out.println("fsdf " + bodeg);
+
+        List<InTipoBodega> listar = tbc.findInTipoBodegaEntities();
+        for (int i = 0; i < listar.size(); i++) {
+            if (listar.get(i).getIdTipoBodega().equals(Bodega.getInBodegaPK().getIdTipoBodega())) {
+                cbxTipoBodega.setSelectedItem(listar.get(i).getNombre());
+                System.out.println("seleccionado 2" + listar.get(i).getIdTipoBodega());
+                
+            }
+            id = listar.get(i).getIdTipoBodega();
+        }
+        InBodegaPK inbodpk = new InBodegaPK();
+        
+//        Bodega.setInBodegaPK(inbodpk.setIdTipoBodega(id));
+        Bodega.setNombreBodega(txtNombre.getText());
+        Bodega.setEstado(cbx_estado.getSelectedItem().toString());
+//        Bodega.setUsuarioActualizacion(usuarioActualizacion);
+        Bodega.setFechaActualizacion(fechaActual);
+        System.out.println("fec " + fechaActual);
+        try {
+            bc.edit(Bodega);
+            setVisible(false);
+            JOptionPane.showMessageDialog(this, "Bodega  actualizada");
+        } catch (Exception ex) {
+            Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -222,6 +287,7 @@ public class bodega_editar extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -242,9 +308,11 @@ public class bodega_editar extends javax.swing.JDialog {
     private javax.swing.JButton btncancelar1;
     private javax.swing.JButton btnguardar;
     private javax.swing.JComboBox<String> cbxTipoBodega;
+    private javax.swing.JComboBox<String> cbx_estado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

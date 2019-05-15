@@ -12,6 +12,7 @@ import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -220,26 +221,38 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
 
     private void tbl_bodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bodegaMousePressed
         int id = 0;
-        tipobodega = null;
         if (evt.getClickCount() == 2) {
             id = tbl_bodega.getSelectedRow();
-            for (int i = 0; i < lista.size(); i++) {
-                tipobodega = lista.get(i);
-                if (tipobodega != null) {
-                    setVisible(false);
-                    tipo_bodega_editar es = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega);
-                    es.setVisible(true);
-                }
+            tipobodega = devuelveObjeto(Long.valueOf(tbl_bodega.getValueAt(id, 0).toString()), lista);
+            System.out.println("hols 1 ");
+            if (tipobodega != null) {
+                System.out.println("hols 2");
+                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega);
+//                setVisible(false);
+                ep.setVisible(true);
 
+                TipoBodega = Tb.findInTipoBodegaEntities();
+                Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
             }
         }
     }//GEN-LAST:event_tbl_bodegaMousePressed
-
+    public InTipoBodega devuelveObjeto(Long id, List<InTipoBodega> listabod) {
+        InTipoBodega doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getIdTipoBodega(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setVisible(false);
+
         tipo_bodega_agregar ingre = new tipo_bodega_agregar(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
-
+        
+        TipoBodega = Tb.findInTipoBodegaEntities();
+        Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -271,6 +284,8 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(consulta_tipo_bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

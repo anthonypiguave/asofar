@@ -50,7 +50,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     List<PrArticulo> listart = carti.findPrArticuloEntities();
     List<PrMedidas> listmed = cmed.findPrMedidasEntities();
     List<PrProductos> listprod = cprod.findPrProductosEntities();
-    
+    PrMedidas prmed;
+
     Tablas tt = new Tablas();
     String valor = "";
     SeUsuarios us1;
@@ -100,6 +101,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                                     if (a.getEstado().equals("A")) {
                                         hart.setUserObject(a.getNombreArticulo());
                                         hsub.add(hart);
+
                                     }
                                 }
                             }
@@ -262,6 +264,11 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         ));
         tabla_prod.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tabla_prod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabla_prodMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabla_prod);
 
         BotonNuevoProducto.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
@@ -400,19 +407,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
     private void BotonNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoProductoActionPerformed
         // TODO add your handling code here:
-        PrArticulo arti = new PrArticulo();
-        PrTipoMedidas tipo = new PrTipoMedidas();
-        PrTipoPresentacion pre = new PrTipoPresentacion();
-        TreePath objeto = arbol.getSelectionPath();
-        String valor = objeto.getPathComponent(3).toString();
-        arti = ObtenerDTO.ObtenerPrArticulo(valor);
-        tipo = ObtenerDTO.ObtenerPrTipoMedidas(tabla_med.getValueAt(tabla_med.getSelectedRow(), 0).toString());
-        pre = ObtenerDTO.ObtenerPrTipoPresentacion(tabla_med.getValueAt(tabla_med.getSelectedRow(), 1).toString());
-        System.out.println(pre + "" + arti + tipo);
-        PrMedidasPK pk = new PrMedidasPK(arti.getPrArticuloPK().getIdArticulo(), arti.getPrArticuloPK().getIdGrupo(), arti.getPrArticuloPK().getIdSubgrupo(), pre.getIdTipoPresentacion(), tipo.getIdTipoMedidas());
-        PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(pk);
-
-         NuevoProducto np = new NuevoProducto(new javax.swing.JFrame(), true, obj, us1, em1);
+        
+        NuevoProducto np = new NuevoProducto(new javax.swing.JFrame(), true, prmed, us1, em1);
         setVisible(false);
         np.setVisible(true);
     }//GEN-LAST:event_BotonNuevoProductoActionPerformed
@@ -462,6 +458,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
     }//GEN-LAST:event_BotonNuevaMedidaActionPerformed
 
     private void tabla_medMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_medMousePressed
+       
         if (evt.getClickCount() == 1) {
 
             PrArticulo arti = new PrArticulo();
@@ -476,10 +473,31 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             PrMedidasPK pk = new PrMedidasPK(arti.getPrArticuloPK().getIdArticulo(), arti.getPrArticuloPK().getIdGrupo(), arti.getPrArticuloPK().getIdSubgrupo(), pre.getIdTipoPresentacion(), tipo.getIdTipoMedidas());
             PrMedidas obj = ObtenerDTO.ObtenerPrMedidas(pk);
             System.out.println(obj + " Hola Mundoo " + pk);
-
+            prmed=obj;
             Tablas.TablaProducto(obj.getPrProductosList(), tabla_prod);
             BotonNuevoProducto.setEnabled(true);
-
+            System.out.println(tabla_med.getValueAt(tabla_med.getSelectedRow(), 2));
+ if (tabla_med.getSelectedColumn()==2) {
+     if ((boolean)tabla_med.getValueAt(tabla_med.getSelectedRow(), 2)) {
+         
+         try {
+             obj.setEstado("I");
+         
+            cmed.edit(obj);
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+     } else {
+         try {
+              obj.setEstado("A");
+            cmed.edit(obj);
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+     }
+     
+            
+        }
         }
     }//GEN-LAST:event_tabla_medMousePressed
 
@@ -511,6 +529,19 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
+
+    private void tabla_prodMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_prodMousePressed
+        
+        if(evt.getClickCount()==2){
+            
+            String valor=tabla_prod.getValueAt(tabla_prod.getSelectedRow(), 0).toString();
+            PrProductos pro = ObtenerDTO.ObtenerProducto(valor);
+            EditarProducto edi = new EditarProducto(new javax.swing.JFrame(), true, pro, us1, em1);
+            setVisible(false);
+            edi.setVisible(true);
+        }
+
+    }//GEN-LAST:event_tabla_prodMousePressed
 
     /**
      * @param args the command line arguments

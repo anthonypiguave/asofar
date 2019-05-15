@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 public class tipo_bodega_editar extends javax.swing.JDialog {
 
-    InTipoBodega bodega;
+    InTipoBodega tipobodega;
     int x,y;
     InTipoBodegaJpaController pjc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
 //
@@ -43,8 +43,8 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        bodega = staticbodega;
-        
+        tipobodega = staticbodega;
+        txtnom_bodega.setText(tipobodega.getNombre());
         cbx_estado.addItem("A");
         cbx_estado.addItem("I");
     }
@@ -162,40 +162,33 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        listaempresa = sjc.findSeEmpresaEntities();
-        empresa = listaempresa.get(0);
-
        
-        bodega.setNombre(txtnom_bodega.getText());
-        bodega.setEstado(cbx_estado.getSelectedItem().toString());
+        tipobodega.setNombre(txtnom_bodega.getText());
+        tipobodega.setEstado(cbx_estado.getSelectedItem().toString());
 //        bodega.setIdUsuarioCreacion(null);
-        bodega.setFechaCreacion(null);
+        tipobodega.setFechaCreacion(null);
 //        bodega.setIdUsuarioActualizacion(null);
-        bodega.setFechaActualizacion(null);
+        tipobodega.setFechaActualizacion(null);
         try {
-            pjc.edit(bodega);
+            pjc.edit(tipobodega);
             setVisible(false);
-            consulta_tipo_bodega tm = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
-            tm.setVisible(true);
+//            consulta_tipo_bodega tm = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
+//            tm.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+ 
         setVisible(false);
-        consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
-        tb.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtnom_bodegaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnom_bodegaFocusLost
@@ -238,6 +231,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(tipo_bodega_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
