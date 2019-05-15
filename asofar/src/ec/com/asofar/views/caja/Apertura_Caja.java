@@ -27,27 +27,27 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class Apertura_Caja extends javax.swing.JDialog {
-    
+
     int x, y;
     Date d = new Date();
-    
+
     VeCajaJpaController cajacon = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     VeDetalleCajaJpaController cajadet = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+
     public Apertura_Caja(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         CargarCajas();
     }
-    
+
     public void CargarCajas() {
         List<VeCaja> listcaja = cajacon.findVeCajaEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             caja.addItem(listcaja.get(i).getNombre());
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -178,7 +178,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         setVisible(false);
 
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -203,21 +203,21 @@ public class Apertura_Caja extends javax.swing.JDialog {
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         try {
-        VeDetalleCaja dc = new VeDetalleCaja();
-        VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
-        
-        dc.setDineroInicio(Double.parseDouble(txtMonto.getText()));
-        dc.setFechaInicio(d);
-        dc.setHoraInicio(d);
-        dc.setEstado("A");
-        dc.setVeCaja(veCaja);
-        if(ValidacionCaja.Validacion(veCaja)){
-        cajadet.create(dc);
-        JOptionPane.showMessageDialog(null, "CAJA ACTIVA","EXITO!",JOptionPane.INFORMATION_MESSAGE);
-        } else {
-        JOptionPane.showMessageDialog(null, "LA CAJA YA ESTA ACTIVA","ERROR!",JOptionPane.ERROR_MESSAGE);
-        }
-        
+            VeDetalleCaja dc = new VeDetalleCaja();
+            VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
+
+            dc.setDineroInicio(Double.parseDouble(txtMonto.getText()));
+            dc.setFechaInicio(d);
+            dc.setHoraInicio(d);
+            dc.setEstado("A");
+            dc.setVeCaja(veCaja);
+            if (ValidacionCaja.Validacion(veCaja)) {
+                cajadet.create(dc);
+                JOptionPane.showMessageDialog(null, "CAJA ACTIVA", "EXITO!", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "LA CAJA YA ESTA ACTIVA", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
