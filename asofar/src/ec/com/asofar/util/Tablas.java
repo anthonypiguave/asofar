@@ -330,8 +330,8 @@ public class Tablas {
                 Filas[0] = lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getNombreUsuario();
                 Filas[2] = lista.get(i).getIdPersona().getCorreo();
-                Filas[3] = String.valueOf(lista.get(i).getFechaCreacion());
-                Filas[4] = String.valueOf(lista.get(i).getFechaActualizacion());
+                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
+                Filas[4] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
