@@ -7,7 +7,6 @@ package ec.com.asofar.views.proveedor;
 
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dto.CoProveedores;
-import ec.com.asofar.dto.CoProveedores_;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.proveedor.*;

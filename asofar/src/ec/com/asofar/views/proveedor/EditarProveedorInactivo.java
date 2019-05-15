@@ -44,6 +44,7 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         cprov = cpro;
         LlenarDatos(cpro);
+        cargarcombotipo();
     }
 
     /**
@@ -185,7 +186,7 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         jLabel11.setText("CONTRIBUYENTE ESPECIAL:");
 
         cbtipopersona.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NATURAL", "JURIDICA" }));
+        cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         cbtipopersona.setEnabled(false);
 
         cbcontribuyente.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -383,6 +384,18 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    public void cargarcombotipo(){
+        listatipop = stpcont.findSeTipoPersonaEntities();
+        for (int i = 0; i <listatipop.size(); i++) {
+            cbtipopersona.addItem(listatipop.get(i).getNombre());
+        }
+        for (int i = 0; i <listatipop.size(); i++) {
+            if(cprov.getTipoPersona().getIdTipoPersona() == listatipop.get(i).getIdTipoPersona()){
+                cbtipopersona.setSelectedItem(listatipop.get(i).getNombre());
+            }
+                }
+        cbcontribuyente.setSelectedItem(cprov.getContribuyenteEspecial());
+    }
     public void LlenarDatos(CoProveedores cpro){
         txtnombre.setText(cpro.getNombre());
         txtdireccion.setText(cpro.getDireccion());
