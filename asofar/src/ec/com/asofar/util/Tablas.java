@@ -965,7 +965,7 @@ public class Tablas {
                 Object fila[] = new Object[4];
                 vo = lista.get(i);
                 fila[0] = vo.getCoDetalleCotizacionPorProveedorPK().getLineaDetalle();
-                fila[1] = vo.getIdProducto().;
+                fila[1] = vo.getIdProducto();
                 fila[2] = vo.getDescripcion();
                 fila[3] = vo.getCantidadPedido();
                 String ac = (String) vo.getEstado();
