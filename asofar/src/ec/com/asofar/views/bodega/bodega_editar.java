@@ -222,27 +222,16 @@ public class bodega_editar extends javax.swing.JDialog {
 
     private void btncancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar1ActionPerformed
         setVisible(false);
-        consulta_bodega es = new consulta_bodega(new javax.swing.JFrame(), true);
-        es.setVisible(true);
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
         InBodega bod = new InBodega();
         bod = obj1;
-        Long id = null;
         bodeg = ObtenerDTO.ObtenerInBodega(cbxTipoBodega.getSelectedItem().toString());
         System.out.println("fsdf " + bodeg);
 
-        List<InTipoBodega> listar = tbc.findInTipoBodegaEntities();
-        for (int i = 0; i < listar.size(); i++) {
-            if (listar.get(i).getIdTipoBodega().equals(Bodega.getInBodegaPK().getIdTipoBodega())) {
-                cbxTipoBodega.setSelectedItem(listar.get(i).getNombre());
-                System.out.println("seleccionado 2" + listar.get(i).getIdTipoBodega());
-                
-            }
-            id = listar.get(i).getIdTipoBodega();
-        }
+ 
         InBodegaPK inbodpk = new InBodegaPK();
         
 //        Bodega.setInBodegaPK(inbodpk.setIdTipoBodega(id));

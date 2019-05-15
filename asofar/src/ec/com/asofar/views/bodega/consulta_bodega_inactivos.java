@@ -16,14 +16,12 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
-public class consulta_bodega extends javax.swing.JDialog {
+public class consulta_bodega_inactivos extends javax.swing.JDialog {
 
     InBodegaJpaController bodega = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<InBodega> lista = bodega.findInBodegaEntities();
@@ -32,23 +30,18 @@ public class consulta_bodega extends javax.swing.JDialog {
     InBodega bodegaL = new InBodega();
     InBodega objeto;
 
-    /**
-     * Creates new form bodega
-     */
-    public consulta_bodega(java.awt.Frame parent, boolean modal) {
+    public consulta_bodega_inactivos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        Tablas.listarBodega(lista, tbl_bodega);
+        Tablas.listarBodegaInactivos(lista, tbl_bodega);
     }
-
-    public consulta_bodega(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public consulta_bodega_inactivos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        Tablas.listarBodega(lista, tbl_bodega);
+        Tablas.listarBodegaInactivos(lista, tbl_bodega);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +58,6 @@ public class consulta_bodega extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtfiltro = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -112,7 +104,7 @@ public class consulta_bodega extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("BODEGAS");
+        jLabel1.setText("BODEGAS INACTIVAS");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -143,15 +135,6 @@ public class consulta_bodega extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(41, 139, 40));
-        jButton2.setText("INGRESAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jButton1.setBackground(new java.awt.Color(173, 42, 48));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
@@ -171,8 +154,7 @@ public class consulta_bodega extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,9 +177,7 @@ public class consulta_bodega extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2))
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -217,10 +197,6 @@ public class consulta_bodega extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbl_bodegaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bodegaMouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbl_bodegaMouseReleased
-
     private void tbl_bodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bodegaMousePressed
 
         int id = 0;
@@ -233,7 +209,6 @@ public class consulta_bodega extends javax.swing.JDialog {
 
             }
         }
-
     }//GEN-LAST:event_tbl_bodegaMousePressed
     public InBodega devuelveObjeto(Long id, List<InBodega> listabod) {
         InBodega doc = null;
@@ -245,6 +220,10 @@ public class consulta_bodega extends javax.swing.JDialog {
         }
         return doc;
     }
+    private void tbl_bodegaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bodegaMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_bodegaMouseReleased
+
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
@@ -273,13 +252,6 @@ public class consulta_bodega extends javax.swing.JDialog {
         Tablas.filtro(valor, tbl_bodega);
     }//GEN-LAST:event_txtfiltroKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        setVisible(false);
-        bodega_agregar ingre = new bodega_agregar(new javax.swing.JFrame(), true);
-        ingre.setVisible(true);
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -301,23 +273,20 @@ public class consulta_bodega extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(consulta_bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consulta_bodega_inactivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(consulta_bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consulta_bodega_inactivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(consulta_bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consulta_bodega_inactivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(consulta_bodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consulta_bodega_inactivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                consulta_bodega dialog = new consulta_bodega(new javax.swing.JFrame(), true);
+                consulta_bodega_inactivos dialog = new consulta_bodega_inactivos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -331,7 +300,6 @@ public class consulta_bodega extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
