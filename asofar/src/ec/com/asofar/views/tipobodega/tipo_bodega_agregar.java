@@ -184,8 +184,8 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
                 try {
                     tbc.create(tipobodega);
                     setVisible(false);
-                    consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
-                    tb.setVisible(true);
+//                    consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
+//                    tb.setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -197,8 +197,8 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
-        consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
-        tb.setVisible(true);
+//        consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
+//        tb.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
