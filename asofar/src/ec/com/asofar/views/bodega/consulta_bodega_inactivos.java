@@ -208,6 +208,7 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
                 ep.setVisible(true);
 
             }
+            /**/
         }
     }//GEN-LAST:event_tbl_bodegaMousePressed
     public InBodega devuelveObjeto(Long id, List<InBodega> listabod) {
