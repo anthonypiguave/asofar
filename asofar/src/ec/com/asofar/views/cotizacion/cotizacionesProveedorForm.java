@@ -5,6 +5,13 @@
  */
 package ec.com.asofar.views.cotizacion;
 
+import ec.com.asofar.dao.CoCotizacionesPorPorveedorJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
+import java.util.List;
+
 /**
  *
  * @author admin1
@@ -14,9 +21,30 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     /**
      * Creates new form cotizacionesProveedorForm
      */
+//    CoCotizacionesPorPorveedorJpaController control = new CoCotizacionesPorPorveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
+//    
+//    List<CoCotizacionesPorPorveedor> lista = control.findCoCotizacionesPorPorveedorEntities();
+//    CoCotizacionesPorPorveedor obj = new CoCotizacionesPorPorveedor();
+    CoCotizacionesPorPorveedor obj = new CoCotizacionesPorPorveedor();
+    List<CoCotizacionesPorPorveedor> lista;
+    CoCotizacionesPorPorveedorJpaController ptm = new CoCotizacionesPorPorveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
+    String valor = "";
     public cotizacionesProveedorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        System.out.println("pajerrro!!");
+        lista=ptm.findCoCotizacionesPorPorveedorEntities();
+         for (int i = 0; i < lista.size(); i++){
+            System.out.println("entread: "+lista.get(i).getEstado()+lista.get(i).getFechaActualizacion());
+        }
+        Tablas.tablaCotizacionPorProveedor(jtCabecera, lista);
+        
+    }
+    public cotizacionesProveedorForm() {
+//        super(parent, modal);
+        initComponents();
+//        Tablas.tablaCotizacionPorProveedor(jtCabecera, lista);
+        
     }
 
     /**
@@ -32,9 +60,9 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtCabecera = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtDetalle = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,31 +89,33 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtCabecera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jtCabecera.setRowHeight(25);
+        jtCabecera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtCabeceraMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtCabecera);
+
+        jtDetalle.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        jtDetalle.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtDetalle.setRowHeight(22);
+        jScrollPane2.setViewportView(jtDetalle);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,11 +138,11 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,6 +158,14 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMousePressed
+        if(evt.getClickCount()==1){
+            String valor = jtCabecera.getValueAt(jtCabecera.getSelectedRow(), 0).toString();
+            CoCotizacionesPorPorveedor coti= ObtenerDTO.ObtenerCoCotizacionesPorPorveedor(valor);
+            Tablas.TablaDetallePorProveerdo(coti.getCoDetalleCotizacionPorProveedorList(), jtDetalle);
+        }
+    }//GEN-LAST:event_jtCabeceraMousePressed
 
     /**
      * @param args the command line arguments
@@ -155,6 +193,13 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -177,7 +222,7 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jtCabecera;
+    private javax.swing.JTable jtDetalle;
     // End of variables declaration//GEN-END:variables
 }

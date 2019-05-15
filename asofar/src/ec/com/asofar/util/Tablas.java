@@ -6,6 +6,8 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InMotivos;
@@ -39,6 +41,7 @@ public class Tablas {
     static DefaultTableModel model;
     private boolean[] editable = {false, false, true};
     private static boolean[] editable1 = {false, false, true};
+    private static boolean[] editable2 = {false,false,false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -898,5 +901,89 @@ public class Tablas {
         }
 
     }
+    
+    public static void tablaCotizacionPorProveedor(JTable Tabla, List<CoCotizacionesPorPorveedor> lista) {
+        int[] a = {5, 100, 100,50,80,90,90};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.LEFT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"    CODIGO", "EMPRESA","PROVEEDOR", "TELEFONO","CORREO","FECHA DE ENVIO","FECHA DE INGRESO"};
+        String[] Filas = new String[7];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = ""+lista.get(i).getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor();
+            Filas[4] = ""+lista.get(i).getIdProveedor().getTelefono1();
+            Filas[2] = ""+lista.get(i).getIdProveedor().getNombre();
+            Filas[3] = lista.get(i).getIdProveedor().getEmail();
+            Filas[1] = lista.get(i).getIdProveedor().getNombreComercial();
+            Filas[5] = ""+lista.get(i).getFechaEnvioCotizacion();
+            Filas[6] = ""+lista.get(i).getFechaIngreso();
+            
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr1);
+        }
+    }
+ public static void TablaDetallePorProveerdo(List<CoDetalleCotizacionPorProveedor> lista, JTable tabla) {
+        CoDetalleCotizacionPorProveedor vo=new CoDetalleCotizacionPorProveedor();
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO","CANTIDAD","ESTADO",}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return editable2[column];
+            }
+        };
+
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+                // model.addRow(new Object[]{});
+                Object fila[] = new Object[4];
+                vo = lista.get(i);
+                fila[0] = vo.getCoDetalleCotizacionPorProveedorPK().getLineaDetalle();
+                fila[1] = vo.getIdProducto().;
+                fila[2] = vo.getDescripcion();
+                fila[3] = vo.getCantidadPedido();
+                String ac = (String) vo.getEstado();
+                if ("A".equals(ac)) {
+                    fila[3] = true;
+                } else {
+                    fila[3] = false;
+                }
+                
+                
+
+                dt.addRow(fila);
+
+            }
+
+        }
+
+        tabla.setModel(dt);
+ }
 
 }
