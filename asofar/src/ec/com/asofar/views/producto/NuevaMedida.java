@@ -202,7 +202,7 @@ public class NuevaMedida extends javax.swing.JDialog {
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         // TODO add your handling code here:
-        MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
+        MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true,us1,em1,null);
         setVisible(false);
         mp.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
@@ -222,7 +222,7 @@ public class NuevaMedida extends javax.swing.JDialog {
             controlm.create(med);
             JOptionPane.showMessageDialog(null, "Medida guardada con exito! ");
             setVisible(false);
-            MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
+            MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(),true,us1,em1,null);
             mp.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo guardar " + e.getMessage());

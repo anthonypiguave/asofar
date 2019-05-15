@@ -412,9 +412,9 @@ public class EditarProducto extends javax.swing.JDialog {
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         // TODO add your handling code here:
-//        MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
+        MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true,us1,em1,null);
         setVisible(false);
-//        mp.setVisible(true);
+        mp.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -448,7 +448,7 @@ public class EditarProducto extends javax.swing.JDialog {
             cprod.edit(obj);
             JOptionPane.showMessageDialog(null, "Producto Actualizado");
             setVisible(false);
-            MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true);
+            MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true,us1,em1,null);
             mp.setVisible(true);
         } catch (Exception e) {
             System.out.println("Error al guardar prod " + e.getMessage());
