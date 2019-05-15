@@ -11,6 +11,8 @@ import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -32,18 +34,23 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     List<SeEmpresa> listaempresa = null;
     SeEmpresa empresa = new SeEmpresa();
     SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
     public tipo_bodega_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
     }
 
-    public tipo_bodega_editar(java.awt.Frame parent, boolean modal, InTipoBodega staticbodega) {
+    public tipo_bodega_editar(java.awt.Frame parent, boolean modal, InTipoBodega staticbodega, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         tipobodega = staticbodega;
+        usu = us;
+        emp = em;
+        suc = suc;
         txtnom_bodega.setText(tipobodega.getNombre());
         cbx_estado.addItem("A");
         cbx_estado.addItem("I");
@@ -169,18 +176,14 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+       java.util.Date fechaActual = new java.util.Date();
         tipobodega.setNombre(txtnom_bodega.getText());
         tipobodega.setEstado(cbx_estado.getSelectedItem().toString());
-//        bodega.setIdUsuarioCreacion(null);
-        tipobodega.setFechaCreacion(null);
-//        bodega.setIdUsuarioActualizacion(null);
-        tipobodega.setFechaActualizacion(null);
+        tipobodega.setUsuarioActualizacion(usu.getNombreUsuario());
+        tipobodega.setFechaActualizacion(fechaActual);
         try {
             pjc.edit(tipobodega);
             setVisible(false);
-//            consulta_tipo_bodega tm = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
-//            tm.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
         }

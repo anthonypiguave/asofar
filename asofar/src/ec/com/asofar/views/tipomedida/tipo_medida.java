@@ -283,7 +283,7 @@ public class tipo_medida extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void medida_tbMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medida_tbMousePressed
-        // TODO add your handling code here:
+ 
         int id = medida_tb.getSelectedRow();
         if (evt.getClickCount() == 2) {
             medidas = devuelveObjeto(Long.parseLong(medida_tb.getValueAt(id, 0).toString()), listamedida);

@@ -148,8 +148,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     public void cargarMenu(List<SeOpcionesMenu> lis) {
         
-        for (int i = 0; i < lis.size(); i++) {
-            
+        for (int i = 0; i < lis.size(); i++) {         
             if(lis.get(i).getIdPadre()==null){
                 if (lis.get(i).getRuta()==null) {
                     JMenu menu= new JMenu(lis.get(i).getNombre());

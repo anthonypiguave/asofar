@@ -198,7 +198,6 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_bodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bodegaMousePressed
-
         int id = 0;
         if (evt.getClickCount() == 2) {
             id = tbl_bodega.getSelectedRow();
@@ -208,7 +207,6 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
                 ep.setVisible(true);
 
             }
-            /**/
         }
     }//GEN-LAST:event_tbl_bodegaMousePressed
     public InBodega devuelveObjeto(Long id, List<InBodega> listabod) {
@@ -254,7 +252,7 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
+        setVisible(false);        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
