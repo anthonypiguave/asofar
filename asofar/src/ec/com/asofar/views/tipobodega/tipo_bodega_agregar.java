@@ -10,6 +10,8 @@ import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.views.tipomedida.tipo_medida_agregar;
 import java.awt.MouseInfo;
@@ -32,6 +34,9 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
     List<SeEmpresa> listaempresa = null;
     SeEmpresa empresa = new SeEmpresa();
     SeEmpresaJpaController sjc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
 
     /**
      * Creates new form tipo_bodega_agregar
@@ -42,7 +47,16 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+  public tipo_bodega_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        System.out.println("hhhhhhhhhhhhh"+us.getNombreUsuario());
+        usu = us;
+        suc = su;
+        emp = em;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code The content of this method is always
@@ -167,25 +181,20 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_txtnom_bodegaKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        java.util.Date fechaActual = new java.util.Date();
         try {
             boolean valor1 = ValidarDTO.ValidarInTipoBodega(txtnom_bodega.getText());
             if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
             } else {
-                listaempresa = sjc.findSeEmpresaEntities();
-                empresa = listaempresa.get(0);
-//        tipobodega.setIdEmpresa(empresa);
                 tipobodega.setNombre(txtnom_bodega.getText());
                 tipobodega.setEstado("A");
-//                tipobodega.setIdUsuarioCreacion(null);
-                tipobodega.setFechaCreacion(null);
-//                tipobodega.setIdUsuarioActualizacion(null);
-                tipobodega.setFechaActualizacion(null);
+                tipobodega.setUsuarioCreacion(usu.getNombreUsuario());
+//                tipobodega.setUsuarioCreacion(String.valueOf(usu.getIdUsuario()));
+                tipobodega.setFechaCreacion(fechaActual);
                 try {
                     tbc.create(tipobodega);
                     setVisible(false);
-//                    consulta_tipo_bodega tb = new consulta_tipo_bodega(new javax.swing.JFrame(), true);
-//                    tb.setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
                 }

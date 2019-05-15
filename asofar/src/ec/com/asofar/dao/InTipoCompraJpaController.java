@@ -6,15 +6,17 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dto.InTipoCompra;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.CoItemsCotizacion;
+import ec.com.asofar.dto.InTipoCompra;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -32,11 +34,29 @@ public class InTipoCompraJpaController implements Serializable {
     }
 
     public void create(InTipoCompra inTipoCompra) {
+        if (inTipoCompra.getCoItemsCotizacionList() == null) {
+            inTipoCompra.setCoItemsCotizacionList(new ArrayList<CoItemsCotizacion>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<CoItemsCotizacion> attachedCoItemsCotizacionList = new ArrayList<CoItemsCotizacion>();
+            for (CoItemsCotizacion coItemsCotizacionListCoItemsCotizacionToAttach : inTipoCompra.getCoItemsCotizacionList()) {
+                coItemsCotizacionListCoItemsCotizacionToAttach = em.getReference(coItemsCotizacionListCoItemsCotizacionToAttach.getClass(), coItemsCotizacionListCoItemsCotizacionToAttach.getCoItemsCotizacionPK());
+                attachedCoItemsCotizacionList.add(coItemsCotizacionListCoItemsCotizacionToAttach);
+            }
+            inTipoCompra.setCoItemsCotizacionList(attachedCoItemsCotizacionList);
             em.persist(inTipoCompra);
+            for (CoItemsCotizacion coItemsCotizacionListCoItemsCotizacion : inTipoCompra.getCoItemsCotizacionList()) {
+                InTipoCompra oldIdTipoCompraOfCoItemsCotizacionListCoItemsCotizacion = coItemsCotizacionListCoItemsCotizacion.getIdTipoCompra();
+                coItemsCotizacionListCoItemsCotizacion.setIdTipoCompra(inTipoCompra);
+                coItemsCotizacionListCoItemsCotizacion = em.merge(coItemsCotizacionListCoItemsCotizacion);
+                if (oldIdTipoCompraOfCoItemsCotizacionListCoItemsCotizacion != null) {
+                    oldIdTipoCompraOfCoItemsCotizacionListCoItemsCotizacion.getCoItemsCotizacionList().remove(coItemsCotizacionListCoItemsCotizacion);
+                    oldIdTipoCompraOfCoItemsCotizacionListCoItemsCotizacion = em.merge(oldIdTipoCompraOfCoItemsCotizacionListCoItemsCotizacion);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,7 +70,34 @@ public class InTipoCompraJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            InTipoCompra persistentInTipoCompra = em.find(InTipoCompra.class, inTipoCompra.getIdInTipoCompra());
+            List<CoItemsCotizacion> coItemsCotizacionListOld = persistentInTipoCompra.getCoItemsCotizacionList();
+            List<CoItemsCotizacion> coItemsCotizacionListNew = inTipoCompra.getCoItemsCotizacionList();
+            List<CoItemsCotizacion> attachedCoItemsCotizacionListNew = new ArrayList<CoItemsCotizacion>();
+            for (CoItemsCotizacion coItemsCotizacionListNewCoItemsCotizacionToAttach : coItemsCotizacionListNew) {
+                coItemsCotizacionListNewCoItemsCotizacionToAttach = em.getReference(coItemsCotizacionListNewCoItemsCotizacionToAttach.getClass(), coItemsCotizacionListNewCoItemsCotizacionToAttach.getCoItemsCotizacionPK());
+                attachedCoItemsCotizacionListNew.add(coItemsCotizacionListNewCoItemsCotizacionToAttach);
+            }
+            coItemsCotizacionListNew = attachedCoItemsCotizacionListNew;
+            inTipoCompra.setCoItemsCotizacionList(coItemsCotizacionListNew);
             inTipoCompra = em.merge(inTipoCompra);
+            for (CoItemsCotizacion coItemsCotizacionListOldCoItemsCotizacion : coItemsCotizacionListOld) {
+                if (!coItemsCotizacionListNew.contains(coItemsCotizacionListOldCoItemsCotizacion)) {
+                    coItemsCotizacionListOldCoItemsCotizacion.setIdTipoCompra(null);
+                    coItemsCotizacionListOldCoItemsCotizacion = em.merge(coItemsCotizacionListOldCoItemsCotizacion);
+                }
+            }
+            for (CoItemsCotizacion coItemsCotizacionListNewCoItemsCotizacion : coItemsCotizacionListNew) {
+                if (!coItemsCotizacionListOld.contains(coItemsCotizacionListNewCoItemsCotizacion)) {
+                    InTipoCompra oldIdTipoCompraOfCoItemsCotizacionListNewCoItemsCotizacion = coItemsCotizacionListNewCoItemsCotizacion.getIdTipoCompra();
+                    coItemsCotizacionListNewCoItemsCotizacion.setIdTipoCompra(inTipoCompra);
+                    coItemsCotizacionListNewCoItemsCotizacion = em.merge(coItemsCotizacionListNewCoItemsCotizacion);
+                    if (oldIdTipoCompraOfCoItemsCotizacionListNewCoItemsCotizacion != null && !oldIdTipoCompraOfCoItemsCotizacionListNewCoItemsCotizacion.equals(inTipoCompra)) {
+                        oldIdTipoCompraOfCoItemsCotizacionListNewCoItemsCotizacion.getCoItemsCotizacionList().remove(coItemsCotizacionListNewCoItemsCotizacion);
+                        oldIdTipoCompraOfCoItemsCotizacionListNewCoItemsCotizacion = em.merge(oldIdTipoCompraOfCoItemsCotizacionListNewCoItemsCotizacion);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -79,6 +126,11 @@ public class InTipoCompraJpaController implements Serializable {
                 inTipoCompra.getIdInTipoCompra();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inTipoCompra with id " + id + " no longer exists.", enfe);
+            }
+            List<CoItemsCotizacion> coItemsCotizacionList = inTipoCompra.getCoItemsCotizacionList();
+            for (CoItemsCotizacion coItemsCotizacionListCoItemsCotizacion : coItemsCotizacionList) {
+                coItemsCotizacionListCoItemsCotizacion.setIdTipoCompra(null);
+                coItemsCotizacionListCoItemsCotizacion = em.merge(coItemsCotizacionListCoItemsCotizacion);
             }
             em.remove(inTipoCompra);
             em.getTransaction().commit();

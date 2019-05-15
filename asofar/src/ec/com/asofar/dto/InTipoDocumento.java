@@ -66,6 +66,8 @@ public class InTipoDocumento implements Serializable {
     private List<InMovimientos> inMovimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
     private List<InKardex> inKardexList;
+    @OneToMany(mappedBy = "idTipoDocumento")
+    private List<CoItemsCotizacion> coItemsCotizacionList;
 
     public InTipoDocumento() {
     }
@@ -146,6 +148,15 @@ public class InTipoDocumento implements Serializable {
 
     public void setInKardexList(List<InKardex> inKardexList) {
         this.inKardexList = inKardexList;
+    }
+
+    @XmlTransient
+    public List<CoItemsCotizacion> getCoItemsCotizacionList() {
+        return coItemsCotizacionList;
+    }
+
+    public void setCoItemsCotizacionList(List<CoItemsCotizacion> coItemsCotizacionList) {
+        this.coItemsCotizacionList = coItemsCotizacionList;
     }
 
     @Override

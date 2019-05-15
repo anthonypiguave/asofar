@@ -7,6 +7,9 @@ package ec.com.asofar.views.tipobodega;
 
 import ec.com.asofar.dao.InTipoBodegaJpaController;
 import ec.com.asofar.dto.InTipoBodega;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -26,15 +29,30 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
     List<InTipoBodega> lista = Tb.findInTipoBodegaEntities();
     InTipoBodega tipobodega = new InTipoBodega();
     int x, y;
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
 
     /**
      * Creates new form tipo_bodega
      */
     public consulta_tipo_bodega(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         MostrarTipoBodega();
+    }
+
+    public consulta_tipo_bodega(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        MostrarTipoBodega();
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     public void MostrarTipoBodega() {
@@ -63,6 +81,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -138,6 +157,15 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton3.setForeground(java.awt.Color.black);
+        jButton3.setText("INACTIVOS");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,6 +185,8 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -173,8 +203,9 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,10 +255,9 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             id = tbl_bodega.getSelectedRow();
             tipobodega = devuelveObjeto(Long.valueOf(tbl_bodega.getValueAt(id, 0).toString()), lista);
-            System.out.println("hols 1 ");
+
             if (tipobodega != null) {
-                System.out.println("hols 2");
-                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega);
+                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega, usu, emp, suc);
 //                setVisible(false);
                 ep.setVisible(true);
 
@@ -248,9 +278,9 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        tipo_bodega_agregar ingre = new tipo_bodega_agregar(new javax.swing.JFrame(), true);
+        tipo_bodega_agregar ingre = new tipo_bodega_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
         ingre.setVisible(true);
-        
+
         TipoBodega = Tb.findInTipoBodegaEntities();
         Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -258,6 +288,13 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        consulta_tipo_bodega_inactivos ctbi = new consulta_tipo_bodega_inactivos(new javax.swing.JFrame(), true, usu, emp, suc);
+        ctbi.setVisible(true);
+        TipoBodega = Tb.findInTipoBodegaEntities();
+        Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,6 +345,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
     private javax.swing.JTextField busqueda_tf;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

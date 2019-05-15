@@ -29,7 +29,9 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
     InTipoBodegaJpaController tbc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoBodega tipobodega = new InTipoBodega();
     List<InTipoBodega> lista = tbc.findInTipoBodegaEntities();
-
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
     /**
      * Creates new form tipo_bodega_inactivos
      */
@@ -45,6 +47,9 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         MostrarMedidaInactiva();
+        usu=us;
+        emp=em;
+        suc=su;
     }
 
     private void MostrarMedidaInactiva() {
@@ -189,11 +194,9 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             id = tbl_tipobodegainactivos.getSelectedRow();
             tipobodega = devuelveObjeto(Long.valueOf(tbl_tipobodegainactivos.getValueAt(id, 0).toString()), lista);
-            System.out.println("hols 1 ");
+
             if (tipobodega != null) {
-                System.out.println("hols 2");
-                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega);
-//                setVisible(false);
+                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega,usu,emp,suc);
                 ep.setVisible(true);
 
                 TipoBodega = tbc.findInTipoBodegaEntities();

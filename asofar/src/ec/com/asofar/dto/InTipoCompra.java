@@ -7,6 +7,7 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -57,6 +60,8 @@ public class InTipoCompra implements Serializable {
     private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     private String fechaActualizacion;
+    @OneToMany(mappedBy = "idTipoCompra")
+    private List<CoItemsCotizacion> coItemsCotizacionList;
 
     public InTipoCompra() {
     }
@@ -119,6 +124,15 @@ public class InTipoCompra implements Serializable {
 
     public void setFechaActualizacion(String fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    @XmlTransient
+    public List<CoItemsCotizacion> getCoItemsCotizacionList() {
+        return coItemsCotizacionList;
+    }
+
+    public void setCoItemsCotizacionList(List<CoItemsCotizacion> coItemsCotizacionList) {
+        this.coItemsCotizacionList = coItemsCotizacionList;
     }
 
     @Override

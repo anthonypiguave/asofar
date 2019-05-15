@@ -53,16 +53,16 @@ public class bodega_agregar extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         TiBo = pgc.findInTipoBodegaEntities();
         llenarCombo(TiBo);
-        usu1=us;
-        su1=su;
-        em1=em;
+        usu1 = us;
+        su1 = su;
+        em1 = em;
     }
 
     public void llenarCombo(List<InTipoBodega> TiBo) {
         for (int i = 0; i < TiBo.size(); i++) {
-            if(!"I".equals(TiBo.get(i).getEstado())){
+            if (!"I".equals(TiBo.get(i).getEstado())) {
                 System.out.println("activos");
-            cbxTipoBodega.addItem(TiBo.get(i).getNombre());
+                cbxTipoBodega.addItem(TiBo.get(i).getNombre());
             }
         }
     }
@@ -218,24 +218,22 @@ public class bodega_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-
+        java.util.Date fechaActual = new java.util.Date();
         InTipoBodega tb = new InTipoBodega();
-        
+
         tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-        System.out.println("bodega "+tb);
+        System.out.println("bodega " + tb);
         InBodegaPK inBodegaPK = new InBodegaPK();
-        
-        inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());     
+
+        inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
 //        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
 //        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
         bod.setInBodegaPK(inBodegaPK);
-       
+
         bod.setNombreBodega(txtNombre.getText());
         bod.setEstado("A");
-        bod.setUsuarioCreacion(/*usu1.getNombreUsuario()*/null);
-        bod.setFechaCreacion(null);
-        bod.setUsuarioActualizacion(null);
-        bod.setFechaActualizacion(null);
+        bod.setUsuarioCreacion(usu1.getNombreUsuario());
+        bod.setFechaCreacion(fechaActual);
         try {
             bc.create(bod);
             setVisible(false);
