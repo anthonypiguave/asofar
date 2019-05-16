@@ -14,7 +14,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.AES;
 import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.views.persona.Editar_persona;
+import ec.com.asofar.views.persona.ActualizarDatosPersona;
 import java.awt.Dimension;
 import java.sql.Date;
 import java.util.List;
@@ -462,7 +462,7 @@ public class Editar_usuario extends javax.swing.JDialog {
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ActualizarDatosPersona.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

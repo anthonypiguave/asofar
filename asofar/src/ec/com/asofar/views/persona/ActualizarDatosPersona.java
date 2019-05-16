@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class Editar_persona extends javax.swing.JDialog {
+public class ActualizarDatosPersona extends javax.swing.JDialog {
 
     SePersonas obj;
     SePersonasJpaControllerExt persona_controller
@@ -51,13 +51,13 @@ public class Editar_persona extends javax.swing.JDialog {
     SePersonasJpaController mp
             = new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-    public Editar_persona(java.awt.Frame parent, boolean modal) {
+    public ActualizarDatosPersona(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
     }
 
-    public Editar_persona(java.awt.Frame parent, boolean modal, SePersonas persona, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ActualizarDatosPersona(java.awt.Frame parent, boolean modal, SePersonas persona, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -82,11 +82,11 @@ public class Editar_persona extends javax.swing.JDialog {
             try {
                 mp.edit(persona1);
                 JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
-                Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+                ListarPersona mp = new ListarPersona(new javax.swing.JFrame(), true);
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ActualizarDatosPersona.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -437,18 +437,18 @@ public class Editar_persona extends javax.swing.JDialog {
             try {
                 mp.edit(persona1);
                 JOptionPane.showMessageDialog(null, "PERSONA ACTUALIZADA");
-                Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true, us1, em1, su1);
+                ListarPersona mp = new ListarPersona(new javax.swing.JFrame(), true, us1, em1, su1);
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ActualizarDatosPersona.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true, us1, em1, su1);
+        ListarPersona mp = new ListarPersona(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -564,7 +564,7 @@ public class Editar_persona extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Editar_persona dialog = new Editar_persona(new javax.swing.JFrame(), true);
+                ActualizarDatosPersona dialog = new ActualizarDatosPersona(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
