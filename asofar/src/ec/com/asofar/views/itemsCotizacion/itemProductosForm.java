@@ -33,7 +33,8 @@ public class itemProductosForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         lprod= obtener.obtenerProducto();
-        Tablas.listarProductoItems(lprod, jt_producto);;
+        Tablas.listarProductoItems(lprod, jt_producto);
+        
     }
 
     /**
