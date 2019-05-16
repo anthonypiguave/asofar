@@ -25,12 +25,16 @@ import java.util.logging.Logger;
  */
 public class consulta_bodega extends javax.swing.JDialog {
 
-    InBodegaJpaController bodega = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<InBodega> lista = bodega.findInBodegaEntities();
+    InBodegaJpaController bc = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<InBodega> lista = bc.findInBodegaEntities();
     String valor = "";
     int x, y;
     InBodega bodegaL = new InBodega();
     InBodega objeto;
+    List<InBodega> bodega;
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
 
     /**
      * Creates new form bodega
@@ -48,6 +52,9 @@ public class consulta_bodega extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         Tablas.listarBodega(lista, tbl_bodega);
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     /**
@@ -244,9 +251,11 @@ public class consulta_bodega extends javax.swing.JDialog {
             id = tbl_bodega.getSelectedRow();
             bodegaL = devuelveObjeto(Long.valueOf(tbl_bodega.getValueAt(id, 0).toString()), lista);
             if (bodegaL != null) {
-                bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL);
+                bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL,usu,emp,suc);
                 ep.setVisible(true);
-
+                
+                bodega = bc.findInBodegaEntities();
+                Tablas.listarBodega(bodega, tbl_bodega);
             }
         }
 
@@ -291,9 +300,11 @@ public class consulta_bodega extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 //        setVisible(false);
-        bodega_agregar ingre = new bodega_agregar(new javax.swing.JFrame(), true);
+        bodega_agregar ingre = new bodega_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
         ingre.setVisible(true);
 
+        bodega = bc.findInBodegaEntities();
+        Tablas.listarBodega(bodega, tbl_bodega);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

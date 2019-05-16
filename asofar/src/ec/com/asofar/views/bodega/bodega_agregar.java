@@ -9,6 +9,7 @@ import ec.com.asofar.dao.InBodegaJpaController;
 import ec.com.asofar.dao.InTipoBodegaJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InBodegaPK;
 import ec.com.asofar.dto.InTipoBodega;
@@ -21,6 +22,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,7 +46,7 @@ public class bodega_agregar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         TiBo = pgc.findInTipoBodegaEntities();
-        llenarCombo(TiBo);
+//        llenarCombo(TiBo);
     }
 
     public bodega_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -82,10 +84,10 @@ public class bodega_agregar extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cbxTipoBodega = new javax.swing.JComboBox<>();
         btncancelar1 = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
+        cbxTipoBodega = new javax.swing.JComboBox<>();
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("ELEGIR GRUPO:");
@@ -141,6 +143,12 @@ public class bodega_agregar extends javax.swing.JDialog {
             }
         });
 
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,13 +163,13 @@ public class bodega_agregar extends javax.swing.JDialog {
                         .addComponent(jLabel4)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbxTipoBodega, 0, 167, Short.MAX_VALUE)
-                            .addComponent(txtNombre)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxTipoBodega, 0, 171, Short.MAX_VALUE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -219,31 +227,41 @@ public class bodega_agregar extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        InTipoBodega tb = new InTipoBodega();
-
-        tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-        System.out.println("bodega " + tb);
-        InBodegaPK inBodegaPK = new InBodegaPK();
-
-        inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
-//        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
-//        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
-        bod.setInBodegaPK(inBodegaPK);
-
-        bod.setNombreBodega(txtNombre.getText());
-        bod.setEstado("A");
-        bod.setUsuarioCreacion(usu1.getNombreUsuario());
-        bod.setFechaCreacion(fechaActual);
         try {
-            bc.create(bod);
-            setVisible(false);
-            consulta_bodega tbv = new consulta_bodega(new javax.swing.JFrame(), true);
-            tbv.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(bodega_agregar.class.getName()).log(Level.SEVERE, null, ex);
+            boolean valor1 = ValidarDTO.ValidarInBodega(txtNombre.getText());
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+            } else {
+                InTipoBodega tb = new InTipoBodega();
+
+                tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
+                InBodegaPK inBodegaPK = new InBodegaPK();
+
+                inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
+                inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
+                inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
+                bod.setInBodegaPK(inBodegaPK);
+
+                bod.setNombreBodega(txtNombre.getText());
+                bod.setEstado("A");
+                bod.setUsuarioCreacion(usu1.getNombreUsuario());
+                bod.setFechaCreacion(fechaActual);
+                try {
+                    bc.create(bod);
+                    setVisible(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(bodega_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        txtNombre.setText(txtNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreFocusLost
 
     /**
      * @param args the command line arguments

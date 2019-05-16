@@ -25,8 +25,8 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
 
     String valor = "";
     List<InTipoBodega> TipoBodega;
-    InTipoBodegaJpaController Tb = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<InTipoBodega> lista = Tb.findInTipoBodegaEntities();
+    InTipoBodegaJpaController Tbc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<InTipoBodega> lista = Tbc.findInTipoBodegaEntities();
     InTipoBodega tipobodega = new InTipoBodega();
     int x, y;
     SeUsuarios usu;
@@ -58,7 +58,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
     public void MostrarTipoBodega() {
         try {
 
-            TipoBodega = Tb.findInTipoBodegaEntities();
+            TipoBodega = Tbc.findInTipoBodegaEntities();
             Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
         } catch (Exception e) {
         }
@@ -261,7 +261,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
 //                setVisible(false);
                 ep.setVisible(true);
 
-                TipoBodega = Tb.findInTipoBodegaEntities();
+                TipoBodega = Tbc.findInTipoBodegaEntities();
                 Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
             }
         }
@@ -281,7 +281,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
         tipo_bodega_agregar ingre = new tipo_bodega_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
         ingre.setVisible(true);
 
-        TipoBodega = Tb.findInTipoBodegaEntities();
+        TipoBodega = Tbc.findInTipoBodegaEntities();
         Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -292,7 +292,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         consulta_tipo_bodega_inactivos ctbi = new consulta_tipo_bodega_inactivos(new javax.swing.JFrame(), true, usu, emp, suc);
         ctbi.setVisible(true);
-        TipoBodega = Tb.findInTipoBodegaEntities();
+        TipoBodega = Tbc.findInTipoBodegaEntities();
         Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
     }//GEN-LAST:event_jButton3ActionPerformed
 

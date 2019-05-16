@@ -29,6 +29,9 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
     int x, y;
     InBodega bodegaL = new InBodega();
     InBodega objeto;
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
 
     public consulta_bodega_inactivos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -41,6 +44,9 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         Tablas.listarBodegaInactivos(lista, tbl_bodega);
+        usu = us;
+        emp = em;
+        suc = su;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -203,7 +209,7 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
             id = tbl_bodega.getSelectedRow();
             bodegaL = devuelveObjeto(Long.valueOf(tbl_bodega.getValueAt(id, 0).toString()), lista);
             if (bodegaL != null) {
-                bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL);
+                bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL,usu,emp,suc);
                 ep.setVisible(true);
 
             }
