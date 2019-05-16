@@ -8,6 +8,7 @@ package ec.com.asofar.views.tipobodega;
 import ec.com.asofar.dao.InTipoBodegaJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
@@ -20,6 +21,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +30,7 @@ import java.util.logging.Logger;
 public class tipo_bodega_editar extends javax.swing.JDialog {
 
     InTipoBodega tipobodega;
-    int x,y;
+    int x, y;
     InTipoBodegaJpaController pjc = new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
 //
     List<SeEmpresa> listaempresa = null;
@@ -37,6 +39,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+
     public tipo_bodega_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -176,21 +179,30 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       java.util.Date fechaActual = new java.util.Date();
-        tipobodega.setNombre(txtnom_bodega.getText());
-        tipobodega.setEstado(cbx_estado.getSelectedItem().toString());
-        tipobodega.setUsuarioActualizacion(usu.getNombreUsuario());
-        tipobodega.setFechaActualizacion(fechaActual);
+        java.util.Date fechaActual = new java.util.Date();
         try {
-            pjc.edit(tipobodega);
-            setVisible(false);
-        } catch (Exception ex) {
-            Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
+            boolean valor1 = ValidarDTO.ValidarInTipoBodega(txtnom_bodega.getText());
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+            } else {
+                tipobodega.setNombre(txtnom_bodega.getText());
+                tipobodega.setEstado(cbx_estado.getSelectedItem().toString());
+                tipobodega.setUsuarioActualizacion(usu.getNombreUsuario());
+                tipobodega.setFechaActualizacion(fechaActual);
+                try {
+                    pjc.edit(tipobodega);
+                    setVisible(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- 
+
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

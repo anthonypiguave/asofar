@@ -64,6 +64,7 @@ public class bodega_editar extends javax.swing.JDialog {
         cbx_estado.addItem("I");
 
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,14 +139,16 @@ public class bodega_editar extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -212,18 +215,26 @@ public class bodega_editar extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-
-        Bodega.setNombreBodega(txtNombre.getText());
-        Bodega.setEstado(cbx_estado.getSelectedItem().toString());
-        Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
-        Bodega.setFechaActualizacion(fechaActual);
-        System.out.println("fec " + fechaActual);
         try {
-            bc.edit(Bodega);
-            setVisible(false);
-            JOptionPane.showMessageDialog(this, "Bodega  actualizada");
-        } catch (Exception ex) {
-            Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
+            boolean valor1 = ValidarDTO.ValidarInBodega(txtNombre.getText());
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+            } else {
+                Bodega.setNombreBodega(txtNombre.getText());
+                Bodega.setEstado(cbx_estado.getSelectedItem().toString());
+                Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
+                Bodega.setFechaActualizacion(fechaActual);
+                System.out.println("fec " + fechaActual);
+                try {
+                    bc.edit(Bodega);
+                    setVisible(false);
+                    JOptionPane.showMessageDialog(this, "Bodega  actualizada");
+                } catch (Exception ex) {
+                    Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
     }//GEN-LAST:event_btnguardarActionPerformed

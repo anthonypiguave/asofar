@@ -9,6 +9,7 @@ import ec.com.asofar.dao.InBodegaJpaController;
 import ec.com.asofar.dao.InTipoBodegaJpaController;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InBodegaPK;
 import ec.com.asofar.dto.InTipoBodega;
@@ -21,6 +22,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -219,26 +221,35 @@ public class bodega_agregar extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        InTipoBodega tb = new InTipoBodega();
+        try {
+            boolean valor1 = ValidarDTO.ValidarInBodega(txtNombre.getText());
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+            } else {
+                InTipoBodega tb = new InTipoBodega();
 
-        tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-        System.out.println("bodega " + tb);
-        InBodegaPK inBodegaPK = new InBodegaPK();
+                tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
+                System.out.println("bodega " + tb);
+                InBodegaPK inBodegaPK = new InBodegaPK();
 
-        inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
+                inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
 //        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
 //        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
-        bod.setInBodegaPK(inBodegaPK);
+                bod.setInBodegaPK(inBodegaPK);
 
-        bod.setNombreBodega(txtNombre.getText());
-        bod.setEstado("A");
-        bod.setUsuarioCreacion(usu1.getNombreUsuario());
-        bod.setFechaCreacion(fechaActual);
-        try {
-            bc.create(bod);
-            setVisible(false);
-        } catch (Exception ex) {
-            Logger.getLogger(bodega_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                bod.setNombreBodega(txtNombre.getText());
+                bod.setEstado("A");
+                bod.setUsuarioCreacion(usu1.getNombreUsuario());
+                bod.setFechaCreacion(fechaActual);
+                try {
+                    bc.create(bod);
+                    setVisible(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(bodega_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
     }//GEN-LAST:event_btnguardarActionPerformed
