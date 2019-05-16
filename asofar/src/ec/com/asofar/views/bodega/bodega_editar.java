@@ -62,7 +62,9 @@ public class bodega_editar extends javax.swing.JDialog {
         txttipoBodega.setText(ObtenerDTO.ObtenerInTipoBodega(bod.getInBodegaPK().getIdTipoBodega()).getNombre());
         cbx_estado.addItem("A");
         cbx_estado.addItem("I");
-
+        emp = em;
+        suc = su;
+        usu = us;
     }
 
     @SuppressWarnings("unchecked")
@@ -120,6 +122,12 @@ public class bodega_editar extends javax.swing.JDialog {
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
+            }
+        });
+
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
             }
         });
 
@@ -215,32 +223,36 @@ public class bodega_editar extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
+//        try {
+//            boolean valor1 = ValidarDTO.ValidarInBodega(txtNombre.getText());
+//            if (valor1 == true) {
+//                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+//            } else {
+        Bodega.setNombreBodega(txtNombre.getText());
+        Bodega.setEstado(cbx_estado.getSelectedItem().toString());
+        Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
+        Bodega.setFechaActualizacion(fechaActual);
         try {
-            boolean valor1 = ValidarDTO.ValidarInBodega(txtNombre.getText());
-            if (valor1 == true) {
-                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
-            } else {
-                Bodega.setNombreBodega(txtNombre.getText());
-                Bodega.setEstado(cbx_estado.getSelectedItem().toString());
-                Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
-                Bodega.setFechaActualizacion(fechaActual);
-                try {
-                    bc.edit(Bodega);
-                    setVisible(false);
-                    JOptionPane.showMessageDialog(this, "Bodega  actualizada");
-                } catch (Exception ex) {
-                    Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            bc.edit(Bodega);
+            setVisible(false);
+            JOptionPane.showMessageDialog(this, "Bodega  actualizada");
+        } catch (Exception ex) {
+            Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
         }
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        }
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txttipoBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttipoBodegaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttipoBodegaActionPerformed
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        txtNombre.setText(txtNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreFocusLost
 
     /**
      * @param args the command line arguments

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_prestaciones")
@@ -50,12 +50,12 @@ public class PrPrestaciones implements Serializable {
     @Column(name = "aplica_iva")
     private String aplicaIva;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
+    private List<VeFacturaDetalle> veFacturaDetalleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
     private List<PrDetalleTarifario> prDetalleTarifarioList;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
-    private List<VeFacturaDetalle> veFacturaDetalleList;
 
     public PrPrestaciones() {
     }
@@ -109,6 +109,15 @@ public class PrPrestaciones implements Serializable {
     }
 
     @XmlTransient
+    public List<VeFacturaDetalle> getVeFacturaDetalleList() {
+        return veFacturaDetalleList;
+    }
+
+    public void setVeFacturaDetalleList(List<VeFacturaDetalle> veFacturaDetalleList) {
+        this.veFacturaDetalleList = veFacturaDetalleList;
+    }
+
+    @XmlTransient
     public List<PrDetalleTarifario> getPrDetalleTarifarioList() {
         return prDetalleTarifarioList;
     }
@@ -123,15 +132,6 @@ public class PrPrestaciones implements Serializable {
 
     public void setSeEmpresa(SeEmpresa seEmpresa) {
         this.seEmpresa = seEmpresa;
-    }
-
-    @XmlTransient
-    public List<VeFacturaDetalle> getVeFacturaDetalleList() {
-        return veFacturaDetalleList;
-    }
-
-    public void setVeFacturaDetalleList(List<VeFacturaDetalle> veFacturaDetalleList) {
-        this.veFacturaDetalleList = veFacturaDetalleList;
     }
 
     @Override

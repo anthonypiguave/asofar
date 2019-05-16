@@ -12,17 +12,17 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.PrDetalleTarifario;
+import ec.com.asofar.dto.VeFacturaDetalle;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.VeFacturaDetalle;
+import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.VeUnidadServicio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class VeUnidadServicioJpaController implements Serializable {
 
@@ -36,38 +36,29 @@ public class VeUnidadServicioJpaController implements Serializable {
     }
 
     public void create(VeUnidadServicio veUnidadServicio) {
-        if (veUnidadServicio.getPrDetalleTarifarioList() == null) {
-            veUnidadServicio.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
-        }
         if (veUnidadServicio.getVeFacturaDetalleList() == null) {
             veUnidadServicio.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
+        }
+        if (veUnidadServicio.getPrDetalleTarifarioList() == null) {
+            veUnidadServicio.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : veUnidadServicio.getPrDetalleTarifarioList()) {
-                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
-            }
-            veUnidadServicio.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
             List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : veUnidadServicio.getVeFacturaDetalleList()) {
                 veFacturaDetalleListVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListVeFacturaDetalleToAttach.getVeFacturaDetallePK());
                 attachedVeFacturaDetalleList.add(veFacturaDetalleListVeFacturaDetalleToAttach);
             }
             veUnidadServicio.setVeFacturaDetalleList(attachedVeFacturaDetalleList);
-            em.persist(veUnidadServicio);
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : veUnidadServicio.getPrDetalleTarifarioList()) {
-                VeUnidadServicio oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getVeUnidadServicio();
-                prDetalleTarifarioListPrDetalleTarifario.setVeUnidadServicio(veUnidadServicio);
-                prDetalleTarifarioListPrDetalleTarifario = em.merge(prDetalleTarifarioListPrDetalleTarifario);
-                if (oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario != null) {
-                    oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListPrDetalleTarifario);
-                    oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario = em.merge(oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario);
-                }
+            List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
+            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : veUnidadServicio.getPrDetalleTarifarioList()) {
+                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
+                attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
             }
+            veUnidadServicio.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
+            em.persist(veUnidadServicio);
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : veUnidadServicio.getVeFacturaDetalleList()) {
                 VeUnidadServicio oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle = veFacturaDetalleListVeFacturaDetalle.getVeUnidadServicio();
                 veFacturaDetalleListVeFacturaDetalle.setVeUnidadServicio(veUnidadServicio);
@@ -75,6 +66,15 @@ public class VeUnidadServicioJpaController implements Serializable {
                 if (oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle != null) {
                     oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListVeFacturaDetalle);
                     oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle = em.merge(oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle);
+                }
+            }
+            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : veUnidadServicio.getPrDetalleTarifarioList()) {
+                VeUnidadServicio oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getVeUnidadServicio();
+                prDetalleTarifarioListPrDetalleTarifario.setVeUnidadServicio(veUnidadServicio);
+                prDetalleTarifarioListPrDetalleTarifario = em.merge(prDetalleTarifarioListPrDetalleTarifario);
+                if (oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario != null) {
+                    oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListPrDetalleTarifario);
+                    oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario = em.merge(oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario);
                 }
             }
             em.getTransaction().commit();
@@ -91,19 +91,11 @@ public class VeUnidadServicioJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             VeUnidadServicio persistentVeUnidadServicio = em.find(VeUnidadServicio.class, veUnidadServicio.getIdUnidadServicio());
-            List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentVeUnidadServicio.getPrDetalleTarifarioList();
-            List<PrDetalleTarifario> prDetalleTarifarioListNew = veUnidadServicio.getPrDetalleTarifarioList();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentVeUnidadServicio.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = veUnidadServicio.getVeFacturaDetalleList();
+            List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentVeUnidadServicio.getPrDetalleTarifarioList();
+            List<PrDetalleTarifario> prDetalleTarifarioListNew = veUnidadServicio.getPrDetalleTarifarioList();
             List<String> illegalOrphanMessages = null;
-            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
-                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its veUnidadServicio field is not nullable.");
-                }
-            }
             for (VeFacturaDetalle veFacturaDetalleListOldVeFacturaDetalle : veFacturaDetalleListOld) {
                 if (!veFacturaDetalleListNew.contains(veFacturaDetalleListOldVeFacturaDetalle)) {
                     if (illegalOrphanMessages == null) {
@@ -112,16 +104,17 @@ public class VeUnidadServicioJpaController implements Serializable {
                     illegalOrphanMessages.add("You must retain VeFacturaDetalle " + veFacturaDetalleListOldVeFacturaDetalle + " since its veUnidadServicio field is not nullable.");
                 }
             }
+            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
+                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its veUnidadServicio field is not nullable.");
+                }
+            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
-                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioListNew.add(prDetalleTarifarioListNewPrDetalleTarifarioToAttach);
-            }
-            prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
-            veUnidadServicio.setPrDetalleTarifarioList(prDetalleTarifarioListNew);
             List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
                 veFacturaDetalleListNewVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListNewVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListNewVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -129,18 +122,14 @@ public class VeUnidadServicioJpaController implements Serializable {
             }
             veFacturaDetalleListNew = attachedVeFacturaDetalleListNew;
             veUnidadServicio.setVeFacturaDetalleList(veFacturaDetalleListNew);
-            veUnidadServicio = em.merge(veUnidadServicio);
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
-                if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
-                    VeUnidadServicio oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario = prDetalleTarifarioListNewPrDetalleTarifario.getVeUnidadServicio();
-                    prDetalleTarifarioListNewPrDetalleTarifario.setVeUnidadServicio(veUnidadServicio);
-                    prDetalleTarifarioListNewPrDetalleTarifario = em.merge(prDetalleTarifarioListNewPrDetalleTarifario);
-                    if (oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario != null && !oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario.equals(veUnidadServicio)) {
-                        oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListNewPrDetalleTarifario);
-                        oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario = em.merge(oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario);
-                    }
-                }
+            List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
+            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
+                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
+                attachedPrDetalleTarifarioListNew.add(prDetalleTarifarioListNewPrDetalleTarifarioToAttach);
             }
+            prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
+            veUnidadServicio.setPrDetalleTarifarioList(prDetalleTarifarioListNew);
+            veUnidadServicio = em.merge(veUnidadServicio);
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalle : veFacturaDetalleListNew) {
                 if (!veFacturaDetalleListOld.contains(veFacturaDetalleListNewVeFacturaDetalle)) {
                     VeUnidadServicio oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle = veFacturaDetalleListNewVeFacturaDetalle.getVeUnidadServicio();
@@ -149,6 +138,17 @@ public class VeUnidadServicioJpaController implements Serializable {
                     if (oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle != null && !oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle.equals(veUnidadServicio)) {
                         oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListNewVeFacturaDetalle);
                         oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle = em.merge(oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle);
+                    }
+                }
+            }
+            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
+                if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
+                    VeUnidadServicio oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario = prDetalleTarifarioListNewPrDetalleTarifario.getVeUnidadServicio();
+                    prDetalleTarifarioListNewPrDetalleTarifario.setVeUnidadServicio(veUnidadServicio);
+                    prDetalleTarifarioListNewPrDetalleTarifario = em.merge(prDetalleTarifarioListNewPrDetalleTarifario);
+                    if (oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario != null && !oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario.equals(veUnidadServicio)) {
+                        oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListNewPrDetalleTarifario);
+                        oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario = em.merge(oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario);
                     }
                 }
             }
@@ -182,19 +182,19 @@ public class VeUnidadServicioJpaController implements Serializable {
                 throw new NonexistentEntityException("The veUnidadServicio with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<PrDetalleTarifario> prDetalleTarifarioListOrphanCheck = veUnidadServicio.getPrDetalleTarifarioList();
-            for (PrDetalleTarifario prDetalleTarifarioListOrphanCheckPrDetalleTarifario : prDetalleTarifarioListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This VeUnidadServicio (" + veUnidadServicio + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable veUnidadServicio field.");
-            }
             List<VeFacturaDetalle> veFacturaDetalleListOrphanCheck = veUnidadServicio.getVeFacturaDetalleList();
             for (VeFacturaDetalle veFacturaDetalleListOrphanCheckVeFacturaDetalle : veFacturaDetalleListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This VeUnidadServicio (" + veUnidadServicio + ") cannot be destroyed since the VeFacturaDetalle " + veFacturaDetalleListOrphanCheckVeFacturaDetalle + " in its veFacturaDetalleList field has a non-nullable veUnidadServicio field.");
+            }
+            List<PrDetalleTarifario> prDetalleTarifarioListOrphanCheck = veUnidadServicio.getPrDetalleTarifarioList();
+            for (PrDetalleTarifario prDetalleTarifarioListOrphanCheckPrDetalleTarifario : prDetalleTarifarioListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This VeUnidadServicio (" + veUnidadServicio + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable veUnidadServicio field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

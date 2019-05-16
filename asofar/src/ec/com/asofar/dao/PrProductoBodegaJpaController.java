@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrProductoBodegaJpaController implements Serializable {
 
@@ -38,8 +38,8 @@ public class PrProductoBodegaJpaController implements Serializable {
         if (prProductoBodega.getPrProductoBodegaPK() == null) {
             prProductoBodega.setPrProductoBodegaPK(new PrProductoBodegaPK());
         }
-        prProductoBodega.getPrProductoBodegaPK().setIdSucursal(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
         prProductoBodega.getPrProductoBodegaPK().setIdEmpresa(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        prProductoBodega.getPrProductoBodegaPK().setIdSucursal(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -68,8 +68,8 @@ public class PrProductoBodegaJpaController implements Serializable {
     }
 
     public void edit(PrProductoBodega prProductoBodega) throws NonexistentEntityException, Exception {
-        prProductoBodega.getPrProductoBodegaPK().setIdSucursal(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
         prProductoBodega.getPrProductoBodegaPK().setIdEmpresa(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        prProductoBodega.getPrProductoBodegaPK().setIdSucursal(prProductoBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();

@@ -15,18 +15,18 @@ import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.PrProductos;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrTipoMedidas;
-import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeEmpresaJpaController implements Serializable {
 
@@ -43,6 +43,9 @@ public class SeEmpresaJpaController implements Serializable {
         if (seEmpresa.getPrProductosList() == null) {
             seEmpresa.setPrProductosList(new ArrayList<PrProductos>());
         }
+        if (seEmpresa.getPrSubgruposList() == null) {
+            seEmpresa.setPrSubgruposList(new ArrayList<PrSubgrupos>());
+        }
         if (seEmpresa.getSeSucursalList() == null) {
             seEmpresa.setSeSucursalList(new ArrayList<SeSucursal>());
         }
@@ -55,9 +58,6 @@ public class SeEmpresaJpaController implements Serializable {
         if (seEmpresa.getPrTipoMedidasList() == null) {
             seEmpresa.setPrTipoMedidasList(new ArrayList<PrTipoMedidas>());
         }
-        if (seEmpresa.getPrSubgruposList() == null) {
-            seEmpresa.setPrSubgruposList(new ArrayList<PrSubgrupos>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -68,6 +68,12 @@ public class SeEmpresaJpaController implements Serializable {
                 attachedPrProductosList.add(prProductosListPrProductosToAttach);
             }
             seEmpresa.setPrProductosList(attachedPrProductosList);
+            List<PrSubgrupos> attachedPrSubgruposList = new ArrayList<PrSubgrupos>();
+            for (PrSubgrupos prSubgruposListPrSubgruposToAttach : seEmpresa.getPrSubgruposList()) {
+                prSubgruposListPrSubgruposToAttach = em.getReference(prSubgruposListPrSubgruposToAttach.getClass(), prSubgruposListPrSubgruposToAttach.getPrSubgruposPK());
+                attachedPrSubgruposList.add(prSubgruposListPrSubgruposToAttach);
+            }
+            seEmpresa.setPrSubgruposList(attachedPrSubgruposList);
             List<SeSucursal> attachedSeSucursalList = new ArrayList<SeSucursal>();
             for (SeSucursal seSucursalListSeSucursalToAttach : seEmpresa.getSeSucursalList()) {
                 seSucursalListSeSucursalToAttach = em.getReference(seSucursalListSeSucursalToAttach.getClass(), seSucursalListSeSucursalToAttach.getSeSucursalPK());
@@ -92,12 +98,6 @@ public class SeEmpresaJpaController implements Serializable {
                 attachedPrTipoMedidasList.add(prTipoMedidasListPrTipoMedidasToAttach);
             }
             seEmpresa.setPrTipoMedidasList(attachedPrTipoMedidasList);
-            List<PrSubgrupos> attachedPrSubgruposList = new ArrayList<PrSubgrupos>();
-            for (PrSubgrupos prSubgruposListPrSubgruposToAttach : seEmpresa.getPrSubgruposList()) {
-                prSubgruposListPrSubgruposToAttach = em.getReference(prSubgruposListPrSubgruposToAttach.getClass(), prSubgruposListPrSubgruposToAttach.getPrSubgruposPK());
-                attachedPrSubgruposList.add(prSubgruposListPrSubgruposToAttach);
-            }
-            seEmpresa.setPrSubgruposList(attachedPrSubgruposList);
             em.persist(seEmpresa);
             for (PrProductos prProductosListPrProductos : seEmpresa.getPrProductosList()) {
                 SeEmpresa oldSeEmpresaOfPrProductosListPrProductos = prProductosListPrProductos.getSeEmpresa();
@@ -106,6 +106,15 @@ public class SeEmpresaJpaController implements Serializable {
                 if (oldSeEmpresaOfPrProductosListPrProductos != null) {
                     oldSeEmpresaOfPrProductosListPrProductos.getPrProductosList().remove(prProductosListPrProductos);
                     oldSeEmpresaOfPrProductosListPrProductos = em.merge(oldSeEmpresaOfPrProductosListPrProductos);
+                }
+            }
+            for (PrSubgrupos prSubgruposListPrSubgrupos : seEmpresa.getPrSubgruposList()) {
+                SeEmpresa oldIdEmpresaOfPrSubgruposListPrSubgrupos = prSubgruposListPrSubgrupos.getIdEmpresa();
+                prSubgruposListPrSubgrupos.setIdEmpresa(seEmpresa);
+                prSubgruposListPrSubgrupos = em.merge(prSubgruposListPrSubgrupos);
+                if (oldIdEmpresaOfPrSubgruposListPrSubgrupos != null) {
+                    oldIdEmpresaOfPrSubgruposListPrSubgrupos.getPrSubgruposList().remove(prSubgruposListPrSubgrupos);
+                    oldIdEmpresaOfPrSubgruposListPrSubgrupos = em.merge(oldIdEmpresaOfPrSubgruposListPrSubgrupos);
                 }
             }
             for (SeSucursal seSucursalListSeSucursal : seEmpresa.getSeSucursalList()) {
@@ -144,15 +153,6 @@ public class SeEmpresaJpaController implements Serializable {
                     oldIdEmpresaOfPrTipoMedidasListPrTipoMedidas = em.merge(oldIdEmpresaOfPrTipoMedidasListPrTipoMedidas);
                 }
             }
-            for (PrSubgrupos prSubgruposListPrSubgrupos : seEmpresa.getPrSubgruposList()) {
-                SeEmpresa oldIdEmpresaOfPrSubgruposListPrSubgrupos = prSubgruposListPrSubgrupos.getIdEmpresa();
-                prSubgruposListPrSubgrupos.setIdEmpresa(seEmpresa);
-                prSubgruposListPrSubgrupos = em.merge(prSubgruposListPrSubgrupos);
-                if (oldIdEmpresaOfPrSubgruposListPrSubgrupos != null) {
-                    oldIdEmpresaOfPrSubgruposListPrSubgrupos.getPrSubgruposList().remove(prSubgruposListPrSubgrupos);
-                    oldIdEmpresaOfPrSubgruposListPrSubgrupos = em.merge(oldIdEmpresaOfPrSubgruposListPrSubgrupos);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -169,6 +169,8 @@ public class SeEmpresaJpaController implements Serializable {
             SeEmpresa persistentSeEmpresa = em.find(SeEmpresa.class, seEmpresa.getIdEmpresa());
             List<PrProductos> prProductosListOld = persistentSeEmpresa.getPrProductosList();
             List<PrProductos> prProductosListNew = seEmpresa.getPrProductosList();
+            List<PrSubgrupos> prSubgruposListOld = persistentSeEmpresa.getPrSubgruposList();
+            List<PrSubgrupos> prSubgruposListNew = seEmpresa.getPrSubgruposList();
             List<SeSucursal> seSucursalListOld = persistentSeEmpresa.getSeSucursalList();
             List<SeSucursal> seSucursalListNew = seEmpresa.getSeSucursalList();
             List<PrGrupos> prGruposListOld = persistentSeEmpresa.getPrGruposList();
@@ -177,8 +179,6 @@ public class SeEmpresaJpaController implements Serializable {
             List<PrPrestaciones> prPrestacionesListNew = seEmpresa.getPrPrestacionesList();
             List<PrTipoMedidas> prTipoMedidasListOld = persistentSeEmpresa.getPrTipoMedidasList();
             List<PrTipoMedidas> prTipoMedidasListNew = seEmpresa.getPrTipoMedidasList();
-            List<PrSubgrupos> prSubgruposListOld = persistentSeEmpresa.getPrSubgruposList();
-            List<PrSubgrupos> prSubgruposListNew = seEmpresa.getPrSubgruposList();
             List<String> illegalOrphanMessages = null;
             for (PrProductos prProductosListOldPrProductos : prProductosListOld) {
                 if (!prProductosListNew.contains(prProductosListOldPrProductos)) {
@@ -214,6 +214,13 @@ public class SeEmpresaJpaController implements Serializable {
             }
             prProductosListNew = attachedPrProductosListNew;
             seEmpresa.setPrProductosList(prProductosListNew);
+            List<PrSubgrupos> attachedPrSubgruposListNew = new ArrayList<PrSubgrupos>();
+            for (PrSubgrupos prSubgruposListNewPrSubgruposToAttach : prSubgruposListNew) {
+                prSubgruposListNewPrSubgruposToAttach = em.getReference(prSubgruposListNewPrSubgruposToAttach.getClass(), prSubgruposListNewPrSubgruposToAttach.getPrSubgruposPK());
+                attachedPrSubgruposListNew.add(prSubgruposListNewPrSubgruposToAttach);
+            }
+            prSubgruposListNew = attachedPrSubgruposListNew;
+            seEmpresa.setPrSubgruposList(prSubgruposListNew);
             List<SeSucursal> attachedSeSucursalListNew = new ArrayList<SeSucursal>();
             for (SeSucursal seSucursalListNewSeSucursalToAttach : seSucursalListNew) {
                 seSucursalListNewSeSucursalToAttach = em.getReference(seSucursalListNewSeSucursalToAttach.getClass(), seSucursalListNewSeSucursalToAttach.getSeSucursalPK());
@@ -242,13 +249,6 @@ public class SeEmpresaJpaController implements Serializable {
             }
             prTipoMedidasListNew = attachedPrTipoMedidasListNew;
             seEmpresa.setPrTipoMedidasList(prTipoMedidasListNew);
-            List<PrSubgrupos> attachedPrSubgruposListNew = new ArrayList<PrSubgrupos>();
-            for (PrSubgrupos prSubgruposListNewPrSubgruposToAttach : prSubgruposListNew) {
-                prSubgruposListNewPrSubgruposToAttach = em.getReference(prSubgruposListNewPrSubgruposToAttach.getClass(), prSubgruposListNewPrSubgruposToAttach.getPrSubgruposPK());
-                attachedPrSubgruposListNew.add(prSubgruposListNewPrSubgruposToAttach);
-            }
-            prSubgruposListNew = attachedPrSubgruposListNew;
-            seEmpresa.setPrSubgruposList(prSubgruposListNew);
             seEmpresa = em.merge(seEmpresa);
             for (PrProductos prProductosListNewPrProductos : prProductosListNew) {
                 if (!prProductosListOld.contains(prProductosListNewPrProductos)) {
@@ -258,6 +258,23 @@ public class SeEmpresaJpaController implements Serializable {
                     if (oldSeEmpresaOfPrProductosListNewPrProductos != null && !oldSeEmpresaOfPrProductosListNewPrProductos.equals(seEmpresa)) {
                         oldSeEmpresaOfPrProductosListNewPrProductos.getPrProductosList().remove(prProductosListNewPrProductos);
                         oldSeEmpresaOfPrProductosListNewPrProductos = em.merge(oldSeEmpresaOfPrProductosListNewPrProductos);
+                    }
+                }
+            }
+            for (PrSubgrupos prSubgruposListOldPrSubgrupos : prSubgruposListOld) {
+                if (!prSubgruposListNew.contains(prSubgruposListOldPrSubgrupos)) {
+                    prSubgruposListOldPrSubgrupos.setIdEmpresa(null);
+                    prSubgruposListOldPrSubgrupos = em.merge(prSubgruposListOldPrSubgrupos);
+                }
+            }
+            for (PrSubgrupos prSubgruposListNewPrSubgrupos : prSubgruposListNew) {
+                if (!prSubgruposListOld.contains(prSubgruposListNewPrSubgrupos)) {
+                    SeEmpresa oldIdEmpresaOfPrSubgruposListNewPrSubgrupos = prSubgruposListNewPrSubgrupos.getIdEmpresa();
+                    prSubgruposListNewPrSubgrupos.setIdEmpresa(seEmpresa);
+                    prSubgruposListNewPrSubgrupos = em.merge(prSubgruposListNewPrSubgrupos);
+                    if (oldIdEmpresaOfPrSubgruposListNewPrSubgrupos != null && !oldIdEmpresaOfPrSubgruposListNewPrSubgrupos.equals(seEmpresa)) {
+                        oldIdEmpresaOfPrSubgruposListNewPrSubgrupos.getPrSubgruposList().remove(prSubgruposListNewPrSubgrupos);
+                        oldIdEmpresaOfPrSubgruposListNewPrSubgrupos = em.merge(oldIdEmpresaOfPrSubgruposListNewPrSubgrupos);
                     }
                 }
             }
@@ -317,23 +334,6 @@ public class SeEmpresaJpaController implements Serializable {
                     }
                 }
             }
-            for (PrSubgrupos prSubgruposListOldPrSubgrupos : prSubgruposListOld) {
-                if (!prSubgruposListNew.contains(prSubgruposListOldPrSubgrupos)) {
-                    prSubgruposListOldPrSubgrupos.setIdEmpresa(null);
-                    prSubgruposListOldPrSubgrupos = em.merge(prSubgruposListOldPrSubgrupos);
-                }
-            }
-            for (PrSubgrupos prSubgruposListNewPrSubgrupos : prSubgruposListNew) {
-                if (!prSubgruposListOld.contains(prSubgruposListNewPrSubgrupos)) {
-                    SeEmpresa oldIdEmpresaOfPrSubgruposListNewPrSubgrupos = prSubgruposListNewPrSubgrupos.getIdEmpresa();
-                    prSubgruposListNewPrSubgrupos.setIdEmpresa(seEmpresa);
-                    prSubgruposListNewPrSubgrupos = em.merge(prSubgruposListNewPrSubgrupos);
-                    if (oldIdEmpresaOfPrSubgruposListNewPrSubgrupos != null && !oldIdEmpresaOfPrSubgruposListNewPrSubgrupos.equals(seEmpresa)) {
-                        oldIdEmpresaOfPrSubgruposListNewPrSubgrupos.getPrSubgruposList().remove(prSubgruposListNewPrSubgrupos);
-                        oldIdEmpresaOfPrSubgruposListNewPrSubgrupos = em.merge(oldIdEmpresaOfPrSubgruposListNewPrSubgrupos);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -388,6 +388,11 @@ public class SeEmpresaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            List<PrSubgrupos> prSubgruposList = seEmpresa.getPrSubgruposList();
+            for (PrSubgrupos prSubgruposListPrSubgrupos : prSubgruposList) {
+                prSubgruposListPrSubgrupos.setIdEmpresa(null);
+                prSubgruposListPrSubgrupos = em.merge(prSubgruposListPrSubgrupos);
+            }
             List<PrGrupos> prGruposList = seEmpresa.getPrGruposList();
             for (PrGrupos prGruposListPrGrupos : prGruposList) {
                 prGruposListPrGrupos.setIdEmpresa(null);
@@ -397,11 +402,6 @@ public class SeEmpresaJpaController implements Serializable {
             for (PrTipoMedidas prTipoMedidasListPrTipoMedidas : prTipoMedidasList) {
                 prTipoMedidasListPrTipoMedidas.setIdEmpresa(null);
                 prTipoMedidasListPrTipoMedidas = em.merge(prTipoMedidasListPrTipoMedidas);
-            }
-            List<PrSubgrupos> prSubgruposList = seEmpresa.getPrSubgruposList();
-            for (PrSubgrupos prSubgruposListPrSubgrupos : prSubgruposList) {
-                prSubgruposListPrSubgrupos.setIdEmpresa(null);
-                prSubgruposListPrSubgrupos = em.merge(prSubgruposListPrSubgrupos);
             }
             em.remove(seEmpresa);
             em.getTransaction().commit();

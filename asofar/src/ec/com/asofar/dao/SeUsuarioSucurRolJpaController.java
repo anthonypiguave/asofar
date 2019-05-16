@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeUsuarioSucurRolJpaController implements Serializable {
 
@@ -40,8 +40,8 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
         if (seUsuarioSucurRol.getSeUsuarioSucurRolPK() == null) {
             seUsuarioSucurRol.setSeUsuarioSucurRolPK(new SeUsuarioSucurRolPK());
         }
-        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdSucursal(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -88,8 +88,8 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
     }
 
     public void edit(SeUsuarioSucurRol seUsuarioSucurRol) throws NonexistentEntityException, Exception {
-        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdSucursal(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        seUsuarioSucurRol.getSeUsuarioSucurRolPK().setIdEmpresa(seUsuarioSucurRol.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();

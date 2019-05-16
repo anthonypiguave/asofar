@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_orden_compras")
@@ -94,8 +94,6 @@ public class CoOrdenCompras implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "coOrdenCompras")
-    private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
     @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
@@ -104,6 +102,8 @@ public class CoOrdenCompras implements Serializable {
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_persona")
     @ManyToOne
     private SePersonas idProveedor;
+    @OneToMany(mappedBy = "coOrdenCompras")
+    private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
 
     public CoOrdenCompras() {
     }
@@ -252,15 +252,6 @@ public class CoOrdenCompras implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    @XmlTransient
-    public List<CoDetalleOrdenCompra> getCoDetalleOrdenCompraList() {
-        return coDetalleOrdenCompraList;
-    }
-
-    public void setCoDetalleOrdenCompraList(List<CoDetalleOrdenCompra> coDetalleOrdenCompraList) {
-        this.coDetalleOrdenCompraList = coDetalleOrdenCompraList;
-    }
-
     public SeSucursal getSeSucursal() {
         return seSucursal;
     }
@@ -275,6 +266,15 @@ public class CoOrdenCompras implements Serializable {
 
     public void setIdProveedor(SePersonas idProveedor) {
         this.idProveedor = idProveedor;
+    }
+
+    @XmlTransient
+    public List<CoDetalleOrdenCompra> getCoDetalleOrdenCompraList() {
+        return coDetalleOrdenCompraList;
+    }
+
+    public void setCoDetalleOrdenCompraList(List<CoDetalleOrdenCompra> coDetalleOrdenCompraList) {
+        this.coDetalleOrdenCompraList = coDetalleOrdenCompraList;
     }
 
     @Override

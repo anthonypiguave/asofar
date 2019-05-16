@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_usuarios")
@@ -65,12 +65,12 @@ public class SeUsuarios implements Serializable {
     @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "idUsuario")
+    private List<VeFactura> veFacturaList;
+    @OneToMany(mappedBy = "idUsuario")
     private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne
     private SePersonas idPersona;
-    @OneToMany(mappedBy = "idUsuario")
-    private List<VeFactura> veFacturaList;
 
     public SeUsuarios() {
     }
@@ -144,6 +144,15 @@ public class SeUsuarios implements Serializable {
     }
 
     @XmlTransient
+    public List<VeFactura> getVeFacturaList() {
+        return veFacturaList;
+    }
+
+    public void setVeFacturaList(List<VeFactura> veFacturaList) {
+        this.veFacturaList = veFacturaList;
+    }
+
+    @XmlTransient
     public List<SeUsuarioSucurRol> getSeUsuarioSucurRolList() {
         return seUsuarioSucurRolList;
     }
@@ -158,15 +167,6 @@ public class SeUsuarios implements Serializable {
 
     public void setIdPersona(SePersonas idPersona) {
         this.idPersona = idPersona;
-    }
-
-    @XmlTransient
-    public List<VeFactura> getVeFacturaList() {
-        return veFacturaList;
-    }
-
-    public void setVeFacturaList(List<VeFactura> veFacturaList) {
-        this.veFacturaList = veFacturaList;
     }
 
     @Override

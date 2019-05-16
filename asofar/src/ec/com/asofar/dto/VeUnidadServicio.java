@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "ve_unidad_servicio")
@@ -67,9 +67,9 @@ public class VeUnidadServicio implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veUnidadServicio")
-    private List<PrDetalleTarifario> prDetalleTarifarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veUnidadServicio")
     private List<VeFacturaDetalle> veFacturaDetalleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veUnidadServicio")
+    private List<PrDetalleTarifario> prDetalleTarifarioList;
 
     public VeUnidadServicio() {
     }
@@ -143,21 +143,21 @@ public class VeUnidadServicio implements Serializable {
     }
 
     @XmlTransient
-    public List<PrDetalleTarifario> getPrDetalleTarifarioList() {
-        return prDetalleTarifarioList;
-    }
-
-    public void setPrDetalleTarifarioList(List<PrDetalleTarifario> prDetalleTarifarioList) {
-        this.prDetalleTarifarioList = prDetalleTarifarioList;
-    }
-
-    @XmlTransient
     public List<VeFacturaDetalle> getVeFacturaDetalleList() {
         return veFacturaDetalleList;
     }
 
     public void setVeFacturaDetalleList(List<VeFacturaDetalle> veFacturaDetalleList) {
         this.veFacturaDetalleList = veFacturaDetalleList;
+    }
+
+    @XmlTransient
+    public List<PrDetalleTarifario> getPrDetalleTarifarioList() {
+        return prDetalleTarifarioList;
+    }
+
+    public void setPrDetalleTarifarioList(List<PrDetalleTarifario> prDetalleTarifarioList) {
+        this.prDetalleTarifarioList = prDetalleTarifarioList;
     }
 
     @Override
