@@ -472,6 +472,7 @@ public class NuevoProducto extends javax.swing.JDialog {
            extran.setEnabled(valor);
            receta.setEnabled(valor);
            desc.setEnabled(valor);
+           
        
        }
        

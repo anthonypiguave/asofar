@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_empresa")
@@ -76,6 +76,8 @@ public class SeEmpresa implements Serializable {
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seEmpresa")
     private List<PrProductos> prProductosList;
+    @OneToMany(mappedBy = "idEmpresa")
+    private List<PrSubgrupos> prSubgruposList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seEmpresa")
     private List<SeSucursal> seSucursalList;
     @OneToMany(mappedBy = "idEmpresa")
@@ -84,8 +86,6 @@ public class SeEmpresa implements Serializable {
     private List<PrPrestaciones> prPrestacionesList;
     @OneToMany(mappedBy = "idEmpresa")
     private List<PrTipoMedidas> prTipoMedidasList;
-    @OneToMany(mappedBy = "idEmpresa")
-    private List<PrSubgrupos> prSubgruposList;
 
     public SeEmpresa() {
     }
@@ -192,6 +192,15 @@ public class SeEmpresa implements Serializable {
     }
 
     @XmlTransient
+    public List<PrSubgrupos> getPrSubgruposList() {
+        return prSubgruposList;
+    }
+
+    public void setPrSubgruposList(List<PrSubgrupos> prSubgruposList) {
+        this.prSubgruposList = prSubgruposList;
+    }
+
+    @XmlTransient
     public List<SeSucursal> getSeSucursalList() {
         return seSucursalList;
     }
@@ -225,15 +234,6 @@ public class SeEmpresa implements Serializable {
 
     public void setPrTipoMedidasList(List<PrTipoMedidas> prTipoMedidasList) {
         this.prTipoMedidasList = prTipoMedidasList;
-    }
-
-    @XmlTransient
-    public List<PrSubgrupos> getPrSubgruposList() {
-        return prSubgruposList;
-    }
-
-    public void setPrSubgruposList(List<PrSubgrupos> prSubgruposList) {
-        this.prSubgruposList = prSubgruposList;
     }
 
     @Override

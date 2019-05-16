@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_sucursal")
@@ -69,24 +69,24 @@ public class SeSucursal implements Serializable {
     @Column(name = "estado")
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
-    private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<CoOrdenPedido> coOrdenPedidoList;
-    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private SeEmpresa seEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<CoOrdenCompras> coOrdenComprasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
-    private List<InKardex> inKardexList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<VeFacturaDetalle> veFacturaDetalleList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<VeFactura> veFacturaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
-    private List<PrProductoBodega> prProductoBodegaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<PrTarifario> prTarifarioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
+    private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private SeEmpresa seEmpresa;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
+    private List<InKardex> inKardexList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
+    private List<PrProductoBodega> prProductoBodegaList;
 
     public SeSucursal() {
     }
@@ -180,29 +180,12 @@ public class SeSucursal implements Serializable {
     }
 
     @XmlTransient
-    public List<SeUsuarioSucurRol> getSeUsuarioSucurRolList() {
-        return seUsuarioSucurRolList;
-    }
-
-    public void setSeUsuarioSucurRolList(List<SeUsuarioSucurRol> seUsuarioSucurRolList) {
-        this.seUsuarioSucurRolList = seUsuarioSucurRolList;
-    }
-
-    @XmlTransient
     public List<CoOrdenPedido> getCoOrdenPedidoList() {
         return coOrdenPedidoList;
     }
 
     public void setCoOrdenPedidoList(List<CoOrdenPedido> coOrdenPedidoList) {
         this.coOrdenPedidoList = coOrdenPedidoList;
-    }
-
-    public SeEmpresa getSeEmpresa() {
-        return seEmpresa;
-    }
-
-    public void setSeEmpresa(SeEmpresa seEmpresa) {
-        this.seEmpresa = seEmpresa;
     }
 
     @XmlTransient
@@ -212,15 +195,6 @@ public class SeSucursal implements Serializable {
 
     public void setCoOrdenComprasList(List<CoOrdenCompras> coOrdenComprasList) {
         this.coOrdenComprasList = coOrdenComprasList;
-    }
-
-    @XmlTransient
-    public List<InKardex> getInKardexList() {
-        return inKardexList;
-    }
-
-    public void setInKardexList(List<InKardex> inKardexList) {
-        this.inKardexList = inKardexList;
     }
 
     @XmlTransient
@@ -242,21 +216,47 @@ public class SeSucursal implements Serializable {
     }
 
     @XmlTransient
-    public List<PrProductoBodega> getPrProductoBodegaList() {
-        return prProductoBodegaList;
-    }
-
-    public void setPrProductoBodegaList(List<PrProductoBodega> prProductoBodegaList) {
-        this.prProductoBodegaList = prProductoBodegaList;
-    }
-
-    @XmlTransient
     public List<PrTarifario> getPrTarifarioList() {
         return prTarifarioList;
     }
 
     public void setPrTarifarioList(List<PrTarifario> prTarifarioList) {
         this.prTarifarioList = prTarifarioList;
+    }
+
+    @XmlTransient
+    public List<SeUsuarioSucurRol> getSeUsuarioSucurRolList() {
+        return seUsuarioSucurRolList;
+    }
+
+    public void setSeUsuarioSucurRolList(List<SeUsuarioSucurRol> seUsuarioSucurRolList) {
+        this.seUsuarioSucurRolList = seUsuarioSucurRolList;
+    }
+
+    public SeEmpresa getSeEmpresa() {
+        return seEmpresa;
+    }
+
+    public void setSeEmpresa(SeEmpresa seEmpresa) {
+        this.seEmpresa = seEmpresa;
+    }
+
+    @XmlTransient
+    public List<InKardex> getInKardexList() {
+        return inKardexList;
+    }
+
+    public void setInKardexList(List<InKardex> inKardexList) {
+        this.inKardexList = inKardexList;
+    }
+
+    @XmlTransient
+    public List<PrProductoBodega> getPrProductoBodegaList() {
+        return prProductoBodegaList;
+    }
+
+    public void setPrProductoBodegaList(List<PrProductoBodega> prProductoBodegaList) {
+        this.prProductoBodegaList = prProductoBodegaList;
     }
 
     @Override

@@ -1,0 +1,219 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ec.com.asofar.dto;
+
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+/**
+ *
+ * @author ADMIN
+ */
+@Entity
+@Table(name = "se_localidad_cliente")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "SeLocalidadCliente.findAll", query = "SELECT s FROM SeLocalidadCliente s")
+    , @NamedQuery(name = "SeLocalidadCliente.findByIdLocalidadCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idLocalidadCliente = :idLocalidadCliente")
+    , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionCliente = :dirreccionCliente")
+    , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionEntrega", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionEntrega = :dirreccionEntrega")
+    , @NamedQuery(name = "SeLocalidadCliente.findByIdCiudad", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idCiudad = :idCiudad")
+    , @NamedQuery(name = "SeLocalidadCliente.findByIdProvincia", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idProvincia = :idProvincia")
+    , @NamedQuery(name = "SeLocalidadCliente.findByIdPais", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idPais = :idPais")
+    , @NamedQuery(name = "SeLocalidadCliente.findByEstado", query = "SELECT s FROM SeLocalidadCliente s WHERE s.estado = :estado")
+    , @NamedQuery(name = "SeLocalidadCliente.findByFechaCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "SeLocalidadCliente.findByUsuarioCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "SeLocalidadCliente.findByFechaActualizacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "SeLocalidadCliente.findByUsuarioActualizacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.usuarioActualizacion = :usuarioActualizacion")})
+public class SeLocalidadCliente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id_localidad_cliente")
+    private Long idLocalidadCliente;
+    @Column(name = "dirreccion_cliente")
+    private String dirreccionCliente;
+    @Column(name = "dirreccion_entrega")
+    private String dirreccionEntrega;
+    @Column(name = "id_ciudad")
+    private BigInteger idCiudad;
+    @Column(name = "id_provincia")
+    private BigInteger idProvincia;
+    @Column(name = "id_pais")
+    private BigInteger idPais;
+    @Column(name = "estado")
+    private String estado;
+    @Column(name = "fecha_creacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+    @Column(name = "usuario_creacion")
+    private String usuarioCreacion;
+    @Column(name = "fecha_actualizacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaActualizacion;
+    @Column(name = "usuario_actualizacion")
+    private String usuarioActualizacion;
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_clientes")
+    @ManyToOne
+    private SeClientes idCliente;
+    @OneToMany(mappedBy = "idLocalidad")
+    private List<SeContactosClientes> seContactosClientesList;
+
+    public SeLocalidadCliente() {
+    }
+
+    public SeLocalidadCliente(Long idLocalidadCliente) {
+        this.idLocalidadCliente = idLocalidadCliente;
+    }
+
+    public Long getIdLocalidadCliente() {
+        return idLocalidadCliente;
+    }
+
+    public void setIdLocalidadCliente(Long idLocalidadCliente) {
+        this.idLocalidadCliente = idLocalidadCliente;
+    }
+
+    public String getDirreccionCliente() {
+        return dirreccionCliente;
+    }
+
+    public void setDirreccionCliente(String dirreccionCliente) {
+        this.dirreccionCliente = dirreccionCliente;
+    }
+
+    public String getDirreccionEntrega() {
+        return dirreccionEntrega;
+    }
+
+    public void setDirreccionEntrega(String dirreccionEntrega) {
+        this.dirreccionEntrega = dirreccionEntrega;
+    }
+
+    public BigInteger getIdCiudad() {
+        return idCiudad;
+    }
+
+    public void setIdCiudad(BigInteger idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
+    public BigInteger getIdProvincia() {
+        return idProvincia;
+    }
+
+    public void setIdProvincia(BigInteger idProvincia) {
+        this.idProvincia = idProvincia;
+    }
+
+    public BigInteger getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(BigInteger idPais) {
+        this.idPais = idPais;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
+    }
+
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
+    }
+
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public String getUsuarioActualizacion() {
+        return usuarioActualizacion;
+    }
+
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
+        this.usuarioActualizacion = usuarioActualizacion;
+    }
+
+    public SeClientes getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(SeClientes idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    @XmlTransient
+    public List<SeContactosClientes> getSeContactosClientesList() {
+        return seContactosClientesList;
+    }
+
+    public void setSeContactosClientesList(List<SeContactosClientes> seContactosClientesList) {
+        this.seContactosClientesList = seContactosClientesList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idLocalidadCliente != null ? idLocalidadCliente.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof SeLocalidadCliente)) {
+            return false;
+        }
+        SeLocalidadCliente other = (SeLocalidadCliente) object;
+        if ((this.idLocalidadCliente == null && other.idLocalidadCliente != null) || (this.idLocalidadCliente != null && !this.idLocalidadCliente.equals(other.idLocalidadCliente))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ec.com.asofar.dto.SeLocalidadCliente[ idLocalidadCliente=" + idLocalidadCliente + " ]";
+    }
+    
+}
