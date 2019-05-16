@@ -44,7 +44,7 @@ public class bodega_agregar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         TiBo = pgc.findInTipoBodegaEntities();
-        llenarCombo(TiBo);
+//        llenarCombo(TiBo);
     }
 
     public bodega_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -52,20 +52,20 @@ public class bodega_agregar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         TiBo = pgc.findInTipoBodegaEntities();
-        llenarCombo(TiBo);
+//        llenarCombo(TiBo);
         usu1 = us;
         su1 = su;
         em1 = em;
     }
 
-    public void llenarCombo(List<InTipoBodega> TiBo) {
-        for (int i = 0; i < TiBo.size(); i++) {
-            if (!"I".equals(TiBo.get(i).getEstado())) {
-                System.out.println("activos");
-                cbxTipoBodega.addItem(TiBo.get(i).getNombre());
-            }
-        }
-    }
+//    public void llenarCombo(List<InTipoBodega> TiBo) {
+//        for (int i = 0; i < TiBo.size(); i++) {
+//            if (!"I".equals(TiBo.get(i).getEstado())) {
+//                System.out.println("activos");
+//                cbxTipoBodega.addItem(TiBo.get(i).getNombre());
+//            }
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,10 +82,10 @@ public class bodega_agregar extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cbxTipoBodega = new javax.swing.JComboBox<>();
         btncancelar1 = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("ELEGIR GRUPO:");
@@ -141,6 +141,13 @@ public class bodega_agregar extends javax.swing.JDialog {
             }
         });
 
+        jTextField1.setEditable(false);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,13 +162,13 @@ public class bodega_agregar extends javax.swing.JDialog {
                         .addComponent(jLabel4)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbxTipoBodega, 0, 167, Short.MAX_VALUE)
-                            .addComponent(txtNombre)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(jTextField1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -171,7 +178,7 @@ public class bodega_agregar extends javax.swing.JDialog {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cbxTipoBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -219,16 +226,16 @@ public class bodega_agregar extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        InTipoBodega tb = new InTipoBodega();
-
-        tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-        System.out.println("bodega " + tb);
-        InBodegaPK inBodegaPK = new InBodegaPK();
-
-        inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
-//        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
-//        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
-        bod.setInBodegaPK(inBodegaPK);
+//        InTipoBodega tb = new InTipoBodega();
+//
+//        tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
+//        System.out.println("bodega " + tb);
+//        InBodegaPK inBodegaPK = new InBodegaPK();
+//
+//        inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
+////        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
+////        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
+//        bod.setInBodegaPK(inBodegaPK);
 
         bod.setNombreBodega(txtNombre.getText());
         bod.setEstado("A");
@@ -244,6 +251,10 @@ public class bodega_agregar extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,12 +305,12 @@ public class bodega_agregar extends javax.swing.JDialog {
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btncancelar1;
     private javax.swing.JButton btnguardar;
-    private javax.swing.JComboBox<String> cbxTipoBodega;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
