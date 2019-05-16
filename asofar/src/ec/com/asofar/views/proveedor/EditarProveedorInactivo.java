@@ -455,6 +455,7 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
 
     private void btnactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactivarActionPerformed
         cprov.setEstado('A');
+        cprov.setFechaActualizacion(d);
         try {
             cpcont.edit(cprov);
             JOptionPane.showMessageDialog(null,"PROVEEDOR ACTIVADO");
@@ -492,6 +493,10 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EditarProveedorInactivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

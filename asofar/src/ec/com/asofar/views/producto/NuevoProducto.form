@@ -319,6 +319,9 @@
                   <Font name="Tahoma" size="12" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cod_barraKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="desc">
               <Properties>
@@ -360,7 +363,6 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder roundedCorners="true"/>
                       </Border>
-                      <Font PropertyName="font" name="Dialog" size="12" style="1"/>
                     </TitledBorder>
                   </Border>
                 </Property>
