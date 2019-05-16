@@ -123,6 +123,12 @@ public class bodega_editar extends javax.swing.JDialog {
             }
         });
 
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("ESTADO :");
 
@@ -215,11 +221,11 @@ public class bodega_editar extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        try {
-            boolean valor1 = ValidarDTO.ValidarInBodega(txtNombre.getText());
-            if (valor1 == true) {
-                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
-            } else {
+//        try {
+//            boolean valor1 = ValidarDTO.ValidarInBodega(txtNombre.getText());
+//            if (valor1 == true) {
+//                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+//            } else {
                 Bodega.setNombreBodega(txtNombre.getText());
                 Bodega.setEstado(cbx_estado.getSelectedItem().toString());
                 Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
@@ -231,16 +237,20 @@ public class bodega_editar extends javax.swing.JDialog {
                 } catch (Exception ex) {
                     Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        }
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txttipoBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttipoBodegaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttipoBodegaActionPerformed
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+            txtNombre.setText(txtNombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombreFocusLost
 
     /**
      * @param args the command line arguments

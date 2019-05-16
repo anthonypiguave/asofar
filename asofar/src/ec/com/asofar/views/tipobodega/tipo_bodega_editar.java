@@ -180,11 +180,11 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        try {
-            boolean valor1 = ValidarDTO.ValidarInTipoBodega(txtnom_bodega.getText());
-            if (valor1 == true) {
-                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
-            } else {
+//        try {
+//            boolean valor1 = ValidarDTO.ValidarInTipoBodega(txtnom_bodega.getText());
+//            if (valor1 == true) {
+//                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+//            } else {
                 tipobodega.setNombre(txtnom_bodega.getText());
                 tipobodega.setEstado(cbx_estado.getSelectedItem().toString());
                 tipobodega.setUsuarioActualizacion(usu.getNombreUsuario());
@@ -195,10 +195,10 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
                 } catch (Exception ex) {
                     Logger.getLogger(tipo_bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -169,6 +169,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombre">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNombreFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
