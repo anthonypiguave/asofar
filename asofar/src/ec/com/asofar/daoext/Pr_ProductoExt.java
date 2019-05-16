@@ -25,6 +25,7 @@ public class Pr_ProductoExt extends PrProductosJpaController {
     public  List<PrProductos> obtenerProducto() {
         EntityManager em = getEntityManager();
         List<PrProductos> lprod = null;
+        
         String nativeQuery = "SELECT P.*"
                 + " FROM pr_productos P\n"
                 + "WHERE P.estado='A';";
