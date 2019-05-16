@@ -32,6 +32,9 @@ public class EditarProveedor extends javax.swing.JDialog {
     SeTipoPersona stp = new SeTipoPersona();
     List<SeTipoPersona> listatipop;
     SeTipoPersonaJpaController stpcont = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SePais>listarpais;
+    SePaisJpaController paiscont = new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SePais pais = new SePais();
     /**
      * Creates new form EditarProveedor
      */
@@ -44,9 +47,11 @@ public class EditarProveedor extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cprov = cpro;
+        listarpais = paiscont.findSePaisEntities();
         cargarcombotipo();
         LlenarDatos(cpro);
         jPanel1.setSize(624,402);
+        cargarcombopais();
     }
 
     /**
@@ -458,6 +463,17 @@ public class EditarProveedor extends javax.swing.JDialog {
             }
                 }        
     }
+    public void cargarcombopais(){
+        listarpais = paiscont.findSePaisEntities();
+        for (int i = 0; i <listarpais.size(); i++) {
+            cbpais.addItem(listarpais.get(i).getNombre());
+        }
+        for (int i = 0; i <listarpais.size(); i++) {
+            if(pais.getNombre().getIdPais() == listarpais.get(i).getIdPais()){
+                cbpais.setSelectedItem(listarpais.get(i).getNombre());
+            }
+                }        
+    }
     public void LlenarDatos(CoProveedores cpro){
         txtnombre.setText(cpro.getNombre());
         txtdireccion.setText(cpro.getDireccion());
@@ -465,8 +481,7 @@ public class EditarProveedor extends javax.swing.JDialog {
         txttelfseg.setText(cpro.getTelefono2());
         txtpaginaweb.setText(cpro.getPaginaWeb());
         txtidentificacion.setText(cpro.getNumeroIdentificacion());
-        txtemail.setText(cpro.getEmail());        
-        //combo pais
+        txtemail.setText(cpro.getEmail());               
         txtnombrecomercial.setText(cpro.getNombreComercial());
         cbcontribuyente.setSelectedItem(cprov.getContribuyenteEspecial());
         txtcodigocont.setText(cpro.getCodigoContribuyente());
@@ -524,7 +539,7 @@ public class EditarProveedor extends javax.swing.JDialog {
             cprov.setNumeroIdentificacion(txtidentificacion.getText());
             cprov.setEmail(txtemail.getText());
             cprov.setTipoPersona(ObtenerDTO.ObtenerSeTipoPersona(cbtipopersona.getSelectedItem().toString()));
-            //cpro.setIdPais(BigInteger.valueOf(cbpais.getSelectedIndex()));
+            cprov.setIdPais(ObtenerDTO.ObtenerSEPais(cbpais.getSelectedItem().toString()));
             cprov.setNombreComercial(txtnombrecomercial.getText());
             cprov.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
             cprov.setCodigoContribuyente(txtcodigocont.getText());
