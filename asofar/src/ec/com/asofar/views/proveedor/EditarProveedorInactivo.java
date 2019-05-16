@@ -31,6 +31,9 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
     SeTipoPersona stp = new SeTipoPersona();
     List<SeTipoPersona> listatipop;
     SeTipoPersonaJpaController stpcont = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SePais pais = new SePais();
+    SePaisJpaController paiscont = new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SePais>listarpais;
     /**
      * Creates new form EditarProveedor
      */
@@ -45,6 +48,7 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         cprov = cpro;
         LlenarDatos(cpro);
         cargarcombotipo();
+        cargarcombopais();
     }
 
     /**
@@ -384,6 +388,17 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    public void cargarcombopais(){
+        listarpais = paiscont.findSePaisEntities();
+        for (int i = 0; i <listarpais.size(); i++) {
+            cbpais.addItem(listarpais.get(i).getNombre());
+        }
+        for (int i = 0; i <listarpais.size(); i++) {
+            if(pais.getNombre().getIdPais() == listarpais.get(i).getIdPais()){
+                cbpais.setSelectedItem(listarpais.get(i).getNombre());
+            }
+                }        
+    }
     public void cargarcombotipo(){
         listatipop = stpcont.findSeTipoPersonaEntities();
         for (int i = 0; i <listatipop.size(); i++) {

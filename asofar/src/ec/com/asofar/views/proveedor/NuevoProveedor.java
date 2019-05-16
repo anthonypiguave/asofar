@@ -13,7 +13,6 @@ import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,6 +31,8 @@ public class NuevoProveedor extends javax.swing.JDialog {
     Date d = new Date();
     SeTipoPersona stp = new SeTipoPersona();
     List<SeTipoPersona> listartipop;
+    List<SePais>listarpais;
+    SePaisJpaController paiscont = new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeTipoPersonaJpaController tipopcont = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
     /**
      * Creates new form NuevoProveedor
@@ -39,8 +40,10 @@ public class NuevoProveedor extends javax.swing.JDialog {
     public NuevoProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        listarpais = paiscont.findSePaisEntities();
         listartipop = tipopcont.findSeTipoPersonaEntities();
         combotipopersona();
+        combopais();
         setLocationRelativeTo(null);
     }
     
@@ -434,6 +437,12 @@ public class NuevoProveedor extends javax.swing.JDialog {
             cbtipopersona.addItem(listartipop.get(i).getNombre());
         }
     }
+    public void combopais(){        
+        cbpais.setModel(new javax.swing.DefaultComboBoxModel<>());
+        for(int i =0;i< listarpais.size();i++){
+            cbpais.addItem(listarpais.get(i).getNombre());
+        }
+    }
     private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttelefonoActionPerformed
@@ -502,7 +511,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
         cpro.setNumeroIdentificacion(txtidentificacion.getText());
         cpro.setEmail(txtemail.getText());
         cpro.setTipoPersona(ObtenerDTO.ObtenerSeTipoPersona(cbtipopersona.getSelectedItem().toString()));
-        //cpro.setIdPais(BigInteger.valueOf(cbpais.getSelectedIndex()));
+        cpro.setIdPais(ObtenerDTO.ObtenerSePais(cbpais.getSelectedItem().toString()));
         cpro.setNombreComercial(txtnombrecomercial.getText());
         cpro.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
         cpro.setCodigoContribuyente(txtcodigocont.getText());
