@@ -51,9 +51,6 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         MostrarMedidaActiva();
         System.out.println("holaaa");
         listaDocumento = ptm.findInTipoDocumentoEntities();
-        for (int i = 0; i < listaDocumento.size(); i++) {
-            System.out.println(listaDocumento.size());
-        }
         btn_guardar.setEnabled(false);
     }
 
@@ -62,6 +59,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         MostrarMedidaActiva();
+        btn_guardar.setEnabled(false);
         System.out.println("nombre es "+us.getNombreUsuario());
         usu1=us;
         su1=su;
@@ -72,9 +70,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     private void MostrarMedidaActiva() {
         try {
             listaDocumento = ptm.findInTipoDocumentoEntities();
-            for (InTipoDocumento y : listaDocumento) {
-                System.out.println(y.getNombreDocumento());
-            }
+//            for (InTipoDocumento y : listaDocumento) {
+//                System.out.println(y.getNombreDocumento());
+//            }
             Tablas.tabla_documento(tb_documento, listaDocumento);
 
         } catch (Exception e) {

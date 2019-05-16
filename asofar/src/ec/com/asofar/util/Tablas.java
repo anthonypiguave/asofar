@@ -704,10 +704,11 @@ public class Tablas {
     }
 
     public static void tabla_documento(JTable tabla, List<InTipoDocumento> lista) {
-
+        model=VaciarTabla(tabla);
         InTipoDocumento vo = new InTipoDocumento();
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO", "ESTADO",}, 0) {
+        //DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO", "ESTADO",}, 0) {
+        model = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO", "ESTADO",}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
@@ -736,13 +737,13 @@ public class Tablas {
                     fila[2] = false;
                 }
 
-                dt.addRow(fila);
+                model.addRow(fila);
 
             }
 
         }
 
-        tabla.setModel(dt);
+        tabla.setModel(model);
     }
 
     public static void listarBodega(List<InBodega> lista, JTable Tabla) {
