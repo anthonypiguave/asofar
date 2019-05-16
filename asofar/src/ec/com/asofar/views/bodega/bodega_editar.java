@@ -224,7 +224,6 @@ public class bodega_editar extends javax.swing.JDialog {
                 Bodega.setEstado(cbx_estado.getSelectedItem().toString());
                 Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
                 Bodega.setFechaActualizacion(fechaActual);
-                System.out.println("fec " + fechaActual);
                 try {
                     bc.edit(Bodega);
                     setVisible(false);

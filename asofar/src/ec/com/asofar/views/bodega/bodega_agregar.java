@@ -229,12 +229,11 @@ public class bodega_agregar extends javax.swing.JDialog {
                 InTipoBodega tb = new InTipoBodega();
 
                 tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-                System.out.println("bodega " + tb);
                 InBodegaPK inBodegaPK = new InBodegaPK();
 
                 inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
-//        inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
-//        inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
+                inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
+                inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
                 bod.setInBodegaPK(inBodegaPK);
 
                 bod.setNombreBodega(txtNombre.getText());
