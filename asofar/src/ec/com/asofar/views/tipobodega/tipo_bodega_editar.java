@@ -48,6 +48,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
 
     public tipo_bodega_editar(java.awt.Frame parent, boolean modal, InTipoBodega staticbodega, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         tipobodega = staticbodega;

@@ -41,6 +41,7 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
     }
     public consulta_bodega_inactivos(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         Tablas.listarBodegaInactivos(lista, tbl_bodega);
