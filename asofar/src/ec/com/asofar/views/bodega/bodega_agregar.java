@@ -237,8 +237,6 @@ public class bodega_agregar extends javax.swing.JDialog {
         try {
             bc.create(bod);
             setVisible(false);
-            consulta_bodega tbv = new consulta_bodega(new javax.swing.JFrame(), true);
-            tbv.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(bodega_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
