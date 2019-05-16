@@ -15,7 +15,6 @@ import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedorPK;
-import ec.com.asofar.dto.PrProductos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,10 +38,10 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
         if (coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK() == null) {
             coDetalleCotizacionPorProveedor.setCoDetalleCotizacionPorProveedorPK(new CoDetalleCotizacionPorProveedorPK());
         }
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor());
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdEmpresa(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdEmpresa());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacion(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdCotizacion());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdSucursal(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdSucursal());
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdEmpresa(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdEmpresa());
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -52,19 +51,10 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
                 coCotizacionesPorProveedor = em.getReference(coCotizacionesPorProveedor.getClass(), coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK());
                 coDetalleCotizacionPorProveedor.setCoCotizacionesPorProveedor(coCotizacionesPorProveedor);
             }
-            PrProductos idProducto = coDetalleCotizacionPorProveedor.getIdProducto();
-            if (idProducto != null) {
-                idProducto = em.getReference(idProducto.getClass(), idProducto.getPrProductosPK());
-                coDetalleCotizacionPorProveedor.setIdProducto(idProducto);
-            }
             em.persist(coDetalleCotizacionPorProveedor);
             if (coCotizacionesPorProveedor != null) {
                 coCotizacionesPorProveedor.getCoDetalleCotizacionPorProveedorList().add(coDetalleCotizacionPorProveedor);
                 coCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedor);
-            }
-            if (idProducto != null) {
-                idProducto.getCoDetalleCotizacionPorProveedorList().add(coDetalleCotizacionPorProveedor);
-                idProducto = em.merge(idProducto);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -80,10 +70,10 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
     }
 
     public void edit(CoDetalleCotizacionPorProveedor coDetalleCotizacionPorProveedor) throws NonexistentEntityException, Exception {
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor());
+        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdEmpresa(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdEmpresa());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacion(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdCotizacion());
         coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdSucursal(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdSucursal());
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdEmpresa(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdEmpresa());
-        coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK().setIdCotizacionesPorPorveedor(coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor().getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -91,15 +81,9 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
             CoDetalleCotizacionPorProveedor persistentCoDetalleCotizacionPorProveedor = em.find(CoDetalleCotizacionPorProveedor.class, coDetalleCotizacionPorProveedor.getCoDetalleCotizacionPorProveedorPK());
             CoCotizacionesPorProveedor coCotizacionesPorProveedorOld = persistentCoDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor();
             CoCotizacionesPorProveedor coCotizacionesPorProveedorNew = coDetalleCotizacionPorProveedor.getCoCotizacionesPorProveedor();
-            PrProductos idProductoOld = persistentCoDetalleCotizacionPorProveedor.getIdProducto();
-            PrProductos idProductoNew = coDetalleCotizacionPorProveedor.getIdProducto();
             if (coCotizacionesPorProveedorNew != null) {
                 coCotizacionesPorProveedorNew = em.getReference(coCotizacionesPorProveedorNew.getClass(), coCotizacionesPorProveedorNew.getCoCotizacionesPorProveedorPK());
                 coDetalleCotizacionPorProveedor.setCoCotizacionesPorProveedor(coCotizacionesPorProveedorNew);
-            }
-            if (idProductoNew != null) {
-                idProductoNew = em.getReference(idProductoNew.getClass(), idProductoNew.getPrProductosPK());
-                coDetalleCotizacionPorProveedor.setIdProducto(idProductoNew);
             }
             coDetalleCotizacionPorProveedor = em.merge(coDetalleCotizacionPorProveedor);
             if (coCotizacionesPorProveedorOld != null && !coCotizacionesPorProveedorOld.equals(coCotizacionesPorProveedorNew)) {
@@ -109,14 +93,6 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
             if (coCotizacionesPorProveedorNew != null && !coCotizacionesPorProveedorNew.equals(coCotizacionesPorProveedorOld)) {
                 coCotizacionesPorProveedorNew.getCoDetalleCotizacionPorProveedorList().add(coDetalleCotizacionPorProveedor);
                 coCotizacionesPorProveedorNew = em.merge(coCotizacionesPorProveedorNew);
-            }
-            if (idProductoOld != null && !idProductoOld.equals(idProductoNew)) {
-                idProductoOld.getCoDetalleCotizacionPorProveedorList().remove(coDetalleCotizacionPorProveedor);
-                idProductoOld = em.merge(idProductoOld);
-            }
-            if (idProductoNew != null && !idProductoNew.equals(idProductoOld)) {
-                idProductoNew.getCoDetalleCotizacionPorProveedorList().add(coDetalleCotizacionPorProveedor);
-                idProductoNew = em.merge(idProductoNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -151,11 +127,6 @@ public class CoDetalleCotizacionPorProveedorJpaController implements Serializabl
             if (coCotizacionesPorProveedor != null) {
                 coCotizacionesPorProveedor.getCoDetalleCotizacionPorProveedorList().remove(coDetalleCotizacionPorProveedor);
                 coCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedor);
-            }
-            PrProductos idProducto = coDetalleCotizacionPorProveedor.getIdProducto();
-            if (idProducto != null) {
-                idProducto.getCoDetalleCotizacionPorProveedorList().remove(coDetalleCotizacionPorProveedor);
-                idProducto = em.merge(idProducto);
             }
             em.remove(coDetalleCotizacionPorProveedor);
             em.getTransaction().commit();

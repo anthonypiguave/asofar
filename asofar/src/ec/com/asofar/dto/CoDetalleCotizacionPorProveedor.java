@@ -6,6 +6,7 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -33,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idCotizacion = :idCotizacion")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdSucursal", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdProducto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.idProducto = :idProducto")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByLineaDetalle", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByDescripcion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMinimoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMinimoReferencial = :valorMinimoReferencial")
@@ -47,6 +49,8 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoDetalleCotizacionPorProveedorPK coDetalleCotizacionPorProveedorPK;
+    @Column(name = "id_producto")
+    private BigInteger idProducto;
     @Column(name = "descripcion")
     private String descripcion;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -72,9 +76,6 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private CoCotizacionesPorProveedor coCotizacionesPorProveedor;
-    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
-    @ManyToOne
-    private PrProductos idProducto;
 
     public CoDetalleCotizacionPorProveedor() {
     }
@@ -93,6 +94,14 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
 
     public void setCoDetalleCotizacionPorProveedorPK(CoDetalleCotizacionPorProveedorPK coDetalleCotizacionPorProveedorPK) {
         this.coDetalleCotizacionPorProveedorPK = coDetalleCotizacionPorProveedorPK;
+    }
+
+    public BigInteger getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(BigInteger idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getDescripcion() {
@@ -165,14 +174,6 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
 
     public void setCoCotizacionesPorProveedor(CoCotizacionesPorProveedor coCotizacionesPorProveedor) {
         this.coCotizacionesPorProveedor = coCotizacionesPorProveedor;
-    }
-
-    public PrProductos getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(PrProductos idProducto) {
-        this.idProducto = idProducto;
     }
 
     @Override
