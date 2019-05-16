@@ -25,7 +25,7 @@ import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
-import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.VeCaja;
@@ -570,13 +570,13 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
         return dto;
     }
       
-      public static CoCotizacionesPorPorveedor ObtenerCoCotizacionesPorPorveedor(String id) {
-        CoCotizacionesPorPorveedorJpaController control = new CoCotizacionesPorPorveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoCotizacionesPorPorveedor dto = new CoCotizacionesPorPorveedor();
-        List<CoCotizacionesPorPorveedor> lista = control.findCoCotizacionesPorPorveedorEntities();
+      public static CoCotizacionesPorProveedor ObtenerCoCotizacionesPorPorveedor(String id) {
+        CoCotizacionesPorProveedorJpaController control = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoCotizacionesPorProveedor dto = new CoCotizacionesPorProveedor();
+        List<CoCotizacionesPorProveedor> lista = control.findCoCotizacionesPorProveedorEntities();
 
         for (int i = 0; i < lista.size(); i++) {
-            if (String.valueOf(lista.get(i).getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor()).equals(id)) {
+            if (String.valueOf(lista.get(i).getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor()).equals(id)) {
                 dto = lista.get(i);
                 break;
             }

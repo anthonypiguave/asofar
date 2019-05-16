@@ -387,7 +387,9 @@ public class Registrar_persona extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+         Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true,us1,em1,su1);
         setVisible(false);
+        mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
@@ -542,15 +544,13 @@ public class Registrar_persona extends javax.swing.JDialog {
 
                     mp.create(persona);
                     JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
-                    Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+                    Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true,us1,em1,su1);
                     setVisible(false);
                     mp.setVisible(true);
                 }
 
             }
-        } else {
-
-        }
+        } 
     }
 
     public void CargarRol() {

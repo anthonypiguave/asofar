@@ -62,7 +62,9 @@ public class bodega_editar extends javax.swing.JDialog {
         txttipoBodega.setText(ObtenerDTO.ObtenerInTipoBodega(bod.getInBodegaPK().getIdTipoBodega()).getNombre());
         cbx_estado.addItem("A");
         cbx_estado.addItem("I");
-
+        emp = em;
+        suc = su;
+        usu = us;
     }
 
     @SuppressWarnings("unchecked")
@@ -226,17 +228,17 @@ public class bodega_editar extends javax.swing.JDialog {
 //            if (valor1 == true) {
 //                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
 //            } else {
-                Bodega.setNombreBodega(txtNombre.getText());
-                Bodega.setEstado(cbx_estado.getSelectedItem().toString());
-                Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
-                Bodega.setFechaActualizacion(fechaActual);
-                try {
-                    bc.edit(Bodega);
-                    setVisible(false);
-                    JOptionPane.showMessageDialog(this, "Bodega  actualizada");
-                } catch (Exception ex) {
-                    Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        Bodega.setNombreBodega(txtNombre.getText());
+        Bodega.setEstado(cbx_estado.getSelectedItem().toString());
+        Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
+        Bodega.setFechaActualizacion(fechaActual);
+        try {
+            bc.edit(Bodega);
+            setVisible(false);
+            JOptionPane.showMessageDialog(this, "Bodega  actualizada");
+        } catch (Exception ex) {
+            Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //            }
 //        } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, e.getMessage());
@@ -249,7 +251,7 @@ public class bodega_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_txttipoBodegaActionPerformed
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
-            txtNombre.setText(txtNombre.getText().toUpperCase());
+        txtNombre.setText(txtNombre.getText().toUpperCase());
     }//GEN-LAST:event_txtNombreFocusLost
 
     /**

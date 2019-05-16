@@ -207,23 +207,23 @@ public class ListaEmpresas extends javax.swing.JDialog {
     }//GEN-LAST:event_jtPersonasMouseClicked
 
     private void jtPersonasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMousePressed
-//        int id = 0;
-//        obj = null;
-//        if (evt.getClickCount() == 2) {
-//            id = jtPersonas.getSelectedRow();
-//            for (int i = 0; i < listaEmpresa.size(); i++) {
-//                if ((jtPersonas.getValueAt(id, 0).toString().equals(listaEmpresa.get(i).getCedula()))) {
-//                    obj = listaEmpresa.get(i);
-//                    if (obj != null) {
-//                        
-//                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1,em1,su1);
-//                        setVisible(false);
-//                        es.setVisible(true);
-//                    }
-//                }
-//            }
-//
-//        }
+        int id = 0;
+        obj = null;
+        if (evt.getClickCount() == 2) {
+            id = jtPersonas.getSelectedRow();
+            for (int i = 0; i < listaEmpresa.size(); i++) {
+                if ((jtPersonas.getValueAt(id, 0).toString().equals(listaEmpresa.get(i).getRuc()))) {
+                    obj = listaEmpresa.get(i);
+                    if (obj != null) {
+                        
+                        ActualizarDatosEmpresa es = new ActualizarDatosEmpresa(new javax.swing.JFrame(), true, obj,us1,em1,su1);
+                        setVisible(false);
+                        es.setVisible(true);
+                    }
+                }
+            }
+
+        }
     }//GEN-LAST:event_jtPersonasMousePressed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed

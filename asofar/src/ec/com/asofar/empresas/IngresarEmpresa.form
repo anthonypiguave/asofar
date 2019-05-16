@@ -113,27 +113,25 @@
                               <EmptySpace pref="86" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtNombre" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="txtCedula" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="txtRuc" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="txtCorreo" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtTelefono" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtCorreo" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="txtApellido" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="80" max="32767" attributes="0"/>
+                              <EmptySpace pref="84" max="32767" attributes="0"/>
                               <Component id="txtDireccion" min="-2" pref="435" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -146,17 +144,21 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCedula" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtRuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="txtCorreo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="txtNombre" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="txtApellido" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jLabel5" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtTelefono" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtNombre" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -174,15 +176,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="NOMBRES:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Ubuntu" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="TELEFONO :"/>
+                <Property name="text" type="java.lang.String" value="NOMBRES :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -193,15 +187,15 @@
                 <Property name="text" type="java.lang.String" value="RUC :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCedula">
+            <Component class="javax.swing.JTextField" name="txtRuc">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="12" style="1"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCedulaKeyTyped"/>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCedulaKeyReleased"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRucKeyTyped"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRucKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
@@ -221,17 +215,6 @@
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNombreFocusLost"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyTyped"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtApellido">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Ubuntu" size="12" style="1"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtApellidoFocusLost"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -262,6 +245,24 @@
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCorreoKeyTyped"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtTelefono">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Ubuntu" size="12" style="1"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefonoKeyTyped"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel5">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Ubuntu" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="TELEFONO :"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

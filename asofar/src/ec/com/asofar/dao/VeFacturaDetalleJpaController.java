@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class VeFacturaDetalleJpaController implements Serializable {
 
@@ -41,11 +41,11 @@ public class VeFacturaDetalleJpaController implements Serializable {
         if (veFacturaDetalle.getVeFacturaDetallePK() == null) {
             veFacturaDetalle.setVeFacturaDetallePK(new VeFacturaDetallePK());
         }
-        veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
         veFacturaDetalle.getVeFacturaDetallePK().setIdPrestaciones(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdUnidadServicio(veFacturaDetalle.getVeUnidadServicio().getIdUnidadServicio());
         veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdUnidadServicio(veFacturaDetalle.getVeUnidadServicio().getIdUnidadServicio());
         veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -101,11 +101,11 @@ public class VeFacturaDetalleJpaController implements Serializable {
     }
 
     public void edit(VeFacturaDetalle veFacturaDetalle) throws NonexistentEntityException, Exception {
-        veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
         veFacturaDetalle.getVeFacturaDetallePK().setIdPrestaciones(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdUnidadServicio(veFacturaDetalle.getVeUnidadServicio().getIdUnidadServicio());
         veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdUnidadServicio(veFacturaDetalle.getVeUnidadServicio().getIdUnidadServicio());
         veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
