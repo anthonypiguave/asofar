@@ -10,7 +10,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
 
-public class Mostrar_usuario extends javax.swing.JDialog {
+public class ListarUsuarios extends javax.swing.JDialog {
 
     int x, y;
     SeUsuarios obj;
@@ -23,7 +23,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
     SeEmpresa em1; 
     SeSucursal su1;
 
-    public Mostrar_usuario(java.awt.Frame parent, boolean modal) {
+    public ListarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -33,7 +33,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
 
     }
 
-    public Mostrar_usuario(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ListarUsuarios(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -181,7 +181,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Registrar_usuario ru = new Registrar_usuario(new javax.swing.JFrame(), true, us1,em1,su1);
+        IngresarUsuarios ru = new IngresarUsuarios(new javax.swing.JFrame(), true, us1,em1,su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -200,7 +200,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
                     obj = usuario_lista.get(i);
                     if (obj != null) {
                         
-                        Editar_usuario es = new Editar_usuario(new javax.swing.JFrame(), true, obj,us1,em1,su1);
+                        ActualizarDatosUsuarios es = new ActualizarDatosUsuarios(new javax.swing.JFrame(), true, obj,us1,em1,su1);
                         setVisible(false);
                         es.setVisible(true);
                     }
@@ -228,7 +228,7 @@ public class Mostrar_usuario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Mostrar_usuario dialog = new Mostrar_usuario(new javax.swing.JFrame(), true);
+                ListarUsuarios dialog = new ListarUsuarios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

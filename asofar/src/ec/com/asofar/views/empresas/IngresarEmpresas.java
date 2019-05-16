@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.empresas;
+package ec.com.asofar.views.empresas;
 
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.dao.SePersonasJpaController;
@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class IngresarEmpresa extends javax.swing.JDialog {
+public class IngresarEmpresas extends javax.swing.JDialog {
     SeEmpresaJpaController empresaController
             = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
     private Date fecha1 = null;
@@ -34,7 +34,7 @@ public class IngresarEmpresa extends javax.swing.JDialog {
     SeEmpresa empresa = new SeEmpresa();
     java.util.Date fechaActual = new java.util.Date();
 
-    public IngresarEmpresa(java.awt.Frame parent, boolean modal) {
+    public IngresarEmpresas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -47,7 +47,7 @@ public class IngresarEmpresa extends javax.swing.JDialog {
 
     }
 
-    public IngresarEmpresa(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public IngresarEmpresas(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -420,7 +420,7 @@ public class IngresarEmpresa extends javax.swing.JDialog {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                IngresarEmpresa dialog = new IngresarEmpresa(new javax.swing.JFrame(), true);
+                IngresarEmpresas dialog = new IngresarEmpresas(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

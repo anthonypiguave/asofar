@@ -1,4 +1,4 @@
-package ec.com.asofar.empresas;
+package ec.com.asofar.views.empresas;
 
 
 import ec.com.asofar.dao.SeEmpresaJpaController;
@@ -197,7 +197,7 @@ public class ListaEmpresas extends javax.swing.JDialog {
    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IngresarEmpresa ru = new IngresarEmpresa(new javax.swing.JFrame(), true, us1,em1,su1);
+        IngresarEmpresas ru = new IngresarEmpresas(new javax.swing.JFrame(), true, us1,em1,su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -216,7 +216,7 @@ public class ListaEmpresas extends javax.swing.JDialog {
                     obj = listaEmpresa.get(i);
                     if (obj != null) {
                         
-                        ActualizarDatosEmpresa es = new ActualizarDatosEmpresa(new javax.swing.JFrame(), true, obj,us1,em1,su1);
+                        ActualizarDatosEmpresas es = new ActualizarDatosEmpresas(new javax.swing.JFrame(), true, obj,us1,em1,su1);
                         setVisible(false);
                         es.setVisible(true);
                     }

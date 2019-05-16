@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class IngresarPersona extends javax.swing.JDialog {
+public class IngresarPersonas extends javax.swing.JDialog {
 
     SeRolesJpaController mn
             = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -48,7 +48,7 @@ public class IngresarPersona extends javax.swing.JDialog {
     SePersonas persona = new SePersonas();
     java.util.Date fechaActual = new java.util.Date();
 
-    public IngresarPersona(java.awt.Frame parent, boolean modal) {
+    public IngresarPersonas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -61,7 +61,7 @@ public class IngresarPersona extends javax.swing.JDialog {
 
     }
 
-    public IngresarPersona(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public IngresarPersonas(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -387,7 +387,7 @@ public class IngresarPersona extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-         ListarPersona mp = new ListarPersona(new javax.swing.JFrame(), true,us1,em1,su1);
+         ListarPersonas mp = new ListarPersonas(new javax.swing.JFrame(), true,us1,em1,su1);
         setVisible(false);
         mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -544,7 +544,7 @@ public class IngresarPersona extends javax.swing.JDialog {
 
                     mp.create(persona);
                     JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
-                   ListarPersona lp = new ListarPersona(new javax.swing.JFrame(), true,us1,em1,su1);
+                   ListarPersonas lp = new ListarPersonas(new javax.swing.JFrame(), true,us1,em1,su1);
                     setVisible(false);
                     lp.setVisible(true);
                 }
@@ -569,7 +569,7 @@ public class IngresarPersona extends javax.swing.JDialog {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                IngresarPersona dialog = new IngresarPersona(new javax.swing.JFrame(), true);
+                IngresarPersonas dialog = new IngresarPersonas(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

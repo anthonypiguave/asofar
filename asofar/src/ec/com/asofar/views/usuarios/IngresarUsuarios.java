@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class Registrar_usuario extends javax.swing.JDialog {
+public class IngresarUsuarios extends javax.swing.JDialog {
     
     SeRolesJpaController mn
             = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -42,7 +42,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
     java.util.Date fechaActual = new java.util.Date();
     AES aes = new AES();
     
-    public Registrar_usuario(java.awt.Frame parent, boolean modal) {
+    public IngresarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -53,7 +53,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
         
     }
     
-    public Registrar_usuario(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public IngresarUsuarios(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -294,7 +294,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
+        ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         mp.setVisible(true);
         
@@ -367,7 +367,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
             
-            Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
+            ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
             setVisible(false);
             mp.setVisible(true);
         } else {
@@ -381,7 +381,7 @@ public class Registrar_usuario extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Registrar_usuario dialog = new Registrar_usuario(new javax.swing.JFrame(), true);
+                IngresarUsuarios dialog = new IngresarUsuarios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
