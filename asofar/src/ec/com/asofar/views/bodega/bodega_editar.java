@@ -52,6 +52,7 @@ public class bodega_editar extends javax.swing.JDialog {
 
     public bodega_editar(java.awt.Frame parent, boolean modal, InBodega bod, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         Bodega = bod;

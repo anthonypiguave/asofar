@@ -51,6 +51,7 @@ public class bodega_agregar extends javax.swing.JDialog {
 
     public bodega_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         TiBo = pgc.findInTipoBodegaEntities();
