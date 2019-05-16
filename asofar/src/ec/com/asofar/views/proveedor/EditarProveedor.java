@@ -6,9 +6,11 @@
 package ec.com.asofar.views.proveedor;
 
 import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.SePaisJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.SePais;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
@@ -539,7 +541,7 @@ public class EditarProveedor extends javax.swing.JDialog {
             cprov.setNumeroIdentificacion(txtidentificacion.getText());
             cprov.setEmail(txtemail.getText());
             cprov.setTipoPersona(ObtenerDTO.ObtenerSeTipoPersona(cbtipopersona.getSelectedItem().toString()));
-            cprov.setIdPais(ObtenerDTO.ObtenerSEPais(cbpais.getSelectedItem().toString()));
+            cprov.setIdPais(ObtenerDTO.ObtenerSePais(cbpais.getSelectedItem().toString()));
             cprov.setNombreComercial(txtnombrecomercial.getText());
             cprov.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
             cprov.setCodigoContribuyente(txtcodigocont.getText());
