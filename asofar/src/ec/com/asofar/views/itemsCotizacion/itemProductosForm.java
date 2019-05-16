@@ -5,9 +5,15 @@
  */
 package ec.com.asofar.views.itemsCotizacion;
 
+import ec.com.asofar.dao.PrProductosJpaController;
+import ec.com.asofar.daoext.Pr_ProductoExt;
+import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -17,9 +23,17 @@ public class itemProductosForm extends javax.swing.JDialog {
 
    String buscar = "";
    int x, y;
+   static EntityManagerFactory conn=EntityManagerUtil.ObtenerEntityManager();
+   static PrProductos producto = new PrProductos();
+   static PrProductosJpaController jproducto = new PrProductosJpaController(conn);
+    List<PrProductos> lprod=null;
+    Pr_ProductoExt obtener = new Pr_ProductoExt(conn);
+    
     public itemProductosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lprod= obtener.obtenerProducto();
+        Tablas.listarProductoItems(lprod, jt_producto);;
     }
 
     /**
@@ -35,7 +49,7 @@ public class itemProductosForm extends javax.swing.JDialog {
         txtBuscar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jt_producto = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -65,7 +79,7 @@ public class itemProductosForm extends javax.swing.JDialog {
 
         jLabel5.setText("BUSQUEDA:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_producto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -76,7 +90,7 @@ public class itemProductosForm extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jt_producto);
 
         jButton1.setText("CANCELAR");
         jButton1.setFocusable(false);
@@ -137,7 +151,7 @@ public class itemProductosForm extends javax.swing.JDialog {
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         buscar = txtBuscar.getText();
-        Tablas.filtro(buscar, jTable1);
+        Tablas.filtro(buscar, jt_producto);
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -194,7 +208,7 @@ public class itemProductosForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jt_producto;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -41,7 +41,7 @@ public class Tablas {
     static DefaultTableModel model;
     private boolean[] editable = {false, false, true};
     private static boolean[] editable1 = {false, false, true};
-    private static boolean[] editable2 = {false,false,false, true};
+    private static boolean[] editable2 = {false, false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -704,7 +704,7 @@ public class Tablas {
     }
 
     public static void tabla_documento(JTable tabla, List<InTipoDocumento> lista) {
-        model=VaciarTabla(tabla);
+        model = VaciarTabla(tabla);
         InTipoDocumento vo = new InTipoDocumento();
         tabla.setDefaultRenderer(Object.class, new Render());
         //DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO", "ESTADO",}, 0) {
@@ -775,6 +775,7 @@ public class Tablas {
             }
         }
     }
+
     public static void listarBodegaInactivos(List<InBodega> lista, JTable Tabla) {
         int[] a = {5, 30, 80, 20};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -902,28 +903,28 @@ public class Tablas {
         }
 
     }
-    
+
     public static void tablaCotizacionPorProveedor(JTable Tabla, List<CoCotizacionesPorPorveedor> lista) {
-        int[] a = {5, 100, 100,50,80,90,90};
+        int[] a = {5, 100, 100, 50, 80, 90, 90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"    CODIGO", "EMPRESA","PROVEEDOR", "TELEFONO","CORREO","FECHA DE ENVIO","FECHA DE INGRESO"};
+        String[] Co = {"    CODIGO", "EMPRESA", "PROVEEDOR", "TELEFONO", "CORREO", "FECHA DE ENVIO", "FECHA DE INGRESO"};
         String[] Filas = new String[7];
         model = new DefaultTableModel(null, Co);
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            Filas[0] = ""+lista.get(i).getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor();
-            Filas[4] = ""+lista.get(i).getIdProveedor().getTelefono1();
-            Filas[2] = ""+lista.get(i).getIdProveedor().getNombre();
+            Filas[0] = "" + lista.get(i).getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor();
+            Filas[4] = "" + lista.get(i).getIdProveedor().getTelefono1();
+            Filas[2] = "" + lista.get(i).getIdProveedor().getNombre();
             Filas[3] = lista.get(i).getIdProveedor().getEmail();
             Filas[1] = lista.get(i).getIdProveedor().getNombreComercial();
-            Filas[5] = ""+lista.get(i).getFechaEnvioCotizacion();
-            Filas[6] = ""+lista.get(i).getFechaIngreso();
-            
+            Filas[5] = "" + lista.get(i).getFechaEnvioCotizacion();
+            Filas[6] = "" + lista.get(i).getFechaIngreso();
+
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -942,10 +943,11 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr1);
         }
     }
- public static void TablaDetallePorProveerdo(List<CoDetalleCotizacionPorProveedor> lista, JTable tabla) {
-        CoDetalleCotizacionPorProveedor vo=new CoDetalleCotizacionPorProveedor();
+
+    public static void TablaDetallePorProveerdo(List<CoDetalleCotizacionPorProveedor> lista, JTable tabla) {
+        CoDetalleCotizacionPorProveedor vo = new CoDetalleCotizacionPorProveedor();
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO","CANTIDAD","ESTADO",}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO", "CANTIDAD", "ESTADO",}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
@@ -975,8 +977,6 @@ public class Tablas {
                 } else {
                     fila[3] = false;
                 }
-                
-                
 
                 dt.addRow(fila);
 
@@ -985,6 +985,48 @@ public class Tablas {
         }
 
         tabla.setModel(dt);
- }
+    }
+
+    public static void listarProductoItems(List<PrProductos> lista, JTable Tabla) {
+        int[] a = {5, 30, 190,190,190,90,90};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"COD_PRO","COD_BARRA", "PRODUCTO","PRESENTACION","MEDIDA","DESCONTINUADO","RECETA"};
+        String[] Filas = new String[7];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals("A")) {
+                Filas[0] = String.valueOf(lista.get(i).getPrProductosPK().getIdProducto());
+                Filas[1] = lista.get(i).getCodigoBarra();
+                Filas[2] = lista.get(i).getNombreProducto();
+                Filas[3] = lista.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+                //Filas[3] = ObtenerDTO.ObtenerPrTipoPresentacion(i).getNombre();
+                Filas[4] = lista.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+                Filas[5] = lista.get(i).getDescontinuado();
+                Filas[6] = lista.get(i).getReceta();
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            }
+        }
+
+    }
 
 }
