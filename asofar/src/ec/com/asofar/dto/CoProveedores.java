@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_proveedores")
@@ -97,11 +97,11 @@ public class CoProveedores implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "estado")
     private Character estado;
-    @OneToMany(mappedBy = "idProveedor")
-    private List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList;
     @JoinColumn(name = "tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona tipoPersona;
+    @OneToMany(mappedBy = "idProveedor")
+    private List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList;
 
     public CoProveedores() {
     }
@@ -254,21 +254,21 @@ public class CoProveedores implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public List<CoCotizacionesPorPorveedor> getCoCotizacionesPorPorveedorList() {
-        return coCotizacionesPorPorveedorList;
-    }
-
-    public void setCoCotizacionesPorPorveedorList(List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList) {
-        this.coCotizacionesPorPorveedorList = coCotizacionesPorPorveedorList;
-    }
-
     public SeTipoPersona getTipoPersona() {
         return tipoPersona;
     }
 
     public void setTipoPersona(SeTipoPersona tipoPersona) {
         this.tipoPersona = tipoPersona;
+    }
+
+    @XmlTransient
+    public List<CoCotizacionesPorProveedor> getCoCotizacionesPorProveedorList() {
+        return coCotizacionesPorProveedorList;
+    }
+
+    public void setCoCotizacionesPorProveedorList(List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList) {
+        this.coCotizacionesPorProveedorList = coCotizacionesPorProveedorList;
     }
 
     @Override

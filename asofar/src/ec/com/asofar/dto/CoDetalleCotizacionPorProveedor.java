@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_detalle_cotizacion_por_proveedor")
@@ -36,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdSucursal", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idSucursal = :idSucursal")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByLineaDetalle", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByDescripcion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdProducto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.idProducto = :idProducto")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMinimoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMinimoReferencial = :valorMinimoReferencial")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMaximoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMaximoReferencial = :valorMaximoReferencial")
     , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByCantidadPedido", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.cantidadPedido = :cantidadPedido")
@@ -51,8 +49,6 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
     protected CoDetalleCotizacionPorProveedorPK coDetalleCotizacionPorProveedorPK;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "id_producto")
-    private BigInteger idProducto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor_minimo_referencial")
     private Double valorMinimoReferencial;
@@ -75,7 +71,10 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private CoCotizacionesPorPorveedor coCotizacionesPorPorveedor;
+    private CoCotizacionesPorProveedor coCotizacionesPorProveedor;
+    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
+    @ManyToOne
+    private PrProductos idProducto;
 
     public CoDetalleCotizacionPorProveedor() {
     }
@@ -102,14 +101,6 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public BigInteger getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(BigInteger idProducto) {
-        this.idProducto = idProducto;
     }
 
     public Double getValorMinimoReferencial() {
@@ -168,12 +159,20 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
         this.fecha = fecha;
     }
 
-    public CoCotizacionesPorPorveedor getCoCotizacionesPorPorveedor() {
-        return coCotizacionesPorPorveedor;
+    public CoCotizacionesPorProveedor getCoCotizacionesPorProveedor() {
+        return coCotizacionesPorProveedor;
     }
 
-    public void setCoCotizacionesPorPorveedor(CoCotizacionesPorPorveedor coCotizacionesPorPorveedor) {
-        this.coCotizacionesPorPorveedor = coCotizacionesPorPorveedor;
+    public void setCoCotizacionesPorProveedor(CoCotizacionesPorProveedor coCotizacionesPorProveedor) {
+        this.coCotizacionesPorProveedor = coCotizacionesPorProveedor;
+    }
+
+    public PrProductos getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(PrProductos idProducto) {
+        this.idProducto = idProducto;
     }
 
     @Override

@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class Registrar_persona extends javax.swing.JDialog {
+public class IngresarPersonas extends javax.swing.JDialog {
 
     SeRolesJpaController mn
             = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -48,7 +48,7 @@ public class Registrar_persona extends javax.swing.JDialog {
     SePersonas persona = new SePersonas();
     java.util.Date fechaActual = new java.util.Date();
 
-    public Registrar_persona(java.awt.Frame parent, boolean modal) {
+    public IngresarPersonas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -61,7 +61,7 @@ public class Registrar_persona extends javax.swing.JDialog {
 
     }
 
-    public Registrar_persona(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public IngresarPersonas(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -387,7 +387,9 @@ public class Registrar_persona extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+         ListarPersonas mp = new ListarPersonas(new javax.swing.JFrame(), true,us1,em1,su1);
         setVisible(false);
+        mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
@@ -542,15 +544,13 @@ public class Registrar_persona extends javax.swing.JDialog {
 
                     mp.create(persona);
                     JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
-                    Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true);
+                   ListarPersonas lp = new ListarPersonas(new javax.swing.JFrame(), true,us1,em1,su1);
                     setVisible(false);
-                    mp.setVisible(true);
+                    lp.setVisible(true);
                 }
 
             }
-        } else {
-
-        }
+        } 
     }
 
     public void CargarRol() {
@@ -569,7 +569,7 @@ public class Registrar_persona extends javax.swing.JDialog {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Registrar_persona dialog = new Registrar_persona(new javax.swing.JFrame(), true);
+                IngresarPersonas dialog = new IngresarPersonas(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

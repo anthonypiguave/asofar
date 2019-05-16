@@ -13,17 +13,17 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SePersonas;
-import ec.com.asofar.dto.SeUsuarioSucurRol;
-import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeFactura;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.VeFactura;
+import ec.com.asofar.dto.SeUsuarioSucurRol;
+import ec.com.asofar.dto.SeUsuarios;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class SeUsuariosJpaController implements Serializable {
 
@@ -37,11 +37,11 @@ public class SeUsuariosJpaController implements Serializable {
     }
 
     public void create(SeUsuarios seUsuarios) throws PreexistingEntityException, Exception {
-        if (seUsuarios.getSeUsuarioSucurRolList() == null) {
-            seUsuarios.setSeUsuarioSucurRolList(new ArrayList<SeUsuarioSucurRol>());
-        }
         if (seUsuarios.getVeFacturaList() == null) {
             seUsuarios.setVeFacturaList(new ArrayList<VeFactura>());
+        }
+        if (seUsuarios.getSeUsuarioSucurRolList() == null) {
+            seUsuarios.setSeUsuarioSucurRolList(new ArrayList<SeUsuarioSucurRol>());
         }
         EntityManager em = null;
         try {
@@ -52,31 +52,22 @@ public class SeUsuariosJpaController implements Serializable {
                 idPersona = em.getReference(idPersona.getClass(), idPersona.getIdPersona());
                 seUsuarios.setIdPersona(idPersona);
             }
-            List<SeUsuarioSucurRol> attachedSeUsuarioSucurRolList = new ArrayList<SeUsuarioSucurRol>();
-            for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRolToAttach : seUsuarios.getSeUsuarioSucurRolList()) {
-                seUsuarioSucurRolListSeUsuarioSucurRolToAttach = em.getReference(seUsuarioSucurRolListSeUsuarioSucurRolToAttach.getClass(), seUsuarioSucurRolListSeUsuarioSucurRolToAttach.getSeUsuarioSucurRolPK());
-                attachedSeUsuarioSucurRolList.add(seUsuarioSucurRolListSeUsuarioSucurRolToAttach);
-            }
-            seUsuarios.setSeUsuarioSucurRolList(attachedSeUsuarioSucurRolList);
             List<VeFactura> attachedVeFacturaList = new ArrayList<VeFactura>();
             for (VeFactura veFacturaListVeFacturaToAttach : seUsuarios.getVeFacturaList()) {
                 veFacturaListVeFacturaToAttach = em.getReference(veFacturaListVeFacturaToAttach.getClass(), veFacturaListVeFacturaToAttach.getVeFacturaPK());
                 attachedVeFacturaList.add(veFacturaListVeFacturaToAttach);
             }
             seUsuarios.setVeFacturaList(attachedVeFacturaList);
+            List<SeUsuarioSucurRol> attachedSeUsuarioSucurRolList = new ArrayList<SeUsuarioSucurRol>();
+            for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRolToAttach : seUsuarios.getSeUsuarioSucurRolList()) {
+                seUsuarioSucurRolListSeUsuarioSucurRolToAttach = em.getReference(seUsuarioSucurRolListSeUsuarioSucurRolToAttach.getClass(), seUsuarioSucurRolListSeUsuarioSucurRolToAttach.getSeUsuarioSucurRolPK());
+                attachedSeUsuarioSucurRolList.add(seUsuarioSucurRolListSeUsuarioSucurRolToAttach);
+            }
+            seUsuarios.setSeUsuarioSucurRolList(attachedSeUsuarioSucurRolList);
             em.persist(seUsuarios);
             if (idPersona != null) {
                 idPersona.getSeUsuariosList().add(seUsuarios);
                 idPersona = em.merge(idPersona);
-            }
-            for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRol : seUsuarios.getSeUsuarioSucurRolList()) {
-                SeUsuarios oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol = seUsuarioSucurRolListSeUsuarioSucurRol.getIdUsuario();
-                seUsuarioSucurRolListSeUsuarioSucurRol.setIdUsuario(seUsuarios);
-                seUsuarioSucurRolListSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListSeUsuarioSucurRol);
-                if (oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol != null) {
-                    oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol.getSeUsuarioSucurRolList().remove(seUsuarioSucurRolListSeUsuarioSucurRol);
-                    oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol = em.merge(oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol);
-                }
             }
             for (VeFactura veFacturaListVeFactura : seUsuarios.getVeFacturaList()) {
                 SeUsuarios oldIdUsuarioOfVeFacturaListVeFactura = veFacturaListVeFactura.getIdUsuario();
@@ -85,6 +76,15 @@ public class SeUsuariosJpaController implements Serializable {
                 if (oldIdUsuarioOfVeFacturaListVeFactura != null) {
                     oldIdUsuarioOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
                     oldIdUsuarioOfVeFacturaListVeFactura = em.merge(oldIdUsuarioOfVeFacturaListVeFactura);
+                }
+            }
+            for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRol : seUsuarios.getSeUsuarioSucurRolList()) {
+                SeUsuarios oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol = seUsuarioSucurRolListSeUsuarioSucurRol.getIdUsuario();
+                seUsuarioSucurRolListSeUsuarioSucurRol.setIdUsuario(seUsuarios);
+                seUsuarioSucurRolListSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListSeUsuarioSucurRol);
+                if (oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol != null) {
+                    oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol.getSeUsuarioSucurRolList().remove(seUsuarioSucurRolListSeUsuarioSucurRol);
+                    oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol = em.merge(oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol);
                 }
             }
             em.getTransaction().commit();
@@ -108,21 +108,14 @@ public class SeUsuariosJpaController implements Serializable {
             SeUsuarios persistentSeUsuarios = em.find(SeUsuarios.class, seUsuarios.getIdUsuario());
             SePersonas idPersonaOld = persistentSeUsuarios.getIdPersona();
             SePersonas idPersonaNew = seUsuarios.getIdPersona();
-            List<SeUsuarioSucurRol> seUsuarioSucurRolListOld = persistentSeUsuarios.getSeUsuarioSucurRolList();
-            List<SeUsuarioSucurRol> seUsuarioSucurRolListNew = seUsuarios.getSeUsuarioSucurRolList();
             List<VeFactura> veFacturaListOld = persistentSeUsuarios.getVeFacturaList();
             List<VeFactura> veFacturaListNew = seUsuarios.getVeFacturaList();
+            List<SeUsuarioSucurRol> seUsuarioSucurRolListOld = persistentSeUsuarios.getSeUsuarioSucurRolList();
+            List<SeUsuarioSucurRol> seUsuarioSucurRolListNew = seUsuarios.getSeUsuarioSucurRolList();
             if (idPersonaNew != null) {
                 idPersonaNew = em.getReference(idPersonaNew.getClass(), idPersonaNew.getIdPersona());
                 seUsuarios.setIdPersona(idPersonaNew);
             }
-            List<SeUsuarioSucurRol> attachedSeUsuarioSucurRolListNew = new ArrayList<SeUsuarioSucurRol>();
-            for (SeUsuarioSucurRol seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach : seUsuarioSucurRolListNew) {
-                seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach = em.getReference(seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach.getClass(), seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach.getSeUsuarioSucurRolPK());
-                attachedSeUsuarioSucurRolListNew.add(seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach);
-            }
-            seUsuarioSucurRolListNew = attachedSeUsuarioSucurRolListNew;
-            seUsuarios.setSeUsuarioSucurRolList(seUsuarioSucurRolListNew);
             List<VeFactura> attachedVeFacturaListNew = new ArrayList<VeFactura>();
             for (VeFactura veFacturaListNewVeFacturaToAttach : veFacturaListNew) {
                 veFacturaListNewVeFacturaToAttach = em.getReference(veFacturaListNewVeFacturaToAttach.getClass(), veFacturaListNewVeFacturaToAttach.getVeFacturaPK());
@@ -130,6 +123,13 @@ public class SeUsuariosJpaController implements Serializable {
             }
             veFacturaListNew = attachedVeFacturaListNew;
             seUsuarios.setVeFacturaList(veFacturaListNew);
+            List<SeUsuarioSucurRol> attachedSeUsuarioSucurRolListNew = new ArrayList<SeUsuarioSucurRol>();
+            for (SeUsuarioSucurRol seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach : seUsuarioSucurRolListNew) {
+                seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach = em.getReference(seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach.getClass(), seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach.getSeUsuarioSucurRolPK());
+                attachedSeUsuarioSucurRolListNew.add(seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach);
+            }
+            seUsuarioSucurRolListNew = attachedSeUsuarioSucurRolListNew;
+            seUsuarios.setSeUsuarioSucurRolList(seUsuarioSucurRolListNew);
             seUsuarios = em.merge(seUsuarios);
             if (idPersonaOld != null && !idPersonaOld.equals(idPersonaNew)) {
                 idPersonaOld.getSeUsuariosList().remove(seUsuarios);
@@ -138,23 +138,6 @@ public class SeUsuariosJpaController implements Serializable {
             if (idPersonaNew != null && !idPersonaNew.equals(idPersonaOld)) {
                 idPersonaNew.getSeUsuariosList().add(seUsuarios);
                 idPersonaNew = em.merge(idPersonaNew);
-            }
-            for (SeUsuarioSucurRol seUsuarioSucurRolListOldSeUsuarioSucurRol : seUsuarioSucurRolListOld) {
-                if (!seUsuarioSucurRolListNew.contains(seUsuarioSucurRolListOldSeUsuarioSucurRol)) {
-                    seUsuarioSucurRolListOldSeUsuarioSucurRol.setIdUsuario(null);
-                    seUsuarioSucurRolListOldSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListOldSeUsuarioSucurRol);
-                }
-            }
-            for (SeUsuarioSucurRol seUsuarioSucurRolListNewSeUsuarioSucurRol : seUsuarioSucurRolListNew) {
-                if (!seUsuarioSucurRolListOld.contains(seUsuarioSucurRolListNewSeUsuarioSucurRol)) {
-                    SeUsuarios oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol = seUsuarioSucurRolListNewSeUsuarioSucurRol.getIdUsuario();
-                    seUsuarioSucurRolListNewSeUsuarioSucurRol.setIdUsuario(seUsuarios);
-                    seUsuarioSucurRolListNewSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListNewSeUsuarioSucurRol);
-                    if (oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol != null && !oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol.equals(seUsuarios)) {
-                        oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol.getSeUsuarioSucurRolList().remove(seUsuarioSucurRolListNewSeUsuarioSucurRol);
-                        oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol = em.merge(oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol);
-                    }
-                }
             }
             for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
                 if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
@@ -170,6 +153,23 @@ public class SeUsuariosJpaController implements Serializable {
                     if (oldIdUsuarioOfVeFacturaListNewVeFactura != null && !oldIdUsuarioOfVeFacturaListNewVeFactura.equals(seUsuarios)) {
                         oldIdUsuarioOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
                         oldIdUsuarioOfVeFacturaListNewVeFactura = em.merge(oldIdUsuarioOfVeFacturaListNewVeFactura);
+                    }
+                }
+            }
+            for (SeUsuarioSucurRol seUsuarioSucurRolListOldSeUsuarioSucurRol : seUsuarioSucurRolListOld) {
+                if (!seUsuarioSucurRolListNew.contains(seUsuarioSucurRolListOldSeUsuarioSucurRol)) {
+                    seUsuarioSucurRolListOldSeUsuarioSucurRol.setIdUsuario(null);
+                    seUsuarioSucurRolListOldSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListOldSeUsuarioSucurRol);
+                }
+            }
+            for (SeUsuarioSucurRol seUsuarioSucurRolListNewSeUsuarioSucurRol : seUsuarioSucurRolListNew) {
+                if (!seUsuarioSucurRolListOld.contains(seUsuarioSucurRolListNewSeUsuarioSucurRol)) {
+                    SeUsuarios oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol = seUsuarioSucurRolListNewSeUsuarioSucurRol.getIdUsuario();
+                    seUsuarioSucurRolListNewSeUsuarioSucurRol.setIdUsuario(seUsuarios);
+                    seUsuarioSucurRolListNewSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListNewSeUsuarioSucurRol);
+                    if (oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol != null && !oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol.equals(seUsuarios)) {
+                        oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol.getSeUsuarioSucurRolList().remove(seUsuarioSucurRolListNewSeUsuarioSucurRol);
+                        oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol = em.merge(oldIdUsuarioOfSeUsuarioSucurRolListNewSeUsuarioSucurRol);
                     }
                 }
             }
@@ -207,15 +207,15 @@ public class SeUsuariosJpaController implements Serializable {
                 idPersona.getSeUsuariosList().remove(seUsuarios);
                 idPersona = em.merge(idPersona);
             }
-            List<SeUsuarioSucurRol> seUsuarioSucurRolList = seUsuarios.getSeUsuarioSucurRolList();
-            for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRol : seUsuarioSucurRolList) {
-                seUsuarioSucurRolListSeUsuarioSucurRol.setIdUsuario(null);
-                seUsuarioSucurRolListSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListSeUsuarioSucurRol);
-            }
             List<VeFactura> veFacturaList = seUsuarios.getVeFacturaList();
             for (VeFactura veFacturaListVeFactura : veFacturaList) {
                 veFacturaListVeFactura.setIdUsuario(null);
                 veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
+            }
+            List<SeUsuarioSucurRol> seUsuarioSucurRolList = seUsuarios.getSeUsuarioSucurRolList();
+            for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRol : seUsuarioSucurRolList) {
+                seUsuarioSucurRolListSeUsuarioSucurRol.setIdUsuario(null);
+                seUsuarioSucurRolListSeUsuarioSucurRol = em.merge(seUsuarioSucurRolListSeUsuarioSucurRol);
             }
             em.remove(seUsuarios);
             em.getTransaction().commit();

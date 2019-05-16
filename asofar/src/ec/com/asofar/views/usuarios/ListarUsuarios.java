@@ -1,8 +1,7 @@
-package ec.com.asofar.views.persona;
+package ec.com.asofar.views.usuarios;
 
-import ec.com.asofar.daoext.SePersonasJpaControllerExt;
+import ec.com.asofar.dao.SeUsuariosJpaController;
 import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -10,41 +9,40 @@ import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
-import javax.swing.JOptionPane;
 
-public class Mostrar_persona extends javax.swing.JDialog {
+public class ListarUsuarios extends javax.swing.JDialog {
 
     int x, y;
-    SePersonas obj;
-    List<SePersonas> lista_persona;
+    SeUsuarios obj;
+    List<SeUsuarios> usuario_lista;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-    SePersonasJpaControllerExt persona_controller
-            = new SePersonasJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
+    SeUsuariosJpaController usuario_controller
+            = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
     SeEmpresa em1; 
     SeSucursal su1;
 
-    public Mostrar_persona(java.awt.Frame parent, boolean modal) {
+    public ListarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        lista_persona
-                = persona_controller.findSePersonasEntities();
-        Tablas.listarPersonas(lista_persona, jtPersonas);
+        usuario_lista
+                = usuario_controller.findSeUsuariosEntities();
+        Tablas.listarUsuarios(usuario_lista, jtPersonas);
 
     }
 
-    public Mostrar_persona(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ListarUsuarios(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         us1 = us;
         em1 = em;
         su1= su;
-        lista_persona
-                = persona_controller.findSePersonasEntities();
-        Tablas.listarPersonas(lista_persona, jtPersonas);
+      usuario_lista
+                = usuario_controller.findSeUsuariosEntities();
+        Tablas.listarUsuarios(usuario_lista, jtPersonas);
 
     }
 
@@ -57,7 +55,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPersonas = new javax.swing.JTable();
-        txtFiltro = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -108,13 +105,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
 
-        txtFiltro.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        txtFiltro.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtFiltroFocusLost(evt);
-            }
-        });
-
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
         jButton2.setText("NUEVO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +117,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PERSONAS");
+        jLabel1.setText("USUARIOS");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -147,11 +137,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(387, 387, 387)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -164,9 +150,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(63, 63, 63)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -191,23 +175,13 @@ public class Mostrar_persona extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
-        int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
-
-        if (r == JOptionPane.YES_OPTION) {
-             setVisible(false);
-
-//            asdfg12345
-        } else {
-
-        }
-           
+            setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Registrar_persona ru = new Registrar_persona(new javax.swing.JFrame(), true, us1,em1,su1);
+        IngresarUsuarios ru = new IngresarUsuarios(new javax.swing.JFrame(), true, us1,em1,su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -221,12 +195,12 @@ public class Mostrar_persona extends javax.swing.JDialog {
         obj = null;
         if (evt.getClickCount() == 2) {
             id = jtPersonas.getSelectedRow();
-            for (int i = 0; i < lista_persona.size(); i++) {
-                if ((jtPersonas.getValueAt(id, 0).toString().equals(lista_persona.get(i).getCedula()))) {
-                    obj = lista_persona.get(i);
+            for (int i = 0; i < usuario_lista.size(); i++) {
+                if ((jtPersonas.getValueAt(id, 0).toString().equals(usuario_lista.get(i).getIdUsuario()))) {
+                    obj = usuario_lista.get(i);
                     if (obj != null) {
                         
-                        Editar_persona es = new Editar_persona(new javax.swing.JFrame(), true, obj,us1,em1,su1);
+                        ActualizarDatosUsuarios es = new ActualizarDatosUsuarios(new javax.swing.JFrame(), true, obj,us1,em1,su1);
                         setVisible(false);
                         es.setVisible(true);
                     }
@@ -246,10 +220,6 @@ public class Mostrar_persona extends javax.swing.JDialog {
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
-    private void txtFiltroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFiltroFocusLost
-        txtFiltro.setText(txtFiltro.getText().toUpperCase());
-    }//GEN-LAST:event_txtFiltroFocusLost
-
     /**
      * @param args the command line arguments
      */
@@ -258,7 +228,7 @@ public class Mostrar_persona extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Mostrar_persona dialog = new Mostrar_persona(new javax.swing.JFrame(), true);
+                ListarUsuarios dialog = new ListarUsuarios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -278,6 +248,5 @@ public class Mostrar_persona extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtPersonas;
-    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

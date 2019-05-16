@@ -248,7 +248,7 @@ public class ModificarCajasForm extends javax.swing.JDialog {
                     vCajaController.edit(vCaja);
                     JOptionPane.showMessageDialog(null, "Datos modificados correctamente!");
                     setVisible(false);
-                    ConsultaCajasForm cg = new ConsultaCajasForm(new javax.swing.JFrame(), true);
+                    ConsultaCajasActivasForm cg = new ConsultaCajasActivasForm(new javax.swing.JFrame(), true);
                     cg.dispose();
                     cg.setVisible(true);
                 } catch (Exception ex) {
@@ -262,31 +262,6 @@ public class ModificarCajasForm extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnGrabarActionPerformed
 
-    private void brnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnEliminarActionPerformed
-        vCaja = vCaja2;
-
-        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar los datos?", "", JOptionPane.YES_NO_OPTION);
-
-        if (r == JOptionPane.YES_OPTION) {
-            vCaja.setEstado("I");
-            try {
-                vCajaController.edit(vCaja2);
-                JOptionPane.showMessageDialog(this, "Caja Eliminada correctamente");
-                setVisible(false);
-                ConsultaCajasForm cg = new ConsultaCajasForm(new javax.swing.JFrame(), true);
-                cg.dispose();
-                cg.setVisible(true);
-            } catch (Exception ex) {
-                Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-
-        }
-
-
-    }//GEN-LAST:event_brnEliminarActionPerformed
-
     private void txtNuevoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoKeyTyped
         char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
@@ -299,6 +274,30 @@ public class ModificarCajasForm extends javax.swing.JDialog {
 
         txtNuevo.setText(txtNuevo.getText().toUpperCase());
     }//GEN-LAST:event_txtNombreactualFocusLost
+
+    private void brnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnEliminarActionPerformed
+        vCaja = vCaja2;
+
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar los datos?", "", JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+            vCaja.setEstado("I");
+            try {
+                vCajaController.edit(vCaja2);
+                JOptionPane.showMessageDialog(this, "Caja Eliminada correctamente");
+                setVisible(false);
+                ConsultaCajasActivasForm cg = new ConsultaCajasActivasForm(new javax.swing.JFrame(), true);
+                cg.dispose();
+                cg.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
+
+    }//GEN-LAST:event_brnEliminarActionPerformed
 
     /**
      * @param args the command line arguments

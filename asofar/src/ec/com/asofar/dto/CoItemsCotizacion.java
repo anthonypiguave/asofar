@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_items_cotizacion")
@@ -69,7 +69,7 @@ public class CoItemsCotizacion implements Serializable {
     @Column(name = "procesado")
     private String procesado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coItemsCotizacion")
-    private List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList;
+    private List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList;
     @JoinColumn(name = "id_tipo_compra", referencedColumnName = "id_in_tipo_compra")
     @ManyToOne
     private InTipoCompra idTipoCompra;
@@ -166,12 +166,12 @@ public class CoItemsCotizacion implements Serializable {
     }
 
     @XmlTransient
-    public List<CoCotizacionesPorPorveedor> getCoCotizacionesPorPorveedorList() {
-        return coCotizacionesPorPorveedorList;
+    public List<CoCotizacionesPorProveedor> getCoCotizacionesPorProveedorList() {
+        return coCotizacionesPorProveedorList;
     }
 
-    public void setCoCotizacionesPorPorveedorList(List<CoCotizacionesPorPorveedor> coCotizacionesPorPorveedorList) {
-        this.coCotizacionesPorPorveedorList = coCotizacionesPorPorveedorList;
+    public void setCoCotizacionesPorProveedorList(List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList) {
+        this.coCotizacionesPorProveedorList = coCotizacionesPorProveedorList;
     }
 
     public InTipoCompra getIdTipoCompra() {

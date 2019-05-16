@@ -14,7 +14,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.AES;
 import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.views.persona.Editar_persona;
+import ec.com.asofar.views.persona.ActualizarDatosPersonas;
 import java.awt.Dimension;
 import java.sql.Date;
 import java.util.List;
@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class Editar_usuario extends javax.swing.JDialog {
+public class ActualizarDatosUsuarios extends javax.swing.JDialog {
 
     SeRolesJpaController mn
             = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -43,7 +43,7 @@ public class Editar_usuario extends javax.swing.JDialog {
     java.util.Date fechaActual = new java.util.Date();
     AES aes = new AES();
 
-    public Editar_usuario(java.awt.Frame parent, boolean modal) {
+    public ActualizarDatosUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -54,7 +54,7 @@ public class Editar_usuario extends javax.swing.JDialog {
 
     }
 
-    public Editar_usuario(java.awt.Frame parent, boolean modal, SeUsuarios us_crear, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ActualizarDatosUsuarios(java.awt.Frame parent, boolean modal, SeUsuarios us_crear, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -315,7 +315,7 @@ public class Editar_usuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
+        ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -391,7 +391,7 @@ public class Editar_usuario extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
 
-            Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
+            ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
             setVisible(false);
             mp.setVisible(true);
         } else {
@@ -405,7 +405,7 @@ public class Editar_usuario extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Editar_usuario dialog = new Editar_usuario(new javax.swing.JFrame(), true);
+                ActualizarDatosUsuarios dialog = new ActualizarDatosUsuarios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -458,11 +458,11 @@ public class Editar_usuario extends javax.swing.JDialog {
             try {
                 tpc.edit(usuario);
                 JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO");
-                Mostrar_usuario mp = new Mostrar_usuario(new javax.swing.JFrame(), true, us1, em1, su1);
+                ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(Editar_persona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ActualizarDatosPersonas.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

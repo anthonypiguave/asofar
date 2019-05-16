@@ -14,18 +14,18 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.VeFacturaDetalle;
+import java.util.ArrayList;
+import java.util.List;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrPrestacionesPK;
-import java.util.ArrayList;
-import java.util.List;
-import ec.com.asofar.dto.VeFacturaDetalle;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrPrestacionesJpaController implements Serializable {
 
@@ -42,11 +42,11 @@ public class PrPrestacionesJpaController implements Serializable {
         if (prPrestaciones.getPrPrestacionesPK() == null) {
             prPrestaciones.setPrPrestacionesPK(new PrPrestacionesPK());
         }
-        if (prPrestaciones.getPrDetalleTarifarioList() == null) {
-            prPrestaciones.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
-        }
         if (prPrestaciones.getVeFacturaDetalleList() == null) {
             prPrestaciones.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
+        }
+        if (prPrestaciones.getPrDetalleTarifarioList() == null) {
+            prPrestaciones.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
         }
         prPrestaciones.getPrPrestacionesPK().setIdEmpresa(prPrestaciones.getSeEmpresa().getIdEmpresa());
         EntityManager em = null;
@@ -58,31 +58,22 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresa = em.getReference(seEmpresa.getClass(), seEmpresa.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresa);
             }
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : prPrestaciones.getPrDetalleTarifarioList()) {
-                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
-            }
-            prPrestaciones.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
             List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : prPrestaciones.getVeFacturaDetalleList()) {
                 veFacturaDetalleListVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListVeFacturaDetalleToAttach.getVeFacturaDetallePK());
                 attachedVeFacturaDetalleList.add(veFacturaDetalleListVeFacturaDetalleToAttach);
             }
             prPrestaciones.setVeFacturaDetalleList(attachedVeFacturaDetalleList);
+            List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
+            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : prPrestaciones.getPrDetalleTarifarioList()) {
+                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
+                attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
+            }
+            prPrestaciones.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
             em.persist(prPrestaciones);
             if (seEmpresa != null) {
                 seEmpresa.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresa = em.merge(seEmpresa);
-            }
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : prPrestaciones.getPrDetalleTarifarioList()) {
-                PrPrestaciones oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getPrPrestaciones();
-                prDetalleTarifarioListPrDetalleTarifario.setPrPrestaciones(prPrestaciones);
-                prDetalleTarifarioListPrDetalleTarifario = em.merge(prDetalleTarifarioListPrDetalleTarifario);
-                if (oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario != null) {
-                    oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListPrDetalleTarifario);
-                    oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario);
-                }
             }
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : prPrestaciones.getVeFacturaDetalleList()) {
                 PrPrestaciones oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle = veFacturaDetalleListVeFacturaDetalle.getPrPrestaciones();
@@ -91,6 +82,15 @@ public class PrPrestacionesJpaController implements Serializable {
                 if (oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle != null) {
                     oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListVeFacturaDetalle);
                     oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle = em.merge(oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle);
+                }
+            }
+            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : prPrestaciones.getPrDetalleTarifarioList()) {
+                PrPrestaciones oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getPrPrestaciones();
+                prDetalleTarifarioListPrDetalleTarifario.setPrPrestaciones(prPrestaciones);
+                prDetalleTarifarioListPrDetalleTarifario = em.merge(prDetalleTarifarioListPrDetalleTarifario);
+                if (oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario != null) {
+                    oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListPrDetalleTarifario);
+                    oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario);
                 }
             }
             em.getTransaction().commit();
@@ -115,25 +115,25 @@ public class PrPrestacionesJpaController implements Serializable {
             PrPrestaciones persistentPrPrestaciones = em.find(PrPrestaciones.class, prPrestaciones.getPrPrestacionesPK());
             SeEmpresa seEmpresaOld = persistentPrPrestaciones.getSeEmpresa();
             SeEmpresa seEmpresaNew = prPrestaciones.getSeEmpresa();
-            List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrPrestaciones.getPrDetalleTarifarioList();
-            List<PrDetalleTarifario> prDetalleTarifarioListNew = prPrestaciones.getPrDetalleTarifarioList();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentPrPrestaciones.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = prPrestaciones.getVeFacturaDetalleList();
+            List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrPrestaciones.getPrDetalleTarifarioList();
+            List<PrDetalleTarifario> prDetalleTarifarioListNew = prPrestaciones.getPrDetalleTarifarioList();
             List<String> illegalOrphanMessages = null;
-            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
-                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its prPrestaciones field is not nullable.");
-                }
-            }
             for (VeFacturaDetalle veFacturaDetalleListOldVeFacturaDetalle : veFacturaDetalleListOld) {
                 if (!veFacturaDetalleListNew.contains(veFacturaDetalleListOldVeFacturaDetalle)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain VeFacturaDetalle " + veFacturaDetalleListOldVeFacturaDetalle + " since its prPrestaciones field is not nullable.");
+                }
+            }
+            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
+                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its prPrestaciones field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -143,13 +143,6 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresaNew);
             }
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
-                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioListNew.add(prDetalleTarifarioListNewPrDetalleTarifarioToAttach);
-            }
-            prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
-            prPrestaciones.setPrDetalleTarifarioList(prDetalleTarifarioListNew);
             List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
                 veFacturaDetalleListNewVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListNewVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListNewVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -157,6 +150,13 @@ public class PrPrestacionesJpaController implements Serializable {
             }
             veFacturaDetalleListNew = attachedVeFacturaDetalleListNew;
             prPrestaciones.setVeFacturaDetalleList(veFacturaDetalleListNew);
+            List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
+            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
+                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
+                attachedPrDetalleTarifarioListNew.add(prDetalleTarifarioListNewPrDetalleTarifarioToAttach);
+            }
+            prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
+            prPrestaciones.setPrDetalleTarifarioList(prDetalleTarifarioListNew);
             prPrestaciones = em.merge(prPrestaciones);
             if (seEmpresaOld != null && !seEmpresaOld.equals(seEmpresaNew)) {
                 seEmpresaOld.getPrPrestacionesList().remove(prPrestaciones);
@@ -166,17 +166,6 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresaNew.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresaNew = em.merge(seEmpresaNew);
             }
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
-                if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
-                    PrPrestaciones oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario = prDetalleTarifarioListNewPrDetalleTarifario.getPrPrestaciones();
-                    prDetalleTarifarioListNewPrDetalleTarifario.setPrPrestaciones(prPrestaciones);
-                    prDetalleTarifarioListNewPrDetalleTarifario = em.merge(prDetalleTarifarioListNewPrDetalleTarifario);
-                    if (oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario != null && !oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.equals(prPrestaciones)) {
-                        oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListNewPrDetalleTarifario);
-                        oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario);
-                    }
-                }
-            }
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalle : veFacturaDetalleListNew) {
                 if (!veFacturaDetalleListOld.contains(veFacturaDetalleListNewVeFacturaDetalle)) {
                     PrPrestaciones oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle = veFacturaDetalleListNewVeFacturaDetalle.getPrPrestaciones();
@@ -185,6 +174,17 @@ public class PrPrestacionesJpaController implements Serializable {
                     if (oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle != null && !oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle.equals(prPrestaciones)) {
                         oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListNewVeFacturaDetalle);
                         oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle = em.merge(oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle);
+                    }
+                }
+            }
+            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
+                if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
+                    PrPrestaciones oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario = prDetalleTarifarioListNewPrDetalleTarifario.getPrPrestaciones();
+                    prDetalleTarifarioListNewPrDetalleTarifario.setPrPrestaciones(prPrestaciones);
+                    prDetalleTarifarioListNewPrDetalleTarifario = em.merge(prDetalleTarifarioListNewPrDetalleTarifario);
+                    if (oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario != null && !oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.equals(prPrestaciones)) {
+                        oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListNewPrDetalleTarifario);
+                        oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario);
                     }
                 }
             }
@@ -218,19 +218,19 @@ public class PrPrestacionesJpaController implements Serializable {
                 throw new NonexistentEntityException("The prPrestaciones with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<PrDetalleTarifario> prDetalleTarifarioListOrphanCheck = prPrestaciones.getPrDetalleTarifarioList();
-            for (PrDetalleTarifario prDetalleTarifarioListOrphanCheckPrDetalleTarifario : prDetalleTarifarioListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable prPrestaciones field.");
-            }
             List<VeFacturaDetalle> veFacturaDetalleListOrphanCheck = prPrestaciones.getVeFacturaDetalleList();
             for (VeFacturaDetalle veFacturaDetalleListOrphanCheckVeFacturaDetalle : veFacturaDetalleListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the VeFacturaDetalle " + veFacturaDetalleListOrphanCheckVeFacturaDetalle + " in its veFacturaDetalleList field has a non-nullable prPrestaciones field.");
+            }
+            List<PrDetalleTarifario> prDetalleTarifarioListOrphanCheck = prPrestaciones.getPrDetalleTarifarioList();
+            for (PrDetalleTarifario prDetalleTarifarioListOrphanCheckPrDetalleTarifario : prDetalleTarifarioListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable prPrestaciones field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

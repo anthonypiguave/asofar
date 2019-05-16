@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_tarifario")
@@ -69,13 +69,13 @@ public class PrTarifario implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTarifario")
-    private List<PrDetalleTarifario> prDetalleTarifarioList;
     @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTarifario")
+    private List<PrDetalleTarifario> prDetalleTarifarioList;
 
     public PrTarifario() {
     }
@@ -160,6 +160,14 @@ public class PrTarifario implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
+    public SeSucursal getSeSucursal() {
+        return seSucursal;
+    }
+
+    public void setSeSucursal(SeSucursal seSucursal) {
+        this.seSucursal = seSucursal;
+    }
+
     @XmlTransient
     public List<PrDetalleTarifario> getPrDetalleTarifarioList() {
         return prDetalleTarifarioList;
@@ -167,14 +175,6 @@ public class PrTarifario implements Serializable {
 
     public void setPrDetalleTarifarioList(List<PrDetalleTarifario> prDetalleTarifarioList) {
         this.prDetalleTarifarioList = prDetalleTarifarioList;
-    }
-
-    public SeSucursal getSeSucursal() {
-        return seSucursal;
-    }
-
-    public void setSeSucursal(SeSucursal seSucursal) {
-        this.seSucursal = seSucursal;
     }
 
     @Override
