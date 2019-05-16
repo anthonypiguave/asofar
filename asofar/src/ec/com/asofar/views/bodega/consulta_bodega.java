@@ -31,7 +31,7 @@ public class consulta_bodega extends javax.swing.JDialog {
     int x, y;
     InBodega bodegaL = new InBodega();
     InBodega objeto;
-    List<InBodega> bodega; 
+    List<InBodega> bodega;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
@@ -253,7 +253,9 @@ public class consulta_bodega extends javax.swing.JDialog {
             if (bodegaL != null) {
                 bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL);
                 ep.setVisible(true);
-
+                
+                bodega = bc.findInBodegaEntities();
+                Tablas.listarBodega(bodega, tbl_bodega);
             }
         }
 
