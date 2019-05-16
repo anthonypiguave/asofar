@@ -5,9 +5,9 @@
  */
 package ec.com.asofar.views.cotizacion;
 
-import ec.com.asofar.dao.CoCotizacionesPorPorveedorJpaController;
+import ec.com.asofar.dao.CoCotizacionesPorProveedorJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
@@ -25,18 +25,18 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
 //    
 //    List<CoCotizacionesPorPorveedor> lista = control.findCoCotizacionesPorPorveedorEntities();
 //    CoCotizacionesPorPorveedor obj = new CoCotizacionesPorPorveedor();
-    CoCotizacionesPorPorveedor obj = new CoCotizacionesPorPorveedor();
-    List<CoCotizacionesPorPorveedor> lista;
-    CoCotizacionesPorPorveedorJpaController ptm = new CoCotizacionesPorPorveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
+    CoCotizacionesPorProveedor obj = new CoCotizacionesPorProveedor();
+    List<CoCotizacionesPorProveedor> lista;
+    CoCotizacionesPorProveedorJpaController ptm = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";
     public cotizacionesProveedorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         System.out.println("pajerrro!!");
-        lista=ptm.findCoCotizacionesPorPorveedorEntities();
-         for (int i = 0; i < lista.size(); i++){
-            System.out.println("entread: "+lista.get(i).getEstado()+lista.get(i).getFechaActualizacion());
-        }
+        lista=ptm.findCoCotizacionesPorProveedorEntities();
+//         for (int i = 0; i < lista.size(); i++){
+//            System.out.println("entread: "+lista.get(i).getEstado()+lista.get(i).getFechaActualizacion());
+//        }
         Tablas.tablaCotizacionPorProveedor(jtCabecera, lista);
         
     }
@@ -162,7 +162,7 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     private void jtCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMousePressed
         if(evt.getClickCount()==1){
             String valor = jtCabecera.getValueAt(jtCabecera.getSelectedRow(), 0).toString();
-            CoCotizacionesPorPorveedor coti= ObtenerDTO.ObtenerCoCotizacionesPorPorveedor(valor);
+            CoCotizacionesPorProveedor coti= ObtenerDTO.ObtenerCoCotizacionesPorProveedor(valor);
             Tablas.TablaDetallePorProveerdo(coti.getCoDetalleCotizacionPorProveedorList(), jtDetalle);
         }
     }//GEN-LAST:event_jtCabeceraMousePressed

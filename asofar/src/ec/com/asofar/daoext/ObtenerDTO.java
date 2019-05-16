@@ -588,7 +588,7 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
         return dto;
     }
       
-      public static CoCotizacionesPorProveedor ObtenerCoCotizacionesPorPorveedor(String id) {
+      public static CoCotizacionesPorProveedor ObtenerCoCotizacionesPorProveedor(String id) {
         CoCotizacionesPorProveedorJpaController control = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
         CoCotizacionesPorProveedor dto = new CoCotizacionesPorProveedor();
         List<CoCotizacionesPorProveedor> lista = control.findCoCotizacionesPorProveedorEntities();
@@ -602,5 +602,18 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
 
         return dto;
 
+    }
+      public static PrProductos ObtenerPrProductos(Long id){
+        PrProductosJpaController control=new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrProductos dto=new PrProductos();
+        List<PrProductos> lista=control.findPrProductosEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getPrProductosPK().getIdProducto()==id){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        return dto;
     }
 }
