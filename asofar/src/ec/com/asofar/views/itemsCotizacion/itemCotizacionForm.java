@@ -20,21 +20,22 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formulario;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author admin1
  */
 public class itemCotizacionForm extends javax.swing.JDialog {
-
+    EntityManagerFactory conn=EntityManagerUtil.ObtenerEntityManager();
     InTipoDepartamento departamento = new InTipoDepartamento();
-    InTipoDepartamentoJpaController jdepartamento = new InTipoDepartamentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoDepartamentoJpaController jdepartamento = new InTipoDepartamentoJpaController(conn);
     InTipoCompra compra = new InTipoCompra();
-    InTipoCompraJpaController jcompra = new InTipoCompraJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoCompraJpaController jcompra = new InTipoCompraJpaController(conn);
     InEstadosMovimiento estados = new InEstadosMovimiento();
-    InEstadosMovimientoJpaController jestados = new InEstadosMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InEstadosMovimientoJpaController jestados = new InEstadosMovimientoJpaController(conn);
     InTipoDocumento documento = new InTipoDocumento();
-    InTipoDocumentoJpaController jdocumento = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoDocumentoJpaController jdocumento = new InTipoDocumentoJpaController(conn);
     List<InTipoCompra> lcompra;
     List<InTipoDepartamento> ldeparta;
     List<InEstadosMovimiento> lestad;
