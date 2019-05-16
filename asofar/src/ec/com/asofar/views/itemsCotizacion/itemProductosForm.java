@@ -35,6 +35,7 @@ public class itemProductosForm extends javax.swing.JDialog {
         lprod= obtener.obtenerProducto();
         Tablas.listarProductoItems(lprod, jt_producto);
         
+        
     }
 
     /**
