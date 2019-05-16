@@ -210,7 +210,7 @@ public class ConsultaCajaInactivasForm extends javax.swing.JDialog {
                 if ((tbCaja.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     vc = lista.get(i);
                     if (vc != null) {
-                        ModificarCajasInactivasForm es = new ModificarCajasInactivasForm(new javax.swing.JFrame(), true, vc);
+                        ModificarCajasForm es = new ModificarCajasForm(new javax.swing.JFrame(), true, vc);
                         es.setVisible(true);
                     }
                 }

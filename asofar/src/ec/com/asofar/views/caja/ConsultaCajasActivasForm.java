@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class ConsultaCajasForm extends javax.swing.JDialog {
+public class ConsultaCajasActivasForm extends javax.swing.JDialog {
 
     List<VeCaja> lista;
     VeCaja vc;
@@ -25,7 +25,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
     int y, x;
     String valor = "";
 
-    public ConsultaCajasForm(java.awt.Frame parent, boolean modal) {
+    public ConsultaCajasActivasForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         cargarInformacion();
@@ -33,7 +33,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
 
     }
 
-    public ConsultaCajasForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ConsultaCajasActivasForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         cargarInformacion();
@@ -324,21 +324,85 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCajasForm.class
+            java.util.logging.Logger.getLogger(ConsultaCajasActivasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCajasForm.class
+            java.util.logging.Logger.getLogger(ConsultaCajasActivasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCajasForm.class
+            java.util.logging.Logger.getLogger(ConsultaCajasActivasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCajasForm.class
+            java.util.logging.Logger.getLogger(ConsultaCajasActivasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -407,7 +471,7 @@ public class ConsultaCajasForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultaCajasForm dialog = new ConsultaCajasForm(new javax.swing.JFrame(), true);
+                ConsultaCajasActivasForm dialog = new ConsultaCajasActivasForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

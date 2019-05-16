@@ -162,9 +162,7 @@ public class CrearCajaForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
         setVisible(false);
-
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
@@ -179,12 +177,10 @@ public class CrearCajaForm extends javax.swing.JDialog {
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(txtNombre.getText())) {
                 JOptionPane.showMessageDialog(null, "Ingrese un nombre!");
             } else {
-
                 vc.setNombre(txtNombre.getText());
                 vc.setEstado("A");
                 vc.setFechaCreacion(d);
@@ -194,17 +190,12 @@ public class CrearCajaForm extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                     setVisible(false);
 
-                    ConsultaCajasForm cg = new ConsultaCajasForm(new javax.swing.JFrame(), true);
+                    ConsultaCajasActivasForm cg = new ConsultaCajasActivasForm(new javax.swing.JFrame(), true);
                     cg.setVisible(true);
-
                 } catch (Exception ex) {
-
                 }
             }
-        } else {
-
         }
-
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
