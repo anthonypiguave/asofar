@@ -228,9 +228,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        setVisible(false);
-        PantallaPrincipal pp = new PantallaPrincipal();
-        pp.setVisible(true);
+        setVisible(false);                
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
@@ -302,6 +300,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultaProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
