@@ -16,8 +16,8 @@ import java.util.TimerTask;
 public class Temporizador {
 
     private int hour = 0;
-    private int minute = 0;
-    private int second = 0;
+    private int minute = 1;
+    private int second = 50;
     private Timer timer;
     private boolean isTimerRunning;
     private Display display;
@@ -26,20 +26,20 @@ public class Temporizador {
         timer = new Timer();
         display = new Display();
     }
-    
+
     TimerTask task = new TimerTask() {
         @Override
         public void run() {
             isTimerRunning = true;
-            if (second >= 0) {
+            if (second < 59) {
                 second++;
             } else {
-                second = 59;
-                if (minute > 0) {
+                second = 00;
+                if (minute < 59) {
                     minute++;
                 } else {
-                    minute = 59;
-                    if (hour > 0) {
+                    minute = 00;
+                    if (hour < 23) {
                         hour++;
                     } else {
                         isTimerRunning = false;
