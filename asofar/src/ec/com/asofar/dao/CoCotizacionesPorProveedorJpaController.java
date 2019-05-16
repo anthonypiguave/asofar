@@ -25,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class CoCotizacionesPorProveedorJpaController implements Serializable {
 
@@ -45,8 +45,8 @@ public class CoCotizacionesPorProveedorJpaController implements Serializable {
         if (coCotizacionesPorProveedor.getCoDetalleCotizacionPorProveedorList() == null) {
             coCotizacionesPorProveedor.setCoDetalleCotizacionPorProveedorList(new ArrayList<CoDetalleCotizacionPorProveedor>());
         }
-        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdSucursal(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdEmpresa(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
+        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdSucursal(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdCotizacion(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         EntityManager em = null;
         try {
@@ -100,8 +100,8 @@ public class CoCotizacionesPorProveedorJpaController implements Serializable {
     }
 
     public void edit(CoCotizacionesPorProveedor coCotizacionesPorProveedor) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdSucursal(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdEmpresa(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
+        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdSucursal(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdCotizacion(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         EntityManager em = null;
         try {

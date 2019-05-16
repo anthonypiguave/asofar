@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "co_proveedores")
@@ -43,7 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoProveedores.findByPaginaWeb", query = "SELECT c FROM CoProveedores c WHERE c.paginaWeb = :paginaWeb")
     , @NamedQuery(name = "CoProveedores.findByNumeroIdentificacion", query = "SELECT c FROM CoProveedores c WHERE c.numeroIdentificacion = :numeroIdentificacion")
     , @NamedQuery(name = "CoProveedores.findByEmail", query = "SELECT c FROM CoProveedores c WHERE c.email = :email")
-    , @NamedQuery(name = "CoProveedores.findByIdPais", query = "SELECT c FROM CoProveedores c WHERE c.idPais = :idPais")
     , @NamedQuery(name = "CoProveedores.findByContribuyenteEspecial", query = "SELECT c FROM CoProveedores c WHERE c.contribuyenteEspecial = :contribuyenteEspecial")
     , @NamedQuery(name = "CoProveedores.findByCodigoContribuyente", query = "SELECT c FROM CoProveedores c WHERE c.codigoContribuyente = :codigoContribuyente")
     , @NamedQuery(name = "CoProveedores.findByObservaciones", query = "SELECT c FROM CoProveedores c WHERE c.observaciones = :observaciones")
@@ -75,8 +73,6 @@ public class CoProveedores implements Serializable {
     private String numeroIdentificacion;
     @Column(name = "email")
     private String email;
-    @Column(name = "id_pais")
-    private BigInteger idPais;
     @Column(name = "contribuyente_especial")
     private String contribuyenteEspecial;
     @Column(name = "codigo_contribuyente")
@@ -100,6 +96,9 @@ public class CoProveedores implements Serializable {
     @JoinColumn(name = "tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona tipoPersona;
+    @JoinColumn(name = "id_pais", referencedColumnName = "id_Pais")
+    @ManyToOne
+    private SePais idPais;
     @OneToMany(mappedBy = "idProveedor")
     private List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList;
 
@@ -172,14 +171,6 @@ public class CoProveedores implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public BigInteger getIdPais() {
-        return idPais;
-    }
-
-    public void setIdPais(BigInteger idPais) {
-        this.idPais = idPais;
     }
 
     public String getContribuyenteEspecial() {
@@ -260,6 +251,14 @@ public class CoProveedores implements Serializable {
 
     public void setTipoPersona(SeTipoPersona tipoPersona) {
         this.tipoPersona = tipoPersona;
+    }
+
+    public SePais getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(SePais idPais) {
+        this.idPais = idPais;
     }
 
     @XmlTransient
