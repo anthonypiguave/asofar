@@ -48,6 +48,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         CargarComboFab();
+        Desavilitar(false);
 
     }
 
@@ -57,6 +58,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         CargarTextFields(med);
         CargarComboFab();
+        Desavilitar(false);
         med1 = med;
         us1 = us;
         em1 = em;
@@ -170,6 +172,11 @@ public class NuevoProducto extends javax.swing.JDialog {
         nom.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         cod_barra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cod_barra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cod_barraKeyTyped(evt);
+            }
+        });
 
         desc.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         desc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
@@ -177,7 +184,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         receta.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         receta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "REGISTRO SANITARIO:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "REGISTRO SANITARIO:"));
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jLabel2.setText("LOCAL:");
@@ -447,6 +454,27 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     }//GEN-LAST:event_BotonGuardarActionPerformed
 
+    private void cod_barraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cod_barraKeyTyped
+        char car = evt.getKeyChar();
+        if (cod_barra.getText().length() >= 13) {
+            evt.consume();
+        }
+        if (cod_barra.getText().length() == 13 ){
+          Desavilitar(true);  
+        } else {
+            Desavilitar(false); 
+        }
+    }//GEN-LAST:event_cod_barraKeyTyped
+       public void Desavilitar(boolean valor){
+           combofab.setEnabled(valor);
+           nom.setEnabled(valor);
+           local.setEnabled(valor);
+           extran.setEnabled(valor);
+           receta.setEnabled(valor);
+           desc.setEnabled(valor);
+       
+       }
+       
     /**
      * @param args the command line arguments
      */
