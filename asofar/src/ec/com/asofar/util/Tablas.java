@@ -21,6 +21,7 @@ import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
+import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
@@ -56,6 +57,42 @@ public class Tablas {
             tab.removeRow(0);
         }
         return tab;
+    }
+    public static void listarEmpresa(List<SeEmpresa> lista, JTable Tabla) {
+        int[] a = {5, 30, 30, 10, 15};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"RUC", "NOMBRE", "DIRECCION", "TELEFONO"};
+        String[] Filas = new String[4];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals('A')) {
+                Filas[0] = lista.get(i).getRuc();
+                Filas[1] = lista.get(i).getNombreComercial();
+                Filas[2] = lista.get(i).getDireccion();
+                Filas[3] = lista.get(i).getTelefono();
+           
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            
+            }
+        }
+
     }
 
     public static void listarProveedor(List<CoProveedores> lista, JTable Tabla) {
