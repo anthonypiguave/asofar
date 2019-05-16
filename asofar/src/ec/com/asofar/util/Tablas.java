@@ -6,7 +6,7 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
@@ -941,7 +941,7 @@ public class Tablas {
 
     }
 
-    public static void tablaCotizacionPorProveedor(JTable Tabla, List<CoCotizacionesPorPorveedor> lista) {
+    public static void tablaCotizacionPorProveedor(JTable Tabla, List<CoCotizacionesPorProveedor> lista) {
         int[] a = {5, 100, 100, 50, 80, 90, 90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
@@ -954,7 +954,7 @@ public class Tablas {
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            Filas[0] = "" + lista.get(i).getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor();
+            Filas[0] = "" + lista.get(i).getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
             Filas[4] = "" + lista.get(i).getIdProveedor().getTelefono1();
             Filas[2] = "" + lista.get(i).getIdProveedor().getNombre();
             Filas[3] = lista.get(i).getIdProveedor().getEmail();
@@ -1025,7 +1025,7 @@ public class Tablas {
     }
 
     public static void listarProductoItems(List<PrProductos> lista, JTable Tabla) {
-        int[] a = {5, 30, 190,190,190,90,90};
+        int[] a = {75, 190, 190,190,190,90,90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
