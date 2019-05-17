@@ -1027,7 +1027,7 @@ public class Tablas {
     }
 
     public static void listarProductoItems(List<PrProductos> lista, JTable Tabla) {
-        int[] a = {5, 30, 190,190,190,90,90};
+        int[] a = {75, 190, 190,190,190,90,90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);

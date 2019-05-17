@@ -230,7 +230,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
         });
 
         cbpais.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbpais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbpais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
 
         lbobligatorio.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         lbobligatorio.setForeground(new java.awt.Color(209, 30, 30));
