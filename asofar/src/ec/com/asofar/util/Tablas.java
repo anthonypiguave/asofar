@@ -6,7 +6,7 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
@@ -42,7 +42,7 @@ public class Tablas {
     static DefaultTableModel model;
     private boolean[] editable = {false, false, true};
     private static boolean[] editable1 = {false, false, true};
-    private static boolean[] editable2 = {false, false, false, true};
+    private static boolean[] editable2 = {false, false, false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -941,7 +941,7 @@ public class Tablas {
 
     }
 
-    public static void tablaCotizacionPorProveedor(JTable Tabla, List<CoCotizacionesPorPorveedor> lista) {
+    public static void tablaCotizacionPorProveedor(JTable Tabla, List<CoCotizacionesPorProveedor> lista) {
         int[] a = {5, 100, 100, 50, 80, 90, 90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
@@ -954,7 +954,7 @@ public class Tablas {
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            Filas[0] = "" + lista.get(i).getCoCotizacionesPorPorveedorPK().getIdCotizacionesPorPorveedor();
+            Filas[0] = "" + lista.get(i).getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
             Filas[4] = "" + lista.get(i).getIdProveedor().getTelefono1();
             Filas[2] = "" + lista.get(i).getIdProveedor().getNombre();
             Filas[3] = lista.get(i).getIdProveedor().getEmail();
@@ -984,10 +984,11 @@ public class Tablas {
     public static void TablaDetallePorProveerdo(List<CoDetalleCotizacionPorProveedor> lista, JTable tabla) {
         CoDetalleCotizacionPorProveedor vo = new CoDetalleCotizacionPorProveedor();
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DOCUMENTO", "DOCUMENTO", "CANTIDAD", "ESTADO",}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"LINEA DE DETALLE", "PRODUCTO", "DESCRIPCION","CANTIDAD", "ESTADO",}, 0) {
 
             Class[] types = new Class[]{
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1002,17 +1003,17 @@ public class Tablas {
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
                 // model.addRow(new Object[]{});
-                Object fila[] = new Object[4];
+                Object fila[] = new Object[5];
                 vo = lista.get(i);
                 fila[0] = vo.getCoDetalleCotizacionPorProveedorPK().getLineaDetalle();
-                fila[1] = vo.getIdProducto();
+                fila[1] = ObtenerDTO.ObtenerPrProductos(vo.getIdProducto().longValue()).getNombreProducto();
                 fila[2] = vo.getDescripcion();
                 fila[3] = vo.getCantidadPedido();
                 String ac = (String) vo.getEstado();
                 if ("A".equals(ac)) {
-                    fila[3] = true;
+                    fila[4] = true;
                 } else {
-                    fila[3] = false;
+                    fila[4] = false;
                 }
 
                 dt.addRow(fila);
