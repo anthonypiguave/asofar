@@ -1155,5 +1155,31 @@ public class Tablas {
         }
 
     }
-
+//    public static void TablaClientesActivo(List<SeClientes> listabodega, JTable tabla) {
+//        int[] a = {5, 100, 20};
+//        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+//        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+//        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+//        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+//        model = VaciarTabla(tabla);
+//        String[] b = {"ID", "MEDIDA", "ESTADO"};
+//        String[] filas = new String[3];
+//        model = new DefaultTableModel(null, b);
+//        tabla.setShowGrid(true);
+//        for (int i = 0; i < listabodega.size(); i++) {
+//            if (listabodega.get(i).getEstado().equals("A")) {
+//                filas[0] = String.valueOf(listabodega.get(i).getIdTipoBodega());
+//                filas[1] = listabodega.get(i).getNombre();
+//                filas[2] = listabodega.get(i).getEstado();
+//                model.addRow(filas);
+//                tabla.setModel(model);
+//                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+//                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+//                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+//                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
+//                tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//                tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+//            }
+//        }
+//    }
 }
