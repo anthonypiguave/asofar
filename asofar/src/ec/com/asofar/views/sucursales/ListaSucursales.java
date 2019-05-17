@@ -17,7 +17,7 @@ public class ListaSucursales extends javax.swing.JDialog {
 
     int x, y;
     SeSucursal obj;
-    List<SeSucursal> listaEmpresa;
+    List<SeSucursal> listaSucursal;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     SeSucursalJpaController sucursalController
@@ -30,9 +30,9 @@ public class ListaSucursales extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        listaEmpresa
+        listaSucursal
                 = sucursalController.findSeSucursalEntities();
-        Tablas.listarEmpresa(listaEmpresa, jtPersonas);
+        Tablas.listarSucursal(listaSucursal, tablaSucursal);
 
     }
 
@@ -43,9 +43,9 @@ public class ListaSucursales extends javax.swing.JDialog {
         us1 = us;
         em1 = em;
         su1= su;
-        listaEmpresa
-                = sucursalController.findSeEmpresaEntities();
-        Tablas.listarEmpresa(listaEmpresa, jtPersonas);
+        listaSucursal
+                = sucursalController.findSeSucursalEntities();
+        Tablas.listarSucursal(listaSucursal, tablaSucursal);
 
     }
 
@@ -57,9 +57,9 @@ public class ListaSucursales extends javax.swing.JDialog {
         btnSalir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtPersonas = new javax.swing.JTable();
+        tablaSucursal = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        SUCURSAL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -77,7 +77,7 @@ public class ListaSucursales extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(1, 1, 1), 2));
 
-        jtPersonas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaSucursal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -88,15 +88,15 @@ public class ListaSucursales extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtPersonasMousePressed(evt);
+                tablaSucursalMousePressed(evt);
             }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtPersonasMouseClicked(evt);
+                tablaSucursalMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtPersonas);
+        jScrollPane1.setViewportView(tablaSucursal);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,20 +117,20 @@ public class ListaSucursales extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EMPRESAS");
-        jLabel1.setOpaque(true);
-        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        SUCURSAL.setBackground(new java.awt.Color(0, 153, 153));
+        SUCURSAL.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        SUCURSAL.setForeground(new java.awt.Color(254, 254, 254));
+        SUCURSAL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SUCURSAL.setText("SUCURSALES");
+        SUCURSAL.setOpaque(true);
+        SUCURSAL.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel1MouseDragged(evt);
+                SUCURSALMouseDragged(evt);
             }
         });
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        SUCURSAL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel1MousePressed(evt);
+                SUCURSALMousePressed(evt);
             }
         });
 
@@ -148,12 +148,12 @@ public class ListaSucursales extends javax.swing.JDialog {
                 .addGap(211, 211, 211)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(85, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(SUCURSAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SUCURSAL, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,26 +195,26 @@ public class ListaSucursales extends javax.swing.JDialog {
    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IngresarEmpresas ru = new IngresarEmpresas(new javax.swing.JFrame(), true, us1,em1,su1);
+        IngresarSucursal ru = new IngresarSucursal(new javax.swing.JFrame(), true, us1,em1,su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jtPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMouseClicked
+    private void tablaSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtPersonasMouseClicked
+    }//GEN-LAST:event_tablaSucursalMouseClicked
 
-    private void jtPersonasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMousePressed
+    private void tablaSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalMousePressed
         int id = 0;
         obj = null;
         if (evt.getClickCount() == 2) {
-            id = jtPersonas.getSelectedRow();
-            for (int i = 0; i < listaEmpresa.size(); i++) {
-                if ((jtPersonas.getValueAt(id, 0).toString().equals(listaEmpresa.get(i).getRuc()))) {
-                    obj = listaEmpresa.get(i);
+            id = tablaSucursal.getSelectedRow();
+            for (int i = 0; i < listaSucursal.size(); i++) {
+                if ((tablaSucursal.getValueAt(id, 0).toString().equals(listaSucursal.get(i).getNombreComercial()))) {
+                    obj = listaSucursal.get(i);
                     if (obj != null) {
                         
-                        ActualizarDatosEmpresas es = new ActualizarDatosEmpresas(new javax.swing.JFrame(), true, obj,us1,em1,su1);
+                        ActualizarDatosSucursal es = new ActualizarDatosSucursal(new javax.swing.JFrame(), true, obj,us1,em1,su1);
                         setVisible(false);
                         es.setVisible(true);
                     }
@@ -222,17 +222,17 @@ public class ListaSucursales extends javax.swing.JDialog {
             }
 
         }
-    }//GEN-LAST:event_jtPersonasMousePressed
+    }//GEN-LAST:event_tablaSucursalMousePressed
 
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+    private void SUCURSALMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SUCURSALMousePressed
         x = evt.getX();
         y = evt.getY();
-    }//GEN-LAST:event_jLabel1MousePressed
+    }//GEN-LAST:event_SUCURSALMousePressed
 
-    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
+    private void SUCURSALMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SUCURSALMouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
-    }//GEN-LAST:event_jLabel1MouseDragged
+    }//GEN-LAST:event_SUCURSALMouseDragged
 
     /**
      * @param args the command line arguments
@@ -255,12 +255,12 @@ public class ListaSucursales extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel SUCURSAL;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtPersonas;
+    private javax.swing.JTable tablaSucursal;
     // End of variables declaration//GEN-END:variables
 }

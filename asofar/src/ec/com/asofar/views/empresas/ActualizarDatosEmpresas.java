@@ -71,14 +71,14 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
 
     public void bloqueo() {
 
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ELIMINAR EL USUARIO?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ELIMINAR LA EMPRESA?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
 
             empresa.setEstado('I');
             try {
                 empresaController.edit(empresa);
-                JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
+                JOptionPane.showMessageDialog(null, "EMPRESA ELIMINADA");
                 ListaEmpresas mp = new ListaEmpresas(new javax.swing.JFrame(), true);
                 setVisible(false);
                 mp.setVisible(true);

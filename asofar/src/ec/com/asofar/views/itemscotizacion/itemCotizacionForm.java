@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.itemsCotizacion;
+package ec.com.asofar.views.itemscotizacion;
 
 import ec.com.asofar.dao.InEstadosMovimientoJpaController;
 import ec.com.asofar.dao.InTipoCompraJpaController;
