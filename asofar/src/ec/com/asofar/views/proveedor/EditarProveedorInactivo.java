@@ -396,7 +396,7 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
             cbpais.addItem(listarpais.get(i).getNombre());
         }
         for (int i = 0; i <listarpais.size(); i++) {
-            if(pais.getNombre().getIdPais == listarpais.get(i).getIdPais()){
+            if(pais.getIdPais() == listarpais.get(i).getIdPais()){
                 cbpais.setSelectedItem(listarpais.get(i).getNombre());
             }
                 }        
