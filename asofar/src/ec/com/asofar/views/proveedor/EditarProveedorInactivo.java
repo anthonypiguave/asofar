@@ -470,6 +470,8 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void btnactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactivarActionPerformed
+        int responsive = JOptionPane.showConfirmDialog(null,"SEGURO DESEA ACTIVAR EL PROVEEDOR","",JOptionPane.YES_NO_OPTION);
+        if(responsive == JOptionPane.YES_OPTION){
         cprov.setEstado('A');
         cprov.setFechaActualizacion(d);
         try {
@@ -481,7 +483,7 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(EditarProveedorInactivo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        }
     }//GEN-LAST:event_btnactivarActionPerformed
 
     /**

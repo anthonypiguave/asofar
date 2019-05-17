@@ -488,7 +488,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        int responsive = JOptionPane.showConfirmDialog(null,"","SEGURO DESEA GUARDAR LOS DATOS",JOptionPane.YES_NO_OPTION);
+        int responsive = JOptionPane.showConfirmDialog(null,"","SEGURO DESEA CREAR EL PROVEEDOR",JOptionPane.YES_NO_OPTION);
         if(responsive == JOptionPane.YES_OPTION){        
             for (int i = 0; i < lista.size(); i++) {
                 if ((lista.get(i).getNumeroIdentificacion()).equals(txtidentificacion.getText())) {
