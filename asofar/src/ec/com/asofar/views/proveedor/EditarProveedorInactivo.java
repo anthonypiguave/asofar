@@ -7,8 +7,10 @@ package ec.com.asofar.views.proveedor;
 
 import ec.com.asofar.views.proveedor.*;
 import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.SePaisJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.SePais;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
@@ -394,7 +396,7 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
             cbpais.addItem(listarpais.get(i).getNombre());
         }
         for (int i = 0; i <listarpais.size(); i++) {
-            if(pais.getNombre().getIdPais() == listarpais.get(i).getIdPais()){
+            if(pais.getNombre().getIdPais == listarpais.get(i).getIdPais()){
                 cbpais.setSelectedItem(listarpais.get(i).getNombre());
             }
                 }        

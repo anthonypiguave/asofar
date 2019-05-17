@@ -12,17 +12,18 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.SeCiudad;
-import ec.com.asofar.dto.SePais;
+import ec.com.asofar.dto.CoProveedores;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.SeCiudad;
+import ec.com.asofar.dto.SePais;
 import ec.com.asofar.dto.SeProvincia;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 public class SePaisJpaController implements Serializable {
 
@@ -36,6 +37,9 @@ public class SePaisJpaController implements Serializable {
     }
 
     public void create(SePais sePais) {
+        if (sePais.getCoProveedoresList() == null) {
+            sePais.setCoProveedoresList(new ArrayList<CoProveedores>());
+        }
         if (sePais.getSeCiudadList() == null) {
             sePais.setSeCiudadList(new ArrayList<SeCiudad>());
         }
@@ -46,6 +50,12 @@ public class SePaisJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<CoProveedores> attachedCoProveedoresList = new ArrayList<CoProveedores>();
+            for (CoProveedores coProveedoresListCoProveedoresToAttach : sePais.getCoProveedoresList()) {
+                coProveedoresListCoProveedoresToAttach = em.getReference(coProveedoresListCoProveedoresToAttach.getClass(), coProveedoresListCoProveedoresToAttach.getIdProveedor());
+                attachedCoProveedoresList.add(coProveedoresListCoProveedoresToAttach);
+            }
+            sePais.setCoProveedoresList(attachedCoProveedoresList);
             List<SeCiudad> attachedSeCiudadList = new ArrayList<SeCiudad>();
             for (SeCiudad seCiudadListSeCiudadToAttach : sePais.getSeCiudadList()) {
                 seCiudadListSeCiudadToAttach = em.getReference(seCiudadListSeCiudadToAttach.getClass(), seCiudadListSeCiudadToAttach.getIdCiudad());
@@ -59,6 +69,15 @@ public class SePaisJpaController implements Serializable {
             }
             sePais.setSeProvinciaList(attachedSeProvinciaList);
             em.persist(sePais);
+            for (CoProveedores coProveedoresListCoProveedores : sePais.getCoProveedoresList()) {
+                SePais oldIdPaisOfCoProveedoresListCoProveedores = coProveedoresListCoProveedores.getIdPais();
+                coProveedoresListCoProveedores.setIdPais(sePais);
+                coProveedoresListCoProveedores = em.merge(coProveedoresListCoProveedores);
+                if (oldIdPaisOfCoProveedoresListCoProveedores != null) {
+                    oldIdPaisOfCoProveedoresListCoProveedores.getCoProveedoresList().remove(coProveedoresListCoProveedores);
+                    oldIdPaisOfCoProveedoresListCoProveedores = em.merge(oldIdPaisOfCoProveedoresListCoProveedores);
+                }
+            }
             for (SeCiudad seCiudadListSeCiudad : sePais.getSeCiudadList()) {
                 SePais oldIdPaisOfSeCiudadListSeCiudad = seCiudadListSeCiudad.getIdPais();
                 seCiudadListSeCiudad.setIdPais(sePais);
@@ -91,6 +110,8 @@ public class SePaisJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             SePais persistentSePais = em.find(SePais.class, sePais.getIdPais());
+            List<CoProveedores> coProveedoresListOld = persistentSePais.getCoProveedoresList();
+            List<CoProveedores> coProveedoresListNew = sePais.getCoProveedoresList();
             List<SeCiudad> seCiudadListOld = persistentSePais.getSeCiudadList();
             List<SeCiudad> seCiudadListNew = sePais.getSeCiudadList();
             List<SeProvincia> seProvinciaListOld = persistentSePais.getSeProvinciaList();
@@ -115,6 +136,13 @@ public class SePaisJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            List<CoProveedores> attachedCoProveedoresListNew = new ArrayList<CoProveedores>();
+            for (CoProveedores coProveedoresListNewCoProveedoresToAttach : coProveedoresListNew) {
+                coProveedoresListNewCoProveedoresToAttach = em.getReference(coProveedoresListNewCoProveedoresToAttach.getClass(), coProveedoresListNewCoProveedoresToAttach.getIdProveedor());
+                attachedCoProveedoresListNew.add(coProveedoresListNewCoProveedoresToAttach);
+            }
+            coProveedoresListNew = attachedCoProveedoresListNew;
+            sePais.setCoProveedoresList(coProveedoresListNew);
             List<SeCiudad> attachedSeCiudadListNew = new ArrayList<SeCiudad>();
             for (SeCiudad seCiudadListNewSeCiudadToAttach : seCiudadListNew) {
                 seCiudadListNewSeCiudadToAttach = em.getReference(seCiudadListNewSeCiudadToAttach.getClass(), seCiudadListNewSeCiudadToAttach.getIdCiudad());
@@ -130,6 +158,23 @@ public class SePaisJpaController implements Serializable {
             seProvinciaListNew = attachedSeProvinciaListNew;
             sePais.setSeProvinciaList(seProvinciaListNew);
             sePais = em.merge(sePais);
+            for (CoProveedores coProveedoresListOldCoProveedores : coProveedoresListOld) {
+                if (!coProveedoresListNew.contains(coProveedoresListOldCoProveedores)) {
+                    coProveedoresListOldCoProveedores.setIdPais(null);
+                    coProveedoresListOldCoProveedores = em.merge(coProveedoresListOldCoProveedores);
+                }
+            }
+            for (CoProveedores coProveedoresListNewCoProveedores : coProveedoresListNew) {
+                if (!coProveedoresListOld.contains(coProveedoresListNewCoProveedores)) {
+                    SePais oldIdPaisOfCoProveedoresListNewCoProveedores = coProveedoresListNewCoProveedores.getIdPais();
+                    coProveedoresListNewCoProveedores.setIdPais(sePais);
+                    coProveedoresListNewCoProveedores = em.merge(coProveedoresListNewCoProveedores);
+                    if (oldIdPaisOfCoProveedoresListNewCoProveedores != null && !oldIdPaisOfCoProveedoresListNewCoProveedores.equals(sePais)) {
+                        oldIdPaisOfCoProveedoresListNewCoProveedores.getCoProveedoresList().remove(coProveedoresListNewCoProveedores);
+                        oldIdPaisOfCoProveedoresListNewCoProveedores = em.merge(oldIdPaisOfCoProveedoresListNewCoProveedores);
+                    }
+                }
+            }
             for (SeCiudad seCiudadListNewSeCiudad : seCiudadListNew) {
                 if (!seCiudadListOld.contains(seCiudadListNewSeCiudad)) {
                     SePais oldIdPaisOfSeCiudadListNewSeCiudad = seCiudadListNewSeCiudad.getIdPais();
@@ -198,6 +243,11 @@ public class SePaisJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            List<CoProveedores> coProveedoresList = sePais.getCoProveedoresList();
+            for (CoProveedores coProveedoresListCoProveedores : coProveedoresList) {
+                coProveedoresListCoProveedores.setIdPais(null);
+                coProveedoresListCoProveedores = em.merge(coProveedoresListCoProveedores);
             }
             em.remove(sePais);
             em.getTransaction().commit();

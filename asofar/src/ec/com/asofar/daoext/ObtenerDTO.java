@@ -28,6 +28,7 @@ import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.SePais;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
@@ -54,6 +55,23 @@ public class ObtenerDTO {
     
     
     }
+    public static SePais ObtenerSePais(String nombre){
+        SePaisJpaController control=new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SePais dto=new SePais();
+        List<SePais> lista=control.findSePaisEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getNombre().equals(nombre)){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        
+        return dto;
+    
+    
+    }
+   
      public static VeCaja ObtenerVeCaja(String nombre){
         VeCajaJpaController control=new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
         VeCaja dto=new VeCaja();
