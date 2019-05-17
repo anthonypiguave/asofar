@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.empresas;
+package ec.com.asofar.views.sucursales;
 
+import ec.com.asofar.views.empresas.*;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
@@ -79,7 +80,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
             try {
                 empresaController.edit(empresa);
                 JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
-                ListaEmpresas mp = new ListaEmpresas(new javax.swing.JFrame(), true);
+                ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true);
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
@@ -333,7 +334,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
             try {
                 empresaController.edit(empresa);
                 JOptionPane.showMessageDialog(null, "EMPRESA ACTUALIZADA");
-                ListaEmpresas mp = new ListaEmpresas(new javax.swing.JFrame(), true, us1, em1, su1);
+                ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
@@ -344,7 +345,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        ListaEmpresas mp = new ListaEmpresas(new javax.swing.JFrame(), true, us1, em1, su1);
+        ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed

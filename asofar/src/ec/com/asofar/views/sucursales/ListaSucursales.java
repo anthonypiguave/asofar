@@ -1,7 +1,7 @@
-package ec.com.asofar.views.empresas;
+package ec.com.asofar.views.sucursales;
 
 
-import ec.com.asofar.dao.SeEmpresaJpaController;
+import ec.com.asofar.dao.SeSucursalJpaController;
 import ec.com.asofar.dto.SeEmpresa;
 
 import ec.com.asofar.dto.SeSucursal;
@@ -13,30 +13,30 @@ import java.awt.Point;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class ListaEmpresas extends javax.swing.JDialog {
+public class ListaSucursales extends javax.swing.JDialog {
 
     int x, y;
-    SeEmpresa obj;
-    List<SeEmpresa> listaEmpresa;
+    SeSucursal obj;
+    List<SeSucursal> listaEmpresa;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-    SeEmpresaJpaController empresaController
-            = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeSucursalJpaController sucursalController
+            = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
     SeEmpresa em1; 
     SeSucursal su1;
 
-    public ListaEmpresas(java.awt.Frame parent, boolean modal) {
+    public ListaSucursales(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         listaEmpresa
-                = empresaController.findSeEmpresaEntities();
+                = sucursalController.findSeSucursalEntities();
         Tablas.listarEmpresa(listaEmpresa, jtPersonas);
 
     }
 
-    public ListaEmpresas(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ListaSucursales(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -44,7 +44,7 @@ public class ListaEmpresas extends javax.swing.JDialog {
         em1 = em;
         su1= su;
         listaEmpresa
-                = empresaController.findSeEmpresaEntities();
+                = sucursalController.findSeEmpresaEntities();
         Tablas.listarEmpresa(listaEmpresa, jtPersonas);
 
     }
@@ -242,7 +242,7 @@ public class ListaEmpresas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ListaEmpresas dialog = new ListaEmpresas(new javax.swing.JFrame(), true);
+                ListaSucursales dialog = new ListaSucursales(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
