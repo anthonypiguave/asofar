@@ -67,14 +67,14 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
     public void bloqueo() {
 
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ELIMINAR EL USUARIO?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ELIMINAR LA SUCURSAL?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
 
             sucursal.setEstado('I');
             try {
                 sucursalController.edit(sucursal);
-                JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
+                JOptionPane.showMessageDialog(null, "SUCURSAL ELIMINADA");
                 ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true);
                 setVisible(false);
                 mp.setVisible(true);
@@ -142,7 +142,7 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(254, 254, 254));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("ACTUALIZAR DATOS EMPRESARIALES");
+        jLabel17.setText("ACTUALIZAR DATOS SUCURSALES");
         jLabel17.setOpaque(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS PERSONALES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
