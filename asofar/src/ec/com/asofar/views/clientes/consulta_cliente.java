@@ -204,14 +204,14 @@ public class consulta_cliente extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void MostrarClientes() {
-        try {
-
-            Cliente = Cc.findSeClientesEntities();
-            Tablas.TablaTipobodegaActivo(Cliente, tba_clientes);
-        } catch (Exception e) {
-        }
-    }
+//    public void MostrarClientes() {
+//        try {
+//
+//            Cliente = Cc.findSeClientesEntities();
+//            Tablas.TablaTipobodegaActivo(Cliente, tba_clientes);
+//        } catch (Exception e) {
+//        }
+//    }
     private void jLabel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
