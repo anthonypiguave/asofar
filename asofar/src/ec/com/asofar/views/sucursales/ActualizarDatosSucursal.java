@@ -5,17 +5,14 @@
  */
 package ec.com.asofar.views.sucursales;
 
-import ec.com.asofar.views.empresas.*;
 import ec.com.asofar.dao.SeEmpresaJpaController;
+import ec.com.asofar.dao.SeSucursalJpaController;
 import ec.com.asofar.dao.SeTipoPersonaJpaController;
-import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.util.Fecha;
 import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,11 +23,11 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class ActualizarDatosEmpresas extends javax.swing.JDialog {
+public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
     SePersonas obj;
-    SeEmpresaJpaController persona_controller
-            = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeSucursalJpaController sucursalController
+            = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     private Date fecha1 = null;
@@ -39,10 +36,8 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
     String gen = null;
 //    private String rutaimagen = "";
     public String fil;
-    List<SeEmpresa> listaEmpresa;
-    SeEmpresa empresa = new SeEmpresa();
-    SeTipoPersonaJpaController tpc
-            = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeSucursal> listaSucursal;
+    SeSucursal sucursal = new SeSucursal();
     java.util.Date fechaActual = new java.util.Date();
     SeUsuarios us1;
     SeEmpresa em1;
@@ -50,23 +45,23 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
     SeEmpresaJpaController empresaController
             = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-    public ActualizarDatosEmpresas(java.awt.Frame parent, boolean modal) {
+    public ActualizarDatosSucursal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
     }
 
-    public ActualizarDatosEmpresas(java.awt.Frame parent, boolean modal, SeEmpresa empresa, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ActualizarDatosSucursal(java.awt.Frame parent, boolean modal, SeSucursal sucursal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.empresa = empresa;
+        this.sucursal = sucursal;
         us1 = us;
         em1 = em;
         su1 = su;
-        cargarValores(empresa);
-        listaEmpresa
-                = persona_controller.findSeEmpresaEntities();
+        cargarValores(sucursal);
+        listaSucursal
+                = sucursalController.findSeSucursalEntities();
 
     }
 
@@ -76,15 +71,15 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            empresa.setEstado('I');
+            sucursal.setEstado('I');
             try {
-                empresaController.edit(empresa);
+                sucursalController.edit(sucursal);
                 JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");
                 ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true);
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(ActualizarDatosEmpresas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ActualizarDatosSucursal.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -105,7 +100,6 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtRuc = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -113,6 +107,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
+        cbEmpresa = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -156,18 +151,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         jLabel2.setText("NOMBRE :");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel4.setText("RUC :");
-
-        txtRuc.setEditable(false);
-        txtRuc.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        txtRuc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtRucKeyTyped(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtRucKeyReleased(evt);
-            }
-        });
+        jLabel4.setText("EMPRESA :");
 
         jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel12.setText("DIRECCION:");
@@ -185,7 +169,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel5.setText("TELEFONO");
+        jLabel5.setText("TELEFONO :");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel6.setText("CORREO:");
@@ -222,40 +206,38 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
-                        .addGap(91, 91, 91)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRuc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(65, 65, 65)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNombre)
+                            .addComponent(cbEmpresa, 0, 190, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,25 +302,25 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
     public void Guardar() {
-//        empresa.setCedula(txtCedula.getText());
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ACTUALIZAR LOS DATOS DE EMPRESA?", "", JOptionPane.YES_NO_OPTION);
+//        sucursal.setCedula(txtCedula.getText());
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA ACTUALIZAR LOS DATOS DE SUCURSAL?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
 
-            empresa.setNombreComercial(txtNombre.getText());
-            empresa.setTelefono(txtTelefono.getText());
-            empresa.setCorreo(txtCorreo.getText());
-            empresa.setDireccion(txtDireccion.getText());
-            empresa.setFechaActualizacion(fechaActual);
-            empresa.setUsuarioActualizacion(us1.getIdUsuario());           
+            sucursal.setNombreComercial(txtNombre.getText());
+            sucursal.setTelefono(txtTelefono.getText());
+            sucursal.setCorreo(txtCorreo.getText());
+            sucursal.setDireccion(txtDireccion.getText());
+            sucursal.setFechaActualizacion(fechaActual);
+            sucursal.setUsuarioActualizacion(us1.getIdUsuario());           
             try {
-                empresaController.edit(empresa);
-                JOptionPane.showMessageDialog(null, "EMPRESA ACTUALIZADA");
+                sucursalController.edit(sucursal);
+                JOptionPane.showMessageDialog(null, "SUCURSAL ACTUALIZADA");
                 ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
                 setVisible(false);
                 mp.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(ActualizarDatosEmpresas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ActualizarDatosSucursal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -353,14 +335,6 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
     private void btnHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilitarActionPerformed
         bloqueo();
     }//GEN-LAST:event_btnHabilitarActionPerformed
-
-    private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
-
-    }//GEN-LAST:event_txtRucKeyTyped
-
-    private void txtRucKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyReleased
-
-    }//GEN-LAST:event_txtRucKeyReleased
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
         txtNombre.setText(txtNombre.getText().toUpperCase());
@@ -413,14 +387,14 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
 //
 //            cbTipoPersona1.addItem(listar.get(i).getNombre());
 //        }
-//        cbTipoPersona1.setSelectedItem(empresa.getIdTipoPersona().getNombre());
+//        cbTipoPersona1.setSelectedItem(sucursal.getIdTipoPersona().getNombre());
 //
 //    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActualizarDatosEmpresas dialog = new ActualizarDatosEmpresas(new javax.swing.JFrame(), true);
+                ActualizarDatosSucursal dialog = new ActualizarDatosSucursal(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -436,6 +410,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnHabilitar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cbEmpresa;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
@@ -447,16 +422,23 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtRuc;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarValores(SeEmpresa persona) {
-        txtRuc.setText(persona.getRuc());
+    private void cargarValores(SeSucursal persona) {
         txtNombre.setText(persona.getNombreComercial());
         txtDireccion.setText(persona.getDireccion());
         txtCorreo.setText(persona.getCorreo());
         txtTelefono.setText(persona.getTelefono());
-        txtCorreo.setText(persona.getCorreo());       
+        txtCorreo.setText(persona.getCorreo());    
+        List<SeEmpresa> listaEmpresa;
+        listaEmpresa = empresaController.findSeEmpresaEntities();
+        for (int i = 0; i < listaEmpresa.size(); i++) {
+            SeEmpresa get = listaEmpresa.get(i);
+            cbEmpresa.addItem(get.getNombreComercial());
+            if((get.getNombreComercial()).equals(persona.getNombreComercial())){
+                cbEmpresa.setSelectedItem(get.getNombreComercial());
+            }
+        }
     }
 }
