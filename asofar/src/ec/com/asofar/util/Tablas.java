@@ -42,7 +42,7 @@ public class Tablas {
     static DefaultTableModel model;
     private boolean[] editable = {false, false, true};
     private static boolean[] editable1 = {false, false, true};
-    private static boolean[] editable2 = {false, false, false, false, true};
+    private static boolean[] editable2 = {false, false, false, false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -984,11 +984,11 @@ public class Tablas {
     public static void TablaDetallePorProveerdo(List<CoDetalleCotizacionPorProveedor> lista, JTable tabla) {
         CoDetalleCotizacionPorProveedor vo = new CoDetalleCotizacionPorProveedor();
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"LINEA DE DETALLE", "PRODUCTO", "DESCRIPCION","CANTIDAD", "ESTADO",}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"LINEA DE DETALLE", "PRODUCTO", "DESCRIPCION","CANTIDAD","CANTIDAD COTIZADO", "ESTADO",}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Boolean.class
+                java.lang.Object.class,java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1003,17 +1003,18 @@ public class Tablas {
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
                 // model.addRow(new Object[]{});
-                Object fila[] = new Object[5];
+                Object fila[] = new Object[6];
                 vo = lista.get(i);
                 fila[0] = vo.getCoDetalleCotizacionPorProveedorPK().getLineaDetalle();
                 fila[1] = ObtenerDTO.ObtenerPrProductos(vo.getIdProducto().longValue()).getNombreProducto();
                 fila[2] = vo.getDescripcion();
                 fila[3] = vo.getCantidadPedido();
+                fila[4] = vo.getCantidadCotizado();
                 String ac = (String) vo.getEstado();
                 if ("A".equals(ac)) {
-                    fila[4] = true;
+                    fila[5] = true;
                 } else {
-                    fila[4] = false;
+                    fila[5] = false;
                 }
 
                 dt.addRow(fila);
