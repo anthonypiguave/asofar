@@ -3,42 +3,52 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.tipoMovimiento;
+package ec.com.asofar.views.tipomovimiento;
 
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.views.articulo.*;
 import ec.com.asofar.dao.PrArticuloJpaController;
-import ec.com.asofar.dao.PrGruposJpaController;
-import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.PrArticulo;
-import ec.com.asofar.dto.PrGrupos;
-import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.dto.PrArticuloPK;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Estado;
+import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ADMIN
  */
-public class CrearTipoMovimientoForm extends javax.swing.JDialog {
-    InTipoMovimientoJpaController control = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-//    PrArticuloJpaControllerExt control2 = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
-    List<InTipoMovimiento> lista= control.findInTipoMovimientoEntities();
+
+
+public class ActualizarTipoMovimientoform extends javax.swing.JDialog {
     int x,y;
+    InTipoMovimientoJpaController control= new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    
+    InTipoMovimiento obj1=null;
+            
     /**
-     * Creates new form IngresarArticulo
+     * Creates new form EditarArticulo
      */
-    public CrearTipoMovimientoForm(java.awt.Frame parent, boolean modal) {
+    public ActualizarTipoMovimientoform(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(this);
-//        ObtenerGrupo();
+    }
+    public ActualizarTipoMovimientoform(java.awt.Frame parent, boolean modal,InTipoMovimiento prar) {
+        
+        super(parent, modal);
+        
+        initComponents();
+        obj1=prar;
+        setLocationRelativeTo(this);
+        llenar(prar);
+        
     }
 
     /**
@@ -50,28 +60,41 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
-        estado = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        guardar = new javax.swing.JButton();
-        txtTMovi = new javax.swing.JTextField();
+        cbEstado = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        txtGrupo = new javax.swing.JTextField();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INGRESO", "EGRESO" }));
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setText("MOVIMIENTO:");
+
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(46, 115, 48));
+        jButton2.setText("ACTUALIZAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INGRESAR ARTICULO");
+        jLabel1.setText("ACTUALIZAR MOVIMIENTO");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -84,24 +107,13 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel4.setText("ARTICULO:");
-
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("ESTADO:");
 
-        guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        guardar.setForeground(new java.awt.Color(51, 109, 52));
-        guardar.setText("GUARDAR");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
-            }
-        });
+        cbEstado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INGRESO", "EGRESO" }));
 
-        txtTMovi.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-
-        jButton1.setBackground(new java.awt.Color(177, 37, 48));
+        jButton1.setBackground(new java.awt.Color(187, 51, 64));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
         jButton1.setText("CANCELAR");
@@ -111,6 +123,8 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
             }
         });
 
+        txtGrupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,20 +133,24 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel5))
-                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTMovi, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 1, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
+                        .addGap(38, 38, 38)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,17 +158,17 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTMovi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel2)
+                    .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,36 +185,33 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       Actualizar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
         try {
-            boolean valor1=ValidarDTO.ValidarInTipoMovimiento(txtTMovi.getText());
-            if (valor1 == true) {
+            InTipoMovimiento arti=new InTipoMovimiento();
+         boolean valor1=ValidarDTO.ValidarInTipoMovimiento(txtGrupo.getText());
+            if (valor1 == true && !obj1.getNombreMovimiento().equals(txtGrupo.getText())) {
                 JOptionPane.showMessageDialog(this, "Movimiento ya existente");
-            } else {
-                String valor ="E";
-        InTipoMovimiento arti=new InTipoMovimiento();
-        if(estado.getSelectedIndex() == 0){
-            valor="I";
-        }
+            }  else {
+            arti=obj1;
+       
+        arti.setNombreMovimiento(txtGrupo.getText());
+        arti.setEstado(Estado.ObtenerEstado(cbEstado.getSelectedItem().toString()));
         
-        arti.setNombreMovimiento(txtTMovi.getText());
-        arti.setEstado(valor);
-        control.create(arti);
-               JOptionPane.showMessageDialog(this, "Movimiento Guardado :)"); 
-//               Actualizar();
+        control.edit(arti);
+        JOptionPane.showMessageDialog(this, "Movimiento actualizado");
+        Actualizar();
             }
+        
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        
-    }//GEN-LAST:event_guardarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-//       
-        Actualizar();
-    
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
@@ -207,15 +222,19 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x-x,point.y-y);
     }//GEN-LAST:event_jLabel1MouseDragged
-public void Actualizar(){
-    setVisible(false);
-//        TipoMovimientoForm cs = new TipoMovimientoForm(new javax.swing.JFrame(),true);
-//        cs.setVisible(true);
 
-    }
     /**
      * @param args the command line arguments
      */
+    public void llenar(InTipoMovimiento prar){
+        txtGrupo.setText(prar.getNombreMovimiento());
+        cbEstado.setSelectedItem(Estado.ObtenerEstado(prar.getEstado()));
+    }
+    public void Actualizar(){
+    setVisible(false);
+        TipoMovimientoForm cs = new TipoMovimientoForm(new javax.swing.JFrame(),true);
+        cs.setVisible(true);
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -230,21 +249,23 @@ public void Actualizar(){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearTipoMovimientoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarTipoMovimientoform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearTipoMovimientoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarTipoMovimientoform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearTipoMovimientoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarTipoMovimientoform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearTipoMovimientoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarTipoMovimientoform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CrearTipoMovimientoForm dialog = new CrearTipoMovimientoForm(new javax.swing.JFrame(), true);
+                ActualizarTipoMovimientoform dialog = new ActualizarTipoMovimientoform(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -255,26 +276,17 @@ public void Actualizar(){
             }
         });
     }
-//    public void ObtenerGrupo(){
-//        
-//        
-//        
-//        for (int i =0 ; i < lista.size(); i++) {
-//            grupo.addItem(lista.get(i).getNombre());
-//        }
-//        
-//    
-//        
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> estado;
-    private javax.swing.JButton guardar;
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtTMovi;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JTextField txtGrupo;
     // End of variables declaration//GEN-END:variables
 }
