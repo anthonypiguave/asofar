@@ -12,7 +12,10 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -28,10 +31,12 @@ public class itemProductosForm extends javax.swing.JDialog {
    static PrProductosJpaController jproducto = new PrProductosJpaController(conn);
     List<PrProductos> lprod=null;
     Pr_ProductoExt obtener = new Pr_ProductoExt(conn);
+    PrProductos objeto = new PrProductos();
     
     public itemProductosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         lprod= obtener.obtenerProducto();
         Tablas.listarProductoItems(lprod, jt_producto);
         
@@ -93,6 +98,11 @@ public class itemProductosForm extends javax.swing.JDialog {
             }
         ));
         jt_producto.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jt_producto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jt_productoMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_producto);
 
         jButton1.setText("CANCELAR");
@@ -164,6 +174,43 @@ public class itemProductosForm extends javax.swing.JDialog {
 //        tma.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jt_productoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_productoMousePressed
+         int i = 0;
+        
+        try {
+            if (evt.getClickCount() == 2) {
+                i = jt_producto.getSelectedRow();
+                objeto = devuelveObjeto(Long.valueOf(jt_producto.getValueAt(i, 0).toString()), lprod);
+                if (objeto != null) {
+                    System.out.println(objeto.getNombreProducto());
+                    this.setVisible(false);
+//                    modificarProducto acc = new modificarProducto(new javax.swing.JFrame(), true, objeto);
+//                    acc.setVisible(true);
+//                    lista.clear();
+//                    lista = crud.listarTodoJoinProductos(1);
+//                    Tablas.cargarJoinProductosMCompra(tbacargarProductos, lista);
+                }
+
+            }
+        } catch (Exception e) {
+            Logger.getLogger(itemProductosForm.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jt_productoMousePressed
+    public PrProductos devuelveObjeto(Long datos,List<PrProductos> listarobj) {
+        PrProductos objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (listarobj.get(i).getPrProductosPK().getIdProducto()==datos) {
+                objeto1 = listarobj.get(i);
+                break;
+            } else {
+            }
+        }
+        return objeto1;
+    }
+    
+    public PrProductos getProducto(){
+       return objeto;
+    }
     /**
      * @param args the command line arguments
      */
@@ -189,6 +236,7 @@ public class itemProductosForm extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(itemProductosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
