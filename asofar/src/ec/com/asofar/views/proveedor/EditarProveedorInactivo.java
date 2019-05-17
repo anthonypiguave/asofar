@@ -233,7 +233,6 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         });
 
         cbpais.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbpais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbpais.setEnabled(false);
 
         btnactivar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
