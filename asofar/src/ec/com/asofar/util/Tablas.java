@@ -1113,14 +1113,14 @@ public class Tablas {
     }
 
     public static void listarProductoItems(List<PrProductos> lista, JTable Tabla) {
-        int[] a = {75, 190, 190, 190, 190, 90, 90};
+        int[] a = {75, 190,180,180, 190,190,190,90,90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD_PRO", "COD_BARRA", "PRODUCTO", "PRESENTACION", "MEDIDA", "DESCONTINUADO", "RECETA"};
-        String[] Filas = new String[7];
+        String[] Co = {"COD_PRO","COD_BARRA", "PRODUCTO","GRUPO","SUBGRUPO","PRESENTACION","MEDIDA","DESCONTINUADO","RECETA"};
+        String[] Filas = new String[9];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -1128,11 +1128,15 @@ public class Tablas {
                 Filas[0] = String.valueOf(lista.get(i).getPrProductosPK().getIdProducto());
                 Filas[1] = lista.get(i).getCodigoBarra();
                 Filas[2] = lista.get(i).getNombreProducto();
-                Filas[3] = lista.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+                Filas[3] = lista.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+                Filas[4] = lista.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre();
+                Filas[5] = lista.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
                 //Filas[3] = ObtenerDTO.ObtenerPrTipoPresentacion(i).getNombre();
-                Filas[4] = lista.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
-                Filas[5] = lista.get(i).getDescontinuado();
-                Filas[6] = lista.get(i).getReceta();
+                Filas[6] = lista.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+                Filas[7] = lista.get(i).getDescontinuado();
+                Filas[8] = lista.get(i).getReceta();
+                
+                
                 model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1149,9 +1153,85 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
                 Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+                Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
             }
         }
 
     }
+    public static void listarProductoItemsCotizacion(List<PrProductos> lista, JTable Tabla) {
+        int[] a = {75, 190,80,180, 190,190,190,90};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"COD_PRO", "PRODUCTO","CANTIDAD","GRUPO","SUBGRUPO","PRESENTACION","MEDIDA","RECETA"};
+        String[] Filas = new String[9];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals("A")) {
+                Filas[0] = String.valueOf(lista.get(i).getPrProductosPK().getIdProducto());
+                Filas[1] = lista.get(i).getNombreProducto();
+                Filas[2] = "";
+                Filas[3] = lista.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+                Filas[4] = lista.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre();
+                Filas[5] = lista.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+                Filas[6] = lista.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+                Filas[7] = lista.get(i).getReceta();
+                
+                
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+                
+            }
+        }
 
+    }
+//    public static void TablaClientesActivo(List<SeClientes> listabodega, JTable tabla) {
+//        int[] a = {5, 100, 20};
+//        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
+//        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
+//        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
+//        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
+//        model = VaciarTabla(tabla);
+//        String[] b = {"ID", "MEDIDA", "ESTADO"};
+//        String[] filas = new String[3];
+//        model = new DefaultTableModel(null, b);
+//        tabla.setShowGrid(true);
+//        for (int i = 0; i < listabodega.size(); i++) {
+//            if (listabodega.get(i).getEstado().equals("A")) {
+//                filas[0] = String.valueOf(listabodega.get(i).getIdTipoBodega());
+//                filas[1] = listabodega.get(i).getNombre();
+//                filas[2] = listabodega.get(i).getEstado();
+//                model.addRow(filas);
+//                tabla.setModel(model);
+//                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+//                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
+//                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+//                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
+//                tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//                tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
+//            }
+//        }
+//    }
 }

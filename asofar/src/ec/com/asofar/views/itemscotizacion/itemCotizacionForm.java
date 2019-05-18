@@ -14,20 +14,27 @@ import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoCompra;
 import ec.com.asofar.dto.InTipoDepartamento;
 import ec.com.asofar.dto.InTipoDocumento;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formulario;
+import ec.com.asofar.util.Tablas;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author admin1
  */
 public class itemCotizacionForm extends javax.swing.JDialog {
-    EntityManagerFactory conn=EntityManagerUtil.ObtenerEntityManager();
+
+    EntityManagerFactory conn = EntityManagerUtil.ObtenerEntityManager();
     InTipoDepartamento departamento = new InTipoDepartamento();
     InTipoDepartamentoJpaController jdepartamento = new InTipoDepartamentoJpaController(conn);
     InTipoCompra compra = new InTipoCompra();
@@ -40,10 +47,13 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     List<InTipoDepartamento> ldeparta;
     List<InEstadosMovimiento> lestad;
     List<InTipoDocumento> ldocument;
+    PrProductos objeto = null;
+    List<PrProductos> lproductos = new ArrayList<>();
 
     public itemCotizacionForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         cargarCab();
     }
 
@@ -57,14 +67,14 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     private void cargarCab() {
         lcompra = jcompra.findInTipoCompraEntities();
         ldeparta = jdepartamento.findInTipoDepartamentoEntities();
-        lestad=jestados.findInEstadosMovimientoEntities();
-        ldocument=jdocumento.findInTipoDocumentoEntities();
-                
+        lestad = jestados.findInEstadosMovimientoEntities();
+        ldocument = jdocumento.findInTipoDocumentoEntities();
+
         cb_tcompra.setModel(Formulario.comboTcompra(lcompra));
         cb_tdepartament.setModel(Formulario.comboTdepart(ldeparta));
         cb_estado.setModel(Formulario.comboTestad(lestad));
         cb_tdocument.setModel(Formulario.comboTdoc(ldocument));
-        
+
 //        for (int i = 0; i < lcompra.size(); i++) {
 //            if ("A".equals(lcompra.get(i).getEstado())) {
 //                cb_tcompra.addItem(lcompra.get(i).getNombre());
@@ -87,7 +97,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tb_prod = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cb_tcompra = new javax.swing.JComboBox<>();
@@ -146,7 +156,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tb_prod.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -157,7 +167,8 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tb_prod.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(tb_prod);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,7 +228,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65))
@@ -256,10 +267,15 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(cb_tdocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setText("AGREGAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -313,6 +329,52 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_tdepartamentActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        int i = tb_prod.getSelectedRow();
+//        if (i == -1) {
+//            JOptionPane.showMessageDialog(this, "SELECCIONE UN DOCUMENTO");
+//        } else {
+
+        if (documento != null) {
+            try {
+                //setVisible(false);
+                itemProductosForm tme = new itemProductosForm(new javax.swing.JFrame(), true);
+                tme.setVisible(true);
+                if (tme.getProducto() != null) {
+                    objeto = tme.getProducto();
+                    anadirPrLista(objeto);
+                } else {
+
+                }
+            } catch (Exception e) {
+                Logger.getLogger(itemCotizacionForm.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        //}
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void anadirPrLista(PrProductos obj) {
+        System.out.println("tam " + lproductos.size());
+        if (lproductos.size() == 0) {
+            System.out.println("jaaaaaaaaaa");
+            lproductos.add(obj);
+            Tablas.listarProductoItemsCotizacion(lproductos, tb_prod);
+        } else {
+            boolean ban = false;
+            for (int i = 0; i < lproductos.size(); i++) {
+                if (lproductos.get(i).getPrProductosPK().getIdProducto() == obj.getPrProductosPK().getIdProducto()) {
+                    ban = true;
+                } 
+            }
+            if (ban == false) {
+                System.out.println("hooaoaasks");
+                lproductos.add(obj);
+                Tablas.listarProductoItemsCotizacion(lproductos, tb_prod);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "PRODUCTO YA ESTA EN LISTA");
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -338,6 +400,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(itemCotizacionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -373,7 +436,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tb_prod;
     // End of variables declaration//GEN-END:variables
 }
