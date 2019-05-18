@@ -11,6 +11,8 @@ import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,19 +26,23 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     CoCotizacionesPorProveedor obj = new CoCotizacionesPorProveedor();
     List<CoCotizacionesPorProveedor> lista;
     CoCotizacionesPorProveedorJpaController ptm = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
+    CoCotizacionesPorProveedorJpaController env = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";
+
     public cotizacionesProveedorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         System.out.println("pajerrro!!");
-        lista=ptm.findCoCotizacionesPorProveedorEntities();
-        Tablas.tablaCotizacionPorProveedor(jtCabecera, lista);
-        
+        lista = ptm.findCoCotizacionesPorProveedorEntities();
+//        Tablas.tablaCotizacionPorProveedor(jtCabecera, lista);
+        Tablas.TablaCotizacionPorProveedorDos(jtCabecera, lista);
+
     }
+
     public cotizacionesProveedorForm() {
 //        super(parent, modal);
         initComponents();
-        
+
     }
 
     /**
@@ -74,6 +80,9 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jtCabeceraMousePressed(evt);
             }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtCabeceraMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(jtCabecera);
 
@@ -97,6 +106,11 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
         jLabel1.setOpaque(true);
 
         jButton1.setText("ACEPTAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("SALIR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -156,16 +170,56 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMousePressed
-        if(evt.getClickCount()==1){
+        if (evt.getClickCount() == 1) {
             String valor = jtCabecera.getValueAt(jtCabecera.getSelectedRow(), 0).toString();
-            CoCotizacionesPorProveedor coti= ObtenerDTO.ObtenerCoCotizacionesPorProveedor(valor);
+            CoCotizacionesPorProveedor coti = ObtenerDTO.ObtenerCoCotizacionesPorProveedor(valor);
             Tablas.TablaDetallePorProveerdo(coti.getCoDetalleCotizacionPorProveedorList(), jtDetalle);
         }
+
     }//GEN-LAST:event_jtCabeceraMousePressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    String estado = "";
+    
+    private void jtCabeceraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMouseClicked
+
+
+    }//GEN-LAST:event_jtCabeceraMouseClicked
+
+    public void prueba() {
+        try {
+//            if (evt.getClickCount() >= 1) {
+            CoCotizacionesPorProveedor cotpro = new CoCotizacionesPorProveedor();
+            cotpro=obj;
+            int t = jtCabecera.getRowCount();
+            String dato = "";
+            for (int i = 0; i < t; i++) {
+                String est = jtCabecera.getValueAt(i, 7).toString();
+//                estado = est;
+                System.out.println("estado: " + est);
+                if ("true".equals(est)) {
+                    dato = "A";
+                } else {
+                    dato = "I";
+                }
+                System.out.println("dato: " + dato);
+                cotpro.setEstado(dato);
+                ptm.edit(cotpro);
+            }
+
+//            cotpro.setEstado(dato);
+//            env.edit(cotpro);
+//        }
+        } catch (Exception e) {
+            Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        prueba();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
