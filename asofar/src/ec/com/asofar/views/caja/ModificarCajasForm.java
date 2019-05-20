@@ -12,6 +12,8 @@ import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
@@ -39,6 +41,10 @@ public class ModificarCajasForm extends javax.swing.JDialog {
     VeCaja vCaja = new VeCaja();
     VeCaja vCaja2 = new VeCaja();
     SeEmpresa se = null;
+    
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
 
     VeCajaJpaController vCajaController = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeEmpresaJpaController spj = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -54,6 +60,15 @@ public class ModificarCajasForm extends javax.swing.JDialog {
     }
 
     public ModificarCajasForm(java.awt.Frame parent, boolean modal, VeCaja obj) {
+        super(parent, modal);
+        initComponents();
+        this.setLocationRelativeTo(parent);
+        vCaja2 = obj;
+        llenar(obj);
+
+    }
+    
+    public ModificarCajasForm(java.awt.Frame parent, boolean modal, VeCaja obj,  SeUsuarios se, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(parent);

@@ -1,4 +1,3 @@
-
 package ec.com.asofar.views.grupo;
 
 import ec.com.asofar.dao.PrGruposJpaController;
@@ -40,7 +39,6 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
 
     }
-    
 
     private void cargarInformacion() {
         try {
@@ -304,7 +302,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroActionPerformed
 
     private void txtfiltroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfiltroFocusLost
-    
+
     }//GEN-LAST:event_txtfiltroFocusLost
 
     /**

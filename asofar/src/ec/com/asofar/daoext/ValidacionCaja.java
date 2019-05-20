@@ -16,16 +16,17 @@ import java.util.List;
  * @author admin1
  */
 public class ValidacionCaja {
-    
-    public static boolean Validacion(VeCaja caja){
-        boolean valor=true;
+
+    public static boolean Validacion(VeCaja caja) {
+        boolean valor = true;
         for (int i = 0; i < caja.getVeDetalleCajaList().size(); i++) {
-            if(caja.getVeDetalleCajaList().get(i).getFechaCierre()==null){
-            valor=false;
+            if (caja.getVeDetalleCajaList().get(i).getFechaCierre() == null
+                    && "A".equals(caja.getVeDetalleCajaList().get(i).getEstado())) {
+                valor = false;
             }
         }
         return valor;
-    
+
     }
-    
+
 }
