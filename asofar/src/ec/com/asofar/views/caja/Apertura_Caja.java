@@ -254,6 +254,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
             dc.setEstado("A");
             dc.setVeCaja(veCaja);
 //            dc.setIdUsuario(seUsuario.getIdUsuario());
+
             if (ValidacionCaja.Validacion(veCaja)) {
                 cajadet.create(dc);
                 JOptionPane.showMessageDialog(null, "CAJA ACTIVA", "EXITO!", JOptionPane.INFORMATION_MESSAGE);
