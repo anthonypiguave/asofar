@@ -36,6 +36,8 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
     Date d = new Date();
     SubGruposExt psc
             = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
+     PrSubgruposJpaController csub
+            = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrGruposJpaController pgc
             = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeEmpresaJpaController secont
@@ -43,6 +45,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
     ObtenerDTO od = new ObtenerDTO();
     List<PrGrupos> pg;
     List<SeEmpresa> se;
+    List<PrSubgrupos> subg;
     SeEmpresa empresa = new SeEmpresa();
     PrSubgrupos ps = new PrSubgrupos();
 
@@ -218,13 +221,22 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-
+        subg = csub.findPrSubgruposEntities();
+        PrSubgrupos  obj = null;
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-
+                
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(txtNombre.getText())) {
                 JOptionPane.showMessageDialog(null, "Ingrese un nombre!");
-            } else {
+            } else  {
+                for (int i = 0; i < subg.size(); i++) {
+                    if (subg.get(i).getNombre().equals(txtNombre.getText())){
+                        obj = subg.get(i);
+                        JOptionPane.showMessageDialog(null, "EL SUBGRUPO YA EXISTE");
+                    }
+                    
+                }
+                if (obj != null){
                 ps.setNombre(txtNombre.getText());
                 ps.setIdEmpresa(empresa);
                 ps.setEstado("A");
@@ -244,9 +256,8 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
                     Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        } else {
-
-        }
+            }
+        } 
 
 
     }//GEN-LAST:event_btnguardarActionPerformed
