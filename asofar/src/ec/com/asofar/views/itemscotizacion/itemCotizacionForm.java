@@ -21,12 +21,18 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formulario;
 import ec.com.asofar.util.Tablas;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -49,12 +55,23 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     List<InTipoDocumento> ldocument;
     PrProductos objeto = null;
     List<PrProductos> lproductos = new ArrayList<>();
+    java.util.Date fechaGuardar = new java.util.Date();
+    String fecha,hora;
 
     public itemCotizacionForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         cargarCab();
+        java.util.Date sistFecha = new java.util.Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        fecha=(formato.format(sistFecha));
+
+        //HORA DEL SISTEMA
+        Timer tiempo = new Timer(100, new itemCotizacionForm.horas());
+        tiempo.start();
+        
+        
     }
 
     public itemCotizacionForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -62,8 +79,27 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarCab();
-    }
+        java.util.Date sistFecha = new java.util.Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        fecha=(formato.format(sistFecha));
 
+        //HORA DEL SISTEMA
+        Timer tiempo = new Timer(100, new itemCotizacionForm.horas());
+        tiempo.start();
+        
+        
+    }
+    class horas implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            java.util.Date sistHora = new java.util.Date();
+            String pmAm = "HH:mm:ss";
+            SimpleDateFormat format = new SimpleDateFormat(pmAm);
+            Calendar hoy = Calendar.getInstance();
+            hora=(String.format(format.format(sistHora), hoy));
+            txthora.setText(fecha+" "+hora);
+        }
+    }
     private void cargarCab() {
         lcompra = jcompra.findInTipoCompraEntities();
         ldeparta = jdepartamento.findInTipoDepartamentoEntities();
@@ -74,8 +110,8 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         cb_tdepartament.setModel(Formulario.comboTdepart(ldeparta));
         cb_estado.setModel(Formulario.comboTestad(lestad));
         cb_tdocument.setModel(Formulario.comboTdoc(ldocument));
-
-//        for (int i = 0; i < lcompra.size(); i++) {
+        
+        //        for (int i = 0; i < lcompra.size(); i++) {
 //            if ("A".equals(lcompra.get(i).getEstado())) {
 //                cb_tcompra.addItem(lcompra.get(i).getNombre());
 //            }
@@ -101,7 +137,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cb_tcompra = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
+        txthora = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cb_tdepartament = new javax.swing.JComboBox<>();
@@ -227,29 +263,27 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cb_tcompra, 0, 135, Short.MAX_VALUE)
                     .addComponent(cb_tdepartament, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cb_estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cb_tdocument, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19))))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cb_tdocument, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txthora, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txthora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,7 +415,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         if (i == -1) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UN ITEM");
         }else{
-            tb_prod.remove(i);
+            lproductos.remove(i);
             Tablas.listarProductoItemsCotizacion(lproductos, tb_prod);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -475,7 +509,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tb_prod;
+    private javax.swing.JTextField txthora;
     // End of variables declaration//GEN-END:variables
 }

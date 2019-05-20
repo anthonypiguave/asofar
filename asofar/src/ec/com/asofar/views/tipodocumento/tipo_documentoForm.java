@@ -8,6 +8,8 @@ package ec.com.asofar.views.tipodocumento;
 //import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
+import ec.com.asofar.daoext.Pr_ProductoExt;
+import ec.com.asofar.daoext.modificarDatosDocumentoExt;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
@@ -44,6 +46,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     SeEmpresa em1;
     SeSucursal su1;
     SeUsuarios usu1;
+    modificarDatosDocumentoExt guardar=new modificarDatosDocumentoExt();
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -163,19 +166,19 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -247,7 +250,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(14, 14, 14)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -318,15 +321,54 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         boolean estado = false;
         for (int i = 0; i < tb_documento.getRowCount(); i++) {
             estado = (boolean) tb_documento.getValueAt(i, 2);
-            String est = transformarboolean(estado);
-            cad1 = "update in_tipo_documento set estado = '" + estado + "' where id_tipo_documento =" + tb_documento.getValueAt(i, 0) + ";";
-
-            queryL1.add(cad1);
-            System.out.println(cad1);
+            //String est = transformarboolean(estado);
+            
+            
+            InTipoDocumento tdoc=listaDocumento.get(i);
+            if (estado)
+                    {
+                        tdoc.setEstado("A");
+                    }else
+                    {
+                        tdoc.setEstado("I");
+                    }
+           
+            
+            /*for (InTipoDocumento tdoc:listaDocumento)
+            {
+                System.out.println(Integer.parseInt(tb_documento.getValueAt(i, 0).toString()));
+                
+                if (tdoc.getIdTipoDocumento().equals(Integer.parseInt(tb_documento.getValueAt(i, 0).toString())))
+                {
+                    if (estado)
+                    {
+                        tdoc.setEstado("A");
+                    }else
+                    {
+                        tdoc.setEstado("I");
+                    }
+                }
+            }*/
+            
         }
+        
+        for (InTipoDocumento tdoc:listaDocumento)
+            {
+                System.out.println(tdoc.getEstado());
+            }
+        
+        
+        try{
+        guardar.guardarEstadoDocumento(listaDocumento);
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+       // guardar.guardarItemsProducto(queryL1);
 
     }//GEN-LAST:event_btn_guardarActionPerformed
 
+   
+    
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);

@@ -6,6 +6,7 @@
 package ec.com.asofar.daoext;
 
 import ec.com.asofar.dao.PrProductosJpaController;
+import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.PrProductos;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -33,4 +34,7 @@ public class Pr_ProductoExt extends PrProductosJpaController {
         lprod = query.getResultList();
         return lprod;
     }
+    
+    
+    
 }
