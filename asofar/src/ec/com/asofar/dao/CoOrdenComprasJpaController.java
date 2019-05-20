@@ -12,8 +12,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.CoCotizacionesPorProveedor;
+import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoOrdenComprasPK;
@@ -50,15 +51,20 @@ public class CoOrdenComprasJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            CoCotizacionesPorProveedor coCotizacionesPorProveedor = coOrdenCompras.getCoCotizacionesPorProveedor();
+            if (coCotizacionesPorProveedor != null) {
+                coCotizacionesPorProveedor = em.getReference(coCotizacionesPorProveedor.getClass(), coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK());
+                coOrdenCompras.setCoCotizacionesPorProveedor(coCotizacionesPorProveedor);
+            }
+            InTipoDocumento idTipoDocumento = coOrdenCompras.getIdTipoDocumento();
+            if (idTipoDocumento != null) {
+                idTipoDocumento = em.getReference(idTipoDocumento.getClass(), idTipoDocumento.getIdTipoDocumento());
+                coOrdenCompras.setIdTipoDocumento(idTipoDocumento);
+            }
             SeSucursal seSucursal = coOrdenCompras.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 coOrdenCompras.setSeSucursal(seSucursal);
-            }
-            SePersonas idProveedor = coOrdenCompras.getIdProveedor();
-            if (idProveedor != null) {
-                idProveedor = em.getReference(idProveedor.getClass(), idProveedor.getIdPersona());
-                coOrdenCompras.setIdProveedor(idProveedor);
             }
             List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraList = new ArrayList<CoDetalleOrdenCompra>();
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach : coOrdenCompras.getCoDetalleOrdenCompraList()) {
@@ -67,13 +73,17 @@ public class CoOrdenComprasJpaController implements Serializable {
             }
             coOrdenCompras.setCoDetalleOrdenCompraList(attachedCoDetalleOrdenCompraList);
             em.persist(coOrdenCompras);
+            if (coCotizacionesPorProveedor != null) {
+                coCotizacionesPorProveedor.getCoOrdenComprasList().add(coOrdenCompras);
+                coCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedor);
+            }
+            if (idTipoDocumento != null) {
+                idTipoDocumento.getCoOrdenComprasList().add(coOrdenCompras);
+                idTipoDocumento = em.merge(idTipoDocumento);
+            }
             if (seSucursal != null) {
                 seSucursal.getCoOrdenComprasList().add(coOrdenCompras);
                 seSucursal = em.merge(seSucursal);
-            }
-            if (idProveedor != null) {
-                idProveedor.getCoOrdenComprasList().add(coOrdenCompras);
-                idProveedor = em.merge(idProveedor);
             }
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : coOrdenCompras.getCoDetalleOrdenCompraList()) {
                 CoOrdenCompras oldCoOrdenComprasOfCoDetalleOrdenCompraListCoDetalleOrdenCompra = coDetalleOrdenCompraListCoDetalleOrdenCompra.getCoOrdenCompras();
@@ -105,19 +115,25 @@ public class CoOrdenComprasJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             CoOrdenCompras persistentCoOrdenCompras = em.find(CoOrdenCompras.class, coOrdenCompras.getCoOrdenComprasPK());
+            CoCotizacionesPorProveedor coCotizacionesPorProveedorOld = persistentCoOrdenCompras.getCoCotizacionesPorProveedor();
+            CoCotizacionesPorProveedor coCotizacionesPorProveedorNew = coOrdenCompras.getCoCotizacionesPorProveedor();
+            InTipoDocumento idTipoDocumentoOld = persistentCoOrdenCompras.getIdTipoDocumento();
+            InTipoDocumento idTipoDocumentoNew = coOrdenCompras.getIdTipoDocumento();
             SeSucursal seSucursalOld = persistentCoOrdenCompras.getSeSucursal();
             SeSucursal seSucursalNew = coOrdenCompras.getSeSucursal();
-            SePersonas idProveedorOld = persistentCoOrdenCompras.getIdProveedor();
-            SePersonas idProveedorNew = coOrdenCompras.getIdProveedor();
             List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOld = persistentCoOrdenCompras.getCoDetalleOrdenCompraList();
             List<CoDetalleOrdenCompra> coDetalleOrdenCompraListNew = coOrdenCompras.getCoDetalleOrdenCompraList();
+            if (coCotizacionesPorProveedorNew != null) {
+                coCotizacionesPorProveedorNew = em.getReference(coCotizacionesPorProveedorNew.getClass(), coCotizacionesPorProveedorNew.getCoCotizacionesPorProveedorPK());
+                coOrdenCompras.setCoCotizacionesPorProveedor(coCotizacionesPorProveedorNew);
+            }
+            if (idTipoDocumentoNew != null) {
+                idTipoDocumentoNew = em.getReference(idTipoDocumentoNew.getClass(), idTipoDocumentoNew.getIdTipoDocumento());
+                coOrdenCompras.setIdTipoDocumento(idTipoDocumentoNew);
+            }
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 coOrdenCompras.setSeSucursal(seSucursalNew);
-            }
-            if (idProveedorNew != null) {
-                idProveedorNew = em.getReference(idProveedorNew.getClass(), idProveedorNew.getIdPersona());
-                coOrdenCompras.setIdProveedor(idProveedorNew);
             }
             List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraListNew = new ArrayList<CoDetalleOrdenCompra>();
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach : coDetalleOrdenCompraListNew) {
@@ -127,6 +143,22 @@ public class CoOrdenComprasJpaController implements Serializable {
             coDetalleOrdenCompraListNew = attachedCoDetalleOrdenCompraListNew;
             coOrdenCompras.setCoDetalleOrdenCompraList(coDetalleOrdenCompraListNew);
             coOrdenCompras = em.merge(coOrdenCompras);
+            if (coCotizacionesPorProveedorOld != null && !coCotizacionesPorProveedorOld.equals(coCotizacionesPorProveedorNew)) {
+                coCotizacionesPorProveedorOld.getCoOrdenComprasList().remove(coOrdenCompras);
+                coCotizacionesPorProveedorOld = em.merge(coCotizacionesPorProveedorOld);
+            }
+            if (coCotizacionesPorProveedorNew != null && !coCotizacionesPorProveedorNew.equals(coCotizacionesPorProveedorOld)) {
+                coCotizacionesPorProveedorNew.getCoOrdenComprasList().add(coOrdenCompras);
+                coCotizacionesPorProveedorNew = em.merge(coCotizacionesPorProveedorNew);
+            }
+            if (idTipoDocumentoOld != null && !idTipoDocumentoOld.equals(idTipoDocumentoNew)) {
+                idTipoDocumentoOld.getCoOrdenComprasList().remove(coOrdenCompras);
+                idTipoDocumentoOld = em.merge(idTipoDocumentoOld);
+            }
+            if (idTipoDocumentoNew != null && !idTipoDocumentoNew.equals(idTipoDocumentoOld)) {
+                idTipoDocumentoNew.getCoOrdenComprasList().add(coOrdenCompras);
+                idTipoDocumentoNew = em.merge(idTipoDocumentoNew);
+            }
             if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
                 seSucursalOld.getCoOrdenComprasList().remove(coOrdenCompras);
                 seSucursalOld = em.merge(seSucursalOld);
@@ -134,14 +166,6 @@ public class CoOrdenComprasJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getCoOrdenComprasList().add(coOrdenCompras);
                 seSucursalNew = em.merge(seSucursalNew);
-            }
-            if (idProveedorOld != null && !idProveedorOld.equals(idProveedorNew)) {
-                idProveedorOld.getCoOrdenComprasList().remove(coOrdenCompras);
-                idProveedorOld = em.merge(idProveedorOld);
-            }
-            if (idProveedorNew != null && !idProveedorNew.equals(idProveedorOld)) {
-                idProveedorNew.getCoOrdenComprasList().add(coOrdenCompras);
-                idProveedorNew = em.merge(idProveedorNew);
             }
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListOldCoDetalleOrdenCompra : coDetalleOrdenCompraListOld) {
                 if (!coDetalleOrdenCompraListNew.contains(coDetalleOrdenCompraListOldCoDetalleOrdenCompra)) {
@@ -189,15 +213,20 @@ public class CoOrdenComprasJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coOrdenCompras with id " + id + " no longer exists.", enfe);
             }
+            CoCotizacionesPorProveedor coCotizacionesPorProveedor = coOrdenCompras.getCoCotizacionesPorProveedor();
+            if (coCotizacionesPorProveedor != null) {
+                coCotizacionesPorProveedor.getCoOrdenComprasList().remove(coOrdenCompras);
+                coCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedor);
+            }
+            InTipoDocumento idTipoDocumento = coOrdenCompras.getIdTipoDocumento();
+            if (idTipoDocumento != null) {
+                idTipoDocumento.getCoOrdenComprasList().remove(coOrdenCompras);
+                idTipoDocumento = em.merge(idTipoDocumento);
+            }
             SeSucursal seSucursal = coOrdenCompras.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal.getCoOrdenComprasList().remove(coOrdenCompras);
                 seSucursal = em.merge(seSucursal);
-            }
-            SePersonas idProveedor = coOrdenCompras.getIdProveedor();
-            if (idProveedor != null) {
-                idProveedor.getCoOrdenComprasList().remove(coOrdenCompras);
-                idProveedor = em.merge(idProveedor);
             }
             List<CoDetalleOrdenCompra> coDetalleOrdenCompraList = coOrdenCompras.getCoDetalleOrdenCompraList();
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : coDetalleOrdenCompraList) {

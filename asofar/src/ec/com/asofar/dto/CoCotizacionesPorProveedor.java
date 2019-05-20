@@ -73,6 +73,8 @@ public class CoCotizacionesPorProveedor implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
+    @OneToMany(mappedBy = "coCotizacionesPorProveedor")
+    private List<CoOrdenCompras> coOrdenComprasList;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne
     private CoProveedores idProveedor;
@@ -174,6 +176,15 @@ public class CoCotizacionesPorProveedor implements Serializable {
 
     public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
+    }
+
+    @XmlTransient
+    public List<CoOrdenCompras> getCoOrdenComprasList() {
+        return coOrdenComprasList;
+    }
+
+    public void setCoOrdenComprasList(List<CoOrdenCompras> coOrdenComprasList) {
+        this.coOrdenComprasList = coOrdenComprasList;
     }
 
     public CoProveedores getIdProveedor() {

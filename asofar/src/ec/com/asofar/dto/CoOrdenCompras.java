@@ -7,7 +7,6 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -37,10 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoOrdenCompras.findByIdOrdenCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idOrdenCompra = :idOrdenCompra")
     , @NamedQuery(name = "CoOrdenCompras.findByIdEmpresa", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoOrdenCompras.findByIdSucursal", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "CoOrdenCompras.findByCodigoCotizacionProveedores", query = "SELECT c FROM CoOrdenCompras c WHERE c.codigoCotizacionProveedores = :codigoCotizacionProveedores")
-    , @NamedQuery(name = "CoOrdenCompras.findByCodigoCotizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.codigoCotizacion = :codigoCotizacion")
     , @NamedQuery(name = "CoOrdenCompras.findByEstado", query = "SELECT c FROM CoOrdenCompras c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoOrdenCompras.findByIdTipoDocumento", query = "SELECT c FROM CoOrdenCompras c WHERE c.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "CoOrdenCompras.findByObservacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.observacion = :observacion")
     , @NamedQuery(name = "CoOrdenCompras.findByFechaEntrega", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaEntrega = :fechaEntrega")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalCompra = :totalCompra")
@@ -58,14 +54,8 @@ public class CoOrdenCompras implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoOrdenComprasPK coOrdenComprasPK;
-    @Column(name = "codigo_cotizacion_proveedores")
-    private BigInteger codigoCotizacionProveedores;
-    @Column(name = "codigo_cotizacion")
-    private BigInteger codigoCotizacion;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "id_tipo_documento")
-    private BigInteger idTipoDocumento;
     @Column(name = "observacion")
     private String observacion;
     @Column(name = "fecha_entrega")
@@ -95,13 +85,19 @@ public class CoOrdenCompras implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
+        @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
+        , @JoinColumn(name = "codigo_cotizacion_proveedores", referencedColumnName = "id_cotizaciones_por_porveedor")
+        , @JoinColumn(name = "codigo_cotizacion", referencedColumnName = "id_cotizacion")})
+    @ManyToOne
+    private CoCotizacionesPorProveedor coCotizacionesPorProveedor;
+    @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
+    @ManyToOne
+    private InTipoDocumento idTipoDocumento;
+    @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_persona")
-    @ManyToOne
-    private SePersonas idProveedor;
     @OneToMany(mappedBy = "coOrdenCompras")
     private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
 
@@ -124,36 +120,12 @@ public class CoOrdenCompras implements Serializable {
         this.coOrdenComprasPK = coOrdenComprasPK;
     }
 
-    public BigInteger getCodigoCotizacionProveedores() {
-        return codigoCotizacionProveedores;
-    }
-
-    public void setCodigoCotizacionProveedores(BigInteger codigoCotizacionProveedores) {
-        this.codigoCotizacionProveedores = codigoCotizacionProveedores;
-    }
-
-    public BigInteger getCodigoCotizacion() {
-        return codigoCotizacion;
-    }
-
-    public void setCodigoCotizacion(BigInteger codigoCotizacion) {
-        this.codigoCotizacion = codigoCotizacion;
-    }
-
     public String getEstado() {
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public BigInteger getIdTipoDocumento() {
-        return idTipoDocumento;
-    }
-
-    public void setIdTipoDocumento(BigInteger idTipoDocumento) {
-        this.idTipoDocumento = idTipoDocumento;
     }
 
     public String getObservacion() {
@@ -252,20 +224,28 @@ public class CoOrdenCompras implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
+    public CoCotizacionesPorProveedor getCoCotizacionesPorProveedor() {
+        return coCotizacionesPorProveedor;
+    }
+
+    public void setCoCotizacionesPorProveedor(CoCotizacionesPorProveedor coCotizacionesPorProveedor) {
+        this.coCotizacionesPorProveedor = coCotizacionesPorProveedor;
+    }
+
+    public InTipoDocumento getIdTipoDocumento() {
+        return idTipoDocumento;
+    }
+
+    public void setIdTipoDocumento(InTipoDocumento idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
+    }
+
     public SeSucursal getSeSucursal() {
         return seSucursal;
     }
 
     public void setSeSucursal(SeSucursal seSucursal) {
         this.seSucursal = seSucursal;
-    }
-
-    public SePersonas getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(SePersonas idProveedor) {
-        this.idProveedor = idProveedor;
     }
 
     @XmlTransient

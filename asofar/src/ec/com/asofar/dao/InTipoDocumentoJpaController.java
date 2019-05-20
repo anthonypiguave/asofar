@@ -12,9 +12,10 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.InMovimientos;
+import ec.com.asofar.dto.CoOrdenCompras;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.InTipoDocumento;
@@ -37,6 +38,9 @@ public class InTipoDocumentoJpaController implements Serializable {
     }
 
     public void create(InTipoDocumento inTipoDocumento) {
+        if (inTipoDocumento.getCoOrdenComprasList() == null) {
+            inTipoDocumento.setCoOrdenComprasList(new ArrayList<CoOrdenCompras>());
+        }
         if (inTipoDocumento.getInMovimientosList() == null) {
             inTipoDocumento.setInMovimientosList(new ArrayList<InMovimientos>());
         }
@@ -50,6 +54,12 @@ public class InTipoDocumentoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<CoOrdenCompras> attachedCoOrdenComprasList = new ArrayList<CoOrdenCompras>();
+            for (CoOrdenCompras coOrdenComprasListCoOrdenComprasToAttach : inTipoDocumento.getCoOrdenComprasList()) {
+                coOrdenComprasListCoOrdenComprasToAttach = em.getReference(coOrdenComprasListCoOrdenComprasToAttach.getClass(), coOrdenComprasListCoOrdenComprasToAttach.getCoOrdenComprasPK());
+                attachedCoOrdenComprasList.add(coOrdenComprasListCoOrdenComprasToAttach);
+            }
+            inTipoDocumento.setCoOrdenComprasList(attachedCoOrdenComprasList);
             List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListInMovimientosToAttach : inTipoDocumento.getInMovimientosList()) {
                 inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
@@ -69,6 +79,15 @@ public class InTipoDocumentoJpaController implements Serializable {
             }
             inTipoDocumento.setCoItemsCotizacionList(attachedCoItemsCotizacionList);
             em.persist(inTipoDocumento);
+            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : inTipoDocumento.getCoOrdenComprasList()) {
+                InTipoDocumento oldIdTipoDocumentoOfCoOrdenComprasListCoOrdenCompras = coOrdenComprasListCoOrdenCompras.getIdTipoDocumento();
+                coOrdenComprasListCoOrdenCompras.setIdTipoDocumento(inTipoDocumento);
+                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
+                if (oldIdTipoDocumentoOfCoOrdenComprasListCoOrdenCompras != null) {
+                    oldIdTipoDocumentoOfCoOrdenComprasListCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListCoOrdenCompras);
+                    oldIdTipoDocumentoOfCoOrdenComprasListCoOrdenCompras = em.merge(oldIdTipoDocumentoOfCoOrdenComprasListCoOrdenCompras);
+                }
+            }
             for (InMovimientos inMovimientosListInMovimientos : inTipoDocumento.getInMovimientosList()) {
                 InTipoDocumento oldInTipoDocumentoOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getInTipoDocumento();
                 inMovimientosListInMovimientos.setInTipoDocumento(inTipoDocumento);
@@ -110,6 +129,8 @@ public class InTipoDocumentoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             InTipoDocumento persistentInTipoDocumento = em.find(InTipoDocumento.class, inTipoDocumento.getIdTipoDocumento());
+            List<CoOrdenCompras> coOrdenComprasListOld = persistentInTipoDocumento.getCoOrdenComprasList();
+            List<CoOrdenCompras> coOrdenComprasListNew = inTipoDocumento.getCoOrdenComprasList();
             List<InMovimientos> inMovimientosListOld = persistentInTipoDocumento.getInMovimientosList();
             List<InMovimientos> inMovimientosListNew = inTipoDocumento.getInMovimientosList();
             List<InKardex> inKardexListOld = persistentInTipoDocumento.getInKardexList();
@@ -136,6 +157,13 @@ public class InTipoDocumentoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            List<CoOrdenCompras> attachedCoOrdenComprasListNew = new ArrayList<CoOrdenCompras>();
+            for (CoOrdenCompras coOrdenComprasListNewCoOrdenComprasToAttach : coOrdenComprasListNew) {
+                coOrdenComprasListNewCoOrdenComprasToAttach = em.getReference(coOrdenComprasListNewCoOrdenComprasToAttach.getClass(), coOrdenComprasListNewCoOrdenComprasToAttach.getCoOrdenComprasPK());
+                attachedCoOrdenComprasListNew.add(coOrdenComprasListNewCoOrdenComprasToAttach);
+            }
+            coOrdenComprasListNew = attachedCoOrdenComprasListNew;
+            inTipoDocumento.setCoOrdenComprasList(coOrdenComprasListNew);
             List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
                 inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
@@ -158,6 +186,23 @@ public class InTipoDocumentoJpaController implements Serializable {
             coItemsCotizacionListNew = attachedCoItemsCotizacionListNew;
             inTipoDocumento.setCoItemsCotizacionList(coItemsCotizacionListNew);
             inTipoDocumento = em.merge(inTipoDocumento);
+            for (CoOrdenCompras coOrdenComprasListOldCoOrdenCompras : coOrdenComprasListOld) {
+                if (!coOrdenComprasListNew.contains(coOrdenComprasListOldCoOrdenCompras)) {
+                    coOrdenComprasListOldCoOrdenCompras.setIdTipoDocumento(null);
+                    coOrdenComprasListOldCoOrdenCompras = em.merge(coOrdenComprasListOldCoOrdenCompras);
+                }
+            }
+            for (CoOrdenCompras coOrdenComprasListNewCoOrdenCompras : coOrdenComprasListNew) {
+                if (!coOrdenComprasListOld.contains(coOrdenComprasListNewCoOrdenCompras)) {
+                    InTipoDocumento oldIdTipoDocumentoOfCoOrdenComprasListNewCoOrdenCompras = coOrdenComprasListNewCoOrdenCompras.getIdTipoDocumento();
+                    coOrdenComprasListNewCoOrdenCompras.setIdTipoDocumento(inTipoDocumento);
+                    coOrdenComprasListNewCoOrdenCompras = em.merge(coOrdenComprasListNewCoOrdenCompras);
+                    if (oldIdTipoDocumentoOfCoOrdenComprasListNewCoOrdenCompras != null && !oldIdTipoDocumentoOfCoOrdenComprasListNewCoOrdenCompras.equals(inTipoDocumento)) {
+                        oldIdTipoDocumentoOfCoOrdenComprasListNewCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListNewCoOrdenCompras);
+                        oldIdTipoDocumentoOfCoOrdenComprasListNewCoOrdenCompras = em.merge(oldIdTipoDocumentoOfCoOrdenComprasListNewCoOrdenCompras);
+                    }
+                }
+            }
             for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
                 if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
                     InTipoDocumento oldInTipoDocumentoOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getInTipoDocumento();
@@ -243,6 +288,11 @@ public class InTipoDocumentoJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            List<CoOrdenCompras> coOrdenComprasList = inTipoDocumento.getCoOrdenComprasList();
+            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coOrdenComprasList) {
+                coOrdenComprasListCoOrdenCompras.setIdTipoDocumento(null);
+                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
             }
             List<CoItemsCotizacion> coItemsCotizacionList = inTipoDocumento.getCoItemsCotizacionList();
             for (CoItemsCotizacion coItemsCotizacionListCoItemsCotizacion : coItemsCotizacionList) {
