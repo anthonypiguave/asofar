@@ -6,13 +6,16 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SeClientes.findAll", query = "SELECT s FROM SeClientes s")
     , @NamedQuery(name = "SeClientes.findByIdClientes", query = "SELECT s FROM SeClientes s WHERE s.idClientes = :idClientes")
-    , @NamedQuery(name = "SeClientes.findByIdTipoIdentificacion", query = "SELECT s FROM SeClientes s WHERE s.idTipoIdentificacion = :idTipoIdentificacion")
     , @NamedQuery(name = "SeClientes.findByNumeroIdentificacion", query = "SELECT s FROM SeClientes s WHERE s.numeroIdentificacion = :numeroIdentificacion")
     , @NamedQuery(name = "SeClientes.findByPrimerNombre", query = "SELECT s FROM SeClientes s WHERE s.primerNombre = :primerNombre")
     , @NamedQuery(name = "SeClientes.findBySegundoNombre", query = "SELECT s FROM SeClientes s WHERE s.segundoNombre = :segundoNombre")
@@ -49,11 +51,10 @@ public class SeClientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_clientes")
     private Long idClientes;
-    @Column(name = "id_tipo_identificacion")
-    private BigInteger idTipoIdentificacion;
     @Column(name = "numero_identificacion")
     private String numeroIdentificacion;
     @Column(name = "primer_nombre")
@@ -80,6 +81,9 @@ public class SeClientes implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @JoinColumn(name = "id_tipo_identificacion", referencedColumnName = "id_tipo_identificacion")
+    @ManyToOne
+    private SeTipoIdentificacion idTipoIdentificacion;
     @OneToMany(mappedBy = "idCliente")
     private List<SeLocalidadCliente> seLocalidadClienteList;
 
@@ -96,14 +100,6 @@ public class SeClientes implements Serializable {
 
     public void setIdClientes(Long idClientes) {
         this.idClientes = idClientes;
-    }
-
-    public BigInteger getIdTipoIdentificacion() {
-        return idTipoIdentificacion;
-    }
-
-    public void setIdTipoIdentificacion(BigInteger idTipoIdentificacion) {
-        this.idTipoIdentificacion = idTipoIdentificacion;
     }
 
     public String getNumeroIdentificacion() {
@@ -200,6 +196,14 @@ public class SeClientes implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public SeTipoIdentificacion getIdTipoIdentificacion() {
+        return idTipoIdentificacion;
+    }
+
+    public void setIdTipoIdentificacion(SeTipoIdentificacion idTipoIdentificacion) {
+        this.idTipoIdentificacion = idTipoIdentificacion;
     }
 
     @XmlTransient

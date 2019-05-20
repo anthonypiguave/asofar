@@ -6,7 +6,6 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import ec.com.asofar.dto.SeContactosClientes;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -33,7 +32,7 @@ public class SeContactosClientesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(SeContactosClientes seContactosClientes) throws PreexistingEntityException, Exception {
+    public void create(SeContactosClientes seContactosClientes) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -49,11 +48,6 @@ public class SeContactosClientesJpaController implements Serializable {
                 idLocalidad = em.merge(idLocalidad);
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findSeContactosClientes(seContactosClientes.getIdContactosClientes()) != null) {
-                throw new PreexistingEntityException("SeContactosClientes " + seContactosClientes + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
