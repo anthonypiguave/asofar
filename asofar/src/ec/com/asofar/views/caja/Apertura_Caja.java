@@ -29,7 +29,6 @@ public class Apertura_Caja extends javax.swing.JDialog {
 
     int x, y;
     Date d_hora = new Date();
-    
     Date d_fecha = new Date();
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
@@ -49,7 +48,6 @@ public class Apertura_Caja extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         CargarCajas();
-
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
@@ -230,11 +228,9 @@ public class Apertura_Caja extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
         ContenedorCaja cCaja = new ContenedorCaja(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
         this.setVisible(false);
         cCaja.setVisible(true);
-
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
@@ -251,7 +247,6 @@ public class Apertura_Caja extends javax.swing.JDialog {
         try {
             VeDetalleCaja dc = new VeDetalleCaja();
             VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
-
             dc.setDineroInicio(Double.parseDouble(txtMonto.getText()));
             dc.setFechaInicio(d_fecha);
             dc.setHoraInicio(d_hora);
@@ -259,37 +254,31 @@ public class Apertura_Caja extends javax.swing.JDialog {
             dc.setIdUsuario(seUsuario.getIdUsuario());
             dc.setVeCaja(veCaja);
 //            dc.setIdUsuario(seUsuario.getIdUsuario());
-
             if (ValidacionCaja.Validacion(veCaja)) {
-                
                 cajadet.create(dc);
                 JOptionPane.showMessageDialog(null, "CAJA ACTIVA", "EXITO!", JOptionPane.INFORMATION_MESSAGE);
                 buscador(veCaja);
             } else {
                 JOptionPane.showMessageDialog(null, "LA CAJA YA ESTA ACTIVA", "ERROR!", JOptionPane.ERROR_MESSAGE);
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     public void buscador(VeCaja caja) {
-
         List<VeDetalleCaja> listadetallecaja = cajadet.findVeDetalleCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
             if ("A".equals(listadetallecaja.get(i).getEstado())
-                    && String.valueOf(listadetallecaja.get(i).getIdUsuario()).equals(seUsuario.getIdUsuario())
+                    && listadetallecaja.get(i).getIdUsuario().equals(seUsuario.getIdUsuario())
                     && listadetallecaja.get(i).getVeCaja().getIdCaja() == caja.getIdCaja()
                     && listadetallecaja.get(i).getFechaCierre() == null) {
-                
                 System.out.println("hola ");
                 ContenedorCaja cCaja = new ContenedorCaja(new javax.swing.JFrame(), true, listadetallecaja.get(i), seUsuario, seEmpresa, seSucursal);
                 this.setVisible(false);
                 cCaja.setVisible(true);
             }
         }
-
     }
 
     /**

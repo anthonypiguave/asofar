@@ -67,7 +67,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         su1 = su;
         lista = cSubgrupos.ObtenerMenu(us);
         cargarMenu(lista);
-        
 
     }
 
@@ -82,6 +81,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jButton1 = new javax.swing.JButton();
         meMenuBase = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,21 +89,36 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTextPane1);
 
+        jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         setJMenuBar(meMenuBase);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 644, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 429, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,53 +162,50 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     public void cargarMenu(List<SeOpcionesMenu> lis) {
-        
-        for (int i = 0; i < lis.size(); i++) {         
-            if(lis.get(i).getIdPadre()==null){
-                if (lis.get(i).getRuta()==null) {
-                    JMenu menu= new JMenu(lis.get(i).getNombre());
+
+        for (int i = 0; i < lis.size(); i++) {
+            if (lis.get(i).getIdPadre() == null) {
+                if (lis.get(i).getRuta() == null) {
+                    JMenu menu = new JMenu(lis.get(i).getNombre());
                     for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
                         for (int k = 0; k < lis.size(); k++) {
-                            if (lis.get(i).getSeOpcionesMenuList().get(j)==lis.get(k)) {
-                                if (lis.get(i).getSeOpcionesMenuList().get(j).getRuta()==null) {
-                                    JMenu menu2= new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                            if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
+                                if (lis.get(i).getSeOpcionesMenuList().get(j).getRuta() == null) {
+                                    JMenu menu2 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                     for (int l = 0; l < lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().size(); l++) {
                                         for (int m = 0; m < lis.size(); m++) {
-                                            if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l)==lis.get(m)) {
-                                                if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta()==null) {
-                                                    JMenu menu3=new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
+                                            if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l) == lis.get(m)) {
+                                                if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta() == null) {
+                                                    JMenu menu3 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
                                                     menu2.add(menu3);
                                                 } else {
-                                                    JMenuItem item= new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
+                                                    JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
                                                     item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta(), us1, em1, su1));
                                                     menu2.add(item);
                                                 }
-                                                
                                             }
                                         }
                                     }
                                     menu.add(menu2);
                                 } else {
-                                    JMenuItem item= new JMenuItem(lis.get(i).getNombre());
+                                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                                     item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
                                     menu.add(item);
                                 }
                             }
-                            
                         }
                     }
                     meMenuBase.add(menu);
-                    
                 } else {
-                    JMenuItem item= new JMenuItem(lis.get(i).getNombre());
+                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                     item.addActionListener(ActionItem.Obtener(lis.get(i).getRuta(), us1, em1, su1));
                     meMenuBase.add(item);
                 }
-                
+
             }
-            
+
         }
- 
+
     }
 
 //        JMenu menu=null;
@@ -253,6 +265,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JMenuBar meMenuBase;

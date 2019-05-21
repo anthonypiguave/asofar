@@ -6,7 +6,7 @@
 package ec.com.asofar.main;
 
 import ec.com.asofar.views.inicio.Frm_cargarSistema;
-
+import java.util.Date;
 
 /**
  *
@@ -20,6 +20,9 @@ public class Asofar {
     public static void main(String[] args) throws NoSuchMethodException {
         Frm_cargarSistema fr= new Frm_cargarSistema();
         fr.setVisible(true);
+//        Date fecha = new Date();
+//   
+//        System.out.println();
     }
-    
+
 }
