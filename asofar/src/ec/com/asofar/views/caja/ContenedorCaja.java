@@ -34,7 +34,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         initComponents();
         btnAperturaCaja.setEnabled(false);
         setLocationRelativeTo(null);
-        System.out.println("HOY"+veCaja.getDineroInicio());
+        System.out.println("HOY" + veCaja.getDineroInicio());
     }
 
     public ContenedorCaja(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
@@ -170,7 +170,6 @@ public class ContenedorCaja extends javax.swing.JDialog {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-      
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
