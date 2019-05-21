@@ -5,6 +5,9 @@
  */
 package ec.com.asofar.views.clientes;
 
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
@@ -17,10 +20,24 @@ public class contacto_agregar extends javax.swing.JDialog {
     /**
      * Creates new form contacto_agregar
      */
-    int x,y;
+    int x, y;
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
+
     public contacto_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public contacto_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     /**

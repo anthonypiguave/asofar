@@ -387,16 +387,16 @@ public class consulta_cliente extends javax.swing.JDialog {
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
-                
+
                 LocalidadCliente = Lc.findSeLocalidadClienteEntities();
                 for (int i = 0; i < LocalidadCliente.size(); i++) {
-                    System.out.println("id Cliente"+Client.getIdClientes());
-                    System.out.println("Localidad id Cliente"+LocalidadCliente.get(i).getIdCliente());
-                    if (Client.getIdClientes().equals(LocalidadCliente.get(i).getIdCliente())) {
-                        System.out.println("222");
-                        Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad);
-                    }
+                    System.out.println("id Cliente" + Client.getIdClientes());
+                    System.out.println("Localidad id Cliente" + LocalidadCliente.get(i).getIdCliente());
+//                    if (Client.getIdClientes().equals(LocalidadCliente.get(id).getIdCliente())) {
+                    System.out.println("222");
+                    Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad);
                 }
+//                }
             }
         }
     }//GEN-LAST:event_tba_clientesMouseClicked
@@ -425,7 +425,8 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_tba_localidadMouseClicked
 
     private void btn_ingresar_localidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_localidadActionPerformed
-
+        Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
+        Lagg.setVisible(true);
     }//GEN-LAST:event_btn_ingresar_localidadActionPerformed
 
     private void tba_contactoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_contactoMousePressed
@@ -437,7 +438,8 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_tba_contactoMouseClicked
 
     private void btn_ingresar_contactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_contactoActionPerformed
-        // TODO add your handling code here:
+        contacto_agregar Cagg = new contacto_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
+        Cagg.setVisible(true);
     }//GEN-LAST:event_btn_ingresar_contactoActionPerformed
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
