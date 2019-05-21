@@ -444,8 +444,11 @@ public class itemCotizacionForm extends javax.swing.JDialog {
             
          
         }
+        for(CoDetItemsCotizacion k: ldetCotiz){
+            System.out.println("dff "+k.getIdProducto());
+        }
         try{
-        guardar.guardarDetItemsCotizacion(ldetCotiz);
+       // guardar.guardarDetItemsCotizacion(ldetCotiz);
         }catch(Exception e){
         e.printStackTrace();
         }

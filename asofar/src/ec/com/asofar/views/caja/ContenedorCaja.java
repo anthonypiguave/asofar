@@ -36,6 +36,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         btnAperturaCaja.setEnabled(false);
         setLocationRelativeTo(null);
         System.out.println("HOY" + veCaja.getDineroInicio());
+        vdc = veCaja;
         
     }
 
@@ -163,7 +164,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
 
     private void btnCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCierreActionPerformed
 
-        Cierre_Caja cierre = new Cierre_Caja(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+        Cierre_Caja cierre = new Cierre_Caja(new javax.swing.JFrame(), true,vdc, seUsuario, seEmpresa, seSucursal);
         this.setVisible(false);
         cierre.setVisible(true);
 
