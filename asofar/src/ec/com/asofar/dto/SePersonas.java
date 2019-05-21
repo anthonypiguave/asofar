@@ -88,8 +88,6 @@ public class SePersonas implements Serializable {
     @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona idTipoPersona;
-    @OneToMany(mappedBy = "idProveedor")
-    private List<CoOrdenCompras> coOrdenComprasList;
     @OneToMany(mappedBy = "idCliente")
     private List<VeFactura> veFacturaList;
     @OneToMany(mappedBy = "idPersona")
@@ -220,15 +218,6 @@ public class SePersonas implements Serializable {
 
     public void setIdTipoPersona(SeTipoPersona idTipoPersona) {
         this.idTipoPersona = idTipoPersona;
-    }
-
-    @XmlTransient
-    public List<CoOrdenCompras> getCoOrdenComprasList() {
-        return coOrdenComprasList;
-    }
-
-    public void setCoOrdenComprasList(List<CoOrdenCompras> coOrdenComprasList) {
-        this.coOrdenComprasList = coOrdenComprasList;
     }
 
     @XmlTransient

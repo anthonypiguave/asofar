@@ -252,6 +252,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
             dc.setFechaInicio(d);
             dc.setHoraInicio(d);
             dc.setEstado("A");
+            dc.setIdUsuario(seUsuario.getIdUsuario());
             dc.setVeCaja(veCaja);
 //            dc.setIdUsuario(seUsuario.getIdUsuario());
 

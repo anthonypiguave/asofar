@@ -6,17 +6,16 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
+import ec.com.asofar.dto.SePersonas;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeTipoPersona;
-import ec.com.asofar.dto.CoOrdenCompras;
-import ec.com.asofar.dto.SePersonas;
+import ec.com.asofar.dto.VeFactura;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.SeUsuarios;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,9 +36,6 @@ public class SePersonasJpaController implements Serializable {
     }
 
     public void create(SePersonas sePersonas) {
-        if (sePersonas.getCoOrdenComprasList() == null) {
-            sePersonas.setCoOrdenComprasList(new ArrayList<CoOrdenCompras>());
-        }
         if (sePersonas.getVeFacturaList() == null) {
             sePersonas.setVeFacturaList(new ArrayList<VeFactura>());
         }
@@ -55,12 +51,6 @@ public class SePersonasJpaController implements Serializable {
                 idTipoPersona = em.getReference(idTipoPersona.getClass(), idTipoPersona.getIdTipoPersona());
                 sePersonas.setIdTipoPersona(idTipoPersona);
             }
-            List<CoOrdenCompras> attachedCoOrdenComprasList = new ArrayList<CoOrdenCompras>();
-            for (CoOrdenCompras coOrdenComprasListCoOrdenComprasToAttach : sePersonas.getCoOrdenComprasList()) {
-                coOrdenComprasListCoOrdenComprasToAttach = em.getReference(coOrdenComprasListCoOrdenComprasToAttach.getClass(), coOrdenComprasListCoOrdenComprasToAttach.getCoOrdenComprasPK());
-                attachedCoOrdenComprasList.add(coOrdenComprasListCoOrdenComprasToAttach);
-            }
-            sePersonas.setCoOrdenComprasList(attachedCoOrdenComprasList);
             List<VeFactura> attachedVeFacturaList = new ArrayList<VeFactura>();
             for (VeFactura veFacturaListVeFacturaToAttach : sePersonas.getVeFacturaList()) {
                 veFacturaListVeFacturaToAttach = em.getReference(veFacturaListVeFacturaToAttach.getClass(), veFacturaListVeFacturaToAttach.getVeFacturaPK());
@@ -77,15 +67,6 @@ public class SePersonasJpaController implements Serializable {
             if (idTipoPersona != null) {
                 idTipoPersona.getSePersonasList().add(sePersonas);
                 idTipoPersona = em.merge(idTipoPersona);
-            }
-            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : sePersonas.getCoOrdenComprasList()) {
-                SePersonas oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = coOrdenComprasListCoOrdenCompras.getIdProveedor();
-                coOrdenComprasListCoOrdenCompras.setIdProveedor(sePersonas);
-                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
-                if (oldIdProveedorOfCoOrdenComprasListCoOrdenCompras != null) {
-                    oldIdProveedorOfCoOrdenComprasListCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListCoOrdenCompras);
-                    oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListCoOrdenCompras);
-                }
             }
             for (VeFactura veFacturaListVeFactura : sePersonas.getVeFacturaList()) {
                 SePersonas oldIdClienteOfVeFacturaListVeFactura = veFacturaListVeFactura.getIdCliente();
@@ -121,8 +102,6 @@ public class SePersonasJpaController implements Serializable {
             SePersonas persistentSePersonas = em.find(SePersonas.class, sePersonas.getIdPersona());
             SeTipoPersona idTipoPersonaOld = persistentSePersonas.getIdTipoPersona();
             SeTipoPersona idTipoPersonaNew = sePersonas.getIdTipoPersona();
-            List<CoOrdenCompras> coOrdenComprasListOld = persistentSePersonas.getCoOrdenComprasList();
-            List<CoOrdenCompras> coOrdenComprasListNew = sePersonas.getCoOrdenComprasList();
             List<VeFactura> veFacturaListOld = persistentSePersonas.getVeFacturaList();
             List<VeFactura> veFacturaListNew = sePersonas.getVeFacturaList();
             List<SeUsuarios> seUsuariosListOld = persistentSePersonas.getSeUsuariosList();
@@ -131,13 +110,6 @@ public class SePersonasJpaController implements Serializable {
                 idTipoPersonaNew = em.getReference(idTipoPersonaNew.getClass(), idTipoPersonaNew.getIdTipoPersona());
                 sePersonas.setIdTipoPersona(idTipoPersonaNew);
             }
-            List<CoOrdenCompras> attachedCoOrdenComprasListNew = new ArrayList<CoOrdenCompras>();
-            for (CoOrdenCompras coOrdenComprasListNewCoOrdenComprasToAttach : coOrdenComprasListNew) {
-                coOrdenComprasListNewCoOrdenComprasToAttach = em.getReference(coOrdenComprasListNewCoOrdenComprasToAttach.getClass(), coOrdenComprasListNewCoOrdenComprasToAttach.getCoOrdenComprasPK());
-                attachedCoOrdenComprasListNew.add(coOrdenComprasListNewCoOrdenComprasToAttach);
-            }
-            coOrdenComprasListNew = attachedCoOrdenComprasListNew;
-            sePersonas.setCoOrdenComprasList(coOrdenComprasListNew);
             List<VeFactura> attachedVeFacturaListNew = new ArrayList<VeFactura>();
             for (VeFactura veFacturaListNewVeFacturaToAttach : veFacturaListNew) {
                 veFacturaListNewVeFacturaToAttach = em.getReference(veFacturaListNewVeFacturaToAttach.getClass(), veFacturaListNewVeFacturaToAttach.getVeFacturaPK());
@@ -160,23 +132,6 @@ public class SePersonasJpaController implements Serializable {
             if (idTipoPersonaNew != null && !idTipoPersonaNew.equals(idTipoPersonaOld)) {
                 idTipoPersonaNew.getSePersonasList().add(sePersonas);
                 idTipoPersonaNew = em.merge(idTipoPersonaNew);
-            }
-            for (CoOrdenCompras coOrdenComprasListOldCoOrdenCompras : coOrdenComprasListOld) {
-                if (!coOrdenComprasListNew.contains(coOrdenComprasListOldCoOrdenCompras)) {
-                    coOrdenComprasListOldCoOrdenCompras.setIdProveedor(null);
-                    coOrdenComprasListOldCoOrdenCompras = em.merge(coOrdenComprasListOldCoOrdenCompras);
-                }
-            }
-            for (CoOrdenCompras coOrdenComprasListNewCoOrdenCompras : coOrdenComprasListNew) {
-                if (!coOrdenComprasListOld.contains(coOrdenComprasListNewCoOrdenCompras)) {
-                    SePersonas oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras = coOrdenComprasListNewCoOrdenCompras.getIdProveedor();
-                    coOrdenComprasListNewCoOrdenCompras.setIdProveedor(sePersonas);
-                    coOrdenComprasListNewCoOrdenCompras = em.merge(coOrdenComprasListNewCoOrdenCompras);
-                    if (oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras != null && !oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.equals(sePersonas)) {
-                        oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListNewCoOrdenCompras);
-                        oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras);
-                    }
-                }
             }
             for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
                 if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
@@ -245,11 +200,6 @@ public class SePersonasJpaController implements Serializable {
             if (idTipoPersona != null) {
                 idTipoPersona.getSePersonasList().remove(sePersonas);
                 idTipoPersona = em.merge(idTipoPersona);
-            }
-            List<CoOrdenCompras> coOrdenComprasList = sePersonas.getCoOrdenComprasList();
-            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coOrdenComprasList) {
-                coOrdenComprasListCoOrdenCompras.setIdProveedor(null);
-                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
             }
             List<VeFactura> veFacturaList = sePersonas.getVeFacturaList();
             for (VeFactura veFacturaListVeFactura : veFacturaList) {

@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "CoCotizacionesPorProveedor.findAll", query = "SELECT c FROM CoCotizacionesPorProveedor c")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor")
+    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdProveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idProveedor = :idProveedor")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacion = :idCotizacion")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdSucursal", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idSucursal = :idSucursal")
@@ -52,6 +53,8 @@ public class CoCotizacionesPorProveedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoCotizacionesPorProveedorPK coCotizacionesPorProveedorPK;
+    @Column(name = "id_proveedor")
+    private BigInteger idProveedor;
     @Column(name = "id_tipo_compra")
     private BigInteger idTipoCompra;
     @Column(name = "fecha_envio_cotizacion")
@@ -73,9 +76,6 @@ public class CoCotizacionesPorProveedor implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
-    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
-    @ManyToOne
-    private CoProveedores idProveedor;
     @JoinColumns({
         @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false)
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
@@ -102,6 +102,14 @@ public class CoCotizacionesPorProveedor implements Serializable {
 
     public void setCoCotizacionesPorProveedorPK(CoCotizacionesPorProveedorPK coCotizacionesPorProveedorPK) {
         this.coCotizacionesPorProveedorPK = coCotizacionesPorProveedorPK;
+    }
+
+    public BigInteger getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(BigInteger idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     public BigInteger getIdTipoCompra() {
@@ -174,14 +182,6 @@ public class CoCotizacionesPorProveedor implements Serializable {
 
     public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
-    }
-
-    public CoProveedores getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(CoProveedores idProveedor) {
-        this.idProveedor = idProveedor;
     }
 
     public CoItemsCotizacion getCoItemsCotizacion() {
