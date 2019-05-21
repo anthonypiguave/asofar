@@ -13,7 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.dto.SePais;
-import ec.com.asofar.dto.CoCotizacionesPorProveedor;
+import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoProveedores;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +36,8 @@ public class CoProveedoresJpaController implements Serializable {
     }
 
     public void create(CoProveedores coProveedores) {
-        if (coProveedores.getCoCotizacionesPorProveedorList() == null) {
-            coProveedores.setCoCotizacionesPorProveedorList(new ArrayList<CoCotizacionesPorProveedor>());
+        if (coProveedores.getCoOrdenComprasList() == null) {
+            coProveedores.setCoOrdenComprasList(new ArrayList<CoOrdenCompras>());
         }
         EntityManager em = null;
         try {
@@ -53,12 +53,12 @@ public class CoProveedoresJpaController implements Serializable {
                 idPais = em.getReference(idPais.getClass(), idPais.getIdPais());
                 coProveedores.setIdPais(idPais);
             }
-            List<CoCotizacionesPorProveedor> attachedCoCotizacionesPorProveedorList = new ArrayList<CoCotizacionesPorProveedor>();
-            for (CoCotizacionesPorProveedor coCotizacionesPorProveedorListCoCotizacionesPorProveedorToAttach : coProveedores.getCoCotizacionesPorProveedorList()) {
-                coCotizacionesPorProveedorListCoCotizacionesPorProveedorToAttach = em.getReference(coCotizacionesPorProveedorListCoCotizacionesPorProveedorToAttach.getClass(), coCotizacionesPorProveedorListCoCotizacionesPorProveedorToAttach.getCoCotizacionesPorProveedorPK());
-                attachedCoCotizacionesPorProveedorList.add(coCotizacionesPorProveedorListCoCotizacionesPorProveedorToAttach);
+            List<CoOrdenCompras> attachedCoOrdenComprasList = new ArrayList<CoOrdenCompras>();
+            for (CoOrdenCompras coOrdenComprasListCoOrdenComprasToAttach : coProveedores.getCoOrdenComprasList()) {
+                coOrdenComprasListCoOrdenComprasToAttach = em.getReference(coOrdenComprasListCoOrdenComprasToAttach.getClass(), coOrdenComprasListCoOrdenComprasToAttach.getCoOrdenComprasPK());
+                attachedCoOrdenComprasList.add(coOrdenComprasListCoOrdenComprasToAttach);
             }
-            coProveedores.setCoCotizacionesPorProveedorList(attachedCoCotizacionesPorProveedorList);
+            coProveedores.setCoOrdenComprasList(attachedCoOrdenComprasList);
             em.persist(coProveedores);
             if (tipoPersona != null) {
                 tipoPersona.getCoProveedoresList().add(coProveedores);
@@ -68,13 +68,13 @@ public class CoProveedoresJpaController implements Serializable {
                 idPais.getCoProveedoresList().add(coProveedores);
                 idPais = em.merge(idPais);
             }
-            for (CoCotizacionesPorProveedor coCotizacionesPorProveedorListCoCotizacionesPorProveedor : coProveedores.getCoCotizacionesPorProveedorList()) {
-                CoProveedores oldIdProveedorOfCoCotizacionesPorProveedorListCoCotizacionesPorProveedor = coCotizacionesPorProveedorListCoCotizacionesPorProveedor.getIdProveedor();
-                coCotizacionesPorProveedorListCoCotizacionesPorProveedor.setIdProveedor(coProveedores);
-                coCotizacionesPorProveedorListCoCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedorListCoCotizacionesPorProveedor);
-                if (oldIdProveedorOfCoCotizacionesPorProveedorListCoCotizacionesPorProveedor != null) {
-                    oldIdProveedorOfCoCotizacionesPorProveedorListCoCotizacionesPorProveedor.getCoCotizacionesPorProveedorList().remove(coCotizacionesPorProveedorListCoCotizacionesPorProveedor);
-                    oldIdProveedorOfCoCotizacionesPorProveedorListCoCotizacionesPorProveedor = em.merge(oldIdProveedorOfCoCotizacionesPorProveedorListCoCotizacionesPorProveedor);
+            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coProveedores.getCoOrdenComprasList()) {
+                CoProveedores oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = coOrdenComprasListCoOrdenCompras.getIdProveedor();
+                coOrdenComprasListCoOrdenCompras.setIdProveedor(coProveedores);
+                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
+                if (oldIdProveedorOfCoOrdenComprasListCoOrdenCompras != null) {
+                    oldIdProveedorOfCoOrdenComprasListCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListCoOrdenCompras);
+                    oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListCoOrdenCompras);
                 }
             }
             em.getTransaction().commit();
@@ -95,8 +95,8 @@ public class CoProveedoresJpaController implements Serializable {
             SeTipoPersona tipoPersonaNew = coProveedores.getTipoPersona();
             SePais idPaisOld = persistentCoProveedores.getIdPais();
             SePais idPaisNew = coProveedores.getIdPais();
-            List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorListOld = persistentCoProveedores.getCoCotizacionesPorProveedorList();
-            List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorListNew = coProveedores.getCoCotizacionesPorProveedorList();
+            List<CoOrdenCompras> coOrdenComprasListOld = persistentCoProveedores.getCoOrdenComprasList();
+            List<CoOrdenCompras> coOrdenComprasListNew = coProveedores.getCoOrdenComprasList();
             if (tipoPersonaNew != null) {
                 tipoPersonaNew = em.getReference(tipoPersonaNew.getClass(), tipoPersonaNew.getIdTipoPersona());
                 coProveedores.setTipoPersona(tipoPersonaNew);
@@ -105,13 +105,13 @@ public class CoProveedoresJpaController implements Serializable {
                 idPaisNew = em.getReference(idPaisNew.getClass(), idPaisNew.getIdPais());
                 coProveedores.setIdPais(idPaisNew);
             }
-            List<CoCotizacionesPorProveedor> attachedCoCotizacionesPorProveedorListNew = new ArrayList<CoCotizacionesPorProveedor>();
-            for (CoCotizacionesPorProveedor coCotizacionesPorProveedorListNewCoCotizacionesPorProveedorToAttach : coCotizacionesPorProveedorListNew) {
-                coCotizacionesPorProveedorListNewCoCotizacionesPorProveedorToAttach = em.getReference(coCotizacionesPorProveedorListNewCoCotizacionesPorProveedorToAttach.getClass(), coCotizacionesPorProveedorListNewCoCotizacionesPorProveedorToAttach.getCoCotizacionesPorProveedorPK());
-                attachedCoCotizacionesPorProveedorListNew.add(coCotizacionesPorProveedorListNewCoCotizacionesPorProveedorToAttach);
+            List<CoOrdenCompras> attachedCoOrdenComprasListNew = new ArrayList<CoOrdenCompras>();
+            for (CoOrdenCompras coOrdenComprasListNewCoOrdenComprasToAttach : coOrdenComprasListNew) {
+                coOrdenComprasListNewCoOrdenComprasToAttach = em.getReference(coOrdenComprasListNewCoOrdenComprasToAttach.getClass(), coOrdenComprasListNewCoOrdenComprasToAttach.getCoOrdenComprasPK());
+                attachedCoOrdenComprasListNew.add(coOrdenComprasListNewCoOrdenComprasToAttach);
             }
-            coCotizacionesPorProveedorListNew = attachedCoCotizacionesPorProveedorListNew;
-            coProveedores.setCoCotizacionesPorProveedorList(coCotizacionesPorProveedorListNew);
+            coOrdenComprasListNew = attachedCoOrdenComprasListNew;
+            coProveedores.setCoOrdenComprasList(coOrdenComprasListNew);
             coProveedores = em.merge(coProveedores);
             if (tipoPersonaOld != null && !tipoPersonaOld.equals(tipoPersonaNew)) {
                 tipoPersonaOld.getCoProveedoresList().remove(coProveedores);
@@ -129,20 +129,20 @@ public class CoProveedoresJpaController implements Serializable {
                 idPaisNew.getCoProveedoresList().add(coProveedores);
                 idPaisNew = em.merge(idPaisNew);
             }
-            for (CoCotizacionesPorProveedor coCotizacionesPorProveedorListOldCoCotizacionesPorProveedor : coCotizacionesPorProveedorListOld) {
-                if (!coCotizacionesPorProveedorListNew.contains(coCotizacionesPorProveedorListOldCoCotizacionesPorProveedor)) {
-                    coCotizacionesPorProveedorListOldCoCotizacionesPorProveedor.setIdProveedor(null);
-                    coCotizacionesPorProveedorListOldCoCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedorListOldCoCotizacionesPorProveedor);
+            for (CoOrdenCompras coOrdenComprasListOldCoOrdenCompras : coOrdenComprasListOld) {
+                if (!coOrdenComprasListNew.contains(coOrdenComprasListOldCoOrdenCompras)) {
+                    coOrdenComprasListOldCoOrdenCompras.setIdProveedor(null);
+                    coOrdenComprasListOldCoOrdenCompras = em.merge(coOrdenComprasListOldCoOrdenCompras);
                 }
             }
-            for (CoCotizacionesPorProveedor coCotizacionesPorProveedorListNewCoCotizacionesPorProveedor : coCotizacionesPorProveedorListNew) {
-                if (!coCotizacionesPorProveedorListOld.contains(coCotizacionesPorProveedorListNewCoCotizacionesPorProveedor)) {
-                    CoProveedores oldIdProveedorOfCoCotizacionesPorProveedorListNewCoCotizacionesPorProveedor = coCotizacionesPorProveedorListNewCoCotizacionesPorProveedor.getIdProveedor();
-                    coCotizacionesPorProveedorListNewCoCotizacionesPorProveedor.setIdProveedor(coProveedores);
-                    coCotizacionesPorProveedorListNewCoCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedorListNewCoCotizacionesPorProveedor);
-                    if (oldIdProveedorOfCoCotizacionesPorProveedorListNewCoCotizacionesPorProveedor != null && !oldIdProveedorOfCoCotizacionesPorProveedorListNewCoCotizacionesPorProveedor.equals(coProveedores)) {
-                        oldIdProveedorOfCoCotizacionesPorProveedorListNewCoCotizacionesPorProveedor.getCoCotizacionesPorProveedorList().remove(coCotizacionesPorProveedorListNewCoCotizacionesPorProveedor);
-                        oldIdProveedorOfCoCotizacionesPorProveedorListNewCoCotizacionesPorProveedor = em.merge(oldIdProveedorOfCoCotizacionesPorProveedorListNewCoCotizacionesPorProveedor);
+            for (CoOrdenCompras coOrdenComprasListNewCoOrdenCompras : coOrdenComprasListNew) {
+                if (!coOrdenComprasListOld.contains(coOrdenComprasListNewCoOrdenCompras)) {
+                    CoProveedores oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras = coOrdenComprasListNewCoOrdenCompras.getIdProveedor();
+                    coOrdenComprasListNewCoOrdenCompras.setIdProveedor(coProveedores);
+                    coOrdenComprasListNewCoOrdenCompras = em.merge(coOrdenComprasListNewCoOrdenCompras);
+                    if (oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras != null && !oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.equals(coProveedores)) {
+                        oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListNewCoOrdenCompras);
+                        oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras);
                     }
                 }
             }
@@ -185,10 +185,10 @@ public class CoProveedoresJpaController implements Serializable {
                 idPais.getCoProveedoresList().remove(coProveedores);
                 idPais = em.merge(idPais);
             }
-            List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList = coProveedores.getCoCotizacionesPorProveedorList();
-            for (CoCotizacionesPorProveedor coCotizacionesPorProveedorListCoCotizacionesPorProveedor : coCotizacionesPorProveedorList) {
-                coCotizacionesPorProveedorListCoCotizacionesPorProveedor.setIdProveedor(null);
-                coCotizacionesPorProveedorListCoCotizacionesPorProveedor = em.merge(coCotizacionesPorProveedorListCoCotizacionesPorProveedor);
+            List<CoOrdenCompras> coOrdenComprasList = coProveedores.getCoOrdenComprasList();
+            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coOrdenComprasList) {
+                coOrdenComprasListCoOrdenCompras.setIdProveedor(null);
+                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
             }
             em.remove(coProveedores);
             em.getTransaction().commit();

@@ -38,8 +38,8 @@ public class CoCotizacionesPorPorveedorJpaController implements Serializable {
             coCotizacionesPorPorveedor.setCoCotizacionesPorPorveedorPK(new CoCotizacionesPorPorveedorPK());
         }
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdEmpresa(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
-        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdCotizacion(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdSucursal(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
+        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdCotizacion(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -60,8 +60,8 @@ public class CoCotizacionesPorPorveedorJpaController implements Serializable {
 
     public void edit(CoCotizacionesPorPorveedor coCotizacionesPorPorveedor) throws NonexistentEntityException, Exception {
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdEmpresa(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
-        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdCotizacion(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdSucursal(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
+        coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK().setIdCotizacion(coCotizacionesPorPorveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         EntityManager em = null;
         try {
             em = getEntityManager();
