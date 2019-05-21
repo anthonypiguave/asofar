@@ -28,7 +28,9 @@ import javax.swing.JOptionPane;
 public class Apertura_Caja extends javax.swing.JDialog {
 
     int x, y;
-    Date d = new Date();
+    Date d_hora = new Date();
+    
+    Date d_fecha = new Date();
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
@@ -249,8 +251,8 @@ public class Apertura_Caja extends javax.swing.JDialog {
             VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
 
             dc.setDineroInicio(Double.parseDouble(txtMonto.getText()));
-            dc.setFechaInicio(d);
-            dc.setHoraInicio(d);
+            dc.setFechaInicio(d_fecha);
+            dc.setHoraInicio(d_hora);
             dc.setEstado("A");
             dc.setIdUsuario(seUsuario.getIdUsuario());
             dc.setVeCaja(veCaja);
