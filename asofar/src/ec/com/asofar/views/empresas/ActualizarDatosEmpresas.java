@@ -142,7 +142,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
             }
         });
 
-        jLabel17.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel17.setBackground(new java.awt.Color(255, 102, 10));
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(254, 254, 254));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

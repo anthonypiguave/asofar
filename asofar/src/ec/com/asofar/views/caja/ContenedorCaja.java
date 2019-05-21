@@ -63,6 +63,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        btnAperturaCaja.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnAperturaCaja.setText("APERTURA");
         btnAperturaCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +71,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
             }
         });
 
+        btnCierre.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnCierre.setText("CIERRE ");
         btnCierre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +79,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
             }
         });
 
+        btnConsulta.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnConsulta.setText("CONSULTA");
         btnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +87,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
             }
         });
 
+        btnEditar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnEditar.setText("EDITAR");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,10 +95,15 @@ public class ContenedorCaja extends javax.swing.JDialog {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton5.setText("VOLVER");
 
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("OPCIONES DE CAJA");
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
