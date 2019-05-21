@@ -6,6 +6,7 @@
 package ec.com.asofar.views.cotizacion;
 
 import ec.com.asofar.dao.CoCotizacionesPorProveedorJpaController;
+import ec.com.asofar.daoext.Cotizacion_cabExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -28,6 +29,7 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     CoCotizacionesPorProveedorJpaController ptm = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoCotizacionesPorProveedorJpaController env = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";
+    Cotizacion_cabExt guardar=new Cotizacion_cabExt();
 
     public cotizacionesProveedorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -186,7 +188,6 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     
     private void jtCabeceraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMouseClicked
 
-
     }//GEN-LAST:event_jtCabeceraMouseClicked
 
     public void prueba() {
@@ -195,24 +196,23 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
             CoCotizacionesPorProveedor cotpro = new CoCotizacionesPorProveedor();
             cotpro=obj;
             int t = jtCabecera.getRowCount();
-            String dato = "";
+//            String dato = "";
+            boolean dato = false;
             for (int i = 0; i < t; i++) {
-                String est = jtCabecera.getValueAt(i, 7).toString();
-//                estado = est;
-                System.out.println("estado: " + est);
-                if ("true".equals(est)) {
-                    dato = "A";
+                dato = (boolean)jtCabecera.getValueAt(i, 7);
+                //System.out.println("estado: " + est);
+                CoCotizacionesPorProveedor tdoc=lista.get(i);
+                if (dato) {
+                    tdoc.setEstado("A");
                 } else {
-                    dato = "I";
+                    tdoc.setEstado("I");
                 }
-                System.out.println("dato: " + dato);
-                cotpro.setEstado(dato);
-                ptm.edit(cotpro);
             }
-
-//            cotpro.setEstado(dato);
-//            env.edit(cotpro);
-//        }
+            try {
+                guardar.guardarEstadoCotizacion(lista);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -246,6 +246,30 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
