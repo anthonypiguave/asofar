@@ -21,6 +21,7 @@ import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
+import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
@@ -1207,31 +1208,37 @@ public class Tablas {
         }
 
     }
-//    public static void TablaClientesActivo(List<SeClientes> listabodega, JTable tabla) {
-//        int[] a = {5, 100, 20};
-//        DefaultTableCellRenderer dtcr1 = new DefaultTableCellRenderer();
-//        DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
-//        dtcr1.setHorizontalAlignment(SwingConstants.CENTER);
-//        dtcr2.setHorizontalAlignment(SwingConstants.LEFT);
-//        model = VaciarTabla(tabla);
-//        String[] b = {"ID", "MEDIDA", "ESTADO"};
-//        String[] filas = new String[3];
-//        model = new DefaultTableModel(null, b);
-//        tabla.setShowGrid(true);
-//        for (int i = 0; i < listabodega.size(); i++) {
-//            if (listabodega.get(i).getEstado().equals("A")) {
-//                filas[0] = String.valueOf(listabodega.get(i).getIdTipoBodega());
-//                filas[1] = listabodega.get(i).getNombre();
-//                filas[2] = listabodega.get(i).getEstado();
-//                model.addRow(filas);
-//                tabla.setModel(model);
-//                tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-//                tabla.getColumnModel().getColumn(0).setCellRenderer(dtcr1);
-//                tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-//                tabla.getColumnModel().getColumn(1).setCellRenderer(dtcr2);
-//                tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-//                tabla.getColumnModel().getColumn(2).setCellRenderer(dtcr1);
-//            }
-//        }
-//    }
+    public static void TablaClientesActivo(List<SeClientes> listacliente, JTable Tabla) {
+        int[] a = {5, 50,120,90,90};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID", "IDENTIFICACION", "NUMERO DE IDENTIFICACION","NOMBRES","APELLIDOS"};
+        String[] filas = new String[5];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listacliente.size(); i++) {
+            if (listacliente.get(i).getEstado().equals("A")) {
+                filas[0] = String.valueOf(listacliente.get(i).getIdClientes());
+                filas[1] = listacliente.get(i).getIdTipoIdentificacion().getNombreIdentificacion();
+                filas[2] = listacliente.get(i).getNumeroIdentificacion();
+                filas[3] = listacliente.get(i).getPrimerNombre()+" "+listacliente.get(i).getSegundoNombre();
+                filas[4] = listacliente.get(i).getPrimerApellido()+" "+listacliente.get(i).getSegundoApellido();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            }
+        }
+    }
 }
