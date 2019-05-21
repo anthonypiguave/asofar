@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author ms24m
  */
 @Embeddable
 public class SeSucursalPK implements Serializable {
@@ -77,5 +76,5 @@ public class SeSucursalPK implements Serializable {
     public String toString() {
         return "ec.com.asofar.dto.SeSucursalPK[ idSucursal=" + idSucursal + ", idEmpresa=" + idEmpresa + " ]";
     }
-
+    
 }

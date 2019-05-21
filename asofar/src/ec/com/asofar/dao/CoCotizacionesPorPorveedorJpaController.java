@@ -7,8 +7,8 @@ package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
-import ec.com.asofar.dto.InBodega;
-import ec.com.asofar.dto.InBodegaPK;
+import ec.com.asofar.dto.CoCotizacionesPorPorveedor;
+import ec.com.asofar.dto.CoCotizacionesPorPorveedorPK;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,9 +22,9 @@ import javax.persistence.criteria.Root;
  *
  * @author ms24m
  */
-public class InBodegaJpaController implements Serializable {
+public class CoCotizacionesPorPorveedorJpaController implements Serializable {
 
-    public InBodegaJpaController(EntityManagerFactory emf) {
+    public CoCotizacionesPorPorveedorJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -33,19 +33,19 @@ public class InBodegaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(InBodega inBodega) throws PreexistingEntityException, Exception {
-        if (inBodega.getInBodegaPK() == null) {
-            inBodega.setInBodegaPK(new InBodegaPK());
+    public void create(CoCotizacionesPorPorveedor coCotizacionesPorPorveedor) throws PreexistingEntityException, Exception {
+        if (coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK() == null) {
+            coCotizacionesPorPorveedor.setCoCotizacionesPorPorveedorPK(new CoCotizacionesPorPorveedorPK());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(inBodega);
+            em.persist(coCotizacionesPorPorveedor);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findInBodega(inBodega.getInBodegaPK()) != null) {
-                throw new PreexistingEntityException("InBodega " + inBodega + " already exists.", ex);
+            if (findCoCotizacionesPorPorveedor(coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK()) != null) {
+                throw new PreexistingEntityException("CoCotizacionesPorPorveedor " + coCotizacionesPorPorveedor + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -55,19 +55,19 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public void edit(InBodega inBodega) throws NonexistentEntityException, Exception {
+    public void edit(CoCotizacionesPorPorveedor coCotizacionesPorPorveedor) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            inBodega = em.merge(inBodega);
+            coCotizacionesPorPorveedor = em.merge(coCotizacionesPorPorveedor);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                InBodegaPK id = inBodega.getInBodegaPK();
-                if (findInBodega(id) == null) {
-                    throw new NonexistentEntityException("The inBodega with id " + id + " no longer exists.");
+                CoCotizacionesPorPorveedorPK id = coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK();
+                if (findCoCotizacionesPorPorveedor(id) == null) {
+                    throw new NonexistentEntityException("The coCotizacionesPorPorveedor with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,19 +78,19 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public void destroy(InBodegaPK id) throws NonexistentEntityException {
+    public void destroy(CoCotizacionesPorPorveedorPK id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            InBodega inBodega;
+            CoCotizacionesPorPorveedor coCotizacionesPorPorveedor;
             try {
-                inBodega = em.getReference(InBodega.class, id);
-                inBodega.getInBodegaPK();
+                coCotizacionesPorPorveedor = em.getReference(CoCotizacionesPorPorveedor.class, id);
+                coCotizacionesPorPorveedor.getCoCotizacionesPorPorveedorPK();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The inBodega with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The coCotizacionesPorPorveedor with id " + id + " no longer exists.", enfe);
             }
-            em.remove(inBodega);
+            em.remove(coCotizacionesPorPorveedor);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -99,19 +99,19 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public List<InBodega> findInBodegaEntities() {
-        return findInBodegaEntities(true, -1, -1);
+    public List<CoCotizacionesPorPorveedor> findCoCotizacionesPorPorveedorEntities() {
+        return findCoCotizacionesPorPorveedorEntities(true, -1, -1);
     }
 
-    public List<InBodega> findInBodegaEntities(int maxResults, int firstResult) {
-        return findInBodegaEntities(false, maxResults, firstResult);
+    public List<CoCotizacionesPorPorveedor> findCoCotizacionesPorPorveedorEntities(int maxResults, int firstResult) {
+        return findCoCotizacionesPorPorveedorEntities(false, maxResults, firstResult);
     }
 
-    private List<InBodega> findInBodegaEntities(boolean all, int maxResults, int firstResult) {
+    private List<CoCotizacionesPorPorveedor> findCoCotizacionesPorPorveedorEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(InBodega.class));
+            cq.select(cq.from(CoCotizacionesPorPorveedor.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -123,20 +123,20 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public InBodega findInBodega(InBodegaPK id) {
+    public CoCotizacionesPorPorveedor findCoCotizacionesPorPorveedor(CoCotizacionesPorPorveedorPK id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(InBodega.class, id);
+            return em.find(CoCotizacionesPorPorveedor.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getInBodegaCount() {
+    public int getCoCotizacionesPorPorveedorCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<InBodega> rt = cq.from(InBodega.class);
+            Root<CoCotizacionesPorPorveedor> rt = cq.from(CoCotizacionesPorPorveedor.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

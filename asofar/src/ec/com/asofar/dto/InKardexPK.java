@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author ms24m
  */
 @Embeddable
 public class InKardexPK implements Serializable {
