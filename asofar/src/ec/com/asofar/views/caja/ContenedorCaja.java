@@ -19,6 +19,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
+    VeDetalleCaja vdc;
 
     /**
      * Creates new form ContenedorCaja
@@ -35,6 +36,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         btnAperturaCaja.setEnabled(false);
         setLocationRelativeTo(null);
         System.out.println("HOY" + veCaja.getDineroInicio());
+        
     }
 
     public ContenedorCaja(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
