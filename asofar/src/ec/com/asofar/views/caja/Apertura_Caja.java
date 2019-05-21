@@ -123,19 +123,20 @@ public class Apertura_Caja extends javax.swing.JDialog {
             }
         });
 
-        monto.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        monto.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         monto.setText("MONTO INICIAL:");
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("CAJA:");
 
-        caja.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        caja.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         caja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opcion..." }));
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("MONTO DE CIERRE:");
 
         jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField1.setText("00");
 
@@ -145,6 +146,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel6.setText("$$");
 
+        txtMonto.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtMonto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

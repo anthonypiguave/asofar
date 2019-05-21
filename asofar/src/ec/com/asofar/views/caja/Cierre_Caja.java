@@ -90,33 +90,33 @@ public class Cierre_Caja extends javax.swing.JDialog {
         jLabel1.setText("CIERRE DE CAJA");
         jLabel1.setOpaque(true);
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("CAJA:");
 
-        nombreCaja.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        nombreCaja.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("MONTO INICIAL:");
 
-        montoInicial.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        montoInicial.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("MONTO DE CIERRE:");
 
-        jTextField3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("HORA DE APERTURA:");
 
-        horaInicio.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        horaInicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel6.setText("HORA DE CIERRE:");
 
-        jTextField5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jTextField5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
         btnGrabar.setBackground(new java.awt.Color(62, 140, 69));
-        btnGrabar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         btnGrabar.setForeground(new java.awt.Color(255, 255, 255));
         btnGrabar.setText("CERRAR");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +126,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
         });
 
         btnCancelar.setBackground(new java.awt.Color(198, 50, 58));
-        btnCancelar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(254, 254, 254));
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {

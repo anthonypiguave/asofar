@@ -236,7 +236,7 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addComponent(btn_ingresar_contacto))
         );
 
-        jLabel3.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel3.setBackground(new java.awt.Color(255, 102, 0));
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -253,8 +253,10 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("Buscar:");
 
+        busqueda_tf.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         busqueda_tf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 busqueda_tfActionPerformed(evt);
