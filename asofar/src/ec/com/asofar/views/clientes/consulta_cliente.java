@@ -345,13 +345,13 @@ public class consulta_cliente extends javax.swing.JDialog {
         }
     }
 
-    public void MostrarLocalidad() {
-        try {
-            LocalidadCliente = Lc.findSeLocalidadClienteEntities();
-            Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad);
-        } catch (Exception e) {
-        }
-    }
+//    public void MostrarLocalidad() {
+//        try {
+//            LocalidadCliente = Lc.findSeLocalidadClienteEntities();
+//            Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad);
+//        } catch (Exception e) {
+//        }
+//    }
     private void jLabel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
@@ -388,7 +388,15 @@ public class consulta_cliente extends javax.swing.JDialog {
 
             if (Client != null) {
                 
-                MostrarLocalidad();
+                LocalidadCliente = Lc.findSeLocalidadClienteEntities();
+                for (int i = 0; i < LocalidadCliente.size(); i++) {
+                    System.out.println("id Cliente"+Client.getIdClientes());
+                    System.out.println("Localidad id Cliente"+LocalidadCliente.get(i).getIdCliente());
+                    if (Client.getIdClientes().equals(LocalidadCliente.get(i).getIdCliente())) {
+                        System.out.println("222");
+                        Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad);
+                    }
+                }
             }
         }
     }//GEN-LAST:event_tba_clientesMouseClicked
