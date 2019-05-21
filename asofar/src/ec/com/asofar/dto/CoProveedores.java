@@ -93,14 +93,14 @@ public class CoProveedores implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "estado")
     private Character estado;
+    @OneToMany(mappedBy = "idProveedor")
+    private List<CoOrdenCompras> coOrdenComprasList;
     @JoinColumn(name = "tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona tipoPersona;
     @JoinColumn(name = "id_pais", referencedColumnName = "id_Pais")
     @ManyToOne
     private SePais idPais;
-    @OneToMany(mappedBy = "idProveedor")
-    private List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList;
 
     public CoProveedores() {
     }
@@ -245,6 +245,15 @@ public class CoProveedores implements Serializable {
         this.estado = estado;
     }
 
+    @XmlTransient
+    public List<CoOrdenCompras> getCoOrdenComprasList() {
+        return coOrdenComprasList;
+    }
+
+    public void setCoOrdenComprasList(List<CoOrdenCompras> coOrdenComprasList) {
+        this.coOrdenComprasList = coOrdenComprasList;
+    }
+
     public SeTipoPersona getTipoPersona() {
         return tipoPersona;
     }
@@ -259,15 +268,6 @@ public class CoProveedores implements Serializable {
 
     public void setIdPais(SePais idPais) {
         this.idPais = idPais;
-    }
-
-    @XmlTransient
-    public List<CoCotizacionesPorProveedor> getCoCotizacionesPorProveedorList() {
-        return coCotizacionesPorProveedorList;
-    }
-
-    public void setCoCotizacionesPorProveedorList(List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList) {
-        this.coCotizacionesPorProveedorList = coCotizacionesPorProveedorList;
     }
 
     @Override
