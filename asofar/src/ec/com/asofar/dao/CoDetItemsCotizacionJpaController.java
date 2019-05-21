@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ms24m
  */
 public class CoDetItemsCotizacionJpaController implements Serializable {
 
@@ -38,9 +38,9 @@ public class CoDetItemsCotizacionJpaController implements Serializable {
         if (coDetItemsCotizacion.getCoDetItemsCotizacionPK() == null) {
             coDetItemsCotizacion.setCoDetItemsCotizacionPK(new CoDetItemsCotizacionPK());
         }
-        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdSucursal(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
+        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -69,9 +69,9 @@ public class CoDetItemsCotizacionJpaController implements Serializable {
     }
 
     public void edit(CoDetItemsCotizacion coDetItemsCotizacion) throws NonexistentEntityException, Exception {
-        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdSucursal(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
+        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();

@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ms24m
  */
 public class CoDetalleOrdenPedidoJpaController implements Serializable {
 

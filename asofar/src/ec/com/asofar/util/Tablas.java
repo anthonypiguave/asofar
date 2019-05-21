@@ -994,30 +994,35 @@ public class Tablas {
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            Filas[0] = "" + lista.get(i).getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
-            Filas[4] = "" + lista.get(i).getIdProveedor().getTelefono1();
-            Filas[2] = "" + lista.get(i).getIdProveedor().getNombre();
-            Filas[3] = lista.get(i).getIdProveedor().getEmail();
-            Filas[1] = lista.get(i).getIdProveedor().getNombreComercial();
-            Filas[5] = "" + lista.get(i).getFechaEnvioCotizacion();
-            Filas[6] = "" + lista.get(i).getFechaIngreso();
-
-            model.addRow(Filas);
-            Tabla.setModel(model);
-            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr1);
+//            Filas[0] = "" + lista.get(i).getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
+//            Filas[4] = "" + lista.get(i).getIdProveedor().getTelefono1();
+//            Filas[3] = lista.get(i).getIdProveedor().getEmail();
+//            Filas[1] = lista.get(i).getIdProveedor().getNombreComercial();
+//            Filas[5] = "" + lista.get(i).getFechaEnvioCotizacion();
+//            Filas[6] = "" + lista.get(i).getFechaIngreso();
+//
+//            model.addRilas[2] = "" + lista.get(i).getIdProveedor().getNombre();
+//            Filas[3] = lista.get(i).getIdProveedor().getEmail();
+//            Filas[1] = lista.get(i).getIdProveedor().getNombreComercial();
+//            Filas[5] = "" + lista.get(i).getFechaEnvioCotizacion();
+//            Filas[6] = "" + lista.get(i).getFechaIngreso();
+//
+//            model.addRow(Filas);
+//            Tabla.setModel(model);
+//            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+//            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+//            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
+//            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
+//            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+//            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr1);
+//            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+//            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr1);
+//            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+//            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr1);
+//            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+//            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr1);
         }
     }
 
@@ -1043,24 +1048,24 @@ public class Tablas {
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
                 // model.addRow(new Object[]{});
-                Object fila[] = new Object[8];
-                vo = lista.get(i);
-                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
-                fila[1] = vo.getIdProveedor().getNombreComercial();
-                fila[2] = vo.getIdProveedor().getNombre();
-                fila[3] = vo.getIdProveedor().getEmail();
-                fila[4] = vo.getIdProveedor().getTelefono1();
-                fila[5] = vo.getFechaEnvioCotizacion();
-                fila[6] = vo.getFechaIngreso();
-                String ac = (String) vo.getEstado();
-                if ("A".equals(ac)) {
-                    fila[7] = true;
-                } else {
-                    fila[7] = false;
-                }
-
-                dt.addRow(fila);
-
+////                Object fila[] = new Object[8];
+////                vo = lista.get(i);
+////                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
+////                fila[1] = vo.getIdProveedor().getNombreComercial();
+////                fila[2] = vo.getIdProveedor().getNombre();
+////                fila[3] = vo.getIdProveedor().getEmail();
+////                fila[4] = vo.getIdProveedor().getTelefono1();
+////                fila[5] = vo.getFechaEnvioCotizacion();
+////                fila[6] = vo.getFechaIngreso();
+////                String ac = (String) vo.getEstado();
+////                if ("A".equals(ac)) {
+////                    fila[7] = true;
+////                } else {
+////                    fila[7] = false;
+////                }
+////
+////                dt.addRow(fila);
+////
             }
 
         }
