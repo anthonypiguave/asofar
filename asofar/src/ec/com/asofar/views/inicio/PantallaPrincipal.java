@@ -67,7 +67,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         su1 = su;
         lista = cSubgrupos.ObtenerMenu(us);
         cargarMenu(lista);
-        
 
     }
 
@@ -163,53 +162,52 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     public void cargarMenu(List<SeOpcionesMenu> lis) {
-        
-        for (int i = 0; i < lis.size(); i++) {         
-            if(lis.get(i).getIdPadre()==null){
-                if (lis.get(i).getRuta()==null) {
-                    JMenu menu= new JMenu(lis.get(i).getNombre());
+
+        for (int i = 0; i < lis.size(); i++) {
+            if (lis.get(i).getIdPadre() == null) {
+                if (lis.get(i).getRuta() == null) {
+                    JMenu menu = new JMenu(lis.get(i).getNombre());
                     for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
                         for (int k = 0; k < lis.size(); k++) {
-                            if (lis.get(i).getSeOpcionesMenuList().get(j)==lis.get(k)) {
-                                if (lis.get(i).getSeOpcionesMenuList().get(j).getRuta()==null) {
-                                    JMenu menu2= new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                            if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
+                                if (lis.get(i).getSeOpcionesMenuList().get(j).getRuta() == null) {
+                                    JMenu menu2 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                     for (int l = 0; l < lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().size(); l++) {
                                         for (int m = 0; m < lis.size(); m++) {
-                                            if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l)==lis.get(m)) {
-                                                if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta()==null) {
-                                                    JMenu menu3=new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
+                                            if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l) == lis.get(m)) {
+                                                if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta() == null) {
+                                                    JMenu menu3 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
                                                     menu2.add(menu3);
                                                 } else {
-                                                    JMenuItem item= new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
+                                                    JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
                                                     item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta(), us1, em1, su1));
                                                     menu2.add(item);
                                                 }
-                                                
                                             }
                                         }
                                     }
                                     menu.add(menu2);
                                 } else {
-                                    JMenuItem item= new JMenuItem(lis.get(i).getNombre());
+                                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                                     item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
                                     menu.add(item);
                                 }
                             }
-                            
+
                         }
                     }
                     meMenuBase.add(menu);
-                    
+
                 } else {
-                    JMenuItem item= new JMenuItem(lis.get(i).getNombre());
+                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                     item.addActionListener(ActionItem.Obtener(lis.get(i).getRuta(), us1, em1, su1));
                     meMenuBase.add(item);
                 }
-                
+
             }
-            
+
         }
- 
+
     }
 
 //        JMenu menu=null;
