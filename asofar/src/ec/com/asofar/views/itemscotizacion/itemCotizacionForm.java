@@ -5,10 +5,14 @@
  */
 package ec.com.asofar.views.itemscotizacion;
 
+import ec.com.asofar.dao.CoDetItemsCotizacionJpaController;
 import ec.com.asofar.dao.InEstadosMovimientoJpaController;
 import ec.com.asofar.dao.InTipoCompraJpaController;
 import ec.com.asofar.dao.InTipoDepartamentoJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.daoext.modificarDatosDocumentoExt;
+import ec.com.asofar.dto.CoDetItemsCotizacion;
+import static ec.com.asofar.dto.CoDetItemsCotizacion_.coDetItemsCotizacionPK;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoCompra;
@@ -23,6 +27,7 @@ import ec.com.asofar.util.Formulario;
 import ec.com.asofar.util.Tablas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,7 +61,11 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     PrProductos objeto = null;
     List<PrProductos> lproductos = new ArrayList<>();
     java.util.Date fechaGuardar = new java.util.Date();
-    String fecha,hora;
+    String fecha, hora;
+    CoDetItemsCotizacion detCotiz = new CoDetItemsCotizacion();
+    CoDetItemsCotizacionJpaController jdetCotiz = new CoDetItemsCotizacionJpaController(conn);
+    List<CoDetItemsCotizacion> ldetCotiz;
+    modificarDatosDocumentoExt guardar=new modificarDatosDocumentoExt();
 
     public itemCotizacionForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -65,13 +74,12 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         cargarCab();
         java.util.Date sistFecha = new java.util.Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        fecha=(formato.format(sistFecha));
+        fecha = (formato.format(sistFecha));
 
         //HORA DEL SISTEMA
         Timer tiempo = new Timer(100, new itemCotizacionForm.horas());
         tiempo.start();
-        
-        
+
     }
 
     public itemCotizacionForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -81,14 +89,14 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         cargarCab();
         java.util.Date sistFecha = new java.util.Date();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
-        fecha=(formato.format(sistFecha));
+        fecha = (formato.format(sistFecha));
 
         //HORA DEL SISTEMA
         Timer tiempo = new Timer(100, new itemCotizacionForm.horas());
         tiempo.start();
-        
-        
+
     }
+
     class horas implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -96,10 +104,11 @@ public class itemCotizacionForm extends javax.swing.JDialog {
             String pmAm = "HH:mm:ss";
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             Calendar hoy = Calendar.getInstance();
-            hora=(String.format(format.format(sistHora), hoy));
-            txthora.setText(fecha+" "+hora);
+            hora = (String.format(format.format(sistHora), hoy));
+            txthora.setText(fecha + " " + hora);
         }
     }
+
     private void cargarCab() {
         lcompra = jcompra.findInTipoCompraEntities();
         ldeparta = jdepartamento.findInTipoDepartamentoEntities();
@@ -110,7 +119,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         cb_tdepartament.setModel(Formulario.comboTdepart(ldeparta));
         cb_estado.setModel(Formulario.comboTestad(lestad));
         cb_tdocument.setModel(Formulario.comboTdoc(ldocument));
-        
+
         //        for (int i = 0; i < lcompra.size(); i++) {
 //            if ("A".equals(lcompra.get(i).getEstado())) {
 //                cb_tcompra.addItem(lcompra.get(i).getNombre());
@@ -196,13 +205,13 @@ public class itemCotizacionForm extends javax.swing.JDialog {
 
         tb_prod.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tb_prod.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -411,18 +420,37 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       int i = tb_prod.getSelectedRow();
+        int i = tb_prod.getSelectedRow();
         if (i == -1) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UN ITEM");
-        }else{
+        } else {
             lproductos.remove(i);
             Tablas.listarProductoItemsCotizacion(lproductos, tb_prod);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        ldetCotiz=jdetCotiz.findCoDetItemsCotizacionEntities();
+        
+        for (int i = 0; i < tb_prod.getRowCount(); i++) {
+            CoDetItemsCotizacion tdet = ldetCotiz.get(i);
+            tdet.getCoDetItemsCotizacionPK().setIdCotizacion(WIDTH);
+            tdet.getCoDetItemsCotizacionPK().setIdEmpresa(ERROR);
+            tdet.getCoDetItemsCotizacionPK().setIdSucursal(ERROR);
+            tdet.getCoDetItemsCotizacionPK().setLineaDetalle(i);
+            tdet.setDescripcion(tb_prod.getValueAt(i, 2).toString());
+            tdet.setCantidadPedida(new BigInteger(tb_prod.getValueAt(i, 5).toString()));
+            tdet.setIdProducto(new BigInteger(tb_prod.getValueAt(i, 0).toString()));
+            
+         
+        }
+        try{
+        guardar.guardarDetItemsCotizacion(ldetCotiz);
+        }catch(Exception e){
+        e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
     public void anadirPrLista(PrProductos obj) {
         System.out.println("tam " + lproductos.size());
         if (lproductos.size() == 0) {
@@ -434,7 +462,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
             for (int i = 0; i < lproductos.size(); i++) {
                 if (lproductos.get(i).getPrProductosPK().getIdProducto() == obj.getPrProductosPK().getIdProducto()) {
                     ban = true;
-                } 
+                }
             }
             if (ban == false) {
                 System.out.println("hooaoaasks");
