@@ -193,11 +193,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     menu.add(item);
                                 }
                             }
-
                         }
                     }
                     meMenuBase.add(menu);
-
                 } else {
                     JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                     item.addActionListener(ActionItem.Obtener(lis.get(i).getRuta(), us1, em1, su1));
