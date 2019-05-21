@@ -40,8 +40,8 @@ public class InKardexJpaController implements Serializable {
             inKardex.setInKardexPK(new InKardexPK());
         }
         inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
+        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -80,8 +80,8 @@ public class InKardexJpaController implements Serializable {
 
     public void edit(InKardex inKardex) throws NonexistentEntityException, Exception {
         inKardex.getInKardexPK().setIdEmpresa(inKardex.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inKardex.getInKardexPK().setIdTipoDocumento(inKardex.getInTipoDocumento().getIdTipoDocumento());
+        inKardex.getInKardexPK().setIdSucursal(inKardex.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();

@@ -316,8 +316,8 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_tb_documentoMouseClicked
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        ArrayList<String> queryL1 = new ArrayList<String>();
-        String cad1 = "";
+       // ArrayList<String> queryL1 = new ArrayList<String>();
+      //  String cad1 = "";
         boolean estado = false;
         for (int i = 0; i < tb_documento.getRowCount(); i++) {
             estado = (boolean) tb_documento.getValueAt(i, 2);

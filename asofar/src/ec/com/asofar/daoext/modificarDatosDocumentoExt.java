@@ -6,6 +6,7 @@
 package ec.com.asofar.daoext;
 
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dto.CoDetItemsCotizacion;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
@@ -48,5 +49,17 @@ public class modificarDatosDocumentoExt extends InTipoDocumentoJpaController{
             nativeQuery="";
         }
         
+    }
+    public void guardarDetItemsCotizacion (List<CoDetItemsCotizacion> lista) throws Exception{
+        EntityManager em = getEntityManager();
+        
+        em.getTransaction().begin();
+        for (CoDetItemsCotizacion trx:lista)
+        {
+             em.merge(trx);
+        }
+       
+        em.getTransaction().commit();
+        System.out.println("hjjsjhs2");
     }
 }
