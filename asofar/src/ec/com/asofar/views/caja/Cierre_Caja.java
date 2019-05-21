@@ -32,21 +32,30 @@ public class Cierre_Caja extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
     }
-       public Cierre_Caja(java.awt.Frame parent, boolean modal,VeDetalleCaja veCaja, SeUsuarios se, SeEmpresa em, SeSucursal su) {
+
+    public Cierre_Caja(java.awt.Frame parent, boolean modal, VeDetalleCaja veCaja, SeUsuarios se, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
         vdc = veCaja;
         llenarCampos(veCaja);
+    }
+
+    private void llenarCampos(VeDetalleCaja veCaja) {
+        nombreCaja.setText(veCaja.getVeCaja().getNombre());
+        montoInicial.setText(String.valueOf(veCaja.getDineroInicio()));
+        horaInicio.setText(String.valueOf(veCaja.getHoraInicio().getHours() + ":" + veCaja.getHoraInicio().getMinutes() + ":" + veCaja.getHoraInicio().getSeconds()));
+
+        veCaja.getHoraInicio().getHours();
+        veCaja.getHoraInicio().getMinutes();
+        veCaja.getHoraInicio().getSeconds();
     }
 
     @SuppressWarnings("unchecked")
@@ -289,10 +298,4 @@ public class Cierre_Caja extends javax.swing.JDialog {
     private javax.swing.JTextField montoInicial;
     private javax.swing.JTextField nombreCaja;
     // End of variables declaration//GEN-END:variables
-
-    private void llenarCampos(VeDetalleCaja veCaja) {
-       nombreCaja.setText(veCaja.getVeCaja().getNombre());
-       montoInicial.setText(String.valueOf(veCaja.getDineroInicio()));
-       horaInicio.setText(String.valueOf(veCaja.getHoraInicio().getTime()));
-    }
 }

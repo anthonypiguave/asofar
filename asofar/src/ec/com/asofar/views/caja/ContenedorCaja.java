@@ -37,7 +37,6 @@ public class ContenedorCaja extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         System.out.println("HOY" + veCaja.getDineroInicio());
         vdc = veCaja;
-        
     }
 
     public ContenedorCaja(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
@@ -150,29 +149,21 @@ public class ContenedorCaja extends javax.swing.JDialog {
         Apertura_Caja acaja = new Apertura_Caja(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
         this.setVisible(false);
         acaja.setVisible(true);
-
     }//GEN-LAST:event_btnAperturaCajaActionPerformed
 
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-
         ConsultaCajasActivasForm consulta = new ConsultaCajasActivasForm(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
         this.setVisible(false);
         consulta.setVisible(true);
-
-
     }//GEN-LAST:event_btnConsultaActionPerformed
 
     private void btnCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCierreActionPerformed
-
-        Cierre_Caja cierre = new Cierre_Caja(new javax.swing.JFrame(), true,vdc, seUsuario, seEmpresa, seSucursal);
+        Cierre_Caja cierre = new Cierre_Caja(new javax.swing.JFrame(), true, vdc, seUsuario, seEmpresa, seSucursal);
         this.setVisible(false);
         cierre.setVisible(true);
-
-
     }//GEN-LAST:event_btnCierreActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
