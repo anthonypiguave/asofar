@@ -34,7 +34,6 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     public cotizacionesProveedorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        System.out.println("pajerrro!!");
         lista = ptm.findCoCotizacionesPorProveedorEntities();
 //        Tablas.tablaCotizacionPorProveedor(jtCabecera, lista);
         Tablas.TablaCotizacionPorProveedorDos(jtCabecera, lista);
@@ -193,31 +192,31 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jtCabeceraMouseClicked
 
     public void prueba() {
-        try {
-//            if (evt.getClickCount() >= 1) {
-            CoCotizacionesPorProveedor cotpro = new CoCotizacionesPorProveedor();
-            cotpro=obj;
-            int t = jtCabecera.getRowCount();
-//            String dato = "";
-            boolean dato = false;
-            for (int i = 0; i < t; i++) {
-                dato = (boolean)jtCabecera.getValueAt(i, 7);
-                //System.out.println("estado: " + est);
-                CoCotizacionesPorProveedor tdoc=lista.get(i);
-                if (dato) {
-                    tdoc.setEstado("A");
-                } else {
-                    tdoc.setEstado("I");
-                }
-            }
-            try {
-                guardar.guardarEstadoCotizacion(lista);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(Level.SEVERE, null, e);
-        }
+//        try {
+////            if (evt.getClickCount() >= 1) {
+//            CoCotizacionesPorProveedor cotpro = new CoCotizacionesPorProveedor();
+//            cotpro=obj;
+//            int t = jtCabecera.getRowCount();
+////            String dato = "";
+//            boolean dato = false;
+//            for (int i = 0; i < t; i++) {
+//                dato = (boolean)jtCabecera.getValueAt(i, 7);
+//                //System.out.println("estado: " + est);
+//                CoCotizacionesPorProveedor tdoc=lista.get(i);
+//                if (dato) {
+//                    tdoc.setEstado("A");
+//                } else {
+//                    tdoc.setEstado("I");
+//                }
+//            }
+//            try {
+//                guardar.guardarEstadoCotizacion(lista);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(Level.SEVERE, null, e);
+//        }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         prueba();
