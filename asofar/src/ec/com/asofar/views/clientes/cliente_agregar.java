@@ -19,6 +19,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +35,7 @@ public class cliente_agregar extends javax.swing.JDialog {
     SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeClientes clientes = new SeClientes();
     SeClientesJpaController scc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+
     public cliente_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -243,15 +244,15 @@ public class cliente_agregar extends javax.swing.JDialog {
         SeTipoIdentificacion ti = new SeTipoIdentificacion();
 //        ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
         ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
-        System.out.println("id de idenetificacion "+ti);
+        System.out.println("id de idenetificacion " + ti);
 
         clientes.setPrimerNombre(txt_primer_nombre.getText());
         clientes.setSegundoNombre(txt_segundo_nombre.getText());
         clientes.setPrimerApellido(txt_primer_apellido.getText());
         clientes.setSegundoApellido(txt_segundo_apellido.getText());
         clientes.setNumeroIdentificacion(txt_numero_identificacion.getText());
-        clientes.setNombreCompleto(txt_primer_nombre.getText()+" "+txt_segundo_nombre.getText()+" "+
-                                   txt_primer_apellido.getText()+" "+txt_segundo_apellido.getText());
+        clientes.setNombreCompleto(txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
+                + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText());
         clientes.setIdTipoIdentificacion(ti);
         clientes.setFechaCreacion(fechaActual);
         clientes.setUsuarioCreacion(usu.getNombreUsuario());
@@ -259,6 +260,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         clientes.setEstado("A");
         try {
             scc.create(clientes);
+            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception ex) {
             Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
