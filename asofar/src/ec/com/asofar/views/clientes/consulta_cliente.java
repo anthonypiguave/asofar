@@ -395,11 +395,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
-
                 LocalidadCliente = Lc.findSeLocalidadClienteEntities();
-                System.out.println("222");
                 Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
-
             }
         }
     }//GEN-LAST:event_tba_clientesMouseClicked
