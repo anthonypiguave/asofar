@@ -90,6 +90,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
+        btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnGrabar.setText("Grabar");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +98,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +106,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -121,8 +123,10 @@ public class ModificarGruposForm extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("Nuevo Nombre:");
 
+        txtNuevo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoKeyTyped(evt);
@@ -130,14 +134,17 @@ public class ModificarGruposForm extends javax.swing.JDialog {
         });
 
         txtNombreactual.setEditable(false);
+        txtNombreactual.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtNombreactual.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreactualFocusLost(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("Nombre Actual:");
 
+        brnEliminar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         brnEliminar.setText("Eliminar");
         brnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +153,9 @@ public class ModificarGruposForm extends javax.swing.JDialog {
         });
 
         txtFecha.setEditable(false);
+        txtFecha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("Fecha de Creacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

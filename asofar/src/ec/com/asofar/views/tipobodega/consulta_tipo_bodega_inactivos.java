@@ -100,6 +100,7 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbl_tipobodegainactivos);
 
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("Buscar:");
 
         busqueda_tf.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +117,7 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

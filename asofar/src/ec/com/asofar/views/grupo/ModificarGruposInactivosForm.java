@@ -89,6 +89,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
+        btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnGrabar.setText("Cambiar Estado ");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +97,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +105,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -121,16 +123,22 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
         });
 
         txtNombreactual.setEditable(false);
+        txtNombreactual.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("Nombre:");
 
         txtFecha.setEditable(false);
+        txtFecha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("Fecha de Creacion");
 
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel6.setText("Fecha de Actualizacion:");
 
         txtFechaActualizacion.setEditable(false);
+        txtFechaActualizacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

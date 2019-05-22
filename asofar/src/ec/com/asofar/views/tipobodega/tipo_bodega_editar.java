@@ -82,16 +82,20 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("Nombre:");
 
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("Estado:");
 
+        txtnom_bodega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtnom_bodega.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtnom_bodegaFocusLost(evt);
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jButton1.setText("Grabar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +103,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +111,9 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        cbx_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

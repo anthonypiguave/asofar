@@ -12,7 +12,7 @@ import ec.com.asofar.dao.InTipoDepartamentoJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.daoext.modificarDatosDocumentoExt;
 import ec.com.asofar.dto.CoDetItemsCotizacion;
-import static ec.com.asofar.dto.CoDetItemsCotizacion_.coDetItemsCotizacionPK;
+//import static ec.com.asofar.dto.CoDetItemsCotizacion_.coDetItemsCotizacionPK;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoCompra;
@@ -65,7 +65,8 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     CoDetItemsCotizacion detCotiz = new CoDetItemsCotizacion();
     CoDetItemsCotizacionJpaController jdetCotiz = new CoDetItemsCotizacionJpaController(conn);
     List<CoDetItemsCotizacion> ldetCotiz;
-    modificarDatosDocumentoExt guardar=new modificarDatosDocumentoExt();
+    modificarDatosDocumentoExt guardar = new modificarDatosDocumentoExt();
+    
 
     public itemCotizacionForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -184,7 +185,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -201,7 +202,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu", 1, 14))); // NOI18N
 
         tb_prod.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,16 +235,23 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Documento"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Documento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu", 1, 14))); // NOI18N
 
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel7.setText("TIPO COMPRA:");
 
+        cb_tcompra.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cb_tcompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
+        txthora.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel8.setText("FECHA EMISION:");
 
+        jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel9.setText("DEPARTAMENTO:");
 
+        cb_tdepartament.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cb_tdepartament.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cb_tdepartament.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,12 +259,16 @@ public class itemCotizacionForm extends javax.swing.JDialog {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel10.setText("ESTADO:");
 
+        cb_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cb_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel11.setText("DOCUMENTO:");
 
+        cb_tdocument.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cb_tdocument.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -315,6 +327,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setText("AGREGAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,6 +335,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setText("ELIMINAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,6 +343,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton3.setText("GUARDAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,7 +390,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(44, 44, 44)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(343, Short.MAX_VALUE)))
+                    .addContainerGap(341, Short.MAX_VALUE)))
         );
 
         pack();
@@ -430,27 +445,29 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ldetCotiz=jdetCotiz.findCoDetItemsCotizacionEntities();
+        ldetCotiz = jdetCotiz.findCoDetItemsCotizacionEntities();
+        
+        List<CoDetItemsCotizacion> lista = new ArrayList<>();
         
         for (int i = 0; i < tb_prod.getRowCount(); i++) {
-            CoDetItemsCotizacion tdet = ldetCotiz.get(i);
-            tdet.getCoDetItemsCotizacionPK().setIdCotizacion(WIDTH);
-            tdet.getCoDetItemsCotizacionPK().setIdEmpresa(ERROR);
-            tdet.getCoDetItemsCotizacionPK().setIdSucursal(ERROR);
+            CoDetItemsCotizacion tdet = new CoDetItemsCotizacion();
+            tdet.getCoDetItemsCotizacionPK().setIdCotizacion(1);
+            tdet.getCoDetItemsCotizacionPK().setIdEmpresa(2);
+            tdet.getCoDetItemsCotizacionPK().setIdSucursal(3);
             tdet.getCoDetItemsCotizacionPK().setLineaDetalle(i);
             tdet.setDescripcion(tb_prod.getValueAt(i, 2).toString());
             tdet.setCantidadPedida(new BigInteger(tb_prod.getValueAt(i, 5).toString()));
             tdet.setIdProducto(new BigInteger(tb_prod.getValueAt(i, 0).toString()));
-            
-         
+            lista.add(tdet);
         }
-        for(CoDetItemsCotizacion k: ldetCotiz){
-            System.out.println("dff "+k.getIdProducto());
+        
+        for(CoDetItemsCotizacion k:lista){
+            System.out.println("dff " + k.getIdProducto());
         }
-        try{
-       // guardar.guardarDetItemsCotizacion(ldetCotiz);
-        }catch(Exception e){
-        e.printStackTrace();
+        try {
+            // guardar.guardarDetItemsCotizacion(ldetCotiz);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

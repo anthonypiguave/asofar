@@ -51,10 +51,12 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setToolTipText("");
 
-        jLabel2.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel2.setBackground(new java.awt.Color(255, 102, 0));
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText(" Nueva presentacion");
+        jLabel2.setOpaque(true);
 
         lblnombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         lblnombre.setText("Nombre presentacion");

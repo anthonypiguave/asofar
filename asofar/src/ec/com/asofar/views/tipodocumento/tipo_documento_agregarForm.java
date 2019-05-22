@@ -71,6 +71,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        txtnom_documento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtnom_documento.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtnom_documentoFocusLost(evt);
@@ -82,6 +83,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
             }
         });
 
+        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         btnGuardar.setText("Grabar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +91,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,9 +99,10 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("Nombre:");
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -131,7 +135,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtnom_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 23, Short.MAX_VALUE))))
+                                .addGap(0, 26, Short.MAX_VALUE))))
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)

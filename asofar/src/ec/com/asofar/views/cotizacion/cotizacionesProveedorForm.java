@@ -7,8 +7,11 @@ package ec.com.asofar.views.cotizacion;
 
 import ec.com.asofar.dao.CoCotizacionesPorProveedorJpaController;
 import ec.com.asofar.daoext.Cotizacion_cabExt;
+import ec.com.asofar.daoext.DetalleCotizacionExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
+import ec.com.asofar.dto.CoDetItemsCotizacion;
+import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
@@ -25,16 +28,18 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
      * Creates new form cotizacionesProveedorForm
      */
     CoCotizacionesPorProveedor obj = new CoCotizacionesPorProveedor();
+    CoDetItemsCotizacion objt = new CoDetItemsCotizacion();
+    List<CoDetalleCotizacionPorProveedor> listar;
     List<CoCotizacionesPorProveedor> lista;
     CoCotizacionesPorProveedorJpaController ptm = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoCotizacionesPorProveedorJpaController env = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";
     Cotizacion_cabExt guardar=new Cotizacion_cabExt();
+    DetalleCotizacionExt guarda = new DetalleCotizacionExt();
 
     public cotizacionesProveedorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        System.out.println("pajerrro!!");
         lista = ptm.findCoCotizacionesPorProveedorEntities();
 //        Tablas.tablaCotizacionPorProveedor(jtCabecera, lista);
         Tablas.TablaCotizacionPorProveedorDos(jtCabecera, lista);
@@ -100,13 +105,14 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
         jtDetalle.setRowHeight(22);
         jScrollPane2.setViewportView(jtDetalle);
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("FALTANTE PROVEEDOR");
         jLabel1.setOpaque(true);
 
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setText("ACEPTAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +120,7 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setText("SALIR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,21 +194,42 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     String estado = "";
     
     private void jtCabeceraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMouseClicked
-
+//public void pruebaCabecera() {
+//        try {
+////            if (evt.getClickCount() >= 1) {
+//            CoCotizacionesPorProveedor cotpro = new CoCotizacionesPorProveedor();
+//            cotpro=obj;
+//            int t = jtCabecera.getRowCount();
+////            String dato = "";
+//            boolean dato = false;
+//            for (int i = 0; i < t; i++) {
+//                dato = (boolean)jtCabecera.getValueAt(i, 7);
+//                //System.out.println("estado: " + est);
+//                CoCotizacionesPorProveedor tdoc=lista.get(i);
+//                if (dato) {
+//                    tdoc.setEstado("A");
+//                } else {
+//                    tdoc.setEstado("I");
+//                }
+//            }
+//            try {
+//                guardar.guardarEstadoCotizacion(lista);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(Level.SEVERE, null, e);
+//        }
+//    }
     }//GEN-LAST:event_jtCabeceraMouseClicked
 
     public void prueba() {
         try {
-//            if (evt.getClickCount() >= 1) {
-            CoCotizacionesPorProveedor cotpro = new CoCotizacionesPorProveedor();
-            cotpro=obj;
-            int t = jtCabecera.getRowCount();
-//            String dato = "";
+            int t = jtDetalle.getRowCount();
             boolean dato = false;
             for (int i = 0; i < t; i++) {
-                dato = (boolean)jtCabecera.getValueAt(i, 7);
-                //System.out.println("estado: " + est);
-                CoCotizacionesPorProveedor tdoc=lista.get(i);
+                dato = (boolean)jtDetalle.getValueAt(i, 5);
+                CoDetalleCotizacionPorProveedor tdoc=listar.get(i);
                 if (dato) {
                     tdoc.setEstado("A");
                 } else {
@@ -209,7 +237,7 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
                 }
             }
             try {
-                guardar.guardarEstadoCotizacion(lista);
+                guarda.guardarEstadoCotizacionDetalle(listar);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -34,6 +34,7 @@ import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
+import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 
@@ -58,6 +59,21 @@ public class ValidarDTO {
     
     
     }
+    public static boolean ValidarSeCliente(String nombre){
+        SeClientesJpaController control=new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+        boolean valor=false;
+        List<SeClientes> lista=control.findSeClientesEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getNombreCompleto().equals(nombre)){
+            valor=true;
+            }
+        }
+        
+        return valor;
+    
+    
+    }    
     public static boolean ValidarInTipoBodega(String nombre){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;

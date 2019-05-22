@@ -117,7 +117,7 @@ public class ListaSucursales extends javax.swing.JDialog {
             }
         });
 
-        SUCURSAL.setBackground(new java.awt.Color(0, 153, 153));
+        SUCURSAL.setBackground(new java.awt.Color(255, 102, 0));
         SUCURSAL.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         SUCURSAL.setForeground(new java.awt.Color(254, 254, 254));
         SUCURSAL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
