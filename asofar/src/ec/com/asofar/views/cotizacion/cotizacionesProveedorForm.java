@@ -7,8 +7,11 @@ package ec.com.asofar.views.cotizacion;
 
 import ec.com.asofar.dao.CoCotizacionesPorProveedorJpaController;
 import ec.com.asofar.daoext.Cotizacion_cabExt;
+import ec.com.asofar.daoext.DetalleCotizacionExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
+import ec.com.asofar.dto.CoDetItemsCotizacion;
+import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
@@ -25,11 +28,14 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
      * Creates new form cotizacionesProveedorForm
      */
     CoCotizacionesPorProveedor obj = new CoCotizacionesPorProveedor();
+    CoDetItemsCotizacion objt = new CoDetItemsCotizacion();
+    List<CoDetalleCotizacionPorProveedor> listar;
     List<CoCotizacionesPorProveedor> lista;
     CoCotizacionesPorProveedorJpaController ptm = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoCotizacionesPorProveedorJpaController env = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";
     Cotizacion_cabExt guardar=new Cotizacion_cabExt();
+    DetalleCotizacionExt guarda = new DetalleCotizacionExt();
 
     public cotizacionesProveedorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -188,10 +194,7 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
     String estado = "";
     
     private void jtCabeceraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMouseClicked
-
-    }//GEN-LAST:event_jtCabeceraMouseClicked
-
-    public void prueba() {
+//public void pruebaCabecera() {
 //        try {
 ////            if (evt.getClickCount() >= 1) {
 //            CoCotizacionesPorProveedor cotpro = new CoCotizacionesPorProveedor();
@@ -217,6 +220,30 @@ public class cotizacionesProveedorForm extends javax.swing.JDialog {
 //        } catch (Exception e) {
 //            Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(Level.SEVERE, null, e);
 //        }
+//    }
+    }//GEN-LAST:event_jtCabeceraMouseClicked
+
+    public void prueba() {
+        try {
+            int t = jtDetalle.getRowCount();
+            boolean dato = false;
+            for (int i = 0; i < t; i++) {
+                dato = (boolean)jtDetalle.getValueAt(i, 5);
+                CoDetalleCotizacionPorProveedor tdoc=listar.get(i);
+                if (dato) {
+                    tdoc.setEstado("A");
+                } else {
+                    tdoc.setEstado("I");
+                }
+            }
+            try {
+                guarda.guardarEstadoCotizacionDetalle(listar);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            Logger.getLogger(cotizacionesProveedorForm.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         prueba();
