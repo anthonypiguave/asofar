@@ -1049,25 +1049,25 @@ public class Tablas {
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
-                // model.addRow(new Object[]{});
-////                Object fila[] = new Object[8];
-////                vo = lista.get(i);
-////                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
-////                fila[1] = vo.getIdProveedor().getNombreComercial();
-////                fila[2] = vo.getIdProveedor().getNombre();
-////                fila[3] = vo.getIdProveedor().getEmail();
-////                fila[4] = vo.getIdProveedor().getTelefono1();
-////                fila[5] = vo.getFechaEnvioCotizacion();
-////                fila[6] = vo.getFechaIngreso();
-////                String ac = (String) vo.getEstado();
-////                if ("A".equals(ac)) {
-////                    fila[7] = true;
-////                } else {
-////                    fila[7] = false;
-////                }
-////
-////                dt.addRow(fila);
-////
+//                 model.addRow(new Object[]{});
+                Object fila[] = new Object[8];
+                vo = lista.get(i);
+                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
+                fila[1] = ObtenerDTO.ObtenerCoProveedores(vo.getIdProveedor().longValue()).getNombreComercial();
+                fila[2] = ObtenerDTO.ObtenerCoProveedores(vo.getIdProveedor().longValue()).getNombre();
+                fila[3] = ObtenerDTO.ObtenerCoProveedores(vo.getIdProveedor().longValue()).getEmail();
+                fila[4] = ObtenerDTO.ObtenerCoProveedores(vo.getIdProveedor().longValue()).getTelefono1();
+                fila[5] = vo.getFechaEnvioCotizacion();
+                fila[6] = vo.getFechaIngreso();
+                String ac = (String) vo.getEstado();
+                if ("A".equals(ac)) {
+                    fila[7] = true;
+                } else {
+                    fila[7] = false;
+                }
+
+                dt.addRow(fila);
+
             }
 
         }

@@ -26,6 +26,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
+import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SePais;
@@ -610,6 +611,19 @@ public static SeTipoPersona ObtenerSeTipoPersona(int id){
         
         for (int i = 0; i <lista.size(); i++) {
             if(lista.get(i).getPrProductosPK().getIdProducto()==id){
+            dto=lista.get(i);
+            break;
+            }
+        }
+        return dto;
+    }
+      public static CoProveedores ObtenerCoProveedores(Long id){
+        CoProveedoresJpaController control=new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoProveedores dto=new CoProveedores();
+        List<CoProveedores> lista=control.findCoProveedoresEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getIdProveedor()==id){
             dto=lista.get(i);
             break;
             }
