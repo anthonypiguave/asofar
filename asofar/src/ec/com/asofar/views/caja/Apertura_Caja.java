@@ -17,6 +17,7 @@ import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -250,7 +251,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-         try {
+        try {
             if (caja.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(null, "SELECCIONE UNA OPCION VALIDA", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
             } else {
@@ -261,7 +262,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
                     VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
                     dc.setDineroInicio(Double.parseDouble(txtMonto.getText()));
                     dc.setFechaInicio(d_fecha);
-                    dc.setHoraInicio(d_hora);
+                    dc.setHoraInicio(new java.sql.Time(d_hora.getTime()));
                     dc.setEstado("A");
                     dc.setIdUsuario(seUsuario.getIdUsuario());
                     dc.setVeCaja(veCaja);
