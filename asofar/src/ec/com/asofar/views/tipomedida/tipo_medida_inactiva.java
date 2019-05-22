@@ -97,9 +97,11 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
 
         toolbar.setRollover(true);
 
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("Buscar:");
         toolbar.add(jLabel2);
 
+        busqueda_tf.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         busqueda_tf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 busqueda_tfKeyTyped(evt);
@@ -110,6 +112,7 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
         });
         toolbar.add(busqueda_tf);
 
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setText("Editar");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -121,6 +124,7 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
         });
         toolbar.add(jButton2);
 
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton3.setText("Volver");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -169,9 +173,12 @@ public class tipo_medida_inactiva extends javax.swing.JDialog {
                 .addGap(0, 0, 0))
         );
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TIPO MEDIDA INACTIVA");
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

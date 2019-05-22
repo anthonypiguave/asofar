@@ -110,8 +110,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Documento"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Documento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu", 1, 14))); // NOI18N
 
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jButton3.setText("Volver");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -122,6 +123,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             }
         });
 
+        btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         btn_guardar.setText("guardar");
         btn_guardar.setFocusable(false);
         btn_guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -132,6 +134,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jButton2.setText("Editar");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -142,6 +145,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jButton1.setText("Agregar");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -152,8 +156,10 @@ public class tipo_documentoForm extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("Buscar:");
 
+        txt_buscar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_buscarKeyReleased(evt);
@@ -216,7 +222,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tb_documento);
 
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
