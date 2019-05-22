@@ -22,7 +22,9 @@ import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
@@ -1214,14 +1216,14 @@ public class Tablas {
 
     }
     public static void TablaClientesActivo(List<SeClientes> listacliente, JTable Tabla) {
-        int[] a = {5, 50,120,90,90};
+        int[] a = {5, 50,120,200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID", "IDENTIFICACION", "NUMERO DE IDENTIFICACION","NOMBRES","APELLIDOS"};
-        String[] filas = new String[5];
+        String[] b = {"ID", "IDENTIFICACION", "NUMERO DE IDENTIFICACION","NOMBRE COMPLETO"};
+        String[] filas = new String[4];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacliente.size(); i++) {
@@ -1229,8 +1231,7 @@ public class Tablas {
                 filas[0] = String.valueOf(listacliente.get(i).getIdClientes());
                 filas[1] = listacliente.get(i).getIdTipoIdentificacion().getNombreIdentificacion();
                 filas[2] = listacliente.get(i).getNumeroIdentificacion();
-                filas[3] = listacliente.get(i).getPrimerNombre()+" "+listacliente.get(i).getSegundoNombre();
-                filas[4] = listacliente.get(i).getPrimerApellido()+" "+listacliente.get(i).getSegundoApellido();
+                filas[3] = listacliente.get(i).getNombreCompleto();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1241,9 +1242,67 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             }
         }
     }
+    public static void TablaLocalidadCliente(List<SeLocalidadCliente> listalocalidadcliente, JTable Tabla,SeClientes lista) {
+        int[] a = {5, 120,120};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID", "DIRECCION CLIENTE", "DIRECCION ENTREGA"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listalocalidadcliente.size(); i++) {
+            if (listalocalidadcliente.get(i).getEstado().equals("A")&& 
+                    listalocalidadcliente.get(i).getIdCliente().getIdClientes()==lista.getIdClientes()) {
+                filas[0] = String.valueOf(listalocalidadcliente.get(i).getIdLocalidadCliente());
+                filas[1] = listalocalidadcliente.get(i).getDirreccionCliente();
+                filas[2] = listalocalidadcliente.get(i).getDirreccionEntrega();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            }
+        }
+    }   
+    public static void TablaContactoCliente(List<SeContactosClientes> listacontactoscliente, JTable Tabla,SeLocalidadCliente lista) {
+        int[] a = {5, 50,50,80};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID", "TELEFONO", "CELULAR","CORREO"};
+        String[] filas = new String[4];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listacontactoscliente.size(); i++) {
+            if (listacontactoscliente.get(i).getEstado().equals("A")&&
+//                    listalocalidadcliente.get(i).getIdCliente().getIdClientes()==lista.getIdClientes()) {
+                    listacontactoscliente.get(i).getIdContactosClientes()==lista.getIdLocalidadCliente()) {
+                filas[0] = String.valueOf(listacontactoscliente.get(i).getIdContactosClientes());
+                filas[1] = listacontactoscliente.get(i).getTelefono();
+                filas[2] = listacontactoscliente.get(i).getCelular();
+                filas[3] = listacontactoscliente.get(i).getEmail();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
+        }
+    }    
 }
