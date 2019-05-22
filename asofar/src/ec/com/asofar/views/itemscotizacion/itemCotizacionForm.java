@@ -12,7 +12,6 @@ import ec.com.asofar.dao.InTipoDepartamentoJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.daoext.modificarDatosDocumentoExt;
 import ec.com.asofar.dto.CoDetItemsCotizacion;
-import static ec.com.asofar.dto.CoDetItemsCotizacion_.coDetItemsCotizacionPK;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoCompra;
