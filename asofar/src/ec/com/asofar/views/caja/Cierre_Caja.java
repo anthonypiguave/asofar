@@ -10,6 +10,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.util.Fecha;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -49,13 +50,10 @@ public class Cierre_Caja extends javax.swing.JDialog {
     }
 
     private void llenarCampos(VeDetalleCaja veCaja) {
+        SimpleDateFormat nombre = new SimpleDateFormat("HH: mm: ss");
         nombreCaja.setText(veCaja.getVeCaja().getNombre());
         montoInicial.setText(String.valueOf(veCaja.getDineroInicio()));
-        horaInicio.setText(String.valueOf(veCaja.getHoraInicio().getHours() + ":" + veCaja.getHoraInicio().getMinutes() + ":" + veCaja.getHoraInicio().getSeconds()));
-
-        veCaja.getHoraInicio().getHours();
-        veCaja.getHoraInicio().getMinutes();
-        veCaja.getHoraInicio().getSeconds();
+        horaInicio.setText(nombre.format(veCaja.getHoraInicio()));
     }
 
     @SuppressWarnings("unchecked")
