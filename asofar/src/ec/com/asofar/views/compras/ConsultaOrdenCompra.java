@@ -17,6 +17,7 @@ public class ConsultaOrdenCompra extends javax.swing.JDialog {
     public ConsultaOrdenCompra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
     }
 
     /**

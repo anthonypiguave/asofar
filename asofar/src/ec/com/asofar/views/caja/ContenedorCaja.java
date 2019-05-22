@@ -46,6 +46,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
+        btnCierre.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
