@@ -54,6 +54,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     }
 
     /*AGREGAR EN OPCIONES MENU Y OPCIONES ROLES*/
+    ///
     public consulta_cliente(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
