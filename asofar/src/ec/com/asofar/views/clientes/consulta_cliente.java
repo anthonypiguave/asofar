@@ -13,6 +13,7 @@ import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -32,6 +33,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+    SeTipoIdentificacion tident;
     List<SeClientes> Cliente;
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeLocalidadCliente> LocalidadCliente;
@@ -411,7 +413,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
     private void btn_ingresar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_clienteActionPerformed
 
-        cliente_agregar cagg = new cliente_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
+        cliente_agregar cagg = new cliente_agregar(new javax.swing.JFrame(), true, usu, emp, suc,tident);
         cagg.setVisible(true);
 
     }//GEN-LAST:event_btn_ingresar_clienteActionPerformed

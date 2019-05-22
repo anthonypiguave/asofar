@@ -12,7 +12,7 @@ import ec.com.asofar.dao.InTipoDepartamentoJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.daoext.modificarDatosDocumentoExt;
 import ec.com.asofar.dto.CoDetItemsCotizacion;
-import static ec.com.asofar.dto.CoDetItemsCotizacion_.coDetItemsCotizacionPK;
+//import static ec.com.asofar.dto.CoDetItemsCotizacion_.coDetItemsCotizacionPK;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoCompra;
@@ -66,6 +66,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
     CoDetItemsCotizacionJpaController jdetCotiz = new CoDetItemsCotizacionJpaController(conn);
     List<CoDetItemsCotizacion> ldetCotiz;
     modificarDatosDocumentoExt guardar = new modificarDatosDocumentoExt();
+    
 
     public itemCotizacionForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -445,19 +446,22 @@ public class itemCotizacionForm extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         ldetCotiz = jdetCotiz.findCoDetItemsCotizacionEntities();
-
+        
+        List<CoDetItemsCotizacion> lista = new ArrayList<>();
+        
         for (int i = 0; i < tb_prod.getRowCount(); i++) {
-            CoDetItemsCotizacion tdet = ldetCotiz.get(i);
-            tdet.getCoDetItemsCotizacionPK().setIdCotizacion(WIDTH);
-            tdet.getCoDetItemsCotizacionPK().setIdEmpresa(ERROR);
-            tdet.getCoDetItemsCotizacionPK().setIdSucursal(ERROR);
+            CoDetItemsCotizacion tdet = new CoDetItemsCotizacion();
+            tdet.getCoDetItemsCotizacionPK().setIdCotizacion(1);
+            tdet.getCoDetItemsCotizacionPK().setIdEmpresa(2);
+            tdet.getCoDetItemsCotizacionPK().setIdSucursal(3);
             tdet.getCoDetItemsCotizacionPK().setLineaDetalle(i);
             tdet.setDescripcion(tb_prod.getValueAt(i, 2).toString());
             tdet.setCantidadPedida(new BigInteger(tb_prod.getValueAt(i, 5).toString()));
             tdet.setIdProducto(new BigInteger(tb_prod.getValueAt(i, 0).toString()));
-
+            lista.add(tdet);
         }
-        for (CoDetItemsCotizacion k : ldetCotiz) {
+        
+        for(CoDetItemsCotizacion k:lista){
             System.out.println("dff " + k.getIdProducto());
         }
         try {
