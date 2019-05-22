@@ -21,6 +21,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +34,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+    SeClientes cli;
     SeTipoIdentificacion tident;
     List<SeClientes> Cliente;
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -395,12 +397,9 @@ public class consulta_cliente extends javax.swing.JDialog {
             if (Client != null) {
 
                 LocalidadCliente = Lc.findSeLocalidadClienteEntities();
-//                for (int i = 0; i < LocalidadCliente.size(); i++) {
-//                    if (Client.getIdClientes() == LocalidadCliente.get(i).getIdCliente().getIdClientes()) {
-                        System.out.println("222");
-                        Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
-//                    }
-//                }
+                System.out.println("222");
+                Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
+
             }
         }
     }//GEN-LAST:event_tba_clientesMouseClicked
@@ -415,7 +414,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
     private void btn_ingresar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_clienteActionPerformed
 
-        cliente_agregar cagg = new cliente_agregar(new javax.swing.JFrame(), true, usu, emp, suc,tident);
+        cliente_agregar cagg = new cliente_agregar(new javax.swing.JFrame(), true, usu, emp, suc, tident);
         cagg.setVisible(true);
 
     }//GEN-LAST:event_btn_ingresar_clienteActionPerformed
@@ -450,10 +449,29 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_tba_localidadMouseClicked
 
     private void btn_ingresar_localidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_localidadActionPerformed
-        Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
-        Lagg.setVisible(true);
-    }//GEN-LAST:event_btn_ingresar_localidadActionPerformed
+        int id = 0;
+        if (tba_localidad.getSelectedRow() >= 0) {
+            id = tba_localidad.getSelectedRow();
+            Client = devuelveObjeto(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista);
 
+            if (Client != null) {
+                Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
+                Lagg.setVisible(true);
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA CLIENTE");
+        }
+    }//GEN-LAST:event_btn_ingresar_localidadActionPerformed
+//    private SeClientes devuelveObjeto3(Long id, List<SeClientes> listacliente) {
+//        listacliente = Cc.findSeClientesEntities();
+//        for (int i = 0; i < listacliente.size(); i++) {
+//            if (Objects.equals(listacliente.get(i).getIdClientes(), id)) {
+//                Client = listacliente.get(i);
+//            }
+//        }
+//        return Client;
+//    }
     private void tba_contactoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_contactoMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tba_contactoMousePressed
@@ -463,8 +481,20 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_tba_contactoMouseClicked
 
     private void btn_ingresar_contactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_contactoActionPerformed
-        contacto_agregar Cagg = new contacto_agregar(new javax.swing.JFrame(), true, usu, emp, suc);
-        Cagg.setVisible(true);
+
+        int id = 0;
+        if (tba_localidad.getSelectedRow() >= 0) {
+            id = tba_localidad.getSelectedRow();
+            LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
+
+            if (LocaliClient != null) {
+                contacto_agregar Cagg = new contacto_agregar(new javax.swing.JFrame(), true, usu, emp, suc,LocaliClient);
+                Cagg.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA LOCALIDAD");
+        }
+
     }//GEN-LAST:event_btn_ingresar_contactoActionPerformed
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
