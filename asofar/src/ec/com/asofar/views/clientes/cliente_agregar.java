@@ -5,7 +5,10 @@
  */
 package ec.com.asofar.views.clientes;
 
+import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
@@ -14,6 +17,8 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +32,9 @@ public class cliente_agregar extends javax.swing.JDialog {
     SeSucursal suc;
     List<SeTipoIdentificacion> TiIden;
     SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    SeClientes clientes = new SeClientes();
+    SeClientesJpaController scc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    
     public cliente_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -62,7 +69,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         cbxtipo_identificacion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_numero_identificacion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txt_primer_nombre = new javax.swing.JTextField();
         txt_segundo_nombre = new javax.swing.JTextField();
@@ -71,7 +78,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         txt_segundo_apellido = new javax.swing.JTextField();
         btnguardar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_razon_social = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -156,8 +163,8 @@ public class cliente_agregar extends javax.swing.JDialog {
                                 .addGap(58, 58, 58)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cbxtipo_identificacion, 0, 114, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2))))
+                                    .addComponent(txt_numero_identificacion)
+                                    .addComponent(txt_razon_social))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -180,7 +187,7 @@ public class cliente_agregar extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_numero_identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -188,7 +195,7 @@ public class cliente_agregar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -233,7 +240,29 @@ public class cliente_agregar extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
- 
+        SeTipoIdentificacion ti = new SeTipoIdentificacion();
+//        ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
+        ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
+        System.out.println("id de idenetificacion "+ti);
+
+        clientes.setPrimerNombre(txt_primer_nombre.getText());
+        clientes.setSegundoNombre(txt_segundo_nombre.getText());
+        clientes.setPrimerApellido(txt_primer_apellido.getText());
+        clientes.setSegundoApellido(txt_segundo_apellido.getText());
+        clientes.setNumeroIdentificacion(txt_numero_identificacion.getText());
+        clientes.setNombreCompleto(txt_primer_nombre.getText()+" "+txt_segundo_nombre.getText()+" "+
+                                   txt_primer_apellido.getText()+" "+txt_segundo_apellido.getText());
+        clientes.setIdTipoIdentificacion(ti);
+        clientes.setFechaCreacion(fechaActual);
+        clientes.setUsuarioCreacion(usu.getNombreUsuario());
+        clientes.setRazonSocial(txt_razon_social.getText());
+        clientes.setEstado("A");
+        try {
+            scc.create(clientes);
+            setVisible(false);
+        } catch (Exception ex) {
+            Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     /**
@@ -289,10 +318,10 @@ public class cliente_agregar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txt_numero_identificacion;
     private javax.swing.JTextField txt_primer_apellido;
     private javax.swing.JTextField txt_primer_nombre;
+    private javax.swing.JTextField txt_razon_social;
     private javax.swing.JTextField txt_segundo_apellido;
     private javax.swing.JTextField txt_segundo_nombre;
     // End of variables declaration//GEN-END:variables
