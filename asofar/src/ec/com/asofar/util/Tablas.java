@@ -8,6 +8,7 @@ package ec.com.asofar.util;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
+import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InMotivos;
@@ -29,12 +30,16 @@ import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
+import java.awt.Font;
+import java.math.BigInteger;
 import java.util.List;
+import static javafx.scene.text.Font.font;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -42,7 +47,7 @@ import javax.swing.table.TableRowSorter;
  * @author admin1
  */
 public class Tablas {
-
+    Font fuente = new Font("Bold",Font.BOLD,14);
     static DefaultTableModel model;
 
 //    public static void TablaCotizacionPorProveedorDos(JTable jtCabecera, List<CoCotizacionesPorProveedor> lista) {
@@ -67,7 +72,49 @@ public class Tablas {
         }
         return tab;
     }
-
+    
+    public static void listarOrdenesdeCompra(List<CoOrdenCompras> lista, JTable Tabla) {
+        int[] a = {30, 30, 40, 50, 30, 35};
+        Font fuente = new Font("Bold",Font.BOLD,12);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT); 
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"No. ORDEN", "EMPRESA", "PROVEEDOR", "FECHA ENTREGA","TOTAL","TOTAL CON IVA"};
+        String[] Filas = new String[6];
+        model = new DefaultTableModel(null, Co);        
+        JTableHeader jt;
+        jt = Tabla.getTableHeader();        
+        jt.setFont(fuente);
+        jt.setDefaultRenderer(tcr);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals("A")) {
+                Filas[0] = String.valueOf(lista.get(i).getCoOrdenComprasPK().getIdOrdenCompra());
+                Filas[1] = String.valueOf(lista.get(i).getSeSucursal().getSeEmpresa().getNombreComercial());
+                Filas[2] = String.valueOf(lista.get(i).getIdProveedor().getNombre());
+                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaEntrega().getTime()));
+                Filas[4] = String.valueOf(Double.valueOf(String.valueOf(lista.get(i).getTotalCompra())));
+                Filas[5] = String.valueOf(Double.valueOf(String.valueOf(lista.get(i).getTotalIva())));
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            }
+        }
+    }
+    
     public static void listarEmpresa(List<SeEmpresa> lista, JTable Tabla) {
         int[] a = {5, 30, 30, 10, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
