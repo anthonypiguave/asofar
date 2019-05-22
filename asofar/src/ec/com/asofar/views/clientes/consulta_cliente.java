@@ -40,6 +40,8 @@ public class consulta_cliente extends javax.swing.JDialog {
     SeClientes Client = new SeClientes();
     List<SeContactosClientes> ContactoCliente;
     SeContactosClientesJpaController Ccl = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeLocalidadCliente> lista1 = Lc.findSeLocalidadClienteEntities();
+    SeLocalidadCliente LocaliClient = new SeLocalidadCliente();
 
     public consulta_cliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -389,13 +391,11 @@ public class consulta_cliente extends javax.swing.JDialog {
             if (Client != null) {
 
                 LocalidadCliente = Lc.findSeLocalidadClienteEntities();
-                for (int i = 0; i < LocalidadCliente.size(); i++) {
-                    System.out.println("id Cliente" + Client.getIdClientes());
-                    System.out.println("Localidad id Cliente" + LocalidadCliente.get(i).getIdCliente());
-//                    if (Client.getIdClientes().equals(LocalidadCliente.get(id).getIdCliente())) {
-                    System.out.println("222");
-                    Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad);
-                }
+//                for (int i = 0; i < LocalidadCliente.size(); i++) {
+//                    if (Client.getIdClientes() == LocalidadCliente.get(i).getIdCliente().getIdClientes()) {
+                        System.out.println("222");
+                        Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
+//                    }
 //                }
             }
         }
@@ -419,9 +419,30 @@ public class consulta_cliente extends javax.swing.JDialog {
     private void tba_localidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_localidadMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tba_localidadMousePressed
-
+    public SeLocalidadCliente devuelveObjeto2(Long id, List<SeLocalidadCliente> listabod) {
+        SeLocalidadCliente doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getIdLocalidadCliente(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
     private void tba_localidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_localidadMouseClicked
-        // TODO add your handling code here:
+        int id = 0;
+        if (evt.getClickCount() == 1) {
+            id = tba_localidad.getSelectedRow();
+            LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
+
+            if (LocaliClient != null) {
+                System.out.println("id locali " + LocaliClient.getIdLocalidadCliente());
+                ContactoCliente = Ccl.findSeContactosClientesEntities();
+//                System.out.println("contaco id local"+ContactoCliente.get(id));
+                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
+
+            }
+        }
     }//GEN-LAST:event_tba_localidadMouseClicked
 
     private void btn_ingresar_localidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_localidadActionPerformed

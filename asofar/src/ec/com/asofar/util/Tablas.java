@@ -22,6 +22,7 @@ import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SePersonas;
@@ -1244,7 +1245,7 @@ public class Tablas {
             }
         }
     }
-    public static void TablaLocalidadCliente(List<SeLocalidadCliente> listalocalidadcliente, JTable Tabla) {
+    public static void TablaLocalidadCliente(List<SeLocalidadCliente> listalocalidadcliente, JTable Tabla,SeClientes lista) {
         int[] a = {5, 120,120};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -1256,12 +1257,11 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listalocalidadcliente.size(); i++) {
-            if (listalocalidadcliente.get(i).getEstado().equals("A")) {
+            if (listalocalidadcliente.get(i).getEstado().equals("A")&& 
+                    listalocalidadcliente.get(i).getIdCliente().getIdClientes()==lista.getIdClientes()) {
                 filas[0] = String.valueOf(listalocalidadcliente.get(i).getIdLocalidadCliente());
                 filas[1] = listalocalidadcliente.get(i).getDirreccionCliente();
                 filas[2] = listalocalidadcliente.get(i).getDirreccionEntrega();
-//                filas[3] = ObtenerDTO.ObtenerProducto(id)
-//                        listalocalidadcliente.get(i).getIdCiudad();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1270,6 +1270,38 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            }
+        }
+    }   
+    public static void TablaContactoCliente(List<SeContactosClientes> listacontactoscliente, JTable Tabla,SeLocalidadCliente lista) {
+        int[] a = {5, 50,50,80};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID", "TELEFONO", "CELULAR","CORREO"};
+        String[] filas = new String[4];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listacontactoscliente.size(); i++) {
+            if (listacontactoscliente.get(i).getEstado().equals("A")&&
+//                    listalocalidadcliente.get(i).getIdCliente().getIdClientes()==lista.getIdClientes()) {
+                    listacontactoscliente.get(i).getIdContactosClientes()==lista.getIdLocalidadCliente()) {
+                filas[0] = String.valueOf(listacontactoscliente.get(i).getIdContactosClientes());
+                filas[1] = listacontactoscliente.get(i).getTelefono();
+                filas[2] = listacontactoscliente.get(i).getCelular();
+                filas[3] = listacontactoscliente.get(i).getEmail();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
     }    
