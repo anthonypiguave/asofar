@@ -6,6 +6,7 @@
 package ec.com.asofar.daoext;
 
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -17,16 +18,16 @@ import java.util.List;
  */
 public class ValidacionCaja {
 
-    public static boolean Validacion(VeCaja caja) {
+    public static boolean Validacion(VeCaja caja, SeUsuarios su) {
         boolean valor = true;
         for (int i = 0; i < caja.getVeDetalleCajaList().size(); i++) {
             if (caja.getVeDetalleCajaList().get(i).getFechaCierre() == null
-                    && "A".equals(caja.getVeDetalleCajaList().get(i).getEstado())) {
+                    && "A".equals(caja.getVeDetalleCajaList().get(i).getEstado())
+                    && caja.getVeDetalleCajaList().get(i).getIdUsuario() == su.getIdUsuario()) {
                 valor = false;
+                System.out.println("hola viejo que hay");
             }
         }
         return valor;
-
     }
-
 }

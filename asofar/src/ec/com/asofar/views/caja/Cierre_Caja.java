@@ -39,6 +39,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        nombreCaja.setEditable(false);
     }
 
     public Cierre_Caja(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
@@ -48,6 +49,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
+        nombreCaja.setEditable(false);
     }
 
     public Cierre_Caja(java.awt.Frame parent, boolean modal, VeDetalleCaja veCaja, SeUsuarios se, SeEmpresa em, SeSucursal su) {
@@ -59,7 +61,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
         seSucursal = su;
         vdc = veCaja;
         llenarCampos(veCaja);
-
+        nombreCaja.setEditable(false);
     }
 
     private void llenarCampos(VeDetalleCaja veCaja) {
@@ -83,8 +85,6 @@ public class Cierre_Caja extends javax.swing.JDialog {
         montocierre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         horaInicio = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         btnGrabar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -110,21 +110,24 @@ public class Cierre_Caja extends javax.swing.JDialog {
         jLabel3.setText("MONTO INICIAL:");
 
         montoInicial.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        montoInicial.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("MONTO DE CIERRE:");
 
         montocierre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        montocierre.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        montocierre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                montocierreKeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("HORA DE APERTURA:");
 
         horaInicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel6.setText("HORA DE CIERRE:");
-
-        jTextField5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        horaInicio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnGrabar.setBackground(new java.awt.Color(62, 140, 69));
         btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -177,21 +180,14 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel6)
                             .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jTextField5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(montocierre, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(montocierre, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -216,10 +212,6 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(montocierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGrabar)
@@ -252,6 +244,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 vdc.setEstado("I");
                 cajadet.edit(vdc);
                 JOptionPane.showMessageDialog(null, "CAJA CERRADA", "REGISTRO COMPLETADO EXITOSAMENTE!", JOptionPane.INFORMATION_MESSAGE);
+                setVisible(false);
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -259,10 +252,17 @@ public class Cierre_Caja extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        ContenedorCaja cCaja = new ContenedorCaja(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
-        this.setVisible(false);
-        cCaja.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void montocierreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montocierreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c == ',') || Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_montocierreKeyTyped
 
     /**
      * @param args the command line arguments
@@ -315,11 +315,9 @@ public class Cierre_Caja extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField montoInicial;
     private javax.swing.JTextField montocierre;
     private javax.swing.JTextField nombreCaja;

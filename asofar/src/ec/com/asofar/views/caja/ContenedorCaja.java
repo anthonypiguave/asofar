@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.caja;
 
+import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -19,10 +20,13 @@ import java.util.List;
  */
 public class ContenedorCaja extends javax.swing.JDialog {
 
+    boolean verificar = true;
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
     VeDetalleCaja vdc;
+    VeCajaJpaController cajacon = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    VeDetalleCajaJpaController cajadet = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
      * Creates new form ContenedorCaja
@@ -38,8 +42,8 @@ public class ContenedorCaja extends javax.swing.JDialog {
         initComponents();
         btnAperturaCaja.setEnabled(false);
         setLocationRelativeTo(null);
-        System.out.println("HOY" + veCaja.getDineroInicio());
         vdc = veCaja;
+
     }
 
     public ContenedorCaja(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
@@ -49,10 +53,24 @@ public class ContenedorCaja extends javax.swing.JDialog {
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
-        btnCierre.setEnabled(false);
-        VeDetalleCajaJpaController cajadet = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
         List<VeDetalleCaja> listadetallecaja = cajadet.findVeDetalleCajaEntities();
+        for (int i = 0; i < listadetallecaja.size(); i++) {
+            if ("A".equals(listadetallecaja.get(i).getEstado())
+                    && listadetallecaja.get(i).getIdUsuario().equals(seUsuario.getIdUsuario())
+                    && listadetallecaja.get(i).getFechaCierre() == null
+                    && listadetallecaja.get(i).getHoraCierre() == null) {
+                btnAperturaCaja.setEnabled(false);
+                btnCierre.setEnabled(true);
+                vdc = listadetallecaja.get(i);
+                
+            }else{
+                btnCierre.setEnabled(false);
+            }
+            
+        }
     }
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
