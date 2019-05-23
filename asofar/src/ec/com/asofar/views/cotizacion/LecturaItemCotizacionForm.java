@@ -201,11 +201,11 @@ public class LecturaItemCotizacionForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMousePressed
-//        if (evt.getClickCount() == 1) {
-//            String valor = jtCabecera.getValueAt(jtCabecera.getSelectedRow(), 0).toString();
-//            CoCotizacionesPorProveedor coti = ObtenerDTO.ObtenerCoCotizacionesPorProveedor(valor);
-//            Tablas.TablaDetallePorProveerdo(coti.getCoDetalleCotizacionPorProveedorList(), jtDetalle);
-//        }
+        if (evt.getClickCount() == 1) {
+            String valor = jtCabecera.getValueAt(jtCabecera.getSelectedRow(), 0).toString();
+            CoItemsCotizacion coti = ObtenerDTO.ObtenerCoItemsCotizacion(valor);
+            Tablas.TablaDetallePorItemCotizacion(coti.getCoDetItemsCotizacionList(), jtDetalle);
+        }
 
     }//GEN-LAST:event_jtCabeceraMousePressed
 

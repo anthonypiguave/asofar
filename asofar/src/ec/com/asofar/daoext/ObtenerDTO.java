@@ -632,6 +632,21 @@ public class ObtenerDTO {
         }
         return dto;
     }
+    public static CoItemsCotizacion ObtenerCoItemsCotizacion(String id) {
+        CoItemsCotizacionJpaController control = new CoItemsCotizacionJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoItemsCotizacion dto = new CoItemsCotizacion();
+        List<CoItemsCotizacion> lista = control.findCoItemsCotizacionEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (String.valueOf(lista.get(i).getCoItemsCotizacionPK().getIdCotizacion()).equals(id)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
     
 //    public static CoItemsCotizacion ObtenerCoItemsCotizacion(Long id) {
 //        CoItemsCotizacionJpaController control = new CoItemsCotizacionJpaController(EntityManagerUtil.ObtenerEntityManager());

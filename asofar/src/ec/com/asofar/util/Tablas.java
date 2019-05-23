@@ -7,6 +7,7 @@ package ec.com.asofar.util;
 
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
+import ec.com.asofar.dto.CoDetItemsCotizacion;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.CoOrdenCompras;
@@ -59,6 +60,7 @@ public class Tablas {
     private static boolean[] editable2 = {false, false, false, false, false, true};
     private static boolean[] editable3 = {false,false,false, false, false, false, false, true};
     private static boolean[] editable4 = {false, false,false, true};
+    private static boolean[] editable5 = {false,false,false,false, false, true, true, true, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -1199,6 +1201,54 @@ public class Tablas {
                     fila[5] = true;
                 } else {
                     fila[5] = false;
+                }
+
+                dt.addRow(fila);
+
+            }
+
+        }
+
+        tabla.setModel(dt);
+    }
+    public static void TablaDetallePorItemCotizacion(List<CoDetItemsCotizacion> lista, JTable tabla) {
+        CoDetItemsCotizacion vo = new CoDetItemsCotizacion();
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"LINEA DE DETALLE", "PRODUCTO", "DESCRIPCION", "FALTANTE", "CANTIDAD PEDIDO","CANTIDAD COTIZADO","VALOR MINIMO","VALOR MAXIMO", "ESTADO",}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return editable5[column];
+            }
+        };
+
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+                // model.addRow(new Object[]{});
+                Object fila[] = new Object[9];
+                vo = lista.get(i);
+                fila[0] = vo.getCoDetItemsCotizacionPK().getLineaDetalle();
+                fila[1] = ObtenerDTO.ObtenerPrProductos(vo.getIdProducto().longValue()).getNombreProducto();
+                fila[2] = vo.getDescripcion();
+                fila[3] = vo.getCantidadFaltante();
+                fila[4] = vo.getCantidadPedida();
+                fila[5] = vo.getCantidadCotizada();
+                fila[6] = vo.getValorMinRef();
+                fila[7] = vo.getValorMaxRef();
+                String ac = (String) vo.getEstado();
+                if ("A".equals(ac)) {
+                    fila[8] = true;
+                } else {
+                    fila[8] = false;
                 }
 
                 dt.addRow(fila);
