@@ -25,22 +25,23 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_subgrupos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrSubgrupos.findAll", query = "SELECT p FROM PrSubgrupos p"),
-    @NamedQuery(name = "PrSubgrupos.findByIdSubgrupo", query = "SELECT p FROM PrSubgrupos p WHERE p.prSubgruposPK.idSubgrupo = :idSubgrupo"),
-    @NamedQuery(name = "PrSubgrupos.findByIdGrupo", query = "SELECT p FROM PrSubgrupos p WHERE p.prSubgruposPK.idGrupo = :idGrupo"),
-    @NamedQuery(name = "PrSubgrupos.findByNombre", query = "SELECT p FROM PrSubgrupos p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "PrSubgrupos.findByEstado", query = "SELECT p FROM PrSubgrupos p WHERE p.estado = :estado"),
-    @NamedQuery(name = "PrSubgrupos.findByUsuarioCreacion", query = "SELECT p FROM PrSubgrupos p WHERE p.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "PrSubgrupos.findByFechaCreacion", query = "SELECT p FROM PrSubgrupos p WHERE p.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "PrSubgrupos.findByUsuarioActualizacion", query = "SELECT p FROM PrSubgrupos p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "PrSubgrupos.findByFechaActualizacion", query = "SELECT p FROM PrSubgrupos p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrSubgrupos.findAll", query = "SELECT p FROM PrSubgrupos p")
+    , @NamedQuery(name = "PrSubgrupos.findByIdSubgrupo", query = "SELECT p FROM PrSubgrupos p WHERE p.prSubgruposPK.idSubgrupo = :idSubgrupo")
+    , @NamedQuery(name = "PrSubgrupos.findByIdGrupo", query = "SELECT p FROM PrSubgrupos p WHERE p.prSubgruposPK.idGrupo = :idGrupo")
+    , @NamedQuery(name = "PrSubgrupos.findByNombre", query = "SELECT p FROM PrSubgrupos p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "PrSubgrupos.findByEstado", query = "SELECT p FROM PrSubgrupos p WHERE p.estado = :estado")
+    , @NamedQuery(name = "PrSubgrupos.findByUsuarioCreacion", query = "SELECT p FROM PrSubgrupos p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrSubgrupos.findByFechaCreacion", query = "SELECT p FROM PrSubgrupos p WHERE p.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "PrSubgrupos.findByUsuarioActualizacion", query = "SELECT p FROM PrSubgrupos p WHERE p.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "PrSubgrupos.findByFechaActualizacion", query = "SELECT p FROM PrSubgrupos p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrSubgrupos implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrSubgruposPK prSubgruposPK;

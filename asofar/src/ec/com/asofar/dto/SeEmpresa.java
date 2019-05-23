@@ -26,25 +26,26 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "se_empresa")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeEmpresa.findAll", query = "SELECT s FROM SeEmpresa s"),
-    @NamedQuery(name = "SeEmpresa.findByIdEmpresa", query = "SELECT s FROM SeEmpresa s WHERE s.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "SeEmpresa.findByNombreComercial", query = "SELECT s FROM SeEmpresa s WHERE s.nombreComercial = :nombreComercial"),
-    @NamedQuery(name = "SeEmpresa.findByRuc", query = "SELECT s FROM SeEmpresa s WHERE s.ruc = :ruc"),
-    @NamedQuery(name = "SeEmpresa.findByTelefono", query = "SELECT s FROM SeEmpresa s WHERE s.telefono = :telefono"),
-    @NamedQuery(name = "SeEmpresa.findByDireccion", query = "SELECT s FROM SeEmpresa s WHERE s.direccion = :direccion"),
-    @NamedQuery(name = "SeEmpresa.findByCorreo", query = "SELECT s FROM SeEmpresa s WHERE s.correo = :correo"),
-    @NamedQuery(name = "SeEmpresa.findByUsuarioCreacion", query = "SELECT s FROM SeEmpresa s WHERE s.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "SeEmpresa.findByFechaCreacion", query = "SELECT s FROM SeEmpresa s WHERE s.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "SeEmpresa.findByUsuarioActualizacion", query = "SELECT s FROM SeEmpresa s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "SeEmpresa.findByFechaActualizacion", query = "SELECT s FROM SeEmpresa s WHERE s.fechaActualizacion = :fechaActualizacion"),
-    @NamedQuery(name = "SeEmpresa.findByEstado", query = "SELECT s FROM SeEmpresa s WHERE s.estado = :estado")})
+    @NamedQuery(name = "SeEmpresa.findAll", query = "SELECT s FROM SeEmpresa s")
+    , @NamedQuery(name = "SeEmpresa.findByIdEmpresa", query = "SELECT s FROM SeEmpresa s WHERE s.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "SeEmpresa.findByNombreComercial", query = "SELECT s FROM SeEmpresa s WHERE s.nombreComercial = :nombreComercial")
+    , @NamedQuery(name = "SeEmpresa.findByRuc", query = "SELECT s FROM SeEmpresa s WHERE s.ruc = :ruc")
+    , @NamedQuery(name = "SeEmpresa.findByTelefono", query = "SELECT s FROM SeEmpresa s WHERE s.telefono = :telefono")
+    , @NamedQuery(name = "SeEmpresa.findByDireccion", query = "SELECT s FROM SeEmpresa s WHERE s.direccion = :direccion")
+    , @NamedQuery(name = "SeEmpresa.findByCorreo", query = "SELECT s FROM SeEmpresa s WHERE s.correo = :correo")
+    , @NamedQuery(name = "SeEmpresa.findByUsuarioCreacion", query = "SELECT s FROM SeEmpresa s WHERE s.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "SeEmpresa.findByFechaCreacion", query = "SELECT s FROM SeEmpresa s WHERE s.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "SeEmpresa.findByUsuarioActualizacion", query = "SELECT s FROM SeEmpresa s WHERE s.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "SeEmpresa.findByFechaActualizacion", query = "SELECT s FROM SeEmpresa s WHERE s.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "SeEmpresa.findByEstado", query = "SELECT s FROM SeEmpresa s WHERE s.estado = :estado")})
 public class SeEmpresa implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

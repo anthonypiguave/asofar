@@ -20,28 +20,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "co_detalle_cotizacion_por_proveedor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findAll", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idCotizacion = :idCotizacion"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdSucursal", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idSucursal = :idSucursal"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdProducto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.idProducto = :idProducto"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByLineaDetalle", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.lineaDetalle = :lineaDetalle"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByDescripcion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.descripcion = :descripcion"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMinimoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMinimoReferencial = :valorMinimoReferencial"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMaximoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMaximoReferencial = :valorMaximoReferencial"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByCantidadPedido", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.cantidadPedido = :cantidadPedido"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByCantidadCotizado", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.cantidadCotizado = :cantidadCotizado"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByPrecioUnitarioNeto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.precioUnitarioNeto = :precioUnitarioNeto"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByEstado", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.estado = :estado"),
-    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByFecha", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.fecha = :fecha")})
+    @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findAll", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idCotizacion = :idCotizacion")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdSucursal", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByIdProducto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.idProducto = :idProducto")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByLineaDetalle", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.coDetalleCotizacionPorProveedorPK.lineaDetalle = :lineaDetalle")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByDescripcion", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.descripcion = :descripcion")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMinimoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMinimoReferencial = :valorMinimoReferencial")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByValorMaximoReferencial", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.valorMaximoReferencial = :valorMaximoReferencial")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByCantidadPedido", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.cantidadPedido = :cantidadPedido")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByCantidadCotizado", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.cantidadCotizado = :cantidadCotizado")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByPrecioUnitarioNeto", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.precioUnitarioNeto = :precioUnitarioNeto")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByEstado", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.estado = :estado")
+    , @NamedQuery(name = "CoDetalleCotizacionPorProveedor.findByFecha", query = "SELECT c FROM CoDetalleCotizacionPorProveedor c WHERE c.fecha = :fecha")})
 public class CoDetalleCotizacionPorProveedor implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoDetalleCotizacionPorProveedorPK coDetalleCotizacionPorProveedorPK;

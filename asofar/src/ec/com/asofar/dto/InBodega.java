@@ -19,24 +19,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "in_bodega")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "InBodega.findAll", query = "SELECT i FROM InBodega i"),
-    @NamedQuery(name = "InBodega.findByIdBodega", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idBodega = :idBodega"),
-    @NamedQuery(name = "InBodega.findByIdTipoBodega", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idTipoBodega = :idTipoBodega"),
-    @NamedQuery(name = "InBodega.findByIdEmpresa", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "InBodega.findByIdSucursal", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idSucursal = :idSucursal"),
-    @NamedQuery(name = "InBodega.findByNombreBodega", query = "SELECT i FROM InBodega i WHERE i.nombreBodega = :nombreBodega"),
-    @NamedQuery(name = "InBodega.findByEstado", query = "SELECT i FROM InBodega i WHERE i.estado = :estado"),
-    @NamedQuery(name = "InBodega.findByUsuarioCreacion", query = "SELECT i FROM InBodega i WHERE i.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "InBodega.findByFechaCreacion", query = "SELECT i FROM InBodega i WHERE i.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "InBodega.findByUsuarioActualizacion", query = "SELECT i FROM InBodega i WHERE i.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "InBodega.findByFechaActualizacion", query = "SELECT i FROM InBodega i WHERE i.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "InBodega.findAll", query = "SELECT i FROM InBodega i")
+    , @NamedQuery(name = "InBodega.findByIdBodega", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idBodega = :idBodega")
+    , @NamedQuery(name = "InBodega.findByIdTipoBodega", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idTipoBodega = :idTipoBodega")
+    , @NamedQuery(name = "InBodega.findByIdEmpresa", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "InBodega.findByIdSucursal", query = "SELECT i FROM InBodega i WHERE i.inBodegaPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "InBodega.findByNombreBodega", query = "SELECT i FROM InBodega i WHERE i.nombreBodega = :nombreBodega")
+    , @NamedQuery(name = "InBodega.findByEstado", query = "SELECT i FROM InBodega i WHERE i.estado = :estado")
+    , @NamedQuery(name = "InBodega.findByUsuarioCreacion", query = "SELECT i FROM InBodega i WHERE i.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "InBodega.findByFechaCreacion", query = "SELECT i FROM InBodega i WHERE i.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "InBodega.findByUsuarioActualizacion", query = "SELECT i FROM InBodega i WHERE i.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "InBodega.findByFechaActualizacion", query = "SELECT i FROM InBodega i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InBodega implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InBodegaPK inBodegaPK;

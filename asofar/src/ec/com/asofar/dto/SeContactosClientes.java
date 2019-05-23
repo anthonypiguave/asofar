@@ -24,23 +24,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "se_contactos_clientes")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeContactosClientes.findAll", query = "SELECT s FROM SeContactosClientes s"),
-    @NamedQuery(name = "SeContactosClientes.findByIdContactosClientes", query = "SELECT s FROM SeContactosClientes s WHERE s.idContactosClientes = :idContactosClientes"),
-    @NamedQuery(name = "SeContactosClientes.findByTelefono", query = "SELECT s FROM SeContactosClientes s WHERE s.telefono = :telefono"),
-    @NamedQuery(name = "SeContactosClientes.findByCelular", query = "SELECT s FROM SeContactosClientes s WHERE s.celular = :celular"),
-    @NamedQuery(name = "SeContactosClientes.findByEmail", query = "SELECT s FROM SeContactosClientes s WHERE s.email = :email"),
-    @NamedQuery(name = "SeContactosClientes.findByEstado", query = "SELECT s FROM SeContactosClientes s WHERE s.estado = :estado"),
-    @NamedQuery(name = "SeContactosClientes.findByUsuarioCreacion", query = "SELECT s FROM SeContactosClientes s WHERE s.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "SeContactosClientes.findByFechaCreacion", query = "SELECT s FROM SeContactosClientes s WHERE s.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "SeContactosClientes.findByUsuarioActualizacion", query = "SELECT s FROM SeContactosClientes s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "SeContactosClientes.findByFechaActualizacion", query = "SELECT s FROM SeContactosClientes s WHERE s.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "SeContactosClientes.findAll", query = "SELECT s FROM SeContactosClientes s")
+    , @NamedQuery(name = "SeContactosClientes.findByIdContactosClientes", query = "SELECT s FROM SeContactosClientes s WHERE s.idContactosClientes = :idContactosClientes")
+    , @NamedQuery(name = "SeContactosClientes.findByTelefono", query = "SELECT s FROM SeContactosClientes s WHERE s.telefono = :telefono")
+    , @NamedQuery(name = "SeContactosClientes.findByCelular", query = "SELECT s FROM SeContactosClientes s WHERE s.celular = :celular")
+    , @NamedQuery(name = "SeContactosClientes.findByEmail", query = "SELECT s FROM SeContactosClientes s WHERE s.email = :email")
+    , @NamedQuery(name = "SeContactosClientes.findByEstado", query = "SELECT s FROM SeContactosClientes s WHERE s.estado = :estado")
+    , @NamedQuery(name = "SeContactosClientes.findByUsuarioCreacion", query = "SELECT s FROM SeContactosClientes s WHERE s.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "SeContactosClientes.findByFechaCreacion", query = "SELECT s FROM SeContactosClientes s WHERE s.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "SeContactosClientes.findByUsuarioActualizacion", query = "SELECT s FROM SeContactosClientes s WHERE s.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "SeContactosClientes.findByFechaActualizacion", query = "SELECT s FROM SeContactosClientes s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class SeContactosClientes implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

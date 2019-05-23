@@ -15,10 +15,11 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Embeddable
 public class InMovimientosPK implements Serializable {
+
     @Basic(optional = false)
     @Column(name = "id_movimientos")
     private long idMovimientos;

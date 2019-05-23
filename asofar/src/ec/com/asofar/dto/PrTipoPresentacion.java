@@ -26,21 +26,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_tipo_presentacion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrTipoPresentacion.findAll", query = "SELECT p FROM PrTipoPresentacion p"),
-    @NamedQuery(name = "PrTipoPresentacion.findByIdTipoPresentacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.idTipoPresentacion = :idTipoPresentacion"),
-    @NamedQuery(name = "PrTipoPresentacion.findByNombre", query = "SELECT p FROM PrTipoPresentacion p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "PrTipoPresentacion.findByEstado", query = "SELECT p FROM PrTipoPresentacion p WHERE p.estado = :estado"),
-    @NamedQuery(name = "PrTipoPresentacion.findByUsuarioCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "PrTipoPresentacion.findByFechaCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "PrTipoPresentacion.findByUsuarioActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "PrTipoPresentacion.findByFechaActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrTipoPresentacion.findAll", query = "SELECT p FROM PrTipoPresentacion p")
+    , @NamedQuery(name = "PrTipoPresentacion.findByIdTipoPresentacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.idTipoPresentacion = :idTipoPresentacion")
+    , @NamedQuery(name = "PrTipoPresentacion.findByNombre", query = "SELECT p FROM PrTipoPresentacion p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "PrTipoPresentacion.findByEstado", query = "SELECT p FROM PrTipoPresentacion p WHERE p.estado = :estado")
+    , @NamedQuery(name = "PrTipoPresentacion.findByUsuarioCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrTipoPresentacion.findByFechaCreacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "PrTipoPresentacion.findByUsuarioActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "PrTipoPresentacion.findByFechaActualizacion", query = "SELECT p FROM PrTipoPresentacion p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrTipoPresentacion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

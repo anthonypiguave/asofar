@@ -12,10 +12,11 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Embeddable
 public class VeDetalleCajaPK implements Serializable {
+
     @Basic(optional = false)
     @Column(name = "id_detalle_caja")
     private long idDetalleCaja;

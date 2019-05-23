@@ -24,38 +24,39 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "in_kardex")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "InKardex.findAll", query = "SELECT i FROM InKardex i"),
-    @NamedQuery(name = "InKardex.findByIdKardex", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idKardex = :idKardex"),
-    @NamedQuery(name = "InKardex.findByIdEmpresa", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "InKardex.findByIdSucursal", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idSucursal = :idSucursal"),
-    @NamedQuery(name = "InKardex.findByIdBodega", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idBodega = :idBodega"),
-    @NamedQuery(name = "InKardex.findByIdProducto", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idProducto = :idProducto"),
-    @NamedQuery(name = "InKardex.findByFechaMovimiento", query = "SELECT i FROM InKardex i WHERE i.fechaMovimiento = :fechaMovimiento"),
-    @NamedQuery(name = "InKardex.findByIdTipoDocumento", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idTipoDocumento = :idTipoDocumento"),
-    @NamedQuery(name = "InKardex.findByAnioDocumento", query = "SELECT i FROM InKardex i WHERE i.anioDocumento = :anioDocumento"),
-    @NamedQuery(name = "InKardex.findByNumeroDocumento", query = "SELECT i FROM InKardex i WHERE i.numeroDocumento = :numeroDocumento"),
-    @NamedQuery(name = "InKardex.findByFechaSistema", query = "SELECT i FROM InKardex i WHERE i.fechaSistema = :fechaSistema"),
-    @NamedQuery(name = "InKardex.findByCantidad", query = "SELECT i FROM InKardex i WHERE i.cantidad = :cantidad"),
-    @NamedQuery(name = "InKardex.findBySaldoActual", query = "SELECT i FROM InKardex i WHERE i.saldoActual = :saldoActual"),
-    @NamedQuery(name = "InKardex.findBySaldoAnterior", query = "SELECT i FROM InKardex i WHERE i.saldoAnterior = :saldoAnterior"),
-    @NamedQuery(name = "InKardex.findBySaldoActualBodega", query = "SELECT i FROM InKardex i WHERE i.saldoActualBodega = :saldoActualBodega"),
-    @NamedQuery(name = "InKardex.findBySaldoAnteriorBodega", query = "SELECT i FROM InKardex i WHERE i.saldoAnteriorBodega = :saldoAnteriorBodega"),
-    @NamedQuery(name = "InKardex.findBySaldoActualEmpresa", query = "SELECT i FROM InKardex i WHERE i.saldoActualEmpresa = :saldoActualEmpresa"),
-    @NamedQuery(name = "InKardex.findBySaldoAnteriorEmpresa", query = "SELECT i FROM InKardex i WHERE i.saldoAnteriorEmpresa = :saldoAnteriorEmpresa"),
-    @NamedQuery(name = "InKardex.findByCostoActual", query = "SELECT i FROM InKardex i WHERE i.costoActual = :costoActual"),
-    @NamedQuery(name = "InKardex.findByCostoAnterior", query = "SELECT i FROM InKardex i WHERE i.costoAnterior = :costoAnterior"),
-    @NamedQuery(name = "InKardex.findByCostoPromedio", query = "SELECT i FROM InKardex i WHERE i.costoPromedio = :costoPromedio"),
-    @NamedQuery(name = "InKardex.findByUsuarioCreacion", query = "SELECT i FROM InKardex i WHERE i.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "InKardex.findByFechaCreacion", query = "SELECT i FROM InKardex i WHERE i.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "InKardex.findByUsuarioActualizacion", query = "SELECT i FROM InKardex i WHERE i.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "InKardex.findByFechaActualizacion", query = "SELECT i FROM InKardex i WHERE i.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "InKardex.findAll", query = "SELECT i FROM InKardex i")
+    , @NamedQuery(name = "InKardex.findByIdKardex", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idKardex = :idKardex")
+    , @NamedQuery(name = "InKardex.findByIdEmpresa", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "InKardex.findByIdSucursal", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "InKardex.findByIdBodega", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idBodega = :idBodega")
+    , @NamedQuery(name = "InKardex.findByIdProducto", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idProducto = :idProducto")
+    , @NamedQuery(name = "InKardex.findByFechaMovimiento", query = "SELECT i FROM InKardex i WHERE i.fechaMovimiento = :fechaMovimiento")
+    , @NamedQuery(name = "InKardex.findByIdTipoDocumento", query = "SELECT i FROM InKardex i WHERE i.inKardexPK.idTipoDocumento = :idTipoDocumento")
+    , @NamedQuery(name = "InKardex.findByAnioDocumento", query = "SELECT i FROM InKardex i WHERE i.anioDocumento = :anioDocumento")
+    , @NamedQuery(name = "InKardex.findByNumeroDocumento", query = "SELECT i FROM InKardex i WHERE i.numeroDocumento = :numeroDocumento")
+    , @NamedQuery(name = "InKardex.findByFechaSistema", query = "SELECT i FROM InKardex i WHERE i.fechaSistema = :fechaSistema")
+    , @NamedQuery(name = "InKardex.findByCantidad", query = "SELECT i FROM InKardex i WHERE i.cantidad = :cantidad")
+    , @NamedQuery(name = "InKardex.findBySaldoActual", query = "SELECT i FROM InKardex i WHERE i.saldoActual = :saldoActual")
+    , @NamedQuery(name = "InKardex.findBySaldoAnterior", query = "SELECT i FROM InKardex i WHERE i.saldoAnterior = :saldoAnterior")
+    , @NamedQuery(name = "InKardex.findBySaldoActualBodega", query = "SELECT i FROM InKardex i WHERE i.saldoActualBodega = :saldoActualBodega")
+    , @NamedQuery(name = "InKardex.findBySaldoAnteriorBodega", query = "SELECT i FROM InKardex i WHERE i.saldoAnteriorBodega = :saldoAnteriorBodega")
+    , @NamedQuery(name = "InKardex.findBySaldoActualEmpresa", query = "SELECT i FROM InKardex i WHERE i.saldoActualEmpresa = :saldoActualEmpresa")
+    , @NamedQuery(name = "InKardex.findBySaldoAnteriorEmpresa", query = "SELECT i FROM InKardex i WHERE i.saldoAnteriorEmpresa = :saldoAnteriorEmpresa")
+    , @NamedQuery(name = "InKardex.findByCostoActual", query = "SELECT i FROM InKardex i WHERE i.costoActual = :costoActual")
+    , @NamedQuery(name = "InKardex.findByCostoAnterior", query = "SELECT i FROM InKardex i WHERE i.costoAnterior = :costoAnterior")
+    , @NamedQuery(name = "InKardex.findByCostoPromedio", query = "SELECT i FROM InKardex i WHERE i.costoPromedio = :costoPromedio")
+    , @NamedQuery(name = "InKardex.findByUsuarioCreacion", query = "SELECT i FROM InKardex i WHERE i.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "InKardex.findByFechaCreacion", query = "SELECT i FROM InKardex i WHERE i.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "InKardex.findByUsuarioActualizacion", query = "SELECT i FROM InKardex i WHERE i.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "InKardex.findByFechaActualizacion", query = "SELECT i FROM InKardex i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InKardex implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InKardexPK inKardexPK;
@@ -101,8 +102,8 @@ public class InKardex implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
-        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento", insertable = false, updatable = false)

@@ -26,23 +26,24 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_articulo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrArticulo.findAll", query = "SELECT p FROM PrArticulo p"),
-    @NamedQuery(name = "PrArticulo.findByIdArticulo", query = "SELECT p FROM PrArticulo p WHERE p.prArticuloPK.idArticulo = :idArticulo"),
-    @NamedQuery(name = "PrArticulo.findByIdGrupo", query = "SELECT p FROM PrArticulo p WHERE p.prArticuloPK.idGrupo = :idGrupo"),
-    @NamedQuery(name = "PrArticulo.findByIdSubgrupo", query = "SELECT p FROM PrArticulo p WHERE p.prArticuloPK.idSubgrupo = :idSubgrupo"),
-    @NamedQuery(name = "PrArticulo.findByNombreArticulo", query = "SELECT p FROM PrArticulo p WHERE p.nombreArticulo = :nombreArticulo"),
-    @NamedQuery(name = "PrArticulo.findByEstado", query = "SELECT p FROM PrArticulo p WHERE p.estado = :estado"),
-    @NamedQuery(name = "PrArticulo.findByUsuarioCreacion", query = "SELECT p FROM PrArticulo p WHERE p.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "PrArticulo.findByFechaCreacion", query = "SELECT p FROM PrArticulo p WHERE p.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "PrArticulo.findByUsuarioActualizacion", query = "SELECT p FROM PrArticulo p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "PrArticulo.findByFechaActualizacion", query = "SELECT p FROM PrArticulo p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrArticulo.findAll", query = "SELECT p FROM PrArticulo p")
+    , @NamedQuery(name = "PrArticulo.findByIdArticulo", query = "SELECT p FROM PrArticulo p WHERE p.prArticuloPK.idArticulo = :idArticulo")
+    , @NamedQuery(name = "PrArticulo.findByIdGrupo", query = "SELECT p FROM PrArticulo p WHERE p.prArticuloPK.idGrupo = :idGrupo")
+    , @NamedQuery(name = "PrArticulo.findByIdSubgrupo", query = "SELECT p FROM PrArticulo p WHERE p.prArticuloPK.idSubgrupo = :idSubgrupo")
+    , @NamedQuery(name = "PrArticulo.findByNombreArticulo", query = "SELECT p FROM PrArticulo p WHERE p.nombreArticulo = :nombreArticulo")
+    , @NamedQuery(name = "PrArticulo.findByEstado", query = "SELECT p FROM PrArticulo p WHERE p.estado = :estado")
+    , @NamedQuery(name = "PrArticulo.findByUsuarioCreacion", query = "SELECT p FROM PrArticulo p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrArticulo.findByFechaCreacion", query = "SELECT p FROM PrArticulo p WHERE p.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "PrArticulo.findByUsuarioActualizacion", query = "SELECT p FROM PrArticulo p WHERE p.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "PrArticulo.findByFechaActualizacion", query = "SELECT p FROM PrArticulo p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrArticulo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrArticuloPK prArticuloPK;
@@ -61,8 +62,8 @@ public class PrArticulo implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrSubgrupos prSubgrupos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prArticulo")

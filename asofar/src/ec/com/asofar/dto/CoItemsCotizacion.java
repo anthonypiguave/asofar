@@ -26,25 +26,26 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "co_items_cotizacion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoItemsCotizacion.findAll", query = "SELECT c FROM CoItemsCotizacion c"),
-    @NamedQuery(name = "CoItemsCotizacion.findByIdCotizacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idCotizacion = :idCotizacion"),
-    @NamedQuery(name = "CoItemsCotizacion.findByIdEmpresa", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "CoItemsCotizacion.findByIdSucursal", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idSucursal = :idSucursal"),
-    @NamedQuery(name = "CoItemsCotizacion.findByFechaEmision", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaEmision = :fechaEmision"),
-    @NamedQuery(name = "CoItemsCotizacion.findByIdEstado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.idEstado = :idEstado"),
-    @NamedQuery(name = "CoItemsCotizacion.findByEstado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.estado = :estado"),
-    @NamedQuery(name = "CoItemsCotizacion.findByUsuarioCreacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "CoItemsCotizacion.findByFechaCreacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "CoItemsCotizacion.findByUsuarioActualizacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "CoItemsCotizacion.findByFechaActualizacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaActualizacion = :fechaActualizacion"),
-    @NamedQuery(name = "CoItemsCotizacion.findByProcesado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.procesado = :procesado")})
+    @NamedQuery(name = "CoItemsCotizacion.findAll", query = "SELECT c FROM CoItemsCotizacion c")
+    , @NamedQuery(name = "CoItemsCotizacion.findByIdCotizacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idCotizacion = :idCotizacion")
+    , @NamedQuery(name = "CoItemsCotizacion.findByIdEmpresa", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoItemsCotizacion.findByIdSucursal", query = "SELECT c FROM CoItemsCotizacion c WHERE c.coItemsCotizacionPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "CoItemsCotizacion.findByFechaEmision", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaEmision = :fechaEmision")
+    , @NamedQuery(name = "CoItemsCotizacion.findByIdEstado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.idEstado = :idEstado")
+    , @NamedQuery(name = "CoItemsCotizacion.findByEstado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.estado = :estado")
+    , @NamedQuery(name = "CoItemsCotizacion.findByUsuarioCreacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "CoItemsCotizacion.findByFechaCreacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "CoItemsCotizacion.findByUsuarioActualizacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "CoItemsCotizacion.findByFechaActualizacion", query = "SELECT c FROM CoItemsCotizacion c WHERE c.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "CoItemsCotizacion.findByProcesado", query = "SELECT c FROM CoItemsCotizacion c WHERE c.procesado = :procesado")})
 public class CoItemsCotizacion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoItemsCotizacionPK coItemsCotizacionPK;

@@ -23,29 +23,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_productos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrProductos.findAll", query = "SELECT p FROM PrProductos p"),
-    @NamedQuery(name = "PrProductos.findByIdProducto", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idProducto = :idProducto"),
-    @NamedQuery(name = "PrProductos.findByIdEmpresa", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "PrProductos.findByIdArticulo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idArticulo = :idArticulo"),
-    @NamedQuery(name = "PrProductos.findByIdGrupo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idGrupo = :idGrupo"),
-    @NamedQuery(name = "PrProductos.findByIdSubgrupo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idSubgrupo = :idSubgrupo"),
-    @NamedQuery(name = "PrProductos.findByIdTipoPresentacion", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idTipoPresentacion = :idTipoPresentacion"),
-    @NamedQuery(name = "PrProductos.findByIdTipoMedidas", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idTipoMedidas = :idTipoMedidas"),
-    @NamedQuery(name = "PrProductos.findByDescontinuado", query = "SELECT p FROM PrProductos p WHERE p.descontinuado = :descontinuado"),
-    @NamedQuery(name = "PrProductos.findByNombreProducto", query = "SELECT p FROM PrProductos p WHERE p.nombreProducto = :nombreProducto"),
-    @NamedQuery(name = "PrProductos.findByReceta", query = "SELECT p FROM PrProductos p WHERE p.receta = :receta"),
-    @NamedQuery(name = "PrProductos.findByEstado", query = "SELECT p FROM PrProductos p WHERE p.estado = :estado"),
-    @NamedQuery(name = "PrProductos.findByUsuarioCreacion", query = "SELECT p FROM PrProductos p WHERE p.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "PrProductos.findByFechaCreacion", query = "SELECT p FROM PrProductos p WHERE p.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "PrProductos.findByUsuarioActualizacion", query = "SELECT p FROM PrProductos p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "PrProductos.findByFechaActualizacion", query = "SELECT p FROM PrProductos p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrProductos.findAll", query = "SELECT p FROM PrProductos p")
+    , @NamedQuery(name = "PrProductos.findByIdProducto", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idProducto = :idProducto")
+    , @NamedQuery(name = "PrProductos.findByIdEmpresa", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "PrProductos.findByIdArticulo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idArticulo = :idArticulo")
+    , @NamedQuery(name = "PrProductos.findByIdGrupo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idGrupo = :idGrupo")
+    , @NamedQuery(name = "PrProductos.findByIdSubgrupo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idSubgrupo = :idSubgrupo")
+    , @NamedQuery(name = "PrProductos.findByIdTipoPresentacion", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idTipoPresentacion = :idTipoPresentacion")
+    , @NamedQuery(name = "PrProductos.findByIdTipoMedidas", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idTipoMedidas = :idTipoMedidas")
+    , @NamedQuery(name = "PrProductos.findByDescontinuado", query = "SELECT p FROM PrProductos p WHERE p.descontinuado = :descontinuado")
+    , @NamedQuery(name = "PrProductos.findByNombreProducto", query = "SELECT p FROM PrProductos p WHERE p.nombreProducto = :nombreProducto")
+    , @NamedQuery(name = "PrProductos.findByReceta", query = "SELECT p FROM PrProductos p WHERE p.receta = :receta")
+    , @NamedQuery(name = "PrProductos.findByEstado", query = "SELECT p FROM PrProductos p WHERE p.estado = :estado")
+    , @NamedQuery(name = "PrProductos.findByUsuarioCreacion", query = "SELECT p FROM PrProductos p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrProductos.findByFechaCreacion", query = "SELECT p FROM PrProductos p WHERE p.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "PrProductos.findByUsuarioActualizacion", query = "SELECT p FROM PrProductos p WHERE p.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "PrProductos.findByFechaActualizacion", query = "SELECT p FROM PrProductos p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrProductos implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrProductosPK prProductosPK;
@@ -83,11 +84,11 @@ public class PrProductos implements Serializable {
     @ManyToOne
     private PrFabricante codFabricante;
     @JoinColumns({
-        @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false),
-        @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrMedidas prMedidas;
 

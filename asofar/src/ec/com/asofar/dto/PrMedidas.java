@@ -26,24 +26,25 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_medidas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrMedidas.findAll", query = "SELECT p FROM PrMedidas p"),
-    @NamedQuery(name = "PrMedidas.findByIdArticulo", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idArticulo = :idArticulo"),
-    @NamedQuery(name = "PrMedidas.findByIdGrupo", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idGrupo = :idGrupo"),
-    @NamedQuery(name = "PrMedidas.findByIdSubgrupo", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idSubgrupo = :idSubgrupo"),
-    @NamedQuery(name = "PrMedidas.findByIdTipoPresentacion", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idTipoPresentacion = :idTipoPresentacion"),
-    @NamedQuery(name = "PrMedidas.findByIdTipoMedidas", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idTipoMedidas = :idTipoMedidas"),
-    @NamedQuery(name = "PrMedidas.findByEstado", query = "SELECT p FROM PrMedidas p WHERE p.estado = :estado"),
-    @NamedQuery(name = "PrMedidas.findByUsuarioCreacion", query = "SELECT p FROM PrMedidas p WHERE p.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "PrMedidas.findByFechaCreacion", query = "SELECT p FROM PrMedidas p WHERE p.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "PrMedidas.findByUsuarioActualizacion", query = "SELECT p FROM PrMedidas p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "PrMedidas.findByFechaActualizacion", query = "SELECT p FROM PrMedidas p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrMedidas.findAll", query = "SELECT p FROM PrMedidas p")
+    , @NamedQuery(name = "PrMedidas.findByIdArticulo", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idArticulo = :idArticulo")
+    , @NamedQuery(name = "PrMedidas.findByIdGrupo", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idGrupo = :idGrupo")
+    , @NamedQuery(name = "PrMedidas.findByIdSubgrupo", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idSubgrupo = :idSubgrupo")
+    , @NamedQuery(name = "PrMedidas.findByIdTipoPresentacion", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idTipoPresentacion = :idTipoPresentacion")
+    , @NamedQuery(name = "PrMedidas.findByIdTipoMedidas", query = "SELECT p FROM PrMedidas p WHERE p.prMedidasPK.idTipoMedidas = :idTipoMedidas")
+    , @NamedQuery(name = "PrMedidas.findByEstado", query = "SELECT p FROM PrMedidas p WHERE p.estado = :estado")
+    , @NamedQuery(name = "PrMedidas.findByUsuarioCreacion", query = "SELECT p FROM PrMedidas p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrMedidas.findByFechaCreacion", query = "SELECT p FROM PrMedidas p WHERE p.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "PrMedidas.findByUsuarioActualizacion", query = "SELECT p FROM PrMedidas p WHERE p.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "PrMedidas.findByFechaActualizacion", query = "SELECT p FROM PrMedidas p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrMedidas implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrMedidasPK prMedidasPK;
@@ -62,9 +63,9 @@ public class PrMedidas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prMedidas")
     private List<PrProductos> prProductosList;
     @JoinColumns({
-        @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrArticulo prArticulo;
     @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)

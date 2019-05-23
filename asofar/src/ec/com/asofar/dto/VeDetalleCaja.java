@@ -22,25 +22,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "ve_detalle_caja")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VeDetalleCaja.findAll", query = "SELECT v FROM VeDetalleCaja v"),
-    @NamedQuery(name = "VeDetalleCaja.findByIdDetalleCaja", query = "SELECT v FROM VeDetalleCaja v WHERE v.veDetalleCajaPK.idDetalleCaja = :idDetalleCaja"),
-    @NamedQuery(name = "VeDetalleCaja.findByIdCaja", query = "SELECT v FROM VeDetalleCaja v WHERE v.veDetalleCajaPK.idCaja = :idCaja"),
-    @NamedQuery(name = "VeDetalleCaja.findByIdUsuario", query = "SELECT v FROM VeDetalleCaja v WHERE v.idUsuario = :idUsuario"),
-    @NamedQuery(name = "VeDetalleCaja.findByFechaInicio", query = "SELECT v FROM VeDetalleCaja v WHERE v.fechaInicio = :fechaInicio"),
-    @NamedQuery(name = "VeDetalleCaja.findByHoraInicio", query = "SELECT v FROM VeDetalleCaja v WHERE v.horaInicio = :horaInicio"),
-    @NamedQuery(name = "VeDetalleCaja.findByFechaCierre", query = "SELECT v FROM VeDetalleCaja v WHERE v.fechaCierre = :fechaCierre"),
-    @NamedQuery(name = "VeDetalleCaja.findByHoraCierre", query = "SELECT v FROM VeDetalleCaja v WHERE v.horaCierre = :horaCierre"),
-    @NamedQuery(name = "VeDetalleCaja.findByDineroInicio", query = "SELECT v FROM VeDetalleCaja v WHERE v.dineroInicio = :dineroInicio"),
-    @NamedQuery(name = "VeDetalleCaja.findByDineroCierre", query = "SELECT v FROM VeDetalleCaja v WHERE v.dineroCierre = :dineroCierre"),
-    @NamedQuery(name = "VeDetalleCaja.findByEstado", query = "SELECT v FROM VeDetalleCaja v WHERE v.estado = :estado"),
-    @NamedQuery(name = "VeDetalleCaja.findByIdVoucher", query = "SELECT v FROM VeDetalleCaja v WHERE v.idVoucher = :idVoucher")})
+    @NamedQuery(name = "VeDetalleCaja.findAll", query = "SELECT v FROM VeDetalleCaja v")
+    , @NamedQuery(name = "VeDetalleCaja.findByIdDetalleCaja", query = "SELECT v FROM VeDetalleCaja v WHERE v.veDetalleCajaPK.idDetalleCaja = :idDetalleCaja")
+    , @NamedQuery(name = "VeDetalleCaja.findByIdCaja", query = "SELECT v FROM VeDetalleCaja v WHERE v.veDetalleCajaPK.idCaja = :idCaja")
+    , @NamedQuery(name = "VeDetalleCaja.findByIdUsuario", query = "SELECT v FROM VeDetalleCaja v WHERE v.idUsuario = :idUsuario")
+    , @NamedQuery(name = "VeDetalleCaja.findByFechaInicio", query = "SELECT v FROM VeDetalleCaja v WHERE v.fechaInicio = :fechaInicio")
+    , @NamedQuery(name = "VeDetalleCaja.findByHoraInicio", query = "SELECT v FROM VeDetalleCaja v WHERE v.horaInicio = :horaInicio")
+    , @NamedQuery(name = "VeDetalleCaja.findByFechaCierre", query = "SELECT v FROM VeDetalleCaja v WHERE v.fechaCierre = :fechaCierre")
+    , @NamedQuery(name = "VeDetalleCaja.findByHoraCierre", query = "SELECT v FROM VeDetalleCaja v WHERE v.horaCierre = :horaCierre")
+    , @NamedQuery(name = "VeDetalleCaja.findByDineroInicio", query = "SELECT v FROM VeDetalleCaja v WHERE v.dineroInicio = :dineroInicio")
+    , @NamedQuery(name = "VeDetalleCaja.findByDineroCierre", query = "SELECT v FROM VeDetalleCaja v WHERE v.dineroCierre = :dineroCierre")
+    , @NamedQuery(name = "VeDetalleCaja.findByEstado", query = "SELECT v FROM VeDetalleCaja v WHERE v.estado = :estado")
+    , @NamedQuery(name = "VeDetalleCaja.findByIdVoucher", query = "SELECT v FROM VeDetalleCaja v WHERE v.idVoucher = :idVoucher")})
 public class VeDetalleCaja implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected VeDetalleCajaPK veDetalleCajaPK;

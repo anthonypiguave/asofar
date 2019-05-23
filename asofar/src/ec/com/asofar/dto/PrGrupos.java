@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
@@ -29,21 +28,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_grupos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrGrupos.findAll", query = "SELECT p FROM PrGrupos p"),
-    @NamedQuery(name = "PrGrupos.findByIdGrupo", query = "SELECT p FROM PrGrupos p WHERE p.idGrupo = :idGrupo"),
-    @NamedQuery(name = "PrGrupos.findByNombre", query = "SELECT p FROM PrGrupos p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "PrGrupos.findByEstado", query = "SELECT p FROM PrGrupos p WHERE p.estado = :estado"),
-    @NamedQuery(name = "PrGrupos.findByUsuarioCreacion", query = "SELECT p FROM PrGrupos p WHERE p.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "PrGrupos.findByFechaCreacion", query = "SELECT p FROM PrGrupos p WHERE p.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "PrGrupos.findByUsuarioActualizacion", query = "SELECT p FROM PrGrupos p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "PrGrupos.findByFechaActualizacion", query = "SELECT p FROM PrGrupos p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrGrupos.findAll", query = "SELECT p FROM PrGrupos p")
+    , @NamedQuery(name = "PrGrupos.findByIdGrupo", query = "SELECT p FROM PrGrupos p WHERE p.idGrupo = :idGrupo")
+    , @NamedQuery(name = "PrGrupos.findByNombre", query = "SELECT p FROM PrGrupos p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "PrGrupos.findByEstado", query = "SELECT p FROM PrGrupos p WHERE p.estado = :estado")
+    , @NamedQuery(name = "PrGrupos.findByUsuarioCreacion", query = "SELECT p FROM PrGrupos p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrGrupos.findByFechaCreacion", query = "SELECT p FROM PrGrupos p WHERE p.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "PrGrupos.findByUsuarioActualizacion", query = "SELECT p FROM PrGrupos p WHERE p.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "PrGrupos.findByFechaActualizacion", query = "SELECT p FROM PrGrupos p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrGrupos implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -174,5 +174,5 @@ public class PrGrupos implements Serializable {
     public String toString() {
         return "ec.com.asofar.dto.PrGrupos[ idGrupo=" + idGrupo + " ]";
     }
-
+    
 }

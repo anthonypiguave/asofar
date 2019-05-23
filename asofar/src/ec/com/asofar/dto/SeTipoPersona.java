@@ -25,21 +25,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "se_tipo_persona")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeTipoPersona.findAll", query = "SELECT s FROM SeTipoPersona s"),
-    @NamedQuery(name = "SeTipoPersona.findByIdTipoPersona", query = "SELECT s FROM SeTipoPersona s WHERE s.idTipoPersona = :idTipoPersona"),
-    @NamedQuery(name = "SeTipoPersona.findByNombre", query = "SELECT s FROM SeTipoPersona s WHERE s.nombre = :nombre"),
-    @NamedQuery(name = "SeTipoPersona.findByEstado", query = "SELECT s FROM SeTipoPersona s WHERE s.estado = :estado"),
-    @NamedQuery(name = "SeTipoPersona.findByUsuarioCreacion", query = "SELECT s FROM SeTipoPersona s WHERE s.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "SeTipoPersona.findByFechaCreacion", query = "SELECT s FROM SeTipoPersona s WHERE s.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "SeTipoPersona.findByUsuarioActualizacion", query = "SELECT s FROM SeTipoPersona s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "SeTipoPersona.findByFechaActualizacion", query = "SELECT s FROM SeTipoPersona s WHERE s.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "SeTipoPersona.findAll", query = "SELECT s FROM SeTipoPersona s")
+    , @NamedQuery(name = "SeTipoPersona.findByIdTipoPersona", query = "SELECT s FROM SeTipoPersona s WHERE s.idTipoPersona = :idTipoPersona")
+    , @NamedQuery(name = "SeTipoPersona.findByNombre", query = "SELECT s FROM SeTipoPersona s WHERE s.nombre = :nombre")
+    , @NamedQuery(name = "SeTipoPersona.findByEstado", query = "SELECT s FROM SeTipoPersona s WHERE s.estado = :estado")
+    , @NamedQuery(name = "SeTipoPersona.findByUsuarioCreacion", query = "SELECT s FROM SeTipoPersona s WHERE s.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "SeTipoPersona.findByFechaCreacion", query = "SELECT s FROM SeTipoPersona s WHERE s.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "SeTipoPersona.findByUsuarioActualizacion", query = "SELECT s FROM SeTipoPersona s WHERE s.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "SeTipoPersona.findByFechaActualizacion", query = "SELECT s FROM SeTipoPersona s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class SeTipoPersona implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

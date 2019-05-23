@@ -28,32 +28,33 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "co_orden_compras")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoOrdenCompras.findAll", query = "SELECT c FROM CoOrdenCompras c"),
-    @NamedQuery(name = "CoOrdenCompras.findByIdOrdenCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idOrdenCompra = :idOrdenCompra"),
-    @NamedQuery(name = "CoOrdenCompras.findByIdEmpresa", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "CoOrdenCompras.findByIdSucursal", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idSucursal = :idSucursal"),
-    @NamedQuery(name = "CoOrdenCompras.findByCodigoCotizacionProveedores", query = "SELECT c FROM CoOrdenCompras c WHERE c.codigoCotizacionProveedores = :codigoCotizacionProveedores"),
-    @NamedQuery(name = "CoOrdenCompras.findByCodigoCotizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.codigoCotizacion = :codigoCotizacion"),
-    @NamedQuery(name = "CoOrdenCompras.findByEstado", query = "SELECT c FROM CoOrdenCompras c WHERE c.estado = :estado"),
-    @NamedQuery(name = "CoOrdenCompras.findByObservacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.observacion = :observacion"),
-    @NamedQuery(name = "CoOrdenCompras.findByFechaEntrega", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaEntrega = :fechaEntrega"),
-    @NamedQuery(name = "CoOrdenCompras.findByTotalCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalCompra = :totalCompra"),
-    @NamedQuery(name = "CoOrdenCompras.findBySubtotal", query = "SELECT c FROM CoOrdenCompras c WHERE c.subtotal = :subtotal"),
-    @NamedQuery(name = "CoOrdenCompras.findByTotalDescuento", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalDescuento = :totalDescuento"),
-    @NamedQuery(name = "CoOrdenCompras.findByTotalIce", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIce = :totalIce"),
-    @NamedQuery(name = "CoOrdenCompras.findByTotalIva", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIva = :totalIva"),
-    @NamedQuery(name = "CoOrdenCompras.findByMailNotificador", query = "SELECT c FROM CoOrdenCompras c WHERE c.mailNotificador = :mailNotificador"),
-    @NamedQuery(name = "CoOrdenCompras.findByUsuarioCreacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "CoOrdenCompras.findByFechaCreacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "CoOrdenCompras.findByUsuarioActualizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "CoOrdenCompras.findByFechaActualizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "CoOrdenCompras.findAll", query = "SELECT c FROM CoOrdenCompras c")
+    , @NamedQuery(name = "CoOrdenCompras.findByIdOrdenCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idOrdenCompra = :idOrdenCompra")
+    , @NamedQuery(name = "CoOrdenCompras.findByIdEmpresa", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoOrdenCompras.findByIdSucursal", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "CoOrdenCompras.findByCodigoCotizacionProveedores", query = "SELECT c FROM CoOrdenCompras c WHERE c.codigoCotizacionProveedores = :codigoCotizacionProveedores")
+    , @NamedQuery(name = "CoOrdenCompras.findByCodigoCotizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.codigoCotizacion = :codigoCotizacion")
+    , @NamedQuery(name = "CoOrdenCompras.findByEstado", query = "SELECT c FROM CoOrdenCompras c WHERE c.estado = :estado")
+    , @NamedQuery(name = "CoOrdenCompras.findByObservacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.observacion = :observacion")
+    , @NamedQuery(name = "CoOrdenCompras.findByFechaEntrega", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaEntrega = :fechaEntrega")
+    , @NamedQuery(name = "CoOrdenCompras.findByTotalCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalCompra = :totalCompra")
+    , @NamedQuery(name = "CoOrdenCompras.findBySubtotal", query = "SELECT c FROM CoOrdenCompras c WHERE c.subtotal = :subtotal")
+    , @NamedQuery(name = "CoOrdenCompras.findByTotalDescuento", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalDescuento = :totalDescuento")
+    , @NamedQuery(name = "CoOrdenCompras.findByTotalIce", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIce = :totalIce")
+    , @NamedQuery(name = "CoOrdenCompras.findByTotalIva", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIva = :totalIva")
+    , @NamedQuery(name = "CoOrdenCompras.findByMailNotificador", query = "SELECT c FROM CoOrdenCompras c WHERE c.mailNotificador = :mailNotificador")
+    , @NamedQuery(name = "CoOrdenCompras.findByUsuarioCreacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "CoOrdenCompras.findByFechaCreacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "CoOrdenCompras.findByUsuarioActualizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "CoOrdenCompras.findByFechaActualizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaActualizacion = :fechaActualizacion")})
 public class CoOrdenCompras implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoOrdenComprasPK coOrdenComprasPK;
@@ -99,8 +100,8 @@ public class CoOrdenCompras implements Serializable {
     @ManyToOne
     private InTipoDocumento idTipoDocumento;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
-        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
     @OneToMany(mappedBy = "coOrdenCompras")

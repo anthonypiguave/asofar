@@ -26,21 +26,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "in_tipo_documento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "InTipoDocumento.findAll", query = "SELECT i FROM InTipoDocumento i"),
-    @NamedQuery(name = "InTipoDocumento.findByIdTipoDocumento", query = "SELECT i FROM InTipoDocumento i WHERE i.idTipoDocumento = :idTipoDocumento"),
-    @NamedQuery(name = "InTipoDocumento.findByNombreDocumento", query = "SELECT i FROM InTipoDocumento i WHERE i.nombreDocumento = :nombreDocumento"),
-    @NamedQuery(name = "InTipoDocumento.findByEstado", query = "SELECT i FROM InTipoDocumento i WHERE i.estado = :estado"),
-    @NamedQuery(name = "InTipoDocumento.findByUsuarioCreacion", query = "SELECT i FROM InTipoDocumento i WHERE i.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "InTipoDocumento.findByFechaCreacion", query = "SELECT i FROM InTipoDocumento i WHERE i.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "InTipoDocumento.findByUsuarioActualizacion", query = "SELECT i FROM InTipoDocumento i WHERE i.usuarioActualizacion = :usuarioActualizacion"),
-    @NamedQuery(name = "InTipoDocumento.findByFechaActualizacion", query = "SELECT i FROM InTipoDocumento i WHERE i.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "InTipoDocumento.findAll", query = "SELECT i FROM InTipoDocumento i")
+    , @NamedQuery(name = "InTipoDocumento.findByIdTipoDocumento", query = "SELECT i FROM InTipoDocumento i WHERE i.idTipoDocumento = :idTipoDocumento")
+    , @NamedQuery(name = "InTipoDocumento.findByNombreDocumento", query = "SELECT i FROM InTipoDocumento i WHERE i.nombreDocumento = :nombreDocumento")
+    , @NamedQuery(name = "InTipoDocumento.findByEstado", query = "SELECT i FROM InTipoDocumento i WHERE i.estado = :estado")
+    , @NamedQuery(name = "InTipoDocumento.findByUsuarioCreacion", query = "SELECT i FROM InTipoDocumento i WHERE i.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "InTipoDocumento.findByFechaCreacion", query = "SELECT i FROM InTipoDocumento i WHERE i.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "InTipoDocumento.findByUsuarioActualizacion", query = "SELECT i FROM InTipoDocumento i WHERE i.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "InTipoDocumento.findByFechaActualizacion", query = "SELECT i FROM InTipoDocumento i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InTipoDocumento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

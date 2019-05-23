@@ -23,17 +23,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "se_Pais")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SePais.findAll", query = "SELECT s FROM SePais s"),
-    @NamedQuery(name = "SePais.findByIdPais", query = "SELECT s FROM SePais s WHERE s.idPais = :idPais"),
-    @NamedQuery(name = "SePais.findByNombre", query = "SELECT s FROM SePais s WHERE s.nombre = :nombre"),
-    @NamedQuery(name = "SePais.findByEstado", query = "SELECT s FROM SePais s WHERE s.estado = :estado")})
+    @NamedQuery(name = "SePais.findAll", query = "SELECT s FROM SePais s")
+    , @NamedQuery(name = "SePais.findByIdPais", query = "SELECT s FROM SePais s WHERE s.idPais = :idPais")
+    , @NamedQuery(name = "SePais.findByNombre", query = "SELECT s FROM SePais s WHERE s.nombre = :nombre")
+    , @NamedQuery(name = "SePais.findByEstado", query = "SELECT s FROM SePais s WHERE s.estado = :estado")})
 public class SePais implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

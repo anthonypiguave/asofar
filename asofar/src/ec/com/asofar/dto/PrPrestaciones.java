@@ -23,20 +23,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_prestaciones")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrPrestaciones.findAll", query = "SELECT p FROM PrPrestaciones p"),
-    @NamedQuery(name = "PrPrestaciones.findByIdPrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idPrestacion = :idPrestacion"),
-    @NamedQuery(name = "PrPrestaciones.findByIdEmpresa", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idEmpresa = :idEmpresa"),
-    @NamedQuery(name = "PrPrestaciones.findByIdPoducto", query = "SELECT p FROM PrPrestaciones p WHERE p.idPoducto = :idPoducto"),
-    @NamedQuery(name = "PrPrestaciones.findByNombrePrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.nombrePrestacion = :nombrePrestacion"),
-    @NamedQuery(name = "PrPrestaciones.findByEstado", query = "SELECT p FROM PrPrestaciones p WHERE p.estado = :estado"),
-    @NamedQuery(name = "PrPrestaciones.findByAplicaIva", query = "SELECT p FROM PrPrestaciones p WHERE p.aplicaIva = :aplicaIva")})
+    @NamedQuery(name = "PrPrestaciones.findAll", query = "SELECT p FROM PrPrestaciones p")
+    , @NamedQuery(name = "PrPrestaciones.findByIdPrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idPrestacion = :idPrestacion")
+    , @NamedQuery(name = "PrPrestaciones.findByIdEmpresa", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "PrPrestaciones.findByIdPoducto", query = "SELECT p FROM PrPrestaciones p WHERE p.idPoducto = :idPoducto")
+    , @NamedQuery(name = "PrPrestaciones.findByNombrePrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.nombrePrestacion = :nombrePrestacion")
+    , @NamedQuery(name = "PrPrestaciones.findByEstado", query = "SELECT p FROM PrPrestaciones p WHERE p.estado = :estado")
+    , @NamedQuery(name = "PrPrestaciones.findByAplicaIva", query = "SELECT p FROM PrPrestaciones p WHERE p.aplicaIva = :aplicaIva")})
 public class PrPrestaciones implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrPrestacionesPK prPrestacionesPK;

@@ -26,21 +26,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author admin1
  */
 @Entity
 @Table(name = "ve_caja")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VeCaja.findAll", query = "SELECT v FROM VeCaja v"),
-    @NamedQuery(name = "VeCaja.findByIdCaja", query = "SELECT v FROM VeCaja v WHERE v.idCaja = :idCaja"),
-    @NamedQuery(name = "VeCaja.findByNombre", query = "SELECT v FROM VeCaja v WHERE v.nombre = :nombre"),
-    @NamedQuery(name = "VeCaja.findByEstado", query = "SELECT v FROM VeCaja v WHERE v.estado = :estado"),
-    @NamedQuery(name = "VeCaja.findByFechaCreacion", query = "SELECT v FROM VeCaja v WHERE v.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "VeCaja.findByUsuarioCreacion", query = "SELECT v FROM VeCaja v WHERE v.usuarioCreacion = :usuarioCreacion"),
-    @NamedQuery(name = "VeCaja.findByFechaActualizacion", query = "SELECT v FROM VeCaja v WHERE v.fechaActualizacion = :fechaActualizacion"),
-    @NamedQuery(name = "VeCaja.findByUsuarioActualizacion", query = "SELECT v FROM VeCaja v WHERE v.usuarioActualizacion = :usuarioActualizacion")})
+    @NamedQuery(name = "VeCaja.findAll", query = "SELECT v FROM VeCaja v")
+    , @NamedQuery(name = "VeCaja.findByIdCaja", query = "SELECT v FROM VeCaja v WHERE v.idCaja = :idCaja")
+    , @NamedQuery(name = "VeCaja.findByNombre", query = "SELECT v FROM VeCaja v WHERE v.nombre = :nombre")
+    , @NamedQuery(name = "VeCaja.findByEstado", query = "SELECT v FROM VeCaja v WHERE v.estado = :estado")
+    , @NamedQuery(name = "VeCaja.findByFechaCreacion", query = "SELECT v FROM VeCaja v WHERE v.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "VeCaja.findByUsuarioCreacion", query = "SELECT v FROM VeCaja v WHERE v.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "VeCaja.findByFechaActualizacion", query = "SELECT v FROM VeCaja v WHERE v.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "VeCaja.findByUsuarioActualizacion", query = "SELECT v FROM VeCaja v WHERE v.usuarioActualizacion = :usuarioActualizacion")})
 public class VeCaja implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
