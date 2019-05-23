@@ -451,12 +451,13 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         
         for (int i = 0; i < tb_prod.getRowCount(); i++) {
             CoDetItemsCotizacion tdet = new CoDetItemsCotizacion();
+            tdet=ldetCotiz.get(i);
             tdet.getCoDetItemsCotizacionPK().setIdCotizacion(1);
             tdet.getCoDetItemsCotizacionPK().setIdEmpresa(2);
             tdet.getCoDetItemsCotizacionPK().setIdSucursal(3);
             tdet.getCoDetItemsCotizacionPK().setLineaDetalle(i);
-            tdet.setDescripcion(tb_prod.getValueAt(i, 2).toString());
-            tdet.setCantidadPedida(new BigInteger(tb_prod.getValueAt(i, 5).toString()));
+            tdet.setDescripcion(tb_prod.getValueAt(i, 3).toString());
+            tdet.setCantidadPedida(BigInteger.valueOf(Long.valueOf(tb_prod.getValueAt(i, 2).toString())));
             tdet.setIdProducto(new BigInteger(tb_prod.getValueAt(i, 0).toString()));
             lista.add(tdet);
         }
