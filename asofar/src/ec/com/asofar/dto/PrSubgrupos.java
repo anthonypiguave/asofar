@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_subgrupos")
@@ -67,6 +67,8 @@ public class PrSubgrupos implements Serializable {
     @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private PrGrupos prGrupos;
+    @OneToMany(mappedBy = "prSubgrupos")
+    private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
 
     public PrSubgrupos() {
     }
@@ -158,6 +160,15 @@ public class PrSubgrupos implements Serializable {
 
     public void setPrGrupos(PrGrupos prGrupos) {
         this.prGrupos = prGrupos;
+    }
+
+    @XmlTransient
+    public List<CoDetalleOrdenCompra> getCoDetalleOrdenCompraList() {
+        return coDetalleOrdenCompraList;
+    }
+
+    public void setCoDetalleOrdenCompraList(List<CoDetalleOrdenCompra> coDetalleOrdenCompraList) {
+        this.coDetalleOrdenCompraList = coDetalleOrdenCompraList;
     }
 
     @Override
