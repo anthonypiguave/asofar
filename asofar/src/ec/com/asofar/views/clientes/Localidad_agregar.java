@@ -195,6 +195,8 @@ public class Localidad_agregar extends javax.swing.JDialog {
         System.out.println("id cliente " + cliente.getIdClientes());
         localidadclientes.setDirreccionEntrega(txt_direccion_entrega.getText());
         localidadclientes.setEstado("A");
+        localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
+        localidadclientes.setFechaCreacion(fechaActual);
         try {
             Lc.create(localidadclientes);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");

@@ -215,6 +215,7 @@ public class contacto_agregar extends javax.swing.JDialog {
         ContactoCliente.setCelular(txt_celular.getText());
         ContactoCliente.setEmail(txt_correo.getText());
         ContactoCliente.setFechaCreacion(fechaActual);
+        ContactoCliente.setUsuarioCreacion(usu.getNombreUsuario());
         ContactoCliente.setEstado("A");
         try {
             Ccc.create(ContactoCliente);
