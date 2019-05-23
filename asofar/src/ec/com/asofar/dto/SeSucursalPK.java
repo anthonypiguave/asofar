@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 @Embeddable
 public class SeSucursalPK implements Serializable {

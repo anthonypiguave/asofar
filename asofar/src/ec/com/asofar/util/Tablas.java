@@ -8,6 +8,8 @@ package ec.com.asofar.util;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
+import ec.com.asofar.dto.CoDetalleOrdenCompra;
+import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
@@ -57,6 +59,7 @@ public class Tablas {
     private static boolean[] editable1 = {false, false, true};
     private static boolean[] editable2 = {false, false, false, false, false, true};
     private static boolean[] editable3 = {false,false,false, false, false, false, false, true};
+    private static boolean[] editable4 = {false, false,false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -72,6 +75,36 @@ public class Tablas {
         }
         return tab;
     }
+    
+    public static void ListarDetalleOrdenCompra(List<CoDetalleOrdenCompra> listadeorco, JTable Tabla,CoOrdenCompras orco) {
+        int[] a = {50,50,50,50,50,50,50,50};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"PRODUCTO", "PRESENTACION", "CANTIDAD",
+            "PRECIO UNITARIO", "IVA", "SUBTOTAL","DESCUENTO", "TOTAL"};
+        String[] filas = new String[8];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listadeorco.size(); i++) {
+            if (listadeorco.get(i).getEstado().equals("A")&& 
+                    listadeorco.get(i).getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra()==orco.getCoOrdenComprasPK().getIdOrdenCompra()) {
+                filas[0] = listadeorco.get(i).get
+                filas[1] = listalocalidadcliente.get(i).getDirreccionCliente();
+                filas[2] = listalocalidadcliente.get(i).getDirreccionEntrega();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            }
+        }
+    } 
     
     public static void listarOrdenesdeCompra(List<CoOrdenCompras> lista, JTable Tabla) {
         int[] a = {30, 30, 40, 50, 30, 35};
@@ -1121,6 +1154,47 @@ public class Tablas {
 
         tabla.setModel(dt);
     }
+    public static void TablaLecturaCotizacion(JTable tabla, List<CoItemsCotizacion> lista) {
+        CoItemsCotizacion vo = new CoItemsCotizacion();
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"CODIGO", "FECHA DE EMISION", "PROSCESADO","ESTADO",}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return editable4[column];
+            }
+        };
+
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+//                 model.addRow(new Object[]{});
+                Object fila[] = new Object[4];
+                vo = lista.get(i);
+                fila[0] = "" + vo.getCoItemsCotizacionPK().getIdCotizacion();
+                fila[1] = vo.getFechaEmision();
+                fila[2] = vo.getProcesado();
+                String ac = (String) vo.getEstado();
+                if ("A".equals(ac)) {
+                    fila[3] = true;
+                } else {
+                    fila[3] = false;
+                }
+
+                dt.addRow(fila);
+
+            }
+
+        }
+
+        tabla.setModel(dt);
+    }
 
     public static void TablaDetallePorProveerdo(List<CoDetalleCotizacionPorProveedor> lista, JTable tabla) {
         CoDetalleCotizacionPorProveedor vo = new CoDetalleCotizacionPorProveedor();
@@ -1306,6 +1380,8 @@ public class Tablas {
         for (int i = 0; i < listalocalidadcliente.size(); i++) {
             if (listalocalidadcliente.get(i).getEstado().equals("A")&& 
                     listalocalidadcliente.get(i).getIdCliente().getIdClientes()==lista.getIdClientes()) {
+//                System.out.println("id localidad"+listalocalidadcliente.get(i).getIdCliente().getIdClientes());
+//                System.out.println("id cliente "+lista.getIdClientes());
                 filas[0] = String.valueOf(listalocalidadcliente.get(i).getIdLocalidadCliente());
                 filas[1] = listalocalidadcliente.get(i).getDirreccionCliente();
                 filas[2] = listalocalidadcliente.get(i).getDirreccionEntrega();
@@ -1333,7 +1409,6 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacontactoscliente.size(); i++) {
             if (listacontactoscliente.get(i).getEstado().equals("A")&&
-//                    listalocalidadcliente.get(i).getIdCliente().getIdClientes()==lista.getIdClientes()) {
                     listacontactoscliente.get(i).getIdContactosClientes()==lista.getIdLocalidadCliente()) {
                 filas[0] = String.valueOf(listacontactoscliente.get(i).getIdContactosClientes());
                 filas[1] = listacontactoscliente.get(i).getTelefono();

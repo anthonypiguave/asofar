@@ -274,9 +274,7 @@ public class cliente_agregar extends javax.swing.JDialog {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
         SeTipoIdentificacion ti = new SeTipoIdentificacion();
-//        ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
         ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
-        System.out.println("id de idenetificacion " + ti);
 
         clientes.setPrimerNombre(txt_primer_nombre.getText());
         clientes.setSegundoNombre(txt_segundo_nombre.getText());
