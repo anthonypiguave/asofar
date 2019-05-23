@@ -1306,6 +1306,8 @@ public class Tablas {
         for (int i = 0; i < listalocalidadcliente.size(); i++) {
             if (listalocalidadcliente.get(i).getEstado().equals("A")&& 
                     listalocalidadcliente.get(i).getIdCliente().getIdClientes()==lista.getIdClientes()) {
+//                System.out.println("id localidad"+listalocalidadcliente.get(i).getIdCliente().getIdClientes());
+//                System.out.println("id cliente "+lista.getIdClientes());
                 filas[0] = String.valueOf(listalocalidadcliente.get(i).getIdLocalidadCliente());
                 filas[1] = listalocalidadcliente.get(i).getDirreccionCliente();
                 filas[2] = listalocalidadcliente.get(i).getDirreccionEntrega();

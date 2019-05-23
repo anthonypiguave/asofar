@@ -21,6 +21,8 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -395,8 +397,13 @@ public class consulta_cliente extends javax.swing.JDialog {
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
+//                try{
                 LocalidadCliente = Lc.findSeLocalidadClienteEntities();
                 Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
+//                }catch(Exception e){
+//                Logger.getLogger(consulta_cliente.class.getName()).log(Level.SEVERE, null, e);
+//        
+//                }
             }
         }
     }//GEN-LAST:event_tba_clientesMouseClicked
@@ -454,7 +461,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             if (Client != null) {
                 Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
                 Lagg.setVisible(true);
-
+                Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
             }
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA CLIENTE");
@@ -485,7 +492,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
 
             if (LocaliClient != null) {
-                contacto_agregar Cagg = new contacto_agregar(new javax.swing.JFrame(), true, usu, emp, suc,LocaliClient);
+                contacto_agregar Cagg = new contacto_agregar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
                 Cagg.setVisible(true);
             }
         } else {
