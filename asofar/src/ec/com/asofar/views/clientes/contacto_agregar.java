@@ -20,7 +20,7 @@ import java.awt.Point;
 public class contacto_agregar extends javax.swing.JDialog {
 
     /**
-     * Creates new form contacto_agregar
+     * id_contactos_clientes id_localidad telefono celulare mail estado
      */
     int x, y;
     SeUsuarios usu;
