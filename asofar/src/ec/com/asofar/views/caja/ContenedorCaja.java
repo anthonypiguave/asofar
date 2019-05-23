@@ -68,6 +68,9 @@ public class ContenedorCaja extends javax.swing.JDialog {
             }
             
         }
+        if(listadetallecaja.isEmpty()){
+            btnCierre.setEnabled(false);
+        }
     }
 
 

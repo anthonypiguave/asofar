@@ -18,12 +18,15 @@ import java.util.List;
  */
 public class ValidacionCaja {
 
+    static VeDetalleCajaJpaController cajaController = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     public static boolean Validacion(VeCaja caja, SeUsuarios su) {
         boolean valor = true;
-        for (int i = 0; i < caja.getVeDetalleCajaList().size(); i++) {
-            if (caja.getVeDetalleCajaList().get(i).getFechaCierre() == null
-                    && "A".equals(caja.getVeDetalleCajaList().get(i).getEstado())
-                    && caja.getVeDetalleCajaList().get(i).getIdUsuario() == su.getIdUsuario()) {
+        List<VeDetalleCaja> lista = cajaController.findVeDetalleCajaEntities();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getFechaCierre() == null
+                    && Character.valueOf('A').equals(lista.get(i).getEstado())
+                    && lista.get(i).getIdUsuario() == su.getIdUsuario()
+                    && lista.get(i).getVeCaja().getIdCaja() == caja.getIdCaja()) {
                 valor = false;
                 System.out.println("hola viejo que hay");
             }
