@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 public class SeLocalidadClienteJpaController implements Serializable {
 
