@@ -8,6 +8,7 @@ package ec.com.asofar.util;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
+import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
@@ -72,6 +73,36 @@ public class Tablas {
         }
         return tab;
     }
+    
+    public static void ListarDetalleOrdenCompra(List<CoDetalleOrdenCompra> listadeorco, JTable Tabla,CoOrdenCompras orco) {
+        int[] a = {50,50,50,50,50,50,50,50};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"PRODUCTO", "PRESENTACION", "CANTIDAD",
+            "PRECIO UNITARIO", "IVA", "SUBTOTAL","DESCUENTO", "TOTAL"};
+        String[] filas = new String[8];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listadeorco.size(); i++) {
+            if (listadeorco.get(i).getEstado().equals("A")&& 
+                    listadeorco.get(i).getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra()==orco.getCoOrdenComprasPK().getIdOrdenCompra()) {
+                filas[0] = listadeorco.get(i).get
+                filas[1] = listalocalidadcliente.get(i).getDirreccionCliente();
+                filas[2] = listalocalidadcliente.get(i).getDirreccionEntrega();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            }
+        }
+    } 
     
     public static void listarOrdenesdeCompra(List<CoOrdenCompras> lista, JTable Tabla) {
         int[] a = {30, 30, 40, 50, 30, 35};
