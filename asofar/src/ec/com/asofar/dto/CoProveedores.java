@@ -27,32 +27,31 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_proveedores")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoProveedores.findAll", query = "SELECT c FROM CoProveedores c")
-    , @NamedQuery(name = "CoProveedores.findByIdProveedor", query = "SELECT c FROM CoProveedores c WHERE c.idProveedor = :idProveedor")
-    , @NamedQuery(name = "CoProveedores.findByNombre", query = "SELECT c FROM CoProveedores c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "CoProveedores.findByDireccion", query = "SELECT c FROM CoProveedores c WHERE c.direccion = :direccion")
-    , @NamedQuery(name = "CoProveedores.findByTelefono1", query = "SELECT c FROM CoProveedores c WHERE c.telefono1 = :telefono1")
-    , @NamedQuery(name = "CoProveedores.findByTelefono2", query = "SELECT c FROM CoProveedores c WHERE c.telefono2 = :telefono2")
-    , @NamedQuery(name = "CoProveedores.findByPaginaWeb", query = "SELECT c FROM CoProveedores c WHERE c.paginaWeb = :paginaWeb")
-    , @NamedQuery(name = "CoProveedores.findByNumeroIdentificacion", query = "SELECT c FROM CoProveedores c WHERE c.numeroIdentificacion = :numeroIdentificacion")
-    , @NamedQuery(name = "CoProveedores.findByEmail", query = "SELECT c FROM CoProveedores c WHERE c.email = :email")
-    , @NamedQuery(name = "CoProveedores.findByContribuyenteEspecial", query = "SELECT c FROM CoProveedores c WHERE c.contribuyenteEspecial = :contribuyenteEspecial")
-    , @NamedQuery(name = "CoProveedores.findByCodigoContribuyente", query = "SELECT c FROM CoProveedores c WHERE c.codigoContribuyente = :codigoContribuyente")
-    , @NamedQuery(name = "CoProveedores.findByObservaciones", query = "SELECT c FROM CoProveedores c WHERE c.observaciones = :observaciones")
-    , @NamedQuery(name = "CoProveedores.findByNombreComercial", query = "SELECT c FROM CoProveedores c WHERE c.nombreComercial = :nombreComercial")
-    , @NamedQuery(name = "CoProveedores.findByUsuarioCreacion", query = "SELECT c FROM CoProveedores c WHERE c.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "CoProveedores.findByFechaCreacion", query = "SELECT c FROM CoProveedores c WHERE c.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "CoProveedores.findByUsuarioActualizacion", query = "SELECT c FROM CoProveedores c WHERE c.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "CoProveedores.findByFechaActualizacion", query = "SELECT c FROM CoProveedores c WHERE c.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "CoProveedores.findByEstado", query = "SELECT c FROM CoProveedores c WHERE c.estado = :estado")})
+    @NamedQuery(name = "CoProveedores.findAll", query = "SELECT c FROM CoProveedores c"),
+    @NamedQuery(name = "CoProveedores.findByIdProveedor", query = "SELECT c FROM CoProveedores c WHERE c.idProveedor = :idProveedor"),
+    @NamedQuery(name = "CoProveedores.findByNombre", query = "SELECT c FROM CoProveedores c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "CoProveedores.findByDireccion", query = "SELECT c FROM CoProveedores c WHERE c.direccion = :direccion"),
+    @NamedQuery(name = "CoProveedores.findByTelefono1", query = "SELECT c FROM CoProveedores c WHERE c.telefono1 = :telefono1"),
+    @NamedQuery(name = "CoProveedores.findByTelefono2", query = "SELECT c FROM CoProveedores c WHERE c.telefono2 = :telefono2"),
+    @NamedQuery(name = "CoProveedores.findByPaginaWeb", query = "SELECT c FROM CoProveedores c WHERE c.paginaWeb = :paginaWeb"),
+    @NamedQuery(name = "CoProveedores.findByNumeroIdentificacion", query = "SELECT c FROM CoProveedores c WHERE c.numeroIdentificacion = :numeroIdentificacion"),
+    @NamedQuery(name = "CoProveedores.findByEmail", query = "SELECT c FROM CoProveedores c WHERE c.email = :email"),
+    @NamedQuery(name = "CoProveedores.findByContribuyenteEspecial", query = "SELECT c FROM CoProveedores c WHERE c.contribuyenteEspecial = :contribuyenteEspecial"),
+    @NamedQuery(name = "CoProveedores.findByCodigoContribuyente", query = "SELECT c FROM CoProveedores c WHERE c.codigoContribuyente = :codigoContribuyente"),
+    @NamedQuery(name = "CoProveedores.findByObservaciones", query = "SELECT c FROM CoProveedores c WHERE c.observaciones = :observaciones"),
+    @NamedQuery(name = "CoProveedores.findByNombreComercial", query = "SELECT c FROM CoProveedores c WHERE c.nombreComercial = :nombreComercial"),
+    @NamedQuery(name = "CoProveedores.findByUsuarioCreacion", query = "SELECT c FROM CoProveedores c WHERE c.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "CoProveedores.findByFechaCreacion", query = "SELECT c FROM CoProveedores c WHERE c.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "CoProveedores.findByUsuarioActualizacion", query = "SELECT c FROM CoProveedores c WHERE c.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "CoProveedores.findByFechaActualizacion", query = "SELECT c FROM CoProveedores c WHERE c.fechaActualizacion = :fechaActualizacion"),
+    @NamedQuery(name = "CoProveedores.findByEstado", query = "SELECT c FROM CoProveedores c WHERE c.estado = :estado")})
 public class CoProveedores implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,22 +25,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "in_tipo_compra")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "InTipoCompra.findAll", query = "SELECT i FROM InTipoCompra i")
-    , @NamedQuery(name = "InTipoCompra.findByIdInTipoCompra", query = "SELECT i FROM InTipoCompra i WHERE i.idInTipoCompra = :idInTipoCompra")
-    , @NamedQuery(name = "InTipoCompra.findByNombre", query = "SELECT i FROM InTipoCompra i WHERE i.nombre = :nombre")
-    , @NamedQuery(name = "InTipoCompra.findByEstado", query = "SELECT i FROM InTipoCompra i WHERE i.estado = :estado")
-    , @NamedQuery(name = "InTipoCompra.findByUsuarioCreacion", query = "SELECT i FROM InTipoCompra i WHERE i.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "InTipoCompra.findByFechaCreacion", query = "SELECT i FROM InTipoCompra i WHERE i.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "InTipoCompra.findByUsuarioActualizacion", query = "SELECT i FROM InTipoCompra i WHERE i.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "InTipoCompra.findByFechaActualizacion", query = "SELECT i FROM InTipoCompra i WHERE i.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "InTipoCompra.findAll", query = "SELECT i FROM InTipoCompra i"),
+    @NamedQuery(name = "InTipoCompra.findByIdInTipoCompra", query = "SELECT i FROM InTipoCompra i WHERE i.idInTipoCompra = :idInTipoCompra"),
+    @NamedQuery(name = "InTipoCompra.findByNombre", query = "SELECT i FROM InTipoCompra i WHERE i.nombre = :nombre"),
+    @NamedQuery(name = "InTipoCompra.findByEstado", query = "SELECT i FROM InTipoCompra i WHERE i.estado = :estado"),
+    @NamedQuery(name = "InTipoCompra.findByUsuarioCreacion", query = "SELECT i FROM InTipoCompra i WHERE i.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "InTipoCompra.findByFechaCreacion", query = "SELECT i FROM InTipoCompra i WHERE i.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "InTipoCompra.findByUsuarioActualizacion", query = "SELECT i FROM InTipoCompra i WHERE i.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "InTipoCompra.findByFechaActualizacion", query = "SELECT i FROM InTipoCompra i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InTipoCompra implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

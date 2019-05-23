@@ -202,7 +202,7 @@ public class LecturaCotizacionesProveedorForm extends javax.swing.JDialog {
         if (evt.getClickCount() == 1) {
             String valor = jtCabecera.getValueAt(jtCabecera.getSelectedRow(), 0).toString();
             CoCotizacionesPorProveedor coti = ObtenerDTO.ObtenerCoCotizacionesPorProveedor(valor);
-            Tablas.TablaDetallePorProveerdo(coti.getCoDetalleCotizacionPorProveedorList(), jtDetalle);
+//            Tablas.TablaDetallePorProveerdo(coti.getCoDetalleCotizacionPorProveedorList(), jtDetalle);
         }
 
     }//GEN-LAST:event_jtCabeceraMousePressed

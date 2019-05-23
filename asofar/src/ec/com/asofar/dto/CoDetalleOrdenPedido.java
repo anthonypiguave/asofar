@@ -24,34 +24,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_detalle_orden_pedido")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoDetalleOrdenPedido.findAll", query = "SELECT c FROM CoDetalleOrdenPedido c")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.lineaDetalle = :lineaDetalle")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idProducto = :idProducto")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idGrupo = :idGrupo")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idSubgrupo = :idSubgrupo")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idArticulo = :idArticulo")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idTipoPresentacion = :idTipoPresentacion")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idTipoMedidas = :idTipoMedidas")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByMarca", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.marca = :marca")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByModelado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.modelado = :modelado")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByCantidadTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.cantidadTotal = :cantidadTotal")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByPrecioUnitario", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.precioUnitario = :precioUnitario")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByPrecioTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.precioTotal = :precioTotal")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByEstado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIva", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.iva = :iva")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findBySubtotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.subtotal = :subtotal")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescuento", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descuento = :descuento")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.total = :total")})
+    @NamedQuery(name = "CoDetalleOrdenPedido.findAll", query = "SELECT c FROM CoDetalleOrdenPedido c"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.lineaDetalle = :lineaDetalle"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descripcion = :descripcion"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idProducto = :idProducto"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idGrupo = :idGrupo"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idSubgrupo = :idSubgrupo"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idArticulo = :idArticulo"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idTipoPresentacion = :idTipoPresentacion"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idTipoMedidas = :idTipoMedidas"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByMarca", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.marca = :marca"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByModelado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.modelado = :modelado"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByCantidadTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.cantidadTotal = :cantidadTotal"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByPrecioUnitario", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.precioUnitario = :precioUnitario"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByPrecioTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.precioTotal = :precioTotal"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByEstado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.estado = :estado"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByIva", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.iva = :iva"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findBySubtotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.subtotal = :subtotal"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByDescuento", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descuento = :descuento"),
+    @NamedQuery(name = "CoDetalleOrdenPedido.findByTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.total = :total")})
 public class CoDetalleOrdenPedido implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,9 +95,9 @@ public class CoDetalleOrdenPedido implements Serializable {
     @Column(name = "total")
     private BigDecimal total;
     @JoinColumns({
-        @JoinColumn(name = "id_orden_pedido", referencedColumnName = "id_orden_pedido")
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal")})
+        @JoinColumn(name = "id_orden_pedido", referencedColumnName = "id_orden_pedido"),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa"),
+        @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal")})
     @ManyToOne
     private CoOrdenPedido coOrdenPedido;
 

@@ -22,23 +22,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_usuario_sucur_rol")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeUsuarioSucurRol.findAll", query = "SELECT s FROM SeUsuarioSucurRol s")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByIdUsuarioSucurRol", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.seUsuarioSucurRolPK.idUsuarioSucurRol = :idUsuarioSucurRol")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByIdSucursal", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.seUsuarioSucurRolPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByIdEmpresa", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.seUsuarioSucurRolPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByEstado", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByUsuarioCreacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByFechaCreacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByUsuarioActualizacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "SeUsuarioSucurRol.findByFechaActualizacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "SeUsuarioSucurRol.findAll", query = "SELECT s FROM SeUsuarioSucurRol s"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByIdUsuarioSucurRol", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.seUsuarioSucurRolPK.idUsuarioSucurRol = :idUsuarioSucurRol"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByIdSucursal", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.seUsuarioSucurRolPK.idSucursal = :idSucursal"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByIdEmpresa", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.seUsuarioSucurRolPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByEstado", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.estado = :estado"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByUsuarioCreacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByFechaCreacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByUsuarioActualizacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "SeUsuarioSucurRol.findByFechaActualizacion", query = "SELECT s FROM SeUsuarioSucurRol s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class SeUsuarioSucurRol implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SeUsuarioSucurRolPK seUsuarioSucurRolPK;
@@ -58,8 +57,8 @@ public class SeUsuarioSucurRol implements Serializable {
     @ManyToOne
     private SeRoles idRoles;
     @JoinColumns({
-        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")

@@ -25,26 +25,25 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_sucursal")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeSucursal.findAll", query = "SELECT s FROM SeSucursal s")
-    , @NamedQuery(name = "SeSucursal.findByIdSucursal", query = "SELECT s FROM SeSucursal s WHERE s.seSucursalPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "SeSucursal.findByIdEmpresa", query = "SELECT s FROM SeSucursal s WHERE s.seSucursalPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "SeSucursal.findByNombreComercial", query = "SELECT s FROM SeSucursal s WHERE s.nombreComercial = :nombreComercial")
-    , @NamedQuery(name = "SeSucursal.findByTelefono", query = "SELECT s FROM SeSucursal s WHERE s.telefono = :telefono")
-    , @NamedQuery(name = "SeSucursal.findByDireccion", query = "SELECT s FROM SeSucursal s WHERE s.direccion = :direccion")
-    , @NamedQuery(name = "SeSucursal.findByCorreo", query = "SELECT s FROM SeSucursal s WHERE s.correo = :correo")
-    , @NamedQuery(name = "SeSucursal.findByUsuarioCreacion", query = "SELECT s FROM SeSucursal s WHERE s.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "SeSucursal.findByFechaCreacion", query = "SELECT s FROM SeSucursal s WHERE s.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "SeSucursal.findByUsuarioActualizacion", query = "SELECT s FROM SeSucursal s WHERE s.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "SeSucursal.findByFechaActualizacion", query = "SELECT s FROM SeSucursal s WHERE s.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "SeSucursal.findByEstado", query = "SELECT s FROM SeSucursal s WHERE s.estado = :estado")})
+    @NamedQuery(name = "SeSucursal.findAll", query = "SELECT s FROM SeSucursal s"),
+    @NamedQuery(name = "SeSucursal.findByIdSucursal", query = "SELECT s FROM SeSucursal s WHERE s.seSucursalPK.idSucursal = :idSucursal"),
+    @NamedQuery(name = "SeSucursal.findByIdEmpresa", query = "SELECT s FROM SeSucursal s WHERE s.seSucursalPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "SeSucursal.findByNombreComercial", query = "SELECT s FROM SeSucursal s WHERE s.nombreComercial = :nombreComercial"),
+    @NamedQuery(name = "SeSucursal.findByTelefono", query = "SELECT s FROM SeSucursal s WHERE s.telefono = :telefono"),
+    @NamedQuery(name = "SeSucursal.findByDireccion", query = "SELECT s FROM SeSucursal s WHERE s.direccion = :direccion"),
+    @NamedQuery(name = "SeSucursal.findByCorreo", query = "SELECT s FROM SeSucursal s WHERE s.correo = :correo"),
+    @NamedQuery(name = "SeSucursal.findByUsuarioCreacion", query = "SELECT s FROM SeSucursal s WHERE s.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "SeSucursal.findByFechaCreacion", query = "SELECT s FROM SeSucursal s WHERE s.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "SeSucursal.findByUsuarioActualizacion", query = "SELECT s FROM SeSucursal s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "SeSucursal.findByFechaActualizacion", query = "SELECT s FROM SeSucursal s WHERE s.fechaActualizacion = :fechaActualizacion"),
+    @NamedQuery(name = "SeSucursal.findByEstado", query = "SELECT s FROM SeSucursal s WHERE s.estado = :estado")})
 public class SeSucursal implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SeSucursalPK seSucursalPK;

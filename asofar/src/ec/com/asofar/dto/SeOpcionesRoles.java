@@ -21,23 +21,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_opciones_roles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeOpcionesRoles.findAll", query = "SELECT s FROM SeOpcionesRoles s")
-    , @NamedQuery(name = "SeOpcionesRoles.findByIdOpcionesRoles", query = "SELECT s FROM SeOpcionesRoles s WHERE s.seOpcionesRolesPK.idOpcionesRoles = :idOpcionesRoles")
-    , @NamedQuery(name = "SeOpcionesRoles.findByIdOpcionesMenu", query = "SELECT s FROM SeOpcionesRoles s WHERE s.seOpcionesRolesPK.idOpcionesMenu = :idOpcionesMenu")
-    , @NamedQuery(name = "SeOpcionesRoles.findByIdRol", query = "SELECT s FROM SeOpcionesRoles s WHERE s.seOpcionesRolesPK.idRol = :idRol")
-    , @NamedQuery(name = "SeOpcionesRoles.findByEstado", query = "SELECT s FROM SeOpcionesRoles s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SeOpcionesRoles.findByUsuarioCreacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "SeOpcionesRoles.findByFechaCreacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "SeOpcionesRoles.findByUsuarioActualizacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "SeOpcionesRoles.findByFechaActualizacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "SeOpcionesRoles.findAll", query = "SELECT s FROM SeOpcionesRoles s"),
+    @NamedQuery(name = "SeOpcionesRoles.findByIdOpcionesRoles", query = "SELECT s FROM SeOpcionesRoles s WHERE s.seOpcionesRolesPK.idOpcionesRoles = :idOpcionesRoles"),
+    @NamedQuery(name = "SeOpcionesRoles.findByIdOpcionesMenu", query = "SELECT s FROM SeOpcionesRoles s WHERE s.seOpcionesRolesPK.idOpcionesMenu = :idOpcionesMenu"),
+    @NamedQuery(name = "SeOpcionesRoles.findByIdRol", query = "SELECT s FROM SeOpcionesRoles s WHERE s.seOpcionesRolesPK.idRol = :idRol"),
+    @NamedQuery(name = "SeOpcionesRoles.findByEstado", query = "SELECT s FROM SeOpcionesRoles s WHERE s.estado = :estado"),
+    @NamedQuery(name = "SeOpcionesRoles.findByUsuarioCreacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "SeOpcionesRoles.findByFechaCreacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "SeOpcionesRoles.findByUsuarioActualizacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "SeOpcionesRoles.findByFechaActualizacion", query = "SELECT s FROM SeOpcionesRoles s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class SeOpcionesRoles implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SeOpcionesRolesPK seOpcionesRolesPK;

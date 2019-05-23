@@ -28,26 +28,25 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_localidad_cliente")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeLocalidadCliente.findAll", query = "SELECT s FROM SeLocalidadCliente s")
-    , @NamedQuery(name = "SeLocalidadCliente.findByIdLocalidadCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idLocalidadCliente = :idLocalidadCliente")
-    , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionCliente = :dirreccionCliente")
-    , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionEntrega", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionEntrega = :dirreccionEntrega")
-    , @NamedQuery(name = "SeLocalidadCliente.findByIdCiudad", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idCiudad = :idCiudad")
-    , @NamedQuery(name = "SeLocalidadCliente.findByIdProvincia", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idProvincia = :idProvincia")
-    , @NamedQuery(name = "SeLocalidadCliente.findByIdPais", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idPais = :idPais")
-    , @NamedQuery(name = "SeLocalidadCliente.findByEstado", query = "SELECT s FROM SeLocalidadCliente s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SeLocalidadCliente.findByFechaCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "SeLocalidadCliente.findByUsuarioCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "SeLocalidadCliente.findByFechaActualizacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "SeLocalidadCliente.findByUsuarioActualizacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.usuarioActualizacion = :usuarioActualizacion")})
+    @NamedQuery(name = "SeLocalidadCliente.findAll", query = "SELECT s FROM SeLocalidadCliente s"),
+    @NamedQuery(name = "SeLocalidadCliente.findByIdLocalidadCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idLocalidadCliente = :idLocalidadCliente"),
+    @NamedQuery(name = "SeLocalidadCliente.findByDirreccionCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionCliente = :dirreccionCliente"),
+    @NamedQuery(name = "SeLocalidadCliente.findByDirreccionEntrega", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionEntrega = :dirreccionEntrega"),
+    @NamedQuery(name = "SeLocalidadCliente.findByIdCiudad", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idCiudad = :idCiudad"),
+    @NamedQuery(name = "SeLocalidadCliente.findByIdProvincia", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idProvincia = :idProvincia"),
+    @NamedQuery(name = "SeLocalidadCliente.findByIdPais", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idPais = :idPais"),
+    @NamedQuery(name = "SeLocalidadCliente.findByEstado", query = "SELECT s FROM SeLocalidadCliente s WHERE s.estado = :estado"),
+    @NamedQuery(name = "SeLocalidadCliente.findByFechaCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "SeLocalidadCliente.findByUsuarioCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "SeLocalidadCliente.findByFechaActualizacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.fechaActualizacion = :fechaActualizacion"),
+    @NamedQuery(name = "SeLocalidadCliente.findByUsuarioActualizacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.usuarioActualizacion = :usuarioActualizacion")})
 public class SeLocalidadCliente implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

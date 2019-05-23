@@ -27,23 +27,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "ve_unidad_servicio")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VeUnidadServicio.findAll", query = "SELECT v FROM VeUnidadServicio v")
-    , @NamedQuery(name = "VeUnidadServicio.findByIdUnidadServicio", query = "SELECT v FROM VeUnidadServicio v WHERE v.idUnidadServicio = :idUnidadServicio")
-    , @NamedQuery(name = "VeUnidadServicio.findByIdEmpresa", query = "SELECT v FROM VeUnidadServicio v WHERE v.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "VeUnidadServicio.findByNombreUnidadServicio", query = "SELECT v FROM VeUnidadServicio v WHERE v.nombreUnidadServicio = :nombreUnidadServicio")
-    , @NamedQuery(name = "VeUnidadServicio.findByEstado", query = "SELECT v FROM VeUnidadServicio v WHERE v.estado = :estado")
-    , @NamedQuery(name = "VeUnidadServicio.findByUsuarioCreacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "VeUnidadServicio.findByFechaCreacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "VeUnidadServicio.findByUsuarioActualizacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "VeUnidadServicio.findByFechaActualizacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "VeUnidadServicio.findAll", query = "SELECT v FROM VeUnidadServicio v"),
+    @NamedQuery(name = "VeUnidadServicio.findByIdUnidadServicio", query = "SELECT v FROM VeUnidadServicio v WHERE v.idUnidadServicio = :idUnidadServicio"),
+    @NamedQuery(name = "VeUnidadServicio.findByIdEmpresa", query = "SELECT v FROM VeUnidadServicio v WHERE v.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "VeUnidadServicio.findByNombreUnidadServicio", query = "SELECT v FROM VeUnidadServicio v WHERE v.nombreUnidadServicio = :nombreUnidadServicio"),
+    @NamedQuery(name = "VeUnidadServicio.findByEstado", query = "SELECT v FROM VeUnidadServicio v WHERE v.estado = :estado"),
+    @NamedQuery(name = "VeUnidadServicio.findByUsuarioCreacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "VeUnidadServicio.findByFechaCreacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "VeUnidadServicio.findByUsuarioActualizacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "VeUnidadServicio.findByFechaActualizacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.fechaActualizacion = :fechaActualizacion")})
 public class VeUnidadServicio implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

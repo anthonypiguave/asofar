@@ -29,25 +29,24 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_opciones_menu")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeOpcionesMenu.findAll", query = "SELECT s FROM SeOpcionesMenu s")
-    , @NamedQuery(name = "SeOpcionesMenu.findByIdOpcionesMenu", query = "SELECT s FROM SeOpcionesMenu s WHERE s.idOpcionesMenu = :idOpcionesMenu")
-    , @NamedQuery(name = "SeOpcionesMenu.findByNombre", query = "SELECT s FROM SeOpcionesMenu s WHERE s.nombre = :nombre")
-    , @NamedQuery(name = "SeOpcionesMenu.findByOrden", query = "SELECT s FROM SeOpcionesMenu s WHERE s.orden = :orden")
-    , @NamedQuery(name = "SeOpcionesMenu.findByDescripcion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.descripcion = :descripcion")
-    , @NamedQuery(name = "SeOpcionesMenu.findByRuta", query = "SELECT s FROM SeOpcionesMenu s WHERE s.ruta = :ruta")
-    , @NamedQuery(name = "SeOpcionesMenu.findByEstado", query = "SELECT s FROM SeOpcionesMenu s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SeOpcionesMenu.findByUsuarioCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "SeOpcionesMenu.findByFechaCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "SeOpcionesMenu.findByUsuarioActualizacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "SeOpcionesMenu.findByFechaActualizacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "SeOpcionesMenu.findAll", query = "SELECT s FROM SeOpcionesMenu s"),
+    @NamedQuery(name = "SeOpcionesMenu.findByIdOpcionesMenu", query = "SELECT s FROM SeOpcionesMenu s WHERE s.idOpcionesMenu = :idOpcionesMenu"),
+    @NamedQuery(name = "SeOpcionesMenu.findByNombre", query = "SELECT s FROM SeOpcionesMenu s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "SeOpcionesMenu.findByOrden", query = "SELECT s FROM SeOpcionesMenu s WHERE s.orden = :orden"),
+    @NamedQuery(name = "SeOpcionesMenu.findByDescripcion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.descripcion = :descripcion"),
+    @NamedQuery(name = "SeOpcionesMenu.findByRuta", query = "SELECT s FROM SeOpcionesMenu s WHERE s.ruta = :ruta"),
+    @NamedQuery(name = "SeOpcionesMenu.findByEstado", query = "SELECT s FROM SeOpcionesMenu s WHERE s.estado = :estado"),
+    @NamedQuery(name = "SeOpcionesMenu.findByUsuarioCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "SeOpcionesMenu.findByFechaCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "SeOpcionesMenu.findByUsuarioActualizacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "SeOpcionesMenu.findByFechaActualizacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class SeOpcionesMenu implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

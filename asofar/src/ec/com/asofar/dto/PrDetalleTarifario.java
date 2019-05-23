@@ -22,30 +22,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_detalle_tarifario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrDetalleTarifario.findAll", query = "SELECT p FROM PrDetalleTarifario p")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdDetalleTarifario", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idDetalleTarifario = :idDetalleTarifario")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdTarifario", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idTarifario = :idTarifario")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdPrestacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idPrestacion = :idPrestacion")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdEmpresa", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdSurcusal", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idSurcusal = :idSurcusal")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdUnidadServicio", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idUnidadServicio = :idUnidadServicio")
-    , @NamedQuery(name = "PrDetalleTarifario.findByValorCosto", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorCosto = :valorCosto")
-    , @NamedQuery(name = "PrDetalleTarifario.findByValorMinVenta", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorMinVenta = :valorMinVenta")
-    , @NamedQuery(name = "PrDetalleTarifario.findByValorVenta", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorVenta = :valorVenta")
-    , @NamedQuery(name = "PrDetalleTarifario.findByValorDescuento", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorDescuento = :valorDescuento")
-    , @NamedQuery(name = "PrDetalleTarifario.findByEstado", query = "SELECT p FROM PrDetalleTarifario p WHERE p.estado = :estado")
-    , @NamedQuery(name = "PrDetalleTarifario.findByUsuarioCreacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "PrDetalleTarifario.findByFechaCreacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "PrDetalleTarifario.findByUsuarioActualizacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "PrDetalleTarifario.findByFechaActualizacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrDetalleTarifario.findAll", query = "SELECT p FROM PrDetalleTarifario p"),
+    @NamedQuery(name = "PrDetalleTarifario.findByIdDetalleTarifario", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idDetalleTarifario = :idDetalleTarifario"),
+    @NamedQuery(name = "PrDetalleTarifario.findByIdTarifario", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idTarifario = :idTarifario"),
+    @NamedQuery(name = "PrDetalleTarifario.findByIdPrestacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idPrestacion = :idPrestacion"),
+    @NamedQuery(name = "PrDetalleTarifario.findByIdEmpresa", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "PrDetalleTarifario.findByIdSurcusal", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idSurcusal = :idSurcusal"),
+    @NamedQuery(name = "PrDetalleTarifario.findByIdUnidadServicio", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idUnidadServicio = :idUnidadServicio"),
+    @NamedQuery(name = "PrDetalleTarifario.findByValorCosto", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorCosto = :valorCosto"),
+    @NamedQuery(name = "PrDetalleTarifario.findByValorMinVenta", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorMinVenta = :valorMinVenta"),
+    @NamedQuery(name = "PrDetalleTarifario.findByValorVenta", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorVenta = :valorVenta"),
+    @NamedQuery(name = "PrDetalleTarifario.findByValorDescuento", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorDescuento = :valorDescuento"),
+    @NamedQuery(name = "PrDetalleTarifario.findByEstado", query = "SELECT p FROM PrDetalleTarifario p WHERE p.estado = :estado"),
+    @NamedQuery(name = "PrDetalleTarifario.findByUsuarioCreacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "PrDetalleTarifario.findByFechaCreacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "PrDetalleTarifario.findByUsuarioActualizacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "PrDetalleTarifario.findByFechaActualizacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrDetalleTarifario implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrDetalleTarifarioPK prDetalleTarifarioPK;
@@ -71,14 +70,14 @@ public class PrDetalleTarifario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_prestacion", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_prestacion", referencedColumnName = "id_prestacion", insertable = false, updatable = false),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrPrestaciones prPrestaciones;
     @JoinColumns({
-        @JoinColumn(name = "id_tarifario", referencedColumnName = "id_tarifario", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_surcusal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_tarifario", referencedColumnName = "id_tarifario", insertable = false, updatable = false),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
+        @JoinColumn(name = "id_surcusal", referencedColumnName = "id_surcusal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrTarifario prTarifario;
     @JoinColumn(name = "id_unidad_servicio", referencedColumnName = "id_unidad_servicio", insertable = false, updatable = false)

@@ -24,33 +24,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "ve_factura_detalle")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VeFacturaDetalle.findAll", query = "SELECT v FROM VeFacturaDetalle v")
-    , @NamedQuery(name = "VeFacturaDetalle.findByIdFacturaDetalle", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idFacturaDetalle = :idFacturaDetalle")
-    , @NamedQuery(name = "VeFacturaDetalle.findByLineaDetalle", query = "SELECT v FROM VeFacturaDetalle v WHERE v.lineaDetalle = :lineaDetalle")
-    , @NamedQuery(name = "VeFacturaDetalle.findByIdFactura", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idFactura = :idFactura")
-    , @NamedQuery(name = "VeFacturaDetalle.findByIdEmpresa", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "VeFacturaDetalle.findByIdSucursal", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "VeFacturaDetalle.findByIdPrestaciones", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idPrestaciones = :idPrestaciones")
-    , @NamedQuery(name = "VeFacturaDetalle.findByIdUnidadServicio", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idUnidadServicio = :idUnidadServicio")
-    , @NamedQuery(name = "VeFacturaDetalle.findByCantidad", query = "SELECT v FROM VeFacturaDetalle v WHERE v.cantidad = :cantidad")
-    , @NamedQuery(name = "VeFacturaDetalle.findByPrecioUnitarioVenta", query = "SELECT v FROM VeFacturaDetalle v WHERE v.precioUnitarioVenta = :precioUnitarioVenta")
-    , @NamedQuery(name = "VeFacturaDetalle.findByValorIce", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorIce = :valorIce")
-    , @NamedQuery(name = "VeFacturaDetalle.findByValorIva", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorIva = :valorIva")
-    , @NamedQuery(name = "VeFacturaDetalle.findByValorDescuento", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorDescuento = :valorDescuento")
-    , @NamedQuery(name = "VeFacturaDetalle.findByValorTotal", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorTotal = :valorTotal")
-    , @NamedQuery(name = "VeFacturaDetalle.findByEstado", query = "SELECT v FROM VeFacturaDetalle v WHERE v.estado = :estado")
-    , @NamedQuery(name = "VeFacturaDetalle.findByUsuarioCreacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "VeFacturaDetalle.findByFechaCreacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "VeFacturaDetalle.findByUsuarioActualizacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "VeFacturaDetalle.findByFechaActualizacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "VeFacturaDetalle.findAll", query = "SELECT v FROM VeFacturaDetalle v"),
+    @NamedQuery(name = "VeFacturaDetalle.findByIdFacturaDetalle", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idFacturaDetalle = :idFacturaDetalle"),
+    @NamedQuery(name = "VeFacturaDetalle.findByLineaDetalle", query = "SELECT v FROM VeFacturaDetalle v WHERE v.lineaDetalle = :lineaDetalle"),
+    @NamedQuery(name = "VeFacturaDetalle.findByIdFactura", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idFactura = :idFactura"),
+    @NamedQuery(name = "VeFacturaDetalle.findByIdEmpresa", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "VeFacturaDetalle.findByIdSucursal", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idSucursal = :idSucursal"),
+    @NamedQuery(name = "VeFacturaDetalle.findByIdPrestaciones", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idPrestaciones = :idPrestaciones"),
+    @NamedQuery(name = "VeFacturaDetalle.findByIdUnidadServicio", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idUnidadServicio = :idUnidadServicio"),
+    @NamedQuery(name = "VeFacturaDetalle.findByCantidad", query = "SELECT v FROM VeFacturaDetalle v WHERE v.cantidad = :cantidad"),
+    @NamedQuery(name = "VeFacturaDetalle.findByPrecioUnitarioVenta", query = "SELECT v FROM VeFacturaDetalle v WHERE v.precioUnitarioVenta = :precioUnitarioVenta"),
+    @NamedQuery(name = "VeFacturaDetalle.findByValorIce", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorIce = :valorIce"),
+    @NamedQuery(name = "VeFacturaDetalle.findByValorIva", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorIva = :valorIva"),
+    @NamedQuery(name = "VeFacturaDetalle.findByValorDescuento", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorDescuento = :valorDescuento"),
+    @NamedQuery(name = "VeFacturaDetalle.findByValorTotal", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorTotal = :valorTotal"),
+    @NamedQuery(name = "VeFacturaDetalle.findByEstado", query = "SELECT v FROM VeFacturaDetalle v WHERE v.estado = :estado"),
+    @NamedQuery(name = "VeFacturaDetalle.findByUsuarioCreacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "VeFacturaDetalle.findByFechaCreacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "VeFacturaDetalle.findByUsuarioActualizacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "VeFacturaDetalle.findByFechaActualizacion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.fechaActualizacion = :fechaActualizacion")})
 public class VeFacturaDetalle implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected VeFacturaDetallePK veFacturaDetallePK;
@@ -83,18 +82,18 @@ public class VeFacturaDetalle implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
+        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
     @JoinColumns({
-        @JoinColumn(name = "id_factura", referencedColumnName = "id_factura", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_factura", referencedColumnName = "id_factura", insertable = false, updatable = false),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private VeFactura veFactura;
     @JoinColumns({
-        @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrPrestaciones prPrestaciones;
     @JoinColumn(name = "id_unidad_servicio", referencedColumnName = "id_unidad_servicio", insertable = false, updatable = false)

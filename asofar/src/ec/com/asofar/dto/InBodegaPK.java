@@ -12,11 +12,10 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Embeddable
 public class InBodegaPK implements Serializable {
-
     @Basic(optional = false)
     @Column(name = "id_bodega")
     private long idBodega;

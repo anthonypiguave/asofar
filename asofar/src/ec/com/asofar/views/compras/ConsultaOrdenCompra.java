@@ -301,7 +301,7 @@ public class ConsultaOrdenCompra extends javax.swing.JDialog {
 //                for (int i = 0; i < LocalidadCliente.size(); i++) {
 //                    if (Client.getIdClientes() == LocalidadCliente.get(i).getIdCliente().getIdClientes()) {
                         System.out.println("Hola Mundo");
-                        Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
+//                        Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
 //                    }
 //                }
             }

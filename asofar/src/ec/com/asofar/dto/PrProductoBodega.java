@@ -20,24 +20,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_producto_bodega")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrProductoBodega.findAll", query = "SELECT p FROM PrProductoBodega p")
-    , @NamedQuery(name = "PrProductoBodega.findByIdProductoBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idProductoBodega = :idProductoBodega")
-    , @NamedQuery(name = "PrProductoBodega.findByIdBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idBodega = :idBodega")
-    , @NamedQuery(name = "PrProductoBodega.findByIdProducto", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idProducto = :idProducto")
-    , @NamedQuery(name = "PrProductoBodega.findByIdEmpresa", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "PrProductoBodega.findByIdSucursal", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "PrProductoBodega.findByIdTipoBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idTipoBodega = :idTipoBodega")
-    , @NamedQuery(name = "PrProductoBodega.findByEstado", query = "SELECT p FROM PrProductoBodega p WHERE p.estado = :estado")
-    , @NamedQuery(name = "PrProductoBodega.findByStockMinimo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMinimo = :stockMinimo")
-    , @NamedQuery(name = "PrProductoBodega.findByStockMaximo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMaximo = :stockMaximo")})
+    @NamedQuery(name = "PrProductoBodega.findAll", query = "SELECT p FROM PrProductoBodega p"),
+    @NamedQuery(name = "PrProductoBodega.findByIdProductoBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idProductoBodega = :idProductoBodega"),
+    @NamedQuery(name = "PrProductoBodega.findByIdBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idBodega = :idBodega"),
+    @NamedQuery(name = "PrProductoBodega.findByIdProducto", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idProducto = :idProducto"),
+    @NamedQuery(name = "PrProductoBodega.findByIdEmpresa", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "PrProductoBodega.findByIdSucursal", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idSucursal = :idSucursal"),
+    @NamedQuery(name = "PrProductoBodega.findByIdTipoBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idTipoBodega = :idTipoBodega"),
+    @NamedQuery(name = "PrProductoBodega.findByEstado", query = "SELECT p FROM PrProductoBodega p WHERE p.estado = :estado"),
+    @NamedQuery(name = "PrProductoBodega.findByStockMinimo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMinimo = :stockMinimo"),
+    @NamedQuery(name = "PrProductoBodega.findByStockMaximo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMaximo = :stockMaximo")})
 public class PrProductoBodega implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrProductoBodegaPK prProductoBodegaPK;
@@ -48,8 +47,8 @@ public class PrProductoBodega implements Serializable {
     @Column(name = "stock_maximo")
     private BigInteger stockMaximo;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
+        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
 

@@ -16,17 +16,16 @@ import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrArticulo;
-import java.util.ArrayList;
-import java.util.List;
-import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrSubgruposPK;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrSubgruposJpaController implements Serializable {
 
@@ -45,9 +44,6 @@ public class PrSubgruposJpaController implements Serializable {
         }
         if (prSubgrupos.getPrArticuloList() == null) {
             prSubgrupos.setPrArticuloList(new ArrayList<PrArticulo>());
-        }
-        if (prSubgrupos.getCoDetalleOrdenCompraList() == null) {
-            prSubgrupos.setCoDetalleOrdenCompraList(new ArrayList<CoDetalleOrdenCompra>());
         }
         prSubgrupos.getPrSubgruposPK().setIdGrupo(prSubgrupos.getPrGrupos().getIdGrupo());
         EntityManager em = null;
@@ -70,12 +66,6 @@ public class PrSubgruposJpaController implements Serializable {
                 attachedPrArticuloList.add(prArticuloListPrArticuloToAttach);
             }
             prSubgrupos.setPrArticuloList(attachedPrArticuloList);
-            List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraList = new ArrayList<CoDetalleOrdenCompra>();
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach : prSubgrupos.getCoDetalleOrdenCompraList()) {
-                coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getIdDetalleOrdenCompra());
-                attachedCoDetalleOrdenCompraList.add(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach);
-            }
-            prSubgrupos.setCoDetalleOrdenCompraList(attachedCoDetalleOrdenCompraList);
             em.persist(prSubgrupos);
             if (idEmpresa != null) {
                 idEmpresa.getPrSubgruposList().add(prSubgrupos);
@@ -92,15 +82,6 @@ public class PrSubgruposJpaController implements Serializable {
                 if (oldPrSubgruposOfPrArticuloListPrArticulo != null) {
                     oldPrSubgruposOfPrArticuloListPrArticulo.getPrArticuloList().remove(prArticuloListPrArticulo);
                     oldPrSubgruposOfPrArticuloListPrArticulo = em.merge(oldPrSubgruposOfPrArticuloListPrArticulo);
-                }
-            }
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : prSubgrupos.getCoDetalleOrdenCompraList()) {
-                PrSubgrupos oldPrSubgruposOfCoDetalleOrdenCompraListCoDetalleOrdenCompra = coDetalleOrdenCompraListCoDetalleOrdenCompra.getPrSubgrupos();
-                coDetalleOrdenCompraListCoDetalleOrdenCompra.setPrSubgrupos(prSubgrupos);
-                coDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListCoDetalleOrdenCompra);
-                if (oldPrSubgruposOfCoDetalleOrdenCompraListCoDetalleOrdenCompra != null) {
-                    oldPrSubgruposOfCoDetalleOrdenCompraListCoDetalleOrdenCompra.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompraListCoDetalleOrdenCompra);
-                    oldPrSubgruposOfCoDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(oldPrSubgruposOfCoDetalleOrdenCompraListCoDetalleOrdenCompra);
                 }
             }
             em.getTransaction().commit();
@@ -129,8 +110,6 @@ public class PrSubgruposJpaController implements Serializable {
             PrGrupos prGruposNew = prSubgrupos.getPrGrupos();
             List<PrArticulo> prArticuloListOld = persistentPrSubgrupos.getPrArticuloList();
             List<PrArticulo> prArticuloListNew = prSubgrupos.getPrArticuloList();
-            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOld = persistentPrSubgrupos.getCoDetalleOrdenCompraList();
-            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListNew = prSubgrupos.getCoDetalleOrdenCompraList();
             List<String> illegalOrphanMessages = null;
             for (PrArticulo prArticuloListOldPrArticulo : prArticuloListOld) {
                 if (!prArticuloListNew.contains(prArticuloListOldPrArticulo)) {
@@ -158,13 +137,6 @@ public class PrSubgruposJpaController implements Serializable {
             }
             prArticuloListNew = attachedPrArticuloListNew;
             prSubgrupos.setPrArticuloList(prArticuloListNew);
-            List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraListNew = new ArrayList<CoDetalleOrdenCompra>();
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach : coDetalleOrdenCompraListNew) {
-                coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getIdDetalleOrdenCompra());
-                attachedCoDetalleOrdenCompraListNew.add(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach);
-            }
-            coDetalleOrdenCompraListNew = attachedCoDetalleOrdenCompraListNew;
-            prSubgrupos.setCoDetalleOrdenCompraList(coDetalleOrdenCompraListNew);
             prSubgrupos = em.merge(prSubgrupos);
             if (idEmpresaOld != null && !idEmpresaOld.equals(idEmpresaNew)) {
                 idEmpresaOld.getPrSubgruposList().remove(prSubgrupos);
@@ -190,23 +162,6 @@ public class PrSubgruposJpaController implements Serializable {
                     if (oldPrSubgruposOfPrArticuloListNewPrArticulo != null && !oldPrSubgruposOfPrArticuloListNewPrArticulo.equals(prSubgrupos)) {
                         oldPrSubgruposOfPrArticuloListNewPrArticulo.getPrArticuloList().remove(prArticuloListNewPrArticulo);
                         oldPrSubgruposOfPrArticuloListNewPrArticulo = em.merge(oldPrSubgruposOfPrArticuloListNewPrArticulo);
-                    }
-                }
-            }
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListOldCoDetalleOrdenCompra : coDetalleOrdenCompraListOld) {
-                if (!coDetalleOrdenCompraListNew.contains(coDetalleOrdenCompraListOldCoDetalleOrdenCompra)) {
-                    coDetalleOrdenCompraListOldCoDetalleOrdenCompra.setPrSubgrupos(null);
-                    coDetalleOrdenCompraListOldCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListOldCoDetalleOrdenCompra);
-                }
-            }
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompra : coDetalleOrdenCompraListNew) {
-                if (!coDetalleOrdenCompraListOld.contains(coDetalleOrdenCompraListNewCoDetalleOrdenCompra)) {
-                    PrSubgrupos oldPrSubgruposOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra = coDetalleOrdenCompraListNewCoDetalleOrdenCompra.getPrSubgrupos();
-                    coDetalleOrdenCompraListNewCoDetalleOrdenCompra.setPrSubgrupos(prSubgrupos);
-                    coDetalleOrdenCompraListNewCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListNewCoDetalleOrdenCompra);
-                    if (oldPrSubgruposOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra != null && !oldPrSubgruposOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra.equals(prSubgrupos)) {
-                        oldPrSubgruposOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompraListNewCoDetalleOrdenCompra);
-                        oldPrSubgruposOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra = em.merge(oldPrSubgruposOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra);
                     }
                 }
             }
@@ -259,11 +214,6 @@ public class PrSubgruposJpaController implements Serializable {
             if (prGrupos != null) {
                 prGrupos.getPrSubgruposList().remove(prSubgrupos);
                 prGrupos = em.merge(prGrupos);
-            }
-            List<CoDetalleOrdenCompra> coDetalleOrdenCompraList = prSubgrupos.getCoDetalleOrdenCompraList();
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : coDetalleOrdenCompraList) {
-                coDetalleOrdenCompraListCoDetalleOrdenCompra.setPrSubgrupos(null);
-                coDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListCoDetalleOrdenCompra);
             }
             em.remove(prSubgrupos);
             em.getTransaction().commit();

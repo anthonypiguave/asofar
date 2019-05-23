@@ -25,22 +25,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "in_estados_movimiento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "InEstadosMovimiento.findAll", query = "SELECT i FROM InEstadosMovimiento i")
-    , @NamedQuery(name = "InEstadosMovimiento.findByIdEstadoMovimiento", query = "SELECT i FROM InEstadosMovimiento i WHERE i.idEstadoMovimiento = :idEstadoMovimiento")
-    , @NamedQuery(name = "InEstadosMovimiento.findByNombre", query = "SELECT i FROM InEstadosMovimiento i WHERE i.nombre = :nombre")
-    , @NamedQuery(name = "InEstadosMovimiento.findByEstado", query = "SELECT i FROM InEstadosMovimiento i WHERE i.estado = :estado")
-    , @NamedQuery(name = "InEstadosMovimiento.findByUsuarioCreacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "InEstadosMovimiento.findByFechaCreacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "InEstadosMovimiento.findByUsuarioActualizacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "InEstadosMovimiento.findByFechaActualizacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "InEstadosMovimiento.findAll", query = "SELECT i FROM InEstadosMovimiento i"),
+    @NamedQuery(name = "InEstadosMovimiento.findByIdEstadoMovimiento", query = "SELECT i FROM InEstadosMovimiento i WHERE i.idEstadoMovimiento = :idEstadoMovimiento"),
+    @NamedQuery(name = "InEstadosMovimiento.findByNombre", query = "SELECT i FROM InEstadosMovimiento i WHERE i.nombre = :nombre"),
+    @NamedQuery(name = "InEstadosMovimiento.findByEstado", query = "SELECT i FROM InEstadosMovimiento i WHERE i.estado = :estado"),
+    @NamedQuery(name = "InEstadosMovimiento.findByUsuarioCreacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "InEstadosMovimiento.findByFechaCreacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "InEstadosMovimiento.findByUsuarioActualizacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "InEstadosMovimiento.findByFechaActualizacion", query = "SELECT i FROM InEstadosMovimiento i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InEstadosMovimiento implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

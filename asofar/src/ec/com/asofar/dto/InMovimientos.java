@@ -22,37 +22,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "in_movimientos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "InMovimientos.findAll", query = "SELECT i FROM InMovimientos i")
-    , @NamedQuery(name = "InMovimientos.findByIdMovimientos", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idMovimientos = :idMovimientos")
-    , @NamedQuery(name = "InMovimientos.findByIdTipoDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idTipoDocumento = :idTipoDocumento")
-    , @NamedQuery(name = "InMovimientos.findByAnioDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.anioDocumento = :anioDocumento")
-    , @NamedQuery(name = "InMovimientos.findByIdBodegaOrigen", query = "SELECT i FROM InMovimientos i WHERE i.idBodegaOrigen = :idBodegaOrigen")
-    , @NamedQuery(name = "InMovimientos.findByIdEmpresa", query = "SELECT i FROM InMovimientos i WHERE i.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "InMovimientos.findByIdSucursal", query = "SELECT i FROM InMovimientos i WHERE i.idSucursal = :idSucursal")
-    , @NamedQuery(name = "InMovimientos.findByIdUsuario", query = "SELECT i FROM InMovimientos i WHERE i.idUsuario = :idUsuario")
-    , @NamedQuery(name = "InMovimientos.findByBodegaDestino", query = "SELECT i FROM InMovimientos i WHERE i.bodegaDestino = :bodegaDestino")
-    , @NamedQuery(name = "InMovimientos.findBySucursalDestino", query = "SELECT i FROM InMovimientos i WHERE i.sucursalDestino = :sucursalDestino")
-    , @NamedQuery(name = "InMovimientos.findByFechaSistema", query = "SELECT i FROM InMovimientos i WHERE i.fechaSistema = :fechaSistema")
-    , @NamedQuery(name = "InMovimientos.findByFechaTransferencia", query = "SELECT i FROM InMovimientos i WHERE i.fechaTransferencia = :fechaTransferencia")
-    , @NamedQuery(name = "InMovimientos.findByFechaRecepcion", query = "SELECT i FROM InMovimientos i WHERE i.fechaRecepcion = :fechaRecepcion")
-    , @NamedQuery(name = "InMovimientos.findByObservacion", query = "SELECT i FROM InMovimientos i WHERE i.observacion = :observacion")
-    , @NamedQuery(name = "InMovimientos.findByIdProveedor", query = "SELECT i FROM InMovimientos i WHERE i.idProveedor = :idProveedor")
-    , @NamedQuery(name = "InMovimientos.findByIdOrdenCompra", query = "SELECT i FROM InMovimientos i WHERE i.idOrdenCompra = :idOrdenCompra")
-    , @NamedQuery(name = "InMovimientos.findByFechaOrden", query = "SELECT i FROM InMovimientos i WHERE i.fechaOrden = :fechaOrden")
-    , @NamedQuery(name = "InMovimientos.findByIdFactura", query = "SELECT i FROM InMovimientos i WHERE i.idFactura = :idFactura")
-    , @NamedQuery(name = "InMovimientos.findByFechaFactura", query = "SELECT i FROM InMovimientos i WHERE i.fechaFactura = :fechaFactura")
-    , @NamedQuery(name = "InMovimientos.findByUsuarioCreacion", query = "SELECT i FROM InMovimientos i WHERE i.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "InMovimientos.findByFechaCreacion", query = "SELECT i FROM InMovimientos i WHERE i.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "InMovimientos.findByUsuarioActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "InMovimientos.findByFechaActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "InMovimientos.findAll", query = "SELECT i FROM InMovimientos i"),
+    @NamedQuery(name = "InMovimientos.findByIdMovimientos", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idMovimientos = :idMovimientos"),
+    @NamedQuery(name = "InMovimientos.findByIdTipoDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idTipoDocumento = :idTipoDocumento"),
+    @NamedQuery(name = "InMovimientos.findByAnioDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.anioDocumento = :anioDocumento"),
+    @NamedQuery(name = "InMovimientos.findByIdBodegaOrigen", query = "SELECT i FROM InMovimientos i WHERE i.idBodegaOrigen = :idBodegaOrigen"),
+    @NamedQuery(name = "InMovimientos.findByIdEmpresa", query = "SELECT i FROM InMovimientos i WHERE i.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "InMovimientos.findByIdSucursal", query = "SELECT i FROM InMovimientos i WHERE i.idSucursal = :idSucursal"),
+    @NamedQuery(name = "InMovimientos.findByIdUsuario", query = "SELECT i FROM InMovimientos i WHERE i.idUsuario = :idUsuario"),
+    @NamedQuery(name = "InMovimientos.findByBodegaDestino", query = "SELECT i FROM InMovimientos i WHERE i.bodegaDestino = :bodegaDestino"),
+    @NamedQuery(name = "InMovimientos.findBySucursalDestino", query = "SELECT i FROM InMovimientos i WHERE i.sucursalDestino = :sucursalDestino"),
+    @NamedQuery(name = "InMovimientos.findByFechaSistema", query = "SELECT i FROM InMovimientos i WHERE i.fechaSistema = :fechaSistema"),
+    @NamedQuery(name = "InMovimientos.findByFechaTransferencia", query = "SELECT i FROM InMovimientos i WHERE i.fechaTransferencia = :fechaTransferencia"),
+    @NamedQuery(name = "InMovimientos.findByFechaRecepcion", query = "SELECT i FROM InMovimientos i WHERE i.fechaRecepcion = :fechaRecepcion"),
+    @NamedQuery(name = "InMovimientos.findByObservacion", query = "SELECT i FROM InMovimientos i WHERE i.observacion = :observacion"),
+    @NamedQuery(name = "InMovimientos.findByIdProveedor", query = "SELECT i FROM InMovimientos i WHERE i.idProveedor = :idProveedor"),
+    @NamedQuery(name = "InMovimientos.findByIdOrdenCompra", query = "SELECT i FROM InMovimientos i WHERE i.idOrdenCompra = :idOrdenCompra"),
+    @NamedQuery(name = "InMovimientos.findByFechaOrden", query = "SELECT i FROM InMovimientos i WHERE i.fechaOrden = :fechaOrden"),
+    @NamedQuery(name = "InMovimientos.findByIdFactura", query = "SELECT i FROM InMovimientos i WHERE i.idFactura = :idFactura"),
+    @NamedQuery(name = "InMovimientos.findByFechaFactura", query = "SELECT i FROM InMovimientos i WHERE i.fechaFactura = :fechaFactura"),
+    @NamedQuery(name = "InMovimientos.findByUsuarioCreacion", query = "SELECT i FROM InMovimientos i WHERE i.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "InMovimientos.findByFechaCreacion", query = "SELECT i FROM InMovimientos i WHERE i.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "InMovimientos.findByUsuarioActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "InMovimientos.findByFechaActualizacion", query = "SELECT i FROM InMovimientos i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InMovimientos implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InMovimientosPK inMovimientosPK;

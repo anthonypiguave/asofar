@@ -25,22 +25,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "in_motivos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "InMotivos.findAll", query = "SELECT i FROM InMotivos i")
-    , @NamedQuery(name = "InMotivos.findByIdMotivo", query = "SELECT i FROM InMotivos i WHERE i.idMotivo = :idMotivo")
-    , @NamedQuery(name = "InMotivos.findByNombre", query = "SELECT i FROM InMotivos i WHERE i.nombre = :nombre")
-    , @NamedQuery(name = "InMotivos.findByEstado", query = "SELECT i FROM InMotivos i WHERE i.estado = :estado")
-    , @NamedQuery(name = "InMotivos.findByUsuarioCreacion", query = "SELECT i FROM InMotivos i WHERE i.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "InMotivos.findByFechaCreacion", query = "SELECT i FROM InMotivos i WHERE i.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "InMotivos.findByUsuarioActualizacion", query = "SELECT i FROM InMotivos i WHERE i.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "InMotivos.findByFechaActualizacion", query = "SELECT i FROM InMotivos i WHERE i.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "InMotivos.findAll", query = "SELECT i FROM InMotivos i"),
+    @NamedQuery(name = "InMotivos.findByIdMotivo", query = "SELECT i FROM InMotivos i WHERE i.idMotivo = :idMotivo"),
+    @NamedQuery(name = "InMotivos.findByNombre", query = "SELECT i FROM InMotivos i WHERE i.nombre = :nombre"),
+    @NamedQuery(name = "InMotivos.findByEstado", query = "SELECT i FROM InMotivos i WHERE i.estado = :estado"),
+    @NamedQuery(name = "InMotivos.findByUsuarioCreacion", query = "SELECT i FROM InMotivos i WHERE i.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "InMotivos.findByFechaCreacion", query = "SELECT i FROM InMotivos i WHERE i.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "InMotivos.findByUsuarioActualizacion", query = "SELECT i FROM InMotivos i WHERE i.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "InMotivos.findByFechaActualizacion", query = "SELECT i FROM InMotivos i WHERE i.fechaActualizacion = :fechaActualizacion")})
 public class InMotivos implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

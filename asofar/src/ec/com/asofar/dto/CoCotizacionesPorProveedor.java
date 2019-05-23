@@ -23,29 +23,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_cotizaciones_por_proveedor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoCotizacionesPorProveedor.findAll", query = "SELECT c FROM CoCotizacionesPorProveedor c")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdProveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idProveedor = :idProveedor")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacion = :idCotizacion")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdSucursal", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdTipoCompra", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idTipoCompra = :idTipoCompra")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByFechaEnvioCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.fechaEnvioCotizacion = :fechaEnvioCotizacion")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByMailContacto", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.mailContacto = :mailContacto")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByTelefonoContacto", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.telefonoContacto = :telefonoContacto")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByEstado", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByFechaIngreso", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.fechaIngreso = :fechaIngreso")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByUsuarioIngreso", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.usuarioIngreso = :usuarioIngreso")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByFechaActualizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByUsuarioActualizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.usuarioActualizacion = :usuarioActualizacion")})
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findAll", query = "SELECT c FROM CoCotizacionesPorProveedor c"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdProveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idProveedor = :idProveedor"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacion = :idCotizacion"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdSucursal", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idSucursal = :idSucursal"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdTipoCompra", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idTipoCompra = :idTipoCompra"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByFechaEnvioCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.fechaEnvioCotizacion = :fechaEnvioCotizacion"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByMailContacto", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.mailContacto = :mailContacto"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByTelefonoContacto", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.telefonoContacto = :telefonoContacto"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByEstado", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.estado = :estado"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByFechaIngreso", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.fechaIngreso = :fechaIngreso"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByUsuarioIngreso", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.usuarioIngreso = :usuarioIngreso"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByFechaActualizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.fechaActualizacion = :fechaActualizacion"),
+    @NamedQuery(name = "CoCotizacionesPorProveedor.findByUsuarioActualizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.usuarioActualizacion = :usuarioActualizacion")})
 public class CoCotizacionesPorProveedor implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoCotizacionesPorProveedorPK coCotizacionesPorProveedorPK;
@@ -73,9 +72,9 @@ public class CoCotizacionesPorProveedor implements Serializable {
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
+        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private CoItemsCotizacion coItemsCotizacion;
 

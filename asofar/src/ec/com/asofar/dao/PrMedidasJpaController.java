@@ -26,7 +26,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 public class PrMedidasJpaController implements Serializable {
 
@@ -46,11 +46,11 @@ public class PrMedidasJpaController implements Serializable {
         if (prMedidas.getPrProductosList() == null) {
             prMedidas.setPrProductosList(new ArrayList<PrProductos>());
         }
+        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
+        prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
         prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
-        prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
-        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -112,11 +112,11 @@ public class PrMedidasJpaController implements Serializable {
     }
 
     public void edit(PrMedidas prMedidas) throws IllegalOrphanException, NonexistentEntityException, Exception {
+        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
+        prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
         prMedidas.getPrMedidasPK().setIdGrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdGrupo());
         prMedidas.getPrMedidasPK().setIdSubgrupo(prMedidas.getPrArticulo().getPrArticuloPK().getIdSubgrupo());
         prMedidas.getPrMedidasPK().setIdTipoPresentacion(prMedidas.getPrTipoPresentacion().getIdTipoPresentacion());
-        prMedidas.getPrMedidasPK().setIdTipoMedidas(prMedidas.getPrTipoMedidas().getIdTipoMedidas());
-        prMedidas.getPrMedidasPK().setIdArticulo(prMedidas.getPrArticulo().getPrArticuloPK().getIdArticulo());
         EntityManager em = null;
         try {
             em = getEntityManager();

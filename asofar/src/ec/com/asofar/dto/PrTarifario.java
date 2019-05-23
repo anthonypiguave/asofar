@@ -26,26 +26,25 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "pr_tarifario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrTarifario.findAll", query = "SELECT p FROM PrTarifario p")
-    , @NamedQuery(name = "PrTarifario.findByIdTarifario", query = "SELECT p FROM PrTarifario p WHERE p.prTarifarioPK.idTarifario = :idTarifario")
-    , @NamedQuery(name = "PrTarifario.findByIdEmpresa", query = "SELECT p FROM PrTarifario p WHERE p.prTarifarioPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "PrTarifario.findByIdSurcusal", query = "SELECT p FROM PrTarifario p WHERE p.prTarifarioPK.idSurcusal = :idSurcusal")
-    , @NamedQuery(name = "PrTarifario.findByDescripcion", query = "SELECT p FROM PrTarifario p WHERE p.descripcion = :descripcion")
-    , @NamedQuery(name = "PrTarifario.findByFechaInicioVigente", query = "SELECT p FROM PrTarifario p WHERE p.fechaInicioVigente = :fechaInicioVigente")
-    , @NamedQuery(name = "PrTarifario.findByFechaFinVigente", query = "SELECT p FROM PrTarifario p WHERE p.fechaFinVigente = :fechaFinVigente")
-    , @NamedQuery(name = "PrTarifario.findByEstado", query = "SELECT p FROM PrTarifario p WHERE p.estado = :estado")
-    , @NamedQuery(name = "PrTarifario.findByUsuarioCreacion", query = "SELECT p FROM PrTarifario p WHERE p.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "PrTarifario.findByFechaCreacion", query = "SELECT p FROM PrTarifario p WHERE p.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "PrTarifario.findByUsuarioActualizacion", query = "SELECT p FROM PrTarifario p WHERE p.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "PrTarifario.findByFechaActualizacion", query = "SELECT p FROM PrTarifario p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "PrTarifario.findAll", query = "SELECT p FROM PrTarifario p"),
+    @NamedQuery(name = "PrTarifario.findByIdTarifario", query = "SELECT p FROM PrTarifario p WHERE p.prTarifarioPK.idTarifario = :idTarifario"),
+    @NamedQuery(name = "PrTarifario.findByIdEmpresa", query = "SELECT p FROM PrTarifario p WHERE p.prTarifarioPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "PrTarifario.findByIdSurcusal", query = "SELECT p FROM PrTarifario p WHERE p.prTarifarioPK.idSurcusal = :idSurcusal"),
+    @NamedQuery(name = "PrTarifario.findByDescripcion", query = "SELECT p FROM PrTarifario p WHERE p.descripcion = :descripcion"),
+    @NamedQuery(name = "PrTarifario.findByFechaInicioVigente", query = "SELECT p FROM PrTarifario p WHERE p.fechaInicioVigente = :fechaInicioVigente"),
+    @NamedQuery(name = "PrTarifario.findByFechaFinVigente", query = "SELECT p FROM PrTarifario p WHERE p.fechaFinVigente = :fechaFinVigente"),
+    @NamedQuery(name = "PrTarifario.findByEstado", query = "SELECT p FROM PrTarifario p WHERE p.estado = :estado"),
+    @NamedQuery(name = "PrTarifario.findByUsuarioCreacion", query = "SELECT p FROM PrTarifario p WHERE p.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "PrTarifario.findByFechaCreacion", query = "SELECT p FROM PrTarifario p WHERE p.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "PrTarifario.findByUsuarioActualizacion", query = "SELECT p FROM PrTarifario p WHERE p.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "PrTarifario.findByFechaActualizacion", query = "SELECT p FROM PrTarifario p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrTarifario implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrTarifarioPK prTarifarioPK;
@@ -70,8 +69,8 @@ public class PrTarifario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
+        @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTarifario")

@@ -27,35 +27,34 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_orden_pedido")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoOrdenPedido.findAll", query = "SELECT c FROM CoOrdenPedido c")
-    , @NamedQuery(name = "CoOrdenPedido.findByIdOrdenPedido", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idOrdenPedido = :idOrdenPedido")
-    , @NamedQuery(name = "CoOrdenPedido.findByIdEmpresa", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "CoOrdenPedido.findByIdSucursal", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "CoOrdenPedido.findByCodigoCotizacionProveedores", query = "SELECT c FROM CoOrdenPedido c WHERE c.codigoCotizacionProveedores = :codigoCotizacionProveedores")
-    , @NamedQuery(name = "CoOrdenPedido.findByCodigoCotizacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.codigoCotizacion = :codigoCotizacion")
-    , @NamedQuery(name = "CoOrdenPedido.findByIdProveedor", query = "SELECT c FROM CoOrdenPedido c WHERE c.idProveedor = :idProveedor")
-    , @NamedQuery(name = "CoOrdenPedido.findByEstado", query = "SELECT c FROM CoOrdenPedido c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoOrdenPedido.findByIdDocumento", query = "SELECT c FROM CoOrdenPedido c WHERE c.idDocumento = :idDocumento")
-    , @NamedQuery(name = "CoOrdenPedido.findByObservacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.observacion = :observacion")
-    , @NamedQuery(name = "CoOrdenPedido.findByFechaEntrega", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaEntrega = :fechaEntrega")
-    , @NamedQuery(name = "CoOrdenPedido.findByTotalCompra", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalCompra = :totalCompra")
-    , @NamedQuery(name = "CoOrdenPedido.findBySubtotal", query = "SELECT c FROM CoOrdenPedido c WHERE c.subtotal = :subtotal")
-    , @NamedQuery(name = "CoOrdenPedido.findByTotalDescuento", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalDescuento = :totalDescuento")
-    , @NamedQuery(name = "CoOrdenPedido.findByTotalIce", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalIce = :totalIce")
-    , @NamedQuery(name = "CoOrdenPedido.findByTotalIva", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalIva = :totalIva")
-    , @NamedQuery(name = "CoOrdenPedido.findByMailNotificador", query = "SELECT c FROM CoOrdenPedido c WHERE c.mailNotificador = :mailNotificador")
-    , @NamedQuery(name = "CoOrdenPedido.findByUsuarioCreacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "CoOrdenPedido.findByFechaCreacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "CoOrdenPedido.findByUsuarioActualizacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "CoOrdenPedido.findByFechaActualizacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "CoOrdenPedido.findAll", query = "SELECT c FROM CoOrdenPedido c"),
+    @NamedQuery(name = "CoOrdenPedido.findByIdOrdenPedido", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idOrdenPedido = :idOrdenPedido"),
+    @NamedQuery(name = "CoOrdenPedido.findByIdEmpresa", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "CoOrdenPedido.findByIdSucursal", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idSucursal = :idSucursal"),
+    @NamedQuery(name = "CoOrdenPedido.findByCodigoCotizacionProveedores", query = "SELECT c FROM CoOrdenPedido c WHERE c.codigoCotizacionProveedores = :codigoCotizacionProveedores"),
+    @NamedQuery(name = "CoOrdenPedido.findByCodigoCotizacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.codigoCotizacion = :codigoCotizacion"),
+    @NamedQuery(name = "CoOrdenPedido.findByIdProveedor", query = "SELECT c FROM CoOrdenPedido c WHERE c.idProveedor = :idProveedor"),
+    @NamedQuery(name = "CoOrdenPedido.findByEstado", query = "SELECT c FROM CoOrdenPedido c WHERE c.estado = :estado"),
+    @NamedQuery(name = "CoOrdenPedido.findByIdDocumento", query = "SELECT c FROM CoOrdenPedido c WHERE c.idDocumento = :idDocumento"),
+    @NamedQuery(name = "CoOrdenPedido.findByObservacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.observacion = :observacion"),
+    @NamedQuery(name = "CoOrdenPedido.findByFechaEntrega", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaEntrega = :fechaEntrega"),
+    @NamedQuery(name = "CoOrdenPedido.findByTotalCompra", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalCompra = :totalCompra"),
+    @NamedQuery(name = "CoOrdenPedido.findBySubtotal", query = "SELECT c FROM CoOrdenPedido c WHERE c.subtotal = :subtotal"),
+    @NamedQuery(name = "CoOrdenPedido.findByTotalDescuento", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalDescuento = :totalDescuento"),
+    @NamedQuery(name = "CoOrdenPedido.findByTotalIce", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalIce = :totalIce"),
+    @NamedQuery(name = "CoOrdenPedido.findByTotalIva", query = "SELECT c FROM CoOrdenPedido c WHERE c.totalIva = :totalIva"),
+    @NamedQuery(name = "CoOrdenPedido.findByMailNotificador", query = "SELECT c FROM CoOrdenPedido c WHERE c.mailNotificador = :mailNotificador"),
+    @NamedQuery(name = "CoOrdenPedido.findByUsuarioCreacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "CoOrdenPedido.findByFechaCreacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "CoOrdenPedido.findByUsuarioActualizacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "CoOrdenPedido.findByFechaActualizacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaActualizacion = :fechaActualizacion")})
 public class CoOrdenPedido implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoOrdenPedidoPK coOrdenPedidoPK;
@@ -98,8 +97,8 @@ public class CoOrdenPedido implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
+        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
     @OneToMany(mappedBy = "coOrdenPedido")

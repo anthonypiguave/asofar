@@ -27,29 +27,28 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_personas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SePersonas.findAll", query = "SELECT s FROM SePersonas s")
-    , @NamedQuery(name = "SePersonas.findByIdPersona", query = "SELECT s FROM SePersonas s WHERE s.idPersona = :idPersona")
-    , @NamedQuery(name = "SePersonas.findByCedula", query = "SELECT s FROM SePersonas s WHERE s.cedula = :cedula")
-    , @NamedQuery(name = "SePersonas.findByNombres", query = "SELECT s FROM SePersonas s WHERE s.nombres = :nombres")
-    , @NamedQuery(name = "SePersonas.findByApellidos", query = "SELECT s FROM SePersonas s WHERE s.apellidos = :apellidos")
-    , @NamedQuery(name = "SePersonas.findByFechaNacimiento", query = "SELECT s FROM SePersonas s WHERE s.fechaNacimiento = :fechaNacimiento")
-    , @NamedQuery(name = "SePersonas.findByDireccion", query = "SELECT s FROM SePersonas s WHERE s.direccion = :direccion")
-    , @NamedQuery(name = "SePersonas.findByCorreo", query = "SELECT s FROM SePersonas s WHERE s.correo = :correo")
-    , @NamedQuery(name = "SePersonas.findByTelefono", query = "SELECT s FROM SePersonas s WHERE s.telefono = :telefono")
-    , @NamedQuery(name = "SePersonas.findByTelefono2", query = "SELECT s FROM SePersonas s WHERE s.telefono2 = :telefono2")
-    , @NamedQuery(name = "SePersonas.findByUsuarioCreacion", query = "SELECT s FROM SePersonas s WHERE s.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "SePersonas.findByFechaCreacion", query = "SELECT s FROM SePersonas s WHERE s.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "SePersonas.findByUsuarioActualizacion", query = "SELECT s FROM SePersonas s WHERE s.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "SePersonas.findByFechaActualizacion", query = "SELECT s FROM SePersonas s WHERE s.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "SePersonas.findByEstado", query = "SELECT s FROM SePersonas s WHERE s.estado = :estado")})
+    @NamedQuery(name = "SePersonas.findAll", query = "SELECT s FROM SePersonas s"),
+    @NamedQuery(name = "SePersonas.findByIdPersona", query = "SELECT s FROM SePersonas s WHERE s.idPersona = :idPersona"),
+    @NamedQuery(name = "SePersonas.findByCedula", query = "SELECT s FROM SePersonas s WHERE s.cedula = :cedula"),
+    @NamedQuery(name = "SePersonas.findByNombres", query = "SELECT s FROM SePersonas s WHERE s.nombres = :nombres"),
+    @NamedQuery(name = "SePersonas.findByApellidos", query = "SELECT s FROM SePersonas s WHERE s.apellidos = :apellidos"),
+    @NamedQuery(name = "SePersonas.findByFechaNacimiento", query = "SELECT s FROM SePersonas s WHERE s.fechaNacimiento = :fechaNacimiento"),
+    @NamedQuery(name = "SePersonas.findByDireccion", query = "SELECT s FROM SePersonas s WHERE s.direccion = :direccion"),
+    @NamedQuery(name = "SePersonas.findByCorreo", query = "SELECT s FROM SePersonas s WHERE s.correo = :correo"),
+    @NamedQuery(name = "SePersonas.findByTelefono", query = "SELECT s FROM SePersonas s WHERE s.telefono = :telefono"),
+    @NamedQuery(name = "SePersonas.findByTelefono2", query = "SELECT s FROM SePersonas s WHERE s.telefono2 = :telefono2"),
+    @NamedQuery(name = "SePersonas.findByUsuarioCreacion", query = "SELECT s FROM SePersonas s WHERE s.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "SePersonas.findByFechaCreacion", query = "SELECT s FROM SePersonas s WHERE s.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "SePersonas.findByUsuarioActualizacion", query = "SELECT s FROM SePersonas s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "SePersonas.findByFechaActualizacion", query = "SELECT s FROM SePersonas s WHERE s.fechaActualizacion = :fechaActualizacion"),
+    @NamedQuery(name = "SePersonas.findByEstado", query = "SELECT s FROM SePersonas s WHERE s.estado = :estado")})
 public class SePersonas implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -26,22 +26,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "se_roles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SeRoles.findAll", query = "SELECT s FROM SeRoles s")
-    , @NamedQuery(name = "SeRoles.findByIdRoles", query = "SELECT s FROM SeRoles s WHERE s.idRoles = :idRoles")
-    , @NamedQuery(name = "SeRoles.findByNombre", query = "SELECT s FROM SeRoles s WHERE s.nombre = :nombre")
-    , @NamedQuery(name = "SeRoles.findByEstado", query = "SELECT s FROM SeRoles s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SeRoles.findByUsuarioCreacion", query = "SELECT s FROM SeRoles s WHERE s.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "SeRoles.findByFechaCreacion", query = "SELECT s FROM SeRoles s WHERE s.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "SeRoles.findByUsuarioActualizacion", query = "SELECT s FROM SeRoles s WHERE s.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "SeRoles.findByFechaActualizacion", query = "SELECT s FROM SeRoles s WHERE s.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "SeRoles.findAll", query = "SELECT s FROM SeRoles s"),
+    @NamedQuery(name = "SeRoles.findByIdRoles", query = "SELECT s FROM SeRoles s WHERE s.idRoles = :idRoles"),
+    @NamedQuery(name = "SeRoles.findByNombre", query = "SELECT s FROM SeRoles s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "SeRoles.findByEstado", query = "SELECT s FROM SeRoles s WHERE s.estado = :estado"),
+    @NamedQuery(name = "SeRoles.findByUsuarioCreacion", query = "SELECT s FROM SeRoles s WHERE s.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "SeRoles.findByFechaCreacion", query = "SELECT s FROM SeRoles s WHERE s.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "SeRoles.findByUsuarioActualizacion", query = "SELECT s FROM SeRoles s WHERE s.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "SeRoles.findByFechaActualizacion", query = "SELECT s FROM SeRoles s WHERE s.fechaActualizacion = :fechaActualizacion")})
 public class SeRoles implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

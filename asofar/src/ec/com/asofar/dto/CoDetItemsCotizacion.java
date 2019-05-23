@@ -23,31 +23,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author ADMIN
  */
 @Entity
 @Table(name = "co_det_items_cotizacion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CoDetItemsCotizacion.findAll", query = "SELECT c FROM CoDetItemsCotizacion c")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByIdCotizacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.idCotizacion = :idCotizacion")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByIdEmpresa", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByIdSucursal", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByLineaDetalle", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.lineaDetalle = :lineaDetalle")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByDescripcion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByIdProducto", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.idProducto = :idProducto")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByCantidadPedida", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.cantidadPedida = :cantidadPedida")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByCantidadCotizada", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.cantidadCotizada = :cantidadCotizada")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByCantidadFaltante", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.cantidadFaltante = :cantidadFaltante")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByValorMinRef", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.valorMinRef = :valorMinRef")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByValorMaxRef", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.valorMaxRef = :valorMaxRef")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByEstado", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByUsuarioCreacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.usuarioCreacion = :usuarioCreacion")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByFechaCreacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByUsuarioActualizacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "CoDetItemsCotizacion.findByFechaActualizacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.fechaActualizacion = :fechaActualizacion")})
+    @NamedQuery(name = "CoDetItemsCotizacion.findAll", query = "SELECT c FROM CoDetItemsCotizacion c"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByIdCotizacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.idCotizacion = :idCotizacion"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByIdEmpresa", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.idEmpresa = :idEmpresa"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByIdSucursal", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.idSucursal = :idSucursal"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByLineaDetalle", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.coDetItemsCotizacionPK.lineaDetalle = :lineaDetalle"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByDescripcion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.descripcion = :descripcion"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByIdProducto", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.idProducto = :idProducto"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByCantidadPedida", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.cantidadPedida = :cantidadPedida"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByCantidadCotizada", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.cantidadCotizada = :cantidadCotizada"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByCantidadFaltante", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.cantidadFaltante = :cantidadFaltante"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByValorMinRef", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.valorMinRef = :valorMinRef"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByValorMaxRef", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.valorMaxRef = :valorMaxRef"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByEstado", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.estado = :estado"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByUsuarioCreacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.usuarioCreacion = :usuarioCreacion"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByFechaCreacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByUsuarioActualizacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.usuarioActualizacion = :usuarioActualizacion"),
+    @NamedQuery(name = "CoDetItemsCotizacion.findByFechaActualizacion", query = "SELECT c FROM CoDetItemsCotizacion c WHERE c.fechaActualizacion = :fechaActualizacion")})
 public class CoDetItemsCotizacion implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoDetItemsCotizacionPK coDetItemsCotizacionPK;
@@ -78,9 +77,9 @@ public class CoDetItemsCotizacion implements Serializable {
     @Column(name = "fecha_actualizacion")
     private String fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false),
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false),
+        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private CoItemsCotizacion coItemsCotizacion;
 
