@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 public class InTipoBodegaJpaController implements Serializable {
 

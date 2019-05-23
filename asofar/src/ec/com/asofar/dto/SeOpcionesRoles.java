@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 @Entity
 @Table(name = "se_opciones_roles")

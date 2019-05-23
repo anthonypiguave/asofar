@@ -14,15 +14,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrMedidas;
-import ec.com.asofar.dto.PrTipoMedidas;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.CoDetalleOrdenCompra;
+import ec.com.asofar.dto.PrTipoMedidas;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 public class PrTipoMedidasJpaController implements Serializable {
 
@@ -39,6 +40,9 @@ public class PrTipoMedidasJpaController implements Serializable {
         if (prTipoMedidas.getPrMedidasList() == null) {
             prTipoMedidas.setPrMedidasList(new ArrayList<PrMedidas>());
         }
+        if (prTipoMedidas.getCoDetalleOrdenCompraList() == null) {
+            prTipoMedidas.setCoDetalleOrdenCompraList(new ArrayList<CoDetalleOrdenCompra>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -54,6 +58,12 @@ public class PrTipoMedidasJpaController implements Serializable {
                 attachedPrMedidasList.add(prMedidasListPrMedidasToAttach);
             }
             prTipoMedidas.setPrMedidasList(attachedPrMedidasList);
+            List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraList = new ArrayList<CoDetalleOrdenCompra>();
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach : prTipoMedidas.getCoDetalleOrdenCompraList()) {
+                coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getIdDetalleOrdenCompra());
+                attachedCoDetalleOrdenCompraList.add(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach);
+            }
+            prTipoMedidas.setCoDetalleOrdenCompraList(attachedCoDetalleOrdenCompraList);
             em.persist(prTipoMedidas);
             if (idEmpresa != null) {
                 idEmpresa.getPrTipoMedidasList().add(prTipoMedidas);
@@ -66,6 +76,15 @@ public class PrTipoMedidasJpaController implements Serializable {
                 if (oldPrTipoMedidasOfPrMedidasListPrMedidas != null) {
                     oldPrTipoMedidasOfPrMedidasListPrMedidas.getPrMedidasList().remove(prMedidasListPrMedidas);
                     oldPrTipoMedidasOfPrMedidasListPrMedidas = em.merge(oldPrTipoMedidasOfPrMedidasListPrMedidas);
+                }
+            }
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : prTipoMedidas.getCoDetalleOrdenCompraList()) {
+                PrTipoMedidas oldIdTipoMedidasOfCoDetalleOrdenCompraListCoDetalleOrdenCompra = coDetalleOrdenCompraListCoDetalleOrdenCompra.getIdTipoMedidas();
+                coDetalleOrdenCompraListCoDetalleOrdenCompra.setIdTipoMedidas(prTipoMedidas);
+                coDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListCoDetalleOrdenCompra);
+                if (oldIdTipoMedidasOfCoDetalleOrdenCompraListCoDetalleOrdenCompra != null) {
+                    oldIdTipoMedidasOfCoDetalleOrdenCompraListCoDetalleOrdenCompra.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompraListCoDetalleOrdenCompra);
+                    oldIdTipoMedidasOfCoDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(oldIdTipoMedidasOfCoDetalleOrdenCompraListCoDetalleOrdenCompra);
                 }
             }
             em.getTransaction().commit();
@@ -86,6 +105,8 @@ public class PrTipoMedidasJpaController implements Serializable {
             SeEmpresa idEmpresaNew = prTipoMedidas.getIdEmpresa();
             List<PrMedidas> prMedidasListOld = persistentPrTipoMedidas.getPrMedidasList();
             List<PrMedidas> prMedidasListNew = prTipoMedidas.getPrMedidasList();
+            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOld = persistentPrTipoMedidas.getCoDetalleOrdenCompraList();
+            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListNew = prTipoMedidas.getCoDetalleOrdenCompraList();
             List<String> illegalOrphanMessages = null;
             for (PrMedidas prMedidasListOldPrMedidas : prMedidasListOld) {
                 if (!prMedidasListNew.contains(prMedidasListOldPrMedidas)) {
@@ -109,6 +130,13 @@ public class PrTipoMedidasJpaController implements Serializable {
             }
             prMedidasListNew = attachedPrMedidasListNew;
             prTipoMedidas.setPrMedidasList(prMedidasListNew);
+            List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraListNew = new ArrayList<CoDetalleOrdenCompra>();
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach : coDetalleOrdenCompraListNew) {
+                coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getIdDetalleOrdenCompra());
+                attachedCoDetalleOrdenCompraListNew.add(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach);
+            }
+            coDetalleOrdenCompraListNew = attachedCoDetalleOrdenCompraListNew;
+            prTipoMedidas.setCoDetalleOrdenCompraList(coDetalleOrdenCompraListNew);
             prTipoMedidas = em.merge(prTipoMedidas);
             if (idEmpresaOld != null && !idEmpresaOld.equals(idEmpresaNew)) {
                 idEmpresaOld.getPrTipoMedidasList().remove(prTipoMedidas);
@@ -126,6 +154,23 @@ public class PrTipoMedidasJpaController implements Serializable {
                     if (oldPrTipoMedidasOfPrMedidasListNewPrMedidas != null && !oldPrTipoMedidasOfPrMedidasListNewPrMedidas.equals(prTipoMedidas)) {
                         oldPrTipoMedidasOfPrMedidasListNewPrMedidas.getPrMedidasList().remove(prMedidasListNewPrMedidas);
                         oldPrTipoMedidasOfPrMedidasListNewPrMedidas = em.merge(oldPrTipoMedidasOfPrMedidasListNewPrMedidas);
+                    }
+                }
+            }
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListOldCoDetalleOrdenCompra : coDetalleOrdenCompraListOld) {
+                if (!coDetalleOrdenCompraListNew.contains(coDetalleOrdenCompraListOldCoDetalleOrdenCompra)) {
+                    coDetalleOrdenCompraListOldCoDetalleOrdenCompra.setIdTipoMedidas(null);
+                    coDetalleOrdenCompraListOldCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListOldCoDetalleOrdenCompra);
+                }
+            }
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompra : coDetalleOrdenCompraListNew) {
+                if (!coDetalleOrdenCompraListOld.contains(coDetalleOrdenCompraListNewCoDetalleOrdenCompra)) {
+                    PrTipoMedidas oldIdTipoMedidasOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra = coDetalleOrdenCompraListNewCoDetalleOrdenCompra.getIdTipoMedidas();
+                    coDetalleOrdenCompraListNewCoDetalleOrdenCompra.setIdTipoMedidas(prTipoMedidas);
+                    coDetalleOrdenCompraListNewCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListNewCoDetalleOrdenCompra);
+                    if (oldIdTipoMedidasOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra != null && !oldIdTipoMedidasOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra.equals(prTipoMedidas)) {
+                        oldIdTipoMedidasOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompraListNewCoDetalleOrdenCompra);
+                        oldIdTipoMedidasOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra = em.merge(oldIdTipoMedidasOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra);
                     }
                 }
             }
@@ -173,6 +218,11 @@ public class PrTipoMedidasJpaController implements Serializable {
             if (idEmpresa != null) {
                 idEmpresa.getPrTipoMedidasList().remove(prTipoMedidas);
                 idEmpresa = em.merge(idEmpresa);
+            }
+            List<CoDetalleOrdenCompra> coDetalleOrdenCompraList = prTipoMedidas.getCoDetalleOrdenCompraList();
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : coDetalleOrdenCompraList) {
+                coDetalleOrdenCompraListCoDetalleOrdenCompra.setIdTipoMedidas(null);
+                coDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListCoDetalleOrdenCompra);
             }
             em.remove(prTipoMedidas);
             em.getTransaction().commit();

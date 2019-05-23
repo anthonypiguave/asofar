@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 @Entity
 @Table(name = "co_detalle_orden_compra")
@@ -34,12 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idProducto = :idProducto")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idGrupo = :idGrupo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idSubgrupo = :idSubgrupo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idArticulo = :idArticulo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoMedidas = :idTipoMedidas")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoPresentacion = :idTipoPresentacion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByMarca", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.marca = :marca")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByModelado", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.modelado = :modelado")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByCantidadTotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.cantidadTotal = :cantidadTotal")
@@ -62,18 +56,6 @@ public class CoDetalleOrdenCompra implements Serializable {
     private BigInteger lineaDetalle;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "id_producto")
-    private BigInteger idProducto;
-    @Column(name = "id_grupo")
-    private BigInteger idGrupo;
-    @Column(name = "id_subgrupo")
-    private BigInteger idSubgrupo;
-    @Column(name = "id_articulo")
-    private BigInteger idArticulo;
-    @Column(name = "id_tipo_medidas")
-    private BigInteger idTipoMedidas;
-    @Column(name = "id_tipo_presentacion")
-    private BigInteger idTipoPresentacion;
     @Column(name = "marca")
     private String marca;
     @Column(name = "modelado")
@@ -101,6 +83,23 @@ public class CoDetalleOrdenCompra implements Serializable {
         , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal")})
     @ManyToOne
     private CoOrdenCompras coOrdenCompras;
+    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
+    @ManyToOne
+    private PrProductos idProducto;
+    @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo")
+    @ManyToOne
+    private PrArticulo idArticulo;
+    @JoinColumns({
+        @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo")
+        , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo")})
+    @ManyToOne
+    private PrSubgrupos prSubgrupos;
+    @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion")
+    @ManyToOne
+    private PrTipoPresentacion idTipoPresentacion;
+    @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas")
+    @ManyToOne
+    private PrTipoMedidas idTipoMedidas;
 
     public CoDetalleOrdenCompra() {
     }
@@ -131,54 +130,6 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public BigInteger getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(BigInteger idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public BigInteger getIdGrupo() {
-        return idGrupo;
-    }
-
-    public void setIdGrupo(BigInteger idGrupo) {
-        this.idGrupo = idGrupo;
-    }
-
-    public BigInteger getIdSubgrupo() {
-        return idSubgrupo;
-    }
-
-    public void setIdSubgrupo(BigInteger idSubgrupo) {
-        this.idSubgrupo = idSubgrupo;
-    }
-
-    public BigInteger getIdArticulo() {
-        return idArticulo;
-    }
-
-    public void setIdArticulo(BigInteger idArticulo) {
-        this.idArticulo = idArticulo;
-    }
-
-    public BigInteger getIdTipoMedidas() {
-        return idTipoMedidas;
-    }
-
-    public void setIdTipoMedidas(BigInteger idTipoMedidas) {
-        this.idTipoMedidas = idTipoMedidas;
-    }
-
-    public BigInteger getIdTipoPresentacion() {
-        return idTipoPresentacion;
-    }
-
-    public void setIdTipoPresentacion(BigInteger idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
     }
 
     public String getMarca() {
@@ -267,6 +218,46 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setCoOrdenCompras(CoOrdenCompras coOrdenCompras) {
         this.coOrdenCompras = coOrdenCompras;
+    }
+
+    public PrProductos getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(PrProductos idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public PrArticulo getIdArticulo() {
+        return idArticulo;
+    }
+
+    public void setIdArticulo(PrArticulo idArticulo) {
+        this.idArticulo = idArticulo;
+    }
+
+    public PrSubgrupos getPrSubgrupos() {
+        return prSubgrupos;
+    }
+
+    public void setPrSubgrupos(PrSubgrupos prSubgrupos) {
+        this.prSubgrupos = prSubgrupos;
+    }
+
+    public PrTipoPresentacion getIdTipoPresentacion() {
+        return idTipoPresentacion;
+    }
+
+    public void setIdTipoPresentacion(PrTipoPresentacion idTipoPresentacion) {
+        this.idTipoPresentacion = idTipoPresentacion;
+    }
+
+    public PrTipoMedidas getIdTipoMedidas() {
+        return idTipoMedidas;
+    }
+
+    public void setIdTipoMedidas(PrTipoMedidas idTipoMedidas) {
+        this.idTipoMedidas = idTipoMedidas;
     }
 
     @Override

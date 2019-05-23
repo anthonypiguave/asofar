@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_tipo_presentacion")
@@ -64,6 +64,8 @@ public class PrTipoPresentacion implements Serializable {
     private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTipoPresentacion")
     private List<PrMedidas> prMedidasList;
+    @OneToMany(mappedBy = "idTipoPresentacion")
+    private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
 
     public PrTipoPresentacion() {
     }
@@ -135,6 +137,15 @@ public class PrTipoPresentacion implements Serializable {
 
     public void setPrMedidasList(List<PrMedidas> prMedidasList) {
         this.prMedidasList = prMedidasList;
+    }
+
+    @XmlTransient
+    public List<CoDetalleOrdenCompra> getCoDetalleOrdenCompraList() {
+        return coDetalleOrdenCompraList;
+    }
+
+    public void setCoDetalleOrdenCompraList(List<CoDetalleOrdenCompra> coDetalleOrdenCompraList) {
+        this.coDetalleOrdenCompraList = coDetalleOrdenCompraList;
     }
 
     @Override

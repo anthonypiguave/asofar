@@ -7,6 +7,7 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -16,14 +17,16 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ms24m
+ * @author admin1
  */
 @Entity
 @Table(name = "pr_productos")
@@ -91,6 +94,8 @@ public class PrProductos implements Serializable {
         , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrMedidas prMedidas;
+    @OneToMany(mappedBy = "idProducto")
+    private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
 
     public PrProductos() {
     }
@@ -221,6 +226,15 @@ public class PrProductos implements Serializable {
 
     public void setPrMedidas(PrMedidas prMedidas) {
         this.prMedidas = prMedidas;
+    }
+
+    @XmlTransient
+    public List<CoDetalleOrdenCompra> getCoDetalleOrdenCompraList() {
+        return coDetalleOrdenCompraList;
+    }
+
+    public void setCoDetalleOrdenCompraList(List<CoDetalleOrdenCompra> coDetalleOrdenCompraList) {
+        this.coDetalleOrdenCompraList = coDetalleOrdenCompraList;
     }
 
     @Override
