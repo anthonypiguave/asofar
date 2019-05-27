@@ -210,7 +210,9 @@ public class contacto_agregar extends javax.swing.JDialog {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-
+        
+        ContactoCliente.setIdLocalidad(localidadclientes);
+        System.out.println("id guardaer "+localidadclientes);
         ContactoCliente.setTelefono(txt_telefono.getText());
         ContactoCliente.setCelular(txt_celular.getText());
         ContactoCliente.setEmail(txt_correo.getText());

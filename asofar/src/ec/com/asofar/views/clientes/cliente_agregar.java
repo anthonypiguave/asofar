@@ -124,6 +124,11 @@ public class cliente_agregar extends javax.swing.JDialog {
                 txt_segundo_nombreFocusLost(evt);
             }
         });
+        txt_segundo_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_segundo_nombreKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Apellidos :");
 
@@ -132,10 +137,20 @@ public class cliente_agregar extends javax.swing.JDialog {
                 txt_primer_apellidoFocusLost(evt);
             }
         });
+        txt_primer_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_primer_apellidoKeyTyped(evt);
+            }
+        });
 
         txt_segundo_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_segundo_apellidoFocusLost(evt);
+            }
+        });
+        txt_segundo_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_segundo_apellidoKeyTyped(evt);
             }
         });
 
@@ -152,6 +167,11 @@ public class cliente_agregar extends javax.swing.JDialog {
         txt_razon_social.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_razon_socialFocusLost(evt);
+            }
+        });
+        txt_razon_social.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_razon_socialKeyTyped(evt);
             }
         });
 
@@ -305,11 +325,15 @@ public class cliente_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_numero_identificacionKeyTyped
 
     private void txt_primer_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_primer_nombreKeyTyped
-
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txt_primer_nombreKeyTyped
 
     private void txt_primer_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_nombreFocusLost
-       txt_primer_nombre.setText(txt_primer_nombre.getText().toUpperCase());
+        txt_primer_nombre.setText(txt_primer_nombre.getText().toUpperCase());
     }//GEN-LAST:event_txt_primer_nombreFocusLost
 
     private void txt_segundo_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_nombreFocusLost
@@ -317,15 +341,15 @@ public class cliente_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_segundo_nombreFocusLost
 
     private void txt_primer_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_apellidoFocusLost
-       txt_primer_apellido.setText(txt_primer_apellido.getText().toUpperCase());
+        txt_primer_apellido.setText(txt_primer_apellido.getText().toUpperCase());
     }//GEN-LAST:event_txt_primer_apellidoFocusLost
 
     private void txt_segundo_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_apellidoFocusLost
-       txt_segundo_apellido.setText(txt_segundo_apellido.getText().toUpperCase());
+        txt_segundo_apellido.setText(txt_segundo_apellido.getText().toUpperCase());
     }//GEN-LAST:event_txt_segundo_apellidoFocusLost
 
     private void txt_razon_socialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_razon_socialFocusLost
-      txt_razon_social.setText(txt_razon_social.getText().toUpperCase());
+        txt_razon_social.setText(txt_razon_social.getText().toUpperCase());
     }//GEN-LAST:event_txt_razon_socialFocusLost
 
     private void jLabel7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseDragged
@@ -337,6 +361,38 @@ public class cliente_agregar extends javax.swing.JDialog {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabel7MousePressed
+
+    private void txt_segundo_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_segundo_nombreKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_segundo_nombreKeyTyped
+
+    private void txt_primer_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_primer_apellidoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_primer_apellidoKeyTyped
+
+    private void txt_segundo_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_segundo_apellidoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_segundo_apellidoKeyTyped
+
+    private void txt_razon_socialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_razon_socialKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_razon_socialKeyTyped
 
     /**
      * @param args the command line arguments

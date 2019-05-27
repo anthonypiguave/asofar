@@ -193,6 +193,7 @@
         <Component class="javax.swing.JTextField" name="txt_segundo_nombre">
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_segundo_nombreFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_segundo_nombreKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -203,11 +204,13 @@
         <Component class="javax.swing.JTextField" name="txt_primer_apellido">
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_primer_apellidoFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_primer_apellidoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_segundo_apellido">
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_segundo_apellidoFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_segundo_apellidoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnguardar">
@@ -229,6 +232,7 @@
         <Component class="javax.swing.JTextField" name="txt_razon_social">
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_razon_socialFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_razon_socialKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">

@@ -82,9 +82,21 @@ public class Localidad_agregar extends javax.swing.JDialog {
             }
         });
 
+        txt_direccion_cliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_direccion_clienteFocusLost(evt);
+            }
+        });
+
         jLabel2.setText("Direccion Cliente  :");
 
         jLabel3.setText("Direccion Entrega :");
+
+        txt_direccion_entrega.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_direccion_entregaFocusLost(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(255, 102, 0));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -142,7 +154,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel4)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_direccion_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -189,7 +201,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        
+
         localidadclientes.setDirreccionCliente(txt_direccion_cliente.getText());
         localidadclientes.setIdCliente(cliente);
         System.out.println("id cliente " + cliente.getIdClientes());
@@ -206,6 +218,14 @@ public class Localidad_agregar extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btn_agregarActionPerformed
+
+    private void txt_direccion_clienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_direccion_clienteFocusLost
+        txt_direccion_cliente.setText(txt_direccion_cliente.getText().toUpperCase());
+    }//GEN-LAST:event_txt_direccion_clienteFocusLost
+
+    private void txt_direccion_entregaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_direccion_entregaFocusLost
+     txt_direccion_entrega.setText(txt_direccion_entrega.getText().toUpperCase());
+    }//GEN-LAST:event_txt_direccion_entregaFocusLost
 
     /**
      * @param args the command line arguments
@@ -255,7 +275,6 @@ public class Localidad_agregar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txt_direccion_cliente;
     private javax.swing.JTextField txt_direccion_entrega;

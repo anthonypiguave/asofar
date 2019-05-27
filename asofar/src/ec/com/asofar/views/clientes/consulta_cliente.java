@@ -167,6 +167,9 @@ public class consulta_cliente extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tba_localidadMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tba_localidadMouseEntered(evt);
+            }
         });
         jScrollPane2.setViewportView(tba_localidad);
 
@@ -399,7 +402,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             if (Client != null) {
                 LocalidadCliente = Lc.findSeLocalidadClienteEntities();
                 Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
-                
+
 //                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
 //                tba_contacto.clearSelection();
             }
@@ -418,7 +421,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
         cliente_agregar cagg = new cliente_agregar(new javax.swing.JFrame(), true, usu, emp, suc, tident);
         cagg.setVisible(true);
-
+        MostrarClientes();
     }//GEN-LAST:event_btn_ingresar_clienteActionPerformed
 
     private void tba_localidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_localidadMousePressed
@@ -441,31 +444,33 @@ public class consulta_cliente extends javax.swing.JDialog {
             LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
 
             if (LocaliClient != null) {
-                System.out.println("id locali " + LocaliClient.getIdLocalidadCliente());
+                System.out.println("id cliente " + LocaliClient.getIdCliente());
+                System.out.println(" id _ localidad " + LocaliClient.getIdLocalidadCliente());
                 ContactoCliente = Ccl.findSeContactosClientesEntities();
-//                System.out.println("contaco id local"+ContactoCliente.get(id));
-                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
 
+                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
+                System.out.println("fdfff");
             }
         }
     }//GEN-LAST:event_tba_localidadMouseClicked
 
     private void btn_ingresar_localidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_localidadActionPerformed
-//        int id = 0;
-//        if (tba_localidad.getSelectedRow() >= 0) {
-//            id = tba_localidad.getSelectedRow();
-//            Client = devuelveObjeto(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista);
-//
-//            if (Client != null) {
-        Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
-        Lagg.setVisible(true);
+        int id = 0;
+        if (tba_clientes.getSelectedRow() >= 0) {
+            id = tba_clientes.getSelectedRow();
+            Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
-        LocalidadCliente = Lc.findSeLocalidadClienteEntities();
-        Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA CLIENTE");
-//        }
+            if (Client != null) {
+                System.out.println(" id cliente " + Client.getIdClientes());
+                Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
+                Lagg.setVisible(true);
+
+                LocalidadCliente = Lc.findSeLocalidadClienteEntities();
+                Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA CLIENTE");
+        }
     }//GEN-LAST:event_btn_ingresar_localidadActionPerformed
 //    private SeClientes devuelveObjeto3(Long id, List<SeClientes> listacliente) {
 //        listacliente = Cc.findSeClientesEntities();
@@ -494,6 +499,10 @@ public class consulta_cliente extends javax.swing.JDialog {
             if (LocaliClient != null) {
                 contacto_agregar Cagg = new contacto_agregar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
                 Cagg.setVisible(true);
+                
+                ContactoCliente = Ccl.findSeContactosClientesEntities();
+                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
+                System.out.println("****");
             }
             ////
         } else {
@@ -501,6 +510,10 @@ public class consulta_cliente extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btn_ingresar_contactoActionPerformed
+
+    private void tba_localidadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_localidadMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tba_localidadMouseEntered
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
         for (int i = 0; i < listabod.size(); i++) {
