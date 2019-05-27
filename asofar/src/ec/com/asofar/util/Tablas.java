@@ -1461,7 +1461,7 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacontactoscliente.size(); i++) {
             if (listacontactoscliente.get(i).getEstado().equals("A")&&
-                    listacontactoscliente.get(i).getIdContactosClientes()==lista.getIdLocalidadCliente()) {
+                    listacontactoscliente.get(i).getIdLocalidad().getIdLocalidadCliente()== lista.getIdLocalidadCliente()) {
                 filas[0] = String.valueOf(listacontactoscliente.get(i).getIdContactosClientes());
                 filas[1] = listacontactoscliente.get(i).getTelefono();
                 filas[2] = listacontactoscliente.get(i).getCelular();
