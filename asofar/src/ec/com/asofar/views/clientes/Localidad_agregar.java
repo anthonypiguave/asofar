@@ -52,7 +52,6 @@ public class Localidad_agregar extends javax.swing.JDialog {
         emp = em;
         suc = su;
         cliente = cl;
-        System.out.println("ID  CLIENTE " + cliente.getIdClientes());
     }
 
     @SuppressWarnings("unchecked")
@@ -204,7 +203,6 @@ public class Localidad_agregar extends javax.swing.JDialog {
 
         localidadclientes.setDirreccionCliente(txt_direccion_cliente.getText());
         localidadclientes.setIdCliente(cliente);
-        System.out.println("id cliente " + cliente.getIdClientes());
         localidadclientes.setDirreccionEntrega(txt_direccion_entrega.getText());
         localidadclientes.setEstado("A");
         localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());

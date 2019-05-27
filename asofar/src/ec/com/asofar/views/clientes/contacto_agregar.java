@@ -52,7 +52,6 @@ public class contacto_agregar extends javax.swing.JDialog {
         suc = su;
         localidadclientes = locli;
 
-        System.out.println("id localidad " + localidadclientes.getIdLocalidadCliente());
     }
 
     /**
@@ -212,7 +211,6 @@ public class contacto_agregar extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
         
         ContactoCliente.setIdLocalidad(localidadclientes);
-        System.out.println("id guardaer "+localidadclientes);
         ContactoCliente.setTelefono(txt_telefono.getText());
         ContactoCliente.setCelular(txt_celular.getText());
         ContactoCliente.setEmail(txt_correo.getText());

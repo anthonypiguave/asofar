@@ -457,7 +457,6 @@ public class consulta_cliente extends javax.swing.JDialog {
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
-                System.out.println(" id cliente " + Client.getIdClientes());
                 Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
                 Lagg.setVisible(true);
 
