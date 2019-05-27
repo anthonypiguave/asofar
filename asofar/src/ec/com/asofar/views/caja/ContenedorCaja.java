@@ -62,18 +62,16 @@ public class ContenedorCaja extends javax.swing.JDialog {
                 btnAperturaCaja.setEnabled(false);
                 btnCierre.setEnabled(true);
                 vdc = listadetallecaja.get(i);
-                
-            }else{
+
+            } else {
                 btnCierre.setEnabled(false);
             }
-            
+
         }
-        if(listadetallecaja.isEmpty()){
+        if (listadetallecaja.isEmpty()) {
             btnCierre.setEnabled(false);
         }
     }
-
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -86,6 +84,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         btnAperturaCaja.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnAperturaCaja.setText("APERTURA");
@@ -105,6 +104,11 @@ public class ContenedorCaja extends javax.swing.JDialog {
 
         jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton5.setText("VOLVER");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -167,6 +171,11 @@ public class ContenedorCaja extends javax.swing.JDialog {
         this.setVisible(false);
         cierre.setVisible(true);
     }//GEN-LAST:event_btnCierreActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
