@@ -653,6 +653,8 @@ public class Tablas {
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
+            
+            
             Filas[0] = String.valueOf(lista.get(i).getPrArticuloPK().getIdArticulo());
             Filas[1] = lista.get(i).getPrSubgrupos().getPrGrupos().getNombre();
             Filas[2] = lista.get(i).getPrSubgrupos().getNombre();

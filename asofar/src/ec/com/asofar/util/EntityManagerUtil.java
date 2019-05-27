@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.util;
 
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -14,26 +13,24 @@ import javax.persistence.Persistence;
  * @author admin1
  */
 public class EntityManagerUtil {
-    public static EntityManagerFactory ObtenerEntityManager(){
-        
+
+    public static EntityManagerFactory ObtenerEntityManager() {
+
         EntityManagerFactory emf = null;
-        
+
         emf = Persistence.createEntityManagerFactory("asofarPU");
-        
+
         return emf;
-        
-    
+
     }
-      public static boolean ObtenerEntityManagerConnection(){
-        
+
+    public static boolean ObtenerEntityManagerConnection() {
+
         EntityManagerFactory emf = ObtenerEntityManager();
-        
+
 //        emf = Persistence.createEntityManagerFactory("asofarPU");
-        
         return emf.isOpen();
-        
-    
+
     }
-    
-    
+
 }
