@@ -540,14 +540,15 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-              int id = 0;
+        int id = 0;
         if (tba_clientes.getSelectedRow() >= 0) {
             id = tba_clientes.getSelectedRow();
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
                 System.out.println("****");
-                
+                cliente_editar Ce = new cliente_editar(new javax.swing.JFrame(), true, usu, emp, suc,Client);
+                Ce.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE PARA EDITAR");
