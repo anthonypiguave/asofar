@@ -49,8 +49,6 @@ public class SePais implements Serializable {
     @OneToMany(mappedBy = "idPais")
     private List<CoProveedores> coProveedoresList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPais")
-    private List<SeCiudad> seCiudadList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPais")
     private List<SeProvincia> seProvinciaList;
 
     public SePais() {
@@ -96,15 +94,6 @@ public class SePais implements Serializable {
 
     public void setCoProveedoresList(List<CoProveedores> coProveedoresList) {
         this.coProveedoresList = coProveedoresList;
-    }
-
-    @XmlTransient
-    public List<SeCiudad> getSeCiudadList() {
-        return seCiudadList;
-    }
-
-    public void setSeCiudadList(List<SeCiudad> seCiudadList) {
-        this.seCiudadList = seCiudadList;
     }
 
     @XmlTransient

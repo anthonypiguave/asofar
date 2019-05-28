@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -104,7 +105,7 @@ public class CoOrdenCompras implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @OneToMany(mappedBy = "coOrdenCompras")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coOrdenCompras")
     private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
 
     public CoOrdenCompras() {

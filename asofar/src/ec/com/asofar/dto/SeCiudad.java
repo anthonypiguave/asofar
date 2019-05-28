@@ -44,9 +44,6 @@ public class SeCiudad implements Serializable {
     @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
     @ManyToOne(optional = false)
     private SeProvincia idProvincia;
-    @JoinColumn(name = "id_Pais", referencedColumnName = "id_Pais")
-    @ManyToOne(optional = false)
-    private SePais idPais;
 
     public SeCiudad() {
     }
@@ -82,14 +79,6 @@ public class SeCiudad implements Serializable {
 
     public void setIdProvincia(SeProvincia idProvincia) {
         this.idProvincia = idProvincia;
-    }
-
-    public SePais getIdPais() {
-        return idPais;
-    }
-
-    public void setIdPais(SePais idPais) {
-        this.idPais = idPais;
     }
 
     @Override

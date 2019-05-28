@@ -7,6 +7,8 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -16,10 +18,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -77,6 +81,12 @@ public class PrProductos implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @JoinColumns({
+        @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private PrArticulo prArticulo;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
@@ -91,6 +101,8 @@ public class PrProductos implements Serializable {
         , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrMedidas prMedidas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prProductos")
+    private List<CoDetalleOrdenCompra> coDetalleOrdenCompraList;
 
     public PrProductos() {
     }
@@ -199,6 +211,14 @@ public class PrProductos implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
+    public PrArticulo getPrArticulo() {
+        return prArticulo;
+    }
+
+    public void setPrArticulo(PrArticulo prArticulo) {
+        this.prArticulo = prArticulo;
+    }
+
     public SeEmpresa getSeEmpresa() {
         return seEmpresa;
     }
@@ -221,6 +241,15 @@ public class PrProductos implements Serializable {
 
     public void setPrMedidas(PrMedidas prMedidas) {
         this.prMedidas = prMedidas;
+    }
+
+    @XmlTransient
+    public List<CoDetalleOrdenCompra> getCoDetalleOrdenCompraList() {
+        return coDetalleOrdenCompraList;
+    }
+
+    public void setCoDetalleOrdenCompraList(List<CoDetalleOrdenCompra> coDetalleOrdenCompraList) {
+        this.coDetalleOrdenCompraList = coDetalleOrdenCompraList;
     }
 
     @Override

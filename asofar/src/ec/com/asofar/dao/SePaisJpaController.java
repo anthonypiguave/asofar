@@ -13,10 +13,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.SePais;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.SeCiudad;
-import ec.com.asofar.dto.SePais;
 import ec.com.asofar.dto.SeProvincia;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -40,9 +39,6 @@ public class SePaisJpaController implements Serializable {
         if (sePais.getCoProveedoresList() == null) {
             sePais.setCoProveedoresList(new ArrayList<CoProveedores>());
         }
-        if (sePais.getSeCiudadList() == null) {
-            sePais.setSeCiudadList(new ArrayList<SeCiudad>());
-        }
         if (sePais.getSeProvinciaList() == null) {
             sePais.setSeProvinciaList(new ArrayList<SeProvincia>());
         }
@@ -56,12 +52,6 @@ public class SePaisJpaController implements Serializable {
                 attachedCoProveedoresList.add(coProveedoresListCoProveedoresToAttach);
             }
             sePais.setCoProveedoresList(attachedCoProveedoresList);
-            List<SeCiudad> attachedSeCiudadList = new ArrayList<SeCiudad>();
-            for (SeCiudad seCiudadListSeCiudadToAttach : sePais.getSeCiudadList()) {
-                seCiudadListSeCiudadToAttach = em.getReference(seCiudadListSeCiudadToAttach.getClass(), seCiudadListSeCiudadToAttach.getIdCiudad());
-                attachedSeCiudadList.add(seCiudadListSeCiudadToAttach);
-            }
-            sePais.setSeCiudadList(attachedSeCiudadList);
             List<SeProvincia> attachedSeProvinciaList = new ArrayList<SeProvincia>();
             for (SeProvincia seProvinciaListSeProvinciaToAttach : sePais.getSeProvinciaList()) {
                 seProvinciaListSeProvinciaToAttach = em.getReference(seProvinciaListSeProvinciaToAttach.getClass(), seProvinciaListSeProvinciaToAttach.getIdProvincia());
@@ -76,15 +66,6 @@ public class SePaisJpaController implements Serializable {
                 if (oldIdPaisOfCoProveedoresListCoProveedores != null) {
                     oldIdPaisOfCoProveedoresListCoProveedores.getCoProveedoresList().remove(coProveedoresListCoProveedores);
                     oldIdPaisOfCoProveedoresListCoProveedores = em.merge(oldIdPaisOfCoProveedoresListCoProveedores);
-                }
-            }
-            for (SeCiudad seCiudadListSeCiudad : sePais.getSeCiudadList()) {
-                SePais oldIdPaisOfSeCiudadListSeCiudad = seCiudadListSeCiudad.getIdPais();
-                seCiudadListSeCiudad.setIdPais(sePais);
-                seCiudadListSeCiudad = em.merge(seCiudadListSeCiudad);
-                if (oldIdPaisOfSeCiudadListSeCiudad != null) {
-                    oldIdPaisOfSeCiudadListSeCiudad.getSeCiudadList().remove(seCiudadListSeCiudad);
-                    oldIdPaisOfSeCiudadListSeCiudad = em.merge(oldIdPaisOfSeCiudadListSeCiudad);
                 }
             }
             for (SeProvincia seProvinciaListSeProvincia : sePais.getSeProvinciaList()) {
@@ -112,19 +93,9 @@ public class SePaisJpaController implements Serializable {
             SePais persistentSePais = em.find(SePais.class, sePais.getIdPais());
             List<CoProveedores> coProveedoresListOld = persistentSePais.getCoProveedoresList();
             List<CoProveedores> coProveedoresListNew = sePais.getCoProveedoresList();
-            List<SeCiudad> seCiudadListOld = persistentSePais.getSeCiudadList();
-            List<SeCiudad> seCiudadListNew = sePais.getSeCiudadList();
             List<SeProvincia> seProvinciaListOld = persistentSePais.getSeProvinciaList();
             List<SeProvincia> seProvinciaListNew = sePais.getSeProvinciaList();
             List<String> illegalOrphanMessages = null;
-            for (SeCiudad seCiudadListOldSeCiudad : seCiudadListOld) {
-                if (!seCiudadListNew.contains(seCiudadListOldSeCiudad)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain SeCiudad " + seCiudadListOldSeCiudad + " since its idPais field is not nullable.");
-                }
-            }
             for (SeProvincia seProvinciaListOldSeProvincia : seProvinciaListOld) {
                 if (!seProvinciaListNew.contains(seProvinciaListOldSeProvincia)) {
                     if (illegalOrphanMessages == null) {
@@ -143,13 +114,6 @@ public class SePaisJpaController implements Serializable {
             }
             coProveedoresListNew = attachedCoProveedoresListNew;
             sePais.setCoProveedoresList(coProveedoresListNew);
-            List<SeCiudad> attachedSeCiudadListNew = new ArrayList<SeCiudad>();
-            for (SeCiudad seCiudadListNewSeCiudadToAttach : seCiudadListNew) {
-                seCiudadListNewSeCiudadToAttach = em.getReference(seCiudadListNewSeCiudadToAttach.getClass(), seCiudadListNewSeCiudadToAttach.getIdCiudad());
-                attachedSeCiudadListNew.add(seCiudadListNewSeCiudadToAttach);
-            }
-            seCiudadListNew = attachedSeCiudadListNew;
-            sePais.setSeCiudadList(seCiudadListNew);
             List<SeProvincia> attachedSeProvinciaListNew = new ArrayList<SeProvincia>();
             for (SeProvincia seProvinciaListNewSeProvinciaToAttach : seProvinciaListNew) {
                 seProvinciaListNewSeProvinciaToAttach = em.getReference(seProvinciaListNewSeProvinciaToAttach.getClass(), seProvinciaListNewSeProvinciaToAttach.getIdProvincia());
@@ -172,17 +136,6 @@ public class SePaisJpaController implements Serializable {
                     if (oldIdPaisOfCoProveedoresListNewCoProveedores != null && !oldIdPaisOfCoProveedoresListNewCoProveedores.equals(sePais)) {
                         oldIdPaisOfCoProveedoresListNewCoProveedores.getCoProveedoresList().remove(coProveedoresListNewCoProveedores);
                         oldIdPaisOfCoProveedoresListNewCoProveedores = em.merge(oldIdPaisOfCoProveedoresListNewCoProveedores);
-                    }
-                }
-            }
-            for (SeCiudad seCiudadListNewSeCiudad : seCiudadListNew) {
-                if (!seCiudadListOld.contains(seCiudadListNewSeCiudad)) {
-                    SePais oldIdPaisOfSeCiudadListNewSeCiudad = seCiudadListNewSeCiudad.getIdPais();
-                    seCiudadListNewSeCiudad.setIdPais(sePais);
-                    seCiudadListNewSeCiudad = em.merge(seCiudadListNewSeCiudad);
-                    if (oldIdPaisOfSeCiudadListNewSeCiudad != null && !oldIdPaisOfSeCiudadListNewSeCiudad.equals(sePais)) {
-                        oldIdPaisOfSeCiudadListNewSeCiudad.getSeCiudadList().remove(seCiudadListNewSeCiudad);
-                        oldIdPaisOfSeCiudadListNewSeCiudad = em.merge(oldIdPaisOfSeCiudadListNewSeCiudad);
                     }
                 }
             }
@@ -227,13 +180,6 @@ public class SePaisJpaController implements Serializable {
                 throw new NonexistentEntityException("The sePais with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<SeCiudad> seCiudadListOrphanCheck = sePais.getSeCiudadList();
-            for (SeCiudad seCiudadListOrphanCheckSeCiudad : seCiudadListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SePais (" + sePais + ") cannot be destroyed since the SeCiudad " + seCiudadListOrphanCheckSeCiudad + " in its seCiudadList field has a non-nullable idPais field.");
-            }
             List<SeProvincia> seProvinciaListOrphanCheck = sePais.getSeProvinciaList();
             for (SeProvincia seProvinciaListOrphanCheckSeProvincia : seProvinciaListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
