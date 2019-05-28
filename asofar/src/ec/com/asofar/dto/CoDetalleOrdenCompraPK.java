@@ -32,36 +32,16 @@ public class CoDetalleOrdenCompraPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_producto")
     private long idProducto;
-    @Basic(optional = false)
-    @Column(name = "id_grupo")
-    private long idGrupo;
-    @Basic(optional = false)
-    @Column(name = "id_subgrupo")
-    private long idSubgrupo;
-    @Basic(optional = false)
-    @Column(name = "id_articulo")
-    private long idArticulo;
-    @Basic(optional = false)
-    @Column(name = "id_tipo_medidas")
-    private long idTipoMedidas;
-    @Basic(optional = false)
-    @Column(name = "id_tipo_presentacion")
-    private long idTipoPresentacion;
 
     public CoDetalleOrdenCompraPK() {
     }
 
-    public CoDetalleOrdenCompraPK(long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto, long idGrupo, long idSubgrupo, long idArticulo, long idTipoMedidas, long idTipoPresentacion) {
+    public CoDetalleOrdenCompraPK(long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto) {
         this.idOrdenCompra = idOrdenCompra;
         this.idEmpresa = idEmpresa;
         this.idSurcusal = idSurcusal;
         this.lineaDetalle = lineaDetalle;
         this.idProducto = idProducto;
-        this.idGrupo = idGrupo;
-        this.idSubgrupo = idSubgrupo;
-        this.idArticulo = idArticulo;
-        this.idTipoMedidas = idTipoMedidas;
-        this.idTipoPresentacion = idTipoPresentacion;
     }
 
     public long getIdOrdenCompra() {
@@ -104,46 +84,6 @@ public class CoDetalleOrdenCompraPK implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public long getIdGrupo() {
-        return idGrupo;
-    }
-
-    public void setIdGrupo(long idGrupo) {
-        this.idGrupo = idGrupo;
-    }
-
-    public long getIdSubgrupo() {
-        return idSubgrupo;
-    }
-
-    public void setIdSubgrupo(long idSubgrupo) {
-        this.idSubgrupo = idSubgrupo;
-    }
-
-    public long getIdArticulo() {
-        return idArticulo;
-    }
-
-    public void setIdArticulo(long idArticulo) {
-        this.idArticulo = idArticulo;
-    }
-
-    public long getIdTipoMedidas() {
-        return idTipoMedidas;
-    }
-
-    public void setIdTipoMedidas(long idTipoMedidas) {
-        this.idTipoMedidas = idTipoMedidas;
-    }
-
-    public long getIdTipoPresentacion() {
-        return idTipoPresentacion;
-    }
-
-    public void setIdTipoPresentacion(long idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -152,11 +92,6 @@ public class CoDetalleOrdenCompraPK implements Serializable {
         hash += (int) idSurcusal;
         hash += (int) lineaDetalle;
         hash += (int) idProducto;
-        hash += (int) idGrupo;
-        hash += (int) idSubgrupo;
-        hash += (int) idArticulo;
-        hash += (int) idTipoMedidas;
-        hash += (int) idTipoPresentacion;
         return hash;
     }
 
@@ -182,27 +117,12 @@ public class CoDetalleOrdenCompraPK implements Serializable {
         if (this.idProducto != other.idProducto) {
             return false;
         }
-        if (this.idGrupo != other.idGrupo) {
-            return false;
-        }
-        if (this.idSubgrupo != other.idSubgrupo) {
-            return false;
-        }
-        if (this.idArticulo != other.idArticulo) {
-            return false;
-        }
-        if (this.idTipoMedidas != other.idTipoMedidas) {
-            return false;
-        }
-        if (this.idTipoPresentacion != other.idTipoPresentacion) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetalleOrdenCompraPK[ idOrdenCompra=" + idOrdenCompra + ", idEmpresa=" + idEmpresa + ", idSurcusal=" + idSurcusal + ", lineaDetalle=" + lineaDetalle + ", idProducto=" + idProducto + ", idGrupo=" + idGrupo + ", idSubgrupo=" + idSubgrupo + ", idArticulo=" + idArticulo + ", idTipoMedidas=" + idTipoMedidas + ", idTipoPresentacion=" + idTipoPresentacion + " ]";
+        return "ec.com.asofar.dto.CoDetalleOrdenCompraPK[ idOrdenCompra=" + idOrdenCompra + ", idEmpresa=" + idEmpresa + ", idSurcusal=" + idSurcusal + ", lineaDetalle=" + lineaDetalle + ", idProducto=" + idProducto + " ]";
     }
     
 }

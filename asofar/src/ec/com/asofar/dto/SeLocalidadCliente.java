@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -38,9 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SeLocalidadCliente.findByIdLocalidadCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idLocalidadCliente = :idLocalidadCliente")
     , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionCliente = :dirreccionCliente")
     , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionEntrega", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionEntrega = :dirreccionEntrega")
-    , @NamedQuery(name = "SeLocalidadCliente.findByIdCiudad", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idCiudad = :idCiudad")
-    , @NamedQuery(name = "SeLocalidadCliente.findByIdProvincia", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idProvincia = :idProvincia")
-    , @NamedQuery(name = "SeLocalidadCliente.findByIdPais", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idPais = :idPais")
     , @NamedQuery(name = "SeLocalidadCliente.findByEstado", query = "SELECT s FROM SeLocalidadCliente s WHERE s.estado = :estado")
     , @NamedQuery(name = "SeLocalidadCliente.findByFechaCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "SeLocalidadCliente.findByUsuarioCreacion", query = "SELECT s FROM SeLocalidadCliente s WHERE s.usuarioCreacion = :usuarioCreacion")
@@ -58,12 +54,6 @@ public class SeLocalidadCliente implements Serializable {
     private String dirreccionCliente;
     @Column(name = "dirreccion_entrega")
     private String dirreccionEntrega;
-    @Column(name = "id_ciudad")
-    private BigInteger idCiudad;
-    @Column(name = "id_provincia")
-    private BigInteger idProvincia;
-    @Column(name = "id_pais")
-    private BigInteger idPais;
     @Column(name = "estado")
     private String estado;
     @Column(name = "fecha_creacion")
@@ -79,6 +69,15 @@ public class SeLocalidadCliente implements Serializable {
     @JoinColumn(name = "id_cliente", referencedColumnName = "id_clientes")
     @ManyToOne
     private SeClientes idCliente;
+    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_Ciudad")
+    @ManyToOne
+    private SeCiudad idCiudad;
+    @JoinColumn(name = "id_provincia", referencedColumnName = "id_Provincia")
+    @ManyToOne
+    private SeProvincia idProvincia;
+    @JoinColumn(name = "id_pais", referencedColumnName = "id_Pais")
+    @ManyToOne
+    private SePais idPais;
     @OneToMany(mappedBy = "idLocalidad")
     private List<SeContactosClientes> seContactosClientesList;
 
@@ -111,30 +110,6 @@ public class SeLocalidadCliente implements Serializable {
 
     public void setDirreccionEntrega(String dirreccionEntrega) {
         this.dirreccionEntrega = dirreccionEntrega;
-    }
-
-    public BigInteger getIdCiudad() {
-        return idCiudad;
-    }
-
-    public void setIdCiudad(BigInteger idCiudad) {
-        this.idCiudad = idCiudad;
-    }
-
-    public BigInteger getIdProvincia() {
-        return idProvincia;
-    }
-
-    public void setIdProvincia(BigInteger idProvincia) {
-        this.idProvincia = idProvincia;
-    }
-
-    public BigInteger getIdPais() {
-        return idPais;
-    }
-
-    public void setIdPais(BigInteger idPais) {
-        this.idPais = idPais;
     }
 
     public String getEstado() {
@@ -183,6 +158,30 @@ public class SeLocalidadCliente implements Serializable {
 
     public void setIdCliente(SeClientes idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public SeCiudad getIdCiudad() {
+        return idCiudad;
+    }
+
+    public void setIdCiudad(SeCiudad idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
+    public SeProvincia getIdProvincia() {
+        return idProvincia;
+    }
+
+    public void setIdProvincia(SeProvincia idProvincia) {
+        this.idProvincia = idProvincia;
+    }
+
+    public SePais getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(SePais idPais) {
+        this.idPais = idPais;
     }
 
     @XmlTransient

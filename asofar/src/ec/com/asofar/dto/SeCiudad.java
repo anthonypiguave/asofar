@@ -6,6 +6,7 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,6 +44,8 @@ public class SeCiudad implements Serializable {
     @Basic(optional = false)
     @Column(name = "Nombre")
     private String nombre;
+    @OneToMany(mappedBy = "idCiudad")
+    private List<SeLocalidadCliente> seLocalidadClienteList;
     @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
     @ManyToOne(optional = false)
     private SeProvincia idProvincia;
@@ -71,6 +76,15 @@ public class SeCiudad implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @XmlTransient
+    public List<SeLocalidadCliente> getSeLocalidadClienteList() {
+        return seLocalidadClienteList;
+    }
+
+    public void setSeLocalidadClienteList(List<SeLocalidadCliente> seLocalidadClienteList) {
+        this.seLocalidadClienteList = seLocalidadClienteList;
     }
 
     public SeProvincia getIdProvincia() {

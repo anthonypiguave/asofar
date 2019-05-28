@@ -95,8 +95,8 @@ public class Tablas {
             if (listadeorco.get(i).getEstado().equals("A")
                     && listadeorco.get(i).getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra() == orco.getCoOrdenComprasPK().getIdOrdenCompra()) {
                 filas[0] = listadeorco.get(i).getDescripcion();
-                filas[1] = listadeorco.get(i).getMarca();
-                filas[2] = listadeorco.get(i).getModelado();
+//                filas[1] = listadeorco.get(i).getMarca();
+//                filas[2] = listadeorco.get(i).getModelado();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);

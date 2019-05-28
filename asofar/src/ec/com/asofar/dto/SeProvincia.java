@@ -45,6 +45,8 @@ public class SeProvincia implements Serializable {
     @Basic(optional = false)
     @Column(name = "Nombre")
     private String nombre;
+    @OneToMany(mappedBy = "idProvincia")
+    private List<SeLocalidadCliente> seLocalidadClienteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProvincia")
     private List<SeCiudad> seCiudadList;
     @JoinColumn(name = "id_Pais", referencedColumnName = "id_Pais")
@@ -77,6 +79,15 @@ public class SeProvincia implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @XmlTransient
+    public List<SeLocalidadCliente> getSeLocalidadClienteList() {
+        return seLocalidadClienteList;
+    }
+
+    public void setSeLocalidadClienteList(List<SeLocalidadCliente> seLocalidadClienteList) {
+        this.seLocalidadClienteList = seLocalidadClienteList;
     }
 
     @XmlTransient

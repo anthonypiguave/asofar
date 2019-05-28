@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.dao;
 
-import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -17,10 +16,8 @@ import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrMedidas;
-import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrProductosPK;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,15 +41,12 @@ public class PrProductosJpaController implements Serializable {
         if (prProductos.getPrProductosPK() == null) {
             prProductos.setPrProductosPK(new PrProductosPK());
         }
-        if (prProductos.getCoDetalleOrdenCompraList() == null) {
-            prProductos.setCoDetalleOrdenCompraList(new ArrayList<CoDetalleOrdenCompra>());
-        }
         prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
-        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
-        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
-        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
         prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
+        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
+        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -77,12 +71,6 @@ public class PrProductosJpaController implements Serializable {
                 prMedidas = em.getReference(prMedidas.getClass(), prMedidas.getPrMedidasPK());
                 prProductos.setPrMedidas(prMedidas);
             }
-            List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraList = new ArrayList<CoDetalleOrdenCompra>();
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach : prProductos.getCoDetalleOrdenCompraList()) {
-                coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getCoDetalleOrdenCompraPK());
-                attachedCoDetalleOrdenCompraList.add(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach);
-            }
-            prProductos.setCoDetalleOrdenCompraList(attachedCoDetalleOrdenCompraList);
             em.persist(prProductos);
             if (prArticulo != null) {
                 prArticulo.getPrProductosList().add(prProductos);
@@ -100,15 +88,6 @@ public class PrProductosJpaController implements Serializable {
                 prMedidas.getPrProductosList().add(prProductos);
                 prMedidas = em.merge(prMedidas);
             }
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : prProductos.getCoDetalleOrdenCompraList()) {
-                PrProductos oldPrProductosOfCoDetalleOrdenCompraListCoDetalleOrdenCompra = coDetalleOrdenCompraListCoDetalleOrdenCompra.getPrProductos();
-                coDetalleOrdenCompraListCoDetalleOrdenCompra.setPrProductos(prProductos);
-                coDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListCoDetalleOrdenCompra);
-                if (oldPrProductosOfCoDetalleOrdenCompraListCoDetalleOrdenCompra != null) {
-                    oldPrProductosOfCoDetalleOrdenCompraListCoDetalleOrdenCompra.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompraListCoDetalleOrdenCompra);
-                    oldPrProductosOfCoDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(oldPrProductosOfCoDetalleOrdenCompraListCoDetalleOrdenCompra);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findPrProductos(prProductos.getPrProductosPK()) != null) {
@@ -122,13 +101,13 @@ public class PrProductosJpaController implements Serializable {
         }
     }
 
-    public void edit(PrProductos prProductos) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(PrProductos prProductos) throws NonexistentEntityException, Exception {
         prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
-        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
-        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
-        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
         prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
+        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
+        prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -142,20 +121,6 @@ public class PrProductosJpaController implements Serializable {
             PrFabricante codFabricanteNew = prProductos.getCodFabricante();
             PrMedidas prMedidasOld = persistentPrProductos.getPrMedidas();
             PrMedidas prMedidasNew = prProductos.getPrMedidas();
-            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOld = persistentPrProductos.getCoDetalleOrdenCompraList();
-            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListNew = prProductos.getCoDetalleOrdenCompraList();
-            List<String> illegalOrphanMessages = null;
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListOldCoDetalleOrdenCompra : coDetalleOrdenCompraListOld) {
-                if (!coDetalleOrdenCompraListNew.contains(coDetalleOrdenCompraListOldCoDetalleOrdenCompra)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain CoDetalleOrdenCompra " + coDetalleOrdenCompraListOldCoDetalleOrdenCompra + " since its prProductos field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (prArticuloNew != null) {
                 prArticuloNew = em.getReference(prArticuloNew.getClass(), prArticuloNew.getPrArticuloPK());
                 prProductos.setPrArticulo(prArticuloNew);
@@ -172,13 +137,6 @@ public class PrProductosJpaController implements Serializable {
                 prMedidasNew = em.getReference(prMedidasNew.getClass(), prMedidasNew.getPrMedidasPK());
                 prProductos.setPrMedidas(prMedidasNew);
             }
-            List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraListNew = new ArrayList<CoDetalleOrdenCompra>();
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach : coDetalleOrdenCompraListNew) {
-                coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getCoDetalleOrdenCompraPK());
-                attachedCoDetalleOrdenCompraListNew.add(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach);
-            }
-            coDetalleOrdenCompraListNew = attachedCoDetalleOrdenCompraListNew;
-            prProductos.setCoDetalleOrdenCompraList(coDetalleOrdenCompraListNew);
             prProductos = em.merge(prProductos);
             if (prArticuloOld != null && !prArticuloOld.equals(prArticuloNew)) {
                 prArticuloOld.getPrProductosList().remove(prProductos);
@@ -212,17 +170,6 @@ public class PrProductosJpaController implements Serializable {
                 prMedidasNew.getPrProductosList().add(prProductos);
                 prMedidasNew = em.merge(prMedidasNew);
             }
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompra : coDetalleOrdenCompraListNew) {
-                if (!coDetalleOrdenCompraListOld.contains(coDetalleOrdenCompraListNewCoDetalleOrdenCompra)) {
-                    PrProductos oldPrProductosOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra = coDetalleOrdenCompraListNewCoDetalleOrdenCompra.getPrProductos();
-                    coDetalleOrdenCompraListNewCoDetalleOrdenCompra.setPrProductos(prProductos);
-                    coDetalleOrdenCompraListNewCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListNewCoDetalleOrdenCompra);
-                    if (oldPrProductosOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra != null && !oldPrProductosOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra.equals(prProductos)) {
-                        oldPrProductosOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompraListNewCoDetalleOrdenCompra);
-                        oldPrProductosOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra = em.merge(oldPrProductosOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -240,7 +187,7 @@ public class PrProductosJpaController implements Serializable {
         }
     }
 
-    public void destroy(PrProductosPK id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(PrProductosPK id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -251,17 +198,6 @@ public class PrProductosJpaController implements Serializable {
                 prProductos.getPrProductosPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The prProductos with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOrphanCheck = prProductos.getCoDetalleOrdenCompraList();
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListOrphanCheckCoDetalleOrdenCompra : coDetalleOrdenCompraListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This PrProductos (" + prProductos + ") cannot be destroyed since the CoDetalleOrdenCompra " + coDetalleOrdenCompraListOrphanCheckCoDetalleOrdenCompra + " in its coDetalleOrdenCompraList field has a non-nullable prProductos field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             PrArticulo prArticulo = prProductos.getPrArticulo();
             if (prArticulo != null) {

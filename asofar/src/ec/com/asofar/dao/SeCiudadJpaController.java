@@ -13,6 +13,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeProvincia;
+import ec.com.asofar.dto.SeLocalidadCliente;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,6 +35,9 @@ public class SeCiudadJpaController implements Serializable {
     }
 
     public void create(SeCiudad seCiudad) {
+        if (seCiudad.getSeLocalidadClienteList() == null) {
+            seCiudad.setSeLocalidadClienteList(new ArrayList<SeLocalidadCliente>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -42,10 +47,25 @@ public class SeCiudadJpaController implements Serializable {
                 idProvincia = em.getReference(idProvincia.getClass(), idProvincia.getIdProvincia());
                 seCiudad.setIdProvincia(idProvincia);
             }
+            List<SeLocalidadCliente> attachedSeLocalidadClienteList = new ArrayList<SeLocalidadCliente>();
+            for (SeLocalidadCliente seLocalidadClienteListSeLocalidadClienteToAttach : seCiudad.getSeLocalidadClienteList()) {
+                seLocalidadClienteListSeLocalidadClienteToAttach = em.getReference(seLocalidadClienteListSeLocalidadClienteToAttach.getClass(), seLocalidadClienteListSeLocalidadClienteToAttach.getIdLocalidadCliente());
+                attachedSeLocalidadClienteList.add(seLocalidadClienteListSeLocalidadClienteToAttach);
+            }
+            seCiudad.setSeLocalidadClienteList(attachedSeLocalidadClienteList);
             em.persist(seCiudad);
             if (idProvincia != null) {
                 idProvincia.getSeCiudadList().add(seCiudad);
                 idProvincia = em.merge(idProvincia);
+            }
+            for (SeLocalidadCliente seLocalidadClienteListSeLocalidadCliente : seCiudad.getSeLocalidadClienteList()) {
+                SeCiudad oldIdCiudadOfSeLocalidadClienteListSeLocalidadCliente = seLocalidadClienteListSeLocalidadCliente.getIdCiudad();
+                seLocalidadClienteListSeLocalidadCliente.setIdCiudad(seCiudad);
+                seLocalidadClienteListSeLocalidadCliente = em.merge(seLocalidadClienteListSeLocalidadCliente);
+                if (oldIdCiudadOfSeLocalidadClienteListSeLocalidadCliente != null) {
+                    oldIdCiudadOfSeLocalidadClienteListSeLocalidadCliente.getSeLocalidadClienteList().remove(seLocalidadClienteListSeLocalidadCliente);
+                    oldIdCiudadOfSeLocalidadClienteListSeLocalidadCliente = em.merge(oldIdCiudadOfSeLocalidadClienteListSeLocalidadCliente);
+                }
             }
             em.getTransaction().commit();
         } finally {
@@ -63,10 +83,19 @@ public class SeCiudadJpaController implements Serializable {
             SeCiudad persistentSeCiudad = em.find(SeCiudad.class, seCiudad.getIdCiudad());
             SeProvincia idProvinciaOld = persistentSeCiudad.getIdProvincia();
             SeProvincia idProvinciaNew = seCiudad.getIdProvincia();
+            List<SeLocalidadCliente> seLocalidadClienteListOld = persistentSeCiudad.getSeLocalidadClienteList();
+            List<SeLocalidadCliente> seLocalidadClienteListNew = seCiudad.getSeLocalidadClienteList();
             if (idProvinciaNew != null) {
                 idProvinciaNew = em.getReference(idProvinciaNew.getClass(), idProvinciaNew.getIdProvincia());
                 seCiudad.setIdProvincia(idProvinciaNew);
             }
+            List<SeLocalidadCliente> attachedSeLocalidadClienteListNew = new ArrayList<SeLocalidadCliente>();
+            for (SeLocalidadCliente seLocalidadClienteListNewSeLocalidadClienteToAttach : seLocalidadClienteListNew) {
+                seLocalidadClienteListNewSeLocalidadClienteToAttach = em.getReference(seLocalidadClienteListNewSeLocalidadClienteToAttach.getClass(), seLocalidadClienteListNewSeLocalidadClienteToAttach.getIdLocalidadCliente());
+                attachedSeLocalidadClienteListNew.add(seLocalidadClienteListNewSeLocalidadClienteToAttach);
+            }
+            seLocalidadClienteListNew = attachedSeLocalidadClienteListNew;
+            seCiudad.setSeLocalidadClienteList(seLocalidadClienteListNew);
             seCiudad = em.merge(seCiudad);
             if (idProvinciaOld != null && !idProvinciaOld.equals(idProvinciaNew)) {
                 idProvinciaOld.getSeCiudadList().remove(seCiudad);
@@ -75,6 +104,23 @@ public class SeCiudadJpaController implements Serializable {
             if (idProvinciaNew != null && !idProvinciaNew.equals(idProvinciaOld)) {
                 idProvinciaNew.getSeCiudadList().add(seCiudad);
                 idProvinciaNew = em.merge(idProvinciaNew);
+            }
+            for (SeLocalidadCliente seLocalidadClienteListOldSeLocalidadCliente : seLocalidadClienteListOld) {
+                if (!seLocalidadClienteListNew.contains(seLocalidadClienteListOldSeLocalidadCliente)) {
+                    seLocalidadClienteListOldSeLocalidadCliente.setIdCiudad(null);
+                    seLocalidadClienteListOldSeLocalidadCliente = em.merge(seLocalidadClienteListOldSeLocalidadCliente);
+                }
+            }
+            for (SeLocalidadCliente seLocalidadClienteListNewSeLocalidadCliente : seLocalidadClienteListNew) {
+                if (!seLocalidadClienteListOld.contains(seLocalidadClienteListNewSeLocalidadCliente)) {
+                    SeCiudad oldIdCiudadOfSeLocalidadClienteListNewSeLocalidadCliente = seLocalidadClienteListNewSeLocalidadCliente.getIdCiudad();
+                    seLocalidadClienteListNewSeLocalidadCliente.setIdCiudad(seCiudad);
+                    seLocalidadClienteListNewSeLocalidadCliente = em.merge(seLocalidadClienteListNewSeLocalidadCliente);
+                    if (oldIdCiudadOfSeLocalidadClienteListNewSeLocalidadCliente != null && !oldIdCiudadOfSeLocalidadClienteListNewSeLocalidadCliente.equals(seCiudad)) {
+                        oldIdCiudadOfSeLocalidadClienteListNewSeLocalidadCliente.getSeLocalidadClienteList().remove(seLocalidadClienteListNewSeLocalidadCliente);
+                        oldIdCiudadOfSeLocalidadClienteListNewSeLocalidadCliente = em.merge(oldIdCiudadOfSeLocalidadClienteListNewSeLocalidadCliente);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -109,6 +155,11 @@ public class SeCiudadJpaController implements Serializable {
             if (idProvincia != null) {
                 idProvincia.getSeCiudadList().remove(seCiudad);
                 idProvincia = em.merge(idProvincia);
+            }
+            List<SeLocalidadCliente> seLocalidadClienteList = seCiudad.getSeLocalidadClienteList();
+            for (SeLocalidadCliente seLocalidadClienteListSeLocalidadCliente : seLocalidadClienteList) {
+                seLocalidadClienteListSeLocalidadCliente.setIdCiudad(null);
+                seLocalidadClienteListSeLocalidadCliente = em.merge(seLocalidadClienteListSeLocalidadCliente);
             }
             em.remove(seCiudad);
             em.getTransaction().commit();

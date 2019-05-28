@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.CoOrdenCompras;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -39,34 +38,19 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
         if (coDetalleOrdenCompra.getCoDetalleOrdenCompraPK() == null) {
             coDetalleOrdenCompra.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
         }
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdOrdenCompra(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdProducto(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdProducto());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdGrupo(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdEmpresa());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdTipoPresentacion(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdTipoPresentacion());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdEmpresa(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdSurcusal(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdSucursal());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdSubgrupo(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdArticulo());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdTipoMedidas(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdSubgrupo());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdArticulo(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdGrupo());
+        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdOrdenCompra(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            PrProductos prProductos = coDetalleOrdenCompra.getPrProductos();
-            if (prProductos != null) {
-                prProductos = em.getReference(prProductos.getClass(), prProductos.getPrProductosPK());
-                coDetalleOrdenCompra.setPrProductos(prProductos);
-            }
             CoOrdenCompras coOrdenCompras = coDetalleOrdenCompra.getCoOrdenCompras();
             if (coOrdenCompras != null) {
                 coOrdenCompras = em.getReference(coOrdenCompras.getClass(), coOrdenCompras.getCoOrdenComprasPK());
                 coDetalleOrdenCompra.setCoOrdenCompras(coOrdenCompras);
             }
             em.persist(coDetalleOrdenCompra);
-            if (prProductos != null) {
-                prProductos.getCoDetalleOrdenCompraList().add(coDetalleOrdenCompra);
-                prProductos = em.merge(prProductos);
-            }
             if (coOrdenCompras != null) {
                 coOrdenCompras.getCoDetalleOrdenCompraList().add(coDetalleOrdenCompra);
                 coOrdenCompras = em.merge(coOrdenCompras);
@@ -85,41 +69,21 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
     }
 
     public void edit(CoDetalleOrdenCompra coDetalleOrdenCompra) throws NonexistentEntityException, Exception {
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdOrdenCompra(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdProducto(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdProducto());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdGrupo(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdEmpresa());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdTipoPresentacion(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdTipoPresentacion());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdEmpresa(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdSurcusal(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdSucursal());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdSubgrupo(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdArticulo());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdTipoMedidas(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdSubgrupo());
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdArticulo(coDetalleOrdenCompra.getPrProductos().getPrProductosPK().getIdGrupo());
+        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdOrdenCompra(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             CoDetalleOrdenCompra persistentCoDetalleOrdenCompra = em.find(CoDetalleOrdenCompra.class, coDetalleOrdenCompra.getCoDetalleOrdenCompraPK());
-            PrProductos prProductosOld = persistentCoDetalleOrdenCompra.getPrProductos();
-            PrProductos prProductosNew = coDetalleOrdenCompra.getPrProductos();
             CoOrdenCompras coOrdenComprasOld = persistentCoDetalleOrdenCompra.getCoOrdenCompras();
             CoOrdenCompras coOrdenComprasNew = coDetalleOrdenCompra.getCoOrdenCompras();
-            if (prProductosNew != null) {
-                prProductosNew = em.getReference(prProductosNew.getClass(), prProductosNew.getPrProductosPK());
-                coDetalleOrdenCompra.setPrProductos(prProductosNew);
-            }
             if (coOrdenComprasNew != null) {
                 coOrdenComprasNew = em.getReference(coOrdenComprasNew.getClass(), coOrdenComprasNew.getCoOrdenComprasPK());
                 coDetalleOrdenCompra.setCoOrdenCompras(coOrdenComprasNew);
             }
             coDetalleOrdenCompra = em.merge(coDetalleOrdenCompra);
-            if (prProductosOld != null && !prProductosOld.equals(prProductosNew)) {
-                prProductosOld.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompra);
-                prProductosOld = em.merge(prProductosOld);
-            }
-            if (prProductosNew != null && !prProductosNew.equals(prProductosOld)) {
-                prProductosNew.getCoDetalleOrdenCompraList().add(coDetalleOrdenCompra);
-                prProductosNew = em.merge(prProductosNew);
-            }
             if (coOrdenComprasOld != null && !coOrdenComprasOld.equals(coOrdenComprasNew)) {
                 coOrdenComprasOld.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompra);
                 coOrdenComprasOld = em.merge(coOrdenComprasOld);
@@ -156,11 +120,6 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
                 coDetalleOrdenCompra.getCoDetalleOrdenCompraPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coDetalleOrdenCompra with id " + id + " no longer exists.", enfe);
-            }
-            PrProductos prProductos = coDetalleOrdenCompra.getPrProductos();
-            if (prProductos != null) {
-                prProductos.getCoDetalleOrdenCompraList().remove(coDetalleOrdenCompra);
-                prProductos = em.merge(prProductos);
             }
             CoOrdenCompras coOrdenCompras = coDetalleOrdenCompra.getCoOrdenCompras();
             if (coOrdenCompras != null) {

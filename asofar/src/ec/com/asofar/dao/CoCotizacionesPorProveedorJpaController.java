@@ -44,9 +44,9 @@ public class CoCotizacionesPorProveedorJpaController implements Serializable {
         if (coCotizacionesPorProveedor.getCoDetalleCotizacionPorProveedorList() == null) {
             coCotizacionesPorProveedor.setCoDetalleCotizacionPorProveedorList(new ArrayList<CoDetalleCotizacionPorProveedor>());
         }
+        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdEmpresa(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdCotizacion(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdSucursal(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
-        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdEmpresa(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -90,9 +90,9 @@ public class CoCotizacionesPorProveedorJpaController implements Serializable {
     }
 
     public void edit(CoCotizacionesPorProveedor coCotizacionesPorProveedor) throws IllegalOrphanException, NonexistentEntityException, Exception {
+        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdEmpresa(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdCotizacion(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdSucursal(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
-        coCotizacionesPorProveedor.getCoCotizacionesPorProveedorPK().setIdEmpresa(coCotizacionesPorProveedor.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();

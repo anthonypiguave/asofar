@@ -28,64 +28,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CoDetalleOrdenCompra.findAll", query = "SELECT c FROM CoDetalleOrdenCompra c")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idOrdenCompra = :idOrdenCompra")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdEmpresa", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSurcusal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idSurcusal = :idSurcusal")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.lineaDetalle = :lineaDetalle")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idProducto = :idProducto")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idGrupo = :idGrupo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idSubgrupo = :idSubgrupo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idArticulo = :idArticulo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idTipoMedidas = :idTipoMedidas")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idTipoPresentacion = :idTipoPresentacion")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByMarca", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.marca = :marca")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByModelado", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.modelado = :modelado")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByCantidadTotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.cantidadTotal = :cantidadTotal")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByPrecioUnitario", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.precioUnitario = :precioUnitario")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByPrecioTotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.precioTotal = :precioTotal")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByEstado", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIva", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.iva = :iva")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByCantidadRecibida", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.cantidadRecibida = :cantidadRecibida")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findBySubtotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.subtotal = :subtotal")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIva", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.iva = :iva")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIce", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.ice = :ice")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByDescuento", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.descuento = :descuento")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByTotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.total = :total")})
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByTotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.total = :total")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByEstado", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.estado = :estado")})
 public class CoDetalleOrdenCompra implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoDetalleOrdenCompraPK coDetalleOrdenCompraPK;
+    @Column(name = "id_detalle_orden_compra")
+    private BigInteger idDetalleOrdenCompra;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "marca")
-    private String marca;
-    @Column(name = "modelado")
-    private String modelado;
-    @Column(name = "cantidad_total")
-    private BigInteger cantidadTotal;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "precio_unitario")
     private BigDecimal precioUnitario;
-    @Column(name = "precio_total")
-    private BigDecimal precioTotal;
-    @Column(name = "estado")
-    private String estado;
-    @Column(name = "iva")
-    private BigDecimal iva;
+    @Column(name = "cantidad_recibida")
+    private BigInteger cantidadRecibida;
     @Column(name = "subtotal")
     private BigDecimal subtotal;
+    @Column(name = "iva")
+    private BigDecimal iva;
+    @Column(name = "ice")
+    private BigDecimal ice;
     @Column(name = "descuento")
     private BigDecimal descuento;
     @Column(name = "total")
     private BigDecimal total;
-    @JoinColumns({
-        @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_grupo", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_articulo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private PrProductos prProductos;
+    @Column(name = "estado")
+    private String estado;
     @JoinColumns({
         @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra", insertable = false, updatable = false)
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
@@ -100,8 +83,8 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.coDetalleOrdenCompraPK = coDetalleOrdenCompraPK;
     }
 
-    public CoDetalleOrdenCompra(long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto, long idGrupo, long idSubgrupo, long idArticulo, long idTipoMedidas, long idTipoPresentacion) {
-        this.coDetalleOrdenCompraPK = new CoDetalleOrdenCompraPK(idOrdenCompra, idEmpresa, idSurcusal, lineaDetalle, idProducto, idGrupo, idSubgrupo, idArticulo, idTipoMedidas, idTipoPresentacion);
+    public CoDetalleOrdenCompra(long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto) {
+        this.coDetalleOrdenCompraPK = new CoDetalleOrdenCompraPK(idOrdenCompra, idEmpresa, idSurcusal, lineaDetalle, idProducto);
     }
 
     public CoDetalleOrdenCompraPK getCoDetalleOrdenCompraPK() {
@@ -112,36 +95,20 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.coDetalleOrdenCompraPK = coDetalleOrdenCompraPK;
     }
 
+    public BigInteger getIdDetalleOrdenCompra() {
+        return idDetalleOrdenCompra;
+    }
+
+    public void setIdDetalleOrdenCompra(BigInteger idDetalleOrdenCompra) {
+        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelado() {
-        return modelado;
-    }
-
-    public void setModelado(String modelado) {
-        this.modelado = modelado;
-    }
-
-    public BigInteger getCantidadTotal() {
-        return cantidadTotal;
-    }
-
-    public void setCantidadTotal(BigInteger cantidadTotal) {
-        this.cantidadTotal = cantidadTotal;
     }
 
     public BigDecimal getPrecioUnitario() {
@@ -152,20 +119,20 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.precioUnitario = precioUnitario;
     }
 
-    public BigDecimal getPrecioTotal() {
-        return precioTotal;
+    public BigInteger getCantidadRecibida() {
+        return cantidadRecibida;
     }
 
-    public void setPrecioTotal(BigDecimal precioTotal) {
-        this.precioTotal = precioTotal;
+    public void setCantidadRecibida(BigInteger cantidadRecibida) {
+        this.cantidadRecibida = cantidadRecibida;
     }
 
-    public String getEstado() {
-        return estado;
+    public BigDecimal getSubtotal() {
+        return subtotal;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
     }
 
     public BigDecimal getIva() {
@@ -176,12 +143,12 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.iva = iva;
     }
 
-    public BigDecimal getSubtotal() {
-        return subtotal;
+    public BigDecimal getIce() {
+        return ice;
     }
 
-    public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
+    public void setIce(BigDecimal ice) {
+        this.ice = ice;
     }
 
     public BigDecimal getDescuento() {
@@ -200,12 +167,12 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.total = total;
     }
 
-    public PrProductos getPrProductos() {
-        return prProductos;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setPrProductos(PrProductos prProductos) {
-        this.prProductos = prProductos;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public CoOrdenCompras getCoOrdenCompras() {
