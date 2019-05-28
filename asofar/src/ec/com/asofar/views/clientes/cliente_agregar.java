@@ -299,7 +299,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         try {
             boolean valor1 = ValidarDTO.ValidarSeClienteCedula(txt_numero_identificacion.getText());
             if (valor1 == true) {
-                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+                JOptionPane.showMessageDialog(this, "El Cliente ya existente");
             } else {
                 clientes.setPrimerNombre(txt_primer_nombre.getText());
                 clientes.setSegundoNombre(txt_segundo_nombre.getText());
