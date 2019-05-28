@@ -5,7 +5,9 @@
  */
 package ec.com.asofar.views.clientes;
 
+import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -15,6 +17,9 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,10 +35,11 @@ public class cliente_editar extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    SeClientes cli;
+    SeClientes cliente;
+    SeClientes clientes = new SeClientes();
     List<SeTipoIdentificacion> TiIden;
     SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    SeClientesJpaController scc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     public cliente_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -48,19 +54,21 @@ public class cliente_editar extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
-        cli = cl;
+        cliente = cl;
         TiIden = tic.findSeTipoIdentificacionEntities();
         mostrarDatos();
         llenarCombo(TiIden);
+        cbx_estado.addItem("A");
+        cbx_estado.addItem("I");
     }
 
     public void mostrarDatos() {
-        txtprimer_nombre.setText(cli.getPrimerNombre());
-        txtsegundo_nombre.setText(cli.getSegundoNombre());
-        txtprimer_apellido.setText(cli.getPrimerApellido());
-        txtsegundo_apellido.setText(cli.getSegundoApellido());
-        txt_razon_social.setText(cli.getRazonSocial());
-        txt_numero_identificacion.setText(cli.getNumeroIdentificacion());
+        txt_primer_nombre.setText(cliente.getPrimerNombre());
+        txt_segundo_nombre.setText(cliente.getSegundoNombre());
+        txt_primer_apellido.setText(cliente.getPrimerApellido());
+        txt_segundo_apellido.setText(cliente.getSegundoApellido());
+        txt_razon_social.setText(cliente.getRazonSocial());
+        txt_numero_identificacion.setText(cliente.getNumeroIdentificacion());
     }
 
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
@@ -77,11 +85,11 @@ public class cliente_editar extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtprimer_nombre = new javax.swing.JTextField();
+        txt_primer_nombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtsegundo_nombre = new javax.swing.JTextField();
-        txtprimer_apellido = new javax.swing.JTextField();
-        txtsegundo_apellido = new javax.swing.JTextField();
+        txt_segundo_nombre = new javax.swing.JTextField();
+        txt_primer_apellido = new javax.swing.JTextField();
+        txt_segundo_apellido = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txt_razon_social = new javax.swing.JTextField();
         cbxtipo_identificacion = new javax.swing.JComboBox<>();
@@ -89,6 +97,8 @@ public class cliente_editar extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txt_numero_identificacion = new javax.swing.JTextField();
         btn_guardar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cbx_estado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -150,6 +160,13 @@ public class cliente_editar extends javax.swing.JDialog {
 
         btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_guardar.setText("GUARDAR");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Estado : ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,6 +176,10 @@ public class cliente_editar extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_guardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -169,24 +190,26 @@ public class cliente_editar extends javax.swing.JDialog {
                                         .addComponent(jLabel2))
                                     .addGap(64, 64, 64)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtsegundo_apellido)
-                                        .addComponent(txtsegundo_nombre)
-                                        .addComponent(txtprimer_nombre)
-                                        .addComponent(txtprimer_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txt_segundo_apellido)
+                                        .addComponent(txt_segundo_nombre)
+                                        .addComponent(txt_primer_nombre)
+                                        .addComponent(txt_primer_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel6))
-                                    .addGap(58, 58, 58)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jLabel6))
+                                            .addGap(58, 58, 58))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addGap(157, 157, 157)))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(cbxtipo_identificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txt_numero_identificacion)
-                                        .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_guardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbx_estado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -200,13 +223,13 @@ public class cliente_editar extends javax.swing.JDialog {
                         .addGap(55, 55, 55)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtprimer_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_primer_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtsegundo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_segundo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtprimer_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_primer_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtsegundo_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_segundo_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -220,6 +243,10 @@ public class cliente_editar extends javax.swing.JDialog {
                     .addComponent(jLabel6)
                     .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbx_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btn_guardar))
@@ -273,6 +300,32 @@ public class cliente_editar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txt_numero_identificacionKeyTyped
 
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        java.util.Date fechaActual = new java.util.Date();
+        SeTipoIdentificacion ti = new SeTipoIdentificacion();
+        ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
+
+        cliente.setPrimerNombre(txt_primer_nombre.getText());
+        cliente.setSegundoNombre(txt_segundo_nombre.getText());
+        cliente.setPrimerApellido(txt_primer_apellido.getText());
+        cliente.setSegundoApellido(txt_segundo_apellido.getText());
+        cliente.setNumeroIdentificacion(txt_numero_identificacion.getText());
+        cliente.setNombreCompleto(txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
+                + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText());
+        cliente.setIdTipoIdentificacion(ti);
+        cliente.setFechaActualizacion(fechaActual);
+        cliente.setUsuarioActualizacion(usu.getNombreUsuario());
+        cliente.setRazonSocial(txt_razon_social.getText());
+        cliente.setEstado(cbx_estado.getSelectedItem().toString());
+        try {
+            scc.edit(cliente);
+            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            setVisible(false);
+        } catch (Exception ex) {
+            Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_guardarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -317,6 +370,7 @@ public class cliente_editar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_guardar;
+    private javax.swing.JComboBox<String> cbx_estado;
     private javax.swing.JComboBox<String> cbxtipo_identificacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -325,12 +379,13 @@ public class cliente_editar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txt_numero_identificacion;
+    private javax.swing.JTextField txt_primer_apellido;
+    private javax.swing.JTextField txt_primer_nombre;
     private javax.swing.JTextField txt_razon_social;
-    private javax.swing.JTextField txtprimer_apellido;
-    private javax.swing.JTextField txtprimer_nombre;
-    private javax.swing.JTextField txtsegundo_apellido;
-    private javax.swing.JTextField txtsegundo_nombre;
+    private javax.swing.JTextField txt_segundo_apellido;
+    private javax.swing.JTextField txt_segundo_nombre;
     // End of variables declaration//GEN-END:variables
 }
