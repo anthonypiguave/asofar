@@ -73,6 +73,22 @@ public class ObtenerDTO {
         return dto;
 
     }
+    public static SePais ObtenerSePais(int id) {
+        SePaisJpaController control = new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SePais dto = new SePais();
+        List<SePais> lista = control.findSePaisEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdPais().equals(id)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }    
+    
 
     public static VeCaja ObtenerVeCaja(String nombre) {
         VeCajaJpaController control = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());

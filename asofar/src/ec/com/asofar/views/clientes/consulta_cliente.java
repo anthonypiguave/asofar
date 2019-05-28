@@ -530,7 +530,6 @@ public class consulta_cliente extends javax.swing.JDialog {
 //                ContactoCliente = Ccl.findSeContactosClientesEntities();
 //                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
             }
-            ////
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA LOCALIDAD");
         }
