@@ -8,6 +8,7 @@ package ec.com.asofar.views.clientes;
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -40,6 +41,7 @@ public class cliente_editar extends javax.swing.JDialog {
     List<SeTipoIdentificacion> TiIden;
     SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeClientesJpaController scc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     public cliente_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -303,27 +305,37 @@ public class cliente_editar extends javax.swing.JDialog {
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
         SeTipoIdentificacion ti = new SeTipoIdentificacion();
-        ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
+        String nombreCompleto =txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
+                        + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
+//        try {
+//            boolean valor1 = ValidarDTO.ValidarSeCliente(nombreCompleto);
+//            if (valor1 == true) {
+//                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+//            } else {
+                ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
 
-        cliente.setPrimerNombre(txt_primer_nombre.getText());
-        cliente.setSegundoNombre(txt_segundo_nombre.getText());
-        cliente.setPrimerApellido(txt_primer_apellido.getText());
-        cliente.setSegundoApellido(txt_segundo_apellido.getText());
-        cliente.setNumeroIdentificacion(txt_numero_identificacion.getText());
-        cliente.setNombreCompleto(txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
-                + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText());
-        cliente.setIdTipoIdentificacion(ti);
-        cliente.setFechaActualizacion(fechaActual);
-        cliente.setUsuarioActualizacion(usu.getNombreUsuario());
-        cliente.setRazonSocial(txt_razon_social.getText());
-        cliente.setEstado(cbx_estado.getSelectedItem().toString());
-        try {
-            scc.edit(cliente);
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
-            setVisible(false);
-        } catch (Exception ex) {
-            Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                cliente.setPrimerNombre(txt_primer_nombre.getText());
+                cliente.setSegundoNombre(txt_segundo_nombre.getText());
+                cliente.setPrimerApellido(txt_primer_apellido.getText());
+                cliente.setSegundoApellido(txt_segundo_apellido.getText());
+                cliente.setNumeroIdentificacion(txt_numero_identificacion.getText());
+                cliente.setNombreCompleto(nombreCompleto);
+                cliente.setIdTipoIdentificacion(ti);
+                cliente.setFechaActualizacion(fechaActual);
+                cliente.setUsuarioActualizacion(usu.getNombreUsuario());
+                cliente.setRazonSocial(txt_razon_social.getText());
+                cliente.setEstado(cbx_estado.getSelectedItem().toString());
+                try {
+                    scc.edit(cliente);
+                    JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+                    setVisible(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        }
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**

@@ -71,8 +71,6 @@ public class ValidarDTO {
         }
         
         return valor;
-    
-    
     }    
     public static boolean ValidarInTipoBodega(String nombre){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());

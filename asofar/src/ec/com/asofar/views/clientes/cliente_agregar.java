@@ -8,6 +8,7 @@ package ec.com.asofar.views.clientes;
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -292,25 +293,36 @@ public class cliente_agregar extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
         SeTipoIdentificacion ti = new SeTipoIdentificacion();
         ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
-
-        clientes.setPrimerNombre(txt_primer_nombre.getText());
-        clientes.setSegundoNombre(txt_segundo_nombre.getText());
-        clientes.setPrimerApellido(txt_primer_apellido.getText());
-        clientes.setSegundoApellido(txt_segundo_apellido.getText());
-        clientes.setNumeroIdentificacion(txt_numero_identificacion.getText());
-        clientes.setNombreCompleto(txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
-                + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText());
-        clientes.setIdTipoIdentificacion(ti);
-        clientes.setFechaCreacion(fechaActual);
-        clientes.setUsuarioCreacion(usu.getNombreUsuario());
-        clientes.setRazonSocial(txt_razon_social.getText());
-        clientes.setEstado("A");
+        
+        String nombreCompleto = txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
+                + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
         try {
-            scc.create(clientes);
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
-            setVisible(false);
-        } catch (Exception ex) {
-            Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
+            boolean valor1 = ValidarDTO.ValidarSeCliente(nombreCompleto);
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
+            } else {
+                clientes.setPrimerNombre(txt_primer_nombre.getText());
+                clientes.setSegundoNombre(txt_segundo_nombre.getText());
+                clientes.setPrimerApellido(txt_primer_apellido.getText());
+                clientes.setSegundoApellido(txt_segundo_apellido.getText());
+                clientes.setNumeroIdentificacion(txt_numero_identificacion.getText());
+                clientes.setNombreCompleto(txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
+                        + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText());
+                clientes.setIdTipoIdentificacion(ti);
+                clientes.setFechaCreacion(fechaActual);
+                clientes.setUsuarioCreacion(usu.getNombreUsuario());
+                clientes.setRazonSocial(txt_razon_social.getText());
+                clientes.setEstado("A");
+                try {
+                    scc.create(clientes);
+                    JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+                    setVisible(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnguardarActionPerformed
 
