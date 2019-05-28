@@ -1478,5 +1478,35 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
-    }    
+    } 
+        public static void TablaClientesInactivos(List<SeClientes> listacliente, JTable Tabla) {
+        int[] a = {5, 50,120,200};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID", "IDENTIFICACION", "NUMERO DE IDENTIFICACION","NOMBRE COMPLETO"};
+        String[] filas = new String[4];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listacliente.size(); i++) {
+            if (listacliente.get(i).getEstado().equals("I")) {
+                filas[0] = String.valueOf(listacliente.get(i).getIdClientes());
+                filas[1] = listacliente.get(i).getIdTipoIdentificacion().getNombreIdentificacion();
+                filas[2] = listacliente.get(i).getNumeroIdentificacion();
+                filas[3] = listacliente.get(i).getNombreCompleto();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
+        }
+    }
 }
