@@ -60,7 +60,7 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CoDetalleOrdenPedido persistentCoDetalleOrdenPedido = em.find(CoDetalleOrdenPedido.class, coDetalleOrdenPedido.getIdDetalleOrdenCompra());
+            CoDetalleOrdenPedido persistentCoDetalleOrdenPedido = em.find(CoDetalleOrdenPedido.class, coDetalleOrdenPedido.getIdDetalleOrdenPedido());
             CoOrdenPedido coOrdenPedidoOld = persistentCoDetalleOrdenPedido.getCoOrdenPedido();
             CoOrdenPedido coOrdenPedidoNew = coDetalleOrdenPedido.getCoOrdenPedido();
             if (coOrdenPedidoNew != null) {
@@ -80,7 +80,7 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = coDetalleOrdenPedido.getIdDetalleOrdenCompra();
+                Long id = coDetalleOrdenPedido.getIdDetalleOrdenPedido();
                 if (findCoDetalleOrdenPedido(id) == null) {
                     throw new NonexistentEntityException("The coDetalleOrdenPedido with id " + id + " no longer exists.");
                 }
@@ -101,7 +101,7 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
             CoDetalleOrdenPedido coDetalleOrdenPedido;
             try {
                 coDetalleOrdenPedido = em.getReference(CoDetalleOrdenPedido.class, id);
-                coDetalleOrdenPedido.getIdDetalleOrdenCompra();
+                coDetalleOrdenPedido.getIdDetalleOrdenPedido();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coDetalleOrdenPedido with id " + id + " no longer exists.", enfe);
             }

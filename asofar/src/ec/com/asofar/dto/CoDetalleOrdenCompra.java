@@ -8,12 +8,9 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -31,15 +28,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CoDetalleOrdenCompra.findAll", query = "SELECT c FROM CoDetalleOrdenCompra c")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.lineaDetalle = :lineaDetalle")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idOrdenCompra = :idOrdenCompra")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdEmpresa", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSurcusal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idSurcusal = :idSurcusal")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.descripcion = :descripcion")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idProducto = :idProducto")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idGrupo = :idGrupo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idSubgrupo = :idSubgrupo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idArticulo = :idArticulo")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoMedidas = :idTipoMedidas")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idTipoPresentacion = :idTipoPresentacion")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idProducto = :idProducto")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idGrupo = :idGrupo")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idSubgrupo = :idSubgrupo")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idArticulo = :idArticulo")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idTipoMedidas = :idTipoMedidas")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idTipoPresentacion = :idTipoPresentacion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByMarca", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.marca = :marca")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByModelado", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.modelado = :modelado")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByCantidadTotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.cantidadTotal = :cantidadTotal")
@@ -53,27 +52,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CoDetalleOrdenCompra implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_detalle_orden_compra")
-    private Long idDetalleOrdenCompra;
-    @Column(name = "linea_detalle")
-    private BigInteger lineaDetalle;
+    @EmbeddedId
+    protected CoDetalleOrdenCompraPK coDetalleOrdenCompraPK;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "id_producto")
-    private BigInteger idProducto;
-    @Column(name = "id_grupo")
-    private BigInteger idGrupo;
-    @Column(name = "id_subgrupo")
-    private BigInteger idSubgrupo;
-    @Column(name = "id_articulo")
-    private BigInteger idArticulo;
-    @Column(name = "id_tipo_medidas")
-    private BigInteger idTipoMedidas;
-    @Column(name = "id_tipo_presentacion")
-    private BigInteger idTipoPresentacion;
     @Column(name = "marca")
     private String marca;
     @Column(name = "modelado")
@@ -96,33 +78,38 @@ public class CoDetalleOrdenCompra implements Serializable {
     @Column(name = "total")
     private BigDecimal total;
     @JoinColumns({
-        @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra")
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal")})
-    @ManyToOne
+        @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_grupo", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_articulo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private PrProductos prProductos;
+    @JoinColumns({
+        @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
     private CoOrdenCompras coOrdenCompras;
 
     public CoDetalleOrdenCompra() {
     }
 
-    public CoDetalleOrdenCompra(Long idDetalleOrdenCompra) {
-        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
+    public CoDetalleOrdenCompra(CoDetalleOrdenCompraPK coDetalleOrdenCompraPK) {
+        this.coDetalleOrdenCompraPK = coDetalleOrdenCompraPK;
     }
 
-    public Long getIdDetalleOrdenCompra() {
-        return idDetalleOrdenCompra;
+    public CoDetalleOrdenCompra(long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto, long idGrupo, long idSubgrupo, long idArticulo, long idTipoMedidas, long idTipoPresentacion) {
+        this.coDetalleOrdenCompraPK = new CoDetalleOrdenCompraPK(idOrdenCompra, idEmpresa, idSurcusal, lineaDetalle, idProducto, idGrupo, idSubgrupo, idArticulo, idTipoMedidas, idTipoPresentacion);
     }
 
-    public void setIdDetalleOrdenCompra(Long idDetalleOrdenCompra) {
-        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
+    public CoDetalleOrdenCompraPK getCoDetalleOrdenCompraPK() {
+        return coDetalleOrdenCompraPK;
     }
 
-    public BigInteger getLineaDetalle() {
-        return lineaDetalle;
-    }
-
-    public void setLineaDetalle(BigInteger lineaDetalle) {
-        this.lineaDetalle = lineaDetalle;
+    public void setCoDetalleOrdenCompraPK(CoDetalleOrdenCompraPK coDetalleOrdenCompraPK) {
+        this.coDetalleOrdenCompraPK = coDetalleOrdenCompraPK;
     }
 
     public String getDescripcion() {
@@ -131,54 +118,6 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public BigInteger getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(BigInteger idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public BigInteger getIdGrupo() {
-        return idGrupo;
-    }
-
-    public void setIdGrupo(BigInteger idGrupo) {
-        this.idGrupo = idGrupo;
-    }
-
-    public BigInteger getIdSubgrupo() {
-        return idSubgrupo;
-    }
-
-    public void setIdSubgrupo(BigInteger idSubgrupo) {
-        this.idSubgrupo = idSubgrupo;
-    }
-
-    public BigInteger getIdArticulo() {
-        return idArticulo;
-    }
-
-    public void setIdArticulo(BigInteger idArticulo) {
-        this.idArticulo = idArticulo;
-    }
-
-    public BigInteger getIdTipoMedidas() {
-        return idTipoMedidas;
-    }
-
-    public void setIdTipoMedidas(BigInteger idTipoMedidas) {
-        this.idTipoMedidas = idTipoMedidas;
-    }
-
-    public BigInteger getIdTipoPresentacion() {
-        return idTipoPresentacion;
-    }
-
-    public void setIdTipoPresentacion(BigInteger idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
     }
 
     public String getMarca() {
@@ -261,6 +200,14 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.total = total;
     }
 
+    public PrProductos getPrProductos() {
+        return prProductos;
+    }
+
+    public void setPrProductos(PrProductos prProductos) {
+        this.prProductos = prProductos;
+    }
+
     public CoOrdenCompras getCoOrdenCompras() {
         return coOrdenCompras;
     }
@@ -272,7 +219,7 @@ public class CoDetalleOrdenCompra implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDetalleOrdenCompra != null ? idDetalleOrdenCompra.hashCode() : 0);
+        hash += (coDetalleOrdenCompraPK != null ? coDetalleOrdenCompraPK.hashCode() : 0);
         return hash;
     }
 
@@ -283,7 +230,7 @@ public class CoDetalleOrdenCompra implements Serializable {
             return false;
         }
         CoDetalleOrdenCompra other = (CoDetalleOrdenCompra) object;
-        if ((this.idDetalleOrdenCompra == null && other.idDetalleOrdenCompra != null) || (this.idDetalleOrdenCompra != null && !this.idDetalleOrdenCompra.equals(other.idDetalleOrdenCompra))) {
+        if ((this.coDetalleOrdenCompraPK == null && other.coDetalleOrdenCompraPK != null) || (this.coDetalleOrdenCompraPK != null && !this.coDetalleOrdenCompraPK.equals(other.coDetalleOrdenCompraPK))) {
             return false;
         }
         return true;
@@ -291,7 +238,7 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetalleOrdenCompra[ idDetalleOrdenCompra=" + idDetalleOrdenCompra + " ]";
+        return "ec.com.asofar.dto.CoDetalleOrdenCompra[ coDetalleOrdenCompraPK=" + coDetalleOrdenCompraPK + " ]";
     }
     
 }

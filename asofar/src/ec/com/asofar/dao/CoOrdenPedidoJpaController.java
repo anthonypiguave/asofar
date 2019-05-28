@@ -43,8 +43,8 @@ public class CoOrdenPedidoJpaController implements Serializable {
         if (coOrdenPedido.getCoDetalleOrdenPedidoList() == null) {
             coOrdenPedido.setCoDetalleOrdenPedidoList(new ArrayList<CoDetalleOrdenPedido>());
         }
-        coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
         coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -56,7 +56,7 @@ public class CoOrdenPedidoJpaController implements Serializable {
             }
             List<CoDetalleOrdenPedido> attachedCoDetalleOrdenPedidoList = new ArrayList<CoDetalleOrdenPedido>();
             for (CoDetalleOrdenPedido coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach : coOrdenPedido.getCoDetalleOrdenPedidoList()) {
-                coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenCompra());
+                coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenPedido());
                 attachedCoDetalleOrdenPedidoList.add(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach);
             }
             coOrdenPedido.setCoDetalleOrdenPedidoList(attachedCoDetalleOrdenPedidoList);
@@ -88,8 +88,8 @@ public class CoOrdenPedidoJpaController implements Serializable {
     }
 
     public void edit(CoOrdenPedido coOrdenPedido) throws NonexistentEntityException, Exception {
-        coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
         coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -105,7 +105,7 @@ public class CoOrdenPedidoJpaController implements Serializable {
             }
             List<CoDetalleOrdenPedido> attachedCoDetalleOrdenPedidoListNew = new ArrayList<CoDetalleOrdenPedido>();
             for (CoDetalleOrdenPedido coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach : coDetalleOrdenPedidoListNew) {
-                coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenCompra());
+                coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenPedido());
                 attachedCoDetalleOrdenPedidoListNew.add(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach);
             }
             coDetalleOrdenPedidoListNew = attachedCoDetalleOrdenPedidoListNew;

@@ -13,7 +13,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeProvincia;
-import ec.com.asofar.dto.SePais;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,19 +42,10 @@ public class SeCiudadJpaController implements Serializable {
                 idProvincia = em.getReference(idProvincia.getClass(), idProvincia.getIdProvincia());
                 seCiudad.setIdProvincia(idProvincia);
             }
-            SePais idPais = seCiudad.getIdPais();
-            if (idPais != null) {
-                idPais = em.getReference(idPais.getClass(), idPais.getIdPais());
-                seCiudad.setIdPais(idPais);
-            }
             em.persist(seCiudad);
             if (idProvincia != null) {
                 idProvincia.getSeCiudadList().add(seCiudad);
                 idProvincia = em.merge(idProvincia);
-            }
-            if (idPais != null) {
-                idPais.getSeCiudadList().add(seCiudad);
-                idPais = em.merge(idPais);
             }
             em.getTransaction().commit();
         } finally {
@@ -73,15 +63,9 @@ public class SeCiudadJpaController implements Serializable {
             SeCiudad persistentSeCiudad = em.find(SeCiudad.class, seCiudad.getIdCiudad());
             SeProvincia idProvinciaOld = persistentSeCiudad.getIdProvincia();
             SeProvincia idProvinciaNew = seCiudad.getIdProvincia();
-            SePais idPaisOld = persistentSeCiudad.getIdPais();
-            SePais idPaisNew = seCiudad.getIdPais();
             if (idProvinciaNew != null) {
                 idProvinciaNew = em.getReference(idProvinciaNew.getClass(), idProvinciaNew.getIdProvincia());
                 seCiudad.setIdProvincia(idProvinciaNew);
-            }
-            if (idPaisNew != null) {
-                idPaisNew = em.getReference(idPaisNew.getClass(), idPaisNew.getIdPais());
-                seCiudad.setIdPais(idPaisNew);
             }
             seCiudad = em.merge(seCiudad);
             if (idProvinciaOld != null && !idProvinciaOld.equals(idProvinciaNew)) {
@@ -91,14 +75,6 @@ public class SeCiudadJpaController implements Serializable {
             if (idProvinciaNew != null && !idProvinciaNew.equals(idProvinciaOld)) {
                 idProvinciaNew.getSeCiudadList().add(seCiudad);
                 idProvinciaNew = em.merge(idProvinciaNew);
-            }
-            if (idPaisOld != null && !idPaisOld.equals(idPaisNew)) {
-                idPaisOld.getSeCiudadList().remove(seCiudad);
-                idPaisOld = em.merge(idPaisOld);
-            }
-            if (idPaisNew != null && !idPaisNew.equals(idPaisOld)) {
-                idPaisNew.getSeCiudadList().add(seCiudad);
-                idPaisNew = em.merge(idPaisNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -133,11 +109,6 @@ public class SeCiudadJpaController implements Serializable {
             if (idProvincia != null) {
                 idProvincia.getSeCiudadList().remove(seCiudad);
                 idProvincia = em.merge(idProvincia);
-            }
-            SePais idPais = seCiudad.getIdPais();
-            if (idPais != null) {
-                idPais.getSeCiudadList().remove(seCiudad);
-                idPais = em.merge(idPais);
             }
             em.remove(seCiudad);
             em.getTransaction().commit();

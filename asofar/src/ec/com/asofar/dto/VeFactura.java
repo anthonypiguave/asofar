@@ -6,6 +6,7 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -13,7 +14,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "VeFactura.findAll", query = "SELECT v FROM VeFactura v")
     , @NamedQuery(name = "VeFactura.findByIdFactura", query = "SELECT v FROM VeFactura v WHERE v.veFacturaPK.idFactura = :idFactura")
     , @NamedQuery(name = "VeFactura.findByIdEmpresa", query = "SELECT v FROM VeFactura v WHERE v.veFacturaPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "VeFactura.findByIdSucursal", query = "SELECT v FROM VeFactura v WHERE v.idSucursal = :idSucursal")
     , @NamedQuery(name = "VeFactura.findByFechaFacturacion", query = "SELECT v FROM VeFactura v WHERE v.fechaFacturacion = :fechaFacturacion")
     , @NamedQuery(name = "VeFactura.findByNumeroEstablecimientoSri", query = "SELECT v FROM VeFactura v WHERE v.numeroEstablecimientoSri = :numeroEstablecimientoSri")
     , @NamedQuery(name = "VeFactura.findByPuntoEmisionSri", query = "SELECT v FROM VeFactura v WHERE v.puntoEmisionSri = :puntoEmisionSri")
@@ -57,6 +58,8 @@ public class VeFactura implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected VeFacturaPK veFacturaPK;
+    @Column(name = "id_sucursal")
+    private BigInteger idSucursal;
     @Column(name = "fecha_facturacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFacturacion;
@@ -100,11 +103,6 @@ public class VeFactura implements Serializable {
     @JoinColumn(name = "id_cliente", referencedColumnName = "id_persona")
     @ManyToOne
     private SePersonas idCliente;
-    @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")})
-    @ManyToOne(optional = false)
-    private SeSucursal seSucursal;
     @JoinColumn(name = "id_caja", referencedColumnName = "id_caja")
     @ManyToOne
     private VeCaja idCaja;
@@ -129,6 +127,14 @@ public class VeFactura implements Serializable {
 
     public void setVeFacturaPK(VeFacturaPK veFacturaPK) {
         this.veFacturaPK = veFacturaPK;
+    }
+
+    public BigInteger getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(BigInteger idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
     public Date getFechaFacturacion() {
@@ -282,14 +288,6 @@ public class VeFactura implements Serializable {
 
     public void setIdCliente(SePersonas idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public SeSucursal getSeSucursal() {
-        return seSucursal;
-    }
-
-    public void setSeSucursal(SeSucursal seSucursal) {
-        this.seSucursal = seSucursal;
     }
 
     public VeCaja getIdCaja() {

@@ -8,6 +8,8 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -16,10 +18,12 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -78,6 +82,8 @@ public class CoCotizacionesPorProveedor implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private CoItemsCotizacion coItemsCotizacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coCotizacionesPorProveedor")
+    private List<CoDetalleCotizacionPorProveedor> coDetalleCotizacionPorProveedorList;
 
     public CoCotizacionesPorProveedor() {
     }
@@ -184,6 +190,15 @@ public class CoCotizacionesPorProveedor implements Serializable {
 
     public void setCoItemsCotizacion(CoItemsCotizacion coItemsCotizacion) {
         this.coItemsCotizacion = coItemsCotizacion;
+    }
+
+    @XmlTransient
+    public List<CoDetalleCotizacionPorProveedor> getCoDetalleCotizacionPorProveedorList() {
+        return coDetalleCotizacionPorProveedorList;
+    }
+
+    public void setCoDetalleCotizacionPorProveedorList(List<CoDetalleCotizacionPorProveedor> coDetalleCotizacionPorProveedorList) {
+        this.coDetalleCotizacionPorProveedorList = coDetalleCotizacionPorProveedorList;
     }
 
     @Override

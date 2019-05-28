@@ -11,6 +11,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -66,6 +69,13 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @JoinColumns({
+        @JoinColumn(name = "id_cotizaciones_por_porveedor", referencedColumnName = "id_cotizaciones_por_porveedor", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private CoCotizacionesPorProveedor coCotizacionesPorProveedor;
 
     public CoDetalleCotizacionPorProveedor() {
     }
@@ -156,6 +166,14 @@ public class CoDetalleCotizacionPorProveedor implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public CoCotizacionesPorProveedor getCoCotizacionesPorProveedor() {
+        return coCotizacionesPorProveedor;
+    }
+
+    public void setCoCotizacionesPorProveedor(CoCotizacionesPorProveedor coCotizacionesPorProveedor) {
+        this.coCotizacionesPorProveedor = coCotizacionesPorProveedor;
     }
 
     @Override

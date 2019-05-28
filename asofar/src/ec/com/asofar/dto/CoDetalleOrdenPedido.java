@@ -6,8 +6,8 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,70 +33,44 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CoDetalleOrdenPedido.findAll", query = "SELECT c FROM CoDetalleOrdenPedido c")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdDetalleOrdenPedido", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idDetalleOrdenPedido = :idDetalleOrdenPedido")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.lineaDetalle = :lineaDetalle")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idProducto = :idProducto")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdGrupo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idGrupo = :idGrupo")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdSubgrupo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idSubgrupo = :idSubgrupo")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdArticulo", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idArticulo = :idArticulo")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdTipoPresentacion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idTipoPresentacion = :idTipoPresentacion")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdTipoMedidas", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idTipoMedidas = :idTipoMedidas")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByMarca", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.marca = :marca")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByModelado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.modelado = :modelado")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByCantidadTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.cantidadTotal = :cantidadTotal")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByPrecioUnitario", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.precioUnitario = :precioUnitario")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByPrecioTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.precioTotal = :precioTotal")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descripcion = :descripcion")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByCantidadSolicitada", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.cantidadSolicitada = :cantidadSolicitada")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByEstado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.estado = :estado")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIva", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.iva = :iva")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findBySubtotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.subtotal = :subtotal")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescuento", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descuento = :descuento")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByTotal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.total = :total")})
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByUsuarioCreacion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByFechaCreacion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByUsuarioActualizacion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByFechaActualizacion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.fechaActualizacion = :fechaActualizacion")})
 public class CoDetalleOrdenPedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_detalle_orden_compra")
-    private Long idDetalleOrdenCompra;
+    @Column(name = "id_detalle_orden_pedido")
+    private Long idDetalleOrdenPedido;
     @Column(name = "linea_detalle")
     private BigInteger lineaDetalle;
-    @Column(name = "descripcion")
-    private String descripcion;
     @Column(name = "id_producto")
     private BigInteger idProducto;
-    @Column(name = "id_grupo")
-    private BigInteger idGrupo;
-    @Column(name = "id_subgrupo")
-    private BigInteger idSubgrupo;
-    @Column(name = "id_articulo")
-    private BigInteger idArticulo;
-    @Column(name = "id_tipo_presentacion")
-    private BigInteger idTipoPresentacion;
-    @Column(name = "id_tipo_medidas")
-    private BigInteger idTipoMedidas;
-    @Column(name = "marca")
-    private String marca;
-    @Column(name = "modelado")
-    private String modelado;
-    @Column(name = "cantidad_total")
-    private BigInteger cantidadTotal;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "precio_unitario")
-    private BigDecimal precioUnitario;
-    @Column(name = "precio_total")
-    private BigDecimal precioTotal;
+    @Column(name = "descripcion")
+    private String descripcion;
+    @Column(name = "cantidad_solicitada")
+    private BigInteger cantidadSolicitada;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "iva")
-    private BigDecimal iva;
-    @Column(name = "subtotal")
-    private BigDecimal subtotal;
-    @Column(name = "descuento")
-    private BigDecimal descuento;
-    @Column(name = "total")
-    private BigDecimal total;
+    @Column(name = "usuario_creacion")
+    private String usuarioCreacion;
+    @Column(name = "fecha_creacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+    @Column(name = "usuario_actualizacion")
+    private String usuarioActualizacion;
+    @Column(name = "fecha_actualizacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaActualizacion;
     @JoinColumns({
         @JoinColumn(name = "id_orden_pedido", referencedColumnName = "id_orden_pedido")
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
@@ -105,16 +81,16 @@ public class CoDetalleOrdenPedido implements Serializable {
     public CoDetalleOrdenPedido() {
     }
 
-    public CoDetalleOrdenPedido(Long idDetalleOrdenCompra) {
-        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
+    public CoDetalleOrdenPedido(Long idDetalleOrdenPedido) {
+        this.idDetalleOrdenPedido = idDetalleOrdenPedido;
     }
 
-    public Long getIdDetalleOrdenCompra() {
-        return idDetalleOrdenCompra;
+    public Long getIdDetalleOrdenPedido() {
+        return idDetalleOrdenPedido;
     }
 
-    public void setIdDetalleOrdenCompra(Long idDetalleOrdenCompra) {
-        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
+    public void setIdDetalleOrdenPedido(Long idDetalleOrdenPedido) {
+        this.idDetalleOrdenPedido = idDetalleOrdenPedido;
     }
 
     public BigInteger getLineaDetalle() {
@@ -125,14 +101,6 @@ public class CoDetalleOrdenPedido implements Serializable {
         this.lineaDetalle = lineaDetalle;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public BigInteger getIdProducto() {
         return idProducto;
     }
@@ -141,84 +109,20 @@ public class CoDetalleOrdenPedido implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public BigInteger getIdGrupo() {
-        return idGrupo;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setIdGrupo(BigInteger idGrupo) {
-        this.idGrupo = idGrupo;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public BigInteger getIdSubgrupo() {
-        return idSubgrupo;
+    public BigInteger getCantidadSolicitada() {
+        return cantidadSolicitada;
     }
 
-    public void setIdSubgrupo(BigInteger idSubgrupo) {
-        this.idSubgrupo = idSubgrupo;
-    }
-
-    public BigInteger getIdArticulo() {
-        return idArticulo;
-    }
-
-    public void setIdArticulo(BigInteger idArticulo) {
-        this.idArticulo = idArticulo;
-    }
-
-    public BigInteger getIdTipoPresentacion() {
-        return idTipoPresentacion;
-    }
-
-    public void setIdTipoPresentacion(BigInteger idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
-    }
-
-    public BigInteger getIdTipoMedidas() {
-        return idTipoMedidas;
-    }
-
-    public void setIdTipoMedidas(BigInteger idTipoMedidas) {
-        this.idTipoMedidas = idTipoMedidas;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelado() {
-        return modelado;
-    }
-
-    public void setModelado(String modelado) {
-        this.modelado = modelado;
-    }
-
-    public BigInteger getCantidadTotal() {
-        return cantidadTotal;
-    }
-
-    public void setCantidadTotal(BigInteger cantidadTotal) {
-        this.cantidadTotal = cantidadTotal;
-    }
-
-    public BigDecimal getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(BigDecimal precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
-
-    public BigDecimal getPrecioTotal() {
-        return precioTotal;
-    }
-
-    public void setPrecioTotal(BigDecimal precioTotal) {
-        this.precioTotal = precioTotal;
+    public void setCantidadSolicitada(BigInteger cantidadSolicitada) {
+        this.cantidadSolicitada = cantidadSolicitada;
     }
 
     public String getEstado() {
@@ -229,36 +133,36 @@ public class CoDetalleOrdenPedido implements Serializable {
         this.estado = estado;
     }
 
-    public BigDecimal getIva() {
-        return iva;
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
     }
 
-    public void setIva(BigDecimal iva) {
-        this.iva = iva;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
-    public BigDecimal getSubtotal() {
-        return subtotal;
+    public Date getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public BigDecimal getDescuento() {
-        return descuento;
+    public String getUsuarioActualizacion() {
+        return usuarioActualizacion;
     }
 
-    public void setDescuento(BigDecimal descuento) {
-        this.descuento = descuento;
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
+        this.usuarioActualizacion = usuarioActualizacion;
     }
 
-    public BigDecimal getTotal() {
-        return total;
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
     }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 
     public CoOrdenPedido getCoOrdenPedido() {
@@ -272,7 +176,7 @@ public class CoDetalleOrdenPedido implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDetalleOrdenCompra != null ? idDetalleOrdenCompra.hashCode() : 0);
+        hash += (idDetalleOrdenPedido != null ? idDetalleOrdenPedido.hashCode() : 0);
         return hash;
     }
 
@@ -283,7 +187,7 @@ public class CoDetalleOrdenPedido implements Serializable {
             return false;
         }
         CoDetalleOrdenPedido other = (CoDetalleOrdenPedido) object;
-        if ((this.idDetalleOrdenCompra == null && other.idDetalleOrdenCompra != null) || (this.idDetalleOrdenCompra != null && !this.idDetalleOrdenCompra.equals(other.idDetalleOrdenCompra))) {
+        if ((this.idDetalleOrdenPedido == null && other.idDetalleOrdenPedido != null) || (this.idDetalleOrdenPedido != null && !this.idDetalleOrdenPedido.equals(other.idDetalleOrdenPedido))) {
             return false;
         }
         return true;
@@ -291,7 +195,7 @@ public class CoDetalleOrdenPedido implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetalleOrdenPedido[ idDetalleOrdenCompra=" + idDetalleOrdenCompra + " ]";
+        return "ec.com.asofar.dto.CoDetalleOrdenPedido[ idDetalleOrdenPedido=" + idDetalleOrdenPedido + " ]";
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.dao;
 
+import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -68,7 +69,7 @@ public class CoOrdenComprasJpaController implements Serializable {
             }
             List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraList = new ArrayList<CoDetalleOrdenCompra>();
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach : coOrdenCompras.getCoDetalleOrdenCompraList()) {
-                coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getIdDetalleOrdenCompra());
+                coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach.getCoDetalleOrdenCompraPK());
                 attachedCoDetalleOrdenCompraList.add(coDetalleOrdenCompraListCoDetalleOrdenCompraToAttach);
             }
             coOrdenCompras.setCoDetalleOrdenCompraList(attachedCoDetalleOrdenCompraList);
@@ -107,7 +108,7 @@ public class CoOrdenComprasJpaController implements Serializable {
         }
     }
 
-    public void edit(CoOrdenCompras coOrdenCompras) throws NonexistentEntityException, Exception {
+    public void edit(CoOrdenCompras coOrdenCompras) throws IllegalOrphanException, NonexistentEntityException, Exception {
         coOrdenCompras.getCoOrdenComprasPK().setIdEmpresa(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         coOrdenCompras.getCoOrdenComprasPK().setIdSucursal(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
@@ -123,6 +124,18 @@ public class CoOrdenComprasJpaController implements Serializable {
             SeSucursal seSucursalNew = coOrdenCompras.getSeSucursal();
             List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOld = persistentCoOrdenCompras.getCoDetalleOrdenCompraList();
             List<CoDetalleOrdenCompra> coDetalleOrdenCompraListNew = coOrdenCompras.getCoDetalleOrdenCompraList();
+            List<String> illegalOrphanMessages = null;
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListOldCoDetalleOrdenCompra : coDetalleOrdenCompraListOld) {
+                if (!coDetalleOrdenCompraListNew.contains(coDetalleOrdenCompraListOldCoDetalleOrdenCompra)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain CoDetalleOrdenCompra " + coDetalleOrdenCompraListOldCoDetalleOrdenCompra + " since its coOrdenCompras field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (idProveedorNew != null) {
                 idProveedorNew = em.getReference(idProveedorNew.getClass(), idProveedorNew.getIdProveedor());
                 coOrdenCompras.setIdProveedor(idProveedorNew);
@@ -137,7 +150,7 @@ public class CoOrdenComprasJpaController implements Serializable {
             }
             List<CoDetalleOrdenCompra> attachedCoDetalleOrdenCompraListNew = new ArrayList<CoDetalleOrdenCompra>();
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach : coDetalleOrdenCompraListNew) {
-                coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getIdDetalleOrdenCompra());
+                coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach = em.getReference(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getClass(), coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach.getCoDetalleOrdenCompraPK());
                 attachedCoDetalleOrdenCompraListNew.add(coDetalleOrdenCompraListNewCoDetalleOrdenCompraToAttach);
             }
             coDetalleOrdenCompraListNew = attachedCoDetalleOrdenCompraListNew;
@@ -167,12 +180,6 @@ public class CoOrdenComprasJpaController implements Serializable {
                 seSucursalNew.getCoOrdenComprasList().add(coOrdenCompras);
                 seSucursalNew = em.merge(seSucursalNew);
             }
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListOldCoDetalleOrdenCompra : coDetalleOrdenCompraListOld) {
-                if (!coDetalleOrdenCompraListNew.contains(coDetalleOrdenCompraListOldCoDetalleOrdenCompra)) {
-                    coDetalleOrdenCompraListOldCoDetalleOrdenCompra.setCoOrdenCompras(null);
-                    coDetalleOrdenCompraListOldCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListOldCoDetalleOrdenCompra);
-                }
-            }
             for (CoDetalleOrdenCompra coDetalleOrdenCompraListNewCoDetalleOrdenCompra : coDetalleOrdenCompraListNew) {
                 if (!coDetalleOrdenCompraListOld.contains(coDetalleOrdenCompraListNewCoDetalleOrdenCompra)) {
                     CoOrdenCompras oldCoOrdenComprasOfCoDetalleOrdenCompraListNewCoDetalleOrdenCompra = coDetalleOrdenCompraListNewCoDetalleOrdenCompra.getCoOrdenCompras();
@@ -201,7 +208,7 @@ public class CoOrdenComprasJpaController implements Serializable {
         }
     }
 
-    public void destroy(CoOrdenComprasPK id) throws NonexistentEntityException {
+    public void destroy(CoOrdenComprasPK id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -212,6 +219,17 @@ public class CoOrdenComprasJpaController implements Serializable {
                 coOrdenCompras.getCoOrdenComprasPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coOrdenCompras with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOrphanCheck = coOrdenCompras.getCoDetalleOrdenCompraList();
+            for (CoDetalleOrdenCompra coDetalleOrdenCompraListOrphanCheckCoDetalleOrdenCompra : coDetalleOrdenCompraListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This CoOrdenCompras (" + coOrdenCompras + ") cannot be destroyed since the CoDetalleOrdenCompra " + coDetalleOrdenCompraListOrphanCheckCoDetalleOrdenCompra + " in its coDetalleOrdenCompraList field has a non-nullable coOrdenCompras field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             CoProveedores idProveedor = coOrdenCompras.getIdProveedor();
             if (idProveedor != null) {
@@ -227,11 +245,6 @@ public class CoOrdenComprasJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getCoOrdenComprasList().remove(coOrdenCompras);
                 seSucursal = em.merge(seSucursal);
-            }
-            List<CoDetalleOrdenCompra> coDetalleOrdenCompraList = coOrdenCompras.getCoDetalleOrdenCompraList();
-            for (CoDetalleOrdenCompra coDetalleOrdenCompraListCoDetalleOrdenCompra : coDetalleOrdenCompraList) {
-                coDetalleOrdenCompraListCoDetalleOrdenCompra.setCoOrdenCompras(null);
-                coDetalleOrdenCompraListCoDetalleOrdenCompra = em.merge(coDetalleOrdenCompraListCoDetalleOrdenCompra);
             }
             em.remove(coOrdenCompras);
             em.getTransaction().commit();

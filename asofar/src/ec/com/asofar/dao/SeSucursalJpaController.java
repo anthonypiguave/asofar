@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.VeFacturaDetalle;
-import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.SeUsuarioSucurRol;
 import ec.com.asofar.dto.InKardex;
@@ -56,9 +55,6 @@ public class SeSucursalJpaController implements Serializable {
         }
         if (seSucursal.getVeFacturaDetalleList() == null) {
             seSucursal.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
-        }
-        if (seSucursal.getVeFacturaList() == null) {
-            seSucursal.setVeFacturaList(new ArrayList<VeFactura>());
         }
         if (seSucursal.getPrTarifarioList() == null) {
             seSucursal.setPrTarifarioList(new ArrayList<PrTarifario>());
@@ -100,12 +96,6 @@ public class SeSucursalJpaController implements Serializable {
                 attachedVeFacturaDetalleList.add(veFacturaDetalleListVeFacturaDetalleToAttach);
             }
             seSucursal.setVeFacturaDetalleList(attachedVeFacturaDetalleList);
-            List<VeFactura> attachedVeFacturaList = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListVeFacturaToAttach : seSucursal.getVeFacturaList()) {
-                veFacturaListVeFacturaToAttach = em.getReference(veFacturaListVeFacturaToAttach.getClass(), veFacturaListVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaList.add(veFacturaListVeFacturaToAttach);
-            }
-            seSucursal.setVeFacturaList(attachedVeFacturaList);
             List<PrTarifario> attachedPrTarifarioList = new ArrayList<PrTarifario>();
             for (PrTarifario prTarifarioListPrTarifarioToAttach : seSucursal.getPrTarifarioList()) {
                 prTarifarioListPrTarifarioToAttach = em.getReference(prTarifarioListPrTarifarioToAttach.getClass(), prTarifarioListPrTarifarioToAttach.getPrTarifarioPK());
@@ -160,15 +150,6 @@ public class SeSucursalJpaController implements Serializable {
                 if (oldSeSucursalOfVeFacturaDetalleListVeFacturaDetalle != null) {
                     oldSeSucursalOfVeFacturaDetalleListVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListVeFacturaDetalle);
                     oldSeSucursalOfVeFacturaDetalleListVeFacturaDetalle = em.merge(oldSeSucursalOfVeFacturaDetalleListVeFacturaDetalle);
-                }
-            }
-            for (VeFactura veFacturaListVeFactura : seSucursal.getVeFacturaList()) {
-                SeSucursal oldSeSucursalOfVeFacturaListVeFactura = veFacturaListVeFactura.getSeSucursal();
-                veFacturaListVeFactura.setSeSucursal(seSucursal);
-                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
-                if (oldSeSucursalOfVeFacturaListVeFactura != null) {
-                    oldSeSucursalOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
-                    oldSeSucursalOfVeFacturaListVeFactura = em.merge(oldSeSucursalOfVeFacturaListVeFactura);
                 }
             }
             for (PrTarifario prTarifarioListPrTarifario : seSucursal.getPrTarifarioList()) {
@@ -235,8 +216,6 @@ public class SeSucursalJpaController implements Serializable {
             List<CoOrdenCompras> coOrdenComprasListNew = seSucursal.getCoOrdenComprasList();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentSeSucursal.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = seSucursal.getVeFacturaDetalleList();
-            List<VeFactura> veFacturaListOld = persistentSeSucursal.getVeFacturaList();
-            List<VeFactura> veFacturaListNew = seSucursal.getVeFacturaList();
             List<PrTarifario> prTarifarioListOld = persistentSeSucursal.getPrTarifarioList();
             List<PrTarifario> prTarifarioListNew = seSucursal.getPrTarifarioList();
             List<SeUsuarioSucurRol> seUsuarioSucurRolListOld = persistentSeSucursal.getSeUsuarioSucurRolList();
@@ -268,14 +247,6 @@ public class SeSucursalJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain VeFacturaDetalle " + veFacturaDetalleListOldVeFacturaDetalle + " since its seSucursal field is not nullable.");
-                }
-            }
-            for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
-                if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain VeFactura " + veFacturaListOldVeFactura + " since its seSucursal field is not nullable.");
                 }
             }
             for (PrTarifario prTarifarioListOldPrTarifario : prTarifarioListOld) {
@@ -338,13 +309,6 @@ public class SeSucursalJpaController implements Serializable {
             }
             veFacturaDetalleListNew = attachedVeFacturaDetalleListNew;
             seSucursal.setVeFacturaDetalleList(veFacturaDetalleListNew);
-            List<VeFactura> attachedVeFacturaListNew = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListNewVeFacturaToAttach : veFacturaListNew) {
-                veFacturaListNewVeFacturaToAttach = em.getReference(veFacturaListNewVeFacturaToAttach.getClass(), veFacturaListNewVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaListNew.add(veFacturaListNewVeFacturaToAttach);
-            }
-            veFacturaListNew = attachedVeFacturaListNew;
-            seSucursal.setVeFacturaList(veFacturaListNew);
             List<PrTarifario> attachedPrTarifarioListNew = new ArrayList<PrTarifario>();
             for (PrTarifario prTarifarioListNewPrTarifarioToAttach : prTarifarioListNew) {
                 prTarifarioListNewPrTarifarioToAttach = em.getReference(prTarifarioListNewPrTarifarioToAttach.getClass(), prTarifarioListNewPrTarifarioToAttach.getPrTarifarioPK());
@@ -412,17 +376,6 @@ public class SeSucursalJpaController implements Serializable {
                     if (oldSeSucursalOfVeFacturaDetalleListNewVeFacturaDetalle != null && !oldSeSucursalOfVeFacturaDetalleListNewVeFacturaDetalle.equals(seSucursal)) {
                         oldSeSucursalOfVeFacturaDetalleListNewVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListNewVeFacturaDetalle);
                         oldSeSucursalOfVeFacturaDetalleListNewVeFacturaDetalle = em.merge(oldSeSucursalOfVeFacturaDetalleListNewVeFacturaDetalle);
-                    }
-                }
-            }
-            for (VeFactura veFacturaListNewVeFactura : veFacturaListNew) {
-                if (!veFacturaListOld.contains(veFacturaListNewVeFactura)) {
-                    SeSucursal oldSeSucursalOfVeFacturaListNewVeFactura = veFacturaListNewVeFactura.getSeSucursal();
-                    veFacturaListNewVeFactura.setSeSucursal(seSucursal);
-                    veFacturaListNewVeFactura = em.merge(veFacturaListNewVeFactura);
-                    if (oldSeSucursalOfVeFacturaListNewVeFactura != null && !oldSeSucursalOfVeFacturaListNewVeFactura.equals(seSucursal)) {
-                        oldSeSucursalOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
-                        oldSeSucursalOfVeFacturaListNewVeFactura = em.merge(oldSeSucursalOfVeFacturaListNewVeFactura);
                     }
                 }
             }
@@ -520,13 +473,6 @@ public class SeSucursalJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This SeSucursal (" + seSucursal + ") cannot be destroyed since the VeFacturaDetalle " + veFacturaDetalleListOrphanCheckVeFacturaDetalle + " in its veFacturaDetalleList field has a non-nullable seSucursal field.");
-            }
-            List<VeFactura> veFacturaListOrphanCheck = seSucursal.getVeFacturaList();
-            for (VeFactura veFacturaListOrphanCheckVeFactura : veFacturaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SeSucursal (" + seSucursal + ") cannot be destroyed since the VeFactura " + veFacturaListOrphanCheckVeFactura + " in its veFacturaList field has a non-nullable seSucursal field.");
             }
             List<PrTarifario> prTarifarioListOrphanCheck = seSucursal.getPrTarifarioList();
             for (PrTarifario prTarifarioListOrphanCheckPrTarifario : prTarifarioListOrphanCheck) {

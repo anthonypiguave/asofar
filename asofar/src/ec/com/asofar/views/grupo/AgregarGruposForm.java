@@ -11,19 +11,15 @@ import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.util.Fecha;
-import ec.com.asofar.views.*;
 import ec.com.asofar.views.supgrupos.NuevoSubgrupo;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.math.BigInteger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**

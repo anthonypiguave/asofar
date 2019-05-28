@@ -16,9 +16,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.PrSubgrupos;
-import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrProductos;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.PrMedidas;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -41,6 +42,9 @@ public class PrArticuloJpaController implements Serializable {
         if (prArticulo.getPrArticuloPK() == null) {
             prArticulo.setPrArticuloPK(new PrArticuloPK());
         }
+        if (prArticulo.getPrProductosList() == null) {
+            prArticulo.setPrProductosList(new ArrayList<PrProductos>());
+        }
         if (prArticulo.getPrMedidasList() == null) {
             prArticulo.setPrMedidasList(new ArrayList<PrMedidas>());
         }
@@ -55,6 +59,12 @@ public class PrArticuloJpaController implements Serializable {
                 prSubgrupos = em.getReference(prSubgrupos.getClass(), prSubgrupos.getPrSubgruposPK());
                 prArticulo.setPrSubgrupos(prSubgrupos);
             }
+            List<PrProductos> attachedPrProductosList = new ArrayList<PrProductos>();
+            for (PrProductos prProductosListPrProductosToAttach : prArticulo.getPrProductosList()) {
+                prProductosListPrProductosToAttach = em.getReference(prProductosListPrProductosToAttach.getClass(), prProductosListPrProductosToAttach.getPrProductosPK());
+                attachedPrProductosList.add(prProductosListPrProductosToAttach);
+            }
+            prArticulo.setPrProductosList(attachedPrProductosList);
             List<PrMedidas> attachedPrMedidasList = new ArrayList<PrMedidas>();
             for (PrMedidas prMedidasListPrMedidasToAttach : prArticulo.getPrMedidasList()) {
                 prMedidasListPrMedidasToAttach = em.getReference(prMedidasListPrMedidasToAttach.getClass(), prMedidasListPrMedidasToAttach.getPrMedidasPK());
@@ -65,6 +75,15 @@ public class PrArticuloJpaController implements Serializable {
             if (prSubgrupos != null) {
                 prSubgrupos.getPrArticuloList().add(prArticulo);
                 prSubgrupos = em.merge(prSubgrupos);
+            }
+            for (PrProductos prProductosListPrProductos : prArticulo.getPrProductosList()) {
+                PrArticulo oldPrArticuloOfPrProductosListPrProductos = prProductosListPrProductos.getPrArticulo();
+                prProductosListPrProductos.setPrArticulo(prArticulo);
+                prProductosListPrProductos = em.merge(prProductosListPrProductos);
+                if (oldPrArticuloOfPrProductosListPrProductos != null) {
+                    oldPrArticuloOfPrProductosListPrProductos.getPrProductosList().remove(prProductosListPrProductos);
+                    oldPrArticuloOfPrProductosListPrProductos = em.merge(oldPrArticuloOfPrProductosListPrProductos);
+                }
             }
             for (PrMedidas prMedidasListPrMedidas : prArticulo.getPrMedidasList()) {
                 PrArticulo oldPrArticuloOfPrMedidasListPrMedidas = prMedidasListPrMedidas.getPrArticulo();
@@ -98,9 +117,19 @@ public class PrArticuloJpaController implements Serializable {
             PrArticulo persistentPrArticulo = em.find(PrArticulo.class, prArticulo.getPrArticuloPK());
             PrSubgrupos prSubgruposOld = persistentPrArticulo.getPrSubgrupos();
             PrSubgrupos prSubgruposNew = prArticulo.getPrSubgrupos();
+            List<PrProductos> prProductosListOld = persistentPrArticulo.getPrProductosList();
+            List<PrProductos> prProductosListNew = prArticulo.getPrProductosList();
             List<PrMedidas> prMedidasListOld = persistentPrArticulo.getPrMedidasList();
             List<PrMedidas> prMedidasListNew = prArticulo.getPrMedidasList();
             List<String> illegalOrphanMessages = null;
+            for (PrProductos prProductosListOldPrProductos : prProductosListOld) {
+                if (!prProductosListNew.contains(prProductosListOldPrProductos)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain PrProductos " + prProductosListOldPrProductos + " since its prArticulo field is not nullable.");
+                }
+            }
             for (PrMedidas prMedidasListOldPrMedidas : prMedidasListOld) {
                 if (!prMedidasListNew.contains(prMedidasListOldPrMedidas)) {
                     if (illegalOrphanMessages == null) {
@@ -116,6 +145,13 @@ public class PrArticuloJpaController implements Serializable {
                 prSubgruposNew = em.getReference(prSubgruposNew.getClass(), prSubgruposNew.getPrSubgruposPK());
                 prArticulo.setPrSubgrupos(prSubgruposNew);
             }
+            List<PrProductos> attachedPrProductosListNew = new ArrayList<PrProductos>();
+            for (PrProductos prProductosListNewPrProductosToAttach : prProductosListNew) {
+                prProductosListNewPrProductosToAttach = em.getReference(prProductosListNewPrProductosToAttach.getClass(), prProductosListNewPrProductosToAttach.getPrProductosPK());
+                attachedPrProductosListNew.add(prProductosListNewPrProductosToAttach);
+            }
+            prProductosListNew = attachedPrProductosListNew;
+            prArticulo.setPrProductosList(prProductosListNew);
             List<PrMedidas> attachedPrMedidasListNew = new ArrayList<PrMedidas>();
             for (PrMedidas prMedidasListNewPrMedidasToAttach : prMedidasListNew) {
                 prMedidasListNewPrMedidasToAttach = em.getReference(prMedidasListNewPrMedidasToAttach.getClass(), prMedidasListNewPrMedidasToAttach.getPrMedidasPK());
@@ -131,6 +167,17 @@ public class PrArticuloJpaController implements Serializable {
             if (prSubgruposNew != null && !prSubgruposNew.equals(prSubgruposOld)) {
                 prSubgruposNew.getPrArticuloList().add(prArticulo);
                 prSubgruposNew = em.merge(prSubgruposNew);
+            }
+            for (PrProductos prProductosListNewPrProductos : prProductosListNew) {
+                if (!prProductosListOld.contains(prProductosListNewPrProductos)) {
+                    PrArticulo oldPrArticuloOfPrProductosListNewPrProductos = prProductosListNewPrProductos.getPrArticulo();
+                    prProductosListNewPrProductos.setPrArticulo(prArticulo);
+                    prProductosListNewPrProductos = em.merge(prProductosListNewPrProductos);
+                    if (oldPrArticuloOfPrProductosListNewPrProductos != null && !oldPrArticuloOfPrProductosListNewPrProductos.equals(prArticulo)) {
+                        oldPrArticuloOfPrProductosListNewPrProductos.getPrProductosList().remove(prProductosListNewPrProductos);
+                        oldPrArticuloOfPrProductosListNewPrProductos = em.merge(oldPrArticuloOfPrProductosListNewPrProductos);
+                    }
+                }
             }
             for (PrMedidas prMedidasListNewPrMedidas : prMedidasListNew) {
                 if (!prMedidasListOld.contains(prMedidasListNewPrMedidas)) {
@@ -173,6 +220,13 @@ public class PrArticuloJpaController implements Serializable {
                 throw new NonexistentEntityException("The prArticulo with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<PrProductos> prProductosListOrphanCheck = prArticulo.getPrProductosList();
+            for (PrProductos prProductosListOrphanCheckPrProductos : prProductosListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This PrArticulo (" + prArticulo + ") cannot be destroyed since the PrProductos " + prProductosListOrphanCheckPrProductos + " in its prProductosList field has a non-nullable prArticulo field.");
+            }
             List<PrMedidas> prMedidasListOrphanCheck = prArticulo.getPrMedidasList();
             for (PrMedidas prMedidasListOrphanCheckPrMedidas : prMedidasListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
