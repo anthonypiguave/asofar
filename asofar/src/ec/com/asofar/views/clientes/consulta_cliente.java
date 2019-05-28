@@ -546,7 +546,6 @@ public class consulta_cliente extends javax.swing.JDialog {
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
-                System.out.println("****");
                 cliente_editar Ce = new cliente_editar(new javax.swing.JFrame(), true, usu, emp, suc,Client);
                 Ce.setVisible(true);
             }
