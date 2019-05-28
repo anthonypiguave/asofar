@@ -305,37 +305,28 @@ public class cliente_editar extends javax.swing.JDialog {
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
         SeTipoIdentificacion ti = new SeTipoIdentificacion();
-        String nombreCompleto =txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
-                        + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
-//        try {
-//            boolean valor1 = ValidarDTO.ValidarSeCliente(nombreCompleto);
-//            if (valor1 == true) {
-//                JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
-//            } else {
-                ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
+        String nombreCompleto = txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
+                + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
+        ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
 
-                cliente.setPrimerNombre(txt_primer_nombre.getText());
-                cliente.setSegundoNombre(txt_segundo_nombre.getText());
-                cliente.setPrimerApellido(txt_primer_apellido.getText());
-                cliente.setSegundoApellido(txt_segundo_apellido.getText());
-                cliente.setNumeroIdentificacion(txt_numero_identificacion.getText());
-                cliente.setNombreCompleto(nombreCompleto);
-                cliente.setIdTipoIdentificacion(ti);
-                cliente.setFechaActualizacion(fechaActual);
-                cliente.setUsuarioActualizacion(usu.getNombreUsuario());
-                cliente.setRazonSocial(txt_razon_social.getText());
-                cliente.setEstado(cbx_estado.getSelectedItem().toString());
-                try {
-                    scc.edit(cliente);
-                    JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
-                    setVisible(false);
-                } catch (Exception ex) {
-                    Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
-                }
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage());
-//        }
+        cliente.setPrimerNombre(txt_primer_nombre.getText());
+        cliente.setSegundoNombre(txt_segundo_nombre.getText());
+        cliente.setPrimerApellido(txt_primer_apellido.getText());
+        cliente.setSegundoApellido(txt_segundo_apellido.getText());
+        cliente.setNumeroIdentificacion(txt_numero_identificacion.getText());
+        cliente.setNombreCompleto(nombreCompleto);
+        cliente.setIdTipoIdentificacion(ti);
+        cliente.setFechaActualizacion(fechaActual);
+        cliente.setUsuarioActualizacion(usu.getNombreUsuario());
+        cliente.setRazonSocial(txt_razon_social.getText());
+        cliente.setEstado(cbx_estado.getSelectedItem().toString());
+        try {
+            scc.edit(cliente);
+            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            setVisible(false);
+        } catch (Exception ex) {
+            Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**
