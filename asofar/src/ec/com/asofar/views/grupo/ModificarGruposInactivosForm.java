@@ -13,7 +13,6 @@ import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
-import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.*;
 import ec.com.asofar.views.supgrupos.NuevoSubgrupo;
 import java.awt.MouseInfo;
@@ -39,6 +38,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
     ObtenerDTO od = new ObtenerDTO();
     List<PrGrupos> listagrupo;
     List<SeEmpresa> listaempresa;
+    
     PrGrupos pr = new PrGrupos();
     PrGrupos pr2 = new PrGrupos();
     SeEmpresa se = null;
