@@ -297,7 +297,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         String nombreCompleto = txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
                 + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
         try {
-            boolean valor1 = ValidarDTO.ValidarSeCliente(nombreCompleto);
+            boolean valor1 = ValidarDTO.ValidarSeClienteCedula(txt_numero_identificacion.getText());
             if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
             } else {
@@ -306,8 +306,7 @@ public class cliente_agregar extends javax.swing.JDialog {
                 clientes.setPrimerApellido(txt_primer_apellido.getText());
                 clientes.setSegundoApellido(txt_segundo_apellido.getText());
                 clientes.setNumeroIdentificacion(txt_numero_identificacion.getText());
-                clientes.setNombreCompleto(txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
-                        + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText());
+                clientes.setNombreCompleto(nombreCompleto);
                 clientes.setIdTipoIdentificacion(ti);
                 clientes.setFechaCreacion(fechaActual);
                 clientes.setUsuarioCreacion(usu.getNombreUsuario());

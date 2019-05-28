@@ -72,6 +72,19 @@ public class ValidarDTO {
         
         return valor;
     }    
+        public static boolean ValidarSeClienteCedula(String cedula){
+        SeClientesJpaController control=new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+        boolean valor=false;
+        List<SeClientes> lista=control.findSeClientesEntities();
+        
+        for (int i = 0; i <lista.size(); i++) {
+            if(lista.get(i).getNumeroIdentificacion().equals(cedula)){
+            valor=true;
+            }
+        }
+        
+        return valor;
+    }
     public static boolean ValidarInTipoBodega(String nombre){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
