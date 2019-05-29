@@ -1422,14 +1422,14 @@ public class Tablas {
     }
 
     public static void TablaLocalidadCliente(List<SeLocalidadCliente> listalocalidadcliente, JTable Tabla, SeClientes lista) {
-        int[] a = {5, 120, 120,90,90,90};
+        int[] a = {5, 120, 120,50,50,50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
         String[] b = {"ID", "DIRECCION CLIENTE", "DIRECCION ENTREGA","PAIS","PROVINCIA","CIUDAD"};
-        String[] filas = new String[5];
+        String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listalocalidadcliente.size(); i++) {
