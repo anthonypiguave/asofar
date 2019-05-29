@@ -6,6 +6,9 @@
 package ec.com.asofar.views.unidadservicio;
 
 import ec.com.asofar.dao.VeUnidadServicioJpaController;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -19,16 +22,30 @@ import java.util.List;
 public class ConsultaUnidadServicio extends javax.swing.JDialog {
 
     List<VeUnidadServicio> unidadservicio;
-VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+    String valor = "";
+    VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
+
     /**
      * Creates new form Consulta_Unidad_Servicio
      */
     public ConsultaUnidadServicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-                    unidadservicio = usc.findVeUnidadServicioEntities();
-            Tablas.TablaUnidadServicio(unidadservicio, tba_unidad_servicio);
+        unidadservicio = usc.findVeUnidadServicioEntities();
+        Tablas.TablaUnidadServicio(unidadservicio, tba_unidad_servicio);
+    }
+
+    public ConsultaUnidadServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        unidadservicio = usc.findVeUnidadServicioEntities();
+        Tablas.TablaUnidadServicio(unidadservicio, tba_unidad_servicio);
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     /**
@@ -47,6 +64,7 @@ VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityMana
         txtbusqueda = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         JbAgregar = new javax.swing.JButton();
+        Jbcancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,11 +83,12 @@ VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityMana
         ));
         jScrollPane1.setViewportView(tba_unidad_servicio);
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 255));
+        jLabel2.setBackground(new java.awt.Color(255, 102, 0));
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("UNIDAD DE SERVICIO");
+        jLabel2.setAutoscrolls(true);
         jLabel2.setOpaque(true);
         jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -87,6 +106,11 @@ VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityMana
                 txtbusquedaActionPerformed(evt);
             }
         });
+        txtbusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyReleased(evt);
+            }
+        });
 
         jLabel1.setText("Buscar");
 
@@ -97,42 +121,54 @@ VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityMana
             }
         });
 
+        Jbcancelar.setText("Cancelar");
+        Jbcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbcancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
+                                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,14 +196,24 @@ VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityMana
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void JbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbAgregarActionPerformed
-        Ingresarservicio is = new Ingresarservicio(new javax.swing.JFrame(), true);
+        Ingresarservicio is = new Ingresarservicio(new javax.swing.JFrame(), true, usu, emp, suc);
         is.setVisible(true);
-
+        unidadservicio = usc.findVeUnidadServicioEntities();
+        Tablas.TablaUnidadServicio(unidadservicio, tba_unidad_servicio);
     }//GEN-LAST:event_JbAgregarActionPerformed
 
     private void txtbusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusquedaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbusquedaActionPerformed
+
+    private void txtbusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyReleased
+        valor = txtbusqueda.getText();
+        Tablas.filtro(valor, tba_unidad_servicio);
+    }//GEN-LAST:event_txtbusquedaKeyReleased
+
+    private void JbcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbcancelarActionPerformed
+        setVisible(false);      
+    }//GEN-LAST:event_JbcancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,6 +260,7 @@ VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityMana
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JbAgregar;
+    private javax.swing.JButton Jbcancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
