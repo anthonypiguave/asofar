@@ -154,6 +154,7 @@ public class cliente_editar extends javax.swing.JDialog {
 
         jLabel5.setText("Numero de Identificacion :");
 
+        txt_numero_identificacion.setEditable(false);
         txt_numero_identificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_numero_identificacionKeyTyped(evt);

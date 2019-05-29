@@ -1475,8 +1475,9 @@ public class Tablas {
                     && listacontactoscliente.get(i).getIdLocalidad().getIdLocalidadCliente() == lista.getIdLocalidadCliente()) {
                 filas[0] = String.valueOf(listacontactoscliente.get(i).getIdContactosClientes());
                 filas[1] = listacontactoscliente.get(i).getTelefono();
-                filas[2] = listacontactoscliente.get(i).getCelular();
-                filas[3] = listacontactoscliente.get(i).getEmail();
+                filas[2] = listacontactoscliente.get(i).getTelefono();
+                filas[3] = listacontactoscliente.get(i).getCelular();
+                filas[4] = listacontactoscliente.get(i).getEmail();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
