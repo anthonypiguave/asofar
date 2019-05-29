@@ -595,7 +595,7 @@ public class consulta_cliente extends javax.swing.JDialog {
                 Lce.setVisible(true);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE PARA EDITAR");
+            JOptionPane.showMessageDialog(null, "SELECCIONE UNA LOCALIDAD PARA EDITAR");
         }
     }//GEN-LAST:event_btn_editarActionPerformed
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
