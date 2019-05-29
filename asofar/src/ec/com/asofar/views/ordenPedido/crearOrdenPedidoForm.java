@@ -15,6 +15,8 @@ import java.awt.Point;
 public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
     int x, y;
+    
+    
 
     /**
      * Creates new form crearOrdenPedidoForm
