@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "SeContactosClientes.findAll", query = "SELECT s FROM SeContactosClientes s")
     , @NamedQuery(name = "SeContactosClientes.findByIdContactosClientes", query = "SELECT s FROM SeContactosClientes s WHERE s.idContactosClientes = :idContactosClientes")
+    , @NamedQuery(name = "SeContactosClientes.findByNombre", query = "SELECT s FROM SeContactosClientes s WHERE s.nombre = :nombre")
     , @NamedQuery(name = "SeContactosClientes.findByTelefono", query = "SELECT s FROM SeContactosClientes s WHERE s.telefono = :telefono")
     , @NamedQuery(name = "SeContactosClientes.findByCelular", query = "SELECT s FROM SeContactosClientes s WHERE s.celular = :celular")
     , @NamedQuery(name = "SeContactosClientes.findByEmail", query = "SELECT s FROM SeContactosClientes s WHERE s.email = :email")
@@ -48,6 +49,8 @@ public class SeContactosClientes implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_contactos_clientes")
     private Long idContactosClientes;
+    @Column(name = "nombre")
+    private String nombre;
     @Column(name = "telefono")
     private String telefono;
     @Column(name = "celular")
@@ -83,6 +86,14 @@ public class SeContactosClientes implements Serializable {
 
     public void setIdContactosClientes(Long idContactosClientes) {
         this.idContactosClientes = idContactosClientes;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTelefono() {

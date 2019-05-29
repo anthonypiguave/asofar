@@ -605,21 +605,21 @@ public class ObtenerDTO {
         return dto;
     }
 
-    public static CoCotizacionesPorProveedor ObtenerCoCotizacionesPorProveedor(String id) {
-        CoCotizacionesPorProveedorJpaController control = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoCotizacionesPorProveedor dto = new CoCotizacionesPorProveedor();
-        List<CoCotizacionesPorProveedor> lista = control.findCoCotizacionesPorProveedorEntities();
-
-        for (int i = 0; i < lista.size(); i++) {
-            if (String.valueOf(lista.get(i).getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor()).equals(id)) {
-                dto = lista.get(i);
-                break;
-            }
-        }
-
-        return dto;
-
-    }
+//    public static CoCotizacionesPorProveedor ObtenerCoCotizacionesPorProveedor(String id) {
+//        CoCotizacionesPorProveedorJpaController control = new CoCotizacionesPorProveedorJpaController(EntityManagerUtil.ObtenerEntityManager());
+//        CoCotizacionesPorProveedor dto = new CoCotizacionesPorProveedor();
+//        List<CoCotizacionesPorProveedor> lista = control.findCoCotizacionesPorProveedorEntities();
+//
+//        for (int i = 0; i < lista.size(); i++) {
+////            if (String.valueOf(lista.get(i).getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor()).equals(id)) {
+//                dto = lista.get(i);
+//                break;
+//            }
+//        }
+//
+//        return dto;
+//
+//    }
 
     public static PrProductos ObtenerPrProductos(Long id) {
         PrProductosJpaController control = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());

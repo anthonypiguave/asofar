@@ -9,13 +9,12 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,11 +33,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CoCotizacionesPorProveedor.findAll", query = "SELECT c FROM CoCotizacionesPorProveedor c")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor")
+    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacionesPorPorveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idCotizacionesPorPorveedor = :idCotizacionesPorPorveedor")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdProveedor", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idProveedor = :idProveedor")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idCotizacion = :idCotizacion")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdSucursal", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.coCotizacionesPorProveedorPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idCotizacion = :idCotizacion")
+    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdEmpresa", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdSucursal", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idSucursal = :idSucursal")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByIdTipoCompra", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.idTipoCompra = :idTipoCompra")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByFechaEnvioCotizacion", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.fechaEnvioCotizacion = :fechaEnvioCotizacion")
     , @NamedQuery(name = "CoCotizacionesPorProveedor.findByMailContacto", query = "SELECT c FROM CoCotizacionesPorProveedor c WHERE c.mailContacto = :mailContacto")
@@ -51,10 +50,19 @@ import javax.xml.bind.annotation.XmlTransient;
 public class CoCotizacionesPorProveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected CoCotizacionesPorProveedorPK coCotizacionesPorProveedorPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_cotizaciones_por_porveedor")
+    private Long idCotizacionesPorPorveedor;
     @Column(name = "id_proveedor")
     private BigInteger idProveedor;
+    @Column(name = "id_cotizacion")
+    private BigInteger idCotizacion;
+    @Column(name = "id_empresa")
+    private BigInteger idEmpresa;
+    @Column(name = "id_sucursal")
+    private BigInteger idSucursal;
     @Column(name = "id_tipo_compra")
     private BigInteger idTipoCompra;
     @Column(name = "fecha_envio_cotizacion")
@@ -76,32 +84,22 @@ public class CoCotizacionesPorProveedor implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
-    @JoinColumns({
-        @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private CoItemsCotizacion coItemsCotizacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coCotizacionesPorProveedor")
+    @OneToMany(mappedBy = "idCotizacion")
     private List<CoDetalleCotizacionPorProveedor> coDetalleCotizacionPorProveedorList;
 
     public CoCotizacionesPorProveedor() {
     }
 
-    public CoCotizacionesPorProveedor(CoCotizacionesPorProveedorPK coCotizacionesPorProveedorPK) {
-        this.coCotizacionesPorProveedorPK = coCotizacionesPorProveedorPK;
+    public CoCotizacionesPorProveedor(Long idCotizacionesPorPorveedor) {
+        this.idCotizacionesPorPorveedor = idCotizacionesPorPorveedor;
     }
 
-    public CoCotizacionesPorProveedor(long idCotizacionesPorPorveedor, long idCotizacion, long idEmpresa, long idSucursal) {
-        this.coCotizacionesPorProveedorPK = new CoCotizacionesPorProveedorPK(idCotizacionesPorPorveedor, idCotizacion, idEmpresa, idSucursal);
+    public Long getIdCotizacionesPorPorveedor() {
+        return idCotizacionesPorPorveedor;
     }
 
-    public CoCotizacionesPorProveedorPK getCoCotizacionesPorProveedorPK() {
-        return coCotizacionesPorProveedorPK;
-    }
-
-    public void setCoCotizacionesPorProveedorPK(CoCotizacionesPorProveedorPK coCotizacionesPorProveedorPK) {
-        this.coCotizacionesPorProveedorPK = coCotizacionesPorProveedorPK;
+    public void setIdCotizacionesPorPorveedor(Long idCotizacionesPorPorveedor) {
+        this.idCotizacionesPorPorveedor = idCotizacionesPorPorveedor;
     }
 
     public BigInteger getIdProveedor() {
@@ -110,6 +108,30 @@ public class CoCotizacionesPorProveedor implements Serializable {
 
     public void setIdProveedor(BigInteger idProveedor) {
         this.idProveedor = idProveedor;
+    }
+
+    public BigInteger getIdCotizacion() {
+        return idCotizacion;
+    }
+
+    public void setIdCotizacion(BigInteger idCotizacion) {
+        this.idCotizacion = idCotizacion;
+    }
+
+    public BigInteger getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(BigInteger idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public BigInteger getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(BigInteger idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
     public BigInteger getIdTipoCompra() {
@@ -184,14 +206,6 @@ public class CoCotizacionesPorProveedor implements Serializable {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
-    public CoItemsCotizacion getCoItemsCotizacion() {
-        return coItemsCotizacion;
-    }
-
-    public void setCoItemsCotizacion(CoItemsCotizacion coItemsCotizacion) {
-        this.coItemsCotizacion = coItemsCotizacion;
-    }
-
     @XmlTransient
     public List<CoDetalleCotizacionPorProveedor> getCoDetalleCotizacionPorProveedorList() {
         return coDetalleCotizacionPorProveedorList;
@@ -204,7 +218,7 @@ public class CoCotizacionesPorProveedor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (coCotizacionesPorProveedorPK != null ? coCotizacionesPorProveedorPK.hashCode() : 0);
+        hash += (idCotizacionesPorPorveedor != null ? idCotizacionesPorPorveedor.hashCode() : 0);
         return hash;
     }
 
@@ -215,7 +229,7 @@ public class CoCotizacionesPorProveedor implements Serializable {
             return false;
         }
         CoCotizacionesPorProveedor other = (CoCotizacionesPorProveedor) object;
-        if ((this.coCotizacionesPorProveedorPK == null && other.coCotizacionesPorProveedorPK != null) || (this.coCotizacionesPorProveedorPK != null && !this.coCotizacionesPorProveedorPK.equals(other.coCotizacionesPorProveedorPK))) {
+        if ((this.idCotizacionesPorPorveedor == null && other.idCotizacionesPorPorveedor != null) || (this.idCotizacionesPorPorveedor != null && !this.idCotizacionesPorPorveedor.equals(other.idCotizacionesPorPorveedor))) {
             return false;
         }
         return true;
@@ -223,7 +237,7 @@ public class CoCotizacionesPorProveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoCotizacionesPorProveedor[ coCotizacionesPorProveedorPK=" + coCotizacionesPorProveedorPK + " ]";
+        return "ec.com.asofar.dto.CoCotizacionesPorProveedor[ idCotizacionesPorPorveedor=" + idCotizacionesPorPorveedor + " ]";
     }
     
 }

@@ -201,7 +201,7 @@ public class LecturaCotizacionesProveedorForm extends javax.swing.JDialog {
     private void jtCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCabeceraMousePressed
         if (evt.getClickCount() == 1) {
             String valor = jtCabecera.getValueAt(jtCabecera.getSelectedRow(), 0).toString();
-            CoCotizacionesPorProveedor coti = ObtenerDTO.ObtenerCoCotizacionesPorProveedor(valor);
+//            CoCotizacionesPorProveedor coti = ObtenerDTO.ObtenerCoCotizacionesPorProveedor(valor);
 //            Tablas.TablaDetallePorProveerdo(coti.getCoDetalleCotizacionPorProveedorList(), jtDetalle);
         }
 

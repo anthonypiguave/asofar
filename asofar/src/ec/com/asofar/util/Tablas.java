@@ -1136,7 +1136,7 @@ public class Tablas {
 //                 model.addRow(new Object[]{});
                 Object fila[] = new Object[8];
                 vo = lista.get(i);
-                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
+//                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
                 fila[1] = ObtenerDTO.ObtenerCoProveedores(vo.getIdProveedor().longValue()).getNombreComercial();
                 fila[2] = ObtenerDTO.ObtenerCoProveedores(vo.getIdProveedor().longValue()).getNombre();
                 fila[3] = ObtenerDTO.ObtenerCoProveedores(vo.getIdProveedor().longValue()).getEmail();
@@ -1225,7 +1225,7 @@ public class Tablas {
                 // model.addRow(new Object[]{});
                 Object fila[] = new Object[6];
                 vo = lista.get(i);
-                fila[0] = vo.getCoDetalleCotizacionPorProveedorPK().getLineaDetalle();
+//                fila[0] = vo.getCoDetalleCotizacionPorProveedorPK().getLineaDetalle();
                 fila[1] = ObtenerDTO.ObtenerPrProductos(vo.getIdProducto().longValue()).getNombreProducto();
                 fila[2] = vo.getDescripcion();
                 fila[3] = vo.getCantidadPedido();

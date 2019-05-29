@@ -68,8 +68,6 @@ public class CoItemsCotizacion implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "procesado")
     private String procesado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coItemsCotizacion")
-    private List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList;
     @JoinColumn(name = "id_tipo_compra", referencedColumnName = "id_in_tipo_compra")
     @ManyToOne
     private InTipoCompra idTipoCompra;
@@ -163,15 +161,6 @@ public class CoItemsCotizacion implements Serializable {
 
     public void setProcesado(String procesado) {
         this.procesado = procesado;
-    }
-
-    @XmlTransient
-    public List<CoCotizacionesPorProveedor> getCoCotizacionesPorProveedorList() {
-        return coCotizacionesPorProveedorList;
-    }
-
-    public void setCoCotizacionesPorProveedorList(List<CoCotizacionesPorProveedor> coCotizacionesPorProveedorList) {
-        this.coCotizacionesPorProveedorList = coCotizacionesPorProveedorList;
     }
 
     public InTipoCompra getIdTipoCompra() {

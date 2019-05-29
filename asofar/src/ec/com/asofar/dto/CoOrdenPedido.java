@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoOrdenPedido.findByIdOrdenPedido", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idOrdenPedido = :idOrdenPedido")
     , @NamedQuery(name = "CoOrdenPedido.findByIdEmpresa", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoOrdenPedido.findByIdSucursal", query = "SELECT c FROM CoOrdenPedido c WHERE c.coOrdenPedidoPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "CoOrdenPedido.findByIdProveedor", query = "SELECT c FROM CoOrdenPedido c WHERE c.idProveedor = :idProveedor")
     , @NamedQuery(name = "CoOrdenPedido.findByEstado", query = "SELECT c FROM CoOrdenPedido c WHERE c.estado = :estado")
     , @NamedQuery(name = "CoOrdenPedido.findByIdDocumento", query = "SELECT c FROM CoOrdenPedido c WHERE c.idDocumento = :idDocumento")
     , @NamedQuery(name = "CoOrdenPedido.findByObservacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.observacion = :observacion")
@@ -49,6 +50,8 @@ public class CoOrdenPedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoOrdenPedidoPK coOrdenPedidoPK;
+    @Column(name = "id_proveedor")
+    private BigInteger idProveedor;
     @Column(name = "estado")
     private String estado;
     @Column(name = "id_documento")
@@ -93,6 +96,14 @@ public class CoOrdenPedido implements Serializable {
 
     public void setCoOrdenPedidoPK(CoOrdenPedidoPK coOrdenPedidoPK) {
         this.coOrdenPedidoPK = coOrdenPedidoPK;
+    }
+
+    public BigInteger getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(BigInteger idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     public String getEstado() {
