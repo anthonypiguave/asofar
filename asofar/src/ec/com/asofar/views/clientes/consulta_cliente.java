@@ -525,15 +525,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA CLIENTE");
         }
     }//GEN-LAST:event_btn_ingresar_localidadActionPerformed
-//    private SeClientes devuelveObjeto3(Long id, List<SeClientes> listacliente) {
-//        listacliente = Cc.findSeClientesEntities();
-//        for (int i = 0; i < listacliente.size(); i++) {
-//            if (Objects.equals(listacliente.get(i).getIdClientes(), id)) {
-//                Client = listacliente.get(i);
-//            }
-//        }
-//        return Client;
-//    }
+
     private void tba_contactoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_contactoMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tba_contactoMousePressed
@@ -608,6 +600,15 @@ public class consulta_cliente extends javax.swing.JDialog {
         contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
         Ce.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+   //    private SeClientes devuelveObjeto3(Long id, List<SeClientes> listacliente) {
+//        listacliente = Cc.findSeClientesEntities();
+//        for (int i = 0; i < listacliente.size(); i++) {
+//            if (Objects.equals(listacliente.get(i).getIdClientes(), id)) {
+//                Client = listacliente.get(i);
+//            }
+//        }
+//        return Client;
+//    }
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
         for (int i = 0; i < listabod.size(); i++) {
