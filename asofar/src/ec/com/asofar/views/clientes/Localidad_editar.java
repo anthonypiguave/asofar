@@ -203,8 +203,10 @@ public class Localidad_editar extends javax.swing.JDialog {
             if (!"I".equals(Pais.get(i).getEstado())) {
 
                 cbx_pais.addItem(Pais.get(i).getNombre());
-                
-                if(LocalidadCliente.getIdPais().getNombre().equals(Pais.get(i).getNombre())) {
+
+                if (LocalidadCliente.getIdPais().getNombre() == Pais.get(i).getNombre()) {
+                    System.out.println("localidad enviada " + LocalidadCliente.getIdPais().getNombre());
+                    System.out.println("pais del for" + Pais.get(i).getNombre());
                     System.out.println("***");
                     cbx_pais.setSelectedItem(Pais.get(i).getNombre());
                 }
@@ -216,6 +218,12 @@ public class Localidad_editar extends javax.swing.JDialog {
         for (int i = 0; i < Provincia.size(); i++) {
             if (!"I".equals(Provincia.get(i).getNombre())) {
                 cbx_provincia.addItem(Provincia.get(i).getNombre());
+                if (LocalidadCliente.getIdProvincia().getNombre() == Provincia.get(i).getNombre()) {
+                    System.out.println("localidad enviada " + LocalidadCliente.getIdProvincia().getNombre());
+                    System.out.println("pais del for" + Provincia.get(i).getNombre());
+                    System.out.println("***");
+                    cbx_provincia.setSelectedItem(Provincia.get(i).getNombre());
+                }
             }
         }
     }
@@ -224,6 +232,12 @@ public class Localidad_editar extends javax.swing.JDialog {
         for (int i = 0; i < Ciudad.size(); i++) {
             if (!"I".equals(Ciudad.get(i).getNombre())) {
                 cbx_Ciudad.addItem(Ciudad.get(i).getNombre());
+                if (LocalidadCliente.getIdCiudad().getNombre() == Ciudad.get(i).getNombre()) {
+                    System.out.println("localidad enviada " + LocalidadCliente.getIdProvincia().getNombre());
+                    System.out.println("pais del for" + Provincia.get(i).getNombre());
+                    System.out.println("***");
+                    cbx_Ciudad.setSelectedItem(Ciudad.get(i).getNombre());
+                }
             }
         }
     }
