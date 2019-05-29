@@ -22,6 +22,7 @@ import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
@@ -33,6 +34,7 @@ import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
+import ec.com.asofar.dto.VeUnidadServicio;
 import java.awt.Font;
 import java.math.BigInteger;
 import java.util.List;
@@ -1564,4 +1566,64 @@ public class Tablas {
             }
         }
     }
+                public static void TablaUnidadServicio(List<VeUnidadServicio> listaunidad, JTable Tabla) {
+        int[] a = {5, 50,166};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID", "NOMBRE", "ESTADO"};
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listaunidad.size(); i++) {
+            if (listaunidad.get(i).getEstado().equals("A")) {
+                filas[0] = String.valueOf(listaunidad.get(i).getIdUnidadServicio());
+                filas[1] = listaunidad.get(i).getNombreUnidadServicio();
+                filas[2] = listaunidad.get(i).getEstado();
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            }
+        }
+    }
+                
+         public static void TablaPrestaciones(List<PrPrestaciones> listaprestaciones, JTable Tabla) {
+        int[] a = {5, 50,166};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"codigo", "nombre producto"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listaprestaciones.size(); i++) {
+            if (listaprestaciones.get(i).getEstado().equals("I")) {
+                filas[0] = String.valueOf(listaprestaciones.get(i).getIdPoducto());
+                filas[1] = listaprestaciones.get(i).getNombrePrestacion();
+               
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                           }
+        }
+    }           
+                
+                
+                
+                
+                
 }
+
+
