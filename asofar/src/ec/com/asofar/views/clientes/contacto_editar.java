@@ -5,44 +5,36 @@
  */
 package ec.com.asofar.views.clientes;
 
-import ec.com.asofar.dao.SeClientesJpaController;
-import ec.com.asofar.dao.SeContactosClientesJpaController;
-import ec.com.asofar.dto.SeClientes;
-import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
-import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author admin1
  */
-public class contacto_agregar extends javax.swing.JDialog {
+public class contacto_editar extends javax.swing.JDialog {
 
     /**
-     * id_contactos_clientes id_localidad telefono celulare mail estado
+     * Creates new form contacto_editar
      */
     int x, y;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
     SeLocalidadCliente localidadclientes;
-    SeContactosClientesJpaController Ccc = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    SeContactosClientes ContactoCliente = new SeContactosClientes();
 
-    public contacto_agregar(java.awt.Frame parent, boolean modal) {
+    public contacto_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
-    public contacto_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeLocalidadCliente locli) {
+    public contacto_editar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeLocalidadCliente locli) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -51,7 +43,6 @@ public class contacto_agregar extends javax.swing.JDialog {
         emp = em;
         suc = su;
         localidadclientes = locli;
-
     }
 
     /**
@@ -72,7 +63,6 @@ public class contacto_agregar extends javax.swing.JDialog {
         txt_celular = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txt_correo = new javax.swing.JTextField();
-        btn_agregar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
 
@@ -113,19 +103,6 @@ public class contacto_agregar extends javax.swing.JDialog {
 
         jLabel4.setText("Correo :");
 
-        btn_agregar.setBackground(new java.awt.Color(0, 102, 0));
-        btn_agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btn_agregar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_agregar.setText("Agregar");
-        btn_agregar.setFocusable(false);
-        btn_agregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_agregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Nombre : ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -158,10 +135,7 @@ public class contacto_agregar extends javax.swing.JDialog {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(27, 27, 27))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,8 +162,6 @@ public class contacto_agregar extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_agregar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -222,25 +194,6 @@ public class contacto_agregar extends javax.swing.JDialog {
         y = evt.getY();
     }//GEN-LAST:event_jLabel3MousePressed
 
-    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        java.util.Date fechaActual = new java.util.Date();
-        ContactoCliente.setNombre(txt_nombre.getText());
-        ContactoCliente.setIdLocalidad(localidadclientes);
-        ContactoCliente.setTelefono(txt_telefono.getText());
-        ContactoCliente.setCelular(txt_celular.getText());
-        ContactoCliente.setEmail(txt_correo.getText());
-        ContactoCliente.setFechaCreacion(fechaActual);
-        ContactoCliente.setUsuarioCreacion(usu.getNombreUsuario());
-        ContactoCliente.setEstado("A");
-        try {
-            Ccc.create(ContactoCliente);
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
-            setVisible(false);
-        } catch (Exception ex) {
-            Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btn_agregarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -258,20 +211,20 @@ public class contacto_agregar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(contacto_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contacto_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(contacto_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contacto_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(contacto_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contacto_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(contacto_agregar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contacto_editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                contacto_agregar dialog = new contacto_agregar(new javax.swing.JFrame(), true);
+                contacto_editar dialog = new contacto_editar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -284,7 +237,6 @@ public class contacto_agregar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_agregar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -271,6 +271,11 @@ public class consulta_cliente extends javax.swing.JDialog {
 
         jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton5.setText("EDITAR");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -590,7 +595,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
 
             if (LocaliClient != null) {
-                
+
                 Localidad_editar Lce = new Localidad_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
                 Lce.setVisible(true);
             }
@@ -598,6 +603,11 @@ public class consulta_cliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA LOCALIDAD PARA EDITAR");
         }
     }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
+        Ce.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
         for (int i = 0; i < listabod.size(); i++) {
