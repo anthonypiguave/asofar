@@ -91,6 +91,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_direccion_entrega = new javax.swing.JTextField();
+        btn_guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -133,6 +134,8 @@ public class Localidad_editar extends javax.swing.JDialog {
 
         jLabel6.setText("Direccion Entrega :");
 
+        btn_guardar.setText("GUARDAR");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,19 +144,25 @@ public class Localidad_editar extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbx_pais, 0, 200, Short.MAX_VALUE)
-                    .addComponent(cbx_Ciudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbx_provincia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_direccion_cliente)
-                    .addComponent(txt_direccion_entrega))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbx_pais, 0, 200, Short.MAX_VALUE)
+                            .addComponent(cbx_Ciudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbx_provincia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_direccion_cliente)
+                            .addComponent(txt_direccion_entrega)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_guardar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,8 +189,10 @@ public class Localidad_editar extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txt_direccion_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btn_guardar))
                 .addContainerGap())
         );
 
@@ -201,13 +212,8 @@ public class Localidad_editar extends javax.swing.JDialog {
     public void llenarComboPais(List<SePais> Pais) {
         for (int i = 0; i < Pais.size(); i++) {
             if (!"I".equals(Pais.get(i).getEstado())) {
-
                 cbx_pais.addItem(Pais.get(i).getNombre());
-
                 if (LocalidadCliente.getIdPais().getNombre() == Pais.get(i).getNombre()) {
-                    System.out.println("localidad enviada " + LocalidadCliente.getIdPais().getNombre());
-                    System.out.println("pais del for" + Pais.get(i).getNombre());
-                    System.out.println("***");
                     cbx_pais.setSelectedItem(Pais.get(i).getNombre());
                 }
             }
@@ -219,9 +225,6 @@ public class Localidad_editar extends javax.swing.JDialog {
             if (!"I".equals(Provincia.get(i).getNombre())) {
                 cbx_provincia.addItem(Provincia.get(i).getNombre());
                 if (LocalidadCliente.getIdProvincia().getNombre() == Provincia.get(i).getNombre()) {
-                    System.out.println("localidad enviada " + LocalidadCliente.getIdProvincia().getNombre());
-                    System.out.println("pais del for" + Provincia.get(i).getNombre());
-                    System.out.println("***");
                     cbx_provincia.setSelectedItem(Provincia.get(i).getNombre());
                 }
             }
@@ -233,9 +236,6 @@ public class Localidad_editar extends javax.swing.JDialog {
             if (!"I".equals(Ciudad.get(i).getNombre())) {
                 cbx_Ciudad.addItem(Ciudad.get(i).getNombre());
                 if (LocalidadCliente.getIdCiudad().getNombre() == Ciudad.get(i).getNombre()) {
-                    System.out.println("localidad enviada " + LocalidadCliente.getIdProvincia().getNombre());
-                    System.out.println("pais del for" + Provincia.get(i).getNombre());
-                    System.out.println("***");
                     cbx_Ciudad.setSelectedItem(Ciudad.get(i).getNombre());
                 }
             }
@@ -298,6 +298,7 @@ public class Localidad_editar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_guardar;
     private javax.swing.JComboBox<String> cbx_Ciudad;
     private javax.swing.JComboBox<String> cbx_pais;
     private javax.swing.JComboBox<String> cbx_provincia;
