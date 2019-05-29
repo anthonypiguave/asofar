@@ -39,7 +39,6 @@ public class NuevoProducto extends javax.swing.JDialog {
     SeUsuarios us1;
     SeEmpresa em1;
 
-
     /**
      * Creates new form NuevoProducto
      */
@@ -62,7 +61,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         med1 = med;
         us1 = us;
         em1 = em;
-       
+
     }
 
     private void CargarTextFields(PrMedidas med) {
@@ -410,7 +409,7 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         // TODO add your handling code here:
-        MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true,us1,em1,null);
+        MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true, us1, em1, null);
         setVisible(false);
         mp.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
@@ -430,7 +429,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         try {
             PrProductos obj = new PrProductos();
             obj.setPrMedidas(med1);
-            
+
             obj.setUsuarioCreacion(us1.getIdUsuario());
             obj.setSeEmpresa(em1);
             obj.setFechaCreacion(new Date());
@@ -446,10 +445,11 @@ public class NuevoProducto extends javax.swing.JDialog {
             cprod.create(obj);
             JOptionPane.showMessageDialog(null, "Nuevo producto guardado ");
             setVisible(false);
-            MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true,us1,em1,null);
+            MantenimientoProductos mp = new MantenimientoProductos(new javax.swing.JFrame(), true, us1, em1, null);
             mp.setVisible(true);
         } catch (Exception e) {
             System.out.println("Error al guardar prod " + e.getMessage());
+            System.err.print(e);
         }
 
     }//GEN-LAST:event_BotonGuardarActionPerformed
@@ -459,23 +459,22 @@ public class NuevoProducto extends javax.swing.JDialog {
         if (cod_barra.getText().length() >= 13) {
             evt.consume();
         }
-        if (cod_barra.getText().length() == 13 ){
-          Desavilitar(true);  
+        if (cod_barra.getText().length() == 13) {
+            Desavilitar(true);
         } else {
-            Desavilitar(false); 
+            Desavilitar(false);
         }
     }//GEN-LAST:event_cod_barraKeyTyped
-       public void Desavilitar(boolean valor){
-           combofab.setEnabled(valor);
-           nom.setEnabled(valor);
-           local.setEnabled(valor);
-           extran.setEnabled(valor);
-           receta.setEnabled(valor);
-           desc.setEnabled(valor);
-           
-       
-       }
-       
+    public void Desavilitar(boolean valor) {
+        combofab.setEnabled(valor);
+        nom.setEnabled(valor);
+        local.setEnabled(valor);
+        extran.setEnabled(valor);
+        receta.setEnabled(valor);
+        desc.setEnabled(valor);
+
+    }
+
     /**
      * @param args the command line arguments
      */
