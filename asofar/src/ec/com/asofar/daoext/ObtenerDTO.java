@@ -27,6 +27,7 @@ import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoItemsCotizacion;
+import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
@@ -706,6 +707,21 @@ public class ObtenerDTO {
             }
         }
 
+        return dto;
+    }
+    
+      
+      public static CoOrdenPedido ObtenerCoOrdenPedido(Long id) {
+      CoOrdenPedidoJpaController control = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoOrdenPedido dto = new CoOrdenPedido();
+        List<CoOrdenPedido> lista = control.findCoOrdenPedidoEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getCoOrdenPedidoPK().getIdOrdenPedido() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
         return dto;
     }
 }
