@@ -1422,14 +1422,14 @@ public class Tablas {
     }
 
     public static void TablaLocalidadCliente(List<SeLocalidadCliente> listalocalidadcliente, JTable Tabla, SeClientes lista) {
-        int[] a = {5, 120, 120};
+        int[] a = {5, 120, 120,90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID", "DIRECCION CLIENTE", "DIRECCION ENTREGA"};
-        String[] filas = new String[3];
+        String[] b = {"ID", "DIRECCION CLIENTE", "DIRECCION ENTREGA","PAIS"};
+        String[] filas = new String[4];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listalocalidadcliente.size(); i++) {
@@ -1438,7 +1438,7 @@ public class Tablas {
                 filas[0] = String.valueOf(listalocalidadcliente.get(i).getIdLocalidadCliente());
                 filas[1] = listalocalidadcliente.get(i).getDirreccionCliente();
                 filas[2] = listalocalidadcliente.get(i).getDirreccionEntrega();
-//                filas[3] = ObtenerDTO.ObtenerSePais(listalocalidadcliente.get(i).);
+                filas[3] = listalocalidadcliente.get(i).getIdPais().getNombre();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1447,8 +1447,8 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-//                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-//                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
     }
