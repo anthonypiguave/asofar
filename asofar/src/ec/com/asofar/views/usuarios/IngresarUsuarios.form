@@ -315,7 +315,7 @@
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="USUARIO NUEVA"/>
+            <Property name="text" type="java.lang.String" value="USUARIO NUEVO"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>

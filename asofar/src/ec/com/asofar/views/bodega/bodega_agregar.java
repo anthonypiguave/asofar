@@ -64,7 +64,6 @@ public class bodega_agregar extends javax.swing.JDialog {
     public void llenarCombo(List<InTipoBodega> TiBo) {
         for (int i = 0; i < TiBo.size(); i++) {
             if (!"I".equals(TiBo.get(i).getEstado())) {
-                System.out.println("activos");
                 cbxTipoBodega.addItem(TiBo.get(i).getNombre());
             }
         }

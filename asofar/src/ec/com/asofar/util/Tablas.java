@@ -1461,21 +1461,21 @@ public class Tablas {
     }
 
     public static void TablaContactoCliente(List<SeContactosClientes> listacontactoscliente, JTable Tabla, SeLocalidadCliente lista) {
-        int[] a = {5, 50, 50, 80};
+        int[] a = {5, 50, 50, 80,80};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID", "TELEFONO", "CELULAR", "CORREO"};
-        String[] filas = new String[4];
+        String[] b = {"ID","NOMBRE", "TELEFONO", "CELULAR", "CORREO"};
+        String[] filas = new String[5];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacontactoscliente.size(); i++) {
             if (listacontactoscliente.get(i).getEstado().equals("A")
                     && listacontactoscliente.get(i).getIdLocalidad().getIdLocalidadCliente() == lista.getIdLocalidadCliente()) {
                 filas[0] = String.valueOf(listacontactoscliente.get(i).getIdContactosClientes());
-                filas[1] = listacontactoscliente.get(i).getTelefono();
+                filas[1] = listacontactoscliente.get(i).getNombre();
                 filas[2] = listacontactoscliente.get(i).getTelefono();
                 filas[3] = listacontactoscliente.get(i).getCelular();
                 filas[4] = listacontactoscliente.get(i).getEmail();
@@ -1489,6 +1489,8 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             }
         }
     }

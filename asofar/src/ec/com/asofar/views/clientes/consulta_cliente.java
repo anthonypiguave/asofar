@@ -85,10 +85,12 @@ public class consulta_cliente extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tba_localidad = new javax.swing.JTable();
         btn_ingresar_localidad = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tba_contacto = new javax.swing.JTable();
         btn_ingresar_contacto = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtbusqueda = new javax.swing.JTextField();
@@ -154,7 +156,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_ingresar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -206,6 +208,14 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
+        btn_editar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_editar.setText("EDITAR");
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -213,6 +223,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_ingresar_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -220,7 +232,9 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_ingresar_localidad))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_ingresar_localidad)
+                    .addComponent(btn_editar)))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contacto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 14))); // NOI18N
@@ -255,6 +269,9 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton5.setText("EDITAR");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -262,6 +279,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_ingresar_contacto, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -269,7 +288,9 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_ingresar_contacto))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_ingresar_contacto)
+                    .addComponent(jButton5)))
         );
 
         jLabel3.setBackground(new java.awt.Color(255, 102, 0));
@@ -560,6 +581,23 @@ public class consulta_cliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE PARA EDITAR");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+        int id = 0;
+        /*eeeeeeeeeeeeeee*/
+        if (tba_localidad.getSelectedRow() >= 0) {
+            id = tba_localidad.getSelectedRow();
+            LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
+
+            if (LocaliClient != null) {
+                
+                Localidad_editar Lce = new Localidad_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
+                Lce.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE PARA EDITAR");
+        }
+    }//GEN-LAST:event_btn_editarActionPerformed
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
         for (int i = 0; i < listabod.size(); i++) {
@@ -615,12 +653,14 @@ public class consulta_cliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_ingresar_cliente;
     private javax.swing.JButton btn_ingresar_contacto;
     private javax.swing.JButton btn_ingresar_localidad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
