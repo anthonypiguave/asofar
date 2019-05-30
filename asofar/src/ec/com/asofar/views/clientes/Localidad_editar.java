@@ -296,7 +296,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         localidadclientes.setIdProvincia(provincia);
         localidadclientes.setIdPais(pais);
         localidadclientes.setEstado("A");
-//        localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
+        localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
         localidadclientes.setFechaCreacion(fechaActual);
         try {
             Lc.edit(localidadclientes);
@@ -306,34 +306,7 @@ public class Localidad_editar extends javax.swing.JDialog {
             Logger.getLogger(Localidad_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_guardarActionPerformed
-    /**
-     * java.util.Date fechaActual = new java.util.Date(); SePais pais = new
-     * SePais(); pais =
-     * ObtenerDTO.ObtenerSePais(cbx_pais.getSelectedItem().toString());
-     * SeProvincia provincia = new SeProvincia(); provincia =
-     * ObtenerDTO.ObtenerSeProvincia(cbx_provincia.getSelectedItem().toString());
-     * SeCiudad ciudad = new SeCiudad(); ciudad =
-     * ObtenerDTO.ObtenerSeCiudad(cbx_Ciudad.getSelectedItem().toString());
-     * localidadclientes.setDirreccionCliente(txt_direccion_cliente.getText());
-     * System.out.println(""+txt_direccion_cliente.getText());
-     * localidadclientes.setIdCliente(cliente); System.out.println(""+cliente);
-     * localidadclientes.setDirreccionEntrega(txt_direccion_entrega.getText());
-     * System.out.println(""+txt_direccion_entrega.getText());
-     * localidadclientes.setIdCiudad(ciudad); System.out.println("id
-     * ciudad"+ciudad); localidadclientes.setIdProvincia(provincia);
-     * System.out.println("id provin"+provincia);
-     * localidadclientes.setIdPais(pais); System.out.println("id pais "+pais);
-     * localidadclientes.setEstado("A"); //
-     * localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
-     * localidadclientes.setFechaCreacion(fechaActual); try {
-     * Lc.edit(LocalidadCliente); JOptionPane.showMessageDialog(null, " GUARDADO
-     * CON EXITO"); setVisible(false); } catch (Exception ex) {
-     * Logger.getLogger(Localidad_agregar.class.getName()).log(Level.SEVERE,
-     * null, ex); }/ /
-     *
-     **
-     * @param args the command line arguments
-     */
+ 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

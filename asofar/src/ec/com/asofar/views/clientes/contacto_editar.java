@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.clientes;
 
+import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
@@ -26,6 +27,7 @@ public class contacto_editar extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     SeLocalidadCliente localidadclientes;
+    SeContactosClientes ContactoClientes;
 
     public contacto_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,7 +36,7 @@ public class contacto_editar extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
 
-    public contacto_editar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeLocalidadCliente locli) {
+    public contacto_editar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeLocalidadCliente locli, SeContactosClientes contcli) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -43,6 +45,15 @@ public class contacto_editar extends javax.swing.JDialog {
         emp = em;
         suc = su;
         localidadclientes = locli;
+        ContactoClientes = contcli;
+        llenar();
+    }
+
+    public void llenar() {
+        txt_nombre.setText(ContactoClientes.getNombre());
+        txt_celular.setText(ContactoClientes.getCelular());
+        txt_telefono.setText(ContactoClientes.getTelefono());
+        txt_correo.setText(ContactoClientes.getEmail());
     }
 
     /**

@@ -45,7 +45,9 @@ public class consulta_cliente extends javax.swing.JDialog {
     List<SeClientes> lista = Cc.findSeClientesEntities();
     SeClientes Client = new SeClientes();
     List<SeContactosClientes> ContactoCliente;
+    SeContactosClientes ContactoClientes = new SeContactosClientes();
     SeContactosClientesJpaController Ccl = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeContactosClientes> lista3 = Ccl.findSeContactosClientesEntities();
     List<SeLocalidadCliente> lista1 = Lc.findSeLocalidadClienteEntities();
     SeLocalidadCliente LocaliClient = new SeLocalidadCliente();
 
@@ -581,7 +583,6 @@ public class consulta_cliente extends javax.swing.JDialog {
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
         int id = 0;
-        /*eeeeeeeeeeeeeee*/
         if (tba_localidad.getSelectedRow() >= 0) {
             id = tba_localidad.getSelectedRow();
             LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
@@ -598,18 +599,30 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_editarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
-        Ce.setVisible(true);
+
+        int id = 0;
+        if (tba_contacto.getSelectedRow() >= 0) {
+            id = tba_contacto.getSelectedRow();
+            ContactoClientes = devuelveObjeto3(Long.valueOf(tba_contacto.getValueAt(id, 0).toString()), lista3);
+
+            if (ContactoClientes != null) {
+                contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient,ContactoClientes);
+                Ce.setVisible(true);    
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN CONTACTO PARA EDITAR");
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
-    //    private SeClientes devuelveObjeto3(Long id, List<SeClientes> listacliente) {
-//        listacliente = Cc.findSeClientesEntities();
-//        for (int i = 0; i < listacliente.size(); i++) {
-//            if (Objects.equals(listacliente.get(i).getIdClientes(), id)) {
-//                Client = listacliente.get(i);
-//            }
-//        }
-//        return Client;
-//    }
+    public SeContactosClientes devuelveObjeto3(Long id, List<SeContactosClientes> listabod) {
+        SeContactosClientes doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getIdContactosClientes(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
 
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
