@@ -51,10 +51,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     InTipoMovimientoJpaController movcontroller = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoOrdenPedido cOrden;
 
-    List<CoDetalleOrdenPedido> listadet;
+//    List<CoDetalleOrdenPedido> listadet = new List<CoDetalleOrdenPedido>;
     List<CoOrdenPedido> listcab;
     PrProductos objetopro = new PrProductos();
-    
 
     public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -368,16 +367,22 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
         objetopro = cproducto.getProducto();
 
+       
+        
         CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
         detalle.setLineaDetalle(BigInteger.valueOf(15));
-//        detalle.setIdProducto((objetopro.getPrProductosPK().getIdProducto()));
-//        detalle.setDescripcion(objetopro.getNombreProducto());
+        detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
+        detalle.setDescripcion(objetopro.getNombreProducto());
         detalle.setCantidadSolicitada(BigInteger.valueOf(15));
 //        listadet.add(detalle);
+        
+        
+//         for (int i = 0; i < listadet.size(); i++) {
+//            System.out.println("lsdasd" + listadet.get(i).getIdProducto());
+//            
+//        }
 
-
-
-        System.out.println("lsdasd"+ objetopro.getNombreProducto());
+//        
 
 //        Tablas.llenarDetalledeOrden(listadet, jTable1);
     }//GEN-LAST:event_jButton1ActionPerformed
