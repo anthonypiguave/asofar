@@ -31,7 +31,9 @@ import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.SeCiudad;
 import ec.com.asofar.dto.SePais;
+import ec.com.asofar.dto.SeProvincia;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -74,6 +76,7 @@ public class ObtenerDTO {
         return dto;
 
     }
+
     public static SePais ObtenerSePais(int id) {
         SePaisJpaController control = new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
         SePais dto = new SePais();
@@ -88,9 +91,62 @@ public class ObtenerDTO {
 
         return dto;
 
-    }    
-    
+    }
 
+    public static SeProvincia ObtenerSeProvincia(int id) {
+        SeProvinciaJpaController control = new SeProvinciaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeProvincia dto = new SeProvincia();
+        List<SeProvincia> lista = control.findSeProvinciaEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdProvincia().equals(id)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+        return dto;
+    }
+
+    public static SeProvincia ObtenerSeProvincia(String nombre) {
+        SeProvinciaJpaController control = new SeProvinciaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeProvincia dto = new SeProvincia();
+        List<SeProvincia> lista = control.findSeProvinciaEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+        return dto;
+    }
+
+    public static SeCiudad ObtenerSeCiudad(int id) {
+        SeCiudadJpaController control = new SeCiudadJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeCiudad dto = new SeCiudad();
+        List<SeCiudad> lista = control.findSeCiudadEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdCiudad().equals(id)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+        return dto;
+    }
+    public static SeCiudad ObtenerSeCiudad(String nombre) {
+        SeCiudadJpaController control = new SeCiudadJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeCiudad dto = new SeCiudad();
+        List<SeCiudad> lista = control.findSeCiudadEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+        return dto;
+    }
     public static VeCaja ObtenerVeCaja(String nombre) {
         VeCajaJpaController control = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
         VeCaja dto = new VeCaja();
@@ -621,7 +677,6 @@ public class ObtenerDTO {
 //        return dto;
 //
 //    }
-
     public static PrProductos ObtenerPrProductos(Long id) {
         PrProductosJpaController control = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrProductos dto = new PrProductos();
@@ -649,6 +704,7 @@ public class ObtenerDTO {
         }
         return dto;
     }
+
     public static CoItemsCotizacion ObtenerCoItemsCotizacion(String id) {
         CoItemsCotizacionJpaController control = new CoItemsCotizacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         CoItemsCotizacion dto = new CoItemsCotizacion();
@@ -664,7 +720,7 @@ public class ObtenerDTO {
         return dto;
 
     }
-    
+
 //    public static CoItemsCotizacion ObtenerCoItemsCotizacion(Long id) {
 //        CoItemsCotizacionJpaController control = new CoItemsCotizacionJpaController(EntityManagerUtil.ObtenerEntityManager());
 //        CoItemsCotizacion dto = new CoItemsCotizacion();
@@ -679,7 +735,6 @@ public class ObtenerDTO {
 //        return dto;
 //    }
     ////////////////
-
     public static SeTipoIdentificacion ObtenerSeTipoIdentificacion(Long id) {
         SeTipoIdentificacionJpaController control = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeTipoIdentificacion dto = new SeTipoIdentificacion();
@@ -709,10 +764,9 @@ public class ObtenerDTO {
 
         return dto;
     }
-    
-      
-      public static CoOrdenPedido ObtenerCoOrdenPedido(Long id) {
-      CoOrdenPedidoJpaController control = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    public static CoOrdenPedido ObtenerCoOrdenPedido(Long id) {
+        CoOrdenPedidoJpaController control = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
         CoOrdenPedido dto = new CoOrdenPedido();
         List<CoOrdenPedido> lista = control.findCoOrdenPedidoEntities();
 

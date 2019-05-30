@@ -515,7 +515,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
-                Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
+                Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client, LocaliClient);
                 Lagg.setVisible(true);
                 MostrarLocalidad();
 //                LocalidadCliente = Lc.findSeLocalidadClienteEntities();
@@ -588,8 +588,9 @@ public class consulta_cliente extends javax.swing.JDialog {
 
             if (LocaliClient != null) {
 
-                Localidad_editar Lce = new Localidad_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
+                Localidad_editar Lce = new Localidad_editar(new javax.swing.JFrame(), true, usu, emp, suc, Client, LocaliClient);
                 Lce.setVisible(true);
+                MostrarLocalidad();
             }
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA LOCALIDAD PARA EDITAR");
@@ -600,7 +601,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
         Ce.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
-   //    private SeClientes devuelveObjeto3(Long id, List<SeClientes> listacliente) {
+    //    private SeClientes devuelveObjeto3(Long id, List<SeClientes> listacliente) {
 //        listacliente = Cc.findSeClientesEntities();
 //        for (int i = 0; i < listacliente.size(); i++) {
 //            if (Objects.equals(listacliente.get(i).getIdClientes(), id)) {
@@ -609,6 +610,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 //        }
 //        return Client;
 //    }
+
     public SeClientes devuelveObjeto(Long id, List<SeClientes> listabod) {
         SeClientes doc = null;
         for (int i = 0; i < listabod.size(); i++) {

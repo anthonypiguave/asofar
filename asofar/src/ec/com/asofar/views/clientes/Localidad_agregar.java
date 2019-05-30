@@ -5,11 +5,18 @@
  */
 package ec.com.asofar.views.clientes;
 
+import ec.com.asofar.dao.SeCiudadJpaController;
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeLocalidadClienteJpaController;
+import ec.com.asofar.dao.SePaisJpaController;
+import ec.com.asofar.dao.SeProvinciaJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.SeCiudad;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
+import ec.com.asofar.dto.SePais;
+import ec.com.asofar.dto.SeProvincia;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -34,26 +41,40 @@ public class Localidad_agregar extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     SeClientes cliente;
+    List<SePais> Pais;
+    SePaisJpaController Pc = new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeCiudad> Ciudad;
+    SeCiudadJpaController Cciu = new SeCiudadJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeProvincia> Provincia;
+    SeProvinciaJpaController Prc = new SeProvinciaJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeLocalidadCliente localidadclientes = new SeLocalidadCliente();
     SeLocalidadClienteJpaController Lc = new SeLocalidadClienteJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    SeLocalidadCliente LocalidadCliente;
+    
     public Localidad_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
-    public Localidad_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeClientes cl) {
+    
+    public Localidad_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeClientes cl, SeLocalidadCliente lc) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
+        Pais = Pc.findSePaisEntities();
+        Ciudad = Cciu.findSeCiudadEntities();
+        Provincia = Prc.findSeProvinciaEntities();
         usu = us;
         emp = em;
         suc = su;
         cliente = cl;
+        LocalidadCliente = lc;
+        llenarComboPais(Pais);
+        llenarComboCiudad(Ciudad);
+        llenarComboProvincia(Provincia);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,6 +87,12 @@ public class Localidad_agregar extends javax.swing.JDialog {
         txt_direccion_entrega = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btn_agregar = new javax.swing.JButton();
+        cbx_pais = new javax.swing.JComboBox<>();
+        cbx_provincia = new javax.swing.JComboBox<>();
+        cbx_ciudad = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,10 +154,17 @@ public class Localidad_agregar extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setText("Pais : ");
+
+        jLabel5.setText("Provincia : ");
+
+        jLabel6.setText("Ciudad : ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,16 +172,26 @@ public class Localidad_agregar extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(txt_direccion_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addGap(18, 18, 18)
-                        .addComponent(txt_direccion_entrega)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_direccion_entrega)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbx_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,12 +205,22 @@ public class Localidad_agregar extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_direccion_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbx_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_agregar)))
+                    .addComponent(btn_agregar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
@@ -178,12 +232,43 @@ public class Localidad_agregar extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void llenarComboPais(List<SePais> Pais) {
+        for (int i = 0; i < Pais.size(); i++) {
+            if (!"I".equals(Pais.get(i).getEstado())) {
+                cbx_pais.addItem(Pais.get(i).getNombre());
+//                if (LocalidadCliente.getIdPais().getNombre() == Pais.get(i).getNombre()) {
+//                    cbx_pais.setSelectedItem(Pais.get(i).getNombre());
+//                }
+            }
+        }
+    }
+    
+    public void llenarComboProvincia(List<SeProvincia> Provincia) {
+        for (int i = 0; i < Provincia.size(); i++) {
+            if (!"I".equals(Provincia.get(i).getNombre())) {
+                cbx_provincia.addItem(Provincia.get(i).getNombre());
+//                if (LocalidadCliente.getIdProvincia().getNombre() == Provincia.get(i).getNombre()) {
+//                    cbx_provincia.setSelectedItem(Provincia.get(i).getNombre());
+//                }
+            }
+        }
+    }
+    
+    public void llenarComboCiudad(List<SeCiudad> Ciudad) {
+        for (int i = 0; i < Ciudad.size(); i++) {
+            if (!"I".equals(Ciudad.get(i).getNombre())) {
+                cbx_ciudad.addItem(Ciudad.get(i).getNombre());
+//                if (LocalidadCliente.getIdCiudad().getNombre() == Ciudad.get(i).getNombre()) {
+//                    cbx_ciudad.setSelectedItem(Ciudad.get(i).getNombre());
+//                }
+            }
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -200,10 +285,20 @@ public class Localidad_agregar extends javax.swing.JDialog {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-
+        SePais pais = new SePais();
+        pais = ObtenerDTO.ObtenerSePais(cbx_pais.getSelectedItem().toString());
+        System.out.println("pais " + pais);
+        SeProvincia provincia = new SeProvincia();
+        provincia = ObtenerDTO.ObtenerSeProvincia(cbx_provincia.getSelectedItem().toString());
+        System.out.println("provincia "+provincia);
+        SeCiudad ciudad = new SeCiudad();
+        ciudad = ObtenerDTO.ObtenerSeCiudad(cbx_ciudad.getSelectedItem().toString());
         localidadclientes.setDirreccionCliente(txt_direccion_cliente.getText());
         localidadclientes.setIdCliente(cliente);
         localidadclientes.setDirreccionEntrega(txt_direccion_entrega.getText());
+        localidadclientes.setIdCiudad(ciudad);
+        localidadclientes.setIdProvincia(provincia);
+        localidadclientes.setIdPais(pais);
         localidadclientes.setEstado("A");
         localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
         localidadclientes.setFechaCreacion(fechaActual);
@@ -222,7 +317,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_direccion_clienteFocusLost
 
     private void txt_direccion_entregaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_direccion_entregaFocusLost
-     txt_direccion_entrega.setText(txt_direccion_entrega.getText().toUpperCase());
+        txt_direccion_entrega.setText(txt_direccion_entrega.getText().toUpperCase());
     }//GEN-LAST:event_txt_direccion_entregaFocusLost
 
     /**
@@ -269,10 +364,16 @@ public class Localidad_agregar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
+    private javax.swing.JComboBox<String> cbx_ciudad;
+    private javax.swing.JComboBox<String> cbx_pais;
+    private javax.swing.JComboBox<String> cbx_provincia;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txt_direccion_cliente;
     private javax.swing.JTextField txt_direccion_entrega;
