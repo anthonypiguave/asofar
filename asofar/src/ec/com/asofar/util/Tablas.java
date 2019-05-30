@@ -88,7 +88,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"CATEGORIA","SUBCATEGORIA","ARTICULO", "PRODUCTO", "EMPRESA",
+        String[] b = {"CATEGORIA", "SUBCATEGORIA", "ARTICULO", "PRODUCTO", "EMPRESA",
             "PRESENTACION", "MEDIDAS"};
         String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
@@ -118,11 +118,11 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
                 Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);                
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
             }
         }
     }
-    
+
     public static void ListarDetalleOrdenCompra(List<CoDetalleOrdenCompra> listadeorco, JTable Tabla, CoOrdenCompras orco) {
         int[] a = {50, 50, 50, 50, 50, 50, 50, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -1466,13 +1466,13 @@ public class Tablas {
     }
 
     public static void TablaLocalidadCliente(List<SeLocalidadCliente> listalocalidadcliente, JTable Tabla, SeClientes lista) {
-        int[] a = {5, 120, 120,50,50,50};
+        int[] a = {5, 120, 120, 50, 50, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID", "DIRECCION CLIENTE", "DIRECCION ENTREGA","PAIS","PROVINCIA","CIUDAD"};
+        String[] b = {"ID", "DIRECCION CLIENTE", "DIRECCION ENTREGA", "PAIS", "PROVINCIA", "CIUDAD"};
         String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
@@ -1504,13 +1504,13 @@ public class Tablas {
     }
 
     public static void TablaContactoCliente(List<SeContactosClientes> listacontactoscliente, JTable Tabla, SeLocalidadCliente lista) {
-        int[] a = {5, 50, 50, 80,80};
+        int[] a = {5, 50, 50, 80, 80};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID","NOMBRE", "TELEFONO", "CELULAR", "CORREO"};
+        String[] b = {"ID", "NOMBRE", "TELEFONO", "CELULAR", "CORREO"};
         String[] filas = new String[5];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
@@ -1568,8 +1568,9 @@ public class Tablas {
             }
         }
     }
-                public static void TablaUnidadServicio(List<VeUnidadServicio> listaunidad, JTable Tabla) {
-        int[] a = {5, 50,166};
+
+    public static void TablaUnidadServicio(List<VeUnidadServicio> listaunidad, JTable Tabla) {
+        int[] a = {5, 50, 166};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1595,37 +1596,36 @@ public class Tablas {
             }
         }
     }
-                
-         public static void TablaPrestaciones(List<PrPrestaciones> listaprestaciones, JTable Tabla) {
-        int[] a = {5, 50,166};
+
+    public static void TablaPrestaciones(List<PrPrestaciones> listaprestaciones, JTable Tabla) {
+        int[] a = {40, 40, 15,15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"codigo", "nombre producto"};
-        String[] filas = new String[2];
+        String[] b = {"Codigo Prestacion", "Nombre prestacion", "Estado", "Aplica Iva"};
+        String[] filas = new String[4];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaprestaciones.size(); i++) {
-            if (listaprestaciones.get(i).getEstado().equals("I")) {
-                filas[0] = String.valueOf(listaprestaciones.get(i).getIdPoducto());
+            if (listaprestaciones.get(i).getEstado().equals("A")) {
+                filas[0] = String.valueOf(listaprestaciones.get(i).getPrPrestacionesPK().getIdPrestacion());
                 filas[1] = listaprestaciones.get(i).getNombrePrestacion();
-               
+                filas[2] = listaprestaciones.get(i).getEstado();
+                filas[3] = listaprestaciones.get(i).getAplicaIva();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
                 Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                           }
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
         }
-    }           
-                
-                
-                
-                
-                
+    }
+
 }
-
-
