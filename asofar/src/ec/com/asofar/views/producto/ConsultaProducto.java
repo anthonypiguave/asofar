@@ -6,6 +6,7 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrProductosJpaController;
+import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -18,12 +19,14 @@ import java.util.List;
  * @author admin1
  */
 public class ConsultaProducto extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     String valor = "";
     PrProductos ppro = new PrProductos();
     List<PrProductos> lista;
     PrProductosJpaController procont = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+    PrProductos objeto = new PrProductos();
+
     /**
      * Creates new form ConsultaProducto
      */
@@ -31,6 +34,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cargartabla();
     }
 
     /**
@@ -50,8 +54,6 @@ public class ConsultaProducto extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbproductos = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
-        btninactivos = new javax.swing.JButton();
-        btnnuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -101,17 +103,24 @@ public class ConsultaProducto extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbproductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbproductosMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbproductos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -122,21 +131,15 @@ public class ConsultaProducto extends javax.swing.JDialog {
             }
         });
 
-        btninactivos.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btninactivos.setText("INACTIVOS");
-
-        btnnuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnnuevo.setText("NUEVO");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(167, 167, 167)
+                .addGap(224, 224, 224)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -145,12 +148,8 @@ public class ConsultaProducto extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btninactivos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,11 +162,8 @@ public class ConsultaProducto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btninactivos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,11 +180,11 @@ public class ConsultaProducto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void cargartabla(){
+    public void cargartabla() {
         lista = procont.findPrProductosEntities();
         Tablas.ListarProductosConsulta(lista, tbproductos);
     }
-    
+
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
         y = evt.getY();
@@ -196,7 +192,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -210,11 +206,47 @@ public class ConsultaProducto extends javax.swing.JDialog {
 
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
         char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyReleased
+
+    private void tbproductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproductosMousePressed
+        int i = 0;
+
+        if (evt.getClickCount() == 2) {
+            i = tbproductos.getSelectedRow();
+            objeto = devuelveObjeto(tbproductos.getValueAt(i, 0).toString(), lista);
+            System.out.println("objeto"+objeto.getNombreProducto());
+            if (objeto != null) {
+                this.setVisible(false);
+            }
+        }
+    }//GEN-LAST:event_tbproductosMousePressed
+
+    public PrProductos getProducto() {
+        return objeto;
+    }
+
+    public PrProductos devuelveObjeto(String datos, List<PrProductos> listaobjeto) {
+
+        PrProductos objeto1 = null;
+
+        for (int i = 0; i < listaobjeto.size(); i++) {
+
+            if (datos.equals(""+ listaobjeto.get(i).getPrProductosPK().getIdProducto())) {
+                objeto1 = listaobjeto.get(i);
+
+                break;
+
+            }
+
+        }
+
+        return objeto1;
+
+    }
 
     /**
      * @param args the command line arguments
@@ -259,8 +291,6 @@ public class ConsultaProducto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btninactivos;
-    private javax.swing.JButton btnnuevo;
     private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

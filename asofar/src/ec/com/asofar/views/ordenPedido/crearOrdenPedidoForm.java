@@ -10,19 +10,24 @@ import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ordenPedidoEXT;
+import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.CoProveedores_;
 import ec.com.asofar.dto.InTipoMovimiento;
+import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.PrProductos_;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.producto.ConsultaProducto;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,6 +50,10 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoMovimientoJpaController movcontroller = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoOrdenPedido cOrden;
+
+//    List<CoDetalleOrdenPedido> listadet = new List<CoDetalleOrdenPedido>;
+    List<CoOrdenPedido> listcab;
+    PrProductos objetopro = new PrProductos();
 
     public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -355,6 +364,27 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ConsultaProducto cproducto = new ConsultaProducto(new javax.swing.JFrame(), true);
         cproducto.setVisible(true);
+
+        objetopro = cproducto.getProducto();
+
+       
+        
+        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+        detalle.setLineaDetalle(BigInteger.valueOf(15));
+        detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
+        detalle.setDescripcion(objetopro.getNombreProducto());
+        detalle.setCantidadSolicitada(BigInteger.valueOf(15));
+//        listadet.add(detalle);
+        
+        
+//         for (int i = 0; i < listadet.size(); i++) {
+//            System.out.println("lsdasd" + listadet.get(i).getIdProducto());
+//            
+//        }
+
+//        
+
+//        Tablas.llenarDetalledeOrden(listadet, jTable1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
