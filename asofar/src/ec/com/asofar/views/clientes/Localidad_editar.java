@@ -6,9 +6,12 @@
 package ec.com.asofar.views.clientes;
 
 import ec.com.asofar.dao.SeCiudadJpaController;
+import ec.com.asofar.dao.SeLocalidadClienteJpaController;
 import ec.com.asofar.dao.SePaisJpaController;
 import ec.com.asofar.dao.SeProvinciaJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.SeCiudad;
+import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SePais;
@@ -19,6 +22,9 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,6 +41,12 @@ public class Localidad_editar extends javax.swing.JDialog {
     List<SeProvincia> Provincia;
     SeProvinciaJpaController Prc = new SeProvinciaJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeLocalidadCliente LocalidadCliente;
+    SeLocalidadCliente localidadclientes = new SeLocalidadCliente();
+    SeLocalidadClienteJpaController Lc = new SeLocalidadClienteJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeClientes cliente;
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
 
     public Localidad_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -49,7 +61,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         llenarComboProvincia(Provincia);
     }
 
-    public Localidad_editar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeLocalidadCliente lc) {
+    public Localidad_editar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeClientes cl, SeLocalidadCliente lc) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -57,7 +69,12 @@ public class Localidad_editar extends javax.swing.JDialog {
         Pais = Pc.findSePaisEntities();
         Ciudad = Cc.findSeCiudadEntities();
         Provincia = Prc.findSeProvinciaEntities();
+        usu = us;
+        emp = em;
+        suc = su;
         LocalidadCliente = lc;
+        System.out.println("localidad " + LocalidadCliente.getIdLocalidadCliente());
+        cliente = cl;
         llenar();
         llenarComboPais(Pais);
         llenarComboCiudad(Ciudad);
@@ -145,7 +162,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,23 +175,33 @@ public class Localidad_editar extends javax.swing.JDialog {
                             .addComponent(jLabel6))
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbx_pais, 0, 200, Short.MAX_VALUE)
-                            .addComponent(cbx_Ciudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbx_provincia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_direccion_cliente)
-                            .addComponent(txt_direccion_entrega)))
+                            .addComponent(txt_direccion_entrega)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cbx_provincia, javax.swing.GroupLayout.Alignment.LEADING, 0, 128, Short.MAX_VALUE)
+                                    .addComponent(cbx_Ciudad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbx_pais, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btn_guardar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_direccion_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_direccion_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -186,18 +213,10 @@ public class Localidad_editar extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cbx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_direccion_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_direccion_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btn_guardar))
+                    .addComponent(btn_guardar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -261,16 +280,58 @@ public class Localidad_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-       /*
-        
-        
-        
-        
-        
-        */
+        java.util.Date fechaActual = new java.util.Date();
+        SePais pais = new SePais();
+        pais = ObtenerDTO.ObtenerSePais(cbx_pais.getSelectedItem().toString());
+        System.out.println("pais " + pais);
+        SeProvincia provincia = new SeProvincia();
+        provincia = ObtenerDTO.ObtenerSeProvincia(cbx_provincia.getSelectedItem().toString());
+        System.out.println("provincia " + provincia);
+        SeCiudad ciudad = new SeCiudad();
+        ciudad = ObtenerDTO.ObtenerSeCiudad(cbx_Ciudad.getSelectedItem().toString());
+        localidadclientes.setDirreccionCliente(txt_direccion_cliente.getText());
+        localidadclientes.setIdCliente(cliente);
+        localidadclientes.setDirreccionEntrega(txt_direccion_entrega.getText());
+        localidadclientes.setIdCiudad(ciudad);
+        localidadclientes.setIdProvincia(provincia);
+        localidadclientes.setIdPais(pais);
+        localidadclientes.setEstado("A");
+//        localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
+        localidadclientes.setFechaCreacion(fechaActual);
+        try {
+            Lc.edit(LocalidadCliente);
+            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            setVisible(false);
+        } catch (Exception ex) {
+            Logger.getLogger(Localidad_agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_guardarActionPerformed
-
     /**
+     * java.util.Date fechaActual = new java.util.Date(); SePais pais = new
+     * SePais(); pais =
+     * ObtenerDTO.ObtenerSePais(cbx_pais.getSelectedItem().toString());
+     * SeProvincia provincia = new SeProvincia(); provincia =
+     * ObtenerDTO.ObtenerSeProvincia(cbx_provincia.getSelectedItem().toString());
+     * SeCiudad ciudad = new SeCiudad(); ciudad =
+     * ObtenerDTO.ObtenerSeCiudad(cbx_Ciudad.getSelectedItem().toString());
+     * localidadclientes.setDirreccionCliente(txt_direccion_cliente.getText());
+     * System.out.println(""+txt_direccion_cliente.getText());
+     * localidadclientes.setIdCliente(cliente); System.out.println(""+cliente);
+     * localidadclientes.setDirreccionEntrega(txt_direccion_entrega.getText());
+     * System.out.println(""+txt_direccion_entrega.getText());
+     * localidadclientes.setIdCiudad(ciudad); System.out.println("id
+     * ciudad"+ciudad); localidadclientes.setIdProvincia(provincia);
+     * System.out.println("id provin"+provincia);
+     * localidadclientes.setIdPais(pais); System.out.println("id pais "+pais);
+     * localidadclientes.setEstado("A"); //
+     * localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
+     * localidadclientes.setFechaCreacion(fechaActual); try {
+     * Lc.edit(LocalidadCliente); JOptionPane.showMessageDialog(null, " GUARDADO
+     * CON EXITO"); setVisible(false); } catch (Exception ex) {
+     * Logger.getLogger(Localidad_agregar.class.getName()).log(Level.SEVERE,
+     * null, ex); }/ /
+     *
+     **
      * @param args the command line arguments
      */
     public static void main(String args[]) {
