@@ -40,6 +40,7 @@ import java.awt.Font;
 import java.math.BigInteger;
 import java.util.List;
 import static javafx.scene.text.Font.font;
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
@@ -66,6 +67,7 @@ public class Tablas {
     private static boolean[] editable3 = {false, false, false, false, false, false, false, true};
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
+    private static boolean[] tbordenpedido = {false, false, false, true, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -157,38 +159,83 @@ public class Tablas {
         }
     }
 
-    public static void llenarDetalledeOrden(List<CoDetalleOrdenPedido> listadeorpe, JTable Tabla ) {
+//    public static void llenarDetalledeOrden(List<CoDetalleOrdenPedido> listadeorpe, JTable Tabla) {
+//
+//        int[] a = {50, 50, 50, 50, 50, 50, 50, 50};
+//        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+//        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+//        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+//        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+//        model = VaciarTabla(Tabla);
+//        String[] b = {"LINEA DETALLE", "COD PRODUCTO", "DESCRIPCION", "CANTIDAD SOLICITADA",};
+//        String[] filas = new String[4];
+//        model = new DefaultTableModel(null, b);
+//        Tabla.setShowGrid(true);
+//        for (int i = 0; i < listadeorpe.size(); i++) {
+//
+//            filas[0] = listadeorpe.get(i).getLineaDetalle().toString();
+//            filas[1] = listadeorpe.get(i).getIdProducto().toString();
+//            filas[2] = listadeorpe.get(i).getDescripcion();
+//            filas[3] = listadeorpe.get(i).getCantidadSolicitada().toString();
+//
+//            model.addRow(filas);
+//            Tabla.setModel(model);
+//            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+//            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+//            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[2]);
+//            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+//
+//        }
+//
+//    }
+    public static void llenarDetalledeOrden(JTable tabla, List<CoDetalleOrdenPedido> lista) {
+        CoDetalleOrdenPedido vo = new CoDetalleOrdenPedido();
 
-        int[] a = {50, 50, 50, 50, 50, 50, 50, 50};
-        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
-        tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
-        model = VaciarTabla(Tabla);
-        String[] b = {"LINEA DETALLE", "COD PRODUCTO", "DESCRIPCION", "CANTIDAD SOLICITADA",};
-        String[] filas = new String[4];
-        model = new DefaultTableModel(null, b);
-        Tabla.setShowGrid(true);
-        for (int i = 0; i < listadeorpe.size(); i++) {
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO",
+            "CANTIDAD SOLICITADA", "",}, 0) {
 
-            filas[0] = listadeorpe.get(i).getLineaDetalle().toString();
-            filas[1] = listadeorpe.get(i).getIdProducto().toString();
-            filas[2] = listadeorpe.get(i).getDescripcion();
-            filas[3] = listadeorpe.get(i).getCantidadSolicitada().toString();
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, JButton.class
 
-            model.addRow(filas);
-            Tabla.setModel(model);
-            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return tbordenpedido[column];
+            }
+        };
+
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+//                 model.addRow(new Object[]{});
+                Object filas[] = new Object[5];
+                vo = lista.get(i);
+//                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
+
+                filas[0] = lista.get(i).getLineaDetalle().toString();
+                filas[1] = lista.get(i).getIdProducto().toString();
+                filas[2] = lista.get(i).getDescripcion();
+                filas[3] = lista.get(i).getCantidadSolicitada().toString();
+
+//                String ac = (String) vo.getEstado();
+                filas[4] = new JButton("ELIMINAR");
+
+                dt.addRow(filas);
+
+            }
 
         }
 
+        tabla.setModel(dt);
     }
 
     public static void listarOrdenesdeCompra(List<CoOrdenCompras> lista, JTable Tabla) {
@@ -1636,27 +1683,32 @@ public class Tablas {
     }
 
     public static void TablaPrestaciones(List<PrPrestaciones> listaprestaciones, JTable Tabla) {
-        int[] a = {5, 50, 166};
+        int[] a = {40, 40, 15,15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"codigo", "nombre producto"};
-        String[] filas = new String[2];
+        String[] b = {"Codigo Prestacion", "Nombre prestacion", "Estado", "Aplica Iva"};
+        String[] filas = new String[4];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaprestaciones.size(); i++) {
-            if (listaprestaciones.get(i).getEstado().equals("I")) {
-                filas[0] = String.valueOf(listaprestaciones.get(i).getIdPoducto());
+            if (listaprestaciones.get(i).getEstado().equals("A")) {
+                filas[0] = String.valueOf(listaprestaciones.get(i).getPrPrestacionesPK().getIdPrestacion());
                 filas[1] = listaprestaciones.get(i).getNombrePrestacion();
-
+                filas[2] = listaprestaciones.get(i).getEstado();
+                filas[3] = listaprestaciones.get(i).getAplicaIva();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
                 Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
     }
