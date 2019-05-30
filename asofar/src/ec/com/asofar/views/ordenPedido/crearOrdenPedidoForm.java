@@ -29,9 +29,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -51,7 +53,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     InTipoMovimientoJpaController movcontroller = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoOrdenPedido cOrden;
 
-//    List<CoDetalleOrdenPedido> listadet = new List<CoDetalleOrdenPedido>;
+    List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoOrdenPedido> listcab;
     PrProductos objetopro = new PrProductos();
 
@@ -296,9 +298,17 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -367,25 +377,48 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
         objetopro = cproducto.getProducto();
 
-       
-        
         CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
         detalle.setLineaDetalle(BigInteger.valueOf(15));
         detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
         detalle.setDescripcion(objetopro.getNombreProducto());
-        detalle.setCantidadSolicitada(BigInteger.valueOf(15));
-//        listadet.add(detalle);
-        
-        
-//         for (int i = 0; i < listadet.size(); i++) {
-//            System.out.println("lsdasd" + listadet.get(i).getIdProducto());
-//            
-//        }
+        detalle.setCantidadSolicitada(BigInteger.valueOf(0));
+        listadet.add(detalle);
 
-//        
+        for (int i = 0; i < listadet.size(); i++) {
+            System.out.println("lsdasd" + listadet.get(i).getIdProducto());
 
-//        Tablas.llenarDetalledeOrden(listadet, jTable1);
+        }
+
+        Tablas.llenarDetalledeOrden(jTable1, listadet);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        
+            int row = jTable1.rowAtPoint(evt.getPoint());
+            int col = jTable1.columnAtPoint(evt.getPoint());
+            if (evt.getClickCount() == 1) {
+                if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
+                    try {
+                    System.out.println("boton:");
+                    } catch (Exception e) {
+        }
+                }
+            }
+        
+
+
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+//        int row = jTable1.rowAtPoint(evt.getPoint());
+//        int col = jTable1.columnAtPoint(evt.getPoint());
+//        
+//        if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
+//      
+//            String 
+//      System.out.println("acada");
+//        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
