@@ -18,4 +18,10 @@ public class SeLocalidadesClientesExt extends SeLocalidadClienteJpaController{
         super(emf);
     }
     
+    
+    
+    public void editar (){
+    
+    }
+    
 }

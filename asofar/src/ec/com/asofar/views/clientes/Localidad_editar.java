@@ -72,8 +72,8 @@ public class Localidad_editar extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
-        LocalidadCliente = lc;
-        System.out.println("localidad " + LocalidadCliente.getIdLocalidadCliente());
+        localidadclientes = lc;
+        System.out.println("localidad " + localidadclientes.getIdLocalidadCliente());
         cliente = cl;
         llenar();
         llenarComboPais(Pais);
@@ -82,8 +82,8 @@ public class Localidad_editar extends javax.swing.JDialog {
     }
 
     public void llenar() {
-        txt_direccion_cliente.setText(LocalidadCliente.getDirreccionCliente());
-        txt_direccion_entrega.setText(LocalidadCliente.getDirreccionEntrega());
+        txt_direccion_cliente.setText(localidadclientes.getDirreccionCliente());
+        txt_direccion_entrega.setText(localidadclientes.getDirreccionEntrega());
     }
 
     /**
@@ -237,7 +237,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         for (int i = 0; i < Pais.size(); i++) {
             if (!"I".equals(Pais.get(i).getEstado())) {
                 cbx_pais.addItem(Pais.get(i).getNombre());
-                if (LocalidadCliente.getIdPais().getNombre() == Pais.get(i).getNombre()) {
+                if (localidadclientes.getIdPais().getNombre() == Pais.get(i).getNombre()) {
                     cbx_pais.setSelectedItem(Pais.get(i).getNombre());
                 }
             }
@@ -248,7 +248,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         for (int i = 0; i < Provincia.size(); i++) {
             if (!"I".equals(Provincia.get(i).getNombre())) {
                 cbx_provincia.addItem(Provincia.get(i).getNombre());
-                if (LocalidadCliente.getIdProvincia().getNombre() == Provincia.get(i).getNombre()) {
+                if (localidadclientes.getIdProvincia().getNombre() == Provincia.get(i).getNombre()) {
                     cbx_provincia.setSelectedItem(Provincia.get(i).getNombre());
                 }
             }
@@ -259,7 +259,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         for (int i = 0; i < Ciudad.size(); i++) {
             if (!"I".equals(Ciudad.get(i).getNombre())) {
                 cbx_Ciudad.addItem(Ciudad.get(i).getNombre());
-                if (LocalidadCliente.getIdCiudad().getNombre() == Ciudad.get(i).getNombre()) {
+                if (localidadclientes.getIdCiudad().getNombre() == Ciudad.get(i).getNombre()) {
                     cbx_Ciudad.setSelectedItem(Ciudad.get(i).getNombre());
                 }
             }
@@ -299,7 +299,7 @@ public class Localidad_editar extends javax.swing.JDialog {
 //        localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
         localidadclientes.setFechaCreacion(fechaActual);
         try {
-            Lc.edit(LocalidadCliente);
+            Lc.edit(localidadclientes);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception ex) {
