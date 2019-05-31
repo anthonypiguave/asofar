@@ -83,16 +83,19 @@ public class consulta_cliente extends javax.swing.JDialog {
         btn_ingresar_cliente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        btn_eliminar_cliente = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tba_localidad = new javax.swing.JTable();
         btn_ingresar_localidad = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
+        btn_eliminar_localidad = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tba_contacto = new javax.swing.JTable();
         btn_ingresar_contacto = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtbusqueda = new javax.swing.JTextField();
@@ -150,6 +153,13 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
+        btn_eliminar_cliente.setText("Eliminar");
+        btn_eliminar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminar_clienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,6 +168,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_eliminar_cliente)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_ingresar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +183,8 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ingresar_cliente)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(btn_eliminar_cliente))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -218,6 +231,13 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
+        btn_eliminar_localidad.setText("Eliminar");
+        btn_eliminar_localidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminar_localidadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -225,6 +245,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btn_eliminar_localidad)
+                .addGap(18, 18, 18)
                 .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_ingresar_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,7 +258,8 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ingresar_localidad)
-                    .addComponent(btn_editar)))
+                    .addComponent(btn_editar)
+                    .addComponent(btn_eliminar_localidad)))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contacto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 14))); // NOI18N
@@ -279,6 +302,13 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
+        jButton7.setText("Eliminar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -286,6 +316,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton7)
+                .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_ingresar_contacto, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -297,7 +329,8 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ingresar_contacto)
-                    .addComponent(jButton5)))
+                    .addComponent(jButton5)
+                    .addComponent(jButton7)))
         );
 
         jLabel3.setBackground(new java.awt.Color(255, 102, 0));
@@ -384,7 +417,7 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                 .addGap(13, 13, 13))
         );
 
@@ -572,6 +605,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         consulta_cliente_inactivos Cci = new consulta_cliente_inactivos(new javax.swing.JFrame(), true, usu, emp, suc);
         Cci.setVisible(true);
+        MostrarClientes();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -622,6 +656,97 @@ public class consulta_cliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN CONTACTO PARA EDITAR");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btn_eliminar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminar_clienteActionPerformed
+        int id = 0;
+        if (tba_clientes.getSelectedRow() >= 0) {
+            id = tba_clientes.getSelectedRow();
+            Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
+
+            if (Client != null) {
+                int OP = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este Cliente?", "", JOptionPane.YES_NO_OPTION);
+                if (OP == JOptionPane.YES_OPTION) {
+                    for (int i = 0; i < Cliente.size(); i++) {
+                        if (Client.getIdClientes().equals(Cliente.get(i).getIdClientes())) {
+                            System.out.println("************");
+                            Client.setEstado("I");
+                            try {
+                                Cc.edit(Client);
+                                JOptionPane.showMessageDialog(null, " ELIMINADO CON EXITO");
+                            } catch (Exception ex) {
+                                Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                } else {
+                }
+                MostrarClientes();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE PARA ELIMINAR");
+        }
+    }//GEN-LAST:event_btn_eliminar_clienteActionPerformed
+
+    private void btn_eliminar_localidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminar_localidadActionPerformed
+        int id = 0;
+        if (tba_localidad.getSelectedRow() >= 0) {
+            id = tba_localidad.getSelectedRow();
+            LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
+
+            if (LocaliClient != null) {
+                int OP = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este Localidad?", "", JOptionPane.YES_NO_OPTION);
+                if (OP == JOptionPane.YES_OPTION) {
+                    for (int i = 0; i < LocalidadCliente.size(); i++) {
+                        if (LocaliClient.getIdLocalidadCliente().equals(LocalidadCliente.get(i).getIdLocalidadCliente())) {
+                            System.out.println("************");
+//                            LocaliClient.setEstado("I");
+                            try {
+                                Lc.destroy(LocaliClient.getIdLocalidadCliente());
+                                JOptionPane.showMessageDialog(null, " ELIMINADO CON EXITO");
+                            } catch (Exception ex) {
+                                Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                } else {
+                }
+
+                MostrarLocalidad();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UNA LOCALIDAD PARA EDITAR");
+        }
+    }//GEN-LAST:event_btn_eliminar_localidadActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        int id = 0;
+        if (tba_contacto.getSelectedRow() >= 0) {
+            id = tba_contacto.getSelectedRow();
+            ContactoClientes = devuelveObjeto3(Long.valueOf(tba_contacto.getValueAt(id, 0).toString()), lista3);
+
+            if (ContactoClientes != null) {
+                int OP = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este Contacto?", "", JOptionPane.YES_NO_OPTION);
+                if (OP == JOptionPane.YES_OPTION) {
+                    for (int i = 0; i < ContactoCliente.size(); i++) {
+                        if (ContactoClientes.getIdContactosClientes().equals(ContactoCliente.get(i).getIdContactosClientes())) {
+                            System.out.println("************");
+//                            LocaliClient.setEstado("I");
+                            try {
+                                Ccl.destroy(ContactoClientes.getIdContactosClientes());
+                                JOptionPane.showMessageDialog(null, " ELIMINADO CON EXITO");
+                            } catch (Exception ex) {
+                                Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                } else {
+                }
+                MostrarContacto();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN CONTACTO PARA EDITAR");
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
     public SeContactosClientes devuelveObjeto3(Long id, List<SeContactosClientes> listabod) {
         SeContactosClientes doc = null;
         for (int i = 0; i < listabod.size(); i++) {
@@ -689,6 +814,8 @@ public class consulta_cliente extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_editar;
+    private javax.swing.JButton btn_eliminar_cliente;
+    private javax.swing.JButton btn_eliminar_localidad;
     private javax.swing.JButton btn_ingresar_cliente;
     private javax.swing.JButton btn_ingresar_contacto;
     private javax.swing.JButton btn_ingresar_localidad;
@@ -696,6 +823,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
