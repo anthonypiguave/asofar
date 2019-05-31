@@ -202,6 +202,9 @@
               <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="articuloKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="grupo">
           <Properties>
