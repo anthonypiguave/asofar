@@ -27,7 +27,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
     PrGruposJpaController control = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrArticuloJpaControllerExt control2 = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     List<PrGrupos> lista= control.findPrGruposEntities();
-    int x,y;
+    int x,y,numerocaracter;
     /**
      * Creates new form IngresarArticulo
      */
@@ -107,6 +107,11 @@ public class IngresarArticulo extends javax.swing.JDialog {
         });
 
         articulo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        articulo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                articuloKeyTyped(evt);
+            }
+        });
 
         grupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         grupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opcion.." }));
@@ -261,6 +266,14 @@ public class IngresarArticulo extends javax.swing.JDialog {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x-x,point.y-y);
     }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void articuloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_articuloKeyTyped
+        numerocaracter = 70;
+        if(articulo.getText().length()>=numerocaracter){
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar maximo 70 caracteres");
+        }
+    }//GEN-LAST:event_articuloKeyTyped
 public void Actualizar(){
     setVisible(false);
         ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);

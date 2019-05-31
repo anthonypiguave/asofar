@@ -24,7 +24,8 @@ import javax.swing.JOptionPane;
 
 
 public class EditarArticulo extends javax.swing.JDialog {
-    int x,y;
+    int x,y,numerocaracter;
+    
     PrArticuloJpaControllerExt control= new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     
     PrArticulo obj1=null;
@@ -86,6 +87,11 @@ public class EditarArticulo extends javax.swing.JDialog {
         jLabel2.setText("GRUPO:");
 
         articulo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        articulo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                articuloKeyTyped(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(46, 115, 48));
@@ -98,6 +104,11 @@ public class EditarArticulo extends javax.swing.JDialog {
 
         grupo.setEditable(false);
         grupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        grupo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                grupoKeyTyped(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -249,6 +260,18 @@ public class EditarArticulo extends javax.swing.JDialog {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x-x,point.y-y);
     }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void grupoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_grupoKeyTyped
+        
+    }//GEN-LAST:event_grupoKeyTyped
+
+    private void articuloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_articuloKeyTyped
+        numerocaracter = 70;
+        if(articulo.getText().length()>=numerocaracter){
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar maximo 70 caracteres");
+        }
+    }//GEN-LAST:event_articuloKeyTyped
 
     /**
      * @param args the command line arguments
