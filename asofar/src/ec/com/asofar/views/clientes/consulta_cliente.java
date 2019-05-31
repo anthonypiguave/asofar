@@ -425,6 +425,14 @@ public class consulta_cliente extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
+
+    public void MostrarContactoVacia() {
+        try {
+            ContactoCliente = Ccl.findSeContactosClientesEntities();
+            Tablas.TablaContactoClienteVacia(ContactoCliente, tba_contacto, LocaliClient);
+        } catch (Exception e) {
+        }
+    }
     private void jLabel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
@@ -465,6 +473,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
 //                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
 //                tba_contacto.clearSelection();
+//                MostrarContactoVacia();
             }
         }
     }//GEN-LAST:event_tba_clientesMouseClicked
@@ -606,8 +615,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             ContactoClientes = devuelveObjeto3(Long.valueOf(tba_contacto.getValueAt(id, 0).toString()), lista3);
 
             if (ContactoClientes != null) {
-                contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient,ContactoClientes);
-                Ce.setVisible(true);    
+                contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient, ContactoClientes);
+                Ce.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN CONTACTO PARA EDITAR");
