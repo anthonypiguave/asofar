@@ -196,6 +196,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_primer_nombre">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_primer_nombreFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -203,10 +206,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_segundo_nombre">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_segundo_nombreFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_primer_apellido">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_primer_apellidoFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_segundo_apellido">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_segundo_apellidoFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>

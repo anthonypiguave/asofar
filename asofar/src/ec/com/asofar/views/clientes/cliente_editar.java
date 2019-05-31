@@ -135,7 +135,31 @@ public class cliente_editar extends javax.swing.JDialog {
 
         jLabel1.setText("Nombres : ");
 
+        txt_primer_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_primer_nombreFocusLost(evt);
+            }
+        });
+
         jLabel2.setText("Apellidos : ");
+
+        txt_segundo_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_segundo_nombreFocusLost(evt);
+            }
+        });
+
+        txt_primer_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_primer_apellidoFocusLost(evt);
+            }
+        });
+
+        txt_segundo_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_segundo_apellidoFocusLost(evt);
+            }
+        });
 
         jLabel6.setText("Razon Social :");
 
@@ -329,6 +353,22 @@ public class cliente_editar extends javax.swing.JDialog {
             Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void txt_primer_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_nombreFocusLost
+        txt_primer_nombre.setText(txt_primer_nombre.getText().toUpperCase());
+    }//GEN-LAST:event_txt_primer_nombreFocusLost
+
+    private void txt_segundo_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_nombreFocusLost
+        txt_segundo_nombre.setText(txt_segundo_nombre.getText().toUpperCase());
+    }//GEN-LAST:event_txt_segundo_nombreFocusLost
+
+    private void txt_primer_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_apellidoFocusLost
+        txt_primer_apellido.setText(txt_primer_apellido.getText().toUpperCase());
+    }//GEN-LAST:event_txt_primer_apellidoFocusLost
+
+    private void txt_segundo_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_apellidoFocusLost
+        txt_segundo_apellido.setText(txt_segundo_apellido.getText().toUpperCase());
+    }//GEN-LAST:event_txt_segundo_apellidoFocusLost
 
     /**
      * @param args the command line arguments

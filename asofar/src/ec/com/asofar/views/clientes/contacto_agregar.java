@@ -14,6 +14,7 @@ import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Validacion;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.logging.Level;
@@ -36,6 +37,7 @@ public class contacto_agregar extends javax.swing.JDialog {
     SeLocalidadCliente localidadclientes;
     SeContactosClientesJpaController Ccc = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeContactosClientes ContactoCliente = new SeContactosClientes();
+    boolean corr = false;
 
     public contacto_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -108,11 +110,29 @@ public class contacto_agregar extends javax.swing.JDialog {
             }
         });
 
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("Telefono :");
 
         jLabel2.setText("Celular :");
 
+        txt_celular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_celularKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Correo :");
+
+        txt_correo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_correoFocusLost(evt);
+            }
+        });
 
         btn_agregar.setBackground(new java.awt.Color(0, 102, 0));
         btn_agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -128,6 +148,12 @@ public class contacto_agregar extends javax.swing.JDialog {
         });
 
         jLabel5.setText("Nombre : ");
+
+        txt_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_nombreFocusLost(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(173, 42, 48));
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -254,6 +280,32 @@ public class contacto_agregar extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txt_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nombreFocusLost
+        txt_nombre.setText(txt_nombre.getText().toUpperCase());
+    }//GEN-LAST:event_txt_nombreFocusLost
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_celularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_celularKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_celularKeyTyped
+
+    private void txt_correoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_correoFocusLost
+        corr = Validacion.Email(txt_correo.getText());
+        if (corr != true) {
+            //msge = msge + "\n Correo invalido";
+            JOptionPane.showMessageDialog(null, "Correo invalido");
+        }
+    }//GEN-LAST:event_txt_correoFocusLost
 
     /**
      * @param args the command line arguments
