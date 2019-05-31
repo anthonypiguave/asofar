@@ -299,6 +299,9 @@ public class IngresarEmpresas extends javax.swing.JDialog {
     private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
         char car = evt.getKeyChar();
         //System.out.println(car);
+        if(!Character.isDigit(car)){
+            evt.consume();
+        }
         if (txtRuc.getText().length() == 9 || txtRuc.getText().length() == 12) {
             // evt.consume();
             Habilitar(true);
@@ -342,7 +345,9 @@ public class IngresarEmpresas extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCorreoKeyTyped
 
     private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
-        // TODO add your handling code here:
+        if(txtDireccion.getText().length()>50){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtDireccionKeyTyped
 
 

@@ -130,7 +130,8 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +139,8 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             }
         });
 
-        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setText("ACTUALIZAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +148,8 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             }
         });
 
-        btnHabilitar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        btnHabilitar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnHabilitar.setForeground(new java.awt.Color(1, 1, 1));
         btnHabilitar.setText("ELIMINAR");
         btnHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,19 +164,24 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
         jLabel17.setText("ACTUALIZAR PERSONA");
         jLabel17.setOpaque(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS PERSONALES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS PERSONALES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(1, 1, 1))); // NOI18N
+        jPanel1.setForeground(new java.awt.Color(1, 1, 1));
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("NOMBRES:");
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("APELLIDOS:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("CEDULA:");
 
         txtCedula.setEditable(false);
-        txtCedula.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtCedula.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtCedula.setForeground(new java.awt.Color(1, 1, 1));
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyTyped(evt);
@@ -184,9 +192,11 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
         });
 
         jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(1, 1, 1));
         jLabel12.setText("DIRECCION:");
 
-        txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(1, 1, 1));
         txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreFocusLost(evt);
@@ -198,7 +208,8 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             }
         });
 
-        txtApellido.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtApellido.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtApellido.setForeground(new java.awt.Color(1, 1, 1));
         txtApellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtApellidoFocusLost(evt);
@@ -211,15 +222,19 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("CELULAR:");
 
         jLabel14.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(1, 1, 1));
         jLabel14.setText("CONVENCIONAL:");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("CORREO:");
 
-        txtDireccion.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtDireccion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(1, 1, 1));
         txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtDireccionFocusLost(evt);
@@ -231,40 +246,45 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             }
         });
 
-        txtCell.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtCell.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtCell.setForeground(new java.awt.Color(1, 1, 1));
         txtCell.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCellKeyTyped(evt);
             }
         });
 
-        txtConven.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtConven.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtConven.setForeground(new java.awt.Color(1, 1, 1));
         txtConven.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtConvenKeyTyped(evt);
             }
         });
 
-        txtCorreo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtCorreo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(1, 1, 1));
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyTyped(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("F. NACIMIENTO :");
 
         fecha.setEditable(false);
-        fecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        fecha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        fecha.setForeground(new java.awt.Color(1, 1, 1));
         fecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fechaActionPerformed(evt);
             }
         });
 
-        BotonFecha1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BotonFecha1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        BotonFecha1.setForeground(new java.awt.Color(1, 1, 1));
         BotonFecha1.setText("...");
         BotonFecha1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,7 +293,11 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
         });
 
         jLabel15.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(1, 1, 1));
         jLabel15.setText("TIPO DE PERSONA");
+
+        cbTipoPersona1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbTipoPersona1.setForeground(new java.awt.Color(1, 1, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -372,26 +396,25 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(btnHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -458,7 +481,9 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnHabilitarActionPerformed
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
-
+if(!Character.isDigit(evt.getKeyChar())){
+    evt.consume();
+}
     }//GEN-LAST:event_txtCedulaKeyTyped
 
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased

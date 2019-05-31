@@ -204,6 +204,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_direccion_cliente">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_direccion_clienteFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -216,6 +219,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_direccion_entrega">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_direccion_entregaFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_guardar">
           <Properties>

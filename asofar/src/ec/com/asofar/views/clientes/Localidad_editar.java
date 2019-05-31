@@ -147,9 +147,21 @@ public class Localidad_editar extends javax.swing.JDialog {
             }
         });
 
+        txt_direccion_cliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_direccion_clienteFocusLost(evt);
+            }
+        });
+
         jLabel5.setText("Direccion Cliente  : ");
 
         jLabel6.setText("Direccion Entrega :");
+
+        txt_direccion_entrega.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_direccion_entregaFocusLost(evt);
+            }
+        });
 
         btn_guardar.setText("GUARDAR");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -306,6 +318,14 @@ public class Localidad_editar extends javax.swing.JDialog {
             Logger.getLogger(Localidad_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void txt_direccion_clienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_direccion_clienteFocusLost
+        txt_direccion_cliente.setText(txt_direccion_cliente.getText().toUpperCase());
+    }//GEN-LAST:event_txt_direccion_clienteFocusLost
+
+    private void txt_direccion_entregaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_direccion_entregaFocusLost
+        txt_direccion_entrega.setText(txt_direccion_entrega.getText().toUpperCase());
+    }//GEN-LAST:event_txt_direccion_entregaFocusLost
  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

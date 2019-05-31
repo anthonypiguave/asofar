@@ -97,6 +97,11 @@ public class EditarFabricanteInac extends javax.swing.JDialog {
 
         nombre.setEditable(false);
         nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
 
         BotonSalir.setBackground(new java.awt.Color(172, 60, 56));
         BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -196,6 +201,12 @@ public class EditarFabricanteInac extends javax.swing.JDialog {
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x-x,point.y-y);
     }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        if(nombre.getText().length()>70){
+            evt.consume();
+        }
+    }//GEN-LAST:event_nombreKeyTyped
 
     /**
      * @param args the command line arguments

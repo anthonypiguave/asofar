@@ -84,6 +84,11 @@ public class EditarMotivoin extends javax.swing.JDialog {
         jLabel2.setText("NOMBRE:");
 
         txtnombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(176, 34, 44));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -110,11 +115,11 @@ public class EditarMotivoin extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtnombre)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,6 +191,12 @@ public class EditarMotivoin extends javax.swing.JDialog {
         ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
         cm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        if(txtnombre.getText().length()>150){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnombreKeyTyped
 
     /**
      * @param args the command line arguments

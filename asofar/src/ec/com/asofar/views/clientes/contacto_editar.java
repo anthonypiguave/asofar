@@ -5,13 +5,21 @@
  */
 package ec.com.asofar.views.clientes;
 
+import ec.com.asofar.dao.SeContactosClientesJpaController;
+import static ec.com.asofar.daoext.ValidacionCaja.Validacion;
+import static ec.com.asofar.dto.CoProveedores_.email;
 import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Validacion;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +36,9 @@ public class contacto_editar extends javax.swing.JDialog {
     SeSucursal suc;
     SeLocalidadCliente localidadclientes;
     SeContactosClientes ContactoClientes;
-
+    SeContactosClientesJpaController Ccc = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeContactosClientes ContactoCliente = new SeContactosClientes();
+    boolean corr = false;
     public contacto_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
@@ -77,6 +87,7 @@ public class contacto_editar extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        btn_agregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,7 +107,7 @@ public class contacto_editar extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("AGREGAR CONTACTO");
+        jLabel3.setText("EDITAR CONTACTO");
         jLabel3.setOpaque(true);
         jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -109,13 +120,49 @@ public class contacto_editar extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Telefono :");
+        txt_telefono.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
 
-        jLabel2.setText("Celular :");
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel1.setText("TELEFONO:");
 
-        jLabel4.setText("Correo :");
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setText("CELULAR:");
 
-        jLabel5.setText("Nombre : ");
+        txt_celular.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_celular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_celularKeyTyped(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setText("CORREO:");
+
+        txt_correo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_correo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_correoFocusLost(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setText("NOMBRE:");
+
+        txt_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_nombreFocusLost(evt);
+            }
+        });
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(173, 42, 48));
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -127,19 +174,28 @@ public class contacto_editar extends javax.swing.JDialog {
             }
         });
 
+        btn_agregar.setBackground(new java.awt.Color(0, 102, 0));
+        btn_agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_agregar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_agregar.setText("Agregar");
+        btn_agregar.setFocusable(false);
+        btn_agregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_agregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -151,23 +207,29 @@ public class contacto_editar extends javax.swing.JDialog {
                                 .addComponent(txt_celular, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,8 +247,13 @@ public class contacto_editar extends javax.swing.JDialog {
                     .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
 
@@ -221,6 +288,59 @@ public class contacto_editar extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        java.util.Date fechaActual = new java.util.Date();
+        ContactoCliente.setNombre(txt_nombre.getText());
+        ContactoCliente.setIdLocalidad(localidadclientes);
+        ContactoCliente.setTelefono(txt_telefono.getText());
+        ContactoCliente.setCelular(txt_celular.getText());
+        ContactoCliente.setEmail(txt_correo.getText());
+        ContactoCliente.setFechaActualizacion(fechaActual);
+        ContactoCliente.setUsuarioActualizacion(usu.getNombreUsuario());
+        ContactoCliente.setEstado("A");
+        try {
+            Ccc.edit(ContactoCliente);
+            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            setVisible(false);
+        } catch (Exception ex) {
+            Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_agregarActionPerformed
+
+    private void txt_celularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_celularKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_celularKeyTyped
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void txt_correoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_correoFocusLost
+            corr = Validacion.Email(txt_correo.getText());
+        if (corr != true) {
+            //msge = msge + "\n Correo invalido";
+            JOptionPane.showMessageDialog(null, "Correo invalido");
+        }
+    }//GEN-LAST:event_txt_correoFocusLost
+
+    private void txt_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nombreFocusLost
+         txt_nombre.setText(txt_nombre.getText().toUpperCase());
+    }//GEN-LAST:event_txt_nombreFocusLost
 
     /**
      * @param args the command line arguments
@@ -265,6 +385,7 @@ public class contacto_editar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_agregar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
