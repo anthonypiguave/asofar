@@ -152,6 +152,9 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        arbol.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        arbol.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        arbol.setForeground(new java.awt.Color(1, 1, 1));
         arbol.setRootVisible(false);
         arbol.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -162,7 +165,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 15)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MEDIDAS");
 
@@ -190,6 +194,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(tabla_med);
 
+        BotonNuevaMedida.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        BotonNuevaMedida.setForeground(new java.awt.Color(1, 1, 1));
         BotonNuevaMedida.setText("NUEVA MEDIDA");
         BotonNuevaMedida.setEnabled(false);
         BotonNuevaMedida.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +204,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         });
 
-        txtfiltro.setFont(new java.awt.Font("Ubuntu", 0, 10)); // NOI18N
+        txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.setForeground(new java.awt.Color(1, 1, 1));
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyTyped(evt);
@@ -208,7 +215,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("BUSCAR:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -231,7 +239,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -251,7 +259,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel2.setFont(new java.awt.Font("Cambria", 1, 15)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("PRODUCTOS");
 
@@ -271,7 +280,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tabla_prod);
 
-        BotonNuevoProducto.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        BotonNuevoProducto.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonNuevoProducto.setForeground(new java.awt.Color(101, 171, 99));
         BotonNuevoProducto.setText("NUEVO PRODUCTO");
         BotonNuevoProducto.setEnabled(false);
@@ -281,7 +290,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         });
 
-        txtfiltro1.setFont(new java.awt.Font("Ubuntu", 0, 10)); // NOI18N
+        txtfiltro1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro1.setForeground(new java.awt.Color(1, 1, 1));
         txtfiltro1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtfiltro1KeyTyped(evt);
@@ -291,7 +301,8 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("BUSCAR:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -347,7 +358,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         });
 
         BotonSalir.setBackground(new java.awt.Color(208, 57, 52));
-        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(254, 254, 254));
         BotonSalir.setText("SALIR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -364,7 +375,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,8 +383,9 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
                         .addComponent(BotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,8 +399,9 @@ public class MantenimientoProductos extends javax.swing.JDialog {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
                         .addComponent(BotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(jScrollPane1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
