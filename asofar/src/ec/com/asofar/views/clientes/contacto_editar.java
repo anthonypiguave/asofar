@@ -153,7 +153,11 @@ public class contacto_editar extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("NOMBRE:");
 
-        txt_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_nombreFocusLost(evt);
+            }
+        });
         txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_nombreKeyTyped(evt);
@@ -333,6 +337,10 @@ public class contacto_editar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Correo invalido");
         }
     }//GEN-LAST:event_txt_correoFocusLost
+
+    private void txt_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nombreFocusLost
+         txt_nombre.setText(txt_nombre.getText().toUpperCase());
+    }//GEN-LAST:event_txt_nombreFocusLost
 
     /**
      * @param args the command line arguments
