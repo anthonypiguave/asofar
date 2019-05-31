@@ -153,6 +153,11 @@ public class bodega_agregar extends javax.swing.JDialog {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         cbxTipoBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,6 +287,13 @@ public class bodega_agregar extends javax.swing.JDialog {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        int caracteres = 70;
+        if(txtNombre.getText().length()>=70){
+            evt.consume();            
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     /**
      * @param args the command line arguments
