@@ -111,18 +111,22 @@ public class IngresarPersonas extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS PERSONALES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS PERSONALES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(1, 1, 1))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("NOMBRES:");
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("APELLIDOS:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("CEDULA:");
 
-        txtCedula.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtCedula.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtCedula.setForeground(new java.awt.Color(1, 1, 1));
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyTyped(evt);
@@ -133,9 +137,11 @@ public class IngresarPersonas extends javax.swing.JDialog {
         });
 
         jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(1, 1, 1));
         jLabel12.setText("DIRECCION:");
 
-        txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(1, 1, 1));
         txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreFocusLost(evt);
@@ -147,7 +153,8 @@ public class IngresarPersonas extends javax.swing.JDialog {
             }
         });
 
-        txtApellido.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtApellido.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtApellido.setForeground(new java.awt.Color(1, 1, 1));
         txtApellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtApellidoFocusLost(evt);
@@ -160,15 +167,19 @@ public class IngresarPersonas extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("CELULAR:");
 
         jLabel14.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(1, 1, 1));
         jLabel14.setText("CONVENCIONAL:");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("CORREO:");
 
-        txtDireccion.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtDireccion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(1, 1, 1));
         txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtDireccionFocusLost(evt);
@@ -180,40 +191,45 @@ public class IngresarPersonas extends javax.swing.JDialog {
             }
         });
 
-        txtCell.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtCell.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtCell.setForeground(new java.awt.Color(1, 1, 1));
         txtCell.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCellKeyTyped(evt);
             }
         });
 
-        txtConven.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtConven.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtConven.setForeground(new java.awt.Color(1, 1, 1));
         txtConven.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtConvenKeyTyped(evt);
             }
         });
 
-        txtCorreo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtCorreo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(1, 1, 1));
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyTyped(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("F. NACIMIENTO :");
 
         fecha.setEditable(false);
-        fecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        fecha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        fecha.setForeground(new java.awt.Color(1, 1, 1));
         fecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fechaActionPerformed(evt);
             }
         });
 
-        BotonFecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BotonFecha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        BotonFecha.setForeground(new java.awt.Color(1, 1, 1));
         BotonFecha.setText("...");
         BotonFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +238,11 @@ public class IngresarPersonas extends javax.swing.JDialog {
         });
 
         jLabel15.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(1, 1, 1));
         jLabel15.setText("TIPO DE PERSONA");
+
+        cbTipoPersona.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbTipoPersona.setForeground(new java.awt.Color(1, 1, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -312,7 +332,8 @@ public class IngresarPersonas extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setText("CANCELAR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,7 +341,8 @@ public class IngresarPersonas extends javax.swing.JDialog {
             }
         });
 
-        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,16 +363,15 @@ public class IngresarPersonas extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(252, 252, 252)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +379,7 @@ public class IngresarPersonas extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -373,9 +394,7 @@ public class IngresarPersonas extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

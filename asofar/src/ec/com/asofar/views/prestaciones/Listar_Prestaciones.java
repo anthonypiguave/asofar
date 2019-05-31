@@ -71,7 +71,7 @@ PrPrestacionesPK prpk;
 
         btnAgregar.setBackground(new java.awt.Color(204, 204, 204));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(0, 255, 0));
+        btnAgregar.setForeground(new java.awt.Color(57, 129, 57));
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
