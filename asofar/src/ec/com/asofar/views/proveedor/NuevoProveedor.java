@@ -120,11 +120,21 @@ public class NuevoProveedor extends javax.swing.JDialog {
         jLabel2.setText("NOMBRE:");
 
         txtnombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("DIRECCION:");
 
         txtdireccion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtdireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdireccionKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("TELEFONO:");
@@ -135,11 +145,21 @@ public class NuevoProveedor extends javax.swing.JDialog {
                 txttelefonoActionPerformed(evt);
             }
         });
+        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyTyped(evt);
+            }
+        });
 
         txttelfseg.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txttelfseg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txttelfsegActionPerformed(evt);
+            }
+        });
+        txttelfseg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelfsegKeyTyped(evt);
             }
         });
 
@@ -155,6 +175,11 @@ public class NuevoProveedor extends javax.swing.JDialog {
                 txtpaginawebActionPerformed(evt);
             }
         });
+        txtpaginaweb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpaginawebKeyTyped(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel7.setText("No. IDENTIFICACION:");
@@ -165,6 +190,11 @@ public class NuevoProveedor extends javax.swing.JDialog {
                 txtidentificacionActionPerformed(evt);
             }
         });
+        txtidentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtidentificacionKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel8.setText("EMAIL:");
@@ -173,6 +203,11 @@ public class NuevoProveedor extends javax.swing.JDialog {
         txtemail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtemailActionPerformed(evt);
+            }
+        });
+        txtemail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtemailKeyTyped(evt);
             }
         });
 
@@ -194,11 +229,21 @@ public class NuevoProveedor extends javax.swing.JDialog {
         jLabel12.setText("CODIGO CONTRIBUYENTE:");
 
         txtcodigocont.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtcodigocont.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcodigocontKeyTyped(evt);
+            }
+        });
 
         txtnombrecomercial.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtnombrecomercial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombrecomercialActionPerformed(evt);
+            }
+        });
+        txtnombrecomercial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombrecomercialKeyTyped(evt);
             }
         });
 
@@ -209,6 +254,11 @@ public class NuevoProveedor extends javax.swing.JDialog {
         jLabel13.setText("OBSERVACIONES:");
 
         txtobservacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtobservacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtobservacionKeyTyped(evt);
+            }
+        });
 
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(64, 145, 64));
@@ -533,6 +583,66 @@ public class NuevoProveedor extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        if(txtnombre.getText().length()>50 && !Character.isLetter(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnombreKeyTyped
+
+    private void txtdireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyTyped
+        if(txtdireccion.getText().length()>50){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtdireccionKeyTyped
+
+    private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
+        if(txttelefono.getText().length()>15 && !Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txttelefonoKeyTyped
+
+    private void txttelfsegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelfsegKeyTyped
+        if(txttelfseg.getText().length()>15 && !Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txttelfsegKeyTyped
+
+    private void txtpaginawebKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpaginawebKeyTyped
+        if(txtpaginaweb.getText().length()>150){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtpaginawebKeyTyped
+
+    private void txtidentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidentificacionKeyTyped
+        if(txtidentificacion.getText().length()>13 && !Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtidentificacionKeyTyped
+
+    private void txtemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyTyped
+        if(txtemail.getText().length()>50){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtemailKeyTyped
+
+    private void txtnombrecomercialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrecomercialKeyTyped
+        if(txtnombrecomercial.getText().length()>50){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnombrecomercialKeyTyped
+
+    private void txtcodigocontKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigocontKeyTyped
+        if(txtcodigocont.getText().length()>15 && !Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtcodigocontKeyTyped
+
+    private void txtobservacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtobservacionKeyTyped
+        if(txtobservacion.getText().length()>60){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtobservacionKeyTyped
 
     /**
      * @param args the command line arguments

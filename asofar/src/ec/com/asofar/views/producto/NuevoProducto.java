@@ -143,7 +143,7 @@ public class NuevoProducto extends javax.swing.JDialog {
             }
         });
 
-        BotonGuardar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        BotonGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonGuardar.setText("GUARDAR");
         BotonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,46 +154,59 @@ public class NuevoProducto extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel31.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(1, 1, 1));
         jLabel31.setText("CODIGO BARRA:");
 
         jLabel32.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(1, 1, 1));
         jLabel32.setText("RECETA:");
 
         jLabel34.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(1, 1, 1));
         jLabel34.setText("FABRICANTE:");
 
         jLabel35.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(1, 1, 1));
         jLabel35.setText("DESCONTINUADO:");
 
         jLabel36.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(1, 1, 1));
         jLabel36.setText("NOMBRE:");
 
-        nom.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nom.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        nom.setForeground(new java.awt.Color(1, 1, 1));
 
-        cod_barra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cod_barra.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cod_barra.setForeground(new java.awt.Color(1, 1, 1));
         cod_barra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 cod_barraKeyTyped(evt);
             }
         });
 
-        desc.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        desc.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        desc.setForeground(new java.awt.Color(1, 1, 1));
         desc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
 
-        receta.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        receta.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        receta.setForeground(new java.awt.Color(1, 1, 1));
         receta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "REGISTRO SANITARIO:"));
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("LOCAL:");
 
-        local.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        local.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        local.setForeground(new java.awt.Color(1, 1, 1));
 
-        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("EXTRANJERO:");
 
-        extran.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        extran.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        extran.setForeground(new java.awt.Color(1, 1, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,18 +236,25 @@ public class NuevoProducto extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        combofab.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        combofab.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        combofab.setForeground(new java.awt.Color(1, 1, 1));
         combofab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
 
-        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("MEDIDA:");
 
-        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(1, 1, 1));
         jLabel8.setText("PRESENTACION: ");
 
         tip_pres.setEditable(false);
+        tip_pres.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        tip_pres.setForeground(new java.awt.Color(1, 1, 1));
 
         tip_med.setEditable(false);
+        tip_med.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        tip_med.setForeground(new java.awt.Color(1, 1, 1));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -314,7 +334,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonSalir.setText("SALIR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,20 +342,29 @@ public class NuevoProducto extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("GRUPO:");
 
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("SUBGRUPO:");
 
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("ARTICULO:");
 
         grupo.setEditable(false);
+        grupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        grupo.setForeground(new java.awt.Color(1, 1, 1));
 
         arti.setEditable(false);
+        arti.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        arti.setForeground(new java.awt.Color(1, 1, 1));
 
         sub.setEditable(false);
+        sub.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        sub.setForeground(new java.awt.Color(1, 1, 1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -388,7 +417,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

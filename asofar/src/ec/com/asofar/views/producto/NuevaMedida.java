@@ -95,30 +95,53 @@ public class NuevaMedida extends javax.swing.JDialog {
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("NUEVA MEDIDA");
         jLabel1.setOpaque(true);
 
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("TIPO MEDIDA:");
 
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("GRUPO:");
 
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("SUBGRUPO:");
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("ARTICULO:");
 
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("TIPO PRESENTACION");
 
         grup.setEditable(false);
+        grup.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        grup.setForeground(new java.awt.Color(1, 1, 1));
 
         sub.setEditable(false);
+        sub.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        sub.setForeground(new java.awt.Color(1, 1, 1));
 
         art.setEditable(false);
+        art.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        art.setForeground(new java.awt.Color(1, 1, 1));
 
+        tipo_med.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        tipo_med.setForeground(new java.awt.Color(1, 1, 1));
         tipo_med.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija una Opcion..." }));
 
+        tipo_pres.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        tipo_pres.setForeground(new java.awt.Color(1, 1, 1));
         tipo_pres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija una Opcion..." }));
 
+        BotonAceptar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        BotonAceptar.setForeground(new java.awt.Color(1, 1, 1));
         BotonAceptar.setText("Aceptar");
         BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +149,8 @@ public class NuevaMedida extends javax.swing.JDialog {
             }
         });
 
+        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
         BotonSalir.setText("Salir");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,11 +178,11 @@ public class NuevaMedida extends javax.swing.JDialog {
                             .addComponent(grup, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
-                                .addComponent(BotonAceptar)))
+                                .addComponent(BotonAceptar))
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tipo_med, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -166,12 +191,12 @@ public class NuevaMedida extends javax.swing.JDialog {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(BotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -184,15 +209,15 @@ public class NuevaMedida extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(art, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tipo_med, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tipo_pres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonAceptar)
                     .addComponent(BotonSalir))
