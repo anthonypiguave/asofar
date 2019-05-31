@@ -27,9 +27,6 @@ import javax.swing.JOptionPane;
  */
 public class contacto_agregar extends javax.swing.JDialog {
 
-    /**
-     * id_contactos_clientes id_localidad telefono celulare mail estado
-     */
     int x, y;
     SeUsuarios usu;
     SeEmpresa emp;
