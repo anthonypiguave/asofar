@@ -5,18 +5,14 @@
  */
 package ec.com.asofar.views.ordenPedido;
 
-import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
-import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
-import ec.com.asofar.dto.CoProveedores_;
 import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.PrProductos;
-import ec.com.asofar.dto.PrProductos_;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
@@ -56,6 +52,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoOrdenPedido> listcab;
     PrProductos objetopro = new PrProductos();
+    
+    
+    int contFilas = 1;
 
     public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -305,9 +304,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed(evt);
             }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
         });
         jScrollPane2.setViewportView(jTable1);
 
@@ -376,49 +372,77 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         cproducto.setVisible(true);
 
         objetopro = cproducto.getProducto();
+        if (validarProductos("" + objetopro.getPrProductosPK().getIdProducto()).equals("si")) {
+            JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
+        } else {
 
-        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-        detalle.setLineaDetalle(BigInteger.valueOf(15));
-        detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
-        detalle.setDescripcion(objetopro.getNombreProducto());
-        detalle.setCantidadSolicitada(BigInteger.valueOf(0));
-        listadet.add(detalle);
+            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
 
-        for (int i = 0; i < listadet.size(); i++) {
-            System.out.println("lsdasd" + listadet.get(i).getIdProducto());
+//            detalle.setLineaDetalle(BigInteger.valueOf(15));
+            detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
+            detalle.setDescripcion(objetopro.getNombreProducto());
+            detalle.setCantidadSolicitada(BigInteger.valueOf(0));
+            listadet.add(detalle);
 
+            for (int i = 0; i < listadet.size(); i++) {
+                System.out.println("lsdasd" + listadet.get(i).getIdProducto());
+                contFilas = i + 1;
+                System.out.println("filas " + contFilas);
+                detalle.setLineaDetalle(BigInteger.valueOf(contFilas));
+            }
+
+            Tablas.llenarDetalledeOrden(jTable1, listadet);
         }
 
-        Tablas.llenarDetalledeOrden(jTable1, listadet);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        
-            int row = jTable1.rowAtPoint(evt.getPoint());
-            int col = jTable1.columnAtPoint(evt.getPoint());
-            if (evt.getClickCount() == 1) {
-                if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
-                    try {
-                    System.out.println("boton:");
-                    } catch (Exception e) {
-        }
+
+        int row = jTable1.rowAtPoint(evt.getPoint());
+        int col = jTable1.columnAtPoint(evt.getPoint());
+        if (evt.getClickCount() == 1) {
+            if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
+                try {
+
+                    int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
+                    if (r == JOptionPane.YES_OPTION) {
+                        int i = jTable1.getSelectedRow();
+                        listadet.remove(i);
+                        contFilas = contFilas - 1;
+                        for (int j = 0; j < listadet.size(); j++) {
+                            contFilas = j + 1;
+                            listadet.get(j).setLineaDetalle(BigInteger.valueOf(contFilas));
+
+                        }
+                        Tablas.llenarDetalledeOrden(jTable1, listadet);
+                    }
+                } catch (Exception e) {
                 }
             }
-        
+
+        }
 
 
     }//GEN-LAST:event_jTable1MousePressed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-//        int row = jTable1.rowAtPoint(evt.getPoint());
-//        int col = jTable1.columnAtPoint(evt.getPoint());
-//        
-//        if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
-//      
-//            String 
-//      System.out.println("acada");
-//        }
-    }//GEN-LAST:event_jTable1MouseClicked
+    public String validarProductos(String datos) {
+        String obj1 = "no";
+
+        for (int i = 0; i < listadet.size(); i++) {
+
+            if (datos.equals(listadet.get(i).getIdProducto().toString())) {
+                obj1 = "si";
+            } else {
+
+                obj1 = "no";
+            }
+
+        }
+
+        return obj1;
+
+    }
 
     /**
      * @param args the command line arguments
@@ -445,6 +469,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
