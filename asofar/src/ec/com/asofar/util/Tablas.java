@@ -412,7 +412,7 @@ public class Tablas {
     }
 
     public static void listarmotivo(List<InMotivos> lista, JTable Tabla) {
-        int[] a = {5, 30, 30};
+        int[] a = {5, 100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
