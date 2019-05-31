@@ -199,7 +199,9 @@ public class CrearCajaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-
+if(txtNombre.getText().length()>50){
+    evt.consume();
+}
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost

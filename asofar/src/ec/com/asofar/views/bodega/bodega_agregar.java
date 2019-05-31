@@ -289,8 +289,7 @@ public class bodega_agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        int caracteres = 70;
-        if(txtNombre.getText().length()>=70){
+                if(txtNombre.getText().length()>=70){
             evt.consume();            
         }
     }//GEN-LAST:event_txtNombreKeyTyped
