@@ -5,8 +5,7 @@
  */
 package ec.com.asofar.views.facturacion;
 
-import ec.com.asofar.dao.SeClientesJpaController;
-import ec.com.asofar.dto.SeClientes;
+
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -18,16 +17,16 @@ import java.util.List;
  * @author admin1
  */
 public class ConsultarClienteForm extends javax.swing.JDialog {
-
-    int x, y;
-    List<SeClientes> Cliente;
-    SeClientesJpaController Cv = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<SeClientes> lista = Cv.findSeClientesEntities();
+//
+//    int x, y;
+//    List<SeClientes> Cliente;
+//    SeClientesJpaController Cv = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+//    List<SeClientes> lista = Cv.findSeClientesEntities();
 
     public ConsultarClienteForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        MostrarClientes();
+//        MostrarClientes();
     }
 
     /**
@@ -170,22 +169,22 @@ public class ConsultarClienteForm extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x, point.y - y);
+//        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        x = evt.getX();
-        y = evt.getY();
+//        x = evt.getX();
+//        y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
-    public void MostrarClientes() {
-        try {
-
-            Cliente = Cv.findSeClientesEntities();
-            Tablas.TablaClientesActivo(Cliente, TablaClienteVentas);
-        } catch (Exception e) {
-        }
-    }
+//    public void MostrarClientes() {
+//        try {
+//
+//            Cliente = Cv.findSeClientesEntities();
+//            Tablas.TablaClientesActivo(Cliente, TablaClienteVentas);
+//        } catch (Exception e) {
+//        }
+//    }
 
 
     private void TablaClienteVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaClienteVentasMousePressed

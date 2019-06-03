@@ -48,8 +48,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
-    
-    
+
     Date d = new Date();
     SeEmpresa se = new SeEmpresa();
     ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
@@ -85,10 +84,13 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
-        
+
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
+
+        Timer tiempo = new Timer(100, new crearOrdenPedidoForm.horas());
+        tiempo.start();
 
     }
 
@@ -451,14 +453,13 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             if ("".equals(cbxProveedor.getSelectedItem().toString())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
-                CoOrdenPedido coOrdenp  = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
-                CoOrdenPedido coOrdend  = ObtenerDTO.ObtenerProveedorPedido(cbx_documento.getSelectedItem().toString());
-                
-                
+                CoOrdenPedido coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
+                CoOrdenPedido coOrdend = ObtenerDTO.ObtenerProveedorPedido(cbx_documento.getSelectedItem().toString());
+
                 cabOrden.setIdProveedor(coOrdenp.getIdProveedor());
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdDocumento(coOrdend.getIdDocumento());
-                cabOrden.setEstado("A");
+                cabOrden.setEstado("A");               
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
                 cabOrden.setFechaCreacion(d);
 

@@ -6,17 +6,15 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
+import ec.com.asofar.dto.SeTipoIdentificacion;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.SeClientes;
-import ec.com.asofar.dto.SeTipoIdentificacion;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -34,29 +32,11 @@ public class SeTipoIdentificacionJpaController implements Serializable {
     }
 
     public void create(SeTipoIdentificacion seTipoIdentificacion) {
-        if (seTipoIdentificacion.getSeClientesList() == null) {
-            seTipoIdentificacion.setSeClientesList(new ArrayList<SeClientes>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<SeClientes> attachedSeClientesList = new ArrayList<SeClientes>();
-            for (SeClientes seClientesListSeClientesToAttach : seTipoIdentificacion.getSeClientesList()) {
-                seClientesListSeClientesToAttach = em.getReference(seClientesListSeClientesToAttach.getClass(), seClientesListSeClientesToAttach.getIdClientes());
-                attachedSeClientesList.add(seClientesListSeClientesToAttach);
-            }
-            seTipoIdentificacion.setSeClientesList(attachedSeClientesList);
             em.persist(seTipoIdentificacion);
-            for (SeClientes seClientesListSeClientes : seTipoIdentificacion.getSeClientesList()) {
-                SeTipoIdentificacion oldIdTipoIdentificacionOfSeClientesListSeClientes = seClientesListSeClientes.getIdTipoIdentificacion();
-                seClientesListSeClientes.setIdTipoIdentificacion(seTipoIdentificacion);
-                seClientesListSeClientes = em.merge(seClientesListSeClientes);
-                if (oldIdTipoIdentificacionOfSeClientesListSeClientes != null) {
-                    oldIdTipoIdentificacionOfSeClientesListSeClientes.getSeClientesList().remove(seClientesListSeClientes);
-                    oldIdTipoIdentificacionOfSeClientesListSeClientes = em.merge(oldIdTipoIdentificacionOfSeClientesListSeClientes);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -70,34 +50,7 @@ public class SeTipoIdentificacionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            SeTipoIdentificacion persistentSeTipoIdentificacion = em.find(SeTipoIdentificacion.class, seTipoIdentificacion.getIdTipoIdentificacion());
-            List<SeClientes> seClientesListOld = persistentSeTipoIdentificacion.getSeClientesList();
-            List<SeClientes> seClientesListNew = seTipoIdentificacion.getSeClientesList();
-            List<SeClientes> attachedSeClientesListNew = new ArrayList<SeClientes>();
-            for (SeClientes seClientesListNewSeClientesToAttach : seClientesListNew) {
-                seClientesListNewSeClientesToAttach = em.getReference(seClientesListNewSeClientesToAttach.getClass(), seClientesListNewSeClientesToAttach.getIdClientes());
-                attachedSeClientesListNew.add(seClientesListNewSeClientesToAttach);
-            }
-            seClientesListNew = attachedSeClientesListNew;
-            seTipoIdentificacion.setSeClientesList(seClientesListNew);
             seTipoIdentificacion = em.merge(seTipoIdentificacion);
-            for (SeClientes seClientesListOldSeClientes : seClientesListOld) {
-                if (!seClientesListNew.contains(seClientesListOldSeClientes)) {
-                    seClientesListOldSeClientes.setIdTipoIdentificacion(null);
-                    seClientesListOldSeClientes = em.merge(seClientesListOldSeClientes);
-                }
-            }
-            for (SeClientes seClientesListNewSeClientes : seClientesListNew) {
-                if (!seClientesListOld.contains(seClientesListNewSeClientes)) {
-                    SeTipoIdentificacion oldIdTipoIdentificacionOfSeClientesListNewSeClientes = seClientesListNewSeClientes.getIdTipoIdentificacion();
-                    seClientesListNewSeClientes.setIdTipoIdentificacion(seTipoIdentificacion);
-                    seClientesListNewSeClientes = em.merge(seClientesListNewSeClientes);
-                    if (oldIdTipoIdentificacionOfSeClientesListNewSeClientes != null && !oldIdTipoIdentificacionOfSeClientesListNewSeClientes.equals(seTipoIdentificacion)) {
-                        oldIdTipoIdentificacionOfSeClientesListNewSeClientes.getSeClientesList().remove(seClientesListNewSeClientes);
-                        oldIdTipoIdentificacionOfSeClientesListNewSeClientes = em.merge(oldIdTipoIdentificacionOfSeClientesListNewSeClientes);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -126,11 +79,6 @@ public class SeTipoIdentificacionJpaController implements Serializable {
                 seTipoIdentificacion.getIdTipoIdentificacion();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The seTipoIdentificacion with id " + id + " no longer exists.", enfe);
-            }
-            List<SeClientes> seClientesList = seTipoIdentificacion.getSeClientesList();
-            for (SeClientes seClientesListSeClientes : seClientesList) {
-                seClientesListSeClientes.setIdTipoIdentificacion(null);
-                seClientesListSeClientes = em.merge(seClientesListSeClientes);
             }
             em.remove(seTipoIdentificacion);
             em.getTransaction().commit();

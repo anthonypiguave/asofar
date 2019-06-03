@@ -7,7 +7,6 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,12 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -61,8 +58,6 @@ public class SeTipoIdentificacion implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "idTipoIdentificacion")
-    private List<SeClientes> seClientesList;
 
     public SeTipoIdentificacion() {
     }
@@ -125,15 +120,6 @@ public class SeTipoIdentificacion implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    @XmlTransient
-    public List<SeClientes> getSeClientesList() {
-        return seClientesList;
-    }
-
-    public void setSeClientesList(List<SeClientes> seClientesList) {
-        this.seClientesList = seClientesList;
     }
 
     @Override
