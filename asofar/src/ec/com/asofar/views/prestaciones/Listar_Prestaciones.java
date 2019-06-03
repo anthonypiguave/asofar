@@ -9,6 +9,9 @@ import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrPrestacionesPK;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
@@ -31,7 +34,11 @@ public class Listar_Prestaciones extends javax.swing.JDialog {
     PrPrestaciones objeto;
     List<PrPrestaciones> prestacion;
     PrPrestaciones prc;
-PrPrestacionesPK prpk;
+    PrPrestacionesPK prpk;
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
+
     /**
      * Creates new form Listar_Prestaciones
      */
@@ -42,14 +49,17 @@ PrPrestacionesPK prpk;
         Tablas.TablaPrestaciones(lista, tblPrestacion);
     }
 
-   public Listar_Prestaciones(java.awt.Frame parent, boolean modal, PrPrestaciones Prp, PrPrestacionesPK Prk) {
+    public Listar_Prestaciones(java.awt.Frame parent, boolean modal, PrPrestaciones Prp, PrPrestacionesPK Prk, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         Tablas.TablaPrestaciones(lista, tblPrestacion);
         prc = Prp;
-        prpk= Prk;
+        prpk = Prk;
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     /**
@@ -153,12 +163,12 @@ PrPrestacionesPK prpk;
     private void tblPrestacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrestacionMousePressed
 
         int id = 0;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1000000) {
             id = tblPrestacion.getSelectedRow();
             prestacionesP = devuelvePrestaciones(Long.valueOf(tblPrestacion.getValueAt(id, 0).toString()), lista);
             if (prestacionesP != null) {
                 AgregarPrestacion Ap = new AgregarPrestacion(new javax.swing.JFrame(), true);
-                Ap.setVisible(true);
+                Ap.setVisible(false);
 
                 prestacion = pr.findPrPrestacionesEntities();
                 Tablas.TablaPrestaciones(prestacion, tblPrestacion);
@@ -169,9 +179,10 @@ PrPrestacionesPK prpk;
     }//GEN-LAST:event_tblPrestacionMousePressed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
- AgregarPrestacion agre = new AgregarPrestacion(new javax.swing.JFrame(), true);
+        AgregarPrestacion agre = new AgregarPrestacion(new javax.swing.JFrame(), true,usu,emp,suc);
         agre.setVisible(true);
-
+        prestacion = pr.findPrPrestacionesEntities();
+        Tablas.TablaPrestaciones(prestacion, tblPrestacion);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed

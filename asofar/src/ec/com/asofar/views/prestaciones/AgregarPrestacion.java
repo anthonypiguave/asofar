@@ -5,26 +5,50 @@
  */
 package ec.com.asofar.views.prestaciones;
 
+import ec.com.asofar.dao.PrPrestacionesJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrPrestaciones;
+import ec.com.asofar.dto.PrPrestacionesPK;
 import ec.com.asofar.dto.PrProductos;
-import javax.swing.JFrame;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.EntityManagerUtil;
+import java.math.BigInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Luis Alberto Mero
  */
 public class AgregarPrestacion extends javax.swing.JDialog {
-PrProductos proc;
-    
-    
-    
+
+    PrProductos proc;
+    PrPrestaciones presta = new PrPrestaciones();
+    PrPrestacionesJpaController pr = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
+
     /**
      * Creates new form AgregarPrestacion
      */
     public AgregarPrestacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-      
+
+    }
+
+    public AgregarPrestacion(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     /**
@@ -36,18 +60,12 @@ PrProductos proc;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cmbxIG = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        cmbxSN = new javax.swing.JComboBox<>();
+        btngrabar = new javax.swing.JButton();
         btnbuscarP = new javax.swing.JButton();
         txtProduc = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -71,10 +89,15 @@ PrProductos proc;
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
+        cmbxSN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setText("Grabar");
+        btngrabar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btngrabar.setText("Grabar");
+        btngrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btngrabarActionPerformed(evt);
+            }
+        });
 
         btnbuscarP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnbuscarP.setText("Buscar");
@@ -105,19 +128,19 @@ PrProductos proc;
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtProduc)
                     .addComponent(cmbxIG, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbxSN, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnbuscarP)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(155, 155, 155)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btngrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -137,9 +160,9 @@ PrProductos proc;
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbxSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btngrabar)
                 .addContainerGap())
         );
 
@@ -147,29 +170,56 @@ PrProductos proc;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnbuscarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarPActionPerformed
-ConsultaProducto cp = new ConsultaProducto(new javax.swing.JFrame(), true);
-cp.setVisible(true);
- proc = cp.getProducto();
-  txtProduc.setText(proc.getNombreProducto());
+        ConsultaProducto cp = new ConsultaProducto(new javax.swing.JFrame(), true);
+        cp.setVisible(true);
+        proc = cp.getProducto();
+        txtProduc.setText(proc.getNombreProducto());
 
-       
-       
         // TODO add your handling code here:
     }//GEN-LAST:event_btnbuscarPActionPerformed
-public int bloqueo (){
-    int bloqueo;
-    String selecciona = (String) cmbxIG.getSelectedItem();
-    System.out.println(selecciona);
-    if(selecciona.equals("Generico")){
-    btnbuscarP.setEnabled(false);
-    }
-    
-return 1;
+    public int bloqueo() {
+        int bloqueo;
+        String selecciona = (String) cmbxIG.getSelectedItem();
+        System.out.println(selecciona);
+        if (selecciona.equals("Generico")) {
+            btnbuscarP.setEnabled(false);
+        } else {
+            btnbuscarP.setEnabled(true);
+        }
 
-}
+        return 1;
+
+    }
     private void cmbxIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxIGActionPerformed
         bloqueo();
     }//GEN-LAST:event_cmbxIGActionPerformed
+
+    private void btngrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngrabarActionPerformed
+        PrPrestaciones PRE = new PrPrestaciones();
+
+//        PRE = ObtenerDTO.ObtenerPrPrestaciones(cmbxIG.getSelectedItem().toString());
+        PrPrestacionesPK prestac = new PrPrestacionesPK();
+        presta.setNombrePrestacion(cmbxIG.getSelectedItem().toString());
+        System.out.println("nombre prestacion "+cmbxIG.getSelectedItem().toString());
+//        System.out.println("hola"+PRE.getNombrePrestacion());
+//        prestac.setIdEmpresa(emp.getIdEmpresa());
+        presta.setEstado("A");
+        presta.setIdPoducto(BigInteger.valueOf(proc.getPrProductosPK().getIdProducto()));
+        System.out.println("la tia de nelio "+BigInteger.valueOf(proc.getPrProductosPK().getIdProducto()));
+        System.out.println(txtProduc.getText());
+        presta.setAplicaIva(cmbxSN.getSelectedItem().toString());
+        System.out.println(cmbxSN.getSelectedItem().toString());
+
+        try {
+            pr.create(presta);
+            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            setVisible(false);
+        } catch (Exception e) {
+            Logger.getLogger(Listar_Prestaciones.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btngrabarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,9 +265,9 @@ return 1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscarP;
+    private javax.swing.JButton btngrabar;
     private javax.swing.JComboBox<String> cmbxIG;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cmbxSN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -218,18 +218,6 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
     private void tbproductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproductosMousePressed
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         int i = 0;
 
         if (evt.getClickCount() == 2) {
