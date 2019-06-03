@@ -10,6 +10,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -55,6 +58,14 @@ public class InBodega implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @JoinColumns({
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private SeSucursal seSucursal;
+    @JoinColumn(name = "id_tipo_bodega", referencedColumnName = "id_tipo_bodega", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private InTipoBodega inTipoBodega;
 
     public InBodega() {
     }
@@ -121,6 +132,22 @@ public class InBodega implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public SeSucursal getSeSucursal() {
+        return seSucursal;
+    }
+
+    public void setSeSucursal(SeSucursal seSucursal) {
+        this.seSucursal = seSucursal;
+    }
+
+    public InTipoBodega getInTipoBodega() {
+        return inTipoBodega;
+    }
+
+    public void setInTipoBodega(InTipoBodega inTipoBodega) {
+        this.inTipoBodega = inTipoBodega;
     }
 
     @Override

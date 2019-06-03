@@ -134,6 +134,7 @@ public class ObtenerDTO {
         }
         return dto;
     }
+
     public static SeCiudad ObtenerSeCiudad(String nombre) {
         SeCiudadJpaController control = new SeCiudadJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeCiudad dto = new SeCiudad();
@@ -147,6 +148,7 @@ public class ObtenerDTO {
         }
         return dto;
     }
+
     public static VeCaja ObtenerVeCaja(String nombre) {
         VeCajaJpaController control = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
         VeCaja dto = new VeCaja();
@@ -154,6 +156,38 @@ public class ObtenerDTO {
 
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static CoProveedores ObtenerProveedorPedido(String nombre) {
+        CoProveedoresJpaController control = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoProveedores dto = new CoProveedores();
+        List<CoProveedores> lista = control.findCoProveedoresEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static InTipoDocumento ObtenerDocumentoPedido(String nombre) {
+        InTipoDocumentoJpaController control = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InTipoDocumento dto = new InTipoDocumento();
+        List<InTipoDocumento> lista = control.findInTipoDocumentoEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombreDocumento().equals(nombre)) {
                 dto = lista.get(i);
                 break;
             }

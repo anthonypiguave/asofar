@@ -14,6 +14,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.PrTipoPrestacion;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,11 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresa = em.getReference(seEmpresa.getClass(), seEmpresa.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresa);
             }
+            PrTipoPrestacion tipoPrestacion = prPrestaciones.getTipoPrestacion();
+            if (tipoPrestacion != null) {
+                tipoPrestacion = em.getReference(tipoPrestacion.getClass(), tipoPrestacion.getIdTipoPrestacion());
+                prPrestaciones.setTipoPrestacion(tipoPrestacion);
+            }
             List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : prPrestaciones.getVeFacturaDetalleList()) {
                 veFacturaDetalleListVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -74,6 +80,10 @@ public class PrPrestacionesJpaController implements Serializable {
             if (seEmpresa != null) {
                 seEmpresa.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresa = em.merge(seEmpresa);
+            }
+            if (tipoPrestacion != null) {
+                tipoPrestacion.getPrPrestacionesList().add(prPrestaciones);
+                tipoPrestacion = em.merge(tipoPrestacion);
             }
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : prPrestaciones.getVeFacturaDetalleList()) {
                 PrPrestaciones oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle = veFacturaDetalleListVeFacturaDetalle.getPrPrestaciones();
@@ -115,6 +125,8 @@ public class PrPrestacionesJpaController implements Serializable {
             PrPrestaciones persistentPrPrestaciones = em.find(PrPrestaciones.class, prPrestaciones.getPrPrestacionesPK());
             SeEmpresa seEmpresaOld = persistentPrPrestaciones.getSeEmpresa();
             SeEmpresa seEmpresaNew = prPrestaciones.getSeEmpresa();
+            PrTipoPrestacion tipoPrestacionOld = persistentPrPrestaciones.getTipoPrestacion();
+            PrTipoPrestacion tipoPrestacionNew = prPrestaciones.getTipoPrestacion();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentPrPrestaciones.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = prPrestaciones.getVeFacturaDetalleList();
             List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrPrestaciones.getPrDetalleTarifarioList();
@@ -143,6 +155,10 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresaNew);
             }
+            if (tipoPrestacionNew != null) {
+                tipoPrestacionNew = em.getReference(tipoPrestacionNew.getClass(), tipoPrestacionNew.getIdTipoPrestacion());
+                prPrestaciones.setTipoPrestacion(tipoPrestacionNew);
+            }
             List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
                 veFacturaDetalleListNewVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListNewVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListNewVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -165,6 +181,14 @@ public class PrPrestacionesJpaController implements Serializable {
             if (seEmpresaNew != null && !seEmpresaNew.equals(seEmpresaOld)) {
                 seEmpresaNew.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresaNew = em.merge(seEmpresaNew);
+            }
+            if (tipoPrestacionOld != null && !tipoPrestacionOld.equals(tipoPrestacionNew)) {
+                tipoPrestacionOld.getPrPrestacionesList().remove(prPrestaciones);
+                tipoPrestacionOld = em.merge(tipoPrestacionOld);
+            }
+            if (tipoPrestacionNew != null && !tipoPrestacionNew.equals(tipoPrestacionOld)) {
+                tipoPrestacionNew.getPrPrestacionesList().add(prPrestaciones);
+                tipoPrestacionNew = em.merge(tipoPrestacionNew);
             }
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalle : veFacturaDetalleListNew) {
                 if (!veFacturaDetalleListOld.contains(veFacturaDetalleListNewVeFacturaDetalle)) {
@@ -239,6 +263,11 @@ public class PrPrestacionesJpaController implements Serializable {
             if (seEmpresa != null) {
                 seEmpresa.getPrPrestacionesList().remove(prPrestaciones);
                 seEmpresa = em.merge(seEmpresa);
+            }
+            PrTipoPrestacion tipoPrestacion = prPrestaciones.getTipoPrestacion();
+            if (tipoPrestacion != null) {
+                tipoPrestacion.getPrPrestacionesList().remove(prPrestaciones);
+                tipoPrestacion = em.merge(tipoPrestacion);
             }
             em.remove(prPrestaciones);
             em.getTransaction().commit();

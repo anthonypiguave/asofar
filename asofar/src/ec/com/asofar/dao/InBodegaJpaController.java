@@ -10,13 +10,15 @@ import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InBodegaPK;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.InTipoBodega;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -37,11 +39,32 @@ public class InBodegaJpaController implements Serializable {
         if (inBodega.getInBodegaPK() == null) {
             inBodega.setInBodegaPK(new InBodegaPK());
         }
+        inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
+        inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            SeSucursal seSucursal = inBodega.getSeSucursal();
+            if (seSucursal != null) {
+                seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
+                inBodega.setSeSucursal(seSucursal);
+            }
+            InTipoBodega inTipoBodega = inBodega.getInTipoBodega();
+            if (inTipoBodega != null) {
+                inTipoBodega = em.getReference(inTipoBodega.getClass(), inTipoBodega.getIdTipoBodega());
+                inBodega.setInTipoBodega(inTipoBodega);
+            }
             em.persist(inBodega);
+            if (seSucursal != null) {
+                seSucursal.getInBodegaList().add(inBodega);
+                seSucursal = em.merge(seSucursal);
+            }
+            if (inTipoBodega != null) {
+                inTipoBodega.getInBodegaList().add(inBodega);
+                inTipoBodega = em.merge(inTipoBodega);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findInBodega(inBodega.getInBodegaPK()) != null) {
@@ -56,11 +79,43 @@ public class InBodegaJpaController implements Serializable {
     }
 
     public void edit(InBodega inBodega) throws NonexistentEntityException, Exception {
+        inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
+        inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            InBodega persistentInBodega = em.find(InBodega.class, inBodega.getInBodegaPK());
+            SeSucursal seSucursalOld = persistentInBodega.getSeSucursal();
+            SeSucursal seSucursalNew = inBodega.getSeSucursal();
+            InTipoBodega inTipoBodegaOld = persistentInBodega.getInTipoBodega();
+            InTipoBodega inTipoBodegaNew = inBodega.getInTipoBodega();
+            if (seSucursalNew != null) {
+                seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
+                inBodega.setSeSucursal(seSucursalNew);
+            }
+            if (inTipoBodegaNew != null) {
+                inTipoBodegaNew = em.getReference(inTipoBodegaNew.getClass(), inTipoBodegaNew.getIdTipoBodega());
+                inBodega.setInTipoBodega(inTipoBodegaNew);
+            }
             inBodega = em.merge(inBodega);
+            if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
+                seSucursalOld.getInBodegaList().remove(inBodega);
+                seSucursalOld = em.merge(seSucursalOld);
+            }
+            if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
+                seSucursalNew.getInBodegaList().add(inBodega);
+                seSucursalNew = em.merge(seSucursalNew);
+            }
+            if (inTipoBodegaOld != null && !inTipoBodegaOld.equals(inTipoBodegaNew)) {
+                inTipoBodegaOld.getInBodegaList().remove(inBodega);
+                inTipoBodegaOld = em.merge(inTipoBodegaOld);
+            }
+            if (inTipoBodegaNew != null && !inTipoBodegaNew.equals(inTipoBodegaOld)) {
+                inTipoBodegaNew.getInBodegaList().add(inBodega);
+                inTipoBodegaNew = em.merge(inTipoBodegaNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -89,6 +144,16 @@ public class InBodegaJpaController implements Serializable {
                 inBodega.getInBodegaPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inBodega with id " + id + " no longer exists.", enfe);
+            }
+            SeSucursal seSucursal = inBodega.getSeSucursal();
+            if (seSucursal != null) {
+                seSucursal.getInBodegaList().remove(inBodega);
+                seSucursal = em.merge(seSucursal);
+            }
+            InTipoBodega inTipoBodega = inBodega.getInTipoBodega();
+            if (inTipoBodega != null) {
+                inTipoBodega.getInBodegaList().remove(inBodega);
+                inTipoBodega = em.merge(inTipoBodega);
             }
             em.remove(inBodega);
             em.getTransaction().commit();

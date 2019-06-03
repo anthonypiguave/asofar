@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeCiudad;
 import ec.com.asofar.dto.SeProvincia;
 import ec.com.asofar.dto.SePais;
@@ -45,11 +44,6 @@ public class SeLocalidadClienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            SeClientes idCliente = seLocalidadCliente.getIdCliente();
-            if (idCliente != null) {
-                idCliente = em.getReference(idCliente.getClass(), idCliente.getIdClientes());
-                seLocalidadCliente.setIdCliente(idCliente);
-            }
             SeCiudad idCiudad = seLocalidadCliente.getIdCiudad();
             if (idCiudad != null) {
                 idCiudad = em.getReference(idCiudad.getClass(), idCiudad.getIdCiudad());
@@ -72,10 +66,6 @@ public class SeLocalidadClienteJpaController implements Serializable {
             }
             seLocalidadCliente.setSeContactosClientesList(attachedSeContactosClientesList);
             em.persist(seLocalidadCliente);
-            if (idCliente != null) {
-                idCliente.getSeLocalidadClienteList().add(seLocalidadCliente);
-                idCliente = em.merge(idCliente);
-            }
             if (idCiudad != null) {
                 idCiudad.getSeLocalidadClienteList().add(seLocalidadCliente);
                 idCiudad = em.merge(idCiudad);
@@ -111,8 +101,6 @@ public class SeLocalidadClienteJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             SeLocalidadCliente persistentSeLocalidadCliente = em.find(SeLocalidadCliente.class, seLocalidadCliente.getIdLocalidadCliente());
-            SeClientes idClienteOld = persistentSeLocalidadCliente.getIdCliente();
-            SeClientes idClienteNew = seLocalidadCliente.getIdCliente();
             SeCiudad idCiudadOld = persistentSeLocalidadCliente.getIdCiudad();
             SeCiudad idCiudadNew = seLocalidadCliente.getIdCiudad();
             SeProvincia idProvinciaOld = persistentSeLocalidadCliente.getIdProvincia();
@@ -121,10 +109,6 @@ public class SeLocalidadClienteJpaController implements Serializable {
             SePais idPaisNew = seLocalidadCliente.getIdPais();
             List<SeContactosClientes> seContactosClientesListOld = persistentSeLocalidadCliente.getSeContactosClientesList();
             List<SeContactosClientes> seContactosClientesListNew = seLocalidadCliente.getSeContactosClientesList();
-            if (idClienteNew != null) {
-                idClienteNew = em.getReference(idClienteNew.getClass(), idClienteNew.getIdClientes());
-                seLocalidadCliente.setIdCliente(idClienteNew);
-            }
             if (idCiudadNew != null) {
                 idCiudadNew = em.getReference(idCiudadNew.getClass(), idCiudadNew.getIdCiudad());
                 seLocalidadCliente.setIdCiudad(idCiudadNew);
@@ -145,14 +129,6 @@ public class SeLocalidadClienteJpaController implements Serializable {
             seContactosClientesListNew = attachedSeContactosClientesListNew;
             seLocalidadCliente.setSeContactosClientesList(seContactosClientesListNew);
             seLocalidadCliente = em.merge(seLocalidadCliente);
-            if (idClienteOld != null && !idClienteOld.equals(idClienteNew)) {
-                idClienteOld.getSeLocalidadClienteList().remove(seLocalidadCliente);
-                idClienteOld = em.merge(idClienteOld);
-            }
-            if (idClienteNew != null && !idClienteNew.equals(idClienteOld)) {
-                idClienteNew.getSeLocalidadClienteList().add(seLocalidadCliente);
-                idClienteNew = em.merge(idClienteNew);
-            }
             if (idCiudadOld != null && !idCiudadOld.equals(idCiudadNew)) {
                 idCiudadOld.getSeLocalidadClienteList().remove(seLocalidadCliente);
                 idCiudadOld = em.merge(idCiudadOld);
@@ -222,11 +198,6 @@ public class SeLocalidadClienteJpaController implements Serializable {
                 seLocalidadCliente.getIdLocalidadCliente();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The seLocalidadCliente with id " + id + " no longer exists.", enfe);
-            }
-            SeClientes idCliente = seLocalidadCliente.getIdCliente();
-            if (idCliente != null) {
-                idCliente.getSeLocalidadClienteList().remove(seLocalidadCliente);
-                idCliente = em.merge(idCliente);
             }
             SeCiudad idCiudad = seLocalidadCliente.getIdCiudad();
             if (idCiudad != null) {

@@ -7,6 +7,7 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,7 +38,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "PrPrestaciones.findByIdPoducto", query = "SELECT p FROM PrPrestaciones p WHERE p.idPoducto = :idPoducto")
     , @NamedQuery(name = "PrPrestaciones.findByNombrePrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.nombrePrestacion = :nombrePrestacion")
     , @NamedQuery(name = "PrPrestaciones.findByEstado", query = "SELECT p FROM PrPrestaciones p WHERE p.estado = :estado")
-    , @NamedQuery(name = "PrPrestaciones.findByAplicaIva", query = "SELECT p FROM PrPrestaciones p WHERE p.aplicaIva = :aplicaIva")})
+    , @NamedQuery(name = "PrPrestaciones.findByAplicaIva", query = "SELECT p FROM PrPrestaciones p WHERE p.aplicaIva = :aplicaIva")
+    , @NamedQuery(name = "PrPrestaciones.findByUsuarioCreacion", query = "SELECT p FROM PrPrestaciones p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrPrestaciones.findByFechaCreacion", query = "SELECT p FROM PrPrestaciones p WHERE p.fechaCreacion = :fechaCreacion")
+    , @NamedQuery(name = "PrPrestaciones.findByUsuarioActualizacion", query = "SELECT p FROM PrPrestaciones p WHERE p.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "PrPrestaciones.findByFechaActualizacion", query = "SELECT p FROM PrPrestaciones p WHERE p.fechaActualizacion = :fechaActualizacion")})
 public class PrPrestaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +56,16 @@ public class PrPrestaciones implements Serializable {
     private String estado;
     @Column(name = "aplica_iva")
     private String aplicaIva;
+    @Column(name = "usuario_creacion")
+    private String usuarioCreacion;
+    @Column(name = "fecha_creacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+    @Column(name = "usuario_actualizacion")
+    private String usuarioActualizacion;
+    @Column(name = "fecha_actualizacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
     private List<VeFacturaDetalle> veFacturaDetalleList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
@@ -56,6 +73,9 @@ public class PrPrestaciones implements Serializable {
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
+    @JoinColumn(name = "tipo_prestacion", referencedColumnName = "id_tipo_prestacion")
+    @ManyToOne
+    private PrTipoPrestacion tipoPrestacion;
 
     public PrPrestaciones() {
     }
@@ -108,6 +128,38 @@ public class PrPrestaciones implements Serializable {
         this.aplicaIva = aplicaIva;
     }
 
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
+    }
+
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getUsuarioActualizacion() {
+        return usuarioActualizacion;
+    }
+
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
+        this.usuarioActualizacion = usuarioActualizacion;
+    }
+
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
     @XmlTransient
     public List<VeFacturaDetalle> getVeFacturaDetalleList() {
         return veFacturaDetalleList;
@@ -132,6 +184,14 @@ public class PrPrestaciones implements Serializable {
 
     public void setSeEmpresa(SeEmpresa seEmpresa) {
         this.seEmpresa = seEmpresa;
+    }
+
+    public PrTipoPrestacion getTipoPrestacion() {
+        return tipoPrestacion;
+    }
+
+    public void setTipoPrestacion(PrTipoPrestacion tipoPrestacion) {
+        this.tipoPrestacion = tipoPrestacion;
     }
 
     @Override
