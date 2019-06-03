@@ -165,13 +165,13 @@ public class ObtenerDTO {
 
     }
 
-    public static CoOrdenPedido ObtenerProveedorPedido(String nombre) {
-        CoOrdenPedidoJpaController control = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoOrdenPedido dto = new CoOrdenPedido();
-        List<CoOrdenPedido> lista = control.findCoOrdenPedidoEntities();
+    public static CoProveedores ObtenerProveedorPedido(String nombre) {
+        CoProveedoresJpaController control = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoProveedores dto = new CoProveedores();
+        List<CoProveedores> lista = control.findCoProveedoresEntities();
 
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getIdProveedor().equals(nombre)) {
+            if (lista.get(i).getNombre().equals(nombre)) {
                 dto = lista.get(i);
                 break;
             }
@@ -181,13 +181,13 @@ public class ObtenerDTO {
 
     }
 
-    public static CoOrdenPedido ObtenerDocumentoPedido(String nombre) {
-        CoOrdenPedidoJpaController control = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoOrdenPedido dto = new CoOrdenPedido();
-        List<CoOrdenPedido> lista = control.findCoOrdenPedidoEntities();
+    public static InTipoDocumento ObtenerDocumentoPedido(String nombre) {
+        InTipoDocumentoJpaController control = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InTipoDocumento dto = new InTipoDocumento();
+        List<InTipoDocumento> lista = control.findInTipoDocumentoEntities();
 
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getIdDocumento().equals(nombre)) {
+            if (lista.get(i).getNombreDocumento().equals(nombre)) {
                 dto = lista.get(i);
                 break;
             }

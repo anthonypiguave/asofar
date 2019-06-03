@@ -8,12 +8,14 @@ package ec.com.asofar.views.ordenPedido;
 import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
@@ -53,7 +55,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     SeEmpresa se = new SeEmpresa();
     ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
-    InTipoMovimientoJpaController movcontroller = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoOrdenPedido cOrden;
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
@@ -120,9 +122,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     public void CargarDocumento() {
-        List<InTipoMovimiento> listcaja = movcontroller.findInTipoMovimientoEntities();
+        List<InTipoDocumento> listcaja = movcontroller.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-            cbx_documento.addItem(listcaja.get(i).getNombreMovimiento());
+            cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
         }
     }
 
@@ -453,14 +455,16 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             if ("".equals(cbxProveedor.getSelectedItem().toString())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
-                CoOrdenPedido coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
-                CoOrdenPedido coOrdend = ObtenerDTO.ObtenerProveedorPedido(cbx_documento.getSelectedItem().toString());
-
-                cabOrden.setIdProveedor(coOrdenp.getIdProveedor());
+                CoProveedores coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
+                InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
+                
+                cabOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                 cabOrden.setObservacion(txtObservacion.getText());
-                cabOrden.setIdDocumento(coOrdend.getIdDocumento());
-                cabOrden.setEstado("A");               
+                cabOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
+                cabOrden.setEstado("A");
+                cabOrden.setFechaEmision(d);
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+                cabOrden.setSeSucursal(seSucursal);
                 cabOrden.setFechaCreacion(d);
 
                 cabOrden.setFechaActualizacion(d);
