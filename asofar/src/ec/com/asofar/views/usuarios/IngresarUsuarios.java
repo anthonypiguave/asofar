@@ -229,7 +229,9 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                 .addGap(19, 19, 19))
         );
 
+        btnSalir.setBackground(new java.awt.Color(255, 0, 0));
         btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("CANCELAR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,6 +240,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         });
 
         btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(0, 153, 0));
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
