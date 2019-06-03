@@ -69,6 +69,8 @@ public class SeSucursal implements Serializable {
     @Column(name = "estado")
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
+    private List<InBodega> inBodegaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<CoOrdenPedido> coOrdenPedidoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<CoOrdenCompras> coOrdenComprasList;
@@ -175,6 +177,15 @@ public class SeSucursal implements Serializable {
 
     public void setEstado(Character estado) {
         this.estado = estado;
+    }
+
+    @XmlTransient
+    public List<InBodega> getInBodegaList() {
+        return inBodegaList;
+    }
+
+    public void setInBodegaList(List<InBodega> inBodegaList) {
+        this.inBodegaList = inBodegaList;
     }
 
     @XmlTransient

@@ -14,9 +14,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.dto.CoOrdenPedido;
+import ec.com.asofar.dto.InBodega;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.PrTarifario;
@@ -46,6 +47,9 @@ public class SeSucursalJpaController implements Serializable {
     public void create(SeSucursal seSucursal) throws PreexistingEntityException, Exception {
         if (seSucursal.getSeSucursalPK() == null) {
             seSucursal.setSeSucursalPK(new SeSucursalPK());
+        }
+        if (seSucursal.getInBodegaList() == null) {
+            seSucursal.setInBodegaList(new ArrayList<InBodega>());
         }
         if (seSucursal.getCoOrdenPedidoList() == null) {
             seSucursal.setCoOrdenPedidoList(new ArrayList<CoOrdenPedido>());
@@ -78,6 +82,12 @@ public class SeSucursalJpaController implements Serializable {
                 seEmpresa = em.getReference(seEmpresa.getClass(), seEmpresa.getIdEmpresa());
                 seSucursal.setSeEmpresa(seEmpresa);
             }
+            List<InBodega> attachedInBodegaList = new ArrayList<InBodega>();
+            for (InBodega inBodegaListInBodegaToAttach : seSucursal.getInBodegaList()) {
+                inBodegaListInBodegaToAttach = em.getReference(inBodegaListInBodegaToAttach.getClass(), inBodegaListInBodegaToAttach.getInBodegaPK());
+                attachedInBodegaList.add(inBodegaListInBodegaToAttach);
+            }
+            seSucursal.setInBodegaList(attachedInBodegaList);
             List<CoOrdenPedido> attachedCoOrdenPedidoList = new ArrayList<CoOrdenPedido>();
             for (CoOrdenPedido coOrdenPedidoListCoOrdenPedidoToAttach : seSucursal.getCoOrdenPedidoList()) {
                 coOrdenPedidoListCoOrdenPedidoToAttach = em.getReference(coOrdenPedidoListCoOrdenPedidoToAttach.getClass(), coOrdenPedidoListCoOrdenPedidoToAttach.getCoOrdenPedidoPK());
@@ -124,6 +134,15 @@ public class SeSucursalJpaController implements Serializable {
             if (seEmpresa != null) {
                 seEmpresa.getSeSucursalList().add(seSucursal);
                 seEmpresa = em.merge(seEmpresa);
+            }
+            for (InBodega inBodegaListInBodega : seSucursal.getInBodegaList()) {
+                SeSucursal oldSeSucursalOfInBodegaListInBodega = inBodegaListInBodega.getSeSucursal();
+                inBodegaListInBodega.setSeSucursal(seSucursal);
+                inBodegaListInBodega = em.merge(inBodegaListInBodega);
+                if (oldSeSucursalOfInBodegaListInBodega != null) {
+                    oldSeSucursalOfInBodegaListInBodega.getInBodegaList().remove(inBodegaListInBodega);
+                    oldSeSucursalOfInBodegaListInBodega = em.merge(oldSeSucursalOfInBodegaListInBodega);
+                }
             }
             for (CoOrdenPedido coOrdenPedidoListCoOrdenPedido : seSucursal.getCoOrdenPedidoList()) {
                 SeSucursal oldSeSucursalOfCoOrdenPedidoListCoOrdenPedido = coOrdenPedidoListCoOrdenPedido.getSeSucursal();
@@ -210,6 +229,8 @@ public class SeSucursalJpaController implements Serializable {
             SeSucursal persistentSeSucursal = em.find(SeSucursal.class, seSucursal.getSeSucursalPK());
             SeEmpresa seEmpresaOld = persistentSeSucursal.getSeEmpresa();
             SeEmpresa seEmpresaNew = seSucursal.getSeEmpresa();
+            List<InBodega> inBodegaListOld = persistentSeSucursal.getInBodegaList();
+            List<InBodega> inBodegaListNew = seSucursal.getInBodegaList();
             List<CoOrdenPedido> coOrdenPedidoListOld = persistentSeSucursal.getCoOrdenPedidoList();
             List<CoOrdenPedido> coOrdenPedidoListNew = seSucursal.getCoOrdenPedidoList();
             List<CoOrdenCompras> coOrdenComprasListOld = persistentSeSucursal.getCoOrdenComprasList();
@@ -225,6 +246,14 @@ public class SeSucursalJpaController implements Serializable {
             List<PrProductoBodega> prProductoBodegaListOld = persistentSeSucursal.getPrProductoBodegaList();
             List<PrProductoBodega> prProductoBodegaListNew = seSucursal.getPrProductoBodegaList();
             List<String> illegalOrphanMessages = null;
+            for (InBodega inBodegaListOldInBodega : inBodegaListOld) {
+                if (!inBodegaListNew.contains(inBodegaListOldInBodega)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain InBodega " + inBodegaListOldInBodega + " since its seSucursal field is not nullable.");
+                }
+            }
             for (CoOrdenPedido coOrdenPedidoListOldCoOrdenPedido : coOrdenPedidoListOld) {
                 if (!coOrdenPedidoListNew.contains(coOrdenPedidoListOldCoOrdenPedido)) {
                     if (illegalOrphanMessages == null) {
@@ -288,6 +317,13 @@ public class SeSucursalJpaController implements Serializable {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 seSucursal.setSeEmpresa(seEmpresaNew);
             }
+            List<InBodega> attachedInBodegaListNew = new ArrayList<InBodega>();
+            for (InBodega inBodegaListNewInBodegaToAttach : inBodegaListNew) {
+                inBodegaListNewInBodegaToAttach = em.getReference(inBodegaListNewInBodegaToAttach.getClass(), inBodegaListNewInBodegaToAttach.getInBodegaPK());
+                attachedInBodegaListNew.add(inBodegaListNewInBodegaToAttach);
+            }
+            inBodegaListNew = attachedInBodegaListNew;
+            seSucursal.setInBodegaList(inBodegaListNew);
             List<CoOrdenPedido> attachedCoOrdenPedidoListNew = new ArrayList<CoOrdenPedido>();
             for (CoOrdenPedido coOrdenPedidoListNewCoOrdenPedidoToAttach : coOrdenPedidoListNew) {
                 coOrdenPedidoListNewCoOrdenPedidoToAttach = em.getReference(coOrdenPedidoListNewCoOrdenPedidoToAttach.getClass(), coOrdenPedidoListNewCoOrdenPedidoToAttach.getCoOrdenPedidoPK());
@@ -345,6 +381,17 @@ public class SeSucursalJpaController implements Serializable {
             if (seEmpresaNew != null && !seEmpresaNew.equals(seEmpresaOld)) {
                 seEmpresaNew.getSeSucursalList().add(seSucursal);
                 seEmpresaNew = em.merge(seEmpresaNew);
+            }
+            for (InBodega inBodegaListNewInBodega : inBodegaListNew) {
+                if (!inBodegaListOld.contains(inBodegaListNewInBodega)) {
+                    SeSucursal oldSeSucursalOfInBodegaListNewInBodega = inBodegaListNewInBodega.getSeSucursal();
+                    inBodegaListNewInBodega.setSeSucursal(seSucursal);
+                    inBodegaListNewInBodega = em.merge(inBodegaListNewInBodega);
+                    if (oldSeSucursalOfInBodegaListNewInBodega != null && !oldSeSucursalOfInBodegaListNewInBodega.equals(seSucursal)) {
+                        oldSeSucursalOfInBodegaListNewInBodega.getInBodegaList().remove(inBodegaListNewInBodega);
+                        oldSeSucursalOfInBodegaListNewInBodega = em.merge(oldSeSucursalOfInBodegaListNewInBodega);
+                    }
+                }
             }
             for (CoOrdenPedido coOrdenPedidoListNewCoOrdenPedido : coOrdenPedidoListNew) {
                 if (!coOrdenPedidoListOld.contains(coOrdenPedidoListNewCoOrdenPedido)) {
@@ -453,6 +500,13 @@ public class SeSucursalJpaController implements Serializable {
                 throw new NonexistentEntityException("The seSucursal with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<InBodega> inBodegaListOrphanCheck = seSucursal.getInBodegaList();
+            for (InBodega inBodegaListOrphanCheckInBodega : inBodegaListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This SeSucursal (" + seSucursal + ") cannot be destroyed since the InBodega " + inBodegaListOrphanCheckInBodega + " in its inBodegaList field has a non-nullable seSucursal field.");
+            }
             List<CoOrdenPedido> coOrdenPedidoListOrphanCheck = seSucursal.getCoOrdenPedidoList();
             for (CoOrdenPedido coOrdenPedidoListOrphanCheckCoOrdenPedido : coOrdenPedidoListOrphanCheck) {
                 if (illegalOrphanMessages == null) {

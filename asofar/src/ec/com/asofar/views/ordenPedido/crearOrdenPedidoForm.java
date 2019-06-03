@@ -5,12 +5,17 @@
  */
 package ec.com.asofar.views.ordenPedido;
 
+import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
+import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
@@ -29,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -44,16 +51,17 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
 
+    Date d = new Date();
+    SeEmpresa se = new SeEmpresa();
     ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
-    InTipoMovimientoJpaController movcontroller = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoOrdenPedido cOrden;
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoOrdenPedido> listcab;
     PrProductos objetopro = new PrProductos();
-    
-    
+
     int contFilas = 1;
 
     public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
@@ -71,13 +79,20 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
     }
 
-    public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
+    public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
+
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
+
+        Timer tiempo = new Timer(100, new crearOrdenPedidoForm.horas());
+        tiempo.start();
 
     }
 
@@ -107,9 +122,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     public void CargarDocumento() {
-        List<InTipoMovimiento> listcaja = movcontroller.findInTipoMovimientoEntities();
+        List<InTipoDocumento> listcaja = movcontroller.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-            cbx_documento.addItem(listcaja.get(i).getNombreMovimiento());
+            cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
         }
     }
 
@@ -129,7 +144,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         txtCod = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtObservacion = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
@@ -194,9 +209,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         jLabel13.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel13.setText("OBSERVACION:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtObservacion.setColumns(20);
+        txtObservacion.setRows(5);
+        jScrollPane1.setViewportView(txtObservacion);
 
         jButton1.setText("AGREGAR PRODUCTOS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -284,6 +299,11 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         );
 
         jButton2.setText("GUARDAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("CANCELAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -372,7 +392,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         cproducto.setVisible(true);
 
         objetopro = cproducto.getProducto();
-        if (validarProductos("" + objetopro.getPrProductosPK().getIdProducto()).equals("si")) {
+        if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
             JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
 
@@ -385,7 +405,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             listadet.add(detalle);
 
             for (int i = 0; i < listadet.size(); i++) {
-                System.out.println("lsdasd" + listadet.get(i).getIdProducto());
+                System.out.println("listadetalle " + listadet.get(i).getIdProducto());
                 contFilas = i + 1;
                 System.out.println("filas " + contFilas);
                 detalle.setLineaDetalle(BigInteger.valueOf(contFilas));
@@ -426,16 +446,52 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTable1MousePressed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
+        CoOrdenPedido cabOrden = new CoOrdenPedido();
+        CoOrdenPedidoJpaController cabOrdencontroller = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+        if (r == JOptionPane.YES_OPTION) {
+            if ("".equals(cbxProveedor.getSelectedItem().toString())) {
+                JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
+            } else {
+                CoProveedores coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
+                InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
+                
+                cabOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
+                cabOrden.setObservacion(txtObservacion.getText());
+                cabOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
+                cabOrden.setEstado("A");
+                cabOrden.setFechaEmision(d);
+                cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+                cabOrden.setSeSucursal(seSucursal);
+                cabOrden.setFechaCreacion(d);
+
+                cabOrden.setFechaActualizacion(d);
+                try {
+                    cabOrdencontroller.create(cabOrden);
+                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                    setVisible(false);
+
+                } catch (Exception ex) {
+                    Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public String validarProductos(String datos) {
         String obj1 = "no";
 
         for (int i = 0; i < listadet.size(); i++) {
 
-            if (datos.equals(listadet.get(i).getIdProducto().toString())) {
+            if (datos.equals((listadet.get(i).getIdProducto()).toString())) {
+                System.out.println("lista si " + listadet.get(i).getIdProducto());
                 obj1 = "si";
-            } else {
 
-                obj1 = "no";
+                break;
             }
 
         }
@@ -504,9 +560,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtCod;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
+    private javax.swing.JTextArea txtObservacion;
     // End of variables declaration//GEN-END:variables
 }

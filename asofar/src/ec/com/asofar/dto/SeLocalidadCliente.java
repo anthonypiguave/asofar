@@ -6,6 +6,7 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SeLocalidadCliente.findAll", query = "SELECT s FROM SeLocalidadCliente s")
     , @NamedQuery(name = "SeLocalidadCliente.findByIdLocalidadCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idLocalidadCliente = :idLocalidadCliente")
+    , @NamedQuery(name = "SeLocalidadCliente.findByIdCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idCliente = :idCliente")
     , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionCliente = :dirreccionCliente")
     , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionEntrega", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionEntrega = :dirreccionEntrega")
     , @NamedQuery(name = "SeLocalidadCliente.findByEstado", query = "SELECT s FROM SeLocalidadCliente s WHERE s.estado = :estado")
@@ -50,6 +52,8 @@ public class SeLocalidadCliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_localidad_cliente")
     private Long idLocalidadCliente;
+    @Column(name = "id_cliente")
+    private BigInteger idCliente;
     @Column(name = "dirreccion_cliente")
     private String dirreccionCliente;
     @Column(name = "dirreccion_entrega")
@@ -66,9 +70,6 @@ public class SeLocalidadCliente implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_clientes")
-    @ManyToOne
-    private SeClientes idCliente;
     @JoinColumn(name = "id_ciudad", referencedColumnName = "id_Ciudad")
     @ManyToOne
     private SeCiudad idCiudad;
@@ -94,6 +95,14 @@ public class SeLocalidadCliente implements Serializable {
 
     public void setIdLocalidadCliente(Long idLocalidadCliente) {
         this.idLocalidadCliente = idLocalidadCliente;
+    }
+
+    public BigInteger getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(BigInteger idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getDirreccionCliente() {
@@ -150,14 +159,6 @@ public class SeLocalidadCliente implements Serializable {
 
     public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
-    }
-
-    public SeClientes getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(SeClientes idCliente) {
-        this.idCliente = idCliente;
     }
 
     public SeCiudad getIdCiudad() {
