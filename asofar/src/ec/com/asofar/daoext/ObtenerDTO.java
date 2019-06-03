@@ -134,6 +134,7 @@ public class ObtenerDTO {
         }
         return dto;
     }
+
     public static SeCiudad ObtenerSeCiudad(String nombre) {
         SeCiudadJpaController control = new SeCiudadJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeCiudad dto = new SeCiudad();
@@ -147,6 +148,7 @@ public class ObtenerDTO {
         }
         return dto;
     }
+
     public static VeCaja ObtenerVeCaja(String nombre) {
         VeCajaJpaController control = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
         VeCaja dto = new VeCaja();
@@ -154,6 +156,38 @@ public class ObtenerDTO {
 
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static CoOrdenPedido ObtenerProveedorPedido(String nombre) {
+        CoOrdenPedidoJpaController control = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoOrdenPedido dto = new CoOrdenPedido();
+        List<CoOrdenPedido> lista = control.findCoOrdenPedidoEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdProveedor().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static CoOrdenPedido ObtenerDocumentoPedido(String nombre) {
+        CoOrdenPedidoJpaController control = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoOrdenPedido dto = new CoOrdenPedido();
+        List<CoOrdenPedido> lista = control.findCoOrdenPedidoEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdDocumento().equals(nombre)) {
                 dto = lista.get(i);
                 break;
             }
