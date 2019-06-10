@@ -1665,7 +1665,6 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaunidad.size(); i++) {
-            if (listaunidad.get(i).getEstado().equals("A")) {
                 filas[0] = String.valueOf(listaunidad.get(i).getIdUnidadServicio());
                 filas[1] = listaunidad.get(i).getNombreUnidadServicio();
                 filas[2] = listaunidad.get(i).getEstado();
