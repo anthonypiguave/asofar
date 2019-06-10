@@ -41,11 +41,13 @@ public class tipo_medida_editar extends javax.swing.JDialog {
      */
     public tipo_medida_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
     }
 
     public tipo_medida_editar(java.awt.Frame parent, boolean modal, PrTipoMedidas staticmedidas, SeUsuarios staticusuarios, SeEmpresa staticempresa) {
         super(parent, modal);
+        setUndecorated(false);
         initComponents();
         setLocationRelativeTo(null);
         medidas = staticmedidas;

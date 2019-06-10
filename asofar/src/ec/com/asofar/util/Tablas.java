@@ -1125,7 +1125,7 @@ public class Tablas {
         }
     }
 
-    public static void listarCajas(List<VeCaja> lista, JTable Tabla) {
+    public static void TablaCajaActiva(List<VeCaja> lista, JTable Tabla) {
         int[] a = {5, 100, 90, 120, 20};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
@@ -1160,7 +1160,7 @@ public class Tablas {
 
     }
 
-    public static void listarCajasInactivas(List<VeCaja> lista, JTable Tabla) {
+    public static void TablaCajaInactiva(List<VeCaja> lista, JTable Tabla) {
         int[] a = {5, 100, 90, 120, 20};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();

@@ -88,8 +88,9 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
+        btningresar.setBackground(new java.awt.Color(0, 102, 0));
         btningresar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btningresar.setForeground(new java.awt.Color(75, 162, 73));
+        btningresar.setForeground(new java.awt.Color(255, 255, 255));
         btningresar.setText("INGRESAR");
         btningresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +98,7 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        btningresar1.setBackground(new java.awt.Color(169, 22, 35));
+        btningresar1.setBackground(new java.awt.Color(255, 51, 51));
         btningresar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btningresar1.setForeground(new java.awt.Color(254, 254, 254));
         btningresar1.setText("SALIR");
@@ -211,6 +212,7 @@ public class Login extends javax.swing.JDialog {
 
     private void btningresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresar1ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btningresar1ActionPerformed
 
     private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed

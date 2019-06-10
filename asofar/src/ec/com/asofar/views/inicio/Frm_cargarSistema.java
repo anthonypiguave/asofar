@@ -60,6 +60,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        carga_pb.setForeground(new java.awt.Color(255, 102, 0));
         carga_pb.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 carga_pbStateChanged(evt);

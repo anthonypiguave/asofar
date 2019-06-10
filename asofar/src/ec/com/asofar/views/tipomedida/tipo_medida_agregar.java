@@ -34,11 +34,13 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
      */
     public tipo_medida_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
     }
 
     public tipo_medida_agregar(java.awt.Frame parent, boolean modal, SeUsuarios staticusuarios, SeEmpresa staticempresa) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         usuarios = staticusuarios;

@@ -132,8 +132,9 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
 
         cbsucursal.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 0));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(53, 173, 57));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("INGRESAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +142,7 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(163, 50, 62));
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(254, 254, 254));
         jButton2.setText("CANCELAR");

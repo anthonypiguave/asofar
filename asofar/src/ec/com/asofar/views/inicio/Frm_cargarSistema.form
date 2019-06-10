@@ -40,6 +40,11 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JProgressBar" name="carga_pb">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="66" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="carga_pbStateChanged"/>
       </Events>
