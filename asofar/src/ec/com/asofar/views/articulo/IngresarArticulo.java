@@ -114,7 +114,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         });
 
         grupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        grupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opcion.." }));
+        grupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         grupo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 grupoItemStateChanged(evt);
@@ -184,7 +184,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
