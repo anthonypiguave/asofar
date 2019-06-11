@@ -76,7 +76,7 @@ public class CoOrdenPedido implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @OneToMany(mappedBy = "coOrdenPedido")
+    @OneToMany(mappedBy = "idOrdenPedido")
     private List<CoDetalleOrdenPedido> coDetalleOrdenPedidoList;
 
     public CoOrdenPedido() {

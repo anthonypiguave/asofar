@@ -59,10 +59,10 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresa = em.getReference(seEmpresa.getClass(), seEmpresa.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresa);
             }
-            PrTipoPrestacion tipoPrestacion = prPrestaciones.getTipoPrestacion();
-            if (tipoPrestacion != null) {
-                tipoPrestacion = em.getReference(tipoPrestacion.getClass(), tipoPrestacion.getIdTipoPrestacion());
-                prPrestaciones.setTipoPrestacion(tipoPrestacion);
+            PrTipoPrestacion idTipoPrestacion = prPrestaciones.getIdTipoPrestacion();
+            if (idTipoPrestacion != null) {
+                idTipoPrestacion = em.getReference(idTipoPrestacion.getClass(), idTipoPrestacion.getIdTipoPrestacion());
+                prPrestaciones.setIdTipoPrestacion(idTipoPrestacion);
             }
             List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : prPrestaciones.getVeFacturaDetalleList()) {
@@ -81,9 +81,9 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresa.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresa = em.merge(seEmpresa);
             }
-            if (tipoPrestacion != null) {
-                tipoPrestacion.getPrPrestacionesList().add(prPrestaciones);
-                tipoPrestacion = em.merge(tipoPrestacion);
+            if (idTipoPrestacion != null) {
+                idTipoPrestacion.getPrPrestacionesList().add(prPrestaciones);
+                idTipoPrestacion = em.merge(idTipoPrestacion);
             }
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : prPrestaciones.getVeFacturaDetalleList()) {
                 PrPrestaciones oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle = veFacturaDetalleListVeFacturaDetalle.getPrPrestaciones();
@@ -125,8 +125,8 @@ public class PrPrestacionesJpaController implements Serializable {
             PrPrestaciones persistentPrPrestaciones = em.find(PrPrestaciones.class, prPrestaciones.getPrPrestacionesPK());
             SeEmpresa seEmpresaOld = persistentPrPrestaciones.getSeEmpresa();
             SeEmpresa seEmpresaNew = prPrestaciones.getSeEmpresa();
-            PrTipoPrestacion tipoPrestacionOld = persistentPrPrestaciones.getTipoPrestacion();
-            PrTipoPrestacion tipoPrestacionNew = prPrestaciones.getTipoPrestacion();
+            PrTipoPrestacion idTipoPrestacionOld = persistentPrPrestaciones.getIdTipoPrestacion();
+            PrTipoPrestacion idTipoPrestacionNew = prPrestaciones.getIdTipoPrestacion();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentPrPrestaciones.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = prPrestaciones.getVeFacturaDetalleList();
             List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrPrestaciones.getPrDetalleTarifarioList();
@@ -155,9 +155,9 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 prPrestaciones.setSeEmpresa(seEmpresaNew);
             }
-            if (tipoPrestacionNew != null) {
-                tipoPrestacionNew = em.getReference(tipoPrestacionNew.getClass(), tipoPrestacionNew.getIdTipoPrestacion());
-                prPrestaciones.setTipoPrestacion(tipoPrestacionNew);
+            if (idTipoPrestacionNew != null) {
+                idTipoPrestacionNew = em.getReference(idTipoPrestacionNew.getClass(), idTipoPrestacionNew.getIdTipoPrestacion());
+                prPrestaciones.setIdTipoPrestacion(idTipoPrestacionNew);
             }
             List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
@@ -182,13 +182,13 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresaNew.getPrPrestacionesList().add(prPrestaciones);
                 seEmpresaNew = em.merge(seEmpresaNew);
             }
-            if (tipoPrestacionOld != null && !tipoPrestacionOld.equals(tipoPrestacionNew)) {
-                tipoPrestacionOld.getPrPrestacionesList().remove(prPrestaciones);
-                tipoPrestacionOld = em.merge(tipoPrestacionOld);
+            if (idTipoPrestacionOld != null && !idTipoPrestacionOld.equals(idTipoPrestacionNew)) {
+                idTipoPrestacionOld.getPrPrestacionesList().remove(prPrestaciones);
+                idTipoPrestacionOld = em.merge(idTipoPrestacionOld);
             }
-            if (tipoPrestacionNew != null && !tipoPrestacionNew.equals(tipoPrestacionOld)) {
-                tipoPrestacionNew.getPrPrestacionesList().add(prPrestaciones);
-                tipoPrestacionNew = em.merge(tipoPrestacionNew);
+            if (idTipoPrestacionNew != null && !idTipoPrestacionNew.equals(idTipoPrestacionOld)) {
+                idTipoPrestacionNew.getPrPrestacionesList().add(prPrestaciones);
+                idTipoPrestacionNew = em.merge(idTipoPrestacionNew);
             }
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalle : veFacturaDetalleListNew) {
                 if (!veFacturaDetalleListOld.contains(veFacturaDetalleListNewVeFacturaDetalle)) {
@@ -264,10 +264,10 @@ public class PrPrestacionesJpaController implements Serializable {
                 seEmpresa.getPrPrestacionesList().remove(prPrestaciones);
                 seEmpresa = em.merge(seEmpresa);
             }
-            PrTipoPrestacion tipoPrestacion = prPrestaciones.getTipoPrestacion();
-            if (tipoPrestacion != null) {
-                tipoPrestacion.getPrPrestacionesList().remove(prPrestaciones);
-                tipoPrestacion = em.merge(tipoPrestacion);
+            PrTipoPrestacion idTipoPrestacion = prPrestaciones.getIdTipoPrestacion();
+            if (idTipoPrestacion != null) {
+                idTipoPrestacion.getPrPrestacionesList().remove(prPrestaciones);
+                idTipoPrestacion = em.merge(idTipoPrestacion);
             }
             em.remove(prPrestaciones);
             em.getTransaction().commit();

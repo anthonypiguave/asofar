@@ -359,11 +359,11 @@ public class cliente_editar extends javax.swing.JDialog {
         cliente.setSegundoApellido(txt_segundo_apellido.getText());
         cliente.setNumeroIdentificacion(txt_numero_identificacion.getText());
         cliente.setNombreCompleto(nombreCompleto);
-        cliente.setIdTipoIdentificacion(ti);
+        cliente.setIdTipoIndentificacion(ti);
         cliente.setFechaActualizacion(fechaActual);
         cliente.setUsuarioActualizacion(usu.getNombreUsuario());
         cliente.setRazonSocial(txt_razon_social.getText());
-        cliente.setEstado(cbx_estado.getSelectedItem().toString());
+        cliente.setEstado((char)cbx_estado.getSelectedItem());
         try {
             scc.edit(cliente);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");

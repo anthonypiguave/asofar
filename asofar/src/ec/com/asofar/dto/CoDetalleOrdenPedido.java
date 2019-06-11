@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CoDetalleOrdenPedido.findAll", query = "SELECT c FROM CoDetalleOrdenPedido c")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdDetalleOrdenPedido", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idDetalleOrdenPedido = :idDetalleOrdenPedido")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdEmpresa", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdSurcusal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idSurcusal = :idSurcusal")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idProducto = :idProducto")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descripcion = :descripcion")
@@ -51,6 +52,10 @@ public class CoDetalleOrdenPedido implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_detalle_orden_pedido")
     private Long idDetalleOrdenPedido;
+    @Column(name = "id_empresa")
+    private BigInteger idEmpresa;
+    @Column(name = "id_surcusal")
+    private BigInteger idSurcusal;
     @Column(name = "linea_detalle")
     private BigInteger lineaDetalle;
     @Column(name = "id_producto")
@@ -71,12 +76,9 @@ public class CoDetalleOrdenPedido implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumns({
-        @JoinColumn(name = "id_orden_pedido", referencedColumnName = "id_orden_pedido")
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal")})
+    @JoinColumn(name = "id_orden_pedido", referencedColumnName = "id_orden_pedido")
     @ManyToOne
-    private CoOrdenPedido coOrdenPedido;
+    private CoOrdenPedido idOrdenPedido;
 
     public CoDetalleOrdenPedido() {
     }
@@ -91,6 +93,22 @@ public class CoDetalleOrdenPedido implements Serializable {
 
     public void setIdDetalleOrdenPedido(Long idDetalleOrdenPedido) {
         this.idDetalleOrdenPedido = idDetalleOrdenPedido;
+    }
+
+    public BigInteger getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(BigInteger idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public BigInteger getIdSurcusal() {
+        return idSurcusal;
+    }
+
+    public void setIdSurcusal(BigInteger idSurcusal) {
+        this.idSurcusal = idSurcusal;
     }
 
     public BigInteger getLineaDetalle() {
@@ -165,12 +183,12 @@ public class CoDetalleOrdenPedido implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public CoOrdenPedido getCoOrdenPedido() {
-        return coOrdenPedido;
+    public CoOrdenPedido getIdOrdenPedido() {
+        return idOrdenPedido;
     }
 
-    public void setCoOrdenPedido(CoOrdenPedido coOrdenPedido) {
-        this.coOrdenPedido = coOrdenPedido;
+    public void setIdOrdenPedido(CoOrdenPedido idOrdenPedido) {
+        this.idOrdenPedido = idOrdenPedido;
     }
 
     @Override

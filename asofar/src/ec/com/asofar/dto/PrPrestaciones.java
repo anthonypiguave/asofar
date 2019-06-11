@@ -73,9 +73,9 @@ public class PrPrestaciones implements Serializable {
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
-    @JoinColumn(name = "tipo_prestacion", referencedColumnName = "id_tipo_prestacion")
+    @JoinColumn(name = "id_tipo_prestacion", referencedColumnName = "id_tipo_prestacion")
     @ManyToOne
-    private PrTipoPrestacion tipoPrestacion;
+    private PrTipoPrestacion idTipoPrestacion;
 
     public PrPrestaciones() {
     }
@@ -186,12 +186,12 @@ public class PrPrestaciones implements Serializable {
         this.seEmpresa = seEmpresa;
     }
 
-    public PrTipoPrestacion getTipoPrestacion() {
-        return tipoPrestacion;
+    public PrTipoPrestacion getIdTipoPrestacion() {
+        return idTipoPrestacion;
     }
 
-    public void setTipoPrestacion(PrTipoPrestacion tipoPrestacion) {
-        this.tipoPrestacion = tipoPrestacion;
+    public void setIdTipoPrestacion(PrTipoPrestacion idTipoPrestacion) {
+        this.idTipoPrestacion = idTipoPrestacion;
     }
 
     @Override

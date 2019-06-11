@@ -49,12 +49,12 @@ public class PrTipoPrestacionJpaController implements Serializable {
             prTipoPrestacion.setPrPrestacionesList(attachedPrPrestacionesList);
             em.persist(prTipoPrestacion);
             for (PrPrestaciones prPrestacionesListPrPrestaciones : prTipoPrestacion.getPrPrestacionesList()) {
-                PrTipoPrestacion oldTipoPrestacionOfPrPrestacionesListPrPrestaciones = prPrestacionesListPrPrestaciones.getTipoPrestacion();
-                prPrestacionesListPrPrestaciones.setTipoPrestacion(prTipoPrestacion);
+                PrTipoPrestacion oldIdTipoPrestacionOfPrPrestacionesListPrPrestaciones = prPrestacionesListPrPrestaciones.getIdTipoPrestacion();
+                prPrestacionesListPrPrestaciones.setIdTipoPrestacion(prTipoPrestacion);
                 prPrestacionesListPrPrestaciones = em.merge(prPrestacionesListPrPrestaciones);
-                if (oldTipoPrestacionOfPrPrestacionesListPrPrestaciones != null) {
-                    oldTipoPrestacionOfPrPrestacionesListPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListPrPrestaciones);
-                    oldTipoPrestacionOfPrPrestacionesListPrPrestaciones = em.merge(oldTipoPrestacionOfPrPrestacionesListPrPrestaciones);
+                if (oldIdTipoPrestacionOfPrPrestacionesListPrPrestaciones != null) {
+                    oldIdTipoPrestacionOfPrPrestacionesListPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListPrPrestaciones);
+                    oldIdTipoPrestacionOfPrPrestacionesListPrPrestaciones = em.merge(oldIdTipoPrestacionOfPrPrestacionesListPrPrestaciones);
                 }
             }
             em.getTransaction().commit();
@@ -83,18 +83,18 @@ public class PrTipoPrestacionJpaController implements Serializable {
             prTipoPrestacion = em.merge(prTipoPrestacion);
             for (PrPrestaciones prPrestacionesListOldPrPrestaciones : prPrestacionesListOld) {
                 if (!prPrestacionesListNew.contains(prPrestacionesListOldPrPrestaciones)) {
-                    prPrestacionesListOldPrPrestaciones.setTipoPrestacion(null);
+                    prPrestacionesListOldPrPrestaciones.setIdTipoPrestacion(null);
                     prPrestacionesListOldPrPrestaciones = em.merge(prPrestacionesListOldPrPrestaciones);
                 }
             }
             for (PrPrestaciones prPrestacionesListNewPrPrestaciones : prPrestacionesListNew) {
                 if (!prPrestacionesListOld.contains(prPrestacionesListNewPrPrestaciones)) {
-                    PrTipoPrestacion oldTipoPrestacionOfPrPrestacionesListNewPrPrestaciones = prPrestacionesListNewPrPrestaciones.getTipoPrestacion();
-                    prPrestacionesListNewPrPrestaciones.setTipoPrestacion(prTipoPrestacion);
+                    PrTipoPrestacion oldIdTipoPrestacionOfPrPrestacionesListNewPrPrestaciones = prPrestacionesListNewPrPrestaciones.getIdTipoPrestacion();
+                    prPrestacionesListNewPrPrestaciones.setIdTipoPrestacion(prTipoPrestacion);
                     prPrestacionesListNewPrPrestaciones = em.merge(prPrestacionesListNewPrPrestaciones);
-                    if (oldTipoPrestacionOfPrPrestacionesListNewPrPrestaciones != null && !oldTipoPrestacionOfPrPrestacionesListNewPrPrestaciones.equals(prTipoPrestacion)) {
-                        oldTipoPrestacionOfPrPrestacionesListNewPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListNewPrPrestaciones);
-                        oldTipoPrestacionOfPrPrestacionesListNewPrPrestaciones = em.merge(oldTipoPrestacionOfPrPrestacionesListNewPrPrestaciones);
+                    if (oldIdTipoPrestacionOfPrPrestacionesListNewPrPrestaciones != null && !oldIdTipoPrestacionOfPrPrestacionesListNewPrPrestaciones.equals(prTipoPrestacion)) {
+                        oldIdTipoPrestacionOfPrPrestacionesListNewPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListNewPrPrestaciones);
+                        oldIdTipoPrestacionOfPrPrestacionesListNewPrPrestaciones = em.merge(oldIdTipoPrestacionOfPrPrestacionesListNewPrPrestaciones);
                     }
                 }
             }
@@ -129,7 +129,7 @@ public class PrTipoPrestacionJpaController implements Serializable {
             }
             List<PrPrestaciones> prPrestacionesList = prTipoPrestacion.getPrPrestacionesList();
             for (PrPrestaciones prPrestacionesListPrPrestaciones : prPrestacionesList) {
-                prPrestacionesListPrPrestaciones.setTipoPrestacion(null);
+                prPrestacionesListPrPrestaciones.setIdTipoPrestacion(null);
                 prPrestacionesListPrPrestaciones = em.merge(prPrestacionesListPrPrestaciones);
             }
             em.remove(prTipoPrestacion);

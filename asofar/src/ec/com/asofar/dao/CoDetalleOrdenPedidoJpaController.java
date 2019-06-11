@@ -37,15 +37,15 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CoOrdenPedido coOrdenPedido = coDetalleOrdenPedido.getCoOrdenPedido();
-            if (coOrdenPedido != null) {
-                coOrdenPedido = em.getReference(coOrdenPedido.getClass(), coOrdenPedido.getCoOrdenPedidoPK());
-                coDetalleOrdenPedido.setCoOrdenPedido(coOrdenPedido);
+            CoOrdenPedido idOrdenPedido = coDetalleOrdenPedido.getIdOrdenPedido();
+            if (idOrdenPedido != null) {
+                idOrdenPedido = em.getReference(idOrdenPedido.getClass(), idOrdenPedido.getCoOrdenPedidoPK());
+                coDetalleOrdenPedido.setIdOrdenPedido(idOrdenPedido);
             }
             em.persist(coDetalleOrdenPedido);
-            if (coOrdenPedido != null) {
-                coOrdenPedido.getCoDetalleOrdenPedidoList().add(coDetalleOrdenPedido);
-                coOrdenPedido = em.merge(coOrdenPedido);
+            if (idOrdenPedido != null) {
+                idOrdenPedido.getCoDetalleOrdenPedidoList().add(coDetalleOrdenPedido);
+                idOrdenPedido = em.merge(idOrdenPedido);
             }
             em.getTransaction().commit();
         } finally {
@@ -61,20 +61,20 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             CoDetalleOrdenPedido persistentCoDetalleOrdenPedido = em.find(CoDetalleOrdenPedido.class, coDetalleOrdenPedido.getIdDetalleOrdenPedido());
-            CoOrdenPedido coOrdenPedidoOld = persistentCoDetalleOrdenPedido.getCoOrdenPedido();
-            CoOrdenPedido coOrdenPedidoNew = coDetalleOrdenPedido.getCoOrdenPedido();
-            if (coOrdenPedidoNew != null) {
-                coOrdenPedidoNew = em.getReference(coOrdenPedidoNew.getClass(), coOrdenPedidoNew.getCoOrdenPedidoPK());
-                coDetalleOrdenPedido.setCoOrdenPedido(coOrdenPedidoNew);
+            CoOrdenPedido idOrdenPedidoOld = persistentCoDetalleOrdenPedido.getIdOrdenPedido();
+            CoOrdenPedido idOrdenPedidoNew = coDetalleOrdenPedido.getIdOrdenPedido();
+            if (idOrdenPedidoNew != null) {
+                idOrdenPedidoNew = em.getReference(idOrdenPedidoNew.getClass(), idOrdenPedidoNew.getCoOrdenPedidoPK());
+                coDetalleOrdenPedido.setIdOrdenPedido(idOrdenPedidoNew);
             }
             coDetalleOrdenPedido = em.merge(coDetalleOrdenPedido);
-            if (coOrdenPedidoOld != null && !coOrdenPedidoOld.equals(coOrdenPedidoNew)) {
-                coOrdenPedidoOld.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedido);
-                coOrdenPedidoOld = em.merge(coOrdenPedidoOld);
+            if (idOrdenPedidoOld != null && !idOrdenPedidoOld.equals(idOrdenPedidoNew)) {
+                idOrdenPedidoOld.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedido);
+                idOrdenPedidoOld = em.merge(idOrdenPedidoOld);
             }
-            if (coOrdenPedidoNew != null && !coOrdenPedidoNew.equals(coOrdenPedidoOld)) {
-                coOrdenPedidoNew.getCoDetalleOrdenPedidoList().add(coDetalleOrdenPedido);
-                coOrdenPedidoNew = em.merge(coOrdenPedidoNew);
+            if (idOrdenPedidoNew != null && !idOrdenPedidoNew.equals(idOrdenPedidoOld)) {
+                idOrdenPedidoNew.getCoDetalleOrdenPedidoList().add(coDetalleOrdenPedido);
+                idOrdenPedidoNew = em.merge(idOrdenPedidoNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -105,10 +105,10 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coDetalleOrdenPedido with id " + id + " no longer exists.", enfe);
             }
-            CoOrdenPedido coOrdenPedido = coDetalleOrdenPedido.getCoOrdenPedido();
-            if (coOrdenPedido != null) {
-                coOrdenPedido.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedido);
-                coOrdenPedido = em.merge(coOrdenPedido);
+            CoOrdenPedido idOrdenPedido = coDetalleOrdenPedido.getIdOrdenPedido();
+            if (idOrdenPedido != null) {
+                idOrdenPedido.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedido);
+                idOrdenPedido = em.merge(idOrdenPedido);
             }
             em.remove(coDetalleOrdenPedido);
             em.getTransaction().commit();

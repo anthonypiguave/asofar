@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "PrTipoPrestacion.findAll", query = "SELECT p FROM PrTipoPrestacion p")
     , @NamedQuery(name = "PrTipoPrestacion.findByIdTipoPrestacion", query = "SELECT p FROM PrTipoPrestacion p WHERE p.idTipoPrestacion = :idTipoPrestacion")
-    , @NamedQuery(name = "PrTipoPrestacion.findByInventario", query = "SELECT p FROM PrTipoPrestacion p WHERE p.inventario = :inventario")
-    , @NamedQuery(name = "PrTipoPrestacion.findByGenerico", query = "SELECT p FROM PrTipoPrestacion p WHERE p.generico = :generico")
+    , @NamedQuery(name = "PrTipoPrestacion.findByNombre", query = "SELECT p FROM PrTipoPrestacion p WHERE p.nombre = :nombre")
     , @NamedQuery(name = "PrTipoPrestacion.findByUsuarioCreacion", query = "SELECT p FROM PrTipoPrestacion p WHERE p.usuarioCreacion = :usuarioCreacion")
+    , @NamedQuery(name = "PrTipoPrestacion.findByEstado", query = "SELECT p FROM PrTipoPrestacion p WHERE p.estado = :estado")
     , @NamedQuery(name = "PrTipoPrestacion.findByFechaCreacion", query = "SELECT p FROM PrTipoPrestacion p WHERE p.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "PrTipoPrestacion.findByUsuarioActualizacion", query = "SELECT p FROM PrTipoPrestacion p WHERE p.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "PrTipoPrestacion.findByFechaActualizacion", query = "SELECT p FROM PrTipoPrestacion p WHERE p.fechaActualizacion = :fechaActualizacion")})
@@ -47,12 +47,12 @@ public class PrTipoPrestacion implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_tipo_prestacion")
     private Long idTipoPrestacion;
-    @Column(name = "inventario")
-    private String inventario;
-    @Column(name = "generico")
-    private String generico;
+    @Column(name = "nombre")
+    private String nombre;
     @Column(name = "usuario_creacion")
     private String usuarioCreacion;
+    @Column(name = "estado")
+    private Character estado;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
@@ -61,7 +61,7 @@ public class PrTipoPrestacion implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "tipoPrestacion")
+    @OneToMany(mappedBy = "idTipoPrestacion")
     private List<PrPrestaciones> prPrestacionesList;
 
     public PrTipoPrestacion() {
@@ -79,20 +79,12 @@ public class PrTipoPrestacion implements Serializable {
         this.idTipoPrestacion = idTipoPrestacion;
     }
 
-    public String getInventario() {
-        return inventario;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setInventario(String inventario) {
-        this.inventario = inventario;
-    }
-
-    public String getGenerico() {
-        return generico;
-    }
-
-    public void setGenerico(String generico) {
-        this.generico = generico;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getUsuarioCreacion() {
@@ -101,6 +93,14 @@ public class PrTipoPrestacion implements Serializable {
 
     public void setUsuarioCreacion(String usuarioCreacion) {
         this.usuarioCreacion = usuarioCreacion;
+    }
+
+    public Character getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Character estado) {
+        this.estado = estado;
     }
 
     public Date getFechaCreacion() {

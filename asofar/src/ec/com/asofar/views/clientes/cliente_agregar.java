@@ -327,11 +327,11 @@ public class cliente_agregar extends javax.swing.JDialog {
                 clientes.setSegundoApellido(txt_segundo_apellido.getText());
                 clientes.setNumeroIdentificacion(txt_numero_identificacion.getText());
                 clientes.setNombreCompleto(nombreCompleto);
-                clientes.setIdTipoIdentificacion(ti);
+                clientes.setIdTipoIndentificacion(ti);
                 clientes.setFechaCreacion(fechaActual);
                 clientes.setUsuarioCreacion(usu.getNombreUsuario());
                 clientes.setRazonSocial(txt_razon_social.getText());
-                clientes.setEstado("A");
+                clientes.setEstado('A');
                 try {
                     scc.create(clientes);
                     JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
