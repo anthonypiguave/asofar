@@ -8,13 +8,14 @@ package ec.com.asofar.dao;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ec.com.asofar.dto.CoOrdenPedido;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -36,7 +37,16 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            CoOrdenPedido coOrdenPedido = coDetalleOrdenPedido.getCoOrdenPedido();
+            if (coOrdenPedido != null) {
+                coOrdenPedido = em.getReference(coOrdenPedido.getClass(), coOrdenPedido.getCoOrdenPedidoPK());
+                coDetalleOrdenPedido.setCoOrdenPedido(coOrdenPedido);
+            }
             em.persist(coDetalleOrdenPedido);
+            if (coOrdenPedido != null) {
+                coOrdenPedido.getCoDetalleOrdenPedidoList().add(coDetalleOrdenPedido);
+                coOrdenPedido = em.merge(coOrdenPedido);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,7 +60,22 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            CoDetalleOrdenPedido persistentCoDetalleOrdenPedido = em.find(CoDetalleOrdenPedido.class, coDetalleOrdenPedido.getIdDetalleOrdenPedido());
+            CoOrdenPedido coOrdenPedidoOld = persistentCoDetalleOrdenPedido.getCoOrdenPedido();
+            CoOrdenPedido coOrdenPedidoNew = coDetalleOrdenPedido.getCoOrdenPedido();
+            if (coOrdenPedidoNew != null) {
+                coOrdenPedidoNew = em.getReference(coOrdenPedidoNew.getClass(), coOrdenPedidoNew.getCoOrdenPedidoPK());
+                coDetalleOrdenPedido.setCoOrdenPedido(coOrdenPedidoNew);
+            }
             coDetalleOrdenPedido = em.merge(coDetalleOrdenPedido);
+            if (coOrdenPedidoOld != null && !coOrdenPedidoOld.equals(coOrdenPedidoNew)) {
+                coOrdenPedidoOld.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedido);
+                coOrdenPedidoOld = em.merge(coOrdenPedidoOld);
+            }
+            if (coOrdenPedidoNew != null && !coOrdenPedidoNew.equals(coOrdenPedidoOld)) {
+                coOrdenPedidoNew.getCoDetalleOrdenPedidoList().add(coDetalleOrdenPedido);
+                coOrdenPedidoNew = em.merge(coOrdenPedidoNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -79,6 +104,11 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
                 coDetalleOrdenPedido.getIdDetalleOrdenPedido();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coDetalleOrdenPedido with id " + id + " no longer exists.", enfe);
+            }
+            CoOrdenPedido coOrdenPedido = coDetalleOrdenPedido.getCoOrdenPedido();
+            if (coOrdenPedido != null) {
+                coOrdenPedido.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedido);
+                coOrdenPedido = em.merge(coOrdenPedido);
             }
             em.remove(coDetalleOrdenPedido);
             em.getTransaction().commit();
