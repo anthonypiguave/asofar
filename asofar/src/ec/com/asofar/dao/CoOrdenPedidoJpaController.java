@@ -7,19 +7,16 @@ package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
+import ec.com.asofar.dto.CoOrdenPedido;
+import ec.com.asofar.dto.CoOrdenPedidoPK;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.CoDetalleOrdenPedido;
-import ec.com.asofar.dto.CoOrdenPedido;
-import ec.com.asofar.dto.CoOrdenPedidoPK;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -40,40 +37,11 @@ public class CoOrdenPedidoJpaController implements Serializable {
         if (coOrdenPedido.getCoOrdenPedidoPK() == null) {
             coOrdenPedido.setCoOrdenPedidoPK(new CoOrdenPedidoPK());
         }
-        if (coOrdenPedido.getCoDetalleOrdenPedidoList() == null) {
-            coOrdenPedido.setCoDetalleOrdenPedidoList(new ArrayList<CoDetalleOrdenPedido>());
-        }
-        coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            SeSucursal seSucursal = coOrdenPedido.getSeSucursal();
-            if (seSucursal != null) {
-                seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
-                coOrdenPedido.setSeSucursal(seSucursal);
-            }
-            List<CoDetalleOrdenPedido> attachedCoDetalleOrdenPedidoList = new ArrayList<CoDetalleOrdenPedido>();
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach : coOrdenPedido.getCoDetalleOrdenPedidoList()) {
-                coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenPedido());
-                attachedCoDetalleOrdenPedidoList.add(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach);
-            }
-            coOrdenPedido.setCoDetalleOrdenPedidoList(attachedCoDetalleOrdenPedidoList);
             em.persist(coOrdenPedido);
-            if (seSucursal != null) {
-                seSucursal.getCoOrdenPedidoList().add(coOrdenPedido);
-                seSucursal = em.merge(seSucursal);
-            }
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListCoDetalleOrdenPedido : coOrdenPedido.getCoDetalleOrdenPedidoList()) {
-                CoOrdenPedido oldIdOrdenPedidoOfCoDetalleOrdenPedidoListCoDetalleOrdenPedido = coDetalleOrdenPedidoListCoDetalleOrdenPedido.getIdOrdenPedido();
-                coDetalleOrdenPedidoListCoDetalleOrdenPedido.setIdOrdenPedido(coOrdenPedido);
-                coDetalleOrdenPedidoListCoDetalleOrdenPedido = em.merge(coDetalleOrdenPedidoListCoDetalleOrdenPedido);
-                if (oldIdOrdenPedidoOfCoDetalleOrdenPedidoListCoDetalleOrdenPedido != null) {
-                    oldIdOrdenPedidoOfCoDetalleOrdenPedidoListCoDetalleOrdenPedido.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedidoListCoDetalleOrdenPedido);
-                    oldIdOrdenPedidoOfCoDetalleOrdenPedidoListCoDetalleOrdenPedido = em.merge(oldIdOrdenPedidoOfCoDetalleOrdenPedidoListCoDetalleOrdenPedido);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findCoOrdenPedido(coOrdenPedido.getCoOrdenPedidoPK()) != null) {
@@ -88,54 +56,11 @@ public class CoOrdenPedidoJpaController implements Serializable {
     }
 
     public void edit(CoOrdenPedido coOrdenPedido) throws NonexistentEntityException, Exception {
-        coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CoOrdenPedido persistentCoOrdenPedido = em.find(CoOrdenPedido.class, coOrdenPedido.getCoOrdenPedidoPK());
-            SeSucursal seSucursalOld = persistentCoOrdenPedido.getSeSucursal();
-            SeSucursal seSucursalNew = coOrdenPedido.getSeSucursal();
-            List<CoDetalleOrdenPedido> coDetalleOrdenPedidoListOld = persistentCoOrdenPedido.getCoDetalleOrdenPedidoList();
-            List<CoDetalleOrdenPedido> coDetalleOrdenPedidoListNew = coOrdenPedido.getCoDetalleOrdenPedidoList();
-            if (seSucursalNew != null) {
-                seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
-                coOrdenPedido.setSeSucursal(seSucursalNew);
-            }
-            List<CoDetalleOrdenPedido> attachedCoDetalleOrdenPedidoListNew = new ArrayList<CoDetalleOrdenPedido>();
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach : coDetalleOrdenPedidoListNew) {
-                coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenPedido());
-                attachedCoDetalleOrdenPedidoListNew.add(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach);
-            }
-            coDetalleOrdenPedidoListNew = attachedCoDetalleOrdenPedidoListNew;
-            coOrdenPedido.setCoDetalleOrdenPedidoList(coDetalleOrdenPedidoListNew);
             coOrdenPedido = em.merge(coOrdenPedido);
-            if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
-                seSucursalOld.getCoOrdenPedidoList().remove(coOrdenPedido);
-                seSucursalOld = em.merge(seSucursalOld);
-            }
-            if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
-                seSucursalNew.getCoOrdenPedidoList().add(coOrdenPedido);
-                seSucursalNew = em.merge(seSucursalNew);
-            }
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListOldCoDetalleOrdenPedido : coDetalleOrdenPedidoListOld) {
-                if (!coDetalleOrdenPedidoListNew.contains(coDetalleOrdenPedidoListOldCoDetalleOrdenPedido)) {
-                    coDetalleOrdenPedidoListOldCoDetalleOrdenPedido.setIdOrdenPedido(null);
-                    coDetalleOrdenPedidoListOldCoDetalleOrdenPedido = em.merge(coDetalleOrdenPedidoListOldCoDetalleOrdenPedido);
-                }
-            }
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListNewCoDetalleOrdenPedido : coDetalleOrdenPedidoListNew) {
-                if (!coDetalleOrdenPedidoListOld.contains(coDetalleOrdenPedidoListNewCoDetalleOrdenPedido)) {
-                    CoOrdenPedido oldIdOrdenPedidoOfCoDetalleOrdenPedidoListNewCoDetalleOrdenPedido = coDetalleOrdenPedidoListNewCoDetalleOrdenPedido.getIdOrdenPedido();
-                    coDetalleOrdenPedidoListNewCoDetalleOrdenPedido.setIdOrdenPedido(coOrdenPedido);
-                    coDetalleOrdenPedidoListNewCoDetalleOrdenPedido = em.merge(coDetalleOrdenPedidoListNewCoDetalleOrdenPedido);
-                    if (oldIdOrdenPedidoOfCoDetalleOrdenPedidoListNewCoDetalleOrdenPedido != null && !oldIdOrdenPedidoOfCoDetalleOrdenPedidoListNewCoDetalleOrdenPedido.equals(coOrdenPedido)) {
-                        oldIdOrdenPedidoOfCoDetalleOrdenPedidoListNewCoDetalleOrdenPedido.getCoDetalleOrdenPedidoList().remove(coDetalleOrdenPedidoListNewCoDetalleOrdenPedido);
-                        oldIdOrdenPedidoOfCoDetalleOrdenPedidoListNewCoDetalleOrdenPedido = em.merge(oldIdOrdenPedidoOfCoDetalleOrdenPedidoListNewCoDetalleOrdenPedido);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -164,16 +89,6 @@ public class CoOrdenPedidoJpaController implements Serializable {
                 coOrdenPedido.getCoOrdenPedidoPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coOrdenPedido with id " + id + " no longer exists.", enfe);
-            }
-            SeSucursal seSucursal = coOrdenPedido.getSeSucursal();
-            if (seSucursal != null) {
-                seSucursal.getCoOrdenPedidoList().remove(coOrdenPedido);
-                seSucursal = em.merge(seSucursal);
-            }
-            List<CoDetalleOrdenPedido> coDetalleOrdenPedidoList = coOrdenPedido.getCoDetalleOrdenPedidoList();
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListCoDetalleOrdenPedido : coDetalleOrdenPedidoList) {
-                coDetalleOrdenPedidoListCoDetalleOrdenPedido.setIdOrdenPedido(null);
-                coDetalleOrdenPedidoListCoDetalleOrdenPedido = em.merge(coDetalleOrdenPedidoListCoDetalleOrdenPedido);
             }
             em.remove(coOrdenPedido);
             em.getTransaction().commit();

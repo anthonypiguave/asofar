@@ -8,21 +8,15 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -71,13 +65,6 @@ public class CoOrdenPedido implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private SeSucursal seSucursal;
-    @OneToMany(mappedBy = "idOrdenPedido")
-    private List<CoDetalleOrdenPedido> coDetalleOrdenPedidoList;
 
     public CoOrdenPedido() {
     }
@@ -168,23 +155,6 @@ public class CoOrdenPedido implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    public SeSucursal getSeSucursal() {
-        return seSucursal;
-    }
-
-    public void setSeSucursal(SeSucursal seSucursal) {
-        this.seSucursal = seSucursal;
-    }
-
-    @XmlTransient
-    public List<CoDetalleOrdenPedido> getCoDetalleOrdenPedidoList() {
-        return coDetalleOrdenPedidoList;
-    }
-
-    public void setCoDetalleOrdenPedidoList(List<CoDetalleOrdenPedido> coDetalleOrdenPedidoList) {
-        this.coDetalleOrdenPedidoList = coDetalleOrdenPedidoList;
     }
 
     @Override
