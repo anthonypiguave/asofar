@@ -109,8 +109,8 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             }
         });
 
-        btnbuscarP.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnbuscarP.setText("Buscar");
+        btnbuscarP.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnbuscarP.setText("BUSCAR");
         btnbuscarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbuscarPActionPerformed(evt);
