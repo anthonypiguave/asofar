@@ -490,7 +490,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 cabOrden.setEstado("A");
                 cabOrden.setFechaEmision(d);
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
-                cabOrden.getCoOrdenPedidoPK().setIdSucursal(seSucursal.getSeSucursalPK().getIdSucursal());
+                cabOrden.setSeSucursal(seSucursal);
                 cabOrden.setFechaCreacion(d);
 
                 cabOrden.setFechaActualizacion(d);
