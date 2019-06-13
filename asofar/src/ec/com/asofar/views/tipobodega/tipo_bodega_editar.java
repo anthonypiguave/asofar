@@ -95,6 +95,11 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
                 txtnom_bodegaFocusLost(evt);
             }
         });
+        txtnom_bodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnom_bodegaActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 0));
@@ -231,6 +236,10 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
+
+    private void txtnom_bodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnom_bodegaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnom_bodegaActionPerformed
 
     /**
      * @param args the command line arguments
