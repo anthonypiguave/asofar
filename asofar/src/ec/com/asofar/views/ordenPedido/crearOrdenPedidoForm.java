@@ -11,6 +11,7 @@ import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
@@ -36,6 +37,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -57,6 +61,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoOrdenPedido cOrden;
+    OrdenPedidoDaoExt idCabecera = new OrdenPedidoDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoOrdenPedido> listcab;
@@ -483,7 +488,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             } else {
                 CoProveedores coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
                 InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
-                
+
                 cabOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
@@ -495,7 +500,14 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
                 cabOrden.setFechaActualizacion(d);
                 try {
+
                     cabOrdencontroller.create(cabOrden);
+
+//                  idCabecera.guardarPedido(cabOrden);
+                   
+                   
+
+//                    System.out.println("  id return " + id);
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                     setVisible(false);
 
