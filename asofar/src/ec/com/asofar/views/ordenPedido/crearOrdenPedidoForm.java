@@ -509,12 +509,24 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                     long id = idCabecera.guardarPedido(cabOrden);
                     System.out.println(" IDcabedcera " + id);
 
+                    for (int i = 0; i < listadet.size(); i++) {
+                    detOrden.getCoOrdenPedido().getCoOrdenPedidoPK().setIdOrdenPedido(id);
+                    detOrden.setCantidadSolicitada(listadet.get(i).getCantidadSolicitada());
+                    detOrden.setIdProducto(listadet.get(i).getIdProducto());
+                    detOrden.setLineaDetalle(listadet.get(i).getLineaDetalle());
+                    detOrden.setEstado("A");
+                    detOrden.setFechaCreacion(d);
+                    detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+                    detOrden.getCoOrdenPedido().setSeSucursal(seSucursal);
+                    detOrden.setFechaCreacion(d);
+                    detOrden.setFechaActualizacion(d);
+                    detOrdencontroller.create(detOrden);
+                    }
+
                     List<CoOrdenPedido> lista2 = cabOrdencontroller.findCoOrdenPedidoEntities();
 
                     for (int i = 0; i < lista2.size(); i++) {
-
                         System.out.println(" prueba " + lista2.get(i).getCoOrdenPedidoPK().getIdOrdenPedido());
-
                     }
 
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
