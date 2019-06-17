@@ -15,6 +15,8 @@ import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
+import ec.com.asofar.dto.CoOrdenPedidoPK;
+import ec.com.asofar.dto.CoOrdenPedido_;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
@@ -60,6 +62,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     CoOrdenPedido cOrden;
     OrdenPedidoDaoExt idCabecera = new OrdenPedidoDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
@@ -480,7 +483,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         CoOrdenPedido cabOrden = new CoOrdenPedido();
+        CoDetalleOrdenPedido detOrden = new CoDetalleOrdenPedido();
         CoOrdenPedidoJpaController cabOrdencontroller = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(cbxProveedor.getSelectedItem().toString())) {
@@ -497,17 +502,32 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
                 cabOrden.setSeSucursal(seSucursal);
                 cabOrden.setFechaCreacion(d);
-
                 cabOrden.setFechaActualizacion(d);
+
                 try {
+//
+//                    cabOrdencontroller.create(cabOrden);
+//                    CoOrdenPedido id = cabOrdencontroller.findCoOrdenPedido(cabOrden.getCoOrdenPedidoPK());
+//
+////                    CoOrdenPedido id = cabOrdencontroller.findCoOrdenPedido(cabOrden.getCoOrdenPedidoPK());
+////                    detOrden.setCoOrdenPedido(id);
+//                    System.out.println("ggggggggg " + id.getCoOrdenPedidoPK());
+////                    detOrden.setDescripcion("descripcion");
+                    CoOrdenPedido id = idCabecera.guardarPedido(cabOrden);
+//                    CoOrdenPedido coOrdenPedido  = cabOrden.getCoOrdenPedidoPK();
+                     System.out.println("ggggggggg " + id.getCoOrdenPedidoPK().getIdOrdenPedido());
+//                    CoOrdenPedido coOrdenPedido = detOrden.getCoOrdenPedido();
+//                     = detOrdencontroller.getReference(coOrdenPedido.getClass(), coOrdenPedido.getCoOrdenPedidoPK());
+//                            detOrden.setCoOrdenPedido(cOrden);
+//                    detOrdencontroller.create(detOrden);
+                    List<CoOrdenPedido> lista2 = cabOrdencontroller.findCoOrdenPedidoEntities();
 
-                    cabOrdencontroller.create(cabOrden);
+                    for (int i = 0; i < lista2.size(); i++) {
 
-//                  idCabecera.guardarPedido(cabOrden);
-                   
-                   
+                        System.out.println(" prueba " + lista2.get(i).getCoOrdenPedidoPK().getIdOrdenPedido());
 
-//                    System.out.println("  id return " + id);
+                    }
+
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                     setVisible(false);
 

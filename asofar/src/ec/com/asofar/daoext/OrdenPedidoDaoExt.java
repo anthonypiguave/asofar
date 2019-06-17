@@ -7,6 +7,8 @@ package ec.com.asofar.daoext;
 
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dto.CoOrdenPedido;
+import ec.com.asofar.dto.CoOrdenPedidoPK;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -22,14 +24,25 @@ public class OrdenPedidoDaoExt extends CoOrdenPedidoJpaController {
 
     public CoOrdenPedido guardarPedido(CoOrdenPedido objOrdenPedido) throws Exception {
         EntityManager em = null;
-        CoOrdenPedido co = new CoOrdenPedido();
+
+        objOrdenPedido.setCoOrdenPedidoPK(new CoOrdenPedidoPK());
+        objOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        objOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
+
+        
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+
             em.persist(objOrdenPedido);
-            co = em.merge(objOrdenPedido);
-//        objOrdenPedido.getCoOrdenPedidoPK().getIdOrdenPedido();
             em.getTransaction().commit();
+
+//            em.flush();
+//            em.refresh(objOrdenPedido);
+            
+//            CoOrdenPedido id = findCoOrdenPedido(objOrdenPedido.getCoOrdenPedidoPK());
+            
+//            System.out.println(" preuba 2 " + id.getCoOrdenPedidoPK().getIdOrdenPedido());
         } catch (Exception e) {
             System.out.println("creates: " + e.getMessage());
         } finally {
@@ -37,7 +50,7 @@ public class OrdenPedidoDaoExt extends CoOrdenPedidoJpaController {
                 em.close();
             }
         }
-        return co;
+        return objOrdenPedido;
     }
 
 }
