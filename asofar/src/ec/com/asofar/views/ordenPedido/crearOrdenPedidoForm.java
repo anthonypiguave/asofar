@@ -505,21 +505,10 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 cabOrden.setFechaActualizacion(d);
 
                 try {
-//
-//                    cabOrdencontroller.create(cabOrden);
-//                    CoOrdenPedido id = cabOrdencontroller.findCoOrdenPedido(cabOrden.getCoOrdenPedidoPK());
-//
-////                    CoOrdenPedido id = cabOrdencontroller.findCoOrdenPedido(cabOrden.getCoOrdenPedidoPK());
-////                    detOrden.setCoOrdenPedido(id);
-//                    System.out.println("ggggggggg " + id.getCoOrdenPedidoPK());
-////                    detOrden.setDescripcion("descripcion");
-                    CoOrdenPedido id = idCabecera.guardarPedido(cabOrden);
-//                    CoOrdenPedido coOrdenPedido  = cabOrden.getCoOrdenPedidoPK();
-                     System.out.println("ggggggggg " + id.getCoOrdenPedidoPK().getIdOrdenPedido());
-//                    CoOrdenPedido coOrdenPedido = detOrden.getCoOrdenPedido();
-//                     = detOrdencontroller.getReference(coOrdenPedido.getClass(), coOrdenPedido.getCoOrdenPedidoPK());
-//                            detOrden.setCoOrdenPedido(cOrden);
-//                    detOrdencontroller.create(detOrden);
+
+                    long id = idCabecera.guardarPedido(cabOrden);
+                    System.out.println(" IDcabedcera " + id);
+
                     List<CoOrdenPedido> lista2 = cabOrdencontroller.findCoOrdenPedidoEntities();
 
                     for (int i = 0; i < lista2.size(); i++) {

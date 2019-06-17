@@ -11,6 +11,8 @@ import ec.com.asofar.dto.CoOrdenPedidoPK;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.FlushModeType;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,35 +24,42 @@ public class OrdenPedidoDaoExt extends CoOrdenPedidoJpaController {
         super(emf);
     }
 
-    public CoOrdenPedido guardarPedido(CoOrdenPedido objOrdenPedido) throws Exception {
-        EntityManager em = null;
+    public long guardarPedido(CoOrdenPedido objOrdenPedido) throws Exception {
+        EntityManager em = getEntityManager();
+        em.setFlushMode(FlushModeType.COMMIT);
 
         objOrdenPedido.setCoOrdenPedidoPK(new CoOrdenPedidoPK());
         objOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         objOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
 
-        
+      long id = 0 ;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-
             em.persist(objOrdenPedido);
+            em.flush();
+            id = showId(em);
             em.getTransaction().commit();
 
-//            em.flush();
-//            em.refresh(objOrdenPedido);
-            
-//            CoOrdenPedido id = findCoOrdenPedido(objOrdenPedido.getCoOrdenPedidoPK());
-            
-//            System.out.println(" preuba 2 " + id.getCoOrdenPedidoPK().getIdOrdenPedido());
         } catch (Exception e) {
             System.out.println("creates: " + e.getMessage());
         } finally {
+             
             if (em != null) {
                 em.close();
             }
         }
-        return objOrdenPedido;
+        return id;
+    }
+    
+    
+     private long showId(EntityManager em) {
+        String nativeQuery = "SELECT max(id_orden_pedido) FROM co_orden_pedido;";
+        Query query = em.createNativeQuery(nativeQuery);
+        long id = ((Number)query.getSingleResult()).longValue();
+        System.out.println("prueba numero de orden "+ id);
+        return id;
+        
     }
 
 }
