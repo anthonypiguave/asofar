@@ -506,11 +506,11 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
                 try {
 
-                    long id = idCabecera.guardarPedido(cabOrden);
-                    System.out.println(" IDcabedcera " + id);
+                    CoOrdenPedido pk = idCabecera.guardarPedido(cabOrden);
+                    System.out.println(" IDcabedcera " + pk);
 
                     for (int i = 0; i < listadet.size(); i++) {
-                    detOrden.getCoOrdenPedido().getCoOrdenPedidoPK().setIdOrdenPedido(id);
+                    detOrden.setCoOrdenPedido(pk);
                     detOrden.setCantidadSolicitada(listadet.get(i).getCantidadSolicitada());
                     detOrden.setIdProducto(listadet.get(i).getIdProducto());
                     detOrden.setLineaDetalle(listadet.get(i).getLineaDetalle());

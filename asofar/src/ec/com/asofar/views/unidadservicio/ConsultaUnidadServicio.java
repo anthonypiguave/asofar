@@ -12,10 +12,13 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import ec.com.asofar.views.clientes.cliente_editar;
 import ec.com.asofar.views.persona.IngresarPersonas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +30,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
     List<VeUnidadServicio> unidadservicio;
     String valor = "";
     VeUnidadServicioJpaController usc = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
+    VeUnidadServicio Unidaddeservicio = new VeUnidadServicio();
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
@@ -64,6 +68,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtbusqueda = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -73,6 +78,18 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tba_unidad_servicio = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        JbAgregar1 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -99,7 +116,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
 
         JbAgregar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         JbAgregar.setForeground(new java.awt.Color(0, 153, 0));
-        JbAgregar.setText("AGREGAR");
+        JbAgregar.setText("ACTUALIZAR");
         JbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbAgregarActionPerformed(evt);
@@ -129,6 +146,11 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tba_unidad_servicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tba_unidad_servicioMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tba_unidad_servicio);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -159,27 +181,41 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
             }
         });
 
+        JbAgregar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        JbAgregar1.setForeground(new java.awt.Color(0, 153, 0));
+        JbAgregar1.setText("AGREGAR");
+        JbAgregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbAgregar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 34, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(118, 118, 118))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(JbAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,10 +227,12 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
                     .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JbAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -211,12 +249,36 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public VeUnidadServicio devuelveObjeto(Long id, List<VeUnidadServicio> listabod) {
+        VeUnidadServicio doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getIdUnidadServicio(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
     private void JbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbAgregarActionPerformed
-        Ingresarservicio is = new Ingresarservicio(new javax.swing.JFrame(), true, usu, emp, suc);
-        is.setVisible(true);
-        unidadservicio = usc.findVeUnidadServicioEntities();
-        Tablas.TablaUnidadServicio(unidadservicio, tba_unidad_servicio);
+        int id = 0;
+        if (tba_unidad_servicio.getSelectedRow() >= 0) {
+            id = tba_unidad_servicio.getSelectedRow();
+            Unidaddeservicio = devuelveObjeto(Long.valueOf(tba_unidad_servicio.getValueAt(id, 0).toString()), unidadservicio);
+
+            if (Unidaddeservicio != null) {
+                ActualizarUnidaddeservicio is = new ActualizarUnidaddeservicio(new javax.swing.JFrame(), true,Unidaddeservicio, usu, emp, suc);
+                is.setVisible(true);
+                unidadservicio = usc.findVeUnidadServicioEntities();
+                Tablas.TablaUnidadServicio(unidadservicio, tba_unidad_servicio);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE ESTADO PARA EDITAR");
+        }
+
+//        ActualizarUnidaddeservicio is = new ActualizarUnidaddeservicio(new javax.swing.JFrame(), true, usu, emp, suc);
+//        is.setVisible(true);
+//        unidadservicio = usc.findVeUnidadServicioEntities();
+//        Tablas.TablaUnidadServicio(unidadservicio, tba_unidad_servicio);
     }//GEN-LAST:event_JbAgregarActionPerformed
 
     private void txtbusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusquedaActionPerformed
@@ -249,6 +311,14 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabel3MousePressed
+
+    private void JbAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbAgregar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JbAgregar1ActionPerformed
+
+    private void tba_unidad_servicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_unidad_servicioMousePressed
+
+    }//GEN-LAST:event_tba_unidad_servicioMousePressed
 
     /**
      * @param args the command line arguments
@@ -295,11 +365,13 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JbAgregar;
+    private javax.swing.JButton JbAgregar1;
     private javax.swing.JButton Jbcancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tba_unidad_servicio;
     private javax.swing.JTextField txtbusqueda;
