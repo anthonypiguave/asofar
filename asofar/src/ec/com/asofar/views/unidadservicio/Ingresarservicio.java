@@ -12,6 +12,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -191,8 +192,8 @@ public class Ingresarservicio extends javax.swing.JDialog {
         unidadservicio.setNombreUnidadServicio(txtnservicios.getText());
         unidadservicio.setEstado(jComboBox1.getSelectedItem().toString());
         unidadservicio.setFechaCreacion(fechaActual);
-//        unidadservicio.setIdEmpresa(emp.getIdEmpresa());
-//        unidadservicio.setUsuarioCreacion(usu.getNombreUsuario());
+        unidadservicio.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
+        unidadservicio.setUsuarioCreacion(usu.getNombreUsuario());
         try {
             uc.create(unidadservicio);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
