@@ -47,29 +47,29 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="guardar" min="-2" pref="110" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="guardar" min="-2" pref="105" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="105" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="110" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel2" max="32767" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" max="-2" attributes="0"/>
+                      <Component id="jLabel4" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="0" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="grupo" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="subgrupo" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="articulo" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="estado" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="grupo" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="subgrupo" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="articulo" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="estado" min="-2" pref="170" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -144,7 +144,7 @@
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="INGRESAR ARTICULO"/>
+            <Property name="text" type="java.lang.String" value="NUEVA ARTICULO"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
