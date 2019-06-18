@@ -24,7 +24,7 @@ public class OrdenPedidoDaoExt extends CoOrdenPedidoJpaController {
         super(emf);
     }
 
-    public long guardarPedido(CoOrdenPedido objOrdenPedido) throws Exception {
+    public CoOrdenPedido guardarPedido(CoOrdenPedido objOrdenPedido) throws Exception {
         EntityManager em = getEntityManager();
         em.setFlushMode(FlushModeType.COMMIT);
 
@@ -40,6 +40,9 @@ public class OrdenPedidoDaoExt extends CoOrdenPedidoJpaController {
             em.flush();
             id = showId(em);
             em.getTransaction().commit();
+            
+            objOrdenPedido.getCoOrdenPedidoPK().setIdOrdenPedido(id);
+            
 
         } catch (Exception e) {
             System.out.println("creates: " + e.getMessage());
@@ -49,7 +52,7 @@ public class OrdenPedidoDaoExt extends CoOrdenPedidoJpaController {
                 em.close();
             }
         }
-        return id;
+        return objOrdenPedido;
     }
     
     
