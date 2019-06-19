@@ -1531,7 +1531,7 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacliente.size(); i++) {
-            if (listacliente.get(i).getEstado().equals("A")) {
+            if (listacliente.get(i).getEstado().equals('A')) {
                 filas[0] = String.valueOf(listacliente.get(i).getIdClientes());
                 filas[1] = listacliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion();
                 filas[2] = listacliente.get(i).getNumeroIdentificacion();
@@ -1635,7 +1635,7 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacliente.size(); i++) {
-            if (listacliente.get(i).getEstado().equals("I")) {
+            if (listacliente.get(i).getEstado().equals('I')) {
                 filas[0] = String.valueOf(listacliente.get(i).getIdClientes());
                 filas[1] = listacliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion();
                 filas[2] = listacliente.get(i).getNumeroIdentificacion();
