@@ -578,6 +578,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_tba_localidadMouseClicked
 
     private void btn_ingresar_localidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_localidadActionPerformed
+        
         int id = 0;
         if (tba_clientes.getSelectedRow() >= 0) {
             id = tba_clientes.getSelectedRow();

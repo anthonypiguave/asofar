@@ -477,7 +477,7 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
                 MostrarClientes();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE PARA ELIMINAR");
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN CLIENTE PARA ABILITAR");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
