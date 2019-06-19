@@ -39,6 +39,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.util.converter.BigIntegerStringConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -78,7 +79,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
 
-        txtCod.setText(String.format("%06d", ordenExt.obtenerNumeroOrden()));
+//        txtCod.setText(String.format("%06d", ordenExt.obtenerNumeroOrden()));
         CargarProveedor();
         CargarDocumento();
 
@@ -195,11 +196,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         txtFecha.setEditable(false);
         txtFecha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel8.setText("FECHA EMISION:");
@@ -209,11 +205,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
         cbx_documento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbx_documento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-        cbx_documento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbx_documentoActionPerformed(evt);
-            }
-        });
 
         jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel12.setText("CODIGO DE ORDEN:");
@@ -347,6 +338,14 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 jTable1MousePressed(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTable1KeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -406,10 +405,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
-    private void cbx_documentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_documentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbx_documentoActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
 
@@ -421,7 +416,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         ConsultaProducto cproducto = new ConsultaProducto(new javax.swing.JFrame(), true);
         cproducto.setVisible(true);
 
@@ -432,17 +429,19 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
             CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
 
-//            detalle.setLineaDetalle(BigInteger.valueOf(15));
             detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
             detalle.setDescripcion(objetopro.getNombreProducto());
-            detalle.setCantidadSolicitada(BigInteger.valueOf(0));
-            listadet.add(detalle);
 
+            detalle.setCantidadSolicitada(BigInteger.valueOf(0));
+
+            listadet.add(detalle);
             for (int i = 0; i < listadet.size(); i++) {
-                System.out.println("listadetalle " + listadet.get(i).getIdProducto());
+
                 contFilas = i + 1;
-                System.out.println("filas " + contFilas);
+                System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
+
                 detalle.setLineaDetalle(BigInteger.valueOf(contFilas));
+
             }
 
             Tablas.llenarDetalledeOrden(jTable1, listadet);
@@ -510,17 +509,17 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                     System.out.println(" IDcabedcera " + pk);
 
                     for (int i = 0; i < listadet.size(); i++) {
-                    detOrden.setCoOrdenPedido(pk);
-                    detOrden.setCantidadSolicitada(listadet.get(i).getCantidadSolicitada());
-                    detOrden.setIdProducto(listadet.get(i).getIdProducto());
-                    detOrden.setLineaDetalle(listadet.get(i).getLineaDetalle());
-                    detOrden.setEstado("A");
-                    detOrden.setFechaCreacion(d);
-                    detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
-                    detOrden.getCoOrdenPedido().setSeSucursal(seSucursal);
-                    detOrden.setFechaCreacion(d);
-                    detOrden.setFechaActualizacion(d);
-                    detOrdencontroller.create(detOrden);
+                        detOrden.setCoOrdenPedido(pk);
+                        detOrden.setCantidadSolicitada(listadet.get(i).getCantidadSolicitada());
+                        detOrden.setIdProducto(listadet.get(i).getIdProducto());
+                        detOrden.setLineaDetalle(listadet.get(i).getLineaDetalle());
+                        detOrden.setEstado("A");
+                        detOrden.setFechaCreacion(d);
+                        detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+                        detOrden.getCoOrdenPedido().setSeSucursal(seSucursal);
+                        detOrden.setFechaCreacion(d);
+                        detOrden.setFechaActualizacion(d);
+                        detOrdencontroller.create(detOrden);
                     }
 
                     List<CoOrdenPedido> lista2 = cabOrdencontroller.findCoOrdenPedidoEntities();
@@ -541,9 +540,30 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaActionPerformed
+    private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
+        char car = evt.getKeyChar();
+        if (car < '0' || car > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTable1KeyTyped
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        try {
+
+            int i = jTable1.getSelectedRow();
+
+            String valor = (String) jTable1.getValueAt(i, 3);
+
+            System.out.println(" fila de tabla cantidad : " + valor);
+
+            BigInteger cantidad = new BigInteger(valor);
+
+            listadet.get(i).setCantidadSolicitada(cantidad);
+            
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jTable1KeyReleased
 
     public String validarProductos(String datos) {
         String obj1 = "no";

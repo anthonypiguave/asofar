@@ -224,7 +224,7 @@ public class Tablas {
                 filas[0] = lista.get(i).getLineaDetalle().toString();
                 filas[1] = lista.get(i).getIdProducto().toString();
                 filas[2] = lista.get(i).getDescripcion();
-                filas[3] = lista.get(i).getCantidadSolicitada().toString();
+                filas[3] = lista.get(i).getCantidadSolicitada();
 
 //                String ac = (String) vo.getEstado();
                 filas[4] = new JButton("ELIMINAR");
