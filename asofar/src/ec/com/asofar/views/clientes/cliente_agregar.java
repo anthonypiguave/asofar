@@ -312,7 +312,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
         SeTipoIdentificacion ti = new SeTipoIdentificacion();
         ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
-        
+
         String nombreCompleto = txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
                 + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
         try {
@@ -335,6 +335,8 @@ public class cliente_agregar extends javax.swing.JDialog {
                     scc.create(clientes);
                     JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
                     setVisible(false);
+                    /*sssd*/ consulta_cliente cagg = new consulta_cliente(new javax.swing.JFrame(), true, usu, emp, suc);
+                    cagg.setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
                 }

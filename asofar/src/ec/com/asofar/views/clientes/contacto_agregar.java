@@ -255,6 +255,8 @@ public class contacto_agregar extends javax.swing.JDialog {
             Ccc.create(ContactoCliente);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
+            /*sssd*/ consulta_cliente cagg = new consulta_cliente(new javax.swing.JFrame(), true, usu, emp, suc);
+            cagg.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -51,12 +51,12 @@ public class Localidad_agregar extends javax.swing.JDialog {
     SeLocalidadCliente localidadclientes = new SeLocalidadCliente();
     SeLocalidadClienteJpaController Lc = new SeLocalidadClienteJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeLocalidadCliente LocalidadCliente;
-    
+
     public Localidad_agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     public Localidad_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, SeClientes cl, SeLocalidadCliente lc) {
         super(parent, modal);
         setUndecorated(true);
@@ -74,7 +74,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
         llenarComboCiudad(Ciudad);
         llenarComboProvincia(Provincia);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -264,7 +264,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
             }
         }
     }
-    
+
     public void llenarComboProvincia(List<SeProvincia> Provincia) {
         for (int i = 0; i < Provincia.size(); i++) {
             if (!"I".equals(Provincia.get(i).getNombre())) {
@@ -275,7 +275,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
             }
         }
     }
-    
+
     public void llenarComboCiudad(List<SeCiudad> Ciudad) {
         for (int i = 0; i < Ciudad.size(); i++) {
             if (!"I".equals(Ciudad.get(i).getNombre())) {
@@ -307,7 +307,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
         System.out.println("pais " + pais);
         SeProvincia provincia = new SeProvincia();
         provincia = ObtenerDTO.ObtenerSeProvincia(cbx_provincia.getSelectedItem().toString());
-        System.out.println("provincia "+provincia);
+        System.out.println("provincia " + provincia);
         SeCiudad ciudad = new SeCiudad();
         ciudad = ObtenerDTO.ObtenerSeCiudad(cbx_ciudad.getSelectedItem().toString());
         localidadclientes.setDirreccionCliente(txt_direccion_cliente.getText());
@@ -323,6 +323,9 @@ public class Localidad_agregar extends javax.swing.JDialog {
             Lc.create(localidadclientes);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
+            /*sssd*/ consulta_cliente cagg = new consulta_cliente(new javax.swing.JFrame(), true, usu, emp, suc);
+            cagg.setVisible(true);
+
         } catch (Exception ex) {
             Logger.getLogger(Localidad_agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
