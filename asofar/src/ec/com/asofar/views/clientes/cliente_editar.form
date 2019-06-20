@@ -48,30 +48,31 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="cbx_estado" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="txt_razon_social" min="-2" pref="170" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_segundo_nombre" min="-2" pref="200" max="-2" attributes="0"/>
-                              <Component id="txt_primer_nombre" min="-2" pref="200" max="-2" attributes="0"/>
-                              <Component id="txt_primer_apellido" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                              <Component id="txt_segundo_apellido" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="txt_segundo_nombre" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="txt_primer_nombre" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="txt_primer_apellido" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="txt_segundo_apellido" min="-2" pref="170" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -81,28 +82,24 @@
                                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="btn_guardar" min="-2" pref="105" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_guardar" min="-2" pref="110" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" pref="105" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_razon_social" max="32767" attributes="0"/>
-                                  <Component id="cbxtipo_identificacion" pref="126" max="32767" attributes="0"/>
-                                  <Component id="txt_numero_identificacion" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="cbx_estado" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="cbxtipo_identificacion" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="txt_numero_identificacion" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="jButton1" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,39 +114,39 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="txt_segundo_nombre" min="-2" pref="27" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txt_primer_apellido" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="txt_segundo_apellido" min="-2" pref="27" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="txt_numero_identificacion" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="cbxtipo_identificacion" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="txt_razon_social" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="cbx_estado" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btn_guardar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -197,7 +194,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nombres : "/>
+            <Property name="text" type="java.lang.String" value="NOMBRES:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_primer_nombre">
@@ -215,7 +212,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Apellidos : "/>
+            <Property name="text" type="java.lang.String" value="APELLIDOS:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_segundo_nombre">
