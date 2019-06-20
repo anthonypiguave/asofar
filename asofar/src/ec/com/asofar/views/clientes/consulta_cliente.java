@@ -175,7 +175,7 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
                         .addComponent(btn_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,10 +420,10 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addGap(183, 183, 183)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(264, 264, 264)
+                .addGap(295, 295, 295)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -461,7 +461,6 @@ public class consulta_cliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     public void MostrarClientes() {
         try {
-
             Cliente = Cc.findSeClientesEntities();
             Tablas.TablaClientesActivo(Cliente, tba_clientes);
         } catch (Exception e) {
@@ -528,7 +527,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             if (Client != null) {
                 LocalidadCliente = Lc.findSeLocalidadClienteEntities();
                 Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
-
+                Tablas.VaciarTabla(tba_contacto);
 //                Tablas.TablaContactoCliente(ContactoCliente, tba_contacto, LocaliClient);
 //                tba_contacto.clearSelection();
 //                MostrarContactoVacia();
@@ -545,7 +544,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_ingresar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_clienteActionPerformed
-
+        setVisible(false);
         cliente_agregar cagg = new cliente_agregar(new javax.swing.JFrame(), true, usu, emp, suc, tident);
         cagg.setVisible(true);
         MostrarClientes();
@@ -578,18 +577,17 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_tba_localidadMouseClicked
 
     private void btn_ingresar_localidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_localidadActionPerformed
-        
+
         int id = 0;
         if (tba_clientes.getSelectedRow() >= 0) {
             id = tba_clientes.getSelectedRow();
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
+                setVisible(false);
                 Localidad_agregar Lagg = new Localidad_agregar(new javax.swing.JFrame(), true, usu, emp, suc, Client, LocaliClient);
                 Lagg.setVisible(true);
                 MostrarLocalidad();
-//                LocalidadCliente = Lc.findSeLocalidadClienteEntities();
-//                Tablas.TablaLocalidadCliente(LocalidadCliente, tba_localidad, Client);
             }
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN REGISTO DE LA TABLA CLIENTE");
@@ -612,6 +610,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             LocaliClient = devuelveObjeto2(Long.valueOf(tba_localidad.getValueAt(id, 0).toString()), lista1);
 
             if (LocaliClient != null) {
+                setVisible(false);
                 contacto_agregar Cagg = new contacto_agregar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient);
                 Cagg.setVisible(true);
                 MostrarContacto();
@@ -697,6 +696,8 @@ public class consulta_cliente extends javax.swing.JDialog {
                             System.out.println("************");
                             Client.setEstado('I');
                             try {
+
+                                SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
                                 Cc.edit(Client);
                                 JOptionPane.showMessageDialog(null, " ELIMINADO CON EXITO");
                             } catch (Exception ex) {
