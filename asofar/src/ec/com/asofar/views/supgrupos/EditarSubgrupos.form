@@ -50,7 +50,7 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel4" alignment="0" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -61,10 +61,10 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jTextField1" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="jTextField3" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="txtNombre" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="jTextField1" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <Component id="jTextField3" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <Component id="jTextField4" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <Component id="txtNombre" min="-2" pref="170" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
