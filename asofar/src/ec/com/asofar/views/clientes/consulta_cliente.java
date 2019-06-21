@@ -649,6 +649,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int id = 0;
         if (tba_clientes.getSelectedRow() >= 0) {
+            /*hgfrt*/
             id = tba_clientes.getSelectedRow();
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
