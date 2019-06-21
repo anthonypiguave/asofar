@@ -1521,7 +1521,7 @@ public class Tablas {
     }
 
     public static void TablaClientesActivo(List<SeClientes> listacliente, JTable Tabla) {
-        int[] a = {5, 50, 120, 200};
+        int[] a = {50, 120, 200, 300};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1552,7 +1552,7 @@ public class Tablas {
     }
 
     public static void TablaLocalidadCliente(List<SeLocalidadCliente> listalocalidadcliente, JTable Tabla, SeClientes lista) {
-        int[] a = {5, 120, 120, 50, 50, 50};
+        int[] a = {50, 250, 250, 100, 100, 100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1596,7 +1596,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID", "NOMBRE", "TELEFONO", "CELULAR", "CORREO"};
+        String[] b = {"ID", "CONTACTO", "TELEFONO", "CELULAR", "CORREO"};
         String[] filas = new String[5];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
