@@ -121,6 +121,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
             }
         ));
+        tba_clientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tba_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tba_clientesMousePressed(evt);
@@ -212,6 +213,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
             }
         ));
+        tba_localidad.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tba_localidad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tba_localidadMousePressed(evt);
