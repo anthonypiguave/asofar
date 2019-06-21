@@ -331,12 +331,12 @@ public class cliente_agregar extends javax.swing.JDialog {
                 clientes.setFechaCreacion(fechaActual);
                 clientes.setUsuarioCreacion(usu.getNombreUsuario());
                 clientes.setRazonSocial(txt_razon_social.getText());
-                clientes.setEstado('A');
+//                clientes.setEstado('A');
                 try {
                     scc.create(clientes);
                     JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
                     setVisible(false);
-                    /*sssd*/ consulta_cliente cagg = new consulta_cliente(new javax.swing.JFrame(), true, usu, emp, suc);
+                    consulta_cliente cagg = new consulta_cliente(new javax.swing.JFrame(), true, usu, emp, suc);
                     cagg.setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);
