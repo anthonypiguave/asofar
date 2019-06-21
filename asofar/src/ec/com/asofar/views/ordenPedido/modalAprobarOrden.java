@@ -50,7 +50,7 @@ import javax.swing.Timer;
  *
  * @author admin1
  */
-public class crearOrdenPedidoForm extends javax.swing.JDialog {
+public class modalAprobarOrden extends javax.swing.JDialog {
 
     int x, y;
     SeUsuarios seUsuario;
@@ -72,7 +72,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
     int contFilas = 1;
 
-    public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
+    public modalAprobarOrden(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -82,14 +82,14 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         CargarProveedor();
         CargarDocumento();
 
-        Timer tiempo = new Timer(100, new crearOrdenPedidoForm.horas());
+        Timer tiempo = new Timer(100, new modalAprobarOrden.horas());
         tiempo.start();
 
     }
     
   
 
-    public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public modalAprobarOrden(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -101,7 +101,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         seEmpresa = em;
         seSucursal = su;
 
-        Timer tiempo = new Timer(100, new crearOrdenPedidoForm.horas());
+        Timer tiempo = new Timer(100, new modalAprobarOrden.horas());
         tiempo.start();
 
     }
@@ -159,7 +159,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnAprobar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -306,12 +306,12 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 102, 0));
-        jButton2.setText("GUARDAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAprobar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAprobar.setForeground(new java.awt.Color(0, 102, 0));
+        btnAprobar.setText("APROBAR");
+        btnAprobar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAprobarActionPerformed(evt);
             }
         });
 
@@ -358,7 +358,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(183, 183, 183)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(97, 97, 97)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -377,7 +377,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -480,7 +480,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTable1MousePressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprobarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         CoOrdenPedido cabOrden = new CoOrdenPedido();
         CoDetalleOrdenPedido detOrden = new CoDetalleOrdenPedido();
@@ -533,13 +533,13 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                     setVisible(false);
 
                 } catch (Exception ex) {
-                    Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(modalAprobarOrden.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
 
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAprobarActionPerformed
 
     private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
         char car = evt.getKeyChar();
@@ -601,21 +601,23 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modalAprobarOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modalAprobarOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modalAprobarOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(modalAprobarOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                crearOrdenPedidoForm dialog = new crearOrdenPedidoForm(new javax.swing.JFrame(), true);
+                modalAprobarOrden dialog = new modalAprobarOrden(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -628,10 +630,10 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAprobar;
     private javax.swing.JComboBox<String> cbxProveedor;
     private javax.swing.JComboBox<String> cbx_documento;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

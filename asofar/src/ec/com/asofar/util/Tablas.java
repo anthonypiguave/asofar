@@ -13,6 +13,7 @@ import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.CoOrdenCompras;
+import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InMotivos;
@@ -1666,23 +1667,23 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaunidad.size(); i++) {
-                filas[0] = String.valueOf(listaunidad.get(i).getIdUnidadServicio());
-                filas[1] = listaunidad.get(i).getNombreUnidadServicio();
-                filas[2] = listaunidad.get(i).getEstado();
-                model.addRow(filas);
-                Tabla.setModel(model);
-                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-            }
-        
+            filas[0] = String.valueOf(listaunidad.get(i).getIdUnidadServicio());
+            filas[1] = listaunidad.get(i).getNombreUnidadServicio();
+            filas[2] = listaunidad.get(i).getEstado();
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        }
+
     }
 
     public static void TablaPrestaciones(List<PrPrestaciones> listaprestaciones, JTable Tabla) {
-        int[] a = {40, 40, 15,15};
+        int[] a = {40, 40, 15, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1711,6 +1712,7 @@ public class Tablas {
             }
         }
     }
+
     public static void TablaContactoClienteVacia(List<SeContactosClientes> listacontactoscliente, JTable Tabla, SeLocalidadCliente lista) {
         int[] a = {5, 50, 50, 80, 80};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -1723,12 +1725,46 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacontactoscliente.size(); i++) {
-                filas[0] = "";
-                filas[1] = "";
-                filas[2] = "";
-                filas[3] = "";
-                filas[4] = "";
-                model.addRow(filas);
+            filas[0] = "";
+            filas[1] = "";
+            filas[2] = "";
+            filas[3] = "";
+            filas[4] = "";
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+
+        }
+    }
+
+    public static void listarCabOrdendePedido(List<CoOrdenPedido> lista, JTable Tabla) {
+        int[] a = {5, 5, 5, 20, 15};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"COD.", "FECHA DE EMISION", "USUARIO", "ESTADO"};
+        String[] Filas = new String[4];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals("P")) {
+                Filas[0] = "" + lista.get(i).getCoOrdenPedidoPK().getIdOrdenPedido();
+                Filas[3] = lista.get(i).getEstado();
+                Filas[1] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaEmision().getTime()));
+                Filas[2] = lista.get(i).getUsuarioCreacion();
+
+                model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
                 Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
@@ -1738,9 +1774,9 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-            
+
+            }
         }
+
     }
 }
