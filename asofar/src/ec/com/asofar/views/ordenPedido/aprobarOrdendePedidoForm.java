@@ -243,6 +243,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         } catch (Exception e) {
 
         }
+        
     }
 
     private void cargarMostrarTablaDetalle() {
