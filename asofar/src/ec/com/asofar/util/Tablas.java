@@ -1694,7 +1694,7 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaprestaciones.size(); i++) {
-            if (listaprestaciones.get(i).getEstado().equals("A")) {
+//            if (listaprestaciones.get(i).getEstado().equals('A')) {
                 filas[0] = String.valueOf(listaprestaciones.get(i).getIdPrestacion());
                 filas[1] = listaprestaciones.get(i).getNombrePrestacion();
                 filas[2] = listaprestaciones.get(i).getEstado();
@@ -1709,7 +1709,7 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-            }
+//            }
         }
     }
 
