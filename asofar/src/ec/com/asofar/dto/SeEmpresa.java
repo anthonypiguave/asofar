@@ -82,7 +82,9 @@ public class SeEmpresa implements Serializable {
     private List<SeSucursal> seSucursalList;
     @OneToMany(mappedBy = "idEmpresa")
     private List<PrGrupos> prGruposList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seEmpresa")
+    @OneToMany(mappedBy = "idEmpresa")
+    private List<VeUnidadServicio> veUnidadServicioList;
+    @OneToMany(mappedBy = "idEmpresa")
     private List<PrPrestaciones> prPrestacionesList;
     @OneToMany(mappedBy = "idEmpresa")
     private List<PrTipoMedidas> prTipoMedidasList;
@@ -216,6 +218,15 @@ public class SeEmpresa implements Serializable {
 
     public void setPrGruposList(List<PrGrupos> prGruposList) {
         this.prGruposList = prGruposList;
+    }
+
+    @XmlTransient
+    public List<VeUnidadServicio> getVeUnidadServicioList() {
+        return veUnidadServicioList;
+    }
+
+    public void setVeUnidadServicioList(List<VeUnidadServicio> veUnidadServicioList) {
+        this.veUnidadServicioList = veUnidadServicioList;
     }
 
     @XmlTransient

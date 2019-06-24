@@ -92,14 +92,6 @@ public class VeFacturaDetalle implements Serializable {
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private VeFactura veFactura;
-    @JoinColumns({
-        @JoinColumn(name = "id_prestaciones", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private PrPrestaciones prPrestaciones;
-    @JoinColumn(name = "id_unidad_servicio", referencedColumnName = "id_unidad_servicio", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private VeUnidadServicio veUnidadServicio;
 
     public VeFacturaDetalle() {
     }
@@ -235,22 +227,6 @@ public class VeFacturaDetalle implements Serializable {
 
     public void setVeFactura(VeFactura veFactura) {
         this.veFactura = veFactura;
-    }
-
-    public PrPrestaciones getPrPrestaciones() {
-        return prPrestaciones;
-    }
-
-    public void setPrPrestaciones(PrPrestaciones prPrestaciones) {
-        this.prPrestaciones = prPrestaciones;
-    }
-
-    public VeUnidadServicio getVeUnidadServicio() {
-        return veUnidadServicio;
-    }
-
-    public void setVeUnidadServicio(VeUnidadServicio veUnidadServicio) {
-        this.veUnidadServicio = veUnidadServicio;
     }
 
     @Override

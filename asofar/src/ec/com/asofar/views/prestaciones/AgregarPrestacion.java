@@ -8,7 +8,6 @@ package ec.com.asofar.views.prestaciones;
 import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrPrestaciones;
-import ec.com.asofar.dto.PrPrestacionesPK;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -242,7 +241,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         PrPrestaciones PRE = new PrPrestaciones();
 
 //        PRE = ObtenerDTO.ObtenerPrPrestaciones(cmbxIG.getSelectedItem().toString());
-        PrPrestacionesPK prestac = new PrPrestacionesPK();
+        PrPrestaciones prestac = new PrPrestaciones();
         presta.setNombrePrestacion(cmbxIG.getSelectedItem().toString());
         System.out.println("nombre prestacion " + cmbxIG.getSelectedItem().toString());
 //        System.out.println("hola"+PRE.getNombrePrestacion());

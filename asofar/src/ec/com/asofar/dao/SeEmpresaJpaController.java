@@ -18,6 +18,7 @@ import java.util.List;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.PrGrupos;
+import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
@@ -51,6 +52,9 @@ public class SeEmpresaJpaController implements Serializable {
         }
         if (seEmpresa.getPrGruposList() == null) {
             seEmpresa.setPrGruposList(new ArrayList<PrGrupos>());
+        }
+        if (seEmpresa.getVeUnidadServicioList() == null) {
+            seEmpresa.setVeUnidadServicioList(new ArrayList<VeUnidadServicio>());
         }
         if (seEmpresa.getPrPrestacionesList() == null) {
             seEmpresa.setPrPrestacionesList(new ArrayList<PrPrestaciones>());
@@ -86,9 +90,15 @@ public class SeEmpresaJpaController implements Serializable {
                 attachedPrGruposList.add(prGruposListPrGruposToAttach);
             }
             seEmpresa.setPrGruposList(attachedPrGruposList);
+            List<VeUnidadServicio> attachedVeUnidadServicioList = new ArrayList<VeUnidadServicio>();
+            for (VeUnidadServicio veUnidadServicioListVeUnidadServicioToAttach : seEmpresa.getVeUnidadServicioList()) {
+                veUnidadServicioListVeUnidadServicioToAttach = em.getReference(veUnidadServicioListVeUnidadServicioToAttach.getClass(), veUnidadServicioListVeUnidadServicioToAttach.getIdUnidadServicio());
+                attachedVeUnidadServicioList.add(veUnidadServicioListVeUnidadServicioToAttach);
+            }
+            seEmpresa.setVeUnidadServicioList(attachedVeUnidadServicioList);
             List<PrPrestaciones> attachedPrPrestacionesList = new ArrayList<PrPrestaciones>();
             for (PrPrestaciones prPrestacionesListPrPrestacionesToAttach : seEmpresa.getPrPrestacionesList()) {
-                prPrestacionesListPrPrestacionesToAttach = em.getReference(prPrestacionesListPrPrestacionesToAttach.getClass(), prPrestacionesListPrPrestacionesToAttach.getPrPrestacionesPK());
+                prPrestacionesListPrPrestacionesToAttach = em.getReference(prPrestacionesListPrPrestacionesToAttach.getClass(), prPrestacionesListPrPrestacionesToAttach.getIdPrestacion());
                 attachedPrPrestacionesList.add(prPrestacionesListPrPrestacionesToAttach);
             }
             seEmpresa.setPrPrestacionesList(attachedPrPrestacionesList);
@@ -135,13 +145,22 @@ public class SeEmpresaJpaController implements Serializable {
                     oldIdEmpresaOfPrGruposListPrGrupos = em.merge(oldIdEmpresaOfPrGruposListPrGrupos);
                 }
             }
+            for (VeUnidadServicio veUnidadServicioListVeUnidadServicio : seEmpresa.getVeUnidadServicioList()) {
+                SeEmpresa oldIdEmpresaOfVeUnidadServicioListVeUnidadServicio = veUnidadServicioListVeUnidadServicio.getIdEmpresa();
+                veUnidadServicioListVeUnidadServicio.setIdEmpresa(seEmpresa);
+                veUnidadServicioListVeUnidadServicio = em.merge(veUnidadServicioListVeUnidadServicio);
+                if (oldIdEmpresaOfVeUnidadServicioListVeUnidadServicio != null) {
+                    oldIdEmpresaOfVeUnidadServicioListVeUnidadServicio.getVeUnidadServicioList().remove(veUnidadServicioListVeUnidadServicio);
+                    oldIdEmpresaOfVeUnidadServicioListVeUnidadServicio = em.merge(oldIdEmpresaOfVeUnidadServicioListVeUnidadServicio);
+                }
+            }
             for (PrPrestaciones prPrestacionesListPrPrestaciones : seEmpresa.getPrPrestacionesList()) {
-                SeEmpresa oldSeEmpresaOfPrPrestacionesListPrPrestaciones = prPrestacionesListPrPrestaciones.getSeEmpresa();
-                prPrestacionesListPrPrestaciones.setSeEmpresa(seEmpresa);
+                SeEmpresa oldIdEmpresaOfPrPrestacionesListPrPrestaciones = prPrestacionesListPrPrestaciones.getIdEmpresa();
+                prPrestacionesListPrPrestaciones.setIdEmpresa(seEmpresa);
                 prPrestacionesListPrPrestaciones = em.merge(prPrestacionesListPrPrestaciones);
-                if (oldSeEmpresaOfPrPrestacionesListPrPrestaciones != null) {
-                    oldSeEmpresaOfPrPrestacionesListPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListPrPrestaciones);
-                    oldSeEmpresaOfPrPrestacionesListPrPrestaciones = em.merge(oldSeEmpresaOfPrPrestacionesListPrPrestaciones);
+                if (oldIdEmpresaOfPrPrestacionesListPrPrestaciones != null) {
+                    oldIdEmpresaOfPrPrestacionesListPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListPrPrestaciones);
+                    oldIdEmpresaOfPrPrestacionesListPrPrestaciones = em.merge(oldIdEmpresaOfPrPrestacionesListPrPrestaciones);
                 }
             }
             for (PrTipoMedidas prTipoMedidasListPrTipoMedidas : seEmpresa.getPrTipoMedidasList()) {
@@ -175,6 +194,8 @@ public class SeEmpresaJpaController implements Serializable {
             List<SeSucursal> seSucursalListNew = seEmpresa.getSeSucursalList();
             List<PrGrupos> prGruposListOld = persistentSeEmpresa.getPrGruposList();
             List<PrGrupos> prGruposListNew = seEmpresa.getPrGruposList();
+            List<VeUnidadServicio> veUnidadServicioListOld = persistentSeEmpresa.getVeUnidadServicioList();
+            List<VeUnidadServicio> veUnidadServicioListNew = seEmpresa.getVeUnidadServicioList();
             List<PrPrestaciones> prPrestacionesListOld = persistentSeEmpresa.getPrPrestacionesList();
             List<PrPrestaciones> prPrestacionesListNew = seEmpresa.getPrPrestacionesList();
             List<PrTipoMedidas> prTipoMedidasListOld = persistentSeEmpresa.getPrTipoMedidasList();
@@ -194,14 +215,6 @@ public class SeEmpresaJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain SeSucursal " + seSucursalListOldSeSucursal + " since its seEmpresa field is not nullable.");
-                }
-            }
-            for (PrPrestaciones prPrestacionesListOldPrPrestaciones : prPrestacionesListOld) {
-                if (!prPrestacionesListNew.contains(prPrestacionesListOldPrPrestaciones)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrPrestaciones " + prPrestacionesListOldPrPrestaciones + " since its seEmpresa field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -235,9 +248,16 @@ public class SeEmpresaJpaController implements Serializable {
             }
             prGruposListNew = attachedPrGruposListNew;
             seEmpresa.setPrGruposList(prGruposListNew);
+            List<VeUnidadServicio> attachedVeUnidadServicioListNew = new ArrayList<VeUnidadServicio>();
+            for (VeUnidadServicio veUnidadServicioListNewVeUnidadServicioToAttach : veUnidadServicioListNew) {
+                veUnidadServicioListNewVeUnidadServicioToAttach = em.getReference(veUnidadServicioListNewVeUnidadServicioToAttach.getClass(), veUnidadServicioListNewVeUnidadServicioToAttach.getIdUnidadServicio());
+                attachedVeUnidadServicioListNew.add(veUnidadServicioListNewVeUnidadServicioToAttach);
+            }
+            veUnidadServicioListNew = attachedVeUnidadServicioListNew;
+            seEmpresa.setVeUnidadServicioList(veUnidadServicioListNew);
             List<PrPrestaciones> attachedPrPrestacionesListNew = new ArrayList<PrPrestaciones>();
             for (PrPrestaciones prPrestacionesListNewPrPrestacionesToAttach : prPrestacionesListNew) {
-                prPrestacionesListNewPrPrestacionesToAttach = em.getReference(prPrestacionesListNewPrPrestacionesToAttach.getClass(), prPrestacionesListNewPrPrestacionesToAttach.getPrPrestacionesPK());
+                prPrestacionesListNewPrPrestacionesToAttach = em.getReference(prPrestacionesListNewPrPrestacionesToAttach.getClass(), prPrestacionesListNewPrPrestacionesToAttach.getIdPrestacion());
                 attachedPrPrestacionesListNew.add(prPrestacionesListNewPrPrestacionesToAttach);
             }
             prPrestacionesListNew = attachedPrPrestacionesListNew;
@@ -306,14 +326,37 @@ public class SeEmpresaJpaController implements Serializable {
                     }
                 }
             }
+            for (VeUnidadServicio veUnidadServicioListOldVeUnidadServicio : veUnidadServicioListOld) {
+                if (!veUnidadServicioListNew.contains(veUnidadServicioListOldVeUnidadServicio)) {
+                    veUnidadServicioListOldVeUnidadServicio.setIdEmpresa(null);
+                    veUnidadServicioListOldVeUnidadServicio = em.merge(veUnidadServicioListOldVeUnidadServicio);
+                }
+            }
+            for (VeUnidadServicio veUnidadServicioListNewVeUnidadServicio : veUnidadServicioListNew) {
+                if (!veUnidadServicioListOld.contains(veUnidadServicioListNewVeUnidadServicio)) {
+                    SeEmpresa oldIdEmpresaOfVeUnidadServicioListNewVeUnidadServicio = veUnidadServicioListNewVeUnidadServicio.getIdEmpresa();
+                    veUnidadServicioListNewVeUnidadServicio.setIdEmpresa(seEmpresa);
+                    veUnidadServicioListNewVeUnidadServicio = em.merge(veUnidadServicioListNewVeUnidadServicio);
+                    if (oldIdEmpresaOfVeUnidadServicioListNewVeUnidadServicio != null && !oldIdEmpresaOfVeUnidadServicioListNewVeUnidadServicio.equals(seEmpresa)) {
+                        oldIdEmpresaOfVeUnidadServicioListNewVeUnidadServicio.getVeUnidadServicioList().remove(veUnidadServicioListNewVeUnidadServicio);
+                        oldIdEmpresaOfVeUnidadServicioListNewVeUnidadServicio = em.merge(oldIdEmpresaOfVeUnidadServicioListNewVeUnidadServicio);
+                    }
+                }
+            }
+            for (PrPrestaciones prPrestacionesListOldPrPrestaciones : prPrestacionesListOld) {
+                if (!prPrestacionesListNew.contains(prPrestacionesListOldPrPrestaciones)) {
+                    prPrestacionesListOldPrPrestaciones.setIdEmpresa(null);
+                    prPrestacionesListOldPrPrestaciones = em.merge(prPrestacionesListOldPrPrestaciones);
+                }
+            }
             for (PrPrestaciones prPrestacionesListNewPrPrestaciones : prPrestacionesListNew) {
                 if (!prPrestacionesListOld.contains(prPrestacionesListNewPrPrestaciones)) {
-                    SeEmpresa oldSeEmpresaOfPrPrestacionesListNewPrPrestaciones = prPrestacionesListNewPrPrestaciones.getSeEmpresa();
-                    prPrestacionesListNewPrPrestaciones.setSeEmpresa(seEmpresa);
+                    SeEmpresa oldIdEmpresaOfPrPrestacionesListNewPrPrestaciones = prPrestacionesListNewPrPrestaciones.getIdEmpresa();
+                    prPrestacionesListNewPrPrestaciones.setIdEmpresa(seEmpresa);
                     prPrestacionesListNewPrPrestaciones = em.merge(prPrestacionesListNewPrPrestaciones);
-                    if (oldSeEmpresaOfPrPrestacionesListNewPrPrestaciones != null && !oldSeEmpresaOfPrPrestacionesListNewPrPrestaciones.equals(seEmpresa)) {
-                        oldSeEmpresaOfPrPrestacionesListNewPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListNewPrPrestaciones);
-                        oldSeEmpresaOfPrPrestacionesListNewPrPrestaciones = em.merge(oldSeEmpresaOfPrPrestacionesListNewPrPrestaciones);
+                    if (oldIdEmpresaOfPrPrestacionesListNewPrPrestaciones != null && !oldIdEmpresaOfPrPrestacionesListNewPrPrestaciones.equals(seEmpresa)) {
+                        oldIdEmpresaOfPrPrestacionesListNewPrPrestaciones.getPrPrestacionesList().remove(prPrestacionesListNewPrPrestaciones);
+                        oldIdEmpresaOfPrPrestacionesListNewPrPrestaciones = em.merge(oldIdEmpresaOfPrPrestacionesListNewPrPrestaciones);
                     }
                 }
             }
@@ -378,13 +421,6 @@ public class SeEmpresaJpaController implements Serializable {
                 }
                 illegalOrphanMessages.add("This SeEmpresa (" + seEmpresa + ") cannot be destroyed since the SeSucursal " + seSucursalListOrphanCheckSeSucursal + " in its seSucursalList field has a non-nullable seEmpresa field.");
             }
-            List<PrPrestaciones> prPrestacionesListOrphanCheck = seEmpresa.getPrPrestacionesList();
-            for (PrPrestaciones prPrestacionesListOrphanCheckPrPrestaciones : prPrestacionesListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SeEmpresa (" + seEmpresa + ") cannot be destroyed since the PrPrestaciones " + prPrestacionesListOrphanCheckPrPrestaciones + " in its prPrestacionesList field has a non-nullable seEmpresa field.");
-            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
@@ -397,6 +433,16 @@ public class SeEmpresaJpaController implements Serializable {
             for (PrGrupos prGruposListPrGrupos : prGruposList) {
                 prGruposListPrGrupos.setIdEmpresa(null);
                 prGruposListPrGrupos = em.merge(prGruposListPrGrupos);
+            }
+            List<VeUnidadServicio> veUnidadServicioList = seEmpresa.getVeUnidadServicioList();
+            for (VeUnidadServicio veUnidadServicioListVeUnidadServicio : veUnidadServicioList) {
+                veUnidadServicioListVeUnidadServicio.setIdEmpresa(null);
+                veUnidadServicioListVeUnidadServicio = em.merge(veUnidadServicioListVeUnidadServicio);
+            }
+            List<PrPrestaciones> prPrestacionesList = seEmpresa.getPrPrestacionesList();
+            for (PrPrestaciones prPrestacionesListPrPrestaciones : prPrestacionesList) {
+                prPrestacionesListPrPrestaciones.setIdEmpresa(null);
+                prPrestacionesListPrPrestaciones = em.merge(prPrestacionesListPrPrestaciones);
             }
             List<PrTipoMedidas> prTipoMedidasList = seEmpresa.getPrTipoMedidasList();
             for (PrTipoMedidas prTipoMedidasListPrTipoMedidas : prTipoMedidasList) {

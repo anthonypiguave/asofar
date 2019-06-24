@@ -69,12 +69,14 @@ public class PrTarifario implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTarifario")
+    private List<CoDetallesTarifa> coDetallesTarifaList;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTarifario")
+    @OneToMany(mappedBy = "prTarifario")
     private List<PrDetalleTarifario> prDetalleTarifarioList;
 
     public PrTarifario() {
@@ -158,6 +160,15 @@ public class PrTarifario implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    @XmlTransient
+    public List<CoDetallesTarifa> getCoDetallesTarifaList() {
+        return coDetallesTarifaList;
+    }
+
+    public void setCoDetallesTarifaList(List<CoDetallesTarifa> coDetallesTarifaList) {
+        this.coDetallesTarifaList = coDetallesTarifaList;
     }
 
     public SeSucursal getSeSucursal() {

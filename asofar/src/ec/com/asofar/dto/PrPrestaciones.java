@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,8 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PrPrestaciones.findAll", query = "SELECT p FROM PrPrestaciones p")
-    , @NamedQuery(name = "PrPrestaciones.findByIdPrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idPrestacion = :idPrestacion")
-    , @NamedQuery(name = "PrPrestaciones.findByIdEmpresa", query = "SELECT p FROM PrPrestaciones p WHERE p.prPrestacionesPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "PrPrestaciones.findByIdPrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.idPrestacion = :idPrestacion")
     , @NamedQuery(name = "PrPrestaciones.findByIdPoducto", query = "SELECT p FROM PrPrestaciones p WHERE p.idPoducto = :idPoducto")
     , @NamedQuery(name = "PrPrestaciones.findByNombrePrestacion", query = "SELECT p FROM PrPrestaciones p WHERE p.nombrePrestacion = :nombrePrestacion")
     , @NamedQuery(name = "PrPrestaciones.findByEstado", query = "SELECT p FROM PrPrestaciones p WHERE p.estado = :estado")
@@ -46,8 +48,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class PrPrestaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected PrPrestacionesPK prPrestacionesPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_prestacion")
+    private Long idPrestacion;
     @Column(name = "id_poducto")
     private BigInteger idPoducto;
     @Column(name = "nombre_prestacion")
@@ -67,12 +72,10 @@ public class PrPrestaciones implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
-    private List<VeFacturaDetalle> veFacturaDetalleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prPrestaciones")
-    private List<PrDetalleTarifario> prDetalleTarifarioList;
-    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private SeEmpresa seEmpresa;
+    private List<InPrestacionesPorServicios> inPrestacionesPorServiciosList;
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
+    @ManyToOne
+    private SeEmpresa idEmpresa;
     @JoinColumn(name = "id_tipo_prestacion", referencedColumnName = "id_tipo_prestacion")
     @ManyToOne
     private PrTipoPrestacion idTipoPrestacion;
@@ -80,20 +83,16 @@ public class PrPrestaciones implements Serializable {
     public PrPrestaciones() {
     }
 
-    public PrPrestaciones(PrPrestacionesPK prPrestacionesPK) {
-        this.prPrestacionesPK = prPrestacionesPK;
+    public PrPrestaciones(Long idPrestacion) {
+        this.idPrestacion = idPrestacion;
     }
 
-    public PrPrestaciones(long idPrestacion, long idEmpresa) {
-        this.prPrestacionesPK = new PrPrestacionesPK(idPrestacion, idEmpresa);
+    public Long getIdPrestacion() {
+        return idPrestacion;
     }
 
-    public PrPrestacionesPK getPrPrestacionesPK() {
-        return prPrestacionesPK;
-    }
-
-    public void setPrPrestacionesPK(PrPrestacionesPK prPrestacionesPK) {
-        this.prPrestacionesPK = prPrestacionesPK;
+    public void setIdPrestacion(Long idPrestacion) {
+        this.idPrestacion = idPrestacion;
     }
 
     public BigInteger getIdPoducto() {
@@ -161,29 +160,20 @@ public class PrPrestaciones implements Serializable {
     }
 
     @XmlTransient
-    public List<VeFacturaDetalle> getVeFacturaDetalleList() {
-        return veFacturaDetalleList;
+    public List<InPrestacionesPorServicios> getInPrestacionesPorServiciosList() {
+        return inPrestacionesPorServiciosList;
     }
 
-    public void setVeFacturaDetalleList(List<VeFacturaDetalle> veFacturaDetalleList) {
-        this.veFacturaDetalleList = veFacturaDetalleList;
+    public void setInPrestacionesPorServiciosList(List<InPrestacionesPorServicios> inPrestacionesPorServiciosList) {
+        this.inPrestacionesPorServiciosList = inPrestacionesPorServiciosList;
     }
 
-    @XmlTransient
-    public List<PrDetalleTarifario> getPrDetalleTarifarioList() {
-        return prDetalleTarifarioList;
+    public SeEmpresa getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setPrDetalleTarifarioList(List<PrDetalleTarifario> prDetalleTarifarioList) {
-        this.prDetalleTarifarioList = prDetalleTarifarioList;
-    }
-
-    public SeEmpresa getSeEmpresa() {
-        return seEmpresa;
-    }
-
-    public void setSeEmpresa(SeEmpresa seEmpresa) {
-        this.seEmpresa = seEmpresa;
+    public void setIdEmpresa(SeEmpresa idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public PrTipoPrestacion getIdTipoPrestacion() {
@@ -197,7 +187,7 @@ public class PrPrestaciones implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (prPrestacionesPK != null ? prPrestacionesPK.hashCode() : 0);
+        hash += (idPrestacion != null ? idPrestacion.hashCode() : 0);
         return hash;
     }
 
@@ -208,7 +198,7 @@ public class PrPrestaciones implements Serializable {
             return false;
         }
         PrPrestaciones other = (PrPrestaciones) object;
-        if ((this.prPrestacionesPK == null && other.prPrestacionesPK != null) || (this.prPrestacionesPK != null && !this.prPrestacionesPK.equals(other.prPrestacionesPK))) {
+        if ((this.idPrestacion == null && other.idPrestacion != null) || (this.idPrestacion != null && !this.idPrestacion.equals(other.idPrestacion))) {
             return false;
         }
         return true;
@@ -216,7 +206,7 @@ public class PrPrestaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrPrestaciones[ prPrestacionesPK=" + prPrestacionesPK + " ]";
+        return "ec.com.asofar.dto.PrPrestaciones[ idPrestacion=" + idPrestacion + " ]";
     }
     
 }

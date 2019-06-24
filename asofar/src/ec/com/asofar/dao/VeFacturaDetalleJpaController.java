@@ -14,10 +14,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.VeFactura;
-import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
-import ec.com.asofar.dto.VeUnidadServicio;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,11 +39,9 @@ public class VeFacturaDetalleJpaController implements Serializable {
         if (veFacturaDetalle.getVeFacturaDetallePK() == null) {
             veFacturaDetalle.setVeFacturaDetallePK(new VeFacturaDetallePK());
         }
-        veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
         veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdEmpresa());
         veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdPrestaciones(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdUnidadServicio(veFacturaDetalle.getVeUnidadServicio().getIdUnidadServicio());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -60,16 +56,6 @@ public class VeFacturaDetalleJpaController implements Serializable {
                 veFactura = em.getReference(veFactura.getClass(), veFactura.getVeFacturaPK());
                 veFacturaDetalle.setVeFactura(veFactura);
             }
-            PrPrestaciones prPrestaciones = veFacturaDetalle.getPrPrestaciones();
-            if (prPrestaciones != null) {
-                prPrestaciones = em.getReference(prPrestaciones.getClass(), prPrestaciones.getPrPrestacionesPK());
-                veFacturaDetalle.setPrPrestaciones(prPrestaciones);
-            }
-            VeUnidadServicio veUnidadServicio = veFacturaDetalle.getVeUnidadServicio();
-            if (veUnidadServicio != null) {
-                veUnidadServicio = em.getReference(veUnidadServicio.getClass(), veUnidadServicio.getIdUnidadServicio());
-                veFacturaDetalle.setVeUnidadServicio(veUnidadServicio);
-            }
             em.persist(veFacturaDetalle);
             if (seSucursal != null) {
                 seSucursal.getVeFacturaDetalleList().add(veFacturaDetalle);
@@ -78,14 +64,6 @@ public class VeFacturaDetalleJpaController implements Serializable {
             if (veFactura != null) {
                 veFactura.getVeFacturaDetalleList().add(veFacturaDetalle);
                 veFactura = em.merge(veFactura);
-            }
-            if (prPrestaciones != null) {
-                prPrestaciones.getVeFacturaDetalleList().add(veFacturaDetalle);
-                prPrestaciones = em.merge(prPrestaciones);
-            }
-            if (veUnidadServicio != null) {
-                veUnidadServicio.getVeFacturaDetalleList().add(veFacturaDetalle);
-                veUnidadServicio = em.merge(veUnidadServicio);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -101,11 +79,9 @@ public class VeFacturaDetalleJpaController implements Serializable {
     }
 
     public void edit(VeFacturaDetalle veFacturaDetalle) throws NonexistentEntityException, Exception {
-        veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdEmpresa());
         veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdEmpresa());
         veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdPrestaciones(veFacturaDetalle.getPrPrestaciones().getPrPrestacionesPK().getIdPrestacion());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdUnidadServicio(veFacturaDetalle.getVeUnidadServicio().getIdUnidadServicio());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -115,10 +91,6 @@ public class VeFacturaDetalleJpaController implements Serializable {
             SeSucursal seSucursalNew = veFacturaDetalle.getSeSucursal();
             VeFactura veFacturaOld = persistentVeFacturaDetalle.getVeFactura();
             VeFactura veFacturaNew = veFacturaDetalle.getVeFactura();
-            PrPrestaciones prPrestacionesOld = persistentVeFacturaDetalle.getPrPrestaciones();
-            PrPrestaciones prPrestacionesNew = veFacturaDetalle.getPrPrestaciones();
-            VeUnidadServicio veUnidadServicioOld = persistentVeFacturaDetalle.getVeUnidadServicio();
-            VeUnidadServicio veUnidadServicioNew = veFacturaDetalle.getVeUnidadServicio();
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 veFacturaDetalle.setSeSucursal(seSucursalNew);
@@ -126,14 +98,6 @@ public class VeFacturaDetalleJpaController implements Serializable {
             if (veFacturaNew != null) {
                 veFacturaNew = em.getReference(veFacturaNew.getClass(), veFacturaNew.getVeFacturaPK());
                 veFacturaDetalle.setVeFactura(veFacturaNew);
-            }
-            if (prPrestacionesNew != null) {
-                prPrestacionesNew = em.getReference(prPrestacionesNew.getClass(), prPrestacionesNew.getPrPrestacionesPK());
-                veFacturaDetalle.setPrPrestaciones(prPrestacionesNew);
-            }
-            if (veUnidadServicioNew != null) {
-                veUnidadServicioNew = em.getReference(veUnidadServicioNew.getClass(), veUnidadServicioNew.getIdUnidadServicio());
-                veFacturaDetalle.setVeUnidadServicio(veUnidadServicioNew);
             }
             veFacturaDetalle = em.merge(veFacturaDetalle);
             if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
@@ -151,22 +115,6 @@ public class VeFacturaDetalleJpaController implements Serializable {
             if (veFacturaNew != null && !veFacturaNew.equals(veFacturaOld)) {
                 veFacturaNew.getVeFacturaDetalleList().add(veFacturaDetalle);
                 veFacturaNew = em.merge(veFacturaNew);
-            }
-            if (prPrestacionesOld != null && !prPrestacionesOld.equals(prPrestacionesNew)) {
-                prPrestacionesOld.getVeFacturaDetalleList().remove(veFacturaDetalle);
-                prPrestacionesOld = em.merge(prPrestacionesOld);
-            }
-            if (prPrestacionesNew != null && !prPrestacionesNew.equals(prPrestacionesOld)) {
-                prPrestacionesNew.getVeFacturaDetalleList().add(veFacturaDetalle);
-                prPrestacionesNew = em.merge(prPrestacionesNew);
-            }
-            if (veUnidadServicioOld != null && !veUnidadServicioOld.equals(veUnidadServicioNew)) {
-                veUnidadServicioOld.getVeFacturaDetalleList().remove(veFacturaDetalle);
-                veUnidadServicioOld = em.merge(veUnidadServicioOld);
-            }
-            if (veUnidadServicioNew != null && !veUnidadServicioNew.equals(veUnidadServicioOld)) {
-                veUnidadServicioNew.getVeFacturaDetalleList().add(veFacturaDetalle);
-                veUnidadServicioNew = em.merge(veUnidadServicioNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -206,16 +154,6 @@ public class VeFacturaDetalleJpaController implements Serializable {
             if (veFactura != null) {
                 veFactura.getVeFacturaDetalleList().remove(veFacturaDetalle);
                 veFactura = em.merge(veFactura);
-            }
-            PrPrestaciones prPrestaciones = veFacturaDetalle.getPrPrestaciones();
-            if (prPrestaciones != null) {
-                prPrestaciones.getVeFacturaDetalleList().remove(veFacturaDetalle);
-                prPrestaciones = em.merge(prPrestaciones);
-            }
-            VeUnidadServicio veUnidadServicio = veFacturaDetalle.getVeUnidadServicio();
-            if (veUnidadServicio != null) {
-                veUnidadServicio.getVeFacturaDetalleList().remove(veFacturaDetalle);
-                veUnidadServicio = em.merge(veUnidadServicio);
             }
             em.remove(veFacturaDetalle);
             em.getTransaction().commit();

@@ -6,7 +6,6 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "VeUnidadServicio.findAll", query = "SELECT v FROM VeUnidadServicio v")
     , @NamedQuery(name = "VeUnidadServicio.findByIdUnidadServicio", query = "SELECT v FROM VeUnidadServicio v WHERE v.idUnidadServicio = :idUnidadServicio")
-    , @NamedQuery(name = "VeUnidadServicio.findByIdEmpresa", query = "SELECT v FROM VeUnidadServicio v WHERE v.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "VeUnidadServicio.findByNombreUnidadServicio", query = "SELECT v FROM VeUnidadServicio v WHERE v.nombreUnidadServicio = :nombreUnidadServicio")
     , @NamedQuery(name = "VeUnidadServicio.findByEstado", query = "SELECT v FROM VeUnidadServicio v WHERE v.estado = :estado")
     , @NamedQuery(name = "VeUnidadServicio.findByUsuarioCreacion", query = "SELECT v FROM VeUnidadServicio v WHERE v.usuarioCreacion = :usuarioCreacion")
@@ -50,8 +50,6 @@ public class VeUnidadServicio implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_unidad_servicio")
     private Long idUnidadServicio;
-    @Column(name = "id_empresa")
-    private BigInteger idEmpresa;
     @Column(name = "nombre_unidad_servicio")
     private String nombreUnidadServicio;
     @Column(name = "estado")
@@ -66,10 +64,11 @@ public class VeUnidadServicio implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
+    @ManyToOne
+    private SeEmpresa idEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veUnidadServicio")
-    private List<VeFacturaDetalle> veFacturaDetalleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veUnidadServicio")
-    private List<PrDetalleTarifario> prDetalleTarifarioList;
+    private List<InPrestacionesPorServicios> inPrestacionesPorServiciosList;
 
     public VeUnidadServicio() {
     }
@@ -84,14 +83,6 @@ public class VeUnidadServicio implements Serializable {
 
     public void setIdUnidadServicio(Long idUnidadServicio) {
         this.idUnidadServicio = idUnidadServicio;
-    }
-
-    public BigInteger getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(BigInteger idEmpresa) {
-        this.idEmpresa = idEmpresa;
     }
 
     public String getNombreUnidadServicio() {
@@ -142,22 +133,21 @@ public class VeUnidadServicio implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
+    public SeEmpresa getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(SeEmpresa idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
     @XmlTransient
-    public List<VeFacturaDetalle> getVeFacturaDetalleList() {
-        return veFacturaDetalleList;
+    public List<InPrestacionesPorServicios> getInPrestacionesPorServiciosList() {
+        return inPrestacionesPorServiciosList;
     }
 
-    public void setVeFacturaDetalleList(List<VeFacturaDetalle> veFacturaDetalleList) {
-        this.veFacturaDetalleList = veFacturaDetalleList;
-    }
-
-    @XmlTransient
-    public List<PrDetalleTarifario> getPrDetalleTarifarioList() {
-        return prDetalleTarifarioList;
-    }
-
-    public void setPrDetalleTarifarioList(List<PrDetalleTarifario> prDetalleTarifarioList) {
-        this.prDetalleTarifarioList = prDetalleTarifarioList;
+    public void setInPrestacionesPorServiciosList(List<InPrestacionesPorServicios> inPrestacionesPorServiciosList) {
+        this.inPrestacionesPorServiciosList = inPrestacionesPorServiciosList;
     }
 
     @Override

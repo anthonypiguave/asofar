@@ -7,7 +7,6 @@ package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -15,12 +14,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrTipoPrestacion;
-import ec.com.asofar.dto.VeFacturaDetalle;
+import ec.com.asofar.dto.InPrestacionesPorServicios;
+import ec.com.asofar.dto.PrPrestaciones;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.PrDetalleTarifario;
-import ec.com.asofar.dto.PrPrestaciones;
-import ec.com.asofar.dto.PrPrestacionesPK;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -39,76 +36,49 @@ public class PrPrestacionesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(PrPrestaciones prPrestaciones) throws PreexistingEntityException, Exception {
-        if (prPrestaciones.getPrPrestacionesPK() == null) {
-            prPrestaciones.setPrPrestacionesPK(new PrPrestacionesPK());
+    public void create(PrPrestaciones prPrestaciones) {
+        if (prPrestaciones.getInPrestacionesPorServiciosList() == null) {
+            prPrestaciones.setInPrestacionesPorServiciosList(new ArrayList<InPrestacionesPorServicios>());
         }
-        if (prPrestaciones.getVeFacturaDetalleList() == null) {
-            prPrestaciones.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
-        }
-        if (prPrestaciones.getPrDetalleTarifarioList() == null) {
-            prPrestaciones.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
-        }
-        prPrestaciones.getPrPrestacionesPK().setIdEmpresa(prPrestaciones.getSeEmpresa().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            SeEmpresa seEmpresa = prPrestaciones.getSeEmpresa();
-            if (seEmpresa != null) {
-                seEmpresa = em.getReference(seEmpresa.getClass(), seEmpresa.getIdEmpresa());
-                prPrestaciones.setSeEmpresa(seEmpresa);
+            SeEmpresa idEmpresa = prPrestaciones.getIdEmpresa();
+            if (idEmpresa != null) {
+                idEmpresa = em.getReference(idEmpresa.getClass(), idEmpresa.getIdEmpresa());
+                prPrestaciones.setIdEmpresa(idEmpresa);
             }
             PrTipoPrestacion idTipoPrestacion = prPrestaciones.getIdTipoPrestacion();
             if (idTipoPrestacion != null) {
                 idTipoPrestacion = em.getReference(idTipoPrestacion.getClass(), idTipoPrestacion.getIdTipoPrestacion());
                 prPrestaciones.setIdTipoPrestacion(idTipoPrestacion);
             }
-            List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
-            for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : prPrestaciones.getVeFacturaDetalleList()) {
-                veFacturaDetalleListVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListVeFacturaDetalleToAttach.getVeFacturaDetallePK());
-                attachedVeFacturaDetalleList.add(veFacturaDetalleListVeFacturaDetalleToAttach);
+            List<InPrestacionesPorServicios> attachedInPrestacionesPorServiciosList = new ArrayList<InPrestacionesPorServicios>();
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach : prPrestaciones.getInPrestacionesPorServiciosList()) {
+                inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach = em.getReference(inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach.getClass(), inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach.getInPrestacionesPorServiciosPK());
+                attachedInPrestacionesPorServiciosList.add(inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach);
             }
-            prPrestaciones.setVeFacturaDetalleList(attachedVeFacturaDetalleList);
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : prPrestaciones.getPrDetalleTarifarioList()) {
-                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
-            }
-            prPrestaciones.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
+            prPrestaciones.setInPrestacionesPorServiciosList(attachedInPrestacionesPorServiciosList);
             em.persist(prPrestaciones);
-            if (seEmpresa != null) {
-                seEmpresa.getPrPrestacionesList().add(prPrestaciones);
-                seEmpresa = em.merge(seEmpresa);
+            if (idEmpresa != null) {
+                idEmpresa.getPrPrestacionesList().add(prPrestaciones);
+                idEmpresa = em.merge(idEmpresa);
             }
             if (idTipoPrestacion != null) {
                 idTipoPrestacion.getPrPrestacionesList().add(prPrestaciones);
                 idTipoPrestacion = em.merge(idTipoPrestacion);
             }
-            for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : prPrestaciones.getVeFacturaDetalleList()) {
-                PrPrestaciones oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle = veFacturaDetalleListVeFacturaDetalle.getPrPrestaciones();
-                veFacturaDetalleListVeFacturaDetalle.setPrPrestaciones(prPrestaciones);
-                veFacturaDetalleListVeFacturaDetalle = em.merge(veFacturaDetalleListVeFacturaDetalle);
-                if (oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle != null) {
-                    oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListVeFacturaDetalle);
-                    oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle = em.merge(oldPrPrestacionesOfVeFacturaDetalleListVeFacturaDetalle);
-                }
-            }
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : prPrestaciones.getPrDetalleTarifarioList()) {
-                PrPrestaciones oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getPrPrestaciones();
-                prDetalleTarifarioListPrDetalleTarifario.setPrPrestaciones(prPrestaciones);
-                prDetalleTarifarioListPrDetalleTarifario = em.merge(prDetalleTarifarioListPrDetalleTarifario);
-                if (oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario != null) {
-                    oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListPrDetalleTarifario);
-                    oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListPrDetalleTarifario);
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListInPrestacionesPorServicios : prPrestaciones.getInPrestacionesPorServiciosList()) {
+                PrPrestaciones oldPrPrestacionesOfInPrestacionesPorServiciosListInPrestacionesPorServicios = inPrestacionesPorServiciosListInPrestacionesPorServicios.getPrPrestaciones();
+                inPrestacionesPorServiciosListInPrestacionesPorServicios.setPrPrestaciones(prPrestaciones);
+                inPrestacionesPorServiciosListInPrestacionesPorServicios = em.merge(inPrestacionesPorServiciosListInPrestacionesPorServicios);
+                if (oldPrPrestacionesOfInPrestacionesPorServiciosListInPrestacionesPorServicios != null) {
+                    oldPrPrestacionesOfInPrestacionesPorServiciosListInPrestacionesPorServicios.getInPrestacionesPorServiciosList().remove(inPrestacionesPorServiciosListInPrestacionesPorServicios);
+                    oldPrPrestacionesOfInPrestacionesPorServiciosListInPrestacionesPorServicios = em.merge(oldPrPrestacionesOfInPrestacionesPorServiciosListInPrestacionesPorServicios);
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findPrPrestaciones(prPrestaciones.getPrPrestacionesPK()) != null) {
-                throw new PreexistingEntityException("PrPrestaciones " + prPrestaciones + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -117,70 +87,52 @@ public class PrPrestacionesJpaController implements Serializable {
     }
 
     public void edit(PrPrestaciones prPrestaciones) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        prPrestaciones.getPrPrestacionesPK().setIdEmpresa(prPrestaciones.getSeEmpresa().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            PrPrestaciones persistentPrPrestaciones = em.find(PrPrestaciones.class, prPrestaciones.getPrPrestacionesPK());
-            SeEmpresa seEmpresaOld = persistentPrPrestaciones.getSeEmpresa();
-            SeEmpresa seEmpresaNew = prPrestaciones.getSeEmpresa();
+            PrPrestaciones persistentPrPrestaciones = em.find(PrPrestaciones.class, prPrestaciones.getIdPrestacion());
+            SeEmpresa idEmpresaOld = persistentPrPrestaciones.getIdEmpresa();
+            SeEmpresa idEmpresaNew = prPrestaciones.getIdEmpresa();
             PrTipoPrestacion idTipoPrestacionOld = persistentPrPrestaciones.getIdTipoPrestacion();
             PrTipoPrestacion idTipoPrestacionNew = prPrestaciones.getIdTipoPrestacion();
-            List<VeFacturaDetalle> veFacturaDetalleListOld = persistentPrPrestaciones.getVeFacturaDetalleList();
-            List<VeFacturaDetalle> veFacturaDetalleListNew = prPrestaciones.getVeFacturaDetalleList();
-            List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrPrestaciones.getPrDetalleTarifarioList();
-            List<PrDetalleTarifario> prDetalleTarifarioListNew = prPrestaciones.getPrDetalleTarifarioList();
+            List<InPrestacionesPorServicios> inPrestacionesPorServiciosListOld = persistentPrPrestaciones.getInPrestacionesPorServiciosList();
+            List<InPrestacionesPorServicios> inPrestacionesPorServiciosListNew = prPrestaciones.getInPrestacionesPorServiciosList();
             List<String> illegalOrphanMessages = null;
-            for (VeFacturaDetalle veFacturaDetalleListOldVeFacturaDetalle : veFacturaDetalleListOld) {
-                if (!veFacturaDetalleListNew.contains(veFacturaDetalleListOldVeFacturaDetalle)) {
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListOldInPrestacionesPorServicios : inPrestacionesPorServiciosListOld) {
+                if (!inPrestacionesPorServiciosListNew.contains(inPrestacionesPorServiciosListOldInPrestacionesPorServicios)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain VeFacturaDetalle " + veFacturaDetalleListOldVeFacturaDetalle + " since its prPrestaciones field is not nullable.");
-                }
-            }
-            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
-                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its prPrestaciones field is not nullable.");
+                    illegalOrphanMessages.add("You must retain InPrestacionesPorServicios " + inPrestacionesPorServiciosListOldInPrestacionesPorServicios + " since its prPrestaciones field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (seEmpresaNew != null) {
-                seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
-                prPrestaciones.setSeEmpresa(seEmpresaNew);
+            if (idEmpresaNew != null) {
+                idEmpresaNew = em.getReference(idEmpresaNew.getClass(), idEmpresaNew.getIdEmpresa());
+                prPrestaciones.setIdEmpresa(idEmpresaNew);
             }
             if (idTipoPrestacionNew != null) {
                 idTipoPrestacionNew = em.getReference(idTipoPrestacionNew.getClass(), idTipoPrestacionNew.getIdTipoPrestacion());
                 prPrestaciones.setIdTipoPrestacion(idTipoPrestacionNew);
             }
-            List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
-            for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
-                veFacturaDetalleListNewVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListNewVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListNewVeFacturaDetalleToAttach.getVeFacturaDetallePK());
-                attachedVeFacturaDetalleListNew.add(veFacturaDetalleListNewVeFacturaDetalleToAttach);
+            List<InPrestacionesPorServicios> attachedInPrestacionesPorServiciosListNew = new ArrayList<InPrestacionesPorServicios>();
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach : inPrestacionesPorServiciosListNew) {
+                inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach = em.getReference(inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach.getClass(), inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach.getInPrestacionesPorServiciosPK());
+                attachedInPrestacionesPorServiciosListNew.add(inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach);
             }
-            veFacturaDetalleListNew = attachedVeFacturaDetalleListNew;
-            prPrestaciones.setVeFacturaDetalleList(veFacturaDetalleListNew);
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
-                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioListNew.add(prDetalleTarifarioListNewPrDetalleTarifarioToAttach);
-            }
-            prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
-            prPrestaciones.setPrDetalleTarifarioList(prDetalleTarifarioListNew);
+            inPrestacionesPorServiciosListNew = attachedInPrestacionesPorServiciosListNew;
+            prPrestaciones.setInPrestacionesPorServiciosList(inPrestacionesPorServiciosListNew);
             prPrestaciones = em.merge(prPrestaciones);
-            if (seEmpresaOld != null && !seEmpresaOld.equals(seEmpresaNew)) {
-                seEmpresaOld.getPrPrestacionesList().remove(prPrestaciones);
-                seEmpresaOld = em.merge(seEmpresaOld);
+            if (idEmpresaOld != null && !idEmpresaOld.equals(idEmpresaNew)) {
+                idEmpresaOld.getPrPrestacionesList().remove(prPrestaciones);
+                idEmpresaOld = em.merge(idEmpresaOld);
             }
-            if (seEmpresaNew != null && !seEmpresaNew.equals(seEmpresaOld)) {
-                seEmpresaNew.getPrPrestacionesList().add(prPrestaciones);
-                seEmpresaNew = em.merge(seEmpresaNew);
+            if (idEmpresaNew != null && !idEmpresaNew.equals(idEmpresaOld)) {
+                idEmpresaNew.getPrPrestacionesList().add(prPrestaciones);
+                idEmpresaNew = em.merge(idEmpresaNew);
             }
             if (idTipoPrestacionOld != null && !idTipoPrestacionOld.equals(idTipoPrestacionNew)) {
                 idTipoPrestacionOld.getPrPrestacionesList().remove(prPrestaciones);
@@ -190,25 +142,14 @@ public class PrPrestacionesJpaController implements Serializable {
                 idTipoPrestacionNew.getPrPrestacionesList().add(prPrestaciones);
                 idTipoPrestacionNew = em.merge(idTipoPrestacionNew);
             }
-            for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalle : veFacturaDetalleListNew) {
-                if (!veFacturaDetalleListOld.contains(veFacturaDetalleListNewVeFacturaDetalle)) {
-                    PrPrestaciones oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle = veFacturaDetalleListNewVeFacturaDetalle.getPrPrestaciones();
-                    veFacturaDetalleListNewVeFacturaDetalle.setPrPrestaciones(prPrestaciones);
-                    veFacturaDetalleListNewVeFacturaDetalle = em.merge(veFacturaDetalleListNewVeFacturaDetalle);
-                    if (oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle != null && !oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle.equals(prPrestaciones)) {
-                        oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListNewVeFacturaDetalle);
-                        oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle = em.merge(oldPrPrestacionesOfVeFacturaDetalleListNewVeFacturaDetalle);
-                    }
-                }
-            }
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
-                if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
-                    PrPrestaciones oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario = prDetalleTarifarioListNewPrDetalleTarifario.getPrPrestaciones();
-                    prDetalleTarifarioListNewPrDetalleTarifario.setPrPrestaciones(prPrestaciones);
-                    prDetalleTarifarioListNewPrDetalleTarifario = em.merge(prDetalleTarifarioListNewPrDetalleTarifario);
-                    if (oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario != null && !oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.equals(prPrestaciones)) {
-                        oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListNewPrDetalleTarifario);
-                        oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario = em.merge(oldPrPrestacionesOfPrDetalleTarifarioListNewPrDetalleTarifario);
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListNewInPrestacionesPorServicios : inPrestacionesPorServiciosListNew) {
+                if (!inPrestacionesPorServiciosListOld.contains(inPrestacionesPorServiciosListNewInPrestacionesPorServicios)) {
+                    PrPrestaciones oldPrPrestacionesOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios = inPrestacionesPorServiciosListNewInPrestacionesPorServicios.getPrPrestaciones();
+                    inPrestacionesPorServiciosListNewInPrestacionesPorServicios.setPrPrestaciones(prPrestaciones);
+                    inPrestacionesPorServiciosListNewInPrestacionesPorServicios = em.merge(inPrestacionesPorServiciosListNewInPrestacionesPorServicios);
+                    if (oldPrPrestacionesOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios != null && !oldPrPrestacionesOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios.equals(prPrestaciones)) {
+                        oldPrPrestacionesOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios.getInPrestacionesPorServiciosList().remove(inPrestacionesPorServiciosListNewInPrestacionesPorServicios);
+                        oldPrPrestacionesOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios = em.merge(oldPrPrestacionesOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios);
                     }
                 }
             }
@@ -216,7 +157,7 @@ public class PrPrestacionesJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                PrPrestacionesPK id = prPrestaciones.getPrPrestacionesPK();
+                Long id = prPrestaciones.getIdPrestacion();
                 if (findPrPrestaciones(id) == null) {
                     throw new NonexistentEntityException("The prPrestaciones with id " + id + " no longer exists.");
                 }
@@ -229,7 +170,7 @@ public class PrPrestacionesJpaController implements Serializable {
         }
     }
 
-    public void destroy(PrPrestacionesPK id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -237,32 +178,25 @@ public class PrPrestacionesJpaController implements Serializable {
             PrPrestaciones prPrestaciones;
             try {
                 prPrestaciones = em.getReference(PrPrestaciones.class, id);
-                prPrestaciones.getPrPrestacionesPK();
+                prPrestaciones.getIdPrestacion();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The prPrestaciones with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<VeFacturaDetalle> veFacturaDetalleListOrphanCheck = prPrestaciones.getVeFacturaDetalleList();
-            for (VeFacturaDetalle veFacturaDetalleListOrphanCheckVeFacturaDetalle : veFacturaDetalleListOrphanCheck) {
+            List<InPrestacionesPorServicios> inPrestacionesPorServiciosListOrphanCheck = prPrestaciones.getInPrestacionesPorServiciosList();
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListOrphanCheckInPrestacionesPorServicios : inPrestacionesPorServiciosListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the VeFacturaDetalle " + veFacturaDetalleListOrphanCheckVeFacturaDetalle + " in its veFacturaDetalleList field has a non-nullable prPrestaciones field.");
-            }
-            List<PrDetalleTarifario> prDetalleTarifarioListOrphanCheck = prPrestaciones.getPrDetalleTarifarioList();
-            for (PrDetalleTarifario prDetalleTarifarioListOrphanCheckPrDetalleTarifario : prDetalleTarifarioListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable prPrestaciones field.");
+                illegalOrphanMessages.add("This PrPrestaciones (" + prPrestaciones + ") cannot be destroyed since the InPrestacionesPorServicios " + inPrestacionesPorServiciosListOrphanCheckInPrestacionesPorServicios + " in its inPrestacionesPorServiciosList field has a non-nullable prPrestaciones field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            SeEmpresa seEmpresa = prPrestaciones.getSeEmpresa();
-            if (seEmpresa != null) {
-                seEmpresa.getPrPrestacionesList().remove(prPrestaciones);
-                seEmpresa = em.merge(seEmpresa);
+            SeEmpresa idEmpresa = prPrestaciones.getIdEmpresa();
+            if (idEmpresa != null) {
+                idEmpresa.getPrPrestacionesList().remove(prPrestaciones);
+                idEmpresa = em.merge(idEmpresa);
             }
             PrTipoPrestacion idTipoPrestacion = prPrestaciones.getIdTipoPrestacion();
             if (idTipoPrestacion != null) {
@@ -302,7 +236,7 @@ public class PrPrestacionesJpaController implements Serializable {
         }
     }
 
-    public PrPrestaciones findPrPrestaciones(PrPrestacionesPK id) {
+    public PrPrestaciones findPrPrestaciones(Long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(PrPrestaciones.class, id);

@@ -36,12 +36,12 @@ public class ActualizarUnidaddeservicio extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     VeUnidadServicio vs;
-    
+
     public ActualizarUnidaddeservicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     public ActualizarUnidaddeservicio(java.awt.Frame parent, boolean modal, VeUnidadServicio vu, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
@@ -51,7 +51,7 @@ public class ActualizarUnidaddeservicio extends javax.swing.JDialog {
         emp = em;
         suc = su;
         vs = vu;
-        cargarDatos(); 
+        cargarDatos();
     }
 
     public void cargarDatos() {
@@ -203,17 +203,18 @@ public class ActualizarUnidaddeservicio extends javax.swing.JDialog {
 
     private void Jbu_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jbu_GuardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        
+
         vs.setNombreUnidadServicio(txtnservicios.getText());
-        System.out.println("Nombre"+txtnservicios.getText());
+        System.out.println("Nombre" + txtnservicios.getText());
         vs.setEstado(jComboBox1.getSelectedItem().toString());
-        System.out.println("Estado"+jComboBox1.getSelectedItem().toString());
+        System.out.println("Estado" + jComboBox1.getSelectedItem().toString());
         vs.setFechaActualizacion(fechaActual);
-        vs.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
+//        vs.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
+        vs.setIdEmpresa(emp);
         vs.setUsuarioActualizacion(usu.getNombreUsuario());
-        System.out.println("Usuario"+usu.getNombreUsuario());
+        System.out.println("Usuario" + usu.getNombreUsuario());
         try {
-          uc.edit(vs);
+            uc.edit(vs);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception ex) {

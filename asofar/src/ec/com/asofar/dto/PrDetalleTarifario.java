@@ -6,10 +6,14 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -29,12 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PrDetalleTarifario.findAll", query = "SELECT p FROM PrDetalleTarifario p")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdDetalleTarifario", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idDetalleTarifario = :idDetalleTarifario")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdTarifario", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idTarifario = :idTarifario")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdPrestacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idPrestacion = :idPrestacion")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdEmpresa", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdSurcusal", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idSurcusal = :idSurcusal")
-    , @NamedQuery(name = "PrDetalleTarifario.findByIdUnidadServicio", query = "SELECT p FROM PrDetalleTarifario p WHERE p.prDetalleTarifarioPK.idUnidadServicio = :idUnidadServicio")
+    , @NamedQuery(name = "PrDetalleTarifario.findByIdDetalleTarifario", query = "SELECT p FROM PrDetalleTarifario p WHERE p.idDetalleTarifario = :idDetalleTarifario")
+    , @NamedQuery(name = "PrDetalleTarifario.findByIdPrestacion", query = "SELECT p FROM PrDetalleTarifario p WHERE p.idPrestacion = :idPrestacion")
+    , @NamedQuery(name = "PrDetalleTarifario.findByIdUnidadServicio", query = "SELECT p FROM PrDetalleTarifario p WHERE p.idUnidadServicio = :idUnidadServicio")
     , @NamedQuery(name = "PrDetalleTarifario.findByValorCosto", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorCosto = :valorCosto")
     , @NamedQuery(name = "PrDetalleTarifario.findByValorMinVenta", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorMinVenta = :valorMinVenta")
     , @NamedQuery(name = "PrDetalleTarifario.findByValorVenta", query = "SELECT p FROM PrDetalleTarifario p WHERE p.valorVenta = :valorVenta")
@@ -47,8 +48,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PrDetalleTarifario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected PrDetalleTarifarioPK prDetalleTarifarioPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_detalle_tarifario")
+    private Long idDetalleTarifario;
+    @Column(name = "id_prestacion")
+    private BigInteger idPrestacion;
+    @Column(name = "id_unidad_servicio")
+    private BigInteger idUnidadServicio;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor_costo")
     private Double valorCosto;
@@ -71,37 +79,41 @@ public class PrDetalleTarifario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_prestacion", referencedColumnName = "id_prestacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private PrPrestaciones prPrestaciones;
-    @JoinColumns({
-        @JoinColumn(name = "id_tarifario", referencedColumnName = "id_tarifario", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_surcusal", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
+        @JoinColumn(name = "id_tarifario", referencedColumnName = "id_tarifario")
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
+        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_surcusal")})
+    @ManyToOne
     private PrTarifario prTarifario;
-    @JoinColumn(name = "id_unidad_servicio", referencedColumnName = "id_unidad_servicio", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private VeUnidadServicio veUnidadServicio;
 
     public PrDetalleTarifario() {
     }
 
-    public PrDetalleTarifario(PrDetalleTarifarioPK prDetalleTarifarioPK) {
-        this.prDetalleTarifarioPK = prDetalleTarifarioPK;
+    public PrDetalleTarifario(Long idDetalleTarifario) {
+        this.idDetalleTarifario = idDetalleTarifario;
     }
 
-    public PrDetalleTarifario(long idDetalleTarifario, long idTarifario, long idPrestacion, long idEmpresa, long idSurcusal, long idUnidadServicio) {
-        this.prDetalleTarifarioPK = new PrDetalleTarifarioPK(idDetalleTarifario, idTarifario, idPrestacion, idEmpresa, idSurcusal, idUnidadServicio);
+    public Long getIdDetalleTarifario() {
+        return idDetalleTarifario;
     }
 
-    public PrDetalleTarifarioPK getPrDetalleTarifarioPK() {
-        return prDetalleTarifarioPK;
+    public void setIdDetalleTarifario(Long idDetalleTarifario) {
+        this.idDetalleTarifario = idDetalleTarifario;
     }
 
-    public void setPrDetalleTarifarioPK(PrDetalleTarifarioPK prDetalleTarifarioPK) {
-        this.prDetalleTarifarioPK = prDetalleTarifarioPK;
+    public BigInteger getIdPrestacion() {
+        return idPrestacion;
+    }
+
+    public void setIdPrestacion(BigInteger idPrestacion) {
+        this.idPrestacion = idPrestacion;
+    }
+
+    public BigInteger getIdUnidadServicio() {
+        return idUnidadServicio;
+    }
+
+    public void setIdUnidadServicio(BigInteger idUnidadServicio) {
+        this.idUnidadServicio = idUnidadServicio;
     }
 
     public Double getValorCosto() {
@@ -176,14 +188,6 @@ public class PrDetalleTarifario implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public PrPrestaciones getPrPrestaciones() {
-        return prPrestaciones;
-    }
-
-    public void setPrPrestaciones(PrPrestaciones prPrestaciones) {
-        this.prPrestaciones = prPrestaciones;
-    }
-
     public PrTarifario getPrTarifario() {
         return prTarifario;
     }
@@ -192,18 +196,10 @@ public class PrDetalleTarifario implements Serializable {
         this.prTarifario = prTarifario;
     }
 
-    public VeUnidadServicio getVeUnidadServicio() {
-        return veUnidadServicio;
-    }
-
-    public void setVeUnidadServicio(VeUnidadServicio veUnidadServicio) {
-        this.veUnidadServicio = veUnidadServicio;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (prDetalleTarifarioPK != null ? prDetalleTarifarioPK.hashCode() : 0);
+        hash += (idDetalleTarifario != null ? idDetalleTarifario.hashCode() : 0);
         return hash;
     }
 
@@ -214,7 +210,7 @@ public class PrDetalleTarifario implements Serializable {
             return false;
         }
         PrDetalleTarifario other = (PrDetalleTarifario) object;
-        if ((this.prDetalleTarifarioPK == null && other.prDetalleTarifarioPK != null) || (this.prDetalleTarifarioPK != null && !this.prDetalleTarifarioPK.equals(other.prDetalleTarifarioPK))) {
+        if ((this.idDetalleTarifario == null && other.idDetalleTarifario != null) || (this.idDetalleTarifario != null && !this.idDetalleTarifario.equals(other.idDetalleTarifario))) {
             return false;
         }
         return true;
@@ -222,7 +218,7 @@ public class PrDetalleTarifario implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrDetalleTarifario[ prDetalleTarifarioPK=" + prDetalleTarifarioPK + " ]";
+        return "ec.com.asofar.dto.PrDetalleTarifario[ idDetalleTarifario=" + idDetalleTarifario + " ]";
     }
     
 }

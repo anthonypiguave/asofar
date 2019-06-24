@@ -427,7 +427,7 @@ public class ObtenerDTO {
         List<PrPrestaciones> lista = control.findPrPrestacionesEntities();
 
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getPrPrestacionesPK().getIdPrestacion() == id) {
+            if (lista.get(i).getIdPrestacion() == id) {
                 dto = lista.get(i);
                 break;
             }

@@ -7,7 +7,6 @@ package ec.com.asofar.views.prestaciones;
 
 import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.dto.PrPrestaciones;
-import ec.com.asofar.dto.PrPrestacionesPK;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -36,7 +35,7 @@ public class Listar_Prestaciones extends javax.swing.JDialog {
     PrPrestaciones objeto;
     List<PrPrestaciones> prestacion;
     PrPrestaciones prc;
-    PrPrestacionesPK prpk;
+    PrPrestaciones prpk;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
@@ -53,7 +52,7 @@ public class Listar_Prestaciones extends javax.swing.JDialog {
         Tablas.TablaPrestaciones(lista, tblPrestacion);
     }
 
-    public Listar_Prestaciones(java.awt.Frame parent, boolean modal, PrPrestaciones Prp, PrPrestacionesPK Prk, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public Listar_Prestaciones(java.awt.Frame parent, boolean modal, PrPrestaciones Prp, PrPrestaciones Prk, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -224,7 +223,7 @@ public class Listar_Prestaciones extends javax.swing.JDialog {
     public PrPrestaciones devuelvePrestaciones(Long id, List<PrPrestaciones> listapre) {
         PrPrestaciones doc = null;
         for (int i = 0; i < listapre.size(); i++) {
-            if (Objects.equals(listapre.get(i).getPrPrestacionesPK().getIdPrestacion(), id)) {
+            if (Objects.equals(listapre.get(i).getIdPrestacion(), id)) {
                 doc = listapre.get(i);
                 break;
             }

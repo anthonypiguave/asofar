@@ -187,7 +187,8 @@ public class Ingresarservicio extends javax.swing.JDialog {
         unidadservicio.setNombreUnidadServicio(txtnservicios.getText());
         unidadservicio.setEstado(jComboBox1.getSelectedItem().toString());
         unidadservicio.setFechaCreacion(fechaActual);
-        unidadservicio.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
+//        unidadservicio.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
+        unidadservicio.setIdEmpresa(emp);
         unidadservicio.setUsuarioCreacion(usu.getNombreUsuario());
         try {
             uc.create(unidadservicio);

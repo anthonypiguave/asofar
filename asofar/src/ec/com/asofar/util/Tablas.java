@@ -1695,7 +1695,7 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaprestaciones.size(); i++) {
             if (listaprestaciones.get(i).getEstado().equals("A")) {
-                filas[0] = String.valueOf(listaprestaciones.get(i).getPrPrestacionesPK().getIdPrestacion());
+                filas[0] = String.valueOf(listaprestaciones.get(i).getIdPrestacion());
                 filas[1] = listaprestaciones.get(i).getNombrePrestacion();
                 filas[2] = listaprestaciones.get(i).getEstado();
                 filas[3] = listaprestaciones.get(i).getAplicaIva();

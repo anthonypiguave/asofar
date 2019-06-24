@@ -30,7 +30,7 @@ public class CoOrdenPedidoJpaController implements Serializable {
     public CoOrdenPedidoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

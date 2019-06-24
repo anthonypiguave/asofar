@@ -15,21 +15,21 @@ import javax.persistence.Embeddable;
  * @author admin1
  */
 @Embeddable
-public class PrPrestacionesPK implements Serializable {
+public class InPrestacionesPorServiciosPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "id_prestacion")
     private long idPrestacion;
     @Basic(optional = false)
-    @Column(name = "id_empresa")
-    private long idEmpresa;
+    @Column(name = "id_unidad_servicio")
+    private long idUnidadServicio;
 
-    public PrPrestacionesPK() {
+    public InPrestacionesPorServiciosPK() {
     }
 
-    public PrPrestacionesPK(long idPrestacion, long idEmpresa) {
+    public InPrestacionesPorServiciosPK(long idPrestacion, long idUnidadServicio) {
         this.idPrestacion = idPrestacion;
-        this.idEmpresa = idEmpresa;
+        this.idUnidadServicio = idUnidadServicio;
     }
 
     public long getIdPrestacion() {
@@ -40,33 +40,33 @@ public class PrPrestacionesPK implements Serializable {
         this.idPrestacion = idPrestacion;
     }
 
-    public long getIdEmpresa() {
-        return idEmpresa;
+    public long getIdUnidadServicio() {
+        return idUnidadServicio;
     }
 
-    public void setIdEmpresa(long idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setIdUnidadServicio(long idUnidadServicio) {
+        this.idUnidadServicio = idUnidadServicio;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) idPrestacion;
-        hash += (int) idEmpresa;
+        hash += (int) idUnidadServicio;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PrPrestacionesPK)) {
+        if (!(object instanceof InPrestacionesPorServiciosPK)) {
             return false;
         }
-        PrPrestacionesPK other = (PrPrestacionesPK) object;
+        InPrestacionesPorServiciosPK other = (InPrestacionesPorServiciosPK) object;
         if (this.idPrestacion != other.idPrestacion) {
             return false;
         }
-        if (this.idEmpresa != other.idEmpresa) {
+        if (this.idUnidadServicio != other.idUnidadServicio) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class PrPrestacionesPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrPrestacionesPK[ idPrestacion=" + idPrestacion + ", idEmpresa=" + idEmpresa + " ]";
+        return "ec.com.asofar.dto.InPrestacionesPorServiciosPK[ idPrestacion=" + idPrestacion + ", idUnidadServicio=" + idUnidadServicio + " ]";
     }
     
 }

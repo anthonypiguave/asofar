@@ -43,7 +43,7 @@ public class PrTipoPrestacionJpaController implements Serializable {
             em.getTransaction().begin();
             List<PrPrestaciones> attachedPrPrestacionesList = new ArrayList<PrPrestaciones>();
             for (PrPrestaciones prPrestacionesListPrPrestacionesToAttach : prTipoPrestacion.getPrPrestacionesList()) {
-                prPrestacionesListPrPrestacionesToAttach = em.getReference(prPrestacionesListPrPrestacionesToAttach.getClass(), prPrestacionesListPrPrestacionesToAttach.getPrPrestacionesPK());
+                prPrestacionesListPrPrestacionesToAttach = em.getReference(prPrestacionesListPrPrestacionesToAttach.getClass(), prPrestacionesListPrPrestacionesToAttach.getIdPrestacion());
                 attachedPrPrestacionesList.add(prPrestacionesListPrPrestacionesToAttach);
             }
             prTipoPrestacion.setPrPrestacionesList(attachedPrPrestacionesList);
@@ -75,7 +75,7 @@ public class PrTipoPrestacionJpaController implements Serializable {
             List<PrPrestaciones> prPrestacionesListNew = prTipoPrestacion.getPrPrestacionesList();
             List<PrPrestaciones> attachedPrPrestacionesListNew = new ArrayList<PrPrestaciones>();
             for (PrPrestaciones prPrestacionesListNewPrPrestacionesToAttach : prPrestacionesListNew) {
-                prPrestacionesListNewPrPrestacionesToAttach = em.getReference(prPrestacionesListNewPrPrestacionesToAttach.getClass(), prPrestacionesListNewPrPrestacionesToAttach.getPrPrestacionesPK());
+                prPrestacionesListNewPrPrestacionesToAttach = em.getReference(prPrestacionesListNewPrPrestacionesToAttach.getClass(), prPrestacionesListNewPrPrestacionesToAttach.getIdPrestacion());
                 attachedPrPrestacionesListNew.add(prPrestacionesListNewPrPrestacionesToAttach);
             }
             prPrestacionesListNew = attachedPrPrestacionesListNew;

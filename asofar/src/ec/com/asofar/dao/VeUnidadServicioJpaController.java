@@ -12,11 +12,11 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.VeFacturaDetalle;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.InPrestacionesPorServicios;
+import ec.com.asofar.dto.VeUnidadServicio;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.PrDetalleTarifario;
-import ec.com.asofar.dto.VeUnidadServicio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -36,45 +36,36 @@ public class VeUnidadServicioJpaController implements Serializable {
     }
 
     public void create(VeUnidadServicio veUnidadServicio) {
-        if (veUnidadServicio.getVeFacturaDetalleList() == null) {
-            veUnidadServicio.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
-        }
-        if (veUnidadServicio.getPrDetalleTarifarioList() == null) {
-            veUnidadServicio.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
+        if (veUnidadServicio.getInPrestacionesPorServiciosList() == null) {
+            veUnidadServicio.setInPrestacionesPorServiciosList(new ArrayList<InPrestacionesPorServicios>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
-            for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : veUnidadServicio.getVeFacturaDetalleList()) {
-                veFacturaDetalleListVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListVeFacturaDetalleToAttach.getVeFacturaDetallePK());
-                attachedVeFacturaDetalleList.add(veFacturaDetalleListVeFacturaDetalleToAttach);
+            SeEmpresa idEmpresa = veUnidadServicio.getIdEmpresa();
+            if (idEmpresa != null) {
+                idEmpresa = em.getReference(idEmpresa.getClass(), idEmpresa.getIdEmpresa());
+                veUnidadServicio.setIdEmpresa(idEmpresa);
             }
-            veUnidadServicio.setVeFacturaDetalleList(attachedVeFacturaDetalleList);
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : veUnidadServicio.getPrDetalleTarifarioList()) {
-                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
+            List<InPrestacionesPorServicios> attachedInPrestacionesPorServiciosList = new ArrayList<InPrestacionesPorServicios>();
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach : veUnidadServicio.getInPrestacionesPorServiciosList()) {
+                inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach = em.getReference(inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach.getClass(), inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach.getInPrestacionesPorServiciosPK());
+                attachedInPrestacionesPorServiciosList.add(inPrestacionesPorServiciosListInPrestacionesPorServiciosToAttach);
             }
-            veUnidadServicio.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
+            veUnidadServicio.setInPrestacionesPorServiciosList(attachedInPrestacionesPorServiciosList);
             em.persist(veUnidadServicio);
-            for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : veUnidadServicio.getVeFacturaDetalleList()) {
-                VeUnidadServicio oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle = veFacturaDetalleListVeFacturaDetalle.getVeUnidadServicio();
-                veFacturaDetalleListVeFacturaDetalle.setVeUnidadServicio(veUnidadServicio);
-                veFacturaDetalleListVeFacturaDetalle = em.merge(veFacturaDetalleListVeFacturaDetalle);
-                if (oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle != null) {
-                    oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListVeFacturaDetalle);
-                    oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle = em.merge(oldVeUnidadServicioOfVeFacturaDetalleListVeFacturaDetalle);
-                }
+            if (idEmpresa != null) {
+                idEmpresa.getVeUnidadServicioList().add(veUnidadServicio);
+                idEmpresa = em.merge(idEmpresa);
             }
-            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : veUnidadServicio.getPrDetalleTarifarioList()) {
-                VeUnidadServicio oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getVeUnidadServicio();
-                prDetalleTarifarioListPrDetalleTarifario.setVeUnidadServicio(veUnidadServicio);
-                prDetalleTarifarioListPrDetalleTarifario = em.merge(prDetalleTarifarioListPrDetalleTarifario);
-                if (oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario != null) {
-                    oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListPrDetalleTarifario);
-                    oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario = em.merge(oldVeUnidadServicioOfPrDetalleTarifarioListPrDetalleTarifario);
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListInPrestacionesPorServicios : veUnidadServicio.getInPrestacionesPorServiciosList()) {
+                VeUnidadServicio oldVeUnidadServicioOfInPrestacionesPorServiciosListInPrestacionesPorServicios = inPrestacionesPorServiciosListInPrestacionesPorServicios.getVeUnidadServicio();
+                inPrestacionesPorServiciosListInPrestacionesPorServicios.setVeUnidadServicio(veUnidadServicio);
+                inPrestacionesPorServiciosListInPrestacionesPorServicios = em.merge(inPrestacionesPorServiciosListInPrestacionesPorServicios);
+                if (oldVeUnidadServicioOfInPrestacionesPorServiciosListInPrestacionesPorServicios != null) {
+                    oldVeUnidadServicioOfInPrestacionesPorServiciosListInPrestacionesPorServicios.getInPrestacionesPorServiciosList().remove(inPrestacionesPorServiciosListInPrestacionesPorServicios);
+                    oldVeUnidadServicioOfInPrestacionesPorServiciosListInPrestacionesPorServicios = em.merge(oldVeUnidadServicioOfInPrestacionesPorServiciosListInPrestacionesPorServicios);
                 }
             }
             em.getTransaction().commit();
@@ -91,64 +82,50 @@ public class VeUnidadServicioJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             VeUnidadServicio persistentVeUnidadServicio = em.find(VeUnidadServicio.class, veUnidadServicio.getIdUnidadServicio());
-            List<VeFacturaDetalle> veFacturaDetalleListOld = persistentVeUnidadServicio.getVeFacturaDetalleList();
-            List<VeFacturaDetalle> veFacturaDetalleListNew = veUnidadServicio.getVeFacturaDetalleList();
-            List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentVeUnidadServicio.getPrDetalleTarifarioList();
-            List<PrDetalleTarifario> prDetalleTarifarioListNew = veUnidadServicio.getPrDetalleTarifarioList();
+            SeEmpresa idEmpresaOld = persistentVeUnidadServicio.getIdEmpresa();
+            SeEmpresa idEmpresaNew = veUnidadServicio.getIdEmpresa();
+            List<InPrestacionesPorServicios> inPrestacionesPorServiciosListOld = persistentVeUnidadServicio.getInPrestacionesPorServiciosList();
+            List<InPrestacionesPorServicios> inPrestacionesPorServiciosListNew = veUnidadServicio.getInPrestacionesPorServiciosList();
             List<String> illegalOrphanMessages = null;
-            for (VeFacturaDetalle veFacturaDetalleListOldVeFacturaDetalle : veFacturaDetalleListOld) {
-                if (!veFacturaDetalleListNew.contains(veFacturaDetalleListOldVeFacturaDetalle)) {
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListOldInPrestacionesPorServicios : inPrestacionesPorServiciosListOld) {
+                if (!inPrestacionesPorServiciosListNew.contains(inPrestacionesPorServiciosListOldInPrestacionesPorServicios)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain VeFacturaDetalle " + veFacturaDetalleListOldVeFacturaDetalle + " since its veUnidadServicio field is not nullable.");
-                }
-            }
-            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
-                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its veUnidadServicio field is not nullable.");
+                    illegalOrphanMessages.add("You must retain InPrestacionesPorServicios " + inPrestacionesPorServiciosListOldInPrestacionesPorServicios + " since its veUnidadServicio field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
-            for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
-                veFacturaDetalleListNewVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListNewVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListNewVeFacturaDetalleToAttach.getVeFacturaDetallePK());
-                attachedVeFacturaDetalleListNew.add(veFacturaDetalleListNewVeFacturaDetalleToAttach);
+            if (idEmpresaNew != null) {
+                idEmpresaNew = em.getReference(idEmpresaNew.getClass(), idEmpresaNew.getIdEmpresa());
+                veUnidadServicio.setIdEmpresa(idEmpresaNew);
             }
-            veFacturaDetalleListNew = attachedVeFacturaDetalleListNew;
-            veUnidadServicio.setVeFacturaDetalleList(veFacturaDetalleListNew);
-            List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
-                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
-                attachedPrDetalleTarifarioListNew.add(prDetalleTarifarioListNewPrDetalleTarifarioToAttach);
+            List<InPrestacionesPorServicios> attachedInPrestacionesPorServiciosListNew = new ArrayList<InPrestacionesPorServicios>();
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach : inPrestacionesPorServiciosListNew) {
+                inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach = em.getReference(inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach.getClass(), inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach.getInPrestacionesPorServiciosPK());
+                attachedInPrestacionesPorServiciosListNew.add(inPrestacionesPorServiciosListNewInPrestacionesPorServiciosToAttach);
             }
-            prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
-            veUnidadServicio.setPrDetalleTarifarioList(prDetalleTarifarioListNew);
+            inPrestacionesPorServiciosListNew = attachedInPrestacionesPorServiciosListNew;
+            veUnidadServicio.setInPrestacionesPorServiciosList(inPrestacionesPorServiciosListNew);
             veUnidadServicio = em.merge(veUnidadServicio);
-            for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalle : veFacturaDetalleListNew) {
-                if (!veFacturaDetalleListOld.contains(veFacturaDetalleListNewVeFacturaDetalle)) {
-                    VeUnidadServicio oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle = veFacturaDetalleListNewVeFacturaDetalle.getVeUnidadServicio();
-                    veFacturaDetalleListNewVeFacturaDetalle.setVeUnidadServicio(veUnidadServicio);
-                    veFacturaDetalleListNewVeFacturaDetalle = em.merge(veFacturaDetalleListNewVeFacturaDetalle);
-                    if (oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle != null && !oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle.equals(veUnidadServicio)) {
-                        oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle.getVeFacturaDetalleList().remove(veFacturaDetalleListNewVeFacturaDetalle);
-                        oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle = em.merge(oldVeUnidadServicioOfVeFacturaDetalleListNewVeFacturaDetalle);
-                    }
-                }
+            if (idEmpresaOld != null && !idEmpresaOld.equals(idEmpresaNew)) {
+                idEmpresaOld.getVeUnidadServicioList().remove(veUnidadServicio);
+                idEmpresaOld = em.merge(idEmpresaOld);
             }
-            for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
-                if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
-                    VeUnidadServicio oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario = prDetalleTarifarioListNewPrDetalleTarifario.getVeUnidadServicio();
-                    prDetalleTarifarioListNewPrDetalleTarifario.setVeUnidadServicio(veUnidadServicio);
-                    prDetalleTarifarioListNewPrDetalleTarifario = em.merge(prDetalleTarifarioListNewPrDetalleTarifario);
-                    if (oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario != null && !oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario.equals(veUnidadServicio)) {
-                        oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario.getPrDetalleTarifarioList().remove(prDetalleTarifarioListNewPrDetalleTarifario);
-                        oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario = em.merge(oldVeUnidadServicioOfPrDetalleTarifarioListNewPrDetalleTarifario);
+            if (idEmpresaNew != null && !idEmpresaNew.equals(idEmpresaOld)) {
+                idEmpresaNew.getVeUnidadServicioList().add(veUnidadServicio);
+                idEmpresaNew = em.merge(idEmpresaNew);
+            }
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListNewInPrestacionesPorServicios : inPrestacionesPorServiciosListNew) {
+                if (!inPrestacionesPorServiciosListOld.contains(inPrestacionesPorServiciosListNewInPrestacionesPorServicios)) {
+                    VeUnidadServicio oldVeUnidadServicioOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios = inPrestacionesPorServiciosListNewInPrestacionesPorServicios.getVeUnidadServicio();
+                    inPrestacionesPorServiciosListNewInPrestacionesPorServicios.setVeUnidadServicio(veUnidadServicio);
+                    inPrestacionesPorServiciosListNewInPrestacionesPorServicios = em.merge(inPrestacionesPorServiciosListNewInPrestacionesPorServicios);
+                    if (oldVeUnidadServicioOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios != null && !oldVeUnidadServicioOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios.equals(veUnidadServicio)) {
+                        oldVeUnidadServicioOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios.getInPrestacionesPorServiciosList().remove(inPrestacionesPorServiciosListNewInPrestacionesPorServicios);
+                        oldVeUnidadServicioOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios = em.merge(oldVeUnidadServicioOfInPrestacionesPorServiciosListNewInPrestacionesPorServicios);
                     }
                 }
             }
@@ -182,22 +159,20 @@ public class VeUnidadServicioJpaController implements Serializable {
                 throw new NonexistentEntityException("The veUnidadServicio with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<VeFacturaDetalle> veFacturaDetalleListOrphanCheck = veUnidadServicio.getVeFacturaDetalleList();
-            for (VeFacturaDetalle veFacturaDetalleListOrphanCheckVeFacturaDetalle : veFacturaDetalleListOrphanCheck) {
+            List<InPrestacionesPorServicios> inPrestacionesPorServiciosListOrphanCheck = veUnidadServicio.getInPrestacionesPorServiciosList();
+            for (InPrestacionesPorServicios inPrestacionesPorServiciosListOrphanCheckInPrestacionesPorServicios : inPrestacionesPorServiciosListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This VeUnidadServicio (" + veUnidadServicio + ") cannot be destroyed since the VeFacturaDetalle " + veFacturaDetalleListOrphanCheckVeFacturaDetalle + " in its veFacturaDetalleList field has a non-nullable veUnidadServicio field.");
-            }
-            List<PrDetalleTarifario> prDetalleTarifarioListOrphanCheck = veUnidadServicio.getPrDetalleTarifarioList();
-            for (PrDetalleTarifario prDetalleTarifarioListOrphanCheckPrDetalleTarifario : prDetalleTarifarioListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This VeUnidadServicio (" + veUnidadServicio + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable veUnidadServicio field.");
+                illegalOrphanMessages.add("This VeUnidadServicio (" + veUnidadServicio + ") cannot be destroyed since the InPrestacionesPorServicios " + inPrestacionesPorServiciosListOrphanCheckInPrestacionesPorServicios + " in its inPrestacionesPorServiciosList field has a non-nullable veUnidadServicio field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            SeEmpresa idEmpresa = veUnidadServicio.getIdEmpresa();
+            if (idEmpresa != null) {
+                idEmpresa.getVeUnidadServicioList().remove(veUnidadServicio);
+                idEmpresa = em.merge(idEmpresa);
             }
             em.remove(veUnidadServicio);
             em.getTransaction().commit();

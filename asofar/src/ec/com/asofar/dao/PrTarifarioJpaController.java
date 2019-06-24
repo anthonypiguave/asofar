@@ -14,11 +14,12 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.CoDetallesTarifa;
+import java.util.ArrayList;
+import java.util.List;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.PrTarifarioPK;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -41,6 +42,9 @@ public class PrTarifarioJpaController implements Serializable {
         if (prTarifario.getPrTarifarioPK() == null) {
             prTarifario.setPrTarifarioPK(new PrTarifarioPK());
         }
+        if (prTarifario.getCoDetallesTarifaList() == null) {
+            prTarifario.setCoDetallesTarifaList(new ArrayList<CoDetallesTarifa>());
+        }
         if (prTarifario.getPrDetalleTarifarioList() == null) {
             prTarifario.setPrDetalleTarifarioList(new ArrayList<PrDetalleTarifario>());
         }
@@ -55,9 +59,15 @@ public class PrTarifarioJpaController implements Serializable {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 prTarifario.setSeSucursal(seSucursal);
             }
+            List<CoDetallesTarifa> attachedCoDetallesTarifaList = new ArrayList<CoDetallesTarifa>();
+            for (CoDetallesTarifa coDetallesTarifaListCoDetallesTarifaToAttach : prTarifario.getCoDetallesTarifaList()) {
+                coDetallesTarifaListCoDetallesTarifaToAttach = em.getReference(coDetallesTarifaListCoDetallesTarifaToAttach.getClass(), coDetallesTarifaListCoDetallesTarifaToAttach.getCoDetallesTarifaPK());
+                attachedCoDetallesTarifaList.add(coDetallesTarifaListCoDetallesTarifaToAttach);
+            }
+            prTarifario.setCoDetallesTarifaList(attachedCoDetallesTarifaList);
             List<PrDetalleTarifario> attachedPrDetalleTarifarioList = new ArrayList<PrDetalleTarifario>();
             for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifarioToAttach : prTarifario.getPrDetalleTarifarioList()) {
-                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
+                prDetalleTarifarioListPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListPrDetalleTarifarioToAttach.getIdDetalleTarifario());
                 attachedPrDetalleTarifarioList.add(prDetalleTarifarioListPrDetalleTarifarioToAttach);
             }
             prTarifario.setPrDetalleTarifarioList(attachedPrDetalleTarifarioList);
@@ -65,6 +75,15 @@ public class PrTarifarioJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getPrTarifarioList().add(prTarifario);
                 seSucursal = em.merge(seSucursal);
+            }
+            for (CoDetallesTarifa coDetallesTarifaListCoDetallesTarifa : prTarifario.getCoDetallesTarifaList()) {
+                PrTarifario oldPrTarifarioOfCoDetallesTarifaListCoDetallesTarifa = coDetallesTarifaListCoDetallesTarifa.getPrTarifario();
+                coDetallesTarifaListCoDetallesTarifa.setPrTarifario(prTarifario);
+                coDetallesTarifaListCoDetallesTarifa = em.merge(coDetallesTarifaListCoDetallesTarifa);
+                if (oldPrTarifarioOfCoDetallesTarifaListCoDetallesTarifa != null) {
+                    oldPrTarifarioOfCoDetallesTarifaListCoDetallesTarifa.getCoDetallesTarifaList().remove(coDetallesTarifaListCoDetallesTarifa);
+                    oldPrTarifarioOfCoDetallesTarifaListCoDetallesTarifa = em.merge(oldPrTarifarioOfCoDetallesTarifaListCoDetallesTarifa);
+                }
             }
             for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : prTarifario.getPrDetalleTarifarioList()) {
                 PrTarifario oldPrTarifarioOfPrDetalleTarifarioListPrDetalleTarifario = prDetalleTarifarioListPrDetalleTarifario.getPrTarifario();
@@ -98,15 +117,17 @@ public class PrTarifarioJpaController implements Serializable {
             PrTarifario persistentPrTarifario = em.find(PrTarifario.class, prTarifario.getPrTarifarioPK());
             SeSucursal seSucursalOld = persistentPrTarifario.getSeSucursal();
             SeSucursal seSucursalNew = prTarifario.getSeSucursal();
+            List<CoDetallesTarifa> coDetallesTarifaListOld = persistentPrTarifario.getCoDetallesTarifaList();
+            List<CoDetallesTarifa> coDetallesTarifaListNew = prTarifario.getCoDetallesTarifaList();
             List<PrDetalleTarifario> prDetalleTarifarioListOld = persistentPrTarifario.getPrDetalleTarifarioList();
             List<PrDetalleTarifario> prDetalleTarifarioListNew = prTarifario.getPrDetalleTarifarioList();
             List<String> illegalOrphanMessages = null;
-            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
-                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
+            for (CoDetallesTarifa coDetallesTarifaListOldCoDetallesTarifa : coDetallesTarifaListOld) {
+                if (!coDetallesTarifaListNew.contains(coDetallesTarifaListOldCoDetallesTarifa)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain PrDetalleTarifario " + prDetalleTarifarioListOldPrDetalleTarifario + " since its prTarifario field is not nullable.");
+                    illegalOrphanMessages.add("You must retain CoDetallesTarifa " + coDetallesTarifaListOldCoDetallesTarifa + " since its prTarifario field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -116,9 +137,16 @@ public class PrTarifarioJpaController implements Serializable {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 prTarifario.setSeSucursal(seSucursalNew);
             }
+            List<CoDetallesTarifa> attachedCoDetallesTarifaListNew = new ArrayList<CoDetallesTarifa>();
+            for (CoDetallesTarifa coDetallesTarifaListNewCoDetallesTarifaToAttach : coDetallesTarifaListNew) {
+                coDetallesTarifaListNewCoDetallesTarifaToAttach = em.getReference(coDetallesTarifaListNewCoDetallesTarifaToAttach.getClass(), coDetallesTarifaListNewCoDetallesTarifaToAttach.getCoDetallesTarifaPK());
+                attachedCoDetallesTarifaListNew.add(coDetallesTarifaListNewCoDetallesTarifaToAttach);
+            }
+            coDetallesTarifaListNew = attachedCoDetallesTarifaListNew;
+            prTarifario.setCoDetallesTarifaList(coDetallesTarifaListNew);
             List<PrDetalleTarifario> attachedPrDetalleTarifarioListNew = new ArrayList<PrDetalleTarifario>();
             for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifarioToAttach : prDetalleTarifarioListNew) {
-                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getPrDetalleTarifarioPK());
+                prDetalleTarifarioListNewPrDetalleTarifarioToAttach = em.getReference(prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getClass(), prDetalleTarifarioListNewPrDetalleTarifarioToAttach.getIdDetalleTarifario());
                 attachedPrDetalleTarifarioListNew.add(prDetalleTarifarioListNewPrDetalleTarifarioToAttach);
             }
             prDetalleTarifarioListNew = attachedPrDetalleTarifarioListNew;
@@ -131,6 +159,23 @@ public class PrTarifarioJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getPrTarifarioList().add(prTarifario);
                 seSucursalNew = em.merge(seSucursalNew);
+            }
+            for (CoDetallesTarifa coDetallesTarifaListNewCoDetallesTarifa : coDetallesTarifaListNew) {
+                if (!coDetallesTarifaListOld.contains(coDetallesTarifaListNewCoDetallesTarifa)) {
+                    PrTarifario oldPrTarifarioOfCoDetallesTarifaListNewCoDetallesTarifa = coDetallesTarifaListNewCoDetallesTarifa.getPrTarifario();
+                    coDetallesTarifaListNewCoDetallesTarifa.setPrTarifario(prTarifario);
+                    coDetallesTarifaListNewCoDetallesTarifa = em.merge(coDetallesTarifaListNewCoDetallesTarifa);
+                    if (oldPrTarifarioOfCoDetallesTarifaListNewCoDetallesTarifa != null && !oldPrTarifarioOfCoDetallesTarifaListNewCoDetallesTarifa.equals(prTarifario)) {
+                        oldPrTarifarioOfCoDetallesTarifaListNewCoDetallesTarifa.getCoDetallesTarifaList().remove(coDetallesTarifaListNewCoDetallesTarifa);
+                        oldPrTarifarioOfCoDetallesTarifaListNewCoDetallesTarifa = em.merge(oldPrTarifarioOfCoDetallesTarifaListNewCoDetallesTarifa);
+                    }
+                }
+            }
+            for (PrDetalleTarifario prDetalleTarifarioListOldPrDetalleTarifario : prDetalleTarifarioListOld) {
+                if (!prDetalleTarifarioListNew.contains(prDetalleTarifarioListOldPrDetalleTarifario)) {
+                    prDetalleTarifarioListOldPrDetalleTarifario.setPrTarifario(null);
+                    prDetalleTarifarioListOldPrDetalleTarifario = em.merge(prDetalleTarifarioListOldPrDetalleTarifario);
+                }
             }
             for (PrDetalleTarifario prDetalleTarifarioListNewPrDetalleTarifario : prDetalleTarifarioListNew) {
                 if (!prDetalleTarifarioListOld.contains(prDetalleTarifarioListNewPrDetalleTarifario)) {
@@ -173,12 +218,12 @@ public class PrTarifarioJpaController implements Serializable {
                 throw new NonexistentEntityException("The prTarifario with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<PrDetalleTarifario> prDetalleTarifarioListOrphanCheck = prTarifario.getPrDetalleTarifarioList();
-            for (PrDetalleTarifario prDetalleTarifarioListOrphanCheckPrDetalleTarifario : prDetalleTarifarioListOrphanCheck) {
+            List<CoDetallesTarifa> coDetallesTarifaListOrphanCheck = prTarifario.getCoDetallesTarifaList();
+            for (CoDetallesTarifa coDetallesTarifaListOrphanCheckCoDetallesTarifa : coDetallesTarifaListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This PrTarifario (" + prTarifario + ") cannot be destroyed since the PrDetalleTarifario " + prDetalleTarifarioListOrphanCheckPrDetalleTarifario + " in its prDetalleTarifarioList field has a non-nullable prTarifario field.");
+                illegalOrphanMessages.add("This PrTarifario (" + prTarifario + ") cannot be destroyed since the CoDetallesTarifa " + coDetallesTarifaListOrphanCheckCoDetallesTarifa + " in its coDetallesTarifaList field has a non-nullable prTarifario field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -187,6 +232,11 @@ public class PrTarifarioJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getPrTarifarioList().remove(prTarifario);
                 seSucursal = em.merge(seSucursal);
+            }
+            List<PrDetalleTarifario> prDetalleTarifarioList = prTarifario.getPrDetalleTarifarioList();
+            for (PrDetalleTarifario prDetalleTarifarioListPrDetalleTarifario : prDetalleTarifarioList) {
+                prDetalleTarifarioListPrDetalleTarifario.setPrTarifario(null);
+                prDetalleTarifarioListPrDetalleTarifario = em.merge(prDetalleTarifarioListPrDetalleTarifario);
             }
             em.remove(prTarifario);
             em.getTransaction().commit();
