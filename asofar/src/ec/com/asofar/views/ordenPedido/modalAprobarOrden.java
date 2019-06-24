@@ -457,7 +457,7 @@ public class modalAprobarOrden extends javax.swing.JDialog {
                 contFilas = i + 1;
                 System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
 
-                detalle.setLineaDetalle(BigInteger.valueOf(contFilas));
+//                detalle.setLineaDetalle(BigInteger.valueOf(contFilas));
 
             }
 
