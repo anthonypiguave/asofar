@@ -8,12 +8,9 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -33,9 +30,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CoDetalleOrdenPedido.findAll", query = "SELECT c FROM CoDetalleOrdenPedido c")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdDetalleOrdenPedido", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idDetalleOrdenPedido = :idDetalleOrdenPedido")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.lineaDetalle = :lineaDetalle")
-    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.idProducto = :idProducto")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdDetalleOrdenPedido", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.idDetalleOrdenPedido = :idDetalleOrdenPedido")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdOrdenPedido", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.idOrdenPedido = :idOrdenPedido")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdEmpresa", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdSurcusal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.idSurcusal = :idSurcusal")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.lineaDetalle = :lineaDetalle")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.idProducto = :idProducto")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByCantidadSolicitada", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.cantidadSolicitada = :cantidadSolicitada")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByEstado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.estado = :estado")
@@ -46,15 +46,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CoDetalleOrdenPedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_detalle_orden_pedido")
-    private Long idDetalleOrdenPedido;
-    @Column(name = "linea_detalle")
-    private BigInteger lineaDetalle;
-    @Column(name = "id_producto")
-    private BigInteger idProducto;
+    @EmbeddedId
+    protected CoDetalleOrdenPedidoPK coDetalleOrdenPedidoPK;
     @Column(name = "descripcion")
     private String descripcion;
     @Column(name = "cantidad_solicitada")
@@ -72,41 +65,29 @@ public class CoDetalleOrdenPedido implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_orden_pedido", referencedColumnName = "id_orden_pedido")
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
-        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal")})
-    @ManyToOne
+        @JoinColumn(name = "id_orden_pedido", referencedColumnName = "id_orden_pedido", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
     private CoOrdenPedido coOrdenPedido;
 
     public CoDetalleOrdenPedido() {
     }
 
-    public CoDetalleOrdenPedido(Long idDetalleOrdenPedido) {
-        this.idDetalleOrdenPedido = idDetalleOrdenPedido;
+    public CoDetalleOrdenPedido(CoDetalleOrdenPedidoPK coDetalleOrdenPedidoPK) {
+        this.coDetalleOrdenPedidoPK = coDetalleOrdenPedidoPK;
     }
 
-    public Long getIdDetalleOrdenPedido() {
-        return idDetalleOrdenPedido;
+    public CoDetalleOrdenPedido(long idDetalleOrdenPedido, long idOrdenPedido, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto) {
+        this.coDetalleOrdenPedidoPK = new CoDetalleOrdenPedidoPK(idDetalleOrdenPedido, idOrdenPedido, idEmpresa, idSurcusal, lineaDetalle, idProducto);
     }
 
-    public void setIdDetalleOrdenPedido(Long idDetalleOrdenPedido) {
-        this.idDetalleOrdenPedido = idDetalleOrdenPedido;
+    public CoDetalleOrdenPedidoPK getCoDetalleOrdenPedidoPK() {
+        return coDetalleOrdenPedidoPK;
     }
 
-    public BigInteger getLineaDetalle() {
-        return lineaDetalle;
-    }
-
-    public void setLineaDetalle(BigInteger lineaDetalle) {
-        this.lineaDetalle = lineaDetalle;
-    }
-
-    public BigInteger getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(BigInteger idProducto) {
-        this.idProducto = idProducto;
+    public void setCoDetalleOrdenPedidoPK(CoDetalleOrdenPedidoPK coDetalleOrdenPedidoPK) {
+        this.coDetalleOrdenPedidoPK = coDetalleOrdenPedidoPK;
     }
 
     public String getDescripcion() {
@@ -176,7 +157,7 @@ public class CoDetalleOrdenPedido implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDetalleOrdenPedido != null ? idDetalleOrdenPedido.hashCode() : 0);
+        hash += (coDetalleOrdenPedidoPK != null ? coDetalleOrdenPedidoPK.hashCode() : 0);
         return hash;
     }
 
@@ -187,7 +168,7 @@ public class CoDetalleOrdenPedido implements Serializable {
             return false;
         }
         CoDetalleOrdenPedido other = (CoDetalleOrdenPedido) object;
-        if ((this.idDetalleOrdenPedido == null && other.idDetalleOrdenPedido != null) || (this.idDetalleOrdenPedido != null && !this.idDetalleOrdenPedido.equals(other.idDetalleOrdenPedido))) {
+        if ((this.coDetalleOrdenPedidoPK == null && other.coDetalleOrdenPedidoPK != null) || (this.coDetalleOrdenPedidoPK != null && !this.coDetalleOrdenPedidoPK.equals(other.coDetalleOrdenPedidoPK))) {
             return false;
         }
         return true;
@@ -195,7 +176,7 @@ public class CoDetalleOrdenPedido implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetalleOrdenPedido[ idDetalleOrdenPedido=" + idDetalleOrdenPedido + " ]";
+        return "ec.com.asofar.dto.CoDetalleOrdenPedido[ coDetalleOrdenPedidoPK=" + coDetalleOrdenPedidoPK + " ]";
     }
     
 }

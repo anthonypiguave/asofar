@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.dao;
 
+import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -43,8 +44,8 @@ public class CoOrdenPedidoJpaController implements Serializable {
         if (coOrdenPedido.getCoDetalleOrdenPedidoList() == null) {
             coOrdenPedido.setCoDetalleOrdenPedidoList(new ArrayList<CoDetalleOrdenPedido>());
         }
-        coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -56,7 +57,7 @@ public class CoOrdenPedidoJpaController implements Serializable {
             }
             List<CoDetalleOrdenPedido> attachedCoDetalleOrdenPedidoList = new ArrayList<CoDetalleOrdenPedido>();
             for (CoDetalleOrdenPedido coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach : coOrdenPedido.getCoDetalleOrdenPedidoList()) {
-                coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenPedido());
+                coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach.getCoDetalleOrdenPedidoPK());
                 attachedCoDetalleOrdenPedidoList.add(coDetalleOrdenPedidoListCoDetalleOrdenPedidoToAttach);
             }
             coOrdenPedido.setCoDetalleOrdenPedidoList(attachedCoDetalleOrdenPedidoList);
@@ -87,9 +88,9 @@ public class CoOrdenPedidoJpaController implements Serializable {
         }
     }
 
-    public void edit(CoOrdenPedido coOrdenPedido) throws NonexistentEntityException, Exception {
-        coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+    public void edit(CoOrdenPedido coOrdenPedido) throws IllegalOrphanException, NonexistentEntityException, Exception {
         coOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        coOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(coOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,13 +100,25 @@ public class CoOrdenPedidoJpaController implements Serializable {
             SeSucursal seSucursalNew = coOrdenPedido.getSeSucursal();
             List<CoDetalleOrdenPedido> coDetalleOrdenPedidoListOld = persistentCoOrdenPedido.getCoDetalleOrdenPedidoList();
             List<CoDetalleOrdenPedido> coDetalleOrdenPedidoListNew = coOrdenPedido.getCoDetalleOrdenPedidoList();
+            List<String> illegalOrphanMessages = null;
+            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListOldCoDetalleOrdenPedido : coDetalleOrdenPedidoListOld) {
+                if (!coDetalleOrdenPedidoListNew.contains(coDetalleOrdenPedidoListOldCoDetalleOrdenPedido)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain CoDetalleOrdenPedido " + coDetalleOrdenPedidoListOldCoDetalleOrdenPedido + " since its coOrdenPedido field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 coOrdenPedido.setSeSucursal(seSucursalNew);
             }
             List<CoDetalleOrdenPedido> attachedCoDetalleOrdenPedidoListNew = new ArrayList<CoDetalleOrdenPedido>();
             for (CoDetalleOrdenPedido coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach : coDetalleOrdenPedidoListNew) {
-                coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getIdDetalleOrdenPedido());
+                coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach = em.getReference(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getClass(), coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach.getCoDetalleOrdenPedidoPK());
                 attachedCoDetalleOrdenPedidoListNew.add(coDetalleOrdenPedidoListNewCoDetalleOrdenPedidoToAttach);
             }
             coDetalleOrdenPedidoListNew = attachedCoDetalleOrdenPedidoListNew;
@@ -118,12 +131,6 @@ public class CoOrdenPedidoJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getCoOrdenPedidoList().add(coOrdenPedido);
                 seSucursalNew = em.merge(seSucursalNew);
-            }
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListOldCoDetalleOrdenPedido : coDetalleOrdenPedidoListOld) {
-                if (!coDetalleOrdenPedidoListNew.contains(coDetalleOrdenPedidoListOldCoDetalleOrdenPedido)) {
-                    coDetalleOrdenPedidoListOldCoDetalleOrdenPedido.setCoOrdenPedido(null);
-                    coDetalleOrdenPedidoListOldCoDetalleOrdenPedido = em.merge(coDetalleOrdenPedidoListOldCoDetalleOrdenPedido);
-                }
             }
             for (CoDetalleOrdenPedido coDetalleOrdenPedidoListNewCoDetalleOrdenPedido : coDetalleOrdenPedidoListNew) {
                 if (!coDetalleOrdenPedidoListOld.contains(coDetalleOrdenPedidoListNewCoDetalleOrdenPedido)) {
@@ -153,7 +160,7 @@ public class CoOrdenPedidoJpaController implements Serializable {
         }
     }
 
-    public void destroy(CoOrdenPedidoPK id) throws NonexistentEntityException {
+    public void destroy(CoOrdenPedidoPK id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -165,15 +172,21 @@ public class CoOrdenPedidoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The coOrdenPedido with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            List<CoDetalleOrdenPedido> coDetalleOrdenPedidoListOrphanCheck = coOrdenPedido.getCoDetalleOrdenPedidoList();
+            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListOrphanCheckCoDetalleOrdenPedido : coDetalleOrdenPedidoListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This CoOrdenPedido (" + coOrdenPedido + ") cannot be destroyed since the CoDetalleOrdenPedido " + coDetalleOrdenPedidoListOrphanCheckCoDetalleOrdenPedido + " in its coDetalleOrdenPedidoList field has a non-nullable coOrdenPedido field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             SeSucursal seSucursal = coOrdenPedido.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal.getCoOrdenPedidoList().remove(coOrdenPedido);
                 seSucursal = em.merge(seSucursal);
-            }
-            List<CoDetalleOrdenPedido> coDetalleOrdenPedidoList = coOrdenPedido.getCoDetalleOrdenPedidoList();
-            for (CoDetalleOrdenPedido coDetalleOrdenPedidoListCoDetalleOrdenPedido : coDetalleOrdenPedidoList) {
-                coDetalleOrdenPedidoListCoDetalleOrdenPedido.setCoOrdenPedido(null);
-                coDetalleOrdenPedidoListCoDetalleOrdenPedido = em.merge(coDetalleOrdenPedidoListCoDetalleOrdenPedido);
             }
             em.remove(coOrdenPedido);
             em.getTransaction().commit();

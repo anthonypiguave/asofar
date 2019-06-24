@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -76,7 +77,7 @@ public class CoOrdenPedido implements Serializable {
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @OneToMany(mappedBy = "coOrdenPedido")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coOrdenPedido")
     private List<CoDetalleOrdenPedido> coDetalleOrdenPedidoList;
 
     public CoOrdenPedido() {

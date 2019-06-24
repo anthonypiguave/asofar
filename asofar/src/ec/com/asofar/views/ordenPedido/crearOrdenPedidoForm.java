@@ -13,6 +13,7 @@ import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
+import ec.com.asofar.dto.CoDetalleOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido_;
@@ -86,8 +87,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         tiempo.start();
 
     }
-    
-  
 
     public crearOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
@@ -438,15 +437,16 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         cproducto.setVisible(true);
 
         objetopro = cproducto.getProducto();
+    
         if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
             JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
 
             CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-
-            detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
+          
+            detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+            detalle.getCoDetalleOrdenPedidoPK().setIdProducto(objetopro.getPrProductosPK().getIdProducto());
             detalle.setDescripcion(objetopro.getNombreProducto());
-
             detalle.setCantidadSolicitada(BigInteger.valueOf(0));
 
             listadet.add(detalle);
@@ -455,7 +455,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 contFilas = i + 1;
                 System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
 
-                detalle.setLineaDetalle(BigInteger.valueOf(contFilas));
+                detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
 
             }
 
@@ -480,7 +480,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                         contFilas = contFilas - 1;
                         for (int j = 0; j < listadet.size(); j++) {
                             contFilas = j + 1;
-                            listadet.get(j).setLineaDetalle(BigInteger.valueOf(contFilas));
+                            listadet.get(j).getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
 
                         }
                         Tablas.llenarDetalledeOrden(jTable1, listadet);
@@ -526,8 +526,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                     for (int i = 0; i < listadet.size(); i++) {
                         detOrden.setCoOrdenPedido(pk);
                         detOrden.setCantidadSolicitada(listadet.get(i).getCantidadSolicitada());
-                        detOrden.setIdProducto(listadet.get(i).getIdProducto());
-                        detOrden.setLineaDetalle(listadet.get(i).getLineaDetalle());
+                        detOrden.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+                        detOrden.getCoDetalleOrdenPedidoPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
+                        detOrden.getCoDetalleOrdenPedidoPK().setLineaDetalle(listadet.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle());
                         detOrden.setEstado("P");
                         detOrden.setFechaCreacion(d);
                         detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
@@ -574,7 +575,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             BigInteger cantidad = new BigInteger(valor);
 
             listadet.get(i).setCantidadSolicitada(cantidad);
-            
 
         } catch (Exception e) {
         }
@@ -585,8 +585,8 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
         for (int i = 0; i < listadet.size(); i++) {
 
-            if (datos.equals((listadet.get(i).getIdProducto()).toString())) {
-                System.out.println("lista si " + listadet.get(i).getIdProducto());
+            if (datos.equals(""+(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
+                System.out.println("lista si " + listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                 obj1 = "si";
 
                 break;

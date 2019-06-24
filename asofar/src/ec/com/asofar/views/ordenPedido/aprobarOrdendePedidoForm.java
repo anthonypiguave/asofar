@@ -1,6 +1,7 @@
 package ec.com.asofar.views.ordenPedido;
-
+import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
+import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -20,25 +21,19 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     SeEmpresa em1;
     SeSucursal su1;
 
-    CoOrdenPedido co;
+    CoOrdenPedido objeto = new CoOrdenPedido();
+
     List<CoOrdenPedido> lista;
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+   
+    List<CoDetalleOrdenPedido> lista2;
+    CoDetalleOrdenPedidoJpaController odetalleController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         cargarMostrarTabla();
-    }
-
-    public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
-        initComponents();
-        this.setLocationRelativeTo(null);
-        cargarMostrarTabla();
-        us1 = us;
-        em1 = em;
-        su1 = su;
     }
 
     @SuppressWarnings("unchecked")
@@ -118,22 +113,12 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         });
 
         txtfiltro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtfiltro.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtfiltroFocusLost(evt);
-            }
-        });
-        txtfiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfiltroActionPerformed(evt);
-            }
-        });
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtfiltroKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
             }
         });
 
@@ -205,14 +190,6 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_btnsalirActionPerformed
 
-    private void txtfiltroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfiltroFocusLost
-
-    }//GEN-LAST:event_txtfiltroFocusLost
-
-    private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfiltroActionPerformed
-
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
         char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
@@ -229,33 +206,50 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
     private void tbAprobarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAprobarMousePressed
 
-        int id = 0;
-        co = null;
+        int i = 0;
+
         if (evt.getClickCount() == 2) {
-            id = tbAprobar.getSelectedRow();
-            for (int i = 0; i < lista.size(); i++) {
-                if ((tbAprobar.getValueAt(id, 1).toString().equals(lista.get(i).getCoOrdenPedidoPK().getIdOrdenPedido()))) {
-                      
-                    co = lista.get(i);
-                    System.out.println("co1 "+co);
+            i = tbAprobar.getSelectedRow();
+            objeto = devuelveObjeto(tbAprobar.getValueAt(i, 0).toString(), lista);
 
-                    if (co != null) {
-                        System.out.println("co2 "+co);
-                        setVisible(false);
-                        modalAprobarOrden es = new modalAprobarOrden(new javax.swing.JFrame(), true);
-                        es.setVisible(true);
-                    }
-                }
+            if (objeto != null) {
+
+//                this.setVisible(false);
+                System.out.println(" datos tomado " + objeto.getCoOrdenPedidoPK());
+
             }
-
         }
+
+
     }//GEN-LAST:event_tbAprobarMousePressed
+
+    public CoOrdenPedido devuelveObjeto(String datos, List<CoOrdenPedido> listarobj) {
+        CoOrdenPedido objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            System.out.println("id " + datos);
+            if (datos.equals("" + listarobj.get(i).getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
+    }
 
     private void cargarMostrarTabla() {
         try {
 
             lista = cbOrdenController.findCoOrdenPedidoEntities();
             Tablas.listarCabOrdendePedido(lista, tbAprobar);
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void cargarMostrarTablaDetalle() {
+        try {
+
+            lista2 = odetalleController.findCoDetalleOrdenPedidoEntities();
+
         } catch (Exception e) {
 
         }

@@ -222,8 +222,8 @@ public class Tablas {
                 vo = lista.get(i);
 //                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
 
-                filas[0] = lista.get(i).getLineaDetalle().toString();
-                filas[1] = lista.get(i).getIdProducto().toString();
+                filas[0] = lista.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle();
+                filas[1] = lista.get(i).getCoDetalleOrdenPedidoPK().getIdProducto();
                 filas[2] = lista.get(i).getDescripcion();
                 filas[3] = lista.get(i).getCantidadSolicitada();
 
