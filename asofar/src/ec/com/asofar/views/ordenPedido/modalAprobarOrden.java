@@ -446,7 +446,7 @@ public class modalAprobarOrden extends javax.swing.JDialog {
 
             CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
 
-            detalle.setIdProducto(BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
+//            (BigInteger.valueOf(objetopro.getPrProductosPK().getIdProducto()));
             detalle.setDescripcion(objetopro.getNombreProducto());
 
             detalle.setCantidadSolicitada(BigInteger.valueOf(0));
