@@ -31,6 +31,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
     PrPrestaciones prestacionesP = new PrPrestaciones();
     PrPrestaciones objeto;
     List<PrPrestaciones> prestacion;
+    
     PrPrestaciones prc;
     PrPrestaciones prpk;
     SeUsuarios usu;
