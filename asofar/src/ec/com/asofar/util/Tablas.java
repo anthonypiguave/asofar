@@ -17,6 +17,7 @@ import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InMotivos;
+import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
@@ -1744,7 +1745,40 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
 
         }
+        
     }
+        public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
+        int[] a = {100, 125, 130, 40};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO"};
+        String[] filas = new String[4];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listapresporserv.size(); i++) {
+            filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
+            filas[1] = listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion();
+            filas[2] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
+            filas[3] = listapresporserv.get(i).getEstado();
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        }
+
+        
+    }
+    
+    
 
     public static void listarCabOrdendePedido(List<CoOrdenPedido> lista, JTable Tabla) {
         int[] a = {5, 5, 5, 20, 15};
@@ -1778,5 +1812,7 @@ public class Tablas {
             }
         }
 
+        
+        
     }
 }
