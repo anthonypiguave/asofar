@@ -6,9 +6,11 @@
 package ec.com.asofar.views.prestaciones;
 
 import ec.com.asofar.dao.PrPrestacionesJpaController;
+import ec.com.asofar.dao.PrTipoPrestacionJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.PrTipoPrestacion;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
@@ -16,6 +18,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigInteger;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,10 +31,14 @@ public class AgregarPrestacion extends javax.swing.JDialog {
 
     PrProductos proc;
     PrPrestaciones presta = new PrPrestaciones();
+    List<PrTipoPrestacion> TipoP;
+    PrTipoPrestacion pol = new PrTipoPrestacion();
+    PrTipoPrestacionJpaController ti = new PrTipoPrestacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrPrestacionesJpaController pr = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+    Long id;
     int x, y;
 
     /**
@@ -41,6 +48,9 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
+        TipoP = ti.findPrTipoPrestacionEntities();
+        llenarTipoPrestacion(TipoP);
+
     }
 
     public AgregarPrestacion(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -48,6 +58,8 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
+        TipoP = ti.findPrTipoPrestacionEntities();
+        llenarTipoPrestacion(TipoP);
         usu = us;
         emp = em;
         suc = su;
@@ -83,13 +95,12 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         jLabel1.setText("TIPO DE PRESTACIONES:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setText("NOMBRE DE PRODUCTO:");
+        jLabel2.setText("NOMBRE DE PRESTACION:");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("APLICA IVA:");
 
         cmbxIG.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        cmbxIG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inventario", "Generico" }));
         cmbxIG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbxIGActionPerformed(evt);
@@ -187,7 +198,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscarP, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtProduc, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(60, 60, 60)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbxSN, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,14 +228,14 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         cp.setVisible(true);
         proc = cp.getProducto();
         txtProduc.setText(proc.getNombreProducto());
-
+        id = proc.getPrProductosPK().getIdProducto();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnbuscarPActionPerformed
     public int bloqueo() {
         int bloqueo;
         String selecciona = (String) cmbxIG.getSelectedItem();
         System.out.println(selecciona);
-        if (selecciona.equals("Generico")) {
+        if (selecciona.equals("generico")) {
             btnbuscarP.setEnabled(false);
         } else {
             btnbuscarP.setEnabled(true);
@@ -233,28 +244,35 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         return 1;
 
     }
+
+    public void llenarTipoPrestacion(List<PrTipoPrestacion> TipoP) {
+        for (int i = 0; i < TipoP.size(); i++) {
+
+            cmbxIG.addItem(TipoP.get(i).getNombre());
+
+        }
+    }
+
     private void cmbxIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxIGActionPerformed
         bloqueo();
     }//GEN-LAST:event_cmbxIGActionPerformed
 
     private void btngrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngrabarActionPerformed
         PrPrestaciones PRE = new PrPrestaciones();
-
-//        PRE = ObtenerDTO.ObtenerPrPrestaciones(cmbxIG.getSelectedItem().toString());
-        PrPrestaciones prestac = new PrPrestaciones();
-        presta.setNombrePrestacion(cmbxIG.getSelectedItem().toString());
-        System.out.println("nombre prestacion " + cmbxIG.getSelectedItem().toString());
-//        System.out.println("hola"+PRE.getNombrePrestacion());
-//        prestac.setIdEmpresa(emp.getIdEmpresa());
-        presta.setEstado("A");
-        presta.setIdPoducto(BigInteger.valueOf(proc.getPrProductosPK().getIdProducto()));
-        System.out.println("la tia de nelio " + BigInteger.valueOf(proc.getPrProductosPK().getIdProducto()));
-        System.out.println(txtProduc.getText());
-        presta.setAplicaIva(cmbxSN.getSelectedItem().toString());
-        System.out.println(cmbxSN.getSelectedItem().toString());
+         java.util.Date fechaActual = new java.util.Date();
+//        id_tipo_prestacion nombreusuario_creacionestadofecha_creacion
+        pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
+        PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
+        PRE.setEstado("A");
+        PRE.setNombrePrestacion(txtProduc.getText());
+        PRE.setIdTipoPrestacion(pol);
+        PRE.setIdPoducto(BigInteger.valueOf(id));
+        PRE.setUsuarioCreacion(usu.getNombreUsuario());
+        PRE.setIdEmpresa(emp);
+        PRE.setFechaCreacion(fechaActual);
 
         try {
-            pr.create(presta);
+            pr.create(PRE);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception e) {

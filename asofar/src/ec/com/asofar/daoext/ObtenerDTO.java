@@ -31,6 +31,7 @@ import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.PrTipoPrestacion;
 import ec.com.asofar.dto.SeCiudad;
 import ec.com.asofar.dto.SePais;
 import ec.com.asofar.dto.SeProvincia;
@@ -811,5 +812,20 @@ public class ObtenerDTO {
             }
         }
         return dto;
+    }
+        public static PrTipoPrestacion ObtenerPrTipoPrestacion(String nombre) {
+        PrTipoPrestacionJpaController control = new PrTipoPrestacionJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrTipoPrestacion dto = new PrTipoPrestacion();
+        List<PrTipoPrestacion> lista = control.findPrTipoPrestacionEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
     }
 }
