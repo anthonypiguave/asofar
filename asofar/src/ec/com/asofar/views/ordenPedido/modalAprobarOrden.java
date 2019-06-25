@@ -482,7 +482,7 @@ public class modalAprobarOrden extends javax.swing.JDialog {
                         contFilas = contFilas - 1;
                         for (int j = 0; j < listadet.size(); j++) {
                             contFilas = j + 1;
-                            listadet.get(j).setLineaDetalle(BigInteger.valueOf(contFilas));
+//                            listadet.get(j).setLineaDetalle(BigInteger.valueOf(contFilas));
 
                         }
                         Tablas.llenarDetalledeOrden(jTable1, listadet);
@@ -528,8 +528,8 @@ public class modalAprobarOrden extends javax.swing.JDialog {
                     for (int i = 0; i < listadet.size(); i++) {
                         detOrden.setCoOrdenPedido(pk);
                         detOrden.setCantidadSolicitada(listadet.get(i).getCantidadSolicitada());
-                        detOrden.setIdProducto(listadet.get(i).getIdProducto());
-                        detOrden.setLineaDetalle(listadet.get(i).getLineaDetalle());
+//                        detOrden.setIdProducto(listadet.get(i).getIdProducto());
+//                        detOrden.setLineaDetalle(listadet.get(i).getLineaDetalle());
                         detOrden.setEstado("P");
                         detOrden.setFechaCreacion(d);
                         detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
@@ -585,16 +585,16 @@ public class modalAprobarOrden extends javax.swing.JDialog {
     public String validarProductos(String datos) {
         String obj1 = "no";
 
-        for (int i = 0; i < listadet.size(); i++) {
-
-            if (datos.equals((listadet.get(i).getIdProducto()).toString())) {
-                System.out.println("lista si " + listadet.get(i).getIdProducto());
-                obj1 = "si";
-
-                break;
-            }
-
-        }
+//        for (int i = 0; i < listadet.size(); i++) {
+//
+//            if (datos.equals((listadet.get(i).getIdProducto()).toString())) {
+//                System.out.println("lista si " + listadet.get(i).getIdProducto());
+//                obj1 = "si";
+//
+//                break;
+//            }
+//
+//        }
 
         return obj1;
 
