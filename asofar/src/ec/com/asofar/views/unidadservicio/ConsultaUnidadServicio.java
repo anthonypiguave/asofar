@@ -309,7 +309,10 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void JbAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbAgregar1ActionPerformed
-        // TODO add your handling code here:
+       setVisible(false);
+        Ingresarservicio ag = new Ingresarservicio(new javax.swing.JFrame(), true);
+        ag.setVisible(true);
+
     }//GEN-LAST:event_JbAgregar1ActionPerformed
 
     private void tba_unidad_servicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_unidad_servicioMousePressed
