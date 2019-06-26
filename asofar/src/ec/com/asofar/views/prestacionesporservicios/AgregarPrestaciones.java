@@ -5,7 +5,16 @@
  */
 package ec.com.asofar.views.prestacionesporservicios;
 
+import ec.com.asofar.dao.PrPrestacionesJpaController;
+import ec.com.asofar.dao.VeUnidadServicioJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
+import ec.com.asofar.dto.PrPrestaciones;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeUnidadServicio;
+import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 
 /**
@@ -15,11 +24,18 @@ import java.util.List;
 // 26-06
 public class AgregarPrestaciones extends javax.swing.JDialog {
 
+     PrPrestaciones pol1 = new PrPrestaciones(); 
+   
+    PrPrestacionesJpaController pr = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<PrPrestaciones> pr2;
+
+    VeUnidadServicioJpaController us1 = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<VeUnidadServicio> us2;
 
     /**
      * Creates new form AgregarPrestaciones
      */
-   // 26-06-19
+    // 26-06-19
 //    public int bloqueo() {
 //       
 //        int bloqueo;
@@ -33,7 +49,25 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     public AgregarPrestaciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-      
+        setLocationRelativeTo(null);
+        pr2 = pr.findPrPrestacionesEntities();
+        nombrePrestacion(pr2);
+
+        us2 = us1.findVeUnidadServicioEntities();
+        nombreUnidad(us2);
+
+    }
+
+    public AgregarPrestaciones(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        pr2 = pr.findPrPrestacionesEntities();
+        nombrePrestacion(pr2);
+
+        us2 = us1.findVeUnidadServicioEntities();
+        nombreUnidad(us2);
+
     }
 
     /**
@@ -46,27 +80,34 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cbxpxs = new javax.swing.JComboBox<>();
+        cbxprestacion = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbxpxs2 = new javax.swing.JComboBox<>();
+        cbxunidadservicio = new javax.swing.JComboBox<>();
         jguardarpreser = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        cbxpxs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxpxs.addActionListener(new java.awt.event.ActionListener() {
+        cbxprestacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxpxsActionPerformed(evt);
+                cbxprestacionActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Prestacion");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Unidad de Servicio");
 
-        cbxpxs2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxunidadservicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxunidadservicioActionPerformed(evt);
+            }
+        });
 
+        jguardarpreser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jguardarpreser.setText("Guardar");
         jguardarpreser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,48 +119,68 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxpxs, 0, 151, Short.MAX_VALUE)
-                    .addComponent(cbxpxs2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(48, 48, 48))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxunidadservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxprestacion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxpxs, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxpxs2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jguardarpreser, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxprestacion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxunidadservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        jLabel4.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("PRESTACIONES - SERVICIO");
+        jLabel4.setAutoscrolls(true);
+        jLabel4.setOpaque(true);
+        jLabel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel4MouseDragged(evt);
+            }
+        });
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -127,16 +188,54 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        
+
     private void jguardarpreserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jguardarpreserActionPerformed
-   
+       
+        PrPrestaciones pre = new PrPrestaciones();
+        java.util.Date fechaActual = new java.util.Date();
+        System.out.println(" " + ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString()));
+        System.out.println(" " + ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString()));
+        pol1 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString())
+        
+
+        
     }//GEN-LAST:event_jguardarpreserActionPerformed
 
-        
-    private void cbxpxsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxpxsActionPerformed
+    public void nombrePrestacion(List<PrPrestaciones> pr2) {
 
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxpxsActionPerformed
+       
+       for (int i = 0; i < pr2.size(); i++) {
+
+            cbxprestacion.addItem(pr2.get(i).getNombrePrestacion());
+
+        }
+
+    }
+
+    public void nombreUnidad(List<VeUnidadServicio> us2) {
+        for (int i = 0; i < us2.size(); i++) {
+
+            cbxunidadservicio.addItem(us2.get(i).getNombreUnidadServicio());
+
+        }
+    }
+    private void cbxprestacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxprestacionActionPerformed
+
+
+    }//GEN-LAST:event_cbxprestacionActionPerformed
+
+    private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
+
+    }//GEN-LAST:event_jLabel4MouseDragged
+
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+
+    }//GEN-LAST:event_jLabel4MousePressed
+
+    private void cbxunidadservicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxunidadservicioActionPerformed
+
+
+    }//GEN-LAST:event_cbxunidadservicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,10 +280,11 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbxpxs;
-    private javax.swing.JComboBox<String> cbxpxs2;
+    private javax.swing.JComboBox<String> cbxprestacion;
+    private javax.swing.JComboBox<String> cbxunidadservicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jguardarpreser;
     // End of variables declaration//GEN-END:variables

@@ -7,6 +7,9 @@ package ec.com.asofar.views.prestacionesporservicios;
 
 import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
@@ -15,14 +18,21 @@ import java.util.List;
  *
  * @author Humbertoezequiel
  */
-public class ConsultaPrestacionporservicio extends javax.swing.JFrame {
+public class Consulta extends javax.swing.JDialog {
 
+    /**
+     * Creates new form Consulta
+     */
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
     List<InPrestacionesPorServicios> listapresporserv;
-    InPrestacionesPorServiciosJpaController preposer = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager()); 
+    InPrestacionesPorServiciosJpaController preposer = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-    public ConsultaPrestacionporservicio() {
+    public Consulta(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-         listapresporserv =preposer.findInPrestacionesPorServiciosEntities();
+        listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
         Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
     }
 
@@ -41,7 +51,7 @@ public class ConsultaPrestacionporservicio extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tba_prestacionesporservicios = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setBackground(new java.awt.Color(255, 102, 0));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
@@ -105,7 +115,7 @@ public class ConsultaPrestacionporservicio extends javax.swing.JFrame {
                 .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,11 +145,13 @@ public class ConsultaPrestacionporservicio extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
 
         setVisible(false);
-        AgregarPrestaciones ag = new AgregarPrestaciones(new javax.swing.JFrame(), true);
+        AgregarPrestaciones ag = new AgregarPrestaciones(new javax.swing.JFrame(), true, usu, emp, suc);
         ag.setVisible(true);
-        
     }//GEN-LAST:event_agregarActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -154,21 +166,27 @@ public class ConsultaPrestacionporservicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPrestacionporservicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPrestacionporservicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPrestacionporservicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPrestacionporservicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaPrestacionporservicio().setVisible(true);
+                Consulta dialog = new Consulta(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
