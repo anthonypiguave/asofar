@@ -1534,7 +1534,7 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacliente.size(); i++) {
-            if (listacliente.get(i).getEstado().equals('A')) {
+            if (listacliente.get(i).getEstado().equals("A")) {
                 filas[0] = String.valueOf(listacliente.get(i).getIdClientes());
                 filas[1] = listacliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion();
                 filas[2] = listacliente.get(i).getNumeroIdentificacion();
@@ -1638,7 +1638,7 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listacliente.size(); i++) {
-            if (listacliente.get(i).getEstado().equals('I')) {
+            if (listacliente.get(i).getEstado().equals("I")) {
                 filas[0] = String.valueOf(listacliente.get(i).getIdClientes());
                 filas[1] = listacliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion();
                 filas[2] = listacliente.get(i).getNumeroIdentificacion();
@@ -1746,7 +1746,40 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
 
         }
+        
     }
+        public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
+        int[] a = {100, 125, 130, 40};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO"};
+        String[] filas = new String[4];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listapresporserv.size(); i++) {
+            filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
+            filas[1] = listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion();
+            filas[2] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
+            filas[3] = listapresporserv.get(i).getEstado();
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        }
+
+        
+    }
+    
+    
 
     public static void listarCabOrdendePedido(List<CoOrdenPedido> lista, JTable Tabla) {
         int[] a = {5, 5, 5, 20, 15};
@@ -1780,6 +1813,8 @@ public class Tablas {
             }
         }
 
+        
+        
     }
 
     public static void listarDetalleTarifario(List<CoDetallesTarifa> listaprestacionesPSO, JTable Tabla) {
