@@ -195,7 +195,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
         System.out.println(" " + ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString()));
         System.out.println(" " + ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString()));
-        pol1 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString())
+        pol1 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString()); 
         
 
         
