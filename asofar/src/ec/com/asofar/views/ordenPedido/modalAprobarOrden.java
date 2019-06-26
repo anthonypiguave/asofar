@@ -108,8 +108,8 @@ public class modalAprobarOrden extends javax.swing.JDialog {
         cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
         
         
-        dOrden.setCoDetalleOrdenPedidoPK( new CoDetalleOrdenPedidoPK());
-        dOrden.getCoDetalleOrdenPedidoPK().setIdOrdenPedido(cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
+//        dOrden.setCoDetalleOrdenPedidoPK( new CoDetalleOrdenPedidoPK());
+//        dOrden.getCoDetalleOrdenPedidoPK().setIdOrdenPedido(cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
         
         
 //        listadet = detordencontroller.findCoDetalleOrdenPedido(dOrden);
