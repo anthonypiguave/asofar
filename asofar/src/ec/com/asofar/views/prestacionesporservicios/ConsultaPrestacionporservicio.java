@@ -137,7 +137,7 @@ public class ConsultaPrestacionporservicio extends javax.swing.JFrame {
         setVisible(false);
         AgregarPrestaciones ag = new AgregarPrestaciones(new javax.swing.JFrame(), true);
         ag.setVisible(true);
-
+        
     }//GEN-LAST:event_agregarActionPerformed
 
     public static void main(String args[]) {
