@@ -14,7 +14,7 @@ import java.util.List;
  */
 // 26-06
 public class AgregarPrestaciones extends javax.swing.JDialog {
-    List<InPrestacionesPorServicios> listapresporserv;
+
 
     /**
      * Creates new form AgregarPrestaciones
@@ -33,7 +33,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     public AgregarPrestaciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        llenarPrestacion(listapresporserv);
+      
     }
 
     /**
@@ -131,14 +131,8 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private void jguardarpreserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jguardarpreserActionPerformed
    
     }//GEN-LAST:event_jguardarpreserActionPerformed
-// 26-06
-     public void llenarPrestacion (List<InPrestacionesPorServicios> listapresporserv) {
-        for (int i = 0; i < listapresporserv.size(); i++) {
 
-            cbxpxs.addItem(listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion());
-
-        }
-        }
+        
     private void cbxpxsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxpxsActionPerformed
 
         // TODO add your handling code here:
