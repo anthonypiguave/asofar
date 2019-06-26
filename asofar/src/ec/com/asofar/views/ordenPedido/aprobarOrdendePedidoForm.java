@@ -1,4 +1,5 @@
 package ec.com.asofar.views.ordenPedido;
+
 import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
@@ -17,17 +18,12 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     int x, y;
     String valor = "";
 
-    SeUsuarios us1;
-    SeEmpresa em1;
-    SeSucursal su1;
 
     CoOrdenPedido objeto = new CoOrdenPedido();
 
     List<CoOrdenPedido> lista;
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-   
-    List<CoDetalleOrdenPedido> lista2;
-    CoDetalleOrdenPedidoJpaController odetalleController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
 
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -217,6 +213,11 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 //                this.setVisible(false);
                 System.out.println(" datos tomado " + objeto.getCoOrdenPedidoPK());
 
+                this.setVisible(false);
+
+                modalAprobarOrden aprobarOrden = new modalAprobarOrden(new javax.swing.JFrame(), true,  objeto);
+                aprobarOrden.setVisible(true);
+
             }
         }
 
@@ -235,6 +236,10 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         return objeto1;
     }
 
+    public CoOrdenPedido getOrdenPedido() {
+        return objeto;
+    }
+
     private void cargarMostrarTabla() {
         try {
 
@@ -243,17 +248,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         } catch (Exception e) {
 
         }
-        
-    }
 
-    private void cargarMostrarTablaDetalle() {
-        try {
-
-            lista2 = odetalleController.findCoDetalleOrdenPedidoEntities();
-
-        } catch (Exception e) {
-
-        }
     }
 
     public static void main(String args[]) {

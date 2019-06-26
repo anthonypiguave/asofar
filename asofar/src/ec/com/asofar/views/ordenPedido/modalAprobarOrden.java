@@ -13,6 +13,7 @@ import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
+import ec.com.asofar.dto.CoDetalleOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido_;
@@ -62,8 +63,11 @@ public class modalAprobarOrden extends javax.swing.JDialog {
     ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    CoDetalleOrdenPedidoJpaController detordencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    
     CoOrdenPedido cOrden;
+    CoDetalleOrdenPedido dOrden;
+    
     OrdenPedidoDaoExt idCabecera = new OrdenPedidoDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
@@ -86,10 +90,8 @@ public class modalAprobarOrden extends javax.swing.JDialog {
         tiempo.start();
 
     }
-    
-  
 
-    public modalAprobarOrden(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public modalAprobarOrden(java.awt.Frame parent, boolean modal, CoOrdenPedido objeto) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -97,10 +99,31 @@ public class modalAprobarOrden extends javax.swing.JDialog {
         CargarProveedor();
         CargarDocumento();
 
-        seUsuario = us;
-        seEmpresa = em;
-        seSucursal = su;
+        cOrden = objeto;
 
+        txtCod.setText("" + cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
+        txtObservacion.setText(cOrden.getObservacion());
+
+        cbxProveedor.setSelectedIndex(cOrden.getIdProveedor().intValue());
+        cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
+        
+        
+        dOrden.setCoDetalleOrdenPedidoPK( new CoDetalleOrdenPedidoPK());
+        dOrden.getCoDetalleOrdenPedidoPK().setIdOrdenPedido(cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
+        
+        
+//        listadet = detordencontroller.findCoDetalleOrdenPedido(dOrden);
+        
+        
+        for (int i = 0; i < listadet.size(); i++) {
+            System.out.println(" prueba  "+ listadet.get(i).getCoDetalleOrdenPedidoPK());
+        }
+        
+        
+
+//        seUsuario = us;
+//        seEmpresa = em;
+//        seSucursal = su;
         Timer tiempo = new Timer(100, new modalAprobarOrden.horas());
         tiempo.start();
 
@@ -458,7 +481,6 @@ public class modalAprobarOrden extends javax.swing.JDialog {
                 System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
 
 //                detalle.setLineaDetalle(BigInteger.valueOf(contFilas));
-
             }
 
             Tablas.llenarDetalledeOrden(jTable1, listadet);
@@ -576,7 +598,6 @@ public class modalAprobarOrden extends javax.swing.JDialog {
             BigInteger cantidad = new BigInteger(valor);
 
             listadet.get(i).setCantidadSolicitada(cantidad);
-            
 
         } catch (Exception e) {
         }
@@ -595,7 +616,6 @@ public class modalAprobarOrden extends javax.swing.JDialog {
 //            }
 //
 //        }
-
         return obj1;
 
     }
