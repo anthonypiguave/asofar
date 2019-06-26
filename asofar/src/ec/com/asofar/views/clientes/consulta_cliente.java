@@ -465,9 +465,14 @@ public class consulta_cliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void MostrarClientes() {
+        System.out.println("mostrar cliente");
         try {
             Cliente = Cc.findSeClientesEntities();
             Tablas.TablaClientesActivo(Cliente, tba_clientes);
+            for (int i = 0; i < Cliente.size(); i++) {
+            System.out.println(" "+Cliente.get(i).getNombreCompleto());
+                
+            }
         } catch (Exception e) {
         }
     }
