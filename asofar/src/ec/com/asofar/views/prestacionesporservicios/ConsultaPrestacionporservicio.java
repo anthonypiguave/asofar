@@ -133,12 +133,13 @@ public class ConsultaPrestacionporservicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        
+
+        setVisible(false);
+        AgregarPrestaciones ag = new AgregarPrestaciones(new javax.swing.JFrame(), true);
+        ag.setVisible(true);
+
     }//GEN-LAST:event_agregarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -47,6 +47,7 @@ import java.util.List;
 public class ObtenerDTO {
 
     public static InBodega ObtenerInBodega(String nombre) {
+        
         InBodegaJpaController control = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         InBodega dto = new InBodega();
         List<InBodega> lista = control.findInBodegaEntities();
