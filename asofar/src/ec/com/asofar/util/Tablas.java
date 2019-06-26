@@ -11,6 +11,7 @@ import ec.com.asofar.dto.CoDetItemsCotizacion;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
+import ec.com.asofar.dto.CoDetallesTarifa;
 import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoOrdenPedido;
@@ -1696,20 +1697,20 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaprestaciones.size(); i++) {
 //            if (listaprestaciones.get(i).getEstado().equals('A')) {
-                filas[0] = String.valueOf(listaprestaciones.get(i).getIdPrestacion());
-                filas[1] = listaprestaciones.get(i).getNombrePrestacion();
-                filas[2] = listaprestaciones.get(i).getEstado();
-                filas[3] = listaprestaciones.get(i).getAplicaIva();
-                model.addRow(filas);
-                Tabla.setModel(model);
-                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            filas[0] = String.valueOf(listaprestaciones.get(i).getIdPrestacion());
+            filas[1] = listaprestaciones.get(i).getNombrePrestacion();
+            filas[2] = listaprestaciones.get(i).getEstado();
+            filas[3] = listaprestaciones.get(i).getAplicaIva();
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
 //            }
         }
     }
@@ -1780,23 +1781,29 @@ public class Tablas {
         }
 
     }
-    public static void listarPrestacionesPorServicios(List<InPrestacionesPorServicios> listaprestacionesPS, JTable Tabla) {
-        int[] a = {40, 40, 15, 15};
+
+    public static void listarDetalleTarifario(List<CoDetallesTarifa> listaprestacionesPSO, JTable Tabla) {
+        int[] a = {90,90, 90, 90, 90, 90, 90, 90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"Codigo Prestacion", "Codigo Unidad por servicio", "Empresa", "Estado"};
-        String[] filas = new String[4];
+        String[] b = {"Nombre prestacion", "Nombre Unidad por servicio", "Empresa", "Estado", "valor costo", "valor minimo venta", "valor venta", "valor venta mayorista"};
+        String[] filas = new String[8];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
-        for (int i = 0; i < listaprestacionesPS.size(); i++) {
-            if (listaprestacionesPS.get(i).getEstado().equals("A") ){
-                filas[0] = String.valueOf(listaprestacionesPS.get(i).getPrPrestaciones());
-                filas[1] = String.valueOf(listaprestacionesPS.get(i).getVeUnidadServicio());
-                filas[2] = String.valueOf( listaprestacionesPS.get(i).getIdEmpresa());
-                filas[3] = listaprestacionesPS.get(i).getEstado();
+        for (int i = 0; i < listaprestacionesPSO.size(); i++) {
+            if (listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getEstado().equals("A")){
+                filas[0] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getPrPrestaciones().getNombrePrestacion());
+                filas[1] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getVeUnidadServicio().getNombreUnidadServicio());
+                filas[2] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getIdEmpresa());
+                filas[3] = listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getEstado();
+                filas[4] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
+                filas[5] = String.valueOf(listaprestacionesPSO.get(i).getValorMinimoVenta());
+                filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
+                filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorVentaMayorista());
+
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1807,15 +1814,19 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+
 //            }
+            }
         }
+
     }
 
 }
-    
-}
-    
-    
-    
-    
-

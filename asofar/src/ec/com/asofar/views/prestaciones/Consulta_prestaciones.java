@@ -43,6 +43,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         initComponents();
     }
     public Consulta_prestaciones(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+
         super(parent, modal);
         setUndecorated(true);
         initComponents();

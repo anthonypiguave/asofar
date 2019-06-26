@@ -5,7 +5,10 @@
  */
 package ec.com.asofar.views.DetallesTarifa;
 
+
+import ec.com.asofar.dao.CoDetallesTarifaJpaController;
 import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
+import ec.com.asofar.dto.CoDetallesTarifa;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeUsuarios;
@@ -13,6 +16,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.JFrame;
 
 /**
@@ -22,51 +26,53 @@ import javax.swing.JFrame;
 public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
     
-    InPrestacionesPorServiciosJpaController PPS = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<InPrestacionesPorServicios> lista = PPS.findInPrestacionesPorServiciosEntities();
+    CoDetallesTarifaJpaController PPS = new CoDetallesTarifaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<CoDetallesTarifa> lista = PPS.findCoDetallesTarifaEntities();
     String valor = "";
     int x, y;
-    InPrestacionesPorServicios prestacionesPPS = new InPrestacionesPorServicios();
-    InPrestacionesPorServicios objetoPPS;
-    List<InPrestacionesPorServicios> prestacionPPS;
-    InPrestacionesPorServicios prcPPS;
-    InPrestacionesPorServicios prpkPPS;
+    CoDetallesTarifa prestacionesPPS = new CoDetallesTarifa();
+    CoDetallesTarifa objetoPPS;
+    List<CoDetallesTarifa> prestacionPPS;
+    CoDetallesTarifa prcPPS;
+    CoDetallesTarifa prpkPPS;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    
-    
-    
-    
+ 
     /**
      * Creates new form Listar_PrestacionesPorServicio
      */
+    
+    
     public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal) {
        super(parent, modal);
         setUndecorated(true);
         initComponents();
-        setLocationRelativeTo(null);
-        MostrarTabla();
-         usu = us;
-        emp = em;
-        suc = su;
-        
-        
+        setLocationRelativeTo(null);     
         System.out.println("************");
-        Tablas.listarPrestacionesPorServicios(lista, tblPrestacionesPorServicios);
+        Tablas.listarDetalleTarifario(lista, tblPrestacionesPorServicios);
     }
 
-   
-
-    public void MostrarTabla() {
+   public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        MostrarTabla();
+        usu = us;
+        emp = em;
+        suc = su;
+       MostrarTabla();
+    }
+   public void MostrarTabla() {
         try {
 
-            lista = PPS.findInPrestacionesPorServiciosEntities();
-            Tablas.listarPrestacionesPorServicios(lista, tblPrestacionesPorServicios);
+            lista = PPS.findCoDetallesTarifaEntities();
+            Tablas.listarDetalleTarifario(lista, tblPrestacionesPorServicios);
         } catch (Exception e) {
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,23 +82,53 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        txtfiltro = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPrestacionesPorServicios = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyTyped(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 102, 0));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("LISTA DE PRESTACIONES POR SERVICIOS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(70, 70, 70))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tblPrestacionesPorServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,35 +143,98 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblPrestacionesPorServicios);
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("BUSCAR:");
+
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 102, 0));
+        jButton1.setText("AGREGAR");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+valor = txtfiltro.getText();
+        Tablas.filtro(valor, tblPrestacionesPorServicios);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfiltroKeyReleased
+
+    private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
+char c = evt.getKeyChar();
+        if(Character.isSpaceChar(c)){
+            getToolkit().beep();
+            evt.consume();        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfiltroKeyTyped
+    }
+    
+    public InPrestacionesPorServicios devuelvePrestacionPorServicio(Long id, List<InPrestacionesPorServicios> listapre) {
+        InPrestacionesPorServicios doc = null;
+        for (int i = 0; i < listapre.size(); i++) {
+            if (Objects.equals(listapre.get(i).getInPrestacionesPorServiciosPK(), id)) {
+                doc = listapre.get(i);
+                break;
+            }
+        }
+        return doc;
+    
+    
+    
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -179,9 +278,14 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblPrestacionesPorServicios;
+    private javax.swing.JTextField txtfiltro;
     // End of variables declaration//GEN-END:variables
 }
