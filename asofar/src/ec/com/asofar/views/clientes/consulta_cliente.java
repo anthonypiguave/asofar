@@ -500,7 +500,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void txtbusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusquedaActionPerformed
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_txtbusquedaActionPerformed
 
     private void txtbusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyTyped
