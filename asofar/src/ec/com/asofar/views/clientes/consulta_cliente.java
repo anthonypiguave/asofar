@@ -693,7 +693,6 @@ public class consulta_cliente extends javax.swing.JDialog {
                 if (OP == JOptionPane.YES_OPTION) {
                     for (int i = 0; i < Cliente.size(); i++) {
                         if (Client.getIdClientes().equals(Cliente.get(i).getIdClientes())) {
-                            System.out.println("************");
                             Client.setEstado("I");
                             try {
 
