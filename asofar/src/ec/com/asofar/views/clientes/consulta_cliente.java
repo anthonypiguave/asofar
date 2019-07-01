@@ -25,10 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author admin1
- */
+
 public class consulta_cliente extends javax.swing.JDialog {
 
     int x, y;
