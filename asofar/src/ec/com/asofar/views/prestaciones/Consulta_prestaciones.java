@@ -43,6 +43,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         initComponents();
     }
     public Consulta_prestaciones(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -146,6 +147,11 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         jLabel1.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtfiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfiltroActionPerformed(evt);
+            }
+        });
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyReleased(evt);
@@ -262,6 +268,10 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
+
+    private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfiltroActionPerformed
 
     /**
      * @param args the command line arguments
