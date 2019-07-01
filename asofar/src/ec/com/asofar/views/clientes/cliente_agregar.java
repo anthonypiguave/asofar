@@ -306,6 +306,8 @@ public class cliente_agregar extends javax.swing.JDialog {
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
+        consulta_cliente ccli = new consulta_cliente(new javax.swing.JFrame(), true, usu, emp, suc);
+        ccli.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
