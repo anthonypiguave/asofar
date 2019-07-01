@@ -297,6 +297,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
             }
         ));
+        tba_contacto.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tba_contacto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tba_contactoMousePressed(evt);

@@ -1592,7 +1592,7 @@ public class Tablas {
     }
 
     public static void TablaContactoCliente(List<SeContactosClientes> listacontactoscliente, JTable Tabla, SeLocalidadCliente lista) {
-        int[] a = {5, 50, 50, 80, 80};
+        int[] a = {50, 200, 150, 150, 250};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
