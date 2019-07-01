@@ -1818,7 +1818,7 @@ public class Tablas {
     }
 
     public static void listarDetalleTarifario(List<CoDetallesTarifa> listaprestacionesPSO, JTable Tabla) {
-        int[] a = {90,90, 90, 90, 90, 90, 90, 90};
+        int[] a = {150,200, 100, 100, 100, 200, 100, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);

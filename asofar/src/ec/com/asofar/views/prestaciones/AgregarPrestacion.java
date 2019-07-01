@@ -163,30 +163,27 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(btngrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addComponent(btngrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cmbxIG, 0, 121, Short.MAX_VALUE)
-                                            .addComponent(txtProduc))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnbuscarP))
-                                    .addComponent(cmbxSN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
-                .addContainerGap())
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbxIG, 0, 121, Short.MAX_VALUE)
+                                    .addComponent(txtProduc))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnbuscarP))
+                            .addComponent(cmbxSN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,7 +235,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         int bloqueo;
         String selecciona = (String) cmbxIG.getSelectedItem();
         System.out.println(selecciona);
-        if (selecciona.equals("generico")) {
+        if (selecciona.equals("servicio")) {
             btnbuscarP.setEnabled(false);
         } else {
             btnbuscarP.setEnabled(true);
@@ -264,6 +261,9 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         PrPrestaciones PRE = new PrPrestaciones();
          java.util.Date fechaActual = new java.util.Date();
 //        id_tipo_prestacion nombreusuario_creacionestadofecha_creacion
+if (cmbxIG.getSelectedItem().toString().equals("inventario")){
+
+
         pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
         PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
         PRE.setEstado("A");
@@ -273,7 +273,19 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         PRE.setUsuarioCreacion(usu.getNombreUsuario());
         PRE.setIdEmpresa(emp);
         PRE.setFechaCreacion(fechaActual);
+}else{
+pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
+        PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
+        PRE.setEstado("A");
+        
+        PRE.setNombrePrestacion(txtProduc.getText());
+        PRE.setIdTipoPrestacion(pol);
+        PRE.setIdPoducto(null);
+        PRE.setUsuarioCreacion(usu.getNombreUsuario());
+        PRE.setIdEmpresa(emp);
+        PRE.setFechaCreacion(fechaActual);
 
+}
         try {
             pr.create(PRE);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
