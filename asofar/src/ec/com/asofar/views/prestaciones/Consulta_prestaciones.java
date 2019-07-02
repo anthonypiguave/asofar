@@ -237,7 +237,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
     private void tblPrestacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrestacionMousePressed
 
         int id = 0;
-        if (evt.getClickCount() == 1000000) {
+        if (evt.getClickCount() == 2) {
             id = tblPrestacion.getSelectedRow();
             prestacionesP = devuelvePrestaciones(Long.valueOf(tblPrestacion.getValueAt(id, 0).toString()), lista);
             if (prestacionesP != null) {

@@ -23,11 +23,13 @@ import java.util.List;
  * @author ADMIN
  */
 public class ConsultaArticulo extends javax.swing.JDialog {
+
     PrArticuloJpaControllerExt articon = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
-    int x,y;
-    List<PrArticulo> listap= articon.findPrArticuloEntities();
-    PrArticulo obj= new PrArticulo();
+    int x, y;
+    List<PrArticulo> listap = articon.findPrArticuloEntities();
+    PrArticulo obj = new PrArticulo();
     String valor = "";
+
     /**
      * Creates new form ConsultaArticulo
      */
@@ -36,14 +38,15 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         Tablas.listaArticulos(listap, tabla);
-        
+
     }
+
     public ConsultaArticulo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         Tablas.listaArticulos(listap, tabla);
-        
+
     }
 
     /**
@@ -212,24 +215,24 @@ public class ConsultaArticulo extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        IngresarArticulo ingre= new IngresarArticulo(new javax.swing.JFrame(), true);
+        IngresarArticulo ingre = new IngresarArticulo(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
         // TODO add your handling code here:
         int id = 0;
-                obj = null;
+        obj = null;
         if (evt.getClickCount() == 2) {
             id = tabla.getSelectedRow();
-            for(int i = 0 ;i < listap.size();i++){
-                if((tabla.getValueAt(id, 3).toString().equals(listap.get(i).getNombreArticulo()))){
+            for (int i = 0; i < listap.size(); i++) {
+                if ((tabla.getValueAt(id, 3).toString().equals(listap.get(i).getNombreArticulo()))) {
                     obj = listap.get(i);
-                  if(obj != null)  {
-                      setVisible(false);
-                      EditarArticulo es = new EditarArticulo(new  javax.swing.JFrame(),true,obj);
-                      es.setVisible(true);
-                  }
+                    if (obj != null) {
+                        setVisible(false);
+                        EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
+                        es.setVisible(true);
+                    }
                 }
             }
         }
@@ -245,8 +248,8 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
@@ -258,7 +261,6 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyTyped
 
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
-
         valor = txtfiltro.getText();
         Tablas.filtro(valor, tabla);
     }//GEN-LAST:event_txtfiltroKeyReleased
@@ -294,11 +296,6 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        
-        
-        
-        
-        
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -313,11 +310,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
             }
         });
     }
-    
-    
-        
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

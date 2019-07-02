@@ -27,6 +27,7 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
     public Ingresar_Presentacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -150,6 +151,8 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         this.setVisible(false);
+        Tipo_presentacion a = new Tipo_presentacion(new javax.swing.JFrame(), true);
+        a.setVisible(true);
     }//GEN-LAST:event_btnsalirActionPerformed
 
     /**
