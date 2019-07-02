@@ -1,4 +1,3 @@
-
 package ec.com.asofar.views.clientes;
 
 import ec.com.asofar.dao.SeClientesJpaController;
@@ -20,7 +19,6 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 public class consulta_cliente extends javax.swing.JDialog {
 
@@ -500,7 +498,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void txtbusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusquedaActionPerformed
-   
+
     }//GEN-LAST:event_txtbusquedaActionPerformed
 
     private void txtbusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyTyped
