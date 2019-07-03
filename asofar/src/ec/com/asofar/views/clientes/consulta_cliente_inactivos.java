@@ -462,10 +462,12 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
                     for (int i = 0; i < Cliente.size(); i++) {
                      if (Client.getIdClientes().equals(Cliente.get(i).getIdClientes())) {
                          System.out.println("************");
-                        Client.setEstado("I");
+                        Client.setEstado("A");
                         try {
                             Cc.edit(Client);
                             JOptionPane.showMessageDialog(null, " CLIENTE ABILITADO");
+                            Tablas.VaciarTabla(tba_contacto);
+                            Tablas.VaciarTabla(tba_localidad);
                         } catch (Exception ex) {
                             Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);
                         }
