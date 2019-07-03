@@ -144,9 +144,12 @@ public class Consulta extends javax.swing.JDialog {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
 
-        setVisible(false);
+        setVisible(true);
         AgregarPrestaciones ag = new AgregarPrestaciones(new javax.swing.JFrame(), true, usu, emp, suc);
         ag.setVisible(true);
+        listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
+        Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
+
     }//GEN-LAST:event_agregarActionPerformed
 
     /**

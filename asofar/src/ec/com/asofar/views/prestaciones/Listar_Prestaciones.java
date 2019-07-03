@@ -44,12 +44,7 @@ public class Listar_Prestaciones extends javax.swing.JDialog {
      * Creates new form Listar_Prestaciones
      */
     public Listar_Prestaciones(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        setUndecorated(true);
-        initComponents();
-        setLocationRelativeTo(null);
-        System.out.println("************");
-        Tablas.TablaPrestaciones(lista, tblPrestacion);
+        
     }
 
     public Listar_Prestaciones(java.awt.Frame parent, boolean modal, PrPrestaciones Prp, PrPrestaciones Prk, SeUsuarios us, SeEmpresa em, SeSucursal su) {

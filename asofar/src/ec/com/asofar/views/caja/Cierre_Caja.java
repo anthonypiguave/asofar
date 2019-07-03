@@ -7,6 +7,7 @@ package ec.com.asofar.views.caja;
 
 import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
+import ec.com.asofar.daoext.ValidacionCaja;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
@@ -244,9 +245,13 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 vdc.setFechaCierre(d_fecha);
                 vdc.setHoraCierre(d_hora);
                 vdc.setEstado("I");
+                if(ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true){
                 cajadet.edit(vdc);
                 JOptionPane.showMessageDialog(null, "CAJA CERRADA", "REGISTRO COMPLETADO EXITOSAMENTE!", JOptionPane.INFORMATION_MESSAGE);
                 setVisible(false);
+                }else{
+                    System.out.println("sorry");
+                }
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }

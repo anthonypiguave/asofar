@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.com.asofar.views.clientes;
 
 import ec.com.asofar.dao.SeClientesJpaController;
@@ -25,10 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author admin1
- */
 public class consulta_cliente extends javax.swing.JDialog {
 
     int x, y;
@@ -297,6 +288,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
             }
         ));
+        tba_contacto.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tba_contacto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tba_contactoMousePressed(evt);
@@ -465,14 +457,10 @@ public class consulta_cliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void MostrarClientes() {
-        System.out.println("mostrar cliente");
         try {
             Cliente = Cc.findSeClientesEntities();
             Tablas.TablaClientesActivo(Cliente, tba_clientes);
-            for (int i = 0; i < Cliente.size(); i++) {
-            System.out.println(" "+Cliente.get(i).getNombreCompleto());
-                
-            }
+
         } catch (Exception e) {
         }
     }
@@ -511,7 +499,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void txtbusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusquedaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtbusquedaActionPerformed
 
     private void txtbusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyTyped
@@ -704,7 +692,6 @@ public class consulta_cliente extends javax.swing.JDialog {
                 if (OP == JOptionPane.YES_OPTION) {
                     for (int i = 0; i < Cliente.size(); i++) {
                         if (Client.getIdClientes().equals(Cliente.get(i).getIdClientes())) {
-                            System.out.println("************");
                             Client.setEstado("I");
                             try {
 

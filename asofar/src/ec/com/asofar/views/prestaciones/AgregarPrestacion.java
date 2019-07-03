@@ -160,7 +160,6 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -183,7 +182,8 @@ public class AgregarPrestacion extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnbuscarP))
                             .addComponent(cmbxSN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +235,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         int bloqueo;
         String selecciona = (String) cmbxIG.getSelectedItem();
         System.out.println(selecciona);
-        if (selecciona.equals("generico")) {
+        if (selecciona.equals("servicio")) {
             btnbuscarP.setEnabled(false);
         } else {
             btnbuscarP.setEnabled(true);
@@ -261,6 +261,9 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         PrPrestaciones PRE = new PrPrestaciones();
          java.util.Date fechaActual = new java.util.Date();
 //        id_tipo_prestacion nombreusuario_creacionestadofecha_creacion
+if (cmbxIG.getSelectedItem().toString().equals("inventario")){
+
+
         pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
         PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
         PRE.setEstado("A");
@@ -270,7 +273,19 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         PRE.setUsuarioCreacion(usu.getNombreUsuario());
         PRE.setIdEmpresa(emp);
         PRE.setFechaCreacion(fechaActual);
+}else{
+pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
+        PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
+        PRE.setEstado("A");
+        
+        PRE.setNombrePrestacion(txtProduc.getText());
+        PRE.setIdTipoPrestacion(pol);
+        PRE.setIdPoducto(null);
+        PRE.setUsuarioCreacion(usu.getNombreUsuario());
+        PRE.setIdEmpresa(emp);
+        PRE.setFechaCreacion(fechaActual);
 
+}
         try {
             pr.create(PRE);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");

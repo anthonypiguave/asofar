@@ -28,8 +28,9 @@ import javax.swing.table.DefaultTableModel;
  * @author admin1
  */
 public class Tipo_presentacion extends javax.swing.JDialog {
+    
     String valor;
-    int x,y;
+    int x, y;
     PrTipoPresentacionJpaController tipo = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<PrTipoPresentacion> pre = null;
     PrTipoPresentacion objeto;
@@ -39,19 +40,21 @@ public class Tipo_presentacion extends javax.swing.JDialog {
      */
     public Tipo_presentacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        initComponents();        
+        setLocationRelativeTo(this);
         CrearModelo();
         CargarInformacion();
     }
-    public Tipo_presentacion(java.awt.Frame parent, boolean modal,SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    
+    public Tipo_presentacion(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         CrearModelo();
         CargarInformacion();
     }
-
+    
     DefaultTableModel modelo;
-
+    
     private void CrearModelo() {
         try {
             modelo = (new DefaultTableModel(
@@ -66,12 +69,12 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false
                 };
-
+                
                 @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
-
+                
                 @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     return canEdit[colIndex];
@@ -81,9 +84,9 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString() + "error");
         }
-
+        
     }
-
+    
     private void CargarInformacion() {
         try {
             Object o[] = null;
@@ -117,7 +120,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtfiltro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -194,13 +197,13 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("BUSCAR:");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
+        txtfiltro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                txtfiltroKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
             }
         });
 
@@ -223,7 +226,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(112, 112, 112))
         );
         jPanel1Layout.setVerticalGroup(
@@ -233,7 +236,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -264,6 +267,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         Ingresar_Presentacion a = new Ingresar_Presentacion(new javax.swing.JFrame(), true);
+        setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_btnnuevoActionPerformed
 
@@ -277,6 +281,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
             objeto = devuelveObjeto(a);
             if (objeto != null) {
                 Editar_Presentacion edi = new Editar_Presentacion(new javax.swing.JFrame(), true, objeto);
+                setVisible(false);
                 edi.setVisible(true);
             }
         }
@@ -289,18 +294,18 @@ public class Tipo_presentacion extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tablaMouseClicked
 
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        valor = jTextField1.getText();
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+        valor = txtfiltro.getText();
         Tablas.filtro(valor, tabla);
-    }//GEN-LAST:event_jTextField1KeyReleased
+    }//GEN-LAST:event_txtfiltroKeyReleased
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
         char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_txtfiltroKeyTyped
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
@@ -309,16 +314,16 @@ public class Tipo_presentacion extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
-
+    
     public PrTipoPresentacion devuelveObjeto(Long id) {
         List<PrTipoPresentacion> listarobj = tipo.findPrTipoPresentacionEntities();
         PrTipoPresentacion objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
             if (listarobj.get(i).getIdTipoPresentacion() == id) {
                 objeto1 = listarobj.get(i);
-
+                
             }
         }
         return objeto1;
@@ -338,21 +343,21 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -397,7 +402,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtfiltro;
     // End of variables declaration//GEN-END:variables
 }
