@@ -6,7 +6,6 @@
 package ec.com.asofar.views.clientes;
 
 import ec.com.asofar.dao.SeContactosClientesJpaController;
-import static ec.com.asofar.daoext.ValidacionCaja.Validacion;
 import static ec.com.asofar.dto.CoProveedores_.email;
 import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
@@ -20,6 +19,7 @@ import java.awt.Point;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static ec.com.asofar.daoext.ValidacionCaja.ValidacionApertura;
 
 /**
  *
