@@ -1819,26 +1819,27 @@ public class Tablas {
     }
 
     public static void listarDetalleTarifario(List<CoDetallesTarifa> listaprestacionesPSO, JTable Tabla) {
-        int[] a = {150,200, 100, 100, 100, 200, 100, 200};
+        int[] a = {23,150,200, 100, 100, 100, 200, 100, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"Nombre prestacion", "Nombre Unidad por servicio", "Empresa", "Estado", "valor costo", "valor minimo venta", "valor venta", "valor venta mayorista"};
-        String[] filas = new String[8];
+        String[] b = {"id","Nombre prestacion", "Nombre Unidad por servicio", "Empresa", "Estado", "valor costo", "valor minimo venta", "valor venta", "valor venta mayorista"};
+        String[] filas = new String[9];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaprestacionesPSO.size(); i++) {
             if (listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getEstado().equals("A")){
-                filas[0] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getPrPrestaciones().getNombrePrestacion());
-                filas[1] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getVeUnidadServicio().getNombreUnidadServicio());
-                filas[2] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getIdEmpresa());
-                filas[3] = listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getEstado();
-                filas[4] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
-                filas[5] = String.valueOf(listaprestacionesPSO.get(i).getValorMinimoVenta());
-                filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
-                filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorVentaMayorista());
+                filas[0] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getInPrestacionesPorServiciosPK().getIdPrestacion());
+                filas[1] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getPrPrestaciones().getNombrePrestacion());
+                filas[2] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getVeUnidadServicio().getNombreUnidadServicio());
+                filas[3] = String.valueOf(listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getIdEmpresa());
+                filas[4] = listaprestacionesPSO.get(i).getInPrestacionesPorServicios().getEstado();
+                filas[5] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
+                filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorMinimoVenta());
+                filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
+                filas[8] = String.valueOf(listaprestacionesPSO.get(i).getValorVentaMayorista());
 
                 model.addRow(filas);
                 Tabla.setModel(model);
@@ -1858,6 +1859,8 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
                 Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+                Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
 
 
             }
