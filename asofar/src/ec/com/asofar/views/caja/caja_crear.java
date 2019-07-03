@@ -175,6 +175,8 @@ public class caja_crear extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
+        caja c = new caja(new javax.swing.JFrame(),true,seUsuario, seEmpresa, seSucursal);
+        c.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
