@@ -2,6 +2,9 @@ package ec.com.asofar.views.ordenPedido;
 
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dto.CoOrdenPedido;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -15,6 +18,10 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
     CoOrdenPedido objeto = new CoOrdenPedido();
 
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
+
     List<CoOrdenPedido> lista;
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
@@ -23,6 +30,17 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarMostrarTabla();
+    }
+
+    public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        cargarMostrarTabla();
+
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
     }
 
     @SuppressWarnings("unchecked")
