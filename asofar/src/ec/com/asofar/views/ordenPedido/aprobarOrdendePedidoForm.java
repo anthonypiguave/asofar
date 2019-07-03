@@ -1,12 +1,7 @@
 package ec.com.asofar.views.ordenPedido;
 
-import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
-import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenPedido;
-import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -18,12 +13,10 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     int x, y;
     String valor = "";
 
-
     CoOrdenPedido objeto = new CoOrdenPedido();
 
     List<CoOrdenPedido> lista;
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
 
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -40,7 +33,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         btnsalir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbAprobar = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtfiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -62,23 +55,20 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        tbAprobar.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        tbAprobar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbAprobarMousePressed(evt);
+                jTable1MousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbAprobar);
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -197,32 +187,29 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
 
         valor = txtfiltro.getText();
-        Tablas.filtro(valor, tbAprobar);
+        Tablas.filtro(valor, jTable1);
     }//GEN-LAST:event_txtfiltroKeyReleased
 
-    private void tbAprobarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAprobarMousePressed
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
 
         int i = 0;
 
         if (evt.getClickCount() == 2) {
-            i = tbAprobar.getSelectedRow();
-            objeto = devuelveObjeto(tbAprobar.getValueAt(i, 0).toString(), lista);
+            i = jTable1.getSelectedRow();
+            objeto = devuelveObjeto(jTable1.getValueAt(i, 0).toString(), lista);
 
             if (objeto != null) {
 
-//                this.setVisible(false);
+                //                this.setVisible(false);
                 System.out.println(" datos tomado " + objeto.getCoOrdenPedidoPK());
 
                 this.setVisible(false);
-
-                modalAprobarOrden aprobarOrden = new modalAprobarOrden(new javax.swing.JFrame(), true,  objeto);
+                modificarOrdenPedidoForm aprobarOrden = new modificarOrdenPedidoForm(new javax.swing.JFrame(), true, objeto);
                 aprobarOrden.setVisible(true);
 
             }
         }
-
-
-    }//GEN-LAST:event_tbAprobarMousePressed
+    }//GEN-LAST:event_jTable1MousePressed
 
     public CoOrdenPedido devuelveObjeto(String datos, List<CoOrdenPedido> listarobj) {
         CoOrdenPedido objeto1 = null;
@@ -244,7 +231,12 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         try {
 
             lista = cbOrdenController.findCoOrdenPedidoEntities();
-            Tablas.listarCabOrdendePedido(lista, tbAprobar);
+
+            for (int i = 0; i < lista.size(); i++) {
+                System.out.println(" busqueda " + lista.get(i).getCoOrdenPedidoPK());
+            }
+
+            Tablas.listarCabOrdendePedido(lista, jTable1);
         } catch (Exception e) {
 
         }
@@ -297,7 +289,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbAprobar;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtfiltro;
     // End of variables declaration//GEN-END:variables
 }
