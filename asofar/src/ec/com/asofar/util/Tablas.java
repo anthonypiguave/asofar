@@ -29,6 +29,7 @@ import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeContactosClientes;
@@ -1749,14 +1750,14 @@ public class Tablas {
         
     }
         public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
-        int[] a = {100, 125, 130, 40};
+        int[] a = {150, 150, 150, 80, 80 , 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO"};
-        String[] filas = new String[4];
+        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "Facturable", "Aplica Descuento"};
+        String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listapresporserv.size(); i++) {
@@ -1764,6 +1765,8 @@ public class Tablas {
             filas[1] = listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion();
             filas[2] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
             filas[3] = listapresporserv.get(i).getEstado();
+            filas[4] = listapresporserv.get(i).getEsFacturable();
+            filas[5] = listapresporserv.get(i).getAplicaDescuento();
             model.addRow(filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1774,7 +1777,13 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
             Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+          
         }
+        
 
         
     }
@@ -1858,10 +1867,54 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
                 Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
 
-//            }
+
             }
         }
 
     }
+
+     public static void listarTarifario(List<PrTarifario> listaT, JTable Tabla) {
+        int[] a = {200,150, 200, 350, 400, 400, 250};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID TARIFARIO", "EMPRESA", "SUCURSAL", "DESCRIPCION", "FECHA INICIO VIGENTE", "FECHA FIN VIGENTE", "ESTADO"};
+        String[] filas = new String[7];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listaT.size(); i++) {
+            
+                filas[0] = String.valueOf(listaT.get(i).getPrTarifarioPK().getIdTarifario());
+                filas[1] = String.valueOf(listaT.get(i).getPrTarifarioPK().getIdEmpresa());
+                filas[2] = String.valueOf(listaT.get(i).getSeSucursal());
+                filas[3] = String.valueOf(listaT.get(i).getDescripcion());
+                filas[4] = String.valueOf(listaT.get(i).getFechaInicioVigente());
+                filas[5] = String.valueOf(listaT.get(i).getFechaFinVigente());
+                filas[6] = String.valueOf(listaT.get(i).getEstado());
+                
+
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+                
+        }
+
+    }
+    
 
 }

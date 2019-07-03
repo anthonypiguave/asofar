@@ -259,7 +259,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
                     dc.setEstado("A");
                     dc.setIdUsuario(seUsuario.getIdUsuario());
                     dc.setVeCaja(veCaja);
-                    if (ValidacionCaja.Validacion(veCaja, seUsuario) == true) {
+                    if (ValidacionCaja.ValidacionApertura(veCaja, seUsuario) == true) {
                         cajadet.create(dc);
                         JOptionPane.showMessageDialog(null, "CAJA ACTIVA", "REGISTRO COMPLETADO EXITOSAMENTE!", JOptionPane.INFORMATION_MESSAGE);
                         buscador(veCaja);
