@@ -17,6 +17,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.views.prestaciones.Listar_Prestaciones;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -280,6 +281,8 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
         preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
         preServ.setEstado(cbxestado.getSelectedItem().toString());
+        preServ.setUsuarioCreacion(usu.getNombreUsuario());
+        preServ.setFechaCreacion(fechaActual);
        
         
         try {
@@ -329,7 +332,8 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxfacturableActionPerformed
 
     private void jcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcancelarActionPerformed
- setVisible(false);
+
+        setVisible(false);
  // TODO add your handling code here:
     }//GEN-LAST:event_jcancelarActionPerformed
 

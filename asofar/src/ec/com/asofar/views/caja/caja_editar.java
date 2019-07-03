@@ -211,8 +211,9 @@ public class caja_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
         setVisible(false);
+        caja c = new caja(new javax.swing.JFrame(),true,seUsuario, se, seSucursal);
+        c.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
