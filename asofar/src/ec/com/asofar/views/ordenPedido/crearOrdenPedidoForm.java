@@ -27,6 +27,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.producto.ConsultaProducto;
+import java.awt.HeadlessException;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -437,29 +438,33 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         cproducto.setVisible(true);
 
         objetopro = cproducto.getProducto();
-    
-        if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
-            JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
-        } else {
+        try {
+            if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
+                JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
+            } else {
 
-            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-          
-            detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
-            detalle.getCoDetalleOrdenPedidoPK().setIdProducto(objetopro.getPrProductosPK().getIdProducto());
-            detalle.setDescripcion(objetopro.getNombreProducto());
-            detalle.setCantidadSolicitada(BigInteger.valueOf(0));
+                CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
 
-            listadet.add(detalle);
-            for (int i = 0; i < listadet.size(); i++) {
+                detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+                detalle.getCoDetalleOrdenPedidoPK().setIdProducto(objetopro.getPrProductosPK().getIdProducto());
+                detalle.setDescripcion(objetopro.getNombreProducto());
+                detalle.setCantidadSolicitada(BigInteger.valueOf(0));
 
-                contFilas = i + 1;
-                System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
+                listadet.add(detalle);
+                for (int i = 0; i < listadet.size(); i++) {
 
-                detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+                    contFilas = i + 1;
+                    System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
 
+                    detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+
+                }
+
+                Tablas.llenarDetalledeOrden(jTable1, listadet);
             }
 
-            Tablas.llenarDetalledeOrden(jTable1, listadet);
+        } catch (HeadlessException e) {
+            e.printStackTrace();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -511,7 +516,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 cabOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
-                cabOrden.setEstado("A");
+                cabOrden.setEstado("P");
                 cabOrden.setFechaEmision(d);
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
                 cabOrden.setSeSucursal(seSucursal);
@@ -529,6 +534,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                         detOrden.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
                         detOrden.getCoDetalleOrdenPedidoPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                         detOrden.getCoDetalleOrdenPedidoPK().setLineaDetalle(listadet.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle());
+                        detOrden.setDescripcion(listadet.get(i).getDescripcion());
                         detOrden.setEstado("P");
                         detOrden.setFechaCreacion(d);
                         detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
@@ -585,7 +591,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
         for (int i = 0; i < listadet.size(); i++) {
 
-            if (datos.equals(""+(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
+            if (datos.equals("" + (listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
                 System.out.println("lista si " + listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                 obj1 = "si";
 
