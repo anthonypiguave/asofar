@@ -17,13 +17,13 @@ import java.util.List;
  *
  * @author Luis Alberto Mero
  */
-public class AgregarTarifario extends javax.swing.JDialog {
+public class ListarTarifario extends javax.swing.JDialog {
 PrTarifarioJpaController PPS = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
 List<PrTarifario> lista = PPS.findPrTarifarioEntities();
     /**
      * Creates new form AgregarTarifario
      */
-    public AgregarTarifario(java.awt.Frame parent, boolean modal) {
+    public ListarTarifario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         tbl_tarifario.setVisible(false);
@@ -196,20 +196,21 @@ List<PrTarifario> lista = PPS.findPrTarifarioEntities();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarTarifario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AgregarTarifario dialog = new AgregarTarifario(new javax.swing.JFrame(), true);
+                ListarTarifario dialog = new ListarTarifario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

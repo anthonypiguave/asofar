@@ -18,6 +18,7 @@ import ec.com.asofar.util.Tablas;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,7 +33,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     int x, y;
     CoDetallesTarifa prestacionesPPS = new CoDetallesTarifa();
     CoDetallesTarifa objetoPPS;
-    List<CoDetallesTarifa> prestacionPPS;
+    List<CoDetallesTarifa> prestacionPP;
     CoDetallesTarifa prcPPS;
     CoDetallesTarifa prpkPPS;
     SeUsuarios usu;
@@ -146,6 +147,11 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
             }
         ));
         tblPrestacionesPorServicios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblPrestacionesPorServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblPrestacionesPorServiciosMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPrestacionesPorServicios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -209,7 +215,35 @@ char c = evt.getKeyChar();
             evt.consume();        // TODO add your handling code here:
     }//GEN-LAST:event_txtfiltroKeyTyped
     }
+    private void tblPrestacionesPorServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrestacionesPorServiciosMousePressed
+   int id = 0;
+        if (evt.getClickCount() == 2) {
+            System.out.println("holamundo");
+            id = tblPrestacionesPorServicios.getSelectedRow();
+            prestacionesPPS = devuelveObjeto(Long.valueOf(tblPrestacionesPorServicios.getValueAt(id, 0).toString()), lista);
+            if (prestacionesPPS != null) {
+                System.out.println("holamundo2w");
+                Nuevotarifario ep = new Nuevotarifario(new javax.swing.JFrame(), true, prestacionesPPS,usu,emp,suc);
+                ep.setVisible(true);
+                
+                prestacionPP = PPS.findCoDetallesTarifaEntities();
+                Tablas.listarDetalleTarifario(prestacionPP, tblPrestacionesPorServicios);
+            }
+        }
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblPrestacionesPorServiciosMousePressed
     
+    public CoDetallesTarifa devuelveObjeto(Long id, List<CoDetallesTarifa> listabod) {
+        CoDetallesTarifa doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getInPrestacionesPorServicios().getPrPrestaciones().getIdPrestacion(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
     public InPrestacionesPorServicios devuelvePrestacionPorServicio(Long id, List<InPrestacionesPorServicios> listapre) {
         InPrestacionesPorServicios doc = null;
         for (int i = 0; i < listapre.size(); i++) {
@@ -223,7 +257,7 @@ char c = evt.getKeyChar();
     
     
     }
-    
+ 
     /**
      * @param args the command line arguments
      */
