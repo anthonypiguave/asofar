@@ -9,6 +9,7 @@ import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.ordenPedidoEXT;
@@ -25,6 +26,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.producto.ConsultaProducto;
+import java.awt.HeadlessException;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -46,31 +48,31 @@ import javax.swing.Timer;
  * @author admin1
  */
 public class modificarOrdenPedidoForm extends javax.swing.JDialog {
-    
+
     int x, y;
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
-    
+
     Date d = new Date();
     SeEmpresa se = new SeEmpresa();
     ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoDetalleOrdenPedidoJpaController detordencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+
     CoOrdenPedido cOrden;
     OrdenPedidoDaoExt idCabecera = new OrdenPedidoDaoExt(EntityManagerUtil.ObtenerEntityManager());
-    
+
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoDetalleOrdenPedido> listadet2 = new ArrayList<CoDetalleOrdenPedido>();
-    
+
     List<CoOrdenPedido> listcab = new ArrayList<CoOrdenPedido>();
-    
+
     PrProductos objetopro = new PrProductos();
-    
+
     int contFilas = 1;
-    
+
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -80,12 +82,12 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 //        txtCod.setText(String.format("%06d", ordenExt.obtenerNumeroOrden()));
         CargarProveedor();
         CargarDocumento();
-        
+
         Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
         tiempo.start();
-        
+
     }
-    
+
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, CoOrdenPedido objeto) {
         super(parent, modal);
         initComponents();
@@ -93,16 +95,16 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
-        
+
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-        
+
         Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
         tiempo.start();
-        
+
     }
-    
+
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal, CoOrdenPedido objeto) {
         super(parent, modal);
         initComponents();
@@ -112,66 +114,66 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
-        
+
         cOrden = objeto;
         listcab.add(objeto);
         CargarFormulario();
-        
+
     }
-    
+
     class horas implements ActionListener {
-        
+
         public void actionPerformed(ActionEvent e) {
             java.util.Date sistHora = new java.util.Date();
             String pmAm = "HH:mm:ss";
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             Calendar hoy = Calendar.getInstance();
             txtHora.setText(String.format(format.format(sistHora), hoy));
-            
+
         }
     }
-    
+
     public static String FechaActual() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         return formatoFecha.format(fecha);
     }
-    
+
     public void CargarProveedor() {
         List<CoProveedores> listcaja = proveedorcontroller.findCoProveedoresEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             cbxProveedor.addItem(listcaja.get(i).getNombre());
         }
     }
-    
+
     public void CargarDocumento() {
         List<InTipoDocumento> listcaja = movcontroller.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
         }
     }
-    
+
     public void CargarFormulario() {
-        
+
         txtCod.setText("" + cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
         txtObservacion.setText(cOrden.getObservacion());
-        
+
         cbxProveedor.setSelectedIndex(cOrden.getIdProveedor().intValue());
         cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
-        
+
         listadet2 = detordencontroller.findCoDetalleOrdenPedidoEntities();
-        
+
         for (int i = 0; i < listadet2.size(); i++) {
             System.out.println(" prueba  " + listadet2.get(i).getDescripcion());
             if (listadet2.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
                 listadet.add(listadet2.get(i));
-                
+
             }
-            
+
         }
         Tablas.llenarDetalledeOrden(jTable1, listadet);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -467,57 +469,52 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
-        
+
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
-            
+
         } else {
-            
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         ConsultaProducto cproducto = new ConsultaProducto(new javax.swing.JFrame(), true);
         cproducto.setVisible(true);
-        
+
         objetopro = cproducto.getProducto();
-        
+
         try {
             if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
                 JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
             } else {
-                
+
                 CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-                
+
                 detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
                 detalle.getCoDetalleOrdenPedidoPK().setIdProducto(objetopro.getPrProductosPK().getIdProducto());
                 detalle.setDescripcion(objetopro.getNombreProducto());
                 detalle.setCantidadSolicitada(BigInteger.valueOf(0));
                 detalle.setEstado("A");
-
-//                CoOrdenPedido objOrdenPedido = new CoOrdenPedido();
-//                objOrdenPedido.setCoOrdenPedidoPK(new CoOrdenPedidoPK());
-//                objOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(cOrden.getCoOrdenPedidoPK().getIdEmpresa());
-//                objOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(cOrden.getCoOrdenPedidoPK().getIdSucursal());
-//                objOrdenPedido.getCoOrdenPedidoPK().setIdOrdenPedido(cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
-//                CoOrdenPedido pk = objOrdenPedido;
                 detalle.setCoOrdenPedido(cOrden);
                 
+                listadet.add(detalle);
+
                 System.out.println(" prueba 5: " + cOrden.getCoOrdenPedidoPK());
-                
+
                 for (int i = 0; i < listadet.size(); i++) {
-                    
+
                     contFilas = i + 1;
                     System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
-                    
+
                     detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-                    
+
                 }
-                
+
                 CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-                
+
                 List<CoDetalleOrdenPedido> var1 = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
                 System.out.println(" prueba 6: " + detOrdencontroller.findCoDetalleOrdenPedidoEntities());
                 long id = 0;
@@ -525,61 +522,58 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                     if (var1.get(i).getCoOrdenPedido().getCoOrdenPedidoPK().equals(detalle.getCoOrdenPedido().getCoOrdenPedidoPK())) {
                         id = var1.get(i).getCoDetalleOrdenPedidoPK().getIdDetalleOrdenPedido();
                         System.out.println("prueba 7: " + id);
-                        
+
                     }
-                    
+
                 }
                 detalle.getCoDetalleOrdenPedidoPK().setIdDetalleOrdenPedido(id);
                 System.out.println("PRUEBA 8 : " + detalle.getCoDetalleOrdenPedidoPK());
-                
-                listadet.add(detalle);
+
+//                listadet.add(detalle);
                 Tablas.llenarDetalledeOrden(jTable1, listadet);
                 detOrdencontroller.create(detalle);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        
+
         CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        
+
         int row = jTable1.rowAtPoint(evt.getPoint());
         int col = jTable1.columnAtPoint(evt.getPoint());
         if (evt.getClickCount() == 1) {
             if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
                 try {
-                    
+
                     int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
                         int i = jTable1.getSelectedRow();
                         
-                        listadet.get(i).setEstado("I");
-                        
+                        detOrdencontroller.destroy(listadet.get(i).getCoDetalleOrdenPedidoPK());
                         listadet.remove(i);
-                        /* resolver------------------------------------------------------ */
-//                        detOrdencontroller.edit(listadet.get(i));
+                  
                         contFilas = contFilas - 1;
                         for (int j = 0; j < listadet.size(); j++) {
                             contFilas = j + 1;
                             listadet.get(j).getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-                            
+
                         }
-                        
                         Tablas.llenarDetalledeOrden(jTable1, listadet);
                     }
-                } catch (Exception e) {
+                } catch (NonexistentEntityException | HeadlessException e) {
                     e.printStackTrace();
                 }
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jTable1MousePressed
 
@@ -587,16 +581,16 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         CoOrdenPedidoJpaController cabOrdencontroller = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
         CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        
+
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(cbxProveedor.getSelectedItem().toString())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
-                
+
                 try {
                     CoProveedores coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
                     InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
-                    
+
                     cOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                     cOrden.setObservacion(txtObservacion.getText());
                     cOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
@@ -606,15 +600,15 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                     cOrden.setFechaActualizacion(d);
                     cOrden.setCoDetalleOrdenPedidoList(listadet);
                     cabOrdencontroller.edit(cOrden);
-                    
+
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
 //                    setVisible(false);
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                 }
-                
+
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -627,27 +621,27 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1KeyTyped
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        
+
         CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
         try {
-            
+
             int i = jTable1.getSelectedRow();
-            
+
             String valor = (String) jTable1.getValueAt(i, 3);
-            
+
             System.out.println(" fila de tabla cantidad : " + valor);
-            
+
             BigInteger cantidad = new BigInteger(valor);
-            
+
             listadet.get(i).setCantidadSolicitada(cantidad);
-            
+
             for (int j = 0; j < listadet.size(); j++) {
-                
+
                 System.out.println(" preuba 10 : " + listadet.get(i).getCoDetalleOrdenPedidoPK());
                 detOrdencontroller.edit(listadet.get(i));
-                
+
             }
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTable1KeyReleased
@@ -655,23 +649,23 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
-    
+
     public String validarProductos(String datos) {
         String obj1 = "no";
-        
+
         for (int i = 0; i < listadet.size(); i++) {
-            
+
             if (datos.equals("" + (listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
                 System.out.println("lista si " + listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                 obj1 = "si";
-                
+
                 break;
             }
-            
+
         }
-        
+
         return obj1;
-        
+
     }
 
     /**

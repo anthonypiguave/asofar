@@ -221,7 +221,7 @@ public class Tablas {
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
 
-                if (lista.get(i).getEstado().equals("A")) {
+//                if (lista.get(i).getEstado().equals("A")) {
 //                 model.addRow(new Object[]{});
                     Object filas[] = new Object[5];
                     vo = lista.get(i);
@@ -236,7 +236,7 @@ public class Tablas {
                     filas[4] = new JButton("ELIMINAR");
 
                     dt.addRow(filas);
-                }
+//                }
             }
 
         }

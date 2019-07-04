@@ -450,8 +450,8 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 detalle.setDescripcion(objetopro.getNombreProducto());
                 detalle.setCantidadSolicitada(BigInteger.valueOf(0));
                 detalle.setEstado("A");
-
                 listadet.add(detalle);
+                
                 for (int i = 0; i < listadet.size(); i++) {
 
                     contFilas = i + 1;
