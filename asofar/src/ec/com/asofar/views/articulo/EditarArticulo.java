@@ -81,12 +81,15 @@ public class EditarArticulo extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("ARTICULO:");
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("GRUPO:");
 
         articulo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        articulo.setForeground(new java.awt.Color(1, 1, 1));
         articulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 articuloKeyTyped(evt);
@@ -104,6 +107,7 @@ public class EditarArticulo extends javax.swing.JDialog {
 
         grupo.setEditable(false);
         grupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        grupo.setForeground(new java.awt.Color(1, 1, 1));
         grupo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 grupoKeyTyped(evt);
@@ -128,12 +132,15 @@ public class EditarArticulo extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("SUBGRUPO:");
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("ESTADO:");
 
         estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        estado.setForeground(new java.awt.Color(1, 1, 1));
         estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
         jButton1.setBackground(new java.awt.Color(187, 51, 64));
@@ -148,6 +155,7 @@ public class EditarArticulo extends javax.swing.JDialog {
 
         subgrupo.setEditable(false);
         subgrupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        subgrupo.setForeground(new java.awt.Color(1, 1, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

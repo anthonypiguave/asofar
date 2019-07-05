@@ -258,20 +258,22 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("BUSCAR:");
 
         txtbusqueda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtbusqueda.setForeground(new java.awt.Color(1, 1, 1));
         txtbusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbusquedaActionPerformed(evt);
             }
         });
         txtbusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbusquedaKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtbusquedaKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyReleased(evt);
             }
         });
 

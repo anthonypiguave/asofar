@@ -66,9 +66,11 @@ public class IngresarArticulo extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        estado.setForeground(new java.awt.Color(1, 1, 1));
         estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("SUBGRUPO:");
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
@@ -89,12 +91,15 @@ public class IngresarArticulo extends javax.swing.JDialog {
         });
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("ARTICULO:");
 
         subgrupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        subgrupo.setForeground(new java.awt.Color(1, 1, 1));
         subgrupo.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("ESTADO:");
 
         guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -107,6 +112,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         });
 
         articulo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        articulo.setForeground(new java.awt.Color(1, 1, 1));
         articulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 articuloKeyTyped(evt);
@@ -114,6 +120,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         });
 
         grupo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        grupo.setForeground(new java.awt.Color(1, 1, 1));
         grupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         grupo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -122,6 +129,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("GRUPO:");
 
         jButton1.setBackground(new java.awt.Color(177, 37, 48));

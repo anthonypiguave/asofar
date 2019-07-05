@@ -112,9 +112,11 @@ public class caja_crear extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("NOMBRE:");
 
         txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(1, 1, 1));
         txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreFocusLost(evt);

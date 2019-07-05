@@ -135,9 +135,11 @@ public class cliente_editar extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("NOMBRES:");
 
         txt_primer_nombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_primer_nombre.setForeground(new java.awt.Color(1, 1, 1));
         txt_primer_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_primer_nombreFocusLost(evt);
@@ -145,9 +147,11 @@ public class cliente_editar extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("APELLIDOS:");
 
         txt_segundo_nombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_segundo_nombre.setForeground(new java.awt.Color(1, 1, 1));
         txt_segundo_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_segundo_nombreFocusLost(evt);
@@ -155,6 +159,7 @@ public class cliente_editar extends javax.swing.JDialog {
         });
 
         txt_primer_apellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_primer_apellido.setForeground(new java.awt.Color(1, 1, 1));
         txt_primer_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_primer_apellidoFocusLost(evt);
@@ -162,6 +167,7 @@ public class cliente_editar extends javax.swing.JDialog {
         });
 
         txt_segundo_apellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_segundo_apellido.setForeground(new java.awt.Color(1, 1, 1));
         txt_segundo_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_segundo_apellidoFocusLost(evt);
@@ -169,9 +175,11 @@ public class cliente_editar extends javax.swing.JDialog {
         });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("RAZON SOCIAL:");
 
         txt_razon_social.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_razon_social.setForeground(new java.awt.Color(1, 1, 1));
         txt_razon_social.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_razon_socialFocusLost(evt);
@@ -184,15 +192,19 @@ public class cliente_editar extends javax.swing.JDialog {
         });
 
         cbxtipo_identificacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbxtipo_identificacion.setForeground(new java.awt.Color(1, 1, 1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("TIPO DE IDENTIFICACION:");
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("No. DE IDENTIFICACION:");
 
         txt_numero_identificacion.setEditable(false);
         txt_numero_identificacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_numero_identificacion.setForeground(new java.awt.Color(1, 1, 1));
         txt_numero_identificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_numero_identificacionKeyTyped(evt);
@@ -209,9 +221,11 @@ public class cliente_editar extends javax.swing.JDialog {
         });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("ESTADO:");
 
         cbx_estado.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_estado.setForeground(new java.awt.Color(1, 1, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

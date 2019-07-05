@@ -107,6 +107,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         });
 
         jButton5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(1, 1, 1));
         jButton5.setText("VOLVER");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

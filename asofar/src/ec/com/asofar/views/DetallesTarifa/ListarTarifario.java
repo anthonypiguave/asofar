@@ -65,12 +65,15 @@ String filt = "";
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(36, 123, 36));
         jButton1.setText("AGREGAR");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("PRESTACION POR SEVICIOS:");
 
         jTextField5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jTextField5.setForeground(new java.awt.Color(1, 1, 1));
         jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField5KeyTyped(evt);

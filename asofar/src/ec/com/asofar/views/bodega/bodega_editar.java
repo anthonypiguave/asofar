@@ -105,9 +105,11 @@ public class bodega_editar extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("TIPO DE BODEGA:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("NOMBRE:");
 
         btncancelar1.setBackground(new java.awt.Color(153, 0, 0));
@@ -130,6 +132,7 @@ public class bodega_editar extends javax.swing.JDialog {
         });
 
         txtNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(1, 1, 1));
         txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreFocusLost(evt);
@@ -142,12 +145,15 @@ public class bodega_editar extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("ESTADO :");
 
         cbx_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbx_estado.setForeground(new java.awt.Color(1, 1, 1));
 
         txttipoBodega.setEditable(false);
         txttipoBodega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txttipoBodega.setForeground(new java.awt.Color(1, 1, 1));
         txttipoBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txttipoBodegaActionPerformed(evt);

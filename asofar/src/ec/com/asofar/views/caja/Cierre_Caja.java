@@ -103,20 +103,26 @@ public class Cierre_Caja extends javax.swing.JDialog {
         jLabel1.setOpaque(true);
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("CAJA:");
 
         nombreCaja.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        nombreCaja.setForeground(new java.awt.Color(1, 1, 1));
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("MONTO INICIAL:");
 
         montoInicial.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        montoInicial.setForeground(new java.awt.Color(1, 1, 1));
         montoInicial.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("MONTO DE CIERRE:");
 
         montocierre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        montocierre.setForeground(new java.awt.Color(1, 1, 1));
         montocierre.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         montocierre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -125,9 +131,11 @@ public class Cierre_Caja extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("HORA DE APERTURA:");
 
         horaInicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        horaInicio.setForeground(new java.awt.Color(1, 1, 1));
         horaInicio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnGrabar.setBackground(new java.awt.Color(62, 140, 69));
@@ -151,9 +159,11 @@ public class Cierre_Caja extends javax.swing.JDialog {
         });
 
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("$$");
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(1, 1, 1));
         jLabel8.setText("$$");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -162,7 +172,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -191,7 +201,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(horaInicio)
                             .addComponent(montocierre, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

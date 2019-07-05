@@ -133,19 +133,25 @@ public class Localidad_editar extends javax.swing.JDialog {
         });
 
         cbx_pais.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_pais.setForeground(new java.awt.Color(1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("PAIS:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("CIUDAD:");
 
         cbx_Ciudad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_Ciudad.setForeground(new java.awt.Color(1, 1, 1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("PROVINCIA:");
 
         cbx_provincia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_provincia.setForeground(new java.awt.Color(1, 1, 1));
 
         jButton1.setBackground(new java.awt.Color(173, 42, 48));
         jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -158,6 +164,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         });
 
         txt_direccion_cliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_direccion_cliente.setForeground(new java.awt.Color(1, 1, 1));
         txt_direccion_cliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_direccion_clienteFocusLost(evt);
@@ -165,12 +172,15 @@ public class Localidad_editar extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("DIRECCION DE CLIENTE:");
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("DIRECCION DE ENTREGA:");
 
         txt_direccion_entrega.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_direccion_entrega.setForeground(new java.awt.Color(1, 1, 1));
         txt_direccion_entrega.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_direccion_entregaFocusLost(evt);
@@ -206,9 +216,9 @@ public class Localidad_editar extends javax.swing.JDialog {
                             .addComponent(txt_direccion_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_direccion_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cbx_provincia, javax.swing.GroupLayout.Alignment.LEADING, 0, 120, Short.MAX_VALUE)
-                                .addComponent(cbx_Ciudad, javax.swing.GroupLayout.Alignment.LEADING, 0, 120, Short.MAX_VALUE)
-                                .addComponent(cbx_pais, javax.swing.GroupLayout.Alignment.LEADING, 0, 120, Short.MAX_VALUE)))
+                                .addComponent(cbx_provincia, javax.swing.GroupLayout.Alignment.LEADING, 0, 170, Short.MAX_VALUE)
+                                .addComponent(cbx_Ciudad, javax.swing.GroupLayout.Alignment.LEADING, 0, 170, Short.MAX_VALUE)
+                                .addComponent(cbx_pais, javax.swing.GroupLayout.Alignment.LEADING, 0, 170, Short.MAX_VALUE)))
                         .addGap(0, 21, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)

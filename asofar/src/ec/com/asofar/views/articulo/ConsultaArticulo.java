@@ -142,9 +142,11 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         );
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.setForeground(new java.awt.Color(1, 1, 1));
         txtfiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfiltroActionPerformed(evt);

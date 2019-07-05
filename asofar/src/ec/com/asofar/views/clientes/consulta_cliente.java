@@ -143,6 +143,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(1, 1, 1));
         jButton3.setText("EDITAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +152,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_eliminar_cliente.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_eliminar_cliente.setForeground(new java.awt.Color(1, 1, 1));
         btn_eliminar_cliente.setText("ELIMINAR");
         btn_eliminar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +230,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_editar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_editar.setForeground(new java.awt.Color(1, 1, 1));
         btn_editar.setText("EDITAR");
         btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +239,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_eliminar_localidad.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_eliminar_localidad.setForeground(new java.awt.Color(1, 1, 1));
         btn_eliminar_localidad.setText("ELIMINAR");
         btn_eliminar_localidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,6 +313,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(1, 1, 1));
         jButton5.setText("EDITAR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,6 +322,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(1, 1, 1));
         jButton7.setText("ELIMINAR");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,20 +377,22 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("BUSCAR:");
 
         txtbusqueda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtbusqueda.setForeground(new java.awt.Color(1, 1, 1));
         txtbusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbusquedaActionPerformed(evt);
             }
         });
         txtbusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbusquedaKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtbusquedaKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyReleased(evt);
             }
         });
 

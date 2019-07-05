@@ -108,6 +108,7 @@ public class contacto_agregar extends javax.swing.JDialog {
         });
 
         txt_telefono.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_telefono.setForeground(new java.awt.Color(1, 1, 1));
         txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_telefonoKeyTyped(evt);
@@ -115,12 +116,15 @@ public class contacto_agregar extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("TELEFONO:");
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("CELULAR:");
 
         txt_celular.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_celular.setForeground(new java.awt.Color(1, 1, 1));
         txt_celular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_celularKeyTyped(evt);
@@ -128,9 +132,11 @@ public class contacto_agregar extends javax.swing.JDialog {
         });
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("CORREO:");
 
         txt_correo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_correo.setForeground(new java.awt.Color(1, 1, 1));
         txt_correo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_correoFocusLost(evt);
@@ -151,9 +157,11 @@ public class contacto_agregar extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("NOMBRE:");
 
         txt_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_nombre.setForeground(new java.awt.Color(1, 1, 1));
         txt_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_nombreFocusLost(evt);

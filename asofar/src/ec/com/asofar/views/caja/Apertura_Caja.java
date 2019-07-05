@@ -125,29 +125,37 @@ public class Apertura_Caja extends javax.swing.JDialog {
         });
 
         monto.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        monto.setForeground(new java.awt.Color(1, 1, 1));
         monto.setText("MONTO INICIAL:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("CAJA:");
 
         caja.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        caja.setForeground(new java.awt.Color(1, 1, 1));
         caja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("MONTO DE CIERRE:");
 
         montocierre.setEditable(false);
         montocierre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        montocierre.setForeground(new java.awt.Color(1, 1, 1));
         montocierre.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         montocierre.setText("00");
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("$$");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("$$");
 
         txtMonto.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtMonto.setForeground(new java.awt.Color(1, 1, 1));
         txtMonto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMonto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -160,7 +168,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +190,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                .addGap(28, 28, 28))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(

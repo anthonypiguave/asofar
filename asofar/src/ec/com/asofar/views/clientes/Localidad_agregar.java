@@ -110,6 +110,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
         });
 
         txt_direccion_cliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_direccion_cliente.setForeground(new java.awt.Color(1, 1, 1));
         txt_direccion_cliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_direccion_clienteFocusLost(evt);
@@ -117,12 +118,15 @@ public class Localidad_agregar extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("DIRECCION DEL CLIENTE:");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("DIRECCION DE ENTREGA:");
 
         txt_direccion_entrega.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_direccion_entrega.setForeground(new java.awt.Color(1, 1, 1));
         txt_direccion_entrega.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_direccion_entregaFocusLost(evt);
@@ -160,18 +164,24 @@ public class Localidad_agregar extends javax.swing.JDialog {
         });
 
         cbx_pais.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_pais.setForeground(new java.awt.Color(1, 1, 1));
 
         cbx_provincia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_provincia.setForeground(new java.awt.Color(1, 1, 1));
 
         cbx_ciudad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_ciudad.setForeground(new java.awt.Color(1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("PAIS:");
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("PROVINCIA:");
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("CIUDAD:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -198,10 +208,10 @@ public class Localidad_agregar extends javax.swing.JDialog {
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_direccion_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbx_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cbx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)

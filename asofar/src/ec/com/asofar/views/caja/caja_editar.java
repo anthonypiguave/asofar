@@ -130,9 +130,11 @@ public class caja_editar extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("NOMBRE:");
 
         txtNuevo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtNuevo.setForeground(new java.awt.Color(1, 1, 1));
         txtNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoKeyTyped(evt);
@@ -140,9 +142,11 @@ public class caja_editar extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("ESTADO:");
 
         estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        estado.setForeground(new java.awt.Color(1, 1, 1));
         estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

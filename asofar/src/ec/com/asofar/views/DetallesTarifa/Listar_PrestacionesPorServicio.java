@@ -99,6 +99,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.setForeground(new java.awt.Color(1, 1, 1));
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyTyped(evt);
@@ -109,6 +110,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("BUSCAR:");
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N

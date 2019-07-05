@@ -100,46 +100,62 @@ public class Nuevotarifario extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("NOMBRE DE PRESTACION: ");
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("NOMBRE DE UNIDAD POR SERVICIO:");
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("EMPRESA:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("ESTADO:");
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("VALOR DE COSTO:");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("VALOR MINIMO DE VENTA:");
 
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("VALOR DE VENTA:");
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(1, 1, 1));
         jLabel8.setText("VALOR DE VENTA DE MAYORISTA:");
 
         txt_nomPre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_nomPre.setForeground(new java.awt.Color(1, 1, 1));
 
         txt_vc.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_vc.setForeground(new java.awt.Color(1, 1, 1));
 
         txt_vmv.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_vmv.setForeground(new java.awt.Color(1, 1, 1));
 
         txt_vv.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_vv.setForeground(new java.awt.Color(1, 1, 1));
 
         txt_vvm.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_vvm.setForeground(new java.awt.Color(1, 1, 1));
 
         cbx_nomUPS.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbx_nomUPS.setForeground(new java.awt.Color(1, 1, 1));
         cbx_nomUPS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cbx_es.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbx_es.setForeground(new java.awt.Color(1, 1, 1));
         cbx_es.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cbx_em.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbx_em.setForeground(new java.awt.Color(1, 1, 1));
         cbx_em.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N

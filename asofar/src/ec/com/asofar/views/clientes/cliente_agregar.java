@@ -99,14 +99,18 @@ public class cliente_agregar extends javax.swing.JDialog {
         });
 
         cbxtipo_identificacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbxtipo_identificacion.setForeground(new java.awt.Color(1, 1, 1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("TIPO DE IDENTIFICACION:");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("No. DE IDENTIFICACION:");
 
         txt_numero_identificacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_numero_identificacion.setForeground(new java.awt.Color(1, 1, 1));
         txt_numero_identificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_numero_identificacionKeyTyped(evt);
@@ -114,9 +118,11 @@ public class cliente_agregar extends javax.swing.JDialog {
         });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("Nombres :");
 
         txt_primer_nombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_primer_nombre.setForeground(new java.awt.Color(1, 1, 1));
         txt_primer_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_primer_nombreFocusLost(evt);
@@ -129,6 +135,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         });
 
         txt_segundo_nombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_segundo_nombre.setForeground(new java.awt.Color(1, 1, 1));
         txt_segundo_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_segundo_nombreFocusLost(evt);
@@ -141,9 +148,11 @@ public class cliente_agregar extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("Apellidos :");
 
         txt_primer_apellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_primer_apellido.setForeground(new java.awt.Color(1, 1, 1));
         txt_primer_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_primer_apellidoFocusLost(evt);
@@ -156,6 +165,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         });
 
         txt_segundo_apellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_segundo_apellido.setForeground(new java.awt.Color(1, 1, 1));
         txt_segundo_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_segundo_apellidoFocusLost(evt);
@@ -177,9 +187,11 @@ public class cliente_agregar extends javax.swing.JDialog {
         });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("RAZON SOCIAL:");
 
         txt_razon_social.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_razon_social.setForeground(new java.awt.Color(1, 1, 1));
         txt_razon_social.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_razon_socialFocusLost(evt);
@@ -213,7 +225,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -232,21 +244,22 @@ public class cliente_agregar extends javax.swing.JDialog {
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_numero_identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(9, 23, Short.MAX_VALUE))
+                        .addGap(9, 26, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(106, 106, 106)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbxtipo_identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(28, 28, 28)
-                                .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbxtipo_identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
