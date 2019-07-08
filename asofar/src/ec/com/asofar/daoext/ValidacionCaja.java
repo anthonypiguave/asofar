@@ -51,7 +51,9 @@ public class ValidacionCaja {
         java.util.Date fecha4 = detallecaja.getHoraCierre();
         String resultado2 = fecha3 + " " + fecha4;
         java.util.Date f2 = Date.valueOf(resultado2);
-
+ 
+        System.out.println("resultado"+f2);
+        
         double valor1 = detallecaja.getDineroInicio();
         double valor2 = detallecaja.getDineroCierre();
         double resultado3 = (valor1 + valor2);

@@ -32,14 +32,18 @@ public class Ingresarservicio extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+
     public Ingresarservicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     public Ingresarservicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(this);
         usu = us;
         emp = em;
         suc = su;

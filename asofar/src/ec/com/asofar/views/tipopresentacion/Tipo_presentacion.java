@@ -40,6 +40,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
      */
     public Tipo_presentacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();        
         setLocationRelativeTo(this);
         CrearModelo();
@@ -48,7 +49,9 @@ public class Tipo_presentacion extends javax.swing.JDialog {
     
     public Tipo_presentacion(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(this);
         CrearModelo();
         CargarInformacion();
     }
