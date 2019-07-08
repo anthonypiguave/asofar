@@ -23,26 +23,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class AgregarPrestaciones extends javax.swing.JDialog {
 
     InPrestacionesPorServicios pol1 = new InPrestacionesPorServicios();
     PrPrestaciones pol2 = new PrPrestaciones();
     VeUnidadServicio pol3 = new VeUnidadServicio();
-    
+
     PrPrestacionesJpaController pr = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<PrPrestaciones> pr2;
 
     InPrestacionesPorServiciosJpaController pxs = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    List<InPrestacionesPorServicios> lppus;
     VeUnidadServicioJpaController us1 = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<VeUnidadServicio> us2;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+
     /**
-     * Creates new form AgregarPrestaciones
-     * @param parent
+     * Creates new form AgregarPrestaciones // * @param parent
      */
     // 26-06-19
 //    public int bloqueo() {
@@ -64,10 +63,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         nombrePrestacion(pr2);
         us2 = us1.findVeUnidadServicioEntities();
         nombreUnidad(us2);
-        
-//        usu = us;
-//        emp = em;
-//        suc = su;
+//        nombreprUnidaddeservicio();
 
     }
 
@@ -263,42 +259,56 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
 
     private void jguardarpreserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jguardarpreserActionPerformed
+        lppus = pxs.findInPrestacionesPorServiciosEntities();
+        VeUnidadServicio id_Unid = new VeUnidadServicio();
+        id_Unid = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
+        PrPrestaciones id_pres = new PrPrestaciones();
+        id_pres = ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString());
 
-        InPrestacionesPorServicios preServ = new InPrestacionesPorServicios();
-        java.util.Date fechaActual = new java.util.Date();
-        pol2 = ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString());
-        System.out.println(" " + ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString()));
-        pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
-        System.out.println("unidad " + ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString()));
-//        pol1= ObtenerDTO.ObtenerInPrestacionesPorServicios(cbxestado.getSelectedItem().toString());
-        
-        System.out.println(""+pol2);
-        System.out.println(""+pol3);
-//        System.out.println(""+pol1);
-        
-        preServ.setPrPrestaciones(pol2);
-        preServ.setVeUnidadServicio(pol3);
-        preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
-        preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
-        preServ.setEstado(cbxestado.getSelectedItem().toString());
-        preServ.setUsuarioCreacion(usu.getNombreUsuario());
-        preServ.setFechaCreacion(fechaActual);
-       
-        
-        try {
-            pxs.create(preServ);
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
-            setVisible(false);
-        } catch (Exception e) {
-            Logger.getLogger(AgregarPrestaciones.class.getName()).log(Level.SEVERE, null, e);
+        for (int i = 0; i < lppus.size(); i++) {
+
+            if (!lppus.get(i).getPrPrestaciones().getIdPrestacion().equals(id_pres.getIdPrestacion()) && !lppus.get(i).getPrPrestaciones().getInPrestacionesPorServiciosList().get(i).getVeUnidadServicio().getIdUnidadServicio().equals(id_Unid.getIdUnidadServicio())) {
+//            if (!id_preXservicio.getPrPrestaciones().getIdPrestacion().equals(id_pres.getIdPrestacion())&&!id_preXservicio.getVeUnidadServicio().getIdUnidadServicio().equals(id_Unid.getIdUnidadServicio())) {
+                System.out.println("+ " + lppus.get(i).getPrPrestaciones().getIdPrestacion());
+                System.out.println("1 " + id_pres.getIdPrestacion());
+
+                JOptionPane.showMessageDialog(null, "debe guardar");
+                //
+                InPrestacionesPorServicios preServ = new InPrestacionesPorServicios();
+                java.util.Date fechaActual = new java.util.Date();
+                pol2 = ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString());
+                pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
+
+                preServ.setPrPrestaciones(pol2);
+                preServ.setVeUnidadServicio(pol3);
+                preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
+                preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
+                preServ.setEstado(cbxestado.getSelectedItem().toString());
+                preServ.setFechaCreacion(fechaActual);
+                try {
+                    pxs.create(preServ);
+                    JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+                    setVisible(false);
+                } catch (Exception e) {
+                    Logger.getLogger(AgregarPrestaciones.class.getName()).log(Level.SEVERE, null, e);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, " ya existe");
+
+            }
         }
-
     }//GEN-LAST:event_jguardarpreserActionPerformed
+    public void nombreprUnidaddeservicio() {
+        lppus = pxs.findInPrestacionesPorServiciosEntities();
+        for (int i = 0; i < lppus.size(); i++) {
+
+        }
+    }
 
     public void nombrePrestacion(List<PrPrestaciones> pr2) {
 
         for (int i = 0; i < pr2.size(); i++) {
-
             cbxprestacion.addItem(pr2.get(i).getNombrePrestacion());
 
         }
@@ -306,7 +316,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
     public void nombreUnidad(List<VeUnidadServicio> us2) {
         for (int i = 0; i < us2.size(); i++) {
-
             cbxunidadservicio.addItem(us2.get(i).getNombreUnidadServicio());
         }
     }
@@ -334,7 +343,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private void jcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcancelarActionPerformed
 
         setVisible(false);
- // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jcancelarActionPerformed
 
     /**
