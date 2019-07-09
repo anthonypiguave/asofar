@@ -511,7 +511,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 cabOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
-                cabOrden.setEstado("A");
+                cabOrden.setEstado("P");
                 cabOrden.setFechaEmision(d);
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
                 cabOrden.setSeSucursal(seSucursal);
@@ -529,7 +529,8 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                         detOrden.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
                         detOrden.getCoDetalleOrdenPedidoPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                         detOrden.getCoDetalleOrdenPedidoPK().setLineaDetalle(listadet.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle());
-                        detOrden.setEstado("P");
+                        detOrden.setDescripcion(listadet.get(i).getDescripcion());
+                        detOrden.setEstado("A");
                         detOrden.setFechaCreacion(d);
                         detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
                         detOrden.getCoOrdenPedido().setSeSucursal(seSucursal);
