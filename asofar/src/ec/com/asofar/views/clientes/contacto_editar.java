@@ -287,6 +287,7 @@ public class contacto_editar extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
         ContactoCliente.setNombre(txt_nombre.getText());
         ContactoCliente.setIdLocalidad(localidadclientes);
+        System.out.println(" id "+localidadclientes.getIdLocalidadCliente());
         ContactoCliente.setTelefono(txt_telefono.getText());
         ContactoCliente.setCelular(txt_celular.getText());
         ContactoCliente.setEmail(txt_correo.getText());
