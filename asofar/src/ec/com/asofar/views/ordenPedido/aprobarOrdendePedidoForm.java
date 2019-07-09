@@ -17,19 +17,33 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
-
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
 
     CoOrdenPedido objeto = new CoOrdenPedido();
 
     List<CoOrdenPedido> lista;
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         cargarMostrarTabla();
+
+    }
+
+    public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        cargarMostrarTabla();
+
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
+
     }
 
     @SuppressWarnings("unchecked")
@@ -215,7 +229,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
                 this.setVisible(false);
 
-                modalAprobarOrden aprobarOrden = new modalAprobarOrden(new javax.swing.JFrame(), true,  objeto);
+                modificarOrdenPedidoForm aprobarOrden = new modificarOrdenPedidoForm(new javax.swing.JFrame(), true, objeto);
                 aprobarOrden.setVisible(true);
 
             }
