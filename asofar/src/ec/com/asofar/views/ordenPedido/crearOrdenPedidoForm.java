@@ -529,6 +529,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                         detOrden.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
                         detOrden.getCoDetalleOrdenPedidoPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                         detOrden.getCoDetalleOrdenPedidoPK().setLineaDetalle(listadet.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle());
+                        detOrden.setDescripcion(listadet.get(i).getDescripcion());
                         detOrden.setEstado("A");
                         detOrden.setFechaCreacion(d);
                         detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
