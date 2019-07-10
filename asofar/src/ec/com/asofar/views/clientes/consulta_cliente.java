@@ -675,6 +675,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             if (ContactoClientes != null) {
                 contacto_editar Ce = new contacto_editar(new javax.swing.JFrame(), true, usu, emp, suc, LocaliClient, ContactoClientes);
                 Ce.setVisible(true);
+                MostrarContacto();
             }
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN CONTACTO PARA EDITAR");
