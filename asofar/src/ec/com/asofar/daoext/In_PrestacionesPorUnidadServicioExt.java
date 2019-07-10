@@ -25,7 +25,10 @@ public class In_PrestacionesPorUnidadServicioExt extends InPrestacionesPorServic
     public List<InPrestacionesPorServicios> obtenerPrestNoRegis() {
         EntityManager em = getEntityManager();
         List<InPrestacionesPorServicios> lprod = null;
-
+/*
+select * from pr_prestaciones
+where id_prestacion NOT IN (select id_prestacion from in_prestaciones_por_servicios)
+*/
         String nativeQuery = "SELECT P.*"
                 + " FROM pr_productos P\n"
                 + "WHERE P.estado='A';";
