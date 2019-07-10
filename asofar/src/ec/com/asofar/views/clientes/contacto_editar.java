@@ -35,10 +35,12 @@ public class contacto_editar extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     SeLocalidadCliente localidadclientes;
-    SeContactosClientes ContactoClientes;
+    SeContactosClientes ContactoCliente;
+    SeContactosClientes ContactoClientes = new SeContactosClientes();
     SeContactosClientesJpaController Ccc = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    SeContactosClientes ContactoCliente = new SeContactosClientes();
+
     boolean corr = false;
+
     public contacto_editar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
@@ -285,17 +287,16 @@ public class contacto_editar extends javax.swing.JDialog {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-        ContactoCliente.setNombre(txt_nombre.getText());
-        ContactoCliente.setIdLocalidad(localidadclientes);
-        System.out.println(" id "+localidadclientes.getIdLocalidadCliente());
-        ContactoCliente.setTelefono(txt_telefono.getText());
-        ContactoCliente.setCelular(txt_celular.getText());
-        ContactoCliente.setEmail(txt_correo.getText());
-        ContactoCliente.setFechaActualizacion(fechaActual);
-        ContactoCliente.setUsuarioActualizacion(usu.getNombreUsuario());
-        ContactoCliente.setEstado("A");
+        ContactoClientes.setNombre(txt_nombre.getText());
+        ContactoClientes.setIdLocalidad(localidadclientes);
+        ContactoClientes.setTelefono(txt_telefono.getText());
+        ContactoClientes.setCelular(txt_celular.getText());
+        ContactoClientes.setEmail(txt_correo.getText());
+        ContactoClientes.setFechaActualizacion(fechaActual);
+        ContactoClientes.setUsuarioActualizacion(usu.getNombreUsuario());
+        ContactoClientes.setEstado("A");
         try {
-            Ccc.edit(ContactoCliente);
+            Ccc.edit(ContactoClientes);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception ex) {
@@ -326,7 +327,7 @@ public class contacto_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_nombreKeyTyped
 
     private void txt_correoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_correoFocusLost
-            corr = Validacion.Email(txt_correo.getText());
+        corr = Validacion.Email(txt_correo.getText());
         if (corr != true) {
             //msge = msge + "\n Correo invalido";
             JOptionPane.showMessageDialog(null, "Correo invalido");
@@ -334,7 +335,7 @@ public class contacto_editar extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_correoFocusLost
 
     private void txt_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nombreFocusLost
-         txt_nombre.setText(txt_nombre.getText().toUpperCase());
+        txt_nombre.setText(txt_nombre.getText().toUpperCase());
     }//GEN-LAST:event_txt_nombreFocusLost
 
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
