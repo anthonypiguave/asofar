@@ -17,6 +17,7 @@ import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
+import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.InTipoBodega;
@@ -1915,28 +1916,27 @@ public class Tablas {
         }
 
     }
-     public static void ListarProductosVenta(List<PrProductos> listaproducto, JTable Tabla) {
-        int[] a = {50, 100, 100, 100, 200, 200, 100, 100};
+     public static void ListarProductosVenta(List<InKardex> listaKardex, JTable Tabla) {
+        int[] a = {50, 200, 100,100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "CATEGORIA", "SUBCATEGORIA", "ARTICULO", "PRODUCTO", "EMPRESA",
-            "PRESENTACION", "MEDIDAS"};
-        String[] filas = new String[8];
+        String[] b = {"COD.", "DESCRIPCION", "CANTIDAD", "PRECIO"};
+        String[] filas = new String[4];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
-        for (int i = 0; i < listaproducto.size(); i++) {
-            if (listaproducto.get(i).getEstado().equals("A")) {
-                filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
-                filas[1] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
-                filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
-                filas[3] = listaproducto.get(i).getPrArticulo().getNombreArticulo();
-                filas[4] = listaproducto.get(i).getNombreProducto();
-                filas[5] = listaproducto.get(i).getSeEmpresa().getNombreComercial();
-                filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
-                filas[7] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+        for (int i = 0; i < listaKardex.size(); i++) {
+//            if (listaproducto.get(i).getEstado().equals("A")) {
+                filas[0] = "" + listaKardex.get(i).getSeSucursal().getSeEmpresa().getPrProductosList().get(i).getPrProductosPK().getIdProducto();
+                filas[1] = listaKardex.get(i).getSeSucursal().getSeEmpresa().getPrProductosList().get(i).getNombreProducto();
+                filas[2] = listaKardex.get(i).getCantidad().toString();
+                filas[3] = "0.22";
+//                filas[4] = listaproducto.get(i).getNombreProducto();
+//                filas[5] = listaproducto.get(i).getSeEmpresa().getNombreComercial();
+//                filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+//                filas[7] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1947,15 +1947,15 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
-                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
-            }
+//                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+//                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+//                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+//                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+//                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+//                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+//                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+//                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+//            }
         }
     }   
 
