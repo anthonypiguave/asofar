@@ -27,7 +27,14 @@ import javax.swing.JOptionPane;
 public class Venta extends javax.swing.JDialog implements KeyListener {
 
     /**
-     * Creates new form Venta
+     *13
+15
+17
+18
+19
+20
+21
+22
      */
     List<SeClientes> Cliente;
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());

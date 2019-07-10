@@ -26,8 +26,10 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
      */
     int x, y;
     String valor;
-    List<InKardex> listaProducto;
-    InKardexJpaController Pc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<InKardex> listaKardex;
+    List<PrProductos> listaProd;
+    InKardexJpaController Kc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductosJpaController Pc = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -38,8 +40,9 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     }
 
     public void cargarTbaProduc() {
-        listaProducto = Pc.findInKardexEntities();
-        Tablas.ListarProductosVenta(listaProducto, tba_productos);
+        listaKardex = Kc.findInKardexEntities();
+        listaProd = Pc.findPrProductosEntities();
+        Tablas.ListarProductosVenta(listaKardex, listaProd, tba_productos);
     }
 
     /**
@@ -140,7 +143,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
