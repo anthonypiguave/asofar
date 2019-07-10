@@ -48,32 +48,33 @@ import javax.swing.Timer;
  * @author admin1
  */
 public class modificarOrdenPedidoForm extends javax.swing.JDialog {
-    
+
     int x, y;
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
-    
+
     Date d = new Date();
     SeEmpresa se = new SeEmpresa();
     ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoDetalleOrdenPedidoJpaController detordencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+
     CoOrdenPedido cOrden;
     OrdenPedidoDaoExt idCabecera = new OrdenPedidoDaoExt(EntityManagerUtil.ObtenerEntityManager());
-    
+
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoDetalleOrdenPedido> listadet2 = new ArrayList<CoDetalleOrdenPedido>();
     List<CoDetalleOrdenPedido> listadet3 = new ArrayList<CoDetalleOrdenPedido>();
-    
+    List<CoDetalleOrdenPedido> listadet4 = new ArrayList<CoDetalleOrdenPedido>();
+
     List<CoOrdenPedido> listcab = new ArrayList<CoOrdenPedido>();
-    
+
     PrProductos objetopro = new PrProductos();
-    
+
     int contFilas = 1;
-    
+
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -83,12 +84,12 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 //        txtCod.setText(String.format("%06d", ordenExt.obtenerNumeroOrden()));
         CargarProveedor();
         CargarDocumento();
-        
+
         Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
         tiempo.start();
-        
+
     }
-    
+
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, CoOrdenPedido objeto) {
         super(parent, modal);
         initComponents();
@@ -96,16 +97,16 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
-        
+
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-        
+
         Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
         tiempo.start();
-        
+
     }
-    
+
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal, CoOrdenPedido objeto) {
         super(parent, modal);
         initComponents();
@@ -115,66 +116,66 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
-        
+
         cOrden = objeto;
         listcab.add(objeto);
         CargarFormulario();
-        
+
     }
-    
+
     class horas implements ActionListener {
-        
+
         public void actionPerformed(ActionEvent e) {
             java.util.Date sistHora = new java.util.Date();
             String pmAm = "HH:mm:ss";
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             Calendar hoy = Calendar.getInstance();
             txtHora.setText(String.format(format.format(sistHora), hoy));
-            
+
         }
     }
-    
+
     public static String FechaActual() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         return formatoFecha.format(fecha);
     }
-    
+
     public void CargarProveedor() {
         List<CoProveedores> listcaja = proveedorcontroller.findCoProveedoresEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             cbxProveedor.addItem(listcaja.get(i).getNombre());
         }
     }
-    
+
     public void CargarDocumento() {
         List<InTipoDocumento> listcaja = movcontroller.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
         }
     }
-    
+
     public void CargarFormulario() {
-        
+
         txtCod.setText("" + cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
         txtObservacion.setText(cOrden.getObservacion());
-        
+
         cbxProveedor.setSelectedIndex(cOrden.getIdProveedor().intValue());
         cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
-        
+
         listadet2 = detordencontroller.findCoDetalleOrdenPedidoEntities();
-        
+
         for (int i = 0; i < listadet2.size(); i++) {
             System.out.println(" prueba  " + listadet2.get(i).getDescripcion());
             if (listadet2.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
                 listadet.add(listadet2.get(i));
-                
+
             }
-            
+
         }
         Tablas.llenarDetalledeOrden(jTable1, listadet);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -196,12 +197,10 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -281,39 +280,42 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(46, 46, 46))
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(36, 36, 36)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(46, 46, 46))
-                                .addComponent(jLabel12))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(36, 36, 36)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbxProveedor, 0, 169, Short.MAX_VALUE)
+                            .addComponent(cbx_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxProveedor, 0, 169, Short.MAX_VALUE)
-                                    .addComponent(cbx_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 14, Short.MAX_VALUE))
+                                .addComponent(jLabel10)
+                                .addGap(25, 25, 25)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,15 +344,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 102, 0));
-        jButton2.setText("actualizar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jButton3.setBackground(new java.awt.Color(153, 0, 0));
         jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -396,17 +389,8 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        jButton4.setText("jButton4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -414,34 +398,28 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(61, 61, 61)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(61, 61, 61)
-                            .addComponent(jButton4)
-                            .addGap(86, 86, 86)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(357, 357, 357)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -470,93 +448,149 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
-        
+
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
-            
+
         } else {
-            
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         ConsultaProducto cproducto = new ConsultaProducto(new javax.swing.JFrame(), true);
         cproducto.setVisible(true);
-        
+
         objetopro = cproducto.getProducto();
-        
+
         CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        
+
         try {
             if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
                 JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
             } else {
-                
+
                 CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-                
+
                 detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
                 detalle.getCoDetalleOrdenPedidoPK().setIdProducto(objetopro.getPrProductosPK().getIdProducto());
                 detalle.setDescripcion(objetopro.getNombreProducto());
                 detalle.setCantidadSolicitada(BigInteger.valueOf(0));
                 detalle.setEstado("A");
                 detalle.setCoOrdenPedido(cOrden);
-                
+
                 listadet.add(detalle);
-                
+
                 for (int i = 0; i < listadet.size(); i++) {
-                    
+
                     contFilas = i + 1;
-                    
+
                     detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-                    
+
                 }
-                
+
                 Tablas.llenarDetalledeOrden(jTable1, listadet);
                 detOrdencontroller.create(detalle);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        
+
         CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        
+
         int row = jTable1.rowAtPoint(evt.getPoint());
         int col = jTable1.columnAtPoint(evt.getPoint());
         if (evt.getClickCount() == 1) {
             if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
                 try {
-                    
+
                     int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
                         int i = jTable1.getSelectedRow();
-                        
+
                         detOrdencontroller.destroy(listadet.get(i).getCoDetalleOrdenPedidoPK());
                         listadet.remove(i);
                         
+                        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+                        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+                        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+
+                        list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
+                        
+                        
+
                         contFilas = contFilas - 1;
                         for (int j = 0; j < listadet.size(); j++) {
                             contFilas = j + 1;
                             listadet.get(j).getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-                            
+
+                            detalle = listadet4.get(j);
+
+                            detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+                            detOrdencontroller.edit(detalle);
+
                         }
                         Tablas.llenarDetalledeOrden(jTable1, listadet);
+                        //////////////////////////
+
+                        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+                        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+                        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+
+                        list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
+
+                        try {
+
+                            for (int j = 0; j < list.size(); j++) {
+
+                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+
+                                    detalle = list.get(j);
+                                    listadet4.add(detalle);
+
+                                    System.out.println("  ttttttttttt: " + detalle.getCoDetalleOrdenPedidoPK());
+
+                                }
+
+                            }
+
+//
+                            contFilas = contFilas - 1;
+                            for (int k = 0; k < listadet4.size(); k++) {
+
+                                System.out.println("kkkkk:" + listadet4.get(k).getCoDetalleOrdenPedidoPK());
+
+                                contFilas = k + 1;
+                                System.out.println("  cont : " + contFilas);
+
+                                detalle = listadet4.get(k);
+
+                                detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+                                detOrdencontroller.edit(detalle);
+
+                            }
+
+                        } catch (Exception e) {
+                        }
+
                     }
                 } catch (NonexistentEntityException | HeadlessException e) {
                     e.printStackTrace();
                 }
+
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jTable1MousePressed
 
@@ -564,16 +598,16 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         CoOrdenPedidoJpaController cabOrdencontroller = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
         CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        
+
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(cbxProveedor.getSelectedItem().toString())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
-                
+
                 try {
                     CoProveedores coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
                     InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
-                    
+
                     cOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                     cOrden.setObservacion(txtObservacion.getText());
                     cOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
@@ -583,15 +617,15 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                     cOrden.setFechaActualizacion(d);
                     cOrden.setCoDetalleOrdenPedidoList(listadet);
                     cabOrdencontroller.edit(cOrden);
-                    
+
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
 //                    setVisible(false);
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                 }
-                
+
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -604,45 +638,45 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1KeyTyped
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        
+
         CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
         try {
-            
+
             int i = jTable1.getSelectedRow();
-            
+
             String valor = (String) jTable1.getValueAt(i, 3);
-            
+
             BigInteger cantidad = new BigInteger(valor);
-            
+
             CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-            
+
             List<CoDetalleOrdenPedido> list;
-            
+
             list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
-            
+
             for (int j = 0; j < list.size(); j++) {
-                
+
                 if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-                    
+
                     detalle = list.get(j);
                     listadet3.add(detalle);
                 }
-                
+
             }
-            
+
             for (int k = 0; k < listadet3.size(); k++) {
                 if (k == i) {
                     detalle = listadet3.get(k);
                     listadet.get(k).setCantidadSolicitada(cantidad);
                     detalle.setCantidadSolicitada(cantidad);
-                    
+
                     break;
                 }
-                
+
             }
-            
+
             detOrdencontroller.edit(detalle);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -651,23 +685,67 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
-    
+
     public String validarProductos(String datos) {
         String obj1 = "no";
-        
+
         for (int i = 0; i < listadet.size(); i++) {
-            
+
             if (datos.equals("" + (listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
                 System.out.println("lista si " + listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                 obj1 = "si";
-                
+
                 break;
             }
-            
+
         }
-        
+
         return obj1;
-        
+
+    }
+
+    public void actualizar() {
+
+        CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+        List<CoDetalleOrdenPedido> list;
+
+        list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
+
+        try {
+
+            for (int j = 0; j < list.size(); j++) {
+
+                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+
+                    detalle = list.get(j);
+                    listadet4.add(detalle);
+
+                    System.out.println("  ttttttttttt: " + detalle.getCoDetalleOrdenPedidoPK());
+
+                }
+
+            }
+
+            contFilas = contFilas - 1;
+            for (int j = 0; j < listadet4.size(); j++) {
+
+                System.out.println("kkkkk:" + listadet4.get(j).getCoDetalleOrdenPedidoPK());
+
+                contFilas = j + 1;
+
+                detalle = listadet4.get(j);
+
+                detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+                detOrdencontroller.edit(detalle);
+
+            }
+
+        } catch (Exception e) {
+        }
+
     }
 
     /**
@@ -719,9 +797,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxProveedor;
     private javax.swing.JComboBox<String> cbx_documento;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
