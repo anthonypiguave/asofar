@@ -6,8 +6,10 @@
 package ec.com.asofar.views.venta;
 
 import ec.com.asofar.dao.InKardexJpaController;
+import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dto.InKardex;
+import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -28,8 +30,10 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     String valor;
     List<InKardex> listaKardex;
     List<PrProductos> listaProd;
+    List<PrDetalleTarifario> listaDetaTari;
     InKardexJpaController Kc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductosJpaController Pc = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrDetalleTarifarioJpaController Dtc = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -42,7 +46,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     public void cargarTbaProduc() {
         listaKardex = Kc.findInKardexEntities();
         listaProd = Pc.findPrProductosEntities();
-        Tablas.ListarProductosVenta(listaKardex, listaProd, tba_productos);
+        listaDetaTari = Dtc.findPrDetalleTarifarioEntities();
+        Tablas.ListarProductosVenta(listaDetaTari,listaKardex, listaProd, tba_productos);
     }
 
     /**
