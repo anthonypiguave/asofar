@@ -7,6 +7,7 @@ package ec.com.asofar.views.venta;
 
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -30,6 +31,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeTipoIdentificacion> TiIden;
     SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductos objetoProducto = new PrProductos();
 
     public Venta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -46,6 +48,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         initComponents();
         setLocationRelativeTo(null);
     }
+
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
         for (int i = 0; i < TiIden.size(); i++) {
             cbxtipo_identificacion.addItem(TiIden.get(i).getNombreIdentificacion());
@@ -519,6 +522,11 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
 
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
+        objetoProducto = ingre.getProducto();
+//        if(objetoProducto!= null){
+//        
+//        }
+
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
 
     private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
@@ -544,7 +552,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         for (int i = 0; i < Cliente.size(); i++) {
             ObjIden = Cliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion().toString();
             if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
-                    && Ident.equals(ObjIden)&&Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
+                    && Ident.equals(ObjIden) && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
                 txtTelefono.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
