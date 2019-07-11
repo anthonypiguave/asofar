@@ -1937,7 +1937,7 @@ public class Tablas {
                                     filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
                                     filas[1] = listProd.get(i).getNombreProducto();
                                     filas[2] = listaKardex.get(j).getCantidad().toString();
-                                    filas[3] = ""+listDetaTari.get(k).getValorVenta();
+                                    filas[3] = Formato_Numeros.formatoNumero(""+listDetaTari.get(k).getValorVenta());
                                     model.addRow(filas);
                                     Tabla.setModel(model);
                                     Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
