@@ -17,6 +17,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.JOptionPane;
@@ -44,6 +45,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     PrProductos objetoProducto = new PrProductos();
     PrPrestaciones objPrest = new PrPrestaciones();
     Long id_pre;
+    String nombre;
+    BigInteger id_prod;
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -242,10 +245,14 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         String msg = null;/**/
         if (evt.getClickCount() == 2) {
             id = tba_productos.getSelectedRow();
+//            objProd = devuelveObjeto2(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProd);
             objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
             if (objPrest != null) {
+//            if (objProd != null) {
                 id_pre = objPrest.getIdPrestacion();
-                getPre(id_pre);
+                nombre = objPrest.getNombrePrestacion();
+                id_prod = objPrest.getIdPoducto();
+                getPre(id_pre, nombre, id_prod);
                 getPresta();
                 setVisible(false);
 
@@ -255,11 +262,15 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     public PrPrestaciones getPresta() {
         PrPrestaciones objPre = new PrPrestaciones();
         objPre.setIdPrestacion(id_pre);
+        objPre.setNombrePrestacion(nombre);
+        objPre.setIdPoducto(id_prod);
         return objPre;
     }
 
-    public Long getPre(Long id_pres) {
+    public Long getPre(Long id_pres, String nombreT, BigInteger id_prodc) {
         id_pre = id_pres;
+        nombre = nombreT;
+        id_prod = id_prodc;
         return id_pre;
 
     }
@@ -270,6 +281,17 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         PrPrestaciones doc = null;
         for (int i = 0; i < listabod.size(); i++) {
             if (Objects.equals(listabod.get(i).getIdPrestacion(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
+
+    public PrProductos devuelveObjeto2(Long id, List<PrProductos> listabod) {
+        PrProductos doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getPrProductosPK().getIdProducto(), id)) {
                 doc = listabod.get(i);
                 break;
             }

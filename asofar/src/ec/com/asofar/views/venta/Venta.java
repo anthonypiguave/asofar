@@ -14,6 +14,7 @@ import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
 import static ec.com.asofar.dto.VeFacturaDetalle_.veFacturaDetallePK;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.PrintStream;
@@ -42,6 +43,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     SeEmpresa emp;
     SeSucursal suc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
+    int contFilas = 1;
 
     public Venta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -115,7 +117,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         jLabel18 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tba_detalle = new javax.swing.JTable();
         btn_agregar_prod = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         txt_numero_factura = new javax.swing.JTextField();
@@ -367,7 +369,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tba_detalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -378,7 +380,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tba_detalle);
 
         btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_agregar_prod.setForeground(new java.awt.Color(0, 102, 0));
@@ -538,17 +540,18 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
             VeFacturaDetalle detalleTar = new VeFacturaDetalle();
 
             detalleTar.setVeFacturaDetallePK(new VeFacturaDetallePK());
-//            for (int i = 0; i < listaPrest.size(); i++) {
-//                id_prest= listaPrest.get(i).getIdPrestacion();
-//                
-//            }
-//            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(id_prest);
+
+//            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
+//            BigInteger id = new BigInteger(objetoPrestacion.getIdPoducto().toString());
             detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
-//            detalleTar.set
+            detalleTar.setDescripcion(objetoPrestacion.getNombrePrestacion());
             detalleTar.setCantidad(BigInteger.ZERO);
             listaDetFactura.add(detalleTar);
-//            System.out.println("hsbhjbxxbc"+id_prest);
-//            System.out.println("hsbhjbxxbc"+detalleTar.getVeFacturaDetallePK().getIdPrestaciones());
+            for (int i = 0; i < listaDetFactura.size(); i++) {
+                contFilas = i + 1;
+                detalleTar.getVeFacturaDetallePK().getLineaDetalle();
+            }
+            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
         }
 
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
@@ -662,7 +665,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tba_detalle;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIdentificacion;

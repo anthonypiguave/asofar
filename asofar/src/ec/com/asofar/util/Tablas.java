@@ -41,6 +41,7 @@ import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
+import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeUnidadServicio;
 import java.awt.Font;
 import java.math.BigInteger;
@@ -1962,8 +1963,8 @@ public class Tablas {
             }
         }
     }
-   public static void llenarDetalleVenta(JTable tabla, List<CoDetalleOrdenPedido> lista) {
-        CoDetalleOrdenPedido vo = new CoDetalleOrdenPedido();
+   public static void llenarDetalleVenta(JTable tabla, List<VeFacturaDetalle> lista) {
+        VeFacturaDetalle vo = new VeFacturaDetalle();
 
         tabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO",
@@ -1991,10 +1992,10 @@ public class Tablas {
                 vo = lista.get(i);
 //                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
 
-                filas[0] = lista.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle();
-                filas[1] = lista.get(i).getCoDetalleOrdenPedidoPK().getIdProducto();
+                filas[0] = lista.get(i).getVeFacturaDetallePK().getLineaDetalle();
+                filas[1] = lista.get(i).getVeFacturaDetallePK().getIdPrestaciones();
                 filas[2] = lista.get(i).getDescripcion();
-                filas[3] = lista.get(i).getCantidadSolicitada();
+                filas[3] = lista.get(i).getCantidad();
 
 //                String ac = (String) vo.getEstado();
                 filas[4] = new JButton("ELIMINAR");
