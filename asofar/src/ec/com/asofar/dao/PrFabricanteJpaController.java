@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
 public class PrFabricanteJpaController implements Serializable {
 

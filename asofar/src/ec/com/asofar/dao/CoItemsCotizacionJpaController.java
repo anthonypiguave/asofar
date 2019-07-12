@@ -26,7 +26,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
 public class CoItemsCotizacionJpaController implements Serializable {
 

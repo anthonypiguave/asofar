@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
 @Embeddable
 public class VeFacturaDetallePK implements Serializable {
@@ -20,6 +20,9 @@ public class VeFacturaDetallePK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_factura_detalle")
     private long idFacturaDetalle;
+    @Basic(optional = false)
+    @Column(name = "linea_detalle")
+    private long lineaDetalle;
     @Basic(optional = false)
     @Column(name = "id_factura")
     private long idFactura;
@@ -39,8 +42,9 @@ public class VeFacturaDetallePK implements Serializable {
     public VeFacturaDetallePK() {
     }
 
-    public VeFacturaDetallePK(long idFacturaDetalle, long idFactura, long idEmpresa, long idSucursal, long idPrestaciones, long idUnidadServicio) {
+    public VeFacturaDetallePK(long idFacturaDetalle, long lineaDetalle, long idFactura, long idEmpresa, long idSucursal, long idPrestaciones, long idUnidadServicio) {
         this.idFacturaDetalle = idFacturaDetalle;
+        this.lineaDetalle = lineaDetalle;
         this.idFactura = idFactura;
         this.idEmpresa = idEmpresa;
         this.idSucursal = idSucursal;
@@ -54,6 +58,14 @@ public class VeFacturaDetallePK implements Serializable {
 
     public void setIdFacturaDetalle(long idFacturaDetalle) {
         this.idFacturaDetalle = idFacturaDetalle;
+    }
+
+    public long getLineaDetalle() {
+        return lineaDetalle;
+    }
+
+    public void setLineaDetalle(long lineaDetalle) {
+        this.lineaDetalle = lineaDetalle;
     }
 
     public long getIdFactura() {
@@ -100,6 +112,7 @@ public class VeFacturaDetallePK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (int) idFacturaDetalle;
+        hash += (int) lineaDetalle;
         hash += (int) idFactura;
         hash += (int) idEmpresa;
         hash += (int) idSucursal;
@@ -116,6 +129,9 @@ public class VeFacturaDetallePK implements Serializable {
         }
         VeFacturaDetallePK other = (VeFacturaDetallePK) object;
         if (this.idFacturaDetalle != other.idFacturaDetalle) {
+            return false;
+        }
+        if (this.lineaDetalle != other.lineaDetalle) {
             return false;
         }
         if (this.idFactura != other.idFactura) {
@@ -138,7 +154,7 @@ public class VeFacturaDetallePK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.VeFacturaDetallePK[ idFacturaDetalle=" + idFacturaDetalle + ", idFactura=" + idFactura + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idPrestaciones=" + idPrestaciones + ", idUnidadServicio=" + idUnidadServicio + " ]";
+        return "ec.com.asofar.dto.VeFacturaDetallePK[ idFacturaDetalle=" + idFacturaDetalle + ", lineaDetalle=" + lineaDetalle + ", idFactura=" + idFactura + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idPrestaciones=" + idPrestaciones + ", idUnidadServicio=" + idUnidadServicio + " ]";
     }
     
 }

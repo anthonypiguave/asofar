@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
 @Embeddable
 public class PrSubgruposPK implements Serializable {

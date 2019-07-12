@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
 public class CoDetItemsCotizacionJpaController implements Serializable {
 
@@ -38,8 +38,8 @@ public class CoDetItemsCotizacionJpaController implements Serializable {
         if (coDetItemsCotizacion.getCoDetItemsCotizacionPK() == null) {
             coDetItemsCotizacion.setCoDetItemsCotizacionPK(new CoDetItemsCotizacionPK());
         }
-        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdSucursal(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
+        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         EntityManager em = null;
         try {
@@ -69,8 +69,8 @@ public class CoDetItemsCotizacionJpaController implements Serializable {
     }
 
     public void edit(CoDetItemsCotizacion coDetItemsCotizacion) throws NonexistentEntityException, Exception {
-        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdSucursal(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdSucursal());
+        coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdEmpresa(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdEmpresa());
         coDetItemsCotizacion.getCoDetItemsCotizacionPK().setIdCotizacion(coDetItemsCotizacion.getCoItemsCotizacion().getCoItemsCotizacionPK().getIdCotizacion());
         EntityManager em = null;
         try {

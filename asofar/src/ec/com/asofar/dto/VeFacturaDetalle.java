@@ -8,7 +8,6 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
 @Entity
 @Table(name = "ve_factura_detalle")
@@ -32,11 +31,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "VeFacturaDetalle.findAll", query = "SELECT v FROM VeFacturaDetalle v")
     , @NamedQuery(name = "VeFacturaDetalle.findByIdFacturaDetalle", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idFacturaDetalle = :idFacturaDetalle")
-    , @NamedQuery(name = "VeFacturaDetalle.findByLineaDetalle", query = "SELECT v FROM VeFacturaDetalle v WHERE v.lineaDetalle = :lineaDetalle")
+    , @NamedQuery(name = "VeFacturaDetalle.findByLineaDetalle", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "VeFacturaDetalle.findByIdFactura", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idFactura = :idFactura")
     , @NamedQuery(name = "VeFacturaDetalle.findByIdEmpresa", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "VeFacturaDetalle.findByIdSucursal", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idSucursal = :idSucursal")
     , @NamedQuery(name = "VeFacturaDetalle.findByIdPrestaciones", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idPrestaciones = :idPrestaciones")
+    , @NamedQuery(name = "VeFacturaDetalle.findByDescripcion", query = "SELECT v FROM VeFacturaDetalle v WHERE v.descripcion = :descripcion")
     , @NamedQuery(name = "VeFacturaDetalle.findByIdUnidadServicio", query = "SELECT v FROM VeFacturaDetalle v WHERE v.veFacturaDetallePK.idUnidadServicio = :idUnidadServicio")
     , @NamedQuery(name = "VeFacturaDetalle.findByCantidad", query = "SELECT v FROM VeFacturaDetalle v WHERE v.cantidad = :cantidad")
     , @NamedQuery(name = "VeFacturaDetalle.findByPrecioUnitarioVenta", query = "SELECT v FROM VeFacturaDetalle v WHERE v.precioUnitarioVenta = :precioUnitarioVenta")
@@ -54,9 +54,8 @@ public class VeFacturaDetalle implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected VeFacturaDetallePK veFacturaDetallePK;
-    @Basic(optional = false)
-    @Column(name = "linea_detalle")
-    private long lineaDetalle;
+    @Column(name = "descripcion")
+    private String descripcion;
     @Column(name = "cantidad")
     private BigInteger cantidad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -100,13 +99,8 @@ public class VeFacturaDetalle implements Serializable {
         this.veFacturaDetallePK = veFacturaDetallePK;
     }
 
-    public VeFacturaDetalle(VeFacturaDetallePK veFacturaDetallePK, long lineaDetalle) {
-        this.veFacturaDetallePK = veFacturaDetallePK;
-        this.lineaDetalle = lineaDetalle;
-    }
-
-    public VeFacturaDetalle(long idFacturaDetalle, long idFactura, long idEmpresa, long idSucursal, long idPrestaciones, long idUnidadServicio) {
-        this.veFacturaDetallePK = new VeFacturaDetallePK(idFacturaDetalle, idFactura, idEmpresa, idSucursal, idPrestaciones, idUnidadServicio);
+    public VeFacturaDetalle(long idFacturaDetalle, long lineaDetalle, long idFactura, long idEmpresa, long idSucursal, long idPrestaciones, long idUnidadServicio) {
+        this.veFacturaDetallePK = new VeFacturaDetallePK(idFacturaDetalle, lineaDetalle, idFactura, idEmpresa, idSucursal, idPrestaciones, idUnidadServicio);
     }
 
     public VeFacturaDetallePK getVeFacturaDetallePK() {
@@ -117,12 +111,12 @@ public class VeFacturaDetalle implements Serializable {
         this.veFacturaDetallePK = veFacturaDetallePK;
     }
 
-    public long getLineaDetalle() {
-        return lineaDetalle;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setLineaDetalle(long lineaDetalle) {
-        this.lineaDetalle = lineaDetalle;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public BigInteger getCantidad() {

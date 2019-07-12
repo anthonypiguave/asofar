@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author admin1
+ * @author Usuario
  */
 @Embeddable
 public class InMovimientosPK implements Serializable {
