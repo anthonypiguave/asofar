@@ -1928,7 +1928,6 @@ public class Tablas {
 
         for (int i = 0; i < listProd.size(); i++) {
             for (int j = 0; j < listaKardex.size(); j++) {
-
                 if (listaKardex.get(j).getInKardexPK().getIdProducto()
                         == listProd.get(i).getPrProductosPK().getIdProducto()) {
                     for (int k = 0; k < listDetaTari.size(); k++) {
