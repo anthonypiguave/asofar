@@ -26,6 +26,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.producto.ConsultaProducto;
+import java.awt.Button;
 import java.awt.HeadlessException;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -56,17 +57,13 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     Date d = new Date();
     SeEmpresa se = new SeEmpresa();
-    ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoDetalleOrdenPedidoJpaController detordencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     CoOrdenPedido cOrden;
-    OrdenPedidoDaoExt idCabecera = new OrdenPedidoDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
-    List<CoDetalleOrdenPedido> listadet2 = new ArrayList<CoDetalleOrdenPedido>();
-    List<CoDetalleOrdenPedido> listadet3 = new ArrayList<CoDetalleOrdenPedido>();
 
     List<CoOrdenPedido> listcab = new ArrayList<CoOrdenPedido>();
 
@@ -80,7 +77,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
 
-//        txtCod.setText(String.format("%06d", ordenExt.obtenerNumeroOrden()));
         CargarProveedor();
         CargarDocumento();
 
@@ -162,12 +158,14 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         cbxProveedor.setSelectedIndex(cOrden.getIdProveedor().intValue());
         cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
 
-        listadet2 = detordencontroller.findCoDetalleOrdenPedidoEntities();
+        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
 
-        for (int i = 0; i < listadet2.size(); i++) {
-            System.out.println(" prueba  " + listadet2.get(i).getDescripcion());
-            if (listadet2.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-                listadet.add(listadet2.get(i));
+        list = detordencontroller.findCoDetalleOrdenPedidoEntities();
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(" prueba  " + list.get(i).getDescripcion());
+            if (list.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                listadet.add(list.get(i));
 
             }
 
@@ -510,18 +508,16 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         int col = jTable1.columnAtPoint(evt.getPoint());
         if (evt.getClickCount() == 1) {
             if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
+
+            
+                System.out.println("gggggggggggggggggggg   " + jTable1.getValueAt(2, 4).toString());
                 try {
 
-                    int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
+                    int r = JOptionPane.showConfirmDialog(null, "Desea desactivar este producto?", "", JOptionPane.YES_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
                         int i = jTable1.getSelectedRow();
 
                         CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-//                        detalle = listadet.get(i);
-//                        detalle.setEstado("I");
-
-//                        detOrdencontroller.edit(detalle);
-
                         List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
                         List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
 
@@ -529,16 +525,19 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
                         for (int j = 0; j < list.size(); j++) {
 
-                            if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido()) && list.get(j).getEstado().equals("A")) {
+                            if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
                                 detalle = list.get(j);
                                 list2.add(detalle);
+
                             }
+                            System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
                         }
 
                         detalle = list2.get(i);
                         detalle.setEstado("I");
+                        System.out.println("prueba 2:" + detalle.getEstado());
                         detOrdencontroller.edit(detalle);
-                        
+
                         listadet.get(i).setEstado("I");
 
                         Tablas.llenarDetalledeOrden(jTable1, listadet);
@@ -575,7 +574,8 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
             CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
 
-            List<CoDetalleOrdenPedido> list;
+            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
 
             list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
 
@@ -584,14 +584,14 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
 
                     detalle = list.get(j);
-                    listadet3.add(detalle);
+                    list2.add(detalle);
                 }
 
             }
 
-            for (int k = 0; k < listadet3.size(); k++) {
+            for (int k = 0; k < list2.size(); k++) {
                 if (k == i) {
-                    detalle = listadet3.get(k);
+                    detalle = list2.get(k);
                     listadet.get(k).setCantidadSolicitada(cantidad);
                     detalle.setCantidadSolicitada(cantidad);
 
