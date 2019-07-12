@@ -7,6 +7,8 @@ package ec.com.asofar.views.venta;
 
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
+import ec.com.asofar.dto.PrDetalleTarifario;
+import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
@@ -19,6 +21,9 @@ import static ec.com.asofar.dto.VeFacturaDetalle_.veFacturaDetallePK;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,9 +40,13 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     List<SeTipoIdentificacion> TiIden;
     SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductos objetoProducto = new PrProductos();
+    PrPrestaciones objetoPrestacion = new PrPrestaciones();
+    List<PrPrestaciones> listaPrest;
+    Long id_prest;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+    List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
 
     public Venta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -527,26 +536,24 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     }//GEN-LAST:event_cbxtipo_identificacionActionPerformed
 
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
-/*`id_factura_detalle`
-  `linea_detalle`
-  `id_factura`
-  `id_empresa`
-  `id_sucursal`
-  `id_prestaciones`
-  `id_unidad_servicio`
-  `cantidad`
-     CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-          
-     detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
-*/
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
-        objetoProducto = ingre.getProducto();
-        if (objetoProducto != null) {
+        objetoPrestacion = ingre.getPresta();
+        if (objetoPrestacion != null) {
             VeFacturaDetalle detalleTar = new VeFacturaDetalle();
-            
+
             detalleTar.setVeFacturaDetallePK(new VeFacturaDetallePK());
-//            detalleTar.setVeFacturaDetallePK(detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoProducto.getPrProductosPK().));
+//            for (int i = 0; i < listaPrest.size(); i++) {
+//                id_prest= listaPrest.get(i).getIdPrestacion();
+//                
+//            }
+//            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(id_prest);
+            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
+//            detalleTar.set
+            detalleTar.setCantidad(BigInteger.ZERO);
+            listaDetFactura.add(detalleTar);
+//            System.out.println("hsbhjbxxbc"+id_prest);
+//            System.out.println("hsbhjbxxbc"+detalleTar.getVeFacturaDetallePK().getIdPrestaciones());
         }
 
     }//GEN-LAST:event_btn_agregar_prodActionPerformed

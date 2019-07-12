@@ -1936,7 +1936,9 @@ public class Tablas {
                                     lisPrest.get(l).getIdPrestacion().toString())) {
                                 if (listaKardex.get(j).getInKardexPK().getIdProducto()
                                         == Long.valueOf(lisPrest.get(l).getIdPoducto().toString())) {
-                                    filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
+//                                    System.out.println("id prst "+lisPrest.get(l).getIdPrestacion());
+                                    filas[0] = ""+lisPrest.get(l).getIdPrestacion();
+//                                    filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
                                     filas[1] = listProd.get(i).getNombreProducto();
                                     filas[2] = listaKardex.get(j).getCantidad().toString();
                                     filas[3] = Formato_Numeros.formatoNumero(""+listDetaTari.get(k).getValorVenta());

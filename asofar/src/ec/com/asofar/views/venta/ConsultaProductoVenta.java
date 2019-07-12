@@ -42,6 +42,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     PrDetalleTarifarioJpaController Dtc = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrPrestacionesJpaController Prestc = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductos objetoProducto = new PrProductos();
+    PrPrestaciones objPrest = new PrPrestaciones();
+    Long id_pre;
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -49,7 +51,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cargarTbaProduc();
-        listaProd = Pc.findPrProductosEntities();
     }
 
     public void cargarTbaProduc() {
@@ -238,28 +239,37 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 
     private void tba_productosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_productosMousePressed
         int id = 0;
-        String msg = null;
+        String msg = null;/**/
         if (evt.getClickCount() == 2) {
             id = tba_productos.getSelectedRow();
-            objProd = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProd);
-//            System.out.println("objeto" + objeto.getNombreProducto());
-
-            if (objProd != null) {
-
-//                msg = ordenPedidoEXT.validarProductosOrdenPedido(tbproductos, String.valueOf(objeto.getPrProductosPK().getIdProducto()));
-                this.setVisible(false);
+            objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
+            if (objPrest != null) {
+                id_pre = objPrest.getIdPrestacion();
+                getPre(id_pre);
+                getPresta();
+                setVisible(false);
 
             }
         }
     }//GEN-LAST:event_tba_productosMousePressed
+    public PrPrestaciones getPresta() {
+        PrPrestaciones objPre = new PrPrestaciones();
+        objPre.setIdPrestacion(id_pre);
+        return objPre;
+    }
 
+    public Long getPre(Long id_pres) {
+        id_pre = id_pres;
+        return id_pre;
+
+    }
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnsalirActionPerformed
-    public PrProductos devuelveObjeto(Long id, List<PrProductos> listabod) {
-        PrProductos doc = null;
+    public PrPrestaciones devuelveObjeto(Long id, List<PrPrestaciones> listabod) {
+        PrPrestaciones doc = null;
         for (int i = 0; i < listabod.size(); i++) {
-            if (Objects.equals(listabod.get(i).getPrProductosPK().getIdProducto(), id)) {
+            if (Objects.equals(listabod.get(i).getIdPrestacion(), id)) {
                 doc = listabod.get(i);
                 break;
             }
@@ -268,24 +278,21 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int id = 0;
-
-        if (tba_productos.getSelectedRow() >= 0) {
-            /*hgfrt*/
-            id = tba_productos.getSelectedRow();
-            objProd = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProd);
-
-            if (objProd != null) {
-//                cliente_editar Ce = new cliente_editar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
-//                Ce.setVisible(true);
-//                MostrarClientes();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "SELECCIONE UN PRODUCTO");
-        }
+//
+//        if (tba_productos.getSelectedRow() >= 0) {
+//            /*hgfrt*/
+//            id = tba_productos.getSelectedRow();
+//            objProd = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProd);
+//
+//            if (objProd != null) {
+////                cliente_editar Ce = new cliente_editar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
+////                Ce.setVisible(true);
+////                MostrarClientes();
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "SELECCIONE UN PRODUCTO");
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
-    public PrProductos getProducto() {
-        return objetoProducto;
-    }
 
     /**
      * @param args the command line arguments

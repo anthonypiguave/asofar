@@ -220,7 +220,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
         int i = 0;
         String msg = null;
         if (evt.getClickCount() == 2) {
-            i = tbproductos.getSelectedRow();
+            i = tbproductos.getSelectedRow(); 
             objeto = devuelveObjeto(tbproductos.getValueAt(i, 0).toString(), lista);
 //            System.out.println("objeto" + objeto.getNombreProducto());
 
