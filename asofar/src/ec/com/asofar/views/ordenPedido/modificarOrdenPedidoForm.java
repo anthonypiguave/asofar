@@ -67,7 +67,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoDetalleOrdenPedido> listadet2 = new ArrayList<CoDetalleOrdenPedido>();
     List<CoDetalleOrdenPedido> listadet3 = new ArrayList<CoDetalleOrdenPedido>();
-    List<CoDetalleOrdenPedido> listadet4 = new ArrayList<CoDetalleOrdenPedido>();
 
     List<CoOrdenPedido> listcab = new ArrayList<CoOrdenPedido>();
 
@@ -517,118 +516,44 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                     if (r == JOptionPane.YES_OPTION) {
                         int i = jTable1.getSelectedRow();
 
-                        detOrdencontroller.destroy(listadet.get(i).getCoDetalleOrdenPedidoPK());
-                        listadet.remove(i);
-                        
                         CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-                        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+//                        detalle = listadet.get(i);
+//                        detalle.setEstado("I");
+
+//                        detOrdencontroller.edit(detalle);
+
                         List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+                        List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
 
                         list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
-                        
-                        
 
-                        contFilas = contFilas - 1;
-                        for (int j = 0; j < listadet.size(); j++) {
-                            contFilas = j + 1;
-                            listadet.get(j).getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+                        for (int j = 0; j < list.size(); j++) {
 
-                            detalle = listadet4.get(j);
-
-                            detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-                            detOrdencontroller.edit(detalle);
-
+                            if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido()) && list.get(j).getEstado().equals("A")) {
+                                detalle = list.get(j);
+                                list2.add(detalle);
+                            }
                         }
+
+                        detalle = list2.get(i);
+                        detalle.setEstado("I");
+                        detOrdencontroller.edit(detalle);
+                        
+                        listadet.get(i).setEstado("I");
+
                         Tablas.llenarDetalledeOrden(jTable1, listadet);
-                        //////////////////////////
-
-                        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-                        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
-                        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-
-                        list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
-
-                        try {
-
-                            for (int j = 0; j < list.size(); j++) {
-
-                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-
-                                    detalle = list.get(j);
-                                    listadet4.add(detalle);
-
-                                    System.out.println("  ttttttttttt: " + detalle.getCoDetalleOrdenPedidoPK());
-
-                                }
-
-                            }
-
-//
-                            contFilas = contFilas - 1;
-                            for (int k = 0; k < listadet4.size(); k++) {
-
-                                System.out.println("kkkkk:" + listadet4.get(k).getCoDetalleOrdenPedidoPK());
-
-                                contFilas = k + 1;
-                                System.out.println("  cont : " + contFilas);
-
-                                detalle = listadet4.get(k);
-
-                                detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-                                detOrdencontroller.edit(detalle);
-
-                            }
-
-                        } catch (Exception e) {
-                        }
 
                     }
-                } catch (NonexistentEntityException | HeadlessException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-        }
-
-
-    }//GEN-LAST:event_jTable1MousePressed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-        CoOrdenPedidoJpaController cabOrdencontroller = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-        if (r == JOptionPane.YES_OPTION) {
-            if ("".equals(cbxProveedor.getSelectedItem().toString())) {
-                JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
-            } else {
-
-                try {
-                    CoProveedores coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
-                    InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
-
-                    cOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
-                    cOrden.setObservacion(txtObservacion.getText());
-                    cOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
-                    cOrden.setEstado("P");
-                    cOrden.setFechaEmision(d);
-                    cOrden.setUsuarioActualizacion(cOrden.getUsuarioActualizacion());
-                    cOrden.setFechaActualizacion(d);
-                    cOrden.setCoDetalleOrdenPedidoList(listadet);
-                    cabOrdencontroller.edit(cOrden);
-
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-//                    setVisible(false);
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
-
+                    Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
+
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_jTable1MousePressed
 
     private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
         char car = evt.getKeyChar();
@@ -682,10 +607,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTable1KeyReleased
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     public String validarProductos(String datos) {
         String obj1 = "no";
 
@@ -701,50 +622,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         }
 
         return obj1;
-
-    }
-
-    public void actualizar() {
-
-        CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
-        List<CoDetalleOrdenPedido> list;
-
-        list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
-
-        try {
-
-            for (int j = 0; j < list.size(); j++) {
-
-                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-
-                    detalle = list.get(j);
-                    listadet4.add(detalle);
-
-                    System.out.println("  ttttttttttt: " + detalle.getCoDetalleOrdenPedidoPK());
-
-                }
-
-            }
-
-            contFilas = contFilas - 1;
-            for (int j = 0; j < listadet4.size(); j++) {
-
-                System.out.println("kkkkk:" + listadet4.get(j).getCoDetalleOrdenPedidoPK());
-
-                contFilas = j + 1;
-
-                detalle = listadet4.get(j);
-
-                detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-                detOrdencontroller.edit(detalle);
-
-            }
-
-        } catch (Exception e) {
-        }
 
     }
 

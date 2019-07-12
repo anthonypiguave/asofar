@@ -222,20 +222,22 @@ public class Tablas {
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).getEstado().equals("A") ){
 //                 model.addRow(new Object[]{});
-                Object filas[] = new Object[5];
-                vo = lista.get(i);
+                    Object filas[] = new Object[5];
+                    vo = lista.get(i);
 //                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
 
-                filas[0] = lista.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle();
-                filas[1] = lista.get(i).getCoDetalleOrdenPedidoPK().getIdProducto();
-                filas[2] = lista.get(i).getDescripcion();
-                filas[3] = lista.get(i).getCantidadSolicitada();
+                    filas[0] = lista.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle();
+                    filas[1] = lista.get(i).getCoDetalleOrdenPedidoPK().getIdProducto();
+                    filas[2] = lista.get(i).getDescripcion();
+                    filas[3] = lista.get(i).getCantidadSolicitada();
 
 //                String ac = (String) vo.getEstado();
-                filas[4] = new JButton("ELIMINAR");
+                    filas[4] = new JButton("ELIMINAR");
 
-                dt.addRow(filas);
+                    dt.addRow(filas);
+                }
 
             }
 
@@ -1929,22 +1931,22 @@ public class Tablas {
                     if (listaKardex.get(j).getInKardexPK().getIdProducto()
                             == listProd.get(i).getPrProductosPK().getIdProducto()) {
                         for (int l = 0; l < lisPrest.size(); l++) {
-                        System.out.println("id presta " + lisPrest.get(l).getIdPrestacion());
+                            System.out.println("id presta " + lisPrest.get(l).getIdPrestacion());
                         }
-                            filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
-                            filas[1] = listProd.get(i).getNombreProducto();
-                            filas[2] = listaKardex.get(j).getCantidad().toString();
-                            filas[3] = "0.22";
-                            model.addRow(filas);
-                            Tabla.setModel(model);
-                            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-                            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-                            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                        filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
+                        filas[1] = listProd.get(i).getNombreProducto();
+                        filas[2] = listaKardex.get(j).getCantidad().toString();
+                        filas[3] = "0.22";
+                        model.addRow(filas);
+                        Tabla.setModel(model);
+                        Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                        Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                        Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                        Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                        Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                        Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                        Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                        Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
 //                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
 //                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
 //                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
@@ -1953,11 +1955,10 @@ public class Tablas {
 //                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 //                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
 //                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
-                        }
                     }
                 }
             }
         }
-    
+    }
 
 }
