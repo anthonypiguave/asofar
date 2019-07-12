@@ -18,6 +18,8 @@ import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,12 +34,14 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     String valor;
     List<InKardex> listaKardex;
     List<PrProductos> listaProd;
+    PrProductos objProd = new PrProductos();
     List<PrDetalleTarifario> listaDetaTari;
     List<PrPrestaciones> listaPresta;
     InKardexJpaController Kc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductosJpaController Pc = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrDetalleTarifarioJpaController Dtc = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrPrestacionesJpaController Prestc = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductos objetoProducto = new PrProductos();
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -45,6 +49,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cargarTbaProduc();
+        listaProd = Pc.findPrProductosEntities();
     }
 
     public void cargarTbaProduc() {
@@ -52,7 +57,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         listaProd = Pc.findPrProductosEntities();
         listaDetaTari = Dtc.findPrDetalleTarifarioEntities();
         listaPresta = Prestc.findPrPrestacionesEntities();
-        Tablas.ListarProductosVenta(listaPresta,listaDetaTari,listaKardex, listaProd, tba_productos);
+        Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
     }
 
     /**
@@ -72,6 +77,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tba_productos = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -149,6 +155,13 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setText("ESCOGER ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,7 +177,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -179,7 +193,9 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -221,12 +237,55 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void tba_productosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_productosMousePressed
+        int id = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+            id = tba_productos.getSelectedRow();
+            objProd = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProd);
+//            System.out.println("objeto" + objeto.getNombreProducto());
 
+            if (objProd != null) {
+
+//                msg = ordenPedidoEXT.validarProductosOrdenPedido(tbproductos, String.valueOf(objeto.getPrProductosPK().getIdProducto()));
+                this.setVisible(false);
+
+            }
+        }
     }//GEN-LAST:event_tba_productosMousePressed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnsalirActionPerformed
+    public PrProductos devuelveObjeto(Long id, List<PrProductos> listabod) {
+        PrProductos doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getPrProductosPK().getIdProducto(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int id = 0;
+
+        if (tba_productos.getSelectedRow() >= 0) {
+            /*hgfrt*/
+            id = tba_productos.getSelectedRow();
+            objProd = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProd);
+
+            if (objProd != null) {
+//                cliente_editar Ce = new cliente_editar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
+//                Ce.setVisible(true);
+//                MostrarClientes();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN PRODUCTO");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public PrProductos getProducto() {
+        return objetoProducto;
+    }
 
     /**
      * @param args the command line arguments
@@ -272,6 +331,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnsalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

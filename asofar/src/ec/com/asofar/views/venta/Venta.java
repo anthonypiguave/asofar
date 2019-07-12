@@ -7,11 +7,15 @@ package ec.com.asofar.views.venta;
 
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeFacturaDetalle;
+import ec.com.asofar.dto.VeFacturaDetallePK;
+import static ec.com.asofar.dto.VeFacturaDetalle_.veFacturaDetallePK;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -30,6 +34,10 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeTipoIdentificacion> TiIden;
     SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductos objetoProducto = new PrProductos();
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
 
     public Venta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -45,7 +53,11 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        usu = us;
+        emp = em;
+        suc = su;
     }
+
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
         for (int i = 0; i < TiIden.size(); i++) {
             cbxtipo_identificacion.addItem(TiIden.get(i).getNombreIdentificacion());
@@ -431,9 +443,8 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)))))
+                                .addGap(38, 38, 38)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -516,9 +527,28 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     }//GEN-LAST:event_cbxtipo_identificacionActionPerformed
 
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
-
+/*`id_factura_detalle`
+  `linea_detalle`
+  `id_factura`
+  `id_empresa`
+  `id_sucursal`
+  `id_prestaciones`
+  `id_unidad_servicio`
+  `cantidad`
+     CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+          
+     detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+*/
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
+        objetoProducto = ingre.getProducto();
+        if (objetoProducto != null) {
+            VeFacturaDetalle detalleTar = new VeFacturaDetalle();
+            
+            detalleTar.setVeFacturaDetallePK(new VeFacturaDetallePK());
+//            detalleTar.setVeFacturaDetallePK(detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoProducto.getPrProductosPK().));
+        }
+
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
 
     private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
@@ -544,7 +574,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         for (int i = 0; i < Cliente.size(); i++) {
             ObjIden = Cliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion().toString();
             if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
-                    && Ident.equals(ObjIden)&&Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
+                    && Ident.equals(ObjIden) && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
                 txtTelefono.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());

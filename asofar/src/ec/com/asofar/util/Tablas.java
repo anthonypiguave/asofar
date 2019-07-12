@@ -1925,40 +1925,84 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
 
-        for (int k = 0; k < listDetaTari.size(); k++) {
-            for (int i = 0; i < listProd.size(); i++) {
-                for (int j = 0; j < listaKardex.size(); j++) {
-                    if (listaKardex.get(j).getInKardexPK().getIdProducto()
-                            == listProd.get(i).getPrProductosPK().getIdProducto()) {
-                        for (int l = 0; l < lisPrest.size(); l++) {
-                            System.out.println("id presta " + lisPrest.get(l).getIdPrestacion());
+        for (int i = 0; i < listProd.size(); i++) {
+            for (int j = 0; j < listaKardex.size(); j++) {
+
+                if (listaKardex.get(j).getInKardexPK().getIdProducto()
+                        == listProd.get(i).getPrProductosPK().getIdProducto()) {
+                    for (int k = 0; k < listDetaTari.size(); k++) {
+                        for (int l = 0; l < lisPrest.size(); l++) {                              
+                            if (listDetaTari.get(k).getIdPrestacion().toString().equals(
+                                    lisPrest.get(l).getIdPrestacion().toString())) {
+                                if (listaKardex.get(j).getInKardexPK().getIdProducto()
+                                        == Long.valueOf(lisPrest.get(l).getIdPoducto().toString())) {
+                                    filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
+                                    filas[1] = listProd.get(i).getNombreProducto();
+                                    filas[2] = listaKardex.get(j).getCantidad().toString();
+                                    filas[3] = Formato_Numeros.formatoNumero(""+listDetaTari.get(k).getValorVenta());
+                                    model.addRow(filas);
+                                    Tabla.setModel(model);
+                                    Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                                    Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                                    Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                                    Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                                    Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                                    Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                                    Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                                    Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                                }
+                            }
+
                         }
-                        filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
-                        filas[1] = listProd.get(i).getNombreProducto();
-                        filas[2] = listaKardex.get(j).getCantidad().toString();
-                        filas[3] = "0.22";
-                        model.addRow(filas);
-                        Tabla.setModel(model);
-                        Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                        Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-                        Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                        Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                        Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                        Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                        Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-                        Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-//                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-//                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-//                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-//                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
-//                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-//                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-//                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
-//                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+
                     }
                 }
             }
         }
     }
+   public static void llenarDetalleVenta(JTable tabla, List<CoDetalleOrdenPedido> lista) {
+        CoDetalleOrdenPedido vo = new CoDetalleOrdenPedido();
 
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO",
+            "CANTIDAD SOLICITADA", "",}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, JButton.class
+
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return tbordenpedido[column];
+            }
+        };
+
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+//                 model.addRow(new Object[]{});
+                Object filas[] = new Object[5];
+                vo = lista.get(i);
+//                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
+
+                filas[0] = lista.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle();
+                filas[1] = lista.get(i).getCoDetalleOrdenPedidoPK().getIdProducto();
+                filas[2] = lista.get(i).getDescripcion();
+                filas[3] = lista.get(i).getCantidadSolicitada();
+
+//                String ac = (String) vo.getEstado();
+                filas[4] = new JButton("ELIMINAR");
+
+                dt.addRow(filas);
+
+            }
+
+        }
+
+        tabla.setModel(dt);
+    }
 }
