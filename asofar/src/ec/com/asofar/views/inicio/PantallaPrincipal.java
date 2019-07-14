@@ -15,6 +15,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
 import ec.com.asofar.util.Reflection;
 import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
+import ec.com.asofar.views.venta.Factura;
 import java.awt.BorderLayout;
 import java.awt.PopupMenu;
 import java.awt.Toolkit;
@@ -65,7 +66,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
+//        this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
         us1 = us;
         em1 = em;
         su1 = su;
@@ -74,6 +75,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         salida.addActionListener((e) -> {
             System.exit(0);
         });
+        jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
     }
 
     public void cargarMenu(List<SeOpcionesMenu> lis) {
@@ -102,11 +104,30 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     }
                                     menu.add(menu2);
                                 } else {
-                                    System.out.println("fdf"+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                                    /**/
+//                                    System.out.println("nom"+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                                    String nombre = "GENERAR VENTA ";
+                                    System.out.println(lis.get(i).getSeOpcionesMenuList().get(j).getNombre()+"nm"+nombre);
+                                        if(lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)){
+                                        System.out.println("-----");
+                                        JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                                        item.addActionListener(new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                Factura fac = new Factura();
+                                                jdpescritorio.add(fac);
+                                                fac.show();
+                                            }
+                                        });
+                                        menu.add(item);
+                                    } 
+                                    else {
+
 //                                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
-                                    JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
-                                    item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
-                                    menu.add(item);
+                                        JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                                        item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
+                                        menu.add(item);
+                                    }
                                 }
                             }
                         }
@@ -134,6 +155,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jdpescritorio = new javax.swing.JDesktopPane();
         meMenuBase = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,17 +163,30 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTextPane1);
 
+        jdpescritorio.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jdpescritorioLayout = new javax.swing.GroupLayout(jdpescritorio);
+        jdpescritorio.setLayout(jdpescritorioLayout);
+        jdpescritorioLayout.setHorizontalGroup(
+            jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 705, Short.MAX_VALUE)
+        );
+        jdpescritorioLayout.setVerticalGroup(
+            jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 452, Short.MAX_VALUE)
+        );
+
         setJMenuBar(meMenuBase);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addComponent(jdpescritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addComponent(jdpescritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -258,6 +293,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JDesktopPane jdpescritorio;
     private javax.swing.JMenuBar meMenuBase;
     // End of variables declaration//GEN-END:variables
 }
