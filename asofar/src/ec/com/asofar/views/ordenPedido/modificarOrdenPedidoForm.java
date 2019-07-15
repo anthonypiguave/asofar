@@ -8,25 +8,22 @@ package ec.com.asofar.views.ordenPedido;
 import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.InMovimientosJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
-import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.daoext.OrdenPedidoDaoExt;
-import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoDetalleOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido;
-import ec.com.asofar.dto.CoOrdenPedidoPK;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Render;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.producto.ConsultaProducto;
-import java.awt.HeadlessException;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -56,17 +53,13 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     Date d = new Date();
     SeEmpresa se = new SeEmpresa();
-    ordenPedidoEXT ordenExt = new ordenPedidoEXT(EntityManagerUtil.ObtenerEntityManager());
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoDetalleOrdenPedidoJpaController detordencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     CoOrdenPedido cOrden;
-    OrdenPedidoDaoExt idCabecera = new OrdenPedidoDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
-    List<CoDetalleOrdenPedido> listadet2 = new ArrayList<CoDetalleOrdenPedido>();
-    List<CoDetalleOrdenPedido> listadet3 = new ArrayList<CoDetalleOrdenPedido>();
 
     List<CoOrdenPedido> listcab = new ArrayList<CoOrdenPedido>();
 
@@ -80,7 +73,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
 
-//        txtCod.setText(String.format("%06d", ordenExt.obtenerNumeroOrden()));
         CargarProveedor();
         CargarDocumento();
 
@@ -162,17 +154,19 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         cbxProveedor.setSelectedIndex(cOrden.getIdProveedor().intValue());
         cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
 
-        listadet2 = detordencontroller.findCoDetalleOrdenPedidoEntities();
+        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
 
-        for (int i = 0; i < listadet2.size(); i++) {
-            System.out.println(" prueba  " + listadet2.get(i).getDescripcion());
-            if (listadet2.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-                listadet.add(listadet2.get(i));
+        list = detordencontroller.findCoDetalleOrdenPedidoEntities();
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(" prueba  " + list.get(i).getDescripcion());
+            if (list.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                listadet.add(list.get(i));
 
             }
 
         }
-        Tablas.llenarDetalledeOrden(jTable1, listadet);
+        Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
     }
 
     @SuppressWarnings("unchecked")
@@ -196,10 +190,11 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        BtnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        BtnAprovar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -344,13 +339,13 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton3.setBackground(new java.awt.Color(153, 0, 0));
-        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("CANCELAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnCancelar.setBackground(new java.awt.Color(153, 0, 0));
+        BtnCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnCancelar.setText("CANCELAR");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnCancelarActionPerformed(evt);
             }
         });
 
@@ -391,6 +386,16 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        BtnAprovar.setBackground(new java.awt.Color(13, 153, 0));
+        BtnAprovar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnAprovar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAprovar.setText("APROVAR");
+        BtnAprovar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAprovarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -404,8 +409,10 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(146, 146, 146)
+                        .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -417,8 +424,10 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -445,7 +454,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
@@ -454,7 +463,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         } else {
 
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnCancelarActionPerformed
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -490,7 +499,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
                 }
 
-                Tablas.llenarDetalledeOrden(jTable1, listadet);
+                Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
                 detOrdencontroller.create(detalle);
             }
 
@@ -510,45 +519,90 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         int col = jTable1.columnAtPoint(evt.getPoint());
         if (evt.getClickCount() == 1) {
             if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
-                try {
 
-                    int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
-                    if (r == JOptionPane.YES_OPTION) {
-                        int i = jTable1.getSelectedRow();
+                JButton jButText = (JButton) jTable1.getValueAt(row, col);
 
-                        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-//                        detalle = listadet.get(i);
-//                        detalle.setEstado("I");
+                if (jButText.getText().equals("DESACTIVAR")) {
 
-//                        detOrdencontroller.edit(detalle);
+                    try {
 
-                        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-                        List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
+                        int r = JOptionPane.showConfirmDialog(null, "Desea desactivar este producto?", "", JOptionPane.YES_OPTION);
+                        if (r == JOptionPane.YES_OPTION) {
+                            int i = jTable1.getSelectedRow();
 
-                        list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
+                            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+                            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+                            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
 
-                        for (int j = 0; j < list.size(); j++) {
+                            list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
 
-                            if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido()) && list.get(j).getEstado().equals("A")) {
-                                detalle = list.get(j);
-                                list2.add(detalle);
+                            for (int j = 0; j < list.size(); j++) {
+
+                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                                    detalle = list.get(j);
+                                    list2.add(detalle);
+
+                                }
+                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
                             }
+
+                            detalle = list2.get(i);
+                            detalle.setEstado("I");
+                            System.out.println("prueba 2:" + detalle.getEstado());
+                            detOrdencontroller.edit(detalle);
+
+                            listadet.get(i).setEstado("I");
+
+                            Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
+
                         }
 
-                        detalle = list2.get(i);
-                        detalle.setEstado("I");
-                        detOrdencontroller.edit(detalle);
-                        
-                        listadet.get(i).setEstado("I");
-
-                        Tablas.llenarDetalledeOrden(jTable1, listadet);
-
+                    } catch (Exception ex) {
+                        Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                } catch (Exception ex) {
-                    Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+                if (jButText.getText().equals("ACTIVAR")) {
+
+                    try {
+
+                        int r = JOptionPane.showConfirmDialog(null, "Desea activar este producto?", "", JOptionPane.YES_OPTION);
+                        if (r == JOptionPane.YES_OPTION) {
+                            int i = jTable1.getSelectedRow();
+
+                            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+                            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+                            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
+
+                            list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
+
+                            for (int j = 0; j < list.size(); j++) {
+
+                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                                    detalle = list.get(j);
+                                    list2.add(detalle);
+
+                                }
+                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
+                            }
+
+                            detalle = list2.get(i);
+                            detalle.setEstado("A");
+                            System.out.println("prueba 2:" + detalle.getEstado());
+                            detOrdencontroller.edit(detalle);
+
+                            listadet.get(i).setEstado("A");
+
+                            Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
+
+                        }
+
+                    } catch (Exception ex) {
+                        Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                Render render = new Render();
+                jTable1.setDefaultRenderer(Object.class, render);
             }
 
         }
@@ -575,7 +629,8 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
             CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
 
-            List<CoDetalleOrdenPedido> list;
+            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
 
             list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
 
@@ -584,14 +639,14 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
 
                     detalle = list.get(j);
-                    listadet3.add(detalle);
+                    list2.add(detalle);
                 }
 
             }
 
-            for (int k = 0; k < listadet3.size(); k++) {
+            for (int k = 0; k < list2.size(); k++) {
                 if (k == i) {
-                    detalle = listadet3.get(k);
+                    detalle = list2.get(k);
                     listadet.get(k).setCantidadSolicitada(cantidad);
                     detalle.setCantidadSolicitada(cantidad);
 
@@ -606,6 +661,45 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
+
+        CoDetalleOrdenPedidoJpaController detOrdenController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InMovimientosJpaController movientoControl= new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
+       
+        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+        InMovimientos movimiento = new InMovimientos();
+        
+        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+        List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
+        list = detOrdenController.findCoDetalleOrdenPedidoEntities();
+        
+        try {
+            for (int j = 0; j < list.size(); j++) {
+
+                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+
+                    detalle = list.get(j);
+                    detalle.setFechaActualizacion(d);
+                    detalle.setUsuarioCreacion(seUsuario.getNombreUsuario());
+                    list2.add(detalle);
+                    detOrdenController.edit(detalle);
+                }
+            }
+            cOrden.setFechaActualizacion(d);
+            cOrden.setUsuarioActualizacion(seUsuario.getNombreUsuario());
+
+            cabOrdenController.edit(cOrden);
+            
+            for (int i = 0; i < list2.size(); i++) {
+                
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnAprovarActionPerformed
 
     public String validarProductos(String datos) {
         String obj1 = "no";
@@ -671,10 +765,11 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAprovar;
+    private javax.swing.JButton BtnCancelar;
     private javax.swing.JComboBox<String> cbxProveedor;
     private javax.swing.JComboBox<String> cbx_documento;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

@@ -246,11 +246,8 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 vdc.setHoraCierre(d_hora);
                 vdc.setEstado("I");
                 if(ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true){
-                cajadet.edit(vdc);
-                JOptionPane.showMessageDialog(null, "CAJA CERRADA", "REGISTRO COMPLETADO EXITOSAMENTE!", JOptionPane.INFORMATION_MESSAGE);
+                cajadet.edit(vdc); 
                 setVisible(false);
-                }else{
-                    System.out.println("sorry");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);

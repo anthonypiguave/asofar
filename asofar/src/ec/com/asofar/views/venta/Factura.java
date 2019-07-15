@@ -2,7 +2,6 @@ package ec.com.asofar.views.venta;
 
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
-import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
@@ -12,25 +11,30 @@ import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
-import static ec.com.asofar.dto.VeFacturaDetalle_.veFacturaDetallePK;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.PrintStream;
 import java.math.BigInteger;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ALUMNO
+ * @author Administrador
  */
-public class Venta extends javax.swing.JDialog implements KeyListener {
+public class Factura extends javax.swing.JInternalFrame {
 
+    /**
+     * Creates new form Factura
+     */
     List<SeClientes> Cliente;
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeTipoIdentificacion> TiIden;
@@ -43,22 +47,24 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     SeEmpresa emp;
     SeSucursal suc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    int contFilas = 1;
+    int Cont = 1;
 
-    public Venta(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Factura() {
         initComponents();
+        this.setLocation(450, 15);
         btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
-        setLocationRelativeTo(null);
         cargarLisCliente();
         TiIden = tic.findSeTipoIdentificacionEntities();
         llenarCombo(TiIden);
     }
 
-    public Venta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
+    public Factura(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setLocation(450, 15);
+        btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
+        cargarLisCliente();
+        TiIden = tic.findSeTipoIdentificacionEntities();
+        llenarCombo(TiIden);
         usu = us;
         emp = em;
         suc = su;
@@ -76,13 +82,6 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         }
     }
 
-    public boolean validarEmail(String email) {
-        String regex = "^(.+)@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,6 +91,9 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
@@ -116,7 +118,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tba_detalle = new javax.swing.JTable();
         btn_agregar_prod = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -124,8 +126,25 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("VENTA");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("FACTURA");
+        setPreferredSize(new java.awt.Dimension(0, 0));
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -217,6 +236,9 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         txtIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdentificacionKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdentificacionKeyPressed(evt);
             }
         });
 
@@ -380,7 +402,20 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
 
             }
         ));
-        jScrollPane1.setViewportView(tba_detalle);
+        tba_detalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tba_detalleMousePressed(evt);
+            }
+        });
+        tba_detalle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tba_detalleKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tba_detalleKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tba_detalle);
 
         btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_agregar_prod.setForeground(new java.awt.Color(0, 102, 0));
@@ -396,7 +431,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane2)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(btn_agregar_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -406,7 +441,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(btn_agregar_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("FACTURA  N°"));
@@ -476,19 +511,35 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2))
         );
 
-        pack();
+        setBounds(0, 0, 794, 723);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char validar = evt.getKeyChar();
+        if ((validar < 'a' || validar > 'z') && (validar < 'A' || validar > 'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
@@ -498,16 +549,13 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
+    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+
+    }//GEN-LAST:event_txtEmailKeyTyped
+
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
-
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        char validar = evt.getKeyChar();
-        if ((validar < 'a' || validar > 'z') && (validar < 'A' || validar > 'Z')) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
         char validar = evt.getKeyChar();
@@ -516,47 +564,13 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
         }
     }//GEN-LAST:event_txtApellidoKeyTyped
 
-    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+    private void cbxtipo_identificacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxtipo_identificacionItemStateChanged
 
-    }//GEN-LAST:event_txtEmailKeyTyped
-
-    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-
-    }//GEN-LAST:event_jLabel1MouseDragged
-
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-
-    }//GEN-LAST:event_jLabel1MousePressed
+    }//GEN-LAST:event_cbxtipo_identificacionItemStateChanged
 
     private void cbxtipo_identificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxtipo_identificacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxtipo_identificacionActionPerformed
-
-    private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
-        ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
-        ingre.setVisible(true);
-        objetoPrestacion = ingre.getPresta();
-        if (objetoPrestacion != null) {
-            VeFacturaDetalle detalleTar = new VeFacturaDetalle();
-
-            detalleTar.setVeFacturaDetallePK(new VeFacturaDetallePK());
-
-//            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
-//            BigInteger id = new BigInteger(objetoPrestacion.getIdPoducto().toString());
-            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
-            detalleTar.setDescripcion(objetoPrestacion.getNombrePrestacion());
-            detalleTar.setCantidad(BigInteger.ZERO);
-            listaDetFactura.add(detalleTar);
-            int Cont= 1;
-            for (int i = 0; i < listaDetFactura.size(); i++) {
-                
-                Cont = i + 1;
-                detalleTar.getVeFacturaDetallePK().getLineaDetalle();
-            }
-            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-        }
-
-    }//GEN-LAST:event_btn_agregar_prodActionPerformed
 
     private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
         // TODO add your handling code here:
@@ -568,7 +582,6 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
             getToolkit().beep();
             evt.consume();
         }
-
     }//GEN-LAST:event_txtIdentificacionKeyTyped
 
     private void btnguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar1ActionPerformed
@@ -589,58 +602,101 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
             }
         }
     }
-    private void cbxtipo_identificacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxtipo_identificacionItemStateChanged
+    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
 
-    }//GEN-LAST:event_cbxtipo_identificacionItemStateChanged
+    }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
+        ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
+        ingre.setVisible(true);
+        objetoPrestacion = ingre.getPresta();
+        if (objetoPrestacion != null) {
+            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
+
+            FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
+
+            //            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
+            //            BigInteger id = new BigInteger(objetoPrestacion.getIdPoducto().toString());
+            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
+            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
+            FactDeta.setCantidad(BigInteger.ONE);
+//            FactDeta.setPrecioUnitarioVenta(objetoPrestacion.);
+//
+            listaDetFactura.add(FactDeta);
+
+            for (int i = 0; i < listaDetFactura.size(); i++) {
+                Cont = i + 1;
+                FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
+            }
+            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+        }
+    }//GEN-LAST:event_btn_agregar_prodActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void txtIdentificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            CargarCliente();
+        }
+    }//GEN-LAST:event_txtIdentificacionKeyPressed
+
+    private void tba_detalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_detalleMousePressed
+        int row = tba_detalle.rowAtPoint(evt.getPoint());
+        int col = tba_detalle.columnAtPoint(evt.getPoint());
+        if (evt.getClickCount() == 1) {
+            if (tba_detalle.getModel().getColumnClass(col).equals(JButton.class)) {
+                try {
+
+                    int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
+                    if (r == JOptionPane.YES_OPTION) {
+                        int i = tba_detalle.getSelectedRow();
+                        listaDetFactura.remove(i);
+                        Cont = Cont - 1;
+                        for (int j = 0; j < listaDetFactura.size(); j++) {
+                            Cont = j + 1;
+//                            listaDetFactura.get(j).getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+                            listaDetFactura.get(j).getVeFacturaDetallePK().setLineaDetalle(Cont);
+                        }
+                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                    }
+                } catch (Exception e) {
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Venta dialog = new Venta(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+        }
+    }//GEN-LAST:event_tba_detalleMousePressed
+
+    private void tba_detalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyTyped
+        char car = evt.getKeyChar();
+        if (car < '0' || car > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tba_detalleKeyTyped
+
+    private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
+                try {
+
+            int i = tba_detalle.getSelectedRow();
+
+            String valor = (String) tba_detalle.getValueAt(i, 3);
+
+            System.out.println(" fila de tabla cantidad : " + valor);
+
+            BigInteger cantidad = new BigInteger(valor);
+
+            listaDetFactura.get(i).setCantidad(cantidad);
+
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_tba_detalleKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar_prod;
@@ -658,6 +714,7 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -667,6 +724,8 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable tba_detalle;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtEmail;
@@ -675,25 +734,5 @@ public class Venta extends javax.swing.JDialog implements KeyListener {
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txt_numero_factura;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            JOptionPane.showMessageDialog(null, "Has pulsado Enter");
-        }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            System.exit(0);
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
