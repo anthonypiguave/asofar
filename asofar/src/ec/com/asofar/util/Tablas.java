@@ -44,9 +44,7 @@ import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeUnidadServicio;
 import java.awt.Font;
-import java.math.BigInteger;
 import java.util.List;
-import static javafx.scene.text.Font.font;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -75,6 +73,7 @@ public class Tablas {
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
     private static boolean[] tbordenpedido = {false, false, false, true, true};
+    private static boolean[] tbordenpedido2 = {false, false, false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -176,7 +175,7 @@ public class Tablas {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, JButton.class
-    
+
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -184,7 +183,18 @@ public class Tablas {
             }
 
             public boolean isCellEditable(int row, int column) {
-                return tbordenpedido[column];
+
+                JButton jButText = (JButton) tabla.getValueAt(row, 4);
+
+                System.out.println("wwwww :" + jButText.getText());
+
+                if (jButText.getText().equals("ACTIVAR")) {
+                    System.out.println("w1 :" + jButText.getText());
+                    return tbordenpedido2[column];
+                } else {
+                    System.out.println("w2 :" + jButText.getText());
+                    return tbordenpedido[column];
+                }
             }
         };
 
@@ -201,12 +211,14 @@ public class Tablas {
 
                 if (lista.get(i).getEstado().equals("A")) {
                     filas[4] = new JButton("DESACTIVAR");
+
+
                 } else {
                     filas[4] = new JButton("ACTIVAR");
+
                 }
 
                 dt.addRow(filas);
-
 
             }
 
@@ -255,7 +267,6 @@ public class Tablas {
                 filas[4] = button;
 
                 dt.addRow(filas);
-
 
             }
 

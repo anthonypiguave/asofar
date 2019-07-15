@@ -6,17 +6,11 @@
 package ec.com.asofar.views.ordenPedido;
 
 import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
-import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
-import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.daoext.OrdenPedidoDaoExt;
-import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoDetalleOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido;
-import ec.com.asofar.dto.CoOrdenPedidoPK;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.PrProductos;
@@ -24,10 +18,9 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Render;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.producto.ConsultaProducto;
-import java.awt.Button;
-import java.awt.HeadlessException;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -170,7 +163,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             }
 
         }
-        Tablas.llenarDetalledeOrden(jTable1, listadet);
+        Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
     }
 
     @SuppressWarnings("unchecked")
@@ -488,7 +481,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
                 }
 
-                Tablas.llenarDetalledeOrden(jTable1, listadet);
+                Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
                 detOrdencontroller.create(detalle);
             }
 
@@ -509,45 +502,89 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         if (evt.getClickCount() == 1) {
             if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
 
-            
-                System.out.println("gggggggggggggggggggg   " + jTable1.getValueAt(2, 4).toString());
-                try {
+                JButton jButText = (JButton) jTable1.getValueAt(row, col);
 
-                    int r = JOptionPane.showConfirmDialog(null, "Desea desactivar este producto?", "", JOptionPane.YES_OPTION);
-                    if (r == JOptionPane.YES_OPTION) {
-                        int i = jTable1.getSelectedRow();
+                if (jButText.getText().equals("DESACTIVAR")) {
 
-                        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-                        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-                        List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
+                    try {
 
-                        list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
+                        int r = JOptionPane.showConfirmDialog(null, "Desea desactivar este producto?", "", JOptionPane.YES_OPTION);
+                        if (r == JOptionPane.YES_OPTION) {
+                            int i = jTable1.getSelectedRow();
 
-                        for (int j = 0; j < list.size(); j++) {
+                            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+                            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+                            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
 
-                            if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-                                detalle = list.get(j);
-                                list2.add(detalle);
+                            list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
 
+                            for (int j = 0; j < list.size(); j++) {
+
+                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                                    detalle = list.get(j);
+                                    list2.add(detalle);
+
+                                }
+                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
                             }
-                            System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
+
+                            detalle = list2.get(i);
+                            detalle.setEstado("I");
+                            System.out.println("prueba 2:" + detalle.getEstado());
+                            detOrdencontroller.edit(detalle);
+
+                            listadet.get(i).setEstado("I");
+
+                            Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
+
                         }
 
-                        detalle = list2.get(i);
-                        detalle.setEstado("I");
-                        System.out.println("prueba 2:" + detalle.getEstado());
-                        detOrdencontroller.edit(detalle);
-
-                        listadet.get(i).setEstado("I");
-
-                        Tablas.llenarDetalledeOrden(jTable1, listadet);
-
+                    } catch (Exception ex) {
+                        Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                } catch (Exception ex) {
-                    Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+                if (jButText.getText().equals("ACTIVAR")) {
+
+                    try {
+
+                        int r = JOptionPane.showConfirmDialog(null, "Desea activar este producto?", "", JOptionPane.YES_OPTION);
+                        if (r == JOptionPane.YES_OPTION) {
+                            int i = jTable1.getSelectedRow();
+
+                            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+                            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+                            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
+
+                            list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
+
+                            for (int j = 0; j < list.size(); j++) {
+
+                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                                    detalle = list.get(j);
+                                    list2.add(detalle);
+
+                                }
+                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
+                            }
+
+                            detalle = list2.get(i);
+                            detalle.setEstado("A");
+                            System.out.println("prueba 2:" + detalle.getEstado());
+                            detOrdencontroller.edit(detalle);
+
+                            listadet.get(i).setEstado("A");
+
+                            Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
+
+                        }
+
+                    } catch (Exception ex) {
+                        Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                Render render = new Render();
+                jTable1.setDefaultRenderer(Object.class, render);
             }
 
         }
