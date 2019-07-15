@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoOrdenCompras;
+import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.SeUsuarioSucurRol;
@@ -31,7 +32,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Usuario
+ * @author admin1
  */
 public class SeSucursalJpaController implements Serializable {
 
@@ -56,6 +57,9 @@ public class SeSucursalJpaController implements Serializable {
         }
         if (seSucursal.getCoOrdenComprasList() == null) {
             seSucursal.setCoOrdenComprasList(new ArrayList<CoOrdenCompras>());
+        }
+        if (seSucursal.getInMovimientosList() == null) {
+            seSucursal.setInMovimientosList(new ArrayList<InMovimientos>());
         }
         if (seSucursal.getVeFacturaDetalleList() == null) {
             seSucursal.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
@@ -100,6 +104,12 @@ public class SeSucursalJpaController implements Serializable {
                 attachedCoOrdenComprasList.add(coOrdenComprasListCoOrdenComprasToAttach);
             }
             seSucursal.setCoOrdenComprasList(attachedCoOrdenComprasList);
+            List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
+            for (InMovimientos inMovimientosListInMovimientosToAttach : seSucursal.getInMovimientosList()) {
+                inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
+                attachedInMovimientosList.add(inMovimientosListInMovimientosToAttach);
+            }
+            seSucursal.setInMovimientosList(attachedInMovimientosList);
             List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : seSucursal.getVeFacturaDetalleList()) {
                 veFacturaDetalleListVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -160,6 +170,15 @@ public class SeSucursalJpaController implements Serializable {
                 if (oldSeSucursalOfCoOrdenComprasListCoOrdenCompras != null) {
                     oldSeSucursalOfCoOrdenComprasListCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListCoOrdenCompras);
                     oldSeSucursalOfCoOrdenComprasListCoOrdenCompras = em.merge(oldSeSucursalOfCoOrdenComprasListCoOrdenCompras);
+                }
+            }
+            for (InMovimientos inMovimientosListInMovimientos : seSucursal.getInMovimientosList()) {
+                SeSucursal oldSeSucursalOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getSeSucursal();
+                inMovimientosListInMovimientos.setSeSucursal(seSucursal);
+                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
+                if (oldSeSucursalOfInMovimientosListInMovimientos != null) {
+                    oldSeSucursalOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
+                    oldSeSucursalOfInMovimientosListInMovimientos = em.merge(oldSeSucursalOfInMovimientosListInMovimientos);
                 }
             }
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : seSucursal.getVeFacturaDetalleList()) {
@@ -235,6 +254,8 @@ public class SeSucursalJpaController implements Serializable {
             List<CoOrdenPedido> coOrdenPedidoListNew = seSucursal.getCoOrdenPedidoList();
             List<CoOrdenCompras> coOrdenComprasListOld = persistentSeSucursal.getCoOrdenComprasList();
             List<CoOrdenCompras> coOrdenComprasListNew = seSucursal.getCoOrdenComprasList();
+            List<InMovimientos> inMovimientosListOld = persistentSeSucursal.getInMovimientosList();
+            List<InMovimientos> inMovimientosListNew = seSucursal.getInMovimientosList();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentSeSucursal.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = seSucursal.getVeFacturaDetalleList();
             List<PrTarifario> prTarifarioListOld = persistentSeSucursal.getPrTarifarioList();
@@ -268,6 +289,14 @@ public class SeSucursalJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain CoOrdenCompras " + coOrdenComprasListOldCoOrdenCompras + " since its seSucursal field is not nullable.");
+                }
+            }
+            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
+                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain InMovimientos " + inMovimientosListOldInMovimientos + " since its seSucursal field is not nullable.");
                 }
             }
             for (VeFacturaDetalle veFacturaDetalleListOldVeFacturaDetalle : veFacturaDetalleListOld) {
@@ -338,6 +367,13 @@ public class SeSucursalJpaController implements Serializable {
             }
             coOrdenComprasListNew = attachedCoOrdenComprasListNew;
             seSucursal.setCoOrdenComprasList(coOrdenComprasListNew);
+            List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
+            for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
+                inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
+                attachedInMovimientosListNew.add(inMovimientosListNewInMovimientosToAttach);
+            }
+            inMovimientosListNew = attachedInMovimientosListNew;
+            seSucursal.setInMovimientosList(inMovimientosListNew);
             List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
                 veFacturaDetalleListNewVeFacturaDetalleToAttach = em.getReference(veFacturaDetalleListNewVeFacturaDetalleToAttach.getClass(), veFacturaDetalleListNewVeFacturaDetalleToAttach.getVeFacturaDetallePK());
@@ -412,6 +448,17 @@ public class SeSucursalJpaController implements Serializable {
                     if (oldSeSucursalOfCoOrdenComprasListNewCoOrdenCompras != null && !oldSeSucursalOfCoOrdenComprasListNewCoOrdenCompras.equals(seSucursal)) {
                         oldSeSucursalOfCoOrdenComprasListNewCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListNewCoOrdenCompras);
                         oldSeSucursalOfCoOrdenComprasListNewCoOrdenCompras = em.merge(oldSeSucursalOfCoOrdenComprasListNewCoOrdenCompras);
+                    }
+                }
+            }
+            for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
+                if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
+                    SeSucursal oldSeSucursalOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getSeSucursal();
+                    inMovimientosListNewInMovimientos.setSeSucursal(seSucursal);
+                    inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
+                    if (oldSeSucursalOfInMovimientosListNewInMovimientos != null && !oldSeSucursalOfInMovimientosListNewInMovimientos.equals(seSucursal)) {
+                        oldSeSucursalOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
+                        oldSeSucursalOfInMovimientosListNewInMovimientos = em.merge(oldSeSucursalOfInMovimientosListNewInMovimientos);
                     }
                 }
             }
@@ -520,6 +567,13 @@ public class SeSucursalJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This SeSucursal (" + seSucursal + ") cannot be destroyed since the CoOrdenCompras " + coOrdenComprasListOrphanCheckCoOrdenCompras + " in its coOrdenComprasList field has a non-nullable seSucursal field.");
+            }
+            List<InMovimientos> inMovimientosListOrphanCheck = seSucursal.getInMovimientosList();
+            for (InMovimientos inMovimientosListOrphanCheckInMovimientos : inMovimientosListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This SeSucursal (" + seSucursal + ") cannot be destroyed since the InMovimientos " + inMovimientosListOrphanCheckInMovimientos + " in its inMovimientosList field has a non-nullable seSucursal field.");
             }
             List<VeFacturaDetalle> veFacturaDetalleListOrphanCheck = seSucursal.getVeFacturaDetalleList();
             for (VeFacturaDetalle veFacturaDetalleListOrphanCheckVeFacturaDetalle : veFacturaDetalleListOrphanCheck) {

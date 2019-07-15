@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Usuario
+ * @author admin1
  */
 @Entity
 @Table(name = "in_movimientos")
@@ -31,18 +32,20 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "InMovimientos.findAll", query = "SELECT i FROM InMovimientos i")
     , @NamedQuery(name = "InMovimientos.findByIdMovimientos", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idMovimientos = :idMovimientos")
     , @NamedQuery(name = "InMovimientos.findByIdTipoDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idTipoDocumento = :idTipoDocumento")
-    , @NamedQuery(name = "InMovimientos.findByAnioDocumento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.anioDocumento = :anioDocumento")
+    , @NamedQuery(name = "InMovimientos.findByAnioDocumento", query = "SELECT i FROM InMovimientos i WHERE i.anioDocumento = :anioDocumento")
+    , @NamedQuery(name = "InMovimientos.findByIdTipoMovimiento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idTipoMovimiento = :idTipoMovimiento")
+    , @NamedQuery(name = "InMovimientos.findByIdMotivo", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idMotivo = :idMotivo")
     , @NamedQuery(name = "InMovimientos.findByIdBodegaOrigen", query = "SELECT i FROM InMovimientos i WHERE i.idBodegaOrigen = :idBodegaOrigen")
-    , @NamedQuery(name = "InMovimientos.findByIdEmpresa", query = "SELECT i FROM InMovimientos i WHERE i.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "InMovimientos.findByIdSucursal", query = "SELECT i FROM InMovimientos i WHERE i.idSucursal = :idSucursal")
-    , @NamedQuery(name = "InMovimientos.findByIdUsuario", query = "SELECT i FROM InMovimientos i WHERE i.idUsuario = :idUsuario")
+    , @NamedQuery(name = "InMovimientos.findByIdEmpresa", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idEmpresa = :idEmpresa")
+    , @NamedQuery(name = "InMovimientos.findByIdSucursal", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "InMovimientos.findByIdUsuario", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idUsuario = :idUsuario")
+    , @NamedQuery(name = "InMovimientos.findByIdEstado", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idEstado = :idEstado")
     , @NamedQuery(name = "InMovimientos.findByBodegaDestino", query = "SELECT i FROM InMovimientos i WHERE i.bodegaDestino = :bodegaDestino")
     , @NamedQuery(name = "InMovimientos.findBySucursalDestino", query = "SELECT i FROM InMovimientos i WHERE i.sucursalDestino = :sucursalDestino")
     , @NamedQuery(name = "InMovimientos.findByFechaSistema", query = "SELECT i FROM InMovimientos i WHERE i.fechaSistema = :fechaSistema")
     , @NamedQuery(name = "InMovimientos.findByFechaTransferencia", query = "SELECT i FROM InMovimientos i WHERE i.fechaTransferencia = :fechaTransferencia")
     , @NamedQuery(name = "InMovimientos.findByFechaRecepcion", query = "SELECT i FROM InMovimientos i WHERE i.fechaRecepcion = :fechaRecepcion")
     , @NamedQuery(name = "InMovimientos.findByObservacion", query = "SELECT i FROM InMovimientos i WHERE i.observacion = :observacion")
-    , @NamedQuery(name = "InMovimientos.findByIdProveedor", query = "SELECT i FROM InMovimientos i WHERE i.idProveedor = :idProveedor")
     , @NamedQuery(name = "InMovimientos.findByIdOrdenCompra", query = "SELECT i FROM InMovimientos i WHERE i.idOrdenCompra = :idOrdenCompra")
     , @NamedQuery(name = "InMovimientos.findByFechaOrden", query = "SELECT i FROM InMovimientos i WHERE i.fechaOrden = :fechaOrden")
     , @NamedQuery(name = "InMovimientos.findByIdFactura", query = "SELECT i FROM InMovimientos i WHERE i.idFactura = :idFactura")
@@ -56,18 +59,15 @@ public class InMovimientos implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InMovimientosPK inMovimientosPK;
+    @Column(name = "anio_documento")
+    @Temporal(TemporalType.DATE)
+    private Date anioDocumento;
     @Column(name = "id_bodega_origen")
     private BigInteger idBodegaOrigen;
-    @Column(name = "id_empresa")
-    private BigInteger idEmpresa;
-    @Column(name = "id_sucursal")
-    private BigInteger idSucursal;
-    @Column(name = "id_usuario")
-    private BigInteger idUsuario;
     @Column(name = "bodega_destino")
-    private String bodegaDestino;
+    private BigInteger bodegaDestino;
     @Column(name = "sucursal_destino")
-    private String sucursalDestino;
+    private BigInteger sucursalDestino;
     @Column(name = "fecha_sistema")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaSistema;
@@ -79,8 +79,6 @@ public class InMovimientos implements Serializable {
     private Date fechaRecepcion;
     @Column(name = "observacion")
     private String observacion;
-    @Column(name = "id_proveedor")
-    private BigInteger idProveedor;
     @Column(name = "id_orden_compra")
     private BigInteger idOrdenCompra;
     @Column(name = "fecha_orden")
@@ -101,18 +99,29 @@ public class InMovimientos implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado_movimiento")
-    @ManyToOne
-    private InEstadosMovimiento idEstado;
-    @JoinColumn(name = "id_motivo", referencedColumnName = "id_motivo")
-    @ManyToOne
-    private InMotivos idMotivo;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private InTipoDocumento inTipoDocumento;
-    @JoinColumn(name = "id_tipo_movimiento", referencedColumnName = "id_tipo_movimiento")
+    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne
-    private InTipoMovimiento idTipoMovimiento;
+    private CoProveedores idProveedor;
+    @JoinColumn(name = "id_tipo_movimiento", referencedColumnName = "id_tipo_movimiento", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private InTipoMovimiento inTipoMovimiento;
+    @JoinColumn(name = "id_motivo", referencedColumnName = "id_motivo", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private InMotivos inMotivos;
+    @JoinColumns({
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private SeSucursal seSucursal;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_persona", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private SePersonas sePersonas;
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado_movimiento", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private InEstadosMovimiento inEstadosMovimiento;
 
     public InMovimientos() {
     }
@@ -121,8 +130,8 @@ public class InMovimientos implements Serializable {
         this.inMovimientosPK = inMovimientosPK;
     }
 
-    public InMovimientos(long idMovimientos, long idTipoDocumento, Date anioDocumento) {
-        this.inMovimientosPK = new InMovimientosPK(idMovimientos, idTipoDocumento, anioDocumento);
+    public InMovimientos(long idMovimientos, long idTipoDocumento, long idTipoMovimiento, long idMotivo, long idEmpresa, long idSucursal, long idUsuario, long idEstado) {
+        this.inMovimientosPK = new InMovimientosPK(idMovimientos, idTipoDocumento, idTipoMovimiento, idMotivo, idEmpresa, idSucursal, idUsuario, idEstado);
     }
 
     public InMovimientosPK getInMovimientosPK() {
@@ -133,6 +142,14 @@ public class InMovimientos implements Serializable {
         this.inMovimientosPK = inMovimientosPK;
     }
 
+    public Date getAnioDocumento() {
+        return anioDocumento;
+    }
+
+    public void setAnioDocumento(Date anioDocumento) {
+        this.anioDocumento = anioDocumento;
+    }
+
     public BigInteger getIdBodegaOrigen() {
         return idBodegaOrigen;
     }
@@ -141,43 +158,19 @@ public class InMovimientos implements Serializable {
         this.idBodegaOrigen = idBodegaOrigen;
     }
 
-    public BigInteger getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(BigInteger idEmpresa) {
-        this.idEmpresa = idEmpresa;
-    }
-
-    public BigInteger getIdSucursal() {
-        return idSucursal;
-    }
-
-    public void setIdSucursal(BigInteger idSucursal) {
-        this.idSucursal = idSucursal;
-    }
-
-    public BigInteger getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(BigInteger idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getBodegaDestino() {
+    public BigInteger getBodegaDestino() {
         return bodegaDestino;
     }
 
-    public void setBodegaDestino(String bodegaDestino) {
+    public void setBodegaDestino(BigInteger bodegaDestino) {
         this.bodegaDestino = bodegaDestino;
     }
 
-    public String getSucursalDestino() {
+    public BigInteger getSucursalDestino() {
         return sucursalDestino;
     }
 
-    public void setSucursalDestino(String sucursalDestino) {
+    public void setSucursalDestino(BigInteger sucursalDestino) {
         this.sucursalDestino = sucursalDestino;
     }
 
@@ -211,14 +204,6 @@ public class InMovimientos implements Serializable {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
-    }
-
-    public BigInteger getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(BigInteger idProveedor) {
-        this.idProveedor = idProveedor;
     }
 
     public BigInteger getIdOrdenCompra() {
@@ -285,22 +270,6 @@ public class InMovimientos implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public InEstadosMovimiento getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdEstado(InEstadosMovimiento idEstado) {
-        this.idEstado = idEstado;
-    }
-
-    public InMotivos getIdMotivo() {
-        return idMotivo;
-    }
-
-    public void setIdMotivo(InMotivos idMotivo) {
-        this.idMotivo = idMotivo;
-    }
-
     public InTipoDocumento getInTipoDocumento() {
         return inTipoDocumento;
     }
@@ -309,12 +278,52 @@ public class InMovimientos implements Serializable {
         this.inTipoDocumento = inTipoDocumento;
     }
 
-    public InTipoMovimiento getIdTipoMovimiento() {
-        return idTipoMovimiento;
+    public CoProveedores getIdProveedor() {
+        return idProveedor;
     }
 
-    public void setIdTipoMovimiento(InTipoMovimiento idTipoMovimiento) {
-        this.idTipoMovimiento = idTipoMovimiento;
+    public void setIdProveedor(CoProveedores idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public InTipoMovimiento getInTipoMovimiento() {
+        return inTipoMovimiento;
+    }
+
+    public void setInTipoMovimiento(InTipoMovimiento inTipoMovimiento) {
+        this.inTipoMovimiento = inTipoMovimiento;
+    }
+
+    public InMotivos getInMotivos() {
+        return inMotivos;
+    }
+
+    public void setInMotivos(InMotivos inMotivos) {
+        this.inMotivos = inMotivos;
+    }
+
+    public SeSucursal getSeSucursal() {
+        return seSucursal;
+    }
+
+    public void setSeSucursal(SeSucursal seSucursal) {
+        this.seSucursal = seSucursal;
+    }
+
+    public SePersonas getSePersonas() {
+        return sePersonas;
+    }
+
+    public void setSePersonas(SePersonas sePersonas) {
+        this.sePersonas = sePersonas;
+    }
+
+    public InEstadosMovimiento getInEstadosMovimiento() {
+        return inEstadosMovimiento;
+    }
+
+    public void setInEstadosMovimiento(InEstadosMovimiento inEstadosMovimiento) {
+        this.inEstadosMovimiento = inEstadosMovimiento;
     }
 
     @Override

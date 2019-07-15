@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.dao;
 
+import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dto.InMotivos;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Usuario
+ * @author admin1
  */
 public class InMotivosJpaController implements Serializable {
 
@@ -49,12 +50,12 @@ public class InMotivosJpaController implements Serializable {
             inMotivos.setInMovimientosList(attachedInMovimientosList);
             em.persist(inMotivos);
             for (InMovimientos inMovimientosListInMovimientos : inMotivos.getInMovimientosList()) {
-                InMotivos oldIdMotivoOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getIdMotivo();
-                inMovimientosListInMovimientos.setIdMotivo(inMotivos);
+                InMotivos oldInMotivosOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getInMotivos();
+                inMovimientosListInMovimientos.setInMotivos(inMotivos);
                 inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
-                if (oldIdMotivoOfInMovimientosListInMovimientos != null) {
-                    oldIdMotivoOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
-                    oldIdMotivoOfInMovimientosListInMovimientos = em.merge(oldIdMotivoOfInMovimientosListInMovimientos);
+                if (oldInMotivosOfInMovimientosListInMovimientos != null) {
+                    oldInMotivosOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
+                    oldInMotivosOfInMovimientosListInMovimientos = em.merge(oldInMotivosOfInMovimientosListInMovimientos);
                 }
             }
             em.getTransaction().commit();
@@ -65,7 +66,7 @@ public class InMotivosJpaController implements Serializable {
         }
     }
 
-    public void edit(InMotivos inMotivos) throws NonexistentEntityException, Exception {
+    public void edit(InMotivos inMotivos) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -73,6 +74,18 @@ public class InMotivosJpaController implements Serializable {
             InMotivos persistentInMotivos = em.find(InMotivos.class, inMotivos.getIdMotivo());
             List<InMovimientos> inMovimientosListOld = persistentInMotivos.getInMovimientosList();
             List<InMovimientos> inMovimientosListNew = inMotivos.getInMovimientosList();
+            List<String> illegalOrphanMessages = null;
+            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
+                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain InMovimientos " + inMovimientosListOldInMovimientos + " since its inMotivos field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
                 inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
@@ -81,20 +94,14 @@ public class InMotivosJpaController implements Serializable {
             inMovimientosListNew = attachedInMovimientosListNew;
             inMotivos.setInMovimientosList(inMovimientosListNew);
             inMotivos = em.merge(inMotivos);
-            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
-                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
-                    inMovimientosListOldInMovimientos.setIdMotivo(null);
-                    inMovimientosListOldInMovimientos = em.merge(inMovimientosListOldInMovimientos);
-                }
-            }
             for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
                 if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
-                    InMotivos oldIdMotivoOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getIdMotivo();
-                    inMovimientosListNewInMovimientos.setIdMotivo(inMotivos);
+                    InMotivos oldInMotivosOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getInMotivos();
+                    inMovimientosListNewInMovimientos.setInMotivos(inMotivos);
                     inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
-                    if (oldIdMotivoOfInMovimientosListNewInMovimientos != null && !oldIdMotivoOfInMovimientosListNewInMovimientos.equals(inMotivos)) {
-                        oldIdMotivoOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
-                        oldIdMotivoOfInMovimientosListNewInMovimientos = em.merge(oldIdMotivoOfInMovimientosListNewInMovimientos);
+                    if (oldInMotivosOfInMovimientosListNewInMovimientos != null && !oldInMotivosOfInMovimientosListNewInMovimientos.equals(inMotivos)) {
+                        oldInMotivosOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
+                        oldInMotivosOfInMovimientosListNewInMovimientos = em.merge(oldInMotivosOfInMovimientosListNewInMovimientos);
                     }
                 }
             }
@@ -115,7 +122,7 @@ public class InMotivosJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -127,10 +134,16 @@ public class InMotivosJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inMotivos with id " + id + " no longer exists.", enfe);
             }
-            List<InMovimientos> inMovimientosList = inMotivos.getInMovimientosList();
-            for (InMovimientos inMovimientosListInMovimientos : inMovimientosList) {
-                inMovimientosListInMovimientos.setIdMotivo(null);
-                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
+            List<String> illegalOrphanMessages = null;
+            List<InMovimientos> inMovimientosListOrphanCheck = inMotivos.getInMovimientosList();
+            for (InMovimientos inMovimientosListOrphanCheckInMovimientos : inMovimientosListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This InMotivos (" + inMotivos + ") cannot be destroyed since the InMovimientos " + inMovimientosListOrphanCheckInMovimientos + " in its inMovimientosList field has a non-nullable inMotivos field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(inMotivos);
             em.getTransaction().commit();

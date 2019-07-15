@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author admin1
  */
 @Entity
 @Table(name = "in_tipo_movimiento")
@@ -61,7 +62,7 @@ public class InTipoMovimiento implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "idTipoMovimiento")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoMovimiento")
     private List<InMovimientos> inMovimientosList;
 
     public InTipoMovimiento() {
