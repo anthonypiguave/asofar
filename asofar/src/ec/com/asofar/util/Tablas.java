@@ -1943,14 +1943,14 @@ public class Tablas {
     }
 
     public static void ListarProductosVenta(List<PrPrestaciones> lisPrest, List<PrDetalleTarifario> listDetaTari, List<InKardex> listaKardex, List<PrProductos> listProd, JTable Tabla) {
-        int[] a = {50, 300, 100, 100};
+        int[] a = {50, 300, 100, 100,100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "DESCRIPCION", "CANTIDAD", "PRECIO"};
-        String[] filas = new String[4];
+        String[] b = {"COD.", "DESCRIPCION", "CANTIDAD", "PRECIO","DESCUENTO"};
+        String[] filas = new String[5];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
 
@@ -1964,12 +1964,14 @@ public class Tablas {
                                     lisPrest.get(l).getIdPrestacion().toString())) {
                                 if (listaKardex.get(j).getInKardexPK().getIdProducto()
                                         == Long.valueOf(lisPrest.get(l).getIdPoducto().toString())) {
-//                                    System.out.println("id prst "+lisPrest.get(l).getIdPrestacion());
+                                    
                                     filas[0] = "" + lisPrest.get(l).getIdPrestacion();
 //                                    filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
                                     filas[1] = listProd.get(i).getNombreProducto();
                                     filas[2] = listaKardex.get(j).getCantidad().toString();
                                     filas[3] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
+                                    filas[4] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorDescuento());
+                                    
                                     model.addRow(filas);
                                     Tabla.setModel(model);
                                     Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1980,6 +1982,8 @@ public class Tablas {
                                     Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
                                     Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                                     Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                                    Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                                    Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
                                 }
                             }
 

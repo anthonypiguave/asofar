@@ -623,8 +623,9 @@ public class Factura extends javax.swing.JInternalFrame {
             //            BigInteger id = new BigInteger(objetoPrestacion.getIdPoducto().toString());
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
-            FactDeta.setCantidad(BigInteger.ZERO);
-
+            FactDeta.setCantidad(BigInteger.ONE);
+//            FactDeta.setPrecioUnitarioVenta(objetoPrestacion.);
+//
             listaDetFactura.add(FactDeta);
 
             for (int i = 0; i < listaDetFactura.size(); i++) {

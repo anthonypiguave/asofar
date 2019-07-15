@@ -259,6 +259,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tba_productosMousePressed
+//   public 
     public PrPrestaciones getPresta() {
         PrPrestaciones objPre = new PrPrestaciones();
         objPre.setIdPrestacion(id_pre);
