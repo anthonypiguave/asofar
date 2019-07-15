@@ -8,8 +8,10 @@ package ec.com.asofar.views.DetallesTarifa;
 
 import ec.com.asofar.dao.CoDetallesTarifaJpaController;
 import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
+import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dto.CoDetallesTarifa;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
+import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.SeSucursal;
@@ -26,15 +28,15 @@ import javax.swing.JFrame;
 public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
     
-    CoDetallesTarifaJpaController PPS = new CoDetallesTarifaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<CoDetallesTarifa> lista = PPS.findCoDetallesTarifaEntities();
+    PrDetalleTarifarioJpaController PPS = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<PrDetalleTarifario> lista = PPS.findPrDetalleTarifarioEntities();
     String valor = "";
     int x, y;
-    CoDetallesTarifa prestacionesPPS = new CoDetallesTarifa();
-    CoDetallesTarifa objetoPPS;
-    List<CoDetallesTarifa> prestacionPPS;
-    CoDetallesTarifa prcPPS;
-    CoDetallesTarifa prpkPPS;
+    PrDetalleTarifario prestacionesPPS = new PrDetalleTarifario();
+    PrDetalleTarifario objetoPPS;
+    List<PrDetalleTarifario> prestacionPPS;
+    PrDetalleTarifario prcPPS;
+   PrDetalleTarifario prpkPPS;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
@@ -50,7 +52,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);     
         System.out.println("************");
-        Tablas.listarDetalleTarifario(lista, tblPrestacionesPorServicios);
+        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
     }
 
    public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -63,12 +65,14 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         emp = em;
         suc = su;
        MostrarTabla();
+       
+        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
     }
    public void MostrarTabla() {
         try {
 
-            lista = PPS.findCoDetallesTarifaEntities();
-            Tablas.listarDetalleTarifario(lista, tblPrestacionesPorServicios);
+            lista = PPS.findPrDetalleTarifarioEntities();
+            Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
         } catch (Exception e) {
         }
     }
