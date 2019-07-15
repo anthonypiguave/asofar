@@ -13,7 +13,11 @@ import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +27,7 @@ public class ValidacionCaja {
 
     static VeDetalleCajaJpaController cajaController = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     static VeFacturaJpaController facturaController = new VeFacturaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    static VeFacturaEXT vf = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
 
     public static boolean ValidacionApertura(VeCaja caja, SeUsuarios su) {
         boolean valor = true;
@@ -41,33 +46,45 @@ public class ValidacionCaja {
 
     public static boolean ValidacionCierre(VeDetalleCaja detallecaja, SeUsuarios su) {
         boolean valor = false;
+        DateFormat df1 = new SimpleDateFormat("hh:mm:ss");
 
-        java.util.Date fecha1 = detallecaja.getFechaInicio();
-        java.util.Date fecha2 = detallecaja.getHoraInicio();
+        java.sql.Date fecha1 = new java.sql.Date(detallecaja.getFechaInicio().getTime());
+        String fecha2 = df1.format(detallecaja.getHoraInicio());
         String resultado1 = fecha1 + " " + fecha2;
-        java.util.Date f1 = Date.valueOf(resultado1);
 
-        java.util.Date fecha3 = detallecaja.getFechaCierre();
-        java.util.Date fecha4 = detallecaja.getHoraCierre();
+        java.sql.Date fecha3 = new java.sql.Date(detallecaja.getFechaCierre().getTime());
+        String fecha4 = df1.format(detallecaja.getHoraCierre());
         String resultado2 = fecha3 + " " + fecha4;
-        java.util.Date f2 = Date.valueOf(resultado2);
 
-        double valor1 = detallecaja.getDineroInicio();
-        double valor2 = detallecaja.getDineroCierre();
-        double resultado3 = (valor1 + valor2);
+        Double factura = 0.0;
+        Double total = 0.0;
 
         List<VeFactura> lista = facturaController.findVeFacturaEntities();
-        for (int i = 0; i < lista.size(); i++) {
-            double v = 0;
-            v += lista.get(i).getTotalFacturado();
+        List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
 
-            if (lista.get(i).getIdUsuario().equals(su.getIdUsuario())
-                    && lista.get(i).getIdCaja().equals(detallecaja.getVeDetalleCajaPK().getIdCaja())
-                    && f1.after(lista.get(i).getFechaFacturacion()) == true
-                    && f2.before(lista.get(i).getFechaFacturacion()) == true
-                    && resultado3 == v) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (Objects.equals(lista.get(i).getIdCaja().getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
+                for (int j = 0; j < listafactura.size(); j++) {
+                    if (listafactura.get(j).getIdUsuario().getIdUsuario().equals(detallecaja.getIdUsuario())) {
+                        factura += listafactura.get(j).getTotalFacturado();
+                        total = factura + detallecaja.getDineroInicio();
+                    }
+                }
+            }
+        }
+        if (Objects.equals(total, detallecaja.getDineroCierre())) {
+            valor = true;
+            JOptionPane.showMessageDialog(null, "REGISTRO COMPLETADO EXITOSAMENTE!", "CAJA CERRADA"
+                    , JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int confirmar = JOptionPane.showConfirmDialog(null, "VALOR DEL CIERRE NO CONCUERDA "
+                    + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: "
+                    + total + "\n CIERRE ACTUAL: " + detallecaja.getDineroCierre(), 
+                    "¿DESEA CERRAR CAJA IGUALMENTE?"
+            , JOptionPane.YES_NO_OPTION);
+            
+            if(confirmar == JOptionPane.YES_OPTION){
                 valor = true;
-                System.out.println("hola viejo que hay");
             }
         }
         return valor;
