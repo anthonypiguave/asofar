@@ -75,7 +75,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         salida.addActionListener((e) -> {
             System.exit(0);
         });
-        jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
+        jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height-75), BorderLayout.CENTER);
     }
 
     public void cargarMenu(List<SeOpcionesMenu> lis) {
@@ -107,14 +107,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     /**/
 //                                    System.out.println("nom"+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                     String nombre = "GENERAR VENTA ";
-                                    System.out.println(lis.get(i).getSeOpcionesMenuList().get(j).getNombre()+"nm"+nombre);
+                                    
                                         if(lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)){
-                                        System.out.println("-----");
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         item.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                Factura fac = new Factura();
+                                                Factura fac = new Factura(new javax.swing.JFrame(), true,us1, em1, su1);
                                                 jdpescritorio.add(fac);
                                                 fac.show();
                                             }

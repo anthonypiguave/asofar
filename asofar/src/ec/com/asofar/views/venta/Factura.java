@@ -47,15 +47,27 @@ public class Factura extends javax.swing.JInternalFrame {
     SeEmpresa emp;
     SeSucursal suc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
+    int Cont = 1;
 
     public Factura() {
         initComponents();
-        this.setLocation(500, 15);
+        this.setLocation(450, 15);
         btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
         cargarLisCliente();
         TiIden = tic.findSeTipoIdentificacionEntities();
         llenarCombo(TiIden);
+    }
 
+    public Factura(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        initComponents();
+        this.setLocation(450, 15);
+        btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
+        cargarLisCliente();
+        TiIden = tic.findSeTipoIdentificacionEntities();
+        llenarCombo(TiIden);
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
@@ -225,6 +237,9 @@ public class Factura extends javax.swing.JInternalFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdentificacionKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdentificacionKeyPressed(evt);
+            }
         });
 
         btnguardar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -387,6 +402,19 @@ public class Factura extends javax.swing.JInternalFrame {
 
             }
         ));
+        tba_detalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tba_detalleMousePressed(evt);
+            }
+        });
+        tba_detalle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tba_detalleKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tba_detalleKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tba_detalle);
 
         btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
@@ -587,21 +615,21 @@ public class Factura extends javax.swing.JInternalFrame {
         ingre.setVisible(true);
         objetoPrestacion = ingre.getPresta();
         if (objetoPrestacion != null) {
-            VeFacturaDetalle detalleTar = new VeFacturaDetalle();
+            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
 
-            detalleTar.setVeFacturaDetallePK(new VeFacturaDetallePK());
+            FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
             //            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             //            BigInteger id = new BigInteger(objetoPrestacion.getIdPoducto().toString());
-            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
-            detalleTar.setDescripcion(objetoPrestacion.getNombrePrestacion());
-            detalleTar.setCantidad(BigInteger.ZERO);
-            listaDetFactura.add(detalleTar);
-            int Cont= 1;
-            for (int i = 0; i < listaDetFactura.size(); i++) {
+            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
+            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
+            FactDeta.setCantidad(BigInteger.ZERO);
 
+            listaDetFactura.add(FactDeta);
+
+            for (int i = 0; i < listaDetFactura.size(); i++) {
                 Cont = i + 1;
-                detalleTar.getVeFacturaDetallePK().getLineaDetalle();
+                FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
             }
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
         }
@@ -610,6 +638,65 @@ public class Factura extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtIdentificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            CargarCliente();
+        }
+    }//GEN-LAST:event_txtIdentificacionKeyPressed
+
+    private void tba_detalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_detalleMousePressed
+        int row = tba_detalle.rowAtPoint(evt.getPoint());
+        int col = tba_detalle.columnAtPoint(evt.getPoint());
+        if (evt.getClickCount() == 1) {
+            if (tba_detalle.getModel().getColumnClass(col).equals(JButton.class)) {
+                try {
+
+                    int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
+                    if (r == JOptionPane.YES_OPTION) {
+                        int i = tba_detalle.getSelectedRow();
+                        listaDetFactura.remove(i);
+                        Cont = Cont - 1;
+                        for (int j = 0; j < listaDetFactura.size(); j++) {
+                            Cont = j + 1;
+//                            listaDetFactura.get(j).getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
+                            listaDetFactura.get(j).getVeFacturaDetallePK().setLineaDetalle(Cont);
+                        }
+                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+        }
+    }//GEN-LAST:event_tba_detalleMousePressed
+
+    private void tba_detalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyTyped
+        char car = evt.getKeyChar();
+        if (car < '0' || car > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tba_detalleKeyTyped
+
+    private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
+                try {
+
+            int i = tba_detalle.getSelectedRow();
+
+            String valor = (String) tba_detalle.getValueAt(i, 3);
+
+            System.out.println(" fila de tabla cantidad : " + valor);
+
+            BigInteger cantidad = new BigInteger(valor);
+
+            listaDetFactura.get(i).setCantidad(cantidad);
+
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_tba_detalleKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar_prod;
     private javax.swing.JButton btnguardar1;
