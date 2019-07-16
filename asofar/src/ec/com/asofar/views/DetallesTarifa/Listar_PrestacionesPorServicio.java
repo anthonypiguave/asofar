@@ -5,13 +5,13 @@
  */
 package ec.com.asofar.views.DetallesTarifa;
 
-
 import ec.com.asofar.dao.CoDetallesTarifaJpaController;
 import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
 import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dto.CoDetallesTarifa;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrDetalleTarifario;
+import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.SeSucursal;
@@ -27,7 +27,6 @@ import javax.swing.JFrame;
  */
 public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
-    
     PrDetalleTarifarioJpaController PPS = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<PrDetalleTarifario> lista = PPS.findPrDetalleTarifarioEntities();
     String valor = "";
@@ -36,43 +35,45 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     PrDetalleTarifario objetoPPS;
     List<PrDetalleTarifario> prestacionPPS;
     PrDetalleTarifario prcPPS;
-   PrDetalleTarifario prpkPPS;
+    PrDetalleTarifario prpkPPS;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
- 
+    PrTarifario tp = new PrTarifario();
+
     /**
      * Creates new form Listar_PrestacionesPorServicio
      */
-    
-    
-    public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal) {
-       super(parent, modal);
-        setUndecorated(true);
-        initComponents();
-        setLocationRelativeTo(null);     
-        System.out.println("************");
-        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
-    }
 
-   public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        MostrarTabla();
+        System.out.println("************");
+//        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
+    }
+
+    public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, PrTarifario tr) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+      
         usu = us;
         emp = em;
         suc = su;
-       MostrarTabla();
-       
-        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
+        
+        tp = tr;
+        MostrarTabla();
+//        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios,tp);
     }
-   public void MostrarTabla() {
+
+    public void MostrarTabla() {
         try {
 
             lista = PPS.findPrDetalleTarifarioEntities();
-            Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
+            Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios,tp);
         } catch (Exception e) {
         }
     }
@@ -202,18 +203,18 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
-valor = txtfiltro.getText();
+        valor = txtfiltro.getText();
         Tablas.filtro(valor, tblPrestacionesPorServicios);        // TODO add your handling code here:
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
-char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();        // TODO add your handling code here:
     }//GEN-LAST:event_txtfiltroKeyTyped
     }
-    
+
     public InPrestacionesPorServicios devuelvePrestacionPorServicio(Long id, List<InPrestacionesPorServicios> listapre) {
         InPrestacionesPorServicios doc = null;
         for (int i = 0; i < listapre.size(); i++) {
@@ -223,11 +224,9 @@ char c = evt.getKeyChar();
             }
         }
         return doc;
-    
-    
-    
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -258,7 +257,7 @@ char c = evt.getKeyChar();
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Listar_PrestacionesPorServicio dialog = new Listar_PrestacionesPorServicio(new javax.swing.JFrame(),true);
+                Listar_PrestacionesPorServicio dialog = new Listar_PrestacionesPorServicio(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
