@@ -14,11 +14,11 @@ import java.text.DecimalFormat;
  */
 public class Formato_Numeros {
 
-    public static String formatoNumero(String valor) {   
+    public static String formatoNumero(String valor) {
 
         DecimalFormat formato = new DecimalFormat("#,###.00");
         String valorFormateado = formato.format(Double.parseDouble(valor));
-
+//        System.out.println(" val" + valor);
         if (valorFormateado.charAt(0) == ',') {
             String h = "0" + valorFormateado;
             valorFormateado = h;
@@ -26,7 +26,6 @@ public class Formato_Numeros {
 
         return valorFormateado;
     }
-
     public static String removeScientificNotation(String value) {
         return new BigDecimal(value).toPlainString();
     }

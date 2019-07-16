@@ -13,6 +13,7 @@ import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -38,15 +39,19 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     PrProductos objProd = new PrProductos();
     List<PrDetalleTarifario> listaDetaTari;
     List<PrPrestaciones> listaPresta;
+//    List<PrPrestaciones> listaPresta;
     InKardexJpaController Kc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductosJpaController Pc = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrDetalleTarifarioJpaController Dtc = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrPrestacionesJpaController Prestc = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductos objetoProducto = new PrProductos();
     PrPrestaciones objPrest = new PrPrestaciones();
+    PrDetalleTarifario objDetalTa = new PrDetalleTarifario();
+    VeFacturaDetalle objFacDet = new VeFacturaDetalle();
     Long id_pre;
     String nombre;
     BigInteger id_prod;
+    Double descuento;
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -239,19 +244,32 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyReleased
+    public PrDetalleTarifario devuelveObjeto3(Double valor, List<PrDetalleTarifario> listabod) {
+        PrDetalleTarifario doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
 
+            if (Objects.equals(listabod.get(i).getValorDescuento(), valor)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
     private void tba_productosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_productosMousePressed
         int id = 0;
-        String msg = null;/**/
+        Double valorDesc;
         if (evt.getClickCount() == 2) {
             id = tba_productos.getSelectedRow();
-//            objProd = devuelveObjeto2(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProd);
+            valorDesc = Double.valueOf(tba_productos.getSelectedRow());
+            
             objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
+//            objDetalTa = devuelveObjeto3(Double.valueOf(tba_productos.getValueAt(Integer.parseInt(valorDesc.toString()),0).toString()), listaDetaTari);
             if (objPrest != null) {
 //            if (objProd != null) {
                 id_pre = objPrest.getIdPrestacion();
                 nombre = objPrest.getNombrePrestacion();
                 id_prod = objPrest.getIdPoducto();
+                descuento = objDetalTa.getValorDescuento();
                 getPre(id_pre, nombre, id_prod);
                 getPresta();
                 setVisible(false);
@@ -259,7 +277,12 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tba_productosMousePressed
-//   public 
+    public VeFacturaDetalle getFac() {
+        VeFacturaDetalle objFac = new VeFacturaDetalle();
+        objFac.setValorDescuento(descuento);
+        return objFac;
+    }
+
     public PrPrestaciones getPresta() {
         PrPrestaciones objPre = new PrPrestaciones();
         objPre.setIdPrestacion(id_pre);

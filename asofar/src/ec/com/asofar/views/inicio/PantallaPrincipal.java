@@ -15,7 +15,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
 import ec.com.asofar.util.Reflection;
 import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
-import ec.com.asofar.views.venta.Factura;
+import ec.com.asofar.views.venta.Venta;
 import java.awt.BorderLayout;
 import java.awt.PopupMenu;
 import java.awt.Toolkit;
@@ -113,7 +113,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         item.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                Factura fac = new Factura(new javax.swing.JFrame(), true,us1, em1, su1);
+                                                Venta fac = new Venta(new javax.swing.JFrame(), true,us1, em1, su1);
                                                 jdpescritorio.add(fac);
                                                 fac.show();
                                             }
