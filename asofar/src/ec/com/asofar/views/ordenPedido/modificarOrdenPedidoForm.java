@@ -14,14 +14,13 @@ import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoDetalleOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
-import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.util.Render;
+import ec.com.asofar.util.Render1;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.producto.ConsultaProducto;
 import java.awt.MouseInfo;
@@ -96,6 +95,10 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         CargarProveedor();
         CargarDocumento();
         CargarFormulario();
+        this.txtCod.setEnabled(false);
+        this.txtObservacion.setEnabled(false);
+        this.cbxProveedor.setEnabled(false);
+        this.cbx_documento.setEnabled(false);
 
         System.out.println(" " + seUsuario);
 
@@ -134,12 +137,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     public void CargarFormulario() {
-        
-        this.txtCod.setEditable(false);
-        this.txtObservacion.setEditable(false);
-        this.cbxProveedor.setEditable(false);
-        this.cbx_documento.setEditable(false);
-    
 
         txtCod.setText("" + cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
         txtObservacion.setText(cOrden.getObservacion());
@@ -416,9 +413,9 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(42, 42, 42)
                 .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+                .addGap(103, 103, 103))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,11 +426,10 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -552,7 +548,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                                     list2.add(detalle);
 
                                 }
-                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
+//                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
                             }
 
                             detalle = list2.get(i);
@@ -610,7 +606,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                         Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                Render render = new Render();
+                Render1 render = new Render1();
                 jTable1.setDefaultRenderer(Object.class, render);
             }
 

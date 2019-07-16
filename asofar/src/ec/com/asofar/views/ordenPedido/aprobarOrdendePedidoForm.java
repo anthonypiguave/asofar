@@ -81,13 +81,13 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
         tbAprobar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbAprobar.addMouseListener(new java.awt.event.MouseAdapter() {

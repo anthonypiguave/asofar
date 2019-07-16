@@ -169,7 +169,7 @@ public class Tablas {
     public static void llenarDetalledeOrdenAprovado(JTable tabla, List<CoDetalleOrdenPedido> lista) {
         CoDetalleOrdenPedido vo = new CoDetalleOrdenPedido();
 
-        tabla.setDefaultRenderer(Object.class, new Render());
+        tabla.setDefaultRenderer(Object.class, new Render1());
         DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO",
             "CANTIDAD SOLICITADA", "",}, 0) {
 
