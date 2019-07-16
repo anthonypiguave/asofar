@@ -265,8 +265,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         pol2 = ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString());
         pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
 
-        
-        
+      
             boolean valor1 = ValidarDTO.ValidarPreporservi(cbxprestacion.getSelectedItem().toString())&& ValidarDTO.ValidarPrPrestaciones(cbxprestacion.getSelectedItem().toString());
             if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "Prestacion Ya existente");
@@ -278,17 +277,21 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
                 preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
                 preServ.setEstado(cbxestado.getSelectedItem().toString());
-                preServ.setFechaCreacion(fechaActual);
-                
-                
-            }
-        try {
+                preServ.setFechaCreacion(fechaActual);  
+          
+             try {
             pxs.create(preServ);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception e) {
             Logger.getLogger(AgregarPrestaciones.class.getName()).log(Level.SEVERE, null, e);
-        }
+        } 
+             
+            
+            }
+            
+            
+      
     }//GEN-LAST:event_jguardarpreserActionPerformed
     public void nombrePrestacion(List<PrPrestaciones> pr2) {
         

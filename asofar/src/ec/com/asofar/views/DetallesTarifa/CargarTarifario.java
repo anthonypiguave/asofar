@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ec.com.asofar.views.DetallesTarifa;
+
 import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dao.PrTarifarioJpaController;
 import ec.com.asofar.dto.PrDetalleTarifario;
@@ -22,29 +23,46 @@ import java.util.List;
  */
 public class CargarTarifario extends javax.swing.JDialog {
 
-PrTarifarioJpaController P = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
-List<PrTarifario> lista = P.findPrTarifarioEntities();
+    PrTarifarioJpaController P = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<PrTarifario> lista = P.findPrTarifarioEntities();
+    PrTarifario objeto = new PrTarifario();
+    PrTarifario obj;
+    AgregarNuevoDetalle pre = new AgregarNuevoDetalle(new javax.swing.JFrame(), true);
 
     /**
      * Creates new form CargarTarifario
      */
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
+
     public CargarTarifario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         System.out.println("************");
-        Tablas.listarTarifario(lista,tbl_tarifario);
+        Tablas.listarTarifario(lista, tbltarifario);
+    }
+
+    public CargarTarifario(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, PrTarifario tr) {
+        super(parent, modal);
+        initComponents();
+        System.out.println("************");
+        Tablas.listarTarifario(lista, tbltarifario);
+
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     public void MostrarTabla() {
         try {
 
             lista = P.findPrTarifarioEntities();
-            Tablas.listarTarifario(lista, tbl_tarifario);
+            Tablas.listarTarifario(lista, tbltarifario);
         } catch (Exception e) {
         }
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,11 +73,11 @@ List<PrTarifario> lista = P.findPrTarifarioEntities();
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_tarifario = new javax.swing.JTable();
+        tbltarifario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tbl_tarifario.setModel(new javax.swing.table.DefaultTableModel(
+        tbltarifario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,12 +88,12 @@ List<PrTarifario> lista = P.findPrTarifarioEntities();
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_tarifario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbltarifario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbl_tarifarioMousePressed(evt);
+                tbltarifarioMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl_tarifario);
+        jScrollPane1.setViewportView(tbltarifario);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,13 +115,56 @@ List<PrTarifario> lista = P.findPrTarifarioEntities();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbl_tarifarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tarifarioMousePressed
+    private void tbltarifarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbltarifarioMousePressed
 
+        int i = 0;
+        if (evt.getClickCount() == 2) {
 
+            i = tbltarifario.getSelectedRow();
+            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 0).toString(), lista);
+            System.out.println("ide" + objeto.getPrTarifarioPK().getIdTarifario());
+//            pre.txtidtarifario.setText(String.valueOf(objeto.getPrTarifarioPK().getIdTarifario()));
+            if (objeto != null) {
+                this.setVisible(false);
+                Listar_PrestacionesPorServicio cp = new Listar_PrestacionesPorServicio(new javax.swing.JFrame(), true,usu,emp,suc, objeto);
+                cp.setVisible(true);
+            }
 
+        }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbl_tarifarioMousePressed
+    }//GEN-LAST:event_tbltarifarioMousePressed
+
+    public PrTarifario getObji() {
+        return obj;
+    }
+
+    public void setObji(PrTarifario obj) {
+        this.obj = obj;
+    }
+
+    public PrTarifario getTarifario() {
+        return objeto;
+    }
+
+    public PrTarifario devuelveObjeto(String datos, List<PrTarifario> listaobjeto) {
+
+        PrTarifario objeto1 = null;
+
+        for (int i = 0; i < listaobjeto.size(); i++) {
+
+            if (datos.equals("" + listaobjeto.get(i).getPrTarifarioPK().getIdTarifario())) {
+                objeto1 = listaobjeto.get(i);
+
+                break;
+
+            }
+
+        }
+
+        return objeto1;
+
+    }
 
     /**
      * @param args the command line arguments
@@ -149,6 +210,6 @@ List<PrTarifario> lista = P.findPrTarifarioEntities();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_tarifario;
+    private javax.swing.JTable tbltarifario;
     // End of variables declaration//GEN-END:variables
 }
