@@ -61,7 +61,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
     public Venta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         initComponents();
-        this.setLocation(450, 15);
+        this.setLocation(250, 15);
         btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
         cargarLisCliente();
         TiIden = tic.findSeTipoIdentificacionEntities();
@@ -485,8 +485,8 @@ public class Venta extends javax.swing.JInternalFrame {
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton2)
-                                .addGap(38, 38, 38)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(40, 40, 40)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -621,14 +621,13 @@ public class Venta extends javax.swing.JInternalFrame {
 
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
-            //            detalleTar.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
-            //            BigInteger id = new BigInteger(objetoPrestacion.getIdPoducto().toString());
+            
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             FactDeta.setCantidad(BigInteger.ONE);
             FactDeta.setValorDescuento(objetoFactDeta.getValorDescuento());
-            System.out.println("afds"+objetoFactDeta.getValorDescuento());
-//
+                System.out.println("objeto fact" + objetoFactDeta.getValorDescuento());
+
             listaDetFactura.add(FactDeta);
 
             for (int i = 0; i < listaDetFactura.size(); i++) {
@@ -683,7 +682,7 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tba_detalleKeyTyped
 
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
-                try {
+        try {
 
             int i = tba_detalle.getSelectedRow();
 
@@ -696,9 +695,9 @@ public class Venta extends javax.swing.JInternalFrame {
             listaDetFactura.get(i).setCantidad(cantidad);
 
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_tba_detalleKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
