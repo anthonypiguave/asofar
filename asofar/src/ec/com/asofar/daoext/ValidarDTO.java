@@ -34,6 +34,7 @@ import ec.com.asofar.dto.InTipoBodega;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
+import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
@@ -85,6 +86,21 @@ public class ValidarDTO {
         
         return valor;
     }
+        
+         public static boolean ValidarPreporservi(String nombre){
+             
+             InPrestacionesPorServiciosJpaController control1 = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
+             boolean valor = false;
+             List<InPrestacionesPorServicios> lista = control1.findInPrestacionesPorServiciosEntities();
+
+             for (int i = 0; i < lista.size(); i++) {
+                 if (lista.get(i).getPrPrestaciones().getNombrePrestacion().equals(nombre)) {
+                     valor = true;
+                 }
+             }
+        
+        return valor;
+      }  
     public static boolean ValidarInTipoBodega(String nombre){
         InTipoBodegaJpaController control=new InTipoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor=false;
