@@ -26,20 +26,20 @@ public class Render extends DefaultTableCellRenderer {
 //        Component comp = super.getTableCellRendererComponent(table, value, isSelected,
 //                hasFocus, row, column);
 
-        JButton button = (JButton) table.getValueAt(row, 4);
-//        Map attributes = (new Font("Serif", Font.BOLD, 12)).getAttributes();
-//        attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
-
-        if (button.getText().equals("ACTIVAR")) {
-
-            setForeground(Color.RED);
-//            comp.setFont(new Font(attributes));
-            
-//            return comp;
-
-        } else {
-            setForeground(Color.BLACK);
-        }
+//        JButton button = (JButton) table.getValueAt(row, 4);
+////        Map attributes = (new Font("Serif", Font.BOLD, 12)).getAttributes();
+////        attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+//
+//        if (button.getText().equals("ACTIVAR")) {
+//
+//            setForeground(Color.RED);
+////            comp.setFont(new Font(attributes));
+//            
+////            return comp;
+//
+//        } else {
+//            setForeground(Color.BLACK);
+//        }
 
         if (value instanceof JButton) {
             JButton btn = (JButton) value;

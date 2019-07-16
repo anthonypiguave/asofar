@@ -21,7 +21,9 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
 
+
     CoOrdenPedido objeto = new CoOrdenPedido();
+
 
     List<CoOrdenPedido> lista;
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -38,12 +40,13 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        cargarMostrarTabla();
+        
 
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-
+        cargarMostrarTabla();
+        System.out.println(" " + seUsuario);
     }
 
     @SuppressWarnings("unchecked")
@@ -216,6 +219,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
     private void tbAprobarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAprobarMousePressed
 
+              
         int i = 0;
 
         if (evt.getClickCount() == 2) {
@@ -229,7 +233,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
                 this.setVisible(false);
 
-                modificarOrdenPedidoForm aprobarOrden = new modificarOrdenPedidoForm(new javax.swing.JFrame(), true, objeto);
+                modificarOrdenPedidoForm aprobarOrden = new modificarOrdenPedidoForm(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal, objeto);
                 aprobarOrden.setVisible(true);
 
             }
@@ -256,13 +260,12 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
     private void cargarMostrarTabla() {
         try {
-
             lista = cbOrdenController.findCoOrdenPedidoEntities();
             Tablas.listarCabOrdendePedido(lista, tbAprobar);
         } catch (Exception e) {
 
         }
-
+        
     }
 
     public static void main(String args[]) {

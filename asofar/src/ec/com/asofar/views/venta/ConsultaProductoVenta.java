@@ -257,21 +257,24 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     }
     private void tba_productosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_productosMousePressed
         int id = 0;
-        Double valorDesc;
         if (evt.getClickCount() == 2) {
             id = tba_productos.getSelectedRow();
-            valorDesc = Double.valueOf(tba_productos.getSelectedRow());
-            
+
             objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
-//            objDetalTa = devuelveObjeto3(Double.valueOf(tba_productos.getValueAt(Integer.parseInt(valorDesc.toString()),0).toString()), listaDetaTari);
+
+            System.out.println("tabla" + tba_productos.getValueAt(id, 4).toString());
             if (objPrest != null) {
-//            if (objProd != null) {
                 id_pre = objPrest.getIdPrestacion();
                 nombre = objPrest.getNombrePrestacion();
                 id_prod = objPrest.getIdPoducto();
-                descuento = objDetalTa.getValorDescuento();
+                if(tba_productos.getValueAt(id, 4).toString().equals("-")){
+                descuento = 0.0;
+                }else{
+                descuento = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
+                }
                 getPre(id_pre, nombre, id_prod);
                 getPresta();
+                getFac();
                 setVisible(false);
 
             }
