@@ -73,6 +73,7 @@ public class Tablas {
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
     private static boolean[] tbordenpedido = {false, false, false, true, true};
+    private static boolean[] tbVenta = {false, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
@@ -1977,8 +1978,11 @@ public class Tablas {
                                     filas[3] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
                                     if (listDetaTari.get(k).getValorDescuento() == null) {
                                         filas[4] = "-";
+                                        System.out.println("" + filas[4]);
                                     } else {
-                                        filas[4] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorDescuento());
+                                        System.out.println("tablaclass" + listDetaTari.get(k).getValorDescuento());
+//                                        filas[4] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorDescuento());
+                                        filas[4] = "" + listDetaTari.get(k).getValorDescuento();
                                     }
                                     model.addRow(filas);
                                     Tabla.setModel(model);
@@ -2008,12 +2012,11 @@ public class Tablas {
         VeFacturaDetalle vo = new VeFacturaDetalle();
 
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO",
-            "CANTIDAD SOLICITADA", "",}, 0) {
-
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO", "CANTIDAD SOLICITADA", "VALOR DESCUENTO", "",}, 0) {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, JButton.class
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, JButton.class
 
             };
 
@@ -2022,25 +2025,21 @@ public class Tablas {
             }
 
             public boolean isCellEditable(int row, int column) {
-                return tbordenpedido[column];
+                return tbVenta[column];
             }
         };
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
-//                 model.addRow(new Object[]{});
-                Object filas[] = new Object[5];
+                Object filas[] = new Object[6];
                 vo = lista.get(i);
-//                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
-
                 filas[0] = lista.get(i).getVeFacturaDetallePK().getLineaDetalle();
                 filas[1] = lista.get(i).getVeFacturaDetallePK().getIdPrestaciones();
                 filas[2] = lista.get(i).getDescripcion();
                 filas[3] = lista.get(i).getCantidad();
-
-//                String ac = (String) vo.getEstado();
-                filas[4] = new JButton("ELIMINAR");
-
+                filas[4] = lista.get(i).getValorDescuento();
+                JButton button = new JButton("ELIMINAR");
+                filas[5] = button;
                 dt.addRow(filas);
 
             }
