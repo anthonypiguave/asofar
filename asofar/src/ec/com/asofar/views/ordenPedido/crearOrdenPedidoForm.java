@@ -106,6 +106,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             Calendar hoy = Calendar.getInstance();
             txtHora.setText(String.format(format.format(sistHora), hoy));
+           
 
         }
     }

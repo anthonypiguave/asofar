@@ -72,9 +72,9 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
-
         CargarProveedor();
         CargarDocumento();
+        CargarFormulario();
 
         Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
         tiempo.start();
@@ -85,32 +85,19 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        txtFecha.setText(FechaActual());
-        CargarProveedor();
-        CargarDocumento();
-
+        Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
+        tiempo.start();
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-
-        Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
-        tiempo.start();
-
-    }
-
-    public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal, CoOrdenPedido objeto) {
-        super(parent, modal);
-        initComponents();
-        this.setLocationRelativeTo(null);
-        Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
-        tiempo.start();
+        cOrden = objeto;
+        listcab.add(objeto);
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
-
-        cOrden = objeto;
-        listcab.add(objeto);
         CargarFormulario();
+
+        System.out.println(" " + seUsuario);
 
     }
 
@@ -147,6 +134,12 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     public void CargarFormulario() {
+        
+        this.txtCod.setEditable(false);
+        this.txtObservacion.setEditable(false);
+        this.cbxProveedor.setEditable(false);
+        this.cbx_documento.setEditable(false);
+    
 
         txtCod.setText("" + cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
         txtObservacion.setText(cOrden.getObservacion());
@@ -195,6 +188,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         BtnAprovar = new javax.swing.JButton();
+        BtnAnular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -396,24 +390,35 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             }
         });
 
+        BtnAnular.setBackground(new java.awt.Color(255, 145, 0));
+        BtnAnular.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnAnular.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAnular.setText("ANULAR");
+        BtnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAnularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101)
-                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,11 +428,13 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -487,6 +494,8 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 detalle.setDescripcion(objetopro.getNombreProducto());
                 detalle.setCantidadSolicitada(BigInteger.valueOf(0));
                 detalle.setEstado("A");
+                detalle.setFechaCreacion(d);
+                detalle.setUsuarioCreacion(seUsuario.getIdUsuario());
                 detalle.setCoOrdenPedido(cOrden);
 
                 listadet.add(detalle);
@@ -666,40 +675,86 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
         CoDetalleOrdenPedidoJpaController detOrdenController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
         CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        InMovimientosJpaController movientoControl= new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
-       
+
         CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-        InMovimientos movimiento = new InMovimientos();
-        
+        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+
         List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-        List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
         list = detOrdenController.findCoDetalleOrdenPedidoEntities();
-        
-        try {
-            for (int j = 0; j < list.size(); j++) {
+        int r = JOptionPane.showConfirmDialog(null, "Desea aprovar?", "", JOptionPane.YES_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            try {
+                for (int j = 0; j < list.size(); j++) {
 
-                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+                    if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
 
-                    detalle = list.get(j);
-                    detalle.setFechaActualizacion(d);
-                    detalle.setUsuarioCreacion(seUsuario.getNombreUsuario());
-                    list2.add(detalle);
-                    detOrdenController.edit(detalle);
+                        detalle = list.get(j);
+
+                        detalle.setFechaActualizacion(d);
+                        detalle.setUsuarioActualizacion(seUsuario.getIdUsuario());
+
+                        detOrdenController.edit(detalle);
+                    }
                 }
-            }
-            cOrden.setFechaActualizacion(d);
-            cOrden.setUsuarioActualizacion(seUsuario.getNombreUsuario());
 
-            cabOrdenController.edit(cOrden);
-            
-            for (int i = 0; i < list2.size(); i++) {
-                
+                CoOrdenPedido cab = cabOrdenController.findCoOrdenPedido(cOrden.getCoOrdenPedidoPK());
+
+                cab.setFechaActualizacion(d);
+                cab.setUsuarioActualizacion(seUsuario.getNombreUsuario());
+                cab.setEstado("A");
+
+                cabOrdenController.edit(cab);
+
+                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                setVisible(false);
+
+            } catch (Exception ex) {
+                Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (Exception ex) {
-            Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
+
+    private void BtnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnularActionPerformed
+        CoDetalleOrdenPedidoJpaController detOrdenController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+
+        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+        list = detOrdenController.findCoDetalleOrdenPedidoEntities();
+        int r = JOptionPane.showConfirmDialog(null, "Desea aprovar?", "", JOptionPane.YES_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            try {
+                for (int j = 0; j < list.size(); j++) {
+
+                    if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+
+                        detalle = list.get(j);
+                        detalle.setEstado("I");
+                        detalle.setFechaActualizacion(d);
+                        detalle.setUsuarioActualizacion(seUsuario.getIdUsuario());
+
+                        detOrdenController.edit(detalle);
+                    }
+                }
+
+                CoOrdenPedido cab = cabOrdenController.findCoOrdenPedido(cOrden.getCoOrdenPedidoPK());
+
+                cab.setFechaActualizacion(d);
+                cab.setUsuarioActualizacion(seUsuario.getNombreUsuario());
+                cab.setEstado("I");
+
+                cabOrdenController.edit(cab);
+
+                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                setVisible(false);
+
+            } catch (Exception ex) {
+                Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_BtnAnularActionPerformed
 
     public String validarProductos(String datos) {
         String obj1 = "no";
@@ -765,6 +820,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAnular;
     private javax.swing.JButton BtnAprovar;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JComboBox<String> cbxProveedor;
