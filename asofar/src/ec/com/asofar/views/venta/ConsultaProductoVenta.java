@@ -53,6 +53,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     BigInteger id_prod;
     Double descuento;
     String iva;
+    Double precio;
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -263,16 +264,17 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 
             objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
 
-            System.out.println("tabla" + tba_productos.getValueAt(id, 4).toString());
+//            System.out.println("tabla preico" + tba_productos.getValueAt(id, 3).toString());
             if (objPrest != null) {
                 id_pre = objPrest.getIdPrestacion();
                 nombre = objPrest.getNombrePrestacion();
                 id_prod = objPrest.getIdPoducto();
                 iva = objPrest.getAplicaIva();
-                if(tba_productos.getValueAt(id, 4).toString().equals("-")){
-                descuento = 0.0;
-                }else{
-                descuento = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
+                precio = Double.valueOf(tba_productos.getValueAt(id, 3).toString());
+                if (tba_productos.getValueAt(id, 4).toString().equals("-")) {
+                    descuento = 0.0;
+                } else {
+                    descuento = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
                 }
                 getPre(id_pre, nombre, id_prod);
                 getPresta();
@@ -285,6 +287,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     public VeFacturaDetalle getFac() {
         VeFacturaDetalle objFac = new VeFacturaDetalle();
         objFac.setValorDescuento(descuento);
+        objFac.setPrecioUnitarioVenta(precio);
         return objFac;
     }
 

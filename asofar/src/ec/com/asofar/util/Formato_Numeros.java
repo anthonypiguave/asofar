@@ -26,6 +26,18 @@ public class Formato_Numeros {
 
         return valorFormateado;
     }
+    public static String formatoNumero2(String valor) {
+
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        String valorFormateado = formato.format(Double.parseDouble(valor));
+////        System.out.println(" val" + valor);
+//        if (valorFormateado.charAt(0) == ',') {
+//            String h = "0" + valorFormateado;
+//            valorFormateado = h;
+//        }
+
+        return valorFormateado;
+    }    
     public static String removeScientificNotation(String value) {
         return new BigDecimal(value).toPlainString();
     }
