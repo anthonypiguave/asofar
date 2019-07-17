@@ -187,13 +187,12 @@ public class Tablas {
 
                 JButton jButText = (JButton) tabla.getValueAt(row, 4);
 
-                System.out.println("wwwww :" + jButText.getText());
 
                 if (jButText.getText().equals("ACTIVAR")) {
-                    System.out.println("w1 :" + jButText.getText());
+                    
                     return tbordenpedido2[column];
                 } else {
-                    System.out.println("w2 :" + jButText.getText());
+
                     return tbordenpedido[column];
                 }
             }

@@ -548,7 +548,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                                     list2.add(detalle);
 
                                 }
-//                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
                             }
 
                             detalle = list2.get(i);
@@ -588,7 +587,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                                     list2.add(detalle);
 
                                 }
-                                System.out.println(" prueba 1: " + list2.get(j).getCoDetalleOrdenPedidoPK());
                             }
 
                             detalle = list2.get(i);
