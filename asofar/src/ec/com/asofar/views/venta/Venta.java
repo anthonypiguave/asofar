@@ -48,8 +48,9 @@ public class Venta extends javax.swing.JInternalFrame {
     SeEmpresa emp;
     SeSucursal suc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
+    VeFacturaDetalle FactDeta = new VeFacturaDetalle();
     int Cont = 1;
-    String iva ;
+    String iva;
 
     public Venta() {
         initComponents();
@@ -620,7 +621,7 @@ public class Venta extends javax.swing.JInternalFrame {
         objetoFactDeta = ingre.getFac();
         iva = objetoPrestacion.getAplicaIva();
         if (objetoPrestacion != null && objetoFactDeta != null) {
-            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
+            
 
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
@@ -640,7 +641,12 @@ public class Venta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
-
+    public void calcularPrecioIva() {
+        BigInteger cant;
+        if (iva.equals("SI")) {
+            cant= FactDeta.getCantidad();
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
