@@ -13,8 +13,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.CoProveedores;
-import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.CoOrdenCompras;
@@ -46,22 +44,12 @@ public class CoOrdenComprasJpaController implements Serializable {
         if (coOrdenCompras.getCoDetalleOrdenCompraList() == null) {
             coOrdenCompras.setCoDetalleOrdenCompraList(new ArrayList<CoDetalleOrdenCompra>());
         }
-        coOrdenCompras.getCoOrdenComprasPK().setIdSucursal(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdSucursal());
         coOrdenCompras.getCoOrdenComprasPK().setIdEmpresa(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        coOrdenCompras.getCoOrdenComprasPK().setIdSucursal(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CoProveedores idProveedor = coOrdenCompras.getIdProveedor();
-            if (idProveedor != null) {
-                idProveedor = em.getReference(idProveedor.getClass(), idProveedor.getIdProveedor());
-                coOrdenCompras.setIdProveedor(idProveedor);
-            }
-            InTipoDocumento idTipoDocumento = coOrdenCompras.getIdTipoDocumento();
-            if (idTipoDocumento != null) {
-                idTipoDocumento = em.getReference(idTipoDocumento.getClass(), idTipoDocumento.getIdTipoDocumento());
-                coOrdenCompras.setIdTipoDocumento(idTipoDocumento);
-            }
             SeSucursal seSucursal = coOrdenCompras.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
@@ -74,14 +62,6 @@ public class CoOrdenComprasJpaController implements Serializable {
             }
             coOrdenCompras.setCoDetalleOrdenCompraList(attachedCoDetalleOrdenCompraList);
             em.persist(coOrdenCompras);
-            if (idProveedor != null) {
-                idProveedor.getCoOrdenComprasList().add(coOrdenCompras);
-                idProveedor = em.merge(idProveedor);
-            }
-            if (idTipoDocumento != null) {
-                idTipoDocumento.getCoOrdenComprasList().add(coOrdenCompras);
-                idTipoDocumento = em.merge(idTipoDocumento);
-            }
             if (seSucursal != null) {
                 seSucursal.getCoOrdenComprasList().add(coOrdenCompras);
                 seSucursal = em.merge(seSucursal);
@@ -109,17 +89,13 @@ public class CoOrdenComprasJpaController implements Serializable {
     }
 
     public void edit(CoOrdenCompras coOrdenCompras) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        coOrdenCompras.getCoOrdenComprasPK().setIdSucursal(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdSucursal());
         coOrdenCompras.getCoOrdenComprasPK().setIdEmpresa(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        coOrdenCompras.getCoOrdenComprasPK().setIdSucursal(coOrdenCompras.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             CoOrdenCompras persistentCoOrdenCompras = em.find(CoOrdenCompras.class, coOrdenCompras.getCoOrdenComprasPK());
-            CoProveedores idProveedorOld = persistentCoOrdenCompras.getIdProveedor();
-            CoProveedores idProveedorNew = coOrdenCompras.getIdProveedor();
-            InTipoDocumento idTipoDocumentoOld = persistentCoOrdenCompras.getIdTipoDocumento();
-            InTipoDocumento idTipoDocumentoNew = coOrdenCompras.getIdTipoDocumento();
             SeSucursal seSucursalOld = persistentCoOrdenCompras.getSeSucursal();
             SeSucursal seSucursalNew = coOrdenCompras.getSeSucursal();
             List<CoDetalleOrdenCompra> coDetalleOrdenCompraListOld = persistentCoOrdenCompras.getCoDetalleOrdenCompraList();
@@ -136,14 +112,6 @@ public class CoOrdenComprasJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (idProveedorNew != null) {
-                idProveedorNew = em.getReference(idProveedorNew.getClass(), idProveedorNew.getIdProveedor());
-                coOrdenCompras.setIdProveedor(idProveedorNew);
-            }
-            if (idTipoDocumentoNew != null) {
-                idTipoDocumentoNew = em.getReference(idTipoDocumentoNew.getClass(), idTipoDocumentoNew.getIdTipoDocumento());
-                coOrdenCompras.setIdTipoDocumento(idTipoDocumentoNew);
-            }
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 coOrdenCompras.setSeSucursal(seSucursalNew);
@@ -156,22 +124,6 @@ public class CoOrdenComprasJpaController implements Serializable {
             coDetalleOrdenCompraListNew = attachedCoDetalleOrdenCompraListNew;
             coOrdenCompras.setCoDetalleOrdenCompraList(coDetalleOrdenCompraListNew);
             coOrdenCompras = em.merge(coOrdenCompras);
-            if (idProveedorOld != null && !idProveedorOld.equals(idProveedorNew)) {
-                idProveedorOld.getCoOrdenComprasList().remove(coOrdenCompras);
-                idProveedorOld = em.merge(idProveedorOld);
-            }
-            if (idProveedorNew != null && !idProveedorNew.equals(idProveedorOld)) {
-                idProveedorNew.getCoOrdenComprasList().add(coOrdenCompras);
-                idProveedorNew = em.merge(idProveedorNew);
-            }
-            if (idTipoDocumentoOld != null && !idTipoDocumentoOld.equals(idTipoDocumentoNew)) {
-                idTipoDocumentoOld.getCoOrdenComprasList().remove(coOrdenCompras);
-                idTipoDocumentoOld = em.merge(idTipoDocumentoOld);
-            }
-            if (idTipoDocumentoNew != null && !idTipoDocumentoNew.equals(idTipoDocumentoOld)) {
-                idTipoDocumentoNew.getCoOrdenComprasList().add(coOrdenCompras);
-                idTipoDocumentoNew = em.merge(idTipoDocumentoNew);
-            }
             if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
                 seSucursalOld.getCoOrdenComprasList().remove(coOrdenCompras);
                 seSucursalOld = em.merge(seSucursalOld);
@@ -230,16 +182,6 @@ public class CoOrdenComprasJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            CoProveedores idProveedor = coOrdenCompras.getIdProveedor();
-            if (idProveedor != null) {
-                idProveedor.getCoOrdenComprasList().remove(coOrdenCompras);
-                idProveedor = em.merge(idProveedor);
-            }
-            InTipoDocumento idTipoDocumento = coOrdenCompras.getIdTipoDocumento();
-            if (idTipoDocumento != null) {
-                idTipoDocumento.getCoOrdenComprasList().remove(coOrdenCompras);
-                idTipoDocumento = em.merge(idTipoDocumento);
             }
             SeSucursal seSucursal = coOrdenCompras.getSeSucursal();
             if (seSucursal != null) {

@@ -18,6 +18,9 @@ import javax.persistence.Embeddable;
 public class CoDetalleOrdenCompraPK implements Serializable {
 
     @Basic(optional = false)
+    @Column(name = "id_detalle_orden_compra")
+    private long idDetalleOrdenCompra;
+    @Basic(optional = false)
     @Column(name = "id_orden_compra")
     private long idOrdenCompra;
     @Basic(optional = false)
@@ -36,12 +39,21 @@ public class CoDetalleOrdenCompraPK implements Serializable {
     public CoDetalleOrdenCompraPK() {
     }
 
-    public CoDetalleOrdenCompraPK(long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto) {
+    public CoDetalleOrdenCompraPK(long idDetalleOrdenCompra, long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto) {
+        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
         this.idOrdenCompra = idOrdenCompra;
         this.idEmpresa = idEmpresa;
         this.idSurcusal = idSurcusal;
         this.lineaDetalle = lineaDetalle;
         this.idProducto = idProducto;
+    }
+
+    public long getIdDetalleOrdenCompra() {
+        return idDetalleOrdenCompra;
+    }
+
+    public void setIdDetalleOrdenCompra(long idDetalleOrdenCompra) {
+        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
     }
 
     public long getIdOrdenCompra() {
@@ -87,6 +99,7 @@ public class CoDetalleOrdenCompraPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (int) idDetalleOrdenCompra;
         hash += (int) idOrdenCompra;
         hash += (int) idEmpresa;
         hash += (int) idSurcusal;
@@ -102,6 +115,9 @@ public class CoDetalleOrdenCompraPK implements Serializable {
             return false;
         }
         CoDetalleOrdenCompraPK other = (CoDetalleOrdenCompraPK) object;
+        if (this.idDetalleOrdenCompra != other.idDetalleOrdenCompra) {
+            return false;
+        }
         if (this.idOrdenCompra != other.idOrdenCompra) {
             return false;
         }
@@ -122,7 +138,7 @@ public class CoDetalleOrdenCompraPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.CoDetalleOrdenCompraPK[ idOrdenCompra=" + idOrdenCompra + ", idEmpresa=" + idEmpresa + ", idSurcusal=" + idSurcusal + ", lineaDetalle=" + lineaDetalle + ", idProducto=" + idProducto + " ]";
+        return "ec.com.asofar.dto.CoDetalleOrdenCompraPK[ idDetalleOrdenCompra=" + idDetalleOrdenCompra + ", idOrdenCompra=" + idOrdenCompra + ", idEmpresa=" + idEmpresa + ", idSurcusal=" + idSurcusal + ", lineaDetalle=" + lineaDetalle + ", idProducto=" + idProducto + " ]";
     }
     
 }

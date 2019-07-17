@@ -7,6 +7,7 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -37,34 +38,36 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoOrdenCompras.findByIdOrdenCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idOrdenCompra = :idOrdenCompra")
     , @NamedQuery(name = "CoOrdenCompras.findByIdEmpresa", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoOrdenCompras.findByIdSucursal", query = "SELECT c FROM CoOrdenCompras c WHERE c.coOrdenComprasPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "CoOrdenCompras.findByEstado", query = "SELECT c FROM CoOrdenCompras c WHERE c.estado = :estado")
+    , @NamedQuery(name = "CoOrdenCompras.findByIdProveedor", query = "SELECT c FROM CoOrdenCompras c WHERE c.idProveedor = :idProveedor")
+    , @NamedQuery(name = "CoOrdenCompras.findByIdTipoDocumento", query = "SELECT c FROM CoOrdenCompras c WHERE c.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "CoOrdenCompras.findByObservacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.observacion = :observacion")
     , @NamedQuery(name = "CoOrdenCompras.findByFechaEntrega", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaEntrega = :fechaEntrega")
-    , @NamedQuery(name = "CoOrdenCompras.findByTotalCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalCompra = :totalCompra")
     , @NamedQuery(name = "CoOrdenCompras.findBySubtotal", query = "SELECT c FROM CoOrdenCompras c WHERE c.subtotal = :subtotal")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalDescuento", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalDescuento = :totalDescuento")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalIce", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIce = :totalIce")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalIva", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIva = :totalIva")
+    , @NamedQuery(name = "CoOrdenCompras.findByTotalCompra", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalCompra = :totalCompra")
     , @NamedQuery(name = "CoOrdenCompras.findByFechaAprobacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaAprobacion = :fechaAprobacion")
     , @NamedQuery(name = "CoOrdenCompras.findByUsuarioCreacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "CoOrdenCompras.findByFechaCreacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "CoOrdenCompras.findByUsuarioActualizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "CoOrdenCompras.findByFechaActualizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaActualizacion = :fechaActualizacion")})
+    , @NamedQuery(name = "CoOrdenCompras.findByFechaActualizacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "CoOrdenCompras.findByEstado", query = "SELECT c FROM CoOrdenCompras c WHERE c.estado = :estado")})
 public class CoOrdenCompras implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoOrdenComprasPK coOrdenComprasPK;
-    @Column(name = "estado")
-    private String estado;
+    @Column(name = "id_proveedor")
+    private BigInteger idProveedor;
+    @Column(name = "id_tipo_documento")
+    private BigInteger idTipoDocumento;
     @Column(name = "observacion")
     private String observacion;
     @Column(name = "fecha_entrega")
     @Temporal(TemporalType.DATE)
     private Date fechaEntrega;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "total_compra")
-    private BigDecimal totalCompra;
     @Column(name = "subtotal")
     private BigDecimal subtotal;
     @Column(name = "total_descuento")
@@ -73,6 +76,8 @@ public class CoOrdenCompras implements Serializable {
     private BigDecimal totalIce;
     @Column(name = "total_iva")
     private BigDecimal totalIva;
+    @Column(name = "total_compra")
+    private BigDecimal totalCompra;
     @Column(name = "fecha_aprobacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaAprobacion;
@@ -86,12 +91,8 @@ public class CoOrdenCompras implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
-    @ManyToOne
-    private CoProveedores idProveedor;
-    @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
-    @ManyToOne
-    private InTipoDocumento idTipoDocumento;
+    @Column(name = "estado")
+    private Character estado;
     @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
@@ -119,12 +120,20 @@ public class CoOrdenCompras implements Serializable {
         this.coOrdenComprasPK = coOrdenComprasPK;
     }
 
-    public String getEstado() {
-        return estado;
+    public BigInteger getIdProveedor() {
+        return idProveedor;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setIdProveedor(BigInteger idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public BigInteger getIdTipoDocumento() {
+        return idTipoDocumento;
+    }
+
+    public void setIdTipoDocumento(BigInteger idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
     }
 
     public String getObservacion() {
@@ -141,14 +150,6 @@ public class CoOrdenCompras implements Serializable {
 
     public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
-    }
-
-    public BigDecimal getTotalCompra() {
-        return totalCompra;
-    }
-
-    public void setTotalCompra(BigDecimal totalCompra) {
-        this.totalCompra = totalCompra;
     }
 
     public BigDecimal getSubtotal() {
@@ -181,6 +182,14 @@ public class CoOrdenCompras implements Serializable {
 
     public void setTotalIva(BigDecimal totalIva) {
         this.totalIva = totalIva;
+    }
+
+    public BigDecimal getTotalCompra() {
+        return totalCompra;
+    }
+
+    public void setTotalCompra(BigDecimal totalCompra) {
+        this.totalCompra = totalCompra;
     }
 
     public Date getFechaAprobacion() {
@@ -223,20 +232,12 @@ public class CoOrdenCompras implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public CoProveedores getIdProveedor() {
-        return idProveedor;
+    public Character getEstado() {
+        return estado;
     }
 
-    public void setIdProveedor(CoProveedores idProveedor) {
-        this.idProveedor = idProveedor;
-    }
-
-    public InTipoDocumento getIdTipoDocumento() {
-        return idTipoDocumento;
-    }
-
-    public void setIdTipoDocumento(InTipoDocumento idTipoDocumento) {
-        this.idTipoDocumento = idTipoDocumento;
+    public void setEstado(Character estado) {
+        this.estado = estado;
     }
 
     public SeSucursal getSeSucursal() {

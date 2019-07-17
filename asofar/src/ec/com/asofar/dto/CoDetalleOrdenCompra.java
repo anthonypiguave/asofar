@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CoDetalleOrdenCompra.findAll", query = "SELECT c FROM CoDetalleOrdenCompra c")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.idDetalleOrdenCompra = :idDetalleOrdenCompra")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdDetalleOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idDetalleOrdenCompra = :idDetalleOrdenCompra")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdOrdenCompra", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idOrdenCompra = :idOrdenCompra")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdEmpresa", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdSurcusal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idSurcusal = :idSurcusal")
@@ -48,8 +48,6 @@ public class CoDetalleOrdenCompra implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoDetalleOrdenCompraPK coDetalleOrdenCompraPK;
-    @Column(name = "id_detalle_orden_compra")
-    private BigInteger idDetalleOrdenCompra;
     @Column(name = "descripcion")
     private String descripcion;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -68,7 +66,7 @@ public class CoDetalleOrdenCompra implements Serializable {
     @Column(name = "total")
     private BigDecimal total;
     @Column(name = "estado")
-    private String estado;
+    private Character estado;
     @JoinColumns({
         @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra", insertable = false, updatable = false)
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
@@ -83,8 +81,8 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.coDetalleOrdenCompraPK = coDetalleOrdenCompraPK;
     }
 
-    public CoDetalleOrdenCompra(long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto) {
-        this.coDetalleOrdenCompraPK = new CoDetalleOrdenCompraPK(idOrdenCompra, idEmpresa, idSurcusal, lineaDetalle, idProducto);
+    public CoDetalleOrdenCompra(long idDetalleOrdenCompra, long idOrdenCompra, long idEmpresa, long idSurcusal, long lineaDetalle, long idProducto) {
+        this.coDetalleOrdenCompraPK = new CoDetalleOrdenCompraPK(idDetalleOrdenCompra, idOrdenCompra, idEmpresa, idSurcusal, lineaDetalle, idProducto);
     }
 
     public CoDetalleOrdenCompraPK getCoDetalleOrdenCompraPK() {
@@ -93,14 +91,6 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setCoDetalleOrdenCompraPK(CoDetalleOrdenCompraPK coDetalleOrdenCompraPK) {
         this.coDetalleOrdenCompraPK = coDetalleOrdenCompraPK;
-    }
-
-    public BigInteger getIdDetalleOrdenCompra() {
-        return idDetalleOrdenCompra;
-    }
-
-    public void setIdDetalleOrdenCompra(BigInteger idDetalleOrdenCompra) {
-        this.idDetalleOrdenCompra = idDetalleOrdenCompra;
     }
 
     public String getDescripcion() {
@@ -167,11 +157,11 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.total = total;
     }
 
-    public String getEstado() {
+    public Character getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Character estado) {
         this.estado = estado;
     }
 
