@@ -264,7 +264,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 
             objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
 
-            System.out.println("tabla preico" + tba_productos.getValueAt(id, 3).toString());
+//            System.out.println("tabla preico" + tba_productos.getValueAt(id, 3).toString());
             if (objPrest != null) {
                 id_pre = objPrest.getIdPrestacion();
                 nombre = objPrest.getNombrePrestacion();

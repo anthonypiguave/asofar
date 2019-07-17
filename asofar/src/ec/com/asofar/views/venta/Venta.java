@@ -14,6 +14,7 @@ import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -54,6 +55,7 @@ public class Venta extends javax.swing.JInternalFrame {
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
     BigInteger cantidad;
     Double precio;
+    Double precioIva;
     int Cont = 1;
     String iva;
 
@@ -650,8 +652,9 @@ public class Venta extends javax.swing.JInternalFrame {
             cantidad = BigInteger.ONE;
             precio = objetoFactDeta.getPrecioUnitarioVenta();
             FactDeta.setCantidad(BigInteger.ONE);
-            calcularPrecioIva();
+            precioIva = calcularPrecioIva();
             FactDeta.setValorDescuento(objetoFactDeta.getValorDescuento());
+            FactDeta.setValorIva(precioIva);
             FactDeta.setPrecioUnitarioVenta(objetoFactDeta.getPrecioUnitarioVenta());
             listaDetFactura.add(FactDeta);
 
@@ -660,23 +663,24 @@ public class Venta extends javax.swing.JInternalFrame {
                 FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
             }
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-        }
-        else {
+        } else {
 //            JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
-    public void calcularPrecioIva() {
+    public Double calcularPrecioIva() {
         BigInteger cant;
         Double pre;
-        Double precioIva;
+        Double precioIva = null;
         if (iva.equals("SI")) {
             cant = cantidad;
             pre = precio;
-//            big.doubleValue() * myDouble
-            precioIva = cant.doubleValue() * pre * 12 / 100;
-            System.out.println("resultprecioIva" + precioIva);
+            precioIva = (cant.doubleValue() * pre) * 12 / 100;
+//            precioIva =Formato_Numeros.removeScientificNotation(precioIva);
 
+        } else {
+            precioIva = 0.0;
         }
+        return precioIva;
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
