@@ -2,6 +2,7 @@ package ec.com.asofar.views.venta;
 
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
+import ec.com.asofar.dao.VeFacturaJpaController;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
@@ -9,6 +10,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -43,12 +45,15 @@ public class Venta extends javax.swing.JInternalFrame {
     PrPrestaciones objetoPrestacion = new PrPrestaciones();
     VeFacturaDetalle objetoFactDeta = new VeFacturaDetalle();
     List<PrPrestaciones> listaPrest;
+    List<VeFactura> Factura;
+    VeFacturaJpaController FactC = new VeFacturaJpaController(EntityManagerUtil.ObtenerEntityManager());
     Long id_prest;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    VeFacturaDetalle FactDeta = new VeFacturaDetalle();
+    BigInteger cantidad;
+    Double precio;
     int Cont = 1;
     String iva;
 
@@ -67,11 +72,20 @@ public class Venta extends javax.swing.JInternalFrame {
         this.setLocation(250, 15);
         btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
         cargarLisCliente();
+        cargarN();
         TiIden = tic.findSeTipoIdentificacionEntities();
         llenarCombo(TiIden);
         usu = us;
         emp = em;
         suc = su;
+    }
+
+    public void cargarN() {
+        Factura = FactC.findVeFacturaEntities();
+        for (int i = 0; i < Factura.size(); i++) {
+            Long sum = Factura.get(i).getVeFacturaPK().getIdFactura() + 1;
+            txt_numero_factura.setText(String.valueOf(sum));
+        }
     }
 
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
@@ -597,6 +611,7 @@ public class Venta extends javax.swing.JInternalFrame {
         String ObjIden = null;
         for (int i = 0; i < Cliente.size(); i++) {
             ObjIden = Cliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion().toString();
+
             if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
                     && Ident.equals(ObjIden) && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
@@ -613,23 +628,31 @@ public class Venta extends javax.swing.JInternalFrame {
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
 
     }//GEN-LAST:event_jLabel1MousePressed
-
+    public void limpiarTxt() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtTelefono.setText("");
+        txtEmail.setText("");
+    }
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
         objetoPrestacion = ingre.getPresta();
         objetoFactDeta = ingre.getFac();
         iva = objetoPrestacion.getAplicaIva();
-        if (objetoPrestacion != null && objetoFactDeta != null) {
-            
 
+        if (objetoPrestacion != null && objetoFactDeta != null) {
+            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
+            cantidad = BigInteger.ONE;
+            precio = objetoFactDeta.getPrecioUnitarioVenta();
             FactDeta.setCantidad(BigInteger.ONE);
+            calcularPrecioIva();
             FactDeta.setValorDescuento(objetoFactDeta.getValorDescuento());
-//            FactDet
+            FactDeta.setPrecioUnitarioVenta(objetoFactDeta.getPrecioUnitarioVenta());
             listaDetFactura.add(FactDeta);
 
             for (int i = 0; i < listaDetFactura.size(); i++) {
@@ -637,14 +660,22 @@ public class Venta extends javax.swing.JInternalFrame {
                 FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
             }
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        }
+        else {
+//            JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
     public void calcularPrecioIva() {
         BigInteger cant;
+        Double pre;
+        Double precioIva;
         if (iva.equals("SI")) {
-            cant= FactDeta.getCantidad();
+            cant = cantidad;
+            pre = precio;
+//            big.doubleValue() * myDouble
+            precioIva = cant.doubleValue() * pre * 12 / 100;
+            System.out.println("resultprecioIva" + precioIva);
+
         }
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -73,7 +73,7 @@ public class Tablas {
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
     private static boolean[] tbordenpedido = {false, false, false, true, true};
-    private static boolean[] tbVenta = {false, false, false, false, false, true};
+    private static boolean[] tbVenta = {false, false, false, false, false,false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, true, true,false,false,false,false,false};
 
@@ -1974,7 +1974,8 @@ public class Tablas {
 //                                    filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
                                     filas[1] = listProd.get(i).getNombreProducto();
                                     filas[2] = listaKardex.get(j).getCantidad().toString();
-                                    filas[3] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
+//                                    filas[3] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
+                                    filas[3] = "" + listDetaTari.get(k).getValorVenta();
                                     if (listDetaTari.get(k).getValorDescuento() == null) {
                                         filas[4] = "-";
                                         filas[5] = lisPrest.get(l).getAplicaIva();
@@ -2015,11 +2016,12 @@ public class Tablas {
         VeFacturaDetalle vo = new VeFacturaDetalle();
 
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO", "CANTIDAD SOLICITADA", "VALOR DESCUENTO", "",}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD",
+            "NOMBRE PRODUCTO", "CANTIDAD","PRECIO" ,"VALOR DESCUENTO", "",}, 0) {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, JButton.class
+                java.lang.Object.class, java.lang.Object.class,JButton.class
 
             };
 
@@ -2034,15 +2036,16 @@ public class Tablas {
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
-                Object filas[] = new Object[6];
+                Object filas[] = new Object[7];
                 vo = lista.get(i);
                 filas[0] = lista.get(i).getVeFacturaDetallePK().getLineaDetalle();
                 filas[1] = lista.get(i).getVeFacturaDetallePK().getIdPrestaciones();
                 filas[2] = lista.get(i).getDescripcion();
                 filas[3] = lista.get(i).getCantidad();
-                filas[4] = lista.get(i).getValorDescuento();
+                filas[4] = lista.get(i).getPrecioUnitarioVenta();
+                filas[5] = lista.get(i).getValorDescuento();
                 JButton button = new JButton("ELIMINAR");
-                filas[5] = button;
+                filas[6] = button;
                 dt.addRow(filas);
 
             }
