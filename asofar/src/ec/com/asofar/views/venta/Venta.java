@@ -49,6 +49,7 @@ public class Venta extends javax.swing.JInternalFrame {
     SeSucursal suc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
     int Cont = 1;
+    String iva ;
 
     public Venta() {
         initComponents();
@@ -617,7 +618,8 @@ public class Venta extends javax.swing.JInternalFrame {
         ingre.setVisible(true);
         objetoPrestacion = ingre.getPresta();
         objetoFactDeta = ingre.getFac();
-        if (objetoPrestacion != null) {
+        iva = objetoPrestacion.getAplicaIva();
+        if (objetoPrestacion != null && objetoFactDeta != null) {
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
 
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
@@ -626,8 +628,7 @@ public class Venta extends javax.swing.JInternalFrame {
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             FactDeta.setCantidad(BigInteger.ONE);
             FactDeta.setValorDescuento(objetoFactDeta.getValorDescuento());
-            System.out.println("objeto fact" + objetoFactDeta.getValorDescuento());
-
+//            FactDet
             listaDetFactura.add(FactDeta);
 
             for (int i = 0; i < listaDetFactura.size(); i++) {

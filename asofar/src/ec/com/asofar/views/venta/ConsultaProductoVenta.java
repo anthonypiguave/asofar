@@ -52,6 +52,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     String nombre;
     BigInteger id_prod;
     Double descuento;
+    String iva;
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -267,6 +268,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
                 id_pre = objPrest.getIdPrestacion();
                 nombre = objPrest.getNombrePrestacion();
                 id_prod = objPrest.getIdPoducto();
+                iva = objPrest.getAplicaIva();
                 if(tba_productos.getValueAt(id, 4).toString().equals("-")){
                 descuento = 0.0;
                 }else{
@@ -291,6 +293,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         objPre.setIdPrestacion(id_pre);
         objPre.setNombrePrestacion(nombre);
         objPre.setIdPoducto(id_prod);
+        objPre.setAplicaIva(iva);
         return objPre;
     }
 
