@@ -76,6 +76,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         salida.addActionListener((e) -> {
             System.exit(0);
         });
+        
         jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height-75), BorderLayout.CENTER);
     }
 
@@ -104,16 +105,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         }
                                     }
                                     menu.add(menu2);
-                                } else {
-                                    /*        MiInternalJFrame m = new MiInternalJFrame();
-        d                                     esktopPane.add(m);
-        D                                     imension desktopSize = desktopPane.getSize();
-                                              Dimension FrameSize = m.getSize();
-        m.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-        m.show();*/
-//                                  
+                                } else {     
                                     String nombre = "GENERAR VENTA ";
-                                    
                                         if(lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)){
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         item.addActionListener(new ActionListener() {
@@ -121,8 +114,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                             public void actionPerformed(ActionEvent e) {
                                                 Venta fac = new Venta(new javax.swing.JFrame(), true,us1, em1, su1);
                                                 jdpescritorio.add(fac);
-                                                Dimension FrameSize = fac.getSize(); 
-//                                                fac.setLocation((jdpescritorio.WIDTH - FrameSize.width)/2,(jdpescritorio.height- FrameSize.height)/2);
                                                 fac.show();
                                             }
                                         });

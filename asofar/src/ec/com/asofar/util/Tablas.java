@@ -1950,14 +1950,14 @@ public class Tablas {
     }
 
     public static void ListarProductosVenta(List<PrPrestaciones> lisPrest, List<PrDetalleTarifario> listDetaTari, List<InKardex> listaKardex, List<PrProductos> listProd, JTable Tabla) {
-        int[] a = {50, 300, 100, 100, 100};
+        int[] a = {50, 300, 100, 100, 100,100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "DESCRIPCION", "CANTIDAD", "PRECIO", "DESCUENTO"};
-        String[] filas = new String[5];
+        String[] b = {"COD.", "DESCRIPCION", "CANTIDAD", "PRECIO", "DESCUENTO","IVA"};
+        String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
 
@@ -1978,11 +1978,13 @@ public class Tablas {
                                     filas[3] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
                                     if (listDetaTari.get(k).getValorDescuento() == null) {
                                         filas[4] = "-";
-                                        System.out.println("" + filas[4]);
+                                        filas[5] = lisPrest.get(l).getAplicaIva();
+                                        
                                     } else {
                                         System.out.println("tablaclass" + listDetaTari.get(k).getValorDescuento());
 //                                        filas[4] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorDescuento());
                                         filas[4] = "" + listDetaTari.get(k).getValorDescuento();
+                                        filas[5] = lisPrest.get(l).getAplicaIva();
                                     }
                                     model.addRow(filas);
                                     Tabla.setModel(model);
@@ -1996,6 +1998,8 @@ public class Tablas {
                                     Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
                                     Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
                                     Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                                    Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                                    Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
 
                                 }
                             }

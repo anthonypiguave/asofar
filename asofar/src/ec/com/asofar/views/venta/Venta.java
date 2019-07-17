@@ -53,6 +53,7 @@ public class Venta extends javax.swing.JInternalFrame {
     public Venta() {
         initComponents();
         this.setLocation(350, 15);
+        this.toFront();
         btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
         cargarLisCliente();
         TiIden = tic.findSeTipoIdentificacionEntities();
@@ -621,12 +622,11 @@ public class Venta extends javax.swing.JInternalFrame {
 
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
-            
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             FactDeta.setCantidad(BigInteger.ONE);
             FactDeta.setValorDescuento(objetoFactDeta.getValorDescuento());
-                System.out.println("objeto fact" + objetoFactDeta.getValorDescuento());
+            System.out.println("objeto fact" + objetoFactDeta.getValorDescuento());
 
             listaDetFactura.add(FactDeta);
 
@@ -635,6 +635,8 @@ public class Venta extends javax.swing.JInternalFrame {
                 FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
             }
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
 
