@@ -48,10 +48,10 @@ public class Venta extends javax.swing.JInternalFrame {
     SeEmpresa emp;
     SeSucursal suc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    VeFacturaDetalle FactDeta = new VeFacturaDetalle();
+    
     int Cont = 1;
     String iva;
-
+    
     public Venta() {
         initComponents();
         this.setLocation(350, 15);
@@ -61,7 +61,7 @@ public class Venta extends javax.swing.JInternalFrame {
         TiIden = tic.findSeTipoIdentificacionEntities();
         llenarCombo(TiIden);
     }
-
+    
     public Venta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         initComponents();
         this.setLocation(250, 15);
@@ -73,13 +73,13 @@ public class Venta extends javax.swing.JInternalFrame {
         emp = em;
         suc = su;
     }
-
+    
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
         for (int i = 0; i < TiIden.size(); i++) {
             cbxtipo_identificacion.addItem(TiIden.get(i).getNombreIdentificacion());
         }
     }
-
+    
     public void cargarLisCliente() {
         Cliente = Cc.findSeClientesEntities();
         for (int i = 0; i < Cliente.size(); i++) {
@@ -589,7 +589,7 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdentificacionKeyTyped
 
     private void btnguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar1ActionPerformed
-
+        
         CargarCliente();
     }//GEN-LAST:event_btnguardar1ActionPerformed
     public void CargarCliente() {
@@ -597,6 +597,7 @@ public class Venta extends javax.swing.JInternalFrame {
         String ObjIden = null;
         for (int i = 0; i < Cliente.size(); i++) {
             ObjIden = Cliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion().toString();
+            
             if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
                     && Ident.equals(ObjIden) && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
@@ -613,7 +614,12 @@ public class Venta extends javax.swing.JInternalFrame {
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
 
     }//GEN-LAST:event_jLabel1MousePressed
-
+    public void limpiarTxt() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtTelefono.setText("");
+        txtEmail.setText("");
+    }
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
@@ -621,17 +627,16 @@ public class Venta extends javax.swing.JInternalFrame {
         objetoFactDeta = ingre.getFac();
         iva = objetoPrestacion.getAplicaIva();
         if (objetoPrestacion != null && objetoFactDeta != null) {
-            
-
+            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
-
+            
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             FactDeta.setCantidad(BigInteger.ONE);
             FactDeta.setValorDescuento(objetoFactDeta.getValorDescuento());
 //            FactDet
             listaDetFactura.add(FactDeta);
-
+            
             for (int i = 0; i < listaDetFactura.size(); i++) {
                 Cont = i + 1;
                 FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
@@ -641,12 +646,12 @@ public class Venta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
-    public void calcularPrecioIva() {
-        BigInteger cant;
-        if (iva.equals("SI")) {
-            cant= FactDeta.getCantidad();
-        }
-    }
+//    public void calcularPrecioIva() {
+//        BigInteger cant;
+//        if (iva.equals("SI")) {
+//            cant = FactDeta.getCantidad();
+//        }
+//    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -663,7 +668,7 @@ public class Venta extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1) {
             if (tba_detalle.getModel().getColumnClass(col).equals(JButton.class)) {
                 try {
-
+                    
                     int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
                         int i = tba_detalle.getSelectedRow();
@@ -679,7 +684,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 } catch (Exception e) {
                 }
             }
-
+            
         }
     }//GEN-LAST:event_tba_detalleMousePressed
 
@@ -692,17 +697,17 @@ public class Venta extends javax.swing.JInternalFrame {
 
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
         try {
-
+            
             int i = tba_detalle.getSelectedRow();
-
+            
             String valor = (String) tba_detalle.getValueAt(i, 3);
-
+            
             System.out.println(" fila de tabla cantidad : " + valor);
-
+            
             BigInteger cantidad = new BigInteger(valor);
-
+            
             listaDetFactura.get(i).setCantidad(cantidad);
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

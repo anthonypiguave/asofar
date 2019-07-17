@@ -2015,7 +2015,7 @@ public class Tablas {
         VeFacturaDetalle vo = new VeFacturaDetalle();
 
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO", "CANTIDAD SOLICITADA", "VALOR DESCUENTO", "",}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO", "CANTIDAD", "VALOR DESCUENTO", "",}, 0) {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
