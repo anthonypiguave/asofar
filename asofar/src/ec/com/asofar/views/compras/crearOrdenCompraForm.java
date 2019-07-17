@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.asofar.views.ordenPedido;
+package ec.com.asofar.views.compras;
 
 import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
-import ec.com.asofar.dao.InMovimientosJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dto.CoDetalleOrdenCompra;
+import ec.com.asofar.dto.CoDetalleOrdenCompraPK;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoDetalleOrdenPedidoPK;
 import ec.com.asofar.dto.CoOrdenPedido;
@@ -22,11 +23,11 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Render1;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.producto.ConsultaProducto;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import javax.swing.Timer;
  *
  * @author admin1
  */
-public class modificarOrdenPedidoForm extends javax.swing.JDialog {
+public class crearOrdenCompraForm extends javax.swing.JDialog {
 
     int x, y;
     SeUsuarios seUsuario;
@@ -60,13 +61,13 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
 
-    List<CoOrdenPedido> listcab = new ArrayList<CoOrdenPedido>();
+    List<CoDetalleOrdenCompra> listadetCompra = new ArrayList<CoDetalleOrdenCompra>();
+
+    List<CoDetalleOrdenCompra> listcabCompra = new ArrayList<CoDetalleOrdenCompra>();
 
     PrProductos objetopro = new PrProductos();
 
-    int contFilas = 1;
-
-    public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
+    public crearOrdenCompraForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -75,30 +76,26 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         CargarDocumento();
         CargarFormulario();
 
-        Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
+        Timer tiempo = new Timer(100, new crearOrdenCompraForm.horas());
         tiempo.start();
 
     }
 
-    public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, CoOrdenPedido objeto) {
+    public crearOrdenCompraForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, CoOrdenPedido objeto) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
+        Timer tiempo = new Timer(100, new crearOrdenCompraForm.horas());
         tiempo.start();
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
         cOrden = objeto;
-        listcab.add(objeto);
         txtFecha.setText(FechaActual());
         CargarProveedor();
         CargarDocumento();
         CargarFormulario();
-        this.txtCod.setEditable(false);
-        this.txtObservacion.setEnabled(false);
         this.cbxProveedor.setEnabled(false);
-        this.cbx_documento.setEditable(false);
 
         System.out.println(" " + seUsuario);
 
@@ -138,9 +135,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     public void CargarFormulario() {
 
-        txtCod.setText("" + cOrden.getCoOrdenPedidoPK().getIdOrdenPedido());
-        txtObservacion.setText(cOrden.getObservacion());
-
         cbxProveedor.setSelectedIndex(cOrden.getIdProveedor().intValue());
         cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
 
@@ -156,7 +150,8 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             }
 
         }
-        Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
+        detalleCompra();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -177,7 +172,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         BtnCancelar = new javax.swing.JButton();
@@ -196,7 +190,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ORDEN DE PEDIDO");
+        jLabel1.setText("ORDEN DE COMPRA");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -245,14 +239,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         txtObservacion.setRows(5);
         jScrollPane1.setViewportView(txtObservacion);
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setText("AGREGAR PRODUCTOS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel10.setText("HORA EMISION:");
 
@@ -297,10 +283,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,9 +307,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         BtnCancelar.setBackground(new java.awt.Color(153, 0, 0));
@@ -351,17 +331,12 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
-            }
-        });
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable1KeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTable1KeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(jTable1);
@@ -467,150 +442,30 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_BtnCancelarActionPerformed
+    public void detalleCompra() {
 
+        for (int i = 0; i < listadet.size(); i++) {
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            CoDetalleOrdenCompra detalle = new CoDetalleOrdenCompra();
 
-        ConsultaProducto cproducto = new ConsultaProducto(new javax.swing.JFrame(), true);
-        cproducto.setVisible(true);
+            detalle.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
 
-        objetopro = cproducto.getProducto();
+            detalle.getCoDetalleOrdenCompraPK().setLineaDetalle(i + 1);
+            detalle.getCoDetalleOrdenCompraPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
+            detalle.setDescripcion(listadet.get(i).getDescripcion());
+            detalle.setPrecioUnitario(BigDecimal.valueOf(0));
+            detalle.setCantidadRecibida(BigInteger.valueOf(0));
+            detalle.setSubtotal(BigDecimal.valueOf(0));
+            detalle.setIva(BigDecimal.valueOf(0));
+            detalle.setIce(BigDecimal.valueOf(0));
+            detalle.setDescuento(BigDecimal.valueOf(0));
+            detalle.setTotal(BigDecimal.valueOf(0));
 
-        CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-        try {
-            if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
-                JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
-            } else {
-
-                CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-
-                detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
-                detalle.getCoDetalleOrdenPedidoPK().setIdProducto(objetopro.getPrProductosPK().getIdProducto());
-                detalle.setDescripcion(objetopro.getNombreProducto());
-                detalle.setCantidadSolicitada(BigInteger.valueOf(0));
-                detalle.setEstado("A");
-                detalle.setFechaCreacion(d);
-                detalle.setUsuarioCreacion(seUsuario.getIdUsuario());
-                detalle.setCoOrdenPedido(cOrden);
-
-                listadet.add(detalle);
-
-                for (int i = 0; i < listadet.size(); i++) {
-
-                    contFilas = i + 1;
-
-                    detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
-
-                }
-
-                Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
-                detOrdencontroller.create(detalle);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            listadetCompra.add(detalle);
         }
+        Tablas.listarDetalleCompra(listadetCompra, jTable1);
+    }
 
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-
-        CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-        int row = jTable1.rowAtPoint(evt.getPoint());
-        int col = jTable1.columnAtPoint(evt.getPoint());
-        if (evt.getClickCount() == 1) {
-            if (jTable1.getModel().getColumnClass(col).equals(JButton.class)) {
-
-                JButton jButText = (JButton) jTable1.getValueAt(row, col);
-
-                if (jButText.getText().equals("DESACTIVAR")) {
-
-                    try {
-
-                        int r = JOptionPane.showConfirmDialog(null, "Desea desactivar este producto?", "", JOptionPane.YES_OPTION);
-                        if (r == JOptionPane.YES_OPTION) {
-                            int i = jTable1.getSelectedRow();
-
-                            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-                            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-                            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
-
-                            list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
-
-                            for (int j = 0; j < list.size(); j++) {
-
-                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-                                    detalle = list.get(j);
-                                    list2.add(detalle);
-
-                                }
-                            }
-
-                            detalle = list2.get(i);
-                            detalle.setEstado("I");
-                            System.out.println("prueba 2:" + detalle.getEstado());
-                            detOrdencontroller.edit(detalle);
-
-                            listadet.get(i).setEstado("I");
-
-                            Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
-
-                        }
-
-                    } catch (Exception ex) {
-                        Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                if (jButText.getText().equals("ACTIVAR")) {
-
-                    try {
-
-                        int r = JOptionPane.showConfirmDialog(null, "Desea activar este producto?", "", JOptionPane.YES_OPTION);
-                        if (r == JOptionPane.YES_OPTION) {
-                            int i = jTable1.getSelectedRow();
-
-                            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-                            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-                            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
-
-                            list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
-
-                            for (int j = 0; j < list.size(); j++) {
-
-                                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-                                    detalle = list.get(j);
-                                    list2.add(detalle);
-
-                                }
-                            }
-
-                            detalle = list2.get(i);
-                            detalle.setEstado("A");
-                            System.out.println("prueba 2:" + detalle.getEstado());
-                            detOrdencontroller.edit(detalle);
-
-                            listadet.get(i).setEstado("A");
-
-                            Tablas.llenarDetalledeOrdenAprovado(jTable1, listadet);
-
-                        }
-
-                    } catch (Exception ex) {
-                        Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                Render1 render = new Render1();
-                jTable1.setDefaultRenderer(Object.class, render);
-            }
-
-        }
-
-    }//GEN-LAST:event_jTable1MousePressed
 
     private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
         char car = evt.getKeyChar();
@@ -703,7 +558,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 setVisible(false);
 
             } catch (Exception ex) {
-                Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(crearOrdenCompraForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
@@ -745,7 +600,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 setVisible(false);
 
             } catch (Exception ex) {
-                Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(crearOrdenCompraForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_BtnAnularActionPerformed
@@ -785,14 +640,18 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -801,7 +660,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                modificarOrdenPedidoForm dialog = new modificarOrdenPedidoForm(new javax.swing.JFrame(), true);
+                crearOrdenCompraForm dialog = new crearOrdenCompraForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -819,7 +678,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JComboBox<String> cbxProveedor;
     private javax.swing.JComboBox<String> cbx_documento;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
