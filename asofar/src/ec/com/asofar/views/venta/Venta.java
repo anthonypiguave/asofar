@@ -664,9 +664,29 @@ public class Venta extends javax.swing.JInternalFrame {
             }
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
         } else {
-//            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
+//        }
+
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
+//    public String validarProductos(String datos) {
+//        String obj1 = "no";
+//
+//        for (int i = 0; i < listaDetFactura.size(); i++) {
+//
+//            if (datos.equals("" + (listaDetFactura.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
+//                System.out.println("lista si " + listaDetFactura.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
+//                obj1 = "si";
+//
+//                break;
+//            }
+//
+//        }
+//
+//        return obj1;
+//
+//    }
+
     public Double calcularPrecioIva() {
         BigInteger cant;
         Double pre;
@@ -727,23 +747,34 @@ public class Venta extends javax.swing.JInternalFrame {
 
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
         try {
-
+//            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             int i = tba_detalle.getSelectedRow();
 
             String valor = (String) tba_detalle.getValueAt(i, 3);
 
-            System.out.println(" fila de tabla cantidad : " + valor);
-
             BigInteger cantidad = new BigInteger(valor);
-
+            calcularIva(cantidad);
+            
+            System.out.println(" xbvhfd" + calcularIva(cantidad));
+            
             listaDetFactura.get(i).setCantidad(cantidad);
-
+            
+//            listaDetFactura.set(i, calcularIva(cantidad));
+            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+            
+//            listaDetFactura.set(i, objetoFactDeta)
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }//GEN-LAST:event_tba_detalleKeyReleased
+    public Double calcularIva(BigInteger cant) {
+        Double Iva2 = null;
+//        (cant.doubleValue() * pre) * 12 / 100
+        Iva2 = cant.doubleValue() * precio * 12 / 100;
+        return Iva2;
 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar_prod;
     private javax.swing.JButton btnguardar1;
