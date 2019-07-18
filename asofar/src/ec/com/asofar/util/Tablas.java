@@ -82,6 +82,11 @@ public class Tablas {
         tr.setRowFilter(RowFilter.regexFilter("(?i)" + valor));
     }
 
+//    public static void filtro2(String valor, JTable tba_prestacionesporservicios) {
+//        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+//        tba_prestacionesporservicios.setRowSorter(tr);
+//        tr.setRowFilter(RowFilter.regexFilter("(?i)" + valor));
+//    }
     public static DefaultTableModel VaciarTabla(JTable tabla) {
         DefaultTableModel tab
                 = (DefaultTableModel) tabla.getModel();

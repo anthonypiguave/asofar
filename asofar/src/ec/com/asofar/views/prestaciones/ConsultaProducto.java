@@ -84,6 +84,11 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfiltroActionPerformed(evt);
+            }
+        });
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyPressed(evt);
@@ -231,6 +236,10 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
             }
         }
     }//GEN-LAST:event_tbproductosMousePressed
+
+    private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfiltroActionPerformed
  public PrProductos getObji() {
      return obj;
  }
