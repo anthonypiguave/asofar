@@ -39,9 +39,9 @@ public class VeFacturaDetalleJpaController implements Serializable {
         if (veFacturaDetalle.getVeFacturaDetallePK() == null) {
             veFacturaDetalle.setVeFacturaDetallePK(new VeFacturaDetallePK());
         }
-        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdEmpresa());
         veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -79,9 +79,9 @@ public class VeFacturaDetalleJpaController implements Serializable {
     }
 
     public void edit(VeFacturaDetalle veFacturaDetalle) throws NonexistentEntityException, Exception {
-        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdEmpresa());
         veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         EntityManager em = null;
         try {
             em = getEntityManager();

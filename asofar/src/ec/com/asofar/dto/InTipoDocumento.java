@@ -62,8 +62,6 @@ public class InTipoDocumento implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "idTipoDocumento")
-    private List<CoOrdenCompras> coOrdenComprasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
     private List<InMovimientos> inMovimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inTipoDocumento")
@@ -132,15 +130,6 @@ public class InTipoDocumento implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    @XmlTransient
-    public List<CoOrdenCompras> getCoOrdenComprasList() {
-        return coOrdenComprasList;
-    }
-
-    public void setCoOrdenComprasList(List<CoOrdenCompras> coOrdenComprasList) {
-        this.coOrdenComprasList = coOrdenComprasList;
     }
 
     @XmlTransient

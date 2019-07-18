@@ -6,6 +6,7 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
+import ec.com.asofar.dto.CoProveedores;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -13,11 +14,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.dto.SePais;
-import ec.com.asofar.dto.CoOrdenCompras;
-import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InMovimientos;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.InMovimientos;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -37,9 +36,6 @@ public class CoProveedoresJpaController implements Serializable {
     }
 
     public void create(CoProveedores coProveedores) {
-        if (coProveedores.getCoOrdenComprasList() == null) {
-            coProveedores.setCoOrdenComprasList(new ArrayList<CoOrdenCompras>());
-        }
         if (coProveedores.getInMovimientosList() == null) {
             coProveedores.setInMovimientosList(new ArrayList<InMovimientos>());
         }
@@ -57,12 +53,6 @@ public class CoProveedoresJpaController implements Serializable {
                 idPais = em.getReference(idPais.getClass(), idPais.getIdPais());
                 coProveedores.setIdPais(idPais);
             }
-            List<CoOrdenCompras> attachedCoOrdenComprasList = new ArrayList<CoOrdenCompras>();
-            for (CoOrdenCompras coOrdenComprasListCoOrdenComprasToAttach : coProveedores.getCoOrdenComprasList()) {
-                coOrdenComprasListCoOrdenComprasToAttach = em.getReference(coOrdenComprasListCoOrdenComprasToAttach.getClass(), coOrdenComprasListCoOrdenComprasToAttach.getCoOrdenComprasPK());
-                attachedCoOrdenComprasList.add(coOrdenComprasListCoOrdenComprasToAttach);
-            }
-            coProveedores.setCoOrdenComprasList(attachedCoOrdenComprasList);
             List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListInMovimientosToAttach : coProveedores.getInMovimientosList()) {
                 inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
@@ -77,15 +67,6 @@ public class CoProveedoresJpaController implements Serializable {
             if (idPais != null) {
                 idPais.getCoProveedoresList().add(coProveedores);
                 idPais = em.merge(idPais);
-            }
-            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coProveedores.getCoOrdenComprasList()) {
-                CoProveedores oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = coOrdenComprasListCoOrdenCompras.getIdProveedor();
-                coOrdenComprasListCoOrdenCompras.setIdProveedor(coProveedores);
-                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
-                if (oldIdProveedorOfCoOrdenComprasListCoOrdenCompras != null) {
-                    oldIdProveedorOfCoOrdenComprasListCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListCoOrdenCompras);
-                    oldIdProveedorOfCoOrdenComprasListCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListCoOrdenCompras);
-                }
             }
             for (InMovimientos inMovimientosListInMovimientos : coProveedores.getInMovimientosList()) {
                 CoProveedores oldIdProveedorOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getIdProveedor();
@@ -114,8 +95,6 @@ public class CoProveedoresJpaController implements Serializable {
             SeTipoPersona tipoPersonaNew = coProveedores.getTipoPersona();
             SePais idPaisOld = persistentCoProveedores.getIdPais();
             SePais idPaisNew = coProveedores.getIdPais();
-            List<CoOrdenCompras> coOrdenComprasListOld = persistentCoProveedores.getCoOrdenComprasList();
-            List<CoOrdenCompras> coOrdenComprasListNew = coProveedores.getCoOrdenComprasList();
             List<InMovimientos> inMovimientosListOld = persistentCoProveedores.getInMovimientosList();
             List<InMovimientos> inMovimientosListNew = coProveedores.getInMovimientosList();
             if (tipoPersonaNew != null) {
@@ -126,13 +105,6 @@ public class CoProveedoresJpaController implements Serializable {
                 idPaisNew = em.getReference(idPaisNew.getClass(), idPaisNew.getIdPais());
                 coProveedores.setIdPais(idPaisNew);
             }
-            List<CoOrdenCompras> attachedCoOrdenComprasListNew = new ArrayList<CoOrdenCompras>();
-            for (CoOrdenCompras coOrdenComprasListNewCoOrdenComprasToAttach : coOrdenComprasListNew) {
-                coOrdenComprasListNewCoOrdenComprasToAttach = em.getReference(coOrdenComprasListNewCoOrdenComprasToAttach.getClass(), coOrdenComprasListNewCoOrdenComprasToAttach.getCoOrdenComprasPK());
-                attachedCoOrdenComprasListNew.add(coOrdenComprasListNewCoOrdenComprasToAttach);
-            }
-            coOrdenComprasListNew = attachedCoOrdenComprasListNew;
-            coProveedores.setCoOrdenComprasList(coOrdenComprasListNew);
             List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
                 inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
@@ -156,23 +128,6 @@ public class CoProveedoresJpaController implements Serializable {
             if (idPaisNew != null && !idPaisNew.equals(idPaisOld)) {
                 idPaisNew.getCoProveedoresList().add(coProveedores);
                 idPaisNew = em.merge(idPaisNew);
-            }
-            for (CoOrdenCompras coOrdenComprasListOldCoOrdenCompras : coOrdenComprasListOld) {
-                if (!coOrdenComprasListNew.contains(coOrdenComprasListOldCoOrdenCompras)) {
-                    coOrdenComprasListOldCoOrdenCompras.setIdProveedor(null);
-                    coOrdenComprasListOldCoOrdenCompras = em.merge(coOrdenComprasListOldCoOrdenCompras);
-                }
-            }
-            for (CoOrdenCompras coOrdenComprasListNewCoOrdenCompras : coOrdenComprasListNew) {
-                if (!coOrdenComprasListOld.contains(coOrdenComprasListNewCoOrdenCompras)) {
-                    CoProveedores oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras = coOrdenComprasListNewCoOrdenCompras.getIdProveedor();
-                    coOrdenComprasListNewCoOrdenCompras.setIdProveedor(coProveedores);
-                    coOrdenComprasListNewCoOrdenCompras = em.merge(coOrdenComprasListNewCoOrdenCompras);
-                    if (oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras != null && !oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.equals(coProveedores)) {
-                        oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras.getCoOrdenComprasList().remove(coOrdenComprasListNewCoOrdenCompras);
-                        oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras = em.merge(oldIdProveedorOfCoOrdenComprasListNewCoOrdenCompras);
-                    }
-                }
             }
             for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
                 if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
@@ -229,11 +184,6 @@ public class CoProveedoresJpaController implements Serializable {
             if (idPais != null) {
                 idPais.getCoProveedoresList().remove(coProveedores);
                 idPais = em.merge(idPais);
-            }
-            List<CoOrdenCompras> coOrdenComprasList = coProveedores.getCoOrdenComprasList();
-            for (CoOrdenCompras coOrdenComprasListCoOrdenCompras : coOrdenComprasList) {
-                coOrdenComprasListCoOrdenCompras.setIdProveedor(null);
-                coOrdenComprasListCoOrdenCompras = em.merge(coOrdenComprasListCoOrdenCompras);
             }
             List<InMovimientos> inMovimientosList = coProveedores.getInMovimientosList();
             for (InMovimientos inMovimientosListInMovimientos : inMovimientosList) {
