@@ -73,7 +73,7 @@ public class Tablas {
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
     private static boolean[] tbordenpedido = {false, false, false, true, true};
-    private static boolean[] tbVenta = {false, false, false, false, false,false,false, true};
+    private static boolean[] tbVenta = {false, false, false, true, false,false,false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, true, true,false,false,false,false,false};
 
@@ -2025,7 +2025,7 @@ public class Tablas {
 
         tabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD",
-            "NOMBRE PRODUCTO", "CANTIDAD","PRECIO" ,"DESCUENTO","IVA", "",}, 0) {
+            "DESCRIPCION", "CANTIDAD","PRECIO" ,"DESCUENTO","IVA", "",}, 0) {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
@@ -2053,7 +2053,7 @@ public class Tablas {
                 filas[3] = lista.get(i).getCantidad();
                 filas[4] = lista.get(i).getPrecioUnitarioVenta();
                 filas[5] = lista.get(i).getValorDescuento();
-                filas[6] = Formato_Numeros.formatoNumero2(""+lista.get(i).getValorIva());
+                filas[6] = Formato_Numeros.formatoNumero(""+lista.get(i).getValorIva());
                 JButton button = new JButton("ELIMINAR");
                 filas[7] = button;
                 dt.addRow(filas);
