@@ -227,20 +227,20 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
     private void tblPrestacionesPorServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrestacionesPorServiciosMousePressed
 
-        int i = 0;
-        if (evt.getClickCount() == 2) {
-
-            i = tblPrestacionesPorServicios.getSelectedRow();
-            prestacionesPPS = devuelveObjeto(tblPrestacionesPorServicios.getValueAt(i, 0).toString(), lista);
-            System.out.println("este ide es :" + prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario());
-            pre.txtidtarifario.setText(String.valueOf(prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario()));
-            if (prestacionesPPS != null) {
-                this.setVisible(false);
-                AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true);
-                cp.setVisible(true);
-            }
-
-        }
+//        int i = 0;
+//        if (evt.getClickCount() == 2) {
+//
+//            i = tblPrestacionesPorServicios.getSelectedRow();
+//            prestacionesPPS = devuelveObjeto(tblPrestacionesPorServicios.getValueAt(i, 0).toString(), lista);
+//            System.out.println("este ide es :" + prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario());
+//            pre.txtidtarifario.setText(String.valueOf(prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario()));
+//            if (prestacionesPPS != null) {
+//                this.setVisible(false);
+//                AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true);
+//                cp.setVisible(true);
+//            }
+//
+//        }
 
 
     }//GEN-LAST:event_tblPrestacionesPorServiciosMousePressed
