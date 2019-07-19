@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 public class AgregarPrestaciones extends javax.swing.JDialog {
 
@@ -37,9 +38,12 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     List<InPrestacionesPorServicios> lppus;
     VeUnidadServicioJpaController us1 = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<VeUnidadServicio> us2;
+    PrPrestaciones proc;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+     Long id;
+     
 
     public AgregarPrestaciones(java.awt.Frame parent, boolean modal) {
 
@@ -79,6 +83,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
+       
     }
 
     /**
@@ -91,7 +96,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cbxprestacion = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbxunidadservicio = new javax.swing.JComboBox<>();
@@ -103,18 +107,14 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         cbxaplicadescuento1 = new javax.swing.JComboBox<>();
         jcancelar = new javax.swing.JButton();
         cbxestado = new javax.swing.JComboBox<>();
+        jbotonbuscar = new javax.swing.JToggleButton();
+        txtpresta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        cbxprestacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxprestacionActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Prestacion");
+        jLabel1.setText("Nombre Prestacion");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Unidad de Servicio");
@@ -161,62 +161,79 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
         cbxestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
 
+        jbotonbuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbotonbuscar.setText("BUSCAR");
+        jbotonbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbotonbuscarActionPerformed(evt);
+            }
+        });
+
+        txtpresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtprestaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbxfacturable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxprestacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxaplicadescuento1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxunidadservicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxestado, 0, 159, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(jcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 95, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(jcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 37, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jbotonbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxfacturable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxaplicadescuento1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxunidadservicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxestado, 0, 159, Short.MAX_VALUE))
+                    .addComponent(txtpresta, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxprestacion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(txtpresta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbotonbuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxunidadservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxfacturable, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxestado, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxestado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jguardarpreser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -243,15 +260,18 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,12 +282,12 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
         InPrestacionesPorServicios preServ = new InPrestacionesPorServicios();
         java.util.Date fechaActual = new java.util.Date();
-        pol2 = ObtenerDTO.ObtenerPrPrestaciones(cbxprestacion.getSelectedItem().toString());
+        pol2 = ObtenerDTO.ObtenerPrPrestaciones(txtpresta.getSelectedText().toString());
         pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
 
       
-            boolean valor1 = ValidarDTO.ValidarPreporservi(cbxprestacion.getSelectedItem().toString())&& ValidarDTO.ValidarPrPrestaciones(cbxprestacion.getSelectedItem().toString());
-            if (valor1 == true) {
+           boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getSelectedText().toString())&& ValidarDTO.ValidarPreporservi(cbxunidadservicio.getSelectedItem().toString());
+           if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "Prestacion Ya existente");
                 
            } else {
@@ -280,7 +300,12 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 preServ.setFechaCreacion(fechaActual);  
           
              try {
-            pxs.create(preServ);
+             preServ.setPrPrestaciones(pol2);
+                preServ.setVeUnidadServicio(pol3);
+                preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
+                preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
+                preServ.setEstado(cbxestado.getSelectedItem().toString());
+                preServ.setFechaCreacion(fechaActual);pxs.create(preServ);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception e) {
@@ -297,7 +322,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         
         lppus = pxs.findInPrestacionesPorServiciosEntities();
         for (int i = 0; i < pr2.size(); i++) {
-                    cbxprestacion.addItem(pr2.get(i).getNombrePrestacion());
+//        cbxprestacion.addItem(pr2.get(i).getNombrePrestacion());
         }
     }
 
@@ -307,10 +332,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
             cbxunidadservicio.addItem(us2.get(i).getNombreUnidadServicio());
         }
     }
-    private void cbxprestacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxprestacionActionPerformed
-
-    }//GEN-LAST:event_cbxprestacionActionPerformed
-
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
 
     }//GEN-LAST:event_jLabel4MouseDragged
@@ -333,6 +354,23 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jcancelarActionPerformed
+
+    private void jbotonbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbotonbuscarActionPerformed
+        setVisible(true);
+        ConsultaPrestacion cp = new ConsultaPrestacion(new javax.swing.JFrame(), true);
+        cp.setVisible(true);
+        
+         proc = cp.getPrestacion();
+        txtpresta.setText(proc.getNombrePrestacion());
+        id = proc.getIdPrestacion();
+        
+        
+        
+    }//GEN-LAST:event_jbotonbuscarActionPerformed
+
+    private void txtprestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprestaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtprestaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +419,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxaplicadescuento1;
     private javax.swing.JComboBox<String> cbxestado;
     private javax.swing.JComboBox<String> cbxfacturable;
-    private javax.swing.JComboBox<String> cbxprestacion;
     private javax.swing.JComboBox<String> cbxunidadservicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -390,7 +427,9 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToggleButton jbotonbuscar;
     private javax.swing.JButton jcancelar;
     private javax.swing.JButton jguardarpreser;
+    public javax.swing.JTextField txtpresta;
     // End of variables declaration//GEN-END:variables
 }

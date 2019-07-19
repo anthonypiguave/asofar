@@ -1821,6 +1821,34 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
 
         }
+    }
+public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprestaciones, JTable Tabla) {
+        int[] a = {150, 150, 150};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES",  "ESTADO"};
+        String[] filas = new String[4];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listabuscarprestaciones.size(); i++) {
+            filas[0] = String.valueOf(listabuscarprestaciones.get(i).getIdPrestacion());
+            filas[1] = listabuscarprestaciones.get(i).getNombrePrestacion();
+            filas[2] = listabuscarprestaciones.get(i).getEstado();
+           
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            
+
+        }
 
     }
 
