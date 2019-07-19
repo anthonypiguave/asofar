@@ -74,6 +74,7 @@ public class Venta extends javax.swing.JInternalFrame {
         btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
         cargarLisCliente();
 //        cargarN();
+
         TiIden = tic.findSeTipoIdentificacionEntities();
         llenarCombo(TiIden);
         usu = us;
