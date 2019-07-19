@@ -366,4 +366,6 @@ pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
     private javax.swing.JPanel jPanel2;
     public javax.swing.JTextField txtProduc;
     // End of variables declaration//GEN-END:variables
+
+
 }
