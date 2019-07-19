@@ -9,9 +9,11 @@ import ec.com.asofar.views.prestacionesporservicios.*;
 import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.InPrestacionesPorServiciosPK;
+import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.util.List;
@@ -32,8 +34,11 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     SeSucursal suc;
     List<InPrestacionesPorServicios> listapresporserv;
     InPrestacionesPorServiciosJpaController preposer = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
-    Long id_Pres;
-    
+    Long id_Pres, id_Uni;
+    String prestacion, unidad;
+    PrPrestaciones pr = new PrPrestaciones();
+    VeUnidadServicio ve = new VeUnidadServicio();
+
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -151,12 +156,17 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             
             i = tba_prestacionesporservicios.getSelectedRow();
-//            prestacionesPPS = devuelveObjeto(tblPrestacionesPorServicios.getValueAt(i, 0).toString(), lista);
-//            System.out.println("este ide es :" + prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario());
             id_Pres = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 0).toString());
-            System.out.println("" + id_Pres);
+            id_Uni = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 2).toString());
+            prestacion= tba_prestacionesporservicios.getValueAt(i, 1).toString();
+            unidad = tba_prestacionesporservicios.getValueAt(i, 3).toString();
             if (objpres != null) {
-                obtener();
+//                obtener();
+//                System.out.println("hhh" +  obtener());
+//                System.out.println("p"+obtenerP());
+//                obtenerP();
+//                System.out.println("v"+obtenerV());
+//                obtenerV();
                 this.setVisible(false);
                 
             }
@@ -171,9 +181,23 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 //FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
         obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
         obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
-        return objpres;
+        obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
+        
+        return obj;
     }
 
+    public PrPrestaciones obtenerP() {
+        PrPrestaciones objp = new PrPrestaciones();
+        objp.setNombrePrestacion(prestacion);
+        return objp;
+    }
+    
+    public VeUnidadServicio obtenerV() {
+        VeUnidadServicio vep = new VeUnidadServicio();
+        vep.setNombreUnidadServicio(unidad);
+       
+        return vep;
+    }
 //    public InPrestacionesPorServicios devuelveObjeto(String datos, List<InPrestacionesPorServicios> listaobjeto) {
 //
 //        InPrestacionesPorServicios objeto1 = null;
@@ -191,6 +215,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 //        return objeto1;
 //
 //    }
+
     /**
      * @param args the command line arguments
      */

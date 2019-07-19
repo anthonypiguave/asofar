@@ -73,7 +73,7 @@ public class Tablas {
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
     private static boolean[] tbordenpedido = {false, false, false, true, true};
-    private static boolean[] tbVenta = {false, false, false, false, false,false,false, true};
+    private static boolean[] tbVenta = {false, false, false, true, false,false,false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, true, true,false,false,false,false,false};
 
@@ -1788,23 +1788,24 @@ public class Tablas {
     }
 
     public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
-        int[] a = {150, 150, 150, 80, 80, 200};
+        int[] a = {150, 150,150, 150, 80, 80, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "Facturable", "Aplica Descuento"};
-        String[] filas = new String[6];
+        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES","ID UNIDAD ", "UNIDAD DE SERVICIO", "ESTADO", "Facturable", "Aplica Descuento"};
+        String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listapresporserv.size(); i++) {
             filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
             filas[1] = listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion();
-            filas[2] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
-            filas[3] = listapresporserv.get(i).getEstado();
-            filas[4] = listapresporserv.get(i).getEsFacturable();
-            filas[5] = listapresporserv.get(i).getAplicaDescuento();
+            filas[2] = ""+listapresporserv.get(i).getVeUnidadServicio().getIdUnidadServicio();
+            filas[3] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
+            filas[4] = listapresporserv.get(i).getEstado();
+            filas[5] = listapresporserv.get(i).getEsFacturable();
+            filas[6] = listapresporserv.get(i).getAplicaDescuento();
             model.addRow(filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1819,6 +1820,8 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 
         }
     }
@@ -2050,7 +2053,7 @@ public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprest
 
         tabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD",
-            "NOMBRE PRODUCTO", "CANTIDAD","PRECIO" ,"DESCUENTO","IVA", "",}, 0) {
+            "DESCRIPCION", "CANTIDAD","PRECIO" ,"DESCUENTO","IVA", "",}, 0) {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
@@ -2078,7 +2081,7 @@ public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprest
                 filas[3] = lista.get(i).getCantidad();
                 filas[4] = lista.get(i).getPrecioUnitarioVenta();
                 filas[5] = lista.get(i).getValorDescuento();
-                filas[6] = Formato_Numeros.formatoNumero2(""+lista.get(i).getValorIva());
+                filas[6] = Formato_Numeros.formatoNumero(""+lista.get(i).getValorIva());
                 JButton button = new JButton("ELIMINAR");
                 filas[7] = button;
                 dt.addRow(filas);
