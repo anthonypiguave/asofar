@@ -153,6 +153,99 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         detalleCompra();
 
     }
+    
+    public void detalleCompra() {
+
+        for (int i = 0; i < listadet.size(); i++) {
+
+            CoDetalleOrdenCompra detalle = new CoDetalleOrdenCompra();
+
+            detalle.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
+
+            detalle.getCoDetalleOrdenCompraPK().setLineaDetalle(i + 1);
+            detalle.getCoDetalleOrdenCompraPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
+            detalle.setDescripcion(listadet.get(i).getDescripcion());
+            detalle.setPrecioUnitario(BigDecimal.valueOf(0));
+            detalle.setCantidadRecibida(BigInteger.valueOf(0));
+            detalle.setSubtotal(BigDecimal.valueOf(0));
+            detalle.setIva(BigDecimal.valueOf(0));
+            detalle.setIce(BigDecimal.valueOf(0));
+            detalle.setDescuento(BigDecimal.valueOf(0));
+            detalle.setTotal(BigDecimal.valueOf(0));
+
+            listadetCompra.add(detalle);
+        }
+        Tablas.listarDetalleCompra(listadetCompra, jTable1);
+    }
+
+    public void calcularTotales() {
+
+        Double iva = 12.00;
+
+        BigDecimal TotalSubConIva = new BigDecimal("0.00");
+        BigDecimal TotalSubSinIva = new BigDecimal("0.00");
+        BigDecimal TotalSubTotal = new BigDecimal("0.00");
+        BigDecimal TotalIva = new BigDecimal("0.00");
+        BigDecimal TotalDescuento = new BigDecimal("0.00");
+        BigDecimal Total = new BigDecimal("0.00");
+
+        BigDecimal Iva = new BigDecimal(iva);
+
+        for (int i = 0; i < listadetCompra.size(); i++) {
+
+            BigInteger Cant = listadetCompra.get(i).getCantidadRecibida();
+            BigDecimal Cantidad = new BigDecimal(Cant);
+            System.out.println("cantidad " + Cantidad);
+            BigDecimal Precio = listadetCompra.get(i).getPrecioUnitario();
+            System.out.println("Precio " + Precio);
+
+            BigDecimal Subtotal = Cantidad.multiply(Precio);
+            System.out.println("Subtotal " + Subtotal);
+
+            BigDecimal Descuento = listadetCompra.get(i).getDescuento();
+            System.out.println("descuento venta " + Descuento);
+            TotalDescuento = TotalDescuento.add(Descuento);
+
+            
+            if ("0.0".equals(ListarDetalle.get(i).getIva().toEngineeringString())) {
+
+                TotalSubSinIva = TotalSubSinIva.add(Subtotal);
+                System.out.println("TotalSub SinIva " + TotalSubSinIva);
+                TotalSubSinIvaCompra = TotalSubSinIvaCompra.add(SubtotalCompra);
+                System.out.println("TotalSubCompra SinIva " + TotalSubSinIvaCompra);
+
+            }
+            if (!"0.0".equals(ListarDetalle.get(i).getIva().toEngineeringString())) {
+
+                TotalIva = TotalIva.add(Subtotal.multiply(Iva));
+                System.out.println("total iva " + TotalIva);
+                TotalIvaCompra = TotalIvaCompra.add(SubtotalCompra.multiply(Iva));
+                System.out.println("total iva Compra " + TotalIvaCompra);
+
+                TotalSubConIva = TotalSubConIva.add(Subtotal);
+                System.out.println("subtotal con iva " + TotalSubConIva);
+                TotalSubConIvaCompra = TotalSubConIvaCompra.add(SubtotalCompra);
+                System.out.println("subtotalCompra con_iva " + TotalSubConIvaCompra);
+
+            }
+
+            Total = Total.add(Subtotal.add(Subtotal.multiply(Iva)).subtract(Descuento));
+            TotalCompra = TotalCompra.add(SubtotalCompra.add(SubtotalCompra.multiply(Iva)));
+
+            System.out.println("total venta " + Total);
+            System.out.println("total compra " + TotalCompra);
+
+        }
+
+        TotalSubTotal = TotalSubConIva.add(TotalSubSinIva);
+        TotalSubTotalCompra = TotalSubConIvaCompra.add(TotalSubSinIvaCompra);
+
+        Utilidad = Total.subtract(TotalCompra);
+        System.out.println("utilidad " + Utilidad);
+
+    }
+
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
