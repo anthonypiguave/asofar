@@ -21,6 +21,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Render;
 import ec.com.asofar.util.Render1;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -37,6 +38,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -144,7 +146,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println(" prueba  " + list.get(i).getDescripcion());
-            if (list.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+            if (list.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido()) && list.get(i).getEstado().equals("A")) {
                 listadet.add(list.get(i));
 
             }
@@ -153,7 +155,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         detalleCompra();
 
     }
-    
+
     public void detalleCompra() {
 
         for (int i = 0; i < listadet.size(); i++) {
@@ -166,7 +168,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             detalle.getCoDetalleOrdenCompraPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
             detalle.setDescripcion(listadet.get(i).getDescripcion());
             detalle.setPrecioUnitario(BigDecimal.valueOf(0));
-            detalle.setCantidadRecibida(BigInteger.valueOf(0));
+            detalle.setCantidadRecibida(listadet.get(i).getCantidadSolicitada());
             detalle.setSubtotal(BigDecimal.valueOf(0));
             detalle.setIva(BigDecimal.valueOf(0));
             detalle.setIce(BigDecimal.valueOf(0));
@@ -176,11 +178,10 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             listadetCompra.add(detalle);
         }
         Tablas.listarDetalleCompra(listadetCompra, jTable1);
+
     }
 
     public void calcularTotales() {
-
-        Double iva = 12.00;
 
         BigDecimal TotalSubConIva = new BigDecimal("0.00");
         BigDecimal TotalSubSinIva = new BigDecimal("0.00");
@@ -189,9 +190,9 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         BigDecimal TotalDescuento = new BigDecimal("0.00");
         BigDecimal Total = new BigDecimal("0.00");
 
-        BigDecimal Iva = new BigDecimal(iva);
-
         for (int i = 0; i < listadetCompra.size(); i++) {
+
+            BigDecimal iva = listadetCompra.get(i).getIva();
 
             BigInteger Cant = listadetCompra.get(i).getCantidadRecibida();
             BigDecimal Cantidad = new BigDecimal(Cant);
@@ -206,46 +207,30 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             System.out.println("descuento venta " + Descuento);
             TotalDescuento = TotalDescuento.add(Descuento);
 
-            
-            if ("0.0".equals(ListarDetalle.get(i).getIva().toEngineeringString())) {
+            if (!"0.0".equals(iva.toEngineeringString())) {
 
-                TotalSubSinIva = TotalSubSinIva.add(Subtotal);
-                System.out.println("TotalSub SinIva " + TotalSubSinIva);
-                TotalSubSinIvaCompra = TotalSubSinIvaCompra.add(SubtotalCompra);
-                System.out.println("TotalSubCompra SinIva " + TotalSubSinIvaCompra);
-
-            }
-            if (!"0.0".equals(ListarDetalle.get(i).getIva().toEngineeringString())) {
-
-                TotalIva = TotalIva.add(Subtotal.multiply(Iva));
+                TotalIva = TotalIva.add(Subtotal.multiply(iva));
                 System.out.println("total iva " + TotalIva);
-                TotalIvaCompra = TotalIvaCompra.add(SubtotalCompra.multiply(Iva));
-                System.out.println("total iva Compra " + TotalIvaCompra);
+                TotalIva = TotalIva.add(Subtotal.multiply(iva));
+                System.out.println("total iva Compra " + TotalIva);
 
                 TotalSubConIva = TotalSubConIva.add(Subtotal);
                 System.out.println("subtotal con iva " + TotalSubConIva);
-                TotalSubConIvaCompra = TotalSubConIvaCompra.add(SubtotalCompra);
-                System.out.println("subtotalCompra con_iva " + TotalSubConIvaCompra);
+                TotalSubConIva = TotalSubConIva.add(Subtotal);
+                System.out.println("subtotalCompra con_iva " + TotalSubConIva);
 
             }
 
-            Total = Total.add(Subtotal.add(Subtotal.multiply(Iva)).subtract(Descuento));
-            TotalCompra = TotalCompra.add(SubtotalCompra.add(SubtotalCompra.multiply(Iva)));
+            Total = Total.add(Subtotal.add(Subtotal.multiply(iva)).subtract(Descuento));
 
             System.out.println("total venta " + Total);
-            System.out.println("total compra " + TotalCompra);
 
         }
 
         TotalSubTotal = TotalSubConIva.add(TotalSubSinIva);
-        TotalSubTotalCompra = TotalSubConIvaCompra.add(TotalSubSinIvaCompra);
-
-        Utilidad = Total.subtract(TotalCompra);
-        System.out.println("utilidad " + Utilidad);
+        System.out.println("total" + TotalSubConIva);
 
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -424,12 +409,17 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
             }
         ));
-        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTable1KeyTyped(evt);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
             }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTable1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTable1KeyTyped(evt);
             }
         });
         jScrollPane2.setViewportView(jTable1);
@@ -535,29 +525,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_BtnCancelarActionPerformed
-    public void detalleCompra() {
-
-        for (int i = 0; i < listadet.size(); i++) {
-
-            CoDetalleOrdenCompra detalle = new CoDetalleOrdenCompra();
-
-            detalle.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
-
-            detalle.getCoDetalleOrdenCompraPK().setLineaDetalle(i + 1);
-            detalle.getCoDetalleOrdenCompraPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
-            detalle.setDescripcion(listadet.get(i).getDescripcion());
-            detalle.setPrecioUnitario(BigDecimal.valueOf(0));
-            detalle.setCantidadRecibida(BigInteger.valueOf(0));
-            detalle.setSubtotal(BigDecimal.valueOf(0));
-            detalle.setIva(BigDecimal.valueOf(0));
-            detalle.setIce(BigDecimal.valueOf(0));
-            detalle.setDescuento(BigDecimal.valueOf(0));
-            detalle.setTotal(BigDecimal.valueOf(0));
-
-            listadetCompra.add(detalle);
-        }
-        Tablas.listarDetalleCompra(listadetCompra, jTable1);
-    }
 
 
     private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
@@ -569,44 +536,22 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
 
-        CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
         try {
 
             int i = jTable1.getSelectedRow();
 
-            String valor = (String) jTable1.getValueAt(i, 3);
+            String valor = (String) jTable1.getValueAt(i, 4);
 
-            BigInteger cantidad = new BigInteger(valor);
+            BigDecimal valor1 = new BigDecimal(valor);
 
-            CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+            for (int j = 0; j < listadetCompra.size(); j++) {
 
-            List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-            List<CoDetalleOrdenPedido> list2 = new ArrayList<CoDetalleOrdenPedido>();
+                if (j == i) {
 
-            list = detOrdencontroller.findCoDetalleOrdenPedidoEntities();
-
-            for (int j = 0; j < list.size(); j++) {
-
-                if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-
-                    detalle = list.get(j);
-                    list2.add(detalle);
+                    listadetCompra.get(j).setPrecioUnitario(valor1);
                 }
 
             }
-
-            for (int k = 0; k < list2.size(); k++) {
-                if (k == i) {
-                    detalle = list2.get(k);
-                    listadet.get(k).setCantidadSolicitada(cantidad);
-                    detalle.setCantidadSolicitada(cantidad);
-
-                    break;
-                }
-
-            }
-
-            detOrdencontroller.edit(detalle);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -615,88 +560,74 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
 
-        CoDetalleOrdenPedidoJpaController detOrdenController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
-
-        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-        list = detOrdenController.findCoDetalleOrdenPedidoEntities();
-        int r = JOptionPane.showConfirmDialog(null, "Desea aprovar?", "", JOptionPane.YES_OPTION);
-        if (r == JOptionPane.YES_OPTION) {
-            try {
-                for (int j = 0; j < list.size(); j++) {
-
-                    if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
-
-                        detalle = list.get(j);
-
-                        detalle.setFechaActualizacion(d);
-                        detalle.setUsuarioActualizacion(seUsuario.getIdUsuario());
-
-                        detOrdenController.edit(detalle);
-                    }
-                }
-
-                CoOrdenPedido cab = cabOrdenController.findCoOrdenPedido(cOrden.getCoOrdenPedidoPK());
-
-                cab.setFechaActualizacion(d);
-                cab.setUsuarioActualizacion(seUsuario.getNombreUsuario());
-                cab.setEstado("A");
-
-                cabOrdenController.edit(cab);
-
-                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                setVisible(false);
-
-            } catch (Exception ex) {
-                Logger.getLogger(crearOrdenCompraForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        CoDetalleOrdenPedidoJpaController detOrdenController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+//        CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+//
+//        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
+//        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+//
+//        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
+//        list = detOrdenController.findCoDetalleOrdenPedidoEntities();
+//        int r = JOptionPane.showConfirmDialog(null, "Desea aprovar?", "", JOptionPane.YES_OPTION);
+//        if (r == JOptionPane.YES_OPTION) {
+//            try {
+//                for (int j = 0; j < list.size(); j++) {
+//
+//                    if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+//
+//                        detalle = list.get(j);
+//
+//                        detalle.setFechaActualizacion(d);
+//                        detalle.setUsuarioActualizacion(seUsuario.getIdUsuario());
+//
+//                        detOrdenController.edit(detalle);
+//                    }
+//                }
+//
+//                CoOrdenPedido cab = cabOrdenController.findCoOrdenPedido(cOrden.getCoOrdenPedidoPK());
+//
+//                cab.setFechaActualizacion(d);
+//                cab.setUsuarioActualizacion(seUsuario.getNombreUsuario());
+//                cab.setEstado("A");
+//
+//                cabOrdenController.edit(cab);
+//
+//                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+//                setVisible(false);
+//
+//            } catch (Exception ex) {
+//                Logger.getLogger(crearOrdenCompraForm.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
     }//GEN-LAST:event_BtnAprovarActionPerformed
 
     private void BtnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnularActionPerformed
-        CoDetalleOrdenPedidoJpaController detOrdenController = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        calcularTotales();
+    }//GEN-LAST:event_BtnAnularActionPerformed
 
-        CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
-        detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
 
-        List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
-        list = detOrdenController.findCoDetalleOrdenPedidoEntities();
-        int r = JOptionPane.showConfirmDialog(null, "Desea aprovar?", "", JOptionPane.YES_OPTION);
-        if (r == JOptionPane.YES_OPTION) {
-            try {
-                for (int j = 0; j < list.size(); j++) {
+        int row = jTable1.rowAtPoint(evt.getPoint());
+        int col = jTable1.columnAtPoint(evt.getPoint());
 
-                    if (list.get(j).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido())) {
+        if (evt.getClickCount() == 1) {
+            if (col == 6) {
+                JCheckBox chbox = (JCheckBox) jTable1.getValueAt(row, col);
 
-                        detalle = list.get(j);
-                        detalle.setEstado("I");
-                        detalle.setFechaActualizacion(d);
-                        detalle.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                boolean selected = chbox.isSelected();
 
-                        detOrdenController.edit(detalle);
-                    }
+                if (selected) {
+
+                    chbox.setSelected(false);
+                } else {
+
+                    chbox.setSelected(true);
                 }
 
-                CoOrdenPedido cab = cabOrdenController.findCoOrdenPedido(cOrden.getCoOrdenPedidoPK());
-
-                cab.setFechaActualizacion(d);
-                cab.setUsuarioActualizacion(seUsuario.getNombreUsuario());
-                cab.setEstado("I");
-
-                cabOrdenController.edit(cab);
-
-                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                setVisible(false);
-
-            } catch (Exception ex) {
-                Logger.getLogger(crearOrdenCompraForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_BtnAnularActionPerformed
+
+    }//GEN-LAST:event_jTable1MousePressed
 
     public String validarProductos(String datos) {
         String obj1 = "no";
@@ -730,16 +661,24 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(crearOrdenCompraForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

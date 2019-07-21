@@ -46,6 +46,7 @@ import ec.com.asofar.dto.VeUnidadServicio;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
@@ -73,9 +74,9 @@ public class Tablas {
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
     private static boolean[] tbordenpedido = {false, false, false, true, true};
-    private static boolean[] tbVenta = {false, false, false, true, false,false,false,false,true};
+    private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
-    private static boolean[] tbordencompra = {false, false, false, true, true,false,false,false,false,false};
+    private static boolean[] tbordencompra = {false, false, false, false, true, false, false, false, false, false};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -1788,20 +1789,20 @@ public class Tablas {
     }
 
     public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
-        int[] a = {150, 150,150, 150, 80, 80, 200};
+        int[] a = {150, 150, 150, 150, 80, 80, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES","ID UNIDAD ", "UNIDAD DE SERVICIO", "ESTADO", "Facturable", "Aplica Descuento"};
+        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES", "ID UNIDAD ", "UNIDAD DE SERVICIO", "ESTADO", "Facturable", "Aplica Descuento"};
         String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listapresporserv.size(); i++) {
             filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
             filas[1] = listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion();
-            filas[2] = ""+listapresporserv.get(i).getVeUnidadServicio().getIdUnidadServicio();
+            filas[2] = "" + listapresporserv.get(i).getVeUnidadServicio().getIdUnidadServicio();
             filas[3] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
             filas[4] = listapresporserv.get(i).getEstado();
             filas[5] = listapresporserv.get(i).getEsFacturable();
@@ -1825,14 +1826,15 @@ public class Tablas {
 
         }
     }
-public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprestaciones, JTable Tabla) {
+
+    public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprestaciones, JTable Tabla) {
         int[] a = {150, 150, 150};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES",  "ESTADO"};
+        String[] b = {"ID PRESTACIONES", "NOMBRE PRESTACIONES", "ESTADO"};
         String[] filas = new String[4];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
@@ -1840,7 +1842,7 @@ public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprest
             filas[0] = String.valueOf(listabuscarprestaciones.get(i).getIdPrestacion());
             filas[1] = listabuscarprestaciones.get(i).getNombrePrestacion();
             filas[2] = listabuscarprestaciones.get(i).getEstado();
-           
+
             model.addRow(filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -1849,7 +1851,6 @@ public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprest
             Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
             Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-            
 
         }
 
@@ -2053,7 +2054,7 @@ public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprest
 
         tabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD",
-            "DESCRIPCION", "CANTIDAD","PRECIO" ,"DESCUENTO","IVA","TOTAL", "",}, 0) {
+            "DESCRIPCION", "CANTIDAD", "PRECIO", "DESCUENTO", "IVA", "TOTAL", "",}, 0) {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
@@ -2082,8 +2083,8 @@ public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprest
                 filas[3] = lista.get(i).getCantidad();
                 filas[4] = lista.get(i).getPrecioUnitarioVenta();
                 filas[5] = lista.get(i).getValorDescuento();
-                filas[6] = Formato_Numeros.formatoNumero(""+lista.get(i).getValorIva());
-                filas[7] =""+lista.get(i).getValorTotal();
+                filas[6] = Formato_Numeros.formatoNumero("" + lista.get(i).getValorIva());
+                filas[7] = "" + lista.get(i).getValorTotal();
                 JButton button = new JButton("ELIMINAR");
                 filas[8] = button;
                 dt.addRow(filas);
@@ -2129,66 +2130,49 @@ public static void TablaBuscarPrestaciones(List<PrPrestaciones> listabuscarprest
 
     }
 
-    public static void listarDetalleCompra(List<CoDetalleOrdenCompra> lista, JTable Tabla) {
-        int[] a = {20, 20, 90, 50, 50, 50, 50, 50, 50, 50};
-        Font fuente = new Font("Bold", Font.BOLD, 12);
-        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
-        tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
-        model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"No.", "CODIGO", "DESCRIPCION", "PRECIO", "CANTIDAD", "SUBTOTAL", "IVA", "ICE", "DESCUENTO", "TOTAL"};
-        String[] Filas = new String[10];
-        model = new DefaultTableModel(null, Co){
-        @Override
-        public boolean isCellEditable(int row, int column) {
+    public static void listarDetalleCompra(List<CoDetalleOrdenCompra> lista, JTable tabla) {
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "SUBTOTAL", "IVA", "ICE", "DESCUENTO", "TOTAL"}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, JCheckBox.class,
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class,};
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
                 return tbordencompra[column];
             }
-        
+
         };
-        
-        JTableHeader jt;
-        jt = Tabla.getTableHeader();
-        jt.setFont(fuente);
-        jt.setDefaultRenderer(tcr);
-        Tabla.setShowGrid(true);
-        
-        for (int i = 0; i < lista.size(); i++) {
 
-            Filas[0] = "" + lista.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle();
-            Filas[1] = "" + lista.get(i).getCoDetalleOrdenCompraPK().getIdProducto();
-            Filas[2] = lista.get(i).getDescripcion();
-            Filas[3] = lista.get(i).getPrecioUnitario().toString();
-            Filas[4] = lista.get(i).getCantidadRecibida().toString();
-            Filas[5] = lista.get(i).getSubtotal().toEngineeringString();
-            Filas[6] = lista.get(i).getIva().toEngineeringString();
-            Filas[7] = lista.get(i).getIce().toEngineeringString();
-            Filas[8] = lista.get(i).getDescuento().toEngineeringString();
-            Filas[9] = lista.get(i).getTotal().toEngineeringString();
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+                Object filas[] = new Object[10];
 
-            model.addRow(Filas);
-            Tabla.setModel(model);
-            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
-            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
-            Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
-            Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
+                filas[0] = "" + lista.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle();
+                filas[1] = "" + lista.get(i).getCoDetalleOrdenCompraPK().getIdProducto();
+                filas[2] = lista.get(i).getDescripcion();
+                filas[3] = lista.get(i).getCantidadRecibida().toString();
+                filas[4] = lista.get(i).getPrecioUnitario().toString();
+                filas[5] = lista.get(i).getSubtotal().toEngineeringString();
+                JCheckBox ch = new JCheckBox();
+                filas[6] = ch;
+
+                filas[7] = lista.get(i).getIce().toEngineeringString();
+                filas[8] = lista.get(i).getDescuento().toEngineeringString();
+                filas[9] = lista.get(i).getTotal().toEngineeringString();
+
+                dt.addRow(filas);
+            }
 
         }
+
+        tabla.setModel(dt);
     }
 }

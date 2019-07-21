@@ -98,7 +98,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         this.txtCod.setEditable(false);
         this.txtObservacion.setEnabled(false);
         this.cbxProveedor.setEnabled(false);
-        this.cbx_documento.setEditable(false);
+        this.cbx_documento.setEnabled(false);
 
         System.out.println(" " + seUsuario);
 
