@@ -12,6 +12,7 @@ import ec.com.asofar.util.AES;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -115,6 +116,11 @@ public class Login extends javax.swing.JDialog {
                 txtpasswordActionPerformed(evt);
             }
         });
+        txtpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpasswordKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,7 +199,7 @@ public class Login extends javax.swing.JDialog {
         }
     }
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        
+
         iniciarSesion();
         setVisible(false);
     }//GEN-LAST:event_btningresarActionPerformed
@@ -220,6 +226,12 @@ public class Login extends javax.swing.JDialog {
     private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtpasswordActionPerformed
+
+    private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            iniciarSesion();
+        }
+    }//GEN-LAST:event_txtpasswordKeyPressed
 
     /**
      * @param args the command line arguments

@@ -56,7 +56,7 @@ public class Venta extends javax.swing.JInternalFrame {
     BigInteger cantidad, cantidadModi;
     Double precio, precioIva, total, descuento;
     int Cont = 1;
-    String iva;
+//    String iva;
 
     public Venta() {
         initComponents();
@@ -80,16 +80,14 @@ public class Venta extends javax.swing.JInternalFrame {
         usu = us;
         emp = em;
         suc = su;
-//        cargarTotal();
+        cargartxt();
     }
 
-    public void cargarTotal() {
-        Double total1 = 0.0;
-        for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-            total1 = listaDetFactura.get(i).getValorTotal();
-            total1 = total1 + total1;
-        }
-        txtTotal.setText(total1.toString());
+    public void cargartxt() {
+        txtSubtotal.setText("0.0");
+        txtDescuento.setText("0.0");
+        txtIva.setText("0.0");
+        txtTotal.setText("0.0");
     }
 
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
@@ -473,10 +471,11 @@ public class Venta extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btn_agregar_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,7 +641,7 @@ public class Venta extends javax.swing.JInternalFrame {
         ingre.setVisible(true);
         objetoPrestacion = ingre.getPresta();
         objetoFactDeta = ingre.getFac();
-        iva = objetoPrestacion.getAplicaIva();
+//        iva = objetoPrestacion.getAplicaIva();
 
         if (objetoPrestacion != null && objetoFactDeta != null) {
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
@@ -652,7 +651,7 @@ public class Venta extends javax.swing.JInternalFrame {
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             cantidad = BigInteger.ONE;
             precio = objetoFactDeta.getPrecioUnitarioVenta();
-            precioIva = calcularPrecioIvaItem();
+            precioIva = calcularIvaItem();
             descuento = objetoFactDeta.getValorDescuento();
             FactDeta.setCantidad(BigInteger.ONE);
             FactDeta.setValorDescuento(descuento);
@@ -666,11 +665,77 @@ public class Venta extends javax.swing.JInternalFrame {
                 Cont = i + 1;
                 FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
             }
+
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+            /**/
+ /**/
+            Totalizar();
+            TotalizarIva();
+            TotalizarDescuento();
+//            TotalizarSubtotal();
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
+    private void Totalizar() {
+        Double t = 0.0;
+        Double p = 0.0;
+        if (tba_detalle.getRowCount() > 0) {
+            for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+//                p = Double.parseDouble(tba_detalle.getValueAt(i, 7).toString());
+                p = listaDetFactura.get(i).getValorTotal();
+                t += p;
+                txtTotal.setText(t.toString());
+            }
+        }
+    }
+
+    private void TotalizarIva() {
+        Double t = 0.0;
+        Double p = 0.0;
+        if (tba_detalle.getRowCount() > 0) {
+            for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+//                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
+                p = listaDetFactura.get(i).getValorIva();
+                t += p;
+                txtIva.setText(t.toString());
+            }
+        }
+    }
+
+    private void TotalizarDescuento() {
+        Double t = 0.0;
+        Double p = 0.0;
+        if (tba_detalle.getRowCount() > 0) {
+            for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+//                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
+                p = listaDetFactura.get(i).getValorDescuento();
+                t += p;
+                txtDescuento.setText(t.toString());
+            }
+        }
+    }
+
+//    private void TotalizarSubtotal() {
+//        Double t = 0.0;
+//        Double p = 0.0;
+//        Double pre =0.0;
+//        BigInteger cant = null;
+//        Double subtotal=0.0;
+//        if (tba_detalle.getRowCount() > 0) {
+//            for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+//                //                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
+//                pre = listaDetFactura.get(i).getPrecioUnitarioVenta();
+//                cant = listaDetFactura.get(i).getCantidad();
+//                subtotal = (cant.doubleValue() * pre);
+//                
+//                p = listaDetFactura.get(i).getValorDescuento();
+//                t += p;
+//                txtSubtotal.setText(t.toString());
+//            }
+//        }
+//    }
+
     public Double calcularTotalItem() {
         BigInteger cant;
         Double pre;
@@ -678,7 +743,7 @@ public class Venta extends javax.swing.JInternalFrame {
         Double total2;
         Double desc;
         /**/
-        preIva = calcularPrecioIvaItem();
+        preIva = calcularIvaItem();
         cant = cantidad;
         pre = precio;
         desc = descuento;
@@ -687,11 +752,14 @@ public class Venta extends javax.swing.JInternalFrame {
         return total2;
     }
 
-    public Double calcularPrecioIvaItem() {
+    public Double calcularIvaItem() {
         BigInteger cant;
         Double pre;
         Double precioIva = null;
-        if (iva.equals("SI")) {
+        String aplica = objetoPrestacion.getAplicaIva();
+//        objetoPrestacion = (PrPrestaciones)listaPrest;
+//           aplica = listaDetFactur;
+        if (aplica.equals("SI")) {
             cant = cantidad;
             pre = precio;
             precioIva = (cant.doubleValue() * pre) * 12 / 100;
@@ -750,6 +818,9 @@ public class Venta extends javax.swing.JInternalFrame {
 
             BigInteger cantidadMod = new BigInteger(valor);
             cantidadModi = cantidadMod;
+            if(objetoPrestacion.getIdPrestacion().equals(tba_detalle.getValueAt(i,0))){
+            
+            }
             Double IvaMod = calcularIvaItemCantMod(cantidadModi);
             Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuento);
             Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc);
@@ -759,6 +830,10 @@ public class Venta extends javax.swing.JInternalFrame {
             listaDetFactura.get(i).setValorTotal(total);
             listaDetFactura.get(i).setValorDescuento(Desc);
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+            /**/
+ /**/
+            Totalizar();
+            TotalizarIva();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -786,7 +861,9 @@ public class Venta extends javax.swing.JInternalFrame {
 //        BigInteger cant;
         Double pre;
         Double precioIva2 = null;
-        if (iva.equals("SI")) {
+        String aplica = objetoPrestacion.getAplicaIva();
+        
+        if (aplica.equals("SI")) {
 //            cant = cantidad;
             pre = precio;
             precioIva2 = (cantMod.doubleValue() * pre) * 12 / 100;
