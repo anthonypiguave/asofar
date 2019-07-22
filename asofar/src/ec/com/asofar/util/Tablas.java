@@ -1992,7 +1992,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "DESCRIPCION", "CANTIDAD", "PRECIO", "DESCUENTO", "IVA"};
+        String[] b = {"COD.", "DESCRIPCION", "STOCK", "PRECIO", "DESCUENTO", "IVA"};
         String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
@@ -2084,7 +2084,7 @@ public class Tablas {
                 filas[4] = lista.get(i).getPrecioUnitarioVenta();
                 filas[5] = lista.get(i).getValorDescuento();
                 filas[6] = Formato_Numeros.formatoNumero("" + lista.get(i).getValorIva());
-                filas[7] = "" + lista.get(i).getValorTotal();
+                filas[7] = Formato_Numeros.formatoNumero("" + lista.get(i).getValorTotal());
                 JButton button = new JButton("ELIMINAR");
                 filas[8] = button;
                 dt.addRow(filas);
