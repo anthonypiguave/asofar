@@ -282,15 +282,19 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
         InPrestacionesPorServicios preServ = new InPrestacionesPorServicios();
         java.util.Date fechaActual = new java.util.Date();
-        pol2 = ObtenerDTO.ObtenerPrPrestaciones(txtpresta.getSelectedText().toString());
+       
+        pol2 = ObtenerDTO.ObtenerPrPrestaciones(txtpresta.getText());
         pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
 
-      
-           boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getSelectedText().toString())&& ValidarDTO.ValidarPreporservi(cbxunidadservicio.getSelectedItem().toString());
-           if (valor1 == true) {
+ 
+             boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText().toString())&& 
+                     ValidarDTO.ValidarPrPrestaciones(txtpresta.getText().toString())
+             && ValidarDTO.ValidarPrPrestaciones(cbxunidadservicio.getSelectedItem().toString());
+            
+             if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "Prestacion Ya existente");
                 
-           } else {
+             } else {
                 
                 preServ.setPrPrestaciones(pol2);
                 preServ.setVeUnidadServicio(pol3);
@@ -300,7 +304,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 preServ.setFechaCreacion(fechaActual);  
           
              try {
-             preServ.setPrPrestaciones(pol2);
+                preServ.setPrPrestaciones(pol2);
                 preServ.setVeUnidadServicio(pol3);
                 preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
                 preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
