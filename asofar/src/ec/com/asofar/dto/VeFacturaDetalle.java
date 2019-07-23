@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "VeFacturaDetalle.findByCantidad", query = "SELECT v FROM VeFacturaDetalle v WHERE v.cantidad = :cantidad")
     , @NamedQuery(name = "VeFacturaDetalle.findByPrecioUnitarioVenta", query = "SELECT v FROM VeFacturaDetalle v WHERE v.precioUnitarioVenta = :precioUnitarioVenta")
     , @NamedQuery(name = "VeFacturaDetalle.findByValorIce", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorIce = :valorIce")
+    , @NamedQuery(name = "VeFacturaDetalle.findBySubtotal", query = "SELECT v FROM VeFacturaDetalle v WHERE v.subtotal = :subtotal")
     , @NamedQuery(name = "VeFacturaDetalle.findByValorIva", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorIva = :valorIva")
     , @NamedQuery(name = "VeFacturaDetalle.findByValorDescuento", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorDescuento = :valorDescuento")
     , @NamedQuery(name = "VeFacturaDetalle.findByValorTotal", query = "SELECT v FROM VeFacturaDetalle v WHERE v.valorTotal = :valorTotal")
@@ -63,6 +64,8 @@ public class VeFacturaDetalle implements Serializable {
     private Double precioUnitarioVenta;
     @Column(name = "valor_ice")
     private Double valorIce;
+    @Column(name = "subtotal")
+    private Double subtotal;
     @Column(name = "valor_iva")
     private Double valorIva;
     @Column(name = "valor_descuento")
@@ -141,6 +144,14 @@ public class VeFacturaDetalle implements Serializable {
 
     public void setValorIce(Double valorIce) {
         this.valorIce = valorIce;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 
     public Double getValorIva() {

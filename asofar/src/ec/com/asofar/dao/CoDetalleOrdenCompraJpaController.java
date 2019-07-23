@@ -38,8 +38,8 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
         if (coDetalleOrdenCompra.getCoDetalleOrdenCompraPK() == null) {
             coDetalleOrdenCompra.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
         }
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdEmpresa(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdOrdenCompra(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
+        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdEmpresa(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdSurcusal(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdSucursal());
         EntityManager em = null;
         try {
@@ -69,8 +69,8 @@ public class CoDetalleOrdenCompraJpaController implements Serializable {
     }
 
     public void edit(CoDetalleOrdenCompra coDetalleOrdenCompra) throws NonexistentEntityException, Exception {
-        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdEmpresa(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdOrdenCompra(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra());
+        coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdEmpresa(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdEmpresa());
         coDetalleOrdenCompra.getCoDetalleOrdenCompraPK().setIdSurcusal(coDetalleOrdenCompra.getCoOrdenCompras().getCoOrdenComprasPK().getIdSucursal());
         EntityManager em = null;
         try {
