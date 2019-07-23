@@ -115,6 +115,11 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfiltroActionPerformed(evt);
+            }
+        });
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyPressed(evt);
@@ -188,7 +193,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -270,11 +275,11 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
                 nombre = objPrest.getNombrePrestacion();
                 id_prod = objPrest.getIdPoducto();
                 iva = objPrest.getAplicaIva();
-                precio = Double.valueOf(tba_productos.getValueAt(id, 3).toString());
-                if (tba_productos.getValueAt(id, 4).toString().equals("-")) {
+                precio = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
+                if (tba_productos.getValueAt(id, 5).toString().equals("-")) {
                     descuento = 0.0;
                 } else {
-                    descuento = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
+                    descuento = Double.valueOf(tba_productos.getValueAt(id, 5).toString());
                 }
                 getPre(id_pre, nombre, id_prod);
                 getPresta();
@@ -348,6 +353,10 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 //            JOptionPane.showMessageDialog(null, "SELECCIONE UN PRODUCTO");
 //        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfiltroActionPerformed
 
     /**
      * @param args the command line arguments
