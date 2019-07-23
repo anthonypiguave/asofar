@@ -818,10 +818,15 @@ public class Venta extends javax.swing.JInternalFrame {
 
             BigInteger cantidadMod = new BigInteger(valor);
             cantidadModi = cantidadMod;
-            if(objetoPrestacion.getIdPrestacion().equals(tba_detalle.getValueAt(i,0))){
+            Double ivaT = Double.valueOf(tba_detalle.getValueAt(i, 6).toString());
+            String  precioS=tba_detalle.getValueAt(i, 4).toString();
+            Double precioT= Double.valueOf(precioS.replace(",", "."));
             
-            }
-            Double IvaMod = calcularIvaItemCantMod(cantidadModi);
+//            if(objetoPrestacion.getIdPrestacion().equals(tba_detalle.getValueAt(i,0))){
+            /*descuento cojer de tabla y el precio*/
+//            }
+            Double IvaMod = calcularIvaItemCantMod(cantidadModi,ivaT,precioT);
+//            Double IvaMod = calcularIvaItemCantMod(cantidadModi);
             Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuento);
             Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc);
 
@@ -856,6 +861,22 @@ public class Venta extends javax.swing.JInternalFrame {
         return descuent;
     }
 
+    public Double calcularIvaItemCantMod(BigInteger   cantMod, Double posicionIva,Double posicionPrecio) {
+
+//        BigInteger cant;
+        Double pre;
+        Double precioIva2 = null;
+        String aplica = objetoPrestacion.getAplicaIva();
+        
+        if (posicionIva !=0.0) {
+//            cant = cantidad;
+            pre = posicionPrecio;
+            precioIva2 = (cantMod.doubleValue() * pre) * 12 / 100;
+        } else {
+            precioIva2 = 0.0;
+        }
+        return precioIva2;
+    }
     public Double calcularIvaItemCantMod(BigInteger cantMod) {
 
 //        BigInteger cant;
