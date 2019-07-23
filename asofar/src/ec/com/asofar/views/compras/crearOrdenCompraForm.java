@@ -53,6 +53,16 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
 
+    Boolean ivaBoolean;
+
+    Boolean[] check = {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
+    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
+    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
+    false,false,false,};
+    
+    
+    
+
     Date d = new Date();
     SeEmpresa se = new SeEmpresa();
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -183,6 +193,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
     public void calcularTotales() {
 
+        BigDecimal iva = new BigDecimal("0.12");////iva quemado
+
         BigDecimal TotalSubConIva = new BigDecimal("0.00");
         BigDecimal TotalSubSinIva = new BigDecimal("0.00");
         BigDecimal TotalSubTotal = new BigDecimal("0.00");
@@ -191,8 +203,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         BigDecimal Total = new BigDecimal("0.00");
 
         for (int i = 0; i < listadetCompra.size(); i++) {
-
-            BigDecimal iva = listadetCompra.get(i).getIva();
 
             BigInteger Cant = listadetCompra.get(i).getCantidadRecibida();
             BigDecimal Cantidad = new BigDecimal(Cant);
@@ -204,26 +214,26 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             System.out.println("Subtotal " + Subtotal);
 
             BigDecimal Descuento = listadetCompra.get(i).getDescuento();
-            System.out.println("descuento venta " + Descuento);
+            System.out.println("descuento  " + Descuento);
             TotalDescuento = TotalDescuento.add(Descuento);
 
-            if (!"0.0".equals(iva.toEngineeringString())) {
+            if (check[i]) {
 
                 TotalIva = TotalIva.add(Subtotal.multiply(iva));
                 System.out.println("total iva " + TotalIva);
-                TotalIva = TotalIva.add(Subtotal.multiply(iva));
-                System.out.println("total iva Compra " + TotalIva);
 
                 TotalSubConIva = TotalSubConIva.add(Subtotal);
                 System.out.println("subtotal con iva " + TotalSubConIva);
-                TotalSubConIva = TotalSubConIva.add(Subtotal);
-                System.out.println("subtotalCompra con_iva " + TotalSubConIva);
+
+            } else {
+                TotalSubSinIva = TotalSubSinIva.add(Subtotal);
+                System.out.println("TotalSub SinIva " + TotalSubSinIva);
 
             }
 
             Total = Total.add(Subtotal.add(Subtotal.multiply(iva)).subtract(Descuento));
 
-            System.out.println("total venta " + Total);
+            System.out.println("total compra" + Total);
 
         }
 
@@ -619,9 +629,16 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 if (selected) {
 
                     chbox.setSelected(false);
+
+                    ivaBoolean = false;
+                    check[row] = ivaBoolean;
+
                 } else {
 
                     chbox.setSelected(true);
+
+                    ivaBoolean = true;
+                    check[row] = ivaBoolean;
                 }
 
             }

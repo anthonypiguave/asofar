@@ -76,7 +76,7 @@ public class Tablas {
     private static boolean[] tbordenpedido = {false, false, false, true, true};
     private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
-    private static boolean[] tbordencompra = {false, false, false, false, true, false, false, false, false, false};
+    private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -2132,14 +2132,14 @@ public class Tablas {
 
     public static void listarDetalleCompra(List<CoDetalleOrdenCompra> lista, JTable tabla) {
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "SUBTOTAL", "IVA", "ICE", "DESCUENTO", "TOTAL"}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "SUBTOTAL", "IVA", "DESCUENTO", "TOTAL"}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, JCheckBox.class,
                 java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class,};
+                JCheckBox.class, java.lang.Object.class,
+                java.lang.Object.class,};
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -2153,7 +2153,7 @@ public class Tablas {
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
-                Object filas[] = new Object[10];
+                Object filas[] = new Object[9];
 
                 filas[0] = "" + lista.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle();
                 filas[1] = "" + lista.get(i).getCoDetalleOrdenCompraPK().getIdProducto();
@@ -2163,10 +2163,8 @@ public class Tablas {
                 filas[5] = lista.get(i).getSubtotal().toEngineeringString();
                 JCheckBox ch = new JCheckBox();
                 filas[6] = ch;
-
-                filas[7] = lista.get(i).getIce().toEngineeringString();
-                filas[8] = lista.get(i).getDescuento().toEngineeringString();
-                filas[9] = lista.get(i).getTotal().toEngineeringString();
+                filas[7] = lista.get(i).getDescuento().toEngineeringString();
+                filas[8] = lista.get(i).getTotal().toEngineeringString();
 
                 dt.addRow(filas);
             }
