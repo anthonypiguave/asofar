@@ -44,6 +44,7 @@ import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeUnidadServicio;
 import java.awt.Font;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -74,7 +75,7 @@ public class Tablas {
     private static boolean[] editable4 = {false, false, false, true};
     private static boolean[] editable5 = {false, false, false, false, false, true, true, true, true};
     private static boolean[] tbordenpedido = {false, false, false, true, true};
-    private static boolean[] tbVenta = {false, false, false, true, false, false, false, false,false, true};
+    private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
 
@@ -1986,13 +1987,13 @@ public class Tablas {
     }
 
     public static void ListarProductosVenta(List<PrPrestaciones> lisPrest, List<PrDetalleTarifario> listDetaTari, List<InKardex> listaKardex, List<PrProductos> listProd, JTable Tabla) {
-        int[] a = {40,300, 300, 100, 100, 100, 100};
+        int[] a = {40, 300, 300, 100, 100, 100, 100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.","COD. BARRA", "DESCRIPCION", "STOCK", "PRECIO", "DESCUENTO", "IVA"};
+        String[] b = {"COD.", "COD. BARRA", "DESCRIPCION", "STOCK", "PRECIO", "DESCUENTO", "IVA"};
         String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
@@ -2008,10 +2009,10 @@ public class Tablas {
                                 if (listaKardex.get(j).getInKardexPK().getIdProducto()
                                         == Long.valueOf(lisPrest.get(l).getIdPoducto().toString())) {
                                     filas[0] = "" + lisPrest.get(l).getIdPrestacion();
-                                    if(listProd.get(i).getCodigoBarra()==null){
-                                    filas[1] = "-";
-                                    }else{
-                                    filas[1] = ""+listProd.get(i).getCodigoBarra();
+                                    if (listProd.get(i).getCodigoBarra() == null) {
+                                        filas[1] = "-";
+                                    } else {
+                                        filas[1] = "" + listProd.get(i).getCodigoBarra();
                                     }
 //                                    filas[0] = "" + listaKardex.get(j).getInKardexPK().getIdProducto();
                                     filas[2] = listProd.get(i).getNombreProducto();
@@ -2061,13 +2062,13 @@ public class Tablas {
 
         tabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD",
-            "DESCRIPCION", "CANTIDAD", "PRECIO", "DESCUENTO", "IVA","SUBTOTAL", "TOTAL", "",}, 0) {
+            "DESCRIPCION", "CANTIDAD", "PRECIO", "DESCUENTO", "IVA", "SUBTOTAL", "TOTAL", "",}, 0) {
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class,JButton.class
+                java.lang.Object.class, JButton.class
 
             };
 
@@ -2170,6 +2171,21 @@ public class Tablas {
                 filas[4] = lista.get(i).getPrecioUnitario().toString();
                 filas[5] = lista.get(i).getSubtotal().toEngineeringString();
                 JCheckBox ch = new JCheckBox();
+                System.out.println(" iva valor " + lista.get(i).getIva());
+
+                BigDecimal bg1 = new BigDecimal("0.00");
+                int res;
+
+                res = bg1.compareTo(lista.get(i).getIva());
+
+                if (res == 0){
+                     System.out.println(" entra 1");
+                    ch.setSelected(false);
+                }
+                else{
+                    System.out.println(" entra 2");
+                    ch.setSelected(true);
+                }
                 filas[6] = ch;
                 filas[7] = lista.get(i).getDescuento().toEngineeringString();
                 filas[8] = lista.get(i).getTotal().toEngineeringString();

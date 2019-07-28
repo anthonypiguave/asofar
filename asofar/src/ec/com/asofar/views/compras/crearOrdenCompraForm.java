@@ -54,14 +54,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     SeSucursal seSucursal;
 
     Boolean ivaBoolean;
-
-    Boolean[] check = {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
-    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
-    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
-    false,false,false,};
-    
-    
-    
+    Boolean[] check ;
 
     Date d = new Date();
     SeEmpresa se = new SeEmpresa();
@@ -154,7 +147,11 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         list = detordencontroller.findCoDetalleOrdenPedidoEntities();
 
+        check = new Boolean[list.size()];
+
         for (int i = 0; i < list.size(); i++) {
+            
+            check[i] = false;
             System.out.println(" prueba  " + list.get(i).getDescripcion());
             if (list.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido()) && list.get(i).getEstado().equals("A")) {
                 listadet.add(list.get(i));
@@ -177,13 +174,13 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             detalle.getCoDetalleOrdenCompraPK().setLineaDetalle(i + 1);
             detalle.getCoDetalleOrdenCompraPK().setIdProducto(listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
             detalle.setDescripcion(listadet.get(i).getDescripcion());
-            detalle.setPrecioUnitario(BigDecimal.valueOf(0));
+            detalle.setPrecioUnitario(BigDecimal.valueOf(0.00));
             detalle.setCantidadRecibida(listadet.get(i).getCantidadSolicitada());
-            detalle.setSubtotal(BigDecimal.valueOf(0));
-            detalle.setIva(BigDecimal.valueOf(0));
-            detalle.setIce(BigDecimal.valueOf(0));
-            detalle.setDescuento(BigDecimal.valueOf(0));
-            detalle.setTotal(BigDecimal.valueOf(0));
+            detalle.setSubtotal(BigDecimal.valueOf(0.00));
+            detalle.setIva(BigDecimal.valueOf(0.00));
+            detalle.setIce(BigDecimal.valueOf(0.00));
+            detalle.setDescuento(BigDecimal.valueOf(0.00));
+            detalle.setTotal(BigDecimal.valueOf(0.00));
 
             listadetCompra.add(detalle);
         }
@@ -201,6 +198,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         BigDecimal TotalIva = new BigDecimal("0.00");
         BigDecimal TotalDescuento = new BigDecimal("0.00");
         BigDecimal Total = new BigDecimal("0.00");
+        BigDecimal TotalCompra = new BigDecimal("0.00");
 
         for (int i = 0; i < listadetCompra.size(); i++) {
 
@@ -212,33 +210,49 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
             BigDecimal Subtotal = Cantidad.multiply(Precio);
             System.out.println("Subtotal " + Subtotal);
+            listadetCompra.get(i).setSubtotal(Subtotal);
 
             BigDecimal Descuento = listadetCompra.get(i).getDescuento();
             System.out.println("descuento  " + Descuento);
             TotalDescuento = TotalDescuento.add(Descuento);
+            listadetCompra.get(i).setDescuento(Descuento);
 
             if (check[i]) {
 
                 TotalIva = TotalIva.add(Subtotal.multiply(iva));
                 System.out.println("total iva " + TotalIva);
 
+                listadetCompra.get(i).setIva(Subtotal.multiply(iva));
+
                 TotalSubConIva = TotalSubConIva.add(Subtotal);
                 System.out.println("subtotal con iva " + TotalSubConIva);
+
+                Total = Subtotal.add(Subtotal.multiply(iva)).subtract(Descuento);
+
+                listadetCompra.get(i).setTotal(Total);
 
             } else {
                 TotalSubSinIva = TotalSubSinIva.add(Subtotal);
                 System.out.println("TotalSub SinIva " + TotalSubSinIva);
+                listadetCompra.get(i).setIva(BigDecimal.valueOf(0.00));
+
+                Total = (Subtotal).subtract(Descuento);
+
+                listadetCompra.get(i).setTotal(Total);
 
             }
 
-            Total = Total.add(Subtotal.add(Subtotal.multiply(iva)).subtract(Descuento));
-
-            System.out.println("total compra" + Total);
+            TotalCompra = TotalCompra.add(Total);
 
         }
 
         TotalSubTotal = TotalSubConIva.add(TotalSubSinIva);
-        System.out.println("total" + TotalSubConIva);
+        System.out.println("total totalsubtotal " + TotalSubTotal);
+        System.out.println("total iva " + TotalIva);
+        System.out.println("total descuento " + TotalDescuento);
+        System.out.println("total compra " + TotalCompra);
+
+        Tablas.listarDetalleCompra(listadetCompra, jTable1);
 
     }
 
