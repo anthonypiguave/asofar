@@ -25,7 +25,8 @@ import java.util.List;
  * @author Humbertoezequiel
  */
 public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     InPrestacionesPorServicios objpres = new InPrestacionesPorServicios();
     String valor;
     /**
@@ -38,6 +39,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     InPrestacionesPorServiciosJpaController preposer = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
     Long id_Pres, id_Uni;
     String prestacion, unidad;
+
     PrPrestaciones pr = new PrPrestaciones();
     VeUnidadServicio ve = new VeUnidadServicio();
 
@@ -47,7 +49,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
         Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
     }
-    
+
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
@@ -189,7 +191,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel4MouseDragged
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
@@ -200,23 +202,25 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     private void tba_prestacionesporserviciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_prestacionesporserviciosMousePressed
         int i = 0;
         if (evt.getClickCount() == 2) {
-            
+
             i = tba_prestacionesporservicios.getSelectedRow();
+
             id_Pres = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 0).toString());
             id_Uni = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 2).toString());
-            prestacion= tba_prestacionesporservicios.getValueAt(i, 1).toString();
+            System.out.println("jhg " + id_Uni);
+            prestacion = tba_prestacionesporservicios.getValueAt(i, 1).toString();
             unidad = tba_prestacionesporservicios.getValueAt(i, 3).toString();
             if (objpres != null) {
-//                obtener();
+                obtener89();
 //                System.out.println("hhh" +  obtener());
 //                System.out.println("p"+obtenerP());
 //                obtenerP();
 //                System.out.println("v"+obtenerV());
 //                obtenerV();
                 this.setVisible(false);
-                
+
             }
-            
+
         }
 
         // TODO add your handling code here:
@@ -229,19 +233,31 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
         char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
-    
-    public InPrestacionesPorServicios obtener() {
+
+    public InPrestacionesPorServicios obtener89() {
+//        InPrestacionesPorServicios obj = new InPrestacionesPorServicios();
+//        obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
+//        obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
+//        System.out.println("obj "+obj.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+//        obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
         InPrestacionesPorServicios obj = new InPrestacionesPorServicios();
-//FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
-        obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
-        obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
-        obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
-        
+        try {
+
+            obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
+            obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
+            obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
+            System.out.println("obj " + obj.getInPrestacionesPorServiciosPK().getIdPrestacion());
+            System.out.println("obj " + obj.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+
         return obj;
     }
 
@@ -250,13 +266,24 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         objp.setNombrePrestacion(prestacion);
         return objp;
     }
-    
+
     public VeUnidadServicio obtenerV() {
         VeUnidadServicio vep = new VeUnidadServicio();
         vep.setNombreUnidadServicio(unidad);
-       
+
         return vep;
     }
+//    public InPrestacionesPorServicios obteneridP() {
+//        InPrestacionesPorServicios objp = new InPrestacionesPorServicios();
+//        objp.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
+//        return objp;
+//    }
+
+//     public InPrestacionesPorServicios obteneridU() {
+//        InPrestacionesPorServicios objp = new InPrestacionesPorServicios();
+//        objp.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Uni);
+//        return objp;
+//    }
 //    public InPrestacionesPorServicios devuelveObjeto(String datos, List<InPrestacionesPorServicios> listaobjeto) {
 //
 //        InPrestacionesPorServicios objeto1 = null;
@@ -274,7 +301,6 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 //        return objeto1;
 //
 //    }
-
     /**
      * @param args the command line arguments
      */

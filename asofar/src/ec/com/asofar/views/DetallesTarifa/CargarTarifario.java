@@ -24,7 +24,8 @@ import java.util.List;
  * @author Luis Alberto Mero
  */
 public class CargarTarifario extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     String valor;
     PrTarifarioJpaController P = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<PrTarifario> lista = P.findPrTarifarioEntities();
@@ -205,7 +206,7 @@ public class CargarTarifario extends javax.swing.JDialog {
 //            pre.txtidtarifario.setText(String.valueOf(objeto.getPrTarifarioPK().getIdTarifario()));
             if (objeto != null) {
                 this.setVisible(false);
-                Listar_PrestacionesPorServicio cp = new Listar_PrestacionesPorServicio(new javax.swing.JFrame(), true,usu,emp,suc, objeto);
+                Listar_PrestacionesPorServicio cp = new Listar_PrestacionesPorServicio(new javax.swing.JFrame(), true, usu, emp, suc, objeto);
                 cp.setVisible(true);
             }
 
@@ -221,7 +222,7 @@ public class CargarTarifario extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
@@ -231,7 +232,7 @@ public class CargarTarifario extends javax.swing.JDialog {
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
         char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }

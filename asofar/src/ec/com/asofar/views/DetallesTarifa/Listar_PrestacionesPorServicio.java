@@ -257,7 +257,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     }//GEN-LAST:event_tblPrestacionesPorServiciosMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true,tp);
+        AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true,tp,usu,emp,suc);
         cp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
