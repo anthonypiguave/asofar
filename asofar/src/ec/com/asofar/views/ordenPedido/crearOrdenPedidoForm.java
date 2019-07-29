@@ -546,9 +546,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                     Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        } else {
-
-        }
+        } 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
