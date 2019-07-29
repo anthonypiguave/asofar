@@ -25,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 public class InPrestacionesPorServiciosJpaController implements Serializable {
 
@@ -45,8 +45,8 @@ public class InPrestacionesPorServiciosJpaController implements Serializable {
         if (inPrestacionesPorServicios.getCoDetallesTarifaList() == null) {
             inPrestacionesPorServicios.setCoDetallesTarifaList(new ArrayList<CoDetallesTarifa>());
         }
-        inPrestacionesPorServicios.getInPrestacionesPorServiciosPK().setIdPrestacion(inPrestacionesPorServicios.getPrPrestaciones().getIdPrestacion());
         inPrestacionesPorServicios.getInPrestacionesPorServiciosPK().setIdUnidadServicio(inPrestacionesPorServicios.getVeUnidadServicio().getIdUnidadServicio());
+        inPrestacionesPorServicios.getInPrestacionesPorServiciosPK().setIdPrestacion(inPrestacionesPorServicios.getPrPrestaciones().getIdPrestacion());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,8 +99,8 @@ public class InPrestacionesPorServiciosJpaController implements Serializable {
     }
 
     public void edit(InPrestacionesPorServicios inPrestacionesPorServicios) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        inPrestacionesPorServicios.getInPrestacionesPorServiciosPK().setIdPrestacion(inPrestacionesPorServicios.getPrPrestaciones().getIdPrestacion());
         inPrestacionesPorServicios.getInPrestacionesPorServiciosPK().setIdUnidadServicio(inPrestacionesPorServicios.getVeUnidadServicio().getIdUnidadServicio());
+        inPrestacionesPorServicios.getInPrestacionesPorServiciosPK().setIdPrestacion(inPrestacionesPorServicios.getPrPrestaciones().getIdPrestacion());
         EntityManager em = null;
         try {
             em = getEntityManager();

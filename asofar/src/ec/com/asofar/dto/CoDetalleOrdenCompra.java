@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Entity
 @Table(name = "co_detalle_orden_compra")
@@ -66,7 +66,7 @@ public class CoDetalleOrdenCompra implements Serializable {
     @Column(name = "total")
     private BigDecimal total;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @JoinColumns({
         @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra", insertable = false, updatable = false)
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
@@ -157,11 +157,11 @@ public class CoDetalleOrdenCompra implements Serializable {
         this.total = total;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

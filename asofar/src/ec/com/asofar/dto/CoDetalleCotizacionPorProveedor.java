@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Entity
 @Table(name = "co_detalle_cotizacion_por_proveedor")

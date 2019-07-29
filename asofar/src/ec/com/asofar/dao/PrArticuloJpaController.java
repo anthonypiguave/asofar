@@ -25,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 public class PrArticuloJpaController implements Serializable {
 
@@ -48,8 +48,8 @@ public class PrArticuloJpaController implements Serializable {
         if (prArticulo.getPrMedidasList() == null) {
             prArticulo.setPrMedidasList(new ArrayList<PrMedidas>());
         }
-        prArticulo.getPrArticuloPK().setIdSubgrupo(prArticulo.getPrSubgrupos().getPrSubgruposPK().getIdSubgrupo());
         prArticulo.getPrArticuloPK().setIdGrupo(prArticulo.getPrSubgrupos().getPrSubgruposPK().getIdGrupo());
+        prArticulo.getPrArticuloPK().setIdSubgrupo(prArticulo.getPrSubgrupos().getPrSubgruposPK().getIdSubgrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -108,8 +108,8 @@ public class PrArticuloJpaController implements Serializable {
     }
 
     public void edit(PrArticulo prArticulo) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        prArticulo.getPrArticuloPK().setIdSubgrupo(prArticulo.getPrSubgrupos().getPrSubgruposPK().getIdSubgrupo());
         prArticulo.getPrArticuloPK().setIdGrupo(prArticulo.getPrSubgrupos().getPrSubgruposPK().getIdGrupo());
+        prArticulo.getPrArticuloPK().setIdSubgrupo(prArticulo.getPrSubgrupos().getPrSubgruposPK().getIdSubgrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();
