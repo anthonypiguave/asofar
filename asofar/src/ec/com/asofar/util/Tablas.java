@@ -32,6 +32,7 @@ import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTarifario;
+import ec.com.asofar.dto.PrTarifarioPK;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeContactosClientes;
@@ -1945,14 +1946,14 @@ public class Tablas {
     }
 
     public static void listarTarifario(List<PrTarifario> listaT, JTable Tabla) {
-        int[] a = {200, 150, 200, 350, 400, 400, 250};
+        int[] a = {200, 150, 200, 350, 400, 400, 250,400};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID TARIFARIO", "EMPRESA", "SUCURSAL", "DESCRIPCION", "FECHA INICIO VIGENTE", "FECHA FIN VIGENTE", "ESTADO"};
-        String[] filas = new String[7];
+        String[] b = {"ID TARIFARIO", "EMPRESA", "SUCURSAL", "DESCRIPCION", "FECHA INICIO VIGENTE", "FECHA FIN VIGENTE", "ESTADO","USUARIO"};
+        String[] filas = new String[8];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaT.size(); i++) {
@@ -1964,6 +1965,8 @@ public class Tablas {
             filas[4] = String.valueOf(listaT.get(i).getFechaInicioVigente());
             filas[5] = String.valueOf(listaT.get(i).getFechaFinVigente());
             filas[6] = String.valueOf(listaT.get(i).getEstado());
+                        filas[7] = String.valueOf(listaT.get(i).getUsuarioCreacion());
+
 
             model.addRow(filas);
             Tabla.setModel(model);
@@ -1981,6 +1984,9 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+
 
         }
 

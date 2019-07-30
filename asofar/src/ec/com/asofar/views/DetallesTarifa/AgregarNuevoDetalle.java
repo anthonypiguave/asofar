@@ -6,6 +6,7 @@
 package ec.com.asofar.views.DetallesTarifa;
 
 import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
+import ec.com.asofar.dao.PrTarifarioJpaController;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
@@ -35,7 +36,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     PrPrestaciones pr = new PrPrestaciones();
     VeUnidadServicio ve = new VeUnidadServicio();
     PrDetalleTarifarioJpaController prp = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    PrTarifarioJpaController op = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     /**
      * Creates new form AgregarNuevoDetalle
      */
@@ -45,6 +46,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+
     public AgregarNuevoDetalle(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -59,6 +61,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         emp = em;
         suc = su;
 //        sucur.setText(usu.getNombreUsuario());
+//        emp1.setText(String.valueOf(emp.getIdEmpresa()));
     }
 
     /**
@@ -93,6 +96,8 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         idp = new javax.swing.JTextField();
         idu = new javax.swing.JTextField();
         sucur = new javax.swing.JTextField();
+        emp1 = new javax.swing.JTextField();
+        USER = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -141,6 +146,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jLabel7.setText("VALOR COSTO:");
 
         txtvc.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtvc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtvcActionPerformed(evt);
+            }
+        });
 
         txtds.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
@@ -241,8 +251,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         });
 
-        sucur.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -254,41 +262,47 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(USER, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(sucur, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtnompr)
                     .addComponent(txtnomuni, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(idp, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                             .addComponent(idu))
                         .addGap(68, 68, 68))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(sucur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(sucur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(sucur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(USER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -332,25 +346,37 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         PrDetalleTarifario pre = new PrDetalleTarifario();
-//        PrTarifarioPK pk = new PrTarifarioPK();
+
+        PrTarifarioPK pk = new PrTarifarioPK();
+
+        PrTarifario pr = new PrTarifario();
+
+        pr.setPrTarifarioPK(new PrTarifarioPK());
 //        long id = 1;
 //
-//        pk.setIdEmpresa(id);
-//        pk.setIdSurcusal(id);
-//        pk.setIdTarifario(tp.getPrTarifarioPK().getIdTarifario());
+        pk.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
+        pk.setIdEmpresa(Long.valueOf(emp1.getText()));
+        pk.setIdSurcusal(Long.valueOf(sucur.getText()));
+
+        pr.setPrTarifarioPK(pk);
+
 //
 //        pre.getPrTarifario().setPrTarifarioPK(pk);
 //                pre.setIdPrestacion(BigInteger.valueOf(pr.getIdPrestacion()));
 //          System.out.println("esta nota"+pr.getIdPrestacion());
 //        pre.setIdUnidadServicio(BigInteger.valueOf(ve.getIdUnidadServicio()));
-
         ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
 
         objpres = cp.obtener89();
 //        objpres.getInPrestacionesPorServiciosPK().getIdPrestacion();
 //        System.out.println("jhfh" + objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
 //        System.out.println("" + objpres.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+        pre.setValorCosto(Double.parseDouble((txtvc.getText())));
+        pre.setValorCosto(Double.parseDouble((txtds.getText())));
+        pre.setValorCosto(Double.parseDouble((txtmin.getText())));
+        pre.setValorCosto(Double.parseDouble((txtven.getText())));
 
+        pre.setUsuarioCreacion(USER.getText());
         pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
         pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
 //        pre.setValorCosto(Double.parseDouble(txtvc.getText()));
@@ -358,6 +384,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 //        pre.setValorMinVenta(Double.parseDouble(txtmin.getText()));
 //        pre.setValorVenta(Double.parseDouble(txtven.getText()));
         try {
+            op.create(pr);
             prp.create(pre);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
@@ -404,9 +431,15 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     private void iduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iduActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_iduActionPerformed
+
+    private void txtvcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtvcActionPerformed
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getPrTarifarioPK().getIdTarifario()));
-
+        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
+        sucur.setText(String.valueOf(tp.getPrTarifarioPK().getIdSurcusal()));
+        USER.setText(String.valueOf(tp.getUsuarioCreacion()));
     }
 
     /**
@@ -452,7 +485,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField USER;
     private javax.swing.JButton btnGrabar;
+    private javax.swing.JTextField emp1;
     private javax.swing.JTextField idp;
     private javax.swing.JTextField idu;
     private javax.swing.JButton jButton2;

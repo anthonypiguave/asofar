@@ -201,9 +201,13 @@ public class CargarTarifario extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
 
             i = tbltarifario.getSelectedRow();
-            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 0).toString(), lista);
+            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 0).toString(),lista);
             System.out.println("ide" + objeto.getPrTarifarioPK().getIdTarifario());
-//            pre.txtidtarifario.setText(String.valueOf(objeto.getPrTarifarioPK().getIdTarifario()));
+objeto = devuelveObjeto(tbltarifario.getValueAt(i, 1).toString(),lista);
+            System.out.println("empresa" + objeto.getPrTarifarioPK().getIdEmpresa());
+
+            
+            
             if (objeto != null) {
                 this.setVisible(false);
                 Listar_PrestacionesPorServicio cp = new Listar_PrestacionesPorServicio(new javax.swing.JFrame(), true, usu, emp, suc, objeto);

@@ -12,6 +12,7 @@ import ec.com.asofar.dto.CoDetallesTarifa;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrTarifario;
+import ec.com.asofar.dto.PrTarifarioPK;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.SeSucursal;
