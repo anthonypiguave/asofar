@@ -8,9 +8,11 @@ package ec.com.asofar.daoext;
 import ec.com.asofar.dao.VeFacturaJpaController;
 import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.dto.VeFactura;
+import ec.com.asofar.dto.VeFacturaPK;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.FlushModeType;
 import javax.persistence.Query;
 
 /**
@@ -42,4 +44,43 @@ public class VeFacturaEXT extends VeFacturaJpaController {
         return lista;
     }
 
+    public VeFactura guardarVenta(VeFactura objVenta) throws Exception {
+        EntityManager em = getEntityManager();
+        em.setFlushMode(FlushModeType.COMMIT);
+
+        objVenta.setVeFacturaPK(new VeFacturaPK());
+        objVenta.getVeFacturaPK().setIdEmpresa(objVenta.getVeFacturaPK().getIdEmpresa());
+//        objOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+//        objOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
+
+        long id = 0;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.persist(objVenta);
+            em.flush();
+            id = showId(em);
+            em.getTransaction().commit();
+            objVenta.getVeFacturaPK().setIdFactura(id);
+//            objOrdenPedido.getCoOrdenPedidoPK().setIdOrdenPedido(id);
+
+        } catch (Exception e) {
+            System.out.println("creates: " + e.getMessage());
+        } finally {
+
+            if (em != null) {
+                em.close();
+            }
+        }
+        return objVenta;
+    }
+
+    private long showId(EntityManager em) {
+        String nativeQuery = "SELECT max(id_factura) FROM ve_factura;";
+        Query query = em.createNativeQuery(nativeQuery);
+        long id = ((Number) query.getSingleResult()).longValue();
+        System.out.println("** prueba numero de factura  ** " + id);
+        return id;
+
+    }
 }
