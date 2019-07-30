@@ -3,6 +3,8 @@ package ec.com.asofar.views.venta;
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
 import ec.com.asofar.dao.VeFacturaJpaController;
+import ec.com.asofar.daoext.OrdenPedidoDaoExt;
+import ec.com.asofar.daoext.VeFacturaEXT;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
@@ -13,6 +15,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
+import ec.com.asofar.dto.VeFacturaPK;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
@@ -56,7 +59,9 @@ public class Venta extends javax.swing.JInternalFrame {
     BigInteger cantidad, cantidadModi;
     Double precio, precioIva, total, descuento, subtotal;
     int Cont = 1;
-
+    VeFacturaEXT id_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
+    
+    
     public Venta() {
         initComponents();
         this.setLocation(350, 15);
@@ -66,7 +71,7 @@ public class Venta extends javax.swing.JInternalFrame {
         TiIden = tic.findSeTipoIdentificacionEntities();
         llenarCombo(TiIden);
     }
-
+    
     public Venta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         initComponents();
         this.setLocation(250, 15);
@@ -79,20 +84,20 @@ public class Venta extends javax.swing.JInternalFrame {
         suc = su;
         cargartxt();
     }
-
+    
     public void cargartxt() {
         txtSubtotal.setText("0.0");
         txtDescuento.setText("0.0");
         txtIva.setText("0.0");
         txtTotal.setText("0.0");
     }
-
+    
     public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
         for (int i = 0; i < TiIden.size(); i++) {
             cbxtipo_identificacion.addItem(TiIden.get(i).getNombreIdentificacion());
         }
     }
-
+    
     public void cargarLisCliente() {
         Cliente = Cc.findSeClientesEntities();
         for (int i = 0; i < Cliente.size(); i++) {
@@ -509,12 +514,12 @@ public class Venta extends javax.swing.JInternalFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 427, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(jButton1)
                                 .addGap(9, 9, 9))
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
@@ -623,7 +628,7 @@ public class Venta extends javax.swing.JInternalFrame {
             if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
                     && Ident.equals(ObjIden)
                     && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
-
+                
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
                 txtTelefono.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
@@ -655,7 +660,7 @@ public class Venta extends javax.swing.JInternalFrame {
         if (objetoPrestacion != null && objetoFactDeta != null) {
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
-
+            
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             cantidad = BigInteger.ONE;
@@ -670,14 +675,14 @@ public class Venta extends javax.swing.JInternalFrame {
             total = calcularTotalItem();
             FactDeta.setValorTotal(total);
             FactDeta.setSubtotal(subtotal);
-
+            
             listaDetFactura.add(FactDeta);
-
+            
             for (int i = 0; i < listaDetFactura.size(); i++) {
                 Cont = i + 1;
                 FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
             }
-
+            
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
             /**/
  /**/
@@ -701,7 +706,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     private void TotalizarIva() {
         Double t = 0.0;
         Double p = 0.0;
@@ -714,7 +719,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     private void TotalizarDescuento() {
         Double t = 0.0;
         Double p = 0.0;
@@ -727,7 +732,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     private void TotalizarSubtotal() {
         Double t = 0.0;
         Double p = 0.0;
@@ -747,7 +752,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     public Double calcularSubtotal() {
         BigInteger cant;
         Double pre;
@@ -755,10 +760,10 @@ public class Venta extends javax.swing.JInternalFrame {
         cant = cantidad;
         pre = precio;
         subt = cant.doubleValue() * pre;
-
+        
         return subt;
     }
-
+    
     public Double calcularTotalItem() {
         BigInteger cant;
         Double pre;
@@ -771,10 +776,10 @@ public class Venta extends javax.swing.JInternalFrame {
         pre = precio;
         desc = descuento;
         total2 = (cant.doubleValue() * pre) + preIva - desc;
-
+        
         return total2;
     }
-
+    
     public Double calcularIvaItem() {
         BigInteger cant;
         Double pre;
@@ -807,7 +812,7 @@ public class Venta extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1) {
             if (tba_detalle.getModel().getColumnClass(col).equals(JButton.class)) {
                 try {
-
+                    
                     int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
                         int i = tba_detalle.getSelectedRow();
@@ -822,7 +827,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 } catch (Exception e) {
                 }
             }
-
+            
         }
     }//GEN-LAST:event_tba_detalleMousePressed
 
@@ -836,9 +841,9 @@ public class Venta extends javax.swing.JInternalFrame {
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
         try {
             int i = tba_detalle.getSelectedRow();
-
+            
             String valor = (String) tba_detalle.getValueAt(i, 3);
-
+            
             BigInteger cantidadMod = new BigInteger(valor);
             cantidadModi = cantidadMod;
             String ivaS = tba_detalle.getValueAt(i, 6).toString();
@@ -847,20 +852,20 @@ public class Venta extends javax.swing.JInternalFrame {
             Double precioT = Double.valueOf(precioS.replace(",", "."));
             String descuentoS = tba_detalle.getValueAt(i, 5).toString();
             Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
-
+            
             Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
 //            Double IvaMod = calcularIvaItemCantMod(cantidadModi);
             Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
             Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
             Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
-
+            
             listaDetFactura.get(i).setCantidad(cantidadMod);
             listaDetFactura.get(i).setValorIva(IvaMod);
             listaDetFactura.get(i).setSubtotal(subt);
             listaDetFactura.get(i).setValorTotal(total);
             listaDetFactura.get(i).setValorDescuento(Desc);
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-
+            
             Totalizar();
             TotalizarIva();
             TotalizarDescuento();
@@ -876,7 +881,36 @@ public class Venta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
             System.out.println("guadar perro");
-
+            VeFactura fact = new VeFactura();
+            /*id_facturaid_caja
+            id_empresa
+            id_sucursal
+            id_usuario
+            id_cliente
+            fecha_facturacion
+            numero_establecimiento_sri
+            punto_emision_sri
+            secuencia_sri
+            subtotaltotal_ice
+            total_descuento
+            total_base_iva
+            total_base_no_iva
+            total_iva
+            total_facturado
+            estado
+            despachado
+            usuario_creacion
+            fecha_creacion
+            usuario_actualizacion
+            fecha_actualizacion*/
+            try {
+                VeFactura pk = id_Factura.guardarVenta(fact);
+                System.out.println("id factua"+ pk);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     public Double calcularSubtotalItemCantMod(BigInteger cantMod, Double PrecioIva) {
@@ -884,35 +918,35 @@ public class Venta extends javax.swing.JInternalFrame {
         subto = cantMod.doubleValue() * PrecioIva;
         return subto;
     }
-
+    
     public Double calcularTotalItemCantMod(BigInteger cantMod, Double PrecioIva, Double desc) {
-
+        
         Double pre;
         Double total2;
         /**/
         pre = precio;
         total2 = (cantMod.doubleValue() * pre) + PrecioIva - desc;
-
+        
         return total2;
     }
-
+    
     public Double calcularTotalItemCantMod(BigInteger cantMod, Double PrecioIva, Double desc, Double precio) {
-
+        
         Double pre;
         Double total2;
         /**/
         pre = precio;
         total2 = (cantMod.doubleValue() * pre) + PrecioIva - desc;
-
+        
         return total2;
     }
-
+    
     public Double calcularDescuentoItemCantMod(BigInteger cantMod, Double descuento) {
         Double descuent = null;
         descuent = cantMod.doubleValue() * descuento;
         return descuent;
     }
-
+    
     public Double calcularDescuentoItemCantMod(BigInteger cantMod, Double descuento, Double posicionDescuento) {
         Double descuent = null;
         if (posicionDescuento != 0.0) {
@@ -922,14 +956,14 @@ public class Venta extends javax.swing.JInternalFrame {
         }
         return descuent;
     }
-
+    
     public Double calcularIvaItemCantMod(BigInteger cantMod, Double posicionIva, Double posicionPrecio) {
 
 //        BigInteger cant;
         Double pre;
         Double precioIva2 = null;
         String aplica = objetoPrestacion.getAplicaIva();
-
+        
         if (posicionIva != 0.0) {
 //            cant = cantidad;
             pre = posicionPrecio;
@@ -939,14 +973,14 @@ public class Venta extends javax.swing.JInternalFrame {
         }
         return precioIva2;
     }
-
+    
     public Double calcularIvaItemCantMod(BigInteger cantMod) {
 
 //        BigInteger cant;
         Double pre;
         Double precioIva2 = null;
         String aplica = objetoPrestacion.getAplicaIva();
-
+        
         if (aplica.equals("SI")) {
 //            cant = cantidad;
             pre = precio;
