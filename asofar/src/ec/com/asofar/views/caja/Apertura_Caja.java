@@ -291,6 +291,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
                     && listadetallecaja.get(i).getFechaCierre() == null) {
                 System.out.println("hola ");
                 ContenedorCaja cCaja = new ContenedorCaja(new javax.swing.JFrame(), true, listadetallecaja.get(i), seUsuario, seEmpresa, seSucursal);
+                
                 this.setVisible(false);
                 cCaja.setVisible(true);
             }
