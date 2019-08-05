@@ -60,6 +60,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
+        System.out.println("ojo"+emp.getIdEmpresa());
+        System.out.println("ojo"+suc.getSeSucursalPK().getIdSucursal());
+        
 //        sucur.setText(usu.getNombreUsuario());
 //        emp1.setText(String.valueOf(emp.getIdEmpresa()));
     }
@@ -352,11 +355,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         PrTarifario pr = new PrTarifario();
 
         pr.setPrTarifarioPK(new PrTarifarioPK());
-//        long id = 1;
-//
+        
+
         pk.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-        pk.setIdEmpresa(Long.valueOf(emp1.getText()));
-        pk.setIdSurcusal(Long.valueOf(sucur.getText()));
+        pk.setIdEmpresa(Long.valueOf(emp.getIdEmpresa().toString()));
+        pk.setIdSurcusal(Long.valueOf(suc.getSeSucursalPK().getIdSucursal()));
 
         pr.setPrTarifarioPK(pk);
 
@@ -371,10 +374,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 //        objpres.getInPrestacionesPorServiciosPK().getIdPrestacion();
 //        System.out.println("jhfh" + objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
 //        System.out.println("" + objpres.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+        
         pre.setValorCosto(Double.parseDouble((txtvc.getText())));
-        pre.setValorCosto(Double.parseDouble((txtds.getText())));
-        pre.setValorCosto(Double.parseDouble((txtmin.getText())));
-        pre.setValorCosto(Double.parseDouble((txtven.getText())));
+        pre.setValorDescuento(Double.parseDouble((txtds.getText())));
+        pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
+        pre.setValorVenta(Double.parseDouble((txtven.getText())));
 
         pre.setUsuarioCreacion(USER.getText());
         pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
@@ -384,7 +388,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 //        pre.setValorMinVenta(Double.parseDouble(txtmin.getText()));
 //        pre.setValorVenta(Double.parseDouble(txtven.getText()));
         try {
-            op.create(pr);
+//            op.create(pr);
             prp.create(pre);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
