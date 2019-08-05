@@ -91,8 +91,6 @@ public class SePersonas implements Serializable {
     private SeTipoPersona idTipoPersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sePersonas")
     private List<InMovimientos> inMovimientosList;
-    @OneToMany(mappedBy = "idCliente")
-    private List<VeFactura> veFacturaList;
     @OneToMany(mappedBy = "idPersona")
     private List<SeUsuarios> seUsuariosList;
 
@@ -230,15 +228,6 @@ public class SePersonas implements Serializable {
 
     public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
         this.inMovimientosList = inMovimientosList;
-    }
-
-    @XmlTransient
-    public List<VeFactura> getVeFacturaList() {
-        return veFacturaList;
-    }
-
-    public void setVeFacturaList(List<VeFactura> veFacturaList) {
-        this.veFacturaList = veFacturaList;
     }
 
     @XmlTransient

@@ -100,15 +100,15 @@ public class VeFactura implements Serializable {
     private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veFactura")
     private List<VeFacturaDetalle> veFacturaDetalleList;
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_persona")
-    @ManyToOne
-    private SePersonas idCliente;
     @JoinColumn(name = "id_caja", referencedColumnName = "id_caja")
     @ManyToOne
     private VeCaja idCaja;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne
     private SeUsuarios idUsuario;
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_clientes")
+    @ManyToOne
+    private SeClientes idCliente;
 
     public VeFactura() {
     }
@@ -282,14 +282,6 @@ public class VeFactura implements Serializable {
         this.veFacturaDetalleList = veFacturaDetalleList;
     }
 
-    public SePersonas getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(SePersonas idCliente) {
-        this.idCliente = idCliente;
-    }
-
     public VeCaja getIdCaja() {
         return idCaja;
     }
@@ -304,6 +296,14 @@ public class VeFactura implements Serializable {
 
     public void setIdUsuario(SeUsuarios idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public SeClientes getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(SeClientes idCliente) {
+        this.idCliente = idCliente;
     }
 
     @Override

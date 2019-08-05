@@ -48,6 +48,7 @@ public class Venta extends javax.swing.JInternalFrame {
     PrProductos objetoProducto = new PrProductos();
     PrPrestaciones objetoPrestacion = new PrPrestaciones();
     VeFacturaDetalle objetoFactDeta = new VeFacturaDetalle();
+    SeClientes objetoCli= new SeClientes();
     List<PrPrestaciones> listaPrest;
     List<VeFactura> Factura;
     VeFacturaJpaController FactC = new VeFacturaJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -895,7 +896,8 @@ public class Venta extends javax.swing.JInternalFrame {
             usuario_actualizacion
             fecha_actualizacion*/
             fact.setIdSucursal(BigInteger.valueOf(1));
-            fact.setIdCliente();
+//            fact.setIdCliente();
+//            fact.setIdCliente(objetoCli);
             fact.setDespachado("SI");
 //            fact.setIdCliente(txt_idCliente.getText());
             try {

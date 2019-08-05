@@ -17,7 +17,6 @@ import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.SePersonas;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.SeUsuarios;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,9 +40,6 @@ public class SePersonasJpaController implements Serializable {
         if (sePersonas.getInMovimientosList() == null) {
             sePersonas.setInMovimientosList(new ArrayList<InMovimientos>());
         }
-        if (sePersonas.getVeFacturaList() == null) {
-            sePersonas.setVeFacturaList(new ArrayList<VeFactura>());
-        }
         if (sePersonas.getSeUsuariosList() == null) {
             sePersonas.setSeUsuariosList(new ArrayList<SeUsuarios>());
         }
@@ -62,12 +58,6 @@ public class SePersonasJpaController implements Serializable {
                 attachedInMovimientosList.add(inMovimientosListInMovimientosToAttach);
             }
             sePersonas.setInMovimientosList(attachedInMovimientosList);
-            List<VeFactura> attachedVeFacturaList = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListVeFacturaToAttach : sePersonas.getVeFacturaList()) {
-                veFacturaListVeFacturaToAttach = em.getReference(veFacturaListVeFacturaToAttach.getClass(), veFacturaListVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaList.add(veFacturaListVeFacturaToAttach);
-            }
-            sePersonas.setVeFacturaList(attachedVeFacturaList);
             List<SeUsuarios> attachedSeUsuariosList = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListSeUsuariosToAttach : sePersonas.getSeUsuariosList()) {
                 seUsuariosListSeUsuariosToAttach = em.getReference(seUsuariosListSeUsuariosToAttach.getClass(), seUsuariosListSeUsuariosToAttach.getIdUsuario());
@@ -86,15 +76,6 @@ public class SePersonasJpaController implements Serializable {
                 if (oldSePersonasOfInMovimientosListInMovimientos != null) {
                     oldSePersonasOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
                     oldSePersonasOfInMovimientosListInMovimientos = em.merge(oldSePersonasOfInMovimientosListInMovimientos);
-                }
-            }
-            for (VeFactura veFacturaListVeFactura : sePersonas.getVeFacturaList()) {
-                SePersonas oldIdClienteOfVeFacturaListVeFactura = veFacturaListVeFactura.getIdCliente();
-                veFacturaListVeFactura.setIdCliente(sePersonas);
-                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
-                if (oldIdClienteOfVeFacturaListVeFactura != null) {
-                    oldIdClienteOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
-                    oldIdClienteOfVeFacturaListVeFactura = em.merge(oldIdClienteOfVeFacturaListVeFactura);
                 }
             }
             for (SeUsuarios seUsuariosListSeUsuarios : sePersonas.getSeUsuariosList()) {
@@ -124,8 +105,6 @@ public class SePersonasJpaController implements Serializable {
             SeTipoPersona idTipoPersonaNew = sePersonas.getIdTipoPersona();
             List<InMovimientos> inMovimientosListOld = persistentSePersonas.getInMovimientosList();
             List<InMovimientos> inMovimientosListNew = sePersonas.getInMovimientosList();
-            List<VeFactura> veFacturaListOld = persistentSePersonas.getVeFacturaList();
-            List<VeFactura> veFacturaListNew = sePersonas.getVeFacturaList();
             List<SeUsuarios> seUsuariosListOld = persistentSePersonas.getSeUsuariosList();
             List<SeUsuarios> seUsuariosListNew = sePersonas.getSeUsuariosList();
             List<String> illegalOrphanMessages = null;
@@ -151,13 +130,6 @@ public class SePersonasJpaController implements Serializable {
             }
             inMovimientosListNew = attachedInMovimientosListNew;
             sePersonas.setInMovimientosList(inMovimientosListNew);
-            List<VeFactura> attachedVeFacturaListNew = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListNewVeFacturaToAttach : veFacturaListNew) {
-                veFacturaListNewVeFacturaToAttach = em.getReference(veFacturaListNewVeFacturaToAttach.getClass(), veFacturaListNewVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaListNew.add(veFacturaListNewVeFacturaToAttach);
-            }
-            veFacturaListNew = attachedVeFacturaListNew;
-            sePersonas.setVeFacturaList(veFacturaListNew);
             List<SeUsuarios> attachedSeUsuariosListNew = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListNewSeUsuariosToAttach : seUsuariosListNew) {
                 seUsuariosListNewSeUsuariosToAttach = em.getReference(seUsuariosListNewSeUsuariosToAttach.getClass(), seUsuariosListNewSeUsuariosToAttach.getIdUsuario());
@@ -182,23 +154,6 @@ public class SePersonasJpaController implements Serializable {
                     if (oldSePersonasOfInMovimientosListNewInMovimientos != null && !oldSePersonasOfInMovimientosListNewInMovimientos.equals(sePersonas)) {
                         oldSePersonasOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
                         oldSePersonasOfInMovimientosListNewInMovimientos = em.merge(oldSePersonasOfInMovimientosListNewInMovimientos);
-                    }
-                }
-            }
-            for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
-                if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
-                    veFacturaListOldVeFactura.setIdCliente(null);
-                    veFacturaListOldVeFactura = em.merge(veFacturaListOldVeFactura);
-                }
-            }
-            for (VeFactura veFacturaListNewVeFactura : veFacturaListNew) {
-                if (!veFacturaListOld.contains(veFacturaListNewVeFactura)) {
-                    SePersonas oldIdClienteOfVeFacturaListNewVeFactura = veFacturaListNewVeFactura.getIdCliente();
-                    veFacturaListNewVeFactura.setIdCliente(sePersonas);
-                    veFacturaListNewVeFactura = em.merge(veFacturaListNewVeFactura);
-                    if (oldIdClienteOfVeFacturaListNewVeFactura != null && !oldIdClienteOfVeFacturaListNewVeFactura.equals(sePersonas)) {
-                        oldIdClienteOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
-                        oldIdClienteOfVeFacturaListNewVeFactura = em.merge(oldIdClienteOfVeFacturaListNewVeFactura);
                     }
                 }
             }
@@ -263,11 +218,6 @@ public class SePersonasJpaController implements Serializable {
             if (idTipoPersona != null) {
                 idTipoPersona.getSePersonasList().remove(sePersonas);
                 idTipoPersona = em.merge(idTipoPersona);
-            }
-            List<VeFactura> veFacturaList = sePersonas.getVeFacturaList();
-            for (VeFactura veFacturaListVeFactura : veFacturaList) {
-                veFacturaListVeFactura.setIdCliente(null);
-                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
             }
             List<SeUsuarios> seUsuariosList = sePersonas.getSeUsuariosList();
             for (SeUsuarios seUsuariosListSeUsuarios : seUsuariosList) {
