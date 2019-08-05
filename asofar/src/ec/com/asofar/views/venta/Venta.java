@@ -61,7 +61,6 @@ public class Venta extends javax.swing.JInternalFrame {
     int Cont = 1;
     VeFacturaEXT id_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
     
-    
     public Venta() {
         initComponents();
         this.setLocation(350, 15);
@@ -880,36 +879,32 @@ public class Venta extends javax.swing.JInternalFrame {
         if ("".equals(txtIdentificacion.getText().toString())) {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
-            System.out.println("guadar perro");
+//            System.out.println("guadar perro");
             VeFactura fact = new VeFactura();
-            /*id_facturaid_caja
-            id_empresa
-            id_sucursal
-            id_usuario
-            id_cliente
-            fecha_facturacion
-            numero_establecimiento_sri
-            punto_emision_sri
+            /*id_factura, id_caja ,id_empresa ,id_sucursal, id_usuario id_cliente,
+            fecha_facturacion, numero_establecimiento_sri, punto_emision_sri
             secuencia_sri
             subtotaltotal_ice
             total_descuento
             total_base_iva
-            total_base_no_iva
-            total_iva
-            total_facturado
-            estado
-            despachado
+            total_base_no_iva ec.com.asofar.dao
+            total_iva ec.com.asofar.dto
+            total_facturado , estado, despachado
             usuario_creacion
             fecha_creacion
             usuario_actualizacion
             fecha_actualizacion*/
+            fact.setIdSucursal(BigInteger.valueOf(1));
+            fact.setIdCliente();
+            fact.setDespachado("SI");
+//            fact.setIdCliente(txt_idCliente.getText());
             try {
                 VeFactura pk = id_Factura.guardarVenta(fact);
-                System.out.println("id factua"+ pk);
+                System.out.println("id factua" + pk);
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
