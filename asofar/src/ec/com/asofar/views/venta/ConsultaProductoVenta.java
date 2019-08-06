@@ -68,6 +68,18 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         listaProd = Pc.findPrProductosEntities();
         listaDetaTari = Dtc.findPrDetalleTarifarioEntities();
         listaPresta = Prestc.findPrPrestacionesEntities();
+//        for (int i = 0; i < listaKardex.size(); i++) {
+//            System.out.println("Kardex ID PRO" + listaKardex.get(i).getInKardexPK().getIdProducto());
+//        }
+//        for (int i = 0; i < listaProd.size(); i++) {
+//            System.out.println("Lista Prod "+ listaProd.get(i).getPrProductosPK().getIdProducto());
+//        }
+//        for (int i = 0; i < listaDetaTari.size(); i++) {
+//            System.out.println("Lista Detalle Tarifa "+listaDetaTari.get(i).getIdPrestacion());
+//        }
+//        for (int i = 0; i < listaPresta.size(); i++) {
+//            System.out.println(" Lista Prestacion "+listaPresta.get(i).getIdPoducto()); 
+//        }
         Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
     }
 

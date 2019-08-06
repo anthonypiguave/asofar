@@ -100,10 +100,10 @@ public class Venta extends javax.swing.JInternalFrame {
                     && listadetallecaja.get(i).getFechaCierre() == null
                     && listadetallecaja.get(i).getHoraCierre() == null) {
                 v = "si";
-                System.out.println("lista en if " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
+//                System.out.println("lista en if " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
             } else {
                 v = "no";
-                System.out.println(" no puede vender");
+//                System.out.println(" no puede vender");
             }
         }
         if (v.equals("no")) {
@@ -907,7 +907,6 @@ public class Venta extends javax.swing.JInternalFrame {
         if ("".equals(txtIdentificacion.getText().toString())) {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
-//            System.out.println("guadar perro");
             VeFactura fact = new VeFactura();
             /*id_factura, id_caja ,id_empresa ,id_sucursal, id_usuario id_cliente,
             fecha_facturacion, numero_establecimiento_sri, punto_emision_sri
@@ -922,7 +921,8 @@ public class Venta extends javax.swing.JInternalFrame {
             fecha_creacion
             usuario_actualizacion
             fecha_actualizacion*/
-            fact.setIdSucursal(BigInteger.valueOf(1));
+            fact.setSeSucursal(suc);
+            
 //            fact.setIdCliente();
 //            fact.setIdCliente(objetoCli);
             fact.setDespachado("SI");
