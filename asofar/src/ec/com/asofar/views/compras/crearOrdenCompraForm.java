@@ -168,6 +168,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     public void detalleCompra() {
 
         for (int i = 0; i < listadet.size(); i++) {
+            
+            System.out.println("gggggggggggggggggggggggg ooooooo "+ listadet.get(i));
 
             CoDetalleOrdenCompra detalle = new CoDetalleOrdenCompra();
 
@@ -200,6 +202,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         BigDecimal Total = new BigDecimal("0.00");
 
         for (int i = 0; i < listadetCompra.size(); i++) {
+            
+            System.out.println("lllllllllllllllllllllllll "+ listadetCompra.get(i));
 
             BigInteger Cant = listadetCompra.get(i).getCantidadRecibida();
             BigDecimal Cantidad = new BigDecimal(Cant);
@@ -235,7 +239,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 System.out.println("TotalSub SinIva " + TotalSubSinIva);
                 listadetCompra.get(i).setIva(BigDecimal.valueOf(0.00));
 
-                Total = (Subtotal).subtract(Descuento);
+                Total = Subtotal.subtract(Descuento);
 
                 listadetCompra.get(i).setTotal(Total);
 
