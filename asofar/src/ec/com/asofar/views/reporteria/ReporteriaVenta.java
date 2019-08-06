@@ -8,6 +8,8 @@ package ec.com.asofar.views.reporteria;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import java.awt.MouseInfo;
+import java.awt.Point;
 
 /**
  *
@@ -21,7 +23,7 @@ public class ReporteriaVenta extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-
+int x,y;
     public ReporteriaVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -242,37 +244,15 @@ public class ReporteriaVenta extends javax.swing.JDialog {
     }//GEN-LAST:event_buscar1KeyReleased
 
     private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿Desea Salir?", "", JOptionPane.YES_NO_OPTION);
 
-        if (r == JOptionPane.YES_OPTION) {
-            setVisible(false);
-
-        } else {
-
-        }
     }//GEN-LAST:event_btnSalir2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        lista = crud.ListarCabeceraVentas(1);
-        Tablas.CargarJoinListaCabeceraVenta(tbaCabeceraVenta, lista);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbaCabeceraVentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaCabeceraVentaMousePressed
-        int i = 0;
 
-        if (evt.getClickCount() == 2) {
-            i = tbaCabeceraVenta.getSelectedRow();
-            lista = crud.ListarCabeceraVentas(1);
-            objeto = devuelveObjeto(tbaCabeceraVenta.getValueAt(i, 0).toString(), lista);
-
-            System.out.println("ventas "+ objeto.getNombre_completo_cliente());
-
-            if (objeto != null) {
-                Reporte_DetalleVenta Rdv = new Reporte_DetalleVenta(new javax.swing.JFrame(), true, objeto);
-                Rdv.setVisible(true);
-            }
-        }
     }//GEN-LAST:event_tbaCabeceraVentaMousePressed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
