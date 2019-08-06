@@ -630,7 +630,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 cabOrden.setFechaCreacion(d);
                 cabOrden.setFechaActualizacion(d);
 
-//                cabOrden.setSubtotal(TotalSubTotal);
+                cabOrden.setTotalSubtotal(TotalSubTotal);
                 cabOrden.setTotalIva(TotalIva);
                 cabOrden.setTotalIce(BigDecimal.valueOf(0));
                 cabOrden.setTotalDescuento(TotalDescuento);

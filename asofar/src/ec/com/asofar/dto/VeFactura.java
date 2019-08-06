@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,7 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "VeFactura.findAll", query = "SELECT v FROM VeFactura v")
     , @NamedQuery(name = "VeFactura.findByIdFactura", query = "SELECT v FROM VeFactura v WHERE v.veFacturaPK.idFactura = :idFactura")
     , @NamedQuery(name = "VeFactura.findByIdEmpresa", query = "SELECT v FROM VeFactura v WHERE v.veFacturaPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "VeFactura.findByIdSucursal", query = "SELECT v FROM VeFactura v WHERE v.idSucursal = :idSucursal")
+    , @NamedQuery(name = "VeFactura.findByIdSucursal", query = "SELECT v FROM VeFactura v WHERE v.veFacturaPK.idSucursal = :idSucursal")
+    , @NamedQuery(name = "VeFactura.findByIdCaja", query = "SELECT v FROM VeFactura v WHERE v.idCaja = :idCaja")
+    , @NamedQuery(name = "VeFactura.findByIdUsuario", query = "SELECT v FROM VeFactura v WHERE v.idUsuario = :idUsuario")
+    , @NamedQuery(name = "VeFactura.findByIdCliente", query = "SELECT v FROM VeFactura v WHERE v.idCliente = :idCliente")
     , @NamedQuery(name = "VeFactura.findByFechaFacturacion", query = "SELECT v FROM VeFactura v WHERE v.fechaFacturacion = :fechaFacturacion")
     , @NamedQuery(name = "VeFactura.findByNumeroEstablecimientoSri", query = "SELECT v FROM VeFactura v WHERE v.numeroEstablecimientoSri = :numeroEstablecimientoSri")
     , @NamedQuery(name = "VeFactura.findByPuntoEmisionSri", query = "SELECT v FROM VeFactura v WHERE v.puntoEmisionSri = :puntoEmisionSri")
@@ -58,8 +62,12 @@ public class VeFactura implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected VeFacturaPK veFacturaPK;
-    @Column(name = "id_sucursal")
-    private BigInteger idSucursal;
+    @Column(name = "id_caja")
+    private BigInteger idCaja;
+    @Column(name = "id_usuario")
+    private String idUsuario;
+    @Column(name = "id_cliente")
+    private BigInteger idCliente;
     @Column(name = "fecha_facturacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFacturacion;
@@ -100,15 +108,11 @@ public class VeFactura implements Serializable {
     private Date fechaActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veFactura")
     private List<VeFacturaDetalle> veFacturaDetalleList;
-    @JoinColumn(name = "id_caja", referencedColumnName = "id_caja")
-    @ManyToOne
-    private VeCaja idCaja;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
-    @ManyToOne
-    private SeUsuarios idUsuario;
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_clientes")
-    @ManyToOne
-    private SeClientes idCliente;
+    @JoinColumns({
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private SeSucursal seSucursal;
 
     public VeFactura() {
     }
@@ -117,8 +121,8 @@ public class VeFactura implements Serializable {
         this.veFacturaPK = veFacturaPK;
     }
 
-    public VeFactura(long idFactura, long idEmpresa) {
-        this.veFacturaPK = new VeFacturaPK(idFactura, idEmpresa);
+    public VeFactura(long idFactura, long idEmpresa, long idSucursal) {
+        this.veFacturaPK = new VeFacturaPK(idFactura, idEmpresa, idSucursal);
     }
 
     public VeFacturaPK getVeFacturaPK() {
@@ -129,12 +133,28 @@ public class VeFactura implements Serializable {
         this.veFacturaPK = veFacturaPK;
     }
 
-    public BigInteger getIdSucursal() {
-        return idSucursal;
+    public BigInteger getIdCaja() {
+        return idCaja;
     }
 
-    public void setIdSucursal(BigInteger idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setIdCaja(BigInteger idCaja) {
+        this.idCaja = idCaja;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public BigInteger getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(BigInteger idCliente) {
+        this.idCliente = idCliente;
     }
 
     public Date getFechaFacturacion() {
@@ -282,28 +302,12 @@ public class VeFactura implements Serializable {
         this.veFacturaDetalleList = veFacturaDetalleList;
     }
 
-    public VeCaja getIdCaja() {
-        return idCaja;
+    public SeSucursal getSeSucursal() {
+        return seSucursal;
     }
 
-    public void setIdCaja(VeCaja idCaja) {
-        this.idCaja = idCaja;
-    }
-
-    public SeUsuarios getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(SeUsuarios idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public SeClientes getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(SeClientes idCliente) {
-        this.idCliente = idCliente;
+    public void setSeSucursal(SeSucursal seSucursal) {
+        this.seSucursal = seSucursal;
     }
 
     @Override

@@ -13,9 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.VeCaja;
-import ec.com.asofar.dto.SeUsuarios;
-import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaPK;
@@ -46,24 +44,16 @@ public class VeFacturaJpaController implements Serializable {
         if (veFactura.getVeFacturaDetalleList() == null) {
             veFactura.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
         }
+        veFactura.getVeFacturaPK().setIdEmpresa(veFactura.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        veFactura.getVeFacturaPK().setIdSucursal(veFactura.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            VeCaja idCaja = veFactura.getIdCaja();
-            if (idCaja != null) {
-                idCaja = em.getReference(idCaja.getClass(), idCaja.getIdCaja());
-                veFactura.setIdCaja(idCaja);
-            }
-            SeUsuarios idUsuario = veFactura.getIdUsuario();
-            if (idUsuario != null) {
-                idUsuario = em.getReference(idUsuario.getClass(), idUsuario.getIdUsuario());
-                veFactura.setIdUsuario(idUsuario);
-            }
-            SeClientes idCliente = veFactura.getIdCliente();
-            if (idCliente != null) {
-                idCliente = em.getReference(idCliente.getClass(), idCliente.getIdClientes());
-                veFactura.setIdCliente(idCliente);
+            SeSucursal seSucursal = veFactura.getSeSucursal();
+            if (seSucursal != null) {
+                seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
+                veFactura.setSeSucursal(seSucursal);
             }
             List<VeFacturaDetalle> attachedVeFacturaDetalleList = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalleToAttach : veFactura.getVeFacturaDetalleList()) {
@@ -72,17 +62,9 @@ public class VeFacturaJpaController implements Serializable {
             }
             veFactura.setVeFacturaDetalleList(attachedVeFacturaDetalleList);
             em.persist(veFactura);
-            if (idCaja != null) {
-                idCaja.getVeFacturaList().add(veFactura);
-                idCaja = em.merge(idCaja);
-            }
-            if (idUsuario != null) {
-                idUsuario.getVeFacturaList().add(veFactura);
-                idUsuario = em.merge(idUsuario);
-            }
-            if (idCliente != null) {
-                idCliente.getVeFacturaList().add(veFactura);
-                idCliente = em.merge(idCliente);
+            if (seSucursal != null) {
+                seSucursal.getVeFacturaList().add(veFactura);
+                seSucursal = em.merge(seSucursal);
             }
             for (VeFacturaDetalle veFacturaDetalleListVeFacturaDetalle : veFactura.getVeFacturaDetalleList()) {
                 VeFactura oldVeFacturaOfVeFacturaDetalleListVeFacturaDetalle = veFacturaDetalleListVeFacturaDetalle.getVeFactura();
@@ -107,17 +89,15 @@ public class VeFacturaJpaController implements Serializable {
     }
 
     public void edit(VeFactura veFactura) throws IllegalOrphanException, NonexistentEntityException, Exception {
+        veFactura.getVeFacturaPK().setIdEmpresa(veFactura.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        veFactura.getVeFacturaPK().setIdSucursal(veFactura.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             VeFactura persistentVeFactura = em.find(VeFactura.class, veFactura.getVeFacturaPK());
-            VeCaja idCajaOld = persistentVeFactura.getIdCaja();
-            VeCaja idCajaNew = veFactura.getIdCaja();
-            SeUsuarios idUsuarioOld = persistentVeFactura.getIdUsuario();
-            SeUsuarios idUsuarioNew = veFactura.getIdUsuario();
-            SeClientes idClienteOld = persistentVeFactura.getIdCliente();
-            SeClientes idClienteNew = veFactura.getIdCliente();
+            SeSucursal seSucursalOld = persistentVeFactura.getSeSucursal();
+            SeSucursal seSucursalNew = veFactura.getSeSucursal();
             List<VeFacturaDetalle> veFacturaDetalleListOld = persistentVeFactura.getVeFacturaDetalleList();
             List<VeFacturaDetalle> veFacturaDetalleListNew = veFactura.getVeFacturaDetalleList();
             List<String> illegalOrphanMessages = null;
@@ -132,17 +112,9 @@ public class VeFacturaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (idCajaNew != null) {
-                idCajaNew = em.getReference(idCajaNew.getClass(), idCajaNew.getIdCaja());
-                veFactura.setIdCaja(idCajaNew);
-            }
-            if (idUsuarioNew != null) {
-                idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getIdUsuario());
-                veFactura.setIdUsuario(idUsuarioNew);
-            }
-            if (idClienteNew != null) {
-                idClienteNew = em.getReference(idClienteNew.getClass(), idClienteNew.getIdClientes());
-                veFactura.setIdCliente(idClienteNew);
+            if (seSucursalNew != null) {
+                seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
+                veFactura.setSeSucursal(seSucursalNew);
             }
             List<VeFacturaDetalle> attachedVeFacturaDetalleListNew = new ArrayList<VeFacturaDetalle>();
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalleToAttach : veFacturaDetalleListNew) {
@@ -152,29 +124,13 @@ public class VeFacturaJpaController implements Serializable {
             veFacturaDetalleListNew = attachedVeFacturaDetalleListNew;
             veFactura.setVeFacturaDetalleList(veFacturaDetalleListNew);
             veFactura = em.merge(veFactura);
-            if (idCajaOld != null && !idCajaOld.equals(idCajaNew)) {
-                idCajaOld.getVeFacturaList().remove(veFactura);
-                idCajaOld = em.merge(idCajaOld);
+            if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
+                seSucursalOld.getVeFacturaList().remove(veFactura);
+                seSucursalOld = em.merge(seSucursalOld);
             }
-            if (idCajaNew != null && !idCajaNew.equals(idCajaOld)) {
-                idCajaNew.getVeFacturaList().add(veFactura);
-                idCajaNew = em.merge(idCajaNew);
-            }
-            if (idUsuarioOld != null && !idUsuarioOld.equals(idUsuarioNew)) {
-                idUsuarioOld.getVeFacturaList().remove(veFactura);
-                idUsuarioOld = em.merge(idUsuarioOld);
-            }
-            if (idUsuarioNew != null && !idUsuarioNew.equals(idUsuarioOld)) {
-                idUsuarioNew.getVeFacturaList().add(veFactura);
-                idUsuarioNew = em.merge(idUsuarioNew);
-            }
-            if (idClienteOld != null && !idClienteOld.equals(idClienteNew)) {
-                idClienteOld.getVeFacturaList().remove(veFactura);
-                idClienteOld = em.merge(idClienteOld);
-            }
-            if (idClienteNew != null && !idClienteNew.equals(idClienteOld)) {
-                idClienteNew.getVeFacturaList().add(veFactura);
-                idClienteNew = em.merge(idClienteNew);
+            if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
+                seSucursalNew.getVeFacturaList().add(veFactura);
+                seSucursalNew = em.merge(seSucursalNew);
             }
             for (VeFacturaDetalle veFacturaDetalleListNewVeFacturaDetalle : veFacturaDetalleListNew) {
                 if (!veFacturaDetalleListOld.contains(veFacturaDetalleListNewVeFacturaDetalle)) {
@@ -227,20 +183,10 @@ public class VeFacturaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            VeCaja idCaja = veFactura.getIdCaja();
-            if (idCaja != null) {
-                idCaja.getVeFacturaList().remove(veFactura);
-                idCaja = em.merge(idCaja);
-            }
-            SeUsuarios idUsuario = veFactura.getIdUsuario();
-            if (idUsuario != null) {
-                idUsuario.getVeFacturaList().remove(veFactura);
-                idUsuario = em.merge(idUsuario);
-            }
-            SeClientes idCliente = veFactura.getIdCliente();
-            if (idCliente != null) {
-                idCliente.getVeFacturaList().remove(veFactura);
-                idCliente = em.merge(idCliente);
+            SeSucursal seSucursal = veFactura.getSeSucursal();
+            if (seSucursal != null) {
+                seSucursal.getVeFacturaList().remove(veFactura);
+                seSucursal = em.merge(seSucursal);
             }
             em.remove(veFactura);
             em.getTransaction().commit();

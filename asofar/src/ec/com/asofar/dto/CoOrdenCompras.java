@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoOrdenCompras.findByIdTipoDocumento", query = "SELECT c FROM CoOrdenCompras c WHERE c.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "CoOrdenCompras.findByObservacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.observacion = :observacion")
     , @NamedQuery(name = "CoOrdenCompras.findByFechaEntrega", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaEntrega = :fechaEntrega")
-    , @NamedQuery(name = "CoOrdenCompras.findBySubtotal", query = "SELECT c FROM CoOrdenCompras c WHERE c.subtotal = :subtotal")
+    , @NamedQuery(name = "CoOrdenCompras.findByTotalSubtotal", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalSubtotal = :totalSubtotal")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalDescuento", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalDescuento = :totalDescuento")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalIce", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIce = :totalIce")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalIva", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalIva = :totalIva")
@@ -68,8 +68,8 @@ public class CoOrdenCompras implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaEntrega;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "subtotal")
-    private BigDecimal subtotal;
+    @Column(name = "total_subtotal")
+    private BigDecimal totalSubtotal;
     @Column(name = "total_descuento")
     private BigDecimal totalDescuento;
     @Column(name = "total_ice")
@@ -152,12 +152,12 @@ public class CoOrdenCompras implements Serializable {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public BigDecimal getSubtotal() {
-        return subtotal;
+    public BigDecimal getTotalSubtotal() {
+        return totalSubtotal;
     }
 
-    public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
+    public void setTotalSubtotal(BigDecimal totalSubtotal) {
+        this.totalSubtotal = totalSubtotal;
     }
 
     public BigDecimal getTotalDescuento() {

@@ -65,8 +65,6 @@ public class SeUsuarios implements Serializable {
     @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "idUsuario")
-    private List<VeFactura> veFacturaList;
-    @OneToMany(mappedBy = "idUsuario")
     private List<SeUsuarioSucurRol> seUsuarioSucurRolList;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne
@@ -141,15 +139,6 @@ public class SeUsuarios implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @XmlTransient
-    public List<VeFactura> getVeFacturaList() {
-        return veFacturaList;
-    }
-
-    public void setVeFacturaList(List<VeFactura> veFacturaList) {
-        this.veFacturaList = veFacturaList;
     }
 
     @XmlTransient

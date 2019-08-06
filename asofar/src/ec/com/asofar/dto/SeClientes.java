@@ -81,8 +81,6 @@ public class SeClientes implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @OneToMany(mappedBy = "idCliente")
-    private List<VeFactura> veFacturaList;
     @JoinColumn(name = "id_tipo_indentificacion", referencedColumnName = "id_tipo_identificacion")
     @ManyToOne
     private SeTipoIdentificacion idTipoIndentificacion;
@@ -198,15 +196,6 @@ public class SeClientes implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    @XmlTransient
-    public List<VeFactura> getVeFacturaList() {
-        return veFacturaList;
-    }
-
-    public void setVeFacturaList(List<VeFactura> veFacturaList) {
-        this.veFacturaList = veFacturaList;
     }
 
     public SeTipoIdentificacion getIdTipoIndentificacion() {

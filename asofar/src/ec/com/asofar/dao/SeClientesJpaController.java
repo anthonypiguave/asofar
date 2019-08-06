@@ -13,10 +13,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeTipoIdentificacion;
-import ec.com.asofar.dto.VeFactura;
+import ec.com.asofar.dto.SeLocalidadCliente;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.SeLocalidadCliente;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -36,9 +35,6 @@ public class SeClientesJpaController implements Serializable {
     }
 
     public void create(SeClientes seClientes) {
-        if (seClientes.getVeFacturaList() == null) {
-            seClientes.setVeFacturaList(new ArrayList<VeFactura>());
-        }
         if (seClientes.getSeLocalidadClienteList() == null) {
             seClientes.setSeLocalidadClienteList(new ArrayList<SeLocalidadCliente>());
         }
@@ -51,12 +47,6 @@ public class SeClientesJpaController implements Serializable {
                 idTipoIndentificacion = em.getReference(idTipoIndentificacion.getClass(), idTipoIndentificacion.getIdTipoIdentificacion());
                 seClientes.setIdTipoIndentificacion(idTipoIndentificacion);
             }
-            List<VeFactura> attachedVeFacturaList = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListVeFacturaToAttach : seClientes.getVeFacturaList()) {
-                veFacturaListVeFacturaToAttach = em.getReference(veFacturaListVeFacturaToAttach.getClass(), veFacturaListVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaList.add(veFacturaListVeFacturaToAttach);
-            }
-            seClientes.setVeFacturaList(attachedVeFacturaList);
             List<SeLocalidadCliente> attachedSeLocalidadClienteList = new ArrayList<SeLocalidadCliente>();
             for (SeLocalidadCliente seLocalidadClienteListSeLocalidadClienteToAttach : seClientes.getSeLocalidadClienteList()) {
                 seLocalidadClienteListSeLocalidadClienteToAttach = em.getReference(seLocalidadClienteListSeLocalidadClienteToAttach.getClass(), seLocalidadClienteListSeLocalidadClienteToAttach.getIdLocalidadCliente());
@@ -67,15 +57,6 @@ public class SeClientesJpaController implements Serializable {
             if (idTipoIndentificacion != null) {
                 idTipoIndentificacion.getSeClientesList().add(seClientes);
                 idTipoIndentificacion = em.merge(idTipoIndentificacion);
-            }
-            for (VeFactura veFacturaListVeFactura : seClientes.getVeFacturaList()) {
-                SeClientes oldIdClienteOfVeFacturaListVeFactura = veFacturaListVeFactura.getIdCliente();
-                veFacturaListVeFactura.setIdCliente(seClientes);
-                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
-                if (oldIdClienteOfVeFacturaListVeFactura != null) {
-                    oldIdClienteOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
-                    oldIdClienteOfVeFacturaListVeFactura = em.merge(oldIdClienteOfVeFacturaListVeFactura);
-                }
             }
             for (SeLocalidadCliente seLocalidadClienteListSeLocalidadCliente : seClientes.getSeLocalidadClienteList()) {
                 SeClientes oldIdClienteOfSeLocalidadClienteListSeLocalidadCliente = seLocalidadClienteListSeLocalidadCliente.getIdCliente();
@@ -102,21 +83,12 @@ public class SeClientesJpaController implements Serializable {
             SeClientes persistentSeClientes = em.find(SeClientes.class, seClientes.getIdClientes());
             SeTipoIdentificacion idTipoIndentificacionOld = persistentSeClientes.getIdTipoIndentificacion();
             SeTipoIdentificacion idTipoIndentificacionNew = seClientes.getIdTipoIndentificacion();
-            List<VeFactura> veFacturaListOld = persistentSeClientes.getVeFacturaList();
-            List<VeFactura> veFacturaListNew = seClientes.getVeFacturaList();
             List<SeLocalidadCliente> seLocalidadClienteListOld = persistentSeClientes.getSeLocalidadClienteList();
             List<SeLocalidadCliente> seLocalidadClienteListNew = seClientes.getSeLocalidadClienteList();
             if (idTipoIndentificacionNew != null) {
                 idTipoIndentificacionNew = em.getReference(idTipoIndentificacionNew.getClass(), idTipoIndentificacionNew.getIdTipoIdentificacion());
                 seClientes.setIdTipoIndentificacion(idTipoIndentificacionNew);
             }
-            List<VeFactura> attachedVeFacturaListNew = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListNewVeFacturaToAttach : veFacturaListNew) {
-                veFacturaListNewVeFacturaToAttach = em.getReference(veFacturaListNewVeFacturaToAttach.getClass(), veFacturaListNewVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaListNew.add(veFacturaListNewVeFacturaToAttach);
-            }
-            veFacturaListNew = attachedVeFacturaListNew;
-            seClientes.setVeFacturaList(veFacturaListNew);
             List<SeLocalidadCliente> attachedSeLocalidadClienteListNew = new ArrayList<SeLocalidadCliente>();
             for (SeLocalidadCliente seLocalidadClienteListNewSeLocalidadClienteToAttach : seLocalidadClienteListNew) {
                 seLocalidadClienteListNewSeLocalidadClienteToAttach = em.getReference(seLocalidadClienteListNewSeLocalidadClienteToAttach.getClass(), seLocalidadClienteListNewSeLocalidadClienteToAttach.getIdLocalidadCliente());
@@ -132,23 +104,6 @@ public class SeClientesJpaController implements Serializable {
             if (idTipoIndentificacionNew != null && !idTipoIndentificacionNew.equals(idTipoIndentificacionOld)) {
                 idTipoIndentificacionNew.getSeClientesList().add(seClientes);
                 idTipoIndentificacionNew = em.merge(idTipoIndentificacionNew);
-            }
-            for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
-                if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
-                    veFacturaListOldVeFactura.setIdCliente(null);
-                    veFacturaListOldVeFactura = em.merge(veFacturaListOldVeFactura);
-                }
-            }
-            for (VeFactura veFacturaListNewVeFactura : veFacturaListNew) {
-                if (!veFacturaListOld.contains(veFacturaListNewVeFactura)) {
-                    SeClientes oldIdClienteOfVeFacturaListNewVeFactura = veFacturaListNewVeFactura.getIdCliente();
-                    veFacturaListNewVeFactura.setIdCliente(seClientes);
-                    veFacturaListNewVeFactura = em.merge(veFacturaListNewVeFactura);
-                    if (oldIdClienteOfVeFacturaListNewVeFactura != null && !oldIdClienteOfVeFacturaListNewVeFactura.equals(seClientes)) {
-                        oldIdClienteOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
-                        oldIdClienteOfVeFacturaListNewVeFactura = em.merge(oldIdClienteOfVeFacturaListNewVeFactura);
-                    }
-                }
             }
             for (SeLocalidadCliente seLocalidadClienteListOldSeLocalidadCliente : seLocalidadClienteListOld) {
                 if (!seLocalidadClienteListNew.contains(seLocalidadClienteListOldSeLocalidadCliente)) {
@@ -200,11 +155,6 @@ public class SeClientesJpaController implements Serializable {
             if (idTipoIndentificacion != null) {
                 idTipoIndentificacion.getSeClientesList().remove(seClientes);
                 idTipoIndentificacion = em.merge(idTipoIndentificacion);
-            }
-            List<VeFactura> veFacturaList = seClientes.getVeFacturaList();
-            for (VeFactura veFacturaListVeFactura : veFacturaList) {
-                veFacturaListVeFactura.setIdCliente(null);
-                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
             }
             List<SeLocalidadCliente> seLocalidadClienteList = seClientes.getSeLocalidadClienteList();
             for (SeLocalidadCliente seLocalidadClienteListSeLocalidadCliente : seLocalidadClienteList) {

@@ -85,13 +85,9 @@ public class VeFacturaDetalle implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private SeSucursal seSucursal;
-    @JoinColumns({
         @JoinColumn(name = "id_factura", referencedColumnName = "id_factura", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private VeFactura veFactura;
 
@@ -216,14 +212,6 @@ public class VeFacturaDetalle implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    public SeSucursal getSeSucursal() {
-        return seSucursal;
-    }
-
-    public void setSeSucursal(SeSucursal seSucursal) {
-        this.seSucursal = seSucursal;
     }
 
     public VeFactura getVeFactura() {

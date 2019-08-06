@@ -77,7 +77,7 @@ public class SeSucursal implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<InMovimientos> inMovimientosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
-    private List<VeFacturaDetalle> veFacturaDetalleList;
+    private List<VeFactura> veFacturaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<PrTarifario> prTarifarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
@@ -218,12 +218,12 @@ public class SeSucursal implements Serializable {
     }
 
     @XmlTransient
-    public List<VeFacturaDetalle> getVeFacturaDetalleList() {
-        return veFacturaDetalleList;
+    public List<VeFactura> getVeFacturaList() {
+        return veFacturaList;
     }
 
-    public void setVeFacturaDetalleList(List<VeFacturaDetalle> veFacturaDetalleList) {
-        this.veFacturaDetalleList = veFacturaDetalleList;
+    public void setVeFacturaList(List<VeFactura> veFacturaList) {
+        this.veFacturaList = veFacturaList;
     }
 
     @XmlTransient

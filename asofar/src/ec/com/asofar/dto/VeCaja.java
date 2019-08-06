@@ -64,8 +64,6 @@ public class VeCaja implements Serializable {
     private String usuarioActualizacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veCaja")
     private List<VeDetalleCaja> veDetalleCajaList;
-    @OneToMany(mappedBy = "idCaja")
-    private List<VeFactura> veFacturaList;
 
     public VeCaja() {
     }
@@ -137,15 +135,6 @@ public class VeCaja implements Serializable {
 
     public void setVeDetalleCajaList(List<VeDetalleCaja> veDetalleCajaList) {
         this.veDetalleCajaList = veDetalleCajaList;
-    }
-
-    @XmlTransient
-    public List<VeFactura> getVeFacturaList() {
-        return veFacturaList;
-    }
-
-    public void setVeFacturaList(List<VeFactura> veFacturaList) {
-        this.veFacturaList = veFacturaList;
     }
 
     @Override

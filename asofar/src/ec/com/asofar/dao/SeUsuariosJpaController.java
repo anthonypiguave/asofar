@@ -13,11 +13,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SePersonas;
-import ec.com.asofar.dto.VeFactura;
-import java.util.ArrayList;
-import java.util.List;
 import ec.com.asofar.dto.SeUsuarioSucurRol;
 import ec.com.asofar.dto.SeUsuarios;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -37,9 +36,6 @@ public class SeUsuariosJpaController implements Serializable {
     }
 
     public void create(SeUsuarios seUsuarios) throws PreexistingEntityException, Exception {
-        if (seUsuarios.getVeFacturaList() == null) {
-            seUsuarios.setVeFacturaList(new ArrayList<VeFactura>());
-        }
         if (seUsuarios.getSeUsuarioSucurRolList() == null) {
             seUsuarios.setSeUsuarioSucurRolList(new ArrayList<SeUsuarioSucurRol>());
         }
@@ -52,12 +48,6 @@ public class SeUsuariosJpaController implements Serializable {
                 idPersona = em.getReference(idPersona.getClass(), idPersona.getIdPersona());
                 seUsuarios.setIdPersona(idPersona);
             }
-            List<VeFactura> attachedVeFacturaList = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListVeFacturaToAttach : seUsuarios.getVeFacturaList()) {
-                veFacturaListVeFacturaToAttach = em.getReference(veFacturaListVeFacturaToAttach.getClass(), veFacturaListVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaList.add(veFacturaListVeFacturaToAttach);
-            }
-            seUsuarios.setVeFacturaList(attachedVeFacturaList);
             List<SeUsuarioSucurRol> attachedSeUsuarioSucurRolList = new ArrayList<SeUsuarioSucurRol>();
             for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRolToAttach : seUsuarios.getSeUsuarioSucurRolList()) {
                 seUsuarioSucurRolListSeUsuarioSucurRolToAttach = em.getReference(seUsuarioSucurRolListSeUsuarioSucurRolToAttach.getClass(), seUsuarioSucurRolListSeUsuarioSucurRolToAttach.getSeUsuarioSucurRolPK());
@@ -68,15 +58,6 @@ public class SeUsuariosJpaController implements Serializable {
             if (idPersona != null) {
                 idPersona.getSeUsuariosList().add(seUsuarios);
                 idPersona = em.merge(idPersona);
-            }
-            for (VeFactura veFacturaListVeFactura : seUsuarios.getVeFacturaList()) {
-                SeUsuarios oldIdUsuarioOfVeFacturaListVeFactura = veFacturaListVeFactura.getIdUsuario();
-                veFacturaListVeFactura.setIdUsuario(seUsuarios);
-                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
-                if (oldIdUsuarioOfVeFacturaListVeFactura != null) {
-                    oldIdUsuarioOfVeFacturaListVeFactura.getVeFacturaList().remove(veFacturaListVeFactura);
-                    oldIdUsuarioOfVeFacturaListVeFactura = em.merge(oldIdUsuarioOfVeFacturaListVeFactura);
-                }
             }
             for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRol : seUsuarios.getSeUsuarioSucurRolList()) {
                 SeUsuarios oldIdUsuarioOfSeUsuarioSucurRolListSeUsuarioSucurRol = seUsuarioSucurRolListSeUsuarioSucurRol.getIdUsuario();
@@ -108,21 +89,12 @@ public class SeUsuariosJpaController implements Serializable {
             SeUsuarios persistentSeUsuarios = em.find(SeUsuarios.class, seUsuarios.getIdUsuario());
             SePersonas idPersonaOld = persistentSeUsuarios.getIdPersona();
             SePersonas idPersonaNew = seUsuarios.getIdPersona();
-            List<VeFactura> veFacturaListOld = persistentSeUsuarios.getVeFacturaList();
-            List<VeFactura> veFacturaListNew = seUsuarios.getVeFacturaList();
             List<SeUsuarioSucurRol> seUsuarioSucurRolListOld = persistentSeUsuarios.getSeUsuarioSucurRolList();
             List<SeUsuarioSucurRol> seUsuarioSucurRolListNew = seUsuarios.getSeUsuarioSucurRolList();
             if (idPersonaNew != null) {
                 idPersonaNew = em.getReference(idPersonaNew.getClass(), idPersonaNew.getIdPersona());
                 seUsuarios.setIdPersona(idPersonaNew);
             }
-            List<VeFactura> attachedVeFacturaListNew = new ArrayList<VeFactura>();
-            for (VeFactura veFacturaListNewVeFacturaToAttach : veFacturaListNew) {
-                veFacturaListNewVeFacturaToAttach = em.getReference(veFacturaListNewVeFacturaToAttach.getClass(), veFacturaListNewVeFacturaToAttach.getVeFacturaPK());
-                attachedVeFacturaListNew.add(veFacturaListNewVeFacturaToAttach);
-            }
-            veFacturaListNew = attachedVeFacturaListNew;
-            seUsuarios.setVeFacturaList(veFacturaListNew);
             List<SeUsuarioSucurRol> attachedSeUsuarioSucurRolListNew = new ArrayList<SeUsuarioSucurRol>();
             for (SeUsuarioSucurRol seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach : seUsuarioSucurRolListNew) {
                 seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach = em.getReference(seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach.getClass(), seUsuarioSucurRolListNewSeUsuarioSucurRolToAttach.getSeUsuarioSucurRolPK());
@@ -138,23 +110,6 @@ public class SeUsuariosJpaController implements Serializable {
             if (idPersonaNew != null && !idPersonaNew.equals(idPersonaOld)) {
                 idPersonaNew.getSeUsuariosList().add(seUsuarios);
                 idPersonaNew = em.merge(idPersonaNew);
-            }
-            for (VeFactura veFacturaListOldVeFactura : veFacturaListOld) {
-                if (!veFacturaListNew.contains(veFacturaListOldVeFactura)) {
-                    veFacturaListOldVeFactura.setIdUsuario(null);
-                    veFacturaListOldVeFactura = em.merge(veFacturaListOldVeFactura);
-                }
-            }
-            for (VeFactura veFacturaListNewVeFactura : veFacturaListNew) {
-                if (!veFacturaListOld.contains(veFacturaListNewVeFactura)) {
-                    SeUsuarios oldIdUsuarioOfVeFacturaListNewVeFactura = veFacturaListNewVeFactura.getIdUsuario();
-                    veFacturaListNewVeFactura.setIdUsuario(seUsuarios);
-                    veFacturaListNewVeFactura = em.merge(veFacturaListNewVeFactura);
-                    if (oldIdUsuarioOfVeFacturaListNewVeFactura != null && !oldIdUsuarioOfVeFacturaListNewVeFactura.equals(seUsuarios)) {
-                        oldIdUsuarioOfVeFacturaListNewVeFactura.getVeFacturaList().remove(veFacturaListNewVeFactura);
-                        oldIdUsuarioOfVeFacturaListNewVeFactura = em.merge(oldIdUsuarioOfVeFacturaListNewVeFactura);
-                    }
-                }
             }
             for (SeUsuarioSucurRol seUsuarioSucurRolListOldSeUsuarioSucurRol : seUsuarioSucurRolListOld) {
                 if (!seUsuarioSucurRolListNew.contains(seUsuarioSucurRolListOldSeUsuarioSucurRol)) {
@@ -206,11 +161,6 @@ public class SeUsuariosJpaController implements Serializable {
             if (idPersona != null) {
                 idPersona.getSeUsuariosList().remove(seUsuarios);
                 idPersona = em.merge(idPersona);
-            }
-            List<VeFactura> veFacturaList = seUsuarios.getVeFacturaList();
-            for (VeFactura veFacturaListVeFactura : veFacturaList) {
-                veFacturaListVeFactura.setIdUsuario(null);
-                veFacturaListVeFactura = em.merge(veFacturaListVeFactura);
             }
             List<SeUsuarioSucurRol> seUsuarioSucurRolList = seUsuarios.getSeUsuarioSucurRolList();
             for (SeUsuarioSucurRol seUsuarioSucurRolListSeUsuarioSucurRol : seUsuarioSucurRolList) {
