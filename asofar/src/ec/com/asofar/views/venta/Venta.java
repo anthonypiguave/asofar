@@ -65,7 +65,6 @@ public class Venta extends javax.swing.JInternalFrame {
     int Cont = 1;
     VeFacturaEXT id_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
     VeDetalleCajaJpaController cajaDetC = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
 
     public Venta() {
         initComponents();
@@ -92,19 +91,24 @@ public class Venta extends javax.swing.JInternalFrame {
     }
 
     public void pVender() {
+        String v = null;
+        List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
-            System.out.println("sf " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
-            if (!"A".equals(listadetallecaja.get(i).getEstado())
+//            System.out.println("lista detalle caja " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
+            if ("A".equals(listadetallecaja.get(i).getEstado())
                     && listadetallecaja.get(i).getIdUsuario().equals(usu.getIdUsuario())
-                    && listadetallecaja.get(i).getFechaCierre() != null
-                    && listadetallecaja.get(i).getHoraCierre() != null) {
-                if (listadetallecaja.get(i).getEstado().equals("I")) {
-                    System.out.println("dentro " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
-                    System.out.println("no puedes vender");
-                }
+                    && listadetallecaja.get(i).getFechaCierre() == null
+                    && listadetallecaja.get(i).getHoraCierre() == null) {
+                v = "si";
+                System.out.println("lista en if " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
             } else {
-                System.out.println("puedes vender");
+                v = "no";
+                System.out.println(" no puede vender");
             }
+        }
+        if (v.equals("no")) {
+            JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
+            this.setEnabled(false);
         }
     }
 
