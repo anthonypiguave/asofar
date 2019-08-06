@@ -198,8 +198,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         BigDecimal TotalSubSinIva = new BigDecimal("0.00");
 
         BigDecimal Total = new BigDecimal("0.00");
-        
-        
 
         for (int i = 0; i < listadetCompra.size(); i++) {
 
@@ -624,18 +622,20 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdTipoDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
                 cabOrden.setEstado("P");
-                cabOrden.setFechaAprobacion(d);
-                cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+
                 cabOrden.setSeSucursal(seSucursal);
+
+                cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
                 cabOrden.setFechaCreacion(d);
-                cabOrden.setFechaActualizacion(d);
+
 
                 cabOrden.setTotalSubtotal(TotalSubTotal);
                 cabOrden.setTotalIva(TotalIva);
                 cabOrden.setTotalIce(BigDecimal.valueOf(0));
                 cabOrden.setTotalDescuento(TotalDescuento);
                 cabOrden.setTotalCompra(TotalCompra);
-
+                
+                
                 try {
 
                     CoOrdenCompras pk = obtenerId.guardarPedido(cabOrden);
@@ -657,11 +657,9 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                         detOrden.setSubtotal(listadetCompra.get(i).getSubtotal());
                         detOrden.setTotal(listadetCompra.get(i).getTotal());
 
-//                        detOrden.set(d);
-//                        detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
-//                        detOrden.getCoOrdenPedido().setSeSucursal(seSucursal);
-//                        detOrden.setFechaCreacion(d);
-//                        detOrden.setFechaActualizacion(d);
+                        detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+                        detOrden.setFechaCreacion(d);
+
                         detOrdenController.create(detOrden);
                     }
 
