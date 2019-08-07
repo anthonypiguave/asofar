@@ -39,8 +39,8 @@ public class InBodegaJpaController implements Serializable {
         if (inBodega.getInBodegaPK() == null) {
             inBodega.setInBodegaPK(new InBodegaPK());
         }
-        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
@@ -79,8 +79,8 @@ public class InBodegaJpaController implements Serializable {
     }
 
     public void edit(InBodega inBodega) throws NonexistentEntityException, Exception {
-        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {

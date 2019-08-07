@@ -72,8 +72,8 @@ public class PrTarifario implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prTarifario")
     private List<CoDetallesTarifa> coDetallesTarifaList;
     @JoinColumns({
-        @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_surcusal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
     @OneToMany(mappedBy = "prTarifario")
