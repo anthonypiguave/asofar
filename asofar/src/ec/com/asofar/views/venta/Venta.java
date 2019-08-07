@@ -1017,7 +1017,7 @@ public class Venta extends javax.swing.JInternalFrame {
                             System.out.println("-------");
                             for (int l = 0; l < tba_detalle.getRowCount(); l++) {
                             if(listaPresta.get(k).getIdPrestacion()==tba_detalle.getValueAt(l,1)){}
-                                System.out.println("/*/*");
+                                
                             }
                         }
                     }
