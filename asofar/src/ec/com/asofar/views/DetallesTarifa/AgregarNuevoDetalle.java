@@ -377,7 +377,8 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         pre.getPrTarifario().getPrTarifarioPK().setIdEmpresa(emp.getIdEmpresa());
         pre.getPrTarifario().getPrTarifarioPK().setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
         pre.getPrTarifario().getPrTarifarioPK().setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-        
+//        pre.setPrTarifario(tp);
+//        pre.set
         pre.setValorCosto(Double.parseDouble((txtvc.getText())));
         pre.setValorDescuento(Double.parseDouble((txtds.getText())));
         pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
