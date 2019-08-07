@@ -291,7 +291,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         PrDetalleTarifario objDetTar = new PrDetalleTarifario();
         objDetTar.setIdUnidadServicio(id_Unidad);
         return objDetTar;
-
     }
 
     public PrPrestaciones getPresta() {

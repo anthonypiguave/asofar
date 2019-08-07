@@ -1008,11 +1008,19 @@ public class Venta extends javax.swing.JInternalFrame {
                        22
                         21
                      */
-//                    listaKardex = Kc.findInKardexEntities();
-//                    for (int j = 0; j < listaKardex.size(); j++) {
-//                        if (objetoPrestacion.getIdPoducto() == listaKardex.get(j).getInKardexPK().getIdProducto()) {
-//                        }
-//                    }
+                    listaKardex = Kc.findInKardexEntities();
+                    listaPresta = Prestc.findPrPrestacionesEntities();
+                    
+                    for (int j = 0; j < listaKardex.size(); j++) {
+                        for (int k = 0; k < listaPresta.size(); k++) {
+                            if(BigInteger.valueOf(listaKardex.get(j).getInKardexPK().getIdProducto())==listaPresta.get(k).getIdPoducto()){}
+                            System.out.println("-------");
+                            for (int l = 0; l < tba_detalle.getRowCount(); l++) {
+                            if(listaPresta.get(k).getIdPrestacion()==tba_detalle.getValueAt(l,1)){}
+                                System.out.println("/*/*");
+                            }
+                        }
+                    }
                 }
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
