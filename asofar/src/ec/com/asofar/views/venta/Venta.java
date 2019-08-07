@@ -4,6 +4,7 @@ import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
 import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
+import ec.com.asofar.dao.VeFacturaDetalleJpaController;
 import ec.com.asofar.dao.VeFacturaJpaController;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.VeFacturaEXT;
@@ -45,6 +46,7 @@ public class Venta extends javax.swing.JInternalFrame {
     /**
      * Creates new form Factura
      */
+    Date d = new Date();
     List<SeClientes> Cliente;
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeTipoIdentificacion> TiIden;
@@ -62,7 +64,7 @@ public class Venta extends javax.swing.JInternalFrame {
     SeSucursal suc;
     VeDetalleCaja vdc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    BigInteger cantidad, cantidadModi;
+    BigInteger cantidad, cantidadModi,idCliente;
     Double precio, precioIva, total, descuento, subtotal;
     int Cont = 1;
     VeFacturaEXT id_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
@@ -92,12 +94,6 @@ public class Venta extends javax.swing.JInternalFrame {
         cargartxt();
         pVender();
     }
-//public void llenarCaja(){
-//List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
-//    for (int i = 0; i < listadetallecaja.size(); i++) {
-//        
-//    }
-//}
 
     public void pVender() {
         String v = null;
@@ -572,14 +568,12 @@ public class Venta extends javax.swing.JInternalFrame {
                         .addGap(9, 9, 9))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(42, 42, 42)
-                                .addComponent(txt_NumeroCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_NombreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_NombreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_NumeroCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(301, 301, 301)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -705,6 +699,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 txtTelefono.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
                 txtEmail.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
                 txt_idCliente.setText(Cliente.get(i).getIdClientes().toString());
+                idCliente = BigInteger.valueOf(Cliente.get(i).getIdClientes());
             }
         }
     }
@@ -952,30 +947,56 @@ public class Venta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
             VeFactura fact = new VeFactura();
+            VeFacturaDetalle detFact = new VeFacturaDetalle();
+            VeFacturaDetalleJpaController detFactController = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
             /*id_factura, id_caja ,id_empresa ,id_sucursal, id_usuario id_cliente,
             fecha_facturacion, numero_establecimiento_sri, punto_emision_sri
             secuencia_sri
             subtotaltotal_ice
             total_descuento
             total_base_iva
-            total_base_no_iva ec.com.asofar.dao
-            total_iva ec.com.asofar.dto
-            total_facturado , estado, despachado
-            usuario_creacion
-            fecha_creacion
-            usuario_actualizacion
-            fecha_actualizacion*/
+            total_base_no_iva 
+            total_iva 
+            total_facturado , estado, despachado*/
             fact.setIdCaja(BigInteger.valueOf(idCaja));
             fact.setSeSucursal(suc);
-
-//            fact.setIdCliente();
-//            fact.setIdCliente(objetoCli);
+            fact.setIdCliente(idCliente);
+            fact.setSubtotal(Double.valueOf(txtSubtotal.getText()));
+            fact.setTotalIva(Double.valueOf(txtIva.getText()));
+//            fact.setTotalBaseNoIva(Double.valueOf(txtSubtotal.getText()));
+            fact.setTotalDescuento(Double.valueOf(txtDescuento.getText()));
+            fact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
             fact.setDespachado("SI");
-//            fact.setIdCliente(txt_idCliente.getText());
             try {
                 VeFactura pk = id_Factura.guardarVenta(fact);
                 System.out.println("id factua" + pk);
+                    for (int i = 0; i < listaDetFactura.size(); i++) {
+                        detFact.setVeFactura(pk);
+                        detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
+                        
+//                        detOrden.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
+//                        detOrden.getCoDetalleOrdenCompraPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
+//                        detOrden.getCoDetalleOrdenCompraPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
+//                        detOrden.setDescripcion(listadetCompra.get(i).getDescripcion());
+//                        detOrden.setEstado("A");
+//
+//                        detOrden.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
+//                        detOrden.setIce(BigDecimal.valueOf(0));
+//                        detOrden.setIva(listadetCompra.get(i).getIva());
+//                        detOrden.setDescuento(listadetCompra.get(i).getDescuento());
+//                        detOrden.setSubtotal(listadetCompra.get(i).getSubtotal());
+                        detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
 
+                        detFact.setUsuarioCreacion(usu.getIdUsuario());
+                        detFact.setFechaCreacion(d);
+
+                        detFactController.create(detFact);
+                    }
+
+//                    List<CoOrdenCompras> lista2 = cabOrdenController.findCoOrdenComprasEntities();
+
+                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                    setVisible(false);
             } catch (Exception e) {
                 e.printStackTrace();
             }

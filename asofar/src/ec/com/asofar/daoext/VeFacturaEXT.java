@@ -50,6 +50,7 @@ public class VeFacturaEXT extends VeFacturaJpaController {
 
         objVenta.setVeFacturaPK(new VeFacturaPK());
         objVenta.getVeFacturaPK().setIdEmpresa(objVenta.getVeFacturaPK().getIdEmpresa());
+        objVenta.getVeFacturaPK().setIdSucursal(objVenta.getVeFacturaPK().getIdSucursal());
 //        objOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
 //        objOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
 

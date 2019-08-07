@@ -2001,11 +2001,8 @@ public class Tablas {
         String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
-//        for (int i = 0; i < lisPrest.size(); i++) {
-//            System.out.println(" gdfgh "+lisPrest.get(i).getIdPoducto());}
-
         for (int i = 0; i < listProd.size(); i++) {
-            System.out.println("list pro " + listProd.get(i).getPrProductosPK().getIdProducto());
+//            System.out.println("list pro " + listProd.get(i).getPrProductosPK().getIdProducto());
             for (int j = 0; j < listaKardex.size(); j++) {
 //                System.out.println("list Kardex "+listaKardex.get(j).getInKardexPK().getIdProducto());
                 if (listaKardex.get(j).getInKardexPK().getIdProducto()
