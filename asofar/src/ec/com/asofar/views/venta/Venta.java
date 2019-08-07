@@ -63,6 +63,7 @@ public class Venta extends javax.swing.JInternalFrame {
     PrPrestaciones objetoPrestacion = new PrPrestaciones();
     VeFacturaDetalle objetoFactDeta = new VeFacturaDetalle();
     PrDetalleTarifario objetoDetTarif = new PrDetalleTarifario();
+    InKardex objetoKardex = new InKardex();
     SeClientes objetoCli = new SeClientes();
     List<PrPrestaciones> listaPrest;
     List<VeFactura> Factura;
@@ -1010,14 +1011,17 @@ public class Venta extends javax.swing.JInternalFrame {
                      */
                     listaKardex = Kc.findInKardexEntities();
                     listaPresta = Prestc.findPrPrestacionesEntities();
-                    
+
                     for (int j = 0; j < listaKardex.size(); j++) {
                         for (int k = 0; k < listaPresta.size(); k++) {
-                            if(BigInteger.valueOf(listaKardex.get(j).getInKardexPK().getIdProducto())==listaPresta.get(k).getIdPoducto()){}
-                            System.out.println("-------");
+                            if (BigInteger.valueOf(listaKardex.get(j).getInKardexPK().getIdProducto()) == listaPresta.get(k).getIdPoducto()) {
+                            }
+//                            System.out.println("-------");
                             for (int l = 0; l < tba_detalle.getRowCount(); l++) {
-                            if(listaPresta.get(k).getIdPrestacion()==tba_detalle.getValueAt(l,1)){}
-                                
+                                if (listaPresta.get(k).getIdPrestacion() == tba_detalle.getValueAt(l, 1)) {
+                                }
+//                                objetoKardex.set
+                                System.out.println(" " + listaPresta.get(k).getIdPrestacion());
                             }
                         }
                     }
