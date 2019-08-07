@@ -1,6 +1,7 @@
 package ec.com.asofar.views.venta;
 
 import ec.com.asofar.dao.InKardexJpaController;
+import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
 import ec.com.asofar.dao.VeCajaJpaController;
@@ -52,6 +53,8 @@ public class Venta extends javax.swing.JInternalFrame {
     Date d = new Date();
     List<InKardex> listaKardex;
     InKardexJpaController Kc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<PrPrestaciones> listaPresta;
+    PrPrestacionesJpaController Prestc = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeClientes> Cliente;
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeTipoIdentificacion> TiIden;
@@ -70,7 +73,7 @@ public class Venta extends javax.swing.JInternalFrame {
     SeSucursal suc;
     VeDetalleCaja vdc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    BigInteger cantidad, cantidadModi, idCliente,id_uni;
+    BigInteger cantidad, cantidadModi, idCliente, id_uni;
     Double precio, precioIva, total, descuento, subtotal;
     int Cont = 1;
     VeFacturaEXT obtenerId_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
@@ -973,7 +976,7 @@ public class Venta extends javax.swing.JInternalFrame {
             cabFact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
             cabFact.setDespachado("SI");
             try {
-                
+
                 VeFactura pk = obtenerId_Factura.guardarVenta(cabFact);
                 System.out.println("id factua" + pk.getVeFacturaPK().getIdFactura());
 
@@ -998,19 +1001,17 @@ public class Venta extends javax.swing.JInternalFrame {
                     detFact.setFechaCreacion(d);
 
                     detFactController.create(detFact);
-                /*
-                 */
-//                listaKardex = Kc.findInKardexEntities();
-//                for (int j = 0; j < listaKardex.size(); j++) {
-//                    for (int k = 0; k < tba_detalle.getRowCount(); k++) {
-//                        System.out.println(" obj " + tba_detalle.getValueAt(k, 0));
-//                        System.out.println(" Kardex " + listaKardex.get(j).getInKardexPK().getIdProducto());
-//                        if (tba_detalle.getValueAt(k, 1).equals(listaKardex.get(j).getInKardexPK().getIdProducto())) {
-//                            /**/
-//                            System.out.println("- modificar cantidad em Kardex - ");
-//
+                    /*
+                      in_kardex id Prodcto           
+                      13                 
+                       15
+                       22
+                        21
+                     */
+//                    listaKardex = Kc.findInKardexEntities();
+//                    for (int j = 0; j < listaKardex.size(); j++) {
+//                        if (objetoPrestacion.getIdPoducto() == listaKardex.get(j).getInKardexPK().getIdProducto()) {
 //                        }
-//                    }
 //                    }
                 }
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
