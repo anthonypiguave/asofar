@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -22,8 +23,17 @@ public class ReporteriaExt {
 ////     public ReporteriaExt(EntityManagerFactory emf) {
 ////        super(emf);
 ////    }
+//private static EntityManagerFactory emf = null;
+
+ static EntityManagerFactory emf = Persistence.createEntityManagerFactory("asofarPU");
+ static EntityManager em = emf.createEntityManager();
+  
+    public static void main(String[] args) {
+       
+        reporteCompras(em);
+    }
     
-    public List<String> reporteCompras(EntityManager em){
+    public static List<String> reporteCompras(EntityManager em){
     List<String> listaCompra = new ArrayList<String>();
     String nativeQuery = "SELECT * FROM `co_orden_compras` a\n" +
                         "INNER JOIN `co_detalle_orden_compra` b \n" +
