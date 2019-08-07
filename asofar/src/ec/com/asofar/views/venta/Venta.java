@@ -58,13 +58,13 @@ public class Venta extends javax.swing.JInternalFrame {
     List<PrPrestaciones> listaPrest;
     List<VeFactura> Factura;
     VeFacturaJpaController FactC = new VeFacturaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    Long id_prest,idCaja;
+    Long id_prest, idCaja;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
     VeDetalleCaja vdc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    BigInteger cantidad, cantidadModi,idCliente;
+    BigInteger cantidad, cantidadModi, idCliente;
     Double precio, precioIva, total, descuento, subtotal;
     int Cont = 1;
     VeFacturaEXT id_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
@@ -112,7 +112,7 @@ public class Venta extends javax.swing.JInternalFrame {
                             == listaCaja.get(j).getIdCaja()) {
                         txt_NumeroCaja.setText("" + listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja());
                         txt_NombreCaja.setText(listaCaja.get(j).getNombre());
-                        idCaja= listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja();
+                        idCaja = listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja();
                     }
                 }
 //                System.out.println("lista en if " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
@@ -321,6 +321,8 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_idCliente.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -359,14 +361,14 @@ public class Venta extends javax.swing.JInternalFrame {
                     .addComponent(txtTelefono)
                     .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbxtipo_identificacion, javax.swing.GroupLayout.Alignment.TRAILING, 0, 149, Short.MAX_VALUE))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnguardar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnguardar1)
                     .addComponent(txt_idCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -970,33 +972,29 @@ public class Venta extends javax.swing.JInternalFrame {
             try {
                 VeFactura pk = id_Factura.guardarVenta(fact);
                 System.out.println("id factua" + pk);
-                    for (int i = 0; i < listaDetFactura.size(); i++) {
-                        detFact.setVeFactura(pk);
-                        detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-                        
-//                        detOrden.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
-//                        detOrden.getCoDetalleOrdenCompraPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
-//                        detOrden.getCoDetalleOrdenCompraPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
-//                        detOrden.setDescripcion(listadetCompra.get(i).getDescripcion());
-//                        detOrden.setEstado("A");
-//
-//                        detOrden.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
-//                        detOrden.setIce(BigDecimal.valueOf(0));
-//                        detOrden.setIva(listadetCompra.get(i).getIva());
-//                        detOrden.setDescuento(listadetCompra.get(i).getDescuento());
-//                        detOrden.setSubtotal(listadetCompra.get(i).getSubtotal());
-                        detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
+                
+                for (int i = 0; i < listaDetFactura.size(); i++) {
+                    
+                    detFact.setVeFactura(pk);
+                    detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
 
-                        detFact.setUsuarioCreacion(usu.getIdUsuario());
-                        detFact.setFechaCreacion(d);
+                    /**/
+//                    detFact.getVeFacturaDetallePK().se;
+                    detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
+                    detFact.setCantidad(listaDetFactura.get(i).getCantidad());
+                    detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
+                    detFact.setSubtotal(listaDetFactura.get(i).getSubtotal());
+                    detFact.setValorIva(listaDetFactura.get(i).getValorIva());
+                    detFact.setValorDescuento(listaDetFactura.get(i).getValorDescuento());
+                    detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
+                    detFact.setEstado("A");
+                    detFact.setUsuarioCreacion(usu.getIdUsuario());
+                    detFact.setFechaCreacion(d);
 
-                        detFactController.create(detFact);
-                    }
-
-//                    List<CoOrdenCompras> lista2 = cabOrdenController.findCoOrdenComprasEntities();
-
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                    setVisible(false);
+                    detFactController.create(detFact);
+                }
+                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                setVisible(false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
