@@ -49,11 +49,9 @@ public class VeFacturaEXT extends VeFacturaJpaController {
         em.setFlushMode(FlushModeType.COMMIT);
 
         objVenta.setVeFacturaPK(new VeFacturaPK());
-        objVenta.getVeFacturaPK().setIdEmpresa(objVenta.getVeFacturaPK().getIdEmpresa());
-        objVenta.getVeFacturaPK().setIdSucursal(objVenta.getVeFacturaPK().getIdSucursal());
-//        objOrdenPedido.getCoOrdenPedidoPK().setIdEmpresa(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-//        objOrdenPedido.getCoOrdenPedidoPK().setIdSucursal(objOrdenPedido.getSeSucursal().getSeSucursalPK().getIdSucursal());
-
+        objVenta.getVeFacturaPK().setIdEmpresa(objVenta.getSeSucursal().getSeSucursalPK().getIdEmpresa());
+/*objOrdenCompra.getCoOrdenComprasPK().setIdEmpresa(objOrdenCompra.getSeSucursal().getSeSucursalPK().getIdEmpresa());*/
+        objVenta.getVeFacturaPK().setIdSucursal(objVenta.getSeSucursal().getSeSucursalPK().getIdSucursal());
         long id = 0;
         try {
             em = getEntityManager();
@@ -62,8 +60,8 @@ public class VeFacturaEXT extends VeFacturaJpaController {
             em.flush();
             id = showId(em);
             em.getTransaction().commit();
+            
             objVenta.getVeFacturaPK().setIdFactura(id);
-//            objOrdenPedido.getCoOrdenPedidoPK().setIdOrdenPedido(id);
 
         } catch (Exception e) {
             System.out.println("creates: " + e.getMessage());

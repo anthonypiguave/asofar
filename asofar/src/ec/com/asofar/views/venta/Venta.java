@@ -10,6 +10,7 @@ import ec.com.asofar.dao.VeFacturaJpaController;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.VeFacturaEXT;
 import ec.com.asofar.dto.InKardex;
+import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
@@ -58,6 +59,7 @@ public class Venta extends javax.swing.JInternalFrame {
     PrProductos objetoProducto = new PrProductos();
     PrPrestaciones objetoPrestacion = new PrPrestaciones();
     VeFacturaDetalle objetoFactDeta = new VeFacturaDetalle();
+    PrDetalleTarifario objetoDetTarif = new PrDetalleTarifario();
     SeClientes objetoCli = new SeClientes();
     List<PrPrestaciones> listaPrest;
     List<VeFactura> Factura;
@@ -68,10 +70,10 @@ public class Venta extends javax.swing.JInternalFrame {
     SeSucursal suc;
     VeDetalleCaja vdc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    BigInteger cantidad, cantidadModi, idCliente;
+    BigInteger cantidad, cantidadModi, idCliente,id_uni;
     Double precio, precioIva, total, descuento, subtotal;
     int Cont = 1;
-    VeFacturaEXT id_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
+    VeFacturaEXT obtenerId_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
     VeDetalleCajaJpaController cajaDetC = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     VeCajaJpaController cajaC = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
@@ -727,6 +729,7 @@ public class Venta extends javax.swing.JInternalFrame {
         ingre.setVisible(true);
         objetoPrestacion = ingre.getPresta();
         objetoFactDeta = ingre.getFac();
+        objetoDetTarif = ingre.getUnid();
 //        iva = objetoPrestacion.getAplicaIva();
 
         if (objetoPrestacion != null && objetoFactDeta != null) {
@@ -952,61 +955,62 @@ public class Venta extends javax.swing.JInternalFrame {
         if ("".equals(txtIdentificacion.getText().toString())) {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
-            VeFactura fact = new VeFactura();
+            VeFactura cabFact = new VeFactura();
             VeFacturaDetalle detFact = new VeFacturaDetalle();
             VeFacturaDetalleJpaController detFactController = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
             /*id_factura, id_caja ,id_empresa ,id_sucursal, id_usuario id_cliente,
             fecha_facturacion, numero_establecimiento_sri, punto_emision_sri
-            secuencia_sri
-            subtotaltotal_ice
-            total_descuento
-            total_base_iva
-            total_base_no_iva 
-            total_iva 
-            total_facturado , estado, despachado*/
-            fact.setIdCaja(BigInteger.valueOf(idCaja));
-            fact.setSeSucursal(suc);
-            fact.setIdCliente(idCliente);
-            fact.setSubtotal(Double.valueOf(txtSubtotal.getText()));
-            fact.setTotalIva(Double.valueOf(txtIva.getText()));
+            secuencia_sri,subtotaltotal_ice,total_descuento, total_base_iva
+            total_base_no_iva , total_iva, total_facturado,
+            estado, despachado*/
+            cabFact.setIdCaja(BigInteger.valueOf(idCaja));
+            cabFact.setSeSucursal(suc);
+            cabFact.setIdCliente(idCliente);
+            cabFact.setSubtotal(Double.valueOf(txtSubtotal.getText()));
+            cabFact.setTotalIva(Double.valueOf(txtIva.getText()));
 //            fact.setTotalBaseNoIva(Double.valueOf(txtSubtotal.getText()));
-            fact.setTotalDescuento(Double.valueOf(txtDescuento.getText()));
-            fact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
-            fact.setDespachado("SI");
+            cabFact.setTotalDescuento(Double.valueOf(txtDescuento.getText()));
+            cabFact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
+            cabFact.setDespachado("SI");
             try {
-                VeFactura pk = id_Factura.guardarVenta(fact);
-                System.out.println("id factua" + pk);
+                
+                VeFactura pk = obtenerId_Factura.guardarVenta(cabFact);
+                System.out.println("id factua" + pk.getVeFacturaPK().getIdFactura());
 
-//                for (int i = 0; i < listaDetFactura.size(); i++) {
-//
-//                    detFact.setVeFactura(pk);
-//                    detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-//
-//                    /**/
-////                    detFact.getVeFacturaDetallePK().se;
-//                    detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
-//                    detFact.setCantidad(listaDetFactura.get(i).getCantidad());
-//                    detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
-//                    detFact.setSubtotal(listaDetFactura.get(i).getSubtotal());
-//                    detFact.setValorIva(listaDetFactura.get(i).getValorIva());
-//                    detFact.setValorDescuento(listaDetFactura.get(i).getValorDescuento());
-//                    detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
-//                    detFact.setEstado("A");
-//                    detFact.setUsuarioCreacion(usu.getIdUsuario());
-//                    detFact.setFechaCreacion(d);
-//
-//                    detFactController.create(detFact);
+                for (int i = 0; i < listaDetFactura.size(); i++) {
+
+                    detFact.setVeFactura(pk);
+                    detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
+                    detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
+                    detFact.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
+                    detFact.getVeFacturaDetallePK().setIdUnidadServicio(objetoDetTarif.getIdUnidadServicio().longValue());
+                    /**/
+//                    detFact.getVeFacturaDetallePK().se;
+                    detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
+                    detFact.setCantidad(listaDetFactura.get(i).getCantidad());
+                    detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
+                    detFact.setSubtotal(listaDetFactura.get(i).getSubtotal());
+                    detFact.setValorIva(listaDetFactura.get(i).getValorIva());
+                    detFact.setValorDescuento(listaDetFactura.get(i).getValorDescuento());
+                    detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
+                    detFact.setEstado("A");
+                    detFact.setUsuarioCreacion(usu.getIdUsuario());
+                    detFact.setFechaCreacion(d);
+
+                    detFactController.create(detFact);
                 /*
                  */
-                listaKardex = Kc.findInKardexEntities();
-                for (int j = 0; j < listaKardex.size(); j++) {
-                    System.out.println(" obj " + objetoPrestacion.getIdPoducto());
-                    System.out.println(" Kardex " + listaKardex.get(j).getInKardexPK().getIdProducto());
-                    if (objetoPrestacion.getIdPoducto().equals(listaKardex.get(j).getInKardexPK().getIdProducto())) {
-                        /**/
-                        System.out.println("- modificarcantidad em Kardex - ");
-
-                    }
+//                listaKardex = Kc.findInKardexEntities();
+//                for (int j = 0; j < listaKardex.size(); j++) {
+//                    for (int k = 0; k < tba_detalle.getRowCount(); k++) {
+//                        System.out.println(" obj " + tba_detalle.getValueAt(k, 0));
+//                        System.out.println(" Kardex " + listaKardex.get(j).getInKardexPK().getIdProducto());
+//                        if (tba_detalle.getValueAt(k, 1).equals(listaKardex.get(j).getInKardexPK().getIdProducto())) {
+//                            /**/
+//                            System.out.println("- modificar cantidad em Kardex - ");
+//
+//                        }
+//                    }
 //                    }
                 }
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
