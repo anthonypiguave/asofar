@@ -350,18 +350,18 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         PrDetalleTarifario pre = new PrDetalleTarifario();
 
-        PrTarifarioPK pk = new PrTarifarioPK();
-
-        PrTarifario pr = new PrTarifario();
-
-        pr.setPrTarifarioPK(new PrTarifarioPK());
-        
-
-        pk.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-        pk.setIdEmpresa(Long.valueOf(emp.getIdEmpresa().toString()));
-        pk.setIdSurcusal(Long.valueOf(suc.getSeSucursalPK().getIdSucursal()));
-
-        pr.setPrTarifarioPK(pk);
+//        PrTarifarioPK pk = new PrTarifarioPK();
+//
+//        PrTarifario pr = new PrTarifario();
+//
+//        pr.setPrTarifarioPK(new PrTarifarioPK());
+//        
+//
+//        pk.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
+//        pk.setIdEmpresa(Long.valueOf(emp.getIdEmpresa().toString()));
+//        pk.setIdSurcusal(Long.valueOf(suc.getSeSucursalPK().getIdSucursal()));
+//
+//        pr.setPrTarifarioPK(pk);
 
 //
 //        pre.getPrTarifario().setPrTarifarioPK(pk);
@@ -374,6 +374,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 //        objpres.getInPrestacionesPorServiciosPK().getIdPrestacion();
 //        System.out.println("jhfh" + objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
 //        System.out.println("" + objpres.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+        pre.getPrTarifario().getPrTarifarioPK().setIdEmpresa(emp.getIdEmpresa());
+        pre.getPrTarifario().getPrTarifarioPK().setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
+        pre.getPrTarifario().getPrTarifarioPK().setIdTarifario(Long.valueOf(txtidtarifario.getText()));
         
         pre.setValorCosto(Double.parseDouble((txtvc.getText())));
         pre.setValorDescuento(Double.parseDouble((txtds.getText())));
