@@ -51,9 +51,7 @@ public class CargarTarifario extends javax.swing.JDialog {
     public CargarTarifario(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
-        System.out.println("************");
         Tablas.listarTarifario(lista, tbltarifario);
-
         usu = us;
         emp = em;
         suc = su;
@@ -222,13 +220,9 @@ public class CargarTarifario extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
 
             i = tbltarifario.getSelectedRow();
-            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 0).toString(),lista);
-            System.out.println("ide" + objeto.getPrTarifarioPK().getIdTarifario());
-objeto = devuelveObjeto(tbltarifario.getValueAt(i, 1).toString(),lista);
-            System.out.println("empresa" + objeto.getPrTarifarioPK().getIdEmpresa());
+            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 0).toString(), lista);
+            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 1).toString(), lista);
 
-            
-            
             if (objeto != null) {
                 this.setVisible(false);
                 Listar_PrestacionesPorServicio cp = new Listar_PrestacionesPorServicio(new javax.swing.JFrame(), true, usu, emp, suc, objeto);

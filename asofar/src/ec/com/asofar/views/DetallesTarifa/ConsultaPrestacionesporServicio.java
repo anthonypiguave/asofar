@@ -207,7 +207,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
             id_Pres = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 0).toString());
             id_Uni = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 2).toString());
-            System.out.println("jhg " + id_Uni);
+         
             prestacion = tba_prestacionesporservicios.getValueAt(i, 1).toString();
             unidad = tba_prestacionesporservicios.getValueAt(i, 3).toString();
             if (objpres != null) {
@@ -251,9 +251,6 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
             obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
             obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
-            System.out.println("obj " + obj.getInPrestacionesPorServiciosPK().getIdPrestacion());
-            System.out.println("obj " + obj.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
-
         } catch (Exception e) {
 //            e.printStackTrace();
         }

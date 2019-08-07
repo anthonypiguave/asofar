@@ -53,8 +53,6 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        System.out.println("************");
-//        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios);
     }
 
     public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, PrTarifario tr) {
