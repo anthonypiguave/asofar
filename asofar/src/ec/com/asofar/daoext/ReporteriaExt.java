@@ -25,7 +25,7 @@ public class ReporteriaExt {
     
     public List<String> reporteCompras(EntityManager em){
     List<String> listaCompra = new ArrayList<String>();
-   String nativeQuery = "SELECT * FROM `co_orden_compras` a\n" +
+    String nativeQuery = "SELECT * FROM `co_orden_compras` a\n" +
                         "INNER JOIN `co_detalle_orden_compra` b \n" +
                         "ON a.`id_orden_compra` = b.`id_orden_compra`\n" +
                         "AND a.`estado`='P'\n" +
