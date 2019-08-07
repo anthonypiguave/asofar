@@ -23,7 +23,8 @@ public class ReporteriaVenta extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-int x,y;
+    int x,y;
+    
     public ReporteriaVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
