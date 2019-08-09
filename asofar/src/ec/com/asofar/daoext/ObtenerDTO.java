@@ -29,6 +29,8 @@ import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InEstadosMovimiento;
+import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrTipoPrestacion;
@@ -47,7 +49,7 @@ import java.util.List;
 public class ObtenerDTO {
 
     public static InBodega ObtenerInBodega(String nombre) {
-        
+
         InBodegaJpaController control = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
         InBodega dto = new InBodega();
         List<InBodega> lista = control.findInBodegaEntities();
@@ -814,7 +816,8 @@ public class ObtenerDTO {
         }
         return dto;
     }
-        public static PrTipoPrestacion ObtenerPrTipoPrestacion(String nombre) {
+
+    public static PrTipoPrestacion ObtenerPrTipoPrestacion(String nombre) {
         PrTipoPrestacionJpaController control = new PrTipoPrestacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrTipoPrestacion dto = new PrTipoPrestacion();
         List<PrTipoPrestacion> lista = control.findPrTipoPrestacionEntities();
@@ -829,5 +832,69 @@ public class ObtenerDTO {
         return dto;
 
     }
-        
+
+    public static InMotivos ObtenerInMotivos(String nombre) {
+        InMotivosJpaController control = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InMotivos dto = new InMotivos();
+        List<InMotivos> lista = control.findInMotivosEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static InMotivos ObtenerInMotivos(int id) {
+        InMotivosJpaController control = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InMotivos dto = new InMotivos();
+        List<InMotivos> lista = control.findInMotivosEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdMotivo() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static InEstadosMovimiento ObtenerInEstadosMovimiento(String nombre) {
+        InEstadosMovimientoJpaController control = new InEstadosMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InEstadosMovimiento dto = new InEstadosMovimiento();
+        List<InEstadosMovimiento> lista = control.findInEstadosMovimientoEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static InEstadosMovimiento ObtenerInEstadosMovimiento(int id) {
+        InEstadosMovimientoJpaController control = new InEstadosMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InEstadosMovimiento dto = new InEstadosMovimiento();
+        List<InEstadosMovimiento> lista = control.findInEstadosMovimientoEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdEstadoMovimiento() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
 }

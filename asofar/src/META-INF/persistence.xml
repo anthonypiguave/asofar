@@ -57,6 +57,7 @@
     <class>ec.com.asofar.dto.SeRoles</class>
     <class>ec.com.asofar.dto.CoDetItemsCotizacion</class>
     <class>ec.com.asofar.dto.CoDetalleOrdenCompra</class>
+    <class>ec.com.asofar.dto.InDetalleMovimiento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://173.212.207.238:57635/bd_farmacia_desa?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="farmacia"/>

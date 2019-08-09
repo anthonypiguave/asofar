@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
@@ -77,5 +76,5 @@ public class PrSubgruposPK implements Serializable {
     public String toString() {
         return "ec.com.asofar.dto.PrSubgruposPK[ idSubgrupo=" + idSubgrupo + ", idGrupo=" + idGrupo + " ]";
     }
-
+    
 }

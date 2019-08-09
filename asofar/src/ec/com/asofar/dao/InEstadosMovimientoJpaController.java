@@ -5,19 +5,16 @@
  */
 package ec.com.asofar.dao;
 
-import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.InMovimientos;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -35,29 +32,11 @@ public class InEstadosMovimientoJpaController implements Serializable {
     }
 
     public void create(InEstadosMovimiento inEstadosMovimiento) {
-        if (inEstadosMovimiento.getInMovimientosList() == null) {
-            inEstadosMovimiento.setInMovimientosList(new ArrayList<InMovimientos>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListInMovimientosToAttach : inEstadosMovimiento.getInMovimientosList()) {
-                inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosList.add(inMovimientosListInMovimientosToAttach);
-            }
-            inEstadosMovimiento.setInMovimientosList(attachedInMovimientosList);
             em.persist(inEstadosMovimiento);
-            for (InMovimientos inMovimientosListInMovimientos : inEstadosMovimiento.getInMovimientosList()) {
-                InEstadosMovimiento oldInEstadosMovimientoOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getInEstadosMovimiento();
-                inMovimientosListInMovimientos.setInEstadosMovimiento(inEstadosMovimiento);
-                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
-                if (oldInEstadosMovimientoOfInMovimientosListInMovimientos != null) {
-                    oldInEstadosMovimientoOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
-                    oldInEstadosMovimientoOfInMovimientosListInMovimientos = em.merge(oldInEstadosMovimientoOfInMovimientosListInMovimientos);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -66,45 +45,12 @@ public class InEstadosMovimientoJpaController implements Serializable {
         }
     }
 
-    public void edit(InEstadosMovimiento inEstadosMovimiento) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(InEstadosMovimiento inEstadosMovimiento) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            InEstadosMovimiento persistentInEstadosMovimiento = em.find(InEstadosMovimiento.class, inEstadosMovimiento.getIdEstadoMovimiento());
-            List<InMovimientos> inMovimientosListOld = persistentInEstadosMovimiento.getInMovimientosList();
-            List<InMovimientos> inMovimientosListNew = inEstadosMovimiento.getInMovimientosList();
-            List<String> illegalOrphanMessages = null;
-            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
-                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain InMovimientos " + inMovimientosListOldInMovimientos + " since its inEstadosMovimiento field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
-                inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosListNew.add(inMovimientosListNewInMovimientosToAttach);
-            }
-            inMovimientosListNew = attachedInMovimientosListNew;
-            inEstadosMovimiento.setInMovimientosList(inMovimientosListNew);
             inEstadosMovimiento = em.merge(inEstadosMovimiento);
-            for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
-                if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
-                    InEstadosMovimiento oldInEstadosMovimientoOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getInEstadosMovimiento();
-                    inMovimientosListNewInMovimientos.setInEstadosMovimiento(inEstadosMovimiento);
-                    inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
-                    if (oldInEstadosMovimientoOfInMovimientosListNewInMovimientos != null && !oldInEstadosMovimientoOfInMovimientosListNewInMovimientos.equals(inEstadosMovimiento)) {
-                        oldInEstadosMovimientoOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
-                        oldInEstadosMovimientoOfInMovimientosListNewInMovimientos = em.merge(oldInEstadosMovimientoOfInMovimientosListNewInMovimientos);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -122,7 +68,7 @@ public class InEstadosMovimientoJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -133,17 +79,6 @@ public class InEstadosMovimientoJpaController implements Serializable {
                 inEstadosMovimiento.getIdEstadoMovimiento();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inEstadosMovimiento with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<InMovimientos> inMovimientosListOrphanCheck = inEstadosMovimiento.getInMovimientosList();
-            for (InMovimientos inMovimientosListOrphanCheckInMovimientos : inMovimientosListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This InEstadosMovimiento (" + inEstadosMovimiento + ") cannot be destroyed since the InMovimientos " + inMovimientosListOrphanCheckInMovimientos + " in its inMovimientosList field has a non-nullable inEstadosMovimiento field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(inEstadosMovimiento);
             em.getTransaction().commit();

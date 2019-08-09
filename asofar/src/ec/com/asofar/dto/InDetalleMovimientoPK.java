@@ -15,8 +15,11 @@ import javax.persistence.Embeddable;
  * @author admin
  */
 @Embeddable
-public class InMovimientosPK implements Serializable {
+public class InDetalleMovimientoPK implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "id_detalle_movimiento")
+    private long idDetalleMovimiento;
     @Basic(optional = false)
     @Column(name = "id_movimientos")
     private long idMovimientos;
@@ -35,17 +38,34 @@ public class InMovimientosPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_sucursal")
     private long idSucursal;
+    @Basic(optional = false)
+    @Column(name = "linea_detalle")
+    private long lineaDetalle;
+    @Basic(optional = false)
+    @Column(name = "id_producto")
+    private long idProducto;
 
-    public InMovimientosPK() {
+    public InDetalleMovimientoPK() {
     }
 
-    public InMovimientosPK(long idMovimientos, long idTipoDocumento, long idTipoMovimiento, long idMotivo, long idEmpresa, long idSucursal) {
+    public InDetalleMovimientoPK(long idDetalleMovimiento, long idMovimientos, long idTipoDocumento, long idTipoMovimiento, long idMotivo, long idEmpresa, long idSucursal, long lineaDetalle, long idProducto) {
+        this.idDetalleMovimiento = idDetalleMovimiento;
         this.idMovimientos = idMovimientos;
         this.idTipoDocumento = idTipoDocumento;
         this.idTipoMovimiento = idTipoMovimiento;
         this.idMotivo = idMotivo;
         this.idEmpresa = idEmpresa;
         this.idSucursal = idSucursal;
+        this.lineaDetalle = lineaDetalle;
+        this.idProducto = idProducto;
+    }
+
+    public long getIdDetalleMovimiento() {
+        return idDetalleMovimiento;
+    }
+
+    public void setIdDetalleMovimiento(long idDetalleMovimiento) {
+        this.idDetalleMovimiento = idDetalleMovimiento;
     }
 
     public long getIdMovimientos() {
@@ -96,25 +116,47 @@ public class InMovimientosPK implements Serializable {
         this.idSucursal = idSucursal;
     }
 
+    public long getLineaDetalle() {
+        return lineaDetalle;
+    }
+
+    public void setLineaDetalle(long lineaDetalle) {
+        this.lineaDetalle = lineaDetalle;
+    }
+
+    public long getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(long idProducto) {
+        this.idProducto = idProducto;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (int) idDetalleMovimiento;
         hash += (int) idMovimientos;
         hash += (int) idTipoDocumento;
         hash += (int) idTipoMovimiento;
         hash += (int) idMotivo;
         hash += (int) idEmpresa;
         hash += (int) idSucursal;
+        hash += (int) lineaDetalle;
+        hash += (int) idProducto;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InMovimientosPK)) {
+        if (!(object instanceof InDetalleMovimientoPK)) {
             return false;
         }
-        InMovimientosPK other = (InMovimientosPK) object;
+        InDetalleMovimientoPK other = (InDetalleMovimientoPK) object;
+        if (this.idDetalleMovimiento != other.idDetalleMovimiento) {
+            return false;
+        }
         if (this.idMovimientos != other.idMovimientos) {
             return false;
         }
@@ -133,12 +175,18 @@ public class InMovimientosPK implements Serializable {
         if (this.idSucursal != other.idSucursal) {
             return false;
         }
+        if (this.lineaDetalle != other.lineaDetalle) {
+            return false;
+        }
+        if (this.idProducto != other.idProducto) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InMovimientosPK[ idMovimientos=" + idMovimientos + ", idTipoDocumento=" + idTipoDocumento + ", idTipoMovimiento=" + idTipoMovimiento + ", idMotivo=" + idMotivo + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + " ]";
+        return "ec.com.asofar.dto.InDetalleMovimientoPK[ idDetalleMovimiento=" + idDetalleMovimiento + ", idMovimientos=" + idMovimientos + ", idTipoDocumento=" + idTipoDocumento + ", idTipoMovimiento=" + idTipoMovimiento + ", idMotivo=" + idMotivo + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", lineaDetalle=" + lineaDetalle + ", idProducto=" + idProducto + " ]";
     }
     
 }
