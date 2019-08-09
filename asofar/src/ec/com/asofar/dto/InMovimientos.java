@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Entity
 @Table(name = "in_movimientos")
@@ -35,13 +35,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InMovimientos.findByAnioDocumento", query = "SELECT i FROM InMovimientos i WHERE i.anioDocumento = :anioDocumento")
     , @NamedQuery(name = "InMovimientos.findByIdTipoMovimiento", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idTipoMovimiento = :idTipoMovimiento")
     , @NamedQuery(name = "InMovimientos.findByIdMotivo", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idMotivo = :idMotivo")
-    , @NamedQuery(name = "InMovimientos.findByIdBodegaOrigen", query = "SELECT i FROM InMovimientos i WHERE i.idBodegaOrigen = :idBodegaOrigen")
     , @NamedQuery(name = "InMovimientos.findByIdEmpresa", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "InMovimientos.findByIdSucursal", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idSucursal = :idSucursal")
-    , @NamedQuery(name = "InMovimientos.findByIdUsuario", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idUsuario = :idUsuario")
     , @NamedQuery(name = "InMovimientos.findByIdEstado", query = "SELECT i FROM InMovimientos i WHERE i.inMovimientosPK.idEstado = :idEstado")
-    , @NamedQuery(name = "InMovimientos.findByBodegaDestino", query = "SELECT i FROM InMovimientos i WHERE i.bodegaDestino = :bodegaDestino")
-    , @NamedQuery(name = "InMovimientos.findBySucursalDestino", query = "SELECT i FROM InMovimientos i WHERE i.sucursalDestino = :sucursalDestino")
+    , @NamedQuery(name = "InMovimientos.findByIdBodegaOrigen", query = "SELECT i FROM InMovimientos i WHERE i.idBodegaOrigen = :idBodegaOrigen")
+    , @NamedQuery(name = "InMovimientos.findByIdBodegaDestino", query = "SELECT i FROM InMovimientos i WHERE i.idBodegaDestino = :idBodegaDestino")
+    , @NamedQuery(name = "InMovimientos.findByIdSucursalDestino", query = "SELECT i FROM InMovimientos i WHERE i.idSucursalDestino = :idSucursalDestino")
     , @NamedQuery(name = "InMovimientos.findByFechaSistema", query = "SELECT i FROM InMovimientos i WHERE i.fechaSistema = :fechaSistema")
     , @NamedQuery(name = "InMovimientos.findByFechaTransferencia", query = "SELECT i FROM InMovimientos i WHERE i.fechaTransferencia = :fechaTransferencia")
     , @NamedQuery(name = "InMovimientos.findByFechaRecepcion", query = "SELECT i FROM InMovimientos i WHERE i.fechaRecepcion = :fechaRecepcion")
@@ -64,10 +63,10 @@ public class InMovimientos implements Serializable {
     private Date anioDocumento;
     @Column(name = "id_bodega_origen")
     private BigInteger idBodegaOrigen;
-    @Column(name = "bodega_destino")
-    private BigInteger bodegaDestino;
-    @Column(name = "sucursal_destino")
-    private BigInteger sucursalDestino;
+    @Column(name = "id_bodega_destino")
+    private BigInteger idBodegaDestino;
+    @Column(name = "id_sucursal_destino")
+    private BigInteger idSucursalDestino;
     @Column(name = "fecha_sistema")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaSistema;
@@ -116,9 +115,6 @@ public class InMovimientos implements Serializable {
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_persona", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private SePersonas sePersonas;
     @JoinColumn(name = "id_estado", referencedColumnName = "id_estado_movimiento", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private InEstadosMovimiento inEstadosMovimiento;
@@ -130,8 +126,8 @@ public class InMovimientos implements Serializable {
         this.inMovimientosPK = inMovimientosPK;
     }
 
-    public InMovimientos(long idMovimientos, long idTipoDocumento, long idTipoMovimiento, long idMotivo, long idEmpresa, long idSucursal, long idUsuario, long idEstado) {
-        this.inMovimientosPK = new InMovimientosPK(idMovimientos, idTipoDocumento, idTipoMovimiento, idMotivo, idEmpresa, idSucursal, idUsuario, idEstado);
+    public InMovimientos(long idMovimientos, long idTipoDocumento, long idTipoMovimiento, long idMotivo, long idEmpresa, long idSucursal, long idEstado) {
+        this.inMovimientosPK = new InMovimientosPK(idMovimientos, idTipoDocumento, idTipoMovimiento, idMotivo, idEmpresa, idSucursal, idEstado);
     }
 
     public InMovimientosPK getInMovimientosPK() {
@@ -158,20 +154,20 @@ public class InMovimientos implements Serializable {
         this.idBodegaOrigen = idBodegaOrigen;
     }
 
-    public BigInteger getBodegaDestino() {
-        return bodegaDestino;
+    public BigInteger getIdBodegaDestino() {
+        return idBodegaDestino;
     }
 
-    public void setBodegaDestino(BigInteger bodegaDestino) {
-        this.bodegaDestino = bodegaDestino;
+    public void setIdBodegaDestino(BigInteger idBodegaDestino) {
+        this.idBodegaDestino = idBodegaDestino;
     }
 
-    public BigInteger getSucursalDestino() {
-        return sucursalDestino;
+    public BigInteger getIdSucursalDestino() {
+        return idSucursalDestino;
     }
 
-    public void setSucursalDestino(BigInteger sucursalDestino) {
-        this.sucursalDestino = sucursalDestino;
+    public void setIdSucursalDestino(BigInteger idSucursalDestino) {
+        this.idSucursalDestino = idSucursalDestino;
     }
 
     public Date getFechaSistema() {
@@ -308,14 +304,6 @@ public class InMovimientos implements Serializable {
 
     public void setSeSucursal(SeSucursal seSucursal) {
         this.seSucursal = seSucursal;
-    }
-
-    public SePersonas getSePersonas() {
-        return sePersonas;
-    }
-
-    public void setSePersonas(SePersonas sePersonas) {
-        this.sePersonas = sePersonas;
     }
 
     public InEstadosMovimiento getInEstadosMovimiento() {

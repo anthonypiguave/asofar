@@ -5,25 +5,23 @@
  */
 package ec.com.asofar.dao;
 
-import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
+import ec.com.asofar.dto.SePersonas;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeTipoPersona;
-import ec.com.asofar.dto.InMovimientos;
-import ec.com.asofar.dto.SePersonas;
+import ec.com.asofar.dto.SeUsuarios;
 import java.util.ArrayList;
 import java.util.List;
-import ec.com.asofar.dto.SeUsuarios;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 public class SePersonasJpaController implements Serializable {
 
@@ -37,9 +35,6 @@ public class SePersonasJpaController implements Serializable {
     }
 
     public void create(SePersonas sePersonas) {
-        if (sePersonas.getInMovimientosList() == null) {
-            sePersonas.setInMovimientosList(new ArrayList<InMovimientos>());
-        }
         if (sePersonas.getSeUsuariosList() == null) {
             sePersonas.setSeUsuariosList(new ArrayList<SeUsuarios>());
         }
@@ -52,12 +47,6 @@ public class SePersonasJpaController implements Serializable {
                 idTipoPersona = em.getReference(idTipoPersona.getClass(), idTipoPersona.getIdTipoPersona());
                 sePersonas.setIdTipoPersona(idTipoPersona);
             }
-            List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListInMovimientosToAttach : sePersonas.getInMovimientosList()) {
-                inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosList.add(inMovimientosListInMovimientosToAttach);
-            }
-            sePersonas.setInMovimientosList(attachedInMovimientosList);
             List<SeUsuarios> attachedSeUsuariosList = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListSeUsuariosToAttach : sePersonas.getSeUsuariosList()) {
                 seUsuariosListSeUsuariosToAttach = em.getReference(seUsuariosListSeUsuariosToAttach.getClass(), seUsuariosListSeUsuariosToAttach.getIdUsuario());
@@ -68,15 +57,6 @@ public class SePersonasJpaController implements Serializable {
             if (idTipoPersona != null) {
                 idTipoPersona.getSePersonasList().add(sePersonas);
                 idTipoPersona = em.merge(idTipoPersona);
-            }
-            for (InMovimientos inMovimientosListInMovimientos : sePersonas.getInMovimientosList()) {
-                SePersonas oldSePersonasOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getSePersonas();
-                inMovimientosListInMovimientos.setSePersonas(sePersonas);
-                inMovimientosListInMovimientos = em.merge(inMovimientosListInMovimientos);
-                if (oldSePersonasOfInMovimientosListInMovimientos != null) {
-                    oldSePersonasOfInMovimientosListInMovimientos.getInMovimientosList().remove(inMovimientosListInMovimientos);
-                    oldSePersonasOfInMovimientosListInMovimientos = em.merge(oldSePersonasOfInMovimientosListInMovimientos);
-                }
             }
             for (SeUsuarios seUsuariosListSeUsuarios : sePersonas.getSeUsuariosList()) {
                 SePersonas oldIdPersonaOfSeUsuariosListSeUsuarios = seUsuariosListSeUsuarios.getIdPersona();
@@ -95,7 +75,7 @@ public class SePersonasJpaController implements Serializable {
         }
     }
 
-    public void edit(SePersonas sePersonas) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(SePersonas sePersonas) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -103,33 +83,12 @@ public class SePersonasJpaController implements Serializable {
             SePersonas persistentSePersonas = em.find(SePersonas.class, sePersonas.getIdPersona());
             SeTipoPersona idTipoPersonaOld = persistentSePersonas.getIdTipoPersona();
             SeTipoPersona idTipoPersonaNew = sePersonas.getIdTipoPersona();
-            List<InMovimientos> inMovimientosListOld = persistentSePersonas.getInMovimientosList();
-            List<InMovimientos> inMovimientosListNew = sePersonas.getInMovimientosList();
             List<SeUsuarios> seUsuariosListOld = persistentSePersonas.getSeUsuariosList();
             List<SeUsuarios> seUsuariosListNew = sePersonas.getSeUsuariosList();
-            List<String> illegalOrphanMessages = null;
-            for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
-                if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain InMovimientos " + inMovimientosListOldInMovimientos + " since its sePersonas field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (idTipoPersonaNew != null) {
                 idTipoPersonaNew = em.getReference(idTipoPersonaNew.getClass(), idTipoPersonaNew.getIdTipoPersona());
                 sePersonas.setIdTipoPersona(idTipoPersonaNew);
             }
-            List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
-            for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
-                inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
-                attachedInMovimientosListNew.add(inMovimientosListNewInMovimientosToAttach);
-            }
-            inMovimientosListNew = attachedInMovimientosListNew;
-            sePersonas.setInMovimientosList(inMovimientosListNew);
             List<SeUsuarios> attachedSeUsuariosListNew = new ArrayList<SeUsuarios>();
             for (SeUsuarios seUsuariosListNewSeUsuariosToAttach : seUsuariosListNew) {
                 seUsuariosListNewSeUsuariosToAttach = em.getReference(seUsuariosListNewSeUsuariosToAttach.getClass(), seUsuariosListNewSeUsuariosToAttach.getIdUsuario());
@@ -145,17 +104,6 @@ public class SePersonasJpaController implements Serializable {
             if (idTipoPersonaNew != null && !idTipoPersonaNew.equals(idTipoPersonaOld)) {
                 idTipoPersonaNew.getSePersonasList().add(sePersonas);
                 idTipoPersonaNew = em.merge(idTipoPersonaNew);
-            }
-            for (InMovimientos inMovimientosListNewInMovimientos : inMovimientosListNew) {
-                if (!inMovimientosListOld.contains(inMovimientosListNewInMovimientos)) {
-                    SePersonas oldSePersonasOfInMovimientosListNewInMovimientos = inMovimientosListNewInMovimientos.getSePersonas();
-                    inMovimientosListNewInMovimientos.setSePersonas(sePersonas);
-                    inMovimientosListNewInMovimientos = em.merge(inMovimientosListNewInMovimientos);
-                    if (oldSePersonasOfInMovimientosListNewInMovimientos != null && !oldSePersonasOfInMovimientosListNewInMovimientos.equals(sePersonas)) {
-                        oldSePersonasOfInMovimientosListNewInMovimientos.getInMovimientosList().remove(inMovimientosListNewInMovimientos);
-                        oldSePersonasOfInMovimientosListNewInMovimientos = em.merge(oldSePersonasOfInMovimientosListNewInMovimientos);
-                    }
-                }
             }
             for (SeUsuarios seUsuariosListOldSeUsuarios : seUsuariosListOld) {
                 if (!seUsuariosListNew.contains(seUsuariosListOldSeUsuarios)) {
@@ -191,7 +139,7 @@ public class SePersonasJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -202,17 +150,6 @@ public class SePersonasJpaController implements Serializable {
                 sePersonas.getIdPersona();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The sePersonas with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<InMovimientos> inMovimientosListOrphanCheck = sePersonas.getInMovimientosList();
-            for (InMovimientos inMovimientosListOrphanCheckInMovimientos : inMovimientosListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SePersonas (" + sePersonas + ") cannot be destroyed since the InMovimientos " + inMovimientosListOrphanCheckInMovimientos + " in its inMovimientosList field has a non-nullable sePersonas field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             SeTipoPersona idTipoPersona = sePersonas.getIdTipoPersona();
             if (idTipoPersona != null) {

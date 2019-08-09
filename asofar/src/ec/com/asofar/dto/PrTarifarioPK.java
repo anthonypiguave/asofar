@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Embeddable
 public class PrTarifarioPK implements Serializable {

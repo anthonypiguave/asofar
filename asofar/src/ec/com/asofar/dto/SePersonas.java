@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Entity
 @Table(name = "se_personas")
@@ -89,8 +88,6 @@ public class SePersonas implements Serializable {
     @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona idTipoPersona;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sePersonas")
-    private List<InMovimientos> inMovimientosList;
     @OneToMany(mappedBy = "idPersona")
     private List<SeUsuarios> seUsuariosList;
 
@@ -219,15 +216,6 @@ public class SePersonas implements Serializable {
 
     public void setIdTipoPersona(SeTipoPersona idTipoPersona) {
         this.idTipoPersona = idTipoPersona;
-    }
-
-    @XmlTransient
-    public List<InMovimientos> getInMovimientosList() {
-        return inMovimientosList;
-    }
-
-    public void setInMovimientosList(List<InMovimientos> inMovimientosList) {
-        this.inMovimientosList = inMovimientosList;
     }
 
     @XmlTransient

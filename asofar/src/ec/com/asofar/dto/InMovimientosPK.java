@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Embeddable
 public class InMovimientosPK implements Serializable {
@@ -36,23 +36,19 @@ public class InMovimientosPK implements Serializable {
     @Column(name = "id_sucursal")
     private long idSucursal;
     @Basic(optional = false)
-    @Column(name = "id_usuario")
-    private long idUsuario;
-    @Basic(optional = false)
     @Column(name = "id_estado")
     private long idEstado;
 
     public InMovimientosPK() {
     }
 
-    public InMovimientosPK(long idMovimientos, long idTipoDocumento, long idTipoMovimiento, long idMotivo, long idEmpresa, long idSucursal, long idUsuario, long idEstado) {
+    public InMovimientosPK(long idMovimientos, long idTipoDocumento, long idTipoMovimiento, long idMotivo, long idEmpresa, long idSucursal, long idEstado) {
         this.idMovimientos = idMovimientos;
         this.idTipoDocumento = idTipoDocumento;
         this.idTipoMovimiento = idTipoMovimiento;
         this.idMotivo = idMotivo;
         this.idEmpresa = idEmpresa;
         this.idSucursal = idSucursal;
-        this.idUsuario = idUsuario;
         this.idEstado = idEstado;
     }
 
@@ -104,14 +100,6 @@ public class InMovimientosPK implements Serializable {
         this.idSucursal = idSucursal;
     }
 
-    public long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
     public long getIdEstado() {
         return idEstado;
     }
@@ -129,7 +117,6 @@ public class InMovimientosPK implements Serializable {
         hash += (int) idMotivo;
         hash += (int) idEmpresa;
         hash += (int) idSucursal;
-        hash += (int) idUsuario;
         hash += (int) idEstado;
         return hash;
     }
@@ -159,9 +146,6 @@ public class InMovimientosPK implements Serializable {
         if (this.idSucursal != other.idSucursal) {
             return false;
         }
-        if (this.idUsuario != other.idUsuario) {
-            return false;
-        }
         if (this.idEstado != other.idEstado) {
             return false;
         }
@@ -170,7 +154,7 @@ public class InMovimientosPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.InMovimientosPK[ idMovimientos=" + idMovimientos + ", idTipoDocumento=" + idTipoDocumento + ", idTipoMovimiento=" + idTipoMovimiento + ", idMotivo=" + idMotivo + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idUsuario=" + idUsuario + ", idEstado=" + idEstado + " ]";
+        return "ec.com.asofar.dto.InMovimientosPK[ idMovimientos=" + idMovimientos + ", idTipoDocumento=" + idTipoDocumento + ", idTipoMovimiento=" + idTipoMovimiento + ", idMotivo=" + idMotivo + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idEstado=" + idEstado + " ]";
     }
     
 }

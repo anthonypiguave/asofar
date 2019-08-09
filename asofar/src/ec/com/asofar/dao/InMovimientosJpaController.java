@@ -17,7 +17,6 @@ import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.InMovimientosPK;
@@ -27,7 +26,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 public class InMovimientosJpaController implements Serializable {
 
@@ -47,10 +46,9 @@ public class InMovimientosJpaController implements Serializable {
         inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
+        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdEstado(inMovimientos.getInEstadosMovimiento().getIdEstadoMovimiento());
-        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inMovimientos.getInMovimientosPK().setIdUsuario(inMovimientos.getSePersonas().getIdPersona());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -80,11 +78,6 @@ public class InMovimientosJpaController implements Serializable {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 inMovimientos.setSeSucursal(seSucursal);
             }
-            SePersonas sePersonas = inMovimientos.getSePersonas();
-            if (sePersonas != null) {
-                sePersonas = em.getReference(sePersonas.getClass(), sePersonas.getIdPersona());
-                inMovimientos.setSePersonas(sePersonas);
-            }
             InEstadosMovimiento inEstadosMovimiento = inMovimientos.getInEstadosMovimiento();
             if (inEstadosMovimiento != null) {
                 inEstadosMovimiento = em.getReference(inEstadosMovimiento.getClass(), inEstadosMovimiento.getIdEstadoMovimiento());
@@ -111,10 +104,6 @@ public class InMovimientosJpaController implements Serializable {
                 seSucursal.getInMovimientosList().add(inMovimientos);
                 seSucursal = em.merge(seSucursal);
             }
-            if (sePersonas != null) {
-                sePersonas.getInMovimientosList().add(inMovimientos);
-                sePersonas = em.merge(sePersonas);
-            }
             if (inEstadosMovimiento != null) {
                 inEstadosMovimiento.getInMovimientosList().add(inMovimientos);
                 inEstadosMovimiento = em.merge(inEstadosMovimiento);
@@ -136,10 +125,9 @@ public class InMovimientosJpaController implements Serializable {
         inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
+        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdEstado(inMovimientos.getInEstadosMovimiento().getIdEstadoMovimiento());
-        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
-        inMovimientos.getInMovimientosPK().setIdUsuario(inMovimientos.getSePersonas().getIdPersona());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -155,8 +143,6 @@ public class InMovimientosJpaController implements Serializable {
             InMotivos inMotivosNew = inMovimientos.getInMotivos();
             SeSucursal seSucursalOld = persistentInMovimientos.getSeSucursal();
             SeSucursal seSucursalNew = inMovimientos.getSeSucursal();
-            SePersonas sePersonasOld = persistentInMovimientos.getSePersonas();
-            SePersonas sePersonasNew = inMovimientos.getSePersonas();
             InEstadosMovimiento inEstadosMovimientoOld = persistentInMovimientos.getInEstadosMovimiento();
             InEstadosMovimiento inEstadosMovimientoNew = inMovimientos.getInEstadosMovimiento();
             if (inTipoDocumentoNew != null) {
@@ -178,10 +164,6 @@ public class InMovimientosJpaController implements Serializable {
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 inMovimientos.setSeSucursal(seSucursalNew);
-            }
-            if (sePersonasNew != null) {
-                sePersonasNew = em.getReference(sePersonasNew.getClass(), sePersonasNew.getIdPersona());
-                inMovimientos.setSePersonas(sePersonasNew);
             }
             if (inEstadosMovimientoNew != null) {
                 inEstadosMovimientoNew = em.getReference(inEstadosMovimientoNew.getClass(), inEstadosMovimientoNew.getIdEstadoMovimiento());
@@ -227,14 +209,6 @@ public class InMovimientosJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getInMovimientosList().add(inMovimientos);
                 seSucursalNew = em.merge(seSucursalNew);
-            }
-            if (sePersonasOld != null && !sePersonasOld.equals(sePersonasNew)) {
-                sePersonasOld.getInMovimientosList().remove(inMovimientos);
-                sePersonasOld = em.merge(sePersonasOld);
-            }
-            if (sePersonasNew != null && !sePersonasNew.equals(sePersonasOld)) {
-                sePersonasNew.getInMovimientosList().add(inMovimientos);
-                sePersonasNew = em.merge(sePersonasNew);
             }
             if (inEstadosMovimientoOld != null && !inEstadosMovimientoOld.equals(inEstadosMovimientoNew)) {
                 inEstadosMovimientoOld.getInMovimientosList().remove(inMovimientos);
@@ -297,11 +271,6 @@ public class InMovimientosJpaController implements Serializable {
             if (seSucursal != null) {
                 seSucursal.getInMovimientosList().remove(inMovimientos);
                 seSucursal = em.merge(seSucursal);
-            }
-            SePersonas sePersonas = inMovimientos.getSePersonas();
-            if (sePersonas != null) {
-                sePersonas.getInMovimientosList().remove(inMovimientos);
-                sePersonas = em.merge(sePersonas);
             }
             InEstadosMovimiento inEstadosMovimiento = inMovimientos.getInEstadosMovimiento();
             if (inEstadosMovimiento != null) {
