@@ -10,8 +10,10 @@ import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenComprasJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.InMotivosJpaController;
 import ec.com.asofar.dao.InMovimientosJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenCompraDaoExt;
 import ec.com.asofar.dto.CoDetalleOrdenCompra;
@@ -71,9 +73,11 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
     Date d = new Date();
 
-    CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
-    InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    CoDetalleOrdenPedidoJpaController detordenpedidocontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    CoProveedoresJpaController proveedorController = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoDocumentoJpaController documentoController = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InTipoMovimientoJpaController movimientoController = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InMotivosJpaController motivoController = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
+    CoDetalleOrdenPedidoJpaController detOrdenPedidocontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
     OrdenCompraDaoExt obtenerId = new OrdenCompraDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
     CoOrdenPedido cOrden;
@@ -91,6 +95,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         CargarProveedor();
         CargarDocumento();
         CargarFormulario();
+        CargarMovimiento();
+        CargarMotivos();
 
         Timer tiempo = new Timer(100, new crearOrdenCompraForm.horas());
         tiempo.start();
@@ -111,6 +117,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         CargarProveedor();
         CargarDocumento();
         CargarFormulario();
+        CargarMovimiento();
+        CargarMotivos();
         this.cbxProveedor.setEnabled(false);
 
         System.out.println(" " + seUsuario);
@@ -136,16 +144,30 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     }
 
     public void CargarProveedor() {
-        List<CoProveedores> listcaja = proveedorcontroller.findCoProveedoresEntities();
+        List<CoProveedores> listcaja = proveedorController.findCoProveedoresEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             cbxProveedor.addItem(listcaja.get(i).getNombre());
         }
     }
 
     public void CargarDocumento() {
-        List<InTipoDocumento> listcaja = movcontroller.findInTipoDocumentoEntities();
+        List<InTipoDocumento> listcaja = documentoController.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
+        }
+    }
+
+    public void CargarMovimiento() {
+        List<InTipoMovimiento> listcaja = movimientoController.findInTipoMovimientoEntities();
+        for (int i = 0; i < listcaja.size(); i++) {
+            cbx_movimiento.addItem(listcaja.get(i).getNombreMovimiento());
+        }
+    }
+
+    public void CargarMotivos() {
+        List<InMotivos> listcaja = motivoController.findInMotivosEntities();
+        for (int i = 0; i < listcaja.size(); i++) {
+            cbx_motivo.addItem(listcaja.get(i).getNombre());
         }
     }
 
@@ -156,7 +178,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
 
-        list = detordenpedidocontroller.findCoDetalleOrdenPedidoEntities();
+        list = detOrdenPedidocontroller.findCoDetalleOrdenPedidoEntities();
 
         check = new Boolean[list.size()];  // inicializar el Boolean segun la lista
 
@@ -386,6 +408,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         txtFechaEntrega.setEditable(false);
         txtFechaEntrega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtFechaEntrega.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFechaEntrega.setText("--SELECCIONE--");
         txtFechaEntrega.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtFechaEntregaMousePressed(evt);
@@ -431,33 +454,29 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbx_movimiento, 0, 169, Short.MAX_VALUE)
+                            .addComponent(cbxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbx_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbx_motivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbx_movimiento, 0, 169, Short.MAX_VALUE)
-                                    .addComponent(cbxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbx_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addGap(25, 25, 25)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel10)
+                                        .addGap(25, 25, 25)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(cbx_motivo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(280, 280, 280)))))
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                                .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -681,7 +700,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -769,28 +788,34 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-        CoOrdenCompras cabOrden = new CoOrdenCompras();
-        CoDetalleOrdenCompra detOrden = new CoDetalleOrdenCompra();
-        CoOrdenComprasJpaController cabOrdenController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
-        CoDetalleOrdenCompraJpaController detOrdenController = new CoDetalleOrdenCompraJpaController(EntityManagerUtil.ObtenerEntityManager());
 
         CoProveedores proveedor = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
         InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
         InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento(cbx_movimiento.getSelectedItem().toString());
         InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos(cbx_motivo.getSelectedItem().toString());
 
+        CoOrdenCompras pkCompra = null;
+        InMovimientos pkMovimiento = null;
+
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(cbxProveedor.getSelectedItem().toString())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
 
+                /////////// AGREGAR AL ORDEN DE COMPRA
+                CoOrdenCompras cabOrden = new CoOrdenCompras();
+                CoDetalleOrdenCompra detOrden = new CoDetalleOrdenCompra();
+                CoOrdenComprasJpaController cabOrdenController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
+                CoDetalleOrdenCompraJpaController detOrdenController = new CoDetalleOrdenCompraJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+                ///////setear la pk cab orden compra
+                cabOrden.setSeSucursal(seSucursal);
+                ///////setear la  cab orden compra
                 cabOrden.setIdProveedor(BigInteger.valueOf(proveedor.getIdProveedor()));
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdTipoDocumento(BigInteger.valueOf(tipoDocumento.getIdTipoDocumento()));
                 cabOrden.setEstado("A");
                 cabOrden.setFechaEntrega(fecha);
-
-                cabOrden.setSeSucursal(seSucursal);
 
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
                 cabOrden.setFechaCreacion(d);
@@ -803,11 +828,11 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
                 try {
 
-                    CoOrdenCompras pk = obtenerId.guardarPedido(cabOrden);
-                    System.out.println(" IDcabedcera " + pk);
+                    pkCompra = obtenerId.guardarPedido(cabOrden);
+                    System.out.println(" IDcabedcera " + pkCompra);
 
                     for (int i = 0; i < listadetCompra.size(); i++) {
-                        detOrden.setCoOrdenCompras(pk);
+                        detOrden.setCoOrdenCompras(pkCompra);
                         detOrden.setCantidadRecibida(listadetCompra.get(i).getCantidadRecibida());
                         detOrden.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
                         detOrden.getCoDetalleOrdenCompraPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
@@ -836,27 +861,43 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
                     cab.edit(cOrden);
 
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                    setVisible(false);
+                } catch (Exception e) {
 
-                } catch (Exception ex) {
+                    e.printStackTrace();
 
                 }
 
                 try {
+
+                    /////////// AGREGAR AL MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
                     InMovimientos movimientoObjeto = new InMovimientos();
 
+                    ////////////setear para la pk cab movimientos
                     movimientoObjeto.setSeSucursal(seSucursal);
+                    movimientoObjeto.setInTipoDocumento(tipoDocumento);
+                    movimientoObjeto.setInTipoMovimiento(tipoMovimiento);
+                    movimientoObjeto.setInMotivos(tipoMotivos);
 
-                    movimientoObjeto.setInMovimientosPK(new InMovimientosPK()); // inicializar pk
+                    ///////////setear cab movimientos
+                    movimientoObjeto.setFechaSistema(d);
+                    movimientoObjeto.setIdBodegaDestino(BigInteger.ZERO);
+                    movimientoObjeto.setAnioDocumento(fecha);
+                    movimientoObjeto.setIdProveedor(proveedor);
+                    movimientoObjeto.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+                    movimientoObjeto.setEstado("A");
 
-                    movimientoObjeto.getInMovimientosPK().setIdTipoDocumento(tipoDocumento.getIdTipoDocumento()); //IdTipoDocumento
-                    movimientoObjeto.getInMovimientosPK().setIdTipoMovimiento(SOMEBITS); //getIdTipoMovimiento
-                    movimientoObjeto.getInMovimientosPK().setIdMotivo(8); //IdMotivo
+                    movimientoObjeto.setUsuarioCreacion(seUsuario.getIdUsuario());
+                    movimientoObjeto.setFechaCreacion(d);
+
+                    cabMovController.create(movimientoObjeto);
 
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
+                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                setVisible(false);
             }
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
