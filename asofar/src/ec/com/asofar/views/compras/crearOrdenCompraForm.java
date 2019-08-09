@@ -8,6 +8,7 @@ package ec.com.asofar.views.compras;
 import ec.com.asofar.dao.CoDetalleOrdenCompraJpaController;
 import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenComprasJpaController;
+import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
@@ -23,6 +24,7 @@ import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.Calendario;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -58,9 +60,11 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     BigDecimal TotalIva = new BigDecimal("0.00");
     BigDecimal TotalDescuento = new BigDecimal("0.00");
     BigDecimal TotalCompra = new BigDecimal("0.00");
+    
+    Date fecha = null;
 
     Date d = new Date();
-    
+
     CoProveedoresJpaController proveedorcontroller = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController movcontroller = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoDetalleOrdenPedidoJpaController detordenpedidocontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -283,6 +287,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         txtObservacion = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtFechaEntrega = new javax.swing.JTextField();
         BtnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -364,6 +370,18 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         txtHora.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel11.setText("FECHA DE ENTEGA:");
+
+        txtFechaEntrega.setEditable(false);
+        txtFechaEntrega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtFechaEntrega.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFechaEntrega.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtFechaEntregaMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -389,16 +407,22 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                             .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(25, 25, 25)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(25, 25, 25)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -420,7 +444,9 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -609,8 +635,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.getAccessibleContext().setAccessibleName("DETALLE DE COMPRA");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -719,7 +743,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 cabOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdTipoDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
-                cabOrden.setEstado("P");
+                cabOrden.setEstado("A");
+                cabOrden.setFechaEntrega(fecha);
 
                 cabOrden.setSeSucursal(seSucursal);
 
@@ -758,12 +783,25 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
                         detOrdenController.create(detOrden);
                     }
+                    /////////// actualizar la cab de la orden de pedido
+                    CoOrdenPedidoJpaController cab = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+                    cOrden.setEstado("I");
+                    cOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                    cOrden.setFechaActualizacion(d);
+
+                    cab.edit(cOrden);
 
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                     setVisible(false);
 
                 } catch (Exception ex) {
 
+                }
+                
+                try {
+                    
+                } catch (Exception e) {
                 }
             }
         }
@@ -807,6 +845,19 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_jTable1MousePressed
+
+    private void txtFechaEntregaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaEntregaMousePressed
+
+        Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
+        fechaEntrega.setVisible(true);
+
+        fecha = fechaEntrega.getFecha();
+
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        txtFechaEntrega.setText(String.format(formatoFecha.format(fecha)));
+
+
+    }//GEN-LAST:event_txtFechaEntregaMousePressed
 
     /**
      * @param args the command line arguments
@@ -873,6 +924,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbx_documento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -892,6 +944,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtCod;
     private javax.swing.JLabel txtDescuento;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtFechaEntrega;
     private javax.swing.JTextField txtHora;
     private javax.swing.JLabel txtIva;
     private javax.swing.JTextArea txtObservacion;
