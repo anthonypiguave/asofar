@@ -10,10 +10,12 @@ import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoOrdenComprasJpaController;
 import ec.com.asofar.dao.CoOrdenPedidoJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
+import ec.com.asofar.dao.InDetalleMovimientoJpaController;
 import ec.com.asofar.dao.InMotivosJpaController;
 import ec.com.asofar.dao.InMovimientosJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
+import ec.com.asofar.daoext.MovimientosDaoExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenCompraDaoExt;
 import ec.com.asofar.dto.CoDetalleOrdenCompra;
@@ -80,7 +82,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     InTipoMovimientoJpaController movimientoController = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
     InMotivosJpaController motivoController = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
     CoDetalleOrdenPedidoJpaController detOrdenPedidocontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    OrdenCompraDaoExt obtenerId = new OrdenCompraDaoExt(EntityManagerUtil.ObtenerEntityManager());
+    OrdenCompraDaoExt obtenerIdCompra = new OrdenCompraDaoExt(EntityManagerUtil.ObtenerEntityManager());
+    MovimientosDaoExt obtenerIdMovimiento = new MovimientosDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
     CoOrdenPedido cOrden;
 
@@ -830,16 +833,19 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
                 try {
 
-                    pkCompra = obtenerId.guardarPedido(cabOrden);
-                    System.out.println(" IDcabedcera " + pkCompra);
+                    pkCompra = obtenerIdCompra.guardarPedido(cabOrden);
+                    System.out.println(" IDcabedcera compra " + pkCompra);
 
                     for (int i = 0; i < listadetCompra.size(); i++) {
+                        ////setear el pk detalle con compras
                         detOrden.setCoOrdenCompras(pkCompra);
-                        detOrden.setCantidadRecibida(listadetCompra.get(i).getCantidadRecibida());
+                        /////// setear el detalle 
                         detOrden.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
                         detOrden.getCoDetalleOrdenCompraPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
                         detOrden.getCoDetalleOrdenCompraPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
                         detOrden.setDescripcion(listadetCompra.get(i).getDescripcion());
+
+                        detOrden.setCantidadRecibida(listadetCompra.get(i).getCantidadRecibida());
                         detOrden.setEstado("A");
 
                         detOrden.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
@@ -869,12 +875,13 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
                 }
 
-                try {
+                /////////// AGREGAR AL MOVIMIENTO
+                InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
+                InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+                InMovimientos cabMovimiento = new InMovimientos();
+                InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
 
-                    /////////// AGREGAR AL MOVIMIENTO
-                    InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
-                    InMovimientos cabMovimiento = new InMovimientos();
-                    InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
+                try {
 
                     ////////////setear para la pk cab movimientos
                     cabMovimiento.setSeSucursal(seSucursal);
@@ -884,7 +891,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
                     ///////////setear cab movimientos
                     cabMovimiento.setFechaSistema(d);
-                    cabMovimiento.setIdBodegaDestino(BigInteger.ZERO);
                     cabMovimiento.setAnioDocumento(fecha);
                     cabMovimiento.setIdProveedor(proveedor);
                     cabMovimiento.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
@@ -893,25 +899,26 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                     cabMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
                     cabMovimiento.setFechaCreacion(d);
 
-                    cabMovController.create(cabMovimiento);
+                    pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
+                    System.out.println(" IDcabedcera movimiento" + pkMovimiento);
 
                     for (int i = 0; i < listadetCompra.size(); i++) {
-                        
-                        detMovimiento.getInDetalleMovimientoPK();
-                        
+                        ////////////setear para la pk detalle con cab movimiento
+                        detMovimiento.setInMovimientos(pkMovimiento);
+                        ///////////setear detalle movimientos
                         detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
                         detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
+
                         detMovimiento.setDescripcion(listadetCompra.get(i).getDescripcion());
                         detMovimiento.setCantidad(listadetCompra.get(i).getCantidadRecibida());
                         detMovimiento.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
                         detMovimiento.setEstado("A");
-                        
+
                         detMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
                         detMovimiento.setFechaCreacion(d);
-                        
-                        
-                        
+
+                        detMovController.create(detMovimiento);
 
                     }
 
