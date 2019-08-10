@@ -14,6 +14,7 @@ import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
 import ec.com.asofar.dao.VeFacturaDetalleJpaController;
 import ec.com.asofar.dao.VeFacturaJpaController;
+import ec.com.asofar.daoext.InKardexExt;
 import ec.com.asofar.daoext.MovimientosDaoExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
@@ -103,6 +104,9 @@ public class Venta extends javax.swing.JInternalFrame {
     Date fecha = null;
     VeCajaJpaController cajaC = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     MovimientosDaoExt obtenerIdMovimiento = new MovimientosDaoExt(EntityManagerUtil.ObtenerEntityManager());
+////
+List<InKardex> ListKardex=null;
+    InKardexExt selectKardex = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
 
     public Venta() {
         initComponents();
@@ -129,6 +133,18 @@ public class Venta extends javax.swing.JInternalFrame {
         CargarDocumento();
         CargarMovimiento();
         CargarMotivos();
+        Prueba();
+    }
+
+    public void Prueba() {
+
+        ListKardex = selectKardex.obtenerProductoKardex(Long.valueOf(18));
+        for (int i = 0; i < ListKardex.size(); i++) {
+        System.out.println("prueba "+ ListKardex.get(i).getCantidad());
+        System.out.println(" "+ ListKardex.get(i).getSaldoActual());
+        System.out.println(" "+ ListKardex.get(i).getSaldoAnterior());
+            
+        }
     }
 
     public void CargarMotivos() {
