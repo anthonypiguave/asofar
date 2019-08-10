@@ -22,6 +22,8 @@ import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InDetalleMovimiento;
+import ec.com.asofar.dto.InDetalleMovimientoPK;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InMovimientos;
@@ -871,26 +873,47 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
                     /////////// AGREGAR AL MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
-                    InMovimientos movimientoObjeto = new InMovimientos();
+                    InMovimientos cabMovimiento = new InMovimientos();
+                    InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
 
                     ////////////setear para la pk cab movimientos
-                    movimientoObjeto.setSeSucursal(seSucursal);
-                    movimientoObjeto.setInTipoDocumento(tipoDocumento);
-                    movimientoObjeto.setInTipoMovimiento(tipoMovimiento);
-                    movimientoObjeto.setInMotivos(tipoMotivos);
+                    cabMovimiento.setSeSucursal(seSucursal);
+                    cabMovimiento.setInTipoDocumento(tipoDocumento);
+                    cabMovimiento.setInTipoMovimiento(tipoMovimiento);
+                    cabMovimiento.setInMotivos(tipoMotivos);
 
                     ///////////setear cab movimientos
-                    movimientoObjeto.setFechaSistema(d);
-                    movimientoObjeto.setIdBodegaDestino(BigInteger.ZERO);
-                    movimientoObjeto.setAnioDocumento(fecha);
-                    movimientoObjeto.setIdProveedor(proveedor);
-                    movimientoObjeto.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
-                    movimientoObjeto.setEstado("A");
+                    cabMovimiento.setFechaSistema(d);
+                    cabMovimiento.setIdBodegaDestino(BigInteger.ZERO);
+                    cabMovimiento.setAnioDocumento(fecha);
+                    cabMovimiento.setIdProveedor(proveedor);
+                    cabMovimiento.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+                    cabMovimiento.setEstado("P");
 
-                    movimientoObjeto.setUsuarioCreacion(seUsuario.getIdUsuario());
-                    movimientoObjeto.setFechaCreacion(d);
+                    cabMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
+                    cabMovimiento.setFechaCreacion(d);
 
-                    cabMovController.create(movimientoObjeto);
+                    cabMovController.create(cabMovimiento);
+
+                    for (int i = 0; i < listadetCompra.size(); i++) {
+                        
+                        detMovimiento.getInDetalleMovimientoPK();
+                        
+                        detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
+                        detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
+                        detMovimiento.getInDetalleMovimientoPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
+                        detMovimiento.setDescripcion(listadetCompra.get(i).getDescripcion());
+                        detMovimiento.setCantidad(listadetCompra.get(i).getCantidadRecibida());
+                        detMovimiento.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
+                        detMovimiento.setEstado("A");
+                        
+                        detMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
+                        detMovimiento.setFechaCreacion(d);
+                        
+                        
+                        
+
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
