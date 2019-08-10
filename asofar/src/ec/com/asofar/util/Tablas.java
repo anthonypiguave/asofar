@@ -2237,4 +2237,55 @@ public class Tablas {
 
         tabla.setModel(dt);
     }
+
+    public static void listarCabOrdendeCompra(List<CoOrdenCompras> lista, JTable Tabla) {
+        int[] a = {5, 20, 40, 40, 20, 20, 20};
+//        Font fuente = new Font("Bold", Font.BOLD, 10);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"COD.", "FECHA ENTREGA", " PROVEEDOR", "TIPO DOCUMENTO", "TOTAL COMPRA", "USUARIO", "ESTADO"};
+        String[] Filas = new String[7];
+        model = new DefaultTableModel(null, Co);
+//        JTableHeader jt;
+//        jt = Tabla.getTableHeader();
+//        jt.setFont(fuente);
+//        jt.setDefaultRenderer(tcr);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals("P")) {
+                Filas[0] = "" + lista.get(i).getCoOrdenComprasPK().getIdOrdenCompra();
+                Filas[1] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaEntrega().getTime()));
+                CoProveedores proveedor = ObtenerDTO.ObtenerProveedorPedido(lista.get(i).getIdProveedor());
+                Filas[2] = proveedor.getNombre();
+                InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido(lista.get(i).getIdTipoDocumento());
+                Filas[3] = tipoDocumento.getNombreDocumento();
+                Filas[4] = lista.get(i).getTotalCompra().setScale(2, BigDecimal.ROUND_HALF_UP).toEngineeringString();
+                Filas[5] = lista.get(i).getUsuarioCreacion();
+                Filas[6] = lista.get(i).getEstado();
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+
+            }
+        }
+
+    }
+
 }

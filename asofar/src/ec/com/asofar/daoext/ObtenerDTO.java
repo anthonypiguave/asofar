@@ -40,6 +40,7 @@ import ec.com.asofar.dto.SeProvincia;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -185,6 +186,24 @@ public class ObtenerDTO {
 
     }
 
+    public static CoProveedores ObtenerProveedorPedido(BigInteger id) {
+        CoProveedoresJpaController control = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoProveedores dto = new CoProveedores();
+        List<CoProveedores> lista = control.findCoProveedoresEntities();
+
+        BigInteger big = id;
+        int valor = big.intValue();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdProveedor() == valor) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
     public static InTipoDocumento ObtenerDocumentoPedido(String nombre) {
         InTipoDocumentoJpaController control = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
         InTipoDocumento dto = new InTipoDocumento();
@@ -192,6 +211,24 @@ public class ObtenerDTO {
 
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getNombreDocumento().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
+    public static InTipoDocumento ObtenerDocumentoPedido(BigInteger id) {
+        InTipoDocumentoJpaController control = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InTipoDocumento dto = new InTipoDocumento();
+        List<InTipoDocumento> lista = control.findInTipoDocumentoEntities();
+
+        BigInteger big = id;
+        int valor = big.intValue();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdTipoDocumento() == valor) {
                 dto = lista.get(i);
                 break;
             }
