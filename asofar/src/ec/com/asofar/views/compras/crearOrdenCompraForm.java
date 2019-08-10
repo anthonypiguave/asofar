@@ -890,7 +890,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                     ///////////setear cab movimientos
                     cabMovimiento.setFechaSistema(d);
                     cabMovimiento.setAnioDocumento(fecha);
-                    cabMovimiento.setIdProveedor(proveedor);
+//                    cabMovimiento.setIdProveedor(proveedor);
                     cabMovimiento.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
                     cabMovimiento.setEstado("P");
 
