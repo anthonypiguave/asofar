@@ -22,10 +22,9 @@ public class InKardexExt extends InKardexJpaController {
         super(emf);
     }
 
-    public List<InKardex> obtenerProducto(Long id) {
+    public List<InKardex> obtenerProductoKardex(Long id) {
         EntityManager em = getEntityManager();
-        List<InKardex> lprod = null;
-
+        List<InKardex> QKardex = null;
 //        String nativeQuery = "SELECT P.*"
 //                + " FROM pr_productos P\n"
 //                + "WHERE P.estado='A';";
@@ -34,7 +33,7 @@ public class InKardexExt extends InKardexJpaController {
                 + "WHERE id_producto = " + id +" "
                 + " AND fecha_movimiento=(SELECT MAX(fecha_movimiento)FROM `in_kardex`)";
         Query query = em.createNativeQuery(nativeQuery, InKardex.class);
-        lprod = query.getResultList();
-        return lprod;
+        QKardex = query.getResultList();
+        return QKardex;
     }
 }

@@ -39,7 +39,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     PrProductos objProd = new PrProductos();
     List<PrDetalleTarifario> listaDetaTari;
     List<PrPrestaciones> listaPresta;
-//    List<PrPrestaciones> listaPresta;
     InKardexJpaController Kc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductosJpaController Pc = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrDetalleTarifarioJpaController Dtc = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
