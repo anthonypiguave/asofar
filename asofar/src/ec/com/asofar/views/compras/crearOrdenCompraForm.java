@@ -26,10 +26,8 @@ import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InDetalleMovimiento;
 import ec.com.asofar.dto.InDetalleMovimientoPK;
-import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InMovimientos;
-import ec.com.asofar.dto.InMovimientosPK;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.PrProductos;
@@ -819,7 +817,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 cabOrden.setIdProveedor(BigInteger.valueOf(proveedor.getIdProveedor()));
                 cabOrden.setObservacion(txtObservacion.getText());
                 cabOrden.setIdTipoDocumento(BigInteger.valueOf(tipoDocumento.getIdTipoDocumento()));
-                cabOrden.setEstado("A");
+                cabOrden.setEstado("P");
                 cabOrden.setFechaEntrega(fecha);
 
                 cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
@@ -977,6 +975,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         fechaEntrega.setVisible(true);
 
         fecha = fechaEntrega.getFecha();
+        
+        System.out.println("hhhhhhhhhhhhhh " + fecha.getTime());
 
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         txtFechaEntrega.setText(String.format(formatoFecha.format(fecha)));

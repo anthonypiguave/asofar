@@ -255,6 +255,10 @@ public class seleccionarOrdenCompraRecibidoForm extends javax.swing.JDialog {
 
         try {
             lista = cabCompraController.findCoOrdenComprasEntities();
+            
+            for (int i = 0; i < lista.size(); i++) {
+                System.out.println(" timeeeee " + lista.get(i).getFechaEntrega().getTime());
+            }
 
             Tablas.listarCabOrdendeCompra(lista, tbAprobar);
         } catch (Exception e) {
