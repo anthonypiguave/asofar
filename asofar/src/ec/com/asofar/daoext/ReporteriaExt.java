@@ -45,22 +45,12 @@ public class ReporteriaExt {
             System.out.println("lalala");
             
         
-//            for (ReporteComprasDTO1 str : itemList) {
-//                System.out.println(str.getId_orden_compra());
-//            }
+
             for (int i = 0; i < itemList.size(); i++) {
-                  System.out.println(itemList.get(i).getId_orden_compra().toString());
+                  System.out.println(itemList.get(i).getId_orden_compra().toString()+" "+
+                          itemList.get(i).getId_tipo_documento().toString());
             }
-//        
-//        Iterator<CoOrdenCompras> iter = lista.iterator();
-//        
-//        while (iter.hasNext()) {
-//            System.out.println(iter.next());
-//        }
-//        for (int i = 0; i < lista.size(); i++) {
-//            System.out.println("fffff" + lista.get(i).getEstado());
-//
-//        }
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -132,11 +122,22 @@ public class ReporteriaExt {
     public  List<ReporteComprasDTO1> listarCategorias() {
        // EntityManager em = getEntityManager();
         List<ReporteComprasDTO1> lista = null;
-        String nativeQuery = "SELECT c FROM co_orden_compras c";
-        Query query = em.createQuery(nativeQuery);
+        String nativeQuery = "SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c";
+        Query query = em.createNativeQuery(nativeQuery);
         //query.setParameter(1, Integer.parseInt(id));
         try {
-            lista = query.getResultList();
+            
+            List<Object[]> lsObj=query.getResultList();
+            lista= new ArrayList<ReporteComprasDTO1>();
+            
+            for (Object[] ooo:lsObj)
+            {
+                ReporteComprasDTO1 oo= new ReporteComprasDTO1();
+                oo.setId_orden_compra(Long.parseLong(ooo[0].toString()));
+                oo.setId_tipo_documento(Long.parseLong(ooo[1].toString()));
+                lista.add(oo);
+            }
+            
         } catch (Exception ex) {
                ex.printStackTrace();
         }
