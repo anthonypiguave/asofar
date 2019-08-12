@@ -10,6 +10,7 @@ import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dto.InKardex;
+import ec.com.asofar.dto.InKardexPK;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
@@ -47,7 +48,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     PrPrestaciones objPrest = new PrPrestaciones();
     PrDetalleTarifario objDetalTa = new PrDetalleTarifario();
     VeFacturaDetalle objFacDet = new VeFacturaDetalle();
-    Long id_pre;
+    Long id_pre,id_bodega;
     String nombre;
     BigInteger id_prod, id_Unidad;
     Double descuento;
@@ -70,7 +71,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -263,7 +263,9 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
                 iva = objPrest.getAplicaIva();
                 precio = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
                 id_Unidad = listaDetaTari.get(id).getIdUnidadServicio();
+//                 id_bodega = listaKardex.get(id).getInKardexPK().getIdBodega();
 
+                System.out.println("---" + id_bodega);
                 if (tba_productos.getValueAt(id, 5).toString().equals("-")) {
                     descuento = 0.0;
                 } else {
@@ -279,6 +281,12 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tba_productosMousePressed
+//   public InKardex getKardex(){
+//       InKardex objKardex = new InKardex();
+//       objKardex.setInKardexPK(new InKardexPK());
+//       objKardex.getInKardexPK().setIdBodega(id_bodega);
+//        return objKardex;
+//   }
     public VeFacturaDetalle getFac() {
         VeFacturaDetalle objFac = new VeFacturaDetalle();
         objFac.setValorDescuento(descuento);

@@ -105,7 +105,10 @@ public class Venta extends javax.swing.JInternalFrame {
     VeCajaJpaController cajaC = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     MovimientosDaoExt obtenerIdMovimiento = new MovimientosDaoExt(EntityManagerUtil.ObtenerEntityManager());
 ////
-List<InKardex> ListKardex=null;
+
+    List<InKardex> lisKar;
+    InKardexJpaController KarC = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<InKardex> ListKardex = null;
     InKardexExt selectKardex = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
 
     public Venta() {
@@ -140,10 +143,10 @@ List<InKardex> ListKardex=null;
 
         ListKardex = selectKardex.obtenerProductoKardex(Long.valueOf(18));
         for (int i = 0; i < ListKardex.size(); i++) {
-        System.out.println("prueba "+ ListKardex.get(i).getCantidad());
-        System.out.println(" "+ ListKardex.get(i).getSaldoActual());
-        System.out.println(" "+ ListKardex.get(i).getSaldoAnterior());
-            
+            System.out.println("prueba " + ListKardex.get(i).getCantidad());
+            System.out.println(" " + ListKardex.get(i).getSaldoActual());
+            System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
+
         }
     }
 
@@ -745,7 +748,7 @@ List<InKardex> ListKardex=null;
                 .addComponent(jLabel2))
         );
 
-        setBounds(0, 0, 794, 659);
+        setBounds(0, 0, 794, 675);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -1106,29 +1109,6 @@ List<InKardex> ListKardex=null;
                     detFact.setFechaCreacion(d);
 
                     detFactController.create(detFact);
-                    /*
-                      in_kardex id Prodcto           
-                      13                 
-                       15
-                       22
-                        21
-                     */
-//                    listaKardex = Kc.findInKardexEntities();
-//                    listaPresta = Prestc.findPrPrestacionesEntities();
-//
-//                    for (int j = 0; j < listaKardex.size(); j++) {
-//                        for (int k = 0; k < listaPresta.size(); k++) {
-//                            if (BigInteger.valueOf(listaKardex.get(j).getInKardexPK().getIdProducto()) == listaPresta.get(k).getIdPoducto()) {
-//                            }
-////                            System.out.println("-------");
-//                            for (int l = 0; l < tba_detalle.getRowCount(); l++) {
-//                                if (listaPresta.get(k).getIdPrestacion() == tba_detalle.getValueAt(l, 1)) {
-//                                }
-////                                objetoKardex.set
-//                                System.out.println(" " + listaPresta.get(k).getIdPrestacion());
-//                            }
-//                        }
-//                    }
                 }
 /////////// AGREGANDO A MOVIMIENTO
                 InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -1170,12 +1150,12 @@ List<InKardex> ListKardex=null;
 //                    System.out.println(" IDcabedcera movimiento" + pkMovimiento);
 
                     for (int i = 0; i < listaDetFactura.size(); i++) {
-                        ////////////setear para la pk detalle con cab movimiento
                         detMovimiento.setInMovimientos(pkMovimiento);
-                        ///////////setear detalle movimientos
                         detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
                         detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
                         Long id = IdProductoDsdObPres(listaDetFactura);
+                        Long id_Bod = IdBodegD(id);
+                        
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(id);
 //                        BigDecimal precio = new BigDecimal(listaDetFactura.get(i).getPrecioUnitarioVenta());
 //                        Double pr = precio.doubleValue();
@@ -1194,6 +1174,7 @@ List<InKardex> ListKardex=null;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                /*AAgregar a KardeX*/
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
             } catch (Exception e) {
@@ -1206,16 +1187,31 @@ List<InKardex> ListKardex=null;
     public Long IdProductoDsdObPres(List<VeFacturaDetalle> listaDetFactura) {
         Long id_producto = null;
         listaPresta = Prestc.findPrPrestacionesEntities();
+        
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
-
-                if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
-                    id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
-                }
+//                for (int k = 0; k < lisKar.size(); k++) {
+                    if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
+                        id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
+//                        if (id_producto.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
+//                        id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
+//                        }
+                    }
+//                }
             }
         }
         return id_producto;
 
+    }
+    public Long IdBodegD(Long id_Pro){
+        Long id_bog = null;
+        lisKar = KarC.findInKardexEntities();
+        for (int k = 0; k < lisKar.size(); k++) {
+            if (id_Pro.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
+                id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
+            }
+        }
+        return id_bog ;
     }
 
     public Double calcularSubtotalItemCantMod(BigInteger cantMod, Double PrecioIva) {
