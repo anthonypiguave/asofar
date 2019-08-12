@@ -32,22 +32,25 @@ public class ReporteriaExt {
 
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("asofarPU");
     static EntityManager em = emf.createEntityManager();
-
+    static ReporteriaExt ed = new ReporteriaExt();
+    
     public static void main(String[] args) {
         try{
-        List<ReporteComprasDTO1> itemList = new ArrayList<ReporteComprasDTO1>();
-        itemList = reporteCompras(em);
+        List<ReporteComprasDTO1> itemList = null;
+        //itemList = reporteCompras(em);
       //  reporteCompras2(em);
-            //System.out.println("j "+itemList.add("id_orden_compra"));
+       // itemList = obtenerEjemplo();
+        itemList= ed.listarCategorias();
+//System.out.println("j "+itemList.add("id_orden_compra"));
             System.out.println("lalala");
             
         
-            for (ReporteComprasDTO1 str : itemList) {
-                System.out.println(str.getId_orden_compra());
-            }
-//            for (int i = 0; i < itemList.size(); i++) {
-//                  System.out.println(itemList.get(i).getFecha_entrega().toString());
+//            for (ReporteComprasDTO1 str : itemList) {
+//                System.out.println(str.getId_orden_compra());
 //            }
+            for (int i = 0; i < itemList.size(); i++) {
+                  System.out.println(itemList.get(i).getId_orden_compra().toString());
+            }
 //        
 //        Iterator<CoOrdenCompras> iter = lista.iterator();
 //        
@@ -64,7 +67,7 @@ public class ReporteriaExt {
     }
 
     public static List<ReporteComprasDTO1> reporteCompras(EntityManager em) {
-        List<ReporteComprasDTO1> listaCompra = new ArrayList<>();
+        List<ReporteComprasDTO1> listaCompra = new ArrayList<ReporteComprasDTO1>();
         List  obj4 =null;
 //        ArrayList<ReporteComprasDTO1> lista = new ArrayList<>();
 //        ReporteComprasDTO1 obj=null;
@@ -86,18 +89,18 @@ public class ReporteriaExt {
           Query q = em.createNativeQuery("SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c");
           for (int i = 0; i <  q.getResultList().size(); i++) {
              ReporteComprasDTO1 obj = new ReporteComprasDTO1();
-//             obj.setId_orden_compra(Long.valueOf(q.getResultList().get(i).toString()));
-//             obj.setId_tipo_documento(Long.valueOf(q.getResultList().get(i).toString()));
-               obj4 = q.getResultList();
-           //   listaCompra.add(obj);
+             obj.setId_orden_compra(Long.valueOf(q.getResultList().get(i).toString()));
+             obj.setId_tipo_documento(Long.valueOf(q.getResultList().get(i).toString()));
+              // obj4 = q.getResultList();
+             listaCompra.add(obj);
               
         }
-         
-         for (int j = 0; j < obj4.size(); j++) {
-                 ReporteComprasDTO1 obj = new ReporteComprasDTO1();
-                 obj.setId_orden_compra(Long.valueOf(obj4.get(j).toString()));
-                 listaCompra.add(obj);
-              }
+//         
+//         for (int j = 0; j < obj4.size(); j++) {
+//                 ReporteComprasDTO1 obj = new ReporteComprasDTO1();
+//                 obj.setId_orden_compra(Long.valueOf(obj4.get(j).toString()));
+//                 listaCompra.add(obj);
+//              }
 
             for (ReporteComprasDTO1 a : listaCompra) {
                 System.out.println("Author "
@@ -117,16 +120,26 @@ public class ReporteriaExt {
         
     }
      
-    public static void reporteCompras2(EntityManager em) {
-        List<ReporteComprasDTO1> listaCompra = new ArrayList<>();
-      Query query = em.createNativeQuery(
-                "SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c", 
-                ReporteComprasDTO1.class);
-        for (int i = 0; i < query.getResultList().size(); i++) {
-            listaCompra = (List)query.getResultList().get(i);
+    public static ArrayList<ReporteComprasDTO1> obtenerEjemplo() {
+       // EntityManager em = getEntityManager();
+        ArrayList<ReporteComprasDTO1> QKardex = null;
+        String nativeQuery = "SELECT c FROM co_orden_compras c";
+        Query query = em.createNativeQuery(nativeQuery);
+        QKardex = (ArrayList)query.getResultList();
+        return QKardex;
+    }
+    
+    public  List<ReporteComprasDTO1> listarCategorias() {
+       // EntityManager em = getEntityManager();
+        List<ReporteComprasDTO1> lista = null;
+        String nativeQuery = "SELECT c FROM co_orden_compras c";
+        Query query = em.createQuery(nativeQuery);
+        //query.setParameter(1, Integer.parseInt(id));
+        try {
+            lista = query.getResultList();
+        } catch (Exception ex) {
+               ex.printStackTrace();
         }
-        for (ReporteComprasDTO1 r : listaCompra) {
-            System.out.println(r.getId_orden_compra().toString()+"  "+r.getId_tipo_documento().toString());
-        }
+        return lista;
     }
 }
