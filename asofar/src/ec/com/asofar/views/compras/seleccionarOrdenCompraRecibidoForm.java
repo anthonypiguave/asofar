@@ -107,7 +107,7 @@ public class seleccionarOrdenCompraRecibidoForm extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SELECIONAR ORDEN DE PEDIDO");
+        jLabel1.setText("SELECIONAR ORDEN DE COMPRA");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -227,8 +227,9 @@ public class seleccionarOrdenCompraRecibidoForm extends javax.swing.JDialog {
 
                 this.setVisible(false);
 
-//                crearOrdenCompraForm crearOrdenCompra = new crearOrdenCompraForm(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal, objeto);
-//                crearOrdenCompra.setVisible(true);
+                recibirOrdenCompraForm recibirOrdenCompra = new recibirOrdenCompraForm(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal, objeto);
+                recibirOrdenCompra.setVisible(true);
+
             }
         }
 
@@ -255,10 +256,6 @@ public class seleccionarOrdenCompraRecibidoForm extends javax.swing.JDialog {
 
         try {
             lista = cabCompraController.findCoOrdenComprasEntities();
-            
-            for (int i = 0; i < lista.size(); i++) {
-                System.out.println(" timeeeee " + lista.get(i).getFechaEntrega().getTime());
-            }
 
             Tablas.listarCabOrdendeCompra(lista, tbAprobar);
         } catch (Exception e) {

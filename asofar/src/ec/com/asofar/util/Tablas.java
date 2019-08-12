@@ -17,6 +17,7 @@ import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
+import ec.com.asofar.dto.InDetalleMovimiento;
 import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
@@ -79,6 +80,7 @@ public class Tablas {
     private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
+    private static boolean[] tbordenrecibido = {false, false, false, false, false, false};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -2286,6 +2288,53 @@ public class Tablas {
             }
         }
 
+    }
+
+    public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
+        tabla.setDefaultRenderer(Object.class,
+                new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO"}, 0) {
+
+            Class[] types = new Class[]{
+                java.lang.Object.class,
+                java.lang.Object.class,
+                java.lang.Object.class,
+                java.lang.Object.class,
+                java.lang.Object.class,
+                JCheckBox.class,};
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return tbordenrecibido[column];
+            }
+
+        };
+
+        if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+                Object filas[] = new Object[6];
+
+                filas[0] = "" + lista.get(i).getInDetalleMovimientoPK().getLineaDetalle();
+                filas[1] = "" + lista.get(i).getInDetalleMovimientoPK().getIdProducto();
+                filas[2] = lista.get(i).getDescripcion();
+                filas[3] = lista.get(i).getCantidad().toString();
+                filas[4] = lista.get(i).getPrecioUnitario().toString();
+
+                JCheckBox ch = new JCheckBox();
+                ch.setSelected(false);
+
+                filas[5] = ch;
+
+
+                dt.addRow(filas);
+            }
+
+        }
+
+        tabla.setModel(dt);
     }
 
 }
