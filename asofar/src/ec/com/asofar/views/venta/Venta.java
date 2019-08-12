@@ -1155,7 +1155,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
                         Long id = IdProductoDsdObPres(listaDetFactura);
                         Long id_Bod = IdBodegD(id);
-                        
+                        detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(id);
 //                        BigDecimal precio = new BigDecimal(listaDetFactura.get(i).getPrecioUnitarioVenta());
 //                        Double pr = precio.doubleValue();
@@ -1206,6 +1206,7 @@ public class Venta extends javax.swing.JInternalFrame {
     public Long IdBodegD(Long id_Pro){
         Long id_bog = null;
         lisKar = KarC.findInKardexEntities();
+        
         for (int k = 0; k < lisKar.size(); k++) {
             if (id_Pro.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
                 id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
