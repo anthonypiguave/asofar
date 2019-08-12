@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author admin
+ * @author admin1
  */
 @Embeddable
 public class SeOpcionesRolesPK implements Serializable {

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin
+ * @author admin1
  */
 @Entity
 @Table(name = "in_detalle_movimiento")
@@ -46,6 +46,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InDetalleMovimiento.findByPrecioUnitario", query = "SELECT i FROM InDetalleMovimiento i WHERE i.precioUnitario = :precioUnitario")
     , @NamedQuery(name = "InDetalleMovimiento.findByEstado", query = "SELECT i FROM InDetalleMovimiento i WHERE i.estado = :estado")
     , @NamedQuery(name = "InDetalleMovimiento.findByDespachado", query = "SELECT i FROM InDetalleMovimiento i WHERE i.despachado = :despachado")
+    , @NamedQuery(name = "InDetalleMovimiento.findByIdBodegaOrigen", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idBodegaOrigen = :idBodegaOrigen")
+    , @NamedQuery(name = "InDetalleMovimiento.findByIdBodegaDestino", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idBodegaDestino = :idBodegaDestino")
+    , @NamedQuery(name = "InDetalleMovimiento.findByIdSucursalDestino", query = "SELECT i FROM InDetalleMovimiento i WHERE i.idSucursalDestino = :idSucursalDestino")
     , @NamedQuery(name = "InDetalleMovimiento.findByUsuarioCreacion", query = "SELECT i FROM InDetalleMovimiento i WHERE i.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "InDetalleMovimiento.findByFechaCreacion", query = "SELECT i FROM InDetalleMovimiento i WHERE i.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "InDetalleMovimiento.findByUsuarioActualizacion", query = "SELECT i FROM InDetalleMovimiento i WHERE i.usuarioActualizacion = :usuarioActualizacion")
@@ -69,6 +72,12 @@ public class InDetalleMovimiento implements Serializable {
     private String estado;
     @Column(name = "despachado")
     private String despachado;
+    @Column(name = "id_bodega_origen")
+    private BigInteger idBodegaOrigen;
+    @Column(name = "id_bodega_destino")
+    private BigInteger idBodegaDestino;
+    @Column(name = "id_sucursal_destino")
+    private BigInteger idSucursalDestino;
     @Column(name = "usuario_creacion")
     private String usuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -154,6 +163,30 @@ public class InDetalleMovimiento implements Serializable {
 
     public void setDespachado(String despachado) {
         this.despachado = despachado;
+    }
+
+    public BigInteger getIdBodegaOrigen() {
+        return idBodegaOrigen;
+    }
+
+    public void setIdBodegaOrigen(BigInteger idBodegaOrigen) {
+        this.idBodegaOrigen = idBodegaOrigen;
+    }
+
+    public BigInteger getIdBodegaDestino() {
+        return idBodegaDestino;
+    }
+
+    public void setIdBodegaDestino(BigInteger idBodegaDestino) {
+        this.idBodegaDestino = idBodegaDestino;
+    }
+
+    public BigInteger getIdSucursalDestino() {
+        return idSucursalDestino;
+    }
+
+    public void setIdSucursalDestino(BigInteger idSucursalDestino) {
+        this.idSucursalDestino = idSucursalDestino;
     }
 
     public String getUsuarioCreacion() {
