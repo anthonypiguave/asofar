@@ -86,7 +86,7 @@ public void cargartabla() {
         jLabel1 = new javax.swing.JLabel();
         txtfiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jsalir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtablaprestaciones = new javax.swing.JTable();
@@ -117,13 +117,19 @@ public void cargartabla() {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("BUSCAR");
 
-        jButton1.setBackground(new java.awt.Color(170, 38, 53));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(254, 254, 254));
-        jButton1.setText("SALIR");
+        jsalir.setBackground(new java.awt.Color(170, 38, 53));
+        jsalir.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jsalir.setForeground(new java.awt.Color(254, 254, 254));
+        jsalir.setText("SALIR");
+        jsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jsalirActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        jtablaprestaciones.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtablaprestaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -171,11 +177,11 @@ public void cargartabla() {
                         .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 232, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(285, 285, 285)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,8 +194,8 @@ public void cargartabla() {
                 .addGap(15, 15, 15)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(71, 71, 71))
+                .addComponent(jsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -234,6 +240,11 @@ public void cargartabla() {
         }
         
     }//GEN-LAST:event_jtablaprestacionesMousePressed
+
+    private void jsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsalirActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jsalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,12 +294,12 @@ public void cargartabla() {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jsalir;
     private javax.swing.JTable jtablaprestaciones;
     private javax.swing.JTextField txtfiltro;
     // End of variables declaration//GEN-END:variables
