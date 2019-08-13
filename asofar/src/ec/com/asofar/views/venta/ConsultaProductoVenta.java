@@ -10,6 +10,8 @@ import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.daoext.InKardexExt;
+import ec.com.asofar.daoext.JoinProductoVenta;
+import ec.com.asofar.daoext.JoinProductoVentaExt;
 import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InKardexPK;
 import ec.com.asofar.dto.PrDetalleTarifario;
@@ -57,6 +59,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     Double precio;
     List<InKardex> ListKardex = null;
     InKardexExt selectKardex = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
+    List<JoinProductoVenta> ListProdVenta = null;
+    JoinProductoVentaExt selectProdVenta = new JoinProductoVentaExt();
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -64,15 +68,17 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cargarTbaProduc();
+        Prueba();
     }
 
     public void Prueba() {
 
-        ListKardex = selectKardex.obtenerProductoKardex(Long.valueOf(18));
-        for (int i = 0; i < ListKardex.size(); i++) {
-            System.out.println("prueba " + ListKardex.get(i).getCantidad());
-            System.out.println(" " + ListKardex.get(i).getSaldoActual());
-            System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
+        ListProdVenta = selectProdVenta.listarProductoVenta();
+        for (int i = 0; i < ListProdVenta.size(); i++) {
+//            System.out.println("prueba 86" + ListProdVenta.get(i).getIdKardex());
+//            System.out.println(" " + ListProdVenta.get(i).getStock());
+//            System.out.println(" " + ListProdVenta.get(i).getDescuento());
+//            System.out.println("iva " + ListProdVenta.get(i).getIva());
 
         }
     }

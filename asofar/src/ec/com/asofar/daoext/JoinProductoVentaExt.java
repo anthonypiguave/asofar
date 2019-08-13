@@ -41,23 +41,43 @@ public class JoinProductoVentaExt {
         Query query = em.createNativeQuery(nativeQuery);
         //query.setParameter(1, Integer.parseInt(id));
         try {
-
             List<Object[]> lsObj = query.getResultList();
             lista = new ArrayList<JoinProductoVenta>();
 
+/*--id_kardex,
+            id_producto,
+            id_prestacion,
+            id_bodega,
+            codigo_barra
+            ,nombre_producto,
+            cantidad,
+            id_unidad_servicio
+valor_venta,valor_descuento,
+pro.codigo_barra,aplica_i*/
+            
             for (Object[] ooo : lsObj) {
                 JoinProductoVenta oo = new JoinProductoVenta();
-                oo.setIdKardex((BigInteger)ooo[0]);
-                oo.setIdProducto((BigInteger)ooo[1]);
-                oo.setIdPrestacion((BigInteger)ooo[2]);
-                oo.setIdBodega((BigInteger)ooo[3]);
-                oo.setCodigoBarra(ooo[4].toString());
+                oo.setIdKardex(Long.parseLong(ooo[0].toString()));
+                oo.setIdProducto(Long.parseLong(ooo[1].toString()));
+                oo.setIdPrestacion(Long.parseLong(ooo[2].toString()));
+                oo.setIdBodega(Long.parseLong(ooo[3].toString()));
+                if (ooo[4] == null) {
+                    oo.setCodigoBarra("-");
+//                    System.out.println("4 "+ooo[4].toString());
+                } else {
+                    oo.setCodigoBarra(ooo[4].toString());
+                }
                 oo.setDescripcion(ooo[5].toString());
-                oo.setStock((Integer) ooo[6]);
-                oo.setValorventa((Double) ooo[7]);
-                oo.setDescuento((Double) ooo[8]);
-                oo.setIva(ooo[9].toString());
-
+                oo.setStock(Integer.parseInt(ooo[6].toString()));
+                oo.setIdUnidadServicio(Long.parseLong(ooo[7].toString()));
+                oo.setValorventa(Double.parseDouble(ooo[8].toString()));
+                oo.setDescuento(Double.parseDouble(ooo[9].toString()));
+                if (ooo[9] == null) {
+                    oo.setIva("erros");
+//                    System.out.println("9 "+ooo[9].toString());
+                } else {
+                    oo.setIva(ooo[9].toString());
+                }
                 lista.add(oo);
             }
 

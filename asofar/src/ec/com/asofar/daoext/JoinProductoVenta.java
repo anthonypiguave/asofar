@@ -12,11 +12,11 @@ import java.math.BigInteger;
  * @author admin1
  */
 public class JoinProductoVenta {
-    public BigInteger idKardex ;
-    public BigInteger idPrestacion ;
-    public BigInteger idBodega ;
-    public BigInteger idProducto ;
-    public BigInteger idUnidadServicio ;
+    public Long idKardex ;
+    public Long idPrestacion ;
+    public Long idBodega ;
+    public Long idProducto ;
+    public Long idUnidadServicio ;
     public String codigoBarra;
     public String descripcion;
     public Integer stock;
@@ -24,43 +24,43 @@ public class JoinProductoVenta {
     public Double descuento;
     public String iva;
 
-    public BigInteger getIdKardex() {
+    public Long getIdKardex() {
         return idKardex;
     }
 
-    public void setIdKardex(BigInteger idKardex) {
+    public void setIdKardex(Long idKardex) {
         this.idKardex = idKardex;
     }
 
-    public BigInteger getIdPrestacion() {
+    public Long getIdPrestacion() {
         return idPrestacion;
     }
 
-    public void setIdPrestacion(BigInteger idPrestacion) {
+    public void setIdPrestacion(Long idPrestacion) {
         this.idPrestacion = idPrestacion;
     }
 
-    public BigInteger getIdBodega() {
+    public Long getIdBodega() {
         return idBodega;
     }
 
-    public void setIdBodega(BigInteger idBodega) {
+    public void setIdBodega(Long idBodega) {
         this.idBodega = idBodega;
     }
 
-    public BigInteger getIdProducto() {
+    public Long getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(BigInteger idProducto) {
+    public void setIdProducto(Long idProducto) {
         this.idProducto = idProducto;
     }
 
-    public BigInteger getIdUnidadServicio() {
+    public Long getIdUnidadServicio() {
         return idUnidadServicio;
     }
 
-    public void setIdUnidadServicio(BigInteger idUnidadServicio) {
+    public void setIdUnidadServicio(Long idUnidadServicio) {
         this.idUnidadServicio = idUnidadServicio;
     }
 
@@ -112,5 +112,6 @@ public class JoinProductoVenta {
         this.iva = iva;
     }
 
-  
 }
+
+  
