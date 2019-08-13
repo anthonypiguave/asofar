@@ -1094,9 +1094,9 @@ public class Venta extends javax.swing.JInternalFrame {
                 InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
                 InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
                 InMovimientos cabMovimiento = new InMovimientos();
-//                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento(cbx_movimiento.getSelectedItem().toString());
-//                InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
-//                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos(cbx_motivo.getSelectedItem().toString());
+                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
+                InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
+                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
 
                 InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
                 try {/*`id_movimientos`
@@ -1114,11 +1114,12 @@ public class Venta extends javax.swing.JInternalFrame {
 `fecha_factura`
 `estado`*/
                     cabMovimiento.setSeSucursal(suc);
-//                    cabMovimiento.setInTipoDocumento(tipoDocumento);7
-//                    cabMovimiento.setInTipoMovimiento(tipoMovimiento);1
-//                    cabMovimiento.setInMotivos(tipoMotivos);7
+                    cabMovimiento.setInTipoDocumento(tipoDocumento);/*7*/
+                    cabMovimiento.setInTipoMovimiento(tipoMovimiento);/*1*/
+                    cabMovimiento.setInMotivos(tipoMotivos);/*7*/
+                    cabMovimiento.setAnioDocumento(d);
                     cabMovimiento.setFechaSistema(d);
-                    cabMovimiento.setAnioDocumento(fecha);
+//                    cabMovimiento.setAnioDocumento(fecha);
                     cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
                     cabMovimiento.setEstado("F");
                     cabMovimiento.setFechaFactura(d);
