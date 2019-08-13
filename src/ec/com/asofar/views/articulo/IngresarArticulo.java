@@ -235,7 +235,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         if(estado.getSelectedIndex() == 0){
             valor="A";
         }
-        sub = ObtenerDTO.ObtenerPrSubGrupos(subgrupo.getSelectedItem().toString());
+       sub = ObtenerDTO.ObtenerPrSubGrupos(subgrupo.getSelectedItem().toString());
         
         arti.setNombreArticulo(articulo.getText());
         arti.setPrSubgrupos(sub);
