@@ -6,6 +6,7 @@
 package ec.com.asofar.daoext;
 
 import ec.com.asofar.dto.CoOrdenCompras;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,8 +40,8 @@ public class ReporteriaExt {
         List<ReporteComprasDTO1> itemList = null;
         //itemList = reporteCompras(em);
       //  reporteCompras2(em);
-       // itemList = obtenerEjemplo();
-        itemList= ed.listarCategorias();
+         itemList = obtenerEjemplo();
+        //itemList= ed.listarCategorias();
 //System.out.println("j "+itemList.add("id_orden_compra"));
             System.out.println("lalala");
             
@@ -56,48 +57,46 @@ public class ReporteriaExt {
         }
     }
 
-    public static List<ReporteComprasDTO1> reporteCompras(EntityManager em) {
-        List<ReporteComprasDTO1> listaCompra = new ArrayList<ReporteComprasDTO1>();
-        List  obj4 =null;
-//        ArrayList<ReporteComprasDTO1> lista = new ArrayList<>();
-//        ReporteComprasDTO1 obj=null;
-//        System.out.println("jjjj");
-//       
-//          String nativeQuery = "SELECT id_orden_compra FROM co_orden_compras c";
-//          Query  query = em.createNativeQuery(nativeQuery);
-//          listaCompra = (ArrayList)query.getResultList();
-//          for (int i = 0; i < listaCompra.size(); i++) {
-//            //listaCompra = ((List)query.getResultList());
-//            obj.setId_orden_compra(listaCompra.get(i).getId_orden_compra());
-//            lista.add(obj);
-//        }
-//        
-//        for (ReporteComprasDTO1 f : lista) {
-//            System.out.println(f.getId_orden_compra());
-//        }
-                 
-          Query q = em.createNativeQuery("SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c");
-          for (int i = 0; i <  q.getResultList().size(); i++) {
-             ReporteComprasDTO1 obj = new ReporteComprasDTO1();
-             obj.setId_orden_compra(Long.valueOf(q.getResultList().get(i).toString()));
-             obj.setId_tipo_documento(Long.valueOf(q.getResultList().get(i).toString()));
-              // obj4 = q.getResultList();
-             listaCompra.add(obj);
-              
+    public static List<ReporteComprasDTO> reporteCompras(EntityManager em) {
+        List<ReporteComprasDTO> listaCompra = null;
+        Query q = em.createNativeQuery("SELECT  distinct\n" +
+                        "	 c.id_orden_compra,\n" +
+                        "	 c.id_tipo_documento,\n" +
+                        "        c.fecha_entrega,\n" +
+                        "        c.id_proveedor,\n" +
+                        "        c.total_subtotal,\n" +
+                        "        c.total_ice,\n" +
+                        "        c.total_iva,\n" +
+                        "        c.total_compra\n" +
+                        "FROM co_orden_compras as c\n" +
+                        "inner join co_detalle_orden_compra as d  \n" +
+                        "	  on   c.id_orden_compra = d.id_orden_compra\n" +
+                        "      and  c.estado = 'P';");
+        List<Object[]> listobj = q.getResultList();
+        listaCompra = new ArrayList<ReporteComprasDTO>();   
+        
+        for (Object[] obj : listobj) {
+            ReporteComprasDTO ob = new ReporteComprasDTO();
+            ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
+            ob.setId_tipo_documento(Long.parseLong(obj[1].toString()));
+            ob.setFecha_entrega(Date.valueOf(obj[3].toString()));
+            ob.setId_proveedor(Long.parseLong(obj[4].toString()));
+            ob.setSubtotal(Double.parseDouble(obj[5].toString()));
+            ob.setIce(Double.parseDouble(obj[6].toString()));
+            ob.setIva(Double.parseDouble(obj[7].toString()));
+            ob.setTotal_compra(Double.parseDouble(obj[8].toString()));
+            listaCompra.add(ob);
         }
+//        
+//        for (int i = 0; i <  q.getResultList().size(); i++) {
+//             ReporteComprasDTO1 obj = new ReporteComprasDTO1();
+//             obj.setId_orden_compra(Long.valueOf(q.getResultList().get(i).toString()));
+//             obj.setId_tipo_documento(Long.valueOf(q.getResultList().get(i).toString()));
+//              // obj4 = q.getResultList();
+//             listaCompra.add(obj);
+//              
+//        }
 //         
-//         for (int j = 0; j < obj4.size(); j++) {
-//                 ReporteComprasDTO1 obj = new ReporteComprasDTO1();
-//                 obj.setId_orden_compra(Long.valueOf(obj4.get(j).toString()));
-//                 listaCompra.add(obj);
-//              }
-
-            for (ReporteComprasDTO1 a : listaCompra) {
-                System.out.println("Author "
-                        + a.getId_orden_compra().toString()
-                        + " "
-                        +a.getId_tipo_documento().toString());
-            }
         return listaCompra;
     }
     
@@ -110,12 +109,29 @@ public class ReporteriaExt {
         
     }
      
-    public static ArrayList<ReporteComprasDTO1> obtenerEjemplo() {
+    public static List<ReporteComprasDTO1> obtenerEjemplo() {
        // EntityManager em = getEntityManager();
-        ArrayList<ReporteComprasDTO1> QKardex = null;
-        String nativeQuery = "SELECT c FROM co_orden_compras c";
+        List<ReporteComprasDTO1> QKardex = null;
+        String nativeQuery = "SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c";
         Query query = em.createNativeQuery(nativeQuery);
-        QKardex = (ArrayList)query.getResultList();
+        
+        List<Object[]> listobj = query.getResultList();
+        QKardex = new ArrayList<ReporteComprasDTO1>();
+        
+//        for (int i = 0; i < listobj.size(); i++) {
+//            ReporteComprasDTO1 obj = new ReporteComprasDTO1();
+//            obj.setId_orden_compra(Long.valueOf(Arrays.toString(listobj.get(i))));
+//            obj.setId_tipo_documento(Long.valueOf(Arrays.toString(listobj.get(i))));
+//            QKardex.add(obj);
+//        }
+        int aux=0;
+        for (Object[] ob : listobj) {
+            ReporteComprasDTO1 obj = new ReporteComprasDTO1();
+            obj.setId_orden_compra(Long.valueOf(ob[0].toString()));
+            obj.setId_tipo_documento(Long.valueOf(ob[1].toString()));
+            QKardex.add(obj);
+            aux++;
+        }
         return QKardex;
     }
     

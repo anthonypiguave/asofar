@@ -24,3 +24,6 @@ hs_err_pid*
 /asofar/build/
 /asofar/dist/
 /asofar/nbproject/private/
+/nbproject/private/
+/build/
+/dist/
