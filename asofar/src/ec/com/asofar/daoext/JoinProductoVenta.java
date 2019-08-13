@@ -12,16 +12,25 @@ import java.math.BigInteger;
  * @author admin1
  */
 public class JoinProductoVenta {
+    public BigInteger idKardex ;
     public BigInteger idPrestacion ;
     public BigInteger idBodega ;
     public BigInteger idProducto ;
     public BigInteger idUnidadServicio ;
     public String codigoBarra;
     public String descripcion;
-    public String stock;
-    public Double precio;
+    public Integer stock;
+    public Double valorventa;
     public Double descuento;
     public String iva;
+
+    public BigInteger getIdKardex() {
+        return idKardex;
+    }
+
+    public void setIdKardex(BigInteger idKardex) {
+        this.idKardex = idKardex;
+    }
 
     public BigInteger getIdPrestacion() {
         return idPrestacion;
@@ -71,20 +80,20 @@ public class JoinProductoVenta {
         this.descripcion = descripcion;
     }
 
-    public String getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Double getValorventa() {
+        return valorventa;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setValorventa(Double valorventa) {
+        this.valorventa = valorventa;
     }
 
     public Double getDescuento() {
@@ -103,4 +112,5 @@ public class JoinProductoVenta {
         this.iva = iva;
     }
 
+  
 }
