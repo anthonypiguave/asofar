@@ -374,16 +374,29 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 //        objpres.getInPrestacionesPorServiciosPK().getIdPrestacion();
 //        System.out.println("jhfh" + objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
 //        System.out.println("" + objpres.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
-        pre.getPrTarifario().getPrTarifarioPK().setIdEmpresa(emp.getIdEmpresa());
+        
+        /////enviar el detalle tarifario a I donde la pretacion sea igua a la prestacion
+        //que envias y el estado sea A
+
+        PrTarifarioPK prTarifarioPK= new PrTarifarioPK();
+        prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
+        prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
+        prTarifarioPK.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
+        
+         PrTarifario prTarifario= new PrTarifario();
+        prTarifario.setPrTarifarioPK(prTarifarioPK);
+        pre.setPrTarifario(prTarifario);
+        /*pre.getPrTarifario().getPrTarifarioPK().setIdEmpresa(emp.getIdEmpresa());
         pre.getPrTarifario().getPrTarifarioPK().setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
         pre.getPrTarifario().getPrTarifarioPK().setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-//        pre.setPrTarifario(tp);
+*/
+        //        pre.setPrTarifario(tp);
 //        pre.set
         pre.setValorCosto(Double.parseDouble((txtvc.getText())));
         pre.setValorDescuento(Double.parseDouble((txtds.getText())));
         pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
         pre.setValorVenta(Double.parseDouble((txtven.getText())));
-
+pre.setEstado("A");
         pre.setUsuarioCreacion(USER.getText());
         pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
         pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
