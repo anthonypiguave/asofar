@@ -22,7 +22,7 @@ public class JoinProductoVentaExt {
     static EntityManager em = emf.createEntityManager();
     static ReporteriaExt ed = new ReporteriaExt();
 
-    public List<JoinProductoVenta> listarCategorias() {
+    public List<JoinProductoVenta> listarProductoVenta() {
         // EntityManager em = getEntityManager();
         List<JoinProductoVenta> lista = null;
         String nativeQuery
