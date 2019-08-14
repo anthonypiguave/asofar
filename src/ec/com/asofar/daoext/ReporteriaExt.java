@@ -25,6 +25,7 @@ import javax.persistence.TypedQuery;
  * @author usuario
  */
 public class ReporteriaExt {
+    //putoooo el que lo lea..!!
     // public String Query = null;
 ////     public ReporteriaExt(EntityManagerFactory emf) {
 ////        super(emf);
