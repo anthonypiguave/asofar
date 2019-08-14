@@ -40,11 +40,11 @@ public class ReporteriaExt {
     
     public static void main(String[] args) {
         try{
-        List<ReporteComprasDTO1> itemList = null;
+        List<ReporteComprasDTO> itemList = null;
        // itemList = reporteCompras();
       //  reporteCompras2(em);
         // itemList = obtenerEjemplo();
-        itemList= ed.listarCategorias();
+      //  itemList= ed.listarCategorias();
 //System.out.println("j "+itemList.add("id_orden_compra"));
 //            System.out.println("lalala");
             
@@ -52,7 +52,7 @@ public class ReporteriaExt {
 
             for (int i = 0; i < itemList.size(); i++) {
                   System.out.println(itemList.get(i).getId_orden_compra().toString()+" "+
-                          itemList.get(i).getId_tipo_documento().toString());
+                          itemList.get(i).getFecha_aprobacion().toString());
             }
 
         }catch(Exception e){
@@ -60,7 +60,7 @@ public class ReporteriaExt {
         }
     }
 
-    public static List<ReporteComprasDTO> reporteCompras() {
+    public  List<ReporteComprasDTO> reporteCompras() {
         
         Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
@@ -72,8 +72,8 @@ public class ReporteriaExt {
                 "        c.fecha_entrega,\n" +
                 "        c.id_proveedor,\n" +
                 "        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
-                "        c.total_ice,\n" +
-                "        c.total_iva,\n" +
+                "        ifnull(c.total_ice,0) as total_ice,\n" +
+                "        ifnull(c.total_iva,0) as total_iva,\n" +
                 "        c.total_compra\n" +
                 "FROM co_orden_compras as c\n" +
                 "inner join co_detalle_orden_compra as d  \n" +
@@ -86,7 +86,7 @@ public class ReporteriaExt {
             ReporteComprasDTO ob = new ReporteComprasDTO();
             ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
             ob.setId_tipo_documento(Long.parseLong(obj[1].toString()));
-            ob.setDescripcion(obj[2].toString());
+            ob.setFecha_aprobacion(Date.valueOf(obj[2].toString()));
             ob.setId_proveedor(Long.parseLong(obj[3].toString()));
             ob.setSubtotal(Double.parseDouble(obj[4].toString()));
             ob.setIce(Double.parseDouble(obj[5].toString()));

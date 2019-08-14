@@ -5,11 +5,15 @@
  */
 package ec.com.asofar.views.reporteria;
 
+import ec.com.asofar.daoext.ReporteComprasDTO;
+import ec.com.asofar.daoext.ReporteriaExt;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 
 /**
  *
@@ -24,6 +28,8 @@ public class ReporteriaVenta extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     int x,y;
+    static ReporteriaExt rep = new ReporteriaExt();
+    List<ReporteComprasDTO> itemList = null;
     
     public ReporteriaVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -36,6 +42,8 @@ public class ReporteriaVenta extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
+        itemList = rep.reporteCompras();
+        //Tablas.listarDetalleCompra(listadetCompra, jTable1);
     }
 
     /**
