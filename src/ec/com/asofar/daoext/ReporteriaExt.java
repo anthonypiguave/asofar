@@ -37,10 +37,10 @@ public class ReporteriaExt {
     
     public static void main(String[] args) {
         try{
-        List<ReporteComprasDTO1> itemList = null;
-        //itemList = reporteCompras(em);
+        List<ReporteComprasDTO> itemList = null;
+        itemList = reporteCompras();
       //  reporteCompras2(em);
-         itemList = obtenerEjemplo();
+         //itemList = obtenerEjemplo();
         //itemList= ed.listarCategorias();
 //System.out.println("j "+itemList.add("id_orden_compra"));
             System.out.println("lalala");
@@ -57,21 +57,21 @@ public class ReporteriaExt {
         }
     }
 
-    public static List<ReporteComprasDTO> reporteCompras(EntityManager em) {
+    public static List<ReporteComprasDTO> reporteCompras() {
         List<ReporteComprasDTO> listaCompra = null;
         Query q = em.createNativeQuery("SELECT  distinct\n" +
-                        "	 c.id_orden_compra,\n" +
-                        "	 c.id_tipo_documento,\n" +
-                        "        c.fecha_entrega,\n" +
-                        "        c.id_proveedor,\n" +
-                        "        c.total_subtotal,\n" +
-                        "        c.total_ice,\n" +
-                        "        c.total_iva,\n" +
-                        "        c.total_compra\n" +
-                        "FROM co_orden_compras as c\n" +
-                        "inner join co_detalle_orden_compra as d  \n" +
-                        "	  on   c.id_orden_compra = d.id_orden_compra\n" +
-                        "      and  c.estado = 'P';");
+                "		c.id_orden_compra,\n" +
+                "		c.id_tipo_documento,\n" +
+                "        c.fecha_entrega,\n" +
+                "        c.id_proveedor,\n" +
+                "        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
+                "        c.total_ice,\n" +
+                "        c.total_iva,\n" +
+                "        c.total_compra\n" +
+                "FROM co_orden_compras as c\n" +
+                "inner join co_detalle_orden_compra as d  \n" +
+                "	  on   c.id_orden_compra = d.id_orden_compra\n" +
+                "      and  c.estado = 'P';");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteComprasDTO>();   
         
@@ -79,7 +79,7 @@ public class ReporteriaExt {
             ReporteComprasDTO ob = new ReporteComprasDTO();
             ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
             ob.setId_tipo_documento(Long.parseLong(obj[1].toString()));
-            ob.setFecha_entrega(Date.valueOf(obj[3].toString()));
+            ob.setDescripcion(obj[3].toString());
             ob.setId_proveedor(Long.parseLong(obj[4].toString()));
             ob.setSubtotal(Double.parseDouble(obj[5].toString()));
             ob.setIce(Double.parseDouble(obj[6].toString()));

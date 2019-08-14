@@ -54,6 +54,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     Double descuento;
     String iva;
     Double precio;
+    
+    /**/
 
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
