@@ -382,7 +382,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
         prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
         prTarifarioPK.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-        
+        //setear compuestas
          PrTarifario prTarifario= new PrTarifario();
         prTarifario.setPrTarifarioPK(prTarifarioPK);
         pre.setPrTarifario(prTarifario);
