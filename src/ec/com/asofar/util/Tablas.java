@@ -2361,8 +2361,8 @@ public class Tablas {
 //            filas[1] = lisProdVen.get(i).getCodigoBarra();
 //            filas[2] = lisProdVen.get(i).getNombre_producto();
 //            filas[3] = ""+ lisProdVen.get(i).getSaldo_actual();
-//            filas[4] = listDetaTari.get(k).getValorVenta();
-//            filas[5] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
+//            filas[4] = lisProdVen.get(i).getValorVenta();
+//            filas[5] =  listDetaTari.get(k).getValorVenta());
 //            filas[6] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
 //
 //            model.addRow(filas);
