@@ -45,9 +45,11 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeUnidadServicio;
+import java.awt.Component;
 import java.awt.Font;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -57,6 +59,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -81,7 +85,7 @@ public class Tablas {
     private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
-    private static boolean[] tbordenrecibido = {false, false, false, false, false, false, false};
+    private static boolean[] tbordenrecibido = {false, false, false, false, false, false, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -2294,7 +2298,7 @@ public class Tablas {
     public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
         tabla.setDefaultRenderer(Object.class,
                 new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO","BODEGA"}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO", "BODEGA"}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class,
@@ -2303,8 +2307,7 @@ public class Tablas {
                 java.lang.Object.class,
                 java.lang.Object.class,
                 JCheckBox.class,
-                JComboBox.class
-            };
+                JComboBox.class,};
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -2330,18 +2333,42 @@ public class Tablas {
                 ch.setSelected(false);
 
                 filas[5] = ch;
+
+//                String[] values = new String[] { "1", "2", "3" };
+                JComboBox cb = new JComboBox();
                 
-                String[] values = new String[] { "1", "2", "3" };
-                
-                JComboBox cb = new JComboBox(values);
+//                cb.setEditable(true);
+
+//                cb.addItem("5");
+//                cb.addItem("2");
+//                cb.addItem("3");
+
                 filas[6] = cb;
-                
+
                 dt.addRow(filas);
             }
+            
+            
 
         }
+        
+ 
 
         tabla.setModel(dt);
+   
+        
+    String[] values = new String[] { "bodega 1", "bodega 2", "bodega 3" };
+
+    TableColumn col = tabla.getColumnModel().getColumn(6);
+    col.setCellEditor(new MyComboBoxEditor(values));
+//    col.setCellRenderer(new MyComboBoxRenderer(values));
     }
 
+}
+
+
+class MyComboBoxEditor extends DefaultCellEditor {
+  public MyComboBoxEditor(String[] items) {
+    super(new JComboBox(items));
+  }
 }
