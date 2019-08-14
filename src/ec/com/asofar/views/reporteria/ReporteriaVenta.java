@@ -5,11 +5,15 @@
  */
 package ec.com.asofar.views.reporteria;
 
+import ec.com.asofar.daoext.ReporteComprasDTO;
+import ec.com.asofar.daoext.ReporteriaExt;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 
 /**
  *
@@ -24,6 +28,8 @@ public class ReporteriaVenta extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     int x,y;
+    static ReporteriaExt rep = new ReporteriaExt();
+    List<ReporteComprasDTO> itemList = null;
     
     public ReporteriaVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -36,6 +42,8 @@ public class ReporteriaVenta extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
+        itemList = rep.reporteCompras();
+        Tablas.listarReporteCompras(itemList, tbaReporteCompra);
     }
 
     /**
@@ -54,7 +62,7 @@ public class ReporteriaVenta extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         tblProduc = new javax.swing.JScrollPane();
-        tbaCabeceraVenta = new javax.swing.JTable();
+        tbaReporteCompra = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         Txt_Utilidad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -98,9 +106,9 @@ public class ReporteriaVenta extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        tbaCabeceraVenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        tbaCabeceraVenta.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        tbaCabeceraVenta.setModel(new javax.swing.table.DefaultTableModel(
+        tbaReporteCompra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        tbaReporteCompra.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        tbaReporteCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -108,13 +116,13 @@ public class ReporteriaVenta extends javax.swing.JDialog {
 
             }
         ));
-        tbaCabeceraVenta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tbaCabeceraVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbaReporteCompra.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbaReporteCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbaCabeceraVentaMousePressed(evt);
+                tbaReporteCompraMousePressed(evt);
             }
         });
-        tblProduc.setViewportView(tbaCabeceraVenta);
+        tblProduc.setViewportView(tbaReporteCompra);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -185,7 +193,7 @@ public class ReporteriaVenta extends javax.swing.JDialog {
                         .addComponent(buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Chooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
@@ -252,9 +260,9 @@ public class ReporteriaVenta extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void tbaCabeceraVentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaCabeceraVentaMousePressed
+    private void tbaReporteCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaReporteCompraMousePressed
 
-    }//GEN-LAST:event_tbaCabeceraVentaMousePressed
+    }//GEN-LAST:event_tbaReporteCompraMousePressed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         //        JoinListarCabeceraVenta dc = new JoinListarCabeceraVenta();
@@ -349,7 +357,7 @@ public class ReporteriaVenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTable tbaCabeceraVenta;
+    private javax.swing.JTable tbaReporteCompra;
     private javax.swing.JScrollPane tblProduc;
     // End of variables declaration//GEN-END:variables
 }
