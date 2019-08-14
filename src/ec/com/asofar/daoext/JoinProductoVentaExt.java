@@ -44,9 +44,13 @@ public class JoinProductoVentaExt {
                 oo.setNombre_producto(ooo[5].toString());
                 oo.setSaldo_actual(Integer.parseInt(ooo[6].toString()));
                 oo.setValor_venta(Double.parseDouble(ooo[7].toString()));
-                oo.setValor_descuento(Double.parseDouble(ooo[8].toString()));
+                if (ooo[8] == null) {
+                    oo.setValor_descuento(0.0);
+                } else {
+                    oo.setValor_descuento(Double.parseDouble(ooo[8].toString()));
+                }
                 oo.setAplica_iva(ooo[9].toString());
-                
+
                 lista.add(oo);
             }
 

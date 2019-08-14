@@ -133,7 +133,7 @@ public class Venta extends javax.swing.JInternalFrame {
         suc = su;
         cargartxt();
         pVender();
-        Prueba();
+//        Prueba();
     }
 
     public void Prueba() {
