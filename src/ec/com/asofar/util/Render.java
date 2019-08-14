@@ -40,6 +40,16 @@ public class Render extends DefaultTableCellRenderer {
         if (value instanceof JComboBox) {
             JComboBox cb = (JComboBox) value;
 
+            if (isSelected) {
+                cb.setForeground(table.getSelectionForeground());
+                cb.setBackground(table.getSelectionBackground());
+            } else {
+                cb.setForeground(table.getForeground());
+                cb.setBackground(table.getBackground());
+            }
+            
+
+
             return cb;
         }
 

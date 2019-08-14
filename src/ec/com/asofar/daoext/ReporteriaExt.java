@@ -5,22 +5,15 @@
  */
 package ec.com.asofar.daoext;
 
-import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.util.Calendario;
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -38,27 +31,27 @@ public class ReporteriaExt {
     static EntityManager em = emf.createEntityManager();
     static ReporteriaExt ed = new ReporteriaExt();
     
-    public static void main(String[] args) {
-        try{
-        List<ReporteComprasDTO> itemList = null;
-       // itemList = reporteCompras();
-      //  reporteCompras2(em);
-        // itemList = obtenerEjemplo();
-      //  itemList= ed.listarCategorias();
+//    public static void main(String[] args) {
+//        try{
+//        List<ReporteComprasDTO> itemList = null;
+//        itemList = reporteCompras();
+//        reporteCompras2(em);
+//         itemList = obtenerEjemplo();
+//        itemList= ed.listarCategorias();
 //System.out.println("j "+itemList.add("id_orden_compra"));
 //            System.out.println("lalala");
-            
-        
-
-            for (int i = 0; i < itemList.size(); i++) {
-                  System.out.println(itemList.get(i).getId_orden_compra().toString()+" "+
-                          itemList.get(i).getFecha_aprobacion().toString());
-            }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
+//            
+//        
+//
+//            for (int i = 0; i < itemList.size(); i++) {
+//                  System.out.println(itemList.get(i).getId_orden_compra().toString()+" "+
+//                          itemList.get(i).getFecha_aprobacion().toString());
+//            }
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 
     public  List<ReporteComprasDTO> reporteCompras() {
         
