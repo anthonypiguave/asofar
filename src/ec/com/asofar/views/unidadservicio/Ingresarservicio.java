@@ -101,7 +101,7 @@ public class Ingresarservicio extends javax.swing.JDialog {
         jBCancelar.setBackground(new java.awt.Color(255, 0, 0));
         jBCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jBCancelar.setText("CANCELAR");
+        jBCancelar.setText("SALIR");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCancelarActionPerformed(evt);

@@ -34,6 +34,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+    String valorb= "";
 
     /**
      * Creates new form Consulta_Unidad_Servicio
@@ -103,11 +104,14 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
             }
         });
         txtbusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbusquedaKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtbusquedaKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyReleased(evt);
             }
         });
 
@@ -126,7 +130,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         Jbcancelar.setBackground(new java.awt.Color(255, 0, 0));
         Jbcancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Jbcancelar.setForeground(new java.awt.Color(255, 255, 255));
-        Jbcancelar.setText("CANCELAR");
+        Jbcancelar.setText("SALIR");
         Jbcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbcancelarActionPerformed(evt);
@@ -319,6 +323,17 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tba_unidad_servicioMousePressed
 
+    private void txtbusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyPressed
+     valorb = txtbusqueda.getText();
+        Tablas.filtro(valorb, tba_unidad_servicio);
+    }//GEN-LAST:event_txtbusquedaKeyPressed
+    private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {                                   
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+     }
     /**
      * @param args the command line arguments
      */
