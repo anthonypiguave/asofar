@@ -2399,10 +2399,11 @@ public class Tablas {
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getEstado().equals("P")) {
+           // if (lista.get(i).getEstado().equals("P")) {
                 Filas[0] = "" + lista.get(i).getId_orden_compra().toString();
                 Filas[1] = lista.get(i).getId_tipo_documento().toString();
-                Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
+                //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
+                Filas[2] = "" +lista.get(i).getFecha_aprobacion().toString();
                 Filas[3] = lista.get(i).getId_proveedor().toString();
                 Filas[4] = lista.get(i).getSubtotal().toString();
                 Filas[5] = lista.get(i).getIce().toString();
@@ -2432,5 +2433,5 @@ public class Tablas {
             }
         }
 
-    }
+ //   }
 }
