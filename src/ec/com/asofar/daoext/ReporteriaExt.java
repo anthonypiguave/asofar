@@ -6,9 +6,11 @@
 package ec.com.asofar.daoext;
 
 import ec.com.asofar.dto.CoOrdenCompras;
+import ec.com.asofar.util.Calendario;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,11 +40,11 @@ public class ReporteriaExt {
     
     public static void main(String[] args) {
         try{
-        List<ReporteComprasDTO> itemList = null;
-        itemList = reporteCompras();
+        List<ReporteComprasDTO1> itemList = null;
+       // itemList = reporteCompras();
       //  reporteCompras2(em);
-         //itemList = obtenerEjemplo();
-        //itemList= ed.listarCategorias();
+        // itemList = obtenerEjemplo();
+        itemList= ed.listarCategorias();
 //System.out.println("j "+itemList.add("id_orden_compra"));
 //            System.out.println("lalala");
             
@@ -59,6 +61,10 @@ public class ReporteriaExt {
     }
 
     public static List<ReporteComprasDTO> reporteCompras() {
+        
+        Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+       
         List<ReporteComprasDTO> listaCompra = null;
         Query q = em.createNativeQuery("SELECT  distinct\n" +
                 "		c.id_orden_compra,\n" +
@@ -75,17 +81,17 @@ public class ReporteriaExt {
                 "      and  c.estado = 'P';");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteComprasDTO>();   
-        
+         try{
         for (Object[] obj : listobj) {
             ReporteComprasDTO ob = new ReporteComprasDTO();
             ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
             ob.setId_tipo_documento(Long.parseLong(obj[1].toString()));
-            ob.setDescripcion(obj[3].toString());
-            ob.setId_proveedor(Long.parseLong(obj[4].toString()));
-            ob.setSubtotal(Double.parseDouble(obj[5].toString()));
-            ob.setIce(Double.parseDouble(obj[6].toString()));
-            ob.setIva(Double.parseDouble(obj[7].toString()));
-            ob.setTotal_compra(Double.parseDouble(obj[8].toString()));
+            ob.setDescripcion(obj[2].toString());
+            ob.setId_proveedor(Long.parseLong(obj[3].toString()));
+            ob.setSubtotal(Double.parseDouble(obj[4].toString()));
+            ob.setIce(Double.parseDouble(obj[5].toString()));
+            ob.setIva(Double.parseDouble(obj[6].toString()));
+            ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
             listaCompra.add(ob);
         }
 //        
@@ -98,6 +104,9 @@ public class ReporteriaExt {
 //              
 //        }
 //         
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return listaCompra;
     }
     
