@@ -44,7 +44,7 @@ public class ReporteriaExt {
          //itemList = obtenerEjemplo();
         //itemList= ed.listarCategorias();
 //System.out.println("j "+itemList.add("id_orden_compra"));
-            System.out.println("lalala");
+//            System.out.println("lalala");
             
         
 
