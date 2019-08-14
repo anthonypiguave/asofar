@@ -66,9 +66,9 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        cargarTbaProduc();
-        Prueba();
-//        cargarTbaProductoVenta();
+//        cargarTbaProduc();
+//        Prueba();
+        cargarTbaProductoVenta();
 
     }
 
@@ -83,18 +83,18 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         }
     }
 
-//    public void cargarTbaProductoVenta() {
-//        ListProdVent = selectProdVent.listarProductoVenta();
-//        Tablas.ListarProductosVenta2
-//    }
-
-    public void cargarTbaProduc() {
-        listaKardex = Kc.findInKardexEntities();
-        listaProd = Pc.findPrProductosEntities();
-        listaDetaTari = Dtc.findPrDetalleTarifarioEntities();
-        listaPresta = Prestc.findPrPrestacionesEntities();
-        Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
+    public void cargarTbaProductoVenta() {
+        ListProdVent = selectProdVent.listarProductoVenta();
+        Tablas.ListarProductosVenta2(ListProdVent,tba_productos);
     }
+
+//    public void cargarTbaProduc() {
+//        listaKardex = Kc.findInKardexEntities();
+//        listaProd = Pc.findPrProductosEntities();
+//        listaDetaTari = Dtc.findPrDetalleTarifarioEntities();
+//        listaPresta = Prestc.findPrPrestacionesEntities();
+//        Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
