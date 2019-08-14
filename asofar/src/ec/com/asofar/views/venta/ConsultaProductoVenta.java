@@ -33,6 +33,11 @@ import javax.swing.JOptionPane;
  */
 public class ConsultaProductoVenta extends javax.swing.JDialog {
 
+    
+    
+    
+    
+    
     /**
      * Creates new form ConsultaProductoVenta
      */
