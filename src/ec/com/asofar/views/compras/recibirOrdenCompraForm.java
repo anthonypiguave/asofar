@@ -5,43 +5,29 @@
  */
 package ec.com.asofar.views.compras;
 
-import ec.com.asofar.dao.CoDetalleOrdenCompraJpaController;
-import ec.com.asofar.dao.CoDetalleOrdenPedidoJpaController;
-import ec.com.asofar.dao.CoOrdenComprasJpaController;
-import ec.com.asofar.dao.CoOrdenPedidoJpaController;
+
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InDetalleMovimientoJpaController;
 import ec.com.asofar.dao.InMotivosJpaController;
 import ec.com.asofar.dao.InMovimientosJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
-import ec.com.asofar.daoext.MovimientosDaoExt;
-import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.daoext.OrdenCompraDaoExt;
-import ec.com.asofar.dto.CoDetalleOrdenCompra;
-import ec.com.asofar.dto.CoDetalleOrdenCompraPK;
-import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoOrdenCompras;
-import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InDetalleMovimiento;
-import ec.com.asofar.dto.InDetalleMovimientoPK;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
-import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
-import ec.com.asofar.util.Calendario;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -200,7 +186,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
         cbxProveedor.setSelectedIndex(cabMovimiento.getIdProveedor().getIdProveedor().intValue());
         cbx_documento.setSelectedIndex(cabMovimiento.getInTipoDocumento().getIdTipoDocumento().intValue());
-        cbx_motivo.setSelectedIndex(cabMovimiento.getInMotivos().getIdMotivo().intValue());
+//        cbx_motivo.setSelectedIndex(cabMovimiento.getInMotivos().getIdMotivo().intValue());
         cbx_movimiento.setSelectedIndex(cabMovimiento.getInTipoMovimiento().getIdTipoMovimiento().intValue());
 
         Tablas.listarDetalleRecepcion(listadet, jTable1);
