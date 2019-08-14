@@ -21,6 +21,15 @@ public class JoinProductoVenta {
     public Double valor_venta;
     public Double valor_descuento;
     public String aplica_iva;
+    public String codigoBarra;
+
+    public String getCodigoBarra() {
+        return codigoBarra;
+    }
+
+    public void setCodigoBarra(String codigoBarra) {
+        this.codigoBarra = codigoBarra;
+    }
 
     public Long getId_kardex() {
         return id_kardex;

@@ -133,7 +133,7 @@ public class Venta extends javax.swing.JInternalFrame {
         suc = su;
         cargartxt();
         pVender();
-        Prueba();
+//        Prueba();
     }
 
     public void Prueba() {
@@ -196,7 +196,7 @@ public class Venta extends javax.swing.JInternalFrame {
         }
         if (v.equals("no")) {
             JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-            this.setEnabled(false);
+            this.setVisible(false);
         }
     }
 

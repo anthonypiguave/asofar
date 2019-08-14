@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.util;
 
+import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetItemsCotizacion;
@@ -2294,7 +2295,7 @@ public class Tablas {
     public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
         tabla.setDefaultRenderer(Object.class,
                 new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO","BODEGA"}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO", "BODEGA"}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class,
@@ -2330,12 +2331,12 @@ public class Tablas {
                 ch.setSelected(false);
 
                 filas[5] = ch;
-                
-                String[] values = new String[] { "1", "2", "3" };
-                
+
+                String[] values = new String[]{"1", "2", "3"};
+
                 JComboBox cb = new JComboBox(values);
                 filas[6] = cb;
-                
+
                 dt.addRow(filas);
             }
 
@@ -2343,5 +2344,46 @@ public class Tablas {
 
         tabla.setModel(dt);
     }
+
+//    public static void ListarProductosVenta2(List<JoinProductoVenta> lisProdVen, JTable Tabla) {
+//        int[] a = {40, 300, 300, 100, 100, 100, 100};
+//        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+//        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+//        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+//        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+//        model = VaciarTabla(Tabla);
+//        String[] b = {"COD.", "COD. BARRA", "DESCRIPCION", "STOCK", "PRECIO", "DESCUENTO", "IVA"};
+//        String[] filas = new String[7];
+//        model = new DefaultTableModel(null, b);
+//        Tabla.setShowGrid(true);
+//        for (int i = 0; i < lisProdVen.size(); i++) {
+//            filas[0] = "" + lisProdVen.get(i).getId_prestacion();
+//            filas[1] = lisProdVen.get(i).getCodigoBarra();
+//            filas[2] = lisProdVen.get(i).getNombre_producto();
+//            filas[3] = ""+ lisProdVen.get(i).getSaldo_actual();
+//            filas[4] = lisProdVen.get(i).getValorVenta();
+//            filas[5] =  listDetaTari.get(k).getValorVenta());
+//            filas[6] = Formato_Numeros.formatoNumero("" + listDetaTari.get(k).getValorVenta());
+//
+//            model.addRow(filas);
+//            Tabla.setModel(model);
+//            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+//            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+//            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+//            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+//            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+//            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+//            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+//
+//        }
+//
+//    }
 
 }
