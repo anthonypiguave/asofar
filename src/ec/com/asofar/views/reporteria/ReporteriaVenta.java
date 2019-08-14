@@ -13,6 +13,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,12 +29,14 @@ public class ReporteriaVenta extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     int x,y;
-    static ReporteriaExt rep = new ReporteriaExt();
+    ReporteriaExt rep = new ReporteriaExt();
     List<ReporteComprasDTO> itemList = null;
     
     public ReporteriaVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        itemList = rep.reporteCompras();
+        Tablas.listarReporteCompras(itemList, tbaReporteCompra);
     }
 
     public ReporteriaVenta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
