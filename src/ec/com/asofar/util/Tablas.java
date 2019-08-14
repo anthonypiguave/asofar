@@ -50,6 +50,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
@@ -80,7 +81,7 @@ public class Tablas {
     private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
-    private static boolean[] tbordenrecibido = {false, false, false, false, false, false};
+    private static boolean[] tbordenrecibido = {false, false, false, false, false, false, false};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -2293,7 +2294,7 @@ public class Tablas {
     public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
         tabla.setDefaultRenderer(Object.class,
                 new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO"}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO","BODEGA"}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class,
@@ -2301,7 +2302,9 @@ public class Tablas {
                 java.lang.Object.class,
                 java.lang.Object.class,
                 java.lang.Object.class,
-                JCheckBox.class,};
+                JCheckBox.class,
+                JComboBox.class
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -2315,7 +2318,7 @@ public class Tablas {
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
-                Object filas[] = new Object[6];
+                Object filas[] = new Object[7];
 
                 filas[0] = "" + lista.get(i).getInDetalleMovimientoPK().getLineaDetalle();
                 filas[1] = "" + lista.get(i).getInDetalleMovimientoPK().getIdProducto();
@@ -2327,8 +2330,12 @@ public class Tablas {
                 ch.setSelected(false);
 
                 filas[5] = ch;
-
-
+                
+                String[] values = new String[] { "1", "2", "3" };
+                
+                JComboBox cb = new JComboBox(values);
+                filas[6] = cb;
+                
                 dt.addRow(filas);
             }
 
