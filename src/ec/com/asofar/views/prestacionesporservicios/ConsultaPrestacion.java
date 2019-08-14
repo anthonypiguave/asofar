@@ -24,7 +24,7 @@ public class ConsultaPrestacion extends javax.swing.JDialog {
     List<PrPrestaciones> lista;
       PrPrestaciones objeto = new PrPrestaciones();
       AgregarPrestaciones pre =  new AgregarPrestaciones (new javax.swing.JFrame(), true);
-    
+    String valorP = "";
     
     
     
@@ -113,6 +113,16 @@ public void cargartabla() {
         });
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfiltroActionPerformed(evt);
+            }
+        });
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("BUSCAR");
@@ -246,7 +256,25 @@ public void cargartabla() {
         setVisible(false);
     }//GEN-LAST:event_jsalirActionPerformed
 
-    /**
+    private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfiltroActionPerformed
+
+    private void txtfiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyPressed
+     valorP = txtfiltro.getText();
+        Tablas.filtro(valorP, jtablaprestaciones);
+    }//GEN-LAST:event_txtfiltroKeyPressed
+  private void txtFILTROActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {                                   
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+     }
+    /** 
      * @param args the command line arguments
      */
     public static void main(String args[]) {

@@ -5,10 +5,72 @@
  */
 package ec.com.asofar.daoext;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
 /**
  *
  * @author admin1
  */
 public class JoinProductoVentaExt {
-    
+
+    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("asofarPU");
+    static EntityManager em = emf.createEntityManager();
+    static ReporteriaExt ed = new ReporteriaExt();
+
+    public List<JoinProductoVenta> listarProductoVenta() {
+        // EntityManager em = getEntityManager();
+        List<JoinProductoVenta> lista = null;
+        String nativeQuery
+                = "SELECT k.`id_kardex`,k.`id_producto`,k.id_bodega,dt.id_unidad_servicio,\n"
+                + "pres.`id_prestacion`,pro.`nombre_producto`,k.saldo_actual\n"
+                + ",dt.`valor_venta`,dt.valor_descuento,pres.aplica_iva,pro.codigo_barra\n"
+                + "FROM `in_kardex` k\n"
+                + "JOIN `pr_productos` pro ON  pro.`id_producto`= k.`id_producto`\n"
+                + "JOIN `pr_prestaciones` pres ON pres.`id_poducto`= pro.`id_producto`\n"
+                + "JOIN `pr_detalle_tarifario` dt ON dt.`id_prestacion` = pres.`id_prestacion`\n"
+                + "WHERE k.`id_producto`IN(SELECT p.`id_producto`FROM `pr_productos` p)\n"
+                + "AND pres.`id_prestacion` IN(SELECT ta.`id_prestacion`FROM`pr_detalle_tarifario`ta)\n"
+                + "ORDER BY pres.`id_prestacion`";
+        Query query = em.createNativeQuery(nativeQuery);
+        //query.setParameter(1, Integer.parseInt(id));
+        try {
+
+            List<Object[]> lsObj = query.getResultList();
+            lista = new ArrayList<JoinProductoVenta>();
+
+            for (Object[] ooo : lsObj) {
+                JoinProductoVenta oo = new JoinProductoVenta();
+                oo.setId_kardex(Long.parseLong(ooo[0].toString()));
+                oo.setId_producto(Long.parseLong(ooo[1].toString()));
+                oo.setId_bodega(Long.parseLong(ooo[2].toString()));
+                oo.setId_unidad_servicio(Long.parseLong(ooo[3].toString()));
+                oo.setId_prestacion(Long.parseLong(ooo[4].toString()));
+                oo.setNombre_producto(ooo[5].toString());
+                oo.setSaldo_actual(Integer.parseInt(ooo[6].toString()));
+                oo.setValor_venta(Double.parseDouble(ooo[7].toString()));
+                
+                if (ooo[8] == null) {
+                    oo.setValor_descuento(0.0);
+                } else {
+                    oo.setValor_descuento(Double.parseDouble(ooo[8].toString()));
+                }
+                oo.setAplica_iva(ooo[9].toString());
+                if(ooo[10]== null){
+                    oo.setCodigoBarra("-");
+                }else{
+                oo.setCodigoBarra(ooo[10].toString());
+                }
+                lista.add(oo);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
 }
