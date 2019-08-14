@@ -41,11 +41,16 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
      * Creates new form AgregarNuevoDetalle
      */
     PrTarifario tp = new PrTarifario();
+   
+    List< PrDetalleTarifario> listaTarifario;
+        List<PrDetalleTarifario> lista = prp.findPrDetalleTarifarioEntities();
+
     InPrestacionesPorServicios objpres = new InPrestacionesPorServicios();
     InPrestacionesPorServicios objpres1 = new InPrestacionesPorServicios();
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+    
 
     public AgregarNuevoDetalle(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -98,9 +103,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         idp = new javax.swing.JTextField();
         idu = new javax.swing.JTextField();
-        sucur = new javax.swing.JTextField();
-        emp1 = new javax.swing.JTextField();
-        USER = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -265,35 +267,24 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(USER, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(sucur, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnompr)
                     .addComponent(txtnomuni, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(idp, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(idu))
-                        .addGap(68, 68, 68))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(idp, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(idu))
+                .addGap(68, 68, 68))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,10 +293,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(sucur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(USER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -397,15 +385,22 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
         pre.setValorVenta(Double.parseDouble((txtven.getText())));
 pre.setEstado("A");
-        pre.setUsuarioCreacion(USER.getText());
+        pre.setUsuarioCreacion(usu.getNombreUsuario());
         pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
         pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
+//        ValiEstado();
+        
+         
+         
+        
+      
 //        pre.setValorCosto(Double.parseDouble(txtvc.getText()));
 //        pre.setValorDescuento(Double.parseDouble(txtds.getText()));
 //        pre.setValorMinVenta(Double.parseDouble(txtmin.getText()));
 //        pre.setValorVenta(Double.parseDouble(txtven.getText()));
         try {
 //            op.create(pr);
+            
             prp.create(pre);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
@@ -458,9 +453,37 @@ pre.setEstado("A");
     }//GEN-LAST:event_txtvcActionPerformed
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getPrTarifarioPK().getIdTarifario()));
-        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
-        sucur.setText(String.valueOf(tp.getPrTarifarioPK().getIdSurcusal()));
-        USER.setText(String.valueOf(tp.getUsuarioCreacion()));
+//        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
+//        sucur.setText(String.valueOf(tp.getPrTarifarioPK().getIdSurcusal()));
+//        USER.setText(String.valueOf(tp.getUsuarioCreacion()));
+    }
+    
+    public void ValiEstado(){
+     PrDetalleTarifario pre = new PrDetalleTarifario();
+
+
+
+        for (int i = 0; i < listaTarifario.size(); i++) {
+            if (listaTarifario.get(i).getEstado().equals("A")) {
+                if (listaTarifario.get(i).getIdPrestacion().equals(listaTarifario.get(i).getIdPrestacion())) {
+                   
+                    pre.setEstado("I");
+                    
+                }
+                else{
+                    
+                    System.out.println("no se encontro otra prestacion activa");
+                    
+                }
+                    
+             
+            }
+            
+            
+            
+        }
+    
+    
     }
 
     /**
@@ -506,9 +529,7 @@ pre.setEstado("A");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField USER;
     private javax.swing.JButton btnGrabar;
-    private javax.swing.JTextField emp1;
     private javax.swing.JTextField idp;
     private javax.swing.JTextField idu;
     private javax.swing.JButton jButton2;
@@ -523,7 +544,6 @@ pre.setEstado("A");
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField sucur;
     private javax.swing.JTextField txtds;
     public javax.swing.JTextField txtidtarifario;
     private javax.swing.JTextField txtmin;
