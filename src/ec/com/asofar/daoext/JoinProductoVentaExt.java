@@ -26,7 +26,16 @@ public class JoinProductoVentaExt {
         // EntityManager em = getEntityManager();
         List<JoinProductoVenta> lista = null;
         String nativeQuery
-                = "SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c";
+                = "SELECT k.`id_kardex`,k.`id_producto`,k.id_bodega,dt.id_unidad_servicio,\n"
+                + "pres.`id_prestacion`,pro.`nombre_producto`,k.saldo_actual\n"
+                + ",dt.`valor_venta`,dt.valor_descuento,pres.aplica_iva,pro.codigo_barra\n"
+                + "FROM `in_kardex` k\n"
+                + "JOIN `pr_productos` pro ON  pro.`id_producto`= k.`id_producto`\n"
+                + "JOIN `pr_prestaciones` pres ON pres.`id_poducto`= pro.`id_producto`\n"
+                + "JOIN `pr_detalle_tarifario` dt ON dt.`id_prestacion` = pres.`id_prestacion`\n"
+                + "WHERE k.`id_producto`IN(SELECT p.`id_producto`FROM `pr_productos` p)\n"
+                + "AND pres.`id_prestacion` IN(SELECT ta.`id_prestacion`FROM`pr_detalle_tarifario`ta)\n"
+                + "ORDER BY pres.`id_prestacion`";
         Query query = em.createNativeQuery(nativeQuery);
         //query.setParameter(1, Integer.parseInt(id));
         try {
@@ -44,13 +53,18 @@ public class JoinProductoVentaExt {
                 oo.setNombre_producto(ooo[5].toString());
                 oo.setSaldo_actual(Integer.parseInt(ooo[6].toString()));
                 oo.setValor_venta(Double.parseDouble(ooo[7].toString()));
+                
                 if (ooo[8] == null) {
                     oo.setValor_descuento(0.0);
                 } else {
                     oo.setValor_descuento(Double.parseDouble(ooo[8].toString()));
                 }
                 oo.setAplica_iva(ooo[9].toString());
-
+                if(ooo[10]== null){
+                    oo.setCodigoBarra("-");
+                }else{
+                oo.setCodigoBarra(ooo[10].toString());
+                }
                 lista.add(oo);
             }
 
