@@ -97,6 +97,7 @@ public class Venta extends javax.swing.JInternalFrame {
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
     BigInteger cantidad, cantidadModi, idCliente, id_uni;
     Double precio, precioIva, total, descuento, subtotal;
+    Double VGTsubtotal, VGTtotal, VGTiva, VGTdescuento;
     int Cont = 1;
     VeFacturaEXT obtenerId_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
     VeDetalleCajaJpaController cajaDetC = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -817,7 +818,6 @@ public class Venta extends javax.swing.JInternalFrame {
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
-            System.out.println("errror" + objJoinProVen.getId_prestacion());
 //            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
 //            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
@@ -861,7 +861,10 @@ public class Venta extends javax.swing.JInternalFrame {
 //                p = Double.parseDouble(tba_detalle.getValueAt(i, 7).toString());
                 p = listaDetFactura.get(i).getValorTotal();
                 t += p;
-                txtTotal.setText(t.toString());
+//                Formato_Numeros.formatoNumero(t.toString());
+                VGTtotal = t;
+                txtTotal.setText(Formato_Numeros.formatoNumero(t.toString()));
+//                txtTotal.setText(t.toString());
             }
         }
     }
@@ -874,7 +877,10 @@ public class Venta extends javax.swing.JInternalFrame {
 //                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
                 p = listaDetFactura.get(i).getValorIva();
                 t += p;
-                txtIva.setText(t.toString());
+//                t=Double.valueOf(Formato_Numeros.formatoNumero(t.toString()));
+                VGTiva = t;
+                txtIva.setText(Formato_Numeros.formatoNumero(t.toString()));
+//                txtIva.setText(t.toString());
             }
         }
     }
@@ -887,7 +893,10 @@ public class Venta extends javax.swing.JInternalFrame {
 //                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
                 p = listaDetFactura.get(i).getValorDescuento();
                 t += p;
-                txtDescuento.setText(t.toString());
+//                Formato_Numeros.formatoNumero(t.toString());
+                VGTdescuento = t;
+                txtDescuento.setText(Formato_Numeros.formatoNumero(t.toString()));
+//                txtDescuento.setText(t.toString());
             }
         }
     }
@@ -907,7 +916,10 @@ public class Venta extends javax.swing.JInternalFrame {
 
                 p = listaDetFactura.get(i).getSubtotal();
                 t += p;
-                txtSubtotal.setText(t.toString());
+//                Formato_Numeros.formatoNumero(t.toString());
+                VGTsubtotal = t;
+                txtSubtotal.setText(Formato_Numeros.formatoNumero(t.toString()));
+//                txtSubtotal.setText(t.toString());
             }
         }
     }
@@ -1056,11 +1068,15 @@ public class Venta extends javax.swing.JInternalFrame {
             cabFact.setIdCaja(BigInteger.valueOf(idCaja));
             cabFact.setSeSucursal(suc);
             cabFact.setIdCliente(idCliente);
-            cabFact.setSubtotal(Double.valueOf(txtSubtotal.getText()));
-            cabFact.setTotalIva(Double.valueOf(txtIva.getText()));
+            cabFact.setSubtotal(VGTsubtotal);
+//            cabFact.setSubtotal(Double.valueOf(txtSubtotal.getText()));
+            cabFact.setTotalIva(VGTiva);
+//            cabFact.setTotalIva(Double.valueOf(txtIva.getText()));
 //            fact.setTotalBaseNoIva(Double.valueOf(txtSubtotal.getText()));
-            cabFact.setTotalDescuento(Double.valueOf(txtDescuento.getText()));
-            cabFact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
+            cabFact.setTotalDescuento(VGTdescuento);
+//            cabFact.setTotalDescuento(Double.valueOf(txtDescuento.getText()));
+            cabFact.setTotalFacturado(VGTtotal);
+//            cabFact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
             cabFact.setDespachado("SI");
             try {
 
@@ -1121,7 +1137,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
                         selectKardex(id_pro);
-                        
+
 //                        BigDecimal precio = new BigDecimal(listaDetFactura.get(i).getPrecioUnitarioVenta());
 //                        Double pr = precio.doubleValue();
                         detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
