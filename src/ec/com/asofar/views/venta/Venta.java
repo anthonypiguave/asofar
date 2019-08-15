@@ -46,6 +46,7 @@ import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyVetoException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.*;
@@ -150,30 +151,11 @@ public class Venta extends javax.swing.JInternalFrame {
         }
     }
 
-//    public void CargarMotivos() {
-//        List<InMotivos> listcaja = motivoCon.findInMotivosEntities();
-//        for (int i = 0; i < listcaja.size(); i++) {
-//            cbx_motivo.addItem(listcaja.get(i).getNombre());
-//        }
-//    }
-//    public void CargarMovimiento() {
-//        List<InTipoMovimiento> listcaja = tipoMovCon.findInTipoMovimientoEntities();
-//        for (int i = 0; i < listcaja.size(); i++) {
-//            cbx_movimiento.addItem(listcaja.get(i).getNombreMovimiento());
-//        }
-//    }
-//    public void CargarDocumento() {
-//        List<InTipoDocumento> listcaja = docCon.findInTipoDocumentoEntities();
-//        for (int i = 0; i < listcaja.size(); i++) {
-//            cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
-//        }
-//    }
     public void pVender() {
         String v = null;
         List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
         List<VeCaja> listaCaja = cajaC.findVeCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
-//            System.out.println("lista detalle caja " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
             if ("A".equals(listadetallecaja.get(i).getEstado())
                     && listadetallecaja.get(i).getIdUsuario().equals(usu.getIdUsuario())
                     && listadetallecaja.get(i).getFechaCierre() == null
@@ -188,16 +170,15 @@ public class Venta extends javax.swing.JInternalFrame {
                         idCaja = listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja();
                     }
                 }
-//                System.out.println("lista en if " + listadetallecaja.get(i).getVeDetalleCajaPK().getIdDetalleCaja());
             } else {
                 v = "no";
-//                System.out.println(" no puede vender");
             }
         }
         if (v.equals("no")) {
             JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-            this.setVisible(false);
+
         }
+//        return v;
     }
 
     public void cargartxt() {
@@ -797,7 +778,7 @@ public class Venta extends javax.swing.JInternalFrame {
             if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
                     && Ident.equals(ObjIden)
                     && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
-
+                txtDireccion.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
                 txtTelefono.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
@@ -836,7 +817,7 @@ public class Venta extends javax.swing.JInternalFrame {
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
-            System.out.println("errror"+objJoinProVen.getId_prestacion());
+            System.out.println("errror" + objJoinProVen.getId_prestacion());
 //            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
 //            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
@@ -1115,20 +1096,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
 
                 InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
-                try {/*`id_movimientos`
-`id_bodega_origen`
-`id_bodega_destino`
-`id_sucursal_destino`
-`fecha_sistema`
-`fecha_transferencia`
-`fecha_recepcion`
-`observacion`
-`id_proveedor`
-`id_orden_compra`
-`fecha_orden`
-`id_factura`
-`fecha_factura`
-`estado`*/
+                try {
                     cabMovimiento.setSeSucursal(suc);
                     cabMovimiento.setInTipoDocumento(tipoDocumento);
                     cabMovimiento.setInTipoMovimiento(tipoMovimiento);
@@ -1148,10 +1116,12 @@ public class Venta extends javax.swing.JInternalFrame {
                         detMovimiento.setInMovimientos(pkMovimiento);
                         detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
                         detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-                        Long id = IdProductoDsdObPres(listaDetFactura);
-                        Long id_Bod = IdBodegD(id);
+                        Long id_pro = IdProductoDsdObPres(listaDetFactura);
+                        Long id_Bod = IdBodegD(id_pro);
                         detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
-                        detMovimiento.getInDetalleMovimientoPK().setIdProducto(id);
+                        detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
+                        selectKardex(id_pro);
+                        
 //                        BigDecimal precio = new BigDecimal(listaDetFactura.get(i).getPrecioUnitarioVenta());
 //                        Double pr = precio.doubleValue();
                         detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
@@ -1163,7 +1133,6 @@ public class Venta extends javax.swing.JInternalFrame {
                         detMovimiento.setFechaCreacion(d);
 
                         detMovController.create(detMovimiento);
-
                     }
 
                 } catch (Exception e) {
@@ -1179,7 +1148,16 @@ public class Venta extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+    public void selectKardex(Long id) {
+        ListKardex = selectKardex.obtenerProductoKardex(id);
+        for (int i = 0; i < ListKardex.size(); i++) {
+            System.out.println("prueba " + ListKardex.get(i).getCantidad());
+            System.out.println(" " + ListKardex.get(i).getSaldoActual());
+            System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
+            System.out.println(" --");
 
+        }
+    }
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
@@ -1190,14 +1168,10 @@ public class Venta extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
-//                for (int k = 0; k < lisKar.size(); k++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
                     id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
-//                        if (id_producto.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
-//                        id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
-//                        }
+
                 }
-//                }
             }
         }
         return id_producto;
