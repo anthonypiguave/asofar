@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.views.compras;
 
-
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InDetalleMovimientoJpaController;
 import ec.com.asofar.dao.InMotivosJpaController;
@@ -149,6 +148,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     public void CargarMotivos() {
         List<InMotivos> listcaja = motivoController.findInMotivosEntities();
         for (int i = 0; i < listcaja.size(); i++) {
+            System.out.println(" id motivos : "+ listcaja.get(i).getIdMotivo() +" NOMBRE :" +listcaja.get(i).getNombre() );
             cbx_motivo.addItem(listcaja.get(i).getNombre());
         }
     }
@@ -186,8 +186,13 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
         cbxProveedor.setSelectedIndex(cabMovimiento.getIdProveedor().getIdProveedor().intValue());
         cbx_documento.setSelectedIndex(cabMovimiento.getInTipoDocumento().getIdTipoDocumento().intValue());
-//        cbx_motivo.setSelectedIndex(cabMovimiento.getInMotivos().getIdMotivo().intValue());
         cbx_movimiento.setSelectedIndex(cabMovimiento.getInTipoMovimiento().getIdTipoMovimiento().intValue());
+//        cbx_motivo.setSelectedIndex(cabMovimiento.getInMotivos().getIdMotivo().intValue());
+
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        txtFechaRecibo.setText(String.format(formatoFecha.format(cabCompra.getFechaEntrega())));
+        
+        txtCod.setText(""+cabCompra.getCoOrdenComprasPK().getIdOrdenCompra());
 
         Tablas.listarDetalleRecepcion(listadet, jTable1);
 
@@ -214,11 +219,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtFechaEntrega = new javax.swing.JTextField();
+        txtFechaRecibo = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        cbx_motivo = new javax.swing.JComboBox<>();
         cbx_movimiento = new javax.swing.JComboBox<>();
+        cbx_motivo = new javax.swing.JComboBox<>();
         BtnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -292,15 +297,20 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel11.setText("FECHA DE ENTEGA:");
+        jLabel11.setText("FECHA DE RECIBO:");
 
-        txtFechaEntrega.setEditable(false);
-        txtFechaEntrega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtFechaEntrega.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFechaEntrega.setText("--SELECCIONE--");
-        txtFechaEntrega.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtFechaRecibo.setEditable(false);
+        txtFechaRecibo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtFechaRecibo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFechaRecibo.setText("--SELECCIONE--");
+        txtFechaRecibo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtFechaEntregaMousePressed(evt);
+                txtFechaReciboMousePressed(evt);
+            }
+        });
+        txtFechaRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaReciboActionPerformed(evt);
             }
         });
 
@@ -310,11 +320,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel19.setText("MOVIMIENTO:");
 
-        cbx_motivo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbx_motivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-
         cbx_movimiento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbx_movimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+
+        cbx_motivo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        cbx_motivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -343,29 +353,31 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbx_movimiento, 0, 169, Short.MAX_VALUE)
-                            .addComponent(cbxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbx_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbx_motivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(25, 25, 25)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_movimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel10))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                                        .addComponent(txtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                                .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cbx_motivo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -388,7 +400,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbx_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -444,11 +456,13 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         BtnAprovar.setBackground(new java.awt.Color(13, 153, 0));
@@ -732,7 +746,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTable1MousePressed
 
-    private void txtFechaEntregaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaEntregaMousePressed
+    private void txtFechaReciboMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaReciboMousePressed
 
 //        Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
 //        fechaEntrega.setVisible(true);
@@ -744,7 +758,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 //        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 //        txtFechaEntrega.setText(String.format(formatoFecha.format(fecha)));
 
-    }//GEN-LAST:event_txtFechaEntregaMousePressed
+    }//GEN-LAST:event_txtFechaReciboMousePressed
+
+    private void txtFechaReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaReciboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaReciboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -837,7 +855,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCod;
     private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtFechaEntrega;
+    private javax.swing.JTextField txtFechaRecibo;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextArea txtObservacion;
     // End of variables declaration//GEN-END:variables
