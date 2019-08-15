@@ -831,8 +831,6 @@ public class Venta extends javax.swing.JInternalFrame {
             }
 
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-            /**/
- /**/
             Totalizar();
             TotalizarIva();
             TotalizarDescuento();
@@ -844,7 +842,6 @@ public class Venta extends javax.swing.JInternalFrame {
         Double p = 0.0;
         if (tba_detalle.getRowCount() > 0) {
             for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-//                p = Double.parseDouble(tba_detalle.getValueAt(i, 7).toString());
                 p = listaDetFactura.get(i).getValorTotal();
                 t += p;
 //                Formato_Numeros.formatoNumero(t.toString());
@@ -860,7 +857,6 @@ public class Venta extends javax.swing.JInternalFrame {
         Double p = 0.0;
         if (tba_detalle.getRowCount() > 0) {
             for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-//                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
                 p = listaDetFactura.get(i).getValorIva();
                 t += p;
 //                t=Double.valueOf(Formato_Numeros.formatoNumero(t.toString()));
@@ -876,7 +872,6 @@ public class Venta extends javax.swing.JInternalFrame {
         Double p = 0.0;
         if (tba_detalle.getRowCount() > 0) {
             for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-//                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
                 p = listaDetFactura.get(i).getValorDescuento();
                 t += p;
 //                Formato_Numeros.formatoNumero(t.toString());
@@ -895,14 +890,11 @@ public class Venta extends javax.swing.JInternalFrame {
         Double subtotal = 0.0;
         if (tba_detalle.getRowCount() > 0) {
             for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-                //                p = Double.parseDouble(tba_detalle.getValueAt(i, 6).toString());
                 pre = listaDetFactura.get(i).getPrecioUnitarioVenta();
                 cant = listaDetFactura.get(i).getCantidad();
-//                subtotal = (cant.doubleValue() * pre);
 
                 p = listaDetFactura.get(i).getSubtotal();
                 t += p;
-//                Formato_Numeros.formatoNumero(t.toString());
                 VGTsubtotal = t;
                 txtSubtotal.setText(Formato_Numeros.formatoNumero(t.toString()));
 //                txtSubtotal.setText(t.toString());
@@ -942,8 +934,6 @@ public class Venta extends javax.swing.JInternalFrame {
         Double pre;
         Double precioIva = null;
         String aplica = objJoinProVen.getAplica_iva();
-//        objetoPrestacion = (PrPrestaciones)listaPrest;
-//           aplica = listaDetFactur;
         if (aplica.equals("SI")) {
             cant = cantidad;
             pre = precio;
