@@ -27,3 +27,13 @@ hs_err_pid*
 /nbproject/private/
 /build/
 /dist/
+!/src/Librerias/jcalendar-1.3.3.jar
+!/src/Librerias/iText-2.1.0.jar
+!/src/Librerias/jasperreports-5.0.1.jar
+!/src/Librerias/commons-collections-3.0.jar
+!/src/Librerias/commons-beanutils-1.9.3.jar
+!/src/Librerias/mysql-connector-java-5.1.6.jar
+!/src/Librerias/commons-lang3-3.8.1.jar
+!/src/Librerias/commons-collections4-4.1.jar
+!/src/Librerias/commons-digester-2.1.jar
+!/src/Librerias/commons-logging-1.1.1.jar
