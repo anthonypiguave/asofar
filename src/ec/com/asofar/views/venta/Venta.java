@@ -803,28 +803,17 @@ public class Venta extends javax.swing.JInternalFrame {
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
         objJoinProVen = ingre.obtObjProdVent();
-//        objetoPrestacion = ingre.getPresta();
-//        objetoFactDeta = ingre.getFac();
-//        objetoDetTarif = ingre.getUnid();
-
-//        if (objetoPrestacion != null && objetoFactDeta != null) {
         if (objJoinProVen == null) {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
         } else {
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
-
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
-//            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
-//            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             cantidad = BigInteger.ONE;
             precio = objJoinProVen.getValor_venta();
-
-//            precio = objetoFactDeta.getPrecioUnitarioVenta();
             precioIva = calcularIvaItem();
             descuento = objJoinProVen.getValor_descuento();
-//            descuento = objetoFactDeta.getValorDescuento();
             FactDeta.setCantidad(BigInteger.ONE);
             FactDeta.setValorDescuento(descuento);
             FactDeta.setValorIva(precioIva);
@@ -943,11 +932,7 @@ public class Venta extends javax.swing.JInternalFrame {
         cant = cantidad;
         pre = precio;
         desc = descuento;
-        System.out.println(" cant " + cant);
-        System.out.println(" precio " + pre);
-        System.out.println(" desc " + desc);
         total2 = (cant.doubleValue() * pre) + preIva - desc;
-        System.out.println("tot " + total2);
 
         return total2;
     }
@@ -1078,16 +1063,17 @@ public class Venta extends javax.swing.JInternalFrame {
             try {
 
                 VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
-                System.out.println("id factua" + pkFactura.getVeFacturaPK().getIdFactura());
+//                System.out.println("id factua" + pkFactura.getVeFacturaPK().getIdFactura());
                 for (int i = 0; i < listaDetFactura.size(); i++) {
 
                     detFact.setVeFactura(pkFactura);
                     detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
                     detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-                    detFact.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
+
+                    detFact.getVeFacturaDetallePK().setIdPrestaciones(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones());
+//                    detFact.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
                     detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
 
-                    selectKardex(objJoinProVen.getId_producto());
                     detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
                     detFact.setCantidad(listaDetFactura.get(i).getCantidad());
                     detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
@@ -1132,6 +1118,10 @@ public class Venta extends javax.swing.JInternalFrame {
                         detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
                         Long id_pro = IdProductoDsdObPres(listaDetFactura);
                         Long id_Bod = IdBodegD(id_pro);
+
+                        selecKardex2(listaDetFactura);
+//                        selectKardex(objJoinProVen.getId_producto());
+
                         detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
                         detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
@@ -1141,16 +1131,16 @@ public class Venta extends javax.swing.JInternalFrame {
 
                         detMovimiento.setUsuarioCreacion(usu.getNombreUsuario());
                         detMovimiento.setFechaCreacion(d);
-                        selectKardex(id_pro);
+//                        selectKardex(id_pro);
                         detMovController.create(detMovimiento);
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-/**/
-                /*AAgregar a KardeX*/
-                
+                /**/
+ /*AAgregar a KardeX*/
+
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
             } catch (Exception e) {
@@ -1159,10 +1149,43 @@ public class Venta extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+    public void selecKardex2(List<VeFacturaDetalle> listaDetFactura) {
+        listaPresta = Prestc.findPrPrestacionesEntities();
+        Long id_Prod = null;
+        for (int i = 0; i < listaPresta.size(); i++) {
+            for (int j = 0; j < listaDetFactura.size(); j++) {
+                if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
+
+                    id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
+                    ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
+                    for (int k = 0; k < ListKardex.size(); k++) {
+                        System.out.println("select ultimo id  " + ListKardex.get(k).getCantidad());
+                        System.out.println(" " + ListKardex.get(k).getSaldoActual());
+                        System.out.println(" " + ListKardex.get(k).getSaldoAnterior());
+                        System.out.println(" --");
+
+                    }
+                }
+            }
+        }
+
+    }
+
+//    public Long idPresta(List<VeFacturaDetalle> listaDetFactura) {
+//        Long id_prestacion = null;
+//        
+//        for (int i = 0; i < listaDetFactura.size(); i++) {
+//            if(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones()==){}
+//            
+//        }
+//
+//        return id_prestacion;
+//
+//    }
     public void selectKardex(Long id) {
         ListKardex = selectKardex.obtenerProductoKardex(id);
         for (int i = 0; i < ListKardex.size(); i++) {
-            System.out.println("prueba " + ListKardex.get(i).getCantidad());
+            System.out.println("select ultimo id  " + ListKardex.get(i).getCantidad());
             System.out.println(" " + ListKardex.get(i).getSaldoActual());
             System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
             System.out.println(" --");
