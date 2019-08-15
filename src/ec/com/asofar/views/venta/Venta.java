@@ -841,6 +841,7 @@ public class Venta extends javax.swing.JInternalFrame {
 //            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             cantidad = BigInteger.ONE;
             precio = objJoinProVen.getValor_venta();
+            
 //            precio = objetoFactDeta.getPrecioUnitarioVenta();
             precioIva = calcularIvaItem();
             descuento = objJoinProVen.getValor_descuento();
