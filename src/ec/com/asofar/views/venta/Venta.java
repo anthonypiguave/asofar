@@ -1162,7 +1162,6 @@ public class Venta extends javax.swing.JInternalFrame {
                     for (int k = 0; k < ListKardex.size(); k++) {
                         System.out.println("select ultimo id  " + ListKardex.get(k).getCantidad());
                         System.out.println(" " + ListKardex.get(k).getSaldoActual());
-                        System.out.println(" " + ListKardex.get(k).getSaldoAnterior());
                         System.out.println(" --");
 
                     }
