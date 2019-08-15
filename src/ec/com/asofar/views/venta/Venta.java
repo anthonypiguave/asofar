@@ -1157,6 +1157,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
 
                     id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
+                  
                     ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
                     for (int k = 0; k < ListKardex.size(); k++) {
                         System.out.println("select ultimo id  " + ListKardex.get(k).getCantidad());

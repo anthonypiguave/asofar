@@ -25,9 +25,6 @@ public class InKardexExt extends InKardexJpaController {
     public List<InKardex> obtenerProductoKardex(Long id) {
         EntityManager em = getEntityManager();
         List<InKardex> QKardex = null;
-//        String nativeQuery = "SELECT P.*"
-//                + " FROM pr_productos P\n"
-//                + "WHERE P.estado='A';";
         String nativeQuery = "SELECT *\n"
                 + "FROM in_kardex a\n"
                 + "WHERE a.id_producto = " + id + "\n"
