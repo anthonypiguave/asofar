@@ -836,12 +836,13 @@ public class Venta extends javax.swing.JInternalFrame {
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
+            System.out.println("errror"+objJoinProVen.getId_prestacion());
 //            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
             FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
 //            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             cantidad = BigInteger.ONE;
             precio = objJoinProVen.getValor_venta();
-            
+
 //            precio = objetoFactDeta.getPrecioUnitarioVenta();
             precioIva = calcularIvaItem();
             descuento = objJoinProVen.getValor_descuento();
@@ -864,7 +865,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
             /**/
-            /**/
+ /**/
             Totalizar();
             TotalizarIva();
             TotalizarDescuento();
@@ -952,7 +953,11 @@ public class Venta extends javax.swing.JInternalFrame {
         cant = cantidad;
         pre = precio;
         desc = descuento;
+        System.out.println(" cant " + cant);
+        System.out.println(" precio " + pre);
+        System.out.println(" desc " + desc);
         total2 = (cant.doubleValue() * pre) + preIva - desc;
+        System.out.println("tot " + total2);
 
         return total2;
     }
@@ -961,7 +966,7 @@ public class Venta extends javax.swing.JInternalFrame {
         BigInteger cant;
         Double pre;
         Double precioIva = null;
-        String aplica = objetoPrestacion.getAplicaIva();
+        String aplica = objJoinProVen.getAplica_iva();
 //        objetoPrestacion = (PrPrestaciones)listaPrest;
 //           aplica = listaDetFactur;
         if (aplica.equals("SI")) {
@@ -999,6 +1004,11 @@ public class Venta extends javax.swing.JInternalFrame {
                             Cont = j + 1;
                             listaDetFactura.get(j).getVeFacturaDetallePK().setLineaDetalle(Cont);
                         }
+                        /**/
+                        Totalizar();
+                        TotalizarIva();
+                        TotalizarDescuento();
+                        TotalizarSubtotal();
                         Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
                     }
                 } catch (Exception e) {
@@ -1080,8 +1090,8 @@ public class Venta extends javax.swing.JInternalFrame {
                     detFact.setVeFactura(pkFactura);
                     detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
                     detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-                    detFact.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
-                    detFact.getVeFacturaDetallePK().setIdUnidadServicio(objetoDetTarif.getIdUnidadServicio().longValue());
+                    detFact.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
+                    detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
 
                     detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
                     detFact.setCantidad(listaDetFactura.get(i).getCantidad());
@@ -1100,9 +1110,9 @@ public class Venta extends javax.swing.JInternalFrame {
                 InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
                 InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
                 InMovimientos cabMovimiento = new InMovimientos();
-//                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento(cbx_movimiento.getSelectedItem().toString());
-//                InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
-//                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos(cbx_motivo.getSelectedItem().toString());
+                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
+                InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
+                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
 
                 InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
                 try {/*`id_movimientos`
@@ -1120,9 +1130,9 @@ public class Venta extends javax.swing.JInternalFrame {
 `fecha_factura`
 `estado`*/
                     cabMovimiento.setSeSucursal(suc);
-//                    cabMovimiento.setInTipoDocumento(tipoDocumento);7
-//                    cabMovimiento.setInTipoMovimiento(tipoMovimiento);1
-//                    cabMovimiento.setInMotivos(tipoMotivos);7
+                    cabMovimiento.setInTipoDocumento(tipoDocumento);
+                    cabMovimiento.setInTipoMovimiento(tipoMovimiento);
+                    cabMovimiento.setInMotivos(tipoMotivos);
                     cabMovimiento.setFechaSistema(d);
                     cabMovimiento.setAnioDocumento(fecha);
                     cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
