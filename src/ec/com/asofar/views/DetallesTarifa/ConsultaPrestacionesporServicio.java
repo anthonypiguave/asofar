@@ -151,6 +151,11 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
         jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -255,6 +260,10 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public InPrestacionesPorServicios obtener89() {
 //        InPrestacionesPorServicios obj = new InPrestacionesPorServicios();
