@@ -35,6 +35,7 @@ public class JoinProductoVentaExt {
                 + "JOIN `pr_detalle_tarifario` dt ON dt.`id_prestacion` = pres.`id_prestacion`\n"
                 + "WHERE k.`id_producto`IN(SELECT p.`id_producto`FROM `pr_productos` p)\n"
                 + "AND pres.`id_prestacion` IN(SELECT ta.`id_prestacion`FROM`pr_detalle_tarifario`ta)\n"
+                + "AND dt.`estado`='A'\n"
                 + "ORDER BY pres.`id_prestacion`";
         Query query = em.createNativeQuery(nativeQuery);
         //query.setParameter(1, Integer.parseInt(id));
@@ -53,17 +54,17 @@ public class JoinProductoVentaExt {
                 oo.setNombre_producto(ooo[5].toString());
                 oo.setSaldo_actual(Integer.parseInt(ooo[6].toString()));
                 oo.setValor_venta(Double.parseDouble(ooo[7].toString()));
-                
+
                 if (ooo[8] == null) {
                     oo.setValor_descuento(0.0);
                 } else {
                     oo.setValor_descuento(Double.parseDouble(ooo[8].toString()));
                 }
                 oo.setAplica_iva(ooo[9].toString());
-                if(ooo[10]== null){
+                if (ooo[10] == null) {
                     oo.setCodigoBarra("-");
-                }else{
-                oo.setCodigoBarra(ooo[10].toString());
+                } else {
+                    oo.setCodigoBarra(ooo[10].toString());
                 }
                 lista.add(oo);
             }
