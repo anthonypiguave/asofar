@@ -44,6 +44,7 @@ import ec.com.asofar.dto.VeFacturaPK;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
+import ec.com.asofar.views.clientes.cliente_agregar;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
@@ -113,6 +114,8 @@ public class Venta extends javax.swing.JInternalFrame {
     InKardexJpaController KarC = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<InKardex> ListKardex = null;
     InKardexExt selectKardex = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
+    InKardex objKar = new InKardex();
+    InKardexJpaController KardCont = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     JoinProductoVenta objJoinProVen = new JoinProductoVenta();
 
@@ -1135,6 +1138,10 @@ public class Venta extends javax.swing.JInternalFrame {
     public void selecKardex2(List<VeFacturaDetalle> listaDetFactura) {
         listaPresta = Prestc.findPrPrestacionesEntities();
         Long id_Prod = null;
+        
+                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
+                InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
+                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
@@ -1148,10 +1155,30 @@ public class Venta extends javax.swing.JInternalFrame {
 //                        
 //                        array1[1]= ListKardex.get(k).getSaldoActual();
 
+                        BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
+                        BigInteger cantActual = ListKardex.get(k).getSaldoActual();
                         System.out.println("select ultimo id  ");
+                        System.out.println("cant venta " + listaDetFactura.get(j).getCantidad());
                         System.out.println("saldo actual " + ListKardex.get(k).getSaldoActual());
-//                        System.out.println("arreglo "+array1);
                         System.out.println(" --");
+                        BigInteger resta = cantActual.subtract(cantVenta);
+                        Long id_Bod = IdBodegD(id_Prod);
+                        objKar.getInKardexPK().setIdBodega(id_Bod);
+                        objKar.getInKardexPK().setIdEmpresa(emp.getIdEmpresa());
+                        objKar.getInKardexPK().setIdSucursal(suc.getSeSucursalPK().getIdSucursal());
+                        objKar.getInKardexPK().setIdProducto(id_Prod);
+                        objKar.setFechaMovimiento(d);
+                        objKar.getInKardexPK().setIdTipoDocumento(7);
+                        objKar.setAnioDocumento(fecha.toString());
+                        objKar.setFechaSistema(fecha);
+                        objKar.setCantidad(cantVenta);
+                        objKar.setSaldoActual(resta);
+                        objKar.setSaldoAnterior(cantActual);
+                        try {
+                            KardCont.create(objKar);
+                        } catch (Exception ex) {
+                            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
                     }
                 }
