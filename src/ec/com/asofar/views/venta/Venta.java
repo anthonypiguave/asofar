@@ -15,6 +15,7 @@ import ec.com.asofar.dao.VeDetalleCajaJpaController;
 import ec.com.asofar.dao.VeFacturaDetalleJpaController;
 import ec.com.asofar.dao.VeFacturaJpaController;
 import ec.com.asofar.daoext.InKardexExt;
+import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.MovimientosDaoExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
@@ -111,6 +112,8 @@ public class Venta extends javax.swing.JInternalFrame {
     List<InKardex> ListKardex = null;
     InKardexExt selectKardex = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
 
+    JoinProductoVenta objJoinProVen = new JoinProductoVenta();
+
     public Venta() {
         initComponents();
         this.setLocation(350, 15);
@@ -153,21 +156,18 @@ public class Venta extends javax.swing.JInternalFrame {
 //            cbx_motivo.addItem(listcaja.get(i).getNombre());
 //        }
 //    }
-
 //    public void CargarMovimiento() {
 //        List<InTipoMovimiento> listcaja = tipoMovCon.findInTipoMovimientoEntities();
 //        for (int i = 0; i < listcaja.size(); i++) {
 //            cbx_movimiento.addItem(listcaja.get(i).getNombreMovimiento());
 //        }
 //    }
-
 //    public void CargarDocumento() {
 //        List<InTipoDocumento> listcaja = docCon.findInTipoDocumentoEntities();
 //        for (int i = 0; i < listcaja.size(); i++) {
 //            cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
 //        }
 //    }
-
     public void pVender() {
         String v = null;
         List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
@@ -823,25 +823,32 @@ public class Venta extends javax.swing.JInternalFrame {
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
-        objetoPrestacion = ingre.getPresta();
-        objetoFactDeta = ingre.getFac();
-        objetoDetTarif = ingre.getUnid();
-//        iva = objetoPrestacion.getAplicaIva();
+        objJoinProVen = ingre.obtObjProdVent();
+//        objetoPrestacion = ingre.getPresta();
+//        objetoFactDeta = ingre.getFac();
+//        objetoDetTarif = ingre.getUnid();
 
-        if (objetoPrestacion != null && objetoFactDeta != null) {
+//        if (objetoPrestacion != null && objetoFactDeta != null) {
+        if (objJoinProVen == null) {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        } else {
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
 
-            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
-            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
+            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
+//            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objetoPrestacion.getIdPrestacion());
+            FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
+//            FactDeta.setDescripcion(objetoPrestacion.getNombrePrestacion());
             cantidad = BigInteger.ONE;
-            precio = objetoFactDeta.getPrecioUnitarioVenta();
+            precio = objJoinProVen.getValor_venta();
+//            precio = objetoFactDeta.getPrecioUnitarioVenta();
             precioIva = calcularIvaItem();
-            descuento = objetoFactDeta.getValorDescuento();
+            descuento = objJoinProVen.getValor_descuento();
+//            descuento = objetoFactDeta.getValorDescuento();
             FactDeta.setCantidad(BigInteger.ONE);
             FactDeta.setValorDescuento(descuento);
             FactDeta.setValorIva(precioIva);
-            FactDeta.setPrecioUnitarioVenta(objetoFactDeta.getPrecioUnitarioVenta());
+            FactDeta.setPrecioUnitarioVenta(objJoinProVen.getValor_venta());
             subtotal = calcularSubtotal();
             total = calcularTotalItem();
             FactDeta.setValorTotal(total);
@@ -856,13 +863,11 @@ public class Venta extends javax.swing.JInternalFrame {
 
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
             /**/
- /**/
+            /**/
             Totalizar();
             TotalizarIva();
             TotalizarDescuento();
             TotalizarSubtotal();
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
     private void Totalizar() {
@@ -1153,10 +1158,8 @@ public class Venta extends javax.swing.JInternalFrame {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
                 /*AAgregar a KardeX*/
-                
-                
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
             } catch (Exception e) {
@@ -1173,32 +1176,33 @@ public class Venta extends javax.swing.JInternalFrame {
     public Long IdProductoDsdObPres(List<VeFacturaDetalle> listaDetFactura) {
         Long id_producto = null;
         listaPresta = Prestc.findPrPrestacionesEntities();
-        
+
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
 //                for (int k = 0; k < lisKar.size(); k++) {
-                    if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
-                        id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
+                if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
+                    id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 //                        if (id_producto.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
 //                        id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
 //                        }
-                    }
+                }
 //                }
             }
         }
         return id_producto;
 
     }
-    public Long IdBodegD(Long id_Pro){
+
+    public Long IdBodegD(Long id_Pro) {
         Long id_bog = null;
         lisKar = KarC.findInKardexEntities();
-        
+
         for (int k = 0; k < lisKar.size(); k++) {
             if (id_Pro.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
                 id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
             }
         }
-        return id_bog ;
+        return id_bog;
     }
 
     public Double calcularSubtotalItemCantMod(BigInteger cantMod, Double PrecioIva) {

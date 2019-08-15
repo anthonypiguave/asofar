@@ -59,6 +59,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     Double precio;
     List<JoinProductoVenta> ListProdVent = null;
     JoinProductoVentaExt selectProdVent = new JoinProductoVentaExt();
+    JoinProductoVenta objJoinProVen = new JoinProductoVenta();
+    List<JoinProductoVenta> listaProVent;
 
     /**/
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
@@ -73,7 +75,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     }
 
     public void Prueba() {
-
         ListProdVent = selectProdVent.listarProductoVenta();
         for (int i = 0; i < ListProdVent.size(); i++) {
 //            System.out.println("prueba " + ListProdVent.get(i).getId_kardex());
@@ -85,7 +86,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 
     public void cargarTbaProductoVenta() {
         ListProdVent = selectProdVent.listarProductoVenta();
-        Tablas.ListarProductosVenta2(ListProdVent,tba_productos);
+        Tablas.ListarProductosVenta2(ListProdVent, tba_productos);
     }
 
 //    public void cargarTbaProduc() {
@@ -95,7 +96,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 //        listaPresta = Prestc.findPrPrestacionesEntities();
 //        Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -280,40 +280,27 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             id = tba_productos.getSelectedRow();
 
-            objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
-
-//            System.out.println("tabla preico" + tba_productos.getValueAt(id, 3).toString());
-            if (objPrest != null) {
-                id_pre = objPrest.getIdPrestacion();
-                nombre = objPrest.getNombrePrestacion();
-                id_prod = objPrest.getIdPoducto();
-                iva = objPrest.getAplicaIva();
-                precio = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
-                id_Unidad = listaDetaTari.get(id).getIdUnidadServicio();
-//                 id_bodega = listaKardex.get(id).getInKardexPK().getIdBodega();
-
-                System.out.println("---" + id_bodega);
-                if (tba_productos.getValueAt(id, 5).toString().equals("-")) {
-                    descuento = 0.0;
-                } else {
-                    descuento = Double.valueOf(tba_productos.getValueAt(id, 5).toString());
-                }
-                getUnid();
-//                getUni(id_Unidad);
-                getPre(id_pre, nombre, id_prod);
-                getPresta();
-                getFac();
-                setVisible(false);
+            objJoinProVen = devuelveObjeto5(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProVent);
+            if (objJoinProVen != null) {
 
             }
         }
     }//GEN-LAST:event_tba_productosMousePressed
-//   public InKardex getKardex(){
-//       InKardex objKardex = new InKardex();
-//       objKardex.setInKardexPK(new InKardexPK());
-//       objKardex.getInKardexPK().setIdBodega(id_bodega);
-//        return objKardex;
-//   }
+    public JoinProductoVenta devuelveObjeto5(Long id, List<JoinProductoVenta> listaPrVen) {
+        JoinProductoVenta doc = null;
+        for (int i = 0; i < listaPrVen.size(); i++) {
+            if (Objects.equals(listaPrVen.get(i).getId_prestacion(), id)) {
+                doc = listaPrVen.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
+
+    public JoinProductoVenta obtObjProdVent() {
+
+        return objJoinProVen;
+    }
 
     public VeFacturaDetalle getFac() {
         VeFacturaDetalle objFac = new VeFacturaDetalle();
