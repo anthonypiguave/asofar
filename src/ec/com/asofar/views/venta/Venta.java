@@ -1147,7 +1147,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+/**/
                 /*AAgregar a KardeX*/
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
