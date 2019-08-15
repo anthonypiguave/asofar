@@ -1049,9 +1049,9 @@ public class Venta extends javax.swing.JInternalFrame {
 //            cabFact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
             cabFact.setDespachado("SI");
             try {
+                selecKardex2(listaDetFactura);
 
                 VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
-//                System.out.println("id factua" + pkFactura.getVeFacturaPK().getIdFactura());
                 for (int i = 0; i < listaDetFactura.size(); i++) {
 
                     detFact.setVeFactura(pkFactura);
@@ -1059,9 +1059,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
 
                     detFact.getVeFacturaDetallePK().setIdPrestaciones(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones());
-//                    detFact.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
                     detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
-
                     detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
                     detFact.setCantidad(listaDetFactura.get(i).getCantidad());
                     detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
@@ -1098,7 +1096,6 @@ public class Venta extends javax.swing.JInternalFrame {
                     cabMovimiento.setFechaCreacion(d);
 
                     pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
-//                    System.out.println(" IDcabedcera movimiento" + pkMovimiento);
 
                     for (int i = 0; i < listaDetFactura.size(); i++) {
                         detMovimiento.setInMovimientos(pkMovimiento);
@@ -1107,9 +1104,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         Long id_pro = IdProductoDsdObPres(listaDetFactura);
                         Long id_Bod = IdBodegD(id_pro);
 
-                        selecKardex2(listaDetFactura);
 //                        selectKardex(objJoinProVen.getId_producto());
-
                         detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
                         detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
@@ -1145,11 +1140,17 @@ public class Venta extends javax.swing.JInternalFrame {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
 
                     id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
-                  
+////
                     ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
                     for (int k = 0; k < ListKardex.size(); k++) {
-                        System.out.println("select ultimo id  " + ListKardex.get(k).getCantidad());
-                        System.out.println(" " + ListKardex.get(k).getSaldoActual());
+//                        BigInteger array1[];
+//                        array1 = new BigInteger[3];
+//                        
+//                        array1[1]= ListKardex.get(k).getSaldoActual();
+
+                        System.out.println("select ultimo id  ");
+                        System.out.println("saldo actual " + ListKardex.get(k).getSaldoActual());
+//                        System.out.println("arreglo "+array1);
                         System.out.println(" --");
 
                     }
