@@ -119,7 +119,6 @@ public class ReporteriaVenta extends javax.swing.JDialog {
 
             }
         ));
-        tbaReporteCompra.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tbaReporteCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbaReporteCompraMousePressed(evt);

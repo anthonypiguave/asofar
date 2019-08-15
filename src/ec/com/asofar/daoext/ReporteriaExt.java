@@ -31,29 +31,29 @@ public class ReporteriaExt {
     static EntityManager em = emf.createEntityManager();
     static ReporteriaExt ed = new ReporteriaExt();
     
-//    public static void main(String[] args) {
-//        try{
-//        List<ReporteComprasDTO> itemList = null;
-//        itemList = reporteCompras();
+    public static void main(String[] args) {
+        try{
+        List<ReporteComprasDTO> itemList = null;
+        itemList = reporteCompras();
 //        reporteCompras2(em);
 //         itemList = obtenerEjemplo();
 //        itemList= ed.listarCategorias();
 //System.out.println("j "+itemList.add("id_orden_compra"));
 //            System.out.println("lalala");
-//            
-//        
-//
-//            for (int i = 0; i < itemList.size(); i++) {
-//                  System.out.println(itemList.get(i).getId_orden_compra().toString()+" "+
-//                          itemList.get(i).getFecha_aprobacion().toString());
-//            }
-//
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    }
+            
+        
 
-    public  List<ReporteComprasDTO> reporteCompras() {
+            for (int i = 0; i < itemList.size(); i++) {
+                  System.out.println(itemList.get(i).getId_orden_compra().toString()+" "+
+                          itemList.get(i).getFecha_aprobacion().toString());
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static List<ReporteComprasDTO> reporteCompras() {
         
         Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
