@@ -2414,7 +2414,7 @@ public class Tablas {
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"COD.COMPRA", "TIPO DOC.", "FECHA ENTREGA", "PROVEEDOR", "SUBTOTAL", "T.ICE", "T.IVA", "T.COMPRA"};
-        String[] Filas = new String[7];
+        String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -2427,7 +2427,7 @@ public class Tablas {
             Filas[4] = lista.get(i).getSubtotal().toString();
             Filas[5] = lista.get(i).getIce().toString();
             Filas[6] = lista.get(i).getIva().toString();
-            Filas[7] = lista.get(i).getTotal().toString();
+            Filas[7] = lista.get(i).getTotal_compra().toString();
 
             model.addRow(Filas);
             Tabla.setModel(model);
