@@ -47,8 +47,6 @@ public class Render extends DefaultTableCellRenderer {
                 cb.setForeground(table.getForeground());
                 cb.setBackground(table.getBackground());
             }
-            
-
 
             return cb;
         }
