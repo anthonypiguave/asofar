@@ -38,6 +38,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     /**
      * Creates new form ReporteriaCompras
      */
+    
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
