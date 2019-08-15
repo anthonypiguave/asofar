@@ -38,9 +38,9 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
         if (coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK() == null) {
             coDetalleOrdenPedido.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
         }
-        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdEmpresa(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdEmpresa());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdOrdenPedido(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdOrdenPedido());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdSurcusal(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdSucursal());
+        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdEmpresa(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -69,9 +69,9 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
     }
 
     public void edit(CoDetalleOrdenPedido coDetalleOrdenPedido) throws NonexistentEntityException, Exception {
-        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdEmpresa(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdEmpresa());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdOrdenPedido(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdOrdenPedido());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdSurcusal(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdSucursal());
+        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdEmpresa(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
