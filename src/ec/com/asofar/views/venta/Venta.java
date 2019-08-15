@@ -146,7 +146,7 @@ public class Venta extends javax.swing.JInternalFrame {
         txtIdentificacion.setText("9999999999999");
         txtTipoIdent.setText("**********************************");
         txtEmail.setText("**********************************");
-         txtDireccion.setText("**********************************");
+        txtDireccion.setText("**********************************");
         txtTelefono.setText("**********************************");
     }
 
@@ -197,6 +197,7 @@ public class Venta extends javax.swing.JInternalFrame {
         txtIva.setText("0.0");
         txtTotal.setText("0.0");
     }
+
     public void cargarLisCliente() {
         Cliente = Cc.findSeClientesEntities();
         for (int i = 0; i < Cliente.size(); i++) {
@@ -772,7 +773,7 @@ public class Venta extends javax.swing.JInternalFrame {
         for (int i = 0; i < Cliente.size(); i++) {
             ObjIden = Cliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion().toString();
             if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
-//                    && Ident.equals(ObjIden)
+                    //                    && Ident.equals(ObjIden)
                     && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
                 txtDireccion.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
@@ -1132,10 +1133,6 @@ public class Venta extends javax.swing.JInternalFrame {
                         Long id_Bod = IdBodegD(id_pro);
                         detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
-                        selectKardex(id_pro);
-
-//                        BigDecimal precio = new BigDecimal(listaDetFactura.get(i).getPrecioUnitarioVenta());
-//                        Double pr = precio.doubleValue();
                         detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
                         detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
                         detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
@@ -1143,7 +1140,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
                         detMovimiento.setUsuarioCreacion(usu.getNombreUsuario());
                         detMovimiento.setFechaCreacion(d);
-
+                        selectKardex(id_pro);
                         detMovController.create(detMovimiento);
                     }
 
