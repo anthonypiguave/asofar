@@ -715,7 +715,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2))
         );
 
-        setBounds(0, 0, 794, 675);
+        setBounds(0, 0, 794, 685);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -1087,6 +1087,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     detFact.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
                     detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
 
+                    selectKardex(objJoinProVen.getId_producto());
                     detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
                     detFact.setCantidad(listaDetFactura.get(i).getCantidad());
                     detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
@@ -1149,6 +1150,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 }
 /**/
                 /*AAgregar a KardeX*/
+                
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
             } catch (Exception e) {
