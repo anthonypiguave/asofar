@@ -78,7 +78,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     int contFilas = 1;
 
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal = false);
         initComponents();
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
@@ -92,7 +92,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     public modificarOrdenPedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, CoOrdenPedido objeto) {
-        super(parent, modal);
+        super(parent, modal= false);
         initComponents();
         this.setLocationRelativeTo(null);
         Timer tiempo = new Timer(100, new modificarOrdenPedidoForm.horas());
@@ -197,7 +197,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         BtnAprovar = new javax.swing.JButton();
         BtnAnular = new javax.swing.JButton();
-        BtnAnular1 = new javax.swing.JButton();
+        btnimprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -409,13 +409,11 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             }
         });
 
-        BtnAnular1.setBackground(new java.awt.Color(255, 145, 0));
-        BtnAnular1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        BtnAnular1.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAnular1.setText("ANULAR");
-        BtnAnular1.addActionListener(new java.awt.event.ActionListener() {
+        btnimprimir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnimprimir.setText("IMPRIMIR");
+        btnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAnular1ActionPerformed(evt);
+                btnimprimirActionPerformed(evt);
             }
         });
 
@@ -433,7 +431,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(BtnAnular1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
@@ -455,7 +453,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                     .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAnular1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -776,17 +774,26 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAnularActionPerformed
 
-    private void BtnAnular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnular1ActionPerformed
+    private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
                 ArrayList lista = new ArrayList();
         for(int i=0;i<jTable1.getRowCount();i++){
-        ClaseReporte creporte = new ClaseReporte();
+        ClaseReporte creporte = new ClaseReporte(txtCod.getText(),
+                                                 cbxProveedor.getSelectedItem().toString(),
+                                                 txtFecha.getText(),
+                                                 cbx_documento.getSelectedItem().toString(),
+                                                 txtHora.getText(),
+                                                 txtObservacion.getText(),
+                                                 jTable1.getValueAt(i,0).toString(),
+                                                 jTable1.getValueAt(i,1).toString(),
+                                                 jTable1.getValueAt(i,2).toString(),
+                                                 jTable1.getValueAt(i,3).toString());
         lista.add(creporte);
         }
         try {
-            JasperReport report = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/modificarOrdenPedido.jasper");
+            JasperReport report = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/modificarOrdenPedidoForm.jasper");
             JasperPrint jprint = JasperFillManager.fillReport(report,null,new JRBeanCollectionDataSource(lista));
-            JRViewer jviewer = new JRViewer(jprint);
-            JDialog ventanareporte = new JDialog();
+            JDialog ventanareporte = new JDialog(this);
+            JRViewer jviewer = new JRViewer(jprint);            
             ventanareporte.add(jviewer);
             ventanareporte.setSize(new Dimension(ancho/2,alto/2));
             ventanareporte.setLocationRelativeTo(null);
@@ -796,7 +803,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             Logger.getLogger(modificarOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_BtnAnular1ActionPerformed
+    }//GEN-LAST:event_btnimprimirActionPerformed
 
     public String validarProductos(String datos) {
         String obj1 = "no";
@@ -863,9 +870,9 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAnular;
-    private javax.swing.JButton BtnAnular1;
     private javax.swing.JButton BtnAprovar;
     private javax.swing.JButton BtnCancelar;
+    private javax.swing.JButton btnimprimir;
     private javax.swing.JComboBox<String> cbxProveedor;
     private javax.swing.JComboBox<String> cbx_documento;
     private javax.swing.JButton jButton1;
