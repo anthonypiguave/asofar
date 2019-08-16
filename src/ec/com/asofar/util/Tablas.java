@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.util;
 
+import ec.com.asofar.dao.InBodegaJpaController;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ReporteComprasDTO;
@@ -2308,6 +2309,7 @@ public class Tablas {
     }
 
     public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
+
         tabla.setDefaultRenderer(Object.class,
                 new Render());
         DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO", "BODEGA"}, 0) {
@@ -2331,6 +2333,8 @@ public class Tablas {
 
         };
 
+        JComboBox cb = null;
+
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
                 Object filas[] = new Object[7];
@@ -2346,13 +2350,16 @@ public class Tablas {
 
                 filas[5] = ch;
 
-//                String[] values = new String[] { "1", "2", "3" };
-                JComboBox cb = new JComboBox();
+                cb = new JComboBox();
 
-//                cb.setEditable(true);
-//                cb.addItem("5");
-//                cb.addItem("2");
-//                cb.addItem("3");
+                InBodegaJpaController InBodegaController = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+                List<InBodega> listcaja = InBodegaController.findInBodegaEntities();
+
+
+                for (int j = 0; j < listcaja.size(); j++) {
+                    cb.addItem(listcaja.get(j).getNombreBodega());
+                }
+
                 filas[6] = cb;
 
                 dt.addRow(filas);

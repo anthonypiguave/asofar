@@ -59,6 +59,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     Double precio;
     List<JoinProductoVenta> ListProdVent = null;
     JoinProductoVentaExt selectProdVent = new JoinProductoVentaExt();
+    JoinProductoVenta objJoinProVen = new JoinProductoVenta();
+    List<JoinProductoVenta> listaProVent;
 
     /**/
     public ConsultaProductoVenta(java.awt.Frame parent, boolean modal) {
@@ -73,7 +75,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     }
 
     public void Prueba() {
-
         ListProdVent = selectProdVent.listarProductoVenta();
         for (int i = 0; i < ListProdVent.size(); i++) {
 //            System.out.println("prueba " + ListProdVent.get(i).getId_kardex());
@@ -85,7 +86,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 
     public void cargarTbaProductoVenta() {
         ListProdVent = selectProdVent.listarProductoVenta();
-        Tablas.ListarProductosVenta2(ListProdVent,tba_productos);
+        Tablas.ListarProductosVenta2(ListProdVent, tba_productos);
     }
 
 //    public void cargarTbaProduc() {
@@ -95,7 +96,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 //        listaPresta = Prestc.findPrPrestacionesEntities();
 //        Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -108,6 +108,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tba_productos = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -190,26 +191,37 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setForeground(new java.awt.Color(0, 102, 0));
+        jButton1.setText("ESCOGER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 243, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216)))
-                .addContainerGap())
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 243, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(216, 216, 216)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(133, 133, 133))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +234,9 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -279,41 +293,28 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         int id = 0;
         if (evt.getClickCount() == 2) {
             id = tba_productos.getSelectedRow();
-
-            objPrest = devuelveObjeto(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaPresta);
-
-//            System.out.println("tabla preico" + tba_productos.getValueAt(id, 3).toString());
-            if (objPrest != null) {
-                id_pre = objPrest.getIdPrestacion();
-                nombre = objPrest.getNombrePrestacion();
-                id_prod = objPrest.getIdPoducto();
-                iva = objPrest.getAplicaIva();
-                precio = Double.valueOf(tba_productos.getValueAt(id, 4).toString());
-                id_Unidad = listaDetaTari.get(id).getIdUnidadServicio();
-//                 id_bodega = listaKardex.get(id).getInKardexPK().getIdBodega();
-
-                System.out.println("---" + id_bodega);
-                if (tba_productos.getValueAt(id, 5).toString().equals("-")) {
-                    descuento = 0.0;
-                } else {
-                    descuento = Double.valueOf(tba_productos.getValueAt(id, 5).toString());
-                }
-                getUnid();
-//                getUni(id_Unidad);
-                getPre(id_pre, nombre, id_prod);
-                getPresta();
-                getFac();
-                setVisible(false);
-
+            listaProVent = selectProdVent.listarProductoVenta();
+            objJoinProVen = devuelveObjeto5(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProVent);
+            if (objJoinProVen != null) {
+            setVisible(false);
             }
         }
     }//GEN-LAST:event_tba_productosMousePressed
-//   public InKardex getKardex(){
-//       InKardex objKardex = new InKardex();
-//       objKardex.setInKardexPK(new InKardexPK());
-//       objKardex.getInKardexPK().setIdBodega(id_bodega);
-//        return objKardex;
-//   }
+    public JoinProductoVenta devuelveObjeto5(Long id, List<JoinProductoVenta> listaPrVen) {
+        JoinProductoVenta doc = null;
+        for (int i = 0; i < listaPrVen.size(); i++) {
+            if (Objects.equals(listaPrVen.get(i).getId_prestacion(), id)) {
+                doc = listaPrVen.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
+
+    public JoinProductoVenta obtObjProdVent() {
+
+        return objJoinProVen;
+    }
 
     public VeFacturaDetalle getFac() {
         VeFacturaDetalle objFac = new VeFacturaDetalle();
@@ -377,6 +378,23 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfiltroActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            int id = 0;
+        if (tba_productos.getSelectedRow() >= 0) {
+            /*hgfrt*/
+            id = tba_productos.getSelectedRow();
+            listaProVent = selectProdVent.listarProductoVenta();
+            objJoinProVen = devuelveObjeto5(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProVent);
+
+            if (objJoinProVen != null) {
+//                cliente_editar Ce = new cliente_editar(new javax.swing.JFrame(), true, usu, emp, suc, Client);
+                setVisible(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN PRODUCTO");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -421,6 +439,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnsalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

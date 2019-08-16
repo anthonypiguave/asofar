@@ -76,7 +76,7 @@
                   <Component id="jLabel1" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -153,34 +153,38 @@
                                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="86" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cbx_movimiento" pref="169" max="32767" attributes="0"/>
-                                  <Component id="cbxProveedor" max="32767" attributes="0"/>
-                                  <Component id="cbx_documento" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtCod" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="cbx_motivo" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                          <Component id="cbxProveedor" min="-2" pref="169" max="-2" attributes="0"/>
+                                          <Component id="txtCod" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Component id="cbx_documento" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
+                                          <Component id="cbx_movimiento" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txtHora" min="-2" pref="127" max="-2" attributes="0"/>
+                                                  <Component id="txtFecha" alignment="1" min="-2" pref="127" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="84" max="32767" attributes="0"/>
+                                              <Component id="txtFechaRecibo" min="-2" pref="127" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtHora" min="-2" pref="127" max="-2" attributes="0"/>
-                                          <Component id="txtFecha" alignment="1" min="-2" pref="127" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="68" max="32767" attributes="0"/>
-                                      <Component id="txtFechaEntrega" min="-2" pref="127" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="cbx_motivo" min="-2" pref="169" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -211,7 +215,7 @@
                           <Component id="jLabel9" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="cbx_documento" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="txtFechaEntrega" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="txtFechaRecibo" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -362,10 +366,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="FECHA DE ENTEGA:"/>
+                <Property name="text" type="java.lang.String" value="FECHA DE RECIBO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFechaEntrega">
+            <Component class="javax.swing.JTextField" name="txtFechaRecibo">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -375,7 +379,8 @@
                 <Property name="text" type="java.lang.String" value="--SELECCIONE--"/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtFechaEntregaMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtFechaReciboMousePressed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFechaReciboActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
@@ -394,7 +399,7 @@
                 <Property name="text" type="java.lang.String" value="MOVIMIENTO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbx_motivo">
+            <Component class="javax.swing.JComboBox" name="cbx_movimiento">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="14" style="1"/>
@@ -409,7 +414,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbx_movimiento">
+            <Component class="javax.swing.JComboBox" name="cbx_motivo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="14" style="1"/>
@@ -455,12 +460,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="170" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>

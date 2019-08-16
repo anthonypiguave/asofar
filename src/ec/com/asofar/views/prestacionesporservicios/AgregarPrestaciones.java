@@ -86,8 +86,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         nombreUnidad(us2);
         usu = us;
         emp = em;
-        suc = su;
-       
+        suc = su;  
     }
 
     /**
@@ -310,7 +309,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         try {
             boolean valor1=ValidarDTO.ValidarPreporservi(txtpresta.getText());
             if (valor1 == true) {
-                JOptionPane.showMessageDialog(this, "Articulo ya existente");
+                JOptionPane.showMessageDialog(this, " YA EXISTENTE");
             } else {
                 String valor ="I";
                 
@@ -331,7 +330,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
                 setVisible(false);
        // control2.create( preServ);
-               JOptionPane.showMessageDialog(this, " Guardado"); 
+              // JOptionPane.showMessageDialog(this, " "); 
              //  Actualizar();
             }
         } catch (Exception e) {
@@ -370,7 +369,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 //            }
 //
 //        }
-
 
     }//GEN-LAST:event_jguardarpreserActionPerformed
     public void nombrePrestacion(List<PrPrestaciones> pr2) {
