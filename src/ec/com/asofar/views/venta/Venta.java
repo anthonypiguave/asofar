@@ -1053,7 +1053,7 @@ public class Venta extends javax.swing.JInternalFrame {
 //            cabFact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
             cabFact.setDespachado("SI");
             try {
-                selecKardex2(listaDetFactura);
+//                selecKardex2(listaDetFactura);
 
                 VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
                 for (int i = 0; i < listaDetFactura.size(); i++) {
