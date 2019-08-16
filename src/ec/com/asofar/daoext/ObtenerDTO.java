@@ -477,6 +477,21 @@ public class ObtenerDTO {
         return dto;
 
     }
+    public static PrPrestaciones ObtenerPrPrestacionesOn(BigInteger id) {
+        PrPrestacionesJpaController control = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrPrestaciones dto = new PrPrestaciones();
+        List<PrPrestaciones> lista = control.findPrPrestacionesEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (BigInteger.valueOf(lista.get(i).getIdPrestacion()) == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
 
     public static PrSubgrupos ObtenerPrSubGrupos(String nombre) {
         PrSubgruposJpaController control = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -629,6 +644,21 @@ public class ObtenerDTO {
 
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getNombreUnidadServicio().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+     public static VeUnidadServicio ObtenerVeUnidadServiciON(BigInteger id) {
+        VeUnidadServicioJpaController control = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
+        VeUnidadServicio dto = new VeUnidadServicio();
+        List<VeUnidadServicio> lista = control.findVeUnidadServicioEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (BigInteger.valueOf(lista.get(i).getIdUnidadServicio()) == id) {
                 dto = lista.get(i);
                 break;
             }
