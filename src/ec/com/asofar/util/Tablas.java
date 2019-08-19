@@ -1903,7 +1903,7 @@ public class Tablas {
         }
 
     }
- 
+
     public static void listarDetalleTarifarios(List<PrDetalleTarifario> listaprestacionesPSO, JTable Tabla, PrTarifario tp1) {
         int[] a = {150, 200, 100, 100, 100, 200, 200, 100, 200, 200, 200, 300};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -1926,7 +1926,7 @@ public class Tablas {
                 filas[3] = String.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
                 filas[4] = "" + listaprestacionesPSO.get(i).getPrTarifario().getSeSucursal().getSeSucursalPK().getIdSucursal();
                 PrPrestaciones presser = ObtenerDTO.ObtenerPrPrestacionesOn(listaprestacionesPSO.get(i).getIdPrestacion());
-                
+
                 //listaprestacionesPSO.get(i).getIdPrestacion
                 filas[5] = presser.getNombrePrestacion();
                 filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
@@ -2355,7 +2355,6 @@ public class Tablas {
                 InBodegaJpaController InBodegaController = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
                 List<InBodega> listcaja = InBodegaController.findInBodegaEntities();
 
-
                 for (int j = 0; j < listcaja.size(); j++) {
                     cb.addItem(listcaja.get(j).getNombreBodega());
                 }
@@ -2425,7 +2424,7 @@ public class Tablas {
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"COD.COMPRA", "TIPO DOC.", "FECHA ENTREGA", "PROVEEDOR", "SUBTOTAL", "T.ICE", "T.IVA", "T.COMPRA"};
-        String[] Filas = new String[7];
+        String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -2438,7 +2437,7 @@ public class Tablas {
             Filas[4] = lista.get(i).getSubtotal().toString();
             Filas[5] = lista.get(i).getIce().toString();
             Filas[6] = lista.get(i).getIva().toString();
-            Filas[7] = lista.get(i).getTotal().toString();
+            Filas[7] = lista.get(i).getTotal_compra().toString();
 
             model.addRow(Filas);
             Tabla.setModel(model);
@@ -2464,8 +2463,6 @@ public class Tablas {
 
     //   }
 }
-
-
 
 class MyComboBoxEditor extends DefaultCellEditor {
 
