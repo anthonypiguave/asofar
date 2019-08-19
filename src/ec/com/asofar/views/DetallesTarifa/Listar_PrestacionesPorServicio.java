@@ -22,10 +22,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,8 +53,6 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        
-        
     }
 
     public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, PrTarifario tr) {
@@ -171,9 +166,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,44 +256,26 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
     private void tblPrestacionesPorServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrestacionesPorServiciosMousePressed
 
-        int i = 0;
-        if (evt.getClickCount() == 2) {
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            JOptionPane.showConfirmDialog(null, "Desea Inactivar Prestacion?", "WARNING", dialogButton);
-            if (dialogButton == JOptionPane.YES_OPTION) {
-                i = tblPrestacionesPorServicios.getSelectedRow();
-                prestacionesPPS = devuelveEstado(tblPrestacionesPorServicios.getValueAt(i, 0).toString(), lista);
-//                System.out.println("este ide estado es :" + prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario());
-                System.out.println("este ide estado es :" + prestacionesPPS.getEstado());
-           
-
-           prestacionesPPS.setIdDetalleTarifario(Long.valueOf(prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario()));
-                if (prestacionesPPS != null) {
-                  prestacionesPPS.setEstado("I");
-
-                    try {
-//            op.create(pr);
-
-                        PPS.edit(prestacionesPPS);
-                        JOptionPane.showMessageDialog(null, " Dado de baja con exito");
-                        setVisible(false);
-                    } catch (Exception e) {
-                        Logger.getLogger(Listar_PrestacionesPorServicio.class.getName()).log(Level.SEVERE, null, e);
-                    }
-
-                }
-                if (dialogButton == JOptionPane.NO_OPTION) {
-                    remove(dialogButton);
-                }
-            }
-
-        }
+//        int i = 0;
+//        if (evt.getClickCount() == 2) {
+//
+//            i = tblPrestacionesPorServicios.getSelectedRow();
+//            prestacionesPPS = devuelveObjeto(tblPrestacionesPorServicios.getValueAt(i, 0).toString(), lista);
+//            System.out.println("este ide es :" + prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario());
+//            pre.txtidtarifario.setText(String.valueOf(prestacionesPPS.getPrTarifario().getPrTarifarioPK().getIdTarifario()));
+//            if (prestacionesPPS != null) {
+//                this.setVisible(false);
+//                AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true);
+//                cp.setVisible(true);
+//            }
+//
+//        }
 
 
     }//GEN-LAST:event_tblPrestacionesPorServiciosMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true, tp, usu, emp, suc);
+        AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true,tp,usu,emp,suc);
         cp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -311,7 +286,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x, point.y - y);
+        setLocation(point.x-x,point.y-y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -329,30 +304,6 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         return prestacionesPPS;
     }
 
-    
-    public PrDetalleTarifario devuelveEstado(String datos, List<PrDetalleTarifario> listaobjeto) {
-
-        PrDetalleTarifario objeto1 = null;
-
-        for (int i = 0; i < listaobjeto.size(); i++) {
-
-            if (datos.equals("" + listaobjeto.get(i).getEstado())) {
-                objeto1 = listaobjeto.get(i);
-
-                break;
-
-            }
-
-        }
-
-        return objeto1;
-
-    }
-
-    
-    
-    
-    
     public PrDetalleTarifario devuelveObjeto(String datos, List<PrDetalleTarifario> listaobjeto) {
 
         PrDetalleTarifario objeto1 = null;
@@ -397,6 +348,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Listar_PrestacionesPorServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
