@@ -162,4 +162,9 @@ public class ReporteriaExt {
         }
         return lista;
     }
+    
+    public static java.util.Date fechaActual(){
+        java.util.Date fechaParseada= new java.util.Date();
+        return fechaParseada;
+    }
 }
