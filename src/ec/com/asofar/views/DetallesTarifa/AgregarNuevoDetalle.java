@@ -66,6 +66,8 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         suc = su;
         System.out.println("ojo"+emp.getIdEmpresa());
         System.out.println("ojo"+suc.getSeSucursalPK().getIdSucursal());
+        idp.setVisible(false);
+        idu.setVisible(false);
         
 //        sucur.setText(usu.getNombreUsuario());
 //        emp1.setText(String.valueOf(emp.getIdEmpresa()));
@@ -130,7 +132,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jLabel1.setText("PRESTACIONES POR UNIDAD DE SERVICIO:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel4.setText("No. DE TARIFARIO:");
+        jLabel4.setText(" TARIFARIO:");
 
         txtidtarifario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtidtarifario.addActionListener(new java.awt.event.ActionListener() {
@@ -285,10 +287,10 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnompr)
                     .addComponent(txtnomuni, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idp, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
@@ -466,7 +468,7 @@ pre.setEstado("A");
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvcActionPerformed
     public void cargar() {
-        txtidtarifario.setText(String.valueOf(tp.getPrTarifarioPK().getIdTarifario()));
+        txtidtarifario.setText(String.valueOf(tp.getDescripcion()));
 //        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
 //        sucur.setText(String.valueOf(tp.getPrTarifarioPK().getIdSurcusal()));
 //        USER.setText(String.valueOf(tp.getUsuarioCreacion()));
