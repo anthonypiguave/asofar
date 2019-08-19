@@ -169,7 +169,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
             if (listcaja.get(i).getIdMotivo() != null) {
                 if (listcaja.get(i).getIdMotivo() == obj.getInMotivos().getIdMotivo()) {
-                    TxtProveedor.setText(listcaja.get(i).getNombre());
+                    TxtMotivo.setText(listcaja.get(i).getNombre());
 
                 }
             }
@@ -217,7 +217,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         TxtFechaRecibo.setText(String.format(formatoFecha.format(cabCompra.getFechaEntrega())));
 
         txtCod.setText("" + cabCompra.getCoOrdenComprasPK().getIdOrdenCompra());
-  
 
         Tablas.listarDetalleRecepcion(listadet, jTable1);
 
@@ -440,6 +439,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 jTable1MousePressed(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -621,21 +625,23 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 }
 
             }
-            
+
             if (col == 6) {
-                JComboBox bx = (JComboBox) jTable1.getValueAt(row, col);
+                try {
 
+//                    JComboBox bx = (JComboBox) jTable1.getValueAt(row, col);
+                    
+                    Object val1 = jTable1.getModel().getValueAt(row, col);
+//                    
+//                    int val = bx.getSelectedIndex();
 
-                
-                
-                String val = bx.getSelectedItem().toString();
-                
-                System.out.println(" prueba 3:  "+ bx);
-  
-                System.out.println(" prueba 5:  "+ val);
-               
+//                    String chosenName = (String) bx.getSelectedItem();
 
-            
+//                    System.out.println(" prueba 5:  " + chosenName);
+                    System.out.println(" prueba 6:  " + val1);
+
+                } catch (Exception e) {
+                }
 
             }
         }
@@ -646,6 +652,20 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+
+        int row = jTable1.getSelectedRow();
+
+        int col = jTable1.getSelectedColumn();
+
+        if (col == 6) {
+            String valor = (String) jTable1.getValueAt(row, col);
+
+            System.out.println(" prueba 3:  " + valor);
+
+        }
+    }//GEN-LAST:event_jTable1KeyReleased
 
     /**
      * @param args the command line arguments

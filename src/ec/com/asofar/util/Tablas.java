@@ -2335,6 +2335,7 @@ public class Tablas {
         };
 
         JComboBox cb = null;
+        String[] values = null;
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
@@ -2356,8 +2357,12 @@ public class Tablas {
                 InBodegaJpaController InBodegaController = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
                 List<InBodega> listcaja = InBodegaController.findInBodegaEntities();
 
+                values = new String[listcaja.size()];
+
                 for (int j = 0; j < listcaja.size(); j++) {
                     cb.addItem(listcaja.get(j).getNombreBodega());
+                    values[j] = listcaja.get(j).getNombreBodega();
+
                 }
 
                 filas[6] = cb;
@@ -2368,8 +2373,6 @@ public class Tablas {
         }
 
         tabla.setModel(dt);
-
-        String[] values = new String[]{"bodega 1", "bodega 2", "bodega 3"};
 
         TableColumn col = tabla.getColumnModel().getColumn(6);
         col.setCellEditor(new MyComboBoxEditor(values));
