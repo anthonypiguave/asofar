@@ -4,6 +4,7 @@
  * and open the template in the editor. ec.com.asofar.dao ec.com.asofar.dto
  */
 package ec.com.asofar.views.DetallesTarifa;
+
 import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dao.PrTarifarioJpaController;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
@@ -20,6 +21,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,16 +42,15 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
      * Creates new form AgregarNuevoDetalle
      */
     PrTarifario tp = new PrTarifario();
-   
+
     List< PrDetalleTarifario> listaTarifario;
-        List<PrDetalleTarifario> lista = prp.findPrDetalleTarifarioEntities();
+    List<PrDetalleTarifario> lista = prp.findPrDetalleTarifarioEntities();
 
     InPrestacionesPorServicios objpres = new InPrestacionesPorServicios();
     InPrestacionesPorServicios objpres1 = new InPrestacionesPorServicios();
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    
 
     public AgregarNuevoDetalle(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -64,11 +65,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
-        System.out.println("ojo"+emp.getIdEmpresa());
-        System.out.println("ojo"+suc.getSeSucursalPK().getIdSucursal());
+        System.out.println("ojo" + emp.getIdEmpresa());
+        System.out.println("ojo" + suc.getSeSucursalPK().getIdSucursal());
         idp.setVisible(false);
         idu.setVisible(false);
-        
+
 //        sucur.setText(usu.getNombreUsuario());
 //        emp1.setText(String.valueOf(emp.getIdEmpresa()));
     }
@@ -275,69 +276,75 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtnompr)
-                    .addComponent(txtnomuni, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtnompr)
+                            .addComponent(txtnomuni, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idp, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(idu))
                 .addGap(68, 68, 68))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtidtarifario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtnompr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(idp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtnomuni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtnompr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtnomuni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(idu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(243, 243, 243))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -352,72 +359,58 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     }//GEN-LAST:event_txtidtarifarioActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
+
+        List<PrDetalleTarifario> list = prp.findPrDetalleTarifarioEntities();
+        for (int i = 0; i < list.size(); i++) {
+            PrDetalleTarifario deta = new PrDetalleTarifario();
+            deta = list.get(i);
+            
+            if (list.get(i).getIdPrestacion()!= null) {
+                
+                System.out.println(" vvv "+ list.get(i).getIdPrestacion());
+            
+            if (list.get(i).getIdPrestacion().intValue() == objpres.getPrPrestaciones().getIdPrestacion()) {
+                deta.setEstado("I");
+                try {
+                    prp.edit(deta);
+                } catch (Exception ex) {
+                    Logger.getLogger(AgregarNuevoDetalle.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            }
+        }
+        
         PrDetalleTarifario pre = new PrDetalleTarifario();
 
-//        PrTarifarioPK pk = new PrTarifarioPK();
-//
-//        PrTarifario pr = new PrTarifario();
-//
-//        pr.setPrTarifarioPK(new PrTarifarioPK());
-//        
-//
-//        pk.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-//        pk.setIdEmpresa(Long.valueOf(emp.getIdEmpresa().toString()));
-//        pk.setIdSurcusal(Long.valueOf(suc.getSeSucursalPK().getIdSucursal()));
-//
-//        pr.setPrTarifarioPK(pk);
-
-//
-//        pre.getPrTarifario().setPrTarifarioPK(pk);
-//                pre.setIdPrestacion(BigInteger.valueOf(pr.getIdPrestacion()));
-//          System.out.println("esta nota"+pr.getIdPrestacion());
-//        pre.setIdUnidadServicio(BigInteger.valueOf(ve.getIdUnidadServicio()));
         ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
-
         objpres = cp.obtener89();
-//        objpres.getInPrestacionesPorServiciosPK().getIdPrestacion();
-//        System.out.println("jhfh" + objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
-//        System.out.println("" + objpres.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
-        
-        /////enviar el detalle tarifario a I donde la pretacion sea igua a la prestacion
+/////enviar el detalle tarifario a I donde la pretacion sea igua a la prestacion
         //que envias y el estado sea A
+//        PrTarifarioPK prTarifarioPK= new PrTarifarioPK();
+//        prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
+//        prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
+//        prTarifarioPK.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
+//        //setear compuestas
+//         PrTarifario prTarifario= new PrTarifario();
+//        prTarifario.setPrTarifarioPK(prTarifarioPK);
+//        pre.setPrTarifario(prTarifario);
+//      
+//        pre.setValorCosto(Double.parseDouble((txtvc.getText())));
+//        pre.setValorDescuento(Double.parseDouble((txtds.getText())));
+//        pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
+//        pre.setValorVenta(Double.parseDouble((txtven.getText())));
+//pre.setEstado("A");
+//        pre.setUsuarioCreacion(usu.getNombreUsuario());
+//        pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
+//        pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
 
-        PrTarifarioPK prTarifarioPK= new PrTarifarioPK();
-        prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
-        prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
-        prTarifarioPK.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-        //setear compuestas
-         PrTarifario prTarifario= new PrTarifario();
-        prTarifario.setPrTarifarioPK(prTarifarioPK);
-        pre.setPrTarifario(prTarifario);
-        /*pre.getPrTarifario().getPrTarifarioPK().setIdEmpresa(emp.getIdEmpresa());
-        pre.getPrTarifario().getPrTarifarioPK().setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
-        pre.getPrTarifario().getPrTarifarioPK().setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-*/
-        //        pre.setPrTarifario(tp);
-//        pre.set
-        pre.setValorCosto(Double.parseDouble((txtvc.getText())));
-        pre.setValorDescuento(Double.parseDouble((txtds.getText())));
-        pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
-        pre.setValorVenta(Double.parseDouble((txtven.getText())));
-pre.setEstado("A");
-        pre.setUsuarioCreacion(usu.getNombreUsuario());
-        pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
-        pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
-//        ValiEstado();
-        
-         
-         
-        
-      
-//        pre.setValorCosto(Double.parseDouble(txtvc.getText()));
-//        pre.setValorDescuento(Double.parseDouble(txtds.getText()));
-//        pre.setValorMinVenta(Double.parseDouble(txtmin.getText()));
-//        pre.setValorVenta(Double.parseDouble(txtven.getText()));
         try {
+
+//            prp.edit(pre);
 //            op.create(pr);
-            
-            prp.create(pre);
+
+//            prp.create(pre);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception e) {
@@ -473,33 +466,26 @@ pre.setEstado("A");
 //        sucur.setText(String.valueOf(tp.getPrTarifarioPK().getIdSurcusal()));
 //        USER.setText(String.valueOf(tp.getUsuarioCreacion()));
     }
-    
-    public void ValiEstado(){
-     PrDetalleTarifario pre = new PrDetalleTarifario();
 
-
+    public void ValiEstado() {
+        PrDetalleTarifario pre = new PrDetalleTarifario();
 
         for (int i = 0; i < listaTarifario.size(); i++) {
             if (listaTarifario.get(i).getEstado().equals("A")) {
                 if (listaTarifario.get(i).getIdPrestacion().equals(listaTarifario.get(i).getIdPrestacion())) {
-                   
+
                     pre.setEstado("I");
-                    
-                }
-                else{
-                    
+
+                } else {
+
                     System.out.println("no se encontro otra prestacion activa");
-                    
+
                 }
-                    
-             
+
             }
-            
-            
-            
+
         }
-    
-    
+
     }
 
     /**

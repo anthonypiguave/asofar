@@ -266,12 +266,12 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public InPrestacionesPorServicios obtener89() {
-//        InPrestacionesPorServicios obj = new InPrestacionesPorServicios();
-//        obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
-//        obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
-//        System.out.println("obj "+obj.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
-//        obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
         InPrestacionesPorServicios obj = new InPrestacionesPorServicios();
+        obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
+        obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
+        System.out.println("obj "+obj.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+        obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
+       
         try {
 
             obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
