@@ -4,7 +4,6 @@
  * and open the template in the editor. ec.com.asofar.dao ec.com.asofar.dto
  */
 package ec.com.asofar.views.DetallesTarifa;
-
 import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dao.PrTarifarioJpaController;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
