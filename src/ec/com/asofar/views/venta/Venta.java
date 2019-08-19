@@ -116,7 +116,7 @@ public class Venta extends javax.swing.JInternalFrame {
     List<InKardex> ListKardex = null;
     InKardexExt selectKardex = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
     InKardexExt guardarKard = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
-    InKardex objKardex = new InKardex();
+//    InKardex objKardex = new InKardex();
     InKardexJpaController KC = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
 //    InKardexExtJpaController KcExt = new InKardexExtJpaController(EntityManagerUtil.ObtenerEntityManager());
 
@@ -1037,7 +1037,7 @@ public class Venta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
             /**/
-            selecKardex2(listaDetFactura);
+//            selecKardex2(listaDetFactura);
             /**/
             VeFactura cabFact = new VeFactura();
             InMovimientos pkMovimiento = null;
@@ -1130,7 +1130,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 }
                 /**/
  /*AAgregar a KardeX*/
-
+                selecKardex2(listaDetFactura);
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
             } catch (Exception e) {
@@ -1142,9 +1142,8 @@ public class Venta extends javax.swing.JInternalFrame {
     public void selecKardex2(List<VeFacturaDetalle> listaDetFactura) {
         listaPresta = Prestc.findPrPrestacionesEntities();
         Long id_Prod = null;
-//        VeFacturaDetalle FactDeta = new VeFacturaDetalle();
-//        FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
-
+        
+        InKardexJpaController KControler = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
         InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
         InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
         InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
@@ -1160,64 +1159,40 @@ public class Venta extends javax.swing.JInternalFrame {
 
                         BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
                         BigInteger cantActual = ListKardex.get(k).getSaldoActual();
-//                        System.out.println("select ultimo id  ");
-//                        System.out.println("cant venta " + listaDetFactura.get(j).getCantidad());
-//                        System.out.println("saldo actual " + ListKardex.get(k).getSaldoActual());
-//                        System.out.println(" --");
+                        System.out.println("select ultimo id  ");
+                        System.out.println("cant venta " + listaDetFactura.get(j).getCantidad());
+                        System.out.println("saldo actual " + ListKardex.get(k).getSaldoActual());
+                        System.out.println(" --");
                         BigInteger resta = cantActual.subtract(cantVenta);
-//                        System.out.println("/*/*/*/");+
-                        Long id_Bod = IdBodegD(id_Prod);
-
-                        
-                        objKardex.setInKardexPK(new InKardexPK());
-
-                        objKardex.getInKardexPK().setIdEmpresa(emp.getIdEmpresa());
-                        System.out.println("empressa " + emp.getIdEmpresa());
-                        System.out.println("empressa " + objKardex.getInKardexPK().getIdEmpresa());
-                        objKardex.getInKardexPK().setIdSucursal(suc.getSeSucursalPK().getIdSucursal());
-                        System.out.println("sucursa " + suc.getSeSucursalPK().getIdSucursal());
-                        System.out.println("sucursa " + objKardex.getInKardexPK().getIdSucursal());
-                        objKardex.getInKardexPK().setIdBodega(id_Bod);
-                        System.out.println("bodega " + id_Bod);
-                        System.out.println("bodega " + objKardex.getInKardexPK().getIdBodega());
-                        objKardex.getInKardexPK().setIdProducto(id_Prod);
-                        System.out.println("producto " +id_Prod);
-                        System.out.println("producto " + objKardex.getInKardexPK().getIdProducto());
-                        objKardex.getInKardexPK().setIdTipoDocumento(Long.parseLong(tipoDocumento.getIdTipoDocumento().toString()));
-//                        System.out.println("tiṕo doc " + objKardex.getInKardexPK().getIdTipoDocumento());
-                        System.out.println("tiṕo doc " + objKardex.getInKardexPK().getIdTipoDocumento());
-
-                        objKardex.setFechaMovimiento(d);
+                        System.out.println("/*/*/*/");
+//                        Long id_Bod = IdBodegD(id_Prod);
+//
+//                        InKardex objKardex = new InKardex();
+//                        objKardex.setInKardexPK(new InKardexPK());
+//
+//                        objKardex.getInKardexPK().setIdBodega(id_Bod);
+//                        objKardex.getInKardexPK().setIdProducto(id_Prod);
 //                        objKardex.getInKardexPK().setIdTipoDocumento(7);
-//                        objKar.setAnioDocumento(fecha.toString());
-//                        objKardex.setFechaSistema(fecha);
-                        objKardex.setCantidad(cantVenta);
-                        objKardex.setSaldoActual(resta);
-                        objKardex.setSaldoAnterior(cantActual);
-                        try {
-                            KC.create(objKardex);
-                        } catch (Exception ex) {
-                            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
+//                        objKardex.setSeSucursal(suc);
+//
+//                        objKardex.setFechaMovimiento(d);
+////                        objKardex.getInKardexPK().setIdTipoDocumento(7);
+////                        objKar.setAnioDocumento(fecha.toString());
+////                        objKardex.setFechaSistema(fecha);
+//                        objKardex.setCantidad(cantVenta);
+//                        objKardex.setSaldoActual(resta);
+//                        objKardex.setSaldoAnterior(cantActual);
+//                        try {
+//                            KControler.create(objKardex);
+//                        } catch (Exception ex) {
+//                            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
                     }
                 }
             }
         }
 
     }
-
-//    public Long idPresta(List<VeFacturaDetalle> listaDetFactura) {
-//        Long id_prestacion = null;
-//        
-//        for (int i = 0; i < listaDetFactura.size(); i++) {
-//            if(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones()==){}
-//            
-//        }
-//
-//        return id_prestacion;
-//
-//    }
     public void selectKardex(Long id) {
         ListKardex = selectKardex.obtenerProductoKardex(id);
         for (int i = 0; i < ListKardex.size(); i++) {

@@ -7,14 +7,29 @@ import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
-
+    int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+    int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int x, y;
     String valor = "";
     SeUsuarios seUsuario;
@@ -29,17 +44,17 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal = false);
         initComponents();
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         cargarMostrarTabla();
 
     }
 
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
+        super(parent, modal=false);
         initComponents();
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         
 
         seUsuario = us;
@@ -61,6 +76,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtfiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        btnimprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -138,6 +154,14 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("BUSCAR:");
 
+        btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnimprimir.setText("IMPRIMIR");
+        btnimprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnimprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,7 +179,9 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(229, 229, 229)
+                .addGap(149, 149, 149)
+                .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -170,7 +196,9 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -242,6 +270,28 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tbAprobarMousePressed
 
+    private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
+        ArrayList lista = new ArrayList();
+        for(int i=0;i<tbAprobar.getRowCount();i++){
+            ClaseReporte creporte = new ClaseReporte(tbAprobar.getValueAt(i,0).toString(),tbAprobar.getValueAt(i,1).toString(),tbAprobar.getValueAt(i,2).toString(),tbAprobar.getValueAt(i,3).toString());
+            lista.add(creporte);
+        }
+        try {
+            JasperReport jreport = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/aprobarOrdendePedidoForm.jasper");
+            JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(lista));
+            JDialog jdialog = new JDialog(this);
+            JRViewer jviewer = new JRViewer(jprint);
+            jdialog.add(jviewer);
+            jdialog.setSize(new Dimension(ancho/2,alto/2));
+            jdialog.setLocationRelativeTo(null);
+            jdialog.setVisible(true);
+            jviewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(aprobarOrdendePedidoForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnimprimirActionPerformed
+
     public CoOrdenPedido devuelveObjeto(String datos, List<CoOrdenPedido> listarobj) {
         CoOrdenPedido objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
@@ -308,6 +358,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnimprimir;
     private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

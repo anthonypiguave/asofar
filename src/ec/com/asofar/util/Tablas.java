@@ -1920,7 +1920,8 @@ public class Tablas {
             if (tp1.getPrTarifarioPK().getIdTarifario() == listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()) {
                 System.out.println("entro");
                 filas[0] = String.valueOf(listaprestacionesPSO.get(i).getIdDetalleTarifario());
-                filas[1] = String.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario());
+                PrTarifario pt = ObtenerDTO.ObtenerPrTarifario(BigInteger.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()));
+                filas[1] = pt.getDescripcion();
                 VeUnidadServicio veuniser = ObtenerDTO.ObtenerVeUnidadServiciON(listaprestacionesPSO.get(i).getIdUnidadServicio());
                 filas[2] = veuniser.getNombreUnidadServicio();
                 filas[3] = String.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
