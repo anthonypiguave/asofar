@@ -24,6 +24,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.swing.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
@@ -43,17 +44,17 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     CoOrdenPedidoJpaController cbOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal = false);
         initComponents();
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         cargarMostrarTabla();
 
     }
 
     public aprobarOrdendePedidoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
+        super(parent, modal=false);
         initComponents();
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         
 
         seUsuario = us;
@@ -278,10 +279,10 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         try {
             JasperReport jreport = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/aprobarOrdendePedidoForm.jasper");
             JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(lista));
-            JasperViewer jviewer = new JasperViewer(jprint);
             JDialog jdialog = new JDialog(this);
+            JRViewer jviewer = new JRViewer(jprint);
             jdialog.add(jviewer);
-            jdialog.getSize(new Dimension(ancho/2,alto/2));
+            jdialog.setSize(new Dimension(ancho/2,alto/2));
             jdialog.setLocationRelativeTo(null);
             jdialog.setVisible(true);
             jviewer.setFitWidthZoomRatio();

@@ -33,6 +33,7 @@ import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.PrTipoPrestacion;
 import ec.com.asofar.dto.SeCiudad;
 import ec.com.asofar.dto.SePais;
@@ -492,6 +493,25 @@ public class ObtenerDTO {
         return dto;
 
     }
+    
+    public static PrTarifario ObtenerPrTarifario(BigInteger id) {
+        PrTarifarioJpaController control = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrTarifario dto = new PrTarifario();
+        List<PrTarifario> lista = control.findPrTarifarioEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (BigInteger.valueOf(lista.get(i).getPrTarifarioPK().getIdTarifario()) == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+    
+    
+    
 
     public static PrSubgrupos ObtenerPrSubGrupos(String nombre) {
         PrSubgruposJpaController control = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
