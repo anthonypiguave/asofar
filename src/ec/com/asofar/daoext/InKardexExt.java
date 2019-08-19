@@ -34,4 +34,6 @@ public class InKardexExt extends InKardexJpaController {
         QKardex = query.getResultList();
         return QKardex;
     }
+
+   
 }
