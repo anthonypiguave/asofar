@@ -1193,18 +1193,6 @@ public class Venta extends javax.swing.JInternalFrame {
         }
 
     }
-    //    public Long idPresta(List<VeFacturaDetalle> listaDetFactura) {
-    //        Long id_prestacion = null;
-    //        
-    //        for (int i = 0; i < listaDetFactura.size(); i++) {
-    //            if(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones()==){}
-    //            
-    //        }
-    //
-    //        return id_prestacion;
-    //
-    //    }
-
     public void selectKardex(Long id) {
         ListKardex = selectKardex.obtenerProductoKardex(id);
         for (int i = 0; i < ListKardex.size(); i++) {
