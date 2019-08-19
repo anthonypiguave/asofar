@@ -35,6 +35,7 @@ import net.sf.jasperreports.swing.JRViewer;
 public class ReporteriaCompras extends javax.swing.JDialog {
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+    
     /**
      * Creates new form ReporteriaCompras
      */
@@ -49,6 +50,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     public ReporteriaCompras(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(this);
         itemList = rep.reporteCompras();
         Tablas.listarReporteCompras(itemList, tbaReporteCompra);
         //java.util.Date fechaParseada= new SimpleDateFormat("yyyy/MM/dd").parse(tuFecha);
