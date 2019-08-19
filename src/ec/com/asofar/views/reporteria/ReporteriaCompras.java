@@ -51,6 +51,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         initComponents();
         itemList = rep.reporteCompras();
         Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+        //java.util.Date fechaParseada= new SimpleDateFormat("yyyy/MM/dd").parse(tuFecha);
+        Chooser1.setDate(rep.fechaActual());
+        Chooser2.setDate(rep.fechaActual());
     }
 
     public ReporteriaCompras(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
