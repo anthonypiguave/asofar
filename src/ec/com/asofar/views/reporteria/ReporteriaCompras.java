@@ -64,6 +64,8 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         suc = su;
         itemList = rep.reporteCompras();
         Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+        Chooser1.setDate(rep.fechaActual());
+        Chooser2.setDate(rep.fechaActual());
     }
 
     /**
