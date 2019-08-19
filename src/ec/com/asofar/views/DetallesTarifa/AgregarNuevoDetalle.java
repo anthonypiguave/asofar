@@ -104,7 +104,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         idp = new javax.swing.JTextField();
         idu = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -270,13 +269,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -284,8 +276,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
@@ -476,13 +466,6 @@ pre.setEstado("A");
     private void txtvcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvcActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-ValiEstado();
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getPrTarifarioPK().getIdTarifario()));
 //        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
@@ -498,8 +481,8 @@ ValiEstado();
         for (int i = 0; i < listaTarifario.size(); i++) {
             if (listaTarifario.get(i).getEstado().equals("A")) {
                 if (listaTarifario.get(i).getIdPrestacion().equals(listaTarifario.get(i).getIdPrestacion())) {
-                    System.out.println(""+"hola");
-                    System.out.println(""+listaTarifario.get(i).getIdPrestacion().equals(listaTarifario.get(i).getIdPrestacion()));
+                   
+                    pre.setEstado("I");
                     
                 }
                 else{
@@ -544,6 +527,7 @@ ValiEstado();
             java.util.logging.Logger.getLogger(AgregarNuevoDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -564,7 +548,6 @@ ValiEstado();
     private javax.swing.JButton btnGrabar;
     private javax.swing.JTextField idp;
     private javax.swing.JTextField idu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
