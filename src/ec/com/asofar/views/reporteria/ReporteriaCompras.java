@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -33,20 +34,20 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author admin1
  */
 public class ReporteriaCompras extends javax.swing.JDialog {
+
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-    
+
     /**
      * Creates new form ReporteriaCompras
      */
-    
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    int x,y;
+    int x, y;
     ReporteriaExt rep = new ReporteriaExt();
     List<ReporteComprasDTO> itemList = null;
-    
+
     public ReporteriaCompras(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -325,22 +326,22 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         //        dc.setFecha2(F2);
         //
         //        if (F1 == null) {
-            //            JOptionPane.showMessageDialog(this, "INGRESE UNA FECHA");
-            //        }
+        //            JOptionPane.showMessageDialog(this, "INGRESE UNA FECHA");
+        //        }
         //        if (F1 != null && F2 == null) {
-            //
-            //            dc.setFecha1(F1);
-            //            dc.setFecha2((F1) + " 23:59:59");
-            //            lista = crud.RangoFechaVenta(1, dc);
-            //            Tablas.CargarJoinListaCabeceraVenta(tbaCabeceraVenta, lista);
-            //        }
+        //
+        //            dc.setFecha1(F1);
+        //            dc.setFecha2((F1) + " 23:59:59");
+        //            lista = crud.RangoFechaVenta(1, dc);
+        //            Tablas.CargarJoinListaCabeceraVenta(tbaCabeceraVenta, lista);
+        //        }
         //        if (F1 != null && F2 != null) {
-            //
-            //            dc.setFecha1(F.getFecha(Chooser1));
-            //            dc.setFecha2(F.getFecha(Chooser2) + " 23:59:59");
-            //            lista = crud.RangoFechaVenta(1, dc);
-            //            Tablas.CargarJoinListaCabeceraVenta(tbaCabeceraVenta, lista);
-            //        }
+        //
+        //            dc.setFecha1(F.getFecha(Chooser1));
+        //            dc.setFecha2(F.getFecha(Chooser2) + " 23:59:59");
+        //            lista = crud.RangoFechaVenta(1, dc);
+        //            Tablas.CargarJoinListaCabeceraVenta(tbaCabeceraVenta, lista);
+        //        }
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
@@ -355,17 +356,17 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList lista = new ArrayList();
-        for(int i = 0;i<tbaReporteCompra.getRowCount();i++){
+        for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
             ClaseReporte creporte = new ClaseReporte();
             lista.add(creporte);
         }
         try {
-            JasperReport report = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/ReporteriaCompras.jasper");
-            JasperPrint jprint = JasperFillManager.fillReport(report,null,new JRBeanCollectionDataSource(lista));
+            JasperReport report = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ReporteriaCompras.jasper");
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
             JDialog ventana = new JDialog();
             JRViewer jviewer = new JRViewer(jprint);
             ventana.add(jviewer);
-            ventana.setSize(new Dimension(ancho/2,alto/2));
+            ventana.setSize(new Dimension(ancho / 2, alto / 2));
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
             jviewer.setFitWidthZoomRatio();
@@ -375,7 +376,30 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
-        // TODO add your handling code here:
+        String valor = rep.getFecha(Chooser1);
+        String valor2 = rep.getFecha(Chooser2);
+
+        if (valor == null || valor2 == null) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
+        } else {
+            int x = valor.compareTo(valor2);
+            switch (x) {
+                case -1:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                case 0:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                default:
+                    System.out.println("error");
+                    JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS \nINGRESE FECHA DESDE - HASTA");
+                    break;
+            }
+        }
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
 
     /**
