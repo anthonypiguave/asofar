@@ -773,11 +773,11 @@ public class Venta extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtIdentificacionKeyTyped
-
     private void btnguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar1ActionPerformed
         CargarCliente();
     }//GEN-LAST:event_btnguardar1ActionPerformed
     public void CargarCliente() {
+        /**/
 //        String Ident = cbxtipo_identificacion.getSelectedItem().toString();
         String ObjIden = null;
         for (int i = 0; i < Cliente.size(); i++) {
