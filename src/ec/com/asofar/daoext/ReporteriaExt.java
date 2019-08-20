@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.daoext;
 
+import com.toedter.calendar.JDateChooser;
 import ec.com.asofar.util.Calendario;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -60,18 +61,21 @@ public class ReporteriaExt {
        
         List<ReporteComprasDTO> listaCompra = null;
         Query q = em.createNativeQuery("SELECT  distinct\n" +
-                "		c.id_orden_compra,\n" +
-                "		c.id_tipo_documento,\n" +
-                "        c.fecha_entrega,\n" +
-                "        c.id_proveedor,\n" +
-                "        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
-                "        ifnull(c.total_ice,0) as total_ice,\n" +
-                "        ifnull(c.total_iva,0) as total_iva,\n" +
-                "        c.total_compra\n" +
-                "FROM co_orden_compras as c\n" +
-                "inner join co_detalle_orden_compra as d  \n" +
-                "	  on   c.id_orden_compra = d.id_orden_compra\n" +
-                "      and  c.estado = 'P';");
+"                		c.id_orden_compra,\n" +
+"                		c.id_tipo_documento,\n" +
+"                        c.fecha_entrega,\n" +
+"                        c.id_proveedor,\n" +
+"                        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
+"                        ifnull(c.total_ice,0) as total_ice,\n" +
+"                        ifnull(c.total_iva,0) as total_iva,\n" +
+"                        c.total_compra\n" +
+"                FROM co_orden_compras as c\n" +
+"                inner join co_detalle_orden_compra as d \n" +
+"                	  on   c.id_orden_compra = d.id_orden_compra\n" +
+"                      and  c.estado = 'P'\n" +
+"                      and  c.fecha_entrega \n" +
+"                      BETWEEN concat(date_format(sysdate(),'%Y-%m-%d'),' 00:00:00')\n" +
+"                      and concat(date_format(sysdate(),'%Y-%m-%d'),' 23:59:59');");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteComprasDTO>();   
          try{
@@ -102,7 +106,58 @@ public class ReporteriaExt {
         }
         return listaCompra;
     }
-    
+    public static List<ReporteComprasDTO> reporteComprasFechas(String desde, String hasta) {
+        
+        Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+       
+        List<ReporteComprasDTO> listaCompra = null;
+        Query q = em.createNativeQuery("SELECT  distinct\n" +
+"                		c.id_orden_compra,\n" +
+"                		c.id_tipo_documento,\n" +
+"                        c.fecha_entrega,\n" +
+"                        c.id_proveedor,\n" +
+"                        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
+"                        ifnull(c.total_ice,0) as total_ice,\n" +
+"                        ifnull(c.total_iva,0) as total_iva,\n" +
+"                        c.total_compra\n" +
+"                FROM co_orden_compras as c\n" +
+"                inner join co_detalle_orden_compra as d \n" +
+"                	  on   c.id_orden_compra = d.id_orden_compra\n" +
+"                      and  c.estado = 'P'\n" +
+"                      and  c.fecha_entrega \n" +
+"                      BETWEEN concat('"+desde+"',' 00:00:00')\n" +
+"                      and concat('"+hasta+"',' 23:59:59');");
+        List<Object[]> listobj = q.getResultList();
+        listaCompra = new ArrayList<ReporteComprasDTO>();   
+         try{
+        for (Object[] obj : listobj) {
+            ReporteComprasDTO ob = new ReporteComprasDTO();
+            ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
+            ob.setId_tipo_documento(Long.parseLong(obj[1].toString()));
+            ob.setFecha_aprobacion(Date.valueOf(obj[2].toString()));
+            ob.setId_proveedor(Long.parseLong(obj[3].toString()));
+            ob.setSubtotal(Double.parseDouble(obj[4].toString()));
+            ob.setIce(Double.parseDouble(obj[5].toString()));
+            ob.setIva(Double.parseDouble(obj[6].toString()));
+            ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
+            listaCompra.add(ob);
+        }
+//        
+//        for (int i = 0; i <  q.getResultList().size(); i++) {
+//             ReporteComprasDTO1 obj = new ReporteComprasDTO1();
+//             obj.setId_orden_compra(Long.valueOf(q.getResultList().get(i).toString()));
+//             obj.setId_tipo_documento(Long.valueOf(q.getResultList().get(i).toString()));
+//              // obj4 = q.getResultList();
+//             listaCompra.add(obj);
+//              
+//        }
+//         
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return listaCompra;
+    }
      private long showId(EntityManager em) {
         String nativeQuery = "SELECT max(id_orden_compra) FROM co_orden_compras;";
         Query query = em.createNativeQuery(nativeQuery);
@@ -166,5 +221,14 @@ public class ReporteriaExt {
     public static java.util.Date fechaActual(){
         java.util.Date fechaParseada= new java.util.Date();
         return fechaParseada;
+    }
+    SimpleDateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+
+    public String getFecha(JDateChooser jd) {
+        if (jd.getDate() != null) {
+            return Formato.format(jd.getDate());
+        } else {
+            return null;
+        }
     }
 }
