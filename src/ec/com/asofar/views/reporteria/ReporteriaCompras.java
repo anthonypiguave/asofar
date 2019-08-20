@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -33,20 +34,20 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author admin1
  */
 public class ReporteriaCompras extends javax.swing.JDialog {
+
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-    
+    String buscar = "";
     /**
      * Creates new form ReporteriaCompras
      */
-    
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    int x,y;
+    int x, y;
     ReporteriaExt rep = new ReporteriaExt();
     List<ReporteComprasDTO> itemList = null;
-    
+
     public ReporteriaCompras(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -90,13 +91,12 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         Txt_Utilidad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        BtnBuscar = new javax.swing.JButton();
         Chooser1 = new com.toedter.calendar.JDateChooser();
         Chooser2 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         BtnBuscar1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -167,14 +167,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel1.setText("ENTRE");
 
-        BtnBuscar.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        BtnBuscar.setText("BUSCAR");
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
-            }
-        });
-
         Chooser1.setDateFormatString("yyyy/MM/dd");
         Chooser1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
@@ -206,8 +198,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<SELECCIONE>", "CODIGO", "DOCUMENTO", "PROVEEDOR" }));
-
         BtnBuscar1.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
         BtnBuscar1.setText("BUSCAR");
         BtnBuscar1.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +205,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                 BtnBuscar1ActionPerformed(evt);
             }
         });
+
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel5.setText("FILTRO:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,12 +229,10 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Chooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                        .addComponent(buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96))))
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -272,8 +263,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnBuscar)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnBuscar1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -306,7 +296,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
-
+        buscar = buscar1.getText();
+        Tablas.filtro(buscar, tbaReporteCompra);
+        
     }//GEN-LAST:event_buscar1KeyReleased
 
     private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
@@ -316,32 +308,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     private void tbaReporteCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaReporteCompraMousePressed
 
     }//GEN-LAST:event_tbaReporteCompraMousePressed
-
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        //        JoinListarCabeceraVenta dc = new JoinListarCabeceraVenta();
-        //        String F1 = F.getFecha(Chooser1);
-        //        String F2 = F.getFecha(Chooser2);
-        //        dc.setFecha1(F1);
-        //        dc.setFecha2(F2);
-        //
-        //        if (F1 == null) {
-            //            JOptionPane.showMessageDialog(this, "INGRESE UNA FECHA");
-            //        }
-        //        if (F1 != null && F2 == null) {
-            //
-            //            dc.setFecha1(F1);
-            //            dc.setFecha2((F1) + " 23:59:59");
-            //            lista = crud.RangoFechaVenta(1, dc);
-            //            Tablas.CargarJoinListaCabeceraVenta(tbaCabeceraVenta, lista);
-            //        }
-        //        if (F1 != null && F2 != null) {
-            //
-            //            dc.setFecha1(F.getFecha(Chooser1));
-            //            dc.setFecha2(F.getFecha(Chooser2) + " 23:59:59");
-            //            lista = crud.RangoFechaVenta(1, dc);
-            //            Tablas.CargarJoinListaCabeceraVenta(tbaCabeceraVenta, lista);
-            //        }
-    }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
@@ -355,17 +321,17 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList lista = new ArrayList();
-        for(int i = 0;i<tbaReporteCompra.getRowCount();i++){
+        for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
             ClaseReporte creporte = new ClaseReporte();
             lista.add(creporte);
         }
         try {
-            JasperReport report = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/ReporteriaCompras.jasper");
-            JasperPrint jprint = JasperFillManager.fillReport(report,null,new JRBeanCollectionDataSource(lista));
+            JasperReport report = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ReporteriaCompras.jasper");
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
             JDialog ventana = new JDialog();
             JRViewer jviewer = new JRViewer(jprint);
             ventana.add(jviewer);
-            ventana.setSize(new Dimension(ancho/2,alto/2));
+            ventana.setSize(new Dimension(ancho / 2, alto / 2));
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
             jviewer.setFitWidthZoomRatio();
@@ -375,7 +341,33 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
-        // TODO add your handling code here:
+        buscar1.setText("");
+        tbaReporteCompra.setRowSorter(null);
+        
+        String valor = rep.getFecha(Chooser1);
+        String valor2 = rep.getFecha(Chooser2);
+
+        if (valor == null || valor2 == null) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
+        } else {
+            int x = valor.compareTo(valor2);
+            switch (x) {
+                case -1:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                case 0:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                default:
+                    System.out.println("error");
+                    JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS \nINGRESE FECHA DESDE - HASTA");
+                    break;
+            }
+        }
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
 
     /**
@@ -424,7 +416,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnBuscar1;
     private com.toedter.calendar.JDateChooser Chooser1;
     private com.toedter.calendar.JDateChooser Chooser2;
@@ -433,11 +424,11 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     private javax.swing.JButton btnSalir2;
     private javax.swing.JTextField buscar1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTable tbaReporteCompra;

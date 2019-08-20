@@ -1802,7 +1802,7 @@ public class Tablas {
     }
 
     public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
-        int[] a = {150, 150, 150, 150, 80, 80, 200};
+        int[] a = {150, 300, 150, 225, 80, 80, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
