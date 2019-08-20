@@ -30,7 +30,8 @@ import javax.swing.JOptionPane;
 import static jdk.nashorn.internal.runtime.Debug.id;
 
 public class AgregarPrestaciones extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     InPrestacionesPorServicios pol1 = new InPrestacionesPorServicios();
     PrPrestaciones pol2 = new PrPrestaciones();
     VeUnidadServicio pol3 = new VeUnidadServicio();
@@ -46,8 +47,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-     Long id;
-     
+    Long id;
 
     public AgregarPrestaciones(java.awt.Frame parent, boolean modal) {
 
@@ -86,7 +86,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         nombreUnidad(us2);
         usu = us;
         emp = em;
-        suc = su;  
+        suc = su;
     }
 
     /**
@@ -300,44 +300,41 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
         InPrestacionesPorServicios preServ = new InPrestacionesPorServicios();
 
-      java.util.Date fechaActual = new java.util.Date();
-       
+        java.util.Date fechaActual = new java.util.Date();
+
         pol2 = ObtenerDTO.ObtenerPrPrestaciones(txtpresta.getText());
         pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
+        
 
- 
-        try {
-            boolean valor1=ValidarDTO.ValidarPreporservi(txtpresta.getText());
-            if (valor1 == true) {
+            //  try {
+            //   boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText());
+            boolean valor1 = ValidarDTO.ValidarPreporservi(cbxunidadservicio.getSelectedItem().toString());
+            System.out.println("" + valor1);
+
+            if (valor1 == false) {
                 JOptionPane.showMessageDialog(this, " YA EXISTENTE");
+            }
+
+            if (valor1 == true) {
+
             } else {
-                String valor ="I";
-                
-//        InPrestacionesPorServicios prest2 =new InPrestacionesPorServicios();
-        
-        if(cbxestado.getSelectedIndex() == 0){
-            valor="A";
-        }
-       // sub = ObtenerDTO.ObtenerPrSubGrupos(subgrupo.getSelectedItem().toString());
-        
                 preServ.setPrPrestaciones(pol2);
                 preServ.setVeUnidadServicio(pol3);
                 preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
                 preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
                 preServ.setEstado(cbxestado.getSelectedItem().toString());
                 preServ.setFechaCreacion(fechaActual);
+                
+                try {
                 pxs.create(preServ);
-                JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+                
+                }catch(Exception e){
                 setVisible(false);
-       // control2.create( preServ);
-              // JOptionPane.showMessageDialog(this, " "); 
-             //  Actualizar();
+                JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");                
+                } 
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        
-        
+
+
 //            boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText().toString())
 //                && ValidarDTO.ValidarPrPrestaciones(txtpresta.getText().toString())
 //                && ValidarDTO.ValidarPrPrestaciones(cbxunidadservicio.getSelectedItem().toString());
@@ -372,7 +369,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jguardarpreserActionPerformed
     public void nombrePrestacion(List<PrPrestaciones> pr2) {
-        
+
         lppus = pxs.findInPrestacionesPorServiciosEntities();
         for (int i = 0; i < pr2.size(); i++) {
 //        cbxprestacion.addItem(pr2.get(i).getNombrePrestacion());
@@ -380,14 +377,14 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     }
 
     public void nombreUnidad(List<VeUnidadServicio> us2) {
-        
+
         for (int i = 0; i < us2.size(); i++) {
             cbxunidadservicio.addItem(us2.get(i).getNombreUnidadServicio());
         }
     }
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel4MouseDragged
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
@@ -414,13 +411,12 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         setVisible(true);
         ConsultaPrestacion cp = new ConsultaPrestacion(new javax.swing.JFrame(), true);
         cp.setVisible(true);
-        
-         proc = cp.getPrestacion();
+
+        proc = cp.getPrestacion();
         txtpresta.setText(proc.getNombrePrestacion());
         id = proc.getIdPrestacion();
-        
-        
-        
+
+
     }//GEN-LAST:event_jbotonbuscarActionPerformed
 
     private void txtprestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprestaActionPerformed
@@ -457,7 +453,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 AgregarPrestaciones dialog = new AgregarPrestaciones(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
