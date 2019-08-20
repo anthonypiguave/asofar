@@ -1036,9 +1036,8 @@ public class Venta extends javax.swing.JInternalFrame {
         if ("".equals(txtIdentificacion.getText().toString())) {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
-            /**/
-//            selecKardex2(listaDetFactura);
-            /**/
+
+//            /**/guardarKardex();
             VeFactura cabFact = new VeFactura();
             InMovimientos pkMovimiento = null;
             VeFacturaDetalle detFact = new VeFacturaDetalle();
@@ -1048,18 +1047,11 @@ public class Venta extends javax.swing.JInternalFrame {
             cabFact.setSeSucursal(suc);
             cabFact.setIdCliente(idCliente);
             cabFact.setSubtotal(VGTsubtotal);
-//            cabFact.setSubtotal(Double.valueOf(txtSubtotal.getText()));
             cabFact.setTotalIva(VGTiva);
-//            cabFact.setTotalIva(Double.valueOf(txtIva.getText()));
-//            fact.setTotalBaseNoIva(Double.valueOf(txtSubtotal.getText()));
             cabFact.setTotalDescuento(VGTdescuento);
-//            cabFact.setTotalDescuento(Double.valueOf(txtDescuento.getText()));
             cabFact.setTotalFacturado(VGTtotal);
-//            cabFact.setTotalFacturado(Double.valueOf(txtTotal.getText()));
             cabFact.setDespachado("SI");
             try {
-//                selecKardex2(listaDetFactura);
-
                 VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
                 for (int i = 0; i < listaDetFactura.size(); i++) {
 
@@ -1128,9 +1120,9 @@ public class Venta extends javax.swing.JInternalFrame {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                /**/
- /*AAgregar a KardeX*/
-                selecKardex2(listaDetFactura);
+
+                guardarKardex2(listaDetFactura);
+
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
             } catch (Exception e) {
@@ -1139,11 +1131,45 @@ public class Venta extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    public void selecKardex2(List<VeFacturaDetalle> listaDetFactura) {
+//    public void guardarKardex() {
+//        InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
+//        for (int i = 0; i < listaDetFactura.size(); i++) {
+//            
+//        Long id_pro = IdProductoDsdObPres(listaDetFactura);
+//        Long id_Bod = IdBodegD(id_pro);
+//
+//        InKardex objKardex = new InKardex();
+//        InKardexJpaController KC = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
+//        objKardex.setInKardexPK(new InKardexPK());
+//
+//        objKardex.getInKardexPK().setIdBodega(id_Bod);
+//        objKardex.getInKardexPK().setIdProducto(id_pro);
+////        objKardex.getInKardexPK().setIdTipoDocumento(7);
+//        
+//        objKardex.setInTipoDocumento(tipoDocumento);
+//        objKardex.setSeSucursal(suc);
+//
+//        objKardex.setFechaMovimiento(d);
+////                        objKardex.getInKardexPK().setIdTipoDocumento(7);
+////                        objKar.setAnioDocumento(fecha.toString());
+////                        objKardex.setFechaSistema(fecha);
+////        objKardex.setCantidad(cantVenta);
+////        objKardex.setSaldoActual(resta);
+////        objKardex.setSaldoAnterior(cantActual);
+//
+//        try {
+//            KC.create(objKardex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        }
+//    }
+
+    public void guardarKardex2(List<VeFacturaDetalle> listaDetFactura) {
         listaPresta = Prestc.findPrPrestacionesEntities();
         Long id_Prod = null;
-        
-        InKardexJpaController KControler = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InKardexJpaController KCon = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
+
         InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
         InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
         InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
@@ -1165,34 +1191,36 @@ public class Venta extends javax.swing.JInternalFrame {
                         System.out.println(" --");
                         BigInteger resta = cantActual.subtract(cantVenta);
                         System.out.println("/*/*/*/");
-//                        Long id_Bod = IdBodegD(id_Prod);
-//
-//                        InKardex objKardex = new InKardex();
-//                        objKardex.setInKardexPK(new InKardexPK());
-//
-//                        objKardex.getInKardexPK().setIdBodega(id_Bod);
-//                        objKardex.getInKardexPK().setIdProducto(id_Prod);
+                        Long id_Bod = IdBodegD(id_Prod);
+
+                        InKardex objKardex = new InKardex();
+                        objKardex.setInKardexPK(new InKardexPK());
+
+                        objKardex.getInKardexPK().setIdBodega(id_Bod);
+                        objKardex.getInKardexPK().setIdProducto(id_Prod);
 //                        objKardex.getInKardexPK().setIdTipoDocumento(7);
-//                        objKardex.setSeSucursal(suc);
-//
-//                        objKardex.setFechaMovimiento(d);
-////                        objKardex.getInKardexPK().setIdTipoDocumento(7);
-////                        objKar.setAnioDocumento(fecha.toString());
-////                        objKardex.setFechaSistema(fecha);
-//                        objKardex.setCantidad(cantVenta);
-//                        objKardex.setSaldoActual(resta);
-//                        objKardex.setSaldoAnterior(cantActual);
-//                        try {
-//                            KControler.create(objKardex);
-//                        } catch (Exception ex) {
-//                            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
+
+                        objKardex.setInTipoDocumento(tipoDocumento);
+                        objKardex.setSeSucursal(suc);
+                        objKardex.setFechaMovimiento(d);
+//                        objKardex.getInKardexPK().setIdTipoDocumento(7);
+//                        objKar.setAnioDocumento(fecha.toString());
+//                        objKardex.setFechaSistema(fecha);
+                        objKardex.setCantidad(cantVenta);
+                        objKardex.setSaldoActual(resta);
+                        objKardex.setSaldoAnterior(cantActual);
+                        try {
+                            KCon.create(objKardex);
+                        } catch (Exception ex) {
+                            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }
         }
 
     }
+
     public void selectKardex(Long id) {
         ListKardex = selectKardex.obtenerProductoKardex(id);
         for (int i = 0; i < ListKardex.size(); i++) {
