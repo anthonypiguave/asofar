@@ -1920,9 +1920,6 @@ public class Tablas {
         for (int i = 0; i < listaprestacionesPSO.size(); i++) {
             
             if (listaprestacionesPSO.get(i).getEstado().equals("A")) {
-            
-        
-
             if (tp1.getPrTarifarioPK().getIdTarifario() == listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()) {
                 System.out.println("entro");
                 filas[0] = String.valueOf(listaprestacionesPSO.get(i).getIdDetalleTarifario());
