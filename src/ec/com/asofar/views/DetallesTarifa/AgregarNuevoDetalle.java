@@ -193,6 +193,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(254, 254, 254));
         jButton3.setText("SALIR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -368,8 +373,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             if (list.get(i).getIdPrestacion()!= null) {
                 
                 System.out.println(" vvv "+ list.get(i).getIdPrestacion());
+                System.out.println("hji"+objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
             
-            if (list.get(i).getIdPrestacion().intValue() == objpres.getPrPrestaciones().getIdPrestacion()) {
+            if (list.get(i).getIdPrestacion().intValue() == objpres.getInPrestacionesPorServiciosPK().getIdPrestacion()) {
                 deta.setEstado("I");
                 try {
                     prp.edit(deta);
@@ -381,33 +387,35 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         }
         
+        
         PrDetalleTarifario pre = new PrDetalleTarifario();
 
-        ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
-        objpres = cp.obtener89();
+//        ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
+//        objpres = cp.obtener89();
 /////enviar el detalle tarifario a I donde la pretacion sea igua a la prestacion
         //que envias y el estado sea A
-//        PrTarifarioPK prTarifarioPK= new PrTarifarioPK();
-//        prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
-//        prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
+        PrTarifarioPK prTarifarioPK= new PrTarifarioPK();
+        prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
+        prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
+        prTarifarioPK.setIdTarifario(tp.getPrTarifarioPK().getIdTarifario());
 //        prTarifarioPK.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-//        //setear compuestas
-//         PrTarifario prTarifario= new PrTarifario();
-//        prTarifario.setPrTarifarioPK(prTarifarioPK);
-//        pre.setPrTarifario(prTarifario);
-//      
-//        pre.setValorCosto(Double.parseDouble((txtvc.getText())));
-//        pre.setValorDescuento(Double.parseDouble((txtds.getText())));
-//        pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
-//        pre.setValorVenta(Double.parseDouble((txtven.getText())));
-//pre.setEstado("A");
-//        pre.setUsuarioCreacion(usu.getNombreUsuario());
-//        pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
-//        pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
+        //setear compuestas
+         PrTarifario prTarifario= new PrTarifario();
+        prTarifario.setPrTarifarioPK(prTarifarioPK);
+        pre.setPrTarifario(prTarifario);
+      
+        pre.setValorCosto(Double.parseDouble((txtvc.getText())));
+        pre.setValorDescuento(Double.parseDouble((txtds.getText())));
+        pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
+        pre.setValorVenta(Double.parseDouble((txtven.getText())));
+pre.setEstado("A");
+        pre.setUsuarioCreacion(usu.getNombreUsuario());
+        pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
+        pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
 
         try {
 
-//            prp.edit(pre);
+            prp.create(pre);
 //            op.create(pr);
 
 //            prp.create(pre);
@@ -460,6 +468,13 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     private void txtvcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvcActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+ setVisible(false);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getDescripcion()));
 //        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));

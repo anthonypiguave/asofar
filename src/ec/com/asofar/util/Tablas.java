@@ -1905,17 +1905,23 @@ public class Tablas {
     }
 
     public static void listarDetalleTarifarios(List<PrDetalleTarifario> listaprestacionesPSO, JTable Tabla, PrTarifario tp1) {
-        int[] a = {150, 200, 100, 100, 100, 200, 200, 100, 200, 200, 200, 300};
+        int[] a = {150, 200, 100, 100, 100, 200, 200, 100, 200, 200, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"detalle tarifario", "tarifario", "unidad servicio", "Empresa", "Sucursal", "prestacion", "nombre prestacion", "valor costo", "valor minimo venta", "valor venta", "valor descueto", "Estado",};
+        String[] b = {"detalle tarifario", "tarifario", "unidad servicio", "Empresa", "Sucursal","nombre prestacion", "valor costo", "valor minimo venta", "valor venta", "valor descueto", "Estado",};
         String[] filas = new String[11];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
+        
+        
         for (int i = 0; i < listaprestacionesPSO.size(); i++) {
+            
+            if (listaprestacionesPSO.get(i).getEstado().equals("A")) {
+            
+        
 
             if (tp1.getPrTarifarioPK().getIdTarifario() == listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()) {
                 System.out.println("entro");
@@ -1964,6 +1970,7 @@ public class Tablas {
             }
 
         }
+         }   
     }
 
     public static void listarTarifario(List<PrTarifario> listaT, JTable Tabla) {
