@@ -82,7 +82,7 @@ public class Venta extends javax.swing.JInternalFrame {
     PrProductos objetoProducto = new PrProductos();
     List<PrProductos> ListProduct;
     PrProductosJpaController ProducC = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+
     PrPrestaciones objetoPrestacion = new PrPrestaciones();
     VeFacturaDetalle objetoFactDeta = new VeFacturaDetalle();
     PrDetalleTarifario objetoDetTarif = new PrDetalleTarifario();
@@ -121,7 +121,7 @@ public class Venta extends javax.swing.JInternalFrame {
 //    InKardexExtJpaController KcExt = new InKardexExtJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     JoinProductoVenta objJoinProVen = new JoinProductoVenta();
-    
+
     public Venta() {
         initComponents();
         this.setLocation(350, 15);
@@ -130,7 +130,7 @@ public class Venta extends javax.swing.JInternalFrame {
         cargarLisCliente();
         TiIden = tic.findSeTipoIdentificacionEntities();
     }
-    
+
     public Venta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         initComponents();
         this.setLocation(250, 15);
@@ -144,7 +144,7 @@ public class Venta extends javax.swing.JInternalFrame {
         pVender();
         consFinal();
     }
-    
+
     public void consFinal() {
         txtNombre.setText("CONSUMIDOR");
         txtApellido.setText("FINAL");
@@ -154,18 +154,18 @@ public class Venta extends javax.swing.JInternalFrame {
         txtDireccion.setText("**********************************");
         txtTelefono.setText("**********************************");
     }
-    
+
     public void Prueba() {
-        
+
         ListKardex = selectKardex.obtenerProductoKardex(Long.valueOf(18));
         for (int i = 0; i < ListKardex.size(); i++) {
             System.out.println("prueba " + ListKardex.get(i).getCantidad());
             System.out.println(" " + ListKardex.get(i).getSaldoActual());
             System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
-            
+
         }
     }
-    
+
     public void pVender() {
         String v = null;
         List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
@@ -191,17 +191,17 @@ public class Venta extends javax.swing.JInternalFrame {
         }
         if (v.equals("no")) {
             JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-            
+
         }
     }
-    
+
     public void cargartxt() {
         txtSubtotal.setText("0.0");
         txtDescuento.setText("0.0");
         txtIva.setText("0.0");
         txtTotal.setText("0.0");
     }
-    
+
     public void cargarLisCliente() {
         Cliente = Cc.findSeClientesEntities();
         for (int i = 0; i < Cliente.size(); i++) {
@@ -261,6 +261,7 @@ public class Venta extends javax.swing.JInternalFrame {
         txt_NombreCaja = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -436,26 +437,22 @@ public class Venta extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTipoIdent, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(25, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22))))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTipoIdent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(25, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,6 +654,14 @@ public class Venta extends javax.swing.JInternalFrame {
         jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel20.setText("CAJA :");
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setText("NUEVO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -679,8 +684,10 @@ public class Venta extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txt_NombreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton1)
                                 .addGap(9, 9, 9)))))
                 .addContainerGap())
@@ -705,7 +712,8 @@ public class Venta extends javax.swing.JInternalFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_NombreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_NombreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addGap(7, 7, 7))
         );
 
@@ -834,14 +842,14 @@ public class Venta extends javax.swing.JInternalFrame {
             total = calcularTotalItem();
             FactDeta.setValorTotal(total);
             FactDeta.setSubtotal(subtotal);
-            
+
             listaDetFactura.add(FactDeta);
-            
+
             for (int i = 0; i < listaDetFactura.size(); i++) {
                 Cont = i + 1;
                 FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
             }
-            
+
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
             Totalizar();
             TotalizarIva();
@@ -863,7 +871,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void TotalizarIva() {
         Double t = 0.0;
         Double p = 0.0;
@@ -878,7 +886,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void TotalizarDescuento() {
         Double t = 0.0;
         Double p = 0.0;
@@ -893,7 +901,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void TotalizarSubtotal() {
         Double t = 0.0;
         Double p = 0.0;
@@ -904,7 +912,7 @@ public class Venta extends javax.swing.JInternalFrame {
             for (int i = 0; i < tba_detalle.getRowCount(); i++) {
                 pre = listaDetFactura.get(i).getPrecioUnitarioVenta();
                 cant = listaDetFactura.get(i).getCantidad();
-                
+
                 p = listaDetFactura.get(i).getSubtotal();
                 t += p;
                 VGTsubtotal = t;
@@ -913,7 +921,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     public Double calcularSubtotal() {
         BigInteger cant;
         Double pre;
@@ -921,10 +929,10 @@ public class Venta extends javax.swing.JInternalFrame {
         cant = cantidad;
         pre = precio;
         subt = cant.doubleValue() * pre;
-        
+
         return subt;
     }
-    
+
     public Double calcularTotalItem() {
         BigInteger cant;
         Double pre;
@@ -937,10 +945,10 @@ public class Venta extends javax.swing.JInternalFrame {
         pre = precio;
         desc = descuento;
         total2 = (cant.doubleValue() * pre) + preIva - desc;
-        
+
         return total2;
     }
-    
+
     public Double calcularIvaItem() {
         BigInteger cant;
         Double pre;
@@ -971,7 +979,7 @@ public class Venta extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1) {
             if (tba_detalle.getModel().getColumnClass(col).equals(JButton.class)) {
                 try {
-                    
+
                     int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
                         int i = tba_detalle.getSelectedRow();
@@ -991,7 +999,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 } catch (Exception e) {
                 }
             }
-            
+
         }
     }//GEN-LAST:event_tba_detalleMousePressed
 
@@ -1005,9 +1013,9 @@ public class Venta extends javax.swing.JInternalFrame {
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
         try {
             int i = tba_detalle.getSelectedRow();
-            
+
             String valor = (String) tba_detalle.getValueAt(i, 3);
-            
+
             BigInteger cantidadMod = new BigInteger(valor);
             cantidadModi = cantidadMod;
             String ivaS = tba_detalle.getValueAt(i, 6).toString();
@@ -1016,20 +1024,20 @@ public class Venta extends javax.swing.JInternalFrame {
             Double precioT = Double.valueOf(precioS.replace(",", "."));
             String descuentoS = tba_detalle.getValueAt(i, 5).toString();
             Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
-            
+
             Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
 //            Double IvaMod = calcularIvaItemCantMod(cantidadModi);
             Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
             Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
             Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
-            
+
             listaDetFactura.get(i).setCantidad(cantidadMod);
             listaDetFactura.get(i).setValorIva(IvaMod);
             listaDetFactura.get(i).setSubtotal(subt);
             listaDetFactura.get(i).setValorTotal(total);
             listaDetFactura.get(i).setValorDescuento(Desc);
             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-            
+
             Totalizar();
             TotalizarIva();
             TotalizarDescuento();
@@ -1041,15 +1049,15 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tba_detalleKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ("".equals(txtIdentificacion.getText().toString())&&txtTotal.getText().equals("0.0")) {
+        if ("".equals(txtIdentificacion.getText().toString()) && txtTotal.getText().equals("0.0")) {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
-            
+
             VeFactura cabFact = new VeFactura();
             InMovimientos pkMovimiento = null;
             VeFacturaDetalle detFact = new VeFacturaDetalle();
             VeFacturaDetalleJpaController detFactController = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
-            
+
             cabFact.setIdCaja(BigInteger.valueOf(idCaja));
             cabFact.setSeSucursal(suc);
             cabFact.setIdCliente(idCliente);
@@ -1061,11 +1069,11 @@ public class Venta extends javax.swing.JInternalFrame {
             try {
                 VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
                 for (int i = 0; i < listaDetFactura.size(); i++) {
-                    
+
                     detFact.setVeFactura(pkFactura);
                     detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
                     detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-                    
+
                     detFact.getVeFacturaDetallePK().setIdPrestaciones(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones());
                     detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
                     detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
@@ -1078,7 +1086,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     detFact.setEstado("A");
                     detFact.setUsuarioCreacion(usu.getIdUsuario());
                     detFact.setFechaCreacion(d);
-                    
+
                     detFactController.create(detFact);
                 }
 /////////// AGREGANDO A MOVIMIENTO
@@ -1088,7 +1096,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
                 InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
                 InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
-                
+
                 InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
                 try {
                     cabMovimiento.setSeSucursal(suc);
@@ -1102,94 +1110,73 @@ public class Venta extends javax.swing.JInternalFrame {
                     cabMovimiento.setFechaFactura(d);
                     cabMovimiento.setUsuarioCreacion(usu.getIdUsuario());
                     cabMovimiento.setFechaCreacion(d);
-                    
+
                     pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
-                    
+
                     for (int i = 0; i < listaDetFactura.size(); i++) {
                         detMovimiento.setInMovimientos(pkMovimiento);
                         detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
                         detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
                         Long id_pro = IdProductoDsdObPres(listaDetFactura);
                         Long id_Bod = IdBodegD(id_pro);
-                        
+
                         detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
                         detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
                         detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
                         detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
                         detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
                         detMovimiento.setEstado("A");
-                        
+
                         detMovimiento.setUsuarioCreacion(usu.getNombreUsuario());
                         detMovimiento.setFechaCreacion(d);
                         detMovController.create(detMovimiento);
                     }
-                    
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
                 guardarKardex2(listaDetFactura);
-                
+
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                setVisible(false);
+
+                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
+                Iv.setVisible(true);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-//    public void guardarKardex() {
-//        InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
-//        for (int i = 0; i < listaDetFactura.size(); i++) {
-//            
-//        Long id_pro = IdProductoDsdObPres(listaDetFactura);
-//        Long id_Bod = IdBodegD(id_pro);
-//
-//        InKardex objKardex = new InKardex();
-//        InKardexJpaController KC = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
-//        objKardex.setInKardexPK(new InKardexPK());
-//
-//        objKardex.getInKardexPK().setIdBodega(id_Bod);
-//        objKardex.getInKardexPK().setIdProducto(id_pro);
-////        objKardex.getInKardexPK().setIdTipoDocumento(7);
-//        
-//        objKardex.setInTipoDocumento(tipoDocumento);
-//        objKardex.setSeSucursal(suc);
-//
-//        objKardex.setFechaMovimiento(d);
-////                        objKardex.getInKardexPK().setIdTipoDocumento(7);
-////                        objKar.setAnioDocumento(fecha.toString());
-////                        objKardex.setFechaSistema(fecha);
-////        objKardex.setCantidad(cantVenta);
-////        objKardex.setSaldoActual(resta);
-////        objKardex.setSaldoAnterior(cantActual);
-//
-//        try {
-//            KC.create(objKardex);
-//        } catch (Exception ex) {
-//            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        }
-//    }
+
+    public void limpiar() {
+        consFinal();
+        listaDetFactura.clear();
+        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+        txtDescuento.setText("");
+        txtIva.setText("");
+        txtTotal.setText("");
+    }
 
     public void guardarKardex2(List<VeFacturaDetalle> listaDetFactura) {
         listaPresta = Prestc.findPrPrestacionesEntities();
         Long id_Prod = null;
         InKardexJpaController KCon = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
-        
+
         InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
         InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
         InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
-        
+
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
-                    
+
                     id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 ////
                     ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
                     for (int k = 0; k < ListKardex.size(); k++) {
-                        
+
                         BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
                         BigInteger cantActual = ListKardex.get(k).getSaldoActual();
                         System.out.println("select ultimo id  ");
@@ -1199,10 +1186,10 @@ public class Venta extends javax.swing.JInternalFrame {
                         BigInteger resta = cantActual.subtract(cantVenta);
                         System.out.println("/*/*/*/");
                         Long id_Bod = IdBodegD(id_Prod);
-                        
+
                         InKardex objKardex = new InKardex();
                         objKardex.setInKardexPK(new InKardexPK());
-                        
+
                         objKardex.getInKardexPK().setIdBodega(id_Bod);
                         objKardex.getInKardexPK().setIdProducto(id_Prod);
 //                        objKardex.getInKardexPK().setIdTipoDocumento(7);
@@ -1227,9 +1214,9 @@ public class Venta extends javax.swing.JInternalFrame {
                 }
             }
         }
-        
+
     }
-    
+
     public void selectKardex(Long id) {
         ListKardex = selectKardex.obtenerProductoKardex(id);
         for (int i = 0; i < ListKardex.size(); i++) {
@@ -1237,7 +1224,7 @@ public class Venta extends javax.swing.JInternalFrame {
             System.out.println(" " + ListKardex.get(i).getSaldoActual());
             System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
             System.out.println(" --");
-            
+
         }
     }
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
@@ -1251,27 +1238,31 @@ public class Venta extends javax.swing.JInternalFrame {
     private void txtTipoIdentKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoIdentKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTipoIdentKeyTyped
-    
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public Long IdProductoDsdObPres(List<VeFacturaDetalle> listaDetFactura) {
         Long id_producto = null;
         listaPresta = Prestc.findPrPrestacionesEntities();
-        
+
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
                     id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
-                    
+
                 }
             }
         }
         return id_producto;
-        
+
     }
-    
+
     public Long IdBodegD(Long id_Pro) {
         Long id_bog = null;
         lisKar = KC.findInKardexEntities();
-        
+
         for (int k = 0; k < lisKar.size(); k++) {
             if (id_Pro.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
                 id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
@@ -1279,41 +1270,41 @@ public class Venta extends javax.swing.JInternalFrame {
         }
         return id_bog;
     }
-    
+
     public Double calcularSubtotalItemCantMod(BigInteger cantMod, Double PrecioIva) {
         Double subto = null;
         subto = cantMod.doubleValue() * PrecioIva;
         return subto;
     }
-    
+
     public Double calcularTotalItemCantMod(BigInteger cantMod, Double PrecioIva, Double desc) {
-        
+
         Double pre;
         Double total2;
         /**/
         pre = precio;
         total2 = (cantMod.doubleValue() * pre) + PrecioIva - desc;
-        
+
         return total2;
     }
-    
+
     public Double calcularTotalItemCantMod(BigInteger cantMod, Double PrecioIva, Double desc, Double precio) {
-        
+
         Double pre;
         Double total2;
         /**/
         pre = precio;
         total2 = (cantMod.doubleValue() * pre) + PrecioIva - desc;
-        
+
         return total2;
     }
-    
+
     public Double calcularDescuentoItemCantMod(BigInteger cantMod, Double descuento) {
         Double descuent = null;
         descuent = cantMod.doubleValue() * descuento;
         return descuent;
     }
-    
+
     public Double calcularDescuentoItemCantMod(BigInteger cantMod, Double descuento, Double posicionDescuento) {
         Double descuent = null;
         if (posicionDescuento != 0.0) {
@@ -1323,14 +1314,14 @@ public class Venta extends javax.swing.JInternalFrame {
         }
         return descuent;
     }
-    
+
     public Double calcularIvaItemCantMod(BigInteger cantMod, Double posicionIva, Double posicionPrecio) {
 
 //        BigInteger cant;
         Double pre;
         Double precioIva2 = null;
         String aplica = objetoPrestacion.getAplicaIva();
-        
+
         if (posicionIva != 0.0) {
 //            cant = cantidad;
             pre = posicionPrecio;
@@ -1340,14 +1331,14 @@ public class Venta extends javax.swing.JInternalFrame {
         }
         return precioIva2;
     }
-    
+
     public Double calcularIvaItemCantMod(BigInteger cantMod) {
 
 //        BigInteger cant;
         Double pre;
         Double precioIva2 = null;
         String aplica = objetoPrestacion.getAplicaIva();
-        
+
         if (aplica.equals("SI")) {
 //            cant = cantidad;
             pre = precio;
@@ -1363,6 +1354,7 @@ public class Venta extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnguardar1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
