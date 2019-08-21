@@ -1042,8 +1042,7 @@ public class Venta extends javax.swing.JInternalFrame {
         if ("".equals(txtIdentificacion.getText().toString())&&txtTotal.getText().equals("0.0")) {
             JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
-
-//            /**/guardarKardex();
+            
             VeFactura cabFact = new VeFactura();
             InMovimientos pkMovimiento = null;
             VeFacturaDetalle detFact = new VeFacturaDetalle();
