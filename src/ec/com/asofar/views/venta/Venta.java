@@ -1049,8 +1049,10 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tba_detalleKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ("".equals(txtIdentificacion.getText().toString()) && txtTotal.getText().equals("0.0")) {
-            JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
+        if ("".equals(txtIdentificacion.getText().toString())) {
+            if ("0.0".equals(txtTotal.getText().toString())) {
+                JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
+            }
         } else {
 
             VeFactura cabFact = new VeFactura();
@@ -1154,6 +1156,7 @@ public class Venta extends javax.swing.JInternalFrame {
         consFinal();
         listaDetFactura.clear();
         Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+        txtSubtotal.setText("");
         txtDescuento.setText("");
         txtIva.setText("");
         txtTotal.setText("");
