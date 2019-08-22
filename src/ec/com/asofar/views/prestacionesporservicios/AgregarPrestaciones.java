@@ -216,66 +216,70 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(61, 61, 61))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbxfacturable, 0, 159, Short.MAX_VALUE)
                             .addComponent(cbxunidadservicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtpresta))
-                        .addGap(18, 18, 18)
-                        .addComponent(jbotonbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbotonbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(jsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cbxestado, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(25, 25, 25)
-                            .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cbxestado, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(25, 25, 25)
+                                    .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 173, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(jsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtpresta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbotonbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxunidadservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxfacturable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtpresta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jbotonbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxunidadservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                        .addComponent(cbxestado, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxfacturable, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addComponent(cbxestado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE))
+                            .addComponent(jsalir)
+                            .addComponent(jguardarpreser)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(53, 53, 53)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jguardarpreser, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(jsalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -287,9 +291,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -301,71 +303,72 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         InPrestacionesPorServicios preServ = new InPrestacionesPorServicios();
 
         java.util.Date fechaActual = new java.util.Date();
-
         pol2 = ObtenerDTO.ObtenerPrPrestaciones(txtpresta.getText());
         pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
-        
+    
+    
 
-            //  try {
-            //   boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText());
-            boolean valor1 = ValidarDTO.ValidarPreporservi(cbxunidadservicio.getSelectedItem().toString());
-            System.out.println("" + valor1);
-
-            if (valor1 == false) {
-                JOptionPane.showMessageDialog(this, " YA EXISTENTE");
-            }
-
-            if (valor1 == true) {
-
-            } else {
-                preServ.setPrPrestaciones(pol2);
-                preServ.setVeUnidadServicio(pol3);
-                preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
-                preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
-                preServ.setEstado(cbxestado.getSelectedItem().toString());
-                preServ.setFechaCreacion(fechaActual);
-                
-                try {
-                pxs.create(preServ);
-                
-                }catch(Exception e){
-                setVisible(false);
-                JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");                
-                } 
-            }
-
-
-//            boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText().toString())
-//                && ValidarDTO.ValidarPrPrestaciones(txtpresta.getText().toString())
-//                && ValidarDTO.ValidarPrPrestaciones(cbxunidadservicio.getSelectedItem().toString());
+//            //  try {
+//            //   boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText());
+//            boolean valor1 = ValidarDTO.ValidarPreporservi(cbxunidadservicio.getSelectedItem().toString());
+//            System.out.println("sout prueba " + valor1);
 //
-//        if (valor1 == true) {
-//            JOptionPane.showMessageDialog(this, "Prestacion Ya existente");
+//            if (valor1 == false) {
+//                JOptionPane.showMessageDialog(this, " YA EXISTENTE");
+//            }
 //
-//        } else {
+//            if (valor1 == true) {
 //
-//            preServ.setPrPrestaciones(pol2);
-//            preServ.setVeUnidadServicio(pol3);
-//            preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
-//            preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
-//            preServ.setEstado(cbxestado.getSelectedItem().toString());
-//            preServ.setFechaCreacion(fechaActual);
-//
-//            try {
+//            } else {
 //                preServ.setPrPrestaciones(pol2);
 //                preServ.setVeUnidadServicio(pol3);
 //                preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
 //                preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
 //                preServ.setEstado(cbxestado.getSelectedItem().toString());
 //                preServ.setFechaCreacion(fechaActual);
-//                pxs.create(preServ);
-//                JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+//                
+//                try {
+//                    
+////                pxs.create(preServ);
+//                
+//                }catch(Exception e){
 //                setVisible(false);
-//            } catch (Exception e) {
-//                Logger.getLogger(AgregarPrestaciones.class.getName()).log(Level.SEVERE, null, e);
+//                JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");                
+//                } 
 //            }
 //
-//        }
+//
+////            boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText().toString())
+////                && ValidarDTO.ValidarPrPrestaciones(txtpresta.getText().toString())
+////                && ValidarDTO.ValidarPrPrestaciones(cbxunidadservicio.getSelectedItem().toString());
+////
+////        if (valor1 == true) {
+////            JOptionPane.showMessageDialog(this, "Prestacion Ya existente");
+////
+////        } else {
+////
+////            preServ.setPrPrestaciones(pol2);
+////            preServ.setVeUnidadServicio(pol3);
+////            preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
+////            preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
+////            preServ.setEstado(cbxestado.getSelectedItem().toString());
+////            preServ.setFechaCreacion(fechaActual);
+////
+////            try {
+////                preServ.setPrPrestaciones(pol2);
+////                preServ.setVeUnidadServicio(pol3);
+////                preServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
+////                preServ.setAplicaDescuento(cbxestado.getSelectedItem().toString());
+////                preServ.setEstado(cbxestado.getSelectedItem().toString());
+////                preServ.setFechaCreacion(fechaActual);
+////                pxs.create(preServ);
+////                JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+////                setVisible(false);
+////            } catch (Exception e) {
+////                Logger.getLogger(AgregarPrestaciones.class.getName()).log(Level.SEVERE, null, e);
+////            }
+////
+////        }
 
     }//GEN-LAST:event_jguardarpreserActionPerformed
     public void nombrePrestacion(List<PrPrestaciones> pr2) {
