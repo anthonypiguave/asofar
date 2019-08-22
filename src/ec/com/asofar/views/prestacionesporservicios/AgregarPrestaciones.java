@@ -304,26 +304,60 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         pol2 = ObtenerDTO.ObtenerPrPrestaciones(txtpresta.getText());
         pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
         java.util.Date fechaActual = new java.util.Date();
-
+        String valor = null;
+        us2 = us1.findVeUnidadServicioEntities();
         lppus = pxs.findInPrestacionesPorServiciosEntities();
-        for (int i = 0; i < lppus.size(); i++) {
-//            System.out.println(" prueba guardar pres"+lppus.get(i).getPrPrestaciones().getIdPrestacion().toString()
-//                    +"---");
-//            System.out.println("prueba UNIDAD "+lppus.get(i).getVeUnidadServicio().getIdUnidadServicio().toString());
-            if (lppus.get(i).getPrPrestaciones().getIdPrestacion() == pol2.getIdPrestacion()) {
-                if (lppus.get(i).getVeUnidadServicio().getIdUnidadServicio() == pol3.getIdUnidadServicio()) {
-                    System.out.println("YA EXISTE NO PUEDE GUARDAR");
-                }
-//                else{
-//                    System.out.println("PUEDE GUARDAR");
+        int cont=0;
+
+//        for (int i = 0; i < lppus.size(); i++) {
+////            System.out.println("todo pres "+lppus.get(i).getPrPrestaciones().getIdPrestacion());
+////            System.out.println("todo uni "+lppus.get(i).getVeUnidadServicio().getIdUnidadServicio());
+//            if (lppus.get(i).getInPrestacionesPorServiciosPK().getIdPrestacion() == pol2.getIdPrestacion()) {
+//                System.out.println("----");
+//                System.out.println(" if 1 " + lppus.get(i).getPrPrestaciones().getIdPrestacion());
+//                System.out.println(" if 1 " + lppus.get(i).getVeUnidadServicio().getIdUnidadServicio());
+//                System.out.println("----");
+//                System.out.println("id " + lppus.get(i).getInPrestacionesPorServiciosPK().getIdUnidadServicio() + " " + pol3.getIdUnidadServicio());
+////                if(lppus.get(i).getInPrestacionesPorServiciosPK().getIdUnidadServicio()==pol3.getIdUnidadServicio()){
+////                    
+////                    
+////                    System.out.println(" if 2 "+lppus.get(i).getPrPrestaciones().getIdPrestacion());
+////                    System.out.println(" if 2 "+lppus.get(i).getVeUnidadServicio().getIdUnidadServicio());
+////                    System.out.println("NO PUEDE");
+////                    
+////                    System.out.println("************");
+////                    return;
+////                }else{
+////                    System.out.println("PUEDE GUARDAR");
+////                }
+//                for (int j = 0; j < us2.size(); j++) {
+//                   if(lppus.get(i).getInPrestacionesPorServiciosPK().getIdUnidadServicio() == us2.get(j).getIdUnidadServicio()){
+//                    cont++;
+//                   }
 //                }
-                if (lppus.get(i).getPrPrestaciones().getIdPrestacion() != pol2.getIdPrestacion() 
-                    && lppus.get(i).getVeUnidadServicio().getIdUnidadServicio() != pol3.getIdUnidadServicio()) {
-                    System.out.println("PUEDE GUARDAR");
+//
+//            }
+//        }
+//        
+//        if(cont == us2.size()){
+//            System.out.println("noooo imprimir"+cont);
+//            cont =0;
+//        }else{
+//            System.out.println("chiiiii imprimir"+cont);
+//            cont =0;
+//        }
+        for (int i = 0; i < lppus.size(); i++) {
+            if (lppus.get(i).getInPrestacionesPorServiciosPK().getIdPrestacion() == pol2.getIdPrestacion()){
+                System.out.println(lppus.get(i).getInPrestacionesPorServiciosPK().getIdPrestacion()+" "+ lppus.get(i).getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+                for (int j = 0; j < us2.size(); j++) {
+                    if(lppus.get(i).getInPrestacionesPorServiciosPK().getIdUnidadServicio() == us2.get(j).getIdUnidadServicio()){
+                      cont++;  
+                    }
                 }
             }
-        }
+        }System.out.println("rep: "+cont);
 
+//se repite sms
 //            //  try {
 //            //   boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText());
 //            boolean valor1 = ValidarDTO.ValidarPreporservi(cbxunidadservicio.getSelectedItem().toString());
@@ -387,6 +421,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 ////        }
 
     }//GEN-LAST:event_jguardarpreserActionPerformed
+
     public void nombrePrestacion(List<PrPrestaciones> pr2) {
 
         lppus = pxs.findInPrestacionesPorServiciosEntities();

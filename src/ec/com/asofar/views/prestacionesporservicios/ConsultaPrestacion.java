@@ -5,8 +5,12 @@
  */
 package ec.com.asofar.views.prestacionesporservicios;
 
+import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
 import ec.com.asofar.dao.PrPrestacionesJpaController;
+import ec.com.asofar.dao.VeUnidadServicioJpaController;
+import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrPrestaciones;
+import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -18,31 +22,33 @@ import java.util.List;
  * @author Humbertoezequiel
  */
 public class ConsultaPrestacion extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     PrPrestacionesJpaController presta = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrPrestaciones obj;
     List<PrPrestaciones> lista;
-      PrPrestaciones objeto = new PrPrestaciones();
-      AgregarPrestaciones pre =  new AgregarPrestaciones (new javax.swing.JFrame(), true);
+    PrPrestaciones objeto = new PrPrestaciones();
+    AgregarPrestaciones pre = new AgregarPrestaciones(new javax.swing.JFrame(), true);
     String valorP = "";
-    
-    
-    
-    
-    
-    
-public void cargartabla() {
-    
-        lista = presta.findPrPrestacionesEntities();
-        Tablas.TablaBuscarPrestaciones(lista, jtablaprestaciones);
-    }
+    List<InPrestacionesPorServicios> lppus;
+    List<VeUnidadServicio> us2;
+    VeUnidadServicioJpaController us1 = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
+    InPrestacionesPorServiciosJpaController pxs = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     /**
      * Creates new form ConsultaPrestacion
      */
     public ConsultaPrestacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-         initComponents();
+        initComponents();
         cargartabla();
+    }
+
+    public void cargartabla() {
+        us2 = us1.findVeUnidadServicioEntities();
+        lppus = pxs.findInPrestacionesPorServiciosEntities();
+        lista = presta.findPrPrestacionesEntities();
+        Tablas.TablaBuscarPrestaciones(lista, jtablaprestaciones, us2,lppus);
     }
 
     public PrPrestaciones getObj() {
@@ -52,6 +58,7 @@ public void cargartabla() {
     public void setObj(PrPrestaciones obj) {
         this.obj = obj;
     }
+
     public PrPrestaciones getPrestacion() {
         return objeto;
     }
@@ -62,7 +69,7 @@ public void cargartabla() {
 
         for (int i = 0; i < listaobjeto.size(); i++) {
 
-            if (datos.equals(""+ listaobjeto.get(i).getIdPrestacion())) {
+            if (datos.equals("" + listaobjeto.get(i).getIdPrestacion())) {
                 objeto1 = listaobjeto.get(i);
 
                 break;
@@ -70,9 +77,10 @@ public void cargartabla() {
             }
 
         }
-    
+
         return objeto1;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -225,30 +233,30 @@ public void cargartabla() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-     x = evt.getX();
-     y = evt.getY();
+        x = evt.getX();
+        y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jtablaprestacionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaprestacionesMousePressed
-       int i = 0;
+        int i = 0;
         if (evt.getClickCount() == 2) {
             i = jtablaprestaciones.getSelectedRow();
             objeto = devuelveObjeto(jtablaprestaciones.getValueAt(i, 0).toString(), lista);
-     
+
             pre.txtpresta.setText(objeto.getNombrePrestacion());
-            System.out.println(""+objeto.getNombrePrestacion());
-            
+            System.out.println("" + objeto.getNombrePrestacion());
+
             if (objeto != null) {
                 System.out.println("entro");
                 this.setVisible(false);
             }
         }
-        
+
     }//GEN-LAST:event_jtablaprestacionesMousePressed
 
     private void jsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsalirActionPerformed
@@ -261,20 +269,22 @@ public void cargartabla() {
     }//GEN-LAST:event_txtfiltroActionPerformed
 
     private void txtfiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyPressed
-     valorP = txtfiltro.getText();
+        valorP = txtfiltro.getText();
         Tablas.filtro(valorP, jtablaprestaciones);
     }//GEN-LAST:event_txtfiltroKeyPressed
-  private void txtFILTROActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void txtFILTROActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                         
-     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {                                   
+    }
+
+    private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
-     }
-    /** 
+    }
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -314,12 +324,9 @@ public void cargartabla() {
                 dialog.setVisible(true);
             }
         });
-    
-    
+
     }
 
- 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
