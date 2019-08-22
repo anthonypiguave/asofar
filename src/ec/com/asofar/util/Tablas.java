@@ -1960,8 +1960,10 @@ public class Tablas {
                     filas[1] = pt.getDescripcion();
                     VeUnidadServicio veuniser = ObtenerDTO.ObtenerVeUnidadServiciON(listaprestacionesPSO.get(i).getIdUnidadServicio());
                     filas[2] = veuniser.getNombreUnidadServicio();
-                    filas[3] = String.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
-                    filas[4] = "" + listaprestacionesPSO.get(i).getPrTarifario().getSeSucursal().getSeSucursalPK().getIdSucursal();
+                    SeEmpresa semp = ObtenerDTO.ObtenerSeEmpresaL(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
+                    filas[3] = semp.getNombreComercial();
+                    SeSucursal sucl = ObtenerDTO.ObtenerSeSucursalL(listaprestacionesPSO.get(i).getPrTarifario().getSeSucursal().getSeSucursalPK().getIdSucursal());
+                    filas[4] = sucl.getNombreComercial();
                     PrPrestaciones presser = ObtenerDTO.ObtenerPrPrestacionesOn(listaprestacionesPSO.get(i).getIdPrestacion());
 
                     //listaprestacionesPSO.get(i).getIdPrestacion
@@ -1969,7 +1971,15 @@ public class Tablas {
                     filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
                     filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorMinVenta());
                     filas[8] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
+                    if (listaprestacionesPSO.get(i).getValorDescuento() == null) {
+                        filas[9] = "0.00";
+
+                    }
+                    else {
                     filas[9] = String.valueOf(listaprestacionesPSO.get(i).getValorDescuento());
+                    
+                    }
+                    
                     filas[10] = String.valueOf(listaprestacionesPSO.get(i).getEstado());
 
                     model.addRow(filas);

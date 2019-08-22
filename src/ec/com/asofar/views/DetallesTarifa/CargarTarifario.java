@@ -221,7 +221,7 @@ public class CargarTarifario extends javax.swing.JDialog {
 
             i = tbltarifario.getSelectedRow();
             objeto = devuelveObjeto(tbltarifario.getValueAt(i, 0).toString(), lista);
-            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 1).toString(), lista);
+//            objeto = devuelveObjeto(tbltarifario.getValueAt(i, 1).toString(), lista);
 
             if (objeto != null) {
                 this.setVisible(false);
