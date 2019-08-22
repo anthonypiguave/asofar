@@ -718,6 +718,21 @@ public class ObtenerDTO {
 
         return dto;
     }
+    
+    public static SeSucursal ObtenerSeSucursalL(Long id) {
+       SeSucursalJpaController control = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeSucursal dto = new SeSucursal();
+        List<SeSucursal> lista = control.findSeSucursalEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getSeSucursalPK().getIdSucursal() == id)                                   {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+    }
 
     public static SeEmpresa ObtenerSeEmpresa(String objeto) {
         SeEmpresaJpaController control = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -734,7 +749,26 @@ public class ObtenerDTO {
         return dto;
     }
 
-    public static SeEmpresa ObtenerSeEmpresa(int id) {
+    public static SeEmpresa ObtenerSeEmpresai(int id) {
+        SeEmpresaJpaController control = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeEmpresa dto = new SeEmpresa();
+        List<SeEmpresa> lista = control.findSeEmpresaEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdEmpresa() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+    }
+    
+    
+    
+    
+    
+     public static SeEmpresa ObtenerSeEmpresaL(Long id) {
         SeEmpresaJpaController control = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeEmpresa dto = new SeEmpresa();
         List<SeEmpresa> lista = control.findSeEmpresaEntities();
