@@ -50,7 +50,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     Long id;
 
     public AgregarPrestaciones(java.awt.Frame parent, boolean modal) {
-
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -65,13 +64,13 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
     public void cargarPrest() {
         for (int i = 0; i < pr2.size(); i++) {
-            System.out.println(" " + pr2.get(i).getNombrePrestacion());
+//            System.out.println(" " + pr2.get(i).getNombrePrestacion());
         }
     }
 
     public void cargarUnida() {
         for (int i = 0; i < us2.size(); i++) {
-            System.out.println("uni " + us2.get(i).getNombreUnidadServicio());
+//            System.out.println("uni " + us2.get(i).getNombreUnidadServicio());
         }
     }
 
@@ -181,6 +180,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
             }
         });
 
+        txtpresta.setEditable(false);
         txtpresta.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtpresta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,12 +301,28 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private void jguardarpreserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jguardarpreserActionPerformed
 
         InPrestacionesPorServicios preServ = new InPrestacionesPorServicios();
-
-        java.util.Date fechaActual = new java.util.Date();
         pol2 = ObtenerDTO.ObtenerPrPrestaciones(txtpresta.getText());
         pol3 = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
-    
-    
+        java.util.Date fechaActual = new java.util.Date();
+
+        lppus = pxs.findInPrestacionesPorServiciosEntities();
+        for (int i = 0; i < lppus.size(); i++) {
+//            System.out.println(" prueba guardar pres"+lppus.get(i).getPrPrestaciones().getIdPrestacion().toString()
+//                    +"---");
+//            System.out.println("prueba UNIDAD "+lppus.get(i).getVeUnidadServicio().getIdUnidadServicio().toString());
+            if (lppus.get(i).getPrPrestaciones().getIdPrestacion() == pol2.getIdPrestacion()) {
+                if (lppus.get(i).getVeUnidadServicio().getIdUnidadServicio() == pol3.getIdUnidadServicio()) {
+                    System.out.println("YA EXISTE NO PUEDE GUARDAR");
+                }
+//                else{
+//                    System.out.println("PUEDE GUARDAR");
+//                }
+                if (lppus.get(i).getPrPrestaciones().getIdPrestacion() != pol2.getIdPrestacion() 
+                    && lppus.get(i).getVeUnidadServicio().getIdUnidadServicio() != pol3.getIdUnidadServicio()) {
+                    System.out.println("PUEDE GUARDAR");
+                }
+            }
+        }
 
 //            //  try {
 //            //   boolean valor1 = ValidarDTO.ValidarPreporservi(txtpresta.getText());
