@@ -8,9 +8,11 @@ package ec.com.asofar.views.DetallesTarifa;
 import ec.com.asofar.dao.CoDetallesTarifaJpaController;
 import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
 import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
+import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.dto.CoDetallesTarifa;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrDetalleTarifario;
+import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.PrTarifarioPK;
 import ec.com.asofar.dto.SeEmpresa;
@@ -44,6 +46,8 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     SeEmpresa emp;
     SeSucursal suc;
     PrTarifario tp = new PrTarifario();
+    PrPrestacionesJpaController Pc = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<PrPrestaciones> listaP ;
 
     /**
      * Creates new form Listar_PrestacionesPorServicio
@@ -53,6 +57,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
+        MostrarTabla();
     }
 
     public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, PrTarifario tr) {
@@ -72,9 +77,9 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
     public void MostrarTabla() {
         try {
-
+            listaP = Pc.findPrPrestacionesEntities();
             lista = PPS.findPrDetalleTarifarioEntities();
-            Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios, tp);
+            Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios, tp, listaP);
         } catch (Exception e) {
         }
     }
@@ -271,11 +276,10 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 //
 //        }
 
-
     }//GEN-LAST:event_tblPrestacionesPorServiciosMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true,tp,usu,emp,suc);
+        AgregarNuevoDetalle cp = new AgregarNuevoDetalle(new javax.swing.JFrame(), true, tp, usu, emp, suc);
         cp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -286,11 +290,11 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
     public PrDetalleTarifario getObji() {
         return obj;

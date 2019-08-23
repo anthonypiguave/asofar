@@ -1,7 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+SELECT 
+k.`id_producto`,
+k.`id_kardex`,
+k.id_bodega,dt.id_unidad_servicio,
+pres.`id_prestacion`,pro.`nombre_producto`,k.saldo_actual
+,dt.`valor_venta`,dt.valor_descuento,pres.aplica_iva,pro.codigo_barra,MAX(k.fecha_movimiento)
+-- select *
+FROM `in_kardex` k
+JOIN `pr_productos` pro 
+ON  pro.`id_producto`= k.`id_producto`
+JOIN `pr_prestaciones` pres 
+ON pres.`id_poducto`= pro.`id_producto`
+JOIN `pr_detalle_tarifario` dt 
+ON dt.`id_prestacion` = pres.`id_prestacion`
+WHERE k.`id_producto`IN(SELECT p.`id_producto`FROM `pr_productos` p where p.`id_producto` = k.`id_producto`)
+AND pres.`id_prestacion` IN(SELECT ta.`id_prestacion`FROM`pr_detalle_tarifario`ta where ta.`id_prestacion`= pres.`id_prestacion`)
+AND dt.`estado`='A'
+group by 
+k.`id_producto`,
+k.`id_kardex`,
+k.id_bodega,dt.id_unidad_servicio,
+pres.`id_prestacion`,pro.`nombre_producto`,k.saldo_actual
+,dt.`valor_venta`,dt.valor_descuento,pres.aplica_iva,pro.codigo_barra
+ORDER BY pres.`id_prestacion`
  */
 package ec.com.asofar.views.venta;
 

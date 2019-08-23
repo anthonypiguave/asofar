@@ -1855,20 +1855,20 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listabuscarprestaciones.size(); i++) {
-            if (listabuscarprestaciones.get(i).getInPrestacionesPorServiciosList().size() <2){
-                      filas[0] = String.valueOf(listabuscarprestaciones.get(i).getIdPrestacion());
-                    filas[1] = listabuscarprestaciones.get(i).getNombrePrestacion();
-                    filas[2] = listabuscarprestaciones.get(i).getEstado();
+            if (listabuscarprestaciones.get(i).getInPrestacionesPorServiciosList().size() < 2) {
+                filas[0] = String.valueOf(listabuscarprestaciones.get(i).getIdPrestacion());
+                filas[1] = listabuscarprestaciones.get(i).getNombrePrestacion();
+                filas[2] = listabuscarprestaciones.get(i).getEstado();
 
-                    model.addRow(filas);
-                    Tabla.setModel(model);
-                    Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                    Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                    Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                    Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);  
-                    }
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            }
         }
 //        for (int i = 0; i < listabuscarprestaciones.size(); i++) {
 //            for (int j = 0; j < listaPresxUni.size(); j++) {
@@ -1938,7 +1938,7 @@ public class Tablas {
 
     }
 
-    public static void listarDetalleTarifarios(List<PrDetalleTarifario> listaprestacionesPSO, JTable Tabla, PrTarifario tp1) {
+    public static void listarDetalleTarifarios(List<PrDetalleTarifario> listaprestacionesPSO, JTable Tabla, PrTarifario tp1, List<PrPrestaciones> listaPrestacion) {
         int[] a = {150, 200, 100, 100, 100, 200, 200, 100, 200, 200, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -1951,35 +1951,38 @@ public class Tablas {
         Tabla.setShowGrid(true);
 
         for (int i = 0; i < listaprestacionesPSO.size(); i++) {
+//            for (int j = 0; j < listaPrestacion.size(); j++) {
 
-            if (listaprestacionesPSO.get(i).getEstado().equals("A")) {
-                if (tp1.getPrTarifarioPK().getIdTarifario() == listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()) {
-                    System.out.println("entro");
-                    filas[0] = String.valueOf(listaprestacionesPSO.get(i).getIdDetalleTarifario());
-                    PrTarifario pt = ObtenerDTO.ObtenerPrTarifario(BigInteger.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()));
-                    filas[1] = pt.getDescripcion();
-                    VeUnidadServicio veuniser = ObtenerDTO.ObtenerVeUnidadServiciON(listaprestacionesPSO.get(i).getIdUnidadServicio());
-                    filas[2] = veuniser.getNombreUnidadServicio();
-                    SeEmpresa semp = ObtenerDTO.ObtenerSeEmpresaL(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
-                    filas[3] = semp.getNombreComercial();
-                    SeSucursal sucl = ObtenerDTO.ObtenerSeSucursalL(listaprestacionesPSO.get(i).getPrTarifario().getSeSucursal().getSeSucursalPK().getIdSucursal());
-                    filas[4] = sucl.getNombreComercial();
-                    PrPrestaciones presser = ObtenerDTO.ObtenerPrPrestacionesOn(listaprestacionesPSO.get(i).getIdPrestacion());
+                if (listaprestacionesPSO.get(i).getEstado().equals("A")) {
+                    if (tp1.getPrTarifarioPK().getIdTarifario() == listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()) {
+//                    if (listaprestacionesPSO.get(i).getIdPrestacion().equals(listaPrestacion.get(j).getIdPrestacion())) {
 
-                    //listaprestacionesPSO.get(i).getIdPrestacion
+                        System.out.println("entro");
+                        filas[0] = String.valueOf(listaprestacionesPSO.get(i).getIdDetalleTarifario());
+                        PrTarifario pt = ObtenerDTO.ObtenerPrTarifario(BigInteger.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()));
+                        filas[1] = pt.getDescripcion();
+                        VeUnidadServicio veuniser = ObtenerDTO.ObtenerVeUnidadServiciON(listaprestacionesPSO.get(i).getIdUnidadServicio());
+                        filas[2] = veuniser.getNombreUnidadServicio();
+                        SeEmpresa semp = ObtenerDTO.ObtenerSeEmpresaL(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
+                        filas[3] = semp.getNombreComercial();
+                        SeSucursal sucl = ObtenerDTO.ObtenerSeSucursalL(listaprestacionesPSO.get(i).getPrTarifario().getSeSucursal().getSeSucursalPK().getIdSucursal());
+                        filas[4] = sucl.getNombreComercial();
+                        PrPrestaciones presser = ObtenerDTO.ObtenerPrPrestacionesOn(listaprestacionesPSO.get(i).getIdPrestacion());
+                        System.out.println("hhhhhhhhhh" + presser.getNombrePrestacion());
+                        //listaprestacionesPSO.get(i).getIdPrestacion
                     filas[5] = presser.getNombrePrestacion();
-                    filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
-                    filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorMinVenta());
-                    filas[8] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
+                        filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
+                        filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorMinVenta());
+                        filas[8] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
+                    }
                     if (listaprestacionesPSO.get(i).getValorDescuento() == null) {
                         filas[9] = "0.00";
 
+                    } else {
+                        filas[9] = String.valueOf(listaprestacionesPSO.get(i).getValorDescuento());
+
                     }
-                    else {
-                    filas[9] = String.valueOf(listaprestacionesPSO.get(i).getValorDescuento());
-                    
-                    }
-                    
+
                     filas[10] = String.valueOf(listaprestacionesPSO.get(i).getEstado());
 
                     model.addRow(filas);
@@ -2006,8 +2009,8 @@ public class Tablas {
                     Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
                     Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
                     Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
-
-                }
+//                    }
+//                }
 
             }
         }
