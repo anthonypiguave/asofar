@@ -7,7 +7,9 @@ package ec.com.asofar.daoext;
 
 import com.toedter.calendar.JDateChooser;
 import ec.com.asofar.util.Calendario;
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -231,5 +233,20 @@ public class ReporteriaExt {
             return null;
         }
     }
-    
+    public static String formatoNumero(String valor) {   ////////////////   1
+
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        String valorFormateado = formato.format(Double.parseDouble(valor));
+
+        if (valorFormateado.charAt(0) == ',') {
+            String h = "0" + valorFormateado;
+            valorFormateado = h;
+        }
+
+        return valorFormateado;
+    }
+
+    public static String removeScientificNotation(String value) {
+        return new BigDecimal(value).toPlainString();
+    }
 }
