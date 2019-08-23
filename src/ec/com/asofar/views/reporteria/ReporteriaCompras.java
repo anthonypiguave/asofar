@@ -15,6 +15,7 @@ import ec.com.asofar.util.Tablas;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,6 +58,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         //java.util.Date fechaParseada= new SimpleDateFormat("yyyy/MM/dd").parse(tuFecha);
         Chooser1.setDate(rep.fechaActual());
         Chooser2.setDate(rep.fechaActual());
+        total();
     }
 
     public ReporteriaCompras(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -69,6 +71,14 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         Tablas.listarReporteCompras(itemList, tbaReporteCompra);
         Chooser1.setDate(rep.fechaActual());
         Chooser2.setDate(rep.fechaActual());
+    }
+
+    public void total() {
+        Double total = 0.00;
+        for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
+            total = total + itemList.get(i).getTotal_compra();
+        }
+        Txt_Total.setText(rep.formatoNumero(total.toString()));
     }
 
     /**
@@ -298,7 +308,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
         buscar = buscar1.getText();
         Tablas.filtro(buscar, tbaReporteCompra);
-        
+        total();
     }//GEN-LAST:event_buscar1KeyReleased
 
     private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
@@ -343,7 +353,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
         buscar1.setText("");
         tbaReporteCompra.setRowSorter(null);
-        
+
         String valor = rep.getFecha(Chooser1);
         String valor2 = rep.getFecha(Chooser2);
 
@@ -368,6 +378,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                     break;
             }
         }
+        total();
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
 
     /**
