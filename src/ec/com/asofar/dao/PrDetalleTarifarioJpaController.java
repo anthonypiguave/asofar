@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 public class PrDetalleTarifarioJpaController implements Serializable {
 

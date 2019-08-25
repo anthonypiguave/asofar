@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Entity
 @Table(name = "in_kardex")
@@ -45,8 +45,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InKardex.findBySaldoActual", query = "SELECT i FROM InKardex i WHERE i.saldoActual = :saldoActual")
     , @NamedQuery(name = "InKardex.findBySaldoAnterior", query = "SELECT i FROM InKardex i WHERE i.saldoAnterior = :saldoAnterior")
     , @NamedQuery(name = "InKardex.findBySaldoActualBodega", query = "SELECT i FROM InKardex i WHERE i.saldoActualBodega = :saldoActualBodega")
-    , @NamedQuery(name = "InKardex.findBySaldoAnteriorBodega", query = "SELECT i FROM InKardex i WHERE i.saldoAnteriorBodega = :saldoAnteriorBodega")
     , @NamedQuery(name = "InKardex.findBySaldoActualEmpresa", query = "SELECT i FROM InKardex i WHERE i.saldoActualEmpresa = :saldoActualEmpresa")
+    , @NamedQuery(name = "InKardex.findBySaldoAnteriorBodega", query = "SELECT i FROM InKardex i WHERE i.saldoAnteriorBodega = :saldoAnteriorBodega")
     , @NamedQuery(name = "InKardex.findBySaldoAnteriorEmpresa", query = "SELECT i FROM InKardex i WHERE i.saldoAnteriorEmpresa = :saldoAnteriorEmpresa")
     , @NamedQuery(name = "InKardex.findByCostoActual", query = "SELECT i FROM InKardex i WHERE i.costoActual = :costoActual")
     , @NamedQuery(name = "InKardex.findByCostoAnterior", query = "SELECT i FROM InKardex i WHERE i.costoAnterior = :costoAnterior")
@@ -78,10 +78,10 @@ public class InKardex implements Serializable {
     private BigInteger saldoAnterior;
     @Column(name = "saldo_actual_bodega")
     private BigInteger saldoActualBodega;
-    @Column(name = "saldo_anterior_bodega")
-    private BigInteger saldoAnteriorBodega;
     @Column(name = "saldo_actual_empresa")
     private BigInteger saldoActualEmpresa;
+    @Column(name = "saldo_anterior_bodega")
+    private BigInteger saldoAnteriorBodega;
     @Column(name = "saldo_anterior_empresa")
     private BigInteger saldoAnteriorEmpresa;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -92,12 +92,12 @@ public class InKardex implements Serializable {
     @Column(name = "costo_promedio")
     private BigDecimal costoPromedio;
     @Column(name = "usuario_creacion")
-    private BigInteger usuarioCreacion;
+    private String usuarioCreacion;
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @Column(name = "usuario_actualizacion")
-    private BigInteger usuarioActualizacion;
+    private String usuarioActualizacion;
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
@@ -193,20 +193,20 @@ public class InKardex implements Serializable {
         this.saldoActualBodega = saldoActualBodega;
     }
 
-    public BigInteger getSaldoAnteriorBodega() {
-        return saldoAnteriorBodega;
-    }
-
-    public void setSaldoAnteriorBodega(BigInteger saldoAnteriorBodega) {
-        this.saldoAnteriorBodega = saldoAnteriorBodega;
-    }
-
     public BigInteger getSaldoActualEmpresa() {
         return saldoActualEmpresa;
     }
 
     public void setSaldoActualEmpresa(BigInteger saldoActualEmpresa) {
         this.saldoActualEmpresa = saldoActualEmpresa;
+    }
+
+    public BigInteger getSaldoAnteriorBodega() {
+        return saldoAnteriorBodega;
+    }
+
+    public void setSaldoAnteriorBodega(BigInteger saldoAnteriorBodega) {
+        this.saldoAnteriorBodega = saldoAnteriorBodega;
     }
 
     public BigInteger getSaldoAnteriorEmpresa() {
@@ -241,11 +241,11 @@ public class InKardex implements Serializable {
         this.costoPromedio = costoPromedio;
     }
 
-    public BigInteger getUsuarioCreacion() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setUsuarioCreacion(BigInteger usuarioCreacion) {
+    public void setUsuarioCreacion(String usuarioCreacion) {
         this.usuarioCreacion = usuarioCreacion;
     }
 
@@ -257,11 +257,11 @@ public class InKardex implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigInteger getUsuarioActualizacion() {
+    public String getUsuarioActualizacion() {
         return usuarioActualizacion;
     }
 
-    public void setUsuarioActualizacion(BigInteger usuarioActualizacion) {
+    public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
     }
 
