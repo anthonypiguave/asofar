@@ -1953,62 +1953,62 @@ public class Tablas {
         for (int i = 0; i < listaprestacionesPSO.size(); i++) {
 //            for (int j = 0; j < listaPrestacion.size(); j++) {
 
-                if (listaprestacionesPSO.get(i).getEstado().equals("A")) {
-                    if (tp1.getPrTarifarioPK().getIdTarifario() == listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()) {
+            if (listaprestacionesPSO.get(i).getEstado().equals("A")) {
+                if (tp1.getPrTarifarioPK().getIdTarifario() == listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()) {
 //                    if (listaprestacionesPSO.get(i).getIdPrestacion().equals(listaPrestacion.get(j).getIdPrestacion())) {
 
-                        System.out.println("entro");
-                        filas[0] = String.valueOf(listaprestacionesPSO.get(i).getIdDetalleTarifario());
-                        PrTarifario pt = ObtenerDTO.ObtenerPrTarifario(BigInteger.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()));
-                        filas[1] = pt.getDescripcion();
-                        VeUnidadServicio veuniser = ObtenerDTO.ObtenerVeUnidadServiciON(listaprestacionesPSO.get(i).getIdUnidadServicio());
-                        filas[2] = veuniser.getNombreUnidadServicio();
-                        SeEmpresa semp = ObtenerDTO.ObtenerSeEmpresaL(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
-                        filas[3] = semp.getNombreComercial();
-                        SeSucursal sucl = ObtenerDTO.ObtenerSeSucursalL(listaprestacionesPSO.get(i).getPrTarifario().getSeSucursal().getSeSucursalPK().getIdSucursal());
-                        filas[4] = sucl.getNombreComercial();
-                        PrPrestaciones presser = ObtenerDTO.ObtenerPrPrestacionesOn(listaprestacionesPSO.get(i).getIdPrestacion());
-                        System.out.println("hhhhhhhhhh" + presser.getNombrePrestacion());
-                        //listaprestacionesPSO.get(i).getIdPrestacion
+                    System.out.println("entro");
+                    filas[0] = String.valueOf(listaprestacionesPSO.get(i).getIdDetalleTarifario());
+                    PrTarifario pt = ObtenerDTO.ObtenerPrTarifario(BigInteger.valueOf(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()));
+                    filas[1] = pt.getDescripcion();
+                    VeUnidadServicio veuniser = ObtenerDTO.ObtenerVeUnidadServiciON(listaprestacionesPSO.get(i).getIdUnidadServicio());
+                    filas[2] = veuniser.getNombreUnidadServicio();
+                    SeEmpresa semp = ObtenerDTO.ObtenerSeEmpresaL(listaprestacionesPSO.get(i).getPrTarifario().getPrTarifarioPK().getIdEmpresa());
+                    filas[3] = semp.getNombreComercial();
+                    SeSucursal sucl = ObtenerDTO.ObtenerSeSucursalL(listaprestacionesPSO.get(i).getPrTarifario().getSeSucursal().getSeSucursalPK().getIdSucursal());
+                    filas[4] = sucl.getNombreComercial();
+                    PrPrestaciones presser = ObtenerDTO.ObtenerPrPrestacionesOn(listaprestacionesPSO.get(i).getIdPrestacion());
+                    System.out.println("hhhhhhhhhh" + presser.getNombrePrestacion());
+                    //listaprestacionesPSO.get(i).getIdPrestacion
                     filas[5] = presser.getNombrePrestacion();
-                        filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
-                        filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorMinVenta());
-                        filas[8] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
-                    }
-                    if (listaprestacionesPSO.get(i).getValorDescuento() == null) {
-                        filas[9] = "0.00";
+                    filas[6] = String.valueOf(listaprestacionesPSO.get(i).getValorCosto());
+                    filas[7] = String.valueOf(listaprestacionesPSO.get(i).getValorMinVenta());
+                    filas[8] = String.valueOf(listaprestacionesPSO.get(i).getValorVenta());
+                }
+                if (listaprestacionesPSO.get(i).getValorDescuento() == null) {
+                    filas[9] = "0.00";
 
-                    } else {
-                        filas[9] = String.valueOf(listaprestacionesPSO.get(i).getValorDescuento());
+                } else {
+                    filas[9] = String.valueOf(listaprestacionesPSO.get(i).getValorDescuento());
 
-                    }
+                }
 
-                    filas[10] = String.valueOf(listaprestacionesPSO.get(i).getEstado());
+                filas[10] = String.valueOf(listaprestacionesPSO.get(i).getEstado());
 
-                    model.addRow(filas);
-                    Tabla.setModel(model);
-                    Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                    Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                    Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                    Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-                    Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-                    Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-                    Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-                    Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
-                    Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
-                    Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
-                    Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
-                    Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
-                    Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+                Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
+                Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
+                Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
 //                    }
 //                }
 
@@ -2360,9 +2360,15 @@ public class Tablas {
     }
 
     public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
+        int[] a = {10, 30, 300, 30, 50, 30, 100};
+
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+
 
         tabla.setDefaultRenderer(Object.class,
                 new Render());
+
         DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO", "BODEGA"}, 0) {
 
             Class[] types = new Class[]{
@@ -2394,8 +2400,8 @@ public class Tablas {
                 filas[0] = "" + lista.get(i).getInDetalleMovimientoPK().getLineaDetalle();
                 filas[1] = "" + lista.get(i).getInDetalleMovimientoPK().getIdProducto();
                 filas[2] = lista.get(i).getDescripcion();
-                filas[3] = lista.get(i).getCantidad().toString();
-                filas[4] = lista.get(i).getPrecioUnitario().toString();
+                filas[3] = lista.get(i).getCantidad();
+                filas[4] = lista.get(i).getPrecioUnitario().setScale(2, BigDecimal.ROUND_HALF_UP).toEngineeringString();
 
                 JCheckBox ch = new JCheckBox();
                 ch.setSelected(false);
@@ -2403,7 +2409,7 @@ public class Tablas {
                 filas[5] = ch;
 
                 cb = new JComboBox();
-                cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+                cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"--SELECCIONE--"}));
 
                 InBodegaJpaController InBodegaController = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
                 List<InBodega> listcaja = InBodegaController.findInBodegaEntities();
@@ -2419,15 +2425,32 @@ public class Tablas {
                 filas[6] = cb;
 
                 dt.addRow(filas);
+
             }
 
         }
 
         tabla.setModel(dt);
+        tabla.setRowHeight(24);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//        tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+        tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+        tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+//        tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+//        tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 
         TableColumn col = tabla.getColumnModel().getColumn(6);
         col.setCellEditor(new MyComboBoxEditor(values));
 //    col.setCellRenderer(new MyComboBoxRenderer(values));
+
     }
 
     public static void ListarProductosVenta2(List<JoinProductoVenta> lisProdVen, JTable Tabla) {
