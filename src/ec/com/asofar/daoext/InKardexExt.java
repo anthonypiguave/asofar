@@ -35,5 +35,17 @@ public class InKardexExt extends InKardexJpaController {
         return QKardex;
     }
 
-   
+    public InKardex obtenerUltimoProductoKardex(Long id) {
+        EntityManager em = getEntityManager();
+        InKardex kardex = null;
+        String nativeQuery = "SELECT * FROM in_kardex \n"
+                + "WHERE in_kardex.id_producto = " + id + "\n"
+                + "ORDER BY in_kardex.id_kardex DESC LIMIT 1;";
+        Query query = em.createNativeQuery(nativeQuery,InKardex.class);
+        kardex =  (InKardex)query.getSingleResult();
+
+        return kardex;
+
+    }
+
 }

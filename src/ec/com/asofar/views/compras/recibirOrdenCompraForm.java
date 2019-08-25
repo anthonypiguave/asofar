@@ -12,8 +12,11 @@ import ec.com.asofar.dao.InMotivosJpaController;
 import ec.com.asofar.dao.InMovimientosJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
+import ec.com.asofar.daoext.InKardexExt;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.InDetalleMovimiento;
 import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InKardexPK;
@@ -30,13 +33,16 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -45,45 +51,46 @@ import javax.swing.Timer;
  * @author admin1
  */
 public class recibirOrdenCompraForm extends javax.swing.JDialog {
-
+    
     int x, y;
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
-
+    
     Boolean selector;
     Boolean[] check;
-
+    
     Date fecha = null;
-
+    
     Date d = new Date();
-
+    
     CoProveedoresJpaController proveedorController = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController documentoController = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoMovimientoJpaController movimientoController = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
     InMotivosJpaController motivoController = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
+    
     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
     InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    
     CoOrdenCompras cabCompra;
     InMovimientos cabMovimiento;
-
+    
     List<InDetalleMovimiento> listadet = new ArrayList<InDetalleMovimiento>();
-
+    
     public recibirOrdenCompraForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
-
+        
         CargarFormulario();
-
+        
         Timer tiempo = new Timer(100, new recibirOrdenCompraForm.horas());
         tiempo.start();
-
+        
     }
-
+    
     public recibirOrdenCompraForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, CoOrdenCompras objeto) {
         super(parent, modal);
         initComponents();
@@ -95,98 +102,98 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         seSucursal = su;
         cabCompra = objeto;
         txtFecha.setText(FechaActual());
-
+        
         CargarFormulario();
-
+        
         System.out.println(" " + seUsuario);
-
+        
     }
-
+    
     class horas implements ActionListener {
-
+        
         public void actionPerformed(ActionEvent e) {
             java.util.Date sistHora = new java.util.Date();
             String pmAm = "HH:mm:ss";
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             Calendar hoy = Calendar.getInstance();
             txtHora.setText(String.format(format.format(sistHora), hoy));
-
+            
         }
     }
-
+    
     public static String FechaActual() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         return formatoFecha.format(fecha);
     }
-
+    
     public void CargarProveedor(InMovimientos obj) {
         List<CoProveedores> listcaja = proveedorController.findCoProveedoresEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdProveedor() != null) {
                 if (listcaja.get(i).getIdProveedor() == obj.getIdProveedor().getIdProveedor()) {
                     TxtProveedor.setText(listcaja.get(i).getNombre());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarDocumento(InMovimientos obj) {
         List<InTipoDocumento> listcaja = documentoController.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdTipoDocumento() != null) {
                 if (listcaja.get(i).getIdTipoDocumento() == obj.getInTipoDocumento().getIdTipoDocumento()) {
                     TxtDocumento.setText(listcaja.get(i).getNombreDocumento());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarMovimiento(InMovimientos obj) {
         List<InTipoMovimiento> listcaja = movimientoController.findInTipoMovimientoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdTipoMovimiento() != null) {
                 if (listcaja.get(i).getIdTipoMovimiento() == obj.getInTipoMovimiento().getIdTipoMovimiento()) {
                     TxtMovimiento.setText(listcaja.get(i).getNombreMovimiento());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarMotivos(InMovimientos obj) {
         List<InMotivos> listcaja = motivoController.findInMotivosEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdMotivo() != null) {
                 if (listcaja.get(i).getIdMotivo() == obj.getInMotivos().getIdMotivo()) {
                     TxtMotivo.setText(listcaja.get(i).getNombre());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarFormulario() {
         List<InMovimientos> listCab = new ArrayList<InMovimientos>();
-
+        
         listCab = cabMovController.findInMovimientosEntities();
-
+        
         for (int i = 0; i < listCab.size(); i++) {
-
+            
             BigInteger value = listCab.get(i).getIdOrdenCompra();
-
+            
             if (value != null) {
-
+                
                 if ((listCab.get(i).getIdOrdenCompra()).intValue() == cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()) {
                     cabMovimiento = listCab.get(i);
                 }
@@ -194,33 +201,33 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         }
         List<InDetalleMovimiento> listDet = new ArrayList<InDetalleMovimiento>();
         listDet = detMovController.findInDetalleMovimientoEntities();
-
+        
         check = new Boolean[listDet.size()];  // inicializar el Boolean segun la lista
 
         for (int i = 0; i < listDet.size(); i++) {
-
+            
             check[i] = false; // setear valor falso
 
             if (listDet.get(i).getInDetalleMovimientoPK().getIdMovimientos() == (cabMovimiento.getInMovimientosPK().getIdMovimientos()) && listDet.get(i).getEstado().equals("A")) {
                 listadet.add(listDet.get(i));
-
+                
             }
         }
-
+        
         CargarProveedor(cabMovimiento);
         CargarDocumento(cabMovimiento);
         CargarMovimiento(cabMovimiento);
         CargarMotivos(cabMovimiento);
-
+        
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         TxtFechaRecibo.setText(String.format(formatoFecha.format(cabCompra.getFechaEntrega())));
-
+        
         txtCod.setText("" + cabCompra.getCoOrdenComprasPK().getIdOrdenCompra());
-
+        
         Tablas.listarDetalleRecepcion(listadet, jTable1);
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -528,46 +535,79 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
-
+        
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
-
+            
         } else {
-
+            
         }
     }//GEN-LAST:event_BtnCancelarActionPerformed
-
+    
 
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-
+        
         InKardexJpaController kardexController = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+        
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(TxtProveedor.getText())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
-
+                
                 try {
-
+                    
+                    
+                    
                     for (int i = 0; i < listadet.size(); i++) {
 
+                        InKardex  objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                        
                         InKardex kardex = new InKardex();
                         kardex.setInKardexPK(new InKardexPK());
                         kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
                         kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
-
+                        
                         kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
                         kardex.setSeSucursal(seSucursal);
-
+                        
+                        kardex.setCantidad(listadet.get(i).getCantidad());
+                        kardex.setAnioDocumento(""+listadet.get(i).getAnioDocumento());
+                        kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+                        
+                        
+                        
+                        
+                        
+                        if (objeto != null) {
+                            
+                            kardex.setSaldoAnterior(objeto.getSaldoActual());
+                            kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
+                            kardex.setCostoAnterior(objeto.getCostoActual());
+                            kardex.setCostoActual(kardex.getCostoAnterior().add(
+                                    (listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())))));
+                            kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
+                            kardex.setFechaSistema(d);
+                            
+                            
+                        } else {
+                            
+                            kardex.setSaldoAnterior(BigInteger.valueOf(0));
+                            kardex.setSaldoActual(listadet.get(i).getCantidad());
+                            kardex.setCostoAnterior(BigDecimal.valueOf(0));
+                            kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
+                            kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
+                            
+                        }
+                        
                         kardexController.create(kardex);
-
+                        
                     }
-
+                    
                 } catch (Exception e) {
-
+                    
                     e.printStackTrace();
-
+                    
                 }
 
 //
@@ -578,61 +618,90 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAprovarActionPerformed
 
     private void BtnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnularActionPerformed
-
+        cargarBodega();
 
     }//GEN-LAST:event_BtnAnularActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-
+        
         int row = jTable1.rowAtPoint(evt.getPoint());
         int col = jTable1.columnAtPoint(evt.getPoint());
-
+        
         if (evt.getClickCount() == 1) {
             if (col == 5) {
                 JCheckBox chbox = (JCheckBox) jTable1.getValueAt(row, col);
-
+                
                 boolean selected = chbox.isSelected();
-
+                
                 if (selected) {
-
+                    
                     chbox.setSelected(false);
-
+                    
                     selector = false;
                     check[row] = selector;
-
+                    
                 } else {
-
+                    
                     chbox.setSelected(true);
-
+                    
                     selector = true;
                     check[row] = selector;
-
-                }
-
-            }
-
-            if (col == 6) {
-                try {
-
-//                    JComboBox bx = (JComboBox) jTable1.getValueAt(row, col);
                     
-                    Object val1 = jTable1.getModel().getValueAt(row, col);
-//                    
-//                    int val = bx.getSelectedIndex();
-
-//                    String chosenName = (String) bx.getSelectedItem();
-
-//                    System.out.println(" prueba 5:  " + chosenName);
-                    System.out.println(" prueba 6:  " + val1);
-
-                } catch (Exception e) {
                 }
-
+                
             }
-        }
 
+//            if (col == 6) {
+//                try {
+//
+//                    for (int i = 0; i < listadet.size(); i++) {
+//
+//                        Object val1 = jTable1.getModel().getValueAt(i, col);
+//                        System.out.println(" prueba 6:  " + val1);
+//
+//                    }
+//
+////                    JComboBox bx = (JComboBox) jTable1.getValueAt(row, col);
+////                    
+////                    if (bx != null){
+////                    Object val1 = jTable1.getModel().getValueAt(row, col);
+////
+////                    
+////                    bx.getSelectedObjects();
+////                    
+////                    
+////                    int val = bx.getSelectedIndex();
+////                    String chosenName = (String) bx.getSelectedItem();
+////                    System.out.println(" prueba 5:  " + chosenName);
+////                    System.out.println(" prueba 6:  " + bx.getSelectedItem());
+////                    }
+//                } catch (Exception e) {
+//                }
+//
+//            }
+        }
+        
 
     }//GEN-LAST:event_jTable1MousePressed
+    
+    public void cargarBodega() {
+        try {
+            
+            for (int i = 0; i < listadet.size(); i++) {
+                String valor = (String) jTable1.getModel().getValueAt(i, 6);
+                
+                InBodega bodega = ObtenerDTO.ObtenerInBodega(valor);
+                
+                listadet.get(i).setIdBodegaDestino(BigInteger.valueOf(bodega.getInBodegaPK().getIdBodega()));
+                
+                System.out.println(" fila " + i + " : " + valor);
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -648,21 +717,21 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
