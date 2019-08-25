@@ -250,17 +250,16 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        TxtProveedor = new javax.swing.JTextField();
-        TxtMovimiento = new javax.swing.JTextField();
-        TxtDocumento = new javax.swing.JTextField();
-        TxtMotivo = new javax.swing.JTextField();
         TxtFechaRecibo = new javax.swing.JTextField();
+        TxtDocumento = new javax.swing.JTextField();
+        TxtMovimiento = new javax.swing.JTextField();
+        TxtMotivo = new javax.swing.JTextField();
+        TxtProveedor = new javax.swing.JTextField();
         BtnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         BtnAprovar = new javax.swing.JButton();
-        BtnAnular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -330,6 +329,26 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel19.setText("MOVIMIENTO:");
 
+        TxtFechaRecibo.setEditable(false);
+        TxtFechaRecibo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        TxtFechaRecibo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        TxtDocumento.setEditable(false);
+        TxtDocumento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        TxtDocumento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        TxtMovimiento.setEditable(false);
+        TxtMovimiento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        TxtMovimiento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        TxtMotivo.setEditable(false);
+        TxtMotivo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        TxtMotivo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        TxtProveedor.setEditable(false);
+        TxtProveedor.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        TxtProveedor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -345,18 +364,20 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(46, 46, 46))
                             .addComponent(jLabel12))
-                        .addGap(28, 28, 28)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
@@ -366,11 +387,10 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TxtMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                    .addComponent(TxtDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                    .addComponent(TxtProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                    .addComponent(TxtMovimiento, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(TxtDocumento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                    .addComponent(TxtMovimiento, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtMotivo, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -387,26 +407,22 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(TxtMovimiento)))
+                    .addComponent(TxtMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(TxtMotivo)))
+                    .addComponent(TxtMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -446,7 +462,9 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,20 +476,10 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         BtnAprovar.setBackground(new java.awt.Color(13, 153, 0));
         BtnAprovar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         BtnAprovar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAprovar.setText("APROVAR");
+        BtnAprovar.setText("APROBAR");
         BtnAprovar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAprovarActionPerformed(evt);
-            }
-        });
-
-        BtnAnular.setBackground(new java.awt.Color(255, 145, 0));
-        BtnAnular.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        BtnAnular.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAnular.setText("ANULAR");
-        BtnAnular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAnularActionPerformed(evt);
             }
         });
 
@@ -485,8 +493,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
                         .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -508,7 +514,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -551,94 +556,110 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-        int cont = 1;
+        int cont1 = 1;
+        int cont2 = 1;
         InKardexJpaController kardexController = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
 
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(TxtProveedor.getText())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
+
                 for (int i = 0; i < listadet.size(); i++) {
 
-                    if (jTable1.getModel().getValueAt(i, 6).getClass().equals(JComboBox.class)) {
-                        cont = cont - 1;
+                    JCheckBox chbox = (JCheckBox) jTable1.getValueAt(i, 5);
+                    boolean selected = chbox.isSelected();
+
+                    if (selected) {
+                        cont1 = cont1 + 1;
 
                     } else {
-                        cont = cont + 1;
+                        cont1 = cont1 - 1;
                     }
 
                 }
-                System.out.println(" cont : " + cont);
-                if (cont < listadet.size()) {
-                    JOptionPane.showMessageDialog(null, "SELECCIONE BODEGA!");
+
+                if (cont1 < listadet.size()) {
+                    JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO RECIBIDOS!");
                 } else {
 
-                    cargarBodega();
+                    for (int i = 0; i < listadet.size(); i++) {
 
-                    try {
+                        if (jTable1.getModel().getValueAt(i, 6).getClass().equals(JComboBox.class)) {
+                            cont2 = cont2 - 1;
 
-                        for (int i = 0; i < listadet.size(); i++) {
+                        } else {
+                            cont2 = cont2 + 1;
+                        }
 
-                            InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                    }
 
-                            InKardex kardex = new InKardex();
-                            kardex.setInKardexPK(new InKardexPK());
-                            kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
-                            kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                    if (cont2 < listadet.size()) {
+                        JOptionPane.showMessageDialog(null, "SELECCIONE BODEGA!");
+                    } else {
 
-                            kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
-                            kardex.setSeSucursal(seSucursal);
+                        cargarBodega();
 
-                            kardex.setCantidad(listadet.get(i).getCantidad());
-                            kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
-                            kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+                        try {
 
-                            if (objeto != null) {
+                            for (int i = 0; i < listadet.size(); i++) {
 
-                                kardex.setSaldoAnterior(objeto.getSaldoActual());
-                                kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
-                                kardex.setCostoAnterior(objeto.getCostoActual());
-                                kardex.setCostoActual(kardex.getCostoAnterior().add(
-                                        ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
-                                kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
-                                kardex.setFechaSistema(d);
+                                InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
 
-                                kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
-                                kardex.setFechaCreacion(d);
+                                InKardex kardex = new InKardex();
+                                kardex.setInKardexPK(new InKardexPK());
+                                kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
+                                kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
 
-                            } else {
+                                kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
+                                kardex.setSeSucursal(seSucursal);
 
-                                kardex.setSaldoAnterior(BigInteger.valueOf(0));
-                                kardex.setSaldoActual(listadet.get(i).getCantidad());
-                                kardex.setCostoAnterior(BigDecimal.valueOf(0));
-                                kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
-                                kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+                                kardex.setCantidad(listadet.get(i).getCantidad());
+                                kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
+                                kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+
+                                if (objeto != null) {
+
+                                    kardex.setSaldoAnterior(objeto.getSaldoActual());
+                                    kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
+                                    kardex.setCostoAnterior(objeto.getCostoActual());
+                                    kardex.setCostoActual(kardex.getCostoAnterior().add(
+                                            ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
+                                    kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+                                    kardex.setFechaSistema(d);
+
+                                    kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                    kardex.setFechaCreacion(d);
+
+                                } else {
+
+                                    kardex.setSaldoAnterior(BigInteger.valueOf(0));
+                                    kardex.setSaldoActual(listadet.get(i).getCantidad());
+                                    kardex.setCostoAnterior(BigDecimal.valueOf(0));
+                                    kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
+                                    kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+
+                                }
+
+                                kardexController.create(kardex);
 
                             }
 
-                            kardexController.create(kardex);
+                        } catch (Exception e) {
+
+                            e.printStackTrace();
 
                         }
 
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-
+//
+                        JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                        setVisible(false);
                     }
 
-//
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                    setVisible(false);
                 }
-
             }
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
-
-    private void BtnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnularActionPerformed
-        cargarBodega();
-
-    }//GEN-LAST:event_BtnAnularActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
 
@@ -669,34 +690,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
             }
 
-//            if (col == 6) {
-//                try {
-//
-//                    for (int i = 0; i < listadet.size(); i++) {
-//
-//                        Object val1 = jTable1.getModel().getValueAt(i, col);
-//                        System.out.println(" prueba 6:  " + val1);
-//
-//                    }
-//
-////                    JComboBox bx = (JComboBox) jTable1.getValueAt(row, col);
-////                    
-////                    if (bx != null){
-////                    Object val1 = jTable1.getModel().getValueAt(row, col);
-////
-////                    
-////                    bx.getSelectedObjects();
-////                    
-////                    
-////                    int val = bx.getSelectedIndex();
-////                    String chosenName = (String) bx.getSelectedItem();
-////                    System.out.println(" prueba 5:  " + chosenName);
-////                    System.out.println(" prueba 6:  " + bx.getSelectedItem());
-////                    }
-//                } catch (Exception e) {
-//                }
-//
-//            }
         }
 
 
@@ -835,7 +828,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAnular;
     private javax.swing.JButton BtnAprovar;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JTextField TxtDocumento;
