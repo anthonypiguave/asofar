@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author admin
  */
 @Entity
 @Table(name = "se_contactos_clientes")

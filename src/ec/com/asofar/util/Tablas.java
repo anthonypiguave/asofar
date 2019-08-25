@@ -2403,6 +2403,7 @@ public class Tablas {
                 filas[5] = ch;
 
                 cb = new JComboBox();
+                cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
                 InBodegaJpaController InBodegaController = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
                 List<InBodega> listcaja = InBodegaController.findInBodegaEntities();
