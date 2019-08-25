@@ -2539,6 +2539,63 @@ public class Tablas {
         }
     }
 
+    public static void listarPrestacionesDetalleTarifario(List<PrDetalleTarifario> listDetalleTari, List<PrPrestaciones> listaPrestacion, JTable Tabla) {
+        int[] a = {150, 200, 100, 100, 100, 200, 200, 100, 200, 200, 200};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"detalle tarifario", "tarifario", "unidad servicio", "Empresa", "Sucursal", "nombre prestacion", "valor costo", "valor minimo venta", "valor venta", "valor descueto", "Estado",};
+        String[] Filas = new String[11];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listDetalleTari.size(); i++) {
+            Filas[0] = listDetalleTari.get(i).getIdDetalleTarifario().toString();
+            Filas[1] = "" + listDetalleTari.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario();
+            Filas[2] = "" + listDetalleTari.get(i).getIdUnidadServicio();
+            Filas[3] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getSeEmpresa().getNombreComercial();
+            Filas[4] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getNombreComercial();
+//            System.out.println("deta lle "+listDetalleTari.get(i).getIdPrestacion());
+            for (int j = 0; j < listaPrestacion.size(); j++) {
+//                System.out.println("prest "+listaPrestacion.get(j).getIdPrestacion());
+                if (BigInteger.valueOf(listaPrestacion.get(j).getIdPrestacion()) == listDetalleTari.get(i).getIdPrestacion()) {
+                    System.out.println("siiiiii");
+                    Filas[5] = listaPrestacion.get(j).getNombrePrestacion();
+//                    Filas[5] = listDetalleTari.get(i).getUsuarioCreacion();
+                }
+            }
+                Filas[6] = "" + listDetalleTari.get(i).getValorCosto();
+                Filas[7] = "" + listDetalleTari.get(i).getValorMinVenta();
+                Filas[8] = "" + listDetalleTari.get(i).getValorVenta();
+                Filas[9] = "" + listDetalleTari.get(i).getValorDescuento();
+                Filas[10] = "" + listDetalleTari.get(i).getEstado();
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+                Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
+                Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
+                Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
+            }
+        }
     //   }
 }
 
