@@ -354,10 +354,9 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
@@ -367,11 +366,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TxtMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addComponent(TxtDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addComponent(TxtProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addComponent(TxtMovimiento, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -388,27 +387,31 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(TxtMovimiento)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(TxtMotivo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         BtnCancelar.setBackground(new java.awt.Color(153, 0, 0));
@@ -548,68 +551,86 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-
+        int cont = 1;
         InKardexJpaController kardexController = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
 
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(TxtProveedor.getText())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             } else {
+                for (int i = 0; i < listadet.size(); i++) {
 
-                try {
+                    if (jTable1.getModel().getValueAt(i, 6).getClass().equals(JComboBox.class)) {
+                        cont = cont - 1;
 
-                    for (int i = 0; i < listadet.size(); i++) {
+                    } else {
+                        cont = cont + 1;
+                    }
 
-                        InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                }
+                System.out.println(" cont : " + cont);
+                if (cont < listadet.size()) {
+                    JOptionPane.showMessageDialog(null, "SELECCIONE BODEGA!");
+                } else {
 
-                        InKardex kardex = new InKardex();
-                        kardex.setInKardexPK(new InKardexPK());
-                        kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
-                        kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                    cargarBodega();
 
-                        kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
-                        kardex.setSeSucursal(seSucursal);
+                    try {
 
-                        kardex.setCantidad(listadet.get(i).getCantidad());
-                        kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
-                        kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+                        for (int i = 0; i < listadet.size(); i++) {
 
-                        if (objeto != null) {
+                            InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
 
-                            kardex.setSaldoAnterior(objeto.getSaldoActual());
-                            kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
-                            kardex.setCostoAnterior(objeto.getCostoActual());
-                            kardex.setCostoActual(kardex.getCostoAnterior().add(
-                                    ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
-                            kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()),5,RoundingMode.HALF_EVEN));
-                            kardex.setFechaSistema(d);
-                            
-                            kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
-                            kardex.setFechaCreacion(d);
+                            InKardex kardex = new InKardex();
+                            kardex.setInKardexPK(new InKardexPK());
+                            kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
+                            kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
 
-                        } else {
+                            kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
+                            kardex.setSeSucursal(seSucursal);
 
-                            kardex.setSaldoAnterior(BigInteger.valueOf(0));
-                            kardex.setSaldoActual(listadet.get(i).getCantidad());
-                            kardex.setCostoAnterior(BigDecimal.valueOf(0));
-                            kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
-                            kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()),5,RoundingMode.HALF_EVEN));
+                            kardex.setCantidad(listadet.get(i).getCantidad());
+                            kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
+                            kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+
+                            if (objeto != null) {
+
+                                kardex.setSaldoAnterior(objeto.getSaldoActual());
+                                kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
+                                kardex.setCostoAnterior(objeto.getCostoActual());
+                                kardex.setCostoActual(kardex.getCostoAnterior().add(
+                                        ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
+                                kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+                                kardex.setFechaSistema(d);
+
+                                kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                kardex.setFechaCreacion(d);
+
+                            } else {
+
+                                kardex.setSaldoAnterior(BigInteger.valueOf(0));
+                                kardex.setSaldoActual(listadet.get(i).getCantidad());
+                                kardex.setCostoAnterior(BigDecimal.valueOf(0));
+                                kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
+                                kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+
+                            }
+
+                            kardexController.create(kardex);
 
                         }
 
-                        kardexController.create(kardex);
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
 
                     }
 
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-
+//
+                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                    setVisible(false);
                 }
 
-//
-                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                setVisible(false);
             }
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
