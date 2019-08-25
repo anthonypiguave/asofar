@@ -101,7 +101,6 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
 //            System.out.println("prueba " + ListProdVent.get(i).getId_kardex());
 //            System.out.println(" " + ListProdVent.get(i).getSaldo_actual());
 //            System.out.println(" " + ListProdVent.get(i).getAplica_iva());
-
         }
     }
 

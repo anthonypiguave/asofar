@@ -47,7 +47,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
     SeSucursal suc;
     PrTarifario tp = new PrTarifario();
     PrPrestacionesJpaController Pc = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<PrPrestaciones> listaP ;
+    List<PrPrestaciones> listaP;
 
     /**
      * Creates new form Listar_PrestacionesPorServicio
@@ -57,7 +57,7 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        MostrarTabla();
+        MostrarTabla2();
     }
 
     public Listar_PrestacionesPorServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, PrTarifario tr) {
@@ -71,8 +71,17 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         suc = su;
 
         tp = tr;
-        MostrarTabla();
-//        Tablas.listarDetalleTarifarios(lista, tblPrestacionesPorServicios,tp);
+        MostrarTabla2();
+//       listarPrestacionesDetalleTarifario
+    }
+
+    public void MostrarTabla2() {
+        try {
+            listaP = Pc.findPrPrestacionesEntities();
+            lista = PPS.findPrDetalleTarifarioEntities();
+            Tablas.listarPrestacionesDetalleTarifario(lista, listaP, tblPrestacionesPorServicios);
+        } catch (Exception e) {
+        }
     }
 
     public void MostrarTabla() {
