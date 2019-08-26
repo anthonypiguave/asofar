@@ -91,7 +91,43 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         buscar = buscar1.getText();
         Tablas.filtro(buscar, tbaReporteCompra);
     }
+    public void busquedaChosserQuery(){
+        buscar1.setText("");
+        tbaReporteCompra.setRowSorter(null);
 
+        String valor = rep.getFecha(Chooser1);
+        String valor2 = rep.getFecha(Chooser2);
+
+        if (valor == null || valor2 == null) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
+        } else {
+            
+            int x = valor.compareTo(valor2);
+            System.out.println("valor "+x);
+            switch (x) {
+                case -1:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                case 0:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                case -2:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                default:
+                    System.out.println("error");
+                    JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS \nINGRESE FECHA DESDE - HASTA");
+                    break;
+            }
+        }
+        total();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,6 +234,11 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
         Chooser2.setDateFormatString("yyyy/MM/dd");
         Chooser2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Chooser2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Chooser2KeyPressed(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(255, 102, 0));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -383,41 +424,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
-        buscar1.setText("");
-        tbaReporteCompra.setRowSorter(null);
-
-        String valor = rep.getFecha(Chooser1);
-        String valor2 = rep.getFecha(Chooser2);
-
-        if (valor == null || valor2 == null) {
-            JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
-        } else {
-            
-            int x = valor.compareTo(valor2);
-            System.out.println("valor "+x);
-            switch (x) {
-                case -1:
-                    System.out.println("correcto");
-                    itemList = rep.reporteComprasFechas(valor, valor2);
-                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
-                    break;
-                case 0:
-                    System.out.println("correcto");
-                    itemList = rep.reporteComprasFechas(valor, valor2);
-                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
-                    break;
-                case -2:
-                    System.out.println("correcto");
-                    itemList = rep.reporteComprasFechas(valor, valor2);
-                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
-                    break;
-                default:
-                    System.out.println("error");
-                    JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS \nINGRESE FECHA DESDE - HASTA");
-                    break;
-            }
-        }
-        total();
+        busquedaChosserQuery();
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
 
     private void buscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyPressed
@@ -427,6 +434,15 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             total();
         }
     }//GEN-LAST:event_buscar1KeyPressed
+
+    private void Chooser2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Chooser2KeyPressed
+       System.out.println("1/1*11*1*");
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        //busquedaChosserQuery();
+           System.out.println("*********d*d*d*d*d*d");
+           BtnBuscar1.requestFocus();
+       }
+    }//GEN-LAST:event_Chooser2KeyPressed
 
     /**
      * @param args the command line arguments
