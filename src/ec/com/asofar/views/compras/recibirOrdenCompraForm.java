@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.compras;
 
+import ec.com.asofar.dao.CoOrdenComprasJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InDetalleMovimientoJpaController;
 import ec.com.asofar.dao.InKardexJpaController;
@@ -69,6 +70,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     InTipoMovimientoJpaController movimientoController = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
     InMotivosJpaController motivoController = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
     InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
+    CoOrdenComprasJpaController cabCompraController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
     InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -623,6 +625,8 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                         ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
                                 kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
                                 kardex.setFechaSistema(d);
+                                
+                                
 
                                 kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
                                 kardex.setFechaCreacion(d);
@@ -638,6 +642,14 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                             }
 
                             kardexController.create(kardex);
+                            
+                            
+                            cabCompra.setEstado("A");
+                            cabCompraController.edit(cabCompra);
+                            
+                           
+                            
+                            
 
                         }
 
