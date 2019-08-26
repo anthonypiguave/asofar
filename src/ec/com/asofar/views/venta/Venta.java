@@ -786,38 +786,17 @@ public class Venta extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < ListCedula.size(); i++) {
 
-                System.out.println("cliente " + ListCedula.get(i).getNombreCompleto());
-                txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
-                        + ListCedula.get(i).getSegundoApellido());
-                txtNombre.setText(ListCedula.get(i).getPrimerNombre());
-                txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
-                txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
-                txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
-                txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
-            
+            System.out.println("cliente " + ListCedula.get(i).getNombreCompleto());
+            txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
+                    + ListCedula.get(i).getSegundoApellido());
+            txtNombre.setText(ListCedula.get(i).getPrimerNombre());
+            txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
+            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
+            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
+            txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
+            txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
         }
     }
-
-//    public void CargarCliente() {
-//        /**/
-////        String Ident = cbxtipo_identificacion.getSelectedItem().toString();
-//        String ObjIden = null;
-//        for (int i = 0; i < Cliente.size(); i++) {
-//            ObjIden = Cliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion().toString();
-//            if (txtIdentificacion.getText().equals(Cliente.get(i).getNumeroIdentificacion())
-//                    //                    && Ident.equals(ObjIden)
-//                    && Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getNombre().equals("PROPIO")) {
-//                txtDireccion.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
-//                txtNombre.setText(Cliente.get(i).getPrimerNombre());
-//                txtApellido.setText(Cliente.get(i).getPrimerApellido());
-//                txtTipoIdent.setText(Cliente.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
-//                txtTelefono.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
-//                txtEmail.setText(Cliente.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
-//                txt_idCliente.setText(Cliente.get(i).getIdClientes().toString());
-//                idCliente = BigInteger.valueOf(Cliente.get(i).getIdClientes());
-//            }
-//        }
-//    }
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
 
     }//GEN-LAST:event_jLabel1MouseDragged

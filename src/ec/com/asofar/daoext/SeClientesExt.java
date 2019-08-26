@@ -26,10 +26,11 @@ public class SeClientesExt extends SeClientesJpaController {
     public List<SeClientes> obtenerClienteVenta(String cedula) {
         EntityManager em = getEntityManager();
         List<SeClientes> QCliente = null;
-        String nativeQuery = "SELECT  scc.* ,slc.*,sc.*\n"
+        String nativeQuery = "SELECT  scc.* ,slc.*,sc.*,sti.nombre_identificacion\n"
                 + "FROM se_contactos_clientes scc\n"
                 + "JOIN se_localidad_cliente slc ON slc.id_localidad_cliente = scc.id_contactos_clientes\n"
                 + "JOIN se_clientes sc ON sc.id_clientes = slc.id_cliente\n"
+                + "JOIN se_tipo_identificacion sti ON sti.id_tipo_identificacion = sc.id_tipo_indentificacion\n"
                 + "WHERE sc.numero_identificacion='"+cedula+"';";
         Query query = em.createNativeQuery(nativeQuery, SeClientes.class);
         QCliente = query.getResultList();
