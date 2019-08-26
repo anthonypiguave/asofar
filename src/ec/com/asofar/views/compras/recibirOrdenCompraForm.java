@@ -615,7 +615,10 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                             kardex.setCantidad(listadet.get(i).getCantidad());
                             kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
                             kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
-
+                            kardex.setFechaSistema(d);
+                            kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
+                            kardex.setFechaCreacion(d);
+                            
                             if (objeto != null) {
 
                                 kardex.setSaldoAnterior(objeto.getSaldoActual());
@@ -624,12 +627,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 kardex.setCostoActual(kardex.getCostoAnterior().add(
                                         ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
                                 kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
-                                kardex.setFechaSistema(d);
-                                
-                                
-
-                                kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
-                                kardex.setFechaCreacion(d);
 
                             } else {
 
@@ -642,14 +639,9 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                             }
 
                             kardexController.create(kardex);
-                            
-                            
+
                             cabCompra.setEstado("A");
                             cabCompraController.edit(cabCompra);
-                            
-                           
-                            
-                            
 
                         }
 
