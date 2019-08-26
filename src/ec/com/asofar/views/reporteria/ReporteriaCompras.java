@@ -15,7 +15,7 @@ import ec.com.asofar.util.Tablas;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.math.BigInteger;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -75,10 +75,21 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
     public void total() {
         Double total = 0.00;
-        for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
-            total = total + itemList.get(i).getTotal_compra();
+        for (int i = 0; i < itemList.size(); i++) {
+            for (int j = 0; j < tbaReporteCompra.getRowCount(); j++) {
+                if (tbaReporteCompra.getValueAt(j, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())) {
+                   // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
+                    total = total + itemList.get(i).getTotal_compra();
+                    Txt_Total.setText(rep.formatoNumero(total.toString()));
+                }
+            }
         }
-        Txt_Total.setText(rep.formatoNumero(total.toString()));
+
+    }
+
+    public void refrescar() {
+        buscar = buscar1.getText();
+        Tablas.filtro(buscar, tbaReporteCompra);
     }
 
     /**
@@ -117,6 +128,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         buscar1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         buscar1.setPreferredSize(new java.awt.Dimension(6, 28));
         buscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscar1KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscar1KeyReleased(evt);
             }
@@ -325,8 +339,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
-        buscar = buscar1.getText();
-        Tablas.filtro(buscar, tbaReporteCompra);
+        refrescar();
         total();
     }//GEN-LAST:event_buscar1KeyReleased
 
@@ -399,6 +412,14 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         }
         total();
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
+
+    private void buscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("lalalalalal fuck");
+            refrescar();
+            total();
+        }
+    }//GEN-LAST:event_buscar1KeyPressed
 
     /**
      * @param args the command line arguments
