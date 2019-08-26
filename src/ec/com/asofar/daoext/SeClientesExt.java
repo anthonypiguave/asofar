@@ -11,22 +11,29 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author admin1
  */
-public class SeClientesExt extends SeClientesJpaController  {
-    
+public class SeClientesExt extends SeClientesJpaController {
+
     public SeClientesExt(EntityManagerFactory emf) {
         super(emf);
     }
-        public List<SeClientes> obtenerClienteVenta(String cedula) {
+
+    public List<SeClientes> obtenerClienteVenta(String cedula) {
         EntityManager em = getEntityManager();
-        List<SeClientes> QKardex = null;
-        String nativeQuery = " ";
+        List<SeClientes> QCliente = null;
+        String nativeQuery = "SELECT  scc.* ,slc.*,sc.*\n"
+                + "FROM se_contactos_clientes scc\n"
+                + "JOIN se_localidad_cliente slc ON slc.id_localidad_cliente = scc.id_contactos_clientes\n"
+                + "JOIN se_clientes sc ON sc.id_clientes = slc.id_cliente\n"
+                + "WHERE sc.numero_identificacion='"+cedula+"';";
         Query query = em.createNativeQuery(nativeQuery, SeClientes.class);
-        QKardex = query.getResultList();
-        return QKardex;
+        QCliente = query.getResultList();
+
+        return QCliente;
     }
 }
