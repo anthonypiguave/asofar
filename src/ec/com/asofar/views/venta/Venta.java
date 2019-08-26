@@ -809,6 +809,7 @@ public class Venta extends javax.swing.JInternalFrame {
         txtApellido.setText("");
         txtTelefono.setText("");
         txtEmail.setText("");
+        consFinal();
     }
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
