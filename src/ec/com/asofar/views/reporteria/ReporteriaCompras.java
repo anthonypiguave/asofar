@@ -392,7 +392,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         if (valor == null || valor2 == null) {
             JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
         } else {
+            
             int x = valor.compareTo(valor2);
+            System.out.println("valor "+x);
             switch (x) {
                 case -1:
                     System.out.println("correcto");
@@ -400,6 +402,11 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                     Tablas.listarReporteCompras(itemList, tbaReporteCompra);
                     break;
                 case 0:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                case -2:
                     System.out.println("correcto");
                     itemList = rep.reporteComprasFechas(valor, valor2);
                     Tablas.listarReporteCompras(itemList, tbaReporteCompra);
