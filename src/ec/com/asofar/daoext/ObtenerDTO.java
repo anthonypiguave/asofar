@@ -939,6 +939,7 @@ public class ObtenerDTO {
     }
 
     public static PrTipoPrestacion ObtenerPrTipoPrestacion(String nombre) {
+      
         PrTipoPrestacionJpaController control = new PrTipoPrestacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrTipoPrestacion dto = new PrTipoPrestacion();
         List<PrTipoPrestacion> lista = control.findPrTipoPrestacionEntities();
@@ -954,6 +955,9 @@ public class ObtenerDTO {
 
     }
 
+    
+    
+    
     public static InMotivos ObtenerInMotivos(String nombre) {
         InMotivosJpaController control = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
         InMotivos dto = new InMotivos();
@@ -993,6 +997,22 @@ public class ObtenerDTO {
 
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getNombre().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+    
+    public static VeUnidadServicio ObtenerVeUniddadservicio(String nombre) {
+        VeUnidadServicioJpaController control = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
+        VeUnidadServicio dto = new VeUnidadServicio();
+        List<VeUnidadServicio> lista = control.findVeUnidadServicioEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombreUnidadServicio().equals(nombre)) {
                 dto = lista.get(i);
                 break;
             }
