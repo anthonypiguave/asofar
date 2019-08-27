@@ -112,15 +112,15 @@ public class Tablas {
     }
 
     public static void ListarProductosConsulta(List<PrProductos> listaproducto, JTable Tabla) {
-        int[] a = {50, 50, 50, 50, 50, 50, 50, 50};
+        int[] a = {50, 50, 50, 50, 50, 100, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "CATEGORIA", "SUBCATEGORIA", "ARTICULO", "PRODUCTO", "EMPRESA",
+        String[] b = {"COD.", "CATEGORIA", "SUBCATEGORIA", "ARTICULO", "PRODUCTO",
             "PRESENTACION", "MEDIDAS"};
-        String[] filas = new String[8];
+        String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaproducto.size(); i++) {
@@ -130,10 +130,9 @@ public class Tablas {
                 filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
                 filas[3] = listaproducto.get(i).getPrArticulo().getNombreArticulo();
                 filas[4] = listaproducto.get(i).getNombreProducto();
-                filas[5] = listaproducto.get(i).getSeEmpresa().getNombreComercial();
-                filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
-                filas[7] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
-//                filas[2] = listaproducto.get(i).getModelado();
+                filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+                filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -150,8 +149,7 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
                 Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
-                Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+
             }
         }
     }

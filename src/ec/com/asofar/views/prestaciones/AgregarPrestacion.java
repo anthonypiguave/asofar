@@ -32,6 +32,8 @@ public class AgregarPrestacion extends javax.swing.JDialog {
     PrProductos proc;
     PrPrestaciones presta = new PrPrestaciones();
     List<PrTipoPrestacion> TipoP;
+    List<PrProductos> Lpro;
+    List<PrPrestaciones> Lpre;
     PrTipoPrestacion pol = new PrTipoPrestacion();
     PrTipoPrestacionJpaController ti = new PrTipoPrestacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrPrestacionesJpaController pr = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -60,6 +62,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         TipoP = ti.findPrTipoPrestacionEntities();
         llenarTipoPrestacion(TipoP);
+
         usu = us;
         emp = em;
         suc = su;
@@ -85,6 +88,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         txtProduc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        prid = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -175,14 +179,16 @@ public class AgregarPrestacion extends javax.swing.JDialog {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbxIG, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbxIG, 0, 121, Short.MAX_VALUE)
-                                    .addComponent(txtProduc))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnbuscarP))
-                            .addComponent(cmbxSN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cmbxSN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtProduc, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(prid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnbuscarP)))
+                .addGap(27, 27, 27))
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -197,7 +203,8 @@ public class AgregarPrestacion extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscarP, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProduc, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProduc, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(prid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,6 +236,8 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         proc = cp.getProducto();
         txtProduc.setText(proc.getNombreProducto());
         id = proc.getPrProductosPK().getIdProducto();
+        prid.setText(String.valueOf(id));
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnbuscarPActionPerformed
     public int bloqueo() {
@@ -253,39 +262,54 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         }
     }
 
+    public void cargarPrest() {
+        for (int i = 0; i < Lpre.size(); i++) {
+            System.out.println(" iides:" + Lpre.get(i).getIdPoducto());
+
+        }
+    }
+
     private void cmbxIGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxIGActionPerformed
         bloqueo();
     }//GEN-LAST:event_cmbxIGActionPerformed
 
     private void btngrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngrabarActionPerformed
         PrPrestaciones PRE = new PrPrestaciones();
-         java.util.Date fechaActual = new java.util.Date();
+        java.util.Date fechaActual = new java.util.Date();
 //        id_tipo_prestacion nombreusuario_creacionestadofecha_creacion
-if (cmbxIG.getSelectedItem().toString().equals("inventario")){
+        List<PrPrestaciones> list = pr.findPrPrestacionesEntities();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(" vvv " + list.get(i).getIdPoducto());
+            System.out.println("hji" + proc.getPrProductosPK().getIdProducto());
+            if (list.get(i).getIdPoducto().intValue() == proc.getPrProductosPK().getIdProducto()) {
+                JOptionPane.showMessageDialog(null, " prestacion ya existe");
 
+            } else {
+                if (cmbxIG.getSelectedItem().toString().equals("inventario")) {
+                    pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
+                    PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
+                    PRE.setEstado("A");
+                    PRE.setNombrePrestacion(txtProduc.getText());
+                    PRE.setIdTipoPrestacion(pol);
+                    PRE.setIdPoducto(BigInteger.valueOf(id));
+                    PRE.setUsuarioCreacion(usu.getNombreUsuario());
+                    PRE.setIdEmpresa(emp);
+                    PRE.setFechaCreacion(fechaActual);
+                } else {
+                    pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
+                    PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
+                    PRE.setEstado("A");
 
-        pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
-        PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
-        PRE.setEstado("A");
-        PRE.setNombrePrestacion(txtProduc.getText());
-        PRE.setIdTipoPrestacion(pol);
-        PRE.setIdPoducto(BigInteger.valueOf(id));
-        PRE.setUsuarioCreacion(usu.getNombreUsuario());
-        PRE.setIdEmpresa(emp);
-        PRE.setFechaCreacion(fechaActual);
-}else{
-pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
-        PRE.setAplicaIva(cmbxSN.getSelectedItem().toString());
-        PRE.setEstado("A");
-        
-        PRE.setNombrePrestacion(txtProduc.getText());
-        PRE.setIdTipoPrestacion(pol);
-        PRE.setIdPoducto(null);
-        PRE.setUsuarioCreacion(usu.getNombreUsuario());
-        PRE.setIdEmpresa(emp);
-        PRE.setFechaCreacion(fechaActual);
+                    PRE.setNombrePrestacion(txtProduc.getText());
+                    PRE.setIdTipoPrestacion(pol);
+                    PRE.setIdPoducto(null);
+                    PRE.setUsuarioCreacion(usu.getNombreUsuario());
+                    PRE.setIdEmpresa(emp);
+                    PRE.setFechaCreacion(fechaActual);
 
-}
+                }
+            }
+        }
         try {
             pr.create(PRE);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
@@ -364,8 +388,8 @@ pol = ObtenerDTO.ObtenerPrTipoPrestacion(cmbxIG.getSelectedItem().toString());
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField prid;
     public javax.swing.JTextField txtProduc;
     // End of variables declaration//GEN-END:variables
-
 
 }
