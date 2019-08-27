@@ -410,7 +410,22 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalir2ActionPerformed
 
     private void tbaReporteCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaReporteCompraMousePressed
-
+        int x = 0;
+        ReporteComprasDTO obj = new ReporteComprasDTO();
+        if(evt.getClickCount() == 2){
+            x = tbaReporteCompra.getSelectedRow();
+            for (int i = 0; i < itemList.size(); i++) {
+                if(tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())){
+                    obj= itemList.get(i);
+                    break;
+                }
+            }
+            if(obj!=null){
+                JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
+            }else{
+                System.out.println("no encontramos al puto id error capa 8");
+            }
+        }
     }//GEN-LAST:event_tbaReporteCompraMousePressed
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
