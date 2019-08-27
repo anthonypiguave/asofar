@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.reporteria;
 
+import com.toedter.calendar.JCalendar;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
 import ec.com.asofar.dto.SeEmpresa;
@@ -12,11 +13,15 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.Tablas;
+import java.awt.AWTKeyStroke;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,7 +83,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         for (int i = 0; i < itemList.size(); i++) {
             for (int j = 0; j < tbaReporteCompra.getRowCount(); j++) {
                 if (tbaReporteCompra.getValueAt(j, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())) {
-                   // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
+                    // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
                     total = total + itemList.get(i).getTotal_compra();
                     Txt_Total.setText(rep.formatoNumero(total.toString()));
                 }
@@ -91,7 +96,17 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         buscar = buscar1.getText();
         Tablas.filtro(buscar, tbaReporteCompra);
     }
-    public void busquedaChosserQuery(){
+
+    private void Keypress_jDateChoooser() { //salto al siguiente campo
+        HashSet<AWTKeyStroke> conjForward = new HashSet<AWTKeyStroke>(
+                Chooser2.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
+        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
+//        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_DOWN, 0)); 
+        Chooser2.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conjForward);
+
+    }
+
+    public void busquedaChosserQuery() {
         buscar1.setText("");
         tbaReporteCompra.setRowSorter(null);
 
@@ -101,9 +116,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         if (valor == null || valor2 == null) {
             JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
         } else {
-            
+
             int x = valor.compareTo(valor2);
-            System.out.println("valor "+x);
+            System.out.println("valor " + x);
             switch (x) {
                 case -1:
                     System.out.println("correcto");
@@ -128,6 +143,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         }
         total();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,6 +179,11 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
         buscar1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         buscar1.setPreferredSize(new java.awt.Dimension(6, 28));
+        buscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar1ActionPerformed(evt);
+            }
+        });
         buscar1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 buscar1KeyPressed(evt);
@@ -434,14 +455,15 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             total();
         }
     }//GEN-LAST:event_buscar1KeyPressed
+    
+    private void buscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscar1ActionPerformed
 
     private void Chooser2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Chooser2KeyPressed
-       System.out.println("1/1*11*1*");
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-        //busquedaChosserQuery();
-           System.out.println("*********d*d*d*d*d*d");
-           BtnBuscar1.requestFocus();
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("sss");
+        }
     }//GEN-LAST:event_Chooser2KeyPressed
 
     /**
