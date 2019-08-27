@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.reporteria;
 
+import com.toedter.calendar.JCalendar;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
 import ec.com.asofar.dto.SeEmpresa;
@@ -12,11 +13,15 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.Tablas;
+import java.awt.AWTKeyStroke;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.math.BigInteger;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +64,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         Chooser1.setDate(rep.fechaActual());
         Chooser2.setDate(rep.fechaActual());
         total();
+        Keypress_jDateChoooser();
     }
 
     public ReporteriaCompras(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -75,10 +81,68 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
     public void total() {
         Double total = 0.00;
-        for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
-            total = total + itemList.get(i).getTotal_compra();
+        for (int i = 0; i < itemList.size(); i++) {
+            for (int j = 0; j < tbaReporteCompra.getRowCount(); j++) {
+                if (tbaReporteCompra.getValueAt(j, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())) {
+                    // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
+                    total = total + itemList.get(i).getTotal_compra();
+                    Txt_Total.setText(rep.formatoNumero(total.toString()));
+                }
+            }
         }
-        Txt_Total.setText(rep.formatoNumero(total.toString()));
+
+    }
+
+    public void refrescar() {
+        buscar = buscar1.getText();
+        Tablas.filtro(buscar, tbaReporteCompra);
+    }
+
+    private void Keypress_jDateChoooser() { //salto al siguiente campo
+        HashSet<AWTKeyStroke> conjForward = new HashSet<AWTKeyStroke>(
+        Chooser2.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
+        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
+        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_DOWN, 0)); 
+        Chooser2.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conjForward);
+
+    }
+
+    public void busquedaChosserQuery() {
+        buscar1.setText("");
+        tbaReporteCompra.setRowSorter(null);
+
+        String valor = rep.getFecha(Chooser1);
+        String valor2 = rep.getFecha(Chooser2);
+
+        if (valor == null || valor2 == null) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
+        } else {
+
+            int x = valor.compareTo(valor2);
+            System.out.println("valor " + x);
+            switch (x) {
+                case -1:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                case 0:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                case -2:
+                    System.out.println("correcto");
+                    itemList = rep.reporteComprasFechas(valor, valor2);
+                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
+                    break;
+                default:
+                    System.out.println("error");
+                    JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS \nINGRESE FECHA DESDE - HASTA");
+                    break;
+            }
+        }
+        total();
     }
 
     /**
@@ -116,7 +180,15 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
         buscar1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         buscar1.setPreferredSize(new java.awt.Dimension(6, 28));
+        buscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar1ActionPerformed(evt);
+            }
+        });
         buscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscar1KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscar1KeyReleased(evt);
             }
@@ -184,6 +256,11 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
         Chooser2.setDateFormatString("yyyy/MM/dd");
         Chooser2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Chooser2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Chooser2KeyPressed(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(255, 102, 0));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -217,6 +294,11 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                 BtnBuscar1ActionPerformed(evt);
             }
         });
+        BtnBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnBuscar1KeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("FILTRO:");
@@ -234,24 +316,21 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Chooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
-                            .addComponent(BtnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Chooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Chooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96))))
+                        .addComponent(buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -286,10 +365,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnBuscar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnBuscar1)))
+                .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -325,8 +403,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
-        buscar = buscar1.getText();
-        Tablas.filtro(buscar, tbaReporteCompra);
+        refrescar();
         total();
     }//GEN-LAST:event_buscar1KeyReleased
 
@@ -335,7 +412,22 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalir2ActionPerformed
 
     private void tbaReporteCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaReporteCompraMousePressed
-
+        int x = 0;
+        ReporteComprasDTO obj = new ReporteComprasDTO();
+        if(evt.getClickCount() == 2){
+            x = tbaReporteCompra.getSelectedRow();
+            for (int i = 0; i < itemList.size(); i++) {
+                if(tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())){
+                    obj= itemList.get(i);
+                    break;
+                }
+            }
+            if(obj!=null){
+                JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
+            }else{
+                System.out.println("no encontramos al puto id error capa 8");
+            }
+        }
     }//GEN-LAST:event_tbaReporteCompraMousePressed
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
@@ -370,35 +462,32 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
-        buscar1.setText("");
-        tbaReporteCompra.setRowSorter(null);
-
-        String valor = rep.getFecha(Chooser1);
-        String valor2 = rep.getFecha(Chooser2);
-
-        if (valor == null || valor2 == null) {
-            JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
-        } else {
-            int x = valor.compareTo(valor2);
-            switch (x) {
-                case -1:
-                    System.out.println("correcto");
-                    itemList = rep.reporteComprasFechas(valor, valor2);
-                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
-                    break;
-                case 0:
-                    System.out.println("correcto");
-                    itemList = rep.reporteComprasFechas(valor, valor2);
-                    Tablas.listarReporteCompras(itemList, tbaReporteCompra);
-                    break;
-                default:
-                    System.out.println("error");
-                    JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS \nINGRESE FECHA DESDE - HASTA");
-                    break;
-            }
-        }
-        total();
+        busquedaChosserQuery();
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
+
+    private void buscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("lalalalalal fuck");
+            refrescar();
+            total();
+        }
+    }//GEN-LAST:event_buscar1KeyPressed
+    
+    private void buscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscar1ActionPerformed
+
+    private void Chooser2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Chooser2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("sss");
+        }
+    }//GEN-LAST:event_Chooser2KeyPressed
+
+    private void BtnBuscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBuscar1KeyPressed
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            System.out.println("valeeeeeeeeeeeeeeeeeeeee");
+        }
+    }//GEN-LAST:event_BtnBuscar1KeyPressed
 
     /**
      * @param args the command line arguments
