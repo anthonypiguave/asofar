@@ -28,5 +28,7 @@ public class ReporteDetalleComprasDTO {
     public String codigo_contribuyente;
     public String observaciones;
     public String nombre_comercial;
+    
+    
 
 }
