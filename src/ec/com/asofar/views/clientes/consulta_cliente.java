@@ -55,7 +55,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     SeLocalidadCliente LocaliClient = new SeLocalidadCliente();
 
     public consulta_cliente(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal=false);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
@@ -65,7 +65,7 @@ public class consulta_cliente extends javax.swing.JDialog {
     /*AGREGAR EN OPCIONES MENU Y OPCIONES ROLES*/
     ///
     public consulta_cliente(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
+        super(parent, modal=false);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
@@ -825,7 +825,8 @@ public class consulta_cliente extends javax.swing.JDialog {
                     JRViewer jviewer = new JRViewer(jprint);
                     JDialog ventana = new JDialog();
                     ventana.add(jviewer);
-                    ventana.getSize(new Dimension(ancho/2,alto/2));
+                    ventana.setVisible(true);
+                    ventana.setSize(new Dimension(ancho/2,alto/2));
                     ventana.setLocationRelativeTo(null);
                     jviewer.setFitWidthZoomRatio();
                     
@@ -841,7 +842,7 @@ public class consulta_cliente extends javax.swing.JDialog {
                     tba_clientes.getValueAt(i,0).toString(),
                     tba_clientes.getValueAt(i,1).toString(),
                     tba_clientes.getValueAt(i,2).toString(),
-                    tba_clientes.getValueAt(i,3).toString());
+                    (String)tba_clientes.getValueAt(i,3));
                     lista.add(creporte);
                 }
                 try {
@@ -850,7 +851,8 @@ public class consulta_cliente extends javax.swing.JDialog {
                     JRViewer jviewer = new JRViewer(jprint);
                     JDialog ventana = new JDialog();
                     ventana.add(jviewer);
-                    ventana.getSize(new Dimension(ancho/2,alto/2));
+                    ventana.setVisible(true);
+                    ventana.setSize(new Dimension(ancho/2,alto/2));
                     ventana.setLocationRelativeTo(null);
                     jviewer.setFitWidthZoomRatio();
                     
