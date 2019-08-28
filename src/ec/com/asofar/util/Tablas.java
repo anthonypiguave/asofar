@@ -6,6 +6,7 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.dao.InBodegaJpaController;
+import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ReporteComprasDTO;
@@ -2493,6 +2494,7 @@ public class Tablas {
     }
 
     public static void listarReporteCompras(List<ReporteComprasDTO> lista, JTable Tabla) {
+        
         int[] a = {5, 5, 20, 15, 15, 15, 15, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
@@ -2506,10 +2508,10 @@ public class Tablas {
         for (int i = 0; i < lista.size(); i++) {
             // if (lista.get(i).getEstado().equals("P")) {
             Filas[0] = "" + lista.get(i).getId_orden_compra().toString();
-            Filas[1] = lista.get(i).getId_tipo_documento().toString();
+            Filas[1] = lista.get(i).getNombre_documento().toString();
             //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
             Filas[2] = "" + lista.get(i).getFecha_aprobacion().toString();
-            Filas[3] = lista.get(i).getId_proveedor().toString();
+            Filas[3] = lista.get(i).getNombre_proveedor().toString();
             Filas[4] = lista.get(i).getSubtotal().toString();
             Filas[5] = lista.get(i).getIce().toString();
             Filas[6] = lista.get(i).getIva().toString();
