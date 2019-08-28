@@ -106,10 +106,9 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         txtFecha.setText(FechaActual());
 
         CargarFormulario();
-        this.txtCod.setEditable(false);
-        this.txtObservacion.setEnabled(false);
 
-        System.out.println(" " + seUsuario);
+
+
 
     }
 
@@ -258,6 +257,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         jLabel13.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel13.setText("OBSERVACION:");
 
+        txtObservacion.setEditable(false);
         txtObservacion.setColumns(20);
         txtObservacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtObservacion.setRows(5);
@@ -517,11 +517,10 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
         try {
             objetopro = cproducto.getProducto();
 
-            CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
             if (validarProductos("" + (objetopro.getPrProductosPK().getIdProducto())).equals("si")) {
                 JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
             } else {
+                CoDetalleOrdenPedidoJpaController detOrdencontroller = new CoDetalleOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
                 CoDetalleOrdenPedido detalle = new CoDetalleOrdenPedido();
 
@@ -549,7 +548,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
 
 
@@ -592,7 +591,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
                             detalle = list2.get(i);
                             detalle.setEstado("I");
-                            System.out.println("prueba 2:" + detalle.getEstado());
+ 
                             detOrdencontroller.edit(detalle);
 
                             listadet.get(i).setEstado("I");
@@ -631,7 +630,6 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
                             detalle = list2.get(i);
                             detalle.setEstado("A");
-                            System.out.println("prueba 2:" + detalle.getEstado());
                             detOrdencontroller.edit(detalle);
 
                             listadet.get(i).setEstado("A");
@@ -824,17 +822,17 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
     public String validarProductos(String datos) {
         String obj1 = "no";
 
-        for (int i = 0; i < listadet.size(); i++) {
 
-            if (datos.equals("" + (listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
-                System.out.println("lista si " + listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
-                obj1 = "si";
+            for (int i = 0; i < listadet.size(); i++) {
 
-                break;
+                if (datos.equals("" + (listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
+                    obj1 = "si";
+
+                    break;
+                }
+
             }
-
-        }
-
+            
         return obj1;
 
     }

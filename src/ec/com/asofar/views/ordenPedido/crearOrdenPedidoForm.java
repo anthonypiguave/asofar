@@ -447,7 +447,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 for (int i = 0; i < listadet.size(); i++) {
 
                     contFilas = i + 1;
-                    System.out.println(" lista cantidad : " + listadet.get(i).getCantidadSolicitada());
+
 
                     detalle.getCoDetalleOrdenPedidoPK().setLineaDetalle(contFilas);
 
@@ -499,7 +499,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            System.out.println(" validacion: " + cbxProveedor.getSelectedItem().toString());
 
             if (cbxProveedor.getSelectedItem().toString().equals("--SELECCIONE--")) {
                 JOptionPane.showMessageDialog(null, "LLENE PROVEEDOR!");
@@ -580,7 +579,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
             String valor = (String) jTable1.getValueAt(i, 3);
 
-            System.out.println(" fila de tabla cantidad : " + valor);
 
             BigInteger cantidad = new BigInteger(valor);
 
@@ -596,7 +594,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         for (int i = 0; i < listadet.size(); i++) {
 
             if (datos.equals("" + (listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto()))) {
-                System.out.println("lista si " + listadet.get(i).getCoDetalleOrdenPedidoPK().getIdProducto());
                 obj1 = "si";
 
                 break;

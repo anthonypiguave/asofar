@@ -61,7 +61,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
         seEmpresa = em;
         seSucursal = su;
         cargarMostrarTabla();
-        System.out.println(" " + seUsuario);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -257,7 +257,7 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
             if (objeto != null) {
 
 //                this.setVisible(false);
-                System.out.println(" datos tomado " + objeto.getCoOrdenPedidoPK());
+
 
                 this.setVisible(false);
 
@@ -295,7 +295,6 @@ public class aprobarOrdendePedidoForm extends javax.swing.JDialog {
     public CoOrdenPedido devuelveObjeto(String datos, List<CoOrdenPedido> listarobj) {
         CoOrdenPedido objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
-            System.out.println("id " + datos);
             if (datos.equals("" + listarobj.get(i).getCoOrdenPedidoPK().getIdOrdenPedido())) {
                 objeto1 = listarobj.get(i);
                 break;

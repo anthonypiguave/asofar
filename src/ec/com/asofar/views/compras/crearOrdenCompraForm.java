@@ -83,7 +83,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     OrdenCompraDaoExt obtenerIdCompra = new OrdenCompraDaoExt(EntityManagerUtil.ObtenerEntityManager());
     MovimientosDaoExt obtenerIdMovimiento = new MovimientosDaoExt(EntityManagerUtil.ObtenerEntityManager());
 
-    CoOrdenPedido cOrden;
+    CoOrdenPedido cabOrden;
 
     List<CoDetalleOrdenPedido> listadet = new ArrayList<CoDetalleOrdenPedido>();
     List<CoDetalleOrdenCompra> listadetCompra = new ArrayList<CoDetalleOrdenCompra>();
@@ -95,8 +95,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
-        CargarProveedor();
-        CargarDocumento();
         CargarMovimiento();
         CargarMotivos();
         CargarFormulario();
@@ -115,16 +113,12 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-        cOrden = objeto;
+        cabOrden = objeto;
         txtFecha.setText(FechaActual());
-        CargarProveedor();
-        CargarDocumento();
+
         CargarMovimiento();
         CargarMotivos();
         CargarFormulario();
-        this.cbxProveedor.setEnabled(false);
-
-        System.out.println(" " + seUsuario);
 
     }
 
@@ -146,17 +140,31 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         return formatoFecha.format(fecha);
     }
 
-    public void CargarProveedor() {
+    public void CargarProveedor(CoOrdenPedido obj) {
         List<CoProveedores> listcaja = proveedorController.findCoProveedoresEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-            cbxProveedor.addItem(listcaja.get(i).getNombre());
+
+            if (listcaja.get(i).getIdProveedor() != null) {
+                if (listcaja.get(i).getIdProveedor() == obj.getIdProveedor().intValue()) {
+                    TxtProveedor.setText(listcaja.get(i).getNombre());
+
+                }
+            }
+
         }
     }
 
-    public void CargarDocumento() {
+    public void CargarDocumento(CoOrdenPedido obj) {
         List<InTipoDocumento> listcaja = documentoController.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-            cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
+
+            if (listcaja.get(i).getIdTipoDocumento() != null) {
+                if (listcaja.get(i).getIdTipoDocumento() == obj.getIdDocumento().intValue()) {
+                    TxtDocumento.setText(listcaja.get(i).getNombreDocumento());
+
+                }
+            }
+
         }
     }
 
@@ -176,9 +184,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
     public void CargarFormulario() {
 
-        cbxProveedor.setSelectedIndex(cOrden.getIdProveedor().intValue());
-        cbx_documento.setSelectedIndex(cOrden.getIdDocumento().intValue());
-
         List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
 
         list = detOrdenPedidocontroller.findCoDetalleOrdenPedidoEntities();
@@ -189,12 +194,15 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
             check[i] = false; // setear valor falso
             System.out.println(" prueba  " + list.get(i).getDescripcion());
-            if (list.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cOrden.getCoOrdenPedidoPK().getIdOrdenPedido()) && list.get(i).getEstado().equals("A")) {
+            if (list.get(i).getCoDetalleOrdenPedidoPK().getIdOrdenPedido() == (cabOrden.getCoOrdenPedidoPK().getIdOrdenPedido()) && list.get(i).getEstado().equals("A")) {
                 listadet.add(list.get(i));
 
             }
 
         }
+
+        CargarProveedor(cabOrden);
+        CargarDocumento(cabOrden);
         detalleCompra();
 
     }
@@ -306,11 +314,9 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        cbxProveedor = new javax.swing.JComboBox<>();
         txtFecha = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        cbx_documento = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -324,6 +330,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         cbx_motivo = new javax.swing.JComboBox<>();
         cbx_movimiento = new javax.swing.JComboBox<>();
+        TxtProveedor = new javax.swing.JTextField();
+        TxtDocumento = new javax.swing.JTextField();
         BtnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -367,9 +375,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel7.setText("PROVEEDOR:");
 
-        cbxProveedor.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-
         txtFecha.setEditable(false);
         txtFecha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -379,9 +384,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel9.setText("DOCUMENTO:");
-
-        cbx_documento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbx_documento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
         jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel12.setText("CODIGO DE ORDEN:");
@@ -430,6 +432,14 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         cbx_movimiento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbx_movimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
+        TxtProveedor.setEditable(false);
+        TxtProveedor.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        TxtProveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        TxtDocumento.setEditable(false);
+        TxtDocumento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        TxtDocumento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -457,29 +467,25 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbx_movimiento, 0, 169, Short.MAX_VALUE)
-                            .addComponent(cbxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbx_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbx_motivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cbx_motivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TxtProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(TxtDocumento, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(25, 25, 25)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8))
+                                .addGap(47, 47, 47)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                                .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(txtFechaEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -494,15 +500,15 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -792,140 +798,175 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
 
-        CoProveedores proveedor = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
-        InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
-        InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento(cbx_movimiento.getSelectedItem().toString());
-        InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos(cbx_motivo.getSelectedItem().toString());
+        InTipoMovimiento Movimiento = ObtenerDTO.ObtenerInTipoMovimiento(cbx_movimiento.getSelectedItem().toString());
+        InMotivos Motivos = ObtenerDTO.ObtenerInMotivos(cbx_motivo.getSelectedItem().toString());
+        InTipoDocumento Documento = ObtenerDTO.ObtenerInTipoDocumento(cabOrden.getIdDocumento().intValue());
+        CoProveedores Proveedor = ObtenerDTO.ObtenerCoProveedores(cabOrden.getIdProveedor().intValue());
 
         CoOrdenCompras pkCompra = null;
         InMovimientos pkMovimiento = null;
 
+        int cont = 0;
+
         if (r == JOptionPane.YES_OPTION) {
-            if ("".equals(cbxProveedor.getSelectedItem().toString())) {
-                JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
+
+            if (cbx_movimiento.getSelectedItem().toString().equals("--SELECCIONE--")) {
+                JOptionPane.showMessageDialog(null, "LLENE MOVIMIENTO!");
             } else {
 
-                /////////// AGREGAR AL ORDEN DE COMPRA
-                CoOrdenCompras cabOrden = new CoOrdenCompras();
-                CoDetalleOrdenCompra detOrden = new CoDetalleOrdenCompra();
-                CoOrdenComprasJpaController cabOrdenController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
-                CoDetalleOrdenCompraJpaController detOrdenController = new CoDetalleOrdenCompraJpaController(EntityManagerUtil.ObtenerEntityManager());
+                if (cbx_motivo.getSelectedItem().toString().equals("--SELECCIONE--")) {
+                    JOptionPane.showMessageDialog(null, "LLENE MOTIVO!");
+                } else {
+                    if (txtObservacion.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "LLENE OBSERVACIÒN!");
+                    } else {
+                        if (txtFechaEntrega.getText().equals("--SELECCIONE--")) {
+                            JOptionPane.showMessageDialog(null, "LLENE FECHA DE ENTREGA!");
+                        } else {
+                            for (int i = 0; i < listadetCompra.size(); i++) {
+                                System.out.println(" vvv "+ cont);
+                                
+                                if (listadetCompra.get(i).getPrecioUnitario().toString().equals("0.0")) {
+                                    cont = cont - 1;
+                                } else {
+                                    cont = cont + 1;
+                                }
 
-                ///////setear la pk cab orden compra
-                cabOrden.setSeSucursal(seSucursal);
-                ///////setear la  cab orden compra
-                cabOrden.setIdProveedor(BigInteger.valueOf(proveedor.getIdProveedor()));
-                cabOrden.setObservacion(txtObservacion.getText());
-                cabOrden.setIdTipoDocumento(BigInteger.valueOf(tipoDocumento.getIdTipoDocumento()));
-                cabOrden.setEstado("P");
-                cabOrden.setFechaEntrega(fecha);
+                            }
+                
+                            if (listadetCompra.size() != cont) {
+                                JOptionPane.showMessageDialog(null, "LLENE PRECIO!");
+                            } else {
 
-                cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
-                cabOrden.setFechaCreacion(d);
+                                /////////// AGREGAR AL ORDEN DE COMPRA
+                                CoOrdenCompras cabCompra = new CoOrdenCompras();
+                                CoDetalleOrdenCompra detCompra = new CoDetalleOrdenCompra();
+                                CoOrdenComprasJpaController cabCompraController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
+                                CoDetalleOrdenCompraJpaController detCompraController = new CoDetalleOrdenCompraJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-                cabOrden.setTotalSubtotal(TotalSubTotal);
-                cabOrden.setTotalIva(TotalIva);
-                cabOrden.setTotalIce(BigDecimal.valueOf(0));
-                cabOrden.setTotalDescuento(TotalDescuento);
-                cabOrden.setTotalCompra(TotalCompra);
+                                ///////setear la pk cab orden compra
+                                cabCompra.setSeSucursal(seSucursal);
+                                ///////setear la  cab orden compra
+                                cabCompra.setIdProveedor(cabOrden.getIdProveedor());
+                                cabCompra.setObservacion(txtObservacion.getText());
+                                cabCompra.setIdTipoDocumento(cabOrden.getIdDocumento());
+                                cabCompra.setEstado("P");
+                                cabCompra.setFechaEntrega(fecha);
+                                
 
-                try {
+                                cabCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                cabCompra.setFechaCreacion(d);
 
-                    pkCompra = obtenerIdCompra.guardarPedido(cabOrden);
-                    System.out.println(" IDcabedcera compra " + pkCompra);
+                                cabCompra.setTotalSubtotal(TotalSubTotal);
+                                cabCompra.setTotalIva(TotalIva);
+                                cabCompra.setTotalIce(BigDecimal.valueOf(0));
+                                cabCompra.setTotalDescuento(TotalDescuento);
+                                cabCompra.setTotalCompra(TotalCompra);
 
-                    for (int i = 0; i < listadetCompra.size(); i++) {
-                        ////setear el pk detalle con compras
-                        detOrden.setCoOrdenCompras(pkCompra);
-                        /////// setear el detalle 
-                        detOrden.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
-                        detOrden.getCoDetalleOrdenCompraPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
-                        detOrden.getCoDetalleOrdenCompraPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
-                        detOrden.setDescripcion(listadetCompra.get(i).getDescripcion());
+                                try {
 
-                        detOrden.setCantidadRecibida(listadetCompra.get(i).getCantidadRecibida());
-                        detOrden.setEstado("A");
+                                    pkCompra = obtenerIdCompra.guardarPedido(cabCompra);
+                                    System.out.println(" IDcabedcera compra " + pkCompra);
 
-                        detOrden.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
-                        detOrden.setIce(BigDecimal.valueOf(0));
-                        detOrden.setIva(listadetCompra.get(i).getIva());
-                        detOrden.setDescuento(listadetCompra.get(i).getDescuento());
-                        detOrden.setSubtotal(listadetCompra.get(i).getSubtotal());
-                        detOrden.setTotal(listadetCompra.get(i).getTotal());
+                                    for (int i = 0; i < listadetCompra.size(); i++) {
+                                        ////setear el pk detalle con compras
+                                        detCompra.setCoOrdenCompras(pkCompra);
+                                        /////// setear el detalle 
+                                        detCompra.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
+                                        detCompra.getCoDetalleOrdenCompraPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
+                                        detCompra.getCoDetalleOrdenCompraPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
+                                        detCompra.setDescripcion(listadetCompra.get(i).getDescripcion());
 
-                        detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
-                        detOrden.setFechaCreacion(d);
+                                        detCompra.setCantidadRecibida(listadetCompra.get(i).getCantidadRecibida());
+                                        detCompra.setEstado("A");
 
-                        detOrdenController.create(detOrden);
+                                        detCompra.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
+                                        detCompra.setIce(BigDecimal.valueOf(0));
+                                        detCompra.setIva(listadetCompra.get(i).getIva());
+                                        detCompra.setDescuento(listadetCompra.get(i).getDescuento());
+                                        detCompra.setSubtotal(listadetCompra.get(i).getSubtotal());
+                                        detCompra.setTotal(listadetCompra.get(i).getTotal());
+
+                                        detCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                        detCompra.setFechaCreacion(d);
+
+                                        detCompraController.create(detCompra);
+                                    }
+                                    /////////// actualizar la cab de la orden de pedido
+                                    CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+                                    cabOrden.setEstado("I");
+                                    cabOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                    cabOrden.setFechaActualizacion(d);
+
+                                    cabOrdenController.edit(cabOrden);
+
+                                } catch (Exception e) {
+
+                                    e.printStackTrace();
+
+                                }
+
+                                /////////// AGREGAR AL MOVIMIENTO
+                                InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
+                                InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+                                InMovimientos cabMovimiento = new InMovimientos();
+                                InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
+
+                                try {
+
+                                    ////////////setear para la pk cab movimientos
+                                    cabMovimiento.setSeSucursal(seSucursal);
+                                    cabMovimiento.setInTipoDocumento(Documento);
+                                    cabMovimiento.setInTipoMovimiento(Movimiento);
+                                    cabMovimiento.setInMotivos(Motivos);
+                                    cabMovimiento.setObservacion(txtObservacion.getText());
+
+                                    ///////////setear cab movimientos
+                                    cabMovimiento.setFechaSistema(d);
+                                    cabMovimiento.setAnioDocumento(fecha);
+                                    cabMovimiento.setIdProveedor(Proveedor);
+                                    cabMovimiento.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+                                    cabMovimiento.setEstado("P");
+
+                                    cabMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                    cabMovimiento.setFechaCreacion(d);
+
+                                    pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
+                                    System.out.println(" IDcabedcera movimiento" + pkMovimiento);
+
+                                    for (int i = 0; i < listadetCompra.size(); i++) {
+                                        ////////////setear para la pk detalle con cab movimiento
+                                        detMovimiento.setInMovimientos(pkMovimiento);
+                                        ///////////setear detalle movimientos
+                                        detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
+                                        detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
+                                        detMovimiento.getInDetalleMovimientoPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
+
+                                        detMovimiento.setDescripcion(listadetCompra.get(i).getDescripcion());
+                                        detMovimiento.setCantidad(listadetCompra.get(i).getCantidadRecibida());
+                                        detMovimiento.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
+                                        detMovimiento.setEstado("A");
+
+                                        detMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                        detMovimiento.setFechaCreacion(d);
+
+                                        detMovController.create(detMovimiento);
+
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                setVisible(false);
+
+                            }
+
+                        }
                     }
-                    /////////// actualizar la cab de la orden de pedido
-                    CoOrdenPedidoJpaController cab = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-                    cOrden.setEstado("I");
-                    cOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
-                    cOrden.setFechaActualizacion(d);
-
-                    cab.edit(cOrden);
-
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-
                 }
 
-                /////////// AGREGAR AL MOVIMIENTO
-                InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
-                InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-                InMovimientos cabMovimiento = new InMovimientos();
-                InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
-
-                try {
-
-                    ////////////setear para la pk cab movimientos
-                    cabMovimiento.setSeSucursal(seSucursal);
-                    cabMovimiento.setInTipoDocumento(tipoDocumento);
-                    cabMovimiento.setInTipoMovimiento(tipoMovimiento);
-                    cabMovimiento.setInMotivos(tipoMotivos);
-
-                    ///////////setear cab movimientos
-                    cabMovimiento.setFechaSistema(d);
-                    cabMovimiento.setAnioDocumento(fecha);
-//                    cabMovimiento.setIdProveedor(proveedor);
-                    cabMovimiento.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
-                    cabMovimiento.setEstado("P");
-
-                    cabMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
-                    cabMovimiento.setFechaCreacion(d);
-
-                    pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
-                    System.out.println(" IDcabedcera movimiento" + pkMovimiento);
-
-                    for (int i = 0; i < listadetCompra.size(); i++) {
-                        ////////////setear para la pk detalle con cab movimiento
-                        detMovimiento.setInMovimientos(pkMovimiento);
-                        ///////////setear detalle movimientos
-                        detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
-                        detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
-                        detMovimiento.getInDetalleMovimientoPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
-
-                        detMovimiento.setDescripcion(listadetCompra.get(i).getDescripcion());
-                        detMovimiento.setCantidad(listadetCompra.get(i).getCantidadRecibida());
-                        detMovimiento.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
-                        detMovimiento.setEstado("A");
-
-                        detMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
-                        detMovimiento.setFechaCreacion(d);
-
-                        detMovController.create(detMovimiento);
-
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                setVisible(false);
             }
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
@@ -1043,8 +1084,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     private javax.swing.JButton BtnAnular;
     private javax.swing.JButton BtnAprovar;
     private javax.swing.JButton BtnCancelar;
-    private javax.swing.JComboBox<String> cbxProveedor;
-    private javax.swing.JComboBox<String> cbx_documento;
+    private javax.swing.JTextField TxtDocumento;
+    private javax.swing.JTextField TxtProveedor;
     private javax.swing.JComboBox<String> cbx_motivo;
     private javax.swing.JComboBox<String> cbx_movimiento;
     private javax.swing.JLabel jLabel1;

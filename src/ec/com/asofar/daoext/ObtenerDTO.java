@@ -478,6 +478,7 @@ public class ObtenerDTO {
         return dto;
 
     }
+
     public static PrPrestaciones ObtenerPrPrestacionesOn(BigInteger id) {
         PrPrestacionesJpaController control = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrPrestaciones dto = new PrPrestaciones();
@@ -493,7 +494,7 @@ public class ObtenerDTO {
         return dto;
 
     }
-    
+
     public static PrTarifario ObtenerPrTarifario(BigInteger id) {
         PrTarifarioJpaController control = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrTarifario dto = new PrTarifario();
@@ -509,9 +510,6 @@ public class ObtenerDTO {
         return dto;
 
     }
-    
-    
-    
 
     public static PrSubgrupos ObtenerPrSubGrupos(String nombre) {
         PrSubgruposJpaController control = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -672,7 +670,8 @@ public class ObtenerDTO {
         return dto;
 
     }
-     public static VeUnidadServicio ObtenerVeUnidadServiciON(BigInteger id) {
+
+    public static VeUnidadServicio ObtenerVeUnidadServiciON(BigInteger id) {
         VeUnidadServicioJpaController control = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
         VeUnidadServicio dto = new VeUnidadServicio();
         List<VeUnidadServicio> lista = control.findVeUnidadServicioEntities();
@@ -718,14 +717,14 @@ public class ObtenerDTO {
 
         return dto;
     }
-    
+
     public static SeSucursal ObtenerSeSucursalL(Long id) {
-       SeSucursalJpaController control = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeSucursalJpaController control = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeSucursal dto = new SeSucursal();
         List<SeSucursal> lista = control.findSeSucursalEntities();
 
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getSeSucursalPK().getIdSucursal() == id)                                   {
+            if (lista.get(i).getSeSucursalPK().getIdSucursal() == id) {
                 dto = lista.get(i);
                 break;
             }
@@ -763,12 +762,8 @@ public class ObtenerDTO {
 
         return dto;
     }
-    
-    
-    
-    
-    
-     public static SeEmpresa ObtenerSeEmpresaL(Long id) {
+
+    public static SeEmpresa ObtenerSeEmpresaL(Long id) {
         SeEmpresaJpaController control = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
         SeEmpresa dto = new SeEmpresa();
         List<SeEmpresa> lista = control.findSeEmpresaEntities();
@@ -864,6 +859,20 @@ public class ObtenerDTO {
         return dto;
     }
 
+    public static CoProveedores ObtenerCoProveedores(int id) {
+        CoProveedoresJpaController control = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+        CoProveedores dto = new CoProveedores();
+        List<CoProveedores> lista = control.findCoProveedoresEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdProveedor() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+        return dto;
+    }
+
     public static CoItemsCotizacion ObtenerCoItemsCotizacion(String id) {
         CoItemsCotizacionJpaController control = new CoItemsCotizacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         CoItemsCotizacion dto = new CoItemsCotizacion();
@@ -939,7 +948,7 @@ public class ObtenerDTO {
     }
 
     public static PrTipoPrestacion ObtenerPrTipoPrestacion(String nombre) {
-      
+
         PrTipoPrestacionJpaController control = new PrTipoPrestacionJpaController(EntityManagerUtil.ObtenerEntityManager());
         PrTipoPrestacion dto = new PrTipoPrestacion();
         List<PrTipoPrestacion> lista = control.findPrTipoPrestacionEntities();
@@ -955,9 +964,6 @@ public class ObtenerDTO {
 
     }
 
-    
-    
-    
     public static InMotivos ObtenerInMotivos(String nombre) {
         InMotivosJpaController control = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
         InMotivos dto = new InMotivos();
@@ -1005,7 +1011,7 @@ public class ObtenerDTO {
         return dto;
 
     }
-    
+
     public static VeUnidadServicio ObtenerVeUniddadservicio(String nombre) {
         VeUnidadServicioJpaController control = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
         VeUnidadServicio dto = new VeUnidadServicio();
