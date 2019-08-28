@@ -15,22 +15,34 @@ import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
  * @author admin1
  */
 public class consulta_cliente_inactivos extends javax.swing.JDialog {
-
+    int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+    int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     /**
      * Creates new form consulta_cliente_inactivos
      */
@@ -92,6 +104,7 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txtbusqueda = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        btnimprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -285,6 +298,14 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
             }
         });
 
+        btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnimprimir.setText("IMPRIMIR");
+        btnimprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnimprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -301,15 +322,16 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(202, 202, 202))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(257, 257, 257))))))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(202, 202, 202))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(170, 170, 170))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,9 +347,11 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnimprimir))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -482,6 +506,70 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
+        ArrayList lista = new ArrayList();   
+        if(tba_clientes.getSelectedRowCount()==1){
+            if(tba_localidad.getSelectedRowCount()!=0){
+                for(int i=0;i<tba_localidad.getSelectedRowCount();i++){
+                   ClaseReporte creporte = new ClaseReporte(
+                   tba_clientes.getValueAt(tba_clientes.getSelectedRow(),0).toString(),
+                   tba_clientes.getValueAt(tba_clientes.getSelectedRow(),1).toString(),
+                   tba_clientes.getValueAt(tba_clientes.getSelectedRow(),2).toString(),
+                   tba_clientes.getValueAt(tba_clientes.getSelectedRow(),3).toString(),                   
+                   tba_localidad.getValueAt(tba_localidad.getSelectedRow(),0).toString(),
+                   tba_localidad.getValueAt(tba_localidad.getSelectedRow(),1).toString(),
+                   tba_localidad.getValueAt(tba_localidad.getSelectedRow(),2).toString(),
+                   tba_localidad.getValueAt(tba_localidad.getSelectedRow(),3).toString(),                   
+                   tba_contacto.getValueAt(i,0).toString(),
+                   tba_contacto.getValueAt(i,1).toString(),
+                   String.valueOf(tba_contacto.getValueAt(i,2)),
+                   tba_contacto.getValueAt(i,3).toString(),
+                   tba_contacto.getValueAt(i,4).toString());
+                   lista.add(creporte);
+                    }
+                   try {
+                    JasperReport reporte = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/consulta_clienteCOMPLETO.jasper");
+                    JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+                    JRViewer jviewer = new JRViewer(jprint);
+                    JDialog ventana = new JDialog();
+                    ventana.add(jviewer);
+                    ventana.setVisible(true);
+                    ventana.setSize(new Dimension(ancho/2,alto/2));
+                    ventana.setLocationRelativeTo(null);
+                    jviewer.setFitWidthZoomRatio();
+                    
+                } catch (JRException ex) {
+                    Logger.getLogger(consulta_cliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }else{
+                JOptionPane.showMessageDialog(null,"Por favor seleccione una Localidad");
+            }                                        
+        }else{
+                for(int i=0;i<tba_clientes.getRowCount();i++){
+                    ClaseReporte creporte = new ClaseReporte(
+                    tba_clientes.getValueAt(i,0).toString(),
+                    tba_clientes.getValueAt(i,1).toString(),
+                    tba_clientes.getValueAt(i,2).toString(),
+                    (String)tba_clientes.getValueAt(i,3));
+                    lista.add(creporte);
+                }
+                try {
+                    JasperReport reporte = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/consulta_clienteLISTA.jasper");
+                    JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+                    JRViewer jviewer = new JRViewer(jprint);
+                    JDialog ventana = new JDialog();
+                    ventana.add(jviewer);
+                    ventana.setVisible(true);
+                    ventana.setSize(new Dimension(ancho/2,alto/2));
+                    ventana.setLocationRelativeTo(null);
+                    jviewer.setFitWidthZoomRatio();
+                    
+                }catch (JRException ex) {
+                    Logger.getLogger(consulta_cliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }        
+    }//GEN-LAST:event_btnimprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -525,6 +613,7 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnimprimir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
