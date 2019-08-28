@@ -63,21 +63,27 @@ public class ReporteriaExt {
        
         List<ReporteComprasDTO> listaCompra = null;
         Query q = em.createNativeQuery("SELECT  distinct\n" +
-"                		c.id_orden_compra,\n" +
-"                		c.id_tipo_documento,\n" +
-"                        c.fecha_entrega,\n" +
-"                        c.id_proveedor,\n" +
-"                        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
-"                        ifnull(c.total_ice,0) as total_ice,\n" +
-"                        ifnull(c.total_iva,0) as total_iva,\n" +
-"                        c.total_compra\n" +
-"                FROM co_orden_compras as c\n" +
-"                inner join co_detalle_orden_compra as d \n" +
-"                	  on   c.id_orden_compra = d.id_orden_compra\n" +
-"                      and  c.estado = 'P'\n" +
-"                      and  c.fecha_entrega \n" +
-"                      BETWEEN concat(date_format(sysdate(),'%Y-%m-%d'),' 00:00:00')\n" +
-"                      and concat(date_format(sysdate(),'%Y-%m-%d'),' 23:59:59');");
+                        "   		c.id_orden_compra,\n" +
+                        "   		c.id_tipo_documento,\n" +
+                        "        c.fecha_entrega,\n" +
+                        "        c.id_proveedor,\n" +
+                        "        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
+                        "        ifnull(c.total_ice,0) as total_ice,\n" +
+                        "        ifnull(c.total_iva,0) as total_iva,\n" +
+                        "        c.total_compra,\n" +
+                        "        f.nombre_documento,\n" +
+                        "        g.nombre_comercial\n" +
+                        "   FROM co_orden_compras as c\n" +
+                        "   inner join co_detalle_orden_compra as d\n" +
+                        "   	  on   c.id_orden_compra = d.id_orden_compra\n" +
+                        "         and  c.estado = 'P'\n" +
+                        "         and  c.fecha_entrega\n" +
+                        "         BETWEEN concat(date_format(sysdate(),'%Y-%m-%d'),' 00:00:00')\n" +
+                        "         and concat(date_format(sysdate(),'%Y-%m-%d'),' 23:59:59')\n" +
+                        "   inner join in_tipo_documento as f\n" +
+                        "	  on f.id_tipo_documento = c.id_tipo_documento\n" +
+                        "	inner join co_proveedores as g\n" +
+                        "      on g.id_proveedor = c.id_proveedor;");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteComprasDTO>();   
          try{
@@ -91,6 +97,8 @@ public class ReporteriaExt {
             ob.setIce(Double.parseDouble(obj[5].toString()));
             ob.setIva(Double.parseDouble(obj[6].toString()));
             ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
+            ob.setNombre_documento(String.valueOf(obj[8].toString()));
+            ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
             listaCompra.add(ob);
         }
 //        
@@ -122,14 +130,20 @@ public class ReporteriaExt {
 "                        ifnull(c.total_subtotal,0) as total_subtotal,\n" +
 "                        ifnull(c.total_ice,0) as total_ice,\n" +
 "                        ifnull(c.total_iva,0) as total_iva,\n" +
-"                        c.total_compra\n" +
+"                        c.total_compra,\n" +
+                "        f.nombre_documento,\n" +
+                "        g.nombre_comercial\n" +
 "                FROM co_orden_compras as c\n" +
 "                inner join co_detalle_orden_compra as d \n" +
 "                	  on   c.id_orden_compra = d.id_orden_compra\n" +
 "                      and  c.estado = 'P'\n" +
 "                      and  c.fecha_entrega \n" +
 "                      BETWEEN concat('"+desde+"',' 00:00:00')\n" +
-"                      and concat('"+hasta+"',' 23:59:59');");
+"                      and concat('"+hasta+"',' 23:59:59')\n" +
+            "   inner join in_tipo_documento as f\n" +
+            "	  on f.id_tipo_documento = c.id_tipo_documento\n" +
+            "	inner join co_proveedores as g\n" +
+            "      on g.id_proveedor = c.id_proveedor;");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteComprasDTO>();   
          try{
@@ -143,6 +157,8 @@ public class ReporteriaExt {
             ob.setIce(Double.parseDouble(obj[5].toString()));
             ob.setIva(Double.parseDouble(obj[6].toString()));
             ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
+            ob.setNombre_documento(String.valueOf(obj[8].toString()));
+            ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
             listaCompra.add(ob);
         }
 //        
