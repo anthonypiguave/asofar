@@ -333,6 +333,7 @@ public class caja extends javax.swing.JDialog {
                                                      tbCajas.getValueAt(i,3).toString(),
                                                      tbCajas.getValueAt(i,4).toString());
             lista.add(creporte);
+        }
             try {
                 JasperReport reporte = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/caja.jasper");
                 JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
@@ -346,7 +347,7 @@ public class caja extends javax.swing.JDialog {
             } catch (JRException ex) {
                 Logger.getLogger(caja.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        
     }//GEN-LAST:event_btnimprimirActionPerformed
 
     /**
