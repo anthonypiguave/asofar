@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6dc8e1c-071f-4be1-8481-d679d293ba16">
-	<property name="ireport.zoom" value="1.3310000000000086"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.8531167061100198"/>
+	<property name="ireport.x" value="1074"/>
+	<property name="ireport.y" value="31"/>
 	<field name="valor1" class="java.lang.String"/>
 	<field name="valor2" class="java.lang.String"/>
 	<field name="valor3" class="java.lang.String"/>
@@ -78,50 +78,50 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="22" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<line>
-				<reportElement x="1" y="21" width="553" height="1" uuid="315efdcc-145c-4122-b663-d1ccfc3d3519"/>
+				<reportElement x="1" y="24" width="553" height="1" uuid="315efdcc-145c-4122-b663-d1ccfc3d3519"/>
 			</line>
 			<line>
-				<reportElement x="1" y="0" width="1" height="21" uuid="e76067db-d1de-40b4-b80e-cd58b2b92125"/>
+				<reportElement x="1" y="0" width="1" height="24" uuid="e76067db-d1de-40b4-b80e-cd58b2b92125"/>
 			</line>
 			<line>
-				<reportElement x="82" y="0" width="1" height="21" uuid="5604a566-49cd-4cff-895c-985fbfd4050e"/>
+				<reportElement x="82" y="0" width="1" height="24" uuid="5604a566-49cd-4cff-895c-985fbfd4050e"/>
 			</line>
 			<line>
-				<reportElement x="218" y="0" width="1" height="21" uuid="7c3ed7de-a6f3-496f-966f-e35f205c954b"/>
+				<reportElement x="218" y="0" width="1" height="24" uuid="7c3ed7de-a6f3-496f-966f-e35f205c954b"/>
 			</line>
 			<line>
-				<reportElement x="354" y="0" width="1" height="21" uuid="43c88fc8-96e4-44e0-ae74-cdd4f7896120"/>
+				<reportElement x="354" y="0" width="1" height="24" uuid="43c88fc8-96e4-44e0-ae74-cdd4f7896120"/>
 			</line>
 			<line>
-				<reportElement x="553" y="0" width="1" height="21" uuid="13dae789-f6c0-4330-8ae4-014438d7f885"/>
+				<reportElement x="553" y="0" width="1" height="24" uuid="13dae789-f6c0-4330-8ae4-014438d7f885"/>
 			</line>
 			<textField>
-				<reportElement x="2" y="0" width="80" height="21" uuid="74851b11-a43e-4347-bd81-9993642c52f5"/>
+				<reportElement x="2" y="0" width="80" height="24" uuid="74851b11-a43e-4347-bd81-9993642c52f5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="83" y="0" width="135" height="21" uuid="31a06a88-5a86-483d-bc93-3874a06d10cc"/>
+				<reportElement x="83" y="0" width="135" height="24" uuid="31a06a88-5a86-483d-bc93-3874a06d10cc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="219" y="0" width="135" height="21" uuid="6b9b92b3-265e-4a7b-9b84-0bee53824c72"/>
+				<reportElement x="219" y="0" width="135" height="24" uuid="6b9b92b3-265e-4a7b-9b84-0bee53824c72"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="355" y="0" width="198" height="21" uuid="fcaaeced-0cb4-4f0a-923e-1b01fc774149"/>
+				<reportElement x="355" y="0" width="198" height="24" uuid="fcaaeced-0cb4-4f0a-923e-1b01fc774149"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor4}]]></textFieldExpression>
 			</textField>
