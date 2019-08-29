@@ -564,113 +564,115 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            for (int i = 0; i < listadet.size(); i++) {
-
-                JCheckBox chbox = (JCheckBox) jTable1.getValueAt(i, 5);
-                boolean selected = chbox.isSelected();
-
-                if (selected) {
-                    cont1 = cont1 + 1;
-
-                } else {
-                    cont1 = cont1 - 1;
-                }
-
-            }
-
-            if (cont1 < listadet.size()) {
-                JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO RECIBIDOS!");
+            if (txtObservacion.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "LLENE OBSERVACIÓN!");
             } else {
 
                 for (int i = 0; i < listadet.size(); i++) {
 
-                    if (jTable1.getModel().getValueAt(i, 6).getClass().equals(JComboBox.class)) {
-                        cont2 = cont2 - 1;
+                    JCheckBox chbox = (JCheckBox) jTable1.getValueAt(i, 5);
+                    boolean selected = chbox.isSelected();
+
+                    if (selected) {
+                        cont1 = cont1 + 1;
 
                     } else {
-                        cont2 = cont2 + 1;
+                        cont1 = cont1 - 1;
                     }
 
                 }
 
-                if (cont2 < listadet.size()) {
-                    JOptionPane.showMessageDialog(null, "SELECCIONE BODEGA!");
+                if (cont1 < listadet.size()) {
+                    JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO RECIBIDOS!");
                 } else {
 
-                    cargarBodega();
+                    for (int i = 0; i < listadet.size(); i++) {
 
-                    try {
+                        if (jTable1.getModel().getValueAt(i, 6).getClass().equals(JComboBox.class)) {
+                            cont2 = cont2 - 1;
 
-                        for (int i = 0; i < listadet.size(); i++) {
+                        } else {
+                            cont2 = cont2 + 1;
+                        }
 
-                            InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                    }
 
-                            InKardex kardex = new InKardex();
-                            kardex.setInKardexPK(new InKardexPK());
-                            kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
-                            kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                    if (cont2 < listadet.size()) {
+                        JOptionPane.showMessageDialog(null, "SELECCIONE BODEGA!");
+                    } else {
 
-                            kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
-                            kardex.setSeSucursal(seSucursal);
+                        cargarBodega();
 
-                            kardex.setCantidad(listadet.get(i).getCantidad());
-                            kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
-                            kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
-                            kardex.setFechaSistema(d);
-                            SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY");
-                            kardex.setAnioDocumento(formatoFecha.format(d));
-                            kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
-                            kardex.setFechaCreacion(d);
-                            
-                            if (objeto != null) {
+                        try {
 
-                                kardex.setSaldoAnterior(objeto.getSaldoActual());
-                                kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
-                                kardex.setCostoAnterior(objeto.getCostoActual());
-                                kardex.setCostoActual(kardex.getCostoAnterior().add(
-                                        ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
-                                kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+                            for (int i = 0; i < listadet.size(); i++) {
 
-                            } else {
+                                InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
 
-                                kardex.setSaldoAnterior(BigInteger.valueOf(0));
-                                kardex.setSaldoActual(listadet.get(i).getCantidad());
-                                kardex.setCostoAnterior(BigDecimal.valueOf(0));
-                                kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
-                                kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+                                InKardex kardex = new InKardex();
+                                kardex.setInKardexPK(new InKardexPK());
+                                kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
+                                kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+
+                                kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
+                                kardex.setSeSucursal(seSucursal);
+
+                                kardex.setCantidad(listadet.get(i).getCantidad());
+                                kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
+                                kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
+                                kardex.setFechaSistema(d);
+                                SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY");
+                                kardex.setAnioDocumento(formatoFecha.format(d));
+                                kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                kardex.setFechaCreacion(d);
+
+                                if (objeto != null) {
+
+                                    kardex.setSaldoAnterior(objeto.getSaldoActual());
+                                    kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
+                                    kardex.setCostoAnterior(objeto.getCostoActual());
+                                    kardex.setCostoActual(kardex.getCostoAnterior().add(
+                                            ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
+                                    kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+
+                                } else {
+
+                                    kardex.setSaldoAnterior(BigInteger.valueOf(0));
+                                    kardex.setSaldoActual(listadet.get(i).getCantidad());
+                                    kardex.setCostoAnterior(BigDecimal.valueOf(0));
+                                    kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
+                                    kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
+
+                                }
+
+                                kardexController.create(kardex);
+
+                                cabCompra.setEstado("A");
+                                cabCompra.setFechaAprobacion(d);
+                                cabCompra.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                cabCompra.setFechaActualizacion(d);
+                                cabCompraController.edit(cabCompra);
+
+                                cabMovimiento.setEstado("A");
+                                cabMovimiento.setObservacion(txtObservacion.getText());
+                                cabMovimiento.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                cabMovimiento.setFechaActualizacion(d);
+                                cabMovimiento.setFechaRecepcion(d);
+                                cabMovController.edit(cabMovimiento);
 
                             }
 
-                            kardexController.create(kardex);
+                        } catch (Exception e) {
 
-                            cabCompra.setEstado("A");
-                            cabCompra.setFechaAprobacion(d);
-                            cabCompra.setUsuarioActualizacion(seUsuario.getIdUsuario());
-                            cabCompra.setFechaActualizacion(d);
-                            cabCompraController.edit(cabCompra);
-                            
-                            
-                            cabMovimiento.setEstado("A");
-                            cabMovimiento.setObservacion(txtObservacion.getText());
-                            cabMovimiento.setUsuarioActualizacion(seUsuario.getIdUsuario());
-                            cabMovimiento.setFechaActualizacion(d);
-                            cabMovimiento.setFechaRecepcion(d);
-                            cabMovController.edit(cabMovimiento);
-                            
-                            
+                            e.printStackTrace();
 
                         }
 
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-
+                        JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                        setVisible(false);
                     }
 
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                    setVisible(false);
                 }
-
             }
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
