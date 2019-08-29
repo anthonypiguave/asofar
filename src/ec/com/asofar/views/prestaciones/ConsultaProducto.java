@@ -5,9 +5,11 @@
  */
 package ec.com.asofar.views.prestaciones;
 
+import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.views.producto.*;
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dto.CoOrdenPedido;
+import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -24,11 +26,14 @@ public class ConsultaProducto extends javax.swing.JDialog {
     int x, y;
     String valor = "";
     PrProductos ppro = new PrProductos();
-PrProductos obj;    
+    PrProductos obj;
     List<PrProductos> lista;
     PrProductosJpaController procont = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductos objeto = new PrProductos();
-AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
+    AgregarPrestacion pre = new AgregarPrestacion(new javax.swing.JFrame(), true);
+    List<PrPrestaciones> listaPrest;
+    PrPrestacionesJpaController prestC = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     /**
      * Creates new form ConsultaProducto
      */
@@ -36,10 +41,9 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        cargartabla();
+        cargartabla1();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,9 +194,13 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
 
     public void cargartabla() {
         lista = procont.findPrProductosEntities();
+        listaPrest = prestC.findPrPrestacionesEntities();
+        Tablas.ListarProductosConsulta2(lista, tbproductos,listaPrest);
+    }
+    public void cargartabla1() {
+        lista = procont.findPrProductosEntities();
         Tablas.ListarProductosConsulta(lista, tbproductos);
     }
-
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
         y = evt.getY();
@@ -222,15 +230,14 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
 
     private void tbproductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproductosMousePressed
 
-
         int i = 0;
 
         if (evt.getClickCount() == 2) {
             i = tbproductos.getSelectedRow();
             objeto = devuelveObjeto(tbproductos.getValueAt(i, 0).toString(), lista);
-            System.out.println("objeto"+objeto.getNombreProducto());
+            System.out.println("objeto" + objeto.getNombreProducto());
             pre.txtProduc.setText(objeto.getNombreProducto());
-            
+
             if (objeto != null) {
                 this.setVisible(false);
             }
@@ -240,13 +247,14 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
     private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfiltroActionPerformed
- public PrProductos getObji() {
-     return obj;
- }
+    public PrProductos getObji() {
+        return obj;
+    }
 
- public void setObji(PrProductos obj) {
-     this.obj = obj;
- }
+    public void setObji(PrProductos obj) {
+        this.obj = obj;
+    }
+
     public PrProductos getProducto() {
         return objeto;
     }
@@ -257,7 +265,7 @@ AgregarPrestacion pre =  new AgregarPrestacion (new javax.swing.JFrame(), true);
 
         for (int i = 0; i < listaobjeto.size(); i++) {
 
-            if (datos.equals(""+ listaobjeto.get(i).getPrProductosPK().getIdProducto())) {
+            if (datos.equals("" + listaobjeto.get(i).getPrProductosPK().getIdProducto())) {
                 objeto1 = listaobjeto.get(i);
 
                 break;
