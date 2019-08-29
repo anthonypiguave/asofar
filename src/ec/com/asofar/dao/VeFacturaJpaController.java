@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin
+ * @author admin1
  */
 public class VeFacturaJpaController implements Serializable {
 

@@ -28,7 +28,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin
+ * @author admin1
  */
 public class InMovimientosJpaController implements Serializable {
 
@@ -49,9 +49,9 @@ public class InMovimientosJpaController implements Serializable {
             inMovimientos.setInDetalleMovimientoList(new ArrayList<InDetalleMovimiento>());
         }
         inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
+        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
@@ -133,9 +133,9 @@ public class InMovimientosJpaController implements Serializable {
 
     public void edit(InMovimientos inMovimientos) throws IllegalOrphanException, NonexistentEntityException, Exception {
         inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
+        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {

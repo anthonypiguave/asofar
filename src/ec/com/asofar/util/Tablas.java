@@ -2249,7 +2249,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD.", "FECHA DE EMISION", "USUARIO", "ESTADO"};
+        String[] Co = {"N. ORDEN", "FECHA DE EMISION", "USUARIO", "ESTADO"};
         String[] Filas = new String[4];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -2347,7 +2347,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"N. ORDEN", "FECHA ENTREGA", " PROVEEDOR", "TIPO DOCUMENTO", "TOTAL COMPRA", "USUARIO", "ESTADO"};
+        String[] Co = {"N. ORDEN COMPRA", "FECHA RECEPCION", " PROVEEDOR", "TIPO DOCUMENTO", "TOTAL COMPRA", "USUARIO", "ESTADO"};
         String[] Filas = new String[7];
         model = new DefaultTableModel(null, Co);
 //        JTableHeader jt;

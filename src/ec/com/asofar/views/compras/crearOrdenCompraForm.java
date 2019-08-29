@@ -978,7 +978,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-        } else {
 
             /////////// AGREGAR AL ORDEN DE COMPRA
             CoOrdenCompras cabCompra = new CoOrdenCompras();

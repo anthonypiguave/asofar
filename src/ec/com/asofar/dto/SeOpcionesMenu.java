@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin
+ * @author admin1
  */
 @Entity
 @Table(name = "se_opciones_menu")
