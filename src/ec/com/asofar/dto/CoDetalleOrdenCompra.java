@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin
+ * @author admin1
  */
 @Entity
 @Table(name = "co_detalle_orden_compra")
@@ -49,7 +49,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByUsuarioCreacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByFechaCreacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByUsuarioActualizacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "CoDetalleOrdenCompra.findByFechaActualizacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.fechaActualizacion = :fechaActualizacion")})
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByFechaActualizacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByLoteFabricacion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.loteFabricacion = :loteFabricacion")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByFechaCaducidad", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.fechaCaducidad = :fechaCaducidad")})
 public class CoDetalleOrdenCompra implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,6 +86,11 @@ public class CoDetalleOrdenCompra implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @Column(name = "lote_fabricacion")
+    private String loteFabricacion;
+    @Column(name = "fecha_caducidad")
+    @Temporal(TemporalType.DATE)
+    private Date fechaCaducidad;
     @JoinColumns({
         @JoinColumn(name = "id_orden_compra", referencedColumnName = "id_orden_compra", insertable = false, updatable = false)
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
@@ -212,6 +219,22 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public String getLoteFabricacion() {
+        return loteFabricacion;
+    }
+
+    public void setLoteFabricacion(String loteFabricacion) {
+        this.loteFabricacion = loteFabricacion;
+    }
+
+    public Date getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(Date fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
     }
 
     public CoOrdenCompras getCoOrdenCompras() {
