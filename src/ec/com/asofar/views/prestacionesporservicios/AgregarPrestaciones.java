@@ -64,8 +64,13 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
+        cbxUnidadServicio();
     }
-
+    public void cbxUnidadServicio() {
+        for (int i = 0; i < us2.size(); i++) {
+                cbxunidadservicio.addItem(us2.get(i).getNombreUnidadServicio());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -283,8 +288,11 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
         vus = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
 
+        objPresxServ.setPrPrestaciones(proc);
         objPresxServ.setVeUnidadServicio(vus);
         objPresxServ.setEstado("A");
+        objPresxServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
+        objPresxServ.setAplicaDescuento(cbxaplicadescuento1.getSelectedItem().toString());
         objPresxServ.setUsuarioCreacion(usu.getIdUsuario());
         objPresxServ.setFechaCreacion(fechaActual);
         try {
@@ -294,8 +302,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(AgregarPrestaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_jguardarpreserActionPerformed
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
@@ -343,8 +349,9 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
             if (idPrestacion == lppus.get(i).getPrPrestaciones().getIdPrestacion()) {
                 Long idG = lppus.get(i).getVeUnidadServicio().getIdUnidadServicio();
                 System.out.println("guardado solo 1 ");
+                cbxunidadservicio.removeAllItems();
                 nombreUnidad(idG);
-            } 
+            }
 //            else //                if (idPrestacion != lppus.get(i).getPrPrestaciones().getIdPrestacion())
 //            {
 //                valor = "no";
@@ -354,13 +361,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         }
     }
 
-    public void nombreUnidad(String valor) {
-        for (int i = 0; i < us2.size(); i++) {
-            if (valor=="no") {
-                cbxunidadservicio.addItem(us2.get(i).getNombreUnidadServicio());
-            }
-        }
-    }
+
 
     public void nombreUnidad(Long idGuardado) {
         for (int i = 0; i < us2.size(); i++) {
