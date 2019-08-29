@@ -7,6 +7,7 @@ package ec.com.asofar.util;
 
 import ec.com.asofar.dao.InBodegaJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ReporteComprasDTO;
@@ -125,8 +126,30 @@ public class Tablas {
         String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
+        PrPrestacionesJpaController pr = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+        List<PrPrestaciones> list = pr.findPrPrestacionesEntities();
+        int count = 0;
         for (int i = 0; i < listaproducto.size(); i++) {
-            if (listaproducto.get(i).getEstado().equals("A")) {
+            System.out.println("for producto" + listaproducto.get(i).getPrProductosPK().getIdProducto());
+            for (int j = 0; j < list.size(); j++) {
+                System.out.println("for prestacion" + list.get(j).getIdPrestacion().intValue());
+                if(list.get(j).getIdPoducto()!=null){
+                    
+                
+                if (list.get(j).getIdPoducto().intValue() 
+                        == listaproducto.get(i).getPrProductosPK().getIdProducto()) {
+
+                    count++;
+//            if (listaproducto.get(i).getEstado().equals("A")) {
+
+//            }
+                }
+                }else{
+                    
+                }
+            }
+            if (count < 1) {
+
                 filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
                 filas[1] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
                 filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
@@ -151,11 +174,13 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
                 Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-
             }
+            count = 0;
         }
     }
 
+    
+    
     public static void ListarDetalleOrdenCompra(List<CoDetalleOrdenCompra> listadeorco, JTable Tabla, CoOrdenCompras orco) {
         int[] a = {50, 50, 50, 50, 50, 50, 50, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -2613,6 +2638,55 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
             Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
+        }
+    }
+
+    public static void ListarProductosConsulta2(List<PrProductos> listaproducto, JTable Tabla, List<PrPrestaciones> listaPrest) {
+        int[] a = {50, 50, 50, 50, 50, 100, 50};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "CATEGORIA", "SUBCATEGORIA", "ARTICULO", "PRODUCTO",
+            "PRESENTACION", "MEDIDAS"};
+        String[] filas = new String[7];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < listaproducto.size(); i++) {
+            for (int j = 0; j < listaPrest.size(); j++) {
+
+                if (listaPrest.get(j).getIdPoducto() != null) {
+                    if (listaproducto.get(i).getPrProductosPK().getIdProducto()
+                            != listaPrest.get(j).getIdPoducto().intValue()) {
+
+                        filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
+                        filas[1] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+                        filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
+                        filas[3] = listaproducto.get(i).getPrArticulo().getNombreArticulo();
+                        filas[4] = listaproducto.get(i).getNombreProducto();
+                        filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+                        filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+                    }
+                }
+            }
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+
         }
     }
     //   }
