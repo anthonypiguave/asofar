@@ -574,7 +574,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         BtnAprovar.setBackground(new java.awt.Color(13, 153, 0));
         BtnAprovar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         BtnAprovar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAprovar.setText("APROVAR");
+        BtnAprovar.setText("APROBAR");
         BtnAprovar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAprovarActionPerformed(evt);
@@ -818,14 +818,14 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "LLENE MOTIVO!");
                 } else {
                     if (txtObservacion.getText().equals("")) {
-                        JOptionPane.showMessageDialog(null, "LLENE OBSERVACIÒN!");
+                        JOptionPane.showMessageDialog(null, "LLENE OBSERVACIÓN!");
                     } else {
                         if (txtFechaEntrega.getText().equals("--SELECCIONE--")) {
                             JOptionPane.showMessageDialog(null, "LLENE FECHA DE ENTREGA!");
                         } else {
                             for (int i = 0; i < listadetCompra.size(); i++) {
-                                System.out.println(" vvv "+ cont);
-                                
+                                System.out.println(" vvv " + cont);
+
                                 if (listadetCompra.get(i).getPrecioUnitario().toString().equals("0.0")) {
                                     cont = cont - 1;
                                 } else {
@@ -833,7 +833,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                 }
 
                             }
-                
+
                             if (listadetCompra.size() != cont) {
                                 JOptionPane.showMessageDialog(null, "LLENE PRECIO!");
                             } else {
@@ -852,7 +852,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                 cabCompra.setIdTipoDocumento(cabOrden.getIdDocumento());
                                 cabCompra.setEstado("P");
                                 cabCompra.setFechaEntrega(fecha);
-                                
 
                                 cabCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
                                 cabCompra.setFechaCreacion(d);
@@ -895,7 +894,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                     /////////// actualizar la cab de la orden de pedido
                                     CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-                                    cabOrden.setEstado("I");
+                                    cabOrden.setEstado("A");
                                     cabOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
                                     cabOrden.setFechaActualizacion(d);
 
@@ -972,6 +971,87 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAprovarActionPerformed
 
     private void BtnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnularActionPerformed
+
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de anular los datos?", "", JOptionPane.YES_NO_OPTION);
+
+        CoOrdenCompras pkCompra = null;
+
+        if (r == JOptionPane.YES_OPTION) {
+
+        } else {
+
+            /////////// AGREGAR AL ORDEN DE COMPRA
+            CoOrdenCompras cabCompra = new CoOrdenCompras();
+            CoDetalleOrdenCompra detCompra = new CoDetalleOrdenCompra();
+            CoOrdenComprasJpaController cabCompraController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
+            CoDetalleOrdenCompraJpaController detCompraController = new CoDetalleOrdenCompraJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+            ///////setear la pk cab orden compra
+            cabCompra.setSeSucursal(seSucursal);
+            ///////setear la  cab orden compra
+            cabCompra.setIdProveedor(cabOrden.getIdProveedor());
+            cabCompra.setObservacion(txtObservacion.getText());
+            cabCompra.setIdTipoDocumento(cabOrden.getIdDocumento());
+            cabCompra.setEstado("I");
+            cabCompra.setFechaEntrega(fecha);
+
+            cabCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+            cabCompra.setFechaCreacion(d);
+
+            cabCompra.setTotalSubtotal(TotalSubTotal);
+            cabCompra.setTotalIva(TotalIva);
+            cabCompra.setTotalIce(BigDecimal.valueOf(0));
+            cabCompra.setTotalDescuento(TotalDescuento);
+            cabCompra.setTotalCompra(TotalCompra);
+
+            try {
+
+                pkCompra = obtenerIdCompra.guardarPedido(cabCompra);
+                System.out.println(" IDcabedcera compra " + pkCompra);
+
+                for (int i = 0; i < listadetCompra.size(); i++) {
+                    ////setear el pk detalle con compras
+                    detCompra.setCoOrdenCompras(pkCompra);
+                    /////// setear el detalle 
+                    detCompra.setCoDetalleOrdenCompraPK(new CoDetalleOrdenCompraPK());
+                    detCompra.getCoDetalleOrdenCompraPK().setIdProducto(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getIdProducto());
+                    detCompra.getCoDetalleOrdenCompraPK().setLineaDetalle(listadetCompra.get(i).getCoDetalleOrdenCompraPK().getLineaDetalle());
+                    detCompra.setDescripcion(listadetCompra.get(i).getDescripcion());
+
+                    detCompra.setCantidadRecibida(listadetCompra.get(i).getCantidadRecibida());
+                    detCompra.setEstado("I");
+
+                    detCompra.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
+                    detCompra.setIce(BigDecimal.valueOf(0));
+                    detCompra.setIva(listadetCompra.get(i).getIva());
+                    detCompra.setDescuento(listadetCompra.get(i).getDescuento());
+                    detCompra.setSubtotal(listadetCompra.get(i).getSubtotal());
+                    detCompra.setTotal(listadetCompra.get(i).getTotal());
+
+                    detCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+                    detCompra.setFechaCreacion(d);
+
+                    detCompraController.create(detCompra);
+                }
+                /////////// actualizar la cab de la orden de pedido
+                CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+                cabOrden.setEstado("I");
+                cabOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                cabOrden.setFechaActualizacion(d);
+
+                cabOrdenController.edit(cabOrden);
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
+
+            JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+            setVisible(false);
+
+        }
 
 
     }//GEN-LAST:event_BtnAnularActionPerformed

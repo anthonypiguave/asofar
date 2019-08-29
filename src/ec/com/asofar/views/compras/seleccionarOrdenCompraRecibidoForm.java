@@ -35,7 +35,7 @@ public class seleccionarOrdenCompraRecibidoForm extends javax.swing.JDialog {
 
     CoOrdenCompras objeto = new CoOrdenCompras();
 
-    List<CoOrdenCompras> lista;
+    List<CoOrdenCompras> lista = null;
     CoOrdenComprasJpaController cabCompraController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public seleccionarOrdenCompraRecibidoForm(java.awt.Frame parent, boolean modal) {
@@ -310,7 +310,6 @@ public class seleccionarOrdenCompraRecibidoForm extends javax.swing.JDialog {
 
         try {
             lista = cabCompraController.findCoOrdenComprasEntities();
-
             Tablas.listarCabOrdendeCompra(lista, tbAprobar);
         } catch (Exception e) {
 

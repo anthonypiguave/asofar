@@ -2324,7 +2324,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD.", "FECHA ENTREGA", " PROVEEDOR", "TIPO DOCUMENTO", "TOTAL COMPRA", "USUARIO", "ESTADO"};
+        String[] Co = {"N. ORDEN", "FECHA ENTREGA", " PROVEEDOR", "TIPO DOCUMENTO", "TOTAL COMPRA", "USUARIO", "ESTADO"};
         String[] Filas = new String[7];
         model = new DefaultTableModel(null, Co);
 //        JTableHeader jt;
