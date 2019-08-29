@@ -59,6 +59,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -90,7 +91,7 @@ public class Tablas {
     private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
-    private static boolean[] tbordenrecibido = {false, false, false, false, false, false, true};
+    private static boolean[] tbordenrecibido = {false, false, false, false, false, false, true, true, true};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -1904,13 +1905,13 @@ public class Tablas {
     }
 
     public static void listarCabOrdendePedido(List<CoOrdenPedido> lista, JTable Tabla) {
-        int[] a = {5, 25, 35, 45, 50,5};
+        int[] a = {5, 25, 35, 45, 50, 5};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"N. ORDEN", "FECHA DE EMISION","PROVEEDOR","DOCUMENTO", "USUARIO DE CREACIÓN", "ESTADO"};
+        String[] Co = {"N. ORDEN", "FECHA DE EMISION", "PROVEEDOR", "DOCUMENTO", "USUARIO DE CREACIÓN", "ESTADO"};
         String[] Filas = new String[6];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -2367,7 +2368,7 @@ public class Tablas {
     }
 
     public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
-        int[] a = {10, 30, 300, 30, 50, 30, 100};
+        int[] a = {10, 30, 250, 30, 50, 30, 100, 30, 30};
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2375,7 +2376,7 @@ public class Tablas {
         tabla.setDefaultRenderer(Object.class,
                 new Render());
 
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO", "BODEGA"}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"No.", "CODIGO", "DESCRIPCION", "CANTIDAD", "PRECIO", "RECIBIDO", "BODEGA", "N. LOTE", "F. CADUCIDAD"}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class,
@@ -2384,7 +2385,9 @@ public class Tablas {
                 java.lang.Object.class,
                 java.lang.Object.class,
                 JCheckBox.class,
-                JComboBox.class,};
+                JComboBox.class,
+                java.lang.Object.class,
+                java.lang.Object.class,};
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -2401,7 +2404,7 @@ public class Tablas {
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
-                Object filas[] = new Object[7];
+                Object filas[] = new Object[9];
 
                 filas[0] = "" + lista.get(i).getInDetalleMovimientoPK().getLineaDetalle();
                 filas[1] = "" + lista.get(i).getInDetalleMovimientoPK().getIdProducto();
@@ -2429,6 +2432,11 @@ public class Tablas {
                 }
 
                 filas[6] = cb;
+                JTextField tx1 = new JTextField();
+                filas[7] = tx1;
+                JTextField tx2 = new JTextField();
+                tx2.setText("--SELECCIONE--");
+                filas[8] = tx2;
 
                 dt.addRow(filas);
 
@@ -2452,6 +2460,10 @@ public class Tablas {
 //        tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
 //        tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+//        tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+//        tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
 
         TableColumn col = tabla.getColumnModel().getColumn(6);
         col.setCellEditor(new MyComboBoxEditor(values));
@@ -2501,7 +2513,7 @@ public class Tablas {
     }
 
     public static void listarReporteCompras(List<ReporteComprasDTO> lista, JTable Tabla) {
-        
+
         int[] a = {5, 5, 20, 15, 15, 15, 15, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();

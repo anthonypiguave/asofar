@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -49,6 +50,19 @@ public class Render extends DefaultTableCellRenderer {
             }
 
             return cb;
+        }
+                if (value instanceof JTextField) {
+            JTextField tx = (JTextField) value;
+
+            if (isSelected) {
+                tx.setForeground(table.getSelectionForeground());
+                tx.setBackground(table.getSelectionBackground());
+            } else {
+                tx.setForeground(table.getForeground());
+                tx.setBackground(table.getBackground());
+            }
+
+            return tx;
         }
 
         return super.getTableCellRendererComponent(table, value, isSelected,

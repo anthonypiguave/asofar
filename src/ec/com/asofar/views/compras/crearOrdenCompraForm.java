@@ -894,7 +894,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                     /////////// actualizar la cab de la orden de pedido
                                     CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-                                    cabOrden.setEstado("A");
+                                    cabOrden.setEstado("C");
                                     cabOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
                                     cabOrden.setFechaActualizacion(d);
 
