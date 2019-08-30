@@ -999,8 +999,8 @@ public class Venta extends javax.swing.JInternalFrame {
                 } catch (Exception e) {
                 }
             }
-
         }
+        
     }//GEN-LAST:event_tba_detalleMousePressed
 
     private void tba_detalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyTyped
