@@ -40,6 +40,9 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    public void formularioProveedor(){
+        
+    }
 
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {
 //        super(parent, modal);
