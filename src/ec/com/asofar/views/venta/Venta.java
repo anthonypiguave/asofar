@@ -975,18 +975,26 @@ public class Venta extends javax.swing.JInternalFrame {
                     int r = JOptionPane.showConfirmDialog(null, "Desea eliminar este producto?", "", JOptionPane.YES_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
                         int i = tba_detalle.getSelectedRow();
+                        System.out.println("**");
                         listaDetFactura.remove(i);
+                        
+                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                        Totalizar();
+                        TotalizarIva();
+                        TotalizarDescuento();
+                        TotalizarSubtotal();
+//                        listaDetFactura.remove(i);
                         Cont = Cont - 1;
                         for (int j = 0; j < listaDetFactura.size(); j++) {
                             Cont = j + 1;
                             listaDetFactura.get(j).getVeFacturaDetallePK().setLineaDetalle(Cont);
                         }
                         /**/
-                        Totalizar();
-                        TotalizarIva();
-                        TotalizarDescuento();
-                        TotalizarSubtotal();
-                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+//                        Totalizar();
+//                        TotalizarIva();
+//                        TotalizarDescuento();
+//                        TotalizarSubtotal();
+//                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
                     }
                 } catch (Exception e) {
                 }
@@ -1132,7 +1140,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
                 guardarKardex2(listaDetFactura);
 
-                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+//                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
 
                 ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
                 Iv.setVisible(true);
