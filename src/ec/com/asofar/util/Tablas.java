@@ -2392,8 +2392,8 @@ public class Tablas {
 
     }
 
-    public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla) {
-        int[] a = {10, 30, 250, 30, 50, 30, 100, 30, 30};
+    public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla,  String[] nLote , String[] fecha ) {
+        int[] a = {10, 30, 200, 30, 50, 30, 100, 30, 40};
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2457,11 +2457,15 @@ public class Tablas {
                 }
 
                 filas[6] = cb;
-                JTextField tx1 = new JTextField();
-                filas[7] = tx1;
-                JTextField tx2 = new JTextField();
-                tx2.setText("--SELECCIONE--");
-                filas[8] = tx2;
+                
+             
+
+                filas[7] = nLote[i];
+                            
+//                JTextField tx2 = new JTextField();
+//                tx2.setText("--SELECCIONE--");
+//                filas[8] = tx2;
+                filas[8] = fecha[i];
 
                 dt.addRow(filas);
 

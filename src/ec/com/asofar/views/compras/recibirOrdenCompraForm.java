@@ -28,6 +28,7 @@ import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.Calendario;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -60,6 +61,9 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
     Boolean selector;
     Boolean[] check;
+    
+    String[] fechaCaducidad;
+    String[] nLote;
 
     Date fecha = null;
 
@@ -205,10 +209,15 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         listDet = detMovController.findInDetalleMovimientoEntities();
 
         check = new Boolean[listDet.size()];  // inicializar el Boolean segun la lista
+        fechaCaducidad = new String[listDet.size()];
+        nLote = new String[listDet.size()];
 
         for (int i = 0; i < listDet.size(); i++) {
 
             check[i] = false; // setear valor falso
+            
+            fechaCaducidad[i] = "--SELECCIONE--";
+            nLote[i]="";
 
             if (listDet.get(i).getInDetalleMovimientoPK().getIdMovimientos() == (cabMovimiento.getInMovimientosPK().getIdMovimientos()) && listDet.get(i).getEstado().equals("A")) {
                 listadet.add(listDet.get(i));
@@ -226,7 +235,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
         txtCod.setText("" + cabCompra.getCoOrdenComprasPK().getIdOrdenCompra());
 
-        Tablas.listarDetalleRecepcion(listadet, jTable1);
+        Tablas.listarDetalleRecepcion(listadet, jTable1, nLote , fechaCaducidad);
 
     }
 
@@ -464,7 +473,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,7 +715,27 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
             }
 
         }
+        if (evt.getClickCount() == 1) {
+            if (col == 8) {
+                Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
+                fechaEntrega.setVisible(true);
 
+                fecha = fechaEntrega.getFecha();
+
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+                
+                
+                fechaCaducidad[row]= String.format(formatoFecha.format(fecha));
+                
+    
+                
+                Tablas.listarDetalleRecepcion(listadet, jTable1, nLote , fechaCaducidad);
+                
+                
+
+
+            }
+        }
 
     }//GEN-LAST:event_jTable1MousePressed
 
