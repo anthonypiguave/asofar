@@ -179,7 +179,6 @@ public class Venta extends javax.swing.JInternalFrame {
                     && listadetallecaja.get(i).getHoraCierre() == null) {
                 v = "si";
                 for (int j = 0; j < listaCaja.size(); j++) {
-                    VeCaja get = listaCaja.get(j);
                     if (listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja()
                             == listaCaja.get(j).getIdCaja()) {
                         txt_NumeroCaja.setText("" + listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja());

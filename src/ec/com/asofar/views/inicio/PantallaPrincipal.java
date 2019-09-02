@@ -5,11 +5,15 @@
  */
 package ec.com.asofar.views.inicio;
 
+import ec.com.asofar.dao.VeCajaJpaController;
+import ec.com.asofar.dao.VeDetalleCajaJpaController;
 import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeOpcionesMenu;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeCaja;
+import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.util.ActionItem;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
@@ -27,6 +31,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +42,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form PantallaPrincipal
      */
+    VeDetalleCajaJpaController cajaDetC = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    VeCajaJpaController cajaC = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeOpcionesMenu> lista = null;
     SeUsuarios us1;
     SeEmpresa em1;
@@ -76,8 +83,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         salida.addActionListener((e) -> {
             System.exit(0);
         });
-        
-        jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height-75), BorderLayout.CENTER);
+
+        jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height - 75), BorderLayout.CENTER);
     }
 
     public void cargarMenu(List<SeOpcionesMenu> lis) {
@@ -106,22 +113,34 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         }
                                     }
                                     menu.add(menu2);
-                                } else {     
+                                } else {
+//                                    String permiso = pVender();
+//                                    if(permiso.equals("no")){
+//                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
+//                                    }else{/*puede vender*/
+//                                        
+//                                        }
+
                                     String nombre = "GENERAR VENTA ";
 //                                    System.out.println("itemvgdfd "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
-                                        if(lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)){
+                                    if (lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)) {
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         item.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                Venta fac = new Venta(new javax.swing.JFrame(), true,us1, em1, su1);
-                                                jdpescritorio.add(fac);
-                                                fac.show();
+                                                String permiso = pVender();
+                                                if (permiso=="no") {
+                                                    JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
+                                                } else {
+
+                                                    Venta fac = new Venta(new javax.swing.JFrame(), true, us1, em1, su1);
+                                                    jdpescritorio.add(fac);
+                                                    fac.show();
+                                                }
                                             }
                                         });
                                         menu.add(item);
-                                    } 
-                                    else {
+                                    } else {
 
 //                                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
 //                                            System.out.println("menu ffg "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
@@ -129,6 +148,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
                                         menu.add(item);
                                     }
+
                                 }
                             }
                         }
@@ -143,6 +163,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         }
         meMenuBase.add(salida);
+    }
+
+    public String pVender() {
+        String v = null;
+        List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
+        List<VeCaja> listaCaja = cajaC.findVeCajaEntities();
+        for (int i = 0; i < listadetallecaja.size(); i++) {
+            if ("A".equals(listadetallecaja.get(i).getEstado())
+                    && listadetallecaja.get(i).getIdUsuario().equals(us1.getIdUsuario())
+                    && listadetallecaja.get(i).getFechaCierre() == null
+                    && listadetallecaja.get(i).getHoraCierre() == null) {
+                v = "si";
+            } else {
+                v = "no";
+            }
+        }
+        return v;
     }
 
     /**

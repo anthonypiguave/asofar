@@ -19,7 +19,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
-import ec.com.asofar.views.prestaciones.Listar_Prestaciones;
+import ec.com.asofar.views.prestaciones.Consulta_prestaciones;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigInteger;

@@ -33,7 +33,7 @@ public class ReporteComprasDTO {
     public String estado;
     public String nombre_documento;
     public String nombre_proveedor;
-        
+        //ReporteDetalleComprasDTO
     public Long id_detalle_orden_compra;
     public Long id_orden_comprad;
     public Long id_empresa2;
