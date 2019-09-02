@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.compras;
 
+import ec.com.asofar.dao.CoDetalleOrdenCompraJpaController;
 import ec.com.asofar.dao.CoOrdenComprasJpaController;
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InDetalleMovimientoJpaController;
@@ -15,6 +16,7 @@ import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.daoext.InKardexExt;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
@@ -53,50 +55,54 @@ import javax.swing.Timer;
  * @author admin1
  */
 public class recibirOrdenCompraForm extends javax.swing.JDialog {
-
+    
     int x, y;
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
-
+    
     Boolean selector;
     Boolean[] check;
     
     String[] fechaCaducidad;
     String[] nLote;
-
+    
     Date fecha = null;
-
+    
     Date d = new Date();
-
+    
     CoProveedoresJpaController proveedorController = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoDocumentoJpaController documentoController = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
     InTipoMovimientoJpaController movimientoController = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
     InMotivosJpaController motivoController = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
     InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
     CoOrdenComprasJpaController cabCompraController = new CoOrdenComprasJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    CoDetalleOrdenCompraJpaController detCompraController = new CoDetalleOrdenCompraJpaController(EntityManagerUtil.ObtenerEntityManager());
+    
     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
     InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    
     CoOrdenCompras cabCompra;
+    CoDetalleOrdenCompra detCompra;
     InMovimientos cabMovimiento;
-
+    
     List<InDetalleMovimiento> listadet = new ArrayList<InDetalleMovimiento>();
-
+    List<CoDetalleOrdenCompra> listadetCompra = new ArrayList<CoDetalleOrdenCompra>();
+    
     public recibirOrdenCompraForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
-
+        
         CargarFormulario();
-
+        cargarDetalleCompra();
+        
         Timer tiempo = new Timer(100, new recibirOrdenCompraForm.horas());
         tiempo.start();
-
+        
     }
-
+    
     public recibirOrdenCompraForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su, CoOrdenCompras objeto) {
         super(parent, modal);
         initComponents();
@@ -108,98 +114,99 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         seSucursal = su;
         cabCompra = objeto;
         txtFecha.setText(FechaActual());
-
+        
         CargarFormulario();
-
+        cargarDetalleCompra();
+        
         System.out.println(" " + seUsuario);
-
+        
     }
-
+    
     class horas implements ActionListener {
-
+        
         public void actionPerformed(ActionEvent e) {
             java.util.Date sistHora = new java.util.Date();
             String pmAm = "HH:mm:ss";
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             Calendar hoy = Calendar.getInstance();
             txtHora.setText(String.format(format.format(sistHora), hoy));
-
+            
         }
     }
-
+    
     public static String FechaActual() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         return formatoFecha.format(fecha);
     }
-
+    
     public void CargarProveedor(InMovimientos obj) {
         List<CoProveedores> listcaja = proveedorController.findCoProveedoresEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdProveedor() != null) {
                 if (listcaja.get(i).getIdProveedor() == obj.getIdProveedor().getIdProveedor()) {
                     TxtProveedor.setText(listcaja.get(i).getNombre());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarDocumento(InMovimientos obj) {
         List<InTipoDocumento> listcaja = documentoController.findInTipoDocumentoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdTipoDocumento() != null) {
                 if (listcaja.get(i).getIdTipoDocumento() == obj.getInTipoDocumento().getIdTipoDocumento()) {
                     TxtDocumento.setText(listcaja.get(i).getNombreDocumento());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarMovimiento(InMovimientos obj) {
         List<InTipoMovimiento> listcaja = movimientoController.findInTipoMovimientoEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdTipoMovimiento() != null) {
                 if (listcaja.get(i).getIdTipoMovimiento() == obj.getInTipoMovimiento().getIdTipoMovimiento()) {
                     TxtMovimiento.setText(listcaja.get(i).getNombreMovimiento());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarMotivos(InMovimientos obj) {
         List<InMotivos> listcaja = motivoController.findInMotivosEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-
+            
             if (listcaja.get(i).getIdMotivo() != null) {
                 if (listcaja.get(i).getIdMotivo() == obj.getInMotivos().getIdMotivo()) {
                     TxtMotivo.setText(listcaja.get(i).getNombre());
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     public void CargarFormulario() {
         List<InMovimientos> listCab = new ArrayList<InMovimientos>();
-
+        
         listCab = cabMovController.findInMovimientosEntities();
-
+        
         for (int i = 0; i < listCab.size(); i++) {
-
+            
             BigInteger value = listCab.get(i).getIdOrdenCompra();
-
+            
             if (value != null) {
-
+                
                 if ((listCab.get(i).getIdOrdenCompra()).intValue() == cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()) {
                     cabMovimiento = listCab.get(i);
                 }
@@ -207,38 +214,52 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         }
         List<InDetalleMovimiento> listDet = new ArrayList<InDetalleMovimiento>();
         listDet = detMovController.findInDetalleMovimientoEntities();
-
+        
         check = new Boolean[listDet.size()];  // inicializar el Boolean segun la lista
         fechaCaducidad = new String[listDet.size()];
         nLote = new String[listDet.size()];
-
+        
         for (int i = 0; i < listDet.size(); i++) {
-
-            check[i] = false; // setear valor falso
             
-            fechaCaducidad[i] = "--SELECCIONE--";
-            nLote[i]="";
+            check[i] = false; // setear valor falso
 
+            fechaCaducidad[i] = "--SELECCIONE--";
+            nLote[i] = "";
+            
             if (listDet.get(i).getInDetalleMovimientoPK().getIdMovimientos() == (cabMovimiento.getInMovimientosPK().getIdMovimientos()) && listDet.get(i).getEstado().equals("A")) {
                 listadet.add(listDet.get(i));
-
+                
             }
         }
-
+        
         CargarProveedor(cabMovimiento);
         CargarDocumento(cabMovimiento);
         CargarMovimiento(cabMovimiento);
         CargarMotivos(cabMovimiento);
-
+        
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         TxtFechaRecibo.setText(String.format(formatoFecha.format(cabCompra.getFechaEntrega())));
-
+        
         txtCod.setText("" + cabCompra.getCoOrdenComprasPK().getIdOrdenCompra());
-
-        Tablas.listarDetalleRecepcion(listadet, jTable1, nLote , fechaCaducidad);
-
+        
+        Tablas.listarDetalleRecepcion(listadet, jTable1, nLote, fechaCaducidad);
+        
     }
-
+    
+    public void cargarDetalleCompra() {
+        List<CoDetalleOrdenCompra> lista = new ArrayList<CoDetalleOrdenCompra>();
+        lista = detCompraController.findCoDetalleOrdenCompraEntities();
+        for (int i = 0; i < lista.size(); i++) {
+            
+            if (lista.get(i).getCoOrdenCompras().getCoOrdenComprasPK().getIdOrdenCompra() == cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()) {
+                
+                listadetCompra.add(lista.get(i));
+                
+            }
+            
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -467,6 +488,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 jTable1MousePressed(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -554,77 +580,77 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
-
+        
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
-
+            
         } else {
-
+            
         }
     }//GEN-LAST:event_BtnCancelarActionPerformed
-
+    
 
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         int cont1 = 1;
         int cont2 = 1;
         InKardexJpaController kardexController = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+        
         if (r == JOptionPane.YES_OPTION) {
-
+            
             if (txtObservacion.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "LLENE OBSERVACIÓN!");
             } else {
-
+                
                 for (int i = 0; i < listadet.size(); i++) {
-
-                    JCheckBox chbox = (JCheckBox) jTable1.getValueAt(i, 5);
+                    
+                    JCheckBox chbox = (JCheckBox) jTable1.getValueAt(i, 8);
                     boolean selected = chbox.isSelected();
-
+                    
                     if (selected) {
                         cont1 = cont1 + 1;
-
+                        
                     } else {
                         cont1 = cont1 - 1;
                     }
-
+                    
                 }
-
+                
                 if (cont1 < listadet.size()) {
                     JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO RECIBIDOS!");
                 } else {
-
+                    
                     for (int i = 0; i < listadet.size(); i++) {
-
-                        if (jTable1.getModel().getValueAt(i, 6).getClass().equals(JComboBox.class)) {
+                        
+                        if (jTable1.getModel().getValueAt(i, 7).getClass().equals(JComboBox.class)) {
                             cont2 = cont2 - 1;
-
+                            
                         } else {
                             cont2 = cont2 + 1;
                         }
-
+                        
                     }
-
+                    
                     if (cont2 < listadet.size()) {
                         JOptionPane.showMessageDialog(null, "SELECCIONE BODEGA!");
                     } else {
-
+                        
                         cargarBodega();
-
+                        
                         try {
-
+                            
                             for (int i = 0; i < listadet.size(); i++) {
-
+                                
                                 InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
-
+                                
                                 InKardex kardex = new InKardex();
                                 kardex.setInKardexPK(new InKardexPK());
                                 kardex.getInKardexPK().setIdBodega(listadet.get(i).getIdBodegaDestino().intValue());
                                 kardex.getInKardexPK().setIdProducto(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
-
+                                
                                 kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
                                 kardex.setSeSucursal(seSucursal);
-
+                                
                                 kardex.setCantidad(listadet.get(i).getCantidad());
                                 kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
                                 kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
@@ -633,127 +659,146 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 kardex.setAnioDocumento(formatoFecha.format(d));
                                 kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
                                 kardex.setFechaCreacion(d);
-
+                                
                                 if (objeto != null) {
-
+                                    
                                     kardex.setSaldoAnterior(objeto.getSaldoActual());
                                     kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
                                     kardex.setCostoAnterior(objeto.getCostoActual());
                                     kardex.setCostoActual(kardex.getCostoAnterior().add(
                                             ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
                                     kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
-
+                                    
                                 } else {
-
+                                    
                                     kardex.setSaldoAnterior(BigInteger.valueOf(0));
                                     kardex.setSaldoActual(listadet.get(i).getCantidad());
                                     kardex.setCostoAnterior(BigDecimal.valueOf(0));
                                     kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
                                     kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
-
+                                    
                                 }
-
+                                
                                 kardexController.create(kardex);
-
+                                
                                 cabCompra.setEstado("C");
                                 cabCompra.setFechaAprobacion(d);
                                 cabCompra.setUsuarioActualizacion(seUsuario.getIdUsuario());
                                 cabCompra.setFechaActualizacion(d);
                                 cabCompraController.edit(cabCompra);
-
+                                
+                                
+                                detCompra = listadetCompra.get(i);
+                                
+                                detCompra.setLoteFabricacion(nLote[i]);
+                                detCompra.setFechaCaducidad(new SimpleDateFormat("YYYY-MM-dd").parse(fechaCaducidad[i]));
+                                detCompraController.edit(detCompra);
+                                
                                 cabMovimiento.setEstado("C");
                                 cabMovimiento.setObservacion(txtObservacion.getText());
                                 cabMovimiento.setUsuarioActualizacion(seUsuario.getIdUsuario());
                                 cabMovimiento.setFechaActualizacion(d);
                                 cabMovimiento.setFechaRecepcion(d);
                                 cabMovController.edit(cabMovimiento);
-
+                                
                             }
-
+                            
                         } catch (Exception e) {
-
+                            
                             e.printStackTrace();
-
+                            
                         }
-
+                        
                         JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                         setVisible(false);
                     }
-
+                    
                 }
             }
         }
     }//GEN-LAST:event_BtnAprovarActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-
+        
         int row = jTable1.rowAtPoint(evt.getPoint());
         int col = jTable1.columnAtPoint(evt.getPoint());
-
-        if (evt.getClickCount() == 1) {
-            if (col == 5) {
-                JCheckBox chbox = (JCheckBox) jTable1.getValueAt(row, col);
-
-                boolean selected = chbox.isSelected();
-
-                if (selected) {
-
-                    chbox.setSelected(false);
-
-                    selector = false;
-                    check[row] = selector;
-
-                } else {
-
-                    chbox.setSelected(true);
-
-                    selector = true;
-                    check[row] = selector;
-
-                }
-
-            }
-
-        }
+        
         if (evt.getClickCount() == 1) {
             if (col == 8) {
+                JCheckBox chbox = (JCheckBox) jTable1.getValueAt(row, col);
+                
+                boolean selected = chbox.isSelected();
+                
+                if (selected) {
+                    
+                    chbox.setSelected(false);
+                    
+                    selector = false;
+                    check[row] = selector;
+                    
+                } else {
+                    
+                    chbox.setSelected(true);
+                    
+                    selector = true;
+                    check[row] = selector;
+                    
+                }
+                
+            }
+            
+        }
+        if (evt.getClickCount() == 1) {
+            if (col == 6) {
                 Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
                 fechaEntrega.setVisible(true);
-
+                
                 fecha = fechaEntrega.getFecha();
-
+                
                 SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
                 
+                fechaCaducidad[row] = String.format(formatoFecha.format(fecha));
                 
-                fechaCaducidad[row]= String.format(formatoFecha.format(fecha));
+                Tablas.listarDetalleRecepcion(listadet, jTable1, nLote, fechaCaducidad);
                 
-    
-                
-                Tablas.listarDetalleRecepcion(listadet, jTable1, nLote , fechaCaducidad);
-                
-                
-
-
             }
         }
 
     }//GEN-LAST:event_jTable1MousePressed
 
-    public void cargarBodega() {
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         try {
-
-            for (int i = 0; i < listadet.size(); i++) {
-                String valor = (String) jTable1.getModel().getValueAt(i, 6);
-
-                InBodega bodega = ObtenerDTO.ObtenerInBodega(valor);
-
-                listadet.get(i).setIdBodegaDestino(BigInteger.valueOf(bodega.getInBodegaPK().getIdBodega()));
-
+            
+            int row = jTable1.getSelectedRow();
+            
+            int col = jTable1.getSelectedColumn();
+            
+            if (col == 5) {
+                
+                String valor = (String) jTable1.getValueAt(row, col);
+                nLote[row] = valor;
+                
             }
-
+            
         } catch (Exception e) {
         }
-
+    }//GEN-LAST:event_jTable1KeyReleased
+    
+    public void cargarBodega() {
+        try {
+            
+            for (int i = 0; i < listadet.size(); i++) {
+                String valor = (String) jTable1.getModel().getValueAt(i, 7);
+                
+                InBodega bodega = ObtenerDTO.ObtenerInBodega(valor);
+                
+                listadet.get(i).setIdBodegaDestino(BigInteger.valueOf(bodega.getInBodegaPK().getIdBodega()));
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        
     }
 
     /**
@@ -770,21 +815,21 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(recibirOrdenCompraForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
