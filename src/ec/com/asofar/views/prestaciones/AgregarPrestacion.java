@@ -315,7 +315,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception e) {
-            Logger.getLogger(Listar_Prestaciones.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(AgregarPrestacion.class.getName()).log(Level.SEVERE, null, e);
         }
 
         // TODO add your handling code here:
