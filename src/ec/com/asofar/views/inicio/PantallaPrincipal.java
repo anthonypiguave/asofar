@@ -175,22 +175,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     && listadetallecaja.get(i).getFechaCierre() == null
                     && listadetallecaja.get(i).getHoraCierre() == null) {
                 v = "si";
-//                for (int j = 0; j < listaCaja.size(); j++) {
-//                    if (listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja()
-//                            == listaCaja.get(j).getIdCaja()) {
-//                        txt_NumeroCaja.setText("" + listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja());
-//                        txt_NombreCaja.setText(listaCaja.get(j).getNombre());
-//                        idCaja = listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja();
-//                    }
-//                }
             } else {
                 v = "no";
             }
         }
-//        if (v.equals("no")) {
-//            JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-//
-//        }
         return v;
     }
 
