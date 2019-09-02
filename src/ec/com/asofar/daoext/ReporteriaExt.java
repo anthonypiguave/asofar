@@ -216,14 +216,14 @@ public class ReporteriaExt {
 
     }
 
-    public static List<ReporteDetalleComprasDTO> obtenerEjemplo() {
+    public static List<ReporteProveedorDTO> obtenerEjemplo() {
         // EntityManager em = getEntityManager();
-        List<ReporteDetalleComprasDTO> QKardex = null;
+        List<ReporteProveedorDTO> QKardex = null;
         String nativeQuery = "SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c";
         Query query = em.createNativeQuery(nativeQuery);
 
         List<Object[]> listobj = query.getResultList();
-        QKardex = new ArrayList<ReporteDetalleComprasDTO>();
+        QKardex = new ArrayList<ReporteProveedorDTO>();
 
 //        for (int i = 0; i < listobj.size(); i++) {
 //            ReporteDetalleComprasDTO obj = new ReporteDetalleComprasDTO();
@@ -242,16 +242,16 @@ public class ReporteriaExt {
         return QKardex;
     }
 
-    public List<ReporteDetalleComprasDTO> listarCategorias() {
+    public List<ReporteProveedorDTO> listarCategorias() {
         // EntityManager em = getEntityManager();
-        List<ReporteDetalleComprasDTO> lista = null;
+        List<ReporteProveedorDTO> lista = null;
         String nativeQuery = "SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c";
         Query query = em.createNativeQuery(nativeQuery);
         //query.setParameter(1, Integer.parseInt(id));
         try {
 
             List<Object[]> lsObj = query.getResultList();
-            lista = new ArrayList<ReporteDetalleComprasDTO>();
+            lista = new ArrayList<ReporteProveedorDTO>();
 
 //            for (Object[] ooo : lsObj) {
 //                ReporteDetalleComprasDTO oo = new ReporteDetalleComprasDTO();
