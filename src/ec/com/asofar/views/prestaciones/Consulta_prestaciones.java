@@ -252,8 +252,8 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
                
                 Ap.setVisible(true);
 
-//                prestacion = pr.findPrPrestacionesEntities();
-//                Tablas.TablaPrestaciones(prestacion, tblPrestacion);
+                prestacion = pr.findPrPrestacionesEntities();
+                Tablas.TablaPrestaciones(prestacion, tblPrestacion);
             }
         }
 

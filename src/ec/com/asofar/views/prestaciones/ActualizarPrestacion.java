@@ -105,6 +105,8 @@ public class ActualizarPrestacion extends javax.swing.JDialog {
 
         jLabel2.setText("Estado");
 
+        cbx_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+
         jLabel3.setText("Aplica Iva");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,13 +165,22 @@ public class ActualizarPrestacion extends javax.swing.JDialog {
         Bodega.setIdPrestacion(Long.valueOf((id.getText())));
 
         Bodega.setNombrePrestacion(txtNombre.getText());
-        Bodega.setEstado(cbx_estado.getSelectedItem().toString());
+        if (cbx_estado.getSelectedItem().toString()== "Activo") {
+          Bodega.setEstado("A");  
+        }else{
+            Bodega.setEstado("I");
+            
+            
+        }
+        
+         
+      
         Bodega.setAplicaIva(cbx_aplica_iva.getSelectedItem().toString());
 
         try {
             tbc.edit(Bodega);
             setVisible(false);
-            JOptionPane.showMessageDialog(this, "Bodega  actualizada");
+            JOptionPane.showMessageDialog(this, "Prestacion Actualizacion");
         } catch (Exception ex) {
             Logger.getLogger(ActualizarPrestacion.class.getName()).log(Level.SEVERE, null, ex);
         }
