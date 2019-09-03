@@ -7,6 +7,8 @@ package ec.com.asofar.views.reporteria;
 
 
 import ec.com.asofar.daoext.ReporteComprasDTO;
+import ec.com.asofar.daoext.ReporteProveedorDTO;
+import ec.com.asofar.daoext.ReporteriaExt;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -34,6 +36,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
  
     BigDecimal VGiva = null, VGtotal = null, VGdescuento = null;
     ReporteComprasDTO objeto = null;
+    ReporteriaExt rep =new ReporteriaExt();
     /**
      * Creates new form Reporte_DetalleCompra
      */
@@ -47,9 +50,18 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         this.setResizable(false);
         this.setLocationRelativeTo(this);
         objeto=obj;
+        formularioProveedor();
     } 
     public void formularioProveedor(){
-        
+        ReporteProveedorDTO objPro = rep.obtenerProveedor((Long)objeto.getId_proveedor());
+        txtCodigoProveedor.setText(objPro.getId_proveedor().toString());
+        txtNombre.setText(objPro.getNombre_comercial().toString());
+        txtRepresentante.setText(objPro.getNombre().toString());
+        txtTelefono.setText(objPro.getTelefono1().toString());
+        txtRuc.setText(objPro.getNumero_identificacion().toString());
+        txtCorreo.setText(objPro.getEmail().toString());
+        txtDireccion.setText(objPro.getDireccion().toString());
+        txtTipo.setText(objPro.getTipo_persona().toString());
     }
 
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {

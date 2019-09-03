@@ -13,27 +13,26 @@ import java.util.Date;
  */
 public class ReporteProveedorDTO {
 
-    public Long id_orden_compra;
-    public Long id_proveedor;
-    public String nombre;
-    public String direccion;
-    public String telefono1;
-    public String telefono2;
-    public String pagina_web;
-    public String numero_identificacion;
-    public String email;
-    public String tipo_persona;
-    public String id_pais;
-    public String contribuyente_especial;
-    public String codigo_contribuyente;
-    public String observaciones;
-    public String nombre_comercial;
+public Long id_proveedor;
+public String nombre;
+public String direccion;
+public String telefono1;
+public String telefono2;
+public String pagina_web;
+public String numero_identificacion;
+public String email;
+public Long tipo_persona;
+public Long id_pais;
+public String contribuyente_especial;
+public String codigo_contribuyente;
+public String observaciones;
+public String nombre_comercial;
+public String estado;
 
     public ReporteProveedorDTO() {
     }
 
-    public ReporteProveedorDTO(Long id_orden_compra, Long id_proveedor, String nombre, String direccion, String telefono1, String telefono2, String pagina_web, String numero_identificacion, String email, String tipo_persona, String id_pais, String contribuyente_especial, String codigo_contribuyente, String observaciones, String nombre_comercial) {
-        this.id_orden_compra = id_orden_compra;
+    public ReporteProveedorDTO(Long id_proveedor, String nombre, String direccion, String telefono1, String telefono2, String pagina_web, String numero_identificacion, String email, Long tipo_persona, Long id_pais, String contribuyente_especial, String codigo_contribuyente, String observaciones, String nombre_comercial, String estado) {
         this.id_proveedor = id_proveedor;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -48,14 +47,7 @@ public class ReporteProveedorDTO {
         this.codigo_contribuyente = codigo_contribuyente;
         this.observaciones = observaciones;
         this.nombre_comercial = nombre_comercial;
-    }
-
-    public Long getId_orden_compra() {
-        return id_orden_compra;
-    }
-
-    public void setId_orden_compra(Long id_orden_compra) {
-        this.id_orden_compra = id_orden_compra;
+        this.estado = estado;
     }
 
     public Long getId_proveedor() {
@@ -122,19 +114,19 @@ public class ReporteProveedorDTO {
         this.email = email;
     }
 
-    public String getTipo_persona() {
+    public Long getTipo_persona() {
         return tipo_persona;
     }
 
-    public void setTipo_persona(String tipo_persona) {
+    public void setTipo_persona(Long tipo_persona) {
         this.tipo_persona = tipo_persona;
     }
 
-    public String getId_pais() {
+    public Long getId_pais() {
         return id_pais;
     }
 
-    public void setId_pais(String id_pais) {
+    public void setId_pais(Long id_pais) {
         this.id_pais = id_pais;
     }
 
@@ -169,6 +161,14 @@ public class ReporteProveedorDTO {
     public void setNombre_comercial(String nombre_comercial) {
         this.nombre_comercial = nombre_comercial;
     }
-    
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     
 }

@@ -181,58 +181,58 @@ public class ReporteriaExt {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
         List<ReporteDetalleComprasDTO> listaDetalle = null;
-        Query q = em.createNativeQuery("select co_detalle_orden_compra.id_detalle_orden_compra,\n" +
-                    "co_detalle_orden_compra.id_orden_compra,\n" +
-                    "co_detalle_orden_compra.id_empresa,\n" +
-                    "co_detalle_orden_compra.id_surcusal,\n" +
-                    "co_detalle_orden_compra.id_producto,\n" +
-                    "co_detalle_orden_compra.descripcion,\n" +
-                    "co_detalle_orden_compra.precio_unitario,\n" +
-                    "co_detalle_orden_compra.cantidad_recibida,\n" +
-                    "co_detalle_orden_compra.subtotal,\n" +
-                    "co_detalle_orden_compra.iva,\n" +
-                    "co_detalle_orden_compra.descuento,\n" +
-                    "co_detalle_orden_compra.total,\n" +
-                    "pr_productos.codigo_barra,\n" +
-                    "pr_productos.id_tipo_presentacion,\n" +
-                    "pr_productos.nombre_producto,\n" +
-                    "pr_productos.receta,\n" +
-                    "pr_tipo_presentacion.nombre\n" +
-                    "from co_orden_compras\n" +
-                    "inner join co_detalle_orden_compra\n" +
-                    "on co_orden_compras.id_orden_compra = co_detalle_orden_compra.id_orden_compra\n" +
-                    "inner join pr_productos\n" +
-                    "on pr_productos.id_producto = co_detalle_orden_compra.id_producto\n" +
-                    "and pr_productos.estado = 'A'\n" +
-                    "inner join pr_tipo_presentacion\n" +
-                    "on pr_tipo_presentacion.id_tipo_presentacion = pr_productos.id_tipo_presentacion\n" +
-                    "WHERE co_orden_compras.id_orden_compra = "+objcab.getId_orden_compra().toString()+";");
+        Query q = em.createNativeQuery("select co_detalle_orden_compra.id_detalle_orden_compra,\n"
+                + "co_detalle_orden_compra.id_orden_compra,\n"
+                + "co_detalle_orden_compra.id_empresa,\n"
+                + "co_detalle_orden_compra.id_surcusal,\n"
+                + "co_detalle_orden_compra.id_producto,\n"
+                + "co_detalle_orden_compra.descripcion,\n"
+                + "co_detalle_orden_compra.precio_unitario,\n"
+                + "co_detalle_orden_compra.cantidad_recibida,\n"
+                + "co_detalle_orden_compra.subtotal,\n"
+                + "co_detalle_orden_compra.iva,\n"
+                + "co_detalle_orden_compra.descuento,\n"
+                + "co_detalle_orden_compra.total,\n"
+                + "pr_productos.codigo_barra,\n"
+                + "pr_productos.id_tipo_presentacion,\n"
+                + "pr_productos.nombre_producto,\n"
+                + "pr_productos.receta,\n"
+                + "pr_tipo_presentacion.nombre\n"
+                + "from co_orden_compras\n"
+                + "inner join co_detalle_orden_compra\n"
+                + "on co_orden_compras.id_orden_compra = co_detalle_orden_compra.id_orden_compra\n"
+                + "inner join pr_productos\n"
+                + "on pr_productos.id_producto = co_detalle_orden_compra.id_producto\n"
+                + "and pr_productos.estado = 'A'\n"
+                + "inner join pr_tipo_presentacion\n"
+                + "on pr_tipo_presentacion.id_tipo_presentacion = pr_productos.id_tipo_presentacion\n"
+                + "WHERE co_orden_compras.id_orden_compra = " + objcab.getId_orden_compra().toString() + ";");
         List<Object[]> listobj = q.getResultList();
         listaDetalle = new ArrayList<ReporteDetalleComprasDTO>();
         try {
             for (Object[] obj : listobj) {
                 ReporteDetalleComprasDTO ob = new ReporteDetalleComprasDTO();
-  //              ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
-  //              ob.setId_detalle_orden_compra(Long.parseLong(obj[1].toString()));
-  //              ob.setLinea_detalle(Date.valueOf(obj[2].toString()));
-  //              ob.setId_producto(Long.parseLong(obj[3].toString()));
-  //              ob.setDescripcion(Double.parseDouble(obj[4].toString()));
-  //              ob.setPrecio_unitario(Double.parseDouble(obj[4].toString()));
-  //              ob.setCantidad_recibida(Double.parseDouble(obj[4].toString()));
-  //              ob.setSubtotal(Double.parseDouble(obj[4].toString()));
-  //              ob.setIce(Double.parseDouble(obj[5].toString()));
-  //              ob.setIva(Double.parseDouble(obj[6].toString()));
-  //              ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
-  //              ob.setNombre_documento(String.valueOf(obj[8].toString()));
-  //              ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
+                //              ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
+                //              ob.setId_detalle_orden_compra(Long.parseLong(obj[1].toString()));
+                //              ob.setLinea_detalle(Date.valueOf(obj[2].toString()));
+                //              ob.setId_producto(Long.parseLong(obj[3].toString()));
+                //              ob.setDescripcion(Double.parseDouble(obj[4].toString()));
+                //              ob.setPrecio_unitario(Double.parseDouble(obj[4].toString()));
+                //              ob.setCantidad_recibida(Double.parseDouble(obj[4].toString()));
+                //              ob.setSubtotal(Double.parseDouble(obj[4].toString()));
+                //              ob.setIce(Double.parseDouble(obj[5].toString()));
+                //              ob.setIva(Double.parseDouble(obj[6].toString()));
+                //              ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
+                //              ob.setNombre_documento(String.valueOf(obj[8].toString()));
+                //              ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
                 listaDetalle.add(ob);
             }
-  
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listaDetalle;
-        
+
     }
 
     private long showId(EntityManager em) {
@@ -270,28 +270,57 @@ public class ReporteriaExt {
         return QKardex;
     }
 
-    public List<ReporteProveedorDTO> listarCategorias() {
-        // EntityManager em = getEntityManager();
+    public ReporteProveedorDTO obtenerProveedor(Long id) {
         List<ReporteProveedorDTO> lista = null;
-        String nativeQuery = "SELECT c.id_orden_compra,c.id_tipo_documento FROM co_orden_compras c";
+        ReporteProveedorDTO obj =null;
+        String nativeQuery = "SELECT\n"
+                + "  `id_proveedor`,\n"
+                + "  `nombre`,\n"
+                + "  `direccion`,\n"
+                + "  `telefono1`,\n"
+                + "  `telefono2`,\n"
+                + "  `pagina_web`,\n"
+                + "  `numero_identificacion`,\n"
+                + "  `email`,\n"
+                + "  `tipo_persona`,\n"
+                + "  `id_pais`,\n"
+                + "  `contribuyente_especial`,\n"
+                + "  `codigo_contribuyente`,\n"
+                + "  `observaciones`,\n"
+                + "  `nombre_comercial`,\n"
+                + "  `estado`\n"
+                + "FROM `co_proveedores`\n"
+                + "WHERE `co_proveedores`.`id_proveedor`= " + id + ";";
         Query query = em.createNativeQuery(nativeQuery);
-        //query.setParameter(1, Integer.parseInt(id));
         try {
 
             List<Object[]> lsObj = query.getResultList();
             lista = new ArrayList<ReporteProveedorDTO>();
 
-//            for (Object[] ooo : lsObj) {
-//                ReporteDetalleComprasDTO oo = new ReporteDetalleComprasDTO();
-//                oo.setId_orden_compra(Long.parseLong(ooo[0].toString()));
-//                oo.setId_tipo_documento(Long.parseLong(ooo[1].toString()));
-//                lista.add(oo);
-//            }
+            for (Object[] oo : lsObj) {
+                obj = new ReporteProveedorDTO();
+                obj.setId_proveedor(Long.parseLong(oo[0].toString()));
+                obj.setNombre((String) (oo[1]));
+                obj.setDireccion((String) (oo[2]));
+                obj.setTelefono1((String) (oo[3]));
+                obj.setTelefono2((String) (oo[4]));
+                obj.setPagina_web((String) (oo[5]));
+                obj.setNumero_identificacion((String) (oo[6]));
+                obj.setEmail((String) (oo[7]));
+                obj.setTipo_persona((Long) (oo[8]));
+                obj.setId_pais((Long) (oo[9]));
+                obj.setContribuyente_especial((String) (oo[10]));
+                obj.setCodigo_contribuyente((String) (oo[11]));
+                obj.setObservaciones((String) (oo[12]));
+                obj.setNombre_comercial((String) (oo[13]));
+                obj.setEstado((String) (oo[14]));
+              //  lista.add(obj);
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return lista;
+        return obj;
     }
 
     public static java.util.Date fechaActual() {
