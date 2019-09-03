@@ -283,14 +283,16 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
     private void jguardarpreserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jguardarpreserActionPerformed
         InPrestacionesPorServicios objPresxServ = new InPrestacionesPorServicios();
+         InPrestacionesPorServicios objPresxServ2 = new InPrestacionesPorServicios();
         VeUnidadServicio vus = new VeUnidadServicio();
         java.util.Date fechaActual = new java.util.Date();
 
         vus = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
-
+        objPresxServ2=ObtenerDTO.ObtenerInPrestacionesPorServicios(cbxestado.getSelectedItem().toString());
+        
         objPresxServ.setPrPrestaciones(proc);
         objPresxServ.setVeUnidadServicio(vus);
-        objPresxServ.setEstado("A");
+        objPresxServ.setEstado(cbxestado.getSelectedItem().toString());
         objPresxServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
         objPresxServ.setAplicaDescuento(cbxaplicadescuento1.getSelectedItem().toString());
         objPresxServ.setUsuarioCreacion(usu.getIdUsuario());
