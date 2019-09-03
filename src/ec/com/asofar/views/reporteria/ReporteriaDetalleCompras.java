@@ -6,6 +6,7 @@
 package ec.com.asofar.views.reporteria;
 
 
+import ec.com.asofar.daoext.ReporteComprasDTO;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -32,7 +33,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
     int x, y;
  
     BigDecimal VGiva = null, VGtotal = null, VGdescuento = null;
-
+    ReporteComprasDTO objeto = null;
     /**
      * Creates new form Reporte_DetalleCompra
      */
@@ -40,6 +41,13 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal,ReporteComprasDTO obj) {
+        super(parent, modal);
+        initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(this);
+        objeto=obj;
+    } 
     public void formularioProveedor(){
         
     }

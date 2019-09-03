@@ -423,7 +423,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                 }
             }
             if(obj!=null){
-                JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
+                //JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
+                ReporteriaDetalleCompras win = new ReporteriaDetalleCompras(new javax.swing.JFrame(),true,obj);
+                win.setVisible(true);
             }else{
                 System.out.println("no encontramos al puto id error capa 8");
             }
