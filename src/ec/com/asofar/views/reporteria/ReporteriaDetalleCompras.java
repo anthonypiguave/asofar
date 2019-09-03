@@ -72,7 +72,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
     }
     public void llenar_detalles(){
         listaDetalle = rep.listadoDetallesCompras(objeto);
-        
+         
     }
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {
 //        super(parent, modal);
