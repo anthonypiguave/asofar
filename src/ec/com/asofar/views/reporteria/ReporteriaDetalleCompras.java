@@ -7,6 +7,7 @@ package ec.com.asofar.views.reporteria;
 
 
 import ec.com.asofar.daoext.ReporteComprasDTO;
+import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
 import ec.com.asofar.daoext.ReporteProveedorDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
 import java.awt.Dimension;
@@ -14,6 +15,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -37,6 +39,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
     BigDecimal VGiva = null, VGtotal = null, VGdescuento = null;
     ReporteComprasDTO objeto = null;
     ReporteriaExt rep =new ReporteriaExt();
+    List<ReporteDetalleComprasDTO> listaDetalle=null;
     /**
      * Creates new form Reporte_DetalleCompra
      */
@@ -51,6 +54,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         this.setLocationRelativeTo(this);
         objeto=obj;
         formularioProveedor();
+        llenar_detalles();
     } 
     public void formularioProveedor(){
         ReporteProveedorDTO objPro = rep.obtenerProveedor((Long)objeto.getId_proveedor());
@@ -66,7 +70,10 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         txtFechaCreacion.setText(objeto.getFecha_aprobacion().toString());
         
     }
-
+    public void llenar_detalles(){
+        listaDetalle = rep.listadoDetallesCompras(objeto);
+         
+    }
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {
 //        super(parent, modal);
 //        setUndecorated(true);

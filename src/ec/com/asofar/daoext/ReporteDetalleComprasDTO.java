@@ -13,29 +13,39 @@ import java.util.Date;
  */
 public class ReporteDetalleComprasDTO {
 
-   public Long id_detalle_orden_compra;
-   public Long id_orden_compra;
-   public Long id_empresa;
-   public Long id_surcusal;
-   public Long linea_detalle;
-   public Long id_producto;
-   public String descripcion;
-   public Double precio_unitario;
-   public Long cantidad_recibida;
-   public Double subtotal;
-   public Double iva;
-   public Double ice;
-   public Double descuento;
-   public Double total;
-   public String estado;
-   public String usuario_creacion;
-   public Date fecha_creacion;
-   public String usuario_actualizacion;
-   public Date fecha_actualizacion;
-   public String lote_fabricacion;
-   public Date fecha_caducidad;
+    public Long id_detalle_orden_compra;
+    public Long id_orden_compra;
+    public Long id_empresa;
+    public Long id_surcusal;
+    public Long linea_detalle;
+    public Long id_producto;
+    public String descripcion;
+    public Double precio_unitario;
+    public Long cantidad_recibida;
+    public Double subtotal;
+    public Double iva;
+    public Double ice;
+    public Double descuento;
+    public Double total;
+    public String estado;
+    public String usuario_creacion;
+    public Date fecha_creacion;
+    public String usuario_actualizacion;
+    public Date fecha_actualizacion;
+    public String lote_fabricacion;
+    public Date fecha_caducidad;
+    // INNER JOIN
+    public String codigo_barra;
+    public String id_tipo_presentacion;
+    public String nombre_producto;
+    public String receta;
+    public String nombrePresentacion;
 
-    public ReporteDetalleComprasDTO(Long id_detalle_orden_compra, Long id_orden_compra, Long id_empresa, Long id_surcusal, Long linea_detalle, Long id_producto, String descripcion, Double precio_unitario, Long cantidad_recibida, Double subtotal, Double iva, Double ice, Double descuento, Double total, String estado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String lote_fabricacion, Date fecha_caducidad) {
+    public ReporteDetalleComprasDTO() {
+
+    }
+
+    public ReporteDetalleComprasDTO(Long id_detalle_orden_compra, Long id_orden_compra, Long id_empresa, Long id_surcusal, Long linea_detalle, Long id_producto, String descripcion, Double precio_unitario, Long cantidad_recibida, Double subtotal, Double iva, Double ice, Double descuento, Double total, String estado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String lote_fabricacion, Date fecha_caducidad, String codigo_barra, String id_tipo_presentacion, String nombre_producto, String receta, String nombrePresentacion) {
         this.id_detalle_orden_compra = id_detalle_orden_compra;
         this.id_orden_compra = id_orden_compra;
         this.id_empresa = id_empresa;
@@ -57,9 +67,11 @@ public class ReporteDetalleComprasDTO {
         this.fecha_actualizacion = fecha_actualizacion;
         this.lote_fabricacion = lote_fabricacion;
         this.fecha_caducidad = fecha_caducidad;
-    }
-
-    public ReporteDetalleComprasDTO() {
+        this.codigo_barra = codigo_barra;
+        this.id_tipo_presentacion = id_tipo_presentacion;
+        this.nombre_producto = nombre_producto;
+        this.receta = receta;
+        this.nombrePresentacion = nombrePresentacion;
     }
 
     public Long getId_detalle_orden_compra() {
@@ -229,6 +241,45 @@ public class ReporteDetalleComprasDTO {
     public void setFecha_caducidad(Date fecha_caducidad) {
         this.fecha_caducidad = fecha_caducidad;
     }
-   
-   
+
+    public String getCodigo_barra() {
+        return codigo_barra;
+    }
+
+    public void setCodigo_barra(String codigo_barra) {
+        this.codigo_barra = codigo_barra;
+    }
+
+    public String getId_tipo_presentacion() {
+        return id_tipo_presentacion;
+    }
+
+    public void setId_tipo_presentacion(String id_tipo_presentacion) {
+        this.id_tipo_presentacion = id_tipo_presentacion;
+    }
+
+    public String getNombre_producto() {
+        return nombre_producto;
+    }
+
+    public void setNombre_producto(String nombre_producto) {
+        this.nombre_producto = nombre_producto;
+    }
+
+    public String getReceta() {
+        return receta;
+    }
+
+    public void setReceta(String receta) {
+        this.receta = receta;
+    }
+
+    public String getNombrePresentacion() {
+        return nombrePresentacion;
+    }
+
+    public void setNombrePresentacion(String nombrePresentacion) {
+        this.nombrePresentacion = nombrePresentacion;
+    }
+
 }

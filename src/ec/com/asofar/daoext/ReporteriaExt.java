@@ -186,6 +186,7 @@ public class ReporteriaExt {
                 + "co_detalle_orden_compra.id_empresa,\n"
                 + "co_detalle_orden_compra.id_surcusal,\n"
                 + "co_detalle_orden_compra.id_producto,\n"
+                + "co_detalle_orden_compra.linea_detalle,\n"
                 + "co_detalle_orden_compra.descripcion,\n"
                 + "co_detalle_orden_compra.precio_unitario,\n"
                 + "co_detalle_orden_compra.cantidad_recibida,\n"
@@ -212,20 +213,25 @@ public class ReporteriaExt {
         try {
             for (Object[] obj : listobj) {
                 ReporteDetalleComprasDTO ob = new ReporteDetalleComprasDTO();
-                //              ob.setId_orden_compra(Long.parseLong(obj[0].toString()));
-                //              ob.setId_detalle_orden_compra(Long.parseLong(obj[1].toString()));
-                //              ob.setLinea_detalle(Date.valueOf(obj[2].toString()));
-                //              ob.setId_producto(Long.parseLong(obj[3].toString()));
-                //              ob.setDescripcion(Double.parseDouble(obj[4].toString()));
-                //              ob.setPrecio_unitario(Double.parseDouble(obj[4].toString()));
-                //              ob.setCantidad_recibida(Double.parseDouble(obj[4].toString()));
-                //              ob.setSubtotal(Double.parseDouble(obj[4].toString()));
-                //              ob.setIce(Double.parseDouble(obj[5].toString()));
-                //              ob.setIva(Double.parseDouble(obj[6].toString()));
-                //              ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
-                //              ob.setNombre_documento(String.valueOf(obj[8].toString()));
-                //              ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
-                listaDetalle.add(ob);
+              ob.setId_detalle_orden_compra(Long.parseLong(obj[0].toString()));              
+              ob.setId_orden_compra(Long.parseLong(obj[1].toString()));
+              ob.setId_empresa(Long.parseLong(obj[2].toString()));//
+              ob.setId_surcusal(Long.parseLong(obj[3].toString()));
+              ob.setId_producto(Long.parseLong(obj[4].toString()));
+              ob.setLinea_detalle(Long.parseLong(obj[5].toString()));
+              ob.setDescripcion((obj[6].toString()));
+              ob.setPrecio_unitario(Double.parseDouble(obj[7].toString()));
+              ob.setCantidad_recibida(Long.parseLong(obj[8].toString()));
+              ob.setSubtotal(Double.parseDouble(obj[9].toString()));
+              ob.setIva(Double.parseDouble(obj[10].toString()));
+              ob.setDescuento(Double.parseDouble(obj[11].toString()));
+              ob.setTotal(Double.parseDouble(obj[12].toString()));
+              ob.setCodigo_barra(String.valueOf(obj[13].toString()));
+              ob.setId_tipo_presentacion(String.valueOf(obj[14].toString()));
+              ob.setNombre_producto(String.valueOf(obj[15].toString()));
+              ob.setReceta(String.valueOf(obj[16].toString()));
+              ob.setNombrePresentacion(String.valueOf(obj[17].toString()));
+              listaDetalle.add(ob);
             }
 
         } catch (Exception e) {
