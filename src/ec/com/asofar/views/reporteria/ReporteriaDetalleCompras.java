@@ -64,6 +64,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         txtTipo.setText(objPro.getTipo_persona().toString());
         txt_Numero.setText(objeto.getId_orden_compra().toString());
         txtFechaCreacion.setText(objeto.getFecha_aprobacion().toString());
+        
     }
 
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {
