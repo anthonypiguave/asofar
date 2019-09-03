@@ -6,11 +6,16 @@
 package ec.com.asofar.views.reporteria;
 
 
+import ec.com.asofar.daoext.ReporteComprasDTO;
+import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
+import ec.com.asofar.daoext.ReporteProveedorDTO;
+import ec.com.asofar.daoext.ReporteriaExt;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -32,7 +37,9 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
     int x, y;
  
     BigDecimal VGiva = null, VGtotal = null, VGdescuento = null;
-
+    ReporteComprasDTO objeto = null;
+    ReporteriaExt rep =new ReporteriaExt();
+    List<ReporteDetalleComprasDTO> listaDetalle=null;
     /**
      * Creates new form Reporte_DetalleCompra
      */
@@ -40,10 +47,33 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal,ReporteComprasDTO obj) {
+        super(parent, modal);
+        initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(this);
+        objeto=obj;
+        formularioProveedor();
+        llenar_detalles();
+    } 
     public void formularioProveedor(){
+        ReporteProveedorDTO objPro = rep.obtenerProveedor((Long)objeto.getId_proveedor());
+        txtCodigoProveedor.setText(objPro.getId_proveedor().toString());
+        txtNombre.setText(objPro.getNombre_comercial().toString());
+        txtRepresentante.setText(objPro.getNombre().toString());
+        txtTelefono.setText(objPro.getTelefono1().toString());
+        txtRuc.setText(objPro.getNumero_identificacion().toString());
+        txtCorreo.setText(objPro.getEmail().toString());
+        txtDireccion.setText(objPro.getDireccion().toString());
+        txtTipo.setText(objPro.getTipo_persona().toString());
+        txt_Numero.setText(objeto.getId_orden_compra().toString());
+        txtFechaCreacion.setText(objeto.getFecha_aprobacion().toString());
         
     }
-
+    public void llenar_detalles(){
+        listaDetalle = rep.listadoDetallesCompras(objeto);
+        
+    }
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {
 //        super(parent, modal);
 //        setUndecorated(true);
@@ -369,7 +399,6 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         jLabel1.setText("$");
 
         btnSalir2.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/action_exit_close_remove_13915.png"))); // NOI18N
         btnSalir2.setText("SALIR");
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
