@@ -31,6 +31,7 @@ import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InEstadosMovimiento;
 import ec.com.asofar.dto.InMotivos;
+import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrTarifario;
@@ -670,6 +671,22 @@ public class ObtenerDTO {
         return dto;
 
     }
+     public static InPrestacionesPorServicios ObtenerInPrestacionesPorServicios(String nombre) {
+        InPrestacionesPorServiciosJpaController control = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
+        InPrestacionesPorServicios dto = new InPrestacionesPorServicios();
+       List<InPrestacionesPorServicios> lista = control.findInPrestacionesPorServiciosEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getEstado().equals(nombre)) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto;
+
+    }
+
 
     public static VeUnidadServicio ObtenerVeUnidadServiciON(BigInteger id) {
         VeUnidadServicioJpaController control = new VeUnidadServicioJpaController(EntityManagerUtil.ObtenerEntityManager());
