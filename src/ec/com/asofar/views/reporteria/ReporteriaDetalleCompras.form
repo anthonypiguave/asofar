@@ -600,9 +600,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="11" style="1"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/farmacia/icon/action_exit_close_remove_13915.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
           <Events>

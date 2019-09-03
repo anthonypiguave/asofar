@@ -62,6 +62,8 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         txtCorreo.setText(objPro.getEmail().toString());
         txtDireccion.setText(objPro.getDireccion().toString());
         txtTipo.setText(objPro.getTipo_persona().toString());
+        txt_Numero.setText(objeto.getId_orden_compra().toString());
+        txtFechaCreacion.setText(objeto.getFecha_aprobacion().toString());
     }
 
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {
@@ -389,7 +391,6 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         jLabel1.setText("$");
 
         btnSalir2.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
-        btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/farmacia/icon/action_exit_close_remove_13915.png"))); // NOI18N
         btnSalir2.setText("SALIR");
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
