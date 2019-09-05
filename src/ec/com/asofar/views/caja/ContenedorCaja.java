@@ -7,12 +7,20 @@ package ec.com.asofar.views.caja;
 
 import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
+import ec.com.asofar.daoext.VeDetalleCajaEXT;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeDetalleCaja;
+import ec.com.asofar.util.Documento;
 import ec.com.asofar.util.EntityManagerUtil;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,6 +61,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
+        VeDetalleCajaEXT v = new VeDetalleCajaEXT(EntityManagerUtil.ObtenerEntityManager());
         List<VeDetalleCaja> listadetallecaja = cajadet.findVeDetalleCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
             if ("A".equals(listadetallecaja.get(i).getEstado())
@@ -177,8 +186,35 @@ public class ContenedorCaja extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCierreActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        VeDetalleCajaEXT v = new VeDetalleCajaEXT(EntityManagerUtil.ObtenerEntityManager());
+        List<VeDetalleCaja> listadetallecaja = v.ObtenerResultados(seUsuario);
 
-        setVisible(false);
+        List lista = new ArrayList<>();
+
+        for (int i = 0; i < listadetallecaja.size(); i++) {
+
+            Date fecha = new Date();
+            DateFormat df1 = new SimpleDateFormat("hh:mm:ss");
+            String hora1 = df1.format(listadetallecaja.get(i).getHoraInicio());
+            String hora2 = df1.format(listadetallecaja.get(i).getHoraCierre());
+
+            ObjetoPrueba op = new ObjetoPrueba(
+                    listadetallecaja.get(i).getVeCaja().getNombre()
+                    + "/" + seUsuario.getNombreUsuario(),
+                    hora1,
+                    listadetallecaja.get(i).getDineroInicio().toString(),
+                    hora2,
+                    listadetallecaja.get(i).getDineroCierre().toString());
+
+            lista.add(op);
+
+        }
+        if (!btnCierre.isEnabled()) {
+            Documento.Reporte("Cajas Activas", lista, "/src/ec/com/asofar/views/caja/caja.jasper");
+            setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "LA CAJA DEBE ESTAR CERRADA", "ACCION DENEGADA", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
