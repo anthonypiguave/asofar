@@ -264,6 +264,17 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 cajadet.edit(vdc); 
                 setVisible(false);
                 }
+                ArrayList lista =new ArrayList();
+                ClaseReporte clreporte = new ClaseReporte(nombreCaja.getText(),montoInicial.getText(),horaInicio.getText(),montocierre.getText());
+                lista.add(clreporte);
+                JasperReport reporte = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/Cierre_Caja.jasper");
+                JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+                JRViewer jviewer = new JRViewer(jprint);
+                JDialog ventana = new JDialog();
+                ventana.add(jviewer);
+                ventana.setVisible(true);
+                ventana.setLocationRelativeTo(null);
+                ventana.setSize(new Dimension(ancho/2,alto/2));
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }
