@@ -29,7 +29,6 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         initComponents();
         cargarInformacion();
         setLocationRelativeTo(null);
-
     }
 
     public ConsultaGruposForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -37,7 +36,6 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         initComponents();
         cargarInformacion();
         setLocationRelativeTo(null);
-
     }
 
     private void cargarInformacion() {
