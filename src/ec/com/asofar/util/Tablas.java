@@ -741,8 +741,9 @@ public class Tablas {
             if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getPrGrupos().getNombre();
                 Filas[1] = lista.get(i).getNombre();
-                Filas[2] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
-                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
+                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
+                //Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
+                Filas[2] = lista.get(i).getUsuarioCreacion();
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
