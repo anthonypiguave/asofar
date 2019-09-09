@@ -92,7 +92,7 @@ public class Tablas {
     private static boolean[] tbVenta = {false, false, false, true, false, false, false, false, false, true};
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
-    private static boolean[] tbordenrecibido = {false,false,false,false,false,true,true,true,false};
+    private static boolean[] tbordenrecibido = {false, false, false, false, false, true, true, true, false};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -133,19 +133,16 @@ public class Tablas {
             System.out.println("for producto" + listaproducto.get(i).getPrProductosPK().getIdProducto());
             for (int j = 0; j < list.size(); j++) {
                 System.out.println("for prestacion" + list.get(j).getIdPrestacion().intValue());
-                if(list.get(j).getIdPoducto()!=null){
-                    
-                
-                if (list.get(j).getIdPoducto().intValue() 
-                        == listaproducto.get(i).getPrProductosPK().getIdProducto()) {
+                if (list.get(j).getIdPoducto() != null) {
 
-                    count++;
+                    if (list.get(j).getIdPoducto().intValue()
+                            == listaproducto.get(i).getPrProductosPK().getIdProducto()) {
+
+                        count++;
 //            if (listaproducto.get(i).getEstado().equals("A")) {
 
 //            }
-                }
-                }else{
-                    
+                    }
                 }
             }
             if (count < 1) {
@@ -179,8 +176,6 @@ public class Tablas {
         }
     }
 
-    
-    
     public static void ListarDetalleOrdenCompra(List<CoDetalleOrdenCompra> listadeorco, JTable Tabla, CoOrdenCompras orco) {
         int[] a = {50, 50, 50, 50, 50, 50, 50, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -2393,8 +2388,8 @@ public class Tablas {
 
     }
 
-    public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla,  String[] nLote , String[] fecha ) {
-        int[] a = {10, 30, 200, 30, 50, 30, 40, 100, 30 };
+    public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla, String[] nLote, String[] fecha) {
+        int[] a = {10, 30, 200, 30, 50, 30, 40, 100, 30};
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2413,8 +2408,7 @@ public class Tablas {
                 java.lang.Object.class,
                 java.lang.Object.class,
                 JComboBox.class,
-                JCheckBox.class,
-                };
+                JCheckBox.class,};
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -2459,11 +2453,9 @@ public class Tablas {
                 }
 
                 filas[7] = cb;
-                
-             
 
                 filas[5] = nLote[i];
-                            
+
                 filas[6] = fecha[i];
 
                 dt.addRow(filas);
