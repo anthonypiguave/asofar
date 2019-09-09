@@ -15,8 +15,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.CoProveedores;
-import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.InMotivos;
+import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.InDetalleMovimiento;
 import ec.com.asofar.dto.InMovimientos;
@@ -49,10 +49,10 @@ public class InMovimientosJpaController implements Serializable {
             inMovimientos.setInDetalleMovimientoList(new ArrayList<InDetalleMovimiento>());
         }
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
+        inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
         inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
+        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -67,15 +67,15 @@ public class InMovimientosJpaController implements Serializable {
                 idProveedor = em.getReference(idProveedor.getClass(), idProveedor.getIdProveedor());
                 inMovimientos.setIdProveedor(idProveedor);
             }
-            InTipoMovimiento inTipoMovimiento = inMovimientos.getInTipoMovimiento();
-            if (inTipoMovimiento != null) {
-                inTipoMovimiento = em.getReference(inTipoMovimiento.getClass(), inTipoMovimiento.getIdTipoMovimiento());
-                inMovimientos.setInTipoMovimiento(inTipoMovimiento);
-            }
             InMotivos inMotivos = inMovimientos.getInMotivos();
             if (inMotivos != null) {
                 inMotivos = em.getReference(inMotivos.getClass(), inMotivos.getIdMotivo());
                 inMovimientos.setInMotivos(inMotivos);
+            }
+            InTipoMovimiento inTipoMovimiento = inMovimientos.getInTipoMovimiento();
+            if (inTipoMovimiento != null) {
+                inTipoMovimiento = em.getReference(inTipoMovimiento.getClass(), inTipoMovimiento.getIdTipoMovimiento());
+                inMovimientos.setInTipoMovimiento(inTipoMovimiento);
             }
             SeSucursal seSucursal = inMovimientos.getSeSucursal();
             if (seSucursal != null) {
@@ -97,13 +97,13 @@ public class InMovimientosJpaController implements Serializable {
                 idProveedor.getInMovimientosList().add(inMovimientos);
                 idProveedor = em.merge(idProveedor);
             }
-            if (inTipoMovimiento != null) {
-                inTipoMovimiento.getInMovimientosList().add(inMovimientos);
-                inTipoMovimiento = em.merge(inTipoMovimiento);
-            }
             if (inMotivos != null) {
                 inMotivos.getInMovimientosList().add(inMovimientos);
                 inMotivos = em.merge(inMotivos);
+            }
+            if (inTipoMovimiento != null) {
+                inTipoMovimiento.getInMovimientosList().add(inMovimientos);
+                inTipoMovimiento = em.merge(inTipoMovimiento);
             }
             if (seSucursal != null) {
                 seSucursal.getInMovimientosList().add(inMovimientos);
@@ -133,10 +133,10 @@ public class InMovimientosJpaController implements Serializable {
 
     public void edit(InMovimientos inMovimientos) throws IllegalOrphanException, NonexistentEntityException, Exception {
         inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
+        inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
         inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
+        inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -146,10 +146,10 @@ public class InMovimientosJpaController implements Serializable {
             InTipoDocumento inTipoDocumentoNew = inMovimientos.getInTipoDocumento();
             CoProveedores idProveedorOld = persistentInMovimientos.getIdProveedor();
             CoProveedores idProveedorNew = inMovimientos.getIdProveedor();
-            InTipoMovimiento inTipoMovimientoOld = persistentInMovimientos.getInTipoMovimiento();
-            InTipoMovimiento inTipoMovimientoNew = inMovimientos.getInTipoMovimiento();
             InMotivos inMotivosOld = persistentInMovimientos.getInMotivos();
             InMotivos inMotivosNew = inMovimientos.getInMotivos();
+            InTipoMovimiento inTipoMovimientoOld = persistentInMovimientos.getInTipoMovimiento();
+            InTipoMovimiento inTipoMovimientoNew = inMovimientos.getInTipoMovimiento();
             SeSucursal seSucursalOld = persistentInMovimientos.getSeSucursal();
             SeSucursal seSucursalNew = inMovimientos.getSeSucursal();
             List<InDetalleMovimiento> inDetalleMovimientoListOld = persistentInMovimientos.getInDetalleMovimientoList();
@@ -174,13 +174,13 @@ public class InMovimientosJpaController implements Serializable {
                 idProveedorNew = em.getReference(idProveedorNew.getClass(), idProveedorNew.getIdProveedor());
                 inMovimientos.setIdProveedor(idProveedorNew);
             }
-            if (inTipoMovimientoNew != null) {
-                inTipoMovimientoNew = em.getReference(inTipoMovimientoNew.getClass(), inTipoMovimientoNew.getIdTipoMovimiento());
-                inMovimientos.setInTipoMovimiento(inTipoMovimientoNew);
-            }
             if (inMotivosNew != null) {
                 inMotivosNew = em.getReference(inMotivosNew.getClass(), inMotivosNew.getIdMotivo());
                 inMovimientos.setInMotivos(inMotivosNew);
+            }
+            if (inTipoMovimientoNew != null) {
+                inTipoMovimientoNew = em.getReference(inTipoMovimientoNew.getClass(), inTipoMovimientoNew.getIdTipoMovimiento());
+                inMovimientos.setInTipoMovimiento(inTipoMovimientoNew);
             }
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
@@ -210,14 +210,6 @@ public class InMovimientosJpaController implements Serializable {
                 idProveedorNew.getInMovimientosList().add(inMovimientos);
                 idProveedorNew = em.merge(idProveedorNew);
             }
-            if (inTipoMovimientoOld != null && !inTipoMovimientoOld.equals(inTipoMovimientoNew)) {
-                inTipoMovimientoOld.getInMovimientosList().remove(inMovimientos);
-                inTipoMovimientoOld = em.merge(inTipoMovimientoOld);
-            }
-            if (inTipoMovimientoNew != null && !inTipoMovimientoNew.equals(inTipoMovimientoOld)) {
-                inTipoMovimientoNew.getInMovimientosList().add(inMovimientos);
-                inTipoMovimientoNew = em.merge(inTipoMovimientoNew);
-            }
             if (inMotivosOld != null && !inMotivosOld.equals(inMotivosNew)) {
                 inMotivosOld.getInMovimientosList().remove(inMovimientos);
                 inMotivosOld = em.merge(inMotivosOld);
@@ -225,6 +217,14 @@ public class InMovimientosJpaController implements Serializable {
             if (inMotivosNew != null && !inMotivosNew.equals(inMotivosOld)) {
                 inMotivosNew.getInMovimientosList().add(inMovimientos);
                 inMotivosNew = em.merge(inMotivosNew);
+            }
+            if (inTipoMovimientoOld != null && !inTipoMovimientoOld.equals(inTipoMovimientoNew)) {
+                inTipoMovimientoOld.getInMovimientosList().remove(inMovimientos);
+                inTipoMovimientoOld = em.merge(inTipoMovimientoOld);
+            }
+            if (inTipoMovimientoNew != null && !inTipoMovimientoNew.equals(inTipoMovimientoOld)) {
+                inTipoMovimientoNew.getInMovimientosList().add(inMovimientos);
+                inTipoMovimientoNew = em.merge(inTipoMovimientoNew);
             }
             if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
                 seSucursalOld.getInMovimientosList().remove(inMovimientos);
@@ -295,15 +295,15 @@ public class InMovimientosJpaController implements Serializable {
                 idProveedor.getInMovimientosList().remove(inMovimientos);
                 idProveedor = em.merge(idProveedor);
             }
-            InTipoMovimiento inTipoMovimiento = inMovimientos.getInTipoMovimiento();
-            if (inTipoMovimiento != null) {
-                inTipoMovimiento.getInMovimientosList().remove(inMovimientos);
-                inTipoMovimiento = em.merge(inTipoMovimiento);
-            }
             InMotivos inMotivos = inMovimientos.getInMotivos();
             if (inMotivos != null) {
                 inMotivos.getInMovimientosList().remove(inMovimientos);
                 inMotivos = em.merge(inMotivos);
+            }
+            InTipoMovimiento inTipoMovimiento = inMovimientos.getInTipoMovimiento();
+            if (inTipoMovimiento != null) {
+                inTipoMovimiento.getInMovimientosList().remove(inMovimientos);
+                inTipoMovimiento = em.merge(inTipoMovimiento);
             }
             SeSucursal seSucursal = inMovimientos.getSeSucursal();
             if (seSucursal != null) {

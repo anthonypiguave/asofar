@@ -112,12 +112,12 @@ public class InMovimientos implements Serializable {
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
     @ManyToOne
     private CoProveedores idProveedor;
-    @JoinColumn(name = "id_tipo_movimiento", referencedColumnName = "id_tipo_movimiento", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private InTipoMovimiento inTipoMovimiento;
     @JoinColumn(name = "id_motivo", referencedColumnName = "id_motivo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private InMotivos inMotivos;
+    @JoinColumn(name = "id_tipo_movimiento", referencedColumnName = "id_tipo_movimiento", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private InTipoMovimiento inTipoMovimiento;
     @JoinColumns({
         @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
         , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
@@ -304,20 +304,20 @@ public class InMovimientos implements Serializable {
         this.idProveedor = idProveedor;
     }
 
-    public InTipoMovimiento getInTipoMovimiento() {
-        return inTipoMovimiento;
-    }
-
-    public void setInTipoMovimiento(InTipoMovimiento inTipoMovimiento) {
-        this.inTipoMovimiento = inTipoMovimiento;
-    }
-
     public InMotivos getInMotivos() {
         return inMotivos;
     }
 
     public void setInMotivos(InMotivos inMotivos) {
         this.inMotivos = inMotivos;
+    }
+
+    public InTipoMovimiento getInTipoMovimiento() {
+        return inTipoMovimiento;
+    }
+
+    public void setInTipoMovimiento(InTipoMovimiento inTipoMovimiento) {
+        this.inTipoMovimiento = inTipoMovimiento;
     }
 
     public SeSucursal getSeSucursal() {

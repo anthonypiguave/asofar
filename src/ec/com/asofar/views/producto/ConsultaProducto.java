@@ -186,6 +186,10 @@ public class ConsultaProducto extends javax.swing.JDialog {
 
     public void cargartabla() {
         lista = procont.findPrProductosEntities();
+        for (int i = 0; i < lista.size(); i++) {
+            System.out.println("   productos : "+ lista.get(i).getPrProductosPK());
+        }
+        
         Tablas.ListarProductosConsulta(lista, tbproductos);
     }
 
