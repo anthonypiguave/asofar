@@ -291,7 +291,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             PRE.setNombrePrestacion(txtProduc.getText());
             PRE.setIdTipoPrestacion(pol);
 
-            if (cmbxIG.getSelectedItem().toString().equals("inventario")) {
+            if (cmbxIG.getSelectedItem().toString().equals("INVENTARIO")) {
                 PRE.setIdPoducto(BigInteger.valueOf(id));
             } else {
                 PRE.setIdPoducto(null);
