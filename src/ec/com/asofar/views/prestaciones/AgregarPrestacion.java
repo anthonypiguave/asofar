@@ -246,7 +246,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         int bloqueo;
         String selecciona = (String) cmbxIG.getSelectedItem();
         System.out.println(selecciona);
-        if (selecciona.equals("servicio")) {
+        if (selecciona.equals("SERVICIO")) {
             btnbuscarP.setEnabled(false);
         } else {
             btnbuscarP.setEnabled(true);
