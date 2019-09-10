@@ -98,7 +98,7 @@ public class Venta extends javax.swing.JInternalFrame {
     SeSucursal suc;
     VeDetalleCaja vdc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    BigInteger cantidad, cantidadModi, idCliente, id_uni;
+    BigInteger cantidad, cantidadModi, idCliente, id_uni, cantidadStock;
     Double precio, precioIva, total, descuento, subtotal;
     Double VGTsubtotal, VGTtotal, VGTiva, VGTdescuento;
     int Cont = 1;
@@ -1015,7 +1015,10 @@ public class Venta extends javax.swing.JInternalFrame {
             int i = tba_detalle.getSelectedRow();
 
             String valor = (String) tba_detalle.getValueAt(i, 3);
-
+            BigInteger valor1 = (BigInteger) tba_detalle.getValueAt(i, 3);
+//            if (valor1 > cantidadStock) {
+//
+//            }
             BigInteger cantidadMod = new BigInteger(valor);
             cantidadModi = cantidadMod;
             String ivaS = tba_detalle.getValueAt(i, 6).toString();
@@ -1182,7 +1185,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     System.out.println("ggggg");
 //                    System.out.println(ListKardex.size());
                     for (int k = 0; k < ListKardex.size(); k++) {
-                        System.out.println("  select " + ListKardex.get(i).getSaldoActual());
+//                        System.out.println("  select " + ListKardex.get(i).getSaldoActual());
                         BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
                         BigInteger cantActual = ListKardex.get(k).getSaldoActual();
                         System.out.println("select ultimo id  ");
