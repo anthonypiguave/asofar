@@ -88,10 +88,8 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbxfacturable = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
         cbxaplicadescuento1 = new javax.swing.JComboBox<>();
         jsalir = new javax.swing.JButton();
-        cbxestado = new javax.swing.JComboBox<>();
         jbotonbuscar = new javax.swing.JToggleButton();
         txtpresta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -136,9 +134,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel6.setText("ESTADO:");
-
         cbxaplicadescuento1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbxaplicadescuento1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
@@ -151,9 +146,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 jsalirActionPerformed(evt);
             }
         });
-
-        cbxestado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbxestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
 
         jbotonbuscar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jbotonbuscar.setText("BUSCAR");
@@ -200,7 +192,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel2))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,16 +201,14 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                         .addComponent(txtpresta, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbotonbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cbxestado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(78, 78, 78)
                 .addComponent(jsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addGap(94, 94, 94))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,15 +231,11 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxestado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jsalir)
                     .addComponent(jguardarpreser))
-                .addContainerGap())
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,11 +260,11 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
 
         vus = ObtenerDTO.ObtenerVeUnidadServicio(cbxunidadservicio.getSelectedItem().toString());
-        objPresxServ2=ObtenerDTO.ObtenerInPrestacionesPorServicios(cbxestado.getSelectedItem().toString());
+        objPresxServ2=ObtenerDTO.ObtenerInPrestacionesPorServicios("A");
         
         objPresxServ.setPrPrestaciones(proc);
         objPresxServ.setVeUnidadServicio(vus);
-        objPresxServ.setEstado(cbxestado.getSelectedItem().toString());
+        objPresxServ.setEstado("A");
         objPresxServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
         objPresxServ.setAplicaDescuento(cbxaplicadescuento1.getSelectedItem().toString());
         objPresxServ.setUsuarioCreacion(usu.getIdUsuario());
@@ -410,7 +395,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxaplicadescuento1;
-    private javax.swing.JComboBox<String> cbxestado;
     private javax.swing.JComboBox<String> cbxfacturable;
     private javax.swing.JComboBox<String> cbxunidadservicio;
     private javax.swing.JLabel jLabel1;
@@ -418,7 +402,6 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jbotonbuscar;
     private javax.swing.JButton jguardarpreser;

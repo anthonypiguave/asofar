@@ -28,8 +28,8 @@ public class InKardexExt extends InKardexJpaController {
         String nativeQuery = "SELECT *\n"
                 + "FROM in_kardex a\n"
                 + "WHERE a.id_producto = " + id + "\n"
-                + "AND a.fecha_movimiento=\n"
-                + "(SELECT MAX(b.fecha_movimiento) FROM in_kardex b where b.id_producto = a.id_producto)";
+                + "AND a.fecha_creacion=\n"
+                + "(SELECT MAX(b.fecha_creacion) FROM in_kardex b where b.id_producto = a.id_producto)";
         Query query = em.createNativeQuery(nativeQuery, InKardex.class);
         QKardex = query.getResultList();
         return QKardex;
