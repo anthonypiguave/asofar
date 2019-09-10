@@ -817,6 +817,7 @@ public class Venta extends javax.swing.JInternalFrame {
         if (objJoinProVen == null) {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
         } else {
+            cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
@@ -1016,35 +1017,41 @@ public class Venta extends javax.swing.JInternalFrame {
 
             String valor = (String) tba_detalle.getValueAt(i, 3);
             BigInteger valor1 = (BigInteger) tba_detalle.getValueAt(i, 3);
-//            if (valor1 > cantidadStock) {
-//
-//            }
-            BigInteger cantidadMod = new BigInteger(valor);
-            cantidadModi = cantidadMod;
-            String ivaS = tba_detalle.getValueAt(i, 6).toString();
-            Double ivaT = Double.valueOf(ivaS.replace(",", "."));
-            String precioS = tba_detalle.getValueAt(i, 4).toString();
-            Double precioT = Double.valueOf(precioS.replace(",", "."));
-            String descuentoS = tba_detalle.getValueAt(i, 5).toString();
-            Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
+//            b1 = new BigInteger("321456");
+//            b2 = new BigInteger("321456");
 
-            Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
+            // apply compareTo() method 
+            int comparevalue = valor1.compareTo(cantidadStock);
+            if (comparevalue == 1) {
+                JOptionPane.showMessageDialog(null, "VERIFIQUE STOCK");
+            } else {
+                BigInteger cantidadMod = new BigInteger(valor);
+                cantidadModi = cantidadMod;
+                String ivaS = tba_detalle.getValueAt(i, 6).toString();
+                Double ivaT = Double.valueOf(ivaS.replace(",", "."));
+                String precioS = tba_detalle.getValueAt(i, 4).toString();
+                Double precioT = Double.valueOf(precioS.replace(",", "."));
+                String descuentoS = tba_detalle.getValueAt(i, 5).toString();
+                Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
+
+                Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
 //            Double IvaMod = calcularIvaItemCantMod(cantidadModi);
-            Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
-            Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
-            Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
+                Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
+                Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
+                Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
 
-            listaDetFactura.get(i).setCantidad(cantidadMod);
-            listaDetFactura.get(i).setValorIva(IvaMod);
-            listaDetFactura.get(i).setSubtotal(subt);
-            listaDetFactura.get(i).setValorTotal(total);
-            listaDetFactura.get(i).setValorDescuento(Desc);
-            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                listaDetFactura.get(i).setCantidad(cantidadMod);
+                listaDetFactura.get(i).setValorIva(IvaMod);
+                listaDetFactura.get(i).setSubtotal(subt);
+                listaDetFactura.get(i).setValorTotal(total);
+                listaDetFactura.get(i).setValorDescuento(Desc);
+                Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
 
-            Totalizar();
-            TotalizarIva();
-            TotalizarDescuento();
-            TotalizarSubtotal();
+                Totalizar();
+                TotalizarIva();
+                TotalizarDescuento();
+                TotalizarSubtotal();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
