@@ -122,6 +122,11 @@ public class cliente_agregar extends javax.swing.JDialog {
                 txt_primer_nombreFocusLost(evt);
             }
         });
+        txt_primer_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_primer_nombreActionPerformed(evt);
+            }
+        });
         txt_primer_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_primer_nombreKeyTyped(evt);
@@ -424,6 +429,10 @@ public class cliente_agregar extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txt_razon_socialKeyTyped
+
+    private void txt_primer_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_primer_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_primer_nombreActionPerformed
 
     /**
      * @param args the command line arguments
