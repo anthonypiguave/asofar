@@ -11,6 +11,7 @@ import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
+import ec.com.asofar.daoext.ProductoCadena;
 import ec.com.asofar.daoext.ordenPedidoEXT;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
 import ec.com.asofar.dto.CoDetalleOrdenPedidoPK;
@@ -440,7 +441,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
                 detalle.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
                 detalle.getCoDetalleOrdenPedidoPK().setIdProducto(objetopro.getPrProductosPK().getIdProducto());
-                detalle.setDescripcion(objetopro.getNombreProducto());
+                detalle.setDescripcion(ProductoCadena.obtenerCadena(objetopro.getPrProductosPK().getIdProducto()));
                 detalle.setCantidadSolicitada(BigInteger.valueOf(0));
 
                 listadet.add(detalle);

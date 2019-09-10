@@ -415,6 +415,21 @@ public class ObtenerDTO {
         return dto;
 
     }
+        public static String ObtenerPrArticulo(Long id) {
+        PrArticuloJpaController control = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrArticulo dto = new PrArticulo();
+        List<PrArticulo> lista = control.findPrArticuloEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getPrArticuloPK().getIdArticulo() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto.getNombreArticulo();
+
+    }
 
     public static PrGrupos ObtenerPrGrupos(String nombre) {
         PrGruposJpaController control = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -445,6 +460,21 @@ public class ObtenerDTO {
         }
 
         return dto;
+
+    }
+        public static String ObtenerPrGrupos(Long id) {
+        PrGruposJpaController control = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrGrupos dto = new PrGrupos();
+        List<PrGrupos> lista = control.findPrGruposEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdGrupo() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto.getNombre();
 
     }
 
@@ -543,6 +573,21 @@ public class ObtenerDTO {
         return dto;
 
     }
+        public static String ObtenerPrSubGrupos(long id) {
+        PrSubgruposJpaController control = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrSubgrupos dto = new PrSubgrupos();
+        List<PrSubgrupos> lista = control.findPrSubgruposEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getPrSubgruposPK().getIdSubgrupo() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto.getNombre();
+
+    }
 
     public static PrTipoMedidas ObtenerPrTipoMedidas(String nombre) {
         PrTipoMedidasJpaController control = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -557,6 +602,21 @@ public class ObtenerDTO {
         }
 
         return dto;
+
+    }
+        public static String ObtenerPrTipoMedidas(Long id) {
+        PrTipoMedidasJpaController control = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrTipoMedidas dto = new PrTipoMedidas();
+        List<PrTipoMedidas> lista = control.findPrTipoMedidasEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdTipoMedidas() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto.getNombreTipoMedida();
 
     }
 
@@ -591,6 +651,23 @@ public class ObtenerDTO {
         return dto;
 
     }
+    
+        public static String ObtenerPrTipoPresentacion(Long id) {
+        PrTipoPresentacionJpaController control = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
+        PrTipoPresentacion dto = new PrTipoPresentacion();
+        List<PrTipoPresentacion> lista = control.findPrTipoPresentacionEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdTipoPresentacion() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
+        return dto.getNombre();
+
+    }
+    
 
     public static SeRoles ObtenerSeRoles(String nombre) {
         SeRolesJpaController control = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
