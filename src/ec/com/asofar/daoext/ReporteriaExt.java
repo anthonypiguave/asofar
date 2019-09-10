@@ -135,7 +135,7 @@ public class ReporteriaExt {
                 + "                FROM co_orden_compras as c\n"
                 + "                inner join co_detalle_orden_compra as d \n"
                 + "                	  on   c.id_orden_compra = d.id_orden_compra\n"
-                + "                      and  c.estado = 'P'\n"
+                + "                      and  c.estado = 'C'\n"
                 + "                      and  c.fecha_entrega \n"
                 + "                      BETWEEN concat('" + desde + "',' 00:00:00')\n"
                 + "                      and concat('" + hasta + "',' 23:59:59')\n"
