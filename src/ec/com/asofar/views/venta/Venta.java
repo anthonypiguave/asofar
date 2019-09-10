@@ -256,7 +256,7 @@ public class Venta extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tba_detalle = new javax.swing.JTable();
         btn_agregar_prod = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_Venta = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txt_NumeroCaja = new javax.swing.JTextField();
         txt_NombreCaja = new javax.swing.JTextField();
@@ -582,11 +582,11 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
         tba_detalle.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tba_detalleKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tba_detalleKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tba_detalleKeyTyped(evt);
             }
         });
         jScrollPane2.setViewportView(tba_detalle);
@@ -619,11 +619,11 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setText("GENERAR VENTA ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Venta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_Venta.setText("GENERAR VENTA ");
+        btn_Venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_VentaActionPerformed(evt);
             }
         });
 
@@ -678,7 +678,7 @@ public class Venta extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
+                                .addComponent(btn_Venta)
                                 .addGap(9, 9, 9))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -702,7 +702,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         .addComponent(txt_NumeroCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_NombreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -820,6 +820,7 @@ public class Venta extends javax.swing.JInternalFrame {
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
+
             FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
             cantidad = BigInteger.ONE;
             precio = objJoinProVen.getValor_venta();
@@ -976,7 +977,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         int i = tba_detalle.getSelectedRow();
                         System.out.println("**");
                         listaDetFactura.remove(i);
-                        
+
                         Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
                         Totalizar();
                         TotalizarIva();
@@ -999,7 +1000,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 }
             }
         }
-        
+
     }//GEN-LAST:event_tba_detalleMousePressed
 
     private void tba_detalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyTyped
@@ -1047,13 +1048,13 @@ public class Venta extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_tba_detalleKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VentaActionPerformed
         if ("".equals(txtIdentificacion.getText().toString())) {
             if ("0.0".equals(txtTotal.getText().toString())) {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             }
         } else {
-
+//            guardarKardex2(listaDetFactura);
             VeFactura cabFact = new VeFactura();
             InMovimientos pkMovimiento = null;
             VeFacturaDetalle detFact = new VeFacturaDetalle();
@@ -1094,9 +1095,9 @@ public class Venta extends javax.swing.JInternalFrame {
                 InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
                 InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
                 InMovimientos cabMovimiento = new InMovimientos();
-                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
+                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("VENTAS");
                 InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
-                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
+                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("VENTA CLIENTE FINAL");
 
                 InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
                 try {
@@ -1118,6 +1119,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         detMovimiento.setInMovimientos(pkMovimiento);
                         detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
                         detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
+
                         Long id_pro = IdProductoDsdObPres(listaDetFactura);
                         Long id_Bod = IdBodegD(id_pro);
 
@@ -1138,9 +1140,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 }
 
                 guardarKardex2(listaDetFactura);
-
 //                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-
                 ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
                 Iv.setVisible(true);
 
@@ -1149,7 +1149,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_VentaActionPerformed
 
     public void limpiar() {
         consFinal();
@@ -1169,16 +1169,20 @@ public class Venta extends javax.swing.JInternalFrame {
         InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
         InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
         InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
-
+//        System.out.println("111");
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
-
+//                    System.out.println("222");
                     id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 ////
+//                    ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
                     ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
+//                    ListKardex = (List<InKardex>) selectKardex.obtenerUltimoProductoKardex(id_Prod);
+                    System.out.println("ggggg");
+//                    System.out.println(ListKardex.size());
                     for (int k = 0; k < ListKardex.size(); k++) {
-
+                        System.out.println("  select " + ListKardex.get(i).getSaldoActual());
                         BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
                         BigInteger cantActual = ListKardex.get(k).getSaldoActual();
                         System.out.println("select ultimo id  ");
@@ -1268,6 +1272,7 @@ public class Venta extends javax.swing.JInternalFrame {
         for (int k = 0; k < lisKar.size(); k++) {
             if (id_Pro.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
                 id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
+                System.out.println("bodeha " + id_bog);
             }
         }
         return id_bog;
@@ -1352,9 +1357,9 @@ public class Venta extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Venta;
     private javax.swing.JButton btn_agregar_prod;
     private javax.swing.JButton btnbuscar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
