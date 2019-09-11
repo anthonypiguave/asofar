@@ -70,6 +70,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     public ReporteriaCompras(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(this);
         usu = us;
         emp = em;
         suc = su;
@@ -77,6 +78,8 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         Tablas.listarReporteCompras(itemList, tbaReporteCompra);
         Chooser1.setDate(rep.fechaActual());
         Chooser2.setDate(rep.fechaActual());
+        total();
+        Keypress_jDateChoooser();
     }
 
     public void total() {
