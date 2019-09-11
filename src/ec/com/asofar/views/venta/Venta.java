@@ -809,12 +809,30 @@ public class Venta extends javax.swing.JInternalFrame {
         txtEmail.setText("");
         consFinal();
     }
+
+    public String validarProductos(String datos) {
+        String obj1 = "no";
+
+        for (int i = 0; i < listaDetFactura.size(); i++) {
+
+            if (datos.equals("" + (listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones()))) {
+                obj1 = "si";
+
+                break;
+            }
+
+        }
+
+        return obj1;
+
+    }
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
         objJoinProVen = ingre.obtObjProdVent();
-        if (objJoinProVen == null) {
-            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+
+        if (validarProductos("" + (objJoinProVen.getId_prestacion())).equals("si")) {
+            JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
             cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
             System.out.println(" fff " + cantidadStock);
@@ -1023,34 +1041,34 @@ public class Venta extends javax.swing.JInternalFrame {
             cantidadModi = cantidadMod;
             int out = cantidadMod.compareTo(cantidadStock);
             if (out == 1) {
-                
+
                 JOptionPane.showMessageDialog(null, "Verifique Stock");
                 listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
                 Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-            }else{
-            String ivaS = tba_detalle.getValueAt(i, 6).toString();
-            Double ivaT = Double.valueOf(ivaS.replace(",", "."));
-            String precioS = tba_detalle.getValueAt(i, 4).toString();
-            Double precioT = Double.valueOf(precioS.replace(",", "."));
-            String descuentoS = tba_detalle.getValueAt(i, 5).toString();
-            Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
+            } else {
+                String ivaS = tba_detalle.getValueAt(i, 6).toString();
+                Double ivaT = Double.valueOf(ivaS.replace(",", "."));
+                String precioS = tba_detalle.getValueAt(i, 4).toString();
+                Double precioT = Double.valueOf(precioS.replace(",", "."));
+                String descuentoS = tba_detalle.getValueAt(i, 5).toString();
+                Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
 
-            Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
-            Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
-            Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
-            Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
+                Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
+                Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
+                Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
+                Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
 
-            listaDetFactura.get(i).setCantidad(cantidadMod);
-            listaDetFactura.get(i).setValorIva(IvaMod);
-            listaDetFactura.get(i).setSubtotal(subt);
-            listaDetFactura.get(i).setValorTotal(total);
-            listaDetFactura.get(i).setValorDescuento(Desc);
-            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                listaDetFactura.get(i).setCantidad(cantidadMod);
+                listaDetFactura.get(i).setValorIva(IvaMod);
+                listaDetFactura.get(i).setSubtotal(subt);
+                listaDetFactura.get(i).setValorTotal(total);
+                listaDetFactura.get(i).setValorDescuento(Desc);
+                Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
 
-            Totalizar();
-            TotalizarIva();
-            TotalizarDescuento();
-            TotalizarSubtotal();
+                Totalizar();
+                TotalizarIva();
+                TotalizarDescuento();
+                TotalizarSubtotal();
             }
         } catch (Exception e) {
             e.printStackTrace();
