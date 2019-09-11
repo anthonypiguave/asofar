@@ -30,15 +30,15 @@ public class ProductoCadena {
             }
 
         }
-
-        String tipoPresentacion = ObtenerDTO.ObtenerPrTipoPresentacion(dto.getPrProductosPK().getIdTipoPresentacion());
-        String tipoMedidas = ObtenerDTO.ObtenerPrTipoMedidas(dto.getPrProductosPK().getIdTipoMedidas());
-        String subGrupo = ObtenerDTO.ObtenerPrSubGrupos(dto.getPrProductosPK().getIdSubgrupo());
-        String grupo = ObtenerDTO.ObtenerPrGrupos(dto.getPrProductosPK().getIdGrupo());
-        String articulo = ObtenerDTO.ObtenerPrArticulo(dto.getPrProductosPK().getIdArticulo());
+        
+        String articulo = dto.getPrArticulo().getNombreArticulo();
+        String grupo = dto.getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+        String subGrupo = dto.getPrArticulo().getPrSubgrupos().getNombre();
+        String tipoPresentacion = dto.getPrMedidas().getPrTipoPresentacion().getNombre();
+        String tipoMedidas = dto.getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
         
         
-        String cadena = grupo +"/"+ subGrupo +"/"+ articulo +"\n"+ tipoMedidas +"/"+ tipoPresentacion ;
+        String cadena = grupo +" \n"+ subGrupo +" \n"+ articulo +" \n"+ tipoPresentacion +" \n"+ tipoMedidas ;
 
         return cadena.toUpperCase();
     }

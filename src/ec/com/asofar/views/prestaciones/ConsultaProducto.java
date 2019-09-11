@@ -41,7 +41,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        cargartabla1();
+        cargartabla();
     }
 
     /**
@@ -198,10 +198,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
         listaPrest = prestC.findPrPrestacionesEntities();
         Tablas.ListarProductosConsulta2(lista, tbproductos,listaPrest);
     }
-    public void cargartabla1() {
-        lista = procont.findPrProductosEntities();
-        Tablas.ListarProductosConsulta(lista, tbproductos);
-    }
+
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
         y = evt.getY();

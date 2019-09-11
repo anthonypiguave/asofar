@@ -129,52 +129,52 @@ public class Tablas {
         Tabla.setShowGrid(true);
         PrPrestacionesJpaController pr = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
         List<PrPrestaciones> list = pr.findPrPrestacionesEntities();
-        int count = 0;
+//        int count = 0;
         for (int i = 0; i < listaproducto.size(); i++) {
-            System.out.println("for producto" + listaproducto.get(i).getPrProductosPK().getIdProducto());
-            for (int j = 0; j < list.size(); j++) {
-                System.out.println("for prestacion" + list.get(j).getIdPrestacion().intValue());
-                if (list.get(j).getIdPoducto() != null) {
-
-                    if (list.get(j).getIdPoducto().intValue()
-                            == listaproducto.get(i).getPrProductosPK().getIdProducto()) {
-
-                        count++;
-//            if (listaproducto.get(i).getEstado().equals("A")) {
-
+//            System.out.println("for producto" + listaproducto.get(i).getPrProductosPK().getIdProducto());
+//            for (int j = 0; j < list.size(); j++) {
+//                System.out.println("for prestacion" + list.get(j).getIdPrestacion().intValue());
+//                if (list.get(j).getIdPoducto() != null) {
+//
+//                    if (list.get(j).getIdPoducto().intValue()
+//                            == listaproducto.get(i).getPrProductosPK().getIdProducto()) {
+//
+//                        count++;
+////            if (listaproducto.get(i).getEstado().equals("A")) {
+//
+////            }
+//                    }
+//                }
 //            }
-                    }
-                }
-            }
-            if (count < 1) {
+//            if (count < 1) {
 
-                filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
-                filas[1] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
-                filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
-                filas[3] = listaproducto.get(i).getPrArticulo().getNombreArticulo();
-                filas[4] = listaproducto.get(i).getNombreProducto();
-                filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
-                filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+            filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
+            filas[1] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+            filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
+            filas[3] = listaproducto.get(i).getPrArticulo().getNombreArticulo();
+            filas[4] = listaproducto.get(i).getNombreProducto();
+            filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+            filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
 
-                model.addRow(filas);
-                Tabla.setModel(model);
-                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-            }
-            count = 0;
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
         }
+//            count = 0;
+//        }
     }
 
     public static void ListarDetalleOrdenCompra(List<CoDetalleOrdenCompra> listadeorco, JTable Tabla, CoOrdenCompras orco) {
@@ -267,11 +267,14 @@ public class Tablas {
     }
 
     public static void llenarDetalledeOrden(JTable tabla, List<CoDetalleOrdenPedido> lista) {
-        CoDetalleOrdenPedido vo = new CoDetalleOrdenPedido();
+        int[] a = {10, 30, 200, 30, 60};
+
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
 
         tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "NOMBRE PRODUCTO",
-            "CANTIDAD SOLICITADA", "",}, 0) {
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"N°", "COD. PROD", "DESCRIPCION",
+            "CANTIDAD", "",}, 0) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class,
@@ -290,16 +293,13 @@ public class Tablas {
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
-//                if (lista.get(i).getEstado().equals("A") ){
-//                 model.addRow(new Object[]{});
+
                 Object filas[] = new Object[5];
-                vo = lista.get(i);
-//                fila[0] = "" + vo.getCoCotizacionesPorProveedorPK().getIdCotizacionesPorPorveedor();
 
                 filas[0] = lista.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle();
                 filas[1] = lista.get(i).getCoDetalleOrdenPedidoPK().getIdProducto();
-                
-                JTextArea textArea = new JTextArea(); 
+
+                JTextArea textArea = new JTextArea();
                 textArea.append(lista.get(i).getDescripcion());
                 filas[2] = textArea;
                 filas[3] = lista.get(i).getCantidadSolicitada();
@@ -315,7 +315,18 @@ public class Tablas {
         }
 
         tabla.setModel(dt);
-        tabla.setRowHeight(40);
+        tabla.setRowHeight(75);
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//        tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+        tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+//        tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
 
     }
 
@@ -2668,10 +2679,14 @@ public class Tablas {
                         filas[4] = listaproducto.get(i).getNombreProducto();
                         filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
                         filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+
+                        model.addRow(filas);
+
                     }
+
                 }
             }
-            model.addRow(filas);
+
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
