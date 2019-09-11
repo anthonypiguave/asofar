@@ -209,17 +209,15 @@
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtTelefono" max="32767" attributes="0"/>
-                                      <Component id="txtTipoIdent" max="32767" attributes="0"/>
-                                      <Component id="txtEmail" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtDireccion" min="-2" pref="258" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtTelefono" max="32767" attributes="0"/>
+                                  <Component id="txtTipoIdent" max="32767" attributes="0"/>
+                                  <Component id="txtEmail" alignment="0" pref="222" max="32767" attributes="0"/>
+                                  <Component id="txtDireccion" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="150" max="32767" attributes="0"/>
+                      <EmptySpace pref="186" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
