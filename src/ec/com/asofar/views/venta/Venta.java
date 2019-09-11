@@ -1048,8 +1048,7 @@ public class Venta extends javax.swing.JInternalFrame {
             for (int j = 0; j < ListProdVent.size(); j++) {
                 if(ListProdVent.get(j).getId_prestacion().equals(id)){
 //                    System.out.println("cantidadaadd "+id);
-                     
-                    BigInteger ca =  BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
+                   BigInteger ca =  BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
 
             int out = cantidadMod.compareTo(ca);
 //            int out = cantidadMod.compareTo(cantidadStock);
