@@ -70,12 +70,13 @@ public class ReporteriaExt {
                 + "        ifnull(c.total_iva,0) as total_iva,\n"
                 + "        c.total_compra,\n"
                 + "        f.nombre_documento,\n"
-                + "        g.nombre_comercial\n"
+                + "        g.nombre_comercial,\n"
+                + "        ifnull(c.total_descuento,0) as total_descuento\n"
                 + "   FROM co_orden_compras as c\n"
                 + "   inner join co_detalle_orden_compra as d\n"
                 + "   	  on   c.id_orden_compra = d.id_orden_compra\n"
                 + "         and  c.estado = 'C'\n"
-                + "         and  c.fecha_entrega\n"
+                + "         and  c.fecha_aprobacion\n"
                 + "         BETWEEN concat(date_format(sysdate(),'%Y-%m-%d'),' 00:00:00')\n"
                 + "         and concat(date_format(sysdate(),'%Y-%m-%d'),' 23:59:59')\n"
                 + "   inner join in_tipo_documento as f\n"
@@ -97,6 +98,7 @@ public class ReporteriaExt {
                 ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
                 ob.setNombre_documento(String.valueOf(obj[8].toString()));
                 ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
+                ob.setDescuento(Double.parseDouble(obj[10].toString()));
                 listaCompra.add(ob);
             }
 //        
@@ -131,12 +133,13 @@ public class ReporteriaExt {
                 + "                        ifnull(c.total_iva,0) as total_iva,\n"
                 + "                        c.total_compra,\n"
                 + "        f.nombre_documento,\n"
-                + "        g.nombre_comercial\n"
+                + "        g.nombre_comercial,\n"
+                + "        ifnull(c.total_descuento,0) as total_descuento\n"
                 + "                FROM co_orden_compras as c\n"
                 + "                inner join co_detalle_orden_compra as d \n"
                 + "                	  on   c.id_orden_compra = d.id_orden_compra\n"
                 + "                      and  c.estado = 'C'\n"
-                + "                      and  c.fecha_entrega \n"
+                + "                      and  c.fecha_aprobacion \n"
                 + "                      BETWEEN concat('" + desde + "',' 00:00:00')\n"
                 + "                      and concat('" + hasta + "',' 23:59:59')\n"
                 + "   inner join in_tipo_documento as f\n"
@@ -158,6 +161,7 @@ public class ReporteriaExt {
                 ob.setTotal_compra(Double.parseDouble(obj[7].toString()));
                 ob.setNombre_documento(String.valueOf(obj[8].toString()));
                 ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
+                ob.setDescuento(Double.parseDouble(obj[10].toString()));
                 listaCompra.add(ob);
             }
 //        
