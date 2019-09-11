@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -51,7 +52,7 @@ public class Render extends DefaultTableCellRenderer {
 
             return cb;
         }
-                if (value instanceof JTextField) {
+        if (value instanceof JTextField) {
             JTextField tx = (JTextField) value;
 
             if (isSelected) {
@@ -64,9 +65,22 @@ public class Render extends DefaultTableCellRenderer {
 
             return tx;
         }
-                
-                
-                ///https://www.youtube.com/watch?v=60utT_e-oak
+        if (value instanceof JTextArea) {
+            JTextArea ta = (JTextArea) value;
+
+            if (isSelected) {
+                ta.setForeground(table.getSelectionForeground());
+                ta.setBackground(table.getSelectionBackground());
+            } else {
+                ta.setForeground(table.getForeground());
+                ta.setBackground(table.getBackground());
+            }
+
+            return ta;
+        }
+
+        ///https://www.youtube.com/watch?v=60utT_e-oak
+        ///https://coderanch.com/t/340609/java/JTable-Custom-Cell-Renderer-JTextArea
 
         return super.getTableCellRendererComponent(table, value, isSelected,
                 hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.

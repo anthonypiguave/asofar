@@ -60,6 +60,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
@@ -297,7 +298,10 @@ public class Tablas {
 
                 filas[0] = lista.get(i).getCoDetalleOrdenPedidoPK().getLineaDetalle();
                 filas[1] = lista.get(i).getCoDetalleOrdenPedidoPK().getIdProducto();
-                filas[2] = lista.get(i).getDescripcion();
+                
+                JTextArea textArea = new JTextArea(); 
+                textArea.append(lista.get(i).getDescripcion());
+                filas[2] = textArea;
                 filas[3] = lista.get(i).getCantidadSolicitada();
 
 //                String ac = (String) vo.getEstado();
@@ -311,6 +315,8 @@ public class Tablas {
         }
 
         tabla.setModel(dt);
+        tabla.setRowHeight(40);
+
     }
 
     public static void listarOrdenesdeCompra(List<CoOrdenCompras> lista, JTable Tabla) {
