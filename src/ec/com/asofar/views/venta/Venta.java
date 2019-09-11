@@ -16,6 +16,7 @@ import ec.com.asofar.dao.VeFacturaDetalleJpaController;
 import ec.com.asofar.dao.VeFacturaJpaController;
 import ec.com.asofar.daoext.InKardexExt;
 import ec.com.asofar.daoext.JoinProductoVenta;
+import ec.com.asofar.daoext.JoinProductoVentaExt;
 import ec.com.asofar.daoext.MovimientosDaoExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.OrdenPedidoDaoExt;
@@ -123,6 +124,8 @@ public class Venta extends javax.swing.JInternalFrame {
     JoinProductoVenta objJoinProVen = new JoinProductoVenta();
     List<SeClientes> ListCedula = null;
     SeClientesExt selectCliente = new SeClientesExt(EntityManagerUtil.ObtenerEntityManager());
+    List<JoinProductoVenta> ListProdVent = null;
+    JoinProductoVentaExt selectProdVent = new JoinProductoVentaExt();
 
     public Venta() {
         initComponents();
@@ -835,7 +838,8 @@ public class Venta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
             cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
-            System.out.println(" fff " + cantidadStock);
+//            System.out.println(" fff " + cantidadStock);
+
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
             FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
@@ -1039,13 +1043,24 @@ public class Venta extends javax.swing.JInternalFrame {
 
             BigInteger cantidadMod = new BigInteger(valor);
             cantidadModi = cantidadMod;
-            int out = cantidadMod.compareTo(cantidadStock);
+            Long id =(Long)tba_detalle.getValueAt(i, 1);
+            ListProdVent = selectProdVent.listarProductoVenta();
+            for (int j = 0; j < ListProdVent.size(); j++) {
+                if(ListProdVent.get(j).getId_prestacion().equals(id)){
+//                    System.out.println("cantidadaadd "+id);
+                     
+                    BigInteger ca =  BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
+
+            int out = cantidadMod.compareTo(ca);
+//            int out = cantidadMod.compareTo(cantidadStock);
             if (out == 1) {
 
                 JOptionPane.showMessageDialog(null, "Verifique Stock");
                 listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
                 Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+
             } else {
+
                 String ivaS = tba_detalle.getValueAt(i, 6).toString();
                 Double ivaT = Double.valueOf(ivaS.replace(",", "."));
                 String precioS = tba_detalle.getValueAt(i, 4).toString();
@@ -1069,7 +1084,9 @@ public class Venta extends javax.swing.JInternalFrame {
                 TotalizarIva();
                 TotalizarDescuento();
                 TotalizarSubtotal();
-            }
+            }/**/
+                            }/**/
+            }/**/
         } catch (Exception e) {
             e.printStackTrace();
         }
