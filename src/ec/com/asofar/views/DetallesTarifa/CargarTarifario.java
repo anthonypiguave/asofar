@@ -44,6 +44,7 @@ public class CargarTarifario extends javax.swing.JDialog {
     public CargarTarifario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         System.out.println("************");
         Tablas.listarTarifario(lista, tbltarifario);
     }
@@ -51,6 +52,7 @@ public class CargarTarifario extends javax.swing.JDialog {
     public CargarTarifario(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         Tablas.listarTarifario(lista, tbltarifario);
         usu = us;
         emp = em;
@@ -86,6 +88,7 @@ public class CargarTarifario extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 

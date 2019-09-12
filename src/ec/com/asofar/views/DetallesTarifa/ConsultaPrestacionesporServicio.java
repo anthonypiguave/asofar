@@ -46,6 +46,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
         Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
     }
@@ -53,6 +54,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
         Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
         usu = us;
@@ -80,6 +82,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
