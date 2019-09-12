@@ -244,7 +244,153 @@ public class ReporteriaExt {
         return listaDetalle;
 
     }
+    public static List<ReporteFacturaDTO> reporteFactura() {
 
+        Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+
+        List<ReporteFacturaDTO> listaCompra = null;
+        Query q = em.createNativeQuery("SELECT  distinct\n" +
+                    "        c.id_factura,\n" +
+                    "        c.id_empresa,\n" +
+                    "        c.id_sucursal,\n" +
+                    "        c.id_caja,\n" +
+                    "        c.id_usuario,\n" +
+                    "        c.id_cliente,\n" +
+                    "        c.fecha_facturacion,\n" +
+                    "        ifnull(c.subtotal,0) as total_subtotal,\n" +
+                    "        ifnull(c.total_ice,0) as total_ice,\n" +
+                    "        ifnull(c.total_descuento,0) as total_descuento,\n" +
+                    "        ifnull(c.total_base_iva,0) as base_iva,\n" +
+                    "        ifnull(c.total_base_no_iva,0) as base_no_iva,\n" +
+                    "        ifnull(c.total_iva,0) as base_no_iva,\n" +
+                    "		ifnull(c.total_facturado,0) as total_fact,\n" +
+                    "        c.despachado,\n" +
+                    "        caja.nombre,\n" +
+                    "        e.nombre_comercial,\n" +
+                    "        s.nombre_comercial\n" +
+                    "   FROM ve_factura as c\n" +
+                    "   inner join ve_factura_detalle as d\n" +
+                    "   	  on  c.id_factura = d.id_factura\n" +
+                    "     -- and  c.estado = 'C'\n" +
+                    "	  and  c.fecha_facturacion\n" +
+                    "	  BETWEEN concat(date_format(sysdate(),'%Y-%m-%d'),' 00:00:00')\n" +
+                    "      and concat(date_format(sysdate(),'%Y-%m-%d'),' 23:59:59')\n" +
+                    "   inner join ve_caja as caja\n" +
+                    "    on caja.id_caja = c.id_caja\n" +
+                    "   inner join se_empresa as e\n" +
+                    "	on e.id_empresa = c.id_empresa\n" +
+                    "   inner join se_sucursal as s\n" +
+                    "    on s.id_sucursal = c.id_sucursal;");
+        List<Object[]> listobj = q.getResultList();
+        listaCompra = new ArrayList<ReporteFacturaDTO>();
+        try {
+            for (Object[] obj : listobj) {
+                ReporteFacturaDTO ob = new ReporteFacturaDTO();
+                ob.setId_factura(Long.parseLong(obj[0].toString()));
+                ob.setId_empresa(Long.parseLong(obj[1].toString()));
+                ob.setId_sucursal(Long.parseLong(obj[2].toString()));
+                ob.setId_caja(Long.parseLong(obj[3].toString()));
+                ob.setId_usuario(Long.parseLong(obj[4].toString()));
+                ob.setId_cliente(Long.parseLong(obj[5].toString()));
+                ob.setFecha_facturacion(Date.valueOf(obj[6].toString()));
+                ob.setSubtotal(Double.parseDouble(obj[7].toString()));
+                ob.setTotal_ice(Double.parseDouble(obj[8].toString()));
+                ob.setTotal_descuento(Double.parseDouble(obj[9].toString()));
+                ob.setTotal_base_iva(Double.parseDouble(obj[10].toString()));
+                ob.setTotal_base_no_iva(Double.parseDouble(obj[11].toString()));
+                ob.setTotal_iva(Double.parseDouble(obj[12].toString()));
+                ob.setTotal_facturado(Double.parseDouble(obj[13].toString()));
+                ob.setDespachado(String.valueOf(obj[14].toString()));
+                ob.setNombre_caja(String.valueOf(obj[15].toString()));
+                ob.setNombre_comercial_emp(String.valueOf(obj[16].toString()));
+                ob.setNombre_comercial_suc(String.valueOf(obj[17].toString()));
+                listaCompra.add(ob);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaCompra;
+    }
+    public static List<ReporteFacturaDTO> reporteFacturaFechas(String desde, String hasta) {
+
+        Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+
+        List<ReporteFacturaDTO> listaCompra = null;
+        Query q = em.createNativeQuery("SELECT  distinct\n" +
+                    "        c.id_factura,\n" +
+                    "        c.id_empresa,\n" +
+                    "        c.id_sucursal,\n" +
+                    "        c.id_caja,\n" +
+                    "        c.id_usuario,\n" +
+                    "        c.id_cliente,\n" +
+                    "        c.fecha_facturacion,\n" +
+                    "        ifnull(c.subtotal,0) as total_subtotal,\n" +
+                    "        ifnull(c.total_ice,0) as total_ice,\n" +
+                    "        ifnull(c.total_descuento,0) as total_descuento,\n" +
+                    "        ifnull(c.total_base_iva,0) as base_iva,\n" +
+                    "        ifnull(c.total_base_no_iva,0) as base_no_iva,\n" +
+                    "        ifnull(c.total_iva,0) as base_no_iva,\n" +
+                    "		ifnull(c.total_facturado,0) as total_fact,\n" +
+                    "        c.despachado,\n" +
+                    "        caja.nombre,\n" +
+                    "        e.nombre_comercial,\n" +
+                    "        s.nombre_comercial\n" +
+                    "   FROM ve_factura as c\n" +
+                    "   inner join ve_factura_detalle as d\n" +
+                    "   	  on  c.id_factura = d.id_factura\n" +
+                    "     -- and  c.estado = 'C'\n" +
+                    "	  and  c.fecha_facturacion\n" +
+                    "              BETWEEN concat('" + desde + "',' 00:00:00')\n"+
+                    "              and concat('" + hasta + "',' 23:59:59')\n"+
+                    "   inner join ve_caja as caja\n" +
+                    "    on caja.id_caja = c.id_caja\n" +
+                    "   inner join se_empresa as e\n" +
+                    "	on e.id_empresa = c.id_empresa\n" +
+                    "   inner join se_sucursal as s\n" +
+                    "    on s.id_sucursal = c.id_sucursal;");
+        List<Object[]> listobj = q.getResultList();
+        listaCompra = new ArrayList<ReporteFacturaDTO>();
+        try {
+            for (Object[] obj : listobj) {
+                ReporteFacturaDTO ob = new ReporteFacturaDTO();
+                ob.setId_factura(Long.parseLong(obj[0].toString()));
+                ob.setId_empresa(Long.parseLong(obj[1].toString()));
+                ob.setId_sucursal(Long.parseLong(obj[2].toString()));
+                ob.setId_caja(Long.parseLong(obj[3].toString()));
+                ob.setId_usuario(Long.parseLong(obj[4].toString()));
+                ob.setId_cliente(Long.parseLong(obj[5].toString()));
+                ob.setFecha_facturacion(Date.valueOf(obj[6].toString()));
+                ob.setSubtotal(Double.parseDouble(obj[7].toString()));
+                ob.setTotal_ice(Double.parseDouble(obj[8].toString()));
+                ob.setTotal_descuento(Double.parseDouble(obj[9].toString()));
+                ob.setTotal_base_iva(Double.parseDouble(obj[10].toString()));
+                ob.setTotal_base_no_iva(Double.parseDouble(obj[11].toString()));
+                ob.setTotal_iva(Double.parseDouble(obj[12].toString()));
+                ob.setTotal_facturado(Double.parseDouble(obj[13].toString()));
+                ob.setDespachado(String.valueOf(obj[14].toString()));
+                ob.setNombre_caja(String.valueOf(obj[15].toString()));
+                ob.setNombre_comercial_emp(String.valueOf(obj[16].toString()));
+                ob.setNombre_comercial_suc(String.valueOf(obj[17].toString()));
+                listaCompra.add(ob);
+            }
+//        
+//        for (int i = 0; i <  q.getResultList().size(); i++) {
+//             ReporteDetalleComprasDTO obj = new ReporteDetalleComprasDTO();
+//             obj.setId_orden_compra(Long.valueOf(q.getResultList().get(i).toString()));
+//             obj.setId_tipo_documento(Long.valueOf(q.getResultList().get(i).toString()));
+//              // obj4 = q.getResultList();
+//             listaCompra.add(obj);
+//              
+//        }
+//         
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaCompra;
+    }
+    
     private long showId(EntityManager em) {
         String nativeQuery = "SELECT max(id_orden_compra) FROM co_orden_compras;";
         Query query = em.createNativeQuery(nativeQuery);
