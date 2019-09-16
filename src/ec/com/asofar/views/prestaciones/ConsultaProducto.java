@@ -6,15 +6,14 @@
 package ec.com.asofar.views.prestaciones;
 
 import ec.com.asofar.dao.PrPrestacionesJpaController;
-import ec.com.asofar.views.producto.*;
 import ec.com.asofar.dao.PrProductosJpaController;
-import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,14 +24,14 @@ public class ConsultaProducto extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
-    PrProductos ppro = new PrProductos();
     PrProductos obj;
-    List<PrProductos> lista;
-    PrProductosJpaController procont = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    List<PrProductos> listaProd;
+    List<PrProductos> lista = new ArrayList<PrProductos>();
+    PrProductosJpaController prodCont = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductos objeto = new PrProductos();
-    AgregarPrestacion pre = new AgregarPrestacion(new javax.swing.JFrame(), true);
     List<PrPrestaciones> listaPrest;
-    PrPrestacionesJpaController prestC = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrPrestacionesJpaController prestCont = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
      * Creates new form ConsultaProducto
@@ -88,11 +87,6 @@ public class ConsultaProducto extends javax.swing.JDialog {
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtfiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfiltroActionPerformed(evt);
-            }
-        });
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyPressed(evt);
@@ -194,9 +188,39 @@ public class ConsultaProducto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
-        lista = procont.findPrProductosEntities();
-        listaPrest = prestC.findPrPrestacionesEntities();
-        Tablas.ListarProductosConsulta2(lista, tbproductos,listaPrest);
+        listaProd = prodCont.findPrProductosEntities();
+        listaPrest = prestCont.findPrPrestacionesEntities();
+
+        Boolean estado = true;
+
+        for (int i = 0; i < listaProd.size(); i++) {
+
+            for (int j = 0; j < listaPrest.size(); j++) {
+
+                if (listaProd.get(i).getPrProductosPK().getIdProducto()
+                        == listaPrest.get(j).getIdPoducto().intValue()) {
+
+                    System.out.println(" entro : " + i);
+
+                    estado = false;
+
+                }
+
+            }
+
+            if (estado) {
+
+                System.out.println("entro2 : " + i);
+
+                lista.add(listaProd.get(i));
+
+            }
+
+            estado = true;
+
+        }
+
+        Tablas.ListarProductosConsulta2(lista, tbproductos);
     }
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -218,23 +242,14 @@ public class ConsultaProducto extends javax.swing.JDialog {
         Tablas.filtro(valor, tbproductos);
     }//GEN-LAST:event_txtfiltroKeyPressed
 
-    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
-        char c = evt.getKeyChar();
-        if (Character.isSpaceChar(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtfiltroKeyReleased
-
     private void tbproductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproductosMousePressed
 
-        int i = 0;
+        int i;
 
         if (evt.getClickCount() == 2) {
             i = tbproductos.getSelectedRow();
             objeto = devuelveObjeto(tbproductos.getValueAt(i, 0).toString(), lista);
             System.out.println("objeto" + objeto.getNombreProducto());
-            pre.txtProduc.setText(objeto.getNombreProducto());
 
             if (objeto != null) {
                 this.setVisible(false);
@@ -242,16 +257,13 @@ public class ConsultaProducto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbproductosMousePressed
 
-    private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfiltroActionPerformed
-    public PrProductos getObji() {
-        return obj;
-    }
-
-    public void setObji(PrProductos obj) {
-        this.obj = obj;
-    }
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtfiltroKeyReleased
 
     public PrProductos getProducto() {
         return objeto;

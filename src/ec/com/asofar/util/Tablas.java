@@ -2653,7 +2653,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
         }
     }
-    
+
     public static void listarReporteFactura(List<ReporteFacturaDTO> lista, JTable Tabla) {
 
         int[] a = {5, 5, 20, 15, 15, 15, 15, 15};
@@ -2699,7 +2699,8 @@ public class Tablas {
 
         }
     }
-    public static void ListarProductosConsulta2(List<PrProductos> listaproducto, JTable Tabla, List<PrPrestaciones> listaPrest) {
+
+    public static void ListarProductosConsulta2(List<PrProductos> listaproducto, JTable Tabla) {
         int[] a = {50, 50, 50, 50, 50, 100, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -2712,46 +2713,41 @@ public class Tablas {
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaproducto.size(); i++) {
-            for (int j = 0; j < listaPrest.size(); j++) {
 
-                if (listaPrest.get(j).getIdPoducto() != null) {
-                    if (listaproducto.get(i).getPrProductosPK().getIdProducto()
-                            != listaPrest.get(j).getIdPoducto().intValue()) {
+            if (listaproducto.get(i) != null) {
 
-                        filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
-                        filas[1] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
-                        filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
-                        filas[3] = listaproducto.get(i).getPrArticulo().getNombreArticulo();
-                        filas[4] = listaproducto.get(i).getNombreProducto();
-                        filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
-                        filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+                filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
+                filas[1] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+                filas[2] = listaproducto.get(i).getPrArticulo().getPrSubgrupos().getNombre();
+                filas[3] = listaproducto.get(i).getPrArticulo().getNombreArticulo();
+                filas[4] = listaproducto.get(i).getNombreProducto();
+                filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+                filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
 
-                        model.addRow(filas);
+                model.addRow(filas);
 
-                    }
-
-                }
             }
 
-            Tabla.setModel(model);
-            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
-
         }
+
+        Tabla.setModel(model);
+        Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+        Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+        Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+        Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+        Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+        Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+        Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+        Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+
     }
-    //   }
+
 }
 
 class MyComboBoxEditor extends DefaultCellEditor {
