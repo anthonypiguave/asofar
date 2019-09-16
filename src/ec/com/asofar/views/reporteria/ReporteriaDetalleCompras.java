@@ -70,6 +70,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         txt_Numero.setText(objeto.getId_orden_compra().toString());
         txtFechaCreacion.setText(objeto.getFecha_aprobacion().toString());
         
+        
     }
     public void llenar_detalles(){
         listaDetalle = rep.listadoDetallesCompras(objeto);
