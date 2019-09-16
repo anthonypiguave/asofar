@@ -2065,7 +2065,7 @@ public class Tablas {
     }
 
     public static void listarTarifario(List<PrTarifario> listaT, JTable Tabla) {
-        int[] a = {200, 150, 200, 350, 400, 400, 250, 400};
+        int[] a = {400, 300, 300, 400, 600, 600, 400, 400};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2644,7 +2644,7 @@ public class Tablas {
         }
     }
     public static void listarPrestacionesDetalleTarifario(List<PrDetalleTarifario> listDetalleTari, List<PrPrestaciones> listaPrestacion, JTable Tabla) {
-        int[] a = {150, 200, 100, 100, 100, 200, 200, 100, 200, 200, 200};
+        int[] a = {700, 500, 500, 500, 500, 600, 400, 400, 400, 400, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
