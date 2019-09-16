@@ -10,6 +10,7 @@ import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
 import ec.com.asofar.daoext.ReporteProveedorDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
+import ec.com.asofar.util.Tablas;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -72,7 +73,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
     }
     public void llenar_detalles(){
         listaDetalle = rep.listadoDetallesCompras(objeto);
-         
+        Tablas.listarReporteDetalleCompra(listaDetalle, tbaListaComprasB); 
     }
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {
 //        super(parent, modal);
