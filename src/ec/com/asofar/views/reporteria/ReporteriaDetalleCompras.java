@@ -56,6 +56,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         objeto=obj;
         formularioProveedor();
         llenar_detalles();
+        totaless();
     } 
     public void formularioProveedor(){
         ReporteProveedorDTO objPro = rep.obtenerProveedor((Long)objeto.getId_proveedor());
@@ -104,7 +105,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
             for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
                 if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
                     // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
-                    total_total = total_total + listaDetalle.get(i).getDescuento();
+                    total_total = total_total + listaDetalle.get(i).getTotal();
                     txtIva.setText(rep.formatoNumero(total_total.toString()));
                 }
             }
