@@ -405,7 +405,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtnomprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomprActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtnomprActionPerformed
 
     private void txtidtarifarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidtarifarioActionPerformed
