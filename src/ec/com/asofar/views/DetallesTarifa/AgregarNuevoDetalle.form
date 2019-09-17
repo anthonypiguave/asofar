@@ -228,8 +228,8 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="txtds" alignment="0" pref="109" max="32767" attributes="0"/>
-                                          <Component id="txtmin" max="32767" attributes="0"/>
+                                          <Component id="txtpds" alignment="0" pref="109" max="32767" attributes="0"/>
+                                          <Component id="txtds" max="32767" attributes="0"/>
                                           <Component id="txtven" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -260,12 +260,12 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtds" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtpds" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtmin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtds" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Btncalcular" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -304,15 +304,15 @@
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtvcKeyTyped"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtds">
+            <Component class="javax.swing.JTextField" name="txtpds">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="14" style="1"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtdsActionPerformed"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtdsKeyTyped"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtpdsActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtpdsKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
@@ -323,15 +323,15 @@
                 <Property name="text" type="java.lang.String" value="PORCENTAJE DESCUENTO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtmin">
+            <Component class="javax.swing.JTextField" name="txtds">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="14" style="1"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtminActionPerformed"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtminKeyTyped"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtdsActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtdsKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnGrabar">

@@ -2647,13 +2647,13 @@ public class Tablas {
         }
     }
     public static void listarPrestacionesDetalleTarifario(List<PrDetalleTarifario> listDetalleTari, List<PrPrestaciones> listaPrestacion, JTable Tabla) {
-        int[] a = {700, 500, 500, 500, 500, 600, 400, 400, 400, 400, 200};
+        int[] a = {700, 500, 500, 500, 500, 600, 500, 500, 500, 500, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"detalle tarifario", "tarifario", "unidad servicio", "Empresa", "Sucursal", "nombre prestacion", "valor costo", "valor minimo venta", "valor venta", "valor descueto", "Estado",};
+        String[] b = {"Detalle tarifario", "Tarifario", "Unidad servicio", "Empresa", "Sucursal", "Nombre prestacion", "Valor minimo venta", "Valor descuento", "valor venta", "Porce.descuento", "Estado",};
         String[] Filas = new String[11];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);

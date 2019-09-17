@@ -95,9 +95,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtvc = new javax.swing.JTextField();
-        txtds = new javax.swing.JTextField();
+        txtpds = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtmin = new javax.swing.JTextField();
+        txtds = new javax.swing.JTextField();
         btnGrabar = new javax.swing.JButton();
         txtven = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -167,6 +167,21 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         });
 
+        txtpds.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtpds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpdsActionPerformed(evt);
+            }
+        });
+        txtpds.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpdsKeyTyped(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel10.setText("PORCENTAJE DESCUENTO:");
+
         txtds.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,21 +191,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         txtds.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtdsKeyTyped(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel10.setText("PORCENTAJE DESCUENTO:");
-
-        txtmin.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtminActionPerformed(evt);
-            }
-        });
-        txtmin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtminKeyTyped(evt);
             }
         });
 
@@ -255,8 +255,8 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtds, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                    .addComponent(txtmin)
+                                    .addComponent(txtpds, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                    .addComponent(txtds)
                                     .addComponent(txtven))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Btncalcular))
@@ -278,11 +278,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                     .addComponent(txtven, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtpds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(Btncalcular))
                 .addGap(18, 18, 18)
@@ -436,6 +436,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         }
 
+       
         PrDetalleTarifario pre = new PrDetalleTarifario();
 
 //        ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
@@ -453,8 +454,8 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         pre.setPrTarifario(prTarifario);
 
         pre.setValorCosto(Double.parseDouble((txtvc.getText())));
-        pre.setValorDescuento(Double.parseDouble((txtds.getText())));
-        pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
+        pre.setValorDescuento(Double.parseDouble((txtpds.getText())));
+        pre.setValorMinVenta(Double.parseDouble((txtds.getText())));
         pre.setValorVenta(Double.parseDouble((txtven.getText())));
         pre.setEstado("A");
         pre.setUsuarioCreacion(usu.getNombreUsuario());
@@ -476,9 +477,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnGrabarActionPerformed
 
-    private void txtminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtminActionPerformed
+    private void txtdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtminActionPerformed
+    }//GEN-LAST:event_txtdsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
@@ -528,11 +529,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvenActionPerformed
 
-    private void txtdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdsActionPerformed
+    private void txtpdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpdsActionPerformed
         // TODO add your handling code here:
 
 
-    }//GEN-LAST:event_txtdsActionPerformed
+    }//GEN-LAST:event_txtpdsActionPerformed
 
     private void idpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idpActionPerformed
         // TODO add your handling code here:
@@ -546,6 +547,14 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtvenKeyTyped
 
+    private void txtpdsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpdsKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtpdsKeyTyped
+
     private void txtdsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdsKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
@@ -553,14 +562,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtdsKeyTyped
-
-    private void txtminKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtminKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtminKeyTyped
 
     private void txtvcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvcKeyTyped
         char c = evt.getKeyChar();
@@ -576,13 +577,13 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         int entero1, entero2;
 
         Double cadena1 = Double.parseDouble(txtven.getText());
-       Integer cadena2 = Integer.valueOf(txtds.getText());
+       Integer cadena2 = Integer.valueOf(txtpds.getText());
 
 
        Double res = (cadena1*cadena2)/100;
 
 
-        txtmin.setText(res.toString());
+        txtds.setText(res.toString());
 
     }//GEN-LAST:event_BtncalcularActionPerformed
     public void cargar() {
@@ -676,9 +677,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtds;
     public javax.swing.JTextField txtidtarifario;
-    private javax.swing.JTextField txtmin;
     private javax.swing.JTextField txtnompr;
     private javax.swing.JTextField txtnomuni;
+    private javax.swing.JTextField txtpds;
     private javax.swing.JTextField txtvc;
     private javax.swing.JTextField txtven;
     // End of variables declaration//GEN-END:variables
