@@ -10,6 +10,7 @@ import ec.com.asofar.dao.InTipoDocumentoJpaController;
 import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ProductoCadena;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
 import ec.com.asofar.daoext.ReporteFacturaDTO;
@@ -2521,10 +2522,12 @@ public class Tablas {
         String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
+//        ProductoCadena k = new ProductoCadena();
         for (int i = 0; i < lisProdVen.size(); i++) {
             filas[0] = "" + lisProdVen.get(i).getId_prestacion();
             filas[1] = lisProdVen.get(i).getCodigoBarra();
-            filas[2] = lisProdVen.get(i).getNombre_producto();
+//            filas[2] = lisProdVen.get(i).getNombre_producto();
+            filas[2] = ProductoCadena.obtenerCadena(lisProdVen.get(i).getId_producto());
             filas[3] = "" + lisProdVen.get(i).getSaldo_actual();
             filas[4] = "" + lisProdVen.get(i).getValor_venta();
             filas[5] = "" + lisProdVen.get(i).getValor_descuento();
@@ -2661,14 +2664,18 @@ public class Tablas {
             Filas[3] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getSeEmpresa().getNombreComercial();
             Filas[4] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getNombreComercial();
 //            System.out.println("deta lle "+listDetalleTari.get(i).getIdPrestacion());
-            for (int j = 0; j < listaPrestacion.size(); j++) {
+//            for (int j = 0; j < listaPrestacion.size(); j++) {
 //                System.out.println("prest "+listaPrestacion.get(j).getIdPrestacion());
-                if (BigInteger.valueOf(listaPrestacion.get(j).getIdPrestacion()) == listDetalleTari.get(i).getIdPrestacion()) {
-                    System.out.println("siiiiii");
-                    Filas[5] = listaPrestacion.get(j).getNombrePrestacion();
+//                System.out.println("detalle "+listDetalleTari.get(i).getIdPrestacion());
+                
+//                if (listaPrestacion.get(j).getIdPrestacion().equals(listDetalleTari.get(i).getIdPrestacion())) {
+//                    System.out.println("siiiiii");
+//                    
+                    PrPrestaciones pr = ObtenerDTO.ObtenerPrPrestacionesOn(listDetalleTari.get(i).getIdPrestacion());
+                    Filas[5] = pr.getNombrePrestacion();
 //                    Filas[5] = listDetalleTari.get(i).getUsuarioCreacion();
-                }
-            }
+//                }
+//            }
             Filas[6] = "" + listDetalleTari.get(i).getValorCosto();
             Filas[7] = "" + listDetalleTari.get(i).getValorMinVenta();
             Filas[8] = "" + listDetalleTari.get(i).getValorVenta();

@@ -1098,6 +1098,8 @@ public class Venta extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
             }
         } else {
+            int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
+            if (r == JOptionPane.YES_OPTION) {
 //            guardarKardex2(listaDetFactura);
             VeFactura cabFact = new VeFactura();
             InMovimientos pkMovimiento = null;
@@ -1145,6 +1147,16 @@ public class Venta extends javax.swing.JInternalFrame {
 
                 InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
                 try {
+                    /*
+                    240  
+                    160  
+                    
+                    ASOFAR institucion acojedora
+                    tutor institucional  el de asofar 
+                    tutor academico ing. tapia
+                    noviembre a marzo yaaaaaaa
+                    
+                    */
                     cabMovimiento.setSeSucursal(suc);
                     cabMovimiento.setInTipoDocumento(tipoDocumento);
                     cabMovimiento.setInTipoMovimiento(tipoMovimiento);
@@ -1184,12 +1196,17 @@ public class Venta extends javax.swing.JInternalFrame {
                 }
 
                 guardarKardex2(listaDetFactura);
+                 JOptionPane.showMessageDialog(null, "");
 //                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
-                Iv.setVisible(true);
+//                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
+//                Iv.setVisible(true);
 
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+//             JOptionPane.showMessageDialog(null, "");
+            }else{
+            
             }
 
         }

@@ -516,7 +516,11 @@ public class ObtenerDTO {
         List<PrPrestaciones> lista = control.findPrPrestacionesEntities();
 
         for (int i = 0; i < lista.size(); i++) {
-            if (BigInteger.valueOf(lista.get(i).getIdPrestacion()) == id) {
+//            System.out.println("iiiiii"+lista.get(i).getNombrePrestacion());
+//            System.out.println("id ajjajaja"+id);
+//            System.out.println("listA "+lista.get(i).getIdPrestacion());
+            if (lista.get(i).getIdPrestacion() == Long.valueOf(id.toString())) {
+               
                 dto = lista.get(i);
                 break;
             }
