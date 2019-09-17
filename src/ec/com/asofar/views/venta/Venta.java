@@ -1153,13 +1153,20 @@ public class Venta extends javax.swing.JInternalFrame {
                     
                     ASOFAR institucion acojedora
                     tutor institucional  el de asofar 
-                    tutor academico ing. tapia
+                    tutor academico --------
                     noviembre a marzo yaaaaaaa
                     
                     */
                     cabMovimiento.setSeSucursal(suc);
+//              InTipoDocumento tipoDocumento =new InTipoDocumento();
+//              tipoDocumento.setIdTipoDocumento(Long.valueOf(5));
                     cabMovimiento.setInTipoDocumento(tipoDocumento);
+//                    System.out.println(" gf "+tipoDocumento.getNombreDocumento());
+//InTipoMovimiento tipoMovimiento = new InTipoMovimiento();
+//tipoMovimiento.setIdTipoMovimiento(Long.valueOf(1));
                     cabMovimiento.setInTipoMovimiento(tipoMovimiento);
+//              InMotivos tipoMotivos = new InMotivos();
+//              tipoMotivos.setIdMotivo(Long.valueOf(2));
                     cabMovimiento.setInMotivos(tipoMotivos);
                     cabMovimiento.setFechaSistema(d);
                     cabMovimiento.setAnioDocumento(fecha);
