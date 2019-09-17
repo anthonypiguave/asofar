@@ -103,6 +103,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        Btncalcular = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         idp = new javax.swing.JTextField();
         idu = new javax.swing.JTextField();
@@ -230,6 +231,13 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         });
 
+        Btncalcular.setText("CALCULAR");
+        Btncalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtncalcularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -245,16 +253,19 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtds, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                .addComponent(txtmin)
-                                .addComponent(txtven))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtds, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                    .addComponent(txtmin)
+                                    .addComponent(txtven))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Btncalcular))
                             .addComponent(txtvc, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(23, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65))))
         );
@@ -272,7 +283,8 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(Btncalcular))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtvc, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -361,7 +373,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtnompr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(idp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -406,46 +418,45 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         for (int i = 0; i < list.size(); i++) {
             PrDetalleTarifario deta = new PrDetalleTarifario();
             deta = list.get(i);
-            
-            if (list.get(i).getIdPrestacion()!= null) {
-                
-                System.out.println(" vvv "+ list.get(i).getIdPrestacion());
-                System.out.println("hji"+objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
-            
-            if (list.get(i).getIdPrestacion().intValue() == objpres.getInPrestacionesPorServiciosPK().getIdPrestacion()) {
-                deta.setEstado("I");
-                try {
-                    prp.edit(deta);
-                } catch (Exception ex) {
-                    Logger.getLogger(AgregarNuevoDetalle.class.getName()).log(Level.SEVERE, null, ex);
-                }
 
-            }
+            if (list.get(i).getIdPrestacion() != null) {
+
+                System.out.println(" vvv " + list.get(i).getIdPrestacion());
+                System.out.println("hji" + objpres.getInPrestacionesPorServiciosPK().getIdPrestacion());
+
+                if (list.get(i).getIdPrestacion().intValue() == objpres.getInPrestacionesPorServiciosPK().getIdPrestacion()) {
+                    deta.setEstado("I");
+                    try {
+                        prp.edit(deta);
+                    } catch (Exception ex) {
+                        Logger.getLogger(AgregarNuevoDetalle.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
             }
         }
-        
-        
+
         PrDetalleTarifario pre = new PrDetalleTarifario();
 
 //        ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
 //        objpres = cp.obtener89();
 /////enviar el detalle tarifario a I donde la pretacion sea igua a la prestacion
         //que envias y el estado sea A
-        PrTarifarioPK prTarifarioPK= new PrTarifarioPK();
+        PrTarifarioPK prTarifarioPK = new PrTarifarioPK();
         prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
         prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
         prTarifarioPK.setIdTarifario(tp.getPrTarifarioPK().getIdTarifario());
 //        prTarifarioPK.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
         //setear compuestas
-         PrTarifario prTarifario= new PrTarifario();
+        PrTarifario prTarifario = new PrTarifario();
         prTarifario.setPrTarifarioPK(prTarifarioPK);
         pre.setPrTarifario(prTarifario);
-      
+
         pre.setValorCosto(Double.parseDouble((txtvc.getText())));
         pre.setValorDescuento(Double.parseDouble((txtds.getText())));
         pre.setValorMinVenta(Double.parseDouble((txtmin.getText())));
         pre.setValorVenta(Double.parseDouble((txtven.getText())));
-pre.setEstado("A");
+        pre.setEstado("A");
         pre.setUsuarioCreacion(usu.getNombreUsuario());
         pre.setIdPrestacion(BigInteger.valueOf(Long.valueOf(idp.getText())));
         pre.setIdUnidadServicio(BigInteger.valueOf(Long.valueOf(idu.getText())));
@@ -508,7 +519,7 @@ pre.setEstado("A");
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
- setVisible(false);
+        setVisible(false);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -519,8 +530,8 @@ pre.setEstado("A");
 
     private void txtdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdsActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_txtdsActionPerformed
 
     private void idpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idpActionPerformed
@@ -528,36 +539,52 @@ pre.setEstado("A");
     }//GEN-LAST:event_idpActionPerformed
 
     private void txtvenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvenKeyTyped
-     char c =evt.getKeyChar();
-     if (Character.isLetter(c)) {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             getToolkit().beep();
             evt.consume();
-          }  
+        }
     }//GEN-LAST:event_txtvenKeyTyped
 
     private void txtdsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdsKeyTyped
-      char c =evt.getKeyChar();
-     if (Character.isLetter(c)) {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             getToolkit().beep();
             evt.consume();
-          }
+        }
     }//GEN-LAST:event_txtdsKeyTyped
 
     private void txtminKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtminKeyTyped
-     char c =evt.getKeyChar();
-     if (Character.isLetter(c)) {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             getToolkit().beep();
             evt.consume();
-          }
+        }
     }//GEN-LAST:event_txtminKeyTyped
 
     private void txtvcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvcKeyTyped
-        char c =evt.getKeyChar();
-     if (Character.isLetter(c)) {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             getToolkit().beep();
             evt.consume();
-          }
+        }
     }//GEN-LAST:event_txtvcKeyTyped
+
+    private void BtncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtncalcularActionPerformed
+
+      
+        int entero1, entero2;
+
+        Double cadena1 = Double.parseDouble(txtven.getText());
+       Integer cadena2 = Integer.valueOf(txtds.getText());
+
+
+       Double res = (cadena1*cadena2)/100;
+
+
+        txtmin.setText(res.toString());
+
+    }//GEN-LAST:event_BtncalcularActionPerformed
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getDescripcion()));
 //        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
@@ -630,6 +657,7 @@ pre.setEstado("A");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btncalcular;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JTextField idp;
     private javax.swing.JTextField idu;

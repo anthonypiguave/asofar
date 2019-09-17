@@ -2607,17 +2607,17 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD.DET", "SUBGRUPO", "ARTICULO-PRESENTACION", "TIP.MEDIDA", "SUBTOTAL", "T.IVA","DESCUENTO", "T.COMPRA"};
+        String[] Co = {"COD.DET", "DESCRIPCION","N° LOTE","FECHA_CADUCIDAD", "SUBTOTAL", "T.IVA","DESCUENTO", "T.COMPRA"};
         String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
             // if (lista.get(i).getEstado().equals("P")) {
             Filas[0] = "" + lista.get(i).getId_detalle_orden_compra().toString();
-            Filas[1] = lista.get(i).getNombre_producto().toString();
+            Filas[1] = lista.get(i).getDescripcion();
             //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
-            Filas[2] = "" + lista.get(i).getNombrePresentacion().toString();
-            Filas[3] = lista.get(i).getNombre_producto().toString();
+            Filas[2] = "" + lista.get(i).getLote_fabricacion().toString();
+            Filas[3] = lista.get(i).getFecha_caducidad().toString();
             Filas[4] = lista.get(i).getSubtotal().toString();
             Filas[5] = lista.get(i).getIva().toString();
             Filas[6] = lista.get(i).getDescuento().toString();
@@ -2725,7 +2725,10 @@ public class Tablas {
             Filas[0] = "" + lista.get(i).getId_factura().toString();
             Filas[1] = lista.get(i).getNombre_caja().toString();
             //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
-            Filas[2] = "" + lista.get(i).getFecha_facturacion().toString();
+            if (lista.get(i).getFecha_facturacion() == null){
+                Filas[2] ="---";
+            }
+            Filas[2] = lista.get(i).getFecha_facturacion().toString();
             Filas[3] = lista.get(i).getNombre_comercial_suc().toString();
             Filas[4] = lista.get(i).getSubtotal().toString();
             Filas[5] = lista.get(i).getTotal_descuento().toString();

@@ -102,7 +102,7 @@
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtnompr" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
                           <Component id="idp" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -226,19 +226,23 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txtds" alignment="0" pref="109" max="32767" attributes="0"/>
-                                      <Component id="txtmin" max="32767" attributes="0"/>
-                                      <Component id="txtven" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txtds" alignment="0" pref="109" max="32767" attributes="0"/>
+                                          <Component id="txtmin" max="32767" attributes="0"/>
+                                          <Component id="txtven" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="Btncalcular" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="txtvc" min="-2" pref="109" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                               <Component id="btnGrabar" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace pref="74" max="32767" attributes="0"/>
+                              <EmptySpace pref="86" max="32767" attributes="0"/>
                               <Component id="jButton3" min="-2" pref="106" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                           </Group>
@@ -263,6 +267,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtmin" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Btncalcular" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -385,6 +390,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="Btncalcular">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="CALCULAR"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtncalcularActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

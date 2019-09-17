@@ -202,7 +202,9 @@ public class ReporteriaExt {
                 + "pr_productos.id_tipo_presentacion,\n"
                 + "pr_productos.nombre_producto,\n"
                 + "ifnull(pr_productos.receta,'--'),\n"
-                + "pr_tipo_presentacion.nombre\n"
+                + "pr_tipo_presentacion.nombre,\n"
+                + "ifnull(co_detalle_orden_compra.lote_fabricacion,'---'),\n"
+                + "co_detalle_orden_compra.fecha_caducidad\n"
                 + "from co_orden_compras\n"
                 + "inner join co_detalle_orden_compra\n"
                 + "on co_orden_compras.id_orden_compra = co_detalle_orden_compra.id_orden_compra\n"
@@ -235,6 +237,8 @@ public class ReporteriaExt {
               ob.setNombre_producto(String.valueOf(obj[15].toString()));
               ob.setReceta(String.valueOf(obj[16].toString()));
               ob.setNombrePresentacion(String.valueOf(obj[17].toString()));
+              ob.setLote_fabricacion(String.valueOf(obj[18].toString()));
+              ob.setFecha_caducidad(Date.valueOf(obj[19].toString()));
               listaDetalle.add(ob);
             }
 
