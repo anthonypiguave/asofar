@@ -97,7 +97,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
                 if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
                     // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
                     total_descuento = total_descuento + listaDetalle.get(i).getDescuento();
-                    txtIva.setText(rep.formatoNumero(total_descuento.toString()));
+                    txtDescuento.setText(rep.formatoNumero(total_descuento.toString()));
                 }
             }
         }
@@ -106,7 +106,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
                 if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
                     // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
                     total_total = total_total + listaDetalle.get(i).getTotal();
-                    txtIva.setText(rep.formatoNumero(total_total.toString()));
+                    txtTotal.setText(rep.formatoNumero(total_total.toString()));
                 }
             }
         }
