@@ -511,6 +511,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     private void BtnBuscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBuscar1KeyPressed
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             System.out.println("valeeeeeeeeeeeeeeeeeeeee");
+            busquedaChosserQuery();
         }
     }//GEN-LAST:event_BtnBuscar1KeyPressed
 

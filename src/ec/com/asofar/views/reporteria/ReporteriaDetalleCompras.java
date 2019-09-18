@@ -464,7 +464,6 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
                 "      CODIGO", "           PRODUCTO", "                 MARCA", "                  TIPO", "             MEDIDA", "       CANTIDAD"
             }
         ));
-        tbaListaComprasB.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tbaListaComprasB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbaListaComprasBMousePressed(evt);
