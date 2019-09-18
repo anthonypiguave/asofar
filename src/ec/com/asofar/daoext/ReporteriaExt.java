@@ -331,38 +331,42 @@ public class ReporteriaExt {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
         List<ReporteFacturaDTO> listaCompra = null;
-        Query q = em.createNativeQuery("SELECT  distinct\n" +
-                    "        c.id_factura,\n" +
-                    "        c.id_empresa,\n" +
-                    "        c.id_sucursal,\n" +
-                    "        c.id_caja,\n" +
-                    "        c.id_usuario,\n" +
-                    "        c.id_cliente,\n" +
-                    "        c.fecha_facturacion,\n" +
-                    "        ifnull(c.subtotal,0) as total_subtotal,\n" +
-                    "        ifnull(c.total_ice,0) as total_ice,\n" +
-                    "        ifnull(c.total_descuento,0) as total_descuento,\n" +
-                    "        ifnull(c.total_base_iva,0) as base_iva,\n" +
-                    "        ifnull(c.total_base_no_iva,0) as base_no_iva,\n" +
-                    "        ifnull(c.total_iva,0) as base_no_iva,\n" +
-                    "		ifnull(c.total_facturado,0) as total_fact,\n" +
-                    "        c.despachado,\n" +
-                    "        caja.nombre,\n" +
-                    "        e.nombre_comercial,\n" +
-                    "        s.nombre_comercial\n" +
-                    "   FROM ve_factura as c\n" +
-                    "   inner join ve_factura_detalle as d\n" +
-                    "   	  on  c.id_factura = d.id_factura\n" +
-                    "     -- and  c.estado = 'C'\n" +
-                    "	  and  c.fecha_facturacion\n" +
-                    "              BETWEEN concat('" + desde + "',' 00:00:00')\n"+
-                    "              and concat('" + hasta + "',' 23:59:59')\n"+
-                    "   inner join ve_caja as caja\n" +
-                    "    on caja.id_caja = c.id_caja\n" +
-                    "   inner join se_empresa as e\n" +
-                    "	on e.id_empresa = c.id_empresa\n" +
-                    "   inner join se_sucursal as s\n" +
-                    "    on s.id_sucursal = c.id_sucursal;");
+        Query q = em.createNativeQuery("SELECT  DISTINCT\n" +
+                            "         c.id_factura,\n" +
+                            "         c.id_empresa,\n" +
+                            "         c.id_sucursal,\n" +
+                            "         c.id_caja,\n" +
+                            "         c.id_usuario,\n" +
+                            "         c.id_cliente,\n" +
+                            "         DATE_FORMAT(c.fecha_facturacion,'%Y-%m-%d') AS fecha_facturacion,\n" +
+                            "         IFNULL(c.subtotal,0) AS total_subtotal,\n" +
+                            "         IFNULL(c.total_ice,0) AS total_ice,\n" +
+                            "         IFNULL(c.total_descuento,0) AS total_descuento,\n" +
+                            "         IFNULL(c.total_base_iva,0) AS base_iva,\n" +
+                            "         IFNULL(c.total_base_no_iva,0) AS base_no_iva,\n" +
+                            "         IFNULL(c.total_iva,0) AS base_no_iva,\n" +
+                            " 		IFNULL(c.total_facturado,0) AS total_fact,\n" +
+                            "         c.despachado,\n" +
+                            "         caja.nombre,\n" +
+                            "         e.nombre_comercial,\n" +
+                            "         s.nombre_comercial,\n" +
+                            "         d.cantidad,\n" +
+                            "         pres.id_poducto\n" +
+                            "    FROM ve_factura AS c\n" +
+                            "    INNER JOIN ve_factura_detalle AS d\n" +
+                            "    	  ON  c.id_factura = d.id_factura\n" +
+                            "      -- and  c.estado = 'C'\n" +
+                            "	AND  c.fecha_facturacion\n" +
+                            "         BETWEEN concat('" + desde + "',' 00:00:00')\n"+
+                            "         and concat('" + hasta + "',' 23:59:59')\n"+
+                            "    INNER JOIN ve_caja AS caja\n" +
+                            "     ON caja.id_caja = c.id_caja\n" +
+                            "    INNER JOIN se_empresa AS e\n" +
+                            " 	ON e.id_empresa = c.id_empresa\n" +
+                            "    INNER JOIN se_sucursal AS s\n" +
+                            "     ON s.id_sucursal = c.id_sucursal\n" +
+                            "    INNER JOIN pr_prestaciones AS pres\n" +
+                            "     ON pres.id_prestacion = d.id_prestaciones;");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteFacturaDTO>();
         try {
