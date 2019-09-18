@@ -408,6 +408,56 @@ public class ReporteriaExt {
         return listaCompra;
     }
     
+    public static List<ReporteDetalleFacturaDTO> listadoDetallesFactura(ReporteFacturaDTO objcab) {
+        Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+
+        List<ReporteDetalleFacturaDTO> listaDetalle = null;
+        Query q = em.createNativeQuery("select \n" +
+                    "	ve_factura_detalle.id_factura,\n" +
+                    "    ve_factura_detalle.id_factura_detalle,\n" +
+                    "    ve_factura_detalle.linea_detalle,\n" +
+                    "    ve_factura_detalle.descripcion,\n" +
+                    "    ve_factura_detalle.precio_unitario_venta,\n" +
+                    "    ve_factura_detalle.subtotal,\n" +
+                    "    ve_factura_detalle.valor_iva,\n" +
+                    "    ve_factura_detalle.valor_descuento,\n" +
+                    "    ve_factura_detalle.valor_total,\n" +
+                    "    ve_factura_detalle.estado,\n" +
+                    "    ve_factura_detalle.cantidad,\n" +
+                    "    pr_prestaciones.id_poducto\n" +
+                    "from ve_factura \n" +
+                    "inner join ve_factura_detalle\n" +
+                    "on ve_factura.id_factura = ve_factura_detalle.id_factura\n" +
+                    "inner join pr_prestaciones \n" +
+                    "on pr_prestaciones.id_prestacion = ve_factura_detalle.id_prestaciones\n" +
+                    "where ve_factura_detalle.id_factura = " + objcab.getId_factura().toString() + ";");
+        List<Object[]> listobj = q.getResultList();
+        listaDetalle = new ArrayList<ReporteDetalleFacturaDTO>();
+        try {
+            for (Object[] obj : listobj) {
+                ReporteDetalleFacturaDTO ob = new ReporteDetalleFacturaDTO();
+              ob.setId_factura(Long.parseLong(obj[0].toString()));              
+              ob.setId_factura_detalle(Long.parseLong(obj[1].toString()));
+              ob.setLinea_detalle(Long.parseLong(obj[2].toString()));//
+              ob.setDescripcion((obj[3].toString()));
+              ob.setPrecio_unitario_venta(Double.parseDouble(obj[4].toString()));
+              ob.setSubtotal(Double.parseDouble(obj[5].toString()));
+              ob.setValor_iva(Double.parseDouble(obj[6].toString()));
+              ob.setValor_descuento(Double.parseDouble(obj[7].toString()));
+              ob.setValor_total(Double.parseDouble(obj[8].toString()));
+              ob.setEstado(String.valueOf(obj[9].toString()));
+              ob.setCantidad(Long.parseLong(obj[10].toString()));
+              ob.setId_producto(Long.parseLong(obj[11].toString()));
+              listaDetalle.add(ob);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaDetalle;
+
+    }
     private long showId(EntityManager em) {
         String nativeQuery = "SELECT max(id_orden_compra) FROM co_orden_compras;";
         Query query = em.createNativeQuery(nativeQuery);
@@ -495,7 +545,7 @@ public class ReporteriaExt {
         }
         return obj;
     }
-
+    
     public static java.util.Date fechaActual() {
         java.util.Date fechaParseada = new java.util.Date();
         return fechaParseada;
