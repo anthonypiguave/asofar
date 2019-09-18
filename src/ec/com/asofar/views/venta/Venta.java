@@ -47,9 +47,18 @@ import ec.com.asofar.dto.VeFacturaPK;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
+import ec.com.asofar.views.caja.Cierre_Caja;
 import ec.com.asofar.views.clientes.cliente_agregar;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
 import java.beans.PropertyVetoException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -60,6 +69,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -148,6 +165,82 @@ public class Venta extends javax.swing.JInternalFrame {
         cargartxt();
         pVender();
         consFinal();
+    }
+
+    public class PrintEpson implements Printable {
+
+        public List<String> getPrinters() {
+            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            PrintService printServices[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+            List<String> printerList = new ArrayList<String>();
+            for (PrintService printerService : printServices) {
+                printerList.add(printerService.getName());
+            }
+            return printerList;
+        }
+
+        @Override
+        public int print(Graphics g, PageFormat pf, int page)
+                throws PrinterException {
+            if (page > 0) {
+                /* We have only one page, and 'page' is zero-based */
+                return NO_SUCH_PAGE;
+            }
+            /*
+	         * User (0,0) is typically outside the imageable area, so we must
+	         * translate by the X and Y values in the PageFormat to avoid clipping
+             */
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.translate(pf.getImageableX(), pf.getImageableY());
+            /* Now we perform our rendering */
+            g.setFont(new Font("Roman", 0, 8));
+            g.drawString("Hello world !", 0, 10);
+            return PAGE_EXISTS;
+        }
+
+        public void printString(String printerName, String text) {
+            // find the printService of name printerName
+            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+            PrintService service = findPrintService("JAPOS", printService);
+            DocPrintJob job = service.createPrintJob();
+            try {
+                byte[] bytes;
+                // important for umlaut chars
+                bytes = text.getBytes("CP437");
+                Doc doc = new SimpleDoc(bytes, flavor, null);
+                job.print(doc, null);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        public void printBytes(String printerName, byte[] bytes) {
+            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+            PrintService service = findPrintService(printerName, printService);
+            DocPrintJob job = service.createPrintJob();
+            try {
+                Doc doc = new SimpleDoc(bytes, flavor, null);
+                job.print(doc, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        private PrintService findPrintService(String printerName,
+                PrintService[] services) {
+            for (PrintService service : services) {
+                if (service.getName().equalsIgnoreCase(printerName)) {
+                    return service;
+                }
+            }
+            return null;
+        }
     }
 
     public void consFinal() {
@@ -1043,48 +1136,48 @@ public class Venta extends javax.swing.JInternalFrame {
 
             BigInteger cantidadMod = new BigInteger(valor);
             cantidadModi = cantidadMod;
-            Long id =(Long)tba_detalle.getValueAt(i, 1);
+            Long id = (Long) tba_detalle.getValueAt(i, 1);
             ListProdVent = selectProdVent.listarProductoVenta();
             for (int j = 0; j < ListProdVent.size(); j++) {
-                if(ListProdVent.get(j).getId_prestacion().equals(id)){
+                if (ListProdVent.get(j).getId_prestacion().equals(id)) {
 //                    System.out.println("cantidadaadd "+id);
-                   BigInteger ca =  BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
+                    BigInteger ca = BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
 
-            int out = cantidadMod.compareTo(ca);
+                    int out = cantidadMod.compareTo(ca);
 //            int out = cantidadMod.compareTo(cantidadStock);
-            if (out == 1) {
+                    if (out == 1) {
 
-                JOptionPane.showMessageDialog(null, "Verifique Stock");
-                listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
-                Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                        JOptionPane.showMessageDialog(null, "Verifique Stock");
+                        listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
+                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
 
-            } else {
+                    } else {
 
-                String ivaS = tba_detalle.getValueAt(i, 6).toString();
-                Double ivaT = Double.valueOf(ivaS.replace(",", "."));
-                String precioS = tba_detalle.getValueAt(i, 4).toString();
-                Double precioT = Double.valueOf(precioS.replace(",", "."));
-                String descuentoS = tba_detalle.getValueAt(i, 5).toString();
-                Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
+                        String ivaS = tba_detalle.getValueAt(i, 6).toString();
+                        Double ivaT = Double.valueOf(ivaS.replace(",", "."));
+                        String precioS = tba_detalle.getValueAt(i, 4).toString();
+                        Double precioT = Double.valueOf(precioS.replace(",", "."));
+                        String descuentoS = tba_detalle.getValueAt(i, 5).toString();
+                        Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
 
-                Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
-                Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
-                Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
-                Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
+                        Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
+                        Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
+                        Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
+                        Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
 
-                listaDetFactura.get(i).setCantidad(cantidadMod);
-                listaDetFactura.get(i).setValorIva(IvaMod);
-                listaDetFactura.get(i).setSubtotal(subt);
-                listaDetFactura.get(i).setValorTotal(total);
-                listaDetFactura.get(i).setValorDescuento(Desc);
-                Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                        listaDetFactura.get(i).setCantidad(cantidadMod);
+                        listaDetFactura.get(i).setValorIva(IvaMod);
+                        listaDetFactura.get(i).setSubtotal(subt);
+                        listaDetFactura.get(i).setValorTotal(total);
+                        listaDetFactura.get(i).setValorDescuento(Desc);
+                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
 
-                Totalizar();
-                TotalizarIva();
-                TotalizarDescuento();
-                TotalizarSubtotal();
-            }/**/
-                            }/**/
+                        Totalizar();
+                        TotalizarIva();
+                        TotalizarDescuento();
+                        TotalizarSubtotal();
+                    }/**/
+                }/**/
             }/**/
         } catch (Exception e) {
             e.printStackTrace();
@@ -1101,54 +1194,79 @@ public class Venta extends javax.swing.JInternalFrame {
             int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
 //            guardarKardex2(listaDetFactura);
-            VeFactura cabFact = new VeFactura();
-            InMovimientos pkMovimiento = null;
-            VeFacturaDetalle detFact = new VeFacturaDetalle();
-            VeFacturaDetalleJpaController detFactController = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
+                VeFactura cabFact = new VeFactura();
+                InMovimientos pkMovimiento = null;
+                VeFacturaDetalle detFact = new VeFacturaDetalle();
+                VeFacturaDetalleJpaController detFactController = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-            cabFact.setIdCaja(BigInteger.valueOf(idCaja));
-            cabFact.setSeSucursal(suc);
-            cabFact.setIdCliente(idCliente);
-            cabFact.setSubtotal(VGTsubtotal);
-            cabFact.setTotalIva(VGTiva);
-            cabFact.setTotalDescuento(VGTdescuento);
-            cabFact.setTotalFacturado(VGTtotal);
-            cabFact.setFechaFacturacion(d);
-            cabFact.setDespachado("SI");
-            try {
-                VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
-                for (int i = 0; i < listaDetFactura.size(); i++) {
-
-                    detFact.setVeFactura(pkFactura);
-                    detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
-                    detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-
-                    detFact.getVeFacturaDetallePK().setIdPrestaciones(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones());
-                    detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
-                    detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
-                    detFact.setCantidad(listaDetFactura.get(i).getCantidad());
-                    detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
-                    detFact.setSubtotal(listaDetFactura.get(i).getSubtotal());
-                    detFact.setValorIva(listaDetFactura.get(i).getValorIva());
-                    detFact.setValorDescuento(listaDetFactura.get(i).getValorDescuento());
-                    detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
-                    detFact.setEstado("A");
-                    detFact.setUsuarioCreacion(usu.getIdUsuario());
-                    detFact.setFechaCreacion(d);
-
-                    detFactController.create(detFact);
-                }
-/////////// AGREGANDO A MOVIMIENTO
-                InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
-                InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-                InMovimientos cabMovimiento = new InMovimientos();
-                InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("VENTAS");
-                InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
-                InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("VENTA CLIENTE FINAL");
-
-                InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
+                cabFact.setIdCaja(BigInteger.valueOf(idCaja));
+                cabFact.setSeSucursal(suc);
+                cabFact.setIdCliente(idCliente);
+                cabFact.setSubtotal(VGTsubtotal);
+                cabFact.setTotalIva(VGTiva);
+                cabFact.setTotalDescuento(VGTdescuento);
+                cabFact.setTotalFacturado(VGTtotal);
+                cabFact.setFechaFacturacion(d);
+                cabFact.setDespachado("SI");
                 try {
-                    /*
+                    VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
+                    for (int i = 0; i < listaDetFactura.size(); i++) {
+
+                        detFact.setVeFactura(pkFactura);
+                        detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
+                        detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
+
+                        detFact.getVeFacturaDetallePK().setIdPrestaciones(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones());
+                        detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
+                        detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
+                        detFact.setCantidad(listaDetFactura.get(i).getCantidad());
+                        detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
+                        detFact.setSubtotal(listaDetFactura.get(i).getSubtotal());
+                        detFact.setValorIva(listaDetFactura.get(i).getValorIva());
+                        detFact.setValorDescuento(listaDetFactura.get(i).getValorDescuento());
+                        detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
+                        detFact.setEstado("A");
+                        detFact.setUsuarioCreacion(usu.getIdUsuario());
+                        detFact.setFechaCreacion(d);
+
+                        detFactController.create(detFact);
+                    }
+
+                    Venta.PrintEpson printerService = new Venta.PrintEpson();
+                    System.out.println(printerService.getPrinters());
+                    //print some stuff. Change the printer name to your thermal printer name.
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "  *              VENTA          *  \n");
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "\n    N° CAJA: " + txt_NumeroCaja.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n    CAJA: " + txt_NombreCaja.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n    CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "      N° DE VENTA: " + txtIdentificacion.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "          NOMBRE DEL CLIENTE: " + txtNombre.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     APELLIDO DEL CLIENTE: " + txtApellido.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                  IDENTIFICACION : " + txtTipoIdent.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     CORREO DEL CLIENTE: " + txtEmail.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     TELEFONO DEL CLIENTE: " + txtTelefono.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     DIRECCION DEL CLIENTE: " + txtDireccion.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                               SUBTOTAL: " + txtSubtotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                           DESCUENTO: " + txtDescuento.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                           IVA: " + txtIva.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                       TOTAL A PAGAR: " + txtTotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    byte[] cutP = new byte[]{0x1d, 'V', 1};
+                    printerService.printBytes("EPSON-TM-T20II", cutP);
+
+/////////// AGREGANDO A MOVIMIENTO
+                    InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
+                    InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+                    InMovimientos cabMovimiento = new InMovimientos();
+                    InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("VENTAS");
+                    InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
+                    InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("VENTA CLIENTE FINAL");
+
+                    InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
+                    try {
+                        /*
                     240  
                     160  
                     
@@ -1157,64 +1275,64 @@ public class Venta extends javax.swing.JInternalFrame {
                     tutor academico --------
                     noviembre a marzo yaaaaaaa
                     
-                    */
-                    cabMovimiento.setSeSucursal(suc);
+                         */
+                        cabMovimiento.setSeSucursal(suc);
 //              InTipoDocumento tipoDocumento =new InTipoDocumento();
 //              tipoDocumento.setIdTipoDocumento(Long.valueOf(5));
-                    cabMovimiento.setInTipoDocumento(tipoDocumento);
+                        cabMovimiento.setInTipoDocumento(tipoDocumento);
 //                    System.out.println(" gf "+tipoDocumento.getNombreDocumento());
 //InTipoMovimiento tipoMovimiento = new InTipoMovimiento();
 //tipoMovimiento.setIdTipoMovimiento(Long.valueOf(1));
-                    cabMovimiento.setInTipoMovimiento(tipoMovimiento);
+                        cabMovimiento.setInTipoMovimiento(tipoMovimiento);
 //              InMotivos tipoMotivos = new InMotivos();
 //              tipoMotivos.setIdMotivo(Long.valueOf(2));
-                    cabMovimiento.setInMotivos(tipoMotivos);
-                    cabMovimiento.setFechaSistema(d);
-                    cabMovimiento.setAnioDocumento(fecha);
-                    cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
-                    cabMovimiento.setEstado("F");
-                    cabMovimiento.setFechaFactura(d);
-                    cabMovimiento.setUsuarioCreacion(usu.getIdUsuario());
-                    cabMovimiento.setFechaCreacion(d);
+                        cabMovimiento.setInMotivos(tipoMotivos);
+                        cabMovimiento.setFechaSistema(d);
+                        cabMovimiento.setAnioDocumento(fecha);
+                        cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
+                        cabMovimiento.setEstado("F");
+                        cabMovimiento.setFechaFactura(d);
+                        cabMovimiento.setUsuarioCreacion(usu.getIdUsuario());
+                        cabMovimiento.setFechaCreacion(d);
 
-                    pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
+                        pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
 
-                    for (int i = 0; i < listaDetFactura.size(); i++) {
-                        detMovimiento.setInMovimientos(pkMovimiento);
-                        detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
-                        detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
+                        for (int i = 0; i < listaDetFactura.size(); i++) {
+                            detMovimiento.setInMovimientos(pkMovimiento);
+                            detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
+                            detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
 
-                        Long id_pro = IdProductoDsdObPres(listaDetFactura);
-                        Long id_Bod = IdBodegD(id_pro);
+                            Long id_pro = IdProductoDsdObPres(listaDetFactura);
+                            Long id_Bod = IdBodegD(id_pro);
 
-                        detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
-                        detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
-                        detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
-                        detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
-                        detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
-                        detMovimiento.setEstado("A");
+                            detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
+                            detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
+                            detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
+                            detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
+                            detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
+                            detMovimiento.setEstado("A");
 
-                        detMovimiento.setUsuarioCreacion(usu.getNombreUsuario());
-                        detMovimiento.setFechaCreacion(d);
-                        detMovController.create(detMovimiento);
+                            detMovimiento.setUsuarioCreacion(usu.getNombreUsuario());
+                            detMovimiento.setFechaCreacion(d);
+                            detMovController.create(detMovimiento);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                guardarKardex2(listaDetFactura);
-                 JOptionPane.showMessageDialog(null, "");
+                    guardarKardex2(listaDetFactura);
+                    JOptionPane.showMessageDialog(null, "");
 //                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
 //                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
 //                Iv.setVisible(true);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 //             JOptionPane.showMessageDialog(null, "");
-            }else{
-            
+            } else {
+
             }
 
         }

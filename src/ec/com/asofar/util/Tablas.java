@@ -13,6 +13,7 @@ import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ProductoCadena;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
+import ec.com.asofar.daoext.ReporteDetalleFacturaDTO;
 import ec.com.asofar.daoext.ReporteFacturaDTO;
 import ec.com.asofar.dto.CoCotizacionesPorProveedor;
 import ec.com.asofar.dto.CoDetItemsCotizacion;
@@ -2795,7 +2796,75 @@ public class Tablas {
 
         }
     }
+    public static void listarReporteDetalleFactura(List<ReporteDetalleFacturaDTO> lista, JTable Tabla) {
+        int[] a = {5,200, 20, 15, 15, 15, 15, 15};
+        String Detalle="";
+        
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        Tabla.setShowGrid(true);
+        Tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel dt = new DefaultTableModel(new String[]{"COD.DET", "DESCRIPCION","CANTIDAD","PREC.UNI", "SUBTOTAL",
+            "T.IVA","DESCUENTO", "T.COMPRA"}, 0) {
 
+            Class[] types = new Class[]{
+                java.lang.Object.class, JTextArea.class,
+                java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class
+
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return tbdetallecompra[column];
+            }
+        };
+        
+      for (int i = 0; i < lista.size(); i++) {
+            Detalle= ProductoCadena.obtenerCadena(lista.get(i).getId_producto());
+            Object Filas[] = new Object[8];
+            Filas[0] = "" + lista.get(i).getId_factura_detalle().toString();
+            JTextArea textArea = new JTextArea();
+            textArea.append(Detalle);
+            Filas[1] = textArea;
+            //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
+            Filas[2] = "" + lista.get(i).getCantidad().toString();
+            Filas[3] = lista.get(i).getPrecio_unitario_venta().toString();
+            Filas[4] = lista.get(i).getSubtotal().toString();
+            Filas[5] = lista.get(i).getValor_iva().toString();
+            Filas[6] = lista.get(i).getValor_descuento().toString();
+            Filas[7] = lista.get(i).getValor_total().toString();
+
+                dt.addRow(Filas);
+
+            
+            Tabla.setModel(dt);
+            Tabla.setRowHeight(50);
+
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+         //   Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+           // Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+            Detalle="";
+      }
+        
+    }
     public static void ListarProductosConsulta2(List<PrProductos> listaproducto, JTable Tabla) {
         int[] a = {50, 50, 50, 50, 50, 100, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();

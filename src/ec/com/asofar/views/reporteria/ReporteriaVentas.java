@@ -84,13 +84,33 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     }
 
     public void total() {
-        Double total = 0.00;
+        Double total_total = 0.00;
+        Double total_iva = 0.00;
+        Double total_descuento = 0.00;
         for (int i = 0; i < itemList.size(); i++) {
             for (int j = 0; j < tbaReporteCompra.getRowCount(); j++) {
                 if (tbaReporteCompra.getValueAt(j, 0).toString().equals(itemList.get(i).getId_factura().toString())) {
                     // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
-                    total = total + itemList.get(i).getTotal_facturado();
-                    Txt_Total.setText(rep.formatoNumero(total.toString()));
+                    total_total = total_total + itemList.get(i).getTotal_facturado();
+                    Txt_Total.setText(rep.formatoNumero(total_total.toString()));
+                }
+            }
+        }
+        for (int i = 0; i < itemList.size(); i++) {
+            for (int j = 0; j < tbaReporteCompra.getRowCount(); j++) {
+                if (tbaReporteCompra.getValueAt(j, 0).toString().equals(itemList.get(i).getId_factura().toString())) {
+                    // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
+                    total_iva = total_iva + itemList.get(i).getTotal_iva();
+                    txtiva.setText(rep.formatoNumero(total_iva.toString()));
+                }
+            }
+        }
+        for (int i = 0; i < itemList.size(); i++) {
+            for (int j = 0; j < tbaReporteCompra.getRowCount(); j++) {
+                if (tbaReporteCompra.getValueAt(j, 0).toString().equals(itemList.get(i).getId_factura().toString())) {
+                    // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
+                    total_descuento = total_descuento + itemList.get(i).getTotal_facturado();
+                    txtdescuento.setText(rep.formatoNumero(total_descuento.toString()));
                 }
             }
         }
@@ -167,7 +187,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         tblProduc = new javax.swing.JScrollPane();
         tbaReporteCompra = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        Txt_Utilidad = new javax.swing.JTextField();
+        txtiva = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Chooser1 = new com.toedter.calendar.JDateChooser();
         Chooser2 = new com.toedter.calendar.JDateChooser();
@@ -175,7 +195,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         BtnBuscar1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        Txt_Utilidad1 = new javax.swing.JTextField();
+        txtdescuento = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -248,9 +268,9 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("TOTAL IVA:");
 
-        Txt_Utilidad.setEditable(false);
-        Txt_Utilidad.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Txt_Utilidad.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtiva.setEditable(false);
+        txtiva.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtiva.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel1.setText("ENTRE");
@@ -307,9 +327,9 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("FILTRO:");
 
-        Txt_Utilidad1.setEditable(false);
-        Txt_Utilidad1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Txt_Utilidad1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtdescuento.setEditable(false);
+        txtdescuento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtdescuento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel6.setText("TOTAL DESCUENTO:");
@@ -350,11 +370,11 @@ public class ReporteriaVentas extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(Txt_Utilidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(Txt_Utilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtiva, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
@@ -376,11 +396,11 @@ public class ReporteriaVentas extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txt_Utilidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txt_Utilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtiva, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Txt_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -417,18 +437,18 @@ public class ReporteriaVentas extends javax.swing.JDialog {
 
     private void tbaReporteCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaReporteCompraMousePressed
         int x = 0;
-        ReporteComprasDTO obj = new ReporteComprasDTO();
+        ReporteFacturaDTO obj = new ReporteFacturaDTO();
         if(evt.getClickCount() == 2){
             x = tbaReporteCompra.getSelectedRow();
             for (int i = 0; i < itemList.size(); i++) {
-//                if(tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())){
-//                    obj= itemList.get(i);
-//                    break;
-//                }
+                if(tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_factura().toString())){
+                    obj= itemList.get(i);
+                    break;
+                }
             }
             if(obj!=null){
                 //JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
-                ReporteriaDetalleCompras win = new ReporteriaDetalleCompras(new javax.swing.JFrame(),true,obj);
+                ReporteriaDetalleFactura win = new ReporteriaDetalleFactura(new javax.swing.JFrame(),true,obj);
                 win.setVisible(true);
             }else{
                 System.out.println("no encontramos al puto id error capa 8");
@@ -549,8 +569,6 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser Chooser1;
     private com.toedter.calendar.JDateChooser Chooser2;
     private javax.swing.JTextField Txt_Total;
-    private javax.swing.JTextField Txt_Utilidad;
-    private javax.swing.JTextField Txt_Utilidad1;
     private javax.swing.JButton btnSalir2;
     private javax.swing.JTextField buscar1;
     private javax.swing.JButton jButton2;
@@ -564,5 +582,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTable tbaReporteCompra;
     private javax.swing.JScrollPane tblProduc;
+    private javax.swing.JTextField txtdescuento;
+    private javax.swing.JTextField txtiva;
     // End of variables declaration//GEN-END:variables
 }

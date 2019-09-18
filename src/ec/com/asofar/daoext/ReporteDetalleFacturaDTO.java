@@ -32,11 +32,11 @@ public String usuario_creacion;
 public Date fecha_creacion;
 public String usuario_actualizacion;
 public Date fecha_actualizacion;
-
+public Long id_producto;
     public ReporteDetalleFacturaDTO() {
     }
 
-    public ReporteDetalleFacturaDTO(Long id_factura_detalle, Long linea_detalle, Long id_factura, Long id_empresa, Long id_sucursal, Long id_prestaciones, String descripcion, Long id_unidad_servicio, Long cantidad, Double precio_unitario_venta, Double valor_ice, Double subtotal, Double valor_iva, Double valor_descuento, Double valor_total, String estado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion) {
+    public ReporteDetalleFacturaDTO(Long id_factura_detalle, Long linea_detalle, Long id_factura, Long id_empresa, Long id_sucursal, Long id_prestaciones, String descripcion, Long id_unidad_servicio, Long cantidad, Double precio_unitario_venta, Double valor_ice, Double subtotal, Double valor_iva, Double valor_descuento, Double valor_total, String estado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, Long id_producto) {
         this.id_factura_detalle = id_factura_detalle;
         this.linea_detalle = linea_detalle;
         this.id_factura = id_factura;
@@ -57,6 +57,7 @@ public Date fecha_actualizacion;
         this.fecha_creacion = fecha_creacion;
         this.usuario_actualizacion = usuario_actualizacion;
         this.fecha_actualizacion = fecha_actualizacion;
+        this.id_producto = id_producto;
     }
 
     public Long getId_factura_detalle() {
@@ -219,5 +220,12 @@ public Date fecha_actualizacion;
         this.fecha_actualizacion = fecha_actualizacion;
     }
 
+    public Long getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(Long id_producto) {
+        this.id_producto = id_producto;
+    }
 
 }

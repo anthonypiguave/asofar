@@ -82,12 +82,12 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="Txt_Utilidad1" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="txtdescuento" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="Txt_Utilidad" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="txtiva" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -116,12 +116,12 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="Txt_Utilidad1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="txtdescuento" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="Txt_Utilidad" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="txtiva" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -253,7 +253,7 @@
             <Property name="text" type="java.lang.String" value="TOTAL IVA:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_Utilidad">
+        <Component class="javax.swing.JTextField" name="txtiva">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -340,7 +340,7 @@
             <Property name="text" type="java.lang.String" value="FILTRO:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_Utilidad1">
+        <Component class="javax.swing.JTextField" name="txtdescuento">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
