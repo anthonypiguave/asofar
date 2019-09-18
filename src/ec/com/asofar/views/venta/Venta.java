@@ -1113,6 +1113,7 @@ public class Venta extends javax.swing.JInternalFrame {
             cabFact.setTotalIva(VGTiva);
             cabFact.setTotalDescuento(VGTdescuento);
             cabFact.setTotalFacturado(VGTtotal);
+            cabFact.setFechaFacturacion(d);
             cabFact.setDespachado("SI");
             try {
                 VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
