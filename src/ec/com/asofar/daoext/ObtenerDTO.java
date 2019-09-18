@@ -529,6 +529,25 @@ public class ObtenerDTO {
         return dto;
 
     }
+    
+    
+////    public static PrTarifario ObtenerPrTarifarioON(Long id) {
+////        PrTarifarioJpaController control = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
+////        PrTarifario dto = new PrTarifario();
+////        List<PrTarifario> lista = control.findPrTarifarioEntities();
+////
+////        for (int i = 0; i < lista.size(); i++) {
+////            if (Long.valueOf(lista.get(i).getPrTarifarioPK().getIdTarifario()) == id) {
+////                dto = lista.get(i);
+////                break;
+////            }
+////        }
+////
+////        return dto;
+////
+////    }
+////    
+    
 
     public static PrTarifario ObtenerPrTarifario(BigInteger id) {
         PrTarifarioJpaController control = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());

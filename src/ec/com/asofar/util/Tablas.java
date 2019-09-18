@@ -2089,8 +2089,12 @@ public class Tablas {
         for (int i = 0; i < listaT.size(); i++) {
 
             filas[0] = String.valueOf(listaT.get(i).getPrTarifarioPK().getIdTarifario());
-            filas[1] = String.valueOf(listaT.get(i).getPrTarifarioPK().getIdEmpresa());
-            filas[2] = String.valueOf(listaT.get(i).getSeSucursal().getSeSucursalPK().getIdSucursal());
+            SeEmpresa em = ObtenerDTO.ObtenerSeEmpresaL(listaT.get(i).getPrTarifarioPK().getIdEmpresa());
+            filas[1] = em.getNombreComercial();
+//            filas[1] = String.valueOf(listaT.get(i).getPrTarifarioPK().getIdEmpresa());
+            SeSucursal suc = ObtenerDTO.ObtenerSeSucursalL(listaT.get(i).getSeSucursal().getSeSucursalPK().getIdSucursal());
+            filas[2] = suc.getNombreComercial();
+//            filas[2] = String.valueOf(listaT.get(i).getSeSucursal().getSeSucursalPK().getIdSucursal());
             filas[3] = String.valueOf(listaT.get(i).getDescripcion());
             filas[4] = String.valueOf(listaT.get(i).getFechaInicioVigente());
             filas[5] = String.valueOf(listaT.get(i).getFechaFinVigente());
@@ -2677,7 +2681,7 @@ public class Tablas {
         
     }
     public static void listarPrestacionesDetalleTarifario(List<PrDetalleTarifario> listDetalleTari, List<PrPrestaciones> listaPrestacion, JTable Tabla) {
-        int[] a = {700, 500, 500, 500, 500, 600, 500, 500, 500, 500, 200};
+        int[] a = {600, 350, 500, 500, 500, 600, 500, 500, 500, 500, 250};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2689,8 +2693,12 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < listDetalleTari.size(); i++) {
             Filas[0] = listDetalleTari.get(i).getIdDetalleTarifario().toString();
+//            PrTarifario pt = ObtenerDTO.ObtenerPrTarifario((listDetalleTari.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()));
+//            Filas[1] = pt.getDescripcion();
             Filas[1] = "" + listDetalleTari.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario();
-            Filas[2] = "" + listDetalleTari.get(i).getIdUnidadServicio();
+           VeUnidadServicio ve = ObtenerDTO.ObtenerVeUnidadServiciON(listDetalleTari.get(i).getIdUnidadServicio());
+            Filas[2] = ve.getNombreUnidadServicio();
+//            Filas[2] = "" + listDetalleTari.get(i).getIdUnidadServicio();
             Filas[3] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getSeEmpresa().getNombreComercial();
             Filas[4] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getNombreComercial();
 //            System.out.println("deta lle "+listDetalleTari.get(i).getIdPrestacion());
