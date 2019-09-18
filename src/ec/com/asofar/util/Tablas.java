@@ -2746,7 +2746,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD.COMPRA", "TIPO DOC.", "FECHA ENTREGA", "PROVEEDOR", "SUBTOTAL", "T.ICE", "T.IVA", "T.COMPRA"};
+        String[] Co = {"COD.FACT", "CAJA", "FECHA FACTURACION", "COMERCIAL", "SUBTOTAL", "T.DESCUENTO", "T.IVA", "T.FACTURA"};
         String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -2757,8 +2757,9 @@ public class Tablas {
             //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
             if (lista.get(i).getFecha_facturacion() == null){
                 Filas[2] ="---";
-            }
+            }else{
             Filas[2] = lista.get(i).getFecha_facturacion().toString();
+            }
             Filas[3] = lista.get(i).getNombre_comercial_suc().toString();
             Filas[4] = lista.get(i).getSubtotal().toString();
             Filas[5] = lista.get(i).getTotal_descuento().toString();
