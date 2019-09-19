@@ -205,6 +205,7 @@ public class Venta extends javax.swing.JInternalFrame {
             PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
             PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
             PrintService service = findPrintService("JAPOS", printService);
+
             DocPrintJob job = service.createPrintJob();
             try {
                 byte[] bytes;
@@ -1331,10 +1332,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     e.printStackTrace();
                 }
 //             JOptionPane.showMessageDialog(null, "");
-            } else {
-
-            }
-
+            } 
         }
     }//GEN-LAST:event_btn_VentaActionPerformed
 

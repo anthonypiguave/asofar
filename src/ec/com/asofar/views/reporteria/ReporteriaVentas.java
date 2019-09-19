@@ -448,7 +448,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
             }
             if(obj!=null){
                 //JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
-                ReporteriaDetalleFactura win = new ReporteriaDetalleFactura(new javax.swing.JFrame(),true,obj);
+                ReporteriaDetalleFactura win = new ReporteriaDetalleFactura(new javax.swing.JFrame(),true,obj,usu,emp,suc);
                 win.setVisible(true);
             }else{
                 System.out.println("no encontramos al puto id error capa 8");

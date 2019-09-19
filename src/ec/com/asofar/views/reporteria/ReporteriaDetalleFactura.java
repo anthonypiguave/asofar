@@ -17,8 +17,11 @@ import ec.com.asofar.daoext.ReporteProveedorDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
 import ec.com.asofar.daoext.SeClientesExt;
 import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
+import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.Dimension;
@@ -53,7 +56,9 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
     List<ReporteDetalleFacturaDTO> listaDetalle=null;
     SeClientesJpaController client_Controler = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeTipoIdentificacionJpaController tipo_doc_Control = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
     /**
      * Creates new form Reporte_DetalleCompra
      */
@@ -61,12 +66,16 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    public ReporteriaDetalleFactura(java.awt.Frame parent, boolean modal,ReporteFacturaDTO obj) {
+    public ReporteriaDetalleFactura(java.awt.Frame parent, boolean modal,
+        ReporteFacturaDTO obj, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(this);
         objeto=obj;
+        usu = us;
+        emp = em;
+        suc = su;
         formularioProveedor();
         llenar_detalles();
         totaless();
@@ -90,7 +99,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
         txt_N_VENTA.setText(objeto.getId_factura().toString());
         txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
         txtCaja.setText(objeto.getNombre_caja());
-        
+        txSucursal.setText(suc.getNombreComercial());
     }
     public void llenar_detalles(){
         listaDetalle = rep.listadoDetallesFactura(objeto);

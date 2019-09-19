@@ -122,6 +122,7 @@ public class CargarTarifario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbltarifario.setUpdateSelectionOnSort(false);
         tbltarifario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbltarifarioMousePressed(evt);
