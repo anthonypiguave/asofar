@@ -580,4 +580,33 @@ public class ReporteriaExt {
     public static String removeScientificNotation(String value) {
         return new BigDecimal(value).toPlainString();
     }
+    public static String buscarLocalidad(Long id){
+    String cadena="";
+    String nativeQuery = "SELECT DISTINCT IFNULL(lc.`dirreccion_cliente`,'---') FROM `se_localidad_cliente` lc \n" +
+                         "WHERE lc.`id_cliente` = "+id+";";
+    Query query = em.createNativeQuery(nativeQuery);
+    cadena = query.getSingleResult().toString();
+        return cadena;
+    }
+    
+    public static String buscarCelular(Long id){
+    String cadena="";
+    String nativeQuery = "SELECT DISTINCT IFNULL(lv.`celular`,'---') FROM `se_localidad_cliente` lc,`se_contactos_clientes` lv \n" +
+                    "WHERE lv.`id_localidad` = lc.`id_localidad_cliente`\n" +
+                    "AND lc.`id_cliente` = "+id+"\n" +
+                    "AND lv.`nombre` = 'PROPIO';";
+    Query query = em.createNativeQuery(nativeQuery);
+    cadena = query.getSingleResult().toString();
+        return cadena;
+    }
+    public static String buscarCorreo(Long id){
+    String cadena="";
+    String nativeQuery = "SELECT DISTINCT IFNULL(lv.`email`,'---') FROM `se_localidad_cliente` lc,`se_contactos_clientes` lv \n" +
+                    "WHERE lv.`id_localidad` = lc.`id_localidad_cliente`\n" +
+                    "AND lc.`id_cliente` = "+id+"\n" +
+                    "AND lv.`nombre` = 'PROPIO';";
+    Query query = em.createNativeQuery(nativeQuery);
+    cadena = query.getSingleResult().toString();
+        return cadena;
+    }
 }

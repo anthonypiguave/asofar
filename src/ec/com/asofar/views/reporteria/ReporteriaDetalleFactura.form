@@ -210,8 +210,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtFechaCreacion1" min="-2" pref="152" max="-2" attributes="0"/>
-                                  <Component id="txtFechaCreacion2" min="-2" pref="152" max="-2" attributes="0"/>
+                                  <Component id="txSucursal" min="-2" pref="152" max="-2" attributes="0"/>
+                                  <Component id="txtCaja" min="-2" pref="152" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                           </Group>
@@ -262,7 +262,7 @@
                           <Component id="txtapellidos" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="txtDireccion" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="txtFechaCreacion1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txSucursal" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -278,7 +278,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtFechaCreacion2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtCaja" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="jLabel11" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -520,7 +520,7 @@
                 <Property name="text" type="java.lang.String" value="FECHA :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFechaCreacion1">
+            <Component class="javax.swing.JTextField" name="txSucursal">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -536,7 +536,7 @@
                 <Property name="text" type="java.lang.String" value="SUCURSAL:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFechaCreacion2">
+            <Component class="javax.swing.JTextField" name="txtCaja">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

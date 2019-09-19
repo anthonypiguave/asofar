@@ -7,6 +7,7 @@ package ec.com.asofar.views.reporteria;
 
 
 import ec.com.asofar.dao.SeClientesJpaController;
+import ec.com.asofar.dao.SeLocalidadClienteJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
@@ -16,6 +17,7 @@ import ec.com.asofar.daoext.ReporteProveedorDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
 import ec.com.asofar.daoext.SeClientesExt;
 import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -51,7 +53,8 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
     List<ReporteDetalleFacturaDTO> listaDetalle=null;
     SeClientesJpaController client_Controler = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeTipoIdentificacionJpaController tipo_doc_Control = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
-     /**
+    
+    /**
      * Creates new form Reporte_DetalleCompra
      */
     public ReporteriaDetalleFactura(java.awt.Frame parent, boolean modal) {
@@ -71,20 +74,22 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
     public void formularioProveedor(){
         SeClientes cliente = new SeClientes();
         SeTipoIdentificacion tip_ident = new SeTipoIdentificacion();
+        SeLocalidadCliente local_client = new SeLocalidadCliente();
         cliente = client_Controler.findSeClientes(Long.valueOf(objeto.getId_cliente().toString()));
         tip_ident = tipo_doc_Control.findSeTipoIdentificacion(cliente.getIdTipoIndentificacion().getIdTipoIdentificacion());
+        
         
         txtCodigoCliente.setText(cliente.getIdClientes().toString());
         txtNombre.setText(cliente.getPrimerNombre()+" "+cliente.getSegundoNombre());
         txtapellidos.setText(cliente.getPrimerApellido()+" "+ cliente.getSegundoApellido());
-        txtTelefono.setText("--");
+        txtTelefono.setText(rep.buscarCelular(cliente.getIdClientes()));
         txttipodoc.setText(tip_ident.getNombreIdentificacion());
         txtn_doc.setText(cliente.getNumeroIdentificacion());
-        txtDireccion.setText("-*-");
-        txtcorreo.setText("--");
+        txtDireccion.setText(rep.buscarLocalidad(cliente.getIdClientes()));
+        txtcorreo.setText(rep.buscarCorreo(cliente.getIdClientes()));
         txt_N_VENTA.setText(objeto.getId_factura().toString());
         txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
-        
+        txtCaja.setText(objeto.getNombre_caja());
         
     }
     public void llenar_detalles(){
@@ -220,9 +225,9 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         txtFechaCreacion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtFechaCreacion1 = new javax.swing.JTextField();
+        txSucursal = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtFechaCreacion2 = new javax.swing.JTextField();
+        txtCaja = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -323,14 +328,14 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
         jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel9.setText("FECHA :");
 
-        txtFechaCreacion1.setEditable(false);
-        txtFechaCreacion1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txSucursal.setEditable(false);
+        txSucursal.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel10.setText("SUCURSAL:");
 
-        txtFechaCreacion2.setEditable(false);
-        txtFechaCreacion2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        txtCaja.setEditable(false);
+        txtCaja.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel11.setText("N° CAJA:");
@@ -389,8 +394,8 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
                                 .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaCreacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFechaCreacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(65, 65, 65))))
             .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -428,7 +433,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
                     .addComponent(txtapellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaCreacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -441,7 +446,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaCreacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -793,12 +798,12 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbaListaComprasB;
+    private javax.swing.JTextField txSucursal;
+    private javax.swing.JTextField txtCaja;
     public static javax.swing.JLabel txtCodigoCliente;
     public static javax.swing.JTextField txtDescuento;
     public static javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFechaCreacion;
-    private javax.swing.JTextField txtFechaCreacion1;
-    private javax.swing.JTextField txtFechaCreacion2;
     public static javax.swing.JTextField txtIva;
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtTelefono;
