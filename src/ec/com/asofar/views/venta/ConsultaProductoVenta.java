@@ -290,6 +290,7 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
             listaProVent = selectProdVent.listarProductoVenta();
             objJoinProVen = devuelveObjeto5(Long.valueOf(tba_productos.getValueAt(id, 0).toString()), listaProVent);
             if (objJoinProVen != null) {
+                objJoinProVen.setNombre_producto(tba_productos.getValueAt(id, 2).toString());
             setVisible(false);
             }
         }
@@ -306,7 +307,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     }
 
     public JoinProductoVenta obtObjProdVent() {
-
+//JoinProductoVenta p = new JoinProductoVenta();
+//p.setNombre_producto(nombre);
         return objJoinProVen;
     }
 
