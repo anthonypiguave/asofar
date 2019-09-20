@@ -927,11 +927,11 @@ public class Venta extends javax.swing.JInternalFrame {
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
         objJoinProVen = ingre.obtObjProdVent();
-if(objJoinProVen!=null){
-}else{
-
-JOptionPane.showMessageDialog(null,"Seleccione");
-}
+//        if (objJoinProVen != null) {
+//        } else {
+//
+//            JOptionPane.showMessageDialog(null, "Seleccione");
+//        }
         if (validarProductos("" + (objJoinProVen.getId_prestacion())).equals("si")) {
             JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
@@ -1198,7 +1198,7 @@ JOptionPane.showMessageDialog(null,"Seleccione");
         } else {
             int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
-            guardarKardex2(listaDetFactura);
+                guardarKardex2(listaDetFactura);
                 VeFactura cabFact = new VeFactura();
                 InMovimientos pkMovimiento = null;
                 VeFacturaDetalle detFact = new VeFacturaDetalle();
@@ -1336,8 +1336,8 @@ JOptionPane.showMessageDialog(null,"Seleccione");
                     e.printStackTrace();
                 }
 //             JOptionPane.showMessageDialog(null, "");
-            }else{
-            
+            } else {
+
             }
         }
     }//GEN-LAST:event_btn_VentaActionPerformed
@@ -1372,11 +1372,11 @@ JOptionPane.showMessageDialog(null,"Seleccione");
                     for (int k = 0; k < ListKardex.size(); k++) {
 //                        System.out.println("8888");
                         BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
-                        System.out.println("cant venta "+cantVenta);
+                        System.out.println("cant venta " + cantVenta);
                         BigInteger cantActual = ListKardex.get(k).getSaldoActual();
-                        System.out.println("cant actu "+cantActual);
+                        System.out.println("cant actu " + cantActual);
                         BigInteger resta = cantActual.subtract(cantVenta);
-                        System.out.println("resta "+resta);
+                        System.out.println("resta " + resta);
 
                         Long id_Bod = IdBodegD(id_Prod);
 
