@@ -1237,29 +1237,29 @@ JOptionPane.showMessageDialog(null,"Seleccione");
                         detFactController.create(detFact);
                     }
 
-//                    Venta.PrintEpson printerService = new Venta.PrintEpson();
-//                    System.out.println(printerService.getPrinters());
-//                    //print some stuff. Change the printer name to your thermal printer name.
-//                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-//                    printerService.printString("EPSON-TM-T20II", "  *              VENTA          *  \n");
-//                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-//                    printerService.printString("EPSON-TM-T20II", "\n    N° CAJA: " + txt_NumeroCaja.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "\n    CAJA: " + txt_NombreCaja.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "\n    CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "      N° DE VENTA: " + txtIdentificacion.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "          NOMBRE DEL CLIENTE: " + txtNombre.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "     APELLIDO DEL CLIENTE: " + txtApellido.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "                  IDENTIFICACION : " + txtTipoIdent.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "     CORREO DEL CLIENTE: " + txtEmail.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "     TELEFONO DEL CLIENTE: " + txtTelefono.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "     DIRECCION DEL CLIENTE: " + txtDireccion.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "                               SUBTOTAL: " + txtSubtotal.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "                           DESCUENTO: " + txtDescuento.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "                           IVA: " + txtIva.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "                       TOTAL A PAGAR: " + txtTotal.getText() + "\n");
-//                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-//                    byte[] cutP = new byte[]{0x1d, 'V', 1};
-//                    printerService.printBytes("EPSON-TM-T20II", cutP);
+                    Venta.PrintEpson printerService = new Venta.PrintEpson();
+                    System.out.println(printerService.getPrinters());
+                    //print some stuff. Change the printer name to your thermal printer name.
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "  *              VENTA          *  \n");
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "\n    N° CAJA: " + txt_NumeroCaja.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n    CAJA: " + txt_NombreCaja.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n    CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "      N° DE VENTA: " + txtIdentificacion.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "          NOMBRE DEL CLIENTE: " + txtNombre.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     APELLIDO DEL CLIENTE: " + txtApellido.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                  IDENTIFICACION : " + txtTipoIdent.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     CORREO DEL CLIENTE: " + txtEmail.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     TELEFONO DEL CLIENTE: " + txtTelefono.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "     DIRECCION DEL CLIENTE: " + txtDireccion.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                               SUBTOTAL: " + txtSubtotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                           DESCUENTO: " + txtDescuento.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                           IVA: " + txtIva.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                       TOTAL A PAGAR: " + txtTotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    byte[] cutP = new byte[]{0x1d, 'V', 1};
+                    printerService.printBytes("EPSON-TM-T20II", cutP);
 
 /////////// AGREGANDO A MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -1336,7 +1336,9 @@ JOptionPane.showMessageDialog(null,"Seleccione");
                     e.printStackTrace();
                 }
 //             JOptionPane.showMessageDialog(null, "");
-            } 
+            }else{
+            
+            }
         }
     }//GEN-LAST:event_btn_VentaActionPerformed
 
