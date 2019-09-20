@@ -927,12 +927,16 @@ public class Venta extends javax.swing.JInternalFrame {
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
         objJoinProVen = ingre.obtObjProdVent();
+if(objJoinProVen!=null){
+}else{
 
+JOptionPane.showMessageDialog(null,"Seleccione");
+}
         if (validarProductos("" + (objJoinProVen.getId_prestacion())).equals("si")) {
             JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
             cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
-//            System.out.println(" fff " + cantidadStock);
+            System.out.println(" fff " + cantidadStock);
 
             VeFacturaDetalle FactDeta = new VeFacturaDetalle();
             FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
@@ -1194,7 +1198,7 @@ public class Venta extends javax.swing.JInternalFrame {
         } else {
             int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
-//            guardarKardex2(listaDetFactura);
+            guardarKardex2(listaDetFactura);
                 VeFactura cabFact = new VeFactura();
                 InMovimientos pkMovimiento = null;
                 VeFacturaDetalle detFact = new VeFacturaDetalle();
@@ -1233,29 +1237,29 @@ public class Venta extends javax.swing.JInternalFrame {
                         detFactController.create(detFact);
                     }
 
-                    Venta.PrintEpson printerService = new Venta.PrintEpson();
-                    System.out.println(printerService.getPrinters());
-                    //print some stuff. Change the printer name to your thermal printer name.
-                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-                    printerService.printString("EPSON-TM-T20II", "  *              VENTA          *  \n");
-                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-                    printerService.printString("EPSON-TM-T20II", "\n    N° CAJA: " + txt_NumeroCaja.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "\n    CAJA: " + txt_NombreCaja.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "\n    CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "      N° DE VENTA: " + txtIdentificacion.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "          NOMBRE DEL CLIENTE: " + txtNombre.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "     APELLIDO DEL CLIENTE: " + txtApellido.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                  IDENTIFICACION : " + txtTipoIdent.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "     CORREO DEL CLIENTE: " + txtEmail.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "     TELEFONO DEL CLIENTE: " + txtTelefono.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "     DIRECCION DEL CLIENTE: " + txtDireccion.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                               SUBTOTAL: " + txtSubtotal.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                           DESCUENTO: " + txtDescuento.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                           IVA: " + txtIva.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                       TOTAL A PAGAR: " + txtTotal.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-                    byte[] cutP = new byte[]{0x1d, 'V', 1};
-                    printerService.printBytes("EPSON-TM-T20II", cutP);
+//                    Venta.PrintEpson printerService = new Venta.PrintEpson();
+//                    System.out.println(printerService.getPrinters());
+//                    //print some stuff. Change the printer name to your thermal printer name.
+//                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+//                    printerService.printString("EPSON-TM-T20II", "  *              VENTA          *  \n");
+//                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+//                    printerService.printString("EPSON-TM-T20II", "\n    N° CAJA: " + txt_NumeroCaja.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "\n    CAJA: " + txt_NombreCaja.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "\n    CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "      N° DE VENTA: " + txtIdentificacion.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "          NOMBRE DEL CLIENTE: " + txtNombre.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "     APELLIDO DEL CLIENTE: " + txtApellido.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "                  IDENTIFICACION : " + txtTipoIdent.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "     CORREO DEL CLIENTE: " + txtEmail.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "     TELEFONO DEL CLIENTE: " + txtTelefono.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "     DIRECCION DEL CLIENTE: " + txtDireccion.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "                               SUBTOTAL: " + txtSubtotal.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "                           DESCUENTO: " + txtDescuento.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "                           IVA: " + txtIva.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "                       TOTAL A PAGAR: " + txtTotal.getText() + "\n");
+//                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+//                    byte[] cutP = new byte[]{0x1d, 'V', 1};
+//                    printerService.printBytes("EPSON-TM-T20II", cutP);
 
 /////////// AGREGANDO A MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -1322,7 +1326,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         e.printStackTrace();
                     }
 
-                    guardarKardex2(listaDetFactura);
+//                    guardarKardex2(listaDetFactura);
                     JOptionPane.showMessageDialog(null, "");
 //                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
 //                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
@@ -1362,10 +1366,15 @@ public class Venta extends javax.swing.JInternalFrame {
                     id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 
                     ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
+//                    System.out.println(" - "+ListKardex);
                     for (int k = 0; k < ListKardex.size(); k++) {
+//                        System.out.println("8888");
                         BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
+                        System.out.println("cant venta "+cantVenta);
                         BigInteger cantActual = ListKardex.get(k).getSaldoActual();
+                        System.out.println("cant actu "+cantActual);
                         BigInteger resta = cantActual.subtract(cantVenta);
+                        System.out.println("resta "+resta);
 
                         Long id_Bod = IdBodegD(id_Prod);
 
@@ -1379,6 +1388,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         objKardex.setInTipoDocumento(tipoDocumento);
                         objKardex.setSeSucursal(suc);
                         objKardex.setFechaMovimiento(d);
+                        objKardex.setFechaCreacion(d);
 //                        objKardex.getInKardexPK().setIdTipoDocumento(7);
 //                        objKar.setAnioDocumento(fecha.toString());
 //                        objKardex.setFechaSistema(fecha);
@@ -1386,7 +1396,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         objKardex.setSaldoActual(resta);
                         objKardex.setSaldoAnterior(cantActual);
 //                        objKardex.setUsuarioCreacion(usu.getIdUsuario());
-                        objKardex.setFechaCreacion(fecha);
+//                        objKardex.setFechaCreacion(fecha);
                         try {
                             KCon.create(objKardex);
                         } catch (Exception ex) {
