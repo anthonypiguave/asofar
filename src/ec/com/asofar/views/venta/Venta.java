@@ -1264,6 +1264,18 @@ public class Venta extends javax.swing.JInternalFrame {
                     printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
                     byte[] cutP = new byte[]{0x1d, 'V', 1};
                     printerService.printBytes("EPSON-TM-T20II", cutP);
+                    //Copiado de internet
+                    printerService.toFile("impresion.txt");
+
+                    FileInputStream inputStream = null;
+                    try {
+                        inputStream = new FileInputStream("impresion.txt");
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                    if (inputStream == null) {
+                        return;
+                    }
 
 /////////// AGREGANDO A MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
