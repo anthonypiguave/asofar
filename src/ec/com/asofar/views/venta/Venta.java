@@ -881,7 +881,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < ListCedula.size(); i++) {
 
-            System.out.println("cliente " + ListCedula.get(i).getNombreCompleto());
+//            System.out.println("cliente " + ListCedula.get(i).getNombreCompleto());
             txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
                     + ListCedula.get(i).getSegundoApellido());
             txtNombre.setText(ListCedula.get(i).getPrimerNombre());
@@ -1206,12 +1206,15 @@ public class Venta extends javax.swing.JInternalFrame {
 
                 cabFact.setIdCaja(BigInteger.valueOf(idCaja));
                 cabFact.setSeSucursal(suc);
-                cabFact.setIdCliente(idCliente);
+                cabFact.setIdCliente(new BigInteger(txt_idCliente.getText().toString()));
                 cabFact.setSubtotal(VGTsubtotal);
                 cabFact.setTotalIva(VGTiva);
                 cabFact.setTotalDescuento(VGTdescuento);
                 cabFact.setTotalFacturado(VGTtotal);
                 cabFact.setFechaFacturacion(d);
+                cabFact.setIdUsuario(usu.getIdUsuario());
+                cabFact.setUsuarioCreacion(usu.getIdUsuario());
+                cabFact.setFechaCreacion(d);
                 cabFact.setDespachado("SI");
                 try {
                     VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
