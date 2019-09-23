@@ -583,9 +583,9 @@ public class ReporteriaExt {
     public static String buscarLocalidad(Long id){
     String cadena="";
     String nativeQuery = "SELECT DISTINCT IFNULL(lc.`dirreccion_cliente`,'---') FROM `se_localidad_cliente` lc \n" +
-                         "WHERE lc.`id_cliente` = "+id+";";
+                         "WHERE lc.`id_cliente` = "+id+" limit 0,1;";
     Query query = em.createNativeQuery(nativeQuery);
-    cadena = query.getSingleResult().toString();
+     cadena = query.getSingleResult().toString();
         return cadena;
     }
     

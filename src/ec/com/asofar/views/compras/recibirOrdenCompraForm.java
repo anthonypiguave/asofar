@@ -665,8 +665,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                     kardex.setSaldoAnterior(objeto.getSaldoActual());
                                     kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
                                     kardex.setCostoAnterior(objeto.getCostoActual());
+                                     System.out.println(" costo"+kardex.getCostoAnterior());
+                                     System.out.println("ccc " +(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))));
                                     kardex.setCostoActual(kardex.getCostoAnterior().add(
                                             ((listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))))));
+                                   
                                     kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
                                     
                                 } else {

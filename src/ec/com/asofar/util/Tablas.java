@@ -2699,7 +2699,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"De tarifario", "Tarifario", "U. servicio", "Empresa", "Sucursal", "Nom. prestacion", "V .min ve.", "V. des", "V. venta", "Porc.des", "Estado",};
+        String[] b = {"De tarifario", "Tarifario", "U. servicio", "Empresa", "Sucursal", "Nom. prestacion", "V.Costo", "V.Min. Venta", "V. venta", "V.Descuento", "Estado",};
         String[] Filas = new String[11];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
