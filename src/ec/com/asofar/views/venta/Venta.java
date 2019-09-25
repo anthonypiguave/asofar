@@ -193,6 +193,8 @@ public class Venta extends javax.swing.JInternalFrame {
              */
             Graphics2D g2d = (Graphics2D) g;
             g2d.translate(pf.getImageableX(), pf.getImageableY());
+            g2d.setFont(new Font("Arial",Font.PLAIN,6));
+            
             /* Now we perform our rendering */
             g.setFont(new Font("Arial", 4, 4));
             g.drawString("Hello world !", 0, 10);
@@ -204,7 +206,7 @@ public class Venta extends javax.swing.JInternalFrame {
             DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
             PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
             PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-            PrintService service = findPrintService("JAPOS", printService);
+            PrintService service = findPrintService("JAPOS1", printService);
 
             DocPrintJob job = service.createPrintJob();
             try {
@@ -1247,6 +1249,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     //print some stuff. Change the printer name to your thermal printer name.
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
                     printerService.printString("EPSON-TM-T20II", "  *                 VENTA              *  \n");
+                    setFont(new Font("Arial",Font.BOLD,18));
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "  CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
@@ -1419,7 +1422,7 @@ public class Venta extends javax.swing.JInternalFrame {
 //                        objKardex.setFechaCreacion(fecha);
                         ////////  costo actual y anterior/////
 
-                        objKardex.setCostoActual(ListKardex.get(i).getCostoActual());
+//                        objKardex.setCostoActual(ListKardex.get(i).getCostoActual());
 
                         try {
                             KCon.create(objKardex);
