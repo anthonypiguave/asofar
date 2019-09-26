@@ -950,7 +950,12 @@ public class Venta extends javax.swing.JInternalFrame {
             precio = objJoinProVen.getValor_venta();
             precioIva = calcularIvaItem();
             descuento = objJoinProVen.getValor_descuento();
+            if(objJoinProVen.getSaldo_actual()!=0){
             FactDeta.setCantidad(BigInteger.ONE);
+            }else{
+            JOptionPane.showMessageDialog(null," Verifique Stock");
+             FactDeta.setCantidad(BigInteger.ZERO);
+            }
             FactDeta.setValorDescuento(descuento);
             FactDeta.setValorIva(precioIva);
             FactDeta.setPrecioUnitarioVenta(objJoinProVen.getValor_venta());
