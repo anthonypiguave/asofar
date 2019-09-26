@@ -165,6 +165,7 @@ public class Venta extends javax.swing.JInternalFrame {
         cargartxt();
         pVender();
         consFinal();
+        
     }
 
     public class PrintEpson implements Printable {
@@ -192,9 +193,7 @@ public class Venta extends javax.swing.JInternalFrame {
 	         * translate by the X and Y values in the PageFormat to avoid clipping
              */
             Graphics2D g2d = (Graphics2D) g;
-            g2d.translate(pf.getImageableX(), pf.getImageableY());
-            g2d.setFont(new Font("Arial",Font.PLAIN,6));
-            
+                g2d.translate(pf.getImageableX(), pf.getImageableY());                        
             /* Now we perform our rendering */
             g.setFont(new Font("Arial", 4, 4));
             g.drawString("Hello world !", 0, 10);
@@ -378,7 +377,6 @@ public class Venta extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setResizable(true);
         setTitle("FACTURA");
         setPreferredSize(new java.awt.Dimension(0, 0));
 
@@ -781,7 +779,7 @@ public class Venta extends javax.swing.JInternalFrame {
                                 .addGap(9, 9, 9))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 17, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -817,7 +815,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -827,7 +825,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2))
         );
 
-        setBounds(0, 0, 889, 685);
+        setBounds(0, 0, 872, 685);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -1242,14 +1240,12 @@ public class Venta extends javax.swing.JInternalFrame {
 
                         detFactController.create(detFact);
                     }
-
+                   
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
-
                     System.out.println(printerService.getPrinters());
                     //print some stuff. Change the printer name to your thermal printer name.
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
-                    printerService.printString("EPSON-TM-T20II", "  *                 VENTA              *  \n");
-                    setFont(new Font("Arial",Font.BOLD,18));
+                    printerService.printString("EPSON-TM-T20II", "  *                 VENTA              *  \n");                    
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "  CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
@@ -1262,26 +1258,19 @@ public class Venta extends javax.swing.JInternalFrame {
                     printerService.printString("EPSON-TM-T20II", "  DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-                        //printerService.printString("EPSON-TM-T20II", "PRODUCTO CANT PRECIO DESC IVA SUBT TOTAL\n");
-                        //printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i,2).toString()+" "+tba_detalle.getValueAt(i,3).toString()+" "+tba_detalle.getValueAt(i,4).toString()+" "+tba_detalle.getValueAt(i,5).toString()+" "+tba_detalle.getValueAt(i,6).toString()+" "+tba_detalle.getValueAt(i,7).toString()+" "+tba_detalle.getValueAt(i,8).toString()+"\n");
-                        String productname = tba_detalle.getValueAt(i, 2).toString();
-                        printerService.printString("EPSON-TM-T20II", "PRODUCTO:" + productname + "\n");
-                        printerService.printString("EPSON-TM-T20II", "CANT:" + tba_detalle.getValueAt(i, 3).toString()
-                                + " PRECIO:" + tba_detalle.getValueAt(i, 4).toString()
-                                + " DESC:" + tba_detalle.getValueAt(i, 5).toString()
-                                + " IVA:" + tba_detalle.getValueAt(i, 6).toString()
-                                + " SUBT:" + tba_detalle.getValueAt(i, 7).toString()
-                                + " TOTAL:" + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                        printerService.printString("EPSON-TM-T20II", "Producto   Cant Valor Subt Desc Iva Total\n");
+                        //printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i,2).toString()+" "+tba_detalle.getValueAt(i,3).toString()+" "+tba_detalle.getValueAt(i,4).toString()+" "+tba_detalle.getValueAt(i,5).toString()+" "+tba_detalle.getValueAt(i,6).toString()+" "+tba_detalle.getValueAt(i,7).toString()+" "+tba_detalle.getValueAt(i,8).toString()+"\n");                        
+                        printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString().substring(29,43).replaceAll("\n","")+" "+tba_detalle.getValueAt(i,3).toString()+" "+ tba_detalle.getValueAt(i, 4).toString()+" "+tba_detalle.getValueAt(i,7).toString()+" "+tba_detalle.getValueAt(i,5).toString().substring(0,2)+"% "+tba_detalle.getValueAt(i,6).toString().substring(0,2)+"% "+tba_detalle.getValueAt(i,8).toString()+"\n");
                     }
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                    printerService.printString("EPSON-TM-T20II", "                    SUBTOTAL: " + txtSubtotal.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: " + txtDescuento.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                    IVA: " + txtIva.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                    TOTAL: " + txtTotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                    SUBTOTAL:  "+txtSubtotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: "+txtDescuento.getText().substring(0,2)+"%" + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                    IVA:       "+txtIva.getText().substring(0,2)+"%" + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                    TOTAL:     "+txtTotal.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     byte[] cutP = new byte[]{0x1d, 'V', 1};
-
                     printerService.printBytes("EPSON-TM-T20II", cutP);
+                    
 /////////// AGREGANDO A MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
                     InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
