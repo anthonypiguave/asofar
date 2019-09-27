@@ -51,6 +51,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+    String CADENA = "";
 
     public AgregarNuevoDetalle(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -171,6 +172,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         });
         txt_porcentaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_porcentajeKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_porcentajeKeyTyped(evt);
             }
@@ -454,7 +458,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         }
 
-       
         PrDetalleTarifario pre = new PrDetalleTarifario();
 
 //        ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
@@ -470,12 +473,12 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         PrTarifario prTarifario = new PrTarifario();
         prTarifario.setPrTarifarioPK(prTarifarioPK);
         pre.setPrTarifario(prTarifario);
-/*
+        /*
         valor_costo
         valor_min_venta
         valor_ventavalor_descuento
-        */
-        pre.setValorCosto(Double.parseDouble(txt_valor_costo.getText())); 
+         */
+        pre.setValorCosto(Double.parseDouble(txt_valor_costo.getText()));
         pre.setValorMinVenta(Double.parseDouble(txt_valor_min.getText()));
         pre.setValorDescuento(Double.parseDouble(txtDescuent_valor.getText()));
         pre.setValorVenta(Double.parseDouble(txt_valor_venta.getText()));
@@ -595,15 +598,12 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
     private void BtncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtncalcularActionPerformed
 
-      
         int entero1, entero2;
 
         Double cadena1 = Double.parseDouble(txt_valor_venta.getText());
-       Integer cadena2 = Integer.valueOf(txt_porcentaje.getText());
+        Integer cadena2 = Integer.valueOf(txt_porcentaje.getText());
 
-
-       Double res = (cadena1*cadena2)/100;
-
+        Double res = (cadena1 * cadena2) / 100;
 
         txtDescuent_valor.setText(res.toString());
 
@@ -616,6 +616,21 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     private void txt_valor_costoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_costoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_valor_costoKeyTyped
+
+    private void txt_porcentajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_porcentajeKeyReleased
+        int largor = txt_porcentaje.getText().length();
+        if (largor > 2) {
+            if (Integer.parseInt(txt_porcentaje.getText()) == 100) {
+                CADENA = txt_porcentaje.getText();
+                txt_porcentaje.setText(CADENA);
+            } else {
+                CADENA = txt_porcentaje.getText().substring(0, 2);
+                txt_porcentaje.setText(CADENA);
+                JOptionPane.showMessageDialog(null, "INGRESE VALOR CORRECTO");
+            }
+        }
+
+    }//GEN-LAST:event_txt_porcentajeKeyReleased
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getDescripcion()));
 //        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
