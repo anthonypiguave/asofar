@@ -250,13 +250,27 @@ public class Venta extends javax.swing.JInternalFrame {
     }
 
     public void consFinal() {
-        txtNombre.setText("CONSUMIDOR");
-        txtApellido.setText("FINAL");
-        txtIdentificacion.setText("9999999999999");
-        txtTipoIdent.setText("********************************");
-        txtEmail.setText("********************************");
-        txtDireccion.setText("********************************");
-        txtTelefono.setText("********************************");
+        Cliente = Cc.findSeClientesEntities();
+        for (int i = 0; i < Cliente.size(); i++) {
+
+            if (Cliente.get(i).getIdClientes()==15) {
+                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
+                txtNombre.setText(Cliente.get(i).getPrimerNombre());
+                txtApellido.setText(Cliente.get(i).getPrimerApellido());
+                txtIdentificacion.setText("9999999999999");
+                txtTipoIdent.setText("********************************");
+                txtEmail.setText("********************************");
+                txtDireccion.setText("********************************");
+                txtTelefono.setText("********************************");
+            }
+        }
+//        txtNombre.setText("CONSUMIDOR");
+//        txtApellido.setText("FINAL");
+//        txtIdentificacion.setText("9999999999999");
+//        txtTipoIdent.setText("********************************");
+//        txtEmail.setText("********************************");
+//        txtDireccion.setText("********************************");
+//        txtTelefono.setText("********************************");
     }
 
     public void Prueba() {
@@ -344,6 +358,7 @@ public class Venta extends javax.swing.JInternalFrame {
         txtDireccion = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         txtTipoIdent = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -386,7 +401,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS DEL CLIENTE:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS DEL CLIENTE:", 0, 0, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -506,6 +521,13 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Consumidor Final");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -513,7 +535,10 @@ public class Venta extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -542,14 +567,17 @@ public class Venta extends javax.swing.JInternalFrame {
                             .addComponent(txtTelefono)
                             .addComponent(txtTipoIdent)
                             .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(txtDireccion))))
-                .addContainerGap(186, Short.MAX_VALUE))
+                            .addComponent(txtDireccion))
+                        .addGap(0, 176, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(btnbuscar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnbuscar)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -594,7 +622,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", 0, 0, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel13.setText("SUBTOTAL: ");
@@ -606,19 +634,19 @@ public class Venta extends javax.swing.JInternalFrame {
         jLabel15.setText("TOTAL: ");
 
         txtSubtotal.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtSubtotal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtSubtotal.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         txtTotal.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtTotal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtTotal.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         txtIva.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtIva.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtIva.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel16.setText("DESCUENTO:");
 
         txtDescuento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtDescuento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDescuento.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -663,7 +691,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", 0, 0, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         tba_detalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -683,11 +711,11 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
         tba_detalle.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tba_detalleKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tba_detalleKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tba_detalleKeyTyped(evt);
             }
         });
         jScrollPane2.setViewportView(tba_detalle);
@@ -1148,7 +1176,7 @@ public class Venta extends javax.swing.JInternalFrame {
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
         try {
             int i = tba_detalle.getSelectedRow();
-Double descuentoT = 0.00;
+            Double descuentoT = 0.00;
             String valor = (String) tba_detalle.getValueAt(i, 3);
 
             BigInteger cantidadMod = new BigInteger(valor);
@@ -1185,7 +1213,7 @@ Double descuentoT = 0.00;
                                 descuentoT = ListProdVent2.get(k).getValor_descuento();
                             }
                         }
-                        
+
                         Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
                         Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
                         Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
@@ -1350,6 +1378,7 @@ Double descuentoT = 0.00;
                             detMovimiento.setUsuarioCreacion(usu.getNombreUsuario());
                             detMovimiento.setFechaCreacion(d);
                             detMovController.create(detMovimiento);
+                            limpiar();
                         }
 
                     } catch (Exception e) {
@@ -1431,7 +1460,7 @@ Double descuentoT = 0.00;
 //                        objKardex.setFechaCreacion(fecha);
                         ////////  costo actual y anterior/////
 
-//                        objKardex.setCostoActual(ListKardex.get(i).getCostoActual());
+                        objKardex.setCostoActual(ListKardex.get(k).getCostoActual());
                         try {
                             KCon.create(objKardex);
                         } catch (Exception ex) {
@@ -1469,6 +1498,10 @@ Double descuentoT = 0.00;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        consFinal();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public Long IdProductoDsdObPres(List<VeFacturaDetalle> listaDetFactura) {
         Long id_producto = null;
@@ -1581,6 +1614,7 @@ Double descuentoT = 0.00;
     private javax.swing.JButton btn_Venta;
     private javax.swing.JButton btn_agregar_prod;
     private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
