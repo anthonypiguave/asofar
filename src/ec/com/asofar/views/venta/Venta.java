@@ -1249,30 +1249,30 @@ public class Venta extends javax.swing.JInternalFrame {
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
                     System.out.println(printerService.getPrinters());
                     //print some stuff. Change the printer name to your thermal printer name.
-                    printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
-                    printerService.printString("EPSON-TM-T20II", "  *                 VENTA              *  \n");                    
-                    printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                    printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "*----------------------------------------*\n");
+                    printerService.printString("EPSON-TM-T20II", "                    VENTA                 \n");                    
+                    printerService.printString("EPSON-TM-T20II", "*----------------------------------------*\n");
+                    printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "            CAJA: " + txt_NombreCaja.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "  CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  N° DE VENTA: " + txtIdentificacion.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  NOMBRE DE CLTE: " + txtNombre.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  APELLIDO DE CLTE: " + txtApellido.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  CORREO DE CLTE: " + txtEmail.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  TELEFONO DE CLTE: " + txtTelefono.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                    for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-                        printerService.printString("EPSON-TM-T20II", "Producto   Cant Valor Subt Desc Iva Total\n");
-                        //printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i,2).toString()+" "+tba_detalle.getValueAt(i,3).toString()+" "+tba_detalle.getValueAt(i,4).toString()+" "+tba_detalle.getValueAt(i,5).toString()+" "+tba_detalle.getValueAt(i,6).toString()+" "+tba_detalle.getValueAt(i,7).toString()+" "+tba_detalle.getValueAt(i,8).toString()+"\n");                        
-                        printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString().substring(29,43).replaceAll("\n","")+" "+tba_detalle.getValueAt(i,3).toString()+" "+ tba_detalle.getValueAt(i, 4).toString()+" "+tba_detalle.getValueAt(i,7).toString()+" "+tba_detalle.getValueAt(i,5).toString().substring(0,2)+"% "+tba_detalle.getValueAt(i,6).toString().substring(0,2)+"% "+tba_detalle.getValueAt(i,8).toString()+"\n");
+                    printerService.printString("EPSON-TM-T20II", "   IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", " N°IDENTIFICACION: " + txtIdentificacion.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "   NOMBRE DE CLTE: " + txtNombre.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", " APELLIDO DE CLTE: " + txtApellido.getText() + "\n");                    
+                    printerService.printString("EPSON-TM-T20II", "   CORREO DE CLTE: " + txtEmail.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", " TELEFONO DE CLTE: " + txtTelefono.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "*----------------------------------------*\n");
+                    printerService.printString("EPSON-TM-T20II", "Producto   Cant Valor Subt Desc Iva Total\n");
+                    for (int i = 0; i < tba_detalle.getRowCount(); i++) {                                                
+                        printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString().substring(29,43).replaceAll("\n","")+" "+tba_detalle.getValueAt(i,3).toString()+" "+ tba_detalle.getValueAt(i, 4).toString()+" "+tba_detalle.getValueAt(i,7).toString()+" "+tba_detalle.getValueAt(i,5).toString().substring(1,3)+"% "+tba_detalle.getValueAt(i,6).toString().substring(1,3)+"% "+tba_detalle.getValueAt(i,8).toString()+"\n");
                     }
-                    printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                    printerService.printString("EPSON-TM-T20II", "                    SUBTOTAL:  "+txtSubtotal.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: "+txtDescuento.getText().substring(0,2)+"%" + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                    IVA:       "+txtIva.getText().substring(0,2)+"%" + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                    TOTAL:     "+txtTotal.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "*----------------------------------------*\n");
+                    printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: "+txtSubtotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: "+txtDescuento.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                          IVA: "+txtIva.getText().substring(1,3) + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                        TOTAL: "+txtTotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "*----------------------------------------*\n");
+                    printerService.printString("EPSON-TM-T20II", "*-------* GRACIAS POR PREFERIRNOS *------*\n\n\n");
                     byte[] cutP = new byte[]{0x1d, 'V', 1};
                     printerService.printBytes("EPSON-TM-T20II", cutP);
                     
