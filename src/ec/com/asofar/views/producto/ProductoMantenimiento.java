@@ -5,11 +5,16 @@
  */
 package ec.com.asofar.views.producto;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
+
 /**
  *
  * @author admin
  */
 public class ProductoMantenimiento extends javax.swing.JDialog {
+    
+    int x, y;
 
     /**
      * Creates new form ProductoManatenimiento
@@ -266,12 +271,6 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
 
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel17.setBackground(new java.awt.Color(255, 102, 0));
@@ -427,10 +426,6 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabel17MousePressed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
 
     /**
      * @param args the command line arguments
