@@ -25,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author nuevouser
  */
 public class PrArticuloJpaController implements Serializable {
 

@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admin1
+ * @author nuevouser
  */
 @Entity
-@Table(name = "se_Ciudad")
+@Table(name = "se_ciudad")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SeCiudad.findAll", query = "SELECT s FROM SeCiudad s")
@@ -44,11 +44,11 @@ public class SeCiudad implements Serializable {
     @Basic(optional = false)
     @Column(name = "Nombre")
     private String nombre;
-    @OneToMany(mappedBy = "idCiudad")
-    private List<SeLocalidadCliente> seLocalidadClienteList;
     @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
     @ManyToOne(optional = false)
     private SeProvincia idProvincia;
+    @OneToMany(mappedBy = "idCiudad")
+    private List<SeLocalidadCliente> seLocalidadClienteList;
 
     public SeCiudad() {
     }
@@ -78,6 +78,14 @@ public class SeCiudad implements Serializable {
         this.nombre = nombre;
     }
 
+    public SeProvincia getIdProvincia() {
+        return idProvincia;
+    }
+
+    public void setIdProvincia(SeProvincia idProvincia) {
+        this.idProvincia = idProvincia;
+    }
+
     @XmlTransient
     public List<SeLocalidadCliente> getSeLocalidadClienteList() {
         return seLocalidadClienteList;
@@ -85,14 +93,6 @@ public class SeCiudad implements Serializable {
 
     public void setSeLocalidadClienteList(List<SeLocalidadCliente> seLocalidadClienteList) {
         this.seLocalidadClienteList = seLocalidadClienteList;
-    }
-
-    public SeProvincia getIdProvincia() {
-        return idProvincia;
-    }
-
-    public void setIdProvincia(SeProvincia idProvincia) {
-        this.idProvincia = idProvincia;
     }
 
     @Override

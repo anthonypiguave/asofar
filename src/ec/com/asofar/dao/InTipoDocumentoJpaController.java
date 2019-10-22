@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admin1
+ * @author nuevouser
  */
 public class InTipoDocumentoJpaController implements Serializable {
 

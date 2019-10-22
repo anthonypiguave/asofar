@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admin1
+ * @author nuevouser
  */
 @Entity
 @Table(name = "pr_productos")
@@ -44,7 +44,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PrProductos.findByUsuarioCreacion", query = "SELECT p FROM PrProductos p WHERE p.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "PrProductos.findByFechaCreacion", query = "SELECT p FROM PrProductos p WHERE p.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "PrProductos.findByUsuarioActualizacion", query = "SELECT p FROM PrProductos p WHERE p.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "PrProductos.findByFechaActualizacion", query = "SELECT p FROM PrProductos p WHERE p.fechaActualizacion = :fechaActualizacion")})
+    , @NamedQuery(name = "PrProductos.findByFechaActualizacion", query = "SELECT p FROM PrProductos p WHERE p.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "PrProductos.findByUnidadEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.unidadEmpaqueCompra = :unidadEmpaqueCompra")
+    , @NamedQuery(name = "PrProductos.findByMedidaEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.medidaEmpaqueCompra = :medidaEmpaqueCompra")
+    , @NamedQuery(name = "PrProductos.findByCantidadPorEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.cantidadPorEmpaqueCompra = :cantidadPorEmpaqueCompra")
+    , @NamedQuery(name = "PrProductos.findByMedidaPorEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.medidaPorEmpaqueCompra = :medidaPorEmpaqueCompra")
+    , @NamedQuery(name = "PrProductos.findByUnidadEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.unidadEmpaqueVenta = :unidadEmpaqueVenta")
+    , @NamedQuery(name = "PrProductos.findByMedidaEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.medidaEmpaqueVenta = :medidaEmpaqueVenta")
+    , @NamedQuery(name = "PrProductos.findByCantidadPorEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.cantidadPorEmpaqueVenta = :cantidadPorEmpaqueVenta")
+    , @NamedQuery(name = "PrProductos.findByMedidaPorEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.medidaPorEmpaqueVenta = :medidaPorEmpaqueVenta")})
 public class PrProductos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,6 +85,23 @@ public class PrProductos implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "unidad_empaque_compra")
+    private Double unidadEmpaqueCompra;
+    @Column(name = "medida_empaque_compra")
+    private String medidaEmpaqueCompra;
+    @Column(name = "cantidad_por_empaque_compra")
+    private Double cantidadPorEmpaqueCompra;
+    @Column(name = "medida_por_empaque_compra")
+    private String medidaPorEmpaqueCompra;
+    @Column(name = "unidad_empaque_venta")
+    private Double unidadEmpaqueVenta;
+    @Column(name = "medida_empaque_venta")
+    private String medidaEmpaqueVenta;
+    @Column(name = "cantidad_por_empaque_venta")
+    private Double cantidadPorEmpaqueVenta;
+    @Column(name = "medida_por_empaque_venta")
+    private String medidaPorEmpaqueVenta;
     @JoinColumns({
         @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
         , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
@@ -203,6 +228,70 @@ public class PrProductos implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Double getUnidadEmpaqueCompra() {
+        return unidadEmpaqueCompra;
+    }
+
+    public void setUnidadEmpaqueCompra(Double unidadEmpaqueCompra) {
+        this.unidadEmpaqueCompra = unidadEmpaqueCompra;
+    }
+
+    public String getMedidaEmpaqueCompra() {
+        return medidaEmpaqueCompra;
+    }
+
+    public void setMedidaEmpaqueCompra(String medidaEmpaqueCompra) {
+        this.medidaEmpaqueCompra = medidaEmpaqueCompra;
+    }
+
+    public Double getCantidadPorEmpaqueCompra() {
+        return cantidadPorEmpaqueCompra;
+    }
+
+    public void setCantidadPorEmpaqueCompra(Double cantidadPorEmpaqueCompra) {
+        this.cantidadPorEmpaqueCompra = cantidadPorEmpaqueCompra;
+    }
+
+    public String getMedidaPorEmpaqueCompra() {
+        return medidaPorEmpaqueCompra;
+    }
+
+    public void setMedidaPorEmpaqueCompra(String medidaPorEmpaqueCompra) {
+        this.medidaPorEmpaqueCompra = medidaPorEmpaqueCompra;
+    }
+
+    public Double getUnidadEmpaqueVenta() {
+        return unidadEmpaqueVenta;
+    }
+
+    public void setUnidadEmpaqueVenta(Double unidadEmpaqueVenta) {
+        this.unidadEmpaqueVenta = unidadEmpaqueVenta;
+    }
+
+    public String getMedidaEmpaqueVenta() {
+        return medidaEmpaqueVenta;
+    }
+
+    public void setMedidaEmpaqueVenta(String medidaEmpaqueVenta) {
+        this.medidaEmpaqueVenta = medidaEmpaqueVenta;
+    }
+
+    public Double getCantidadPorEmpaqueVenta() {
+        return cantidadPorEmpaqueVenta;
+    }
+
+    public void setCantidadPorEmpaqueVenta(Double cantidadPorEmpaqueVenta) {
+        this.cantidadPorEmpaqueVenta = cantidadPorEmpaqueVenta;
+    }
+
+    public String getMedidaPorEmpaqueVenta() {
+        return medidaPorEmpaqueVenta;
+    }
+
+    public void setMedidaPorEmpaqueVenta(String medidaPorEmpaqueVenta) {
+        this.medidaPorEmpaqueVenta = medidaPorEmpaqueVenta;
     }
 
     public PrArticulo getPrArticulo() {
