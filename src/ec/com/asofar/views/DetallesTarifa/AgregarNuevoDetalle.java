@@ -12,7 +12,7 @@ import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.PrTarifarioPK;
-import static ec.com.asofar.dto.PrTarifario_.prDetalleTarifarioList;
+//import static ec.com.asofar.dto.PrTarifario_.prDetalleTarifarioList;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;

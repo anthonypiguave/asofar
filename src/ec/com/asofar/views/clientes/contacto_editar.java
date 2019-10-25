@@ -6,7 +6,7 @@
 package ec.com.asofar.views.clientes;
 
 import ec.com.asofar.dao.SeContactosClientesJpaController;
-import static ec.com.asofar.dto.CoProveedores_.email;
+//import static ec.com.asofar.dto.CoProveedores_.email;
 import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
