@@ -481,7 +481,7 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
             Client = devuelveObjeto(Long.valueOf(tba_clientes.getValueAt(id, 0).toString()), lista);
 
             if (Client != null) {
-                int OP = JOptionPane.showConfirmDialog(null, "¿Desea Abilitar este Cliente?", "", JOptionPane.YES_NO_OPTION);
+                int OP = JOptionPane.showConfirmDialog(null, "¿Desea Activar este Cliente?", "", JOptionPane.YES_NO_OPTION);
                 if (OP == JOptionPane.YES_OPTION) {
                     for (int i = 0; i < Cliente.size(); i++) {
                      if (Client.getIdClientes().equals(Cliente.get(i).getIdClientes())) {

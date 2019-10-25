@@ -254,10 +254,11 @@ public class Venta extends javax.swing.JInternalFrame {
         for (int i = 0; i < Cliente.size(); i++) {
 
             if (Cliente.get(i).getIdClientes()==15) {
-                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
+//                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
                 txtIdentificacion.setText("9999999999999");
+                txt_idCliente.setText(Cliente.get(i).getIdClientes().toString());
                 txtTipoIdent.setText("********************************");
                 txtEmail.setText("********************************");
                 txtDireccion.setText("********************************");
@@ -906,7 +907,9 @@ public class Venta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtIdentificacionKeyTyped
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        CargarCliente2();
+//        CargarCliente2();
+        ClienteVenta ingre = new ClienteVenta(new javax.swing.JFrame(), true);
+        ingre.setVisible(true);
     }//GEN-LAST:event_btnbuscarActionPerformed
     public void CargarCliente2() {
         String cedula = txtIdentificacion.getText();
