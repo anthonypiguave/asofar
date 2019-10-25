@@ -11,6 +11,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class ClienteVenta extends javax.swing.JDialog {
     String valor = "";
     SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeClientes> lista = Cc.findSeClientesEntities();
+    SeClientes Clientesss = null;
 
     public ClienteVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -192,10 +194,37 @@ public class ClienteVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbaClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaClienteMousePressed
+        int id = 0;
 
+        if (evt.getClickCount() == 2) {
+            id = tbaCliente.getSelectedRow();
+            lista = Cc.findSeClientesEntities();
+            Clientesss = buscarObjeto(tbaCliente.getValueAt(id, 0).toString(), lista);
+
+            //    System.out.println("nulo --"+lista.get(id).getPrimerNombre());
+            //  lista.clear();
+            setVisible(false);
+        }
 
     }//GEN-LAST:event_tbaClienteMousePressed
+    public SeClientes buscarObjeto(String cedula, List<SeClientes> lis) {
+        SeClientes pro = new SeClientes();
+        pro = null;
+        //int ced = Integer.valueOf(cedula);
+        for (int i = 0; i < lis.size(); i++) {
+//                System.out.println("var "+cedula);
+//                System.out.println("lis "+lis.get(i).getIdClientes());
+            if (cedula.equals(lis.get(i).getIdClientes().toString())) {
+              //  System.out.println("enter " + lis.get(i).getIdClientes().toString());
+                pro = lis.get(i);
+            }
+        }
+        return pro;
+    }
 
+    public SeClientes getCliente() {
+        return Clientesss;
+    }
     private void tbaClienteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaClienteMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tbaClienteMouseReleased

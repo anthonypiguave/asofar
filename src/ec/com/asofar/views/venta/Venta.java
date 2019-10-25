@@ -9,6 +9,8 @@ import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.SeClientesJpaController;
+import ec.com.asofar.dao.SeContactosClientesJpaController;
+import ec.com.asofar.dao.SeLocalidadClienteJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
 import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
@@ -34,7 +36,9 @@ import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
@@ -147,6 +151,13 @@ public class Venta extends javax.swing.JInternalFrame {
 
     List<JoinProductoVenta> ListProdVent2 = null;
     JoinProductoVentaExt selectProdVent2 = new JoinProductoVentaExt();
+    SeClientes Clientesss = null;
+
+    List<SeContactosClientes> ContactoCliente;
+    SeContactosClientesJpaController Ccl = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    List<SeLocalidadCliente> LocalidadCliente;
+    SeLocalidadClienteJpaController Lc = new SeLocalidadClienteJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public Venta() {
         initComponents();
@@ -253,7 +264,7 @@ public class Venta extends javax.swing.JInternalFrame {
         Cliente = Cc.findSeClientesEntities();
         for (int i = 0; i < Cliente.size(); i++) {
 
-            if (Cliente.get(i).getIdClientes()==15) {
+            if (Cliente.get(i).getIdClientes() == 15) {
 //                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
@@ -274,17 +285,16 @@ public class Venta extends javax.swing.JInternalFrame {
 //        txtTelefono.setText("********************************");
     }
 
-    public void Prueba() {
-
-        ListKardex = selectKardex.obtenerProductoKardex(Long.valueOf(18));
-        for (int i = 0; i < ListKardex.size(); i++) {
-            System.out.println("prueba " + ListKardex.get(i).getCantidad());
-            System.out.println(" " + ListKardex.get(i).getSaldoActual());
-            System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
-
-        }
-    }
-
+//    public void Prueba() {
+//
+//        ListKardex = selectKardex.obtenerProductoKardex(Long.valueOf(18));
+//        for (int i = 0; i < ListKardex.size(); i++) {
+//            System.out.println("prueba " + ListKardex.get(i).getCantidad());
+//            System.out.println(" " + ListKardex.get(i).getSaldoActual());
+//            System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
+//
+//        }
+//    }
     public void pVender() {
         String v = null;
         List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
@@ -402,7 +412,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS DEL CLIENTE:", 0, 0, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS DEL CLIENTE:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -486,7 +496,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
         btnbuscar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnbuscar.setForeground(new java.awt.Color(0, 102, 0));
-        btnbuscar.setText("BUSCAR");
+        btnbuscar.setText("Clientes");
         btnbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbuscarActionPerformed(evt);
@@ -538,27 +548,28 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel18))
                                 .addGap(37, 37, 37)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txt_idCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9))
                                 .addGap(12, 12, 12)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtApellido))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel11)
                             .addComponent(jLabel10)
@@ -567,9 +578,8 @@ public class Venta extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTelefono)
                             .addComponent(txtTipoIdent)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(txtDireccion))
-                        .addGap(0, 176, Short.MAX_VALUE)))
+                            .addComponent(txtEmail)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -623,7 +633,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", 0, 0, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel13.setText("SUBTOTAL: ");
@@ -635,19 +645,19 @@ public class Venta extends javax.swing.JInternalFrame {
         jLabel15.setText("TOTAL: ");
 
         txtSubtotal.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtSubtotal.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        txtSubtotal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         txtTotal.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtTotal.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        txtTotal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         txtIva.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtIva.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        txtIva.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel16.setText("DESCUENTO:");
 
         txtDescuento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtDescuento.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        txtDescuento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -692,7 +702,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", 0, 0, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DETALLE DE FACTURA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         tba_detalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -910,6 +920,26 @@ public class Venta extends javax.swing.JInternalFrame {
 //        CargarCliente2();
         ClienteVenta ingre = new ClienteVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
+        Clientesss = ingre.getCliente();
+//        Long idCliente = Clientesss.getIdClientes();
+        try {
+            
+            String cedula = Clientesss.getNumeroIdentificacion().toString();
+            ListCedula = selectCliente.obtenerClienteVenta(cedula);
+            for (int i = 0; i < ListCedula.size(); i++) {
+                txtIdentificacion.setText(ListCedula.get(i).getNumeroIdentificacion());
+            txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
+                    + ListCedula.get(i).getSegundoApellido());
+            txtNombre.setText(ListCedula.get(i).getPrimerNombre());
+            txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
+            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
+            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
+            txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
+            txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
+      }
+        } catch (Exception e) {
+            Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_btnbuscarActionPerformed
     public void CargarCliente2() {
         String cedula = txtIdentificacion.getText();
@@ -1295,32 +1325,32 @@ public class Venta extends javax.swing.JInternalFrame {
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
                     System.out.println(printerService.getPrinters());
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
-                    printerService.printString("EPSON-TM-T20II", "  *                 VENTA              *  \n");                    
+                    printerService.printString("EPSON-TM-T20II", "  *                 VENTA              *  \n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");                    
+                    printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "    IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", " N° IDENTIFICACION: " + txtIdentificacion.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "    NOMBRE DE CLTE: " + txtNombre.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "  APELLIDO DE CLTE: " + txtApellido.getText() + "\n");                    
+                    printerService.printString("EPSON-TM-T20II", "  APELLIDO DE CLTE: " + txtApellido.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "    CORREO DE CLTE: " + txtEmail.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "  TELEFONO DE CLTE: " + txtTelefono.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", " DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "Producto   Cant Valor Subt Desc Iva Total\n");
-                    for (int i = 0; i < tba_detalle.getRowCount(); i++) {                                            
-                        printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString().substring(29,43).replaceAll("\n","")+" "+tba_detalle.getValueAt(i,3).toString()+" "+ tba_detalle.getValueAt(i, 4).toString()+" "+tba_detalle.getValueAt(i,7).toString()+" "+tba_detalle.getValueAt(i,5).toString().substring(0,2)+"% "+tba_detalle.getValueAt(i,6).toString().substring(0,2)+"% "+tba_detalle.getValueAt(i,8).toString()+"\n");
+                    for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+                        printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString().substring(29, 43).replaceAll("\n", "") + " " + tba_detalle.getValueAt(i, 3).toString() + " " + tba_detalle.getValueAt(i, 4).toString() + " " + tba_detalle.getValueAt(i, 7).toString() + " " + tba_detalle.getValueAt(i, 5).toString().substring(0, 2) + "% " + tba_detalle.getValueAt(i, 6).toString().substring(0, 2) + "% " + tba_detalle.getValueAt(i, 8).toString() + "\n");
                     }
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                    printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: "+txtSubtotal.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: "+txtDescuento.getText()+ "\n");
-                    printerService.printString("EPSON-TM-T20II", "                          IVA: "+txtIva.getText()+ "\n");
-                    printerService.printString("EPSON-TM-T20II", "                        TOTAL: "+txtTotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: " + txtSubtotal.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: " + txtDescuento.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                          IVA: " + txtIva.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "                        TOTAL: " + txtTotal.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "--------- GRACIAS POR PREFERIRNOS --------\n");
                     byte[] cutP = new byte[]{0x1d, 'V', 1};
                     printerService.printBytes("EPSON-TM-T20II", cutP);
-                    
+
 /////////// AGREGANDO A MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
                     InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
