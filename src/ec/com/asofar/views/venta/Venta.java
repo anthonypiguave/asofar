@@ -926,7 +926,9 @@ public class Venta extends javax.swing.JInternalFrame {
             
             String cedula = Clientesss.getNumeroIdentificacion().toString();
             ListCedula = selectCliente.obtenerClienteVenta(cedula);
+            
             for (int i = 0; i < ListCedula.size(); i++) {
+                
                 txtIdentificacion.setText(ListCedula.get(i).getNumeroIdentificacion());
             txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
                     + ListCedula.get(i).getSegundoApellido());
