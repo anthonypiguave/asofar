@@ -6,8 +6,13 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrEmpaqueJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrEmpaque;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.compras.crearOrdenCompraForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -29,11 +35,29 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
      */
     PrEmpaqueJpaController empcontrol = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
 //    PrEmpaque emp=new PrEmpaque();
-    List<PrEmpaque> listEmp = empcontrol.findPrEmpaqueEntities();
+    List<PrEmpaque> listEmpa = empcontrol.findPrEmpaqueEntities();
+    PrEmpaque emp = new PrEmpaque();
+    SeUsuarios usuario; 
+    SeEmpresa empresa;
+    SeSucursal sucursal;
 
     public EmpaqueMantenimiento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setLocationRelativeTo(null);
         initComponents();
+        tabla();
+//        Timer tiempo = new Timer(100, new EmpaqueMantenimiento.horas());
+//        tiempo.start();
+    }
+
+    public EmpaqueMantenimiento(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        tabla();
+        usuario = us;
+        empresa = em;
+        sucursal = su;
 //        Timer tiempo = new Timer(100, new EmpaqueMantenimiento.horas());
 //        tiempo.start();
     }
@@ -54,7 +78,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -69,8 +93,8 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
             }
         });
 
-        jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder("EMPAQUES"));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -78,7 +102,12 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
 
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +183,12 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void tabla() {
+        List<PrEmpaque> listEmp = empcontrol.findPrEmpaqueEntities();
+        Tablas.listarEmpaque(listEmp, tabla);
+
+    }
+
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
@@ -192,24 +227,59 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 
     public void guardar() {
         try {
-            PrEmpaque oe = new PrEmpaque();
+            boolean valor = ValidarDTO.ValidarEmpaques(txtNombre.getText());
+            if (valor == true) {
+                JOptionPane.showMessageDialog(this, "el empaque ya existe!");
+            } else {
+                PrEmpaque oe = new PrEmpaque();
 
-            oe.setNombreEmpaque(txtNombre.getText());
-            oe.setEstado("A");
-            oe.setFechaCreacion(d);
+                oe.setNombreEmpaque(txtNombre.getText());
+                oe.setEstado("A");
+                oe.setFechaCreacion(d);
+                oe.setUsuarioCreacion(usuario.getNombreUsuario());
 //        oe.setUsuarioCreacion(usuarioCreacion);
-            empcontrol.create(oe);
-            JOptionPane.showMessageDialog(null, "Nuevo empaque guardado ");
+                empcontrol.create(oe);
+                JOptionPane.showMessageDialog(null, "Nuevo empaque guardado ");
+            }
+
         } catch (Exception e) {
             System.out.println("Error al guardar prod " + e.getMessage());
             System.err.print(e);
         }
 
+        tabla();
     }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    public PrEmpaque devuelveObjeto(Long id, List<PrEmpaque> listabod) {
+        PrEmpaque doc = null;
+        for (int i = 0; i < listabod.size(); i++) {
+            if (Objects.equals(listabod.get(i).getId(), id)) {
+                doc = listabod.get(i);
+                break;
+            }
+        }
+        return doc;
+    }
+
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+        int id = 0;
+        emp = null;
+        if (evt.getClickCount() == 2) {
+            id = tabla.getSelectedRow();
+            emp = devuelveObjeto(Long.valueOf(tabla.getValueAt(id, 0).toString()), listEmpa);
+            if (emp != null) {
+//                        setVisible(false);
+                ActualizarEmpaque ep = new ActualizarEmpaque(new javax.swing.JFrame(), true,usuario,empresa,sucursal, emp);
+                ep.setVisible(true);
+            }
+
+            tabla();
+        }
+    }//GEN-LAST:event_tablaMousePressed
 
     /**
      * @param args the command line arguments
@@ -262,7 +332,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,6 +35,7 @@ import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrDetalleTarifario;
+import ec.com.asofar.dto.PrEmpaque;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
@@ -2232,6 +2233,7 @@ public class Tablas {
     }
 
     public static void llenarDetalleVenta(JTable tabla, List<VeFacturaDetalle> lista) {
+        int[] a = {10, 30, 200, 30, 60};
         VeFacturaDetalle vo = new VeFacturaDetalle();
 
         tabla
@@ -2261,7 +2263,6 @@ public class Tablas {
                 return tbVenta[column];
             }
         };
-
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
                 Object filas[] = new Object[10];
@@ -2282,6 +2283,8 @@ public class Tablas {
             }
 
         }
+        tabla.setModel(dt);
+        tabla.setRowHeight(30);
 
         tabla.setModel(dt);
     }
@@ -2924,6 +2927,38 @@ public class Tablas {
         Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
         Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 
+    }
+    
+    public static void listarEmpaque(List<PrEmpaque> lista, JTable Tabla) {
+        int[] a = {30, 30, 40};
+        Font fuente = new Font("Bold", Font.BOLD, 12);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"No. ", "NOMBRE", "ESTADO"};
+        String[] Filas = new String[3];
+        model = new DefaultTableModel(null, Co);
+        JTableHeader jt;
+        jt = Tabla.getTableHeader();
+        jt.setFont(fuente);
+        jt.setDefaultRenderer(tcr);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+                Filas[0] = String.valueOf(lista.get(i).getId());
+                Filas[1] = String.valueOf(lista.get(i).getNombreEmpaque());
+                Filas[2] = String.valueOf(lista.get(i).getEstado());
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            
+        }
     }
 
 }
