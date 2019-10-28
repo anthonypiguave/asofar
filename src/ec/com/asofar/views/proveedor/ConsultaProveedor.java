@@ -7,12 +7,14 @@ package ec.com.asofar.views.proveedor;
 
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.PrEmpaque;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.EntityManager;
 
 /**

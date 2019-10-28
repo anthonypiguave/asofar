@@ -35,6 +35,7 @@ import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
+import ec.com.asofar.dto.PrEmpaque;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
@@ -321,5 +322,20 @@ public class ValidarDTO {
             }
         }
         return valor;
+    }
+        
+        public static boolean ValidarEmpaques(String nombre) {
+        PrEmpaqueJpaController control = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
+        boolean valor = false;
+        List<PrEmpaque> lista = control.findPrEmpaqueEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombreEmpaque().equals(nombre)) {
+                valor = true;
+            }
+        }
+
+        return valor;
+
     }
 }
