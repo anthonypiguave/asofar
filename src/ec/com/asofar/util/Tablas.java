@@ -2233,6 +2233,7 @@ public class Tablas {
     }
 
     public static void llenarDetalleVenta(JTable tabla, List<VeFacturaDetalle> lista) {
+        int[] a = {10, 30, 200, 30, 60};
         VeFacturaDetalle vo = new VeFacturaDetalle();
 
         tabla
@@ -2262,7 +2263,6 @@ public class Tablas {
                 return tbVenta[column];
             }
         };
-
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
                 Object filas[] = new Object[10];
@@ -2283,6 +2283,8 @@ public class Tablas {
             }
 
         }
+        tabla.setModel(dt);
+        tabla.setRowHeight(30);
 
         tabla.setModel(dt);
     }
