@@ -5,12 +5,18 @@
  */
 package ec.com.asofar.views.producto;
 
+import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dao.PrArticuloJpaController;
+import ec.com.asofar.dao.PrEmpaqueJpaController;
+import ec.com.asofar.dao.PrFabricanteJpaController;
 import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
+import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrArticulo;
+import ec.com.asofar.dto.PrEmpaque;
+import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
@@ -33,6 +39,18 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
     PrArticuloJpaController ArticuloContoller = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrTipoMedidasJpaController MedidaController = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrTipoPresentacionJpaController PresentacionController = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
+    CoProveedoresJpaController ProveedorController = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrEmpaqueJpaController EmpaqueController = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrFabricanteJpaController FabricanteController = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    List<PrGrupos> listGrupo = GrupoController.findPrGruposEntities();
+    List<PrSubgrupos> listSubgrupo = SubgrupoController.findPrSubgruposEntities();
+    List<PrArticulo> listArticulo = ArticuloContoller.findPrArticuloEntities();
+    List<PrTipoMedidas> listMedida = MedidaController.findPrTipoMedidasEntities();
+    List<CoProveedores> listProveedor = ProveedorController.findCoProveedoresEntities();
+    List<PrEmpaque> listEmpaque = EmpaqueController.findPrEmpaqueEntities();
+    List<PrTipoPresentacion> listPresentacion = PresentacionController.findPrTipoPresentacionEntities();
+    List<PrFabricante> listFabricante = FabricanteController.findPrFabricanteEntities();
 
     public ProductoMantenimiento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -43,42 +61,87 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         CargarArticulos();
         CargarMedidas();
         CargarPresentacion();
+        CargarProveedor();
+        CargarEmpaque();
+        CargarFabricante();
 
     }
 
     public void CargarGrupo() {
-        List<PrGrupos> list = GrupoController.findPrGruposEntities();
-        for (int i = 0; i < list.size(); i++) {
-            cbxGrupo.addItem(list.get(i).getNombre());
+
+        for (int i = 0; i < listGrupo.size(); i++) {
+            cbxGrupo.addItem(listGrupo.get(i).getNombre());
         }
     }
 
     public void CargarSubgrupo() {
-        List<PrSubgrupos> list = SubgrupoController.findPrSubgruposEntities();
-        for (int i = 0; i < list.size(); i++) {
-            cbxSubgrupo.addItem(list.get(i).getNombre());
+
+        for (int i = 0; i < listSubgrupo.size(); i++) {
+            cbxSubgrupo.addItem(listSubgrupo.get(i).getNombre());
         }
     }
 
     public void CargarArticulos() {
-        List<PrArticulo> list = ArticuloContoller.findPrArticuloEntities();
-        for (int i = 0; i < list.size(); i++) {
-            cbxArticulo.addItem(list.get(i).getNombreArticulo());
+
+        for (int i = 0; i < listArticulo.size(); i++) {
+            cbxArticulo.addItem(listArticulo.get(i).getNombreArticulo());
         }
     }
 
     public void CargarMedidas() {
-        List<PrTipoMedidas> list = MedidaController.findPrTipoMedidasEntities();
-        for (int i = 0; i < list.size(); i++) {
-            cbxMedida.addItem(list.get(i).getNombreTipoMedida());
+
+        for (int i = 0; i < listMedida.size(); i++) {
+            cbxMedida.addItem(listMedida.get(i).getNombreTipoMedida());
         }
     }
 
     public void CargarPresentacion() {
-        List<PrTipoPresentacion> list = PresentacionController.findPrTipoPresentacionEntities();
-        for (int i = 0; i < list.size(); i++) {
-            cbxPresentacion.addItem(list.get(i).getNombre());
+
+        for (int i = 0; i < listPresentacion.size(); i++) {
+            cbxPresentacion.addItem(listPresentacion.get(i).getNombre());
         }
+    }
+
+    public void CargarProveedor() {
+
+        for (int i = 0; i < listProveedor.size(); i++) {
+            cbxProveedor.addItem(listProveedor.get(i).getNombre());
+        }
+
+    }
+
+    public void CargarEmpaque() {
+
+        for (int i = 0; i < listEmpaque.size(); i++) {
+            cbxEmpaqueUnidadCompra.addItem(listEmpaque.get(i).getNombreEmpaque());
+            cbxEmpaqueCantidadCompra.addItem(listEmpaque.get(i).getNombreEmpaque());
+            cbxUnidadEmpaqueVenta.addItem(listEmpaque.get(i).getNombreEmpaque());
+            cbxCantidadEmpaqueVenta.addItem(listEmpaque.get(i).getNombreEmpaque());
+        }
+
+    }
+    
+        public void CargarFabricante() {
+
+        for (int i = 0; i < listFabricante.size(); i++) {
+            cbxFabricante.addItem(listFabricante.get(i).getNombre());
+
+        }
+
+    }
+
+    public String GenerarProductoNombre() {
+
+        String articulo = cbxArticulo.getSelectedItem().toString();
+        String grupo = cbxGrupo.getSelectedItem().toString();
+        String subGrupo = cbxSubgrupo.getSelectedItem().toString();
+        String tipoPresentacion = cbxPresentacion.getSelectedItem().toString();
+        String tipoMedidas = cbxMedida.getSelectedItem().toString();
+
+        String cadena = grupo + "  " + subGrupo + "  " + articulo + "  " + tipoPresentacion + "  " + tipoMedidas;
+
+        return cadena.toUpperCase();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -96,17 +159,17 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbxEmpaqueUnidadCompra = new javax.swing.JComboBox<>();
+        cbxEmpaqueCantidadCompra = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbxProveedor = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        cbxUnidadEmpaqueVenta = new javax.swing.JComboBox<>();
+        cbxCantidadEmpaqueVenta = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -120,7 +183,7 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         cbxSubgrupo = new javax.swing.JComboBox<>();
         cbxPresentacion = new javax.swing.JComboBox<>();
         cbxArticulo = new javax.swing.JComboBox<>();
-        jTextField7 = new javax.swing.JTextField();
+        txtProducto = new javax.swing.JTextField();
         cbxMedida = new javax.swing.JComboBox<>();
         jTextField9 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -132,8 +195,9 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox11 = new javax.swing.JComboBox<>();
+        cbxFabricante = new javax.swing.JComboBox<>();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -162,13 +226,13 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
 
         jLabel7.setText("cantidad por unidad de empaque:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxEmpaqueUnidadCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxEmpaqueCantidadCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
         jLabel8.setText("proveedor por defecto:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -180,7 +244,7 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -193,8 +257,8 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(cbxEmpaqueUnidadCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxEmpaqueCantidadCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,17 +266,17 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                 .addGap(46, 46, 46)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxEmpaqueUnidadCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxEmpaqueCantidadCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
@@ -222,9 +286,9 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
 
         jLabel16.setText("cantidad por unidad de empaque:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxUnidadEmpaqueVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxCantidadEmpaqueVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -243,8 +307,8 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbxUnidadEmpaqueVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxCantidadEmpaqueVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(366, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -254,12 +318,12 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxUnidadEmpaqueVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxCantidadEmpaqueVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
 
@@ -355,11 +419,18 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
 
         jButton7.setText("Cancelar");
 
-        jLabel1.setText("Marca:");
+        jLabel1.setText("Fabricante:");
 
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxFabricante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
         jButton8.setText("+");
+
+        jButton9.setText("jButton9");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -372,6 +443,10 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                     .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addGap(43, 43, 43)
+                                .addComponent(jButton7))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -395,20 +470,21 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                                             .addComponent(cbxMedida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(cbxArticulo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(cbxPresentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField7)
-                                            .addComponent(jComboBox11, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtProducto)
+                                            .addComponent(cbxFabricante, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton4)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton8)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton6)
-                                .addGap(43, 43, 43)
-                                .addComponent(jButton7)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton1)
+                                            .addComponent(jButton2)
+                                            .addComponent(jButton3)
+                                            .addComponent(jButton4)
+                                            .addComponent(jButton5)
+                                            .addComponent(jButton8)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jButton9)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -446,12 +522,13 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -477,6 +554,12 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabel17MousePressed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        String cadena = GenerarProductoNombre();
+        txtProducto.setText(cadena);
+        System.out.println("kkkkkkkkkkkk " + cadena);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,10 +606,16 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxArticulo;
+    private javax.swing.JComboBox<String> cbxCantidadEmpaqueVenta;
+    private javax.swing.JComboBox<String> cbxEmpaqueCantidadCompra;
+    private javax.swing.JComboBox<String> cbxEmpaqueUnidadCompra;
+    private javax.swing.JComboBox<String> cbxFabricante;
     private javax.swing.JComboBox<String> cbxGrupo;
     private javax.swing.JComboBox<String> cbxMedida;
     private javax.swing.JComboBox<String> cbxPresentacion;
+    private javax.swing.JComboBox<String> cbxProveedor;
     private javax.swing.JComboBox<String> cbxSubgrupo;
+    private javax.swing.JComboBox<String> cbxUnidadEmpaqueVenta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -535,12 +624,7 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -569,7 +653,7 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
 }
