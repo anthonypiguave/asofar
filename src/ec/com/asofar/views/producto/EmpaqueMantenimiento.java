@@ -85,7 +85,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("NOMBRE:");
+        jLabel1.setText("AGREGAR EMPAQUE:");
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,10 +152,9 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
                                 .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(29, 29, 29)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(120, 120, 120)
                         .addComponent(btnGuardar)
@@ -231,15 +230,19 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
             if (valor == true) {
                 JOptionPane.showMessageDialog(this, "el empaque ya existe!");
             } else {
-                PrEmpaque oe = new PrEmpaque();
+                if (txtNombre.getText().length() <= 0) {
+                    JOptionPane.showMessageDialog(this, "Ecriba un nombre");
+                }else{
+                    PrEmpaque oe = new PrEmpaque();
 
                 oe.setNombreEmpaque(txtNombre.getText());
                 oe.setEstado("A");
                 oe.setFechaCreacion(d);
                 oe.setUsuarioCreacion(usuario.getNombreUsuario());
-//        oe.setUsuarioCreacion(usuarioCreacion);
                 empcontrol.create(oe);
                 JOptionPane.showMessageDialog(null, "Nuevo empaque guardado ");
+                }
+                
             }
 
         } catch (Exception e) {

@@ -32,7 +32,7 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
     List<PrEmpaque> listEmp = empcontrol.findPrEmpaqueEntities();
     PrEmpaque emp = new PrEmpaque();
     Date d = new Date();
-    SeUsuarios usuario; 
+    SeUsuarios usuario;
     SeEmpresa empresa;
     SeSucursal sucursal;
 
@@ -40,18 +40,16 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        listEmpaq = emp;
-        lista();
         usuario = us;
         empresa = em;
         sucursal = su;
+        listEmpaq = emp;
+        boton();
     }
 
     public ActualizarEmpaque(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-//        listEmpaq = emp;
-//        lista();
     }
 
     /**
@@ -63,12 +61,15 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        cbEstado = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        boton = new javax.swing.JButton();
+
+        jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,8 +92,6 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
 
         jLabel1.setText("NOMBRE:");
 
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
-
         jButton1.setText("ACTUALIZAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,40 +106,47 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
             }
         });
 
+        boton.setText("AAAAAAAAAA");
+        boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
+                        .addComponent(jButton1)
+                        .addGap(61, 61, 61)
+                        .addComponent(boton)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(boton))
                 .addGap(25, 25, 25))
         );
 
@@ -152,13 +158,16 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
         //        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel2MouseDragged
 
-    public void lista() {
-        txtNombre.setText(listEmpaq.getNombreEmpaque());
-        if (listEmpaq.getEstado() == "A") {
-            cbEstado.setSelectedIndex(1);
-        } else {
-            cbEstado.setSelectedIndex(0);
+    public void boton() {
+        String est = listEmpaq.getEstado();
+        if ("A".equals(est)) {
+            boton.setText("DESACTIVAR");
         }
+        if ("I".equals(est)) {
+            boton.setText("ACTIVAR");
+        }
+        
+        txtNombre.setText(listEmpaq.getNombreEmpaque());
     }
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -172,22 +181,47 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
 
     public void actualizar() {
         try {
-//            boolean valor = ValidarDTO.ValidarEmpaques(txtNombre.getText());
-//            if (valor == true) {
-//                JOptionPane.showMessageDialog(this, "el empaque ya existe!");
-//            } else {
-                listEmpaq.setNombreEmpaque(txtNombre.getText());
-                if (cbEstado.getSelectedItem() == "ACTIVO") {
-                    listEmpaq.setEstado("A");
-                } else {
-                    listEmpaq.setEstado("I");
-                }
+            boolean valor = ValidarDTO.ValidarEmpaques(txtNombre.getText());
+            if (valor == true) {
+                JOptionPane.showMessageDialog(this, "el empaque ya existe!");
+            }
+            else if(txtNombre.getText().length() <= 0) {
+                JOptionPane.showMessageDialog(this, "Escriba un nombre!");
+            }
+            else {
 
-                listEmpaq.setFechaActualizacion(d);
-                listEmpaq.setUsuarioActualizacion(usuario.getNombreUsuario());
-//        oe.setUsuarioCreacion(usuarioCreacion);
-                empcontrol.edit(listEmpaq);
-                JOptionPane.showMessageDialog(null, "Nuevo empaque actualizado ");
+            listEmpaq.setFechaActualizacion(d);
+            listEmpaq.setUsuarioActualizacion(usuario.getNombreUsuario());
+            empcontrol.edit(listEmpaq);
+            JOptionPane.showMessageDialog(null, "Nuevo empaque actualizado ");
+            setVisible(false);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al guardar prod " + e.getMessage());
+            System.err.print(e);
+        }
+    }
+
+    public void desactivar() {
+        try {
+            listEmpaq.setEstado("I");
+            listEmpaq.setFechaActualizacion(d);
+            empcontrol.edit(listEmpaq);
+            JOptionPane.showMessageDialog(null, "Empaque actualizado ");
+//            }
+
+        } catch (Exception e) {
+            System.out.println("Error al guardar prod " + e.getMessage());
+            System.err.print(e);
+        }
+    }
+    public void activar() {
+        try {
+            listEmpaq.setEstado("A");
+            listEmpaq.setFechaActualizacion(d);
+            empcontrol.edit(listEmpaq);
+            JOptionPane.showMessageDialog(null, "Empaque actualizado ");
 //            }
 
         } catch (Exception e) {
@@ -198,8 +232,19 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         actualizar();
-        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActionPerformed
+        String bot = boton.getText();
+        System.out.println("botonn: " + bot);
+        if ("ACTIVAR".equals(bot)) {
+            activar();
+            setVisible(false);
+        } else {
+            desactivar();
+            setVisible(false);
+        }
+    }//GEN-LAST:event_botonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,11 +289,12 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbEstado;
+    private javax.swing.JButton boton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
