@@ -13,6 +13,9 @@ import ec.com.asofar.dto.InKardexPK;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -64,12 +67,15 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-//        cargarTbaProduc();
-//        Prueba();
         cargarTbaProductoVenta();
-
     }
-
+    public ReporteriaProducto(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        cargarTbaProductoVenta();
+    }
     public void Prueba() {
         ListProdVent = selectProdVent.listarProductoVenta();
         for (int i = 0; i < ListProdVent.size(); i++) {
