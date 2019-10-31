@@ -29,7 +29,8 @@ import javax.swing.JOptionPane;
  * @author alumno
  */
 public class ActualizarDatosUsuarios extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     SeRolesJpaController mn
             = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SePersonasJpaController mp
@@ -382,10 +383,15 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
     private void BotonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonUsuarioActionPerformed
         Mostrar_persona mp = new Mostrar_persona(new javax.swing.JFrame(), true, us1, em1, su1);
         mp.setVisible(true);
-        objPersona = mp.getObj();
-        txtPersona.setText(objPersona.getNombres());
-        txtCell.setText(objPersona.getTelefono());
-        txtCorreo.setText(objPersona.getCorreo());
+        try {
+            objPersona = mp.getObj();
+            txtPersona.setText(objPersona.getNombres());
+            txtCell.setText(objPersona.getTelefono());
+            txtCorreo.setText(objPersona.getCorreo());
+        } catch (Exception e) {
+            
+        }
+
 
     }//GEN-LAST:event_BotonUsuarioActionPerformed
 
@@ -400,7 +406,7 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     public void Guardar() {
