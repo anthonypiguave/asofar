@@ -102,7 +102,11 @@ public class Login extends javax.swing.JDialog {
         btningresar1.setBackground(new java.awt.Color(255, 51, 51));
         btningresar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btningresar1.setForeground(new java.awt.Color(254, 254, 254));
+        btningresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         btningresar1.setText("SALIR");
+        btningresar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btningresar1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btningresar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btningresar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btningresar1ActionPerformed(evt);
