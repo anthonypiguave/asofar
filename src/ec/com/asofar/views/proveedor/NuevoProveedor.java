@@ -26,16 +26,18 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class NuevoProveedor extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     CoProveedores cpro = new CoProveedores();
-    List<CoProveedores>lista;
+    List<CoProveedores> lista;
     CoProveedoresJpaController cpcont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
     Date d = new Date();
     SeTipoPersona stp = new SeTipoPersona();
     List<SeTipoPersona> listartipop;
-    List<SePais>listarpais;
+    List<SePais> listarpais;
     SePaisJpaController paiscont = new SePaisJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeTipoPersonaJpaController tipopcont = new SeTipoPersonaJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     /**
      * Creates new form NuevoProveedor
      */
@@ -48,7 +50,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
         combopais();
         setLocationRelativeTo(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -284,7 +286,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(0, 635, Short.MAX_VALUE))
+                .addGap(0, 688, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(135, 135, 135)
@@ -410,17 +412,17 @@ public class NuevoProveedor extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    public void combotipopersona(){        
+
+    public void combotipopersona() {
         cbtipopersona.setModel(new javax.swing.DefaultComboBoxModel<>());
-        for(int i =0;i< listartipop.size();i++){
+        for (int i = 0; i < listartipop.size(); i++) {
             cbtipopersona.addItem(listartipop.get(i).getNombre());
         }
     }
-    public void combopais(){        
+
+    public void combopais() {
         cbpais.setModel(new javax.swing.DefaultComboBoxModel<>());
-        for(int i =0;i< listarpais.size();i++){
+        for (int i = 0; i < listarpais.size(); i++) {
             cbpais.addItem(listarpais.get(i).getNombre());
         }
     }
@@ -455,26 +457,37 @@ public class NuevoProveedor extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         int opcion = JOptionPane.showConfirmDialog(null, "SEGURO QUE DESEA SALIR", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
-        if(opcion == JOptionPane.YES_OPTION){
-        setVisible(false);
-        ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
-        cp.setVisible(true);}
+        if (opcion == JOptionPane.YES_OPTION) {
+            setVisible(false);
+            ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(), true);
+            cp.setVisible(true);
+        }
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        int responsive = JOptionPane.showConfirmDialog(null,"","SEGURO DESEA CREAR EL PROVEEDOR",JOptionPane.YES_NO_OPTION);
-        if(responsive == JOptionPane.YES_OPTION){        
-            for (int i = 0; i < lista.size(); i++) {
-                if ((lista.get(i).getNumeroIdentificacion()).equals(txtidentificacion.getText())) {
-                    cpro = lista.get(i);
+        int responsive = JOptionPane.showConfirmDialog(null, "SEGURO DESEA CREAR EL PROVEEDOR","", JOptionPane.YES_NO_OPTION);
+        lista = cpcont.findCoProveedoresEntities();
+        Boolean estado = false;
+
+        if (responsive == JOptionPane.YES_OPTION) {
+
+            if (lista != null) {
+                
+                for (int i = 0; i < lista.size(); i++) {
+
+                    if ((lista.get(i).getNumeroIdentificacion()).equals(txtidentificacion.getText())) {
+                       estado = true ;
+                    }
                 }
             }
-            if (cpro != null) {
+            
+            
+            if (estado) {
                 JOptionPane.showMessageDialog(null, "PERSONA YA EXISTE");
             } else {
                 if ("".equals(txtnombre.getText())
@@ -484,91 +497,91 @@ public class NuevoProveedor extends javax.swing.JDialog {
                         || "".equals(txtdireccion.getText())) {
                     JOptionPane.showMessageDialog(null, "DEBE LLENAR EL FORMULARIO");
                 } else {
-        cpro.setNombre(txtnombre.getText());
-        cpro.setDireccion(txtdireccion.getText());
-        cpro.setTelefono1(txttelefono.getText());
-        cpro.setTelefono2(txttelfseg.getText());
-        cpro.setPaginaWeb(txtpaginaweb.getText());
-        cpro.setNumeroIdentificacion(txtidentificacion.getText());
-        cpro.setEmail(txtemail.getText());
-        cpro.setTipoPersona(ObtenerDTO.ObtenerSeTipoPersona(cbtipopersona.getSelectedItem().toString()));
-        cpro.setIdPais(ObtenerDTO.ObtenerSePais(cbpais.getSelectedItem().toString()));
-        cpro.setNombreComercial(txtnombrecomercial.getText());
-        cpro.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
-        cpro.setCodigoContribuyente(txtcodigocont.getText());
-        cpro.setObservaciones(txtobservacion.getText());
-        cpro.setFechaCreacion(d);
-        cpro.setEstado('A');
-    try {
-        cpcont.create(cpro);
-        JOptionPane.showMessageDialog(this, "NUEVO PROVEEDOR CREADO");
-        setVisible(false);
-        ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(),true);
-        cp.setVisible(true);    
-    } catch (Exception ex) {
-        Logger.getLogger(NuevoProveedor.class.getName()).log(Level.SEVERE, null, ex);
-    }
+                    cpro.setNombre(txtnombre.getText());
+                    cpro.setDireccion(txtdireccion.getText());
+                    cpro.setTelefono1(txttelefono.getText());
+                    cpro.setTelefono2(txttelfseg.getText());
+                    cpro.setPaginaWeb(txtpaginaweb.getText());
+                    cpro.setNumeroIdentificacion(txtidentificacion.getText());
+                    cpro.setEmail(txtemail.getText());
+                    cpro.setTipoPersona(ObtenerDTO.ObtenerSeTipoPersona(cbtipopersona.getSelectedItem().toString()));
+                    cpro.setIdPais(ObtenerDTO.ObtenerSePais(cbpais.getSelectedItem().toString()));
+                    cpro.setNombreComercial(txtnombrecomercial.getText());
+                    cpro.setContribuyenteEspecial(cbcontribuyente.getSelectedItem().toString());
+                    cpro.setCodigoContribuyente(txtcodigocont.getText());
+                    cpro.setObservaciones(txtobservacion.getText());
+                    cpro.setFechaCreacion(d);
+                    cpro.setEstado('A');
+                    try {
+                        cpcont.create(cpro);
+                        JOptionPane.showMessageDialog(this, "NUEVO PROVEEDOR CREADO");
+                        setVisible(false);
+                        ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(), true);
+                        cp.setVisible(true);
+                    } catch (Exception ex) {
+                        Logger.getLogger(NuevoProveedor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
-        if(txtnombre.getText().length()>50 && !Character.isLetter(evt.getKeyChar())){
+        if (txtnombre.getText().length() > 50 && !Character.isLetter(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_txtnombreKeyTyped
 
     private void txtdireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyTyped
-        if(txtdireccion.getText().length()>50){
+        if (txtdireccion.getText().length() > 50) {
             evt.consume();
         }
     }//GEN-LAST:event_txtdireccionKeyTyped
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
-        if(txttelefono.getText().length()>15 && !Character.isDigit(evt.getKeyChar())){
+        if (txttelefono.getText().length() > 15 && !Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_txttelefonoKeyTyped
 
     private void txttelfsegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelfsegKeyTyped
-        if(txttelfseg.getText().length()>15 && !Character.isDigit(evt.getKeyChar())){
+        if (txttelfseg.getText().length() > 15 && !Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_txttelfsegKeyTyped
 
     private void txtpaginawebKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpaginawebKeyTyped
-        if(txtpaginaweb.getText().length()>150){
+        if (txtpaginaweb.getText().length() > 150) {
             evt.consume();
         }
     }//GEN-LAST:event_txtpaginawebKeyTyped
 
     private void txtidentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidentificacionKeyTyped
-        if(txtidentificacion.getText().length()>13 && !Character.isDigit(evt.getKeyChar())){
+        if (txtidentificacion.getText().length() > 13 && !Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
     private void txtemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyTyped
-        if(txtemail.getText().length()>50){
+        if (txtemail.getText().length() > 50) {
             evt.consume();
         }
     }//GEN-LAST:event_txtemailKeyTyped
 
     private void txtnombrecomercialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrecomercialKeyTyped
-        if(txtnombrecomercial.getText().length()>50){
+        if (txtnombrecomercial.getText().length() > 50) {
             evt.consume();
         }
     }//GEN-LAST:event_txtnombrecomercialKeyTyped
 
     private void txtcodigocontKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigocontKeyTyped
-        if(txtcodigocont.getText().length()>15 && !Character.isDigit(evt.getKeyChar())){
+        if (txtcodigocont.getText().length() > 15 && !Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_txtcodigocontKeyTyped
 
     private void txtobservacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtobservacionKeyTyped
-        if(txtobservacion.getText().length()>60){
+        if (txtobservacion.getText().length() > 60) {
             evt.consume();
         }
     }//GEN-LAST:event_txtobservacionKeyTyped

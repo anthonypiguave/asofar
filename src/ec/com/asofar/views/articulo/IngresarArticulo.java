@@ -13,6 +13,9 @@ import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -24,10 +27,16 @@ import javax.swing.JOptionPane;
  * @author ADMIN
  */
 public class IngresarArticulo extends javax.swing.JDialog {
+
     PrGruposJpaController control = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrArticuloJpaControllerExt control2 = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
-    List<PrGrupos> lista= control.findPrGruposEntities();
-    int x,y,numerocaracter;
+    List<PrGrupos> lista = control.findPrGruposEntities();
+    int x, y, numerocaracter;
+
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
+
     /**
      * Creates new form IngresarArticulo
      */
@@ -36,6 +45,16 @@ public class IngresarArticulo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(this);
         ObtenerGrupo();
+    }
+
+    public IngresarArticulo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(this);
+        ObtenerGrupo();
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     /**
@@ -203,58 +222,55 @@ public class IngresarArticulo extends javax.swing.JDialog {
 
     private void grupoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_grupoItemStateChanged
         // TODO add your handling code here:
-         subgrupo.setEnabled(true);
-        
-        String nombre=grupo.getSelectedItem().toString();
-        
+        subgrupo.setEnabled(true);
+
+        String nombre = grupo.getSelectedItem().toString();
+
         PrGrupos gru = ObtenerDTO.ObtenerPrGrupos(nombre);
-        
-        
-        subgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Opcion.." }));
-        
+
+        subgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione una Opcion.."}));
+
         for (int i = 0; i < gru.getPrSubgruposList().size(); i++) {
-            
+
             subgrupo.addItem(gru.getPrSubgruposList().get(i).getNombre());
-            
+
         }
-        
-      
-        
-        
+
+
     }//GEN-LAST:event_grupoItemStateChanged
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         try {
-            boolean valor1=ValidarDTO.ValidarPrArticulo(articulo.getText());
+            boolean valor1 = ValidarDTO.ValidarPrArticulo(articulo.getText());
             if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "Articulo ya existente");
             } else {
-                String valor ="I";
-        PrArticulo arti=new PrArticulo();
-        PrSubgrupos sub= new PrSubgrupos();
-        if(estado.getSelectedIndex() == 0){
-            valor="A";
-        }
-       sub = ObtenerDTO.ObtenerPrSubGrupos(subgrupo.getSelectedItem().toString());
-        
-        arti.setNombreArticulo(articulo.getText());
-        arti.setPrSubgrupos(sub);
-        arti.setEstado(valor);
-        control2.create(arti);
-               JOptionPane.showMessageDialog(this, "Articulo Guardados"); 
-               Actualizar();
+                String valor = "I";
+                PrArticulo arti = new PrArticulo();
+                PrSubgrupos sub = new PrSubgrupos();
+                if (estado.getSelectedIndex() == 0) {
+                    valor = "A";
+                }
+                sub = ObtenerDTO.ObtenerPrSubGrupos(subgrupo.getSelectedItem().toString());
+
+                arti.setNombreArticulo(articulo.getText());
+                arti.setPrSubgrupos(sub);
+                arti.setEstado(valor);
+                control2.create(arti);
+                JOptionPane.showMessageDialog(this, "Articulo Guardados");
+                Actualizar();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        
+
     }//GEN-LAST:event_guardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 //       
         Actualizar();
-    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -264,21 +280,22 @@ public class IngresarArticulo extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void articuloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_articuloKeyTyped
         numerocaracter = 70;
-        if(articulo.getText().length()>=numerocaracter){
+        if (articulo.getText().length() >= numerocaracter) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Solo puede ingresar maximo 70 caracteres");
         }
     }//GEN-LAST:event_articuloKeyTyped
-public void Actualizar(){
-    setVisible(false);
-        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);
+    public void Actualizar() {
+        setVisible(false);
+        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(), true);
         cs.setVisible(true);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -320,16 +337,13 @@ public void Actualizar(){
             }
         });
     }
-    public void ObtenerGrupo(){
-        
-        
-        
-        for (int i =0 ; i < lista.size(); i++) {
+
+    public void ObtenerGrupo() {
+
+        for (int i = 0; i < lista.size(); i++) {
             grupo.addItem(lista.get(i).getNombre());
         }
-        
-    
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

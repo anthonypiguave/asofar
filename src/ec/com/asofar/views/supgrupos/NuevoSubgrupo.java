@@ -36,7 +36,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
     Date d = new Date();
     SubGruposExt psc
             = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
-     PrSubgruposJpaController csub
+    PrSubgruposJpaController csub
             = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrGruposJpaController pgc
             = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -227,42 +227,50 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         subg = csub.findPrSubgruposEntities();
-        PrSubgrupos  obj = null;
+        Boolean estado = false;
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-                
+
         if (r == JOptionPane.YES_OPTION) {
             if ("".equals(txtNombre.getText())) {
                 JOptionPane.showMessageDialog(null, "Ingrese un nombre!");
-            } else  {
-                for (int i = 0; i < subg.size(); i++) {
-                    if (subg.get(i).getNombre().equals(txtNombre.getText())){
-                        obj = subg.get(i);
-                        JOptionPane.showMessageDialog(null, "EL SUBGRUPO YA EXISTE");
-                    }
-                    
-                }
-                if (obj != null){
-                ps.setNombre(txtNombre.getText());
-                ps.setIdEmpresa(empresa);
-                ps.setEstado("A");
-                ps.setPrGrupos(ObtenerDTO.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
-                ps.setUsuarioActualizacion(String.valueOf(1));
-                ps.setUsuarioCreacion(String.valueOf(1));
-                ps.setFechaActualizacion(d);
-                ps.setFechaCreacion(d);
-                try {
-                    psc.create(ps);
-                    JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
-                    ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
-                    setVisible(false);
-                    cs.setVisible(true);
+            } else {
 
-                } catch (Exception ex) {
-                    Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+                if (subg != null) {
+
+                    for (int i = 0; i < subg.size(); i++) {
+                        if (subg.get(i).getNombre().equals(txtNombre.getText())) {
+                            estado = true;
+
+                        }
+
+                    }
+                }
+
+                if (estado) {
+                    JOptionPane.showMessageDialog(null, "EL SUBGRUPO YA EXISTE");
+                } else {
+
+                    ps.setNombre(txtNombre.getText());
+                    ps.setIdEmpresa(empresa);
+                    ps.setEstado("A");
+                    ps.setPrGrupos(ObtenerDTO.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
+                    ps.setUsuarioActualizacion(String.valueOf(1));
+                    ps.setUsuarioCreacion(String.valueOf(1));
+                    ps.setFechaActualizacion(d);
+                    ps.setFechaCreacion(d);
+                    try {
+                        psc.create(ps);
+                        JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
+                        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
+                        setVisible(false);
+                        cs.setVisible(true);
+
+                    } catch (Exception ex) {
+                        Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
-            }
-        } 
+        }
 
 
     }//GEN-LAST:event_btnguardarActionPerformed

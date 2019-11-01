@@ -7,15 +7,14 @@ package ec.com.asofar.views.proveedor;
 
 import ec.com.asofar.dao.CoProveedoresJpaController;
 import ec.com.asofar.dto.CoProveedores;
-import ec.com.asofar.dto.PrEmpaque;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
-import java.util.Objects;
-import javax.persistence.EntityManager;
 
 /**
  *
@@ -28,6 +27,9 @@ public class ConsultaProveedor extends javax.swing.JDialog {
     CoProveedores cpro = new CoProveedores();
     String valor = "";
     List<CoProveedores> lista;
+    SeUsuarios usu;
+    SeEmpresa emp;
+    SeSucursal suc;
 
     /**
      * Creates new form ConsultaProveedor
@@ -37,6 +39,16 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         Cargardatos();
+    }
+
+    public ConsultaProveedor(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        Cargardatos();
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     /**
@@ -122,7 +134,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +193,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
                 .addGap(156, 156, 156)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,7 +218,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +243,7 @@ public class ConsultaProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        setVisible(false);                
+        setVisible(false);
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed

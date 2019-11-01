@@ -82,7 +82,6 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setText("CONTRASEÑA:");
 
         txtusuario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtusuario.setText("apiguave");
         txtusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtusuarioActionPerformed(evt);
@@ -114,7 +113,6 @@ public class Login extends javax.swing.JDialog {
         });
 
         txtpassword.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtpassword.setText("12345");
         txtpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpasswordActionPerformed(evt);
