@@ -37,7 +37,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 //    PrEmpaque emp=new PrEmpaque();
     List<PrEmpaque> listEmpa = empcontrol.findPrEmpaqueEntities();
     PrEmpaque emp = new PrEmpaque();
-    SeUsuarios usuario; 
+    SeUsuarios usuario;
     SeEmpresa empresa;
     SeSucursal sucursal;
 
@@ -232,17 +232,17 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
             } else {
                 if (txtNombre.getText().length() <= 0) {
                     JOptionPane.showMessageDialog(this, "Ecriba un nombre");
-                }else{
+                } else {
                     PrEmpaque oe = new PrEmpaque();
-
-                oe.setNombreEmpaque(txtNombre.getText());
-                oe.setEstado("A");
-                oe.setFechaCreacion(d);
-                oe.setUsuarioCreacion(usuario.getNombreUsuario());
-                empcontrol.create(oe);
-                JOptionPane.showMessageDialog(null, "Nuevo empaque guardado ");
+                    oe.setNombreEmpaque(txtNombre.getText());
+                    oe.setEstado("A");
+                    oe.setFechaCreacion(d);
+                    oe.setUsuarioCreacion(usuario.getNombreUsuario());
+                    empcontrol.create(oe);
+                    txtNombre.setText("");
+                    JOptionPane.showMessageDialog(null, "Nuevo empaque guardado ");
                 }
-                
+
             }
 
         } catch (Exception e) {
@@ -276,7 +276,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
             emp = devuelveObjeto(Long.valueOf(tabla.getValueAt(id, 0).toString()), listEmpa);
             if (emp != null) {
 //                        setVisible(false);
-                ActualizarEmpaque ep = new ActualizarEmpaque(new javax.swing.JFrame(), true,usuario,empresa,sucursal, emp);
+                ActualizarEmpaque ep = new ActualizarEmpaque(new javax.swing.JFrame(), true, usuario, empresa, sucursal, emp);
                 ep.setVisible(true);
             }
 

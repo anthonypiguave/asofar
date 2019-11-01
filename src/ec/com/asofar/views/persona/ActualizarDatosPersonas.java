@@ -565,7 +565,7 @@ if(!Character.isDigit(evt.getKeyChar())){
         if (com == 1 || com == 0) {
             JOptionPane.showMessageDialog(null, "Fecha invalida");
             fecha = null;
-            fecha.setText(" ");
+            fecha.setText("");
         } else {
             fecha.setText(Fecha.getStringFecha(fecha1));
 

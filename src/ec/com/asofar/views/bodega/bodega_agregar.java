@@ -249,6 +249,7 @@ public class bodega_agregar extends javax.swing.JDialog {
             if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "El tipo de Bodega ya existente");
             } else {
+                try {
                 InTipoBodega tb = new InTipoBodega();
 
                 tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
@@ -269,7 +270,7 @@ public class bodega_agregar extends javax.swing.JDialog {
                 bod.setEstado("A");
                 bod.setUsuarioCreacion(usu1.getNombreUsuario());
                 bod.setFechaCreacion(fechaActual);
-                try {
+                
                     bc.create(bod);
                     JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
                     setVisible(false);

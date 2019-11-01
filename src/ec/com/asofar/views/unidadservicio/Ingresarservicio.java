@@ -32,6 +32,7 @@ public class Ingresarservicio extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+
     public Ingresarservicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -183,14 +184,14 @@ public class Ingresarservicio extends javax.swing.JDialog {
 
     private void Jbu_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jbu_GuardarActionPerformed
         java.util.Date fechaActual = new java.util.Date();
-
-        unidadservicio.setNombreUnidadServicio(txtnservicios.getText());
-        unidadservicio.setEstado(jComboBox1.getSelectedItem().toString());
-        unidadservicio.setFechaCreacion(fechaActual);
-//        unidadservicio.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
-        unidadservicio.setIdEmpresa(emp);
-        unidadservicio.setUsuarioCreacion(usu.getNombreUsuario());
         try {
+            unidadservicio.setNombreUnidadServicio(txtnservicios.getText());
+            unidadservicio.setEstado(jComboBox1.getSelectedItem().toString());
+            unidadservicio.setFechaCreacion(fechaActual);
+//        unidadservicio.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
+            unidadservicio.setIdEmpresa(emp);
+            unidadservicio.setUsuarioCreacion(usu.getNombreUsuario());
+
             uc.create(unidadservicio);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
