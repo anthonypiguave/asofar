@@ -42,6 +42,8 @@ public class ListarUsuarios extends javax.swing.JDialog {
         su1= su;
       usuario_lista
                 = usuario_controller.findSeUsuariosEntities();
+      
+        System.out.println("ffffff  " + usuario_lista.get(0).getNombreUsuario()+"  "+ usuario_lista.get(0).getFechaCreacion());
         Tablas.listarUsuarios(usuario_lista, jtPersonas);
 
     }

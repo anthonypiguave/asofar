@@ -6,8 +6,7 @@
 package ec.com.asofar.views.bodega;
 
 import ec.com.asofar.dao.InBodegaJpaController;
-import ec.com.asofar.dao.InTipoBodegaJpaController;
-import ec.com.asofar.dao.SeEmpresaJpaController;
+import ec.com.asofar.dao.InTipoBodegaJpaController;;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.InBodega;
@@ -49,7 +48,7 @@ public class bodega_agregar extends javax.swing.JDialog {
 //        llenarCombo(TiBo);
     }
 
-    public bodega_agregar(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public bodega_agregar(java.awt.Frame parent, boolean modal,SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -253,12 +252,18 @@ public class bodega_agregar extends javax.swing.JDialog {
                 InTipoBodega tb = new InTipoBodega();
 
                 tb = ObtenerDTO.ObtenerInTipoBodega(cbxTipoBodega.getSelectedItem().toString());
-                InBodegaPK inBodegaPK = new InBodegaPK();
-
-                inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
-                inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
-                inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
-                bod.setInBodegaPK(inBodegaPK);
+//                InBodegaPK inBodegaPK = new InBodegaPK();
+//
+//                inBodegaPK.setIdTipoBodega(tb.getIdTipoBodega());
+                
+                bod.setInBodegaPK(new InBodegaPK());
+                
+//                bod.getInBodegaPK().setIdTipoBodega(tb.getIdTipoBodega());
+                bod.setInTipoBodega(tb);
+//                inBodegaPK.setIdEmpresa(em1.getIdEmpresa());
+//                inBodegaPK.setIdSucursal(su1.getSeSucursalPK().getIdSucursal());
+                bod.setSeSucursal(su1);
+//                bod.setInBodegaPK(inBodegaPK);
 
                 bod.setNombreBodega(txtNombre.getText());
                 bod.setEstado("A");
