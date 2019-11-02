@@ -64,7 +64,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     JoinProductoVenta objJoinProVen = new JoinProductoVenta();
     List<JoinProductoVenta> listaProVent;
     Double VGTtotal;
-    List<InBodega> LisBod ;
+    List<InBodega> LisBod;
     InBodegaJpaController BC = new InBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
 
@@ -103,6 +103,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
             }
         }
     }
+
     private void TotalizarCantidad() {
         Double t = 0.0;
         Integer p = 0;
@@ -117,10 +118,11 @@ public class ReporteriaProducto extends javax.swing.JDialog {
             }
         }
     }
+
     public void cargarTbaProductoVenta() {
         ListProdVent = selectProdVent.listarProductoInventario();
         LisBod = BC.findInBodegaEntities();
-        Tablas.ListarProductosInventario(ListProdVent, tba_productos,LisBod);
+        Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
     }
 
 //    public void cargarTbaProduc() {
@@ -314,6 +316,8 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     private void txtfiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyPressed
         valor = txtfiltro.getText();
         Tablas.filtro(valor, tba_productos);
+        Totalizar();
+        TotalizarCantidad();
     }//GEN-LAST:event_txtfiltroKeyPressed
 
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
