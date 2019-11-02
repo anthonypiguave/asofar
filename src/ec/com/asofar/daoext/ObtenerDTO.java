@@ -283,9 +283,7 @@ public class ObtenerDTO {
                 break;
             }
         }
-
         return dto;
-
     }
 
     public static InTipoBodega ObtenerInTipoBodega(String nombre) {
