@@ -2569,8 +2569,8 @@ public class Tablas {
             filas[3] = "" + lisProdVen.get(i).getSaldo_actual();
             filas[4] = "" + lisProdVen.get(i).getValor_venta();
             filas[5] = "" + lisProdVen.get(i).getValor_descuento();
-            filas[6] = lisProdVen.get(i).getAplica_iva();
 
+            filas[6] = ""+lisProdVen.get(i).getAplica_iva();
             model.addRow(filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -2971,6 +2971,57 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
 
         }
+    }
+        public static void ListarProductosInventario(List<JoinProductoVenta> lisProdVen, JTable Tabla,List<InBodega> lisBode) {
+        int[] a = {40, 300, 300, 100, 100, 100, 100};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "COD. BARRA", "DESCRIPCION", "STOCK", "PRECIO", "DESCUENTO", "BODEGA"};
+        String[] filas = new String[7];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+//        ProductoCadena k = new ProductoCadena();
+        for (int i = 0; i < lisProdVen.size(); i++) {
+            filas[0] = "" + lisProdVen.get(i).getId_prestacion();
+            filas[1] = lisProdVen.get(i).getCodigoBarra();
+//            filas[2] = lisProdVen.get(i).getNombre_producto();
+            filas[2] = ProductoCadena.obtenerCadena(lisProdVen.get(i).getId_producto());
+            filas[3] = "" + lisProdVen.get(i).getSaldo_actual();
+            filas[4] = "" + lisProdVen.get(i).getValor_venta();
+            filas[5] = "" + lisProdVen.get(i).getValor_descuento();
+            Long id_bodega = lisProdVen.get(i).getId_bodega();
+
+          
+            for (int j = 0; j < lisBode.size(); j++) {
+                if(lisBode.get(j).getInBodegaPK().getIdBodega()==id_bodega){
+                filas[6] = ""+lisBode.get(j).getNombreBodega();
+                }
+            }
+      
+
+//            filas[6] = ""+ObtenerDTO.ObtenerInBodega(id_bodega);
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+
+        }
+
     }
 
 }

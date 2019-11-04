@@ -60,7 +60,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         this.setLocationRelativeTo(this);
         itemList = rep.reporteCompras();
         Tablas.listarReporteCompras(itemList, tbaReporteCompra);
-        //java.util.Date fechaParseada= new SimpleDateFormat("yyyy/MM/dd").parse(tuFecha);
         Chooser1.setDate(rep.fechaActual());
         Chooser2.setDate(rep.fechaActual());
         total();
@@ -83,10 +82,10 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }
 
     public void total() {
-        Double total_iva= 0.00;
-        Double total_descuento= 0.00;
-        Double total_total= 0.00;
-        
+        Double total_iva = 0.00;
+        Double total_descuento = 0.00;
+        Double total_total = 0.00;
+
         for (int i = 0; i < itemList.size(); i++) {
             for (int j = 0; j < tbaReporteCompra.getRowCount(); j++) {
                 if (tbaReporteCompra.getValueAt(j, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())) {
@@ -123,9 +122,9 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
     private void Keypress_jDateChoooser() { //salto al siguiente campo
         HashSet<AWTKeyStroke> conjForward = new HashSet<AWTKeyStroke>(
-        Chooser2.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
+                Chooser2.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
         conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
-        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_DOWN, 0)); 
+        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_DOWN, 0));
         Chooser2.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conjForward);
 
     }
@@ -437,19 +436,19 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     private void tbaReporteCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaReporteCompraMousePressed
         int x = 0;
         ReporteComprasDTO obj = new ReporteComprasDTO();
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             x = tbaReporteCompra.getSelectedRow();
             for (int i = 0; i < itemList.size(); i++) {
-                if(tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())){
-                    obj= itemList.get(i);
+                if (tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_orden_compra().toString())) {
+                    obj = itemList.get(i);
                     break;
                 }
             }
-            if(obj!=null){
+            if (obj != null) {
                 //JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
-                ReporteriaDetalleCompras win = new ReporteriaDetalleCompras(new javax.swing.JFrame(),true,obj);
+                ReporteriaDetalleCompras win = new ReporteriaDetalleCompras(new javax.swing.JFrame(), true, obj);
                 win.setVisible(true);
-            }else{
+            } else {
                 System.out.println("no encontramos al puto id error capa 8");
             }
         }
@@ -497,7 +496,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             total();
         }
     }//GEN-LAST:event_buscar1KeyPressed
-    
+
     private void buscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscar1ActionPerformed
@@ -509,7 +508,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_Chooser2KeyPressed
 
     private void BtnBuscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBuscar1KeyPressed
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             System.out.println("valeeeeeeeeeeeeeeeeeeeee");
             busquedaChosserQuery();
         }
