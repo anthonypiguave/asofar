@@ -43,7 +43,6 @@ public class ConsultaProducto extends javax.swing.JDialog {
         cargartabla();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,13 +197,16 @@ public class ConsultaProducto extends javax.swing.JDialog {
 
             for (int j = 0; j < listaPrest.size(); j++) {
 
-                if (listaProd.get(i).getPrProductosPK().getIdProducto()
-                        == listaPrest.get(j).getIdPoducto().intValue()) {
+                if (listaPrest.get(j).getIdPoducto() != null) {
 
-                    System.out.println(" entro : " + i);
+                    if (listaProd.get(i).getPrProductosPK().getIdProducto()
+                            == listaPrest.get(j).getIdPoducto().longValue()) {
 
-                    estado = false;
+                        System.out.println(" entro : " + i);
 
+                        estado = false;
+
+                    }
                 }
 
             }

@@ -34,6 +34,7 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author Humbertoezequiel
  */
 public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
+
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     /**
@@ -46,10 +47,9 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     InPrestacionesPorServiciosJpaController preposer = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
     String valor = "";
     int x, y;
-  
 
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal) {
-        super(parent, modal=false);
+        super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
         listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
@@ -57,7 +57,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     }
 
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal=false);
+        super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
         listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
@@ -241,30 +241,29 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
-   Point point = MouseInfo.getPointerInfo().getLocation();
+        Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel4MouseDragged
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-   x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
 
-        setVisible(true);
+        this.setVisible(false);
         AgregarPrestaciones ag = new AgregarPrestaciones(new javax.swing.JFrame(), true, usu, emp, suc);
         ag.setVisible(true);
         listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
         Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
 
-        
+
     }//GEN-LAST:event_agregarActionPerformed
 
     private void txtFILTROKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFILTROKeyPressed
-valor = txtFILTRO.getText();
+        valor = txtFILTRO.getText();
         Tablas.filtro(valor, tba_prestacionesporservicios);
-
 
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFILTROKeyPressed
@@ -280,23 +279,23 @@ valor = txtFILTRO.getText();
 
     private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
         ArrayList lista = new ArrayList();
-        for(int i = 0;i<tba_prestacionesporservicios.getRowCount();i++){
-            ClaseReporte creporte = new ClaseReporte(String.valueOf(tba_prestacionesporservicios.getValueAt(i,0)),
-                                                     String.valueOf(tba_prestacionesporservicios.getValueAt(i,1)),
-                                                     String.valueOf(tba_prestacionesporservicios.getValueAt(i,2)),
-                                                     String.valueOf(tba_prestacionesporservicios.getValueAt(i,3)),
-                                                     String.valueOf(tba_prestacionesporservicios.getValueAt(i,4)),
-                                                     String.valueOf(tba_prestacionesporservicios.getValueAt(i,5)),
-                                                     String.valueOf(tba_prestacionesporservicios.getValueAt(i,6)));
+        for (int i = 0; i < tba_prestacionesporservicios.getRowCount(); i++) {
+            ClaseReporte creporte = new ClaseReporte(String.valueOf(tba_prestacionesporservicios.getValueAt(i, 0)),
+                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 1)),
+                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 2)),
+                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 3)),
+                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 4)),
+                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 5)),
+                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 6)));
             lista.add(creporte);
         }
         try {
-            JasperReport reporte = (JasperReport)JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/ConsultaPrestacionesporServicio.jasper");
-            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+            JasperReport reporte = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ConsultaPrestacionesporServicio.jasper");
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
             JRViewer jviewer = new JRViewer(jprint);
             JDialog ventana = new JDialog();
             ventana.add(jviewer);
-            ventana.setSize(new Dimension(ancho/2,alto/2));
+            ventana.setSize(new Dimension(ancho / 2, alto / 2));
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
             jviewer.setFitWidthZoomRatio();
@@ -304,25 +303,23 @@ valor = txtFILTRO.getText();
             Logger.getLogger(ConsultaPrestacionesporServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnimprimirActionPerformed
-     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {                                   
+    private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
-    
-     }
-                                  
 
-    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {                                      
+    }
+
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
-    } 
+    }
 
-    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

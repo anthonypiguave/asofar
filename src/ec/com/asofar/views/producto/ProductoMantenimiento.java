@@ -13,6 +13,7 @@ import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrEmpaque;
@@ -57,8 +58,8 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         CargarGrupo();
-        CargarSubgrupo();
-        CargarArticulos();
+//        CargarSubgrupo();
+//        CargarArticulos();
         CargarMedidas();
         CargarPresentacion();
         CargarProveedor();
@@ -74,20 +75,19 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         }
     }
 
-    public void CargarSubgrupo() {
-
-        for (int i = 0; i < listSubgrupo.size(); i++) {
-            cbxSubgrupo.addItem(listSubgrupo.get(i).getNombre());
-        }
-    }
-
-    public void CargarArticulos() {
-
-        for (int i = 0; i < listArticulo.size(); i++) {
-            cbxArticulo.addItem(listArticulo.get(i).getNombreArticulo());
-        }
-    }
-
+//    public void CargarSubgrupo() {
+//
+//        for (int i = 0; i < listSubgrupo.size(); i++) {
+//            cbxSubgrupo.addItem(listSubgrupo.get(i).getNombre());
+//        }
+//    }
+//
+//    public void CargarArticulos() {
+//
+//        for (int i = 0; i < listArticulo.size(); i++) {
+//            cbxArticulo.addItem(listArticulo.get(i).getNombreArticulo());
+//        }
+//    }
     public void CargarMedidas() {
 
         for (int i = 0; i < listMedida.size(); i++) {
@@ -120,8 +120,8 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         }
 
     }
-    
-        public void CargarFabricante() {
+
+    public void CargarFabricante() {
 
         for (int i = 0; i < listFabricante.size(); i++) {
             cbxFabricante.addItem(listFabricante.get(i).getNombre());
@@ -379,12 +379,19 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         jLabel11.setText("Código de barra:");
 
         cbxGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxGrupo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxGrupoItemStateChanged(evt);
+            }
+        });
 
-        cbxSubgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxSubgrupo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxSubgrupoItemStateChanged(evt);
+            }
+        });
 
         cbxPresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-
-        cbxArticulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
         cbxMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
 
@@ -560,6 +567,38 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         txtProducto.setText(cadena);
         System.out.println("kkkkkkkkkkkk " + cadena);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void cbxGrupoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxGrupoItemStateChanged
+        cbxSubgrupo.setEnabled(true);
+
+        String nombre = cbxGrupo.getSelectedItem().toString();
+
+        PrGrupos grupos = ObtenerDTO.ObtenerPrGrupos(nombre);
+
+        cbxSubgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione una Opcion.."}));
+
+        for (int i = 0; i < grupos.getPrSubgruposList().size(); i++) {
+
+            cbxSubgrupo.addItem(grupos.getPrSubgruposList().get(i).getNombre());
+
+        }
+    }//GEN-LAST:event_cbxGrupoItemStateChanged
+
+    private void cbxSubgrupoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubgrupoItemStateChanged
+        cbxArticulo.setEnabled(true);
+
+        String nombre = cbxSubgrupo.getSelectedItem().toString();
+
+        PrSubgrupos subgrupos = ObtenerDTO.ObtenerPrSubGrupos(nombre);
+
+        cbxArticulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione una Opcion.."}));
+
+        for (int i = 0; i < subgrupos.getPrArticuloList().size(); i++) {
+
+            cbxArticulo.addItem(subgrupos.getPrArticuloList().get(i).getNombreArticulo());
+
+        }
+    }//GEN-LAST:event_cbxSubgrupoItemStateChanged
 
     /**
      * @param args the command line arguments

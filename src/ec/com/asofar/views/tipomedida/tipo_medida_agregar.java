@@ -214,11 +214,11 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
 
     private void nombre_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_tfKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
+//        char c = evt.getKeyChar();
+//        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
     }//GEN-LAST:event_nombre_tfKeyTyped
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed

@@ -5,10 +5,11 @@
  */
 package ec.com.asofar.views.DetallesTarifa;
 
-import ec.com.asofar.views.prestacionesporservicios.*;
+
 import ec.com.asofar.dao.InPrestacionesPorServiciosJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
-import ec.com.asofar.dto.InPrestacionesPorServiciosPK;
+
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -37,11 +38,12 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     SeSucursal suc;
     List<InPrestacionesPorServicios> listapresporserv;
     InPrestacionesPorServiciosJpaController preposer = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
-    Long id_Pres, id_Uni;
-    String prestacion, unidad;
+//    Long id_Pres, id_Uni;
+//    String prestacion, unidad;
+    InPrestacionesPorServicios objeto = new InPrestacionesPorServicios();
 
-    PrPrestaciones pr = new PrPrestaciones();
-    VeUnidadServicio ve = new VeUnidadServicio();
+//    PrPrestaciones pr = new PrPrestaciones();
+//    VeUnidadServicio ve = new VeUnidadServicio();
 
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -228,23 +230,35 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         int i = 0;
         if (evt.getClickCount() == 2) {
 
-            i = tba_prestacionesporservicios.getSelectedRow();
+            if (evt.getClickCount() == 2) {
+                i = tba_prestacionesporservicios.getSelectedRow();
+                objeto = devuelveObjeto(tba_prestacionesporservicios.getValueAt(i, 0).toString(), tba_prestacionesporservicios.getValueAt(i, 1).toString(), listapresporserv);
 
-            id_Pres = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 0).toString());
-            id_Uni = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 2).toString());
-         
-            prestacion = tba_prestacionesporservicios.getValueAt(i, 1).toString();
-            unidad = tba_prestacionesporservicios.getValueAt(i, 3).toString();
-            if (objpres != null) {
-                obtener89();
-//                System.out.println("hhh" +  obtener());
-//                System.out.println("p"+obtenerP());
-//                obtenerP();
-//                System.out.println("v"+obtenerV());
-//                obtenerV();
-                this.setVisible(false);
 
+                if (objeto != null) {
+                    
+                    this.setVisible(false);
+
+                }
             }
+
+//            i = tba_prestacionesporservicios.getSelectedRow();
+//
+//            id_Pres = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 0).toString());
+//            id_Uni = Long.valueOf(tba_prestacionesporservicios.getValueAt(i, 2).toString());
+//
+//            prestacion = tba_prestacionesporservicios.getValueAt(i, 1).toString();
+//            unidad = tba_prestacionesporservicios.getValueAt(i, 3).toString();
+//            if (objpres != null) {
+//                obtener89();
+////                System.out.println("hhh" +  obtener());
+////                System.out.println("p"+obtenerP());
+////                obtenerP();
+////                System.out.println("v"+obtenerV());
+////                obtenerV();
+//                this.setVisible(false);
+
+//            }
 
         }
 
@@ -268,37 +282,63 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public InPrestacionesPorServicios obtener89() {
-        InPrestacionesPorServicios obj = new InPrestacionesPorServicios();
-        obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
-        obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
-        System.out.println("obj "+obj.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
-        obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
-       
-        try {
+//    public InPrestacionesPorServicios obtener89() {
+//        InPrestacionesPorServicios obj = new InPrestacionesPorServicios();
+//        obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
+//        obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
+//        System.out.println("obj " + obj.getInPrestacionesPorServiciosPK().getIdUnidadServicio());
+//        obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
+//
+//        try {
+//
+//            obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
+//            obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
+//            obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
+//        } catch (Exception e) {
+////            e.printStackTrace();
+//        }
+//
+//        return obj;
+//    }
 
-            obj.setInPrestacionesPorServiciosPK(new InPrestacionesPorServiciosPK());
-            obj.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);
-            obj.getInPrestacionesPorServiciosPK().setIdUnidadServicio(id_Uni);
-        } catch (Exception e) {
-//            e.printStackTrace();
+    public InPrestacionesPorServicios getObjeto() {
+        return objeto;
+    }
+
+    public InPrestacionesPorServicios devuelveObjeto(String datos1, String datos2, List<InPrestacionesPorServicios> listaobjeto) {
+        InPrestacionesPorServicios objeto1 = null;
+
+        PrPrestaciones pr = ObtenerDTO.ObtenerPrPrestaciones(datos1);
+        VeUnidadServicio vu = ObtenerDTO.ObtenerVeUnidadServicio(datos2);
+
+        for (int i = 0; i < listaobjeto.size(); i++) {
+
+            if (pr.getIdPrestacion() == listaobjeto.get(i).getInPrestacionesPorServiciosPK().getIdPrestacion()
+                    && vu.getIdUnidadServicio() == listaobjeto.get(i).getInPrestacionesPorServiciosPK().getIdUnidadServicio()) {
+                objeto1 = listaobjeto.get(i);
+
+                break;
+
+            }
+
         }
 
-        return obj;
+        return objeto1;
+
     }
 
-    public PrPrestaciones obtenerP() {
-        PrPrestaciones objp = new PrPrestaciones();
-        objp.setNombrePrestacion(prestacion);
-        return objp;
-    }
-
-    public VeUnidadServicio obtenerV() {
-        VeUnidadServicio vep = new VeUnidadServicio();
-        vep.setNombreUnidadServicio(unidad);
-
-        return vep;
-    }
+//    public PrPrestaciones obtenerP() {
+//        PrPrestaciones objp = new PrPrestaciones();
+//        objp.setNombrePrestacion(prestacion);
+//        return objp;
+//    }
+//
+//    public VeUnidadServicio obtenerV() {
+//        VeUnidadServicio vep = new VeUnidadServicio();
+//        vep.setNombreUnidadServicio(unidad);
+//
+//        return vep;
+//    }
 //    public InPrestacionesPorServicios obteneridP() {
 //        InPrestacionesPorServicios objp = new InPrestacionesPorServicios();
 //        objp.getInPrestacionesPorServiciosPK().setIdPrestacion(id_Pres);

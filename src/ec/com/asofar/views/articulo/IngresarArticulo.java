@@ -221,7 +221,9 @@ public class IngresarArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void grupoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_grupoItemStateChanged
-        // TODO add your handling code here:
+        
+        
+    
         subgrupo.setEnabled(true);
 
         String nombre = grupo.getSelectedItem().toString();

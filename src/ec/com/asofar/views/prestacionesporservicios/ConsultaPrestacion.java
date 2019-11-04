@@ -40,7 +40,9 @@ public class ConsultaPrestacion extends javax.swing.JDialog {
      */
     public ConsultaPrestacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(null);
         cargartabla();
     }
 
