@@ -142,7 +142,7 @@
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="INVENTARIO"/>
+            <Property name="text" type="java.lang.String" value="STOCK"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
