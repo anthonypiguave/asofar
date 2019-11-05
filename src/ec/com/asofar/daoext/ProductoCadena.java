@@ -31,9 +31,9 @@ public class ProductoCadena {
 
         }
         
-        String articulo = dto.getPrArticulo().getNombreArticulo();
-        String grupo = dto.getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
-        String subGrupo = dto.getPrArticulo().getPrSubgrupos().getNombre();
+        String articulo = dto.getPrMedidas().getPrArticulo().getNombreArticulo();
+        String grupo = dto.getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+        String subGrupo = dto.getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre();
         String tipoPresentacion = dto.getPrMedidas().getPrTipoPresentacion().getNombre();
         String tipoMedidas = dto.getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
         

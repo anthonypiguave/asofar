@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author nuevouser
+ * @author jorge
  */
 @Entity
 @Table(name = "pr_productos")
@@ -102,12 +102,6 @@ public class PrProductos implements Serializable {
     private Double cantidadPorEmpaqueVenta;
     @Column(name = "medida_por_empaque_venta")
     private String medidaPorEmpaqueVenta;
-    @JoinColumns({
-        @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private PrArticulo prArticulo;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
@@ -292,14 +286,6 @@ public class PrProductos implements Serializable {
 
     public void setMedidaPorEmpaqueVenta(String medidaPorEmpaqueVenta) {
         this.medidaPorEmpaqueVenta = medidaPorEmpaqueVenta;
-    }
-
-    public PrArticulo getPrArticulo() {
-        return prArticulo;
-    }
-
-    public void setPrArticulo(PrArticulo prArticulo) {
-        this.prArticulo = prArticulo;
     }
 
     public SeEmpresa getSeEmpresa() {

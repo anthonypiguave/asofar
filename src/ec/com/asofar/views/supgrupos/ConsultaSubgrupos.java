@@ -244,7 +244,6 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
 
-//            asdfg12345
         } else {
 
         }

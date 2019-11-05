@@ -46,8 +46,9 @@ public class EditarSubgrupos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        llenarCampos(obj);
+        
         pr = obj;
+        llenarCampos(obj);
     }
 
     /**

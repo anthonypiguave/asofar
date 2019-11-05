@@ -16,6 +16,7 @@ import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.supgrupos.EditarSubgrupos;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,17 +27,21 @@ public class ConsultaArticulo extends javax.swing.JDialog {
 
     PrArticuloJpaControllerExt articon = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     int x, y;
-    List<PrArticulo> listap = articon.findPrArticuloEntities();
+    List<PrArticulo> listap = new ArrayList<PrArticulo>();
+
     PrArticulo obj = new PrArticulo();
     String valor = "";
 
     /**
      * Creates new form ConsultaArticulo
+     * @param parent
+     * @param modal
      */
     public ConsultaArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        listap = articon.findPrArticuloEntities();
         Tablas.listaArticulos(listap, tabla);
 
     }
@@ -45,6 +50,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        listap = articon.findPrArticuloEntities();
         Tablas.listaArticulos(listap, tabla);
 
     }
@@ -214,33 +220,10 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
         IngresarArticulo ingre = new IngresarArticulo(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
-        // TODO add your handling code here:
-        int id = 0;
-        obj = null;
-        if (evt.getClickCount() == 2) {
-            id = tabla.getSelectedRow();
-            for (int i = 0; i < listap.size(); i++) {
-                if ((tabla.getValueAt(id, 3).toString().equals(listap.get(i).getNombreArticulo()))) {
-                    obj = listap.get(i);
-                    if (obj != null) {
-                        setVisible(false);
-                        EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
-                        es.setVisible(true);
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_tablaMousePressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
@@ -269,6 +252,30 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfiltroActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+
+        int id = 0;
+        obj = null;
+        if (evt.getClickCount() == 2) {
+            id = tabla.getSelectedRow();
+            for (int i = 0; i < listap.size(); i++) {
+                if (tabla.getValueAt(id, 3).toString().equals(listap.get(i).getNombreArticulo())) {
+                    obj = listap.get(i);
+                    if (obj != null) {
+                        dispose();
+                        EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
+                        es.setVisible(true);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_tablaMousePressed
 
     /**
      * @param args the command line arguments

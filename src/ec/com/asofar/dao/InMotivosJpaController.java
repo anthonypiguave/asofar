@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author nuevouser
+ * @author jorge
  */
 public class InMotivosJpaController implements Serializable {
 

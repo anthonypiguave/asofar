@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author nuevouser
+ * @author jorge
  */
 public class VeFacturaDetalleJpaController implements Serializable {
 
@@ -39,8 +39,8 @@ public class VeFacturaDetalleJpaController implements Serializable {
             veFacturaDetalle.setVeFacturaDetallePK(new VeFacturaDetallePK());
         }
         veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdEmpresa());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdSucursal());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -70,8 +70,8 @@ public class VeFacturaDetalleJpaController implements Serializable {
 
     public void edit(VeFacturaDetalle veFacturaDetalle) throws NonexistentEntityException, Exception {
         veFacturaDetalle.getVeFacturaDetallePK().setIdEmpresa(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdEmpresa());
-        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         veFacturaDetalle.getVeFacturaDetallePK().setIdSucursal(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdSucursal());
+        veFacturaDetalle.getVeFacturaDetallePK().setIdFactura(veFacturaDetalle.getVeFactura().getVeFacturaPK().getIdFactura());
         EntityManager em = null;
         try {
             em = getEntityManager();

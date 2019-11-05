@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author nuevouser
+ * @author jorge
  */
 public class CoCotizacionesPorProveedorJpaController implements Serializable {
 

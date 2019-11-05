@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author nuevouser
+ * @author jorge
  */
 public class CoOrdenComprasJpaController implements Serializable {
 

@@ -21,15 +21,14 @@ import javax.swing.JOptionPane;
  *
  * @author ADMIN
  */
-
-
 public class EditarArticulo extends javax.swing.JDialog {
-    int x,y,numerocaracter;
-    
-    PrArticuloJpaControllerExt control= new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
-    
-    PrArticulo obj1=null;
-            
+
+    int x, y, numerocaracter;
+
+    PrArticuloJpaControllerExt control = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
+
+    PrArticulo obj1 = new PrArticulo();
+
     /**
      * Creates new form EditarArticulo
      */
@@ -38,15 +37,14 @@ public class EditarArticulo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(this);
     }
-    public EditarArticulo(java.awt.Frame parent, boolean modal,PrArticulo prar) {
-        
+
+    public EditarArticulo(java.awt.Frame parent, boolean modal, PrArticulo prar) {
         super(parent, modal);
-        
         initComponents();
-        obj1=prar;
         setLocationRelativeTo(this);
+        obj1 = prar;
         llenar(prar);
-        
+
     }
 
     /**
@@ -220,30 +218,25 @@ public class EditarArticulo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-       Actualizar();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-            PrArticulo arti=new PrArticulo();
-         boolean valor1=ValidarDTO.ValidarPrArticulo(articulo.getText());
+            PrArticulo arti = new PrArticulo();
+            boolean valor1 = ValidarDTO.ValidarPrArticulo(articulo.getText());
             if (valor1 == true && !obj1.getNombreArticulo().equals(articulo.getText())) {
                 JOptionPane.showMessageDialog(this, "Articulo ya existente");
-            }  else {
-            arti=obj1;
-       
-        arti.setPrArticuloPK(obj1.getPrArticuloPK());
-        arti.setNombreArticulo(articulo.getText());
-        arti.setEstado(Estado.ObtenerEstado(estado.getSelectedItem().toString()));
-        
-        control.edit(arti);
-        JOptionPane.showMessageDialog(this, "Aticulo actualizado");
-        Actualizar();
+            } else {
+                arti = obj1;
+
+                arti.setPrArticuloPK(obj1.getPrArticuloPK());
+                arti.setNombreArticulo(articulo.getText());
+                arti.setEstado(Estado.ObtenerEstado(estado.getSelectedItem().toString()));
+
+                control.edit(arti);
+                JOptionPane.showMessageDialog(this, "Aticulo actualizado");
+                Actualizar();
             }
-        
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -256,38 +249,44 @@ public class EditarArticulo extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void grupoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_grupoKeyTyped
-        
+
     }//GEN-LAST:event_grupoKeyTyped
 
     private void articuloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_articuloKeyTyped
         numerocaracter = 70;
-        if(articulo.getText().length()>=numerocaracter){
+        if (articulo.getText().length() >= numerocaracter) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Solo puede ingresar maximo 70 caracteres");
         }
     }//GEN-LAST:event_articuloKeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+        ConsultaArticulo dialog = new ConsultaArticulo(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public void llenar(PrArticulo prar){
-        
-        
-        
+    public void llenar(PrArticulo prar) {
+
         grupo.setText(prar.getPrSubgrupos().getPrGrupos().getNombre());
         subgrupo.setText(prar.getPrSubgrupos().getNombre());
         articulo.setText(prar.getNombreArticulo());
         estado.setSelectedItem(Estado.ObtenerEstado(prar.getEstado()));
     }
-    public void Actualizar(){
-    setVisible(false);
-        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(),true);
+
+    public void Actualizar() {
+        setVisible(false);
+        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(), true);
         cs.setVisible(true);
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

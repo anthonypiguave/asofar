@@ -7,7 +7,6 @@ package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrEmpaqueJpaController;
 import ec.com.asofar.daoext.ValidarDTO;
-import static ec.com.asofar.dto.Administrador_.usuario;
 import ec.com.asofar.dto.PrEmpaque;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;

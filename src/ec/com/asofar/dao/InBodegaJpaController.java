@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author nuevouser
+ * @author jorge
  */
 public class InBodegaJpaController implements Serializable {
 
@@ -40,8 +40,8 @@ public class InBodegaJpaController implements Serializable {
             inBodega.setInBodegaPK(new InBodegaPK());
         }
         inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -80,8 +80,8 @@ public class InBodegaJpaController implements Serializable {
 
     public void edit(InBodega inBodega) throws NonexistentEntityException, Exception {
         inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
         EntityManager em = null;
         try {
             em = getEntityManager();

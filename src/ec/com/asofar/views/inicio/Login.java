@@ -29,6 +29,8 @@ public class Login extends javax.swing.JDialog {
     List<SeUsuarios> ul;
     AES aes = new AES();
 
+    Boolean entro = false;
+
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal = false);
         initComponents();
@@ -183,9 +185,9 @@ public class Login extends javax.swing.JDialog {
         String usuario = txtusuario.getText();
         String password = txtpassword.getText();
         String dc = aes.encrypt(password);
-        if (txtusuario.getText().length() < 4) {
+        if (txtusuario.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Ingrese un usuario válido");
-        } else if (txtusuario.getText().length() < 4) {
+        } else if (txtpassword.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Ingrese una contraseña válida");
         } else {
             SeUsuarios u = new SeUsuarios();
@@ -193,17 +195,25 @@ public class Login extends javax.swing.JDialog {
             for (int i = 0; i < ul.size(); i++) {
                 if (ul.get(i).getIdUsuario().equals(usuario)) {
                     if (ul.get(i).getPassword().equals(dc)) {
+                        setVisible(false);
                         SelectEmpresaSucursal ses = new SelectEmpresaSucursal(new javax.swing.JFrame(), true, ul.get(i).getIdUsuario());
+                        entro = true;
                         ses.setVisible(true);
+
                     }
                 }
             }
+
+            if (entro == false) {
+                JOptionPane.showMessageDialog(null, "Ingrese un usuario o contraseña válido");
+            }
+
         }
     }
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
 
         iniciarSesion();
-        setVisible(false);
+//        setVisible(false);
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed

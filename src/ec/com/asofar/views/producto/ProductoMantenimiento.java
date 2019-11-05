@@ -60,8 +60,8 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         CargarGrupo();
 //        CargarSubgrupo();
 //        CargarArticulos();
-        CargarMedidas();
-        CargarPresentacion();
+//        CargarMedidas();
+//        CargarPresentacion();
         CargarProveedor();
         CargarEmpaque();
         CargarFabricante();
@@ -88,19 +88,19 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
 //            cbxArticulo.addItem(listArticulo.get(i).getNombreArticulo());
 //        }
 //    }
-    public void CargarMedidas() {
-
-        for (int i = 0; i < listMedida.size(); i++) {
-            cbxMedida.addItem(listMedida.get(i).getNombreTipoMedida());
-        }
-    }
-
-    public void CargarPresentacion() {
-
-        for (int i = 0; i < listPresentacion.size(); i++) {
-            cbxPresentacion.addItem(listPresentacion.get(i).getNombre());
-        }
-    }
+//    public void CargarMedidas() {
+//
+//        for (int i = 0; i < listMedida.size(); i++) {
+//            cbxMedida.addItem(listMedida.get(i).getNombreTipoMedida());
+//        }
+//    }
+//
+//    public void CargarPresentacion() {
+//
+//        for (int i = 0; i < listPresentacion.size(); i++) {
+//            cbxPresentacion.addItem(listPresentacion.get(i).getNombre());
+//        }
+//    }
 
     public void CargarProveedor() {
 
@@ -391,9 +391,11 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
             }
         });
 
-        cbxPresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-
-        cbxMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
+        cbxArticulo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxArticuloItemStateChanged(evt);
+            }
+        });
 
         jLabel17.setBackground(new java.awt.Color(255, 102, 0));
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -599,6 +601,35 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_cbxSubgrupoItemStateChanged
+
+    private void cbxArticuloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxArticuloItemStateChanged
+       cbxMedida.setEnabled(true);
+       cbxPresentacion.setEnabled(true);
+        
+        
+        String nombre = cbxArticulo.getSelectedItem().toString();
+        
+        PrArticulo articulo = ObtenerDTO.ObtenerPrArticulo(nombre);
+        
+        cbxMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione una Opcion.."}));
+        cbxPresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione una Opcion.."}));
+        
+         for (int i = 0; i < articulo.getPrMedidasList().size(); i++) {
+
+            cbxMedida.addItem(articulo.getPrMedidasList().get(i).getPrTipoMedidas().getNombreTipoMedida());
+            cbxPresentacion.addItem(articulo.getPrMedidasList().get(i).getPrTipoPresentacion().getNombre());
+
+        }
+         
+         
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_cbxArticuloItemStateChanged
 
     /**
      * @param args the command line arguments

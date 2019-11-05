@@ -12,7 +12,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrMedidas;
@@ -24,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author nuevouser
+ * @author jorge
  */
 public class PrProductosJpaController implements Serializable {
 
@@ -41,21 +40,16 @@ public class PrProductosJpaController implements Serializable {
         if (prProductos.getPrProductosPK() == null) {
             prProductos.setPrProductosPK(new PrProductosPK());
         }
+        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
         prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
-        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
-        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            PrArticulo prArticulo = prProductos.getPrArticulo();
-            if (prArticulo != null) {
-                prArticulo = em.getReference(prArticulo.getClass(), prArticulo.getPrArticuloPK());
-                prProductos.setPrArticulo(prArticulo);
-            }
             SeEmpresa seEmpresa = prProductos.getSeEmpresa();
             if (seEmpresa != null) {
                 seEmpresa = em.getReference(seEmpresa.getClass(), seEmpresa.getIdEmpresa());
@@ -72,10 +66,6 @@ public class PrProductosJpaController implements Serializable {
                 prProductos.setPrMedidas(prMedidas);
             }
             em.persist(prProductos);
-            if (prArticulo != null) {
-                prArticulo.getPrProductosList().add(prProductos);
-                prArticulo = em.merge(prArticulo);
-            }
             if (seEmpresa != null) {
                 seEmpresa.getPrProductosList().add(prProductos);
                 seEmpresa = em.merge(seEmpresa);
@@ -102,29 +92,23 @@ public class PrProductosJpaController implements Serializable {
     }
 
     public void edit(PrProductos prProductos) throws NonexistentEntityException, Exception {
+        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
         prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
-        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
-        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             PrProductos persistentPrProductos = em.find(PrProductos.class, prProductos.getPrProductosPK());
-            PrArticulo prArticuloOld = persistentPrProductos.getPrArticulo();
-            PrArticulo prArticuloNew = prProductos.getPrArticulo();
             SeEmpresa seEmpresaOld = persistentPrProductos.getSeEmpresa();
             SeEmpresa seEmpresaNew = prProductos.getSeEmpresa();
             PrFabricante codFabricanteOld = persistentPrProductos.getCodFabricante();
             PrFabricante codFabricanteNew = prProductos.getCodFabricante();
             PrMedidas prMedidasOld = persistentPrProductos.getPrMedidas();
             PrMedidas prMedidasNew = prProductos.getPrMedidas();
-            if (prArticuloNew != null) {
-                prArticuloNew = em.getReference(prArticuloNew.getClass(), prArticuloNew.getPrArticuloPK());
-                prProductos.setPrArticulo(prArticuloNew);
-            }
             if (seEmpresaNew != null) {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 prProductos.setSeEmpresa(seEmpresaNew);
@@ -138,14 +122,6 @@ public class PrProductosJpaController implements Serializable {
                 prProductos.setPrMedidas(prMedidasNew);
             }
             prProductos = em.merge(prProductos);
-            if (prArticuloOld != null && !prArticuloOld.equals(prArticuloNew)) {
-                prArticuloOld.getPrProductosList().remove(prProductos);
-                prArticuloOld = em.merge(prArticuloOld);
-            }
-            if (prArticuloNew != null && !prArticuloNew.equals(prArticuloOld)) {
-                prArticuloNew.getPrProductosList().add(prProductos);
-                prArticuloNew = em.merge(prArticuloNew);
-            }
             if (seEmpresaOld != null && !seEmpresaOld.equals(seEmpresaNew)) {
                 seEmpresaOld.getPrProductosList().remove(prProductos);
                 seEmpresaOld = em.merge(seEmpresaOld);
@@ -198,11 +174,6 @@ public class PrProductosJpaController implements Serializable {
                 prProductos.getPrProductosPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The prProductos with id " + id + " no longer exists.", enfe);
-            }
-            PrArticulo prArticulo = prProductos.getPrArticulo();
-            if (prArticulo != null) {
-                prArticulo.getPrProductosList().remove(prProductos);
-                prArticulo = em.merge(prArticulo);
             }
             SeEmpresa seEmpresa = prProductos.getSeEmpresa();
             if (seEmpresa != null) {
