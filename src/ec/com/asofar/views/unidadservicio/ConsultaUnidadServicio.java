@@ -130,6 +130,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         Jbcancelar.setBackground(new java.awt.Color(255, 0, 0));
         Jbcancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Jbcancelar.setForeground(new java.awt.Color(255, 255, 255));
+        Jbcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         Jbcancelar.setText("SALIR");
         Jbcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +188,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
 
         JbAgregar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         JbAgregar1.setForeground(new java.awt.Color(0, 153, 0));
+        JbAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         JbAgregar1.setText("AGREGAR");
         JbAgregar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -226,6 +226,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         btnSalir2.setBackground(new java.awt.Color(153, 0, 51));
         btnSalir2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalir2.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         btnSalir2.setText("SALIR");
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,6 +311,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         });
 
         BtnBuscar1.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        BtnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         BtnBuscar1.setText("BUSCAR");
         BtnBuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

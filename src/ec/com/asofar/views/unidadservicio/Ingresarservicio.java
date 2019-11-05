@@ -71,14 +71,14 @@ public class Ingresarservicio extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        txtnservicios.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtnservicios.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtnservicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnserviciosActionPerformed(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,8 +86,9 @@ public class Ingresarservicio extends javax.swing.JDialog {
             }
         });
 
-        Jbu_Guardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Jbu_Guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         Jbu_Guardar.setForeground(new java.awt.Color(0, 153, 0));
+        Jbu_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         Jbu_Guardar.setText("GUARDAR");
         Jbu_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,15 +96,16 @@ public class Ingresarservicio extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("ESTADO:");
 
-        JlNombredeservicio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        JlNombredeservicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         JlNombredeservicio.setText("NOMBRE:");
 
         jBCancelar.setBackground(new java.awt.Color(255, 0, 0));
-        jBCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jBCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jBCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jBCancelar.setText("SALIR");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +151,7 @@ public class Ingresarservicio extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtnservicios, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

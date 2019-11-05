@@ -138,6 +138,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
         btn_ingresar_cliente.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_ingresar_cliente.setForeground(new java.awt.Color(41, 139, 40));
+        btn_ingresar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_cliente.setText("INGRESAR");
         btn_ingresar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +165,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_eliminar_cliente.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_eliminar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btn_eliminar_cliente.setText("ELIMINAR");
         btn_eliminar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,6 +235,7 @@ public class consulta_cliente extends javax.swing.JDialog {
 
         btn_ingresar_localidad.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_ingresar_localidad.setForeground(new java.awt.Color(41, 139, 40));
+        btn_ingresar_localidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_localidad.setText("INGRESAR");
         btn_ingresar_localidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,6 +252,7 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_eliminar_localidad.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_eliminar_localidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btn_eliminar_localidad.setText("ELIMINAR");
         btn_eliminar_localidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,8 +316,9 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(tba_contacto);
 
-        btn_ingresar_contacto.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_ingresar_contacto.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_ingresar_contacto.setForeground(new java.awt.Color(41, 139, 40));
+        btn_ingresar_contacto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_contacto.setText("INGRESAR");
         btn_ingresar_contacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,7 +326,7 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton5.setText("EDITAR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,7 +334,8 @@ public class consulta_cliente extends javax.swing.JDialog {
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         jButton7.setText("ELIMINAR");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

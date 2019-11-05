@@ -96,6 +96,7 @@ int x,y;
         btncancelar.setBackground(new java.awt.Color(153, 0, 0));
         btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btncancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

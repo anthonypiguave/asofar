@@ -259,6 +259,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
 
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(64, 145, 64));
+        btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,6 +270,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
         btncancelar.setBackground(new java.awt.Color(153, 28, 35));
         btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btncancelar.setForeground(new java.awt.Color(254, 254, 254));
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +314,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
                             .addComponent(cbpais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(cbcontribuyente, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

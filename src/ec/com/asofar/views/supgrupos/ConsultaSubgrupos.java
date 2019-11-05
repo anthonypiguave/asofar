@@ -133,6 +133,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
         btnagregarnuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnagregarnuevo.setForeground(new java.awt.Color(0, 102, 0));
+        btnagregarnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btnagregarnuevo.setText("NUEVO");
         btnagregarnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +144,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         btnsalir.setBackground(new java.awt.Color(153, 0, 0));
         btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         btnsalir.setText("SALIR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

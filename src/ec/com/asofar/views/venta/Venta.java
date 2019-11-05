@@ -733,7 +733,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
         btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_agregar_prod.setForeground(new java.awt.Color(0, 102, 0));
-        btn_agregar_prod.setMnemonic('e');
+        btn_agregar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         btn_agregar_prod.setText("AGREGAR");
         btn_agregar_prod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -768,6 +768,7 @@ public class Venta extends javax.swing.JInternalFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton2.setText("SALIR ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -786,6 +787,7 @@ public class Venta extends javax.swing.JInternalFrame {
         jLabel20.setText("CAJA :");
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton3.setText("NUEVO");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

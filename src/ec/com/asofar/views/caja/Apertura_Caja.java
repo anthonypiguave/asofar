@@ -100,6 +100,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
         btnCancelar.setBackground(new java.awt.Color(198, 50, 58));
         btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(254, 254, 254));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

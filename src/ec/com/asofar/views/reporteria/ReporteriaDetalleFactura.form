@@ -79,9 +79,9 @@
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnReporte" min="-2" pref="105" max="-2" attributes="0"/>
+                                  <Component id="btnReporte" min="-2" pref="110" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-                                  <Component id="btnSalir2" min="-2" pref="105" max="-2" attributes="0"/>
+                                  <Component id="btnSalir2" min="-2" pref="110" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -128,8 +128,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSalir2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="btnReporte" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="btnSalir2" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="btnReporte" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -656,7 +656,10 @@
         <Component class="javax.swing.JButton" name="btnSalir2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="11" style="1"/>
+              <Font name="Ubuntu" size="12" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
@@ -667,7 +670,7 @@
         <Component class="javax.swing.JButton" name="btnReporte">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="11" style="1"/>
+              <Font name="Ubuntu" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="IMPRIMIR"/>
           </Properties>

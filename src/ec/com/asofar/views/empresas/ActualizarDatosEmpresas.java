@@ -121,6 +121,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         btnSalir.setBackground(new java.awt.Color(153, 0, 0));
         btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +141,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         btnHabilitar.setBackground(new java.awt.Color(0, 0, 0));
         btnHabilitar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnHabilitar.setForeground(new java.awt.Color(255, 255, 255));
+        btnHabilitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btnHabilitar.setText("ELIMINAR");
         btnHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

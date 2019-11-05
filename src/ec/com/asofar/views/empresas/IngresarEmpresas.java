@@ -206,16 +206,24 @@ public class IngresarEmpresas extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnSalir.setBackground(new java.awt.Color(153, 0, 0));
         btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(254, 254, 254));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btnSalir.setText("CANCELAR");
+        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
 
+        btnGuardar.setBackground(new java.awt.Color(0, 102, 0));
         btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(254, 254, 254));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
+        btnGuardar.setOpaque(true);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);

@@ -291,6 +291,7 @@ public class EditarProveedor extends javax.swing.JDialog {
 
         btnactualizar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnactualizar.setForeground(new java.awt.Color(64, 145, 64));
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnactualizar.setText("GUARDAR");
         btnactualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,6 +302,7 @@ public class EditarProveedor extends javax.swing.JDialog {
         btncancelar.setBackground(new java.awt.Color(153, 28, 35));
         btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btncancelar.setForeground(new java.awt.Color(254, 254, 254));
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,7 +363,7 @@ public class EditarProveedor extends javax.swing.JDialog {
                                     .addComponent(txtemail)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                 .addComponent(cbcontribuyente, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -525,8 +525,9 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         );
 
         BtnCancelar.setBackground(new java.awt.Color(153, 0, 0));
-        BtnCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BtnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         BtnCancelar.setText("CANCELAR");
         BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -572,7 +573,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         );
 
         BtnAprovar.setBackground(new java.awt.Color(13, 153, 0));
-        BtnAprovar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnAprovar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BtnAprovar.setForeground(new java.awt.Color(255, 255, 255));
         BtnAprovar.setText("APROBAR");
         BtnAprovar.addActionListener(new java.awt.event.ActionListener() {
@@ -582,7 +583,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         });
 
         BtnAnular.setBackground(new java.awt.Color(255, 145, 0));
-        BtnAnular.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnAnular.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BtnAnular.setForeground(new java.awt.Color(255, 255, 255));
         BtnAnular.setText("ANULAR");
         BtnAnular.addActionListener(new java.awt.event.ActionListener() {

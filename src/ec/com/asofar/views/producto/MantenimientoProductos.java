@@ -196,6 +196,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         BotonNuevaMedida.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonNuevaMedida.setForeground(new java.awt.Color(1, 1, 1));
+        BotonNuevaMedida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         BotonNuevaMedida.setText("NUEVA MEDIDA");
         BotonNuevaMedida.setEnabled(false);
         BotonNuevaMedida.addActionListener(new java.awt.event.ActionListener() {
@@ -282,6 +283,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
 
         BotonNuevoProducto.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonNuevoProducto.setForeground(new java.awt.Color(101, 171, 99));
+        BotonNuevoProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         BotonNuevoProducto.setText("NUEVO PRODUCTO");
         BotonNuevoProducto.setEnabled(false);
         BotonNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -360,6 +362,7 @@ public class MantenimientoProductos extends javax.swing.JDialog {
         BotonSalir.setBackground(new java.awt.Color(208, 57, 52));
         BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(254, 254, 254));
+        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         BotonSalir.setText("SALIR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

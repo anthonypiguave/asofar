@@ -64,6 +64,7 @@ public class ConsultaFab extends javax.swing.JDialog {
         BotonSalir.setBackground(new java.awt.Color(143, 22, 22));
         BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(254, 254, 254));
+        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         BotonSalir.setText("SALIR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +74,7 @@ public class ConsultaFab extends javax.swing.JDialog {
 
         BotonNuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonNuevo.setForeground(new java.awt.Color(41, 117, 49));
+        BotonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         BotonNuevo.setText("NUEVO");
         BotonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

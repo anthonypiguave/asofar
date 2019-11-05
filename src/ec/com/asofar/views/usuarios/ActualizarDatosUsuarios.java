@@ -103,30 +103,30 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DATOS PERSONALES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("PERSONA:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("CLAVE:");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("USUARIO :");
 
-        txtIdUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtIdUsuario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtIdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIdUsuarioKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdUsuarioKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIdUsuarioKeyReleased(evt);
+            }
         });
 
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel12.setText("CONFIRMAR CLAVE :");
 
         txtPersona.setEditable(false);
-        txtPersona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtPersona.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtPersona.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtPersonaFocusLost(evt);
@@ -138,14 +138,14 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("E-MAIL :");
 
-        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel14.setText("TELEFONO :");
 
         txtCorreo.setEditable(false);
-        txtCorreo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtCorreo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyTyped(evt);
@@ -153,14 +153,14 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         });
 
         txtCell.setEditable(false);
-        txtCell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtCell.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtCell.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCellKeyTyped(evt);
             }
         });
 
-        BotonUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        BotonUsuario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         BotonUsuario.setText("...");
         BotonUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,9 +168,9 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             }
         });
 
-        txtClaveConfirm.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtClaveConfirm.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        txtClave.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtClave.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -240,17 +240,20 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         );
 
         btnSalir.setBackground(new java.awt.Color(255, 0, 0));
-        btnSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btnSalir.setText("CANCELAR");
+        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
 
-        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(0, 153, 0));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,7 +279,8 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         });
 
         btnEliminar.setBackground(new java.awt.Color(0, 0, 0));
-        btnEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

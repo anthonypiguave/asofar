@@ -137,9 +137,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         jButton3.setBackground(new java.awt.Color(153, 0, 0));
         jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton3.setText("SALIR");
         jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,9 +148,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         });
 
         btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btn_guardar.setText("GUARDAR");
         btn_guardar.setFocusable(false);
-        btn_guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,9 +171,9 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 0));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("NUEVO");
         jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

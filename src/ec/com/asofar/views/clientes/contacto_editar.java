@@ -176,6 +176,7 @@ public class contacto_editar extends javax.swing.JDialog {
         jButton2.setBackground(new java.awt.Color(173, 42, 48));
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(254, 254, 254));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton2.setText("SALIR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,9 +187,10 @@ public class contacto_editar extends javax.swing.JDialog {
         btn_agregar.setBackground(new java.awt.Color(0, 102, 0));
         btn_agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btn_agregar.setText("GUARDAR");
         btn_agregar.setFocusable(false);
-        btn_agregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_agregar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         btn_agregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +250,7 @@ public class contacto_editar extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );

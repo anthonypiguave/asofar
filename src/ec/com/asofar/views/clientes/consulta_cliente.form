@@ -196,6 +196,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="28" green="8b" red="29" type="rgb"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="INGRESAR"/>
               </Properties>
               <Events>
@@ -234,6 +237,9 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="12" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ELIMINAR"/>
               </Properties>
@@ -338,6 +344,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="28" green="8b" red="29" type="rgb"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="INGRESAR"/>
               </Properties>
               <Events>
@@ -359,6 +368,9 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="12" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ELIMINAR"/>
               </Properties>
@@ -455,10 +467,13 @@
             <Component class="javax.swing.JButton" name="btn_ingresar_contacto">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="1"/>
+                  <Font name="Ubuntu" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="28" green="8b" red="29" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="INGRESAR"/>
               </Properties>
@@ -469,7 +484,7 @@
             <Component class="javax.swing.JButton" name="jButton5">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="1"/>
+                  <Font name="Ubuntu" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="EDITAR"/>
               </Properties>
@@ -480,7 +495,10 @@
             <Component class="javax.swing.JButton" name="jButton7">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="1"/>
+                  <Font name="Ubuntu" size="12" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ELIMINAR"/>
               </Properties>

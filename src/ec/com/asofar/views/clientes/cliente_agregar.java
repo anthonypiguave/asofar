@@ -91,6 +91,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(173, 42, 48));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +175,7 @@ public class cliente_agregar extends javax.swing.JDialog {
 
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(0, 102, 0));
+        btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

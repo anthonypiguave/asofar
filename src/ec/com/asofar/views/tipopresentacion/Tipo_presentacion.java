@@ -146,6 +146,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
 
         btnnuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnnuevo.setForeground(new java.awt.Color(0, 153, 0));
+        btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnnuevo.setText("NUEVO");
         btnnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +157,9 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         btnsalir.setBackground(new java.awt.Color(255, 0, 0));
         btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         btnsalir.setText("SALIR");
+        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);

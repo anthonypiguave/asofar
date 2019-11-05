@@ -115,6 +115,7 @@ public class NuevaMedida extends javax.swing.JDialog {
         BotonSalir.setBackground(new java.awt.Color(153, 0, 0));
         BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         BotonSalir.setText("CANCELAR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +137,7 @@ public class NuevaMedida extends javax.swing.JDialog {
 
         BotonAceptar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         BotonAceptar.setForeground(new java.awt.Color(0, 102, 0));
+        BotonAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         BotonAceptar.setText("GUARDAR");
         BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

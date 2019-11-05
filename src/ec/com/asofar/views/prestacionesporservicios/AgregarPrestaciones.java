@@ -112,6 +112,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
         jguardarpreser.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jguardarpreser.setForeground(new java.awt.Color(74, 126, 72));
+        jguardarpreser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         jguardarpreser.setText("GUARDAR");
         jguardarpreser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +135,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         jsalir.setBackground(new java.awt.Color(160, 52, 58));
         jsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jsalir.setForeground(new java.awt.Color(254, 254, 254));
+        jsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jsalir.setText("SALIR");
         jsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +144,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         });
 
         jbotonbuscar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jbotonbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         jbotonbuscar.setText("BUSCAR");
         jbotonbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,11 +226,11 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxaplicadescuento1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(35, 35, 35)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jsalir)
-                    .addComponent(jguardarpreser))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(jsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

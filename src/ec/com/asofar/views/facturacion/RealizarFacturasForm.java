@@ -131,7 +131,8 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         TxtCedula.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         TxtCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        BtnBuscarcedula.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnBuscarcedula.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BtnBuscarcedula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         BtnBuscarcedula.setText("BUSCAR");
         BtnBuscarcedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,7 +214,8 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         TxtProdNombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         TxtProdNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        BtnBuscarprodnombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnBuscarprodnombre.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BtnBuscarprodnombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         BtnBuscarprodnombre.setText("BUSCAR");
         BtnBuscarprodnombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +267,8 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         TxtProdtotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         TxtProdtotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        BtnAddIten.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BtnAddIten.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BtnAddIten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         BtnAddIten.setText("ADICIONAR ITEM");
         BtnAddIten.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 0), 1, true));
         BtnAddIten.addActionListener(new java.awt.event.ActionListener() {
@@ -291,7 +294,7 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("%DESCUENTO:");
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setText("EDITAR");
         jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 0), 1, true));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -329,7 +332,6 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
                                         .addComponent(TxtProdSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(TxtProdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(TxtProdPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(BtnAddIten, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel3Layout.createSequentialGroup()
                                             .addComponent(TxtProdNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -337,7 +339,8 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
                                         .addGroup(jPanel3Layout.createSequentialGroup()
                                             .addComponent(TxtDescuentoPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(BtnAddIten, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGap(0, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()

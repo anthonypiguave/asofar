@@ -118,6 +118,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
 
         guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         guardar.setForeground(new java.awt.Color(51, 109, 52));
+        guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         guardar.setText("GUARDAR");
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +147,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(177, 37, 48));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("CANCELAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -115,8 +115,9 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         cmbxSN.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cmbxSN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
-        btngrabar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btngrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btngrabar.setForeground(new java.awt.Color(0, 102, 0));
+        btngrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btngrabar.setText("GUARDAR");
         btngrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +125,8 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             }
         });
 
-        btnbuscarP.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnbuscarP.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnbuscarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         btnbuscarP.setText("BUSCAR");
         btnbuscarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,8 +152,9 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(173, 42, 48));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

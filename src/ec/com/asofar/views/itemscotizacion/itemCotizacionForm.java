@@ -190,6 +190,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("AGREGAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +199,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
         });
 
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         jButton2.setText("ELIMINAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +209,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
 
         jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 102, 0));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         jButton3.setText("GUARDAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,8 +271,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel10)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(jLabel8)))

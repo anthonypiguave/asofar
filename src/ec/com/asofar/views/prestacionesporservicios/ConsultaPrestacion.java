@@ -140,6 +140,7 @@ public class ConsultaPrestacion extends javax.swing.JDialog {
         jsalir.setBackground(new java.awt.Color(170, 38, 53));
         jsalir.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jsalir.setForeground(new java.awt.Color(254, 254, 254));
+        jsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jsalir.setText("SALIR");
         jsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

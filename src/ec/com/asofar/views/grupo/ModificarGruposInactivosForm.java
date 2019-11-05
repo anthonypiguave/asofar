@@ -103,6 +103,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
         btnCancelar.setBackground(new java.awt.Color(153, 0, 0));
         btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

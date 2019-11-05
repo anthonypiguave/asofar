@@ -129,6 +129,7 @@ public class bodega_agregar extends javax.swing.JDialog {
         btncancelar1.setBackground(new java.awt.Color(153, 0, 0));
         btncancelar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btncancelar1.setForeground(new java.awt.Color(255, 255, 255));
+        btncancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btncancelar1.setText("CANCELAR");
         btncancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +139,7 @@ public class bodega_agregar extends javax.swing.JDialog {
 
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(0, 102, 0));
+        btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

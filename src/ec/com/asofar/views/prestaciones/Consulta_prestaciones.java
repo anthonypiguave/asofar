@@ -89,6 +89,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         btnAgregar.setBackground(new java.awt.Color(204, 204, 204));
         btnAgregar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(57, 129, 57));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         btnAgregar.setText("AGREGAR");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +100,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(173, 42, 48));
         jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

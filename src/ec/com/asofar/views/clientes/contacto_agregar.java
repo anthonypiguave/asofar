@@ -83,6 +83,7 @@ public class contacto_agregar extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(173, 42, 48));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,9 +141,10 @@ public class contacto_agregar extends javax.swing.JDialog {
         btn_agregar.setBackground(new java.awt.Color(0, 102, 0));
         btn_agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btn_agregar.setText("AGREGAR");
         btn_agregar.setFocusable(false);
-        btn_agregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_agregar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         btn_agregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

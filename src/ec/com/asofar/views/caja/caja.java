@@ -162,6 +162,7 @@ public class caja extends javax.swing.JDialog {
 
         btnagregarnuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnagregarnuevo.setForeground(new java.awt.Color(45, 115, 45));
+        btnagregarnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btnagregarnuevo.setText("AGREGAR");
         btnagregarnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +173,7 @@ public class caja extends javax.swing.JDialog {
         btnsalir.setBackground(new java.awt.Color(177, 45, 52));
         btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(254, 254, 254));
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btnsalir.setText("VOLVER");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
