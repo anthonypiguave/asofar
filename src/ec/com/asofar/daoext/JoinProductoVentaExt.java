@@ -95,7 +95,8 @@ public class JoinProductoVentaExt {
         }
         return lista;
     }
-        public List<JoinProductoVenta> listarProductoInventario() {
+
+    public List<JoinProductoVenta> listarProductoInventario() {
         // EntityManager em = getEntityManager();
         List<JoinProductoVenta> lista = null;
         String nativeQuery

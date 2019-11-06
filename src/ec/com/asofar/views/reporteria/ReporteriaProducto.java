@@ -94,10 +94,11 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     private void Totalizar() {
         Double t = 0.0;
         Double p = 0.0;
-        if (tba_productos.getRowCount() > 0) {
+        if (tba_productos.getRowCount() >= 0) {
             for (int i = 0; i < tba_productos.getRowCount(); i++) {
                 p = ListProdVent.get(i).getValor_venta();
                 t += p;
+//                System.out.println(" ooo "+t);
 //                Formato_Numeros.formatoNumero(t.toString());
                 VGTtotal = t;
                 txt_total.setText(Formato_Numeros.formatoNumero(t.toString()));
@@ -109,16 +110,27 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     private void TotalizarCantidad() {
         Double t = 0.0;
         Integer p = 0;
-        if (tba_productos.getRowCount() > 0) {
+        if(tba_productos.getRowCount() == 1){
             for (int i = 0; i < tba_productos.getRowCount(); i++) {
+                System.out.println("eee " + ListProdVent.get(i).getNombre_producto());
                 p = ListProdVent.get(i).getSaldo_actual();
-                t += p;
-//                Formato_Numeros.formatoNumero(t.toString());
-                VGTtotal = t;
-                Txt_Cantidad.setText(Formato_Numeros.formatoNumero(t.toString()));
-//                txtTotal.setText(t.toString()); Txt_Cantidad
+                Txt_Cantidad.setText(p.toString());
             }
+            
         }
+//        if (tba_productos.getRowCount() > 1) {
+//            System.out.println("count "+tba_productos.getRowCount());
+//            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+//                p = ListProdVent.get(i).getSaldo_actual();
+////                Txt_Cantidad.setText("0.00");
+//                t += p;
+//                System.out.println("eeee "+t);
+//                
+//                VGTtotal = t;
+//                Txt_Cantidad.setText(Formato_Numeros.formatoNumero(t.toString()));
+////                txtTotal.setText(t.toString()); Txt_Cantidad
+//            }
+//        }
     }
 
     public void cargarTbaProductoVenta() {
@@ -152,6 +164,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         Txt_Cantidad = new javax.swing.JTextField();
         txtbusqueda = new javax.swing.JTextField();
+        btn_buscar = new javax.swing.JButton();
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("ENTRE");
@@ -241,8 +254,21 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 
         txtbusqueda.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         txtbusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtbusquedaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyTyped(evt);
+            }
+        });
+
+        btn_buscar.setText("jButton1");
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarActionPerformed(evt);
             }
         });
 
@@ -268,7 +294,9 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(27, 27, 27)
-                                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_buscar))
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -284,7 +312,8 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_buscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -428,9 +457,32 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     private void txtbusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyReleased
         Buscar = txtbusqueda.getText();
         Tablas.filtro(Buscar, tba_productos);
+        String buscar = txtbusqueda.getText();
         Totalizar();
         TotalizarCantidad();
     }//GEN-LAST:event_txtbusquedaKeyReleased
+
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        String buscar = txtbusqueda.getText();
+        Totalizar();
+        TotalizarCantidad();
+    }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void txtbusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyTyped
+//        Buscar = txtbusqueda.getText();
+//        Tablas.filtro(Buscar, tba_productos);
+//        String buscar = txtbusqueda.getText();
+//        Totalizar();
+//        TotalizarCantidad();
+    }//GEN-LAST:event_txtbusquedaKeyTyped
+
+    private void txtbusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyPressed
+        Buscar = txtbusqueda.getText();
+        Tablas.filtro(Buscar, tba_productos);
+        
+        Totalizar();
+        TotalizarCantidad();
+    }//GEN-LAST:event_txtbusquedaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -478,6 +530,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Chooser2;
     private javax.swing.JTextField Txt_Cantidad;
+    private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

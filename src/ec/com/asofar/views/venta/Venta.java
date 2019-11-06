@@ -264,7 +264,7 @@ public class Venta extends javax.swing.JInternalFrame {
         Cliente = Cc.findSeClientesEntities();
         for (int i = 0; i < Cliente.size(); i++) {
 
-            if (Cliente.get(i).getIdClientes() == 15) {
+            if (Cliente.get(i).getIdClientes() == 1) {
 //                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
