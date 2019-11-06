@@ -55,11 +55,11 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                          <Component id="btnagregarnuevo" min="-2" pref="110" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="btnimprimir" min="-2" pref="110" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnsalir" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="btnagregarnuevo" min="-2" pref="115" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                          <Component id="btnimprimir" min="-2" pref="115" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnsalir" min="-2" pref="115" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -152,7 +152,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="540" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="537" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -238,7 +238,7 @@
         <Component class="javax.swing.JButton" name="btnsalir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="34" green="2d" red="b1" type="rgb"/>
+              <Color blue="15" green="e" red="d9" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>

@@ -126,7 +126,7 @@ public class bodega_agregar extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("NOMBRE:");
 
-        btncancelar1.setBackground(new java.awt.Color(153, 0, 0));
+        btncancelar1.setBackground(new java.awt.Color(217, 14, 21));
         btncancelar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btncancelar1.setForeground(new java.awt.Color(255, 255, 255));
         btncancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N

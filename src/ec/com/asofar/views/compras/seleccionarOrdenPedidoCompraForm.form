@@ -63,7 +63,7 @@
               <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
-                  <Component id="btnsalir" min="-2" pref="110" max="-2" attributes="0"/>
+                  <Component id="btnsalir" min="-2" pref="115" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -80,7 +80,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnsalir" min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="btnsalir" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -90,7 +90,7 @@
         <Component class="javax.swing.JButton" name="btnsalir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="34" green="2d" red="b1" type="rgb"/>
+              <Color blue="15" green="e" red="d9" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>

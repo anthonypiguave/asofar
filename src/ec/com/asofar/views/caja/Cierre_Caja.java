@@ -230,9 +230,9 @@ public class Cierre_Caja extends javax.swing.JDialog {
         horaInicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         horaInicio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        btnGrabar.setBackground(new java.awt.Color(62, 140, 69));
+        btnGrabar.setBackground(new java.awt.Color(254, 254, 254));
         btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnGrabar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGrabar.setForeground(new java.awt.Color(72, 127, 73));
         btnGrabar.setText("CERRAR");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +240,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(198, 50, 58));
+        btnCancelar.setBackground(new java.awt.Color(217, 14, 21));
         btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(254, 254, 254));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
@@ -290,9 +290,9 @@ public class Cierre_Caja extends javax.swing.JDialog {
                                 .addComponent(horaInicio)
                                 .addComponent(montocierre, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

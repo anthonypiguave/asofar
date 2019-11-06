@@ -132,23 +132,23 @@ public class Localidad_editar extends javax.swing.JDialog {
             }
         });
 
-        cbx_pais.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_pais.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel1.setText("PAIS:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("CIUDAD:");
 
-        cbx_Ciudad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_Ciudad.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("PROVINCIA:");
 
-        cbx_provincia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbx_provincia.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(173, 42, 48));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(217, 14, 21));
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(254, 254, 254));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("SALIR");
@@ -158,27 +158,27 @@ public class Localidad_editar extends javax.swing.JDialog {
             }
         });
 
-        txt_direccion_cliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_direccion_cliente.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_direccion_cliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_direccion_clienteFocusLost(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("DIRECCION DE CLIENTE:");
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel6.setText("DIRECCION DE ENTREGA:");
 
-        txt_direccion_entrega.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_direccion_entrega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_direccion_entrega.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_direccion_entregaFocusLost(evt);
             }
         });
 
-        btn_guardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_guardar.setForeground(new java.awt.Color(0, 102, 0));
         btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btn_guardar.setText("GUARDAR");
@@ -211,13 +211,13 @@ public class Localidad_editar extends javax.swing.JDialog {
                                 .addComponent(cbx_provincia, javax.swing.GroupLayout.Alignment.LEADING, 0, 120, Short.MAX_VALUE)
                                 .addComponent(cbx_Ciudad, javax.swing.GroupLayout.Alignment.LEADING, 0, 120, Short.MAX_VALUE)
                                 .addComponent(cbx_pais, javax.swing.GroupLayout.Alignment.LEADING, 0, 120, Short.MAX_VALUE)))
-                        .addGap(0, 21, Short.MAX_VALUE))
+                        .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,8 +245,8 @@ public class Localidad_editar extends javax.swing.JDialog {
                     .addComponent(cbx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 

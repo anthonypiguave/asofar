@@ -93,7 +93,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnGrabar.setForeground(new java.awt.Color(254, 254, 254));
+        btnGrabar.setForeground(new java.awt.Color(72, 127, 73));
         btnGrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGrabar.setText("GUARDAR");
         btnGrabar.setOpaque(true);
@@ -153,9 +153,9 @@ public class ModificarGruposForm extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("NOMBRE ACTUAL:");
 
-        brnEliminar.setBackground(new java.awt.Color(0, 0, 0));
+        brnEliminar.setBackground(new java.awt.Color(254, 254, 254));
         brnEliminar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        brnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        brnEliminar.setForeground(new java.awt.Color(1, 1, 1));
         brnEliminar.setText("DESACTIVAR");
         brnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

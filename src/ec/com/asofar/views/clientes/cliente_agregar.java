@@ -99,25 +99,25 @@ public class cliente_agregar extends javax.swing.JDialog {
             }
         });
 
-        cbxtipo_identificacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbxtipo_identificacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("TIPO DE IDENTIFICACION:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("No. DE IDENTIFICACION:");
 
-        txt_numero_identificacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_numero_identificacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_numero_identificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_numero_identificacionKeyTyped(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("Nombres :");
 
-        txt_primer_nombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_primer_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_primer_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_primer_nombreFocusLost(evt);
@@ -134,7 +134,7 @@ public class cliente_agregar extends javax.swing.JDialog {
             }
         });
 
-        txt_segundo_nombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_segundo_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_segundo_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_segundo_nombreFocusLost(evt);
@@ -146,10 +146,10 @@ public class cliente_agregar extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("Apellidos :");
 
-        txt_primer_apellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_primer_apellido.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_primer_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_primer_apellidoFocusLost(evt);
@@ -161,7 +161,7 @@ public class cliente_agregar extends javax.swing.JDialog {
             }
         });
 
-        txt_segundo_apellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_segundo_apellido.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_segundo_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_segundo_apellidoFocusLost(evt);
@@ -183,10 +183,10 @@ public class cliente_agregar extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel6.setText("RAZON SOCIAL:");
 
-        txt_razon_social.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txt_razon_social.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_razon_social.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_razon_socialFocusLost(evt);
@@ -243,9 +243,9 @@ public class cliente_agregar extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -288,8 +288,8 @@ public class cliente_agregar extends javax.swing.JDialog {
                     .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 

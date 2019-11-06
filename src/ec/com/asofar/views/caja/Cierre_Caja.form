@@ -82,9 +82,9 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnGrabar" min="-2" pref="105" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="btnGrabar" min="-2" pref="115" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -213,13 +213,13 @@
         <Component class="javax.swing.JButton" name="btnGrabar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="45" green="8c" red="3e" type="rgb"/>
+              <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="49" green="7f" red="48" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CERRAR"/>
           </Properties>
@@ -230,7 +230,7 @@
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3a" green="32" red="c6" type="rgb"/>
+              <Color blue="15" green="e" red="d9" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>

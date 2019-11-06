@@ -28,13 +28,13 @@ public class Login extends javax.swing.JDialog {
     SeUsuariosJpaController uc = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<SeUsuarios> ul;
     AES aes = new AES();
-
     Boolean entro = false;
 
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
+        System.out.println(txtpassword.getText());
     }
 
     /**

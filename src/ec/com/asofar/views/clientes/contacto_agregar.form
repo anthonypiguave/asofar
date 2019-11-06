@@ -66,9 +66,9 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="btn_agregar" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="btn_agregar" min="-2" pref="115" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -101,8 +101,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_agregar" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="btn_agregar" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -207,13 +207,13 @@
         <Component class="javax.swing.JButton" name="btn_agregar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="66" red="0" type="rgb"/>
+              <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="49" green="7f" red="48" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"/>

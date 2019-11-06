@@ -136,7 +136,7 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tba_clientes);
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 102, 0));
         jButton2.setText("ACTIVAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +155,7 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(244, 244, 244)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -164,7 +164,7 @@ public class consulta_cliente_inactivos extends javax.swing.JDialog {
                 .addGap(4, 4, 4)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

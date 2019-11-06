@@ -76,9 +76,9 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnguardar" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="btnguardar" min="-2" pref="115" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jButton1" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="jButton1" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -134,8 +134,8 @@
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="btnguardar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnguardar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
@@ -166,7 +166,7 @@
         <Component class="javax.swing.JComboBox" name="cbxtipo_identificacion">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
@@ -179,7 +179,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="TIPO DE IDENTIFICACION:"/>
           </Properties>
@@ -187,7 +187,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="No. DE IDENTIFICACION:"/>
           </Properties>
@@ -195,7 +195,7 @@
         <Component class="javax.swing.JTextField" name="txt_numero_identificacion">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -205,7 +205,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nombres :"/>
           </Properties>
@@ -213,7 +213,7 @@
         <Component class="javax.swing.JTextField" name="txt_primer_nombre">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -225,7 +225,7 @@
         <Component class="javax.swing.JTextField" name="txt_segundo_nombre">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -236,7 +236,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Apellidos :"/>
           </Properties>
@@ -244,7 +244,7 @@
         <Component class="javax.swing.JTextField" name="txt_primer_apellido">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -255,7 +255,7 @@
         <Component class="javax.swing.JTextField" name="txt_segundo_apellido">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -283,7 +283,7 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="RAZON SOCIAL:"/>
           </Properties>
@@ -291,7 +291,7 @@
         <Component class="javax.swing.JTextField" name="txt_razon_social">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>

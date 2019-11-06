@@ -51,9 +51,9 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnGrabar" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="btnGrabar" min="-2" pref="115" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -76,8 +76,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnGrabar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="btnCancelar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="btnGrabar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -105,7 +105,7 @@
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3a" green="32" red="c6" type="rgb"/>
+              <Color blue="15" green="e" red="d9" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>

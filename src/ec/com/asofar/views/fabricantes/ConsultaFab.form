@@ -54,12 +54,12 @@
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="BotonNuevo" min="-2" pref="105" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="BotonNuevo" min="-2" pref="115" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="BotonEliminados" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="BotonEliminados" min="-2" pref="115" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="BotonSalir" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="BotonSalir" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
@@ -85,9 +85,9 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="BotonNuevo" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="BotonSalir" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="BotonEliminados" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="BotonNuevo" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="BotonSalir" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="BotonEliminados" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -98,7 +98,7 @@
         <Component class="javax.swing.JButton" name="BotonSalir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="16" green="16" red="8f" type="rgb"/>
+              <Color blue="15" green="e" red="d9" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>

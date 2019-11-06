@@ -64,7 +64,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="105" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="115" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -73,7 +73,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" pref="14" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" pref="13" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtfiltro" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -81,7 +81,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -178,7 +178,7 @@
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="37" green="34" red="b8" type="rgb"/>
+              <Color blue="15" green="e" red="d9" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="12" style="1"/>
@@ -190,6 +190,7 @@
               <Image iconType="3" name="/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
