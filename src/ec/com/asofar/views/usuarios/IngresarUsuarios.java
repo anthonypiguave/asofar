@@ -7,10 +7,15 @@ package ec.com.asofar.views.usuarios;
 
 import ec.com.asofar.dao.SePersonasJpaController;
 import ec.com.asofar.dao.SeRolesJpaController;
+import ec.com.asofar.dao.SeUsuarioSucurRolJpaController;
 import ec.com.asofar.dao.SeUsuariosJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
+import ec.com.asofar.dto.SeRoles;
 import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarioSucurRol;
+import static ec.com.asofar.dto.SeUsuarioSucurRol_.seUsuarioSucurRolPK;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.AES;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -28,33 +33,41 @@ import javax.swing.JOptionPane;
  * @author alumno
  */
 public class IngresarUsuarios extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     SeRolesJpaController mn
             = new SeRolesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SePersonasJpaController mp
             = new SePersonasJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuariosJpaController tpc
             = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+    SeUsuarioSucurRolJpaController usrc
+            = new SeUsuarioSucurRolJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     private Date fecha1 = null;
     SeUsuarios us1;
     SeEmpresa em1;
     SeSucursal su1;
     SePersonas objPersona;
+    SeUsuarioSucurRol usr = new SeUsuarioSucurRol();
     SeUsuarios usuario = new SeUsuarios();
     java.util.Date fechaActual = new java.util.Date();
     AES aes = new AES();
-    
+
+    List<SeRoles> rol;
+
     public IngresarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
-        
+
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight() - 1));
-        
+
     }
-    
+
     public IngresarUsuarios(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         setUndecorated(true);
@@ -64,9 +77,11 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         su1 = su;
         this.setLocationRelativeTo(null);
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
-        
+        rol = mn.findSeRolesEntities();
+        llenarCombo(rol);
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -86,6 +101,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         BotonFecha = new javax.swing.JButton();
         txtClave = new javax.swing.JPasswordField();
         txtClaveConfirm = new javax.swing.JPasswordField();
+        cbRol = new javax.swing.JComboBox<>();
         btnSalir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -178,10 +194,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtCell, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -193,7 +205,13 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                             .addComponent(txtPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIdUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtClave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtClaveConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtClaveConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotonFecha)
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -222,11 +240,13 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCell, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addGap(18, 18, 18)
+                .addComponent(cbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         btnSalir.setBackground(new java.awt.Color(255, 0, 0));
@@ -234,7 +254,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btnSalir.setText("CANCELAR");
-        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -310,7 +329,15 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public void llenarCombo(List<SeRoles> TiBo) {
+        cbRol.addItem("SELECCIONE...");
+        for (int i = 0; i < TiBo.size(); i++) {
+            if (!"I".equals(TiBo.get(i).getEstado())) {
 
+                cbRol.addItem(TiBo.get(i).getNombre());
+            }
+        }
+    }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Guardar();
@@ -320,7 +347,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         mp.setVisible(true);
-        
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtPersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPersonaFocusLost
@@ -354,10 +381,10 @@ public class IngresarUsuarios extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtCellKeyTyped
-    
+
 
     private void txtIdUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdUsuarioKeyReleased
-        
+
 
     }//GEN-LAST:event_txtIdUsuarioKeyReleased
 
@@ -372,18 +399,21 @@ public class IngresarUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_BotonFechaActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-       x = evt.getX();
-       y = evt.getY();
+        x = evt.getX();
+        y = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-       Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
-    
+
     public void Guardar() {
+        if(txtIdUsuario.getText().length() < 5){
+            JOptionPane.showMessageDialog(this, "llene");
+        }
         if (txtClave.getText().equals(txtClaveConfirm.getText())
-                || txtIdUsuario.getText().length() >= 2) {
+                ) {
             usuario.setIdUsuario(txtIdUsuario.getText());
             usuario.setNombreUsuario(txtPersona.getText());
             usuario.setEstado('A');
@@ -393,13 +423,25 @@ public class IngresarUsuarios extends javax.swing.JDialog {
             usuario.setUsuarioCreacion(us1.getNombreUsuario());
             usuario.setUsuarioActualizacion(us1.getNombreUsuario());
             usuario.setPassword(aes.encrypt(txtClave.getText()));
+
+//            Integer idRol = cbRol.getSelectedIndex();
+            SeRoles tb = new SeRoles();
+            tb = ObtenerDTO.ObtenerSeRoles(cbRol.getSelectedItem().toString());
+            
+            usr.setIdUsuario(usuario);
+            usr.setIdRoles(tb);
+            usr.setEstado('A');
+            usr.setSeSucursal(su1);
+
             try {
                 tpc.create(usuario);
+
+                usrc.create(usr);
                 JOptionPane.showMessageDialog(this, "EXITO AL GUARDAR");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
-            
+
             ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
             setVisible(false);
             mp.setVisible(true);
@@ -430,6 +472,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
     private javax.swing.JButton BotonFecha;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cbRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
