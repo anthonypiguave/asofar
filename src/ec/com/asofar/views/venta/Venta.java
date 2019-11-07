@@ -1458,7 +1458,10 @@ public class Venta extends javax.swing.JInternalFrame {
 //        System.out.println("111");
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
-                if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
+                if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())
+                    /*
+                        
+                        */) {
 
                     id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 
