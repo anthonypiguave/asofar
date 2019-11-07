@@ -101,7 +101,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_agregar" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btn_agregar" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>

@@ -227,21 +227,21 @@
                           <Component id="txthora" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="cb_tcompra" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="cb_estado" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="cb_tdepartament" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="cb_tdocument" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
