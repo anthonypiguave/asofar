@@ -410,7 +410,10 @@ public void llenarCombo(List<SeRoles> TiBo) {
 
     public void Guardar() {
         if(txtIdUsuario.getText().length() < 5){
-            JOptionPane.showMessageDialog(this, "llene");
+            JOptionPane.showMessageDialog(this, "Debe tener al menos 6 caracteres");
+        }
+        if(cbRol.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Elija un rol");
         }
         if (txtClave.getText().equals(txtClaveConfirm.getText())
                 ) {

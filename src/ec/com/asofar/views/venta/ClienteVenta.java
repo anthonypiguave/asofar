@@ -38,11 +38,22 @@ public class ClienteVenta extends javax.swing.JDialog {
 
     public ClienteVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         Tablas.TablaClientesActivo(lista, tbaCliente);
     }
-
+    public ClienteVenta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        Tablas.TablaClientesActivo(lista, tbaCliente);
+        usu = us;
+        emp = em;
+        suc = su;
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

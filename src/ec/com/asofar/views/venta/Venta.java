@@ -920,7 +920,7 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdentificacionKeyTyped
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
 //        CargarCliente2();
-        ClienteVenta ingre = new ClienteVenta(new javax.swing.JFrame(), true);
+        ClienteVenta ingre = new ClienteVenta(new javax.swing.JFrame(), true, usu, emp, suc);
         ingre.setVisible(true);
         Clientesss = ingre.getCliente();
 //        Long idCliente = Clientesss.getIdClientes();
