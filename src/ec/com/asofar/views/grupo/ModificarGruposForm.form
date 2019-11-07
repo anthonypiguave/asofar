@@ -50,11 +50,11 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace pref="15" max="32767" attributes="0"/>
-                          <Component id="btnGrabar" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="btnGrabar" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="brnEliminar" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="brnEliminar" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" min="-2" pref="110" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -65,9 +65,9 @@
                           </Group>
                           <EmptySpace type="unrelated" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtFecha" max="32767" attributes="0"/>
-                              <Component id="txtNombreactual" max="32767" attributes="0"/>
-                              <Component id="txtNuevo" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="txtFecha" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="txtNombreactual" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="txtNuevo" min="-2" pref="170" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -97,9 +97,9 @@
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnGrabar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="btnCancelar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="brnEliminar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="btnGrabar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="brnEliminar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
