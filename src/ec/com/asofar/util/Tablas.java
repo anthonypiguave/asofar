@@ -2532,7 +2532,7 @@ public class Tablas {
     }
 
     public static void ListarProductosVenta2(List<JoinProductoVenta> lisProdVen, JTable Tabla) {
-        int[] a = {40, 300, 300, 100, 100, 100, 100};
+        int[] a = {40, 200, 300, 100, 100, 100, 100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2544,11 +2544,18 @@ public class Tablas {
         Tabla.setShowGrid(true);
 //        ProductoCadena k = new ProductoCadena();
         for (int i = 0; i < lisProdVen.size(); i++) {
+
+            System.out.println("error " + lisProdVen.get(i).getId_prestacion());
             filas[0] = "" + lisProdVen.get(i).getId_prestacion();
+            if (lisProdVen.get(i).getCodigoBarra() == "") {
+                filas[1] = "-";
+            filas[3] = "-";
+            }else{
             filas[1] = lisProdVen.get(i).getCodigoBarra();
-//            filas[2] = lisProdVen.get(i).getNombre_producto();
-            filas[2] = ProductoCadena.obtenerCadena(lisProdVen.get(i).getId_producto());
             filas[3] = "" + lisProdVen.get(i).getSaldo_actual();
+            }
+//            filas[2] = lisProdVen.get(i).getNombre_producto()
+            filas[2] = lisProdVen.get(i).getNombre_producto();
             filas[4] = "" + lisProdVen.get(i).getValor_venta();
             filas[5] = "" + lisProdVen.get(i).getValor_descuento();
 
@@ -3036,8 +3043,8 @@ public class Tablas {
         }
 
     }
-    
-        public static void ListarSubGrupoConsulta(List<PrSubgrupos> lista, JTable Tabla) {
+
+    public static void ListarSubGrupoConsulta(List<PrSubgrupos> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -3068,7 +3075,7 @@ public class Tablas {
         }
 
     }
-    
+
     public static void ListarArticuloConsulta(List<PrArticulo> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -3100,7 +3107,7 @@ public class Tablas {
         }
 
     }
-    
+
     public static void ListarTipoMedidaConsulta(List<PrTipoMedidas> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -3132,8 +3139,8 @@ public class Tablas {
         }
 
     }
-    
-     public static void ListarTipoPresentacionMedidaConsulta(List<PrMedidas> lista, JTable Tabla) {
+
+    public static void ListarTipoPresentacionMedidaConsulta(List<PrMedidas> lista, JTable Tabla) {
         int[] a = {500, 300};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -3164,8 +3171,8 @@ public class Tablas {
         }
 
     }
-     
-     public static void ListarTipoPresentacionConsulta(List<PrTipoPresentacion> lista, JTable Tabla) {
+
+    public static void ListarTipoPresentacionConsulta(List<PrTipoPresentacion> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -3196,8 +3203,8 @@ public class Tablas {
         }
 
     }
-     
-     public static void ListarTipoMedidasConsulta(List<PrTipoMedidas> lista, JTable Tabla) {
+
+    public static void ListarTipoMedidasConsulta(List<PrTipoMedidas> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -3228,7 +3235,6 @@ public class Tablas {
         }
 
     }
-
 
 }
 ///// ---------es otra clases //la clase tabla esta arriba  -------------------
