@@ -1002,7 +1002,7 @@ public class Venta extends javax.swing.JInternalFrame {
 //
 //            JOptionPane.showMessageDialog(null, "Seleccione");
 //        }
-        if (validarProductos("" + (objJoinProVen.getId_prestacion())).equals("si")) {
+        if (validarProductos("" +(objJoinProVen.getId_prestacion())).equals("si")) {
             JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
             cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
