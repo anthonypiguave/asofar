@@ -567,9 +567,9 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
     }//GEN-LAST:event_tba_clientesMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        setVisible(false);
-        ClienteVenta cagg = new ClienteVenta(new javax.swing.JFrame(), true, usu, emp, suc);
-        cagg.setVisible(true);     
+        setVisible(false);
+//        ClienteVenta cagg = new ClienteVenta(new javax.swing.JFrame(), true, usu, emp, suc);
+//        cagg.setVisible(true);     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_ingresar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar_clienteActionPerformed
