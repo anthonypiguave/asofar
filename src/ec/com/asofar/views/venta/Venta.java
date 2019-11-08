@@ -925,22 +925,22 @@ public class Venta extends javax.swing.JInternalFrame {
         Clientesss = ingre.getCliente();
 //        Long idCliente = Clientesss.getIdClientes();
         try {
-            
+
             String cedula = Clientesss.getNumeroIdentificacion().toString();
             ListCedula = selectCliente.obtenerClienteVenta(cedula);
-            
+
             for (int i = 0; i < ListCedula.size(); i++) {
-                
+
                 txtIdentificacion.setText(ListCedula.get(i).getNumeroIdentificacion());
-            txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
-                    + ListCedula.get(i).getSegundoApellido());
-            txtNombre.setText(ListCedula.get(i).getPrimerNombre());
-            txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
-            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
-            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
-            txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
-            txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
-      }
+                txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
+                        + ListCedula.get(i).getSegundoApellido());
+                txtNombre.setText(ListCedula.get(i).getPrimerNombre());
+                txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
+                txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
+                txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
+                txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
+                txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
+            }
         } catch (Exception e) {
             Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -1002,7 +1002,7 @@ public class Venta extends javax.swing.JInternalFrame {
 //
 //            JOptionPane.showMessageDialog(null, "Seleccione");
 //        }
-        if (validarProductos("" +(objJoinProVen.getId_prestacion())).equals("si")) {
+        if (validarProductos("" + (objJoinProVen.getId_prestacion())).equals("si")) {
             JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
         } else {
             cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
@@ -1459,9 +1459,9 @@ public class Venta extends javax.swing.JInternalFrame {
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())
-                    /*
+                        && listaPresta.get(i).getIdPoducto() != null /*
                         
-                        */) {
+                         */) {
 
                     id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 
