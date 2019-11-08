@@ -88,7 +88,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel4.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel4.setBackground(new java.awt.Color(6, 162, 213));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -152,10 +152,10 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(217, 14, 21));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(254, 254, 254));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        jButton1.setBackground(new java.awt.Color(254, 254, 254));
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(1, 1, 1));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,13 +171,11 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 528, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
