@@ -76,7 +76,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        cargarTbaProductoVenta();
+        cargarTbaProductoInventario();
         Totalizar();
         TotalizarCantidad();
     }
@@ -86,7 +86,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        cargarTbaProductoVenta();
+        cargarTbaProductoInventario();
         Totalizar();
         TotalizarCantidad();
     }
@@ -133,7 +133,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 //        }
     }
 
-    public void cargarTbaProductoVenta() {
+    public void cargarTbaProductoInventario() {
         ListProdVent = selectProdVent.listarProductoInventario();
         LisBod = BC.findInBodegaEntities();
         Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
