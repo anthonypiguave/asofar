@@ -136,25 +136,7 @@ public class JoinProductoVentaExt {
         // EntityManager em = getEntityManager();
         List<JoinProductoVenta> lista = null;
         String nativeQuery
-                = "SELECT \"\" AS  id_kardex,\n"
-                + "pr_prestaciones.id_poducto,\n"
-                + "\"\" AS id_bodega,\n"
-                + "pr_detalle_tarifario.id_unidad_servicio,\n"
-                + "pr_prestaciones.id_prestacion,\n"
-                + "pr_prestaciones.nombre_prestacion AS 'prestacion',\n"
-                + "\"\"AS saldo_actual,\n"
-                + "pr_detalle_tarifario.valor_venta, \n"
-                + "pr_detalle_tarifario.valor_descuento,\n"
-                + "pr_prestaciones.aplica_iva , \n"
-                + "\"\" AS codigo_barra\n"
-                + "FROM pr_detalle_tarifario\n"
-                + "INNER JOIN pr_prestaciones\n"
-                + "ON pr_prestaciones.id_prestacion = pr_detalle_tarifario.id_prestacion\n"
-                + "WHERE pr_detalle_tarifario.estado = 'A' AND  pr_prestaciones.id_poducto IS NULL\n"
-                + "                \n"
-                + "UNION ALL\n"
-                + "                \n"
-                + "SELECT in_kardex.id_kardex,pr_prestaciones.id_poducto, in_kardex.id_bodega,\n"
+                = "SELECT in_kardex.id_kardex,pr_prestaciones.id_poducto, in_kardex.id_bodega,\n"
                 + "pr_detalle_tarifario.id_unidad_servicio,pr_prestaciones.id_prestacion,\n"
                 + "pr_prestaciones.nombre_prestacion AS 'prestacion',in_kardex.saldo_actual,\n"
                 + "pr_detalle_tarifario.valor_venta, pr_detalle_tarifario.valor_descuento,\n"
@@ -200,10 +182,10 @@ public class JoinProductoVentaExt {
                     oo.setValor_descuento(Double.parseDouble(ooo[8].toString()));
                 }
 //                oo.setAplica_iva(ooo[9].toString());
-                if (ooo[9] == null) {
+                if (ooo[10] == null) {
                     oo.setCodigoBarra("-");
                 } else {
-                    oo.setCodigoBarra(ooo[9].toString());
+                    oo.setCodigoBarra(ooo[10].toString());
                 }
                 lista.add(oo);
             }

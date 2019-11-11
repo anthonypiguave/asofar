@@ -110,27 +110,27 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     private void TotalizarCantidad() {
         Double t = 0.0;
         Integer p = 0;
-        if(tba_productos.getRowCount() == 1){
-            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-                System.out.println("eee " + ListProdVent.get(i).getNombre_producto());
-                p = ListProdVent.get(i).getSaldo_actual();
-                Txt_Cantidad.setText(p.toString());
-            }
-            
-        }
-//        if (tba_productos.getRowCount() > 1) {
-//            System.out.println("count "+tba_productos.getRowCount());
+//        if(tba_productos.getRowCount() == 1){
 //            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+//                System.out.println("eee " + ListProdVent.get(i).getNombre_producto());
 //                p = ListProdVent.get(i).getSaldo_actual();
-////                Txt_Cantidad.setText("0.00");
-//                t += p;
-//                System.out.println("eeee "+t);
-//                
-//                VGTtotal = t;
-//                Txt_Cantidad.setText(Formato_Numeros.formatoNumero(t.toString()));
-////                txtTotal.setText(t.toString()); Txt_Cantidad
+//                Txt_Cantidad.setText(p.toString());
 //            }
+//            
 //        }
+        if (tba_productos.getRowCount() > 1) {
+//            System.out.println("count "+tba_productos.getRowCount());
+            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+                p = ListProdVent.get(i).getSaldo_actual();
+//                Txt_Cantidad.setText("0.00");
+                t += p;
+                System.out.println("eeee "+t);
+                
+                VGTtotal = t;
+                Txt_Cantidad.setText(Formato_Numeros.formatoNumero(t.toString()));
+//                txtTotal.setText(t.toString()); Txt_Cantidad
+            }
+        }
     }
 
     public void cargarTbaProductoInventario() {
@@ -240,7 +240,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         btnsalir.setBackground(new java.awt.Color(153, 0, 0));
         btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
