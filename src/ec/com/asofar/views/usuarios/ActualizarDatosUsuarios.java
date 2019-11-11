@@ -112,13 +112,14 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("USUARIO :");
 
+        txtIdUsuario.setEditable(false);
         txtIdUsuario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtIdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtIdUsuarioKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIdUsuarioKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdUsuarioKeyTyped(evt);
             }
         });
 
@@ -244,7 +245,6 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         btnSalir.setText("CANCELAR");
-        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -421,7 +421,7 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             usuario.setEstado('A');
             usuario.setFechaActualizacion(fechaActual);
             usuario.setFechaCreacion(fechaActual);
-            usuario.setIdPersona(objPersona);
+//            usuario.setIdPersona(objPersona);
             usuario.setUsuarioCreacion(us1.getNombreUsuario());
             usuario.setUsuarioActualizacion(us1.getNombreUsuario());
             usuario.setPassword(txtClave.getText());
