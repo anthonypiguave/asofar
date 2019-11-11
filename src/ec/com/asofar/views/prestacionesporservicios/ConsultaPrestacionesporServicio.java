@@ -93,7 +93,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel4.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel4.setBackground(new java.awt.Color(6, 162, 213));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -111,8 +111,9 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             }
         });
 
+        agregar.setBackground(new java.awt.Color(254, 254, 254));
         agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        agregar.setForeground(new java.awt.Color(59, 157, 60));
+        agregar.setForeground(new java.awt.Color(1, 1, 1));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         agregar.setText("AGREGAR");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,10 +166,10 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
 
-        jsalir.setBackground(new java.awt.Color(170, 38, 53));
+        jsalir.setBackground(new java.awt.Color(254, 254, 254));
         jsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jsalir.setForeground(new java.awt.Color(254, 254, 254));
-        jsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        jsalir.setForeground(new java.awt.Color(1, 1, 1));
+        jsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jsalir.setText("SALIR");
         jsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +177,9 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             }
         });
 
+        btnimprimir.setBackground(new java.awt.Color(254, 254, 254));
         btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnimprimir.setForeground(new java.awt.Color(1, 1, 1));
         btnimprimir.setText("IMPRIMIR");
         btnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

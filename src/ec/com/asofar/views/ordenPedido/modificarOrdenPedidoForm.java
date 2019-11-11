@@ -215,7 +215,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -340,11 +340,12 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                     .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel7))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel7)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,10 +359,10 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BtnCancelar.setBackground(new java.awt.Color(217, 14, 21));
+        BtnCancelar.setBackground(new java.awt.Color(254, 254, 254));
         BtnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BtnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        BtnCancelar.setForeground(new java.awt.Color(1, 1, 1));
+        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         BtnCancelar.setText("CANCELAR");
         BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -408,7 +409,8 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
         BtnAprovar.setBackground(new java.awt.Color(254, 254, 254));
         BtnAprovar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BtnAprovar.setForeground(new java.awt.Color(72, 127, 73));
+        BtnAprovar.setForeground(new java.awt.Color(1, 1, 1));
+        BtnAprovar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/aceptar_Mesa de trabajo 1.jpg"))); // NOI18N
         BtnAprovar.setText("APROBAR");
         BtnAprovar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,9 +418,9 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             }
         });
 
-        BtnAnular.setBackground(new java.awt.Color(255, 145, 0));
+        BtnAnular.setBackground(new java.awt.Color(254, 254, 254));
         BtnAnular.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BtnAnular.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAnular.setForeground(new java.awt.Color(1, 1, 1));
         BtnAnular.setText("ANULAR");
         BtnAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,7 +428,9 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
             }
         });
 
+        btnimprimir.setBackground(new java.awt.Color(254, 254, 254));
         btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnimprimir.setForeground(new java.awt.Color(1, 1, 1));
         btnimprimir.setText("IMPRIMIR");
         btnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

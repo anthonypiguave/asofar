@@ -353,7 +353,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -522,10 +522,10 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BtnCancelar.setBackground(new java.awt.Color(217, 14, 21));
+        BtnCancelar.setBackground(new java.awt.Color(254, 254, 254));
         BtnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BtnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        BtnCancelar.setForeground(new java.awt.Color(1, 1, 1));
+        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         BtnCancelar.setText("CANCELAR");
         BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -570,9 +570,10 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        BtnAprovar.setBackground(new java.awt.Color(13, 153, 0));
+        BtnAprovar.setBackground(new java.awt.Color(254, 254, 254));
         BtnAprovar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BtnAprovar.setForeground(new java.awt.Color(72, 127, 73));
+        BtnAprovar.setForeground(new java.awt.Color(1, 1, 1));
+        BtnAprovar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/aceptar_Mesa de trabajo 1.jpg"))); // NOI18N
         BtnAprovar.setText("APROBAR");
         BtnAprovar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -580,9 +581,9 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             }
         });
 
-        BtnAnular.setBackground(new java.awt.Color(255, 145, 0));
+        BtnAnular.setBackground(new java.awt.Color(254, 254, 254));
         BtnAnular.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BtnAnular.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAnular.setForeground(new java.awt.Color(1, 1, 1));
         BtnAnular.setText("ANULAR");
         BtnAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -669,13 +670,10 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 389, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)

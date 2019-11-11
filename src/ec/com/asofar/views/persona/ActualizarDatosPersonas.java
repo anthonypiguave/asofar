@@ -130,10 +130,10 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        btnSalir.setBackground(new java.awt.Color(217, 14, 21));
+        btnSalir.setBackground(new java.awt.Color(254, 254, 254));
         btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(1, 1, 1));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,8 +141,9 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             }
         });
 
+        btnGuardar.setBackground(new java.awt.Color(254, 254, 254));
         btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(0, 102, 0));
+        btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("ACTUALIZAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +164,7 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             }
         });
 
-        jLabel17.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel17.setBackground(new java.awt.Color(6, 162, 213));
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(254, 254, 254));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

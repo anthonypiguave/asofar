@@ -432,7 +432,7 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         jTextField9.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jTextField9.setForeground(new java.awt.Color(1, 1, 1));
 
-        jLabel17.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel17.setBackground(new java.awt.Color(6, 162, 213));
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(254, 254, 254));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -469,9 +469,16 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         jButton5.setForeground(new java.awt.Color(1, 1, 1));
         jButton5.setText("+");
 
+        jButton6.setBackground(new java.awt.Color(254, 254, 254));
+        jButton6.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(1, 1, 1));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         jButton6.setText("CREAR");
 
-        jButton7.setBackground(new java.awt.Color(217, 14, 21));
+        jButton7.setBackground(new java.awt.Color(254, 254, 254));
+        jButton7.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(1, 1, 1));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         jButton7.setText("CANCELAR");
         jButton7.setOpaque(true);
 

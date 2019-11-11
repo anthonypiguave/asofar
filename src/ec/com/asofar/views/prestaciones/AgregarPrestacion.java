@@ -115,8 +115,9 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         cmbxSN.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cmbxSN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
+        btngrabar.setBackground(new java.awt.Color(254, 254, 254));
         btngrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btngrabar.setForeground(new java.awt.Color(0, 102, 0));
+        btngrabar.setForeground(new java.awt.Color(1, 1, 1));
         btngrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btngrabar.setText("GUARDAR");
         btngrabar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +135,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel4.setBackground(new java.awt.Color(6, 162, 213));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -151,10 +152,10 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(173, 42, 48));
+        jButton1.setBackground(new java.awt.Color(254, 254, 254));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(254, 254, 254));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        jButton1.setForeground(new java.awt.Color(1, 1, 1));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

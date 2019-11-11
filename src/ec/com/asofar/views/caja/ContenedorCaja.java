@@ -117,6 +117,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         });
 
         jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(1, 1, 1));
         jButton5.setText("IMPRIMIR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,16 +125,16 @@ public class ContenedorCaja extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("OPCIONES DE CAJA");
         jLabel1.setOpaque(true);
 
-        jButton1.setBackground(new java.awt.Color(217, 14, 21));
+        jButton1.setBackground(new java.awt.Color(254, 254, 254));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(254, 254, 254));
+        jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("VOLVER");
         jButton1.setOpaque(true);

@@ -96,7 +96,7 @@ public class NuevoProveedor extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -257,8 +257,9 @@ public class NuevoProveedor extends javax.swing.JDialog {
             }
         });
 
+        btnguardar.setBackground(new java.awt.Color(254, 254, 254));
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnguardar.setForeground(new java.awt.Color(64, 145, 64));
+        btnguardar.setForeground(new java.awt.Color(1, 1, 1));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -267,10 +268,10 @@ public class NuevoProveedor extends javax.swing.JDialog {
             }
         });
 
-        btncancelar.setBackground(new java.awt.Color(153, 28, 35));
+        btncancelar.setBackground(new java.awt.Color(254, 254, 254));
         btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btncancelar.setForeground(new java.awt.Color(254, 254, 254));
-        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        btncancelar.setForeground(new java.awt.Color(1, 1, 1));
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -91,7 +91,7 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
 
         jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel2.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel2.setBackground(new java.awt.Color(6, 162, 213));
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -132,6 +132,7 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         TxtCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         BtnBuscarcedula.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BtnBuscarcedula.setForeground(new java.awt.Color(1, 1, 1));
         BtnBuscarcedula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         BtnBuscarcedula.setText("BUSCAR");
         BtnBuscarcedula.addActionListener(new java.awt.event.ActionListener() {
@@ -268,6 +269,7 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         TxtProdtotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         BtnAddIten.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BtnAddIten.setForeground(new java.awt.Color(1, 1, 1));
         BtnAddIten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         BtnAddIten.setText("ADICIONAR ITEM");
         BtnAddIten.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 0), 1, true));

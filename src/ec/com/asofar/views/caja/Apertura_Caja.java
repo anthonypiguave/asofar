@@ -89,7 +89,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
 
         btnGrabar.setBackground(new java.awt.Color(254, 254, 254));
         btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnGrabar.setForeground(new java.awt.Color(72, 127, 73));
+        btnGrabar.setForeground(new java.awt.Color(1, 1, 1));
         btnGrabar.setText("ACTIVAR");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,10 +97,10 @@ public class Apertura_Caja extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(217, 14, 21));
+        btnCancelar.setBackground(new java.awt.Color(254, 254, 254));
         btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(254, 254, 254));
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(1, 1, 1));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

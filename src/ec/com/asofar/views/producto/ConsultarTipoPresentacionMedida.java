@@ -84,7 +84,7 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -145,9 +145,10 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        btnsalir.setBackground(new java.awt.Color(153, 0, 0));
+        btnsalir.setBackground(new java.awt.Color(254, 254, 254));
         btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnsalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnsalir.setForeground(new java.awt.Color(1, 1, 1));
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,8 +156,10 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
             }
         });
 
+        btnNuevo.setBackground(new java.awt.Color(254, 254, 254));
         btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnNuevo.setForeground(new java.awt.Color(0, 102, 0));
+        btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btnNuevo.setText("NUEVO");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

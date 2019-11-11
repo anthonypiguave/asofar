@@ -91,8 +91,9 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        btnGrabar.setBackground(new java.awt.Color(254, 254, 254));
         btnGrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnGrabar.setForeground(new java.awt.Color(0, 102, 0));
+        btnGrabar.setForeground(new java.awt.Color(1, 1, 1));
         btnGrabar.setText("ACTIVAR");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,10 +101,10 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(153, 0, 0));
+        btnCancelar.setBackground(new java.awt.Color(254, 254, 254));
         btnCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(1, 1, 1));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +112,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -182,7 +183,7 @@ public class ModificarGruposInactivosForm extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)

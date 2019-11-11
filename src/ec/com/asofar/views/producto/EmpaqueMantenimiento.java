@@ -115,7 +115,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jLabel2.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel2.setBackground(new java.awt.Color(6, 162, 213));
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -141,9 +141,9 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
             }
         });
 
-        btnGuardar.setBackground(new java.awt.Color(0, 102, 0));
+        btnGuardar.setBackground(new java.awt.Color(254, 254, 254));
         btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(254, 254, 254));
+        btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
         btnGuardar.setOpaque(true);
@@ -153,10 +153,10 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 0, 0));
+        jButton2.setBackground(new java.awt.Color(254, 254, 254));
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(254, 254, 254));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        jButton2.setForeground(new java.awt.Color(1, 1, 1));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         jButton2.setText("CANCELAR");
         jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +226,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,7 +237,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

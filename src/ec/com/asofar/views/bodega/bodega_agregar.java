@@ -103,7 +103,7 @@ public class bodega_agregar extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -126,10 +126,10 @@ public class bodega_agregar extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("NOMBRE:");
 
-        btncancelar1.setBackground(new java.awt.Color(217, 14, 21));
+        btncancelar1.setBackground(new java.awt.Color(254, 250, 250));
         btncancelar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btncancelar1.setForeground(new java.awt.Color(255, 255, 255));
-        btncancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        btncancelar1.setForeground(new java.awt.Color(1, 1, 1));
+        btncancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btncancelar1.setText("CANCELAR");
         btncancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +138,7 @@ public class bodega_agregar extends javax.swing.JDialog {
         });
 
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnguardar.setForeground(new java.awt.Color(0, 102, 0));
+        btnguardar.setForeground(new java.awt.Color(8, 1, 1));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
