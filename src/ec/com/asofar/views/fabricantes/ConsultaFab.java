@@ -61,10 +61,10 @@ public class ConsultaFab extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        BotonSalir.setBackground(new java.awt.Color(217, 14, 21));
+        BotonSalir.setBackground(new java.awt.Color(254, 254, 254));
         BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BotonSalir.setForeground(new java.awt.Color(254, 254, 254));
-        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
+        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         BotonSalir.setText("SALIR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,8 +72,9 @@ public class ConsultaFab extends javax.swing.JDialog {
             }
         });
 
+        BotonNuevo.setBackground(new java.awt.Color(254, 254, 254));
         BotonNuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BotonNuevo.setForeground(new java.awt.Color(41, 117, 49));
+        BotonNuevo.setForeground(new java.awt.Color(1, 1, 1));
         BotonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         BotonNuevo.setText("NUEVO");
         BotonNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -82,9 +83,9 @@ public class ConsultaFab extends javax.swing.JDialog {
             }
         });
 
-        BotonEliminados.setBackground(new java.awt.Color(1, 1, 1));
+        BotonEliminados.setBackground(new java.awt.Color(254, 254, 254));
         BotonEliminados.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BotonEliminados.setForeground(new java.awt.Color(254, 254, 254));
+        BotonEliminados.setForeground(new java.awt.Color(1, 1, 1));
         BotonEliminados.setText("INACTIVOS");
         BotonEliminados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +93,7 @@ public class ConsultaFab extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

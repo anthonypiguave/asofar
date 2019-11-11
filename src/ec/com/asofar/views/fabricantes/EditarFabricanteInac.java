@@ -69,7 +69,7 @@ public class EditarFabricanteInac extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("NOMBRE:");
 
-        jLabel1.setBackground(new java.awt.Color(1, 1, 1));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -87,7 +87,7 @@ public class EditarFabricanteInac extends javax.swing.JDialog {
         });
 
         BotonActivar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BotonActivar.setForeground(new java.awt.Color(58, 139, 57));
+        BotonActivar.setForeground(new java.awt.Color(1, 1, 1));
         BotonActivar.setText("ACTIVAR");
         BotonActivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,10 +103,10 @@ public class EditarFabricanteInac extends javax.swing.JDialog {
             }
         });
 
-        BotonSalir.setBackground(new java.awt.Color(217, 14, 21));
+        BotonSalir.setBackground(new java.awt.Color(254, 254, 254));
         BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BotonSalir.setForeground(new java.awt.Color(254, 254, 254));
-        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
+        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         BotonSalir.setText("SALIR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

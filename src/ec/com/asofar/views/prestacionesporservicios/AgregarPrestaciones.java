@@ -110,8 +110,9 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
 
         cbxunidadservicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
+        jguardarpreser.setBackground(new java.awt.Color(254, 254, 254));
         jguardarpreser.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jguardarpreser.setForeground(new java.awt.Color(74, 126, 72));
+        jguardarpreser.setForeground(new java.awt.Color(1, 1, 1));
         jguardarpreser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         jguardarpreser.setText("GUARDAR");
         jguardarpreser.addActionListener(new java.awt.event.ActionListener() {
@@ -132,9 +133,9 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         cbxaplicadescuento1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbxaplicadescuento1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
-        jsalir.setBackground(new java.awt.Color(160, 52, 58));
+        jsalir.setBackground(new java.awt.Color(254, 254, 254));
         jsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jsalir.setForeground(new java.awt.Color(254, 254, 254));
+        jsalir.setForeground(new java.awt.Color(1, 1, 1));
         jsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
         jsalir.setText("SALIR");
         jsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +144,9 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
             }
         });
 
+        jbotonbuscar.setBackground(new java.awt.Color(254, 254, 254));
         jbotonbuscar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jbotonbuscar.setForeground(new java.awt.Color(1, 1, 1));
         jbotonbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         jbotonbuscar.setText("BUSCAR");
         jbotonbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +158,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         txtpresta.setEditable(false);
         txtpresta.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel4.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel4.setBackground(new java.awt.Color(6, 162, 213));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -206,7 +209,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -228,7 +231,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jguardarpreser, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

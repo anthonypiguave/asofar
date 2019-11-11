@@ -60,7 +60,7 @@ public class Login extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -91,9 +91,10 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        btningresar.setBackground(new java.awt.Color(0, 102, 0));
+        btningresar.setBackground(new java.awt.Color(254, 254, 254));
         btningresar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btningresar.setForeground(new java.awt.Color(255, 255, 255));
+        btningresar.setForeground(new java.awt.Color(1, 1, 1));
+        btningresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/aceptar_Mesa de trabajo 1.jpg"))); // NOI18N
         btningresar.setText("INGRESAR");
         btningresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,13 +102,12 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        btningresar1.setBackground(new java.awt.Color(255, 51, 51));
+        btningresar1.setBackground(new java.awt.Color(254, 254, 254));
         btningresar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btningresar1.setForeground(new java.awt.Color(254, 254, 254));
-        btningresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        btningresar1.setForeground(new java.awt.Color(1, 1, 1));
+        btningresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btningresar1.setText("SALIR");
         btningresar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btningresar1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btningresar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btningresar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

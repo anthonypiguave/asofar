@@ -112,10 +112,10 @@ public class NuevaMedida extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("SUBGRUPO:");
 
-        BotonSalir.setBackground(new java.awt.Color(153, 0, 0));
+        BotonSalir.setBackground(new java.awt.Color(254, 254, 254));
         BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BotonSalir.setForeground(new java.awt.Color(255, 255, 255));
-        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.png"))); // NOI18N
+        BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
+        BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         BotonSalir.setText("CANCELAR");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,8 +135,9 @@ public class NuevaMedida extends javax.swing.JDialog {
         tipo_pres.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tipo_pres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR..." }));
 
+        BotonAceptar.setBackground(new java.awt.Color(254, 254, 254));
         BotonAceptar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        BotonAceptar.setForeground(new java.awt.Color(0, 102, 0));
+        BotonAceptar.setForeground(new java.awt.Color(1, 1, 1));
         BotonAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         BotonAceptar.setText("GUARDAR");
         BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +146,7 @@ public class NuevaMedida extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
