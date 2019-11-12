@@ -86,10 +86,12 @@ public class Ingresarservicio extends javax.swing.JDialog {
             }
         });
 
+        Jbu_Guardar.setBackground(new java.awt.Color(254, 254, 254));
         Jbu_Guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        Jbu_Guardar.setForeground(new java.awt.Color(0, 153, 0));
+        Jbu_Guardar.setForeground(new java.awt.Color(1, 1, 1));
         Jbu_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         Jbu_Guardar.setText("GUARDAR");
+        Jbu_Guardar.setOpaque(true);
         Jbu_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Jbu_GuardarActionPerformed(evt);
@@ -102,18 +104,19 @@ public class Ingresarservicio extends javax.swing.JDialog {
         JlNombredeservicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         JlNombredeservicio.setText("NOMBRE:");
 
-        jBCancelar.setBackground(new java.awt.Color(255, 0, 0));
+        jBCancelar.setBackground(new java.awt.Color(254, 254, 254));
         jBCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jBCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        jBCancelar.setForeground(new java.awt.Color(1, 1, 1));
+        jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jBCancelar.setText("SALIR");
+        jBCancelar.setOpaque(true);
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCancelarActionPerformed(evt);
             }
         });
 
-        jLabel4.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel4.setBackground(new java.awt.Color(6, 162, 213));
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -140,9 +143,9 @@ public class Ingresarservicio extends javax.swing.JDialog {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Jbu_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Jbu_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JlNombredeservicio)
@@ -167,8 +170,8 @@ public class Ingresarservicio extends javax.swing.JDialog {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Jbu_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jbu_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 

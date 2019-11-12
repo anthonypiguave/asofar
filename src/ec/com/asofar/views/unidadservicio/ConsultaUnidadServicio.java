@@ -118,20 +118,23 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("BUSCAR:");
 
+        JbAgregar.setBackground(new java.awt.Color(254, 254, 254));
         JbAgregar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        JbAgregar.setForeground(new java.awt.Color(0, 153, 0));
+        JbAgregar.setForeground(new java.awt.Color(1, 1, 1));
         JbAgregar.setText("ACTUALIZAR");
+        JbAgregar.setOpaque(true);
         JbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbAgregarActionPerformed(evt);
             }
         });
 
-        Jbcancelar.setBackground(new java.awt.Color(255, 0, 0));
+        Jbcancelar.setBackground(new java.awt.Color(254, 254, 254));
         Jbcancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Jbcancelar.setForeground(new java.awt.Color(255, 255, 255));
-        Jbcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        Jbcancelar.setForeground(new java.awt.Color(1, 1, 1));
+        Jbcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         Jbcancelar.setText("SALIR");
+        Jbcancelar.setOpaque(true);
         Jbcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbcancelarActionPerformed(evt);
@@ -169,7 +172,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLabel3.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel3.setBackground(new java.awt.Color(6, 162, 213));
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -186,10 +189,12 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
             }
         });
 
+        JbAgregar1.setBackground(new java.awt.Color(254, 254, 254));
         JbAgregar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        JbAgregar1.setForeground(new java.awt.Color(0, 153, 0));
+        JbAgregar1.setForeground(new java.awt.Color(1, 1, 1));
         JbAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         JbAgregar1.setText("AGREGAR");
+        JbAgregar1.setOpaque(true);
         JbAgregar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbAgregar1ActionPerformed(evt);
@@ -206,15 +211,15 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(JbAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 41, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(JbAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
+                .addGap(102, 102, 102)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,9 +237,9 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JbAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JbAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
