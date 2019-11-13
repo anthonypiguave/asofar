@@ -94,63 +94,11 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 //        Totalizar();
 //        TotalizarCantidad();
     }
-//
-
-    private void Totalizar() {
-        Double t = 0.0;
-        Double p = 0.0;
-        if (tba_productos.getRowCount() >= 0) {
-            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-                p = ListProdVent.get(i).getValor_venta();
-                t += p;
-//                System.out.println(" ooo "+t);
-//                Formato_Numeros.formatoNumero(t.toString());
-                VGTtotal = t;
-                txt_total.setText(Formato_Numeros.formatoNumero(t.toString()));
-//                txtTotal.setText(t.toString()); Txt_Cantidad
-            }
-        }
-    }
-
-    private void TotalizarCantidad() {
-        Double t = 0.0;
-        Integer p = 0;
-//        if(tba_productos.getRowCount() == 1){
-//            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-//                System.out.println("eee " + ListProdVent.get(i).getNombre_producto());
-//                p = ListProdVent.get(i).getSaldo_actual();
-//                Txt_Cantidad.setText(p.toString());
-//            }
-//            
-//        }
-        if (tba_productos.getRowCount() > 1) {
-//            System.out.println("count "+tba_productos.getRowCount());
-            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-                p = ListProdVent.get(i).getSaldo_actual();
-//                Txt_Cantidad.setText("0.00");
-                t += p;
-                System.out.println("eeee " + t);
-
-                VGTtotal = t;
-                Txt_Cantidad.setText(Formato_Numeros.formatoNumero(t.toString()));
-//                txtTotal.setText(t.toString()); Txt_Cantidad
-            }
-        }
-    }
-
     public void cargarTbaProductoInventario() {
         ListProdVent = selectProdVent.listarProductoInventario();
         LisBod = BC.findInBodegaEntities();
         Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
     }
-
-//    public void cargarTbaProduc() {
-//        listaKardex = Kc.findInKardexEntities();
-//        listaProd = Pc.findPrProductosEntities();
-//        listaDetaTari = Dtc.findPrDetalleTarifarioEntities();
-//        listaPresta = Prestc.findPrPrestacionesEntities();
-//        Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
-//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
