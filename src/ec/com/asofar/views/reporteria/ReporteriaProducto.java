@@ -76,7 +76,9 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-//        cargarTbaProductoInventario();
+        cargarTbaProductoInventario();
+        sumarCantidad();
+        sumarTotal();
 //        Totalizar();
 //        TotalizarCantidad();
     }
@@ -87,65 +89,16 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cargarTbaProductoInventario();
-        Totalizar();
-        TotalizarCantidad();
+        sumarCantidad();
+        sumarTotal();
+//        Totalizar();
+//        TotalizarCantidad();
     }
-
-    private void Totalizar() {
-        Double t = 0.0;
-        Double p = 0.0;
-        if (tba_productos.getRowCount() >= 0) {
-            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-                p = ListProdVent.get(i).getValor_venta();
-                t += p;
-//                System.out.println(" ooo "+t);
-//                Formato_Numeros.formatoNumero(t.toString());
-                VGTtotal = t;
-                txt_total.setText(Formato_Numeros.formatoNumero(t.toString()));
-//                txtTotal.setText(t.toString()); Txt_Cantidad
-            }
-        }
-    }
-
-    private void TotalizarCantidad() {
-        Double t = 0.0;
-        Integer p = 0;
-//        if(tba_productos.getRowCount() == 1){
-//            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-//                System.out.println("eee " + ListProdVent.get(i).getNombre_producto());
-//                p = ListProdVent.get(i).getSaldo_actual();
-//                Txt_Cantidad.setText(p.toString());
-//            }
-//            
-//        }
-        if (tba_productos.getRowCount() > 1) {
-//            System.out.println("count "+tba_productos.getRowCount());
-            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-                p = ListProdVent.get(i).getSaldo_actual();
-//                Txt_Cantidad.setText("0.00");
-                t += p;
-                System.out.println("eeee " + t);
-
-                VGTtotal = t;
-                Txt_Cantidad.setText(Formato_Numeros.formatoNumero(t.toString()));
-//                txtTotal.setText(t.toString()); Txt_Cantidad
-            }
-        }
-    }
-
     public void cargarTbaProductoInventario() {
         ListProdVent = selectProdVent.listarProductoInventario();
         LisBod = BC.findInBodegaEntities();
         Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
     }
-
-//    public void cargarTbaProduc() {
-//        listaKardex = Kc.findInKardexEntities();
-//        listaProd = Pc.findPrProductosEntities();
-//        listaDetaTari = Dtc.findPrDetalleTarifarioEntities();
-//        listaPresta = Prestc.findPrPrestacionesEntities();
-//        Tablas.ListarProductosVenta(listaPresta, listaDetaTari, listaKardex, listaProd, tba_productos);
-//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -479,39 +432,64 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         String query = "";
         String txt = Txt_buscar.getText();
         String pos = cbxFiltro.getSelectedItem().toString();
-        int index =  cbxFiltro.getSelectedIndex();
+        int index = cbxFiltro.getSelectedIndex();
 
         if (pos == "TODO") {
             ListProdVent = selectProdVent.listarProductoInventario();
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+//            Totalizar();
+//            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
         if (pos == "NOMBRE") {
-            ListProdVent.clear();
             ListProdVent = selectProdVent.listarProductoInventarioFiltroNombre(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
         if (pos == "CODIGO BARRA") {
-            ListProdVent.clear();
             ListProdVent = selectProdVent.listarProductoInventarioFiltroCodigoBarra(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
-        if (index == 3 ) {
-            ListProdVent.clear();
+        if (index == 3) {
             ListProdVent = selectProdVent.listarProductoInventarioFiltroBodega(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
+    }
+
+    public void sumarCantidad() {
+        Integer t = 0;
+        Integer p = 0;
+        if (tba_productos.getRowCount() > 0) {
+            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+                p = Integer.parseInt(tba_productos.getValueAt(i, 3).toString());
+                t += p;
+//                System.out.println("sum " + t);
+            }
+        }
+        Txt_Cantidad.setText(t.toString());
+    }
+
+    public void sumarTotal() {
+        Double t = 0.0;
+        Double p = 0.0;
+        if (tba_productos.getRowCount() > 0) {
+            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+                p = Double.parseDouble(tba_productos.getValueAt(i, 4).toString());
+                t += p;
+//                System.out.println("sum " + t);
+            }
+        }
+        txt_total.setText("$ "+t.toString());
     }
     private void Txt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_buscarActionPerformed
 
