@@ -93,6 +93,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         sumarTotal();
 //        Totalizar();
 //        TotalizarCantidad();
+
     }
     public void cargarTbaProductoInventario() {
         ListProdVent = selectProdVent.listarProductoInventario();
