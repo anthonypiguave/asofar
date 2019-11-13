@@ -494,8 +494,9 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
+        btnbuscar.setBackground(new java.awt.Color(254, 254, 254));
         btnbuscar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnbuscar.setForeground(new java.awt.Color(0, 102, 0));
+        btnbuscar.setForeground(new java.awt.Color(1, 1, 1));
         btnbuscar.setText("Clientes");
         btnbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -532,6 +533,8 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(254, 254, 254));
+        jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setText("Consumidor Final");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -616,7 +619,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addGap(45, 45, 45))
         );
 
-        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -732,7 +735,7 @@ public class Venta extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tba_detalle);
 
         btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btn_agregar_prod.setForeground(new java.awt.Color(0, 102, 0));
+        btn_agregar_prod.setForeground(new java.awt.Color(1, 1, 1));
         btn_agregar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         btn_agregar_prod.setText("AGREGAR");
         btn_agregar_prod.addActionListener(new java.awt.event.ActionListener() {
@@ -759,7 +762,9 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
         );
 
+        btn_Venta.setBackground(new java.awt.Color(254, 254, 254));
         btn_Venta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_Venta.setForeground(new java.awt.Color(1, 1, 1));
         btn_Venta.setText("GENERAR VENTA ");
         btn_Venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -767,8 +772,10 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(254, 254, 254));
         jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 1.png"))); // NOI18N
+        jButton2.setForeground(new java.awt.Color(1, 1, 1));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton2.setText("SALIR ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -786,7 +793,9 @@ public class Venta extends javax.swing.JInternalFrame {
         jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel20.setText("CAJA :");
 
+        jButton3.setBackground(new java.awt.Color(254, 254, 254));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(1, 1, 1));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton3.setText("NUEVO");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -799,6 +808,7 @@ public class Venta extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -822,11 +832,10 @@ public class Venta extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(9, 9, 9))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

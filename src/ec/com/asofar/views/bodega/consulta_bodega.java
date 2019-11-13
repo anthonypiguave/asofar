@@ -173,7 +173,7 @@ public class consulta_bodega extends javax.swing.JDialog {
             }
         });
 
-        btn_inactivos.setBackground(new java.awt.Color(0, 0, 0));
+        btn_inactivos.setBackground(new java.awt.Color(254, 254, 254));
         btn_inactivos.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btn_inactivos.setForeground(new java.awt.Color(1, 1, 1));
         btn_inactivos.setText("INACTIVOS");
