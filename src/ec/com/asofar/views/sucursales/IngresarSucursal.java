@@ -8,6 +8,7 @@ package ec.com.asofar.views.sucursales;
 import ec.com.asofar.views.empresas.*;
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.dao.SeSucursalJpaController;
+import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
@@ -350,7 +351,10 @@ public class IngresarSucursal extends javax.swing.JDialog {
                     
                     JOptionPane.showMessageDialog(null, "DEBE LLENAR EL FORMULARIO");
                 } else {
+                  SeEmpresa   tb = new SeEmpresa();
 
+                tb = ObtenerDTO.ObtenerSeEmpresa(cbEmpresa.getSelectedItem().toString());
+                    sucursal.setSeEmpresa(tb);
                     sucursal.setNombreComercial(txtNombre.getText());
                     sucursal.setTelefono(txtTelefono.getText());
                     sucursal.setCorreo(txtCorreo.getText());
