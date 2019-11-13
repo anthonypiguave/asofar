@@ -251,7 +251,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
-            dispose();
+            setVisible(false);
 
 //            asdfg12345
         } else {
