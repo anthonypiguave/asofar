@@ -68,6 +68,7 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         cargarDatos(usuario);
+        BotonUsuario.setVisible(false);
 
     }
 
@@ -240,10 +241,10 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
                 .addGap(14, 14, 14))
         );
 
-        btnSalir.setBackground(new java.awt.Color(254, 254, 254));
+        btnSalir.setBackground(new java.awt.Color(255, 0, 0));
         btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(1, 1, 1));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir.setText("CANCELAR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,9 +252,8 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             }
         });
 
-        btnGuardar.setBackground(new java.awt.Color(254, 254, 254));
         btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
+        btnGuardar.setForeground(new java.awt.Color(0, 153, 0));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -262,11 +262,11 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EDITAR USUARIO");
+        jLabel1.setText("ACTUALIZAR USUARIO");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -279,9 +279,8 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(254, 254, 254));
+        btnEliminar.setBackground(new java.awt.Color(0, 0, 0));
         btnEliminar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(1, 1, 1));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +394,7 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             txtCell.setText(objPersona.getTelefono());
             txtCorreo.setText(objPersona.getCorreo());
         } catch (Exception e) {
-            
+
         }
 
 
@@ -416,9 +415,13 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     public void Guardar() {
-        if (txtClave.getText().equals(txtClaveConfirm.getText())
-                || txtIdUsuario.getText().length() >= 2) {
-//            usuario.setIdUsuario(txtIdUsuario.getText());
+        if (txtClave.getText().length() <= 5) {
+            JOptionPane.showMessageDialog(this, "Contraseña debe tener al menos 6 caracteres");
+        }
+        else if (!txtClave.getText().equals(txtClaveConfirm.getText()) && txtIdUsuario.getText().length() >= 6) {
+            JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN");
+        } else {
+            //            usuario.setIdUsuario(txtIdUsuario.getText());
             usuario.setNombreUsuario(txtPersona.getText());
             usuario.setEstado('A');
             usuario.setFechaActualizacion(fechaActual);
@@ -426,7 +429,9 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
 //            usuario.setIdPersona(objPersona);
             usuario.setUsuarioCreacion(us1.getNombreUsuario());
             usuario.setUsuarioActualizacion(us1.getNombreUsuario());
-            usuario.setPassword(txtClave.getText());
+            usuario.setPassword(aes.encrypt(txtClave.getText()));
+            System.out.println("calve: " + txtClave.getText());
+            System.out.println("pass: " + aes.encrypt(txtClave.getText()));
             try {
                 tpc.edit(usuario);
                 JOptionPane.showMessageDialog(this, "USUARIO ACTUALIZADO CORRECTAMENTE");
@@ -437,8 +442,7 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
             setVisible(false);
             mp.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN");
+
         }
     }
 
