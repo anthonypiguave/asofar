@@ -3235,8 +3235,41 @@ public class Tablas {
         }
 
     }
+    public static void ListarProveedorConsulta(List<CoProveedores> lista, JTable Tabla) {
+        int[] a = {60, 500};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "PROVEEDORES"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+                filas[0] = "" + lista.get(i).getIdProveedor();
+                filas[1] = lista.get(i).getNombre();
+
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+
+            }
+
+        }
+
+    }
+
 
 }
+
 ///// ---------es otra clases //la clase tabla esta arriba  -------------------
 
 class MyComboBoxEditor extends DefaultCellEditor {

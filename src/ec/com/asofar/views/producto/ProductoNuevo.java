@@ -241,6 +241,12 @@ public class ProductoNuevo extends javax.swing.JDialog {
 
         jLabel8.setText("proveedor por defecto:");
 
+        txtProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtProveedorMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -735,6 +741,14 @@ public class ProductoNuevo extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtProveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtProveedorMousePressed
+      
+        
+        
+        
+        
+    }//GEN-LAST:event_txtProveedorMousePressed
 
     /**
      * @param args the command line arguments
