@@ -2963,7 +2963,7 @@ public class Tablas {
     }
 
     public static void ListarProductosInventario(List<JoinProductoVenta> lisProdVen, JTable Tabla, List<InBodega> lisBode) {
-        int[] a = {40, 300, 300, 100, 100, 100, 100};
+        int[] a = {40, 200, 400, 100, 100, 100, 100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);

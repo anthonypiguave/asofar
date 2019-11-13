@@ -76,7 +76,9 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-//        cargarTbaProductoInventario();
+        cargarTbaProductoInventario();
+        sumarCantidad();
+        sumarTotal();
 //        Totalizar();
 //        TotalizarCantidad();
     }
@@ -87,9 +89,12 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cargarTbaProductoInventario();
-        Totalizar();
-        TotalizarCantidad();
+        sumarCantidad();
+        sumarTotal();
+//        Totalizar();
+//        TotalizarCantidad();
     }
+//
 
     private void Totalizar() {
         Double t = 0.0;
@@ -479,39 +484,64 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         String query = "";
         String txt = Txt_buscar.getText();
         String pos = cbxFiltro.getSelectedItem().toString();
-        int index =  cbxFiltro.getSelectedIndex();
+        int index = cbxFiltro.getSelectedIndex();
 
         if (pos == "TODO") {
             ListProdVent = selectProdVent.listarProductoInventario();
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+//            Totalizar();
+//            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
         if (pos == "NOMBRE") {
-            ListProdVent.clear();
             ListProdVent = selectProdVent.listarProductoInventarioFiltroNombre(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
         if (pos == "CODIGO BARRA") {
-            ListProdVent.clear();
             ListProdVent = selectProdVent.listarProductoInventarioFiltroCodigoBarra(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
-        if (index == 3 ) {
-            ListProdVent.clear();
+        if (index == 3) {
             ListProdVent = selectProdVent.listarProductoInventarioFiltroBodega(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-            Totalizar();
-            TotalizarCantidad();
+            sumarCantidad();
+            sumarTotal();
         }
+    }
+
+    public void sumarCantidad() {
+        Integer t = 0;
+        Integer p = 0;
+        if (tba_productos.getRowCount() > 0) {
+            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+                p = Integer.parseInt(tba_productos.getValueAt(i, 3).toString());
+                t += p;
+//                System.out.println("sum " + t);
+            }
+        }
+        Txt_Cantidad.setText(t.toString());
+    }
+
+    public void sumarTotal() {
+        Double t = 0.0;
+        Double p = 0.0;
+        if (tba_productos.getRowCount() > 0) {
+            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+                p = Double.parseDouble(tba_productos.getValueAt(i, 4).toString());
+                t += p;
+//                System.out.println("sum " + t);
+            }
+        }
+        txt_total.setText("$ "+t.toString());
     }
     private void Txt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_buscarActionPerformed
 
