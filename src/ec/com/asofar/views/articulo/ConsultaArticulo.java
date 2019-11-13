@@ -222,7 +222,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        this.setVisible(false);
         IngresarArticulo ingre = new IngresarArticulo(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -256,7 +256,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
+        this.setVisible(false);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

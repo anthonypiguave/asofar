@@ -187,9 +187,9 @@ public class AgregarGruposForm extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         setVisible(false);
-//        ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+        ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
 //        cg.dispose();
-//        cg.setVisible(true);
+        cg.setVisible(true);
 
 
     }//GEN-LAST:event_btnCancelarActionPerformed

@@ -347,7 +347,7 @@ public class IngresarSucursal extends javax.swing.JDialog {
                         || "".equals(txtCorreo.getText())
                         || "".equals(txtTelefono.getText())
                         || "".equals(txtDireccion.getText())) {
-
+                    
                     JOptionPane.showMessageDialog(null, "DEBE LLENAR EL FORMULARIO");
                 } else {
 

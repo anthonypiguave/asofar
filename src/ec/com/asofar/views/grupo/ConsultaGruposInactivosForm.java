@@ -200,7 +200,6 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
-
         } else {
 
         }
