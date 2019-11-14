@@ -33,6 +33,7 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
     SeUsuarios us1;
     SeEmpresa em1;
     SeSucursal su1;
+    String valor = "";
 
     public ConsultaSubgrupos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -97,6 +98,11 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
         jLabel2.setText("BUSCAR:");
 
         txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
+            }
+        });
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -282,6 +288,11 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_tbsubgruposMousePressed
+
+    private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+        valor = txtfiltro.getText();
+        Tablas.filtro(valor, tbsubgrupos);
+    }//GEN-LAST:event_txtfiltroKeyReleased
 
     /**
      * @param args the command line arguments
