@@ -226,7 +226,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
         return aux;
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged

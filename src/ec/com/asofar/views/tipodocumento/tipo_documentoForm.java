@@ -46,7 +46,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     SeEmpresa em1;
     SeSucursal su1;
     SeUsuarios usu1;
-    modificarDatosDocumentoExt guardar=new modificarDatosDocumentoExt();
+    modificarDatosDocumentoExt guardar = new modificarDatosDocumentoExt();
 
     public tipo_documentoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -63,11 +63,11 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         MostrarMedidaActiva();
         btn_guardar.setEnabled(false);
-        System.out.println("nombre es "+us.getNombreUsuario());
-        usu1=us;
-        su1=su;
-        em1=em;
-        
+        System.out.println("nombre es " + us.getNombreUsuario());
+        usu1 = us;
+        su1 = su;
+        em1 = em;
+
     }
 
     private void MostrarMedidaActiva() {
@@ -77,7 +77,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 //                System.out.println(y.getNombreDocumento());
 //            }
             Tablas.tabla_documento(tb_documento, listaDocumento);
-
+            listaDocumento = ptm.findInTipoDocumentoEntities();
         } catch (Exception e) {
             System.out.println("error documento: " + e.getMessage());
         }
@@ -303,8 +303,8 @@ public class tipo_documentoForm extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        tipo_documento_agregarForm tma = new tipo_documento_agregarForm(new javax.swing.JFrame(), true,usu1,em1,su1);
+//        setVisible(false);
+        tipo_documento_agregarForm tma = new tipo_documento_agregarForm(new javax.swing.JFrame(), true, usu1, em1, su1);
         tma.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -316,18 +316,19 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         } else {
             listaDocumento = ptm.findInTipoDocumentoEntities();
             Long id1 = Long.valueOf(tb_documento.getValueAt(i, 0).toString());
-            
+
             documento = devuelveObjeto(id1, listaDocumento);
             if (documento != null) {
                 setVisible(false);
-                tipo_documentoEditarForm tme = new tipo_documentoEditarForm(new javax.swing.JFrame(), true,usu1,em1,su1,documento);
+                tipo_documentoEditarForm tme = new tipo_documentoEditarForm(new javax.swing.JFrame(), true, usu1, em1, su1, documento);
                 tme.setVisible(true);
-               
+
             }
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public InTipoDocumento devuelveObjeto(Long id, List<InTipoDocumento> listadoc) {  
+    public InTipoDocumento devuelveObjeto(Long id, List<InTipoDocumento> listadoc) {
         InTipoDocumento doc = null;
         for (int i = 0; i < listadoc.size(); i++) {
             if (Objects.equals(listadoc.get(i).getIdTipoDocumento(), id)) {
@@ -358,24 +359,20 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_tb_documentoMouseClicked
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-       // ArrayList<String> queryL1 = new ArrayList<String>();
-      //  String cad1 = "";
+        // ArrayList<String> queryL1 = new ArrayList<String>();
+        //  String cad1 = "";
         boolean estado = false;
         for (int i = 0; i < tb_documento.getRowCount(); i++) {
             estado = (boolean) tb_documento.getValueAt(i, 2);
             //String est = transformarboolean(estado);
-            
-            
-            InTipoDocumento tdoc=listaDocumento.get(i);
-            if (estado)
-                    {
-                        tdoc.setEstado("A");
-                    }else
-                    {
-                        tdoc.setEstado("I");
-                    }
-           
-            
+
+            InTipoDocumento tdoc = listaDocumento.get(i);
+            if (estado) {
+                tdoc.setEstado("A");
+            } else {
+                tdoc.setEstado("I");
+            }
+
             /*for (InTipoDocumento tdoc:listaDocumento)
             {
                 System.out.println(Integer.parseInt(tb_documento.getValueAt(i, 0).toString()));
@@ -391,26 +388,23 @@ public class tipo_documentoForm extends javax.swing.JDialog {
                     }
                 }
             }*/
-            
         }
-        
-        for (InTipoDocumento tdoc:listaDocumento)
-            {
-                System.out.println(tdoc.getEstado());
-            }
-        
-        
-        try{
-        guardar.guardarEstadoDocumento(listaDocumento);
-        }catch(Exception e){
-        e.printStackTrace();
+
+        for (InTipoDocumento tdoc : listaDocumento) {
+            System.out.println(tdoc.getEstado());
         }
-       // guardar.guardarItemsProducto(queryL1);
+
+        try {
+            guardar.guardarEstadoDocumento(listaDocumento);
+            JOptionPane.showMessageDialog(this, "ACTUALIZADO CORRECAMENTE!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // guardar.guardarItemsProducto(queryL1);
 
     }//GEN-LAST:event_btn_guardarActionPerformed
 
-   
-    
+
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
@@ -422,8 +416,8 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void txt_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyReleased
-      buscar = txt_buscar.getText();
-      Tablas.filtro(buscar, tb_documento);
+        buscar = txt_buscar.getText();
+        Tablas.filtro(buscar, tb_documento);
     }//GEN-LAST:event_txt_buscarKeyReleased
     public String transformarboolean(boolean valor) {
         if (valor == true) {
