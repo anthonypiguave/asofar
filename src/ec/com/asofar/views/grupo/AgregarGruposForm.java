@@ -225,9 +225,9 @@ public class AgregarGruposForm extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                     setVisible(false);
 
-                    ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
-                    cg.dispose();
-                    cg.setVisible(true);
+//                    ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+//                    cg.dispose();
+//                    cg.setVisible(true);
 
                 } catch (Exception ex) {
                     Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);

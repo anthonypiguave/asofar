@@ -251,7 +251,7 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         int r = JOptionPane.showConfirmDialog(null, "¿Desea Regresar?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
-            setVisible(false);
+            this.setVisible(false);
 
 //            asdfg12345
         } else {
@@ -269,11 +269,14 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
                 if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     pg = lista.get(i);
                     if (pg != null) {
+//                        this.setVisible(false);
                         ModificarGruposForm es = new ModificarGruposForm(new javax.swing.JFrame(), true, pg);
                         es.setVisible(true);
                     }
                 }
             }
+            
+                        cargarInformacion();
         }
     }//GEN-LAST:event_tbGruposMousePressed
 

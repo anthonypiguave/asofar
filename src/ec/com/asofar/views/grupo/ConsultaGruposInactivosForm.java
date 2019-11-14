@@ -215,6 +215,7 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
                 if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     pg = lista.get(i);
                     if (pg != null) {
+//                        this.setVisible(false);
                         ModificarGruposInactivosForm es = new ModificarGruposInactivosForm(new javax.swing.JFrame(), true, pg);
                         es.setVisible(true);
                     }
