@@ -212,7 +212,8 @@ public class consulta_bodega_inactivos extends javax.swing.JDialog {
             if (bodegaL != null) {
                 bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL,usu,emp,suc);
                 ep.setVisible(true);
-
+                
+                Tablas.listarBodegaInactivos(lista, tbl_bodega);
             }
         }
     }//GEN-LAST:event_tbl_bodegaMousePressed
