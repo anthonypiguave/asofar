@@ -119,10 +119,11 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         btnSalir.setBackground(new java.awt.Color(254, 254, 254));
-        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir.setText("SALIR");
+        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -130,9 +131,10 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         });
 
         btnGuardar.setBackground(new java.awt.Color(254, 254, 254));
-        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnGuardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setText("ACTUALIZAR");
+        btnGuardar.setOpaque(true);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -140,10 +142,11 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
         });
 
         btnHabilitar.setBackground(new java.awt.Color(254, 254, 254));
-        btnHabilitar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnHabilitar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnHabilitar.setForeground(new java.awt.Color(1, 1, 1));
         btnHabilitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btnHabilitar.setText("ELIMINAR");
+        btnHabilitar.setOpaque(true);
         btnHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHabilitarActionPerformed(evt);

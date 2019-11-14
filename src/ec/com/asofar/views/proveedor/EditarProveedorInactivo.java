@@ -223,10 +223,11 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         txtobservacion.setEnabled(false);
 
         btncancelar.setBackground(new java.awt.Color(254, 254, 254));
-        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btncancelar.setForeground(new java.awt.Color(1, 1, 1));
         btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btncancelar.setText("CANCELAR");
+        btncancelar.setOpaque(true);
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarActionPerformed(evt);
@@ -237,9 +238,10 @@ public class EditarProveedorInactivo extends javax.swing.JDialog {
         cbpais.setEnabled(false);
 
         btnactivar.setBackground(new java.awt.Color(254, 254, 254));
-        btnactivar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnactivar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnactivar.setForeground(new java.awt.Color(1, 1, 1));
         btnactivar.setText("ACTIVAR");
+        btnactivar.setOpaque(true);
         btnactivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnactivarActionPerformed(evt);

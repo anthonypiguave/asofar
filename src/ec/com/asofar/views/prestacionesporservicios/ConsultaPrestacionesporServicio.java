@@ -112,10 +112,11 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         });
 
         agregar.setBackground(new java.awt.Color(254, 254, 254));
-        agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        agregar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         agregar.setForeground(new java.awt.Color(1, 1, 1));
         agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         agregar.setText("AGREGAR");
+        agregar.setOpaque(true);
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
@@ -167,10 +168,11 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         );
 
         jsalir.setBackground(new java.awt.Color(254, 254, 254));
-        jsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jsalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jsalir.setForeground(new java.awt.Color(1, 1, 1));
         jsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jsalir.setText("SALIR");
+        jsalir.setOpaque(true);
         jsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jsalirActionPerformed(evt);
@@ -178,9 +180,10 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         });
 
         btnimprimir.setBackground(new java.awt.Color(254, 254, 254));
-        btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnimprimir.setForeground(new java.awt.Color(1, 1, 1));
         btnimprimir.setText("IMPRIMIR");
+        btnimprimir.setOpaque(true);
         btnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnimprimirActionPerformed(evt);

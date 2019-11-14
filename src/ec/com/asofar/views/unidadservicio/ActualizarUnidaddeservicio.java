@@ -96,7 +96,7 @@ public class ActualizarUnidaddeservicio extends javax.swing.JDialog {
         });
 
         Jbu_Guardar.setBackground(new java.awt.Color(254, 254, 254));
-        Jbu_Guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        Jbu_Guardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         Jbu_Guardar.setForeground(new java.awt.Color(1, 1, 1));
         Jbu_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         Jbu_Guardar.setText("GUARDAR");
@@ -114,7 +114,7 @@ public class ActualizarUnidaddeservicio extends javax.swing.JDialog {
         JlNombredeservicio.setText("NOMBRE:");
 
         jBCancelar.setBackground(new java.awt.Color(254, 254, 254));
-        jBCancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jBCancelar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jBCancelar.setForeground(new java.awt.Color(1, 1, 1));
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jBCancelar.setText("SALIR");

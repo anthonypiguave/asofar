@@ -92,10 +92,11 @@ public class Login extends javax.swing.JDialog {
         });
 
         btningresar.setBackground(new java.awt.Color(254, 254, 254));
-        btningresar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btningresar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btningresar.setForeground(new java.awt.Color(1, 1, 1));
         btningresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/aceptar_Mesa de trabajo 1.jpg"))); // NOI18N
         btningresar.setText("INGRESAR");
+        btningresar.setOpaque(true);
         btningresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btningresarActionPerformed(evt);
@@ -103,12 +104,13 @@ public class Login extends javax.swing.JDialog {
         });
 
         btningresar1.setBackground(new java.awt.Color(254, 254, 254));
-        btningresar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btningresar1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btningresar1.setForeground(new java.awt.Color(1, 1, 1));
         btningresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btningresar1.setText("SALIR");
         btningresar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btningresar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btningresar1.setOpaque(true);
         btningresar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btningresar1ActionPerformed(evt);
@@ -145,9 +147,9 @@ public class Login extends javax.swing.JDialog {
                 .addGap(31, 31, 31))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(btningresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btningresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(

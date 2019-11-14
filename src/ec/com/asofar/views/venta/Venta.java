@@ -495,7 +495,7 @@ public class Venta extends javax.swing.JInternalFrame {
         });
 
         btnbuscar.setBackground(new java.awt.Color(254, 254, 254));
-        btnbuscar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnbuscar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnbuscar.setForeground(new java.awt.Color(1, 1, 1));
         btnbuscar.setText("CLIENTES");
         btnbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -534,7 +534,7 @@ public class Venta extends javax.swing.JInternalFrame {
         });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setText("CONSUMIDOR FINAL");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -735,10 +735,11 @@ public class Venta extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tba_detalle);
 
-        btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_agregar_prod.setForeground(new java.awt.Color(1, 1, 1));
         btn_agregar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         btn_agregar_prod.setText("AGREGAR");
+        btn_agregar_prod.setOpaque(true);
         btn_agregar_prod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregar_prodActionPerformed(evt);
@@ -750,10 +751,10 @@ public class Venta extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(307, 307, 307)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_agregar_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(353, 353, 353))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -764,7 +765,7 @@ public class Venta extends javax.swing.JInternalFrame {
         );
 
         btn_Venta.setBackground(new java.awt.Color(254, 254, 254));
-        btn_Venta.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_Venta.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_Venta.setForeground(new java.awt.Color(1, 1, 1));
         btn_Venta.setText("GENERAR VENTA ");
         btn_Venta.setOpaque(true);
@@ -775,7 +776,7 @@ public class Venta extends javax.swing.JInternalFrame {
         });
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton2.setText("SALIR ");
@@ -797,7 +798,7 @@ public class Venta extends javax.swing.JInternalFrame {
         jLabel20.setText("CAJA :");
 
         jButton3.setBackground(new java.awt.Color(254, 254, 254));
-        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton3.setForeground(new java.awt.Color(1, 1, 1));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton3.setText("NUEVO");
