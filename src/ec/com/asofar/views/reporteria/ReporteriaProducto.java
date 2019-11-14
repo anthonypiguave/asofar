@@ -190,10 +190,11 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         );
 
         btnsalir.setBackground(new java.awt.Color(254, 254, 254));
-        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
+        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -215,7 +216,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         cbxFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODO", "CODIGO BARRA", "NOMBRE", "BODEGA" }));
 
-        btnBuscar1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnBuscar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         btnBuscar1.setText("BUSCAR");
         btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

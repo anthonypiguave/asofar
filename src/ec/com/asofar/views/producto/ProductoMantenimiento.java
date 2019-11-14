@@ -470,13 +470,13 @@ public class ProductoMantenimiento extends javax.swing.JDialog {
         jButton5.setText("+");
 
         jButton6.setBackground(new java.awt.Color(254, 254, 254));
-        jButton6.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton6.setForeground(new java.awt.Color(1, 1, 1));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         jButton6.setText("CREAR");
 
         jButton7.setBackground(new java.awt.Color(254, 254, 254));
-        jButton7.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton7.setForeground(new java.awt.Color(1, 1, 1));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         jButton7.setText("CANCELAR");

@@ -91,7 +91,7 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
         jLabel5.setText("ESTADO:");
 
         guardar.setBackground(new java.awt.Color(254, 254, 254));
-        guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        guardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         guardar.setForeground(new java.awt.Color(1, 1, 1));
         guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         guardar.setText("GUARDAR");
@@ -105,7 +105,7 @@ public class CrearTipoMovimientoForm extends javax.swing.JDialog {
         txtTMovi.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         jButton1.setText("CANCELAR");

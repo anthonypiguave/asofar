@@ -110,7 +110,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="BtnBuscarcedula" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnBuscarcedula" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
@@ -252,7 +252,7 @@
             <Component class="javax.swing.JButton" name="BtnBuscarcedula">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Ubuntu" size="12" style="1"/>
+                  <Font name="Ubuntu" size="10" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="1" green="1" red="1" type="rgb"/>
@@ -367,55 +367,49 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jLabel16" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="286" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="jLabel17" alignment="0" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel1" alignment="0" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel20" alignment="0" max="-2" attributes="0"/>
-                                                  <Component id="jLabel19" alignment="0" max="-2" attributes="0"/>
-                                                  <Component id="jLabel18" alignment="0" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="TxtProdIva" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Component id="TxtProdDescuento" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Component id="TxtProdtotal" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Component id="TxtProdSubtotal" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Component id="TxtProdCantidad" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Component id="TxtProdPrecio" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="TxtProdNombre" min="-2" pref="151" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="BtnBuscarprodnombre" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="TxtDescuentoPorcentaje" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jButton2" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="BtnAddIten" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="jLabel13" alignment="0" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel14" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel1" alignment="0" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel20" alignment="0" max="-2" attributes="0"/>
+                                              <Component id="jLabel19" alignment="0" max="-2" attributes="0"/>
+                                              <Component id="jLabel18" alignment="0" max="-2" attributes="0"/>
+                                              <Component id="jLabel16" alignment="0" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="TxtProdIva" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="TxtProdDescuento" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="TxtProdtotal" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="TxtProdSubtotal" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="TxtProdCantidad" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="TxtProdPrecio" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="TxtProdNombre" min="-2" pref="151" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="BtnBuscarprodnombre" min="-2" pref="115" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="TxtDescuentoPorcentaje" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jButton2" min="-2" pref="110" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="BtnAddIten" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="jLabel13" alignment="0" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel17" alignment="0" max="-2" attributes="0"/>
+                                      <Component id="jLabel14" alignment="0" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="283" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -426,7 +420,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="TxtProdNombre" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="jLabel13" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="BtnBuscarprodnombre" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="BtnBuscarprodnombre" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -447,7 +441,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="TxtDescuentoPorcentaje" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jButton2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -487,7 +481,7 @@
                 <Component class="javax.swing.JButton" name="BtnBuscarprodnombre">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Ubuntu" size="12" style="1"/>
+                      <Font name="Ubuntu" size="10" style="1"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"/>
@@ -621,7 +615,7 @@
                 <Component class="javax.swing.JButton" name="BtnAddIten">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Ubuntu" size="12" style="1"/>
+                      <Font name="Ubuntu" size="10" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="1" green="1" red="1" type="rgb"/>
@@ -637,6 +631,7 @@
                         </LineBorder>
                       </Border>
                     </Property>
+                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAddItenActionPerformed"/>
@@ -681,7 +676,7 @@
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Ubuntu" size="12" style="1"/>
+                      <Font name="Ubuntu" size="10" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="EDITAR"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -691,6 +686,7 @@
                         </LineBorder>
                       </Border>
                     </Property>
+                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>

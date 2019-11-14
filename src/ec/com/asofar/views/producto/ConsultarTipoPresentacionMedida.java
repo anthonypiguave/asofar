@@ -146,10 +146,11 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
         );
 
         btnsalir.setBackground(new java.awt.Color(254, 254, 254));
-        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
+        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -157,10 +158,11 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
         });
 
         btnNuevo.setBackground(new java.awt.Color(254, 254, 254));
-        btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btnNuevo.setText("NUEVO");
+        btnNuevo.setOpaque(true);
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);

@@ -142,10 +142,11 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         );
 
         btnsalir.setBackground(new java.awt.Color(254, 254, 254));
-        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
+        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -153,9 +154,10 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         });
 
         btninactivos.setBackground(new java.awt.Color(254, 254, 254));
-        btninactivos.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btninactivos.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btninactivos.setForeground(new java.awt.Color(1, 1, 1));
         btninactivos.setText("INACTIVOS");
+        btninactivos.setOpaque(true);
         btninactivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btninactivosActionPerformed(evt);
@@ -163,10 +165,11 @@ public class ConsultaProveedor extends javax.swing.JDialog {
         });
 
         btnnuevo.setBackground(new java.awt.Color(254, 254, 254));
-        btnnuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnnuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnnuevo.setForeground(new java.awt.Color(1, 1, 1));
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btnnuevo.setText("NUEVO");
+        btnnuevo.setOpaque(true);
         btnnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnuevoActionPerformed(evt);

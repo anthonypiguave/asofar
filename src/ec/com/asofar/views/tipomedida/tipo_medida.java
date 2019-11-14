@@ -130,7 +130,7 @@ public class tipo_medida extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("AGREGAR");
@@ -143,7 +143,7 @@ public class tipo_medida extends javax.swing.JDialog {
         });
 
         jButton4.setBackground(new java.awt.Color(254, 254, 254));
-        jButton4.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton4.setForeground(new java.awt.Color(1, 1, 1));
         jButton4.setText("INACTIVOS");
         jButton4.setFocusable(false);
@@ -157,7 +157,7 @@ public class tipo_medida extends javax.swing.JDialog {
         });
 
         jButton3.setBackground(new java.awt.Color(254, 254, 254));
-        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton3.setForeground(new java.awt.Color(1, 1, 1));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton3.setText("SALIR");

@@ -113,10 +113,11 @@ public class NuevaMedida extends javax.swing.JDialog {
         jLabel4.setText("SUBGRUPO:");
 
         BotonSalir.setBackground(new java.awt.Color(254, 254, 254));
-        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
         BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         BotonSalir.setText("CANCELAR");
+        BotonSalir.setOpaque(true);
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSalirActionPerformed(evt);
@@ -136,10 +137,11 @@ public class NuevaMedida extends javax.swing.JDialog {
         tipo_pres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR..." }));
 
         BotonAceptar.setBackground(new java.awt.Color(254, 254, 254));
-        BotonAceptar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonAceptar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonAceptar.setForeground(new java.awt.Color(1, 1, 1));
         BotonAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         BotonAceptar.setText("GUARDAR");
+        BotonAceptar.setOpaque(true);
         BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAceptarActionPerformed(evt);
