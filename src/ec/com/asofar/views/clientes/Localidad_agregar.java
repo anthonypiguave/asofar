@@ -182,18 +182,19 @@ public class Localidad_agregar extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
                             .addComponent(jLabel6))
-                        .addGap(15, 15, 15)))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbx_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,6 +268,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
         for (int i = 0; i < Provincia.size(); i++) {
             if (!"I".equals(Provincia.get(i).getNombre())) {
                 cbx_provincia.addItem(Provincia.get(i).getNombre());
+                cbx_provincia.setSelectedItem("Guayas");
 //                if (LocalidadCliente.getIdProvincia().getNombre() == Provincia.get(i).getNombre()) {
 //                    cbx_provincia.setSelectedItem(Provincia.get(i).getNombre());
 //                }
@@ -278,6 +280,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
         for (int i = 0; i < Ciudad.size(); i++) {
             if (!"I".equals(Ciudad.get(i).getNombre())) {
                 cbx_ciudad.addItem(Ciudad.get(i).getNombre());
+                cbx_ciudad.setSelectedItem("Guayaquil");
 //                if (LocalidadCliente.getIdCiudad().getNombre() == Ciudad.get(i).getNombre()) {
 //                    cbx_ciudad.setSelectedItem(Ciudad.get(i).getNombre());
 //                }
