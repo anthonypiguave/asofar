@@ -137,6 +137,11 @@ public class ModificarGruposForm extends javax.swing.JDialog {
         jLabel3.setText("NUEVO NOMBRE:");
 
         txtNuevo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtNuevo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNuevoFocusLost(evt);
+            }
+        });
         txtNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoKeyTyped(evt);
@@ -272,9 +277,9 @@ public class ModificarGruposForm extends javax.swing.JDialog {
                     prj.edit(pr);
                     JOptionPane.showMessageDialog(null, "Datos modificados correctamente!");
                     setVisible(false);
-                    ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
-                    cg.dispose();
-                    cg.setVisible(true);
+//                    ConsultaGruposForm cg = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+////                    cg.dispose();
+//                    cg.setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -323,6 +328,10 @@ public class ModificarGruposForm extends javax.swing.JDialog {
        
         txtNuevo.setText(txtNuevo.getText().toUpperCase());
     }//GEN-LAST:event_txtNombreactualFocusLost
+
+    private void txtNuevoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoFocusLost
+        txtNuevo.setText(txtNuevo.getText().toUpperCase());
+    }//GEN-LAST:event_txtNuevoFocusLost
 
     /**
      * @param args the command line arguments

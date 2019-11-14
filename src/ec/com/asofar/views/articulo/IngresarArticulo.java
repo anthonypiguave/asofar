@@ -127,6 +127,11 @@ public class IngresarArticulo extends javax.swing.JDialog {
         });
 
         articulo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        articulo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                articuloFocusLost(evt);
+            }
+        });
         articulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 articuloKeyTyped(evt);
@@ -294,6 +299,10 @@ public class IngresarArticulo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Solo puede ingresar maximo 70 caracteres");
         }
     }//GEN-LAST:event_articuloKeyTyped
+
+    private void articuloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_articuloFocusLost
+        articulo.setText(articulo.getText().toUpperCase());
+    }//GEN-LAST:event_articuloFocusLost
     public void Actualizar() {
         setVisible(false);
         ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(), true);

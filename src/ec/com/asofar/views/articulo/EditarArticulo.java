@@ -85,6 +85,11 @@ public class EditarArticulo extends javax.swing.JDialog {
         jLabel2.setText("GRUPO:");
 
         articulo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        articulo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                articuloFocusLost(evt);
+            }
+        });
         articulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 articuloKeyTyped(evt);
@@ -270,6 +275,10 @@ public class EditarArticulo extends javax.swing.JDialog {
         ConsultaArticulo dialog = new ConsultaArticulo(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void articuloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_articuloFocusLost
+        articulo.setText(articulo.getText().toUpperCase());
+    }//GEN-LAST:event_articuloFocusLost
 
     /**
      * @param args the command line arguments
