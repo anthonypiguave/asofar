@@ -140,7 +140,7 @@ public class JoinProductoVentaExt {
                 + "pr_detalle_tarifario.id_unidad_servicio,pr_prestaciones.id_prestacion,\n"
                 + "pr_prestaciones.nombre_prestacion AS 'prestacion',in_kardex.saldo_actual,\n"
                 + "pr_detalle_tarifario.valor_venta, pr_detalle_tarifario.valor_descuento,\n"
-                + "pr_prestaciones.aplica_iva , pr_productos.codigo_barra\n"
+                + "pr_prestaciones.aplica_iva , pr_productos.codigo_barra,in_bodega.`nombre_bodega`,in_kardex.`costo_actual`\n"
                 + "FROM pr_detalle_tarifario\n"
                 + "INNER JOIN pr_prestaciones\n"
                 + "ON pr_prestaciones.id_prestacion = pr_detalle_tarifario.id_prestacion\n"
@@ -148,13 +148,16 @@ public class JoinProductoVentaExt {
                 + "ON in_kardex.id_producto = pr_prestaciones.id_poducto\n"
                 + "INNER JOIN \n"
                 + "pr_productos ON pr_productos.id_producto = in_kardex.id_producto\n"
-                + "WHERE pr_detalle_tarifario.estado = 'A'               \n"
+                + "INNER JOIN in_bodega\n"
+                + "ON in_kardex.id_bodega = in_bodega.id_bodega\n"
+                + "\n"
+                + "WHERE pr_detalle_tarifario.estado = 'A' \n"
                 + "AND in_kardex.id_kardex = ANY(            \n"
                 + "SELECT p.id_kardex FROM in_kardex  p WHERE \n"
                 + "p.id_kardex = ALL (\n"
                 + "SELECT MAX(k.id_kardex)  \n"
                 + "FROM in_kardex k\n"
-                + "WHERE k.id_producto = p.id_producto\n"
+                + "WHERE k.id_producto = p.id_producto \n"
                 + "ORDER BY k.id_kardex DESC )            \n"
                 + ")             \n"
                 + "ORDER BY prestacion;";
@@ -187,6 +190,7 @@ public class JoinProductoVentaExt {
                 } else {
                     oo.setCodigoBarra(ooo[10].toString());
                 }
+                oo.setCosto(Double.parseDouble(ooo[12].toString()));
                 lista.add(oo);
             }
 
@@ -343,7 +347,7 @@ public class JoinProductoVentaExt {
                 + "pr_productos ON pr_productos.id_producto = in_kardex.id_producto\n"
                 + "INNER JOIN in_bodega\n"
                 + "ON in_kardex.id_bodega = in_bodega.id_bodega\n"
-                + "WHERE pr_detalle_tarifario.estado = 'A'  AND in_bodega.`nombre_bodega` LIKE '%"+Bodega+"%'\n"
+                + "WHERE pr_detalle_tarifario.estado = 'A'  AND in_bodega.`nombre_bodega` LIKE '%" + Bodega + "%'\n"
                 + "AND in_kardex.id_kardex = ANY(            \n"
                 + "SELECT p.id_kardex FROM in_kardex  p WHERE \n"
                 + "p.id_kardex = ALL (\n"
