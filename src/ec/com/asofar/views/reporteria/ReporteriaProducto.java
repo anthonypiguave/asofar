@@ -526,6 +526,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 
     }//GEN-LAST:event_Txt_buscarActionPerformed
 
+    
     private void Txt_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_buscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Buscar();
