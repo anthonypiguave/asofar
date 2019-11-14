@@ -319,6 +319,8 @@ public class consulta_bodega extends javax.swing.JDialog {
     private void btn_inactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inactivosActionPerformed
         consulta_bodega_inactivos inac = new consulta_bodega_inactivos(new javax.swing.JFrame(), true,usu,emp,suc);
         inac.setVisible(true);
+        bodega = bc.findInBodegaEntities();
+        Tablas.listarBodega(bodega, tbl_bodega);
     }//GEN-LAST:event_btn_inactivosActionPerformed
 
     /**

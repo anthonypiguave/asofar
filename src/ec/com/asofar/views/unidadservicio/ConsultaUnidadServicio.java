@@ -119,7 +119,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         jLabel1.setText("BUSCAR:");
 
         JbAgregar.setBackground(new java.awt.Color(254, 254, 254));
-        JbAgregar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        JbAgregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         JbAgregar.setForeground(new java.awt.Color(1, 1, 1));
         JbAgregar.setText("ACTUALIZAR");
         JbAgregar.setOpaque(true);
@@ -130,7 +130,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         });
 
         Jbcancelar.setBackground(new java.awt.Color(254, 254, 254));
-        Jbcancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Jbcancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         Jbcancelar.setForeground(new java.awt.Color(1, 1, 1));
         Jbcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         Jbcancelar.setText("SALIR");
@@ -190,7 +190,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         });
 
         JbAgregar1.setBackground(new java.awt.Color(254, 254, 254));
-        JbAgregar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        JbAgregar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         JbAgregar1.setForeground(new java.awt.Color(1, 1, 1));
         JbAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         JbAgregar1.setText("AGREGAR");
