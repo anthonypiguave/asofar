@@ -78,7 +78,8 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         cargarTbaProductoInventario();
         sumarCantidad();
-        sumarTotal();
+        sumarTotalPvp();
+        sumarTotalCosto();
 //        Totalizar();
 //        TotalizarCantidad();
     }
@@ -90,7 +91,8 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         cargarTbaProductoInventario();
         sumarCantidad();
-        sumarTotal();
+        sumarTotalCosto();
+        sumarTotalPvp();
 //        Totalizar();
 //        TotalizarCantidad();
 
@@ -120,6 +122,8 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         cbxFiltro = new javax.swing.JComboBox<>();
         btnBuscar1 = new javax.swing.JButton();
         Txt_buscar = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txt_Costo = new javax.swing.JTextField();
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("ENTRE");
@@ -199,7 +203,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         txt_total.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel3.setText("TOTAL :");
+        jLabel3.setText("PVP : ");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("CANTIDAD : ");
@@ -239,7 +243,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         PanelSec1Layout.setHorizontalGroup(
             PanelSec1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelSec1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(153, Short.MAX_VALUE)
                 .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,6 +262,11 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel6.setText("COSTO :");
+
+        txt_Costo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -268,11 +277,15 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Txt_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 340, Short.MAX_VALUE)
+                .addGap(146, 146, 146)
                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -295,7 +308,9 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(Txt_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_Costo))
                 .addContainerGap())
         );
 
@@ -442,28 +457,32 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 //            Totalizar();
 //            TotalizarCantidad();
             sumarCantidad();
-            sumarTotal();
+            sumarTotalCosto();
+            sumarTotalPvp();
         }
         if (pos == "NOMBRE") {
             ListProdVent = selectProdVent.listarProductoInventarioFiltroNombre(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
             sumarCantidad();
-            sumarTotal();
+            sumarTotalCosto();
+            sumarTotalPvp();
         }
         if (pos == "CODIGO BARRA") {
             ListProdVent = selectProdVent.listarProductoInventarioFiltroCodigoBarra(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
             sumarCantidad();
-            sumarTotal();
+            sumarTotalCosto();
+            sumarTotalPvp();
         }
         if (index == 3) {
             ListProdVent = selectProdVent.listarProductoInventarioFiltroBodega(txt);
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
             sumarCantidad();
-            sumarTotal();
+            sumarTotalCosto();
+            sumarTotalPvp();
         }
     }
 
@@ -479,13 +498,24 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         }
         Txt_Cantidad.setText(t.toString());
     }
-
-    public void sumarTotal() {
+    public void sumarTotalCosto() {
         Double t = 0.0;
         Double p = 0.0;
         if (tba_productos.getRowCount() > 0) {
             for (int i = 0; i < tba_productos.getRowCount(); i++) {
                 p = Double.parseDouble(tba_productos.getValueAt(i, 4).toString());
+                t += p;
+//                System.out.println("sum " + t);
+            }
+        }
+        txt_Costo.setText(t.toString());
+    }
+    public void sumarTotalPvp() {
+        Double t = 0.0;
+        Double p = 0.0;
+        if (tba_productos.getRowCount() > 0) {
+            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+                p = Double.parseDouble(tba_productos.getValueAt(i, 5).toString());
                 t += p;
 //                System.out.println("sum " + t);
             }
@@ -496,6 +526,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 
     }//GEN-LAST:event_Txt_buscarActionPerformed
 
+    
     private void Txt_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_buscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Buscar();
@@ -552,26 +583,22 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Chooser2;
-    private javax.swing.JPanel PanelSec;
     private javax.swing.JPanel PanelSec1;
-    private javax.swing.JTextField TxtFiltro;
     private javax.swing.JTextField Txt_Cantidad;
     private javax.swing.JTextField Txt_buscar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnsalir;
     private javax.swing.JComboBox<String> cbxFiltro;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tba_productos;
-    private javax.swing.JComboBox<String> tipofiltro;
+    private javax.swing.JTextField txt_Costo;
     private javax.swing.JTextField txt_total;
     // End of variables declaration//GEN-END:variables
 }
