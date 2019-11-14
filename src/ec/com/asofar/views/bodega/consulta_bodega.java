@@ -35,10 +35,7 @@ public class consulta_bodega extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-
-    /**
-     * Creates new form bodega
-     */
+    
     public consulta_bodega(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
