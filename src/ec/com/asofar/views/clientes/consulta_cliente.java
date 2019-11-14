@@ -137,10 +137,11 @@ public class consulta_cliente extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tba_clientes);
 
         btn_ingresar_cliente.setBackground(new java.awt.Color(254, 254, 254));
-        btn_ingresar_cliente.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_ingresar_cliente.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_ingresar_cliente.setForeground(new java.awt.Color(1, 1, 1));
         btn_ingresar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_cliente.setText("INGRESAR");
+        btn_ingresar_cliente.setOpaque(true);
         btn_ingresar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ingresar_clienteActionPerformed(evt);
@@ -148,9 +149,10 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setText("INACTIVOS");
+        jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -158,9 +160,10 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton3.setBackground(new java.awt.Color(254, 254, 254));
-        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton3.setForeground(new java.awt.Color(1, 1, 1));
         jButton3.setText("EDITAR");
+        jButton3.setOpaque(true);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -168,10 +171,11 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_eliminar_cliente.setBackground(new java.awt.Color(254, 254, 254));
-        btn_eliminar_cliente.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_eliminar_cliente.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_eliminar_cliente.setForeground(new java.awt.Color(1, 1, 1));
         btn_eliminar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btn_eliminar_cliente.setText("ELIMINAR");
+        btn_eliminar_cliente.setOpaque(true);
         btn_eliminar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_eliminar_clienteActionPerformed(evt);
@@ -186,13 +190,13 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                        .addComponent(btn_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addComponent(btn_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_ingresar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_ingresar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -239,10 +243,11 @@ public class consulta_cliente extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tba_localidad);
 
         btn_ingresar_localidad.setBackground(new java.awt.Color(254, 254, 254));
-        btn_ingresar_localidad.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_ingresar_localidad.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_ingresar_localidad.setForeground(new java.awt.Color(1, 1, 1));
         btn_ingresar_localidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_localidad.setText("INGRESAR");
+        btn_ingresar_localidad.setOpaque(true);
         btn_ingresar_localidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ingresar_localidadActionPerformed(evt);
@@ -250,9 +255,10 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_editar.setBackground(new java.awt.Color(254, 254, 254));
-        btn_editar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_editar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_editar.setForeground(new java.awt.Color(1, 1, 1));
         btn_editar.setText("EDITAR");
+        btn_editar.setOpaque(true);
         btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editarActionPerformed(evt);
@@ -260,10 +266,11 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btn_eliminar_localidad.setBackground(new java.awt.Color(254, 254, 254));
-        btn_eliminar_localidad.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_eliminar_localidad.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_eliminar_localidad.setForeground(new java.awt.Color(1, 1, 1));
         btn_eliminar_localidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btn_eliminar_localidad.setText("ELIMINAR");
+        btn_eliminar_localidad.setOpaque(true);
         btn_eliminar_localidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_eliminar_localidadActionPerformed(evt);
@@ -278,11 +285,11 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_eliminar_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_eliminar_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_ingresar_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_ingresar_localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2)))
@@ -327,10 +334,11 @@ public class consulta_cliente extends javax.swing.JDialog {
         jScrollPane3.setViewportView(tba_contacto);
 
         btn_ingresar_contacto.setBackground(new java.awt.Color(254, 254, 254));
-        btn_ingresar_contacto.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_ingresar_contacto.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_ingresar_contacto.setForeground(new java.awt.Color(1, 1, 1));
         btn_ingresar_contacto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_contacto.setText("INGRESAR");
+        btn_ingresar_contacto.setOpaque(true);
         btn_ingresar_contacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ingresar_contactoActionPerformed(evt);
@@ -338,9 +346,10 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton5.setBackground(new java.awt.Color(254, 254, 254));
-        jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton5.setForeground(new java.awt.Color(1, 1, 1));
         jButton5.setText("EDITAR");
+        jButton5.setOpaque(true);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -348,10 +357,11 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton7.setBackground(new java.awt.Color(254, 254, 254));
-        jButton7.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton7.setForeground(new java.awt.Color(1, 1, 1));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         jButton7.setText("ELIMINAR");
+        jButton7.setOpaque(true);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -368,11 +378,11 @@ public class consulta_cliente extends javax.swing.JDialog {
                     .addComponent(jScrollPane3)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_ingresar_contacto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_ingresar_contacto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -423,10 +433,11 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton1.setText("SALIR");
+        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -434,9 +445,10 @@ public class consulta_cliente extends javax.swing.JDialog {
         });
 
         btnimprimir.setBackground(new java.awt.Color(254, 254, 254));
-        btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnimprimir.setForeground(new java.awt.Color(1, 1, 1));
         btnimprimir.setText("IMPRIMIR");
+        btnimprimir.setOpaque(true);
         btnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnimprimirActionPerformed(evt);
@@ -457,9 +469,9 @@ public class consulta_cliente extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(166, 166, 166))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(228, 228, 228)

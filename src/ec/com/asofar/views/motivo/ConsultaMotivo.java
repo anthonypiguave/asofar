@@ -131,10 +131,11 @@ public class ConsultaMotivo extends javax.swing.JDialog {
         );
 
         btnsalir.setBackground(new java.awt.Color(254, 254, 254));
-        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
+        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -142,9 +143,10 @@ public class ConsultaMotivo extends javax.swing.JDialog {
         });
 
         btninactivos.setBackground(new java.awt.Color(254, 254, 254));
-        btninactivos.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btninactivos.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btninactivos.setForeground(new java.awt.Color(1, 1, 1));
         btninactivos.setText("INACTIVOS");
+        btninactivos.setOpaque(true);
         btninactivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btninactivosActionPerformed(evt);
@@ -152,10 +154,11 @@ public class ConsultaMotivo extends javax.swing.JDialog {
         });
 
         btnnuevos.setBackground(new java.awt.Color(254, 254, 254));
-        btnnuevos.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnnuevos.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnnuevos.setForeground(new java.awt.Color(1, 1, 1));
         btnnuevos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btnnuevos.setText("NUEVO");
+        btnnuevos.setOpaque(true);
         btnnuevos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnuevosActionPerformed(evt);
@@ -173,11 +176,11 @@ public class ConsultaMotivo extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnnuevos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnnuevos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btninactivos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btninactivos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

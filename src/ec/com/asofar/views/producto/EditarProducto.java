@@ -151,10 +151,11 @@ public class EditarProducto extends javax.swing.JDialog {
         });
 
         BotonGuardar.setBackground(new java.awt.Color(254, 254, 254));
-        BotonGuardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonGuardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonGuardar.setForeground(new java.awt.Color(1, 1, 1));
         BotonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         BotonGuardar.setText("GUARDAR");
+        BotonGuardar.setOpaque(true);
         BotonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonGuardarActionPerformed(evt);
@@ -162,10 +163,11 @@ public class EditarProducto extends javax.swing.JDialog {
         });
 
         BotonSalir.setBackground(new java.awt.Color(254, 254, 254));
-        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
         BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         BotonSalir.setText("SALIR");
+        BotonSalir.setOpaque(true);
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSalirActionPerformed(evt);

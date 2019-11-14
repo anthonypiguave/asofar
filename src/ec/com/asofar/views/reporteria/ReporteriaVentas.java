@@ -226,10 +226,11 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         jLabel2.setText("TOTAL VENTAS:");
 
         btnSalir2.setBackground(new java.awt.Color(254, 254, 254));
-        btnSalir2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSalir2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnSalir2.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir2.setText("SALIR");
+        btnSalir2.setOpaque(true);
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalir2ActionPerformed(evt);
@@ -305,18 +306,20 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setText("IMPRIMIR");
+        jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        BtnBuscar1.setFont(new java.awt.Font("Ubuntu", 1, 11)); // NOI18N
+        BtnBuscar1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BtnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         BtnBuscar1.setText("BUSCAR");
+        BtnBuscar1.setOpaque(true);
         BtnBuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBuscar1ActionPerformed(evt);
@@ -410,7 +413,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

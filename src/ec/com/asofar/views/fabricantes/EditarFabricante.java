@@ -68,10 +68,11 @@ public class EditarFabricante extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         BotonEliminar.setBackground(new java.awt.Color(254, 254, 254));
-        BotonEliminar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonEliminar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonEliminar.setForeground(new java.awt.Color(1, 1, 1));
         BotonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         BotonEliminar.setText("ELIMINAR");
+        BotonEliminar.setOpaque(true);
         BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonEliminarActionPerformed(evt);
@@ -96,10 +97,11 @@ public class EditarFabricante extends javax.swing.JDialog {
         });
 
         BotonSalir.setBackground(new java.awt.Color(254, 254, 254));
-        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
         BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         BotonSalir.setText("SALIR");
+        BotonSalir.setOpaque(true);
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSalirActionPerformed(evt);
@@ -114,10 +116,11 @@ public class EditarFabricante extends javax.swing.JDialog {
         });
 
         BotonActualizar.setBackground(new java.awt.Color(254, 254, 254));
-        BotonActualizar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonActualizar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonActualizar.setForeground(new java.awt.Color(1, 1, 1));
         BotonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         BotonActualizar.setText("ACTUALIZAR");
+        BotonActualizar.setOpaque(true);
         BotonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonActualizarActionPerformed(evt);

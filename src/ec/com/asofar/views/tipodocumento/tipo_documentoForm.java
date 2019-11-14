@@ -135,11 +135,12 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "DOCUMENTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu", 1, 14))); // NOI18N
 
         jButton3.setBackground(new java.awt.Color(254, 254, 254));
-        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton3.setForeground(new java.awt.Color(1, 1, 1));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton3.setText("SALIR");
         jButton3.setFocusable(false);
+        jButton3.setOpaque(true);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -147,11 +148,12 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         });
 
         btn_guardar.setBackground(new java.awt.Color(254, 254, 254));
-        btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_guardar.setForeground(new java.awt.Color(1, 1, 1));
         btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btn_guardar.setText("GUARDAR");
         btn_guardar.setFocusable(false);
+        btn_guardar.setOpaque(true);
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
@@ -159,11 +161,12 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setText("EDITAR");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setOpaque(true);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,13 +175,14 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("NUEVO");
         jButton1.setAutoscrolls(true);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.setFocusable(false);
+        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

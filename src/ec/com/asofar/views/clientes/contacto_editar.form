@@ -60,7 +60,7 @@
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_agregar" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="btn_agregar" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -68,7 +68,7 @@
                               <Component id="txt_celular" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
                               <Component id="txt_telefono" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
                               <Component id="txt_nombre" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="jButton2" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                       </Group>
@@ -231,7 +231,7 @@
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="12" style="1"/>
+              <Font name="Ubuntu" size="10" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1" green="1" red="1" type="rgb"/>
@@ -251,7 +251,7 @@
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="12" style="1"/>
+              <Font name="Ubuntu" size="10" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1" green="1" red="1" type="rgb"/>
@@ -261,8 +261,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="GUARDAR"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_agregarActionPerformed"/>

@@ -125,7 +125,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton2.setText("INGRESAR");
@@ -137,7 +137,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton1.setText("SALIR");
@@ -149,7 +149,7 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
         });
 
         jButton3.setBackground(new java.awt.Color(254, 254, 254));
-        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton3.setForeground(new java.awt.Color(1, 1, 1));
         jButton3.setText("INACTIVOS");
         jButton3.setOpaque(true);

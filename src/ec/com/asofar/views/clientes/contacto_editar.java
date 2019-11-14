@@ -174,7 +174,7 @@ public class contacto_editar extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton2.setText("SALIR");
@@ -185,13 +185,11 @@ public class contacto_editar extends javax.swing.JDialog {
         });
 
         btn_agregar.setBackground(new java.awt.Color(254, 254, 254));
-        btn_agregar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btn_agregar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(1, 1, 1));
         btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btn_agregar.setText("GUARDAR");
         btn_agregar.setFocusable(false);
-        btn_agregar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        btn_agregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregarActionPerformed(evt);
@@ -215,14 +213,14 @@ public class contacto_editar extends javax.swing.JDialog {
                             .addComponent(jLabel1)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
-                            .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_celular, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
         );

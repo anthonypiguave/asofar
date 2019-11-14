@@ -62,10 +62,11 @@ public class ConsultaFab extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         BotonSalir.setBackground(new java.awt.Color(254, 254, 254));
-        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonSalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(1, 1, 1));
         BotonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         BotonSalir.setText("SALIR");
+        BotonSalir.setOpaque(true);
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSalirActionPerformed(evt);
@@ -73,10 +74,11 @@ public class ConsultaFab extends javax.swing.JDialog {
         });
 
         BotonNuevo.setBackground(new java.awt.Color(254, 254, 254));
-        BotonNuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonNuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonNuevo.setForeground(new java.awt.Color(1, 1, 1));
         BotonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         BotonNuevo.setText("NUEVO");
+        BotonNuevo.setOpaque(true);
         BotonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonNuevoActionPerformed(evt);
@@ -84,9 +86,10 @@ public class ConsultaFab extends javax.swing.JDialog {
         });
 
         BotonEliminados.setBackground(new java.awt.Color(254, 254, 254));
-        BotonEliminados.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        BotonEliminados.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonEliminados.setForeground(new java.awt.Color(1, 1, 1));
         BotonEliminados.setText("INACTIVOS");
+        BotonEliminados.setOpaque(true);
         BotonEliminados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonEliminadosActionPerformed(evt);
@@ -172,19 +175,22 @@ public class ConsultaFab extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(BotonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BotonEliminados, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(BotonEliminados, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

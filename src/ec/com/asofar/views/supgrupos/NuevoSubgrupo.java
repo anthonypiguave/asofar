@@ -111,7 +111,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
         });
 
         btncancelar.setBackground(new java.awt.Color(254, 254, 254));
-        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btncancelar.setForeground(new java.awt.Color(1, 1, 1));
         btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btncancelar.setText("CANCELAR");
@@ -123,7 +123,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
         });
 
         btnguardar.setBackground(new java.awt.Color(254, 254, 254));
-        btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(1, 1, 1));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");

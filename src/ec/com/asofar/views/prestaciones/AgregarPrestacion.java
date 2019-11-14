@@ -116,19 +116,23 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         cmbxSN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
 
         btngrabar.setBackground(new java.awt.Color(254, 254, 254));
-        btngrabar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btngrabar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btngrabar.setForeground(new java.awt.Color(1, 1, 1));
         btngrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btngrabar.setText("GUARDAR");
+        btngrabar.setOpaque(true);
         btngrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btngrabarActionPerformed(evt);
             }
         });
 
-        btnbuscarP.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnbuscarP.setBackground(new java.awt.Color(254, 254, 254));
+        btnbuscarP.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        btnbuscarP.setForeground(new java.awt.Color(1, 1, 1));
         btnbuscarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         btnbuscarP.setText("BUSCAR");
+        btnbuscarP.setOpaque(true);
         btnbuscarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbuscarPActionPerformed(evt);
@@ -153,10 +157,11 @@ public class AgregarPrestacion extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton1.setText("SALIR");
+        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -185,7 +190,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(txtCadena, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnbuscarP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnbuscarP, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(50, 50, 50))))

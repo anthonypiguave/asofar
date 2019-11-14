@@ -2981,7 +2981,7 @@ public class Tablas {
 //            filas[2] = lisProdVen.get(i).getNombre_producto();
             filas[2] = ProductoCadena.obtenerCadena(lisProdVen.get(i).getId_producto());
             filas[3] = "" + lisProdVen.get(i).getSaldo_actual();
-            filas[4] = "1" + lisProdVen.get(i).getValor_venta();
+            filas[4] = "" + lisProdVen.get(i).getCosto();
             filas[5] = "" + lisProdVen.get(i).getValor_venta();
 //            filas[6] = "" + lisProdVen.get(i).getValor_descuento();
             Long id_bodega = lisProdVen.get(i).getId_bodega();

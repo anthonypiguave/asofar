@@ -97,10 +97,11 @@ public class EditarSubgrupos extends javax.swing.JDialog {
         });
 
         btncancelar.setBackground(new java.awt.Color(254, 254, 254));
-        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btncancelar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btncancelar.setForeground(new java.awt.Color(1, 1, 1));
         btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btncancelar.setText("CANCELAR");
+        btncancelar.setOpaque(true);
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarActionPerformed(evt);
@@ -108,10 +109,11 @@ public class EditarSubgrupos extends javax.swing.JDialog {
         });
 
         btnguardar.setBackground(new java.awt.Color(254, 254, 254));
-        btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(1, 1, 1));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
+        btnguardar.setOpaque(true);
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
@@ -152,9 +154,10 @@ public class EditarSubgrupos extends javax.swing.JDialog {
         jTextField4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
         btneliminar.setBackground(new java.awt.Color(254, 254, 254));
-        btneliminar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btneliminar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btneliminar.setForeground(new java.awt.Color(1, 1, 1));
         btneliminar.setText("INACTIVAR");
+        btneliminar.setOpaque(true);
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneliminarActionPerformed(evt);

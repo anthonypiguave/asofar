@@ -426,17 +426,19 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("$");
 
-        btnSalir2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnSalir2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir2.setText("SALIR");
+        btnSalir2.setOpaque(true);
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalir2ActionPerformed(evt);
             }
         });
 
-        btnReporte.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnReporte.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnReporte.setText("IMPRIMIR");
+        btnReporte.setOpaque(true);
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteActionPerformed(evt);

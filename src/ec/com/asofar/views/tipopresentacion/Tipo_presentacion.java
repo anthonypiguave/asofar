@@ -28,24 +28,24 @@ import javax.swing.table.DefaultTableModel;
  * @author admin1
  */
 public class Tipo_presentacion extends javax.swing.JDialog {
-    
-    String valor;
+
     int x, y;
     PrTipoPresentacionJpaController tipo = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     List<PrTipoPresentacion> pre = null;
     PrTipoPresentacion objeto;
+    String valor = "";
 
     /**
      * Creates new form NewJDialog
      */
     public Tipo_presentacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();        
+        initComponents();
         setLocationRelativeTo(this);
         CrearModelo();
         CargarInformacion();
     }
-    
+
     public Tipo_presentacion(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
@@ -53,9 +53,9 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         CrearModelo();
         CargarInformacion();
     }
-    
+
     DefaultTableModel modelo;
-    
+
     private void CrearModelo() {
         try {
             modelo = (new DefaultTableModel(
@@ -70,12 +70,12 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false
                 };
-                
+
                 @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
-                
+
                 @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     return canEdit[colIndex];
@@ -85,9 +85,9 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString() + "error");
         }
-        
+
     }
-    
+
     private void CargarInformacion() {
         try {
             Object o[] = null;
@@ -146,7 +146,7 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         });
 
         btnnuevo.setBackground(new java.awt.Color(254, 254, 254));
-        btnnuevo.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnnuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnnuevo.setForeground(new java.awt.Color(1, 1, 1));
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnnuevo.setText("NUEVO");
@@ -157,11 +157,10 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         });
 
         btnsalir.setBackground(new java.awt.Color(254, 254, 254));
-        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnsalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
-        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -179,11 +178,11 @@ public class Tipo_presentacion extends javax.swing.JDialog {
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tablaMousePressed(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tabla);
@@ -196,19 +195,24 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
         );
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("BUSCAR:");
 
-        txtfiltro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtfiltroKeyTyped(evt);
+        txtfiltro.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtfiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfiltroActionPerformed(evt);
             }
+        });
+        txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyTyped(evt);
             }
         });
 
@@ -224,15 +228,16 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,13 +247,13 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,7 +304,22 @@ public class Tipo_presentacion extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tablaMouseClicked
 
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfiltroActionPerformed
+
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
+
         valor = txtfiltro.getText();
         Tablas.filtro(valor, tabla);
     }//GEN-LAST:event_txtfiltroKeyReleased
@@ -312,23 +332,13 @@ public class Tipo_presentacion extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtfiltroKeyTyped
 
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jLabel1MousePressed
-
-    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-        Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x, point.y - y);
-    }//GEN-LAST:event_jLabel1MouseDragged
-    
     public PrTipoPresentacion devuelveObjeto(Long id) {
         List<PrTipoPresentacion> listarobj = tipo.findPrTipoPresentacionEntities();
         PrTipoPresentacion objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
             if (listarobj.get(i).getIdTipoPresentacion() == id) {
                 objeto1 = listarobj.get(i);
-                
+
             }
         }
         return objeto1;
@@ -348,21 +358,21 @@ public class Tipo_presentacion extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Tipo_presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);

@@ -127,20 +127,22 @@ public class bodega_agregar extends javax.swing.JDialog {
         jLabel4.setText("NOMBRE:");
 
         btncancelar1.setBackground(new java.awt.Color(254, 250, 250));
-        btncancelar1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btncancelar1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btncancelar1.setForeground(new java.awt.Color(1, 1, 1));
         btncancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btncancelar1.setText("CANCELAR");
+        btncancelar1.setOpaque(true);
         btncancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelar1ActionPerformed(evt);
             }
         });
 
-        btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(8, 1, 1));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
+        btnguardar.setOpaque(true);
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
@@ -190,9 +192,9 @@ public class bodega_agregar extends javax.swing.JDialog {
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40))))
         );
         jPanel1Layout.setVerticalGroup(

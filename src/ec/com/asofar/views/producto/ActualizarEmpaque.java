@@ -79,7 +79,7 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
         jLabel1.setText("NOMBRE:");
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         jButton2.setText("CANCELAR");
@@ -108,7 +108,7 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
         });
 
         boton.setBackground(new java.awt.Color(254, 254, 254));
-        boton.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        boton.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         boton.setForeground(new java.awt.Color(1, 1, 1));
         boton.setText("AAAAAAAAAA");
         boton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +118,7 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         jButton1.setText("ACTUALIZAR");
