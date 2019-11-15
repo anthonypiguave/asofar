@@ -71,7 +71,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="Chooser2" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="BtnBuscar1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="BtnBuscar1" min="-2" pref="105" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
