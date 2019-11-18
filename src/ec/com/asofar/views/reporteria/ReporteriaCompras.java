@@ -55,7 +55,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     List<ReporteComprasDTO> itemList = null;
 
     public ReporteriaCompras(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal=false);
         initComponents();
         this.setLocationRelativeTo(this);
         itemList = rep.reporteCompras();
@@ -67,7 +67,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }
 
     public ReporteriaCompras(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
+        super(parent, modal=false);
         initComponents();
         this.setLocationRelativeTo(this);
         usu = us;
@@ -397,11 +397,11 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                         .addComponent(BtnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescuentlo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Txt_iva, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -473,7 +473,17 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList lista = new ArrayList();
         for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
-            ClaseReporte creporte = new ClaseReporte();
+            ClaseReporte creporte = new ClaseReporte(Chooser1.getDate().toString(),
+                                                    Chooser2.getDate().toString(),
+                                                    tbaReporteCompra.getValueAt(i,0).toString(),
+                                                    tbaReporteCompra.getValueAt(i,1).toString(),
+                                                    tbaReporteCompra.getValueAt(i,2).toString(),
+                                                    tbaReporteCompra.getValueAt(i,3).toString(),
+                                                    tbaReporteCompra.getValueAt(i,4).toString(),
+                                                    tbaReporteCompra.getValueAt(i,5).toString(),
+                                                    tbaReporteCompra.getValueAt(i,6).toString(),
+                                                    tbaReporteCompra.getValueAt(i,7).toString(),
+                                                    txtDescuentlo.getText(),Txt_iva.getText(),Txt_Total.getText());
             lista.add(creporte);
         }
         try {
@@ -482,7 +492,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             JDialog ventana = new JDialog();
             JRViewer jviewer = new JRViewer(jprint);
             ventana.add(jviewer);
-            ventana.setSize(new Dimension(ancho / 2, alto / 2));
+            ventana.setSize(new Dimension(ancho/2,alto/2));
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
             jviewer.setFitWidthZoomRatio();
