@@ -70,6 +70,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
     PrSubgrupos subgrupo;
     PrArticulo articulo;
     PrMedidas presentacionMedida;
+    CoProveedores proveedor;
 
     public ProductoNuevo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -745,11 +746,27 @@ public class ProductoNuevo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtProveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtProveedorMousePressed
-      
-        
-        
-        
-        
+
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarProveedor dialog = new ConsultarProveedor(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+
+                proveedor = dialog.getObjeto();
+
+                if (proveedor.getNombre() != null) {
+                    txtProveedor.setText(proveedor.getNombre());
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+
+
     }//GEN-LAST:event_txtProveedorMousePressed
 
     /**

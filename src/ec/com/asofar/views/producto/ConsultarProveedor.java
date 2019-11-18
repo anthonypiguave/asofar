@@ -6,13 +6,13 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.CoProveedoresJpaController;
-import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.dto.CoProveedores;
-import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
+import ec.com.asofar.views.proveedor.NuevoProveedor;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ public class ConsultarProveedor extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
-    PrGrupos grupo = new PrGrupos();
+
 
     List<CoProveedores> lista;
     CoProveedoresJpaController cont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -201,8 +201,10 @@ public class ConsultarProveedor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
-        lista = cont.findCoProveedoresEntities();
 
+        lista = new ArrayList<CoProveedores>();
+        
+        lista = cont.findCoProveedoresEntities();
 
         Tablas.ListarProveedorConsulta(lista, tabla);
     }
@@ -241,7 +243,6 @@ public class ConsultarProveedor extends javax.swing.JDialog {
             i = tabla.getSelectedRow();
             objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
 
-
             if (objeto != null) {
 
                 this.setVisible(false);
@@ -252,8 +253,10 @@ public class ConsultarProveedor extends javax.swing.JDialog {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
-        
-        
+        NuevoProveedor dialog = new NuevoProveedor(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
+        cargartabla();
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     public CoProveedores getObjeto() {

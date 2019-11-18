@@ -3252,7 +3252,7 @@ public class Tablas {
 
         for (int i = 0; i < lista.size(); i++) {
 
-            if (lista.get(i).getEstado().equals("A")) {
+            if (lista.get(i).getEstado().equals('A')) {
                 filas[0] = "" + lista.get(i).getIdProveedor();
                 filas[1] = lista.get(i).getNombre();
 

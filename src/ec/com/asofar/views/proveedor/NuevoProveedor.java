@@ -469,8 +469,8 @@ public class NuevoProveedor extends javax.swing.JDialog {
         int opcion = JOptionPane.showConfirmDialog(null, "SEGURO QUE DESEA SALIR", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
         if (opcion == JOptionPane.YES_OPTION) {
             setVisible(false);
-            ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(), true);
-            cp.setVisible(true);
+//            ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(), true);
+//            cp.setVisible(true);
         }
     }//GEN-LAST:event_btncancelarActionPerformed
 
@@ -521,8 +521,8 @@ public class NuevoProveedor extends javax.swing.JDialog {
                         cpcont.create(cpro);
                         JOptionPane.showMessageDialog(this, "NUEVO PROVEEDOR CREADO");
                         setVisible(false);
-                        ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(), true);
-                        cp.setVisible(true);
+//                        ConsultaProveedor cp = new ConsultaProveedor(new javax.swing.JFrame(), true);
+//                        cp.setVisible(true);
                     } catch (Exception ex) {
                         Logger.getLogger(NuevoProveedor.class.getName()).log(Level.SEVERE, null, ex);
                     }
