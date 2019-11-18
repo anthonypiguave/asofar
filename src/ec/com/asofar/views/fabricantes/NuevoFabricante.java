@@ -165,8 +165,8 @@ public class NuevoFabricante extends javax.swing.JDialog {
                     cfab.create(obj);
                     JOptionPane.showMessageDialog(null, "Fabricante guardado con exito");
                     setVisible(false);
-                    ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
-                    cf.setVisible(true);
+//                    ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
+//                    cf.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha podido guardar");
                 }
@@ -180,8 +180,8 @@ public class NuevoFabricante extends javax.swing.JDialog {
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        ConsultaFab a = new ConsultaFab(new javax.swing.JFrame(), true);
-        a.setVisible(true);
+//        ConsultaFab a = new ConsultaFab(new javax.swing.JFrame(), true);
+//        a.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed

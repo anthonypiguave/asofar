@@ -194,6 +194,9 @@
                 <Component class="javax.swing.JCheckBox" name="chDescontinuado">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFabricante">
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtFabricanteMousePressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtRegistroSanitarioExtranjero">
                 </Component>
@@ -300,6 +303,9 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEmpaqueCompra2">
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtEmpaqueCompra2MousePressed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -367,8 +373,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEmpaqueVenta1">
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtEmpaqueVenta1MousePressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEmpaqueVenta2">
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtEmpaqueVenta2MousePressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtUVenta">
                 </Component>
@@ -537,11 +549,9 @@
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -551,16 +561,14 @@
                                   <Component id="txtArticulo" max="32767" attributes="0"/>
                                   <Component id="txtTipoPresentacionMedida" min="-2" pref="320" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtProducto" pref="320" max="32767" attributes="0"/>
-                                      <Component id="txtCodigoBarra" max="32767" attributes="0"/>
-                                  </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtProducto" min="-2" pref="320" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnGenerarCadena" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="txtCodigoBarra" min="-2" pref="320" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="190" pref="157" max="32767" attributes="0"/>
+                          <EmptySpace pref="157" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -589,14 +597,14 @@
                           </Group>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtCodigoBarra" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtProducto" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="btnGenerarCadena" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCodigoBarra" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="142" max="32767" attributes="0"/>
                       </Group>

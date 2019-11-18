@@ -5,14 +5,14 @@
  */
 package ec.com.asofar.views.producto;
 
-import ec.com.asofar.dao.PrEmpaqueJpaController;
-import ec.com.asofar.dto.PrEmpaque;
+import ec.com.asofar.dao.PrFabricanteJpaController;
+import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.proveedor.NuevoProveedor;
+import ec.com.asofar.views.fabricantes.NuevoFabricante;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author admin1
  */
-public class ConsultarEmpaque extends javax.swing.JDialog {
+public class ConsultarFabricante extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
@@ -30,21 +30,21 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
 
-    List<PrEmpaque> lista;
-    PrEmpaqueJpaController cont = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
-    PrEmpaque objeto = new PrEmpaque();
+    List<PrFabricante> lista;
+    PrFabricanteJpaController cont = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrFabricante objeto = new PrFabricante();
 
     /**
      * Creates new form ConsultaProducto
      */
-    public ConsultarEmpaque(java.awt.Frame parent, boolean modal) {
+    public ConsultarFabricante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         cargartabla();
     }
 
-    public ConsultarEmpaque(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ConsultarFabricante(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -82,7 +82,7 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EMPAQUE");
+        jLabel1.setText("FABRICANTE");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -217,11 +217,11 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
 
     public void cargartabla() {
 
-        lista = new ArrayList<PrEmpaque>();
+        lista = new ArrayList<PrFabricante>();
 
-        lista = cont.findPrEmpaqueEntities();
+        lista = cont.findPrFabricanteEntities();
 
-        Tablas.ListarEmpaqueConsulta(lista, tabla);
+        Tablas.ListarFabricanteConsulta(lista, tabla);
     }
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -268,23 +268,23 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
-        EmpaqueMantenimiento dialog = new EmpaqueMantenimiento(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+        NuevoFabricante dialog = new NuevoFabricante(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
         cargartabla();
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    public PrEmpaque getObjeto() {
+    public PrFabricante getObjeto() {
         return objeto;
     }
 
-    public PrEmpaque devuelveObjeto(String datos, List<PrEmpaque> listaobjeto) {
+    public PrFabricante devuelveObjeto(String datos, List<PrFabricante> listaobjeto) {
 
-        PrEmpaque objeto1 = null;
+        PrFabricante objeto1 = null;
 
         for (int i = 0; i < listaobjeto.size(); i++) {
 
-            if (datos.equals("" + listaobjeto.get(i).getId())) {
+            if (datos.equals("" + listaobjeto.get(i).getIdFabricante())) {
                 objeto1 = listaobjeto.get(i);
 
                 break;
@@ -314,14 +314,30 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultarEmpaque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultarEmpaque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultarEmpaque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultarEmpaque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -342,7 +358,7 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true);
+                ConsultarFabricante dialog = new ConsultarFabricante(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

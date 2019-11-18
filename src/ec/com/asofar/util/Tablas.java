@@ -2549,10 +2549,10 @@ public class Tablas {
             filas[0] = "" + lisProdVen.get(i).getId_prestacion();
             if (lisProdVen.get(i).getCodigoBarra() == "") {
                 filas[1] = "-";
-            filas[3] = "-";
-            }else{
-            filas[1] = lisProdVen.get(i).getCodigoBarra();
-            filas[3] = "" + lisProdVen.get(i).getSaldo_actual();
+                filas[3] = "-";
+            } else {
+                filas[1] = lisProdVen.get(i).getCodigoBarra();
+                filas[3] = "" + lisProdVen.get(i).getSaldo_actual();
             }
 //            filas[2] = lisProdVen.get(i).getNombre_producto()
             filas[2] = lisProdVen.get(i).getNombre_producto();
@@ -2963,13 +2963,13 @@ public class Tablas {
     }
 
     public static void ListarProductosInventario(List<JoinProductoVenta> lisProdVen, JTable Tabla, List<InBodega> lisBode) {
-        int[] a = {40, 150, 400, 100,100 ,100/*, 100*/, 100};
+        int[] a = {40, 150, 400, 100, 100, 100/*, 100*/, 100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "COD. BARRA", "DESCRIPCION", "STOCK","COSTO", "P.VENTA"/*, "DESCUENTO"*/, "BODEGA"};
+        String[] b = {"COD.", "COD. BARRA", "DESCRIPCION", "STOCK", "COSTO", "P.VENTA"/*, "DESCUENTO"*/, "BODEGA"};
         String[] filas = new String[7];
 //        String[] filas = new String[8];
         model = new DefaultTableModel(null, b);
@@ -3238,6 +3238,7 @@ public class Tablas {
         }
 
     }
+
     public static void ListarProveedorConsulta(List<CoProveedores> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -3269,7 +3270,8 @@ public class Tablas {
         }
 
     }
-     public static void ListarEmpaqueConsulta(List<PrEmpaque> lista, JTable Tabla) {
+
+    public static void ListarEmpaqueConsulta(List<PrEmpaque> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -3301,11 +3303,41 @@ public class Tablas {
 
     }
 
+    public static void ListarFabricanteConsulta(List<PrFabricante> lista, JTable Tabla) {
+        int[] a = {60, 500};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "FABRICANTE"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+                filas[0] = "" + lista.get(i).getIdFabricante();
+                filas[1] = lista.get(i).getNombre();
+
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+
+            }
+
+        }
+
+    }
 
 }
 
 ///// ---------es otra clases //la clase tabla esta arriba  -------------------
-
 class MyComboBoxEditor extends DefaultCellEditor {
 
     public MyComboBoxEditor(String[] items) {

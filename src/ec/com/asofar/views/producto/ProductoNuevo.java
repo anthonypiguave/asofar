@@ -14,7 +14,6 @@ import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
-import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrEmpaque;
@@ -71,7 +70,8 @@ public class ProductoNuevo extends javax.swing.JDialog {
     PrArticulo articulo;
     PrMedidas presentacionMedida;
     CoProveedores proveedor;
-    PrEmpaque empaqueCompra1;
+    PrEmpaque empaqueCompra1, empaqueCompra2, empaqueVenta1, empaqueVenta2;
+    PrFabricante fabricante;
 
     public ProductoNuevo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -185,6 +185,12 @@ public class ProductoNuevo extends javax.swing.JDialog {
 
         jLabel21.setText("Descontinuado:");
 
+        txtFabricante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtFabricanteMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -255,6 +261,12 @@ public class ProductoNuevo extends javax.swing.JDialog {
             }
         });
 
+        txtEmpaqueCompra2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtEmpaqueCompra2MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -305,6 +317,18 @@ public class ProductoNuevo extends javax.swing.JDialog {
         jLabel15.setText("unidad de medida de empaque:");
 
         jLabel16.setText("cantidad por unidad de empaque:");
+
+        txtEmpaqueVenta1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtEmpaqueVenta1MousePressed(evt);
+            }
+        });
+
+        txtEmpaqueVenta2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtEmpaqueVenta2MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -482,10 +506,9 @@ public class ProductoNuevo extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -494,12 +517,11 @@ public class ProductoNuevo extends javax.swing.JDialog {
                         .addComponent(txtArticulo)
                         .addComponent(txtTipoPresentacionMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                            .addComponent(txtCodigoBarra))
+                        .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenerarCadena)))
-                .addGap(157, 157, Short.MAX_VALUE))
+                        .addComponent(btnGenerarCadena))
+                    .addComponent(txtCodigoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,13 +544,13 @@ public class ProductoNuevo extends javax.swing.JDialog {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGenerarCadena, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtCodigoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
 
@@ -710,18 +732,20 @@ public class ProductoNuevo extends javax.swing.JDialog {
                 obj.setFechaCreacion(d);
 
                 if (txtCodigoBarra.getText() != "") {
+
+                } else {
                     obj.setCodigoBarra(txtCodigoBarra.getText());
                 }
                 if (txtRegistroSanitarioExtranjero.getText() != "") {
+
+                } else {
                     obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
                 }
 
                 if (txtRegistroSanitarioLocal.getText() != "") {
-                    obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
-                }
 
-                if (txtRegistroSanitarioExtranjero.getText() != "") {
-                    obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
+                } else {
+                    obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
                 }
 
                 if (chReceta.isEnabled()) {
@@ -734,6 +758,65 @@ public class ProductoNuevo extends javax.swing.JDialog {
                     obj.setDescontinuado("SI");
                 } else {
                     obj.setDescontinuado("NO");
+                }
+
+                if (txtProveedor.getText() != "") {
+
+                } else {
+
+                }
+
+                if (txtFabricante.getText() != "") {
+
+                } else {
+                    obj.setCodFabricante(fabricante);
+
+                }
+
+                if (empaqueCompra1.getNombreEmpaque() != "") {
+
+                } else {
+                    obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
+                }
+
+                if (empaqueCompra2.getNombreEmpaque() != "") {
+
+                } else {
+                    obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
+                }
+                if (txtUCompra.getText() != "") {
+
+                } else {
+                    obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
+                }
+
+                if (txtCCompra.getText() != "") {
+
+                } else {
+                    obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
+                }
+
+                if (empaqueVenta1.getNombreEmpaque() != "") {
+
+                } else {
+                    obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
+                }
+
+                if (empaqueVenta2.getNombreEmpaque() != "") {
+
+                } else {
+                    obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
+                }
+                if (txtUVenta.getText() != "") {
+
+                } else {
+                    obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
+                }
+
+                if (txtCVenta.getText() != "") {
+
+                } else {
+                    obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
                 }
 
                 productController.create(obj);
@@ -799,6 +882,90 @@ public class ProductoNuevo extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_txtEmpaqueCompra1MousePressed
+
+    private void txtEmpaqueCompra2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmpaqueCompra2MousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                empaqueCompra2 = dialog.getObjeto();
+
+                if (empaqueCompra2.getNombreEmpaque() != null) {
+                    txtEmpaqueCompra2.setText(empaqueCompra2.getNombreEmpaque());
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+    }//GEN-LAST:event_txtEmpaqueCompra2MousePressed
+
+    private void txtEmpaqueVenta1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmpaqueVenta1MousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                empaqueVenta1 = dialog.getObjeto();
+
+                if (empaqueVenta1.getNombreEmpaque() != null) {
+                    txtEmpaqueVenta1.setText(empaqueVenta1.getNombreEmpaque());
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+    }//GEN-LAST:event_txtEmpaqueVenta1MousePressed
+
+    private void txtEmpaqueVenta2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmpaqueVenta2MousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                empaqueVenta2 = dialog.getObjeto();
+
+                if (empaqueVenta2.getNombreEmpaque() != null) {
+                    txtEmpaqueVenta2.setText(empaqueVenta2.getNombreEmpaque());
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+    }//GEN-LAST:event_txtEmpaqueVenta2MousePressed
+
+    private void txtFabricanteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFabricanteMousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarFabricante dialog = new ConsultarFabricante(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                fabricante = dialog.getObjeto();
+
+                if (fabricante.getNombre() != null) {
+                    txtFabricante.setText(fabricante.getNombre());
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+    }//GEN-LAST:event_txtFabricanteMousePressed
 
     /**
      * @param args the command line arguments

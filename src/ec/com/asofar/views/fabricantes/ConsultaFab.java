@@ -11,29 +11,35 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author alumno
  */
-
-
 public class ConsultaFab extends javax.swing.JDialog {
+
     String valor = "";
-    int x,y;
+    int x, y;
+    List<PrFabricante> listfab;
     PrFabricanteJpaController cfab = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<PrFabricante> listfab = cfab.findPrFabricanteEntities();
     PrFabricante obj = null;
 
-    /**
-     * Creates new form ConsultaFab
-     */
+
     public ConsultaFab(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        CargarTabla();
+
+    }
+
+    public void CargarTabla() {
+        listfab = new ArrayList<PrFabricante>();
+        listfab = cfab.findPrFabricanteEntities();
         Tablas.TablaFabricante(listfab, tabla);
+
     }
 
     /**
@@ -225,11 +231,13 @@ public class ConsultaFab extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void BotonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoActionPerformed
         // TODO add your handling code here:
+//        setVisible(false);
         NuevoFabricante nf = new NuevoFabricante(new javax.swing.JFrame(), true);
-        setVisible(false);
         nf.setVisible(true);
+        CargarTabla();
     }//GEN-LAST:event_BotonNuevoActionPerformed
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
@@ -246,9 +254,10 @@ public class ConsultaFab extends javax.swing.JDialog {
                 if ((tabla.getValueAt(id, 1).toString().equals(listfab.get(i).getNombre()))) {
                     obj = listfab.get(i);
                     if (obj != null) {
-                        setVisible(false);
+//                        setVisible(false);
                         EditarFabricante ef = new EditarFabricante(new javax.swing.JFrame(), true, obj);
                         ef.setVisible(true);
+                        CargarTabla();
                     }
                 }
             }
@@ -259,9 +268,10 @@ public class ConsultaFab extends javax.swing.JDialog {
 
     private void BotonEliminadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminadosActionPerformed
         // TODO add your handling code here:
+//        setVisible(false);
         ConsultaFabInac cfi = new ConsultaFabInac(new javax.swing.JFrame(), true);
-        setVisible(false);
         cfi.setVisible(true);
+        CargarTabla();
     }//GEN-LAST:event_BotonEliminadosActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -271,7 +281,7 @@ public class ConsultaFab extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
@@ -287,7 +297,7 @@ public class ConsultaFab extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyTyped
 
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
-       valor = txtfiltro.getText();
+        valor = txtfiltro.getText();
         Tablas.filtro(valor, tabla);
     }//GEN-LAST:event_txtfiltroKeyReleased
 

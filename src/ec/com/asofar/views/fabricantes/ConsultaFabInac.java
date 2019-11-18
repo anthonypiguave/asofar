@@ -9,9 +9,9 @@ import ec.com.asofar.dao.PrFabricanteJpaController;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.articulo.EditarArticulo;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,19 +19,26 @@ import java.util.List;
  * @author alumno
  */
 public class ConsultaFabInac extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
+
+    List<PrFabricante> listfab;
     PrFabricanteJpaController cfab = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<PrFabricante> listfab = cfab.findPrFabricanteEntities();
     PrFabricante obj = null;
     String valor = "";
-    /**
-     * Creates new form ConsultaFab
-     */
+
     public ConsultaFabInac(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        CargarTabla();
+    }
+
+    public void CargarTabla() {
+        listfab = new ArrayList<PrFabricante>();
+        listfab = cfab.findPrFabricanteEntities();
         Tablas.TablaFabricanteInac(listfab, tabla);
+
     }
 
     /**
@@ -190,11 +197,10 @@ public class ConsultaFabInac extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
-        // TODO add your handling code here:
-        
+
         setVisible(false);
-        ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
-        cf.setVisible(true);
+//        ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
+//        cf.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
@@ -213,7 +219,7 @@ public class ConsultaFabInac extends javax.swing.JDialog {
                 }
             }
         }
-        
+
 
     }//GEN-LAST:event_tablaMousePressed
 
@@ -224,7 +230,7 @@ public class ConsultaFabInac extends javax.swing.JDialog {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed

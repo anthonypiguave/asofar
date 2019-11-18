@@ -174,8 +174,8 @@ public class EditarFabricanteInac extends javax.swing.JDialog {
                 cfab.edit(obj1);
                 JOptionPane.showMessageDialog(null, "Fabricante activado");
                 setVisible(false);
-                ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
-                cf.setVisible(true);
+//                ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
+//                cf.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido activar");
             }
@@ -190,8 +190,8 @@ public class EditarFabricanteInac extends javax.swing.JDialog {
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        ConsultaFabInac cf = new ConsultaFabInac(new javax.swing.JFrame(), true);
-        cf.setVisible(true);
+//        ConsultaFabInac cf = new ConsultaFabInac(new javax.swing.JFrame(), true);
+//        cf.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed

@@ -70,8 +70,7 @@ public class EditarFabricante extends javax.swing.JDialog {
         BotonEliminar.setBackground(new java.awt.Color(254, 254, 254));
         BotonEliminar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BotonEliminar.setForeground(new java.awt.Color(1, 1, 1));
-        BotonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
-        BotonEliminar.setText("ELIMINAR");
+        BotonEliminar.setText("DESACTIVAR");
         BotonEliminar.setOpaque(true);
         BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,8 +198,8 @@ public class EditarFabricante extends javax.swing.JDialog {
                         cfab.edit(obj1);
                         JOptionPane.showMessageDialog(null, "Fabricante actualizado con exito");
                         setVisible(false);
-                        ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
-                        cf.setVisible(true);
+//                        ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
+//                        cf.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "No se ha podido guardar");
                     }
@@ -218,8 +217,8 @@ public class EditarFabricante extends javax.swing.JDialog {
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
-        cf.setVisible(true);
+//        ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
+//        cf.setVisible(true);
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
@@ -232,8 +231,8 @@ public class EditarFabricante extends javax.swing.JDialog {
                 cfab.edit(obj1);
                 JOptionPane.showMessageDialog(null, "Fabricante eliminado");
                 setVisible(false);
-                ConsultaFab cf= new ConsultaFab(new javax.swing.JFrame(), true);
-                cf.setVisible(true);
+//                ConsultaFab cf= new ConsultaFab(new javax.swing.JFrame(), true);
+//                cf.setVisible(true);
             }
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
