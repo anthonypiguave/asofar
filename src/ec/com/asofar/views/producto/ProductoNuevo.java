@@ -71,6 +71,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
     PrArticulo articulo;
     PrMedidas presentacionMedida;
     CoProveedores proveedor;
+    PrEmpaque empaqueCompra1;
 
     public ProductoNuevo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -245,6 +246,12 @@ public class ProductoNuevo extends javax.swing.JDialog {
         txtProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtProveedorMousePressed(evt);
+            }
+        });
+
+        txtEmpaqueCompra1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtEmpaqueCompra1MousePressed(evt);
             }
         });
 
@@ -768,6 +775,30 @@ public class ProductoNuevo extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_txtProveedorMousePressed
+
+    private void txtEmpaqueCompra1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmpaqueCompra1MousePressed
+
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                empaqueCompra1 = dialog.getObjeto();
+
+                if (empaqueCompra1.getNombreEmpaque() != null) {
+                    txtEmpaqueCompra1.setText(empaqueCompra1.getNombreEmpaque());
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+
+
+    }//GEN-LAST:event_txtEmpaqueCompra1MousePressed
 
     /**
      * @param args the command line arguments

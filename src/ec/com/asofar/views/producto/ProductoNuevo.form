@@ -295,6 +295,9 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEmpaqueCompra1">
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtEmpaqueCompra1MousePressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEmpaqueCompra2">
                 </Component>

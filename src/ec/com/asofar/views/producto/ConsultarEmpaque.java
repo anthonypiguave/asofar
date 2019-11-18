@@ -5,8 +5,11 @@
  */
 package ec.com.asofar.views.producto;
 
-import ec.com.asofar.dao.CoProveedoresJpaController;
-import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dao.PrEmpaqueJpaController;
+import ec.com.asofar.dto.PrEmpaque;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.proveedor.NuevoProveedor;
@@ -23,11 +26,13 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
 
-
-    List<CoProveedores> lista;
-    CoProveedoresJpaController cont = new CoProveedoresJpaController(EntityManagerUtil.ObtenerEntityManager());
-    CoProveedores objeto = new CoProveedores();
+    List<PrEmpaque> lista;
+    PrEmpaqueJpaController cont = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrEmpaque objeto = new PrEmpaque();
 
     /**
      * Creates new form ConsultaProducto
@@ -36,6 +41,16 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cargartabla();
+    }
+
+    public ConsultarEmpaque(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
         cargartabla();
     }
 
@@ -202,11 +217,11 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
 
     public void cargartabla() {
 
-        lista = new ArrayList<CoProveedores>();
-        
-        lista = cont.findCoProveedoresEntities();
+        lista = new ArrayList<PrEmpaque>();
 
-        Tablas.ListarProveedorConsulta(lista, tabla);
+        lista = cont.findPrEmpaqueEntities();
+
+        Tablas.ListarEmpaqueConsulta(lista, tabla);
     }
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -253,23 +268,23 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
-        NuevoProveedor dialog = new NuevoProveedor(new javax.swing.JFrame(), true);
+        EmpaqueMantenimiento dialog = new EmpaqueMantenimiento(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
         dialog.setVisible(true);
         cargartabla();
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    public CoProveedores getObjeto() {
+    public PrEmpaque getObjeto() {
         return objeto;
     }
 
-    public CoProveedores devuelveObjeto(String datos, List<CoProveedores> listaobjeto) {
+    public PrEmpaque devuelveObjeto(String datos, List<PrEmpaque> listaobjeto) {
 
-        CoProveedores objeto1 = null;
+        PrEmpaque objeto1 = null;
 
         for (int i = 0; i < listaobjeto.size(); i++) {
 
-            if (datos.equals("" + listaobjeto.get(i).getIdProveedor())) {
+            if (datos.equals("" + listaobjeto.get(i).getId())) {
                 objeto1 = listaobjeto.get(i);
 
                 break;
