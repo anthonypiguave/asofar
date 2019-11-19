@@ -10,6 +10,7 @@ import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
 import ec.com.asofar.daoext.ReporteProveedorDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
+import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.Tablas;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
@@ -469,7 +470,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,52 +598,42 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalir2ActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-//        ArrayList tablac = new ArrayList();
-//        for (int i = 0; i < tbaListaComprasB.getRowCount(); i++) {
-//            ClaseReporte tabla1 = new ClaseReporte(txtNombre.getText(),
-//                    txtCodigoProveedor.getText(),
-//                    txtNombre.getText(),
-//                    txtRepresentante.getText(),
-//                    txtTelefono.getText(),
-//                    txtRuc.getText(),
-//                    txtCorreo.getText(),
-//                    txtDireccion.getText(),
-//                    txtTipo.getText(),
-//                    txtFechaCreacion.getText(),
-//                    cbxPlazo.getSelectedItem().toString(),
-//                    cbxFormaP.getSelectedItem().toString(),
-//                    tbaListaComprasB.getValueAt(i, 0).toString(),
-//                    tbaListaComprasB.getValueAt(i, 1).toString(),
-//                    tbaListaComprasB.getValueAt(i, 2).toString(),
-//                    tbaListaComprasB.getValueAt(i, 3).toString(),
-//                    tbaListaComprasB.getValueAt(i, 4).toString(),
-//                    tbaListaComprasB.getValueAt(i, 5).toString(),
-//                    tbaListaComprasB.getValueAt(i, 6).toString(),
-//                    tbaListaComprasB.getValueAt(i, 7).toString(),
-//                    tbaListaComprasB.getValueAt(i, 8).toString(),
-//                    tbaListaComprasB.getValueAt(i, 9).toString(),
-//                    tbaListaComprasB.getValueAt(i, 10).toString(),
-//                    tbaListaComprasB.getValueAt(i, 11).toString(),
-//                    txtDescuento.getText(),
-//                    txtIva.getText(),
-//                    txtTotal.getText(),
-//                    txt_Numero.getText());
-//            tablac.add(tabla1);
-//        }
-//        try {
-//            String dir = System.getProperty("user.dir") + "/Reportes/" +"OrdenCompra.jasper";
-//            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
-//            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(tablac));
-//            JDialog frame = new JDialog(this);
-//            JRViewer viewer = new JRViewer(jprint);
-//            frame.add(viewer);
-//            frame.setSize(new Dimension(ancho / 2, alto / 2));
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-//            viewer.setFitWidthZoomRatio();
-//        } catch (JRException ex) {
-//            Logger.getLogger(ReporteriaDetalleCompras.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        ArrayList tablac = new ArrayList();
+        for (int i = 0; i < tbaListaComprasB.getRowCount(); i++) {
+            ClaseReporte tabla1 = new ClaseReporte(txtCodigoProveedor.getText(),
+                    txtRuc.getText(),
+                    txt_Numero.getText(),
+                    txtNombre.getText(),
+                    txtCorreo.getText(),
+                    txtFechaCreacion.getText(),
+                    txtRepresentante.getText(),
+                    txtDireccion.getText(),
+                    txtTelefono.getText(),
+                    txtTipo.getText(),
+                    tbaListaComprasB.getValueAt(i, 0).toString(),
+                    tbaListaComprasB.getValueAt(i, 1).toString(),
+                    tbaListaComprasB.getValueAt(i, 2).toString(),
+                    tbaListaComprasB.getValueAt(i, 3).toString(),
+                    tbaListaComprasB.getValueAt(i, 4).toString(),
+                    txtDescuento.getText(),
+                    txtIva.getText(),
+                    txtTotal.getText());
+            tablac.add(tabla1);
+        }
+        try {
+            String dir = System.getProperty("user.dir")+"/Reportes/"+"ReporteriaDetalleCompras.jasper";
+            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(tablac));
+            JDialog frame = new JDialog(this);
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho / 2, alto / 2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(ReporteriaDetalleCompras.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void jLabel7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseDragged

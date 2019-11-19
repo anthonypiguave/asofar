@@ -22,6 +22,7 @@ import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.Dimension;
@@ -652,52 +653,45 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalir2ActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-//        ArrayList tablac = new ArrayList();
-//        for (int i = 0; i < tbaListaComprasB.getRowCount(); i++) {
-//            ClaseReporte tabla1 = new ClaseReporte(txtNombre.getText(),
-//                    txtCodigoProveedor.getText(),
-//                    txtNombre.getText(),
-//                    txtRepresentante.getText(),
-//                    txtTelefono.getText(),
-//                    txtRuc.getText(),
-//                    txtCorreo.getText(),
-//                    txtDireccion.getText(),
-//                    txtTipo.getText(),
-//                    txtFechaCreacion.getText(),
-//                    cbxPlazo.getSelectedItem().toString(),
-//                    cbxFormaP.getSelectedItem().toString(),
-//                    tbaListaComprasB.getValueAt(i, 0).toString(),
-//                    tbaListaComprasB.getValueAt(i, 1).toString(),
-//                    tbaListaComprasB.getValueAt(i, 2).toString(),
-//                    tbaListaComprasB.getValueAt(i, 3).toString(),
-//                    tbaListaComprasB.getValueAt(i, 4).toString(),
-//                    tbaListaComprasB.getValueAt(i, 5).toString(),
-//                    tbaListaComprasB.getValueAt(i, 6).toString(),
-//                    tbaListaComprasB.getValueAt(i, 7).toString(),
-//                    tbaListaComprasB.getValueAt(i, 8).toString(),
-//                    tbaListaComprasB.getValueAt(i, 9).toString(),
-//                    tbaListaComprasB.getValueAt(i, 10).toString(),
-//                    tbaListaComprasB.getValueAt(i, 11).toString(),
-//                    txtDescuento.getText(),
-//                    txtIva.getText(),
-//                    txtTotal.getText(),
-//                    txt_Numero.getText());
-//            tablac.add(tabla1);
-//        }
-//        try {
-//            String dir = System.getProperty("user.dir") + "/Reportes/" +"OrdenCompra.jasper";
-//            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
-//            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(tablac));
-//            JDialog frame = new JDialog(this);
-//            JRViewer viewer = new JRViewer(jprint);
-//            frame.add(viewer);
-//            frame.setSize(new Dimension(ancho / 2, alto / 2));
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-//            viewer.setFitWidthZoomRatio();
-//        } catch (JRException ex) {
-//            Logger.getLogger(ReporteriaDetalleCompras.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        ArrayList tablac = new ArrayList();
+        for (int i = 0; i < tbaListaComprasB.getRowCount(); i++) {
+            ClaseReporte tabla1 = new ClaseReporte(txtCodigoCliente.getText(),
+                    txttipodoc.getText(),
+                    txt_N_VENTA.getText(),
+                    txtNombre.getText(),
+                    txtn_doc.getText(),
+                    txtFechaCreacion.getText(),
+                    txtapellidos.getText(),
+                    txtDireccion.getText(),
+                    txSucursal.getText(),
+                    txtTelefono.getText(),
+                    txtcorreo.getText(),
+                    txtCaja.getText(),                    
+                    tbaListaComprasB.getValueAt(i, 0).toString(),
+                    tbaListaComprasB.getValueAt(i, 1).toString(),
+                    tbaListaComprasB.getValueAt(i, 2).toString(),
+                    tbaListaComprasB.getValueAt(i, 3).toString(),
+                    tbaListaComprasB.getValueAt(i, 4).toString(),
+                    tbaListaComprasB.getValueAt(i, 5).toString(),
+                    txtDescuento.getText(),
+                    txtIva.getText(),
+                    txtTotal.getText());
+            tablac.add(tabla1);
+        }
+        try {
+            String dir = System.getProperty("user.dir") + "/Reportes/" +"ReporteriaDetalleFactura.jasper";
+            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(tablac));
+            JDialog frame = new JDialog(this);
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho / 2, alto / 2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(ReporteriaDetalleCompras.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void jLabel7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseDragged
