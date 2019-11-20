@@ -104,7 +104,7 @@ public class Tablas {
     private static boolean[] tbordenpedido2 = {false, false, false, false, true};
     private static boolean[] tbordencompra = {false, false, false, false, true, false, false, true, false};
     private static boolean[] tbordenrecibido = {false, false, false, false, false, true, true, true, false};
-    private static boolean[] tbdetallecompra = {false, true, false, false, false, false, false, false};
+    private static boolean[] tbdetallecompra = {false, false, false, false, false, false, false, false};
 
     public static void filtro(String valor, JTable Tabla) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
@@ -2658,10 +2658,11 @@ public class Tablas {
 
             Object Filas[] = new Object[8];
             Filas[0] = "" + lista.get(i).getId_detalle_orden_compra().toString();
-            JTextArea textArea = new JTextArea();
-            textArea.append(lista.get(i).getDescripcion());
-            Filas[1] = textArea;
-            //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
+//            JTextArea textArea = new JTextArea();
+//            textArea.append(""+lista.get(i).getDescripcion());
+//            Filas[1] = textArea;
+//            Filas[1] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
+            Filas[1] = lista.get(i).getDescripcion();
             Filas[2] = "" + lista.get(i).getLote_fabricacion().toString();
             Filas[3] = lista.get(i).getFecha_caducidad().toString();
             Filas[4] = lista.get(i).getSubtotal().toString();
@@ -2676,8 +2677,8 @@ public class Tablas {
 
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
-            //   Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            // Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+//               Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+//             Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
             Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
