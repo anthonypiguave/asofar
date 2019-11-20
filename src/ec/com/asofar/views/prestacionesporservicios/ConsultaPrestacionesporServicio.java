@@ -289,13 +289,9 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
     private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
         ArrayList lista = new ArrayList();
         for (int i = 0; i < tba_prestacionesporservicios.getRowCount(); i++) {
-            ClaseReporte creporte = new ClaseReporte(String.valueOf(tba_prestacionesporservicios.getValueAt(i, 0)),
-                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 1)),
-                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 2)),
-                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 3)),
-                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 4)),
-                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 5)),
-                    String.valueOf(tba_prestacionesporservicios.getValueAt(i, 6)));
+            ClaseReporte creporte = new ClaseReporte(tba_prestacionesporservicios.getValueAt(i, 0).toString(),
+                    tba_prestacionesporservicios.getValueAt(i, 1).toString(),
+                    tba_prestacionesporservicios.getValueAt(i, 2).toString());
             lista.add(creporte);
         }
         try {
