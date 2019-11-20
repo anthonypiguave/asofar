@@ -629,7 +629,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             try {
 
-                ConsultarGrupo dialog = new ConsultarGrupo(new javax.swing.JFrame(), true);
+                ConsultarGrupo dialog = new ConsultarGrupo(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
                 dialog.setVisible(true);
 
                 grupo = dialog.getObjeto();
@@ -653,7 +653,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
 
             try {
-                ConsultarSubGrupo dialog = new ConsultarSubGrupo(new javax.swing.JFrame(), true, grupo);
+                ConsultarSubGrupo dialog = new ConsultarSubGrupo(new javax.swing.JFrame(), true, grupo, seUsuario, seEmpresa, seSucursal);
                 dialog.setVisible(true);
 
                 subgrupo = dialog.getObjeto();

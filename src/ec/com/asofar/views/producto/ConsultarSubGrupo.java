@@ -10,6 +10,9 @@ import ec.com.asofar.daoext.GruposControllerExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrSubgrupos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -25,8 +28,12 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
+
     PrGrupos gruposObjeto = new PrGrupos();
-    List<PrSubgrupos> lista = new ArrayList<PrSubgrupos>();
+    List<PrSubgrupos> lista;
     PrSubgruposJpaController cont = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrSubgrupos objeto = new PrSubgrupos();
 
@@ -48,6 +55,17 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
         cargartabla();
     }
 
+    public ConsultarSubGrupo(java.awt.Frame parent, boolean modal, PrGrupos objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
+        gruposObjeto = objeto;
+        cargartabla();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,6 +83,7 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -137,10 +156,20 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
-        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
+            }
+        });
+
+        btnNuevo.setBackground(new java.awt.Color(254, 254, 254));
+        btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
+        btnNuevo.setText("NUEVO");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
             }
         });
 
@@ -164,6 +193,8 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
                                 .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(152, 152, 152))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
                                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())))))
         );
@@ -177,9 +208,11 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
                     .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevo)
+                    .addComponent(btnsalir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,7 +231,7 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
 
     public void cargartabla() {
 
-
+        lista = new ArrayList<PrSubgrupos>();
         PrGrupos grupos = ObtenerDTO.ObtenerPrGrupos(gruposObjeto.getNombre());
 
         for (int i = 0; i < grupos.getPrSubgruposList().size(); i++) {
@@ -250,6 +283,13 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tablaMousePressed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        NuevoSubGrupo dialog = new NuevoSubGrupo(new javax.swing.JFrame(), true, gruposObjeto, seUsuario, seEmpresa, seSucursal);
+        dialog.setVisible(true);
+        cargartabla();
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     public PrSubgrupos getObjeto() {
         return objeto;
@@ -324,6 +364,7 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
