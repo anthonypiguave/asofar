@@ -21,6 +21,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
@@ -471,10 +472,19 @@ public class ReporteriaCompras extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String dia = Integer.toString(Chooser1.getCalendar().get(Calendar.DAY_OF_MONTH));
+        String mes = Integer.toString(Chooser1.getCalendar().get(Calendar.MONTH));
+        String año = Integer.toString(Chooser1.getCalendar().get(Calendar.YEAR));
+        String fecha = (dia+"-"+mes+"-"+año);
+        String dia2 = Integer.toString(Chooser2.getCalendar().get(Calendar.DAY_OF_MONTH));
+        String mes2 = Integer.toString(Chooser2.getCalendar().get(Calendar.MONTH));
+        String año2 = Integer.toString(Chooser2.getCalendar().get(Calendar.YEAR));
+        String fecha2 = (dia2+"-"+mes2+"-"+año2);
         ArrayList lista = new ArrayList();
+        
         for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
-            ClaseReporte creporte = new ClaseReporte(Chooser1.getDate().toString(),
-                                                    Chooser2.getDate().toString(),
+            ClaseReporte creporte = new ClaseReporte(fecha,
+                                                    fecha2,
                                                     tbaReporteCompra.getValueAt(i,0).toString(),
                                                     tbaReporteCompra.getValueAt(i,1).toString(),
                                                     tbaReporteCompra.getValueAt(i,2).toString(),

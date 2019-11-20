@@ -105,9 +105,52 @@ public class ClaseReporte {
         this.valor12 = valor12;
         this.valor13 = valor13;
     }
-    
-    
 
+    public ClaseReporte(String valor1, String valor2, String valor3, String valor4, String valor5, String valor6, String valor7, String valor8, String valor9, String valor10, String valor11, String valor12, String valor13, String valor14, String valor15, String valor16, String valor17, String valor18) {
+        this.valor1 = valor1;
+        this.valor2 = valor2;
+        this.valor3 = valor3;
+        this.valor4 = valor4;
+        this.valor5 = valor5;
+        this.valor6 = valor6;
+        this.valor7 = valor7;
+        this.valor8 = valor8;
+        this.valor9 = valor9;
+        this.valor10 = valor10;
+        this.valor11 = valor11;
+        this.valor12 = valor12;
+        this.valor13 = valor13;
+        this.valor14 = valor14;
+        this.valor15 = valor15;
+        this.valor16 = valor16;
+        this.valor17 = valor17;
+        this.valor18 = valor18;
+    }
+
+    public ClaseReporte(String valor1, String valor2, String valor3, String valor4, String valor5, String valor6, String valor7, String valor8, String valor9, String valor10, String valor11, String valor12, String valor13, String valor14, String valor15, String valor16, String valor17, String valor18, String valor19, String valor20, String valor21) {
+        this.valor1 = valor1;
+        this.valor2 = valor2;
+        this.valor3 = valor3;
+        this.valor4 = valor4;
+        this.valor5 = valor5;
+        this.valor6 = valor6;
+        this.valor7 = valor7;
+        this.valor8 = valor8;
+        this.valor9 = valor9;
+        this.valor10 = valor10;
+        this.valor11 = valor11;
+        this.valor12 = valor12;
+        this.valor13 = valor13;
+        this.valor14 = valor14;
+        this.valor15 = valor15;
+        this.valor16 = valor16;
+        this.valor17 = valor17;
+        this.valor18 = valor18;
+        this.valor19 = valor19;
+        this.valor20 = valor20;
+        this.valor21 = valor21;
+    }
+    
     public String getValor1() {
         return valor1;
     }
