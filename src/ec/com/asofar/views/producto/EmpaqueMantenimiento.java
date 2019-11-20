@@ -29,7 +29,6 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
      * Creates new form EmpaqueMantenimiento
      */
     PrEmpaqueJpaController empcontrol = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
-//    PrEmpaque emp=new PrEmpaque();
     List<PrEmpaque> listEmpa = empcontrol.findPrEmpaqueEntities();
     PrEmpaque emp = new PrEmpaque();
     SeUsuarios usuario;
@@ -38,8 +37,8 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 
     public EmpaqueMantenimiento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setLocationRelativeTo(null);
         initComponents();
+        setLocationRelativeTo(null);
         tabla();
 //        Timer tiempo = new Timer(100, new EmpaqueMantenimiento.horas());
 //        tiempo.start();
@@ -107,6 +106,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 

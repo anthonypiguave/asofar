@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author admin1
  */
-public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
+public class ConsultarPresentacionMedida extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
@@ -40,14 +40,14 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
     /**
      * Creates new form ConsultaProducto
      */
-    public ConsultarTipoPresentacionMedida(java.awt.Frame parent, boolean modal) {
+    public ConsultarPresentacionMedida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         cargartabla();
     }
 
-    public ConsultarTipoPresentacionMedida(java.awt.Frame parent, boolean modal, PrArticulo objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ConsultarPresentacionMedida(java.awt.Frame parent, boolean modal, PrArticulo objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -148,7 +148,6 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
-        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -160,7 +159,6 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
         btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btnNuevo.setText("NUEVO");
-        btnNuevo.setOpaque(true);
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -327,14 +325,16 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultarTipoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultarTipoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultarTipoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultarTipoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -342,7 +342,7 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultarTipoPresentacionMedida dialog = new ConsultarTipoPresentacionMedida(new javax.swing.JFrame(), true);
+                ConsultarPresentacionMedida dialog = new ConsultarPresentacionMedida(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

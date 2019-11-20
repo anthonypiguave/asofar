@@ -3145,7 +3145,7 @@ public class Tablas {
     }
 
     public static void ListarTipoPresentacionMedidaConsulta(List<PrMedidas> lista, JTable Tabla) {
-        int[] a = {500, 300};
+        int[] a = {400, 300};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);

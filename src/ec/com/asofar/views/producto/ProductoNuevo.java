@@ -97,6 +97,8 @@ public class ProductoNuevo extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
+        chReceta.setSelected(false);
+        chDescontinuado.setSelected(false);
 
     }
 
@@ -667,7 +669,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
                 }
 
             } catch (Exception e) {
-                
+
             }
 
         }
@@ -701,7 +703,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
 
             try {
-                ConsultarTipoPresentacionMedida dialog = new ConsultarTipoPresentacionMedida(new javax.swing.JFrame(), true, articulo, seUsuario, seEmpresa, seSucursal);
+                ConsultarPresentacionMedida dialog = new ConsultarPresentacionMedida(new javax.swing.JFrame(), true, articulo, seUsuario, seEmpresa, seSucursal);
                 dialog.setVisible(true);
 
                 presentacionMedida = dialog.getObjeto();
@@ -734,93 +736,41 @@ public class ProductoNuevo extends javax.swing.JDialog {
                 obj.setUsuarioCreacion(seUsuario.getIdUsuario());
                 obj.setFechaCreacion(d);
 
-                if (txtCodigoBarra.getText() != "") {
+                obj.setCodigoBarra(txtCodigoBarra.getText());
 
-                } else {
-                    obj.setCodigoBarra(txtCodigoBarra.getText());
-                }
-                if (txtRegistroSanitarioExtranjero.getText() != "") {
+                obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
 
-                } else {
-                    obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
-                }
+                obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
 
-                if (txtRegistroSanitarioLocal.getText() != "") {
-
-                } else {
-                    obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
-                }
-
-                if (chReceta.isEnabled()) {
+                if (chReceta.isSelected()) {
                     obj.setReceta("SI");
                 } else {
                     obj.setReceta("NO");
                 }
 
-                if (chDescontinuado.isEnabled()) {
+                if (chDescontinuado.isSelected()) {
                     obj.setDescontinuado("SI");
                 } else {
                     obj.setDescontinuado("NO");
                 }
 
-                if (txtProveedor.getText() != "") {
+                obj.setCodFabricante(fabricante);
 
-                } else {
+                obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
 
-                }
+                obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
 
-                if (txtFabricante.getText() != "") {
+                obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
 
-                } else {
-                    obj.setCodFabricante(fabricante);
+                obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
 
-                }
+                obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
 
-                if (empaqueCompra1.getNombreEmpaque() != "") {
+                obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
 
-                } else {
-                    obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
-                }
+                obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
 
-                if (empaqueCompra2.getNombreEmpaque() != "") {
-
-                } else {
-                    obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
-                }
-                if (txtUCompra.getText() != "") {
-
-                } else {
-                    obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
-                }
-
-                if (txtCCompra.getText() != "") {
-
-                } else {
-                    obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
-                }
-
-                if (empaqueVenta1.getNombreEmpaque() != "") {
-
-                } else {
-                    obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
-                }
-
-                if (empaqueVenta2.getNombreEmpaque() != "") {
-
-                } else {
-                    obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
-                }
-                if (txtUVenta.getText() != "") {
-
-                } else {
-                    obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
-                }
-
-                if (txtCVenta.getText() != "") {
-
-                } else {
-                    obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
-                }
+                obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
 
                 productController.create(obj);
 

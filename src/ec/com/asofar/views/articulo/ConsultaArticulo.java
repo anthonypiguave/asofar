@@ -32,11 +32,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     PrArticulo obj = new PrArticulo();
     String valor = "";
 
-    /**
-     * Creates new form ConsultaArticulo
-     * @param parent
-     * @param modal
-     */
+
     public ConsultaArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
