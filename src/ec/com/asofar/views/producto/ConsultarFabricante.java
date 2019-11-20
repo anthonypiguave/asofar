@@ -217,6 +217,9 @@ public class ConsultarFabricante extends javax.swing.JDialog {
 
     public void cargartabla() {
 
+        txtfiltro.setText("");
+        tabla.setRowSorter(null); // quitar el filtro
+
         lista = new ArrayList<PrFabricante>();
 
         lista = cont.findPrFabricanteEntities();

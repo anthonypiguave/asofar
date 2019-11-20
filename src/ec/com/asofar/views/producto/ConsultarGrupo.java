@@ -216,6 +216,9 @@ public class ConsultarGrupo extends javax.swing.JDialog {
 
     public void cargartabla() {
 
+        txtfiltro.setText("");
+        tabla.setRowSorter(null); // quitar el filtro
+
         lista = new ArrayList<PrGrupos>();
         lista = cont.findPrGruposEntities();
         Tablas.ListarGrupoConsulta(lista, tabla);

@@ -6,15 +6,12 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrProductosJpaController;
-import ec.com.asofar.daoext.ordenPedidoEXT;
-import ec.com.asofar.dto.CoOrdenPedido;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
-import javax.print.DocFlavor;
 
 /**
  *

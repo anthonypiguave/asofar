@@ -201,6 +201,10 @@ public class ConsultarProveedor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
+        
+        txtfiltro.setText("");
+        tabla.setRowSorter(null); // quitar el filtro
+
 
         lista = new ArrayList<CoProveedores>();
         
