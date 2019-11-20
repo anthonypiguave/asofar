@@ -30,6 +30,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -726,59 +727,70 @@ public class ProductoNuevo extends javax.swing.JDialog {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         PrProductos obj = new PrProductos();
+
+        List<PrProductos> list = new ArrayList<PrProductos>();
+        list = productController.findPrProductosEntities();
+
+        list = presentacionMedida.getPrProductosList();
+
         if (r == JOptionPane.YES_OPTION) {
-            try {
 
-                obj.setSeEmpresa(seEmpresa);
-                obj.setPrMedidas(presentacionMedida);
-                obj.setNombreProducto(txtProducto.getText());
-                obj.setEstado("A");
-                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
-                obj.setFechaCreacion(d);
+            if (list.size() >= 1) {
+                JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
+            } else {
+//
+                try {
+//
+                    obj.setSeEmpresa(seEmpresa);
+                    obj.setPrMedidas(presentacionMedida);
+                    obj.setNombreProducto(txtProducto.getText());
+                    obj.setEstado("A");
+                    obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                    obj.setFechaCreacion(d);
+                    obj.setCodigoBarra(txtCodigoBarra.getText());
 
-                obj.setCodigoBarra(txtCodigoBarra.getText());
+                    obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
 
-                obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
+                    obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
 
-                obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
+                    if (chReceta.isSelected()) {
+                        obj.setReceta("SI");
+                    } else {
+                        obj.setReceta("NO");
+                    }
 
-                if (chReceta.isSelected()) {
-                    obj.setReceta("SI");
-                } else {
-                    obj.setReceta("NO");
+                    if (chDescontinuado.isSelected()) {
+                        obj.setDescontinuado("SI");
+                    } else {
+                        obj.setDescontinuado("NO");
+                    }
+
+                    obj.setCodFabricante(fabricante);
+
+                    obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
+
+                    obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
+
+                    obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
+
+                    obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
+
+                    obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
+
+                    obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
+
+                    obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
+
+                    obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
+
+                    productController.create(obj);
+
+                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                    setVisible(false);
+
+                } catch (Exception e) {
+                    Logger.getLogger(ProductoNuevo.class.getName()).log(Level.SEVERE, null, e);
                 }
-
-                if (chDescontinuado.isSelected()) {
-                    obj.setDescontinuado("SI");
-                } else {
-                    obj.setDescontinuado("NO");
-                }
-
-                obj.setCodFabricante(fabricante);
-
-                obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
-
-                obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
-
-                obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
-
-                obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
-
-                obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
-
-                obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
-
-                obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
-
-                obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
-
-                productController.create(obj);
-
-                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                setVisible(false);
-
-            } catch (Exception e) {
-                Logger.getLogger(ProductoNuevo.class.getName()).log(Level.SEVERE, null, e);
             }
 
         }
