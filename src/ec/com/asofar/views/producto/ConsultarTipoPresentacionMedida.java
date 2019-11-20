@@ -5,15 +5,13 @@
  */
 package ec.com.asofar.views.producto;
 
-import ec.com.asofar.dao.PrTipoPresentacionJpaController;
+
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrMedidas;
-import ec.com.asofar.dto.PrTipoPresentacion;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
-import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -49,7 +47,7 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
         cargartabla();
     }
 
-    public ConsultarTipoPresentacionMedida(java.awt.Frame parent, boolean modal, PrArticulo objeto,SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ConsultarTipoPresentacionMedida(java.awt.Frame parent, boolean modal, PrArticulo objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -223,6 +221,10 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
+
+        txtfiltro.setText("");
+        tabla.setRowSorter(null); // quitar el filtro
+
         lista = new ArrayList<PrMedidas>();
 
         PrArticulo articulo = ObtenerDTO.ObtenerPrArticulo(articuloObjeto.getNombreArticulo());
@@ -279,7 +281,7 @@ public class ConsultarTipoPresentacionMedida extends javax.swing.JDialog {
     }//GEN-LAST:event_tablaMousePressed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        PresentacionMedidaNuevo dialog = new PresentacionMedidaNuevo(new javax.swing.JFrame(), true, articuloObjeto, seUsuario, seEmpresa, seSucursal);
+        NuevoPresentacionMedida dialog = new NuevoPresentacionMedida(new javax.swing.JFrame(), true, articuloObjeto, seUsuario, seEmpresa, seSucursal);
         dialog.setVisible(true);
         cargartabla();
     }//GEN-LAST:event_btnNuevoActionPerformed

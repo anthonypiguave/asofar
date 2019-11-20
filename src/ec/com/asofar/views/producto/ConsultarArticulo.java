@@ -230,6 +230,9 @@ public class ConsultarArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
+        txtfiltro.setText("");
+        tabla.setRowSorter(null); // quitar el filtro
+
         lista = new ArrayList<PrArticulo>();
         list = new ArrayList<PrArticulo>();
         list = cont.findPrArticuloEntities();

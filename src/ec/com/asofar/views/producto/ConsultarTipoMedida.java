@@ -29,7 +29,6 @@ public class ConsultarTipoMedida extends javax.swing.JDialog {
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
-    
 
     List<PrTipoMedidas> lista;
     PrTipoMedidasJpaController cont = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -219,7 +218,10 @@ public class ConsultarTipoMedida extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
-        
+
+        txtfiltro.setText("");
+        tabla.setRowSorter(null); // quitar el filtro
+
         lista = new ArrayList<PrTipoMedidas>();
 
         lista = cont.findPrTipoMedidasEntities();
@@ -341,8 +343,6 @@ public class ConsultarTipoMedida extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
-  
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {

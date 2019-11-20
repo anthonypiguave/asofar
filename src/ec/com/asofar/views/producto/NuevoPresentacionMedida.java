@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class PresentacionMedidaNuevo extends javax.swing.JDialog {
+public class NuevoPresentacionMedida extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
@@ -49,14 +49,14 @@ public class PresentacionMedidaNuevo extends javax.swing.JDialog {
     /**
      * Creates new form ConsultaProducto
      */
-    public PresentacionMedidaNuevo(java.awt.Frame parent, boolean modal) {
+    public NuevoPresentacionMedida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
 
     }
 
-    public PresentacionMedidaNuevo(java.awt.Frame parent, boolean modal, PrArticulo objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public NuevoPresentacionMedida(java.awt.Frame parent, boolean modal, PrArticulo objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -297,14 +297,16 @@ public class PresentacionMedidaNuevo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PresentacionMedidaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PresentacionMedidaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PresentacionMedidaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PresentacionMedidaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPresentacionMedida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -312,7 +314,7 @@ public class PresentacionMedidaNuevo extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PresentacionMedidaNuevo dialog = new PresentacionMedidaNuevo(new javax.swing.JFrame(), true);
+                NuevoPresentacionMedida dialog = new NuevoPresentacionMedida(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
