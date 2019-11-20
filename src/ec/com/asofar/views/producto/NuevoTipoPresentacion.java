@@ -5,10 +5,8 @@
  */
 package ec.com.asofar.views.producto;
 
-import ec.com.asofar.dao.PrArticuloJpaController;
+
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
-import ec.com.asofar.dto.PrArticulo;
-import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoPresentacion;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -256,31 +254,7 @@ public class NuevoTipoPresentacion extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
 
         /* Create and display the dialog */

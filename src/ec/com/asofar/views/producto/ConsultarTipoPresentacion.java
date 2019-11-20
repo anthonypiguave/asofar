@@ -50,7 +50,6 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-
         cargartabla();
     }
 
