@@ -6,8 +6,6 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrSubgruposJpaController;
-import ec.com.asofar.daoext.GruposControllerExt;
-import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
@@ -34,6 +32,7 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
 
     PrGrupos gruposObjeto = new PrGrupos();
     List<PrSubgrupos> lista;
+    List<PrSubgrupos> list;
     PrSubgruposJpaController cont = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrSubgrupos objeto = new PrSubgrupos();
 
@@ -232,14 +231,18 @@ public class ConsultarSubGrupo extends javax.swing.JDialog {
     public void cargartabla() {
 
         lista = new ArrayList<PrSubgrupos>();
-        PrGrupos grupos = ObtenerDTO.ObtenerPrGrupos(gruposObjeto.getNombre());
+        list = new ArrayList<PrSubgrupos>();
+        list = cont.findPrSubgruposEntities();
 
-        for (int i = 0; i < grupos.getPrSubgruposList().size(); i++) {
-
-            lista.add(grupos.getPrSubgruposList().get(i));
-
+        for (int i = 0; i < list.size(); i++) {
+            
+            if (list.get(i).getPrSubgruposPK().getIdGrupo() == gruposObjeto.getIdGrupo()){
+                lista.add(list.get(i));
+            }
         }
+
         Tablas.ListarSubGrupoConsulta(lista, tabla);
+
     }
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed

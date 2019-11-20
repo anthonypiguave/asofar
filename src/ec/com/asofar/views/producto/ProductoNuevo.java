@@ -32,6 +32,8 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -665,6 +667,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
                 }
 
             } catch (Exception e) {
+                
             }
 
         }
@@ -676,7 +679,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
 
             try {
-                ConsultarArticulo dialog = new ConsultarArticulo(new javax.swing.JFrame(), true, subgrupo);
+                ConsultarArticulo dialog = new ConsultarArticulo(new javax.swing.JFrame(), true, subgrupo, seUsuario, seEmpresa, seSucursal);
                 dialog.setVisible(true);
 
                 articulo = dialog.getObjeto();
@@ -825,6 +828,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
                 setVisible(false);
 
             } catch (Exception e) {
+                Logger.getLogger(ProductoNuevo.class.getName()).log(Level.SEVERE, null, e);
             }
 
         }

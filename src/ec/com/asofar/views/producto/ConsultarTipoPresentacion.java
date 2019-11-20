@@ -5,13 +5,16 @@
  */
 package ec.com.asofar.views.producto;
 
-
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
 import ec.com.asofar.dto.PrTipoPresentacion;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,11 +25,13 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
 
-    List<PrTipoPresentacion> lista ;
+    List<PrTipoPresentacion> lista;
     PrTipoPresentacionJpaController cont = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrTipoPresentacion objeto = new PrTipoPresentacion();
-
 
     /**
      * Creates new form ConsultaProducto
@@ -38,7 +43,16 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
         cargartabla();
     }
 
+    public ConsultarTipoPresentacion(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
 
+        cargartabla();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,6 +71,7 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -129,10 +144,20 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
-        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
+            }
+        });
+
+        btnNuevo.setBackground(new java.awt.Color(254, 254, 254));
+        btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
+        btnNuevo.setText("NUEVO");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
             }
         });
 
@@ -153,6 +178,8 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
                         .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -167,8 +194,10 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnsalir)
+                    .addComponent(btnNuevo))
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,17 +208,19 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 68, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
-
+        
+        lista = new ArrayList<PrTipoPresentacion>();
 
         lista = cont.findPrTipoPresentacionEntities();
-
 
         Tablas.ListarTipoPresentacionConsulta(lista, tabla);
     }
@@ -235,6 +266,13 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tablaMousePressed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        NuevoTipoPresentacion dialog = new NuevoTipoPresentacion(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+        dialog.setVisible(true);
+        cargartabla();
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     public PrTipoPresentacion getObjeto() {
         return objeto;
@@ -333,6 +371,7 @@ public class ConsultarTipoPresentacion extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
