@@ -54,7 +54,7 @@ public class AgregarGruposForm extends javax.swing.JDialog {
     public AgregarGruposForm(java.awt.Frame parent, boolean modal, PrGrupos obj1) {
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(parent);
+        this.setLocationRelativeTo(null);
 
         listagrupo = prj.findPrGruposEntities();
         listaempresa = spj.findSeEmpresaEntities();

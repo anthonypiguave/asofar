@@ -35,13 +35,13 @@ public class EditarArticulo extends javax.swing.JDialog {
     public EditarArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(this);
+        setLocationRelativeTo(null);
     }
 
     public EditarArticulo(java.awt.Frame parent, boolean modal, PrArticulo prar) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(this);
+        setLocationRelativeTo(null);
         obj1 = prar;
         llenar(prar);
 
