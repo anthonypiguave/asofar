@@ -269,9 +269,9 @@ public class ConsultarBodega extends javax.swing.JDialog {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
-        NuevoGrupo dialog = new NuevoGrupo(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
-        dialog.setVisible(true);
-        cargartabla();
+//        NuevoGrupo dialog = new NuevoGrupo(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+//        dialog.setVisible(true);
+//        cargartabla();
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 

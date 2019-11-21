@@ -16,7 +16,6 @@ import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
-import ec.com.asofar.daoext.ProductoCadena;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.PrArticulo;
@@ -87,6 +86,7 @@ public class NuevoProducto extends javax.swing.JDialog {
     PrFabricante fabricante;
     InBodega bodega;
     PrProductoBodega bodegaStock;
+    PrProductos producto;
 
     String[] cadenaArray1 = {"Seleccione una Opcion..", ""};
 
@@ -111,10 +111,26 @@ public class NuevoProducto extends javax.swing.JDialog {
         txtEmpaqueVenta2.setText("Seleccione una Opcion..");
         txtEmpaqueCompra1.setText("Seleccione una Opcion..");
         txtEmpaqueCompra2.setText("Seleccione una Opcion..");
+        txtBodega.setText("Seleccione una Opcion..");
         txtUCompra.setText("0");
         txtUVenta.setText("0");
         txtCCompra.setText("0");
         txtCVenta.setText("0");
+        txtStockNin.setText("0");
+        txtStockMax.setText("0");
+        txtGrupo.setEditable(false);
+        txtSubGrupo.setEditable(false);
+        txtArticulo.setEditable(false);
+        txtPresentacionMedida.setEditable(false);
+        txtFabricante.setEditable(false);
+        txtProveedor.setEditable(false);
+        txtEmpaqueVenta1.setEditable(false);
+        txtEmpaqueVenta2.setEditable(false);
+        txtEmpaqueCompra1.setEditable(false);
+        txtEmpaqueCompra2.setEditable(false);
+        txtBodega.setEditable(false);
+        
+        
 
         seUsuario = us;
         seEmpresa = em;
@@ -771,9 +787,9 @@ public class NuevoProducto extends javax.swing.JDialog {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         PrProductos obj = new PrProductos();
+        bodegaStock = new PrProductoBodega();
 
         List<PrProductos> list = new ArrayList<PrProductos>();
-//        list = productController.findPrProductosEntities();
 
         if (r == JOptionPane.YES_OPTION) {
 
@@ -792,139 +808,153 @@ public class NuevoProducto extends javax.swing.JDialog {
                             if (Arrays.asList(cadenaArray1).contains(txtProducto.getText())) {
                                 JOptionPane.showMessageDialog(null, "genere o escriba el Producto!");
                             } else {
+
                                 list = presentacionMedida.getPrProductosList();
                                 if (list.size() >= 1) {
                                     JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
+
                                 } else {
-//
-                                    try {
+                                    if (Arrays.asList(cadenaArray1).contains(txtBodega.getText())) {
+                                        JOptionPane.showMessageDialog(null, "elija una bodega en Datos de inventario!");
+                                        
+                                    } else {
 
-//
-                                        obj.setSeEmpresa(seEmpresa);
-                                        obj.setPrMedidas(presentacionMedida);
-                                        obj.setNombreProducto(txtProducto.getText());
-                                        obj.setEstado("A");
-                                        obj.setUsuarioCreacion(seUsuario.getIdUsuario());
-                                        obj.setFechaCreacion(d);
+                                        try {
 
-                                        if (txtCodigoBarra.getText().equals("")) {
+                                            obj.setSeEmpresa(seEmpresa);
+                                            obj.setPrMedidas(presentacionMedida);
+                                            obj.setNombreProducto(txtProducto.getText());
+                                            obj.setEstado("A");
+                                            obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                            obj.setFechaCreacion(d);
 
-                                        } else {
-                                            obj.setCodigoBarra(txtCodigoBarra.getText());
-                                        }
-                                        if (txtRegistroSanitarioExtranjero.getText().equals("")) {
+                                            if (txtCodigoBarra.getText().equals("")) {
 
-                                        } else {
-                                            obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
-                                        }
-
-                                        if (txtRegistroSanitarioLocal.getText().equals("")) {
-
-                                        } else {
-                                            obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
-                                        }
-
-                                        if (chReceta.isSelected()) {
-                                            obj.setReceta("SI");
-                                        } else {
-                                            obj.setReceta("NO");
-                                        }
-
-                                        if (chDescontinuado.isSelected()) {
-                                            obj.setDescontinuado("SI");
-                                        } else {
-                                            obj.setDescontinuado("NO");
-                                        }
-
-                                        if (Arrays.asList(cadenaArray1).contains(txtFabricante.getText())) {
-
-                                        } else {
-                                            obj.setCodFabricante(fabricante);
-                                        }
-                                        if (Arrays.asList(cadenaArray1).contains(txtProveedor.getText())) {
-
-                                        } else {
-                                            obj.setIdProveedor(proveedor);
-                                        }
-                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra1.getText())) {
-
-                                        } else {
-                                            obj.setMedidaEmpaqueCompra(empaqueCompra1);
-                                        }
-                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra2.getText())) {
-
-                                        } else {
-                                            obj.setMedidaPorEmpaqueCompra(empaqueCompra2);
-                                        }
-                                        if (Arrays.asList(cadenaArray2).contains(txtUCompra.getText())) {
-
-                                        } else {
-                                            obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
-                                        }
-                                        if (Arrays.asList(cadenaArray2).contains(txtCCompra.getText())) {
-
-                                        } else {
-                                            obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
-                                        }
-                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta1.getText())) {
-
-                                        } else {
-                                            obj.setMedidaEmpaqueVenta(empaqueVenta1);
-                                        }
-
-                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta2.getText())) {
-
-                                        } else {
-
-                                            obj.setMedidaPorEmpaqueVenta(empaqueVenta2);
-                                        }
-                                        if (Arrays.asList(cadenaArray2).contains(txtUVenta.getText())) {
-
-                                        } else {
-
-                                            obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
-                                        }
-                                        if (Arrays.asList(cadenaArray2).contains(txtCVenta.getText())) {
-
-                                        } else {
-                                            obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
-                                        }
-
-                                        productController.create(obj);
-
-                                        list = new ArrayList<PrProductos>();
-
-                                        obj = new PrProductos();
-
-                                        list = productController.findPrProductosEntities();
-
-                                        for (int i = 0; i < list.size(); i++) {
-
-                                            if (list.get(i).getPrMedidas().equals(presentacionMedida)) {
-                                                obj = list.get(i);
-                                               
+                                            } else {
+                                                obj.setCodigoBarra(txtCodigoBarra.getText());
                                             }
+                                            if (txtRegistroSanitarioExtranjero.getText().equals("")) {
+
+                                            } else {
+                                                obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
+                                            }
+
+                                            if (txtRegistroSanitarioLocal.getText().equals("")) {
+
+                                            } else {
+                                                obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
+                                            }
+
+                                            if (chReceta.isSelected()) {
+                                                obj.setReceta("SI");
+                                            } else {
+                                                obj.setReceta("NO");
+                                            }
+
+                                            if (chDescontinuado.isSelected()) {
+                                                obj.setDescontinuado("SI");
+                                            } else {
+                                                obj.setDescontinuado("NO");
+                                            }
+
+                                            if (Arrays.asList(cadenaArray1).contains(txtFabricante.getText())) {
+
+                                            } else {
+                                                obj.setCodFabricante(fabricante);
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtProveedor.getText())) {
+
+                                            } else {
+                                                obj.setIdProveedor(proveedor);
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra1.getText())) {
+
+                                            } else {
+                                                obj.setMedidaEmpaqueCompra(empaqueCompra1);
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra2.getText())) {
+
+                                            } else {
+                                                obj.setMedidaPorEmpaqueCompra(empaqueCompra2);
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtUCompra.getText())) {
+
+                                            } else {
+                                                obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtCCompra.getText())) {
+
+                                            } else {
+                                                obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta1.getText())) {
+
+                                            } else {
+                                                obj.setMedidaEmpaqueVenta(empaqueVenta1);
+                                            }
+
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta2.getText())) {
+
+                                            } else {
+
+                                                obj.setMedidaPorEmpaqueVenta(empaqueVenta2);
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtUVenta.getText())) {
+
+                                            } else {
+
+                                                obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtCVenta.getText())) {
+
+                                            } else {
+                                                obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
+                                            }
+                                            ///////////////////////////////////////////////////////////////////////////
+
+                                            if (Arrays.asList(cadenaArray2).contains(txtStockNin.getText())) {
+
+                                            } else {
+
+                                                bodegaStock.setStockMinimo(BigInteger.valueOf(Long.parseLong(txtStockNin.getText())));
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtStockMax.getText())) {
+
+                                            } else {
+                                                bodegaStock.setStockMaximo(BigInteger.valueOf(Long.parseLong(txtStockMax.getText())));
+                                            }
+
+                                            productController.create(obj);
+
+                                            list = new ArrayList<PrProductos>();
+
+                                            producto = new PrProductos();
+
+                                            list = productController.findPrProductosEntities();
+
+                                            for (int i = 0; i < list.size(); i++) {
+
+                                                if (list.get(i).getPrMedidas().equals(presentacionMedida)) {
+                                                    producto = list.get(i);
+
+                                                }
+                                            }
+
+                                            bodegaStock.setPrProductoBodegaPK(new PrProductoBodegaPK());
+                                            bodegaStock.getPrProductoBodegaPK().setIdProducto(producto.getPrProductosPK().getIdProducto());
+
+                                            bodegaStock.setInBodega(bodega);
+                                            bodegaStock.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                            bodegaStock.setFechaCreacion(d);
+
+                                            bodegaStockController.create(bodegaStock);
+
+                                            JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                            setVisible(false);
+
+                                        } catch (Exception e) {
+                                            Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, e);
                                         }
-
-                                        bodegaStock = new PrProductoBodega();
-
-                                        bodegaStock.setPrProductoBodegaPK(new PrProductoBodegaPK());
-                                        bodegaStock.getPrProductoBodegaPK().setIdProducto(obj.getPrProductosPK().getIdProducto());
-
-                                        bodegaStock.setInBodega(bodega);
-
-                                        bodegaStock.setStockMinimo(BigInteger.valueOf(Long.parseLong(txtStockNin.getText())));
-                                        bodegaStock.setStockMaximo(BigInteger.valueOf(Long.parseLong(txtStockMax.getText())));
-                                        bodegaStock.setUsuarioCreacion(seUsuario.getIdUsuario());
-                                        bodegaStock.setFechaCreacion(d);
-
-                                        bodegaStockController.create(bodegaStock);
-
-                                        JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                                        setVisible(false);
-
-                                    } catch (Exception e) {
-                                        Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, e);
                                     }
                                 }
                             }
