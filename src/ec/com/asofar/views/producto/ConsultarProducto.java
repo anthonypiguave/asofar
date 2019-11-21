@@ -5,63 +5,36 @@
  */
 package ec.com.asofar.views.producto;
 
-import ec.com.asofar.dao.PrArticuloJpaController;
-import ec.com.asofar.dto.PrArticulo;
-import ec.com.asofar.dto.PrSubgrupos;
-import ec.com.asofar.dto.SeEmpresa;
-import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dao.PrProductosJpaController;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author admin1
  */
-public class ConsultarArticulo extends javax.swing.JDialog {
+public class ConsultarProducto extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
-    SeUsuarios seUsuario;
-    SeEmpresa seEmpresa;
-    SeSucursal seSucursal;
-
-    PrSubgrupos subgruposObjetos = new PrSubgrupos();
-    List<PrArticulo> lista;
-    List<PrArticulo> list;
-    PrArticuloJpaController cont = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
-    PrArticulo objeto = new PrArticulo();
+    PrProductos ppro = new PrProductos();
+    
+    
+    List<PrProductos> lista;
+    PrProductosJpaController procont = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductos objeto = new PrProductos();
 
     /**
      * Creates new form ConsultaProducto
      */
-    public ConsultarArticulo(java.awt.Frame parent, boolean modal) {
+    public ConsultarProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        cargartabla();
-    }
-
-    public ConsultarArticulo(java.awt.Frame parent, boolean modal, PrSubgrupos objeto) {
-        super(parent, modal);
-        initComponents();
-        setLocationRelativeTo(null);
-        subgruposObjetos = objeto;
-        cargartabla();
-    }
-
-    public ConsultarArticulo(java.awt.Frame parent, boolean modal, PrSubgrupos objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
-        initComponents();
-        setLocationRelativeTo(null);
-        seUsuario = us;
-        seEmpresa = em;
-        seSucursal = su;
-        subgruposObjetos = objeto;
         cargartabla();
     }
 
@@ -80,9 +53,8 @@ public class ConsultarArticulo extends javax.swing.JDialog {
         txtfiltro = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
+        tbproductos = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
-        btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -93,7 +65,7 @@ public class ConsultarArticulo extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ARTICULOS");
+        jLabel1.setText("PRODUCTOS");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -121,7 +93,7 @@ public class ConsultarArticulo extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
+        tbproductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -132,18 +104,18 @@ public class ConsultarArticulo extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbproductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tablaMousePressed(evt);
+                tbproductosMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tabla);
+        jScrollPane1.setViewportView(tbproductos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,17 +133,6 @@ public class ConsultarArticulo extends javax.swing.JDialog {
             }
         });
 
-        btnNuevo.setBackground(new java.awt.Color(254, 254, 254));
-        btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
-        btnNuevo.setText("NUEVO");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,22 +141,17 @@ public class ConsultarArticulo extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(139, 139, 139))))))
+                        .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(213, 213, 213))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,10 +164,8 @@ public class ConsultarArticulo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnsalir))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,22 +183,8 @@ public class ConsultarArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
-        txtfiltro.setText("");
-        tabla.setRowSorter(null); // quitar el filtro
-
-        lista = new ArrayList<PrArticulo>();
-        list = new ArrayList<PrArticulo>();
-        list = cont.findPrArticuloEntities();
-
-        for (int i = 0; i < list.size(); i++) {
-
-            if (list.get(i).getPrArticuloPK().getIdSubgrupo() == subgruposObjetos.getPrSubgruposPK().getIdSubgrupo()) {
-
-                lista.add(list.get(i));
-            }
-        }
-
-        Tablas.ListarArticuloConsulta(lista, tabla);
+        lista = procont.findPrProductosEntities();
+        Tablas.ListarProductosConsulta(lista, tbproductos);
     }
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -263,7 +203,7 @@ public class ConsultarArticulo extends javax.swing.JDialog {
 
     private void txtfiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyPressed
         valor = txtfiltro.getText();
-        Tablas.filtro(valor, tabla);
+        Tablas.filtro(valor, tbproductos);
     }//GEN-LAST:event_txtfiltroKeyPressed
 
     private void txtfiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyReleased
@@ -274,39 +214,36 @@ public class ConsultarArticulo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtfiltroKeyReleased
 
-    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+    private void tbproductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproductosMousePressed
         int i = 0;
         String msg = null;
         if (evt.getClickCount() == 2) {
-            i = tabla.getSelectedRow();
-            objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
+            i = tbproductos.getSelectedRow(); 
+            objeto = devuelveObjeto(tbproductos.getValueAt(i, 0).toString(), lista);
+//            System.out.println("objeto" + objeto.getNombreProducto());
 
             if (objeto != null) {
 
+//                msg = ordenPedidoEXT.validarProductosOrdenPedido(tbproductos, String.valueOf(objeto.getPrProductosPK().getIdProducto()));
                 this.setVisible(false);
 
             }
         }
-    }//GEN-LAST:event_tablaMousePressed
+    }//GEN-LAST:event_tbproductosMousePressed
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
-        NuevoArticulo dialog = new NuevoArticulo(new javax.swing.JFrame(), true, subgruposObjetos, seUsuario, seEmpresa, seSucursal);
-        dialog.setVisible(true);
-        cargartabla();
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
-    public PrArticulo getObjeto() {
+    
+    
+    public PrProductos getProducto() {
         return objeto;
     }
 
-    public PrArticulo devuelveObjeto(String datos, List<PrArticulo> listaobjeto) {
+    public PrProductos devuelveObjeto(String datos, List<PrProductos> listaobjeto) {
 
-        PrArticulo objeto1 = null;
+        PrProductos objeto1 = null;
 
         for (int i = 0; i < listaobjeto.size(); i++) {
 
-            if (datos.equals("" + listaobjeto.get(i).getPrArticuloPK().getIdArticulo())) {
+            if (datos.equals("" + listaobjeto.get(i).getPrProductosPK().getIdProducto())) {
                 objeto1 = listaobjeto.get(i);
 
                 break;
@@ -336,26 +273,14 @@ public class ConsultarArticulo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -364,7 +289,7 @@ public class ConsultarArticulo extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultarArticulo dialog = new ConsultarArticulo(new javax.swing.JFrame(), true);
+                ConsultarProducto dialog = new ConsultarProducto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -377,14 +302,13 @@ public class ConsultarArticulo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabla;
+    private javax.swing.JTable tbproductos;
     private javax.swing.JTextField txtfiltro;
     // End of variables declaration//GEN-END:variables
 }

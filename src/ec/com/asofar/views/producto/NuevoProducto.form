@@ -557,7 +557,7 @@
                                   <Component id="txtSubGrupo" max="32767" attributes="0"/>
                                   <Component id="txtGrupo" max="32767" attributes="0"/>
                                   <Component id="txtArticulo" max="32767" attributes="0"/>
-                                  <Component id="txtTipoPresentacionMedida" min="-2" pref="320" max="-2" attributes="0"/>
+                                  <Component id="txtPresentacionMedida" min="-2" pref="320" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="txtProducto" min="-2" pref="320" max="-2" attributes="0"/>
@@ -590,7 +590,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtTipoPresentacionMedida" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="txtPresentacionMedida" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
@@ -645,9 +645,9 @@
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtArticuloMousePressed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtTipoPresentacionMedida">
+                <Component class="javax.swing.JTextField" name="txtPresentacionMedida">
                   <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtTipoPresentacionMedidaMousePressed"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtPresentacionMedidaMousePressed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">

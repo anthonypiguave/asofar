@@ -24,7 +24,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.producto.ConsultaProducto;
+import ec.com.asofar.views.producto.ConsultarProducto;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -544,7 +544,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        ConsultaProducto cproducto = new ConsultaProducto(new javax.swing.JFrame(), true);
+        ConsultarProducto cproducto = new ConsultarProducto(new javax.swing.JFrame(), true);
         cproducto.setVisible(true);
         try {
 

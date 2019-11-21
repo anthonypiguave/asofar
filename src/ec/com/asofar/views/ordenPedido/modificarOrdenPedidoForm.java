@@ -23,7 +23,7 @@ import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Render1;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.producto.ConsultaProducto;
+import ec.com.asofar.views.producto.ConsultarProducto;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -521,7 +521,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        ConsultaProducto cproducto = new ConsultaProducto(new javax.swing.JFrame(), true);
+        ConsultarProducto cproducto = new ConsultarProducto(new javax.swing.JFrame(), true);
         cproducto.setVisible(true);
         try {
             objetopro = cproducto.getProducto();

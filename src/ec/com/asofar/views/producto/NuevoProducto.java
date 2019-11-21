@@ -31,6 +31,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,7 +42,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin
  */
-public class ProductoNuevo extends javax.swing.JDialog {
+public class NuevoProducto extends javax.swing.JDialog {
 
     int x, y;
     SeUsuarios seUsuario;
@@ -76,14 +77,18 @@ public class ProductoNuevo extends javax.swing.JDialog {
     PrEmpaque empaqueCompra1, empaqueCompra2, empaqueVenta1, empaqueVenta2;
     PrFabricante fabricante;
 
-    public ProductoNuevo(java.awt.Frame parent, boolean modal) {
+    String[] cadenaArray1 = {"Seleccione una Opcion..", ""};
+
+    String[] cadenaArray2 = {"0", ""};
+
+    public NuevoProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
 
     }
 
-    public ProductoNuevo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public NuevoProducto(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         this.setUndecorated(true);
         initComponents();
@@ -95,9 +100,15 @@ public class ProductoNuevo extends javax.swing.JDialog {
         txtEmpaqueVenta2.setText("Seleccione una Opcion..");
         txtEmpaqueCompra1.setText("Seleccione una Opcion..");
         txtEmpaqueCompra2.setText("Seleccione una Opcion..");
+        txtUCompra.setText("0");
+        txtUVenta.setText("0");
+        txtCCompra.setText("0");
+        txtCVenta.setText("0");
+
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
+        
         chReceta.setSelected(false);
         chDescontinuado.setSelected(false);
 
@@ -110,7 +121,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         String tipoPre = presentacionMedida.getPrTipoPresentacion().getNombre();
         String tipoMe = presentacionMedida.getPrTipoMedidas().getNombreTipoMedida();
 
-        String cadena = subGru + "  " + art + " en " + tipoPre + " De " + tipoMe;
+        String cadena = subGru + "  " + art + " en " + tipoPre + " de " + tipoMe;
 
         return cadena.toUpperCase();
 
@@ -167,7 +178,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         txtGrupo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtArticulo = new javax.swing.JTextField();
-        txtTipoPresentacionMedida = new javax.swing.JTextField();
+        txtPresentacionMedida = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -437,7 +448,6 @@ public class ProductoNuevo extends javax.swing.JDialog {
         btnCrear.setForeground(new java.awt.Color(1, 1, 1));
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         btnCrear.setText("CREAR");
-        btnCrear.setOpaque(true);
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -449,7 +459,6 @@ public class ProductoNuevo extends javax.swing.JDialog {
         btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btnSalir.setText("CANCELAR");
-        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -487,9 +496,9 @@ public class ProductoNuevo extends javax.swing.JDialog {
             }
         });
 
-        txtTipoPresentacionMedida.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtPresentacionMedida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtTipoPresentacionMedidaMousePressed(evt);
+                txtPresentacionMedidaMousePressed(evt);
             }
         });
 
@@ -520,7 +529,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
                         .addComponent(txtSubGrupo)
                         .addComponent(txtGrupo)
                         .addComponent(txtArticulo)
-                        .addComponent(txtTipoPresentacionMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPresentacionMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -545,7 +554,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTipoPresentacionMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPresentacionMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -620,7 +629,10 @@ public class ProductoNuevo extends javax.swing.JDialog {
 
     private void btnGenerarCadenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCadenaActionPerformed
 
-        if (!txtGrupo.getText().equals("") && !txtSubGrupo.getText().equals("") && !txtArticulo.getText().equals("") && !txtTipoPresentacionMedida.getText().equals("")) {
+        if (Arrays.asList(cadenaArray1).contains(txtPresentacionMedida.getText())) {
+            JOptionPane.showMessageDialog(null, "llene los campos desde Categoria hasta la Presentacion y Medida");
+
+        } else {
             String cadena = GenerarProductoNombre();
             txtProducto.setText(cadena);
         }
@@ -643,7 +655,8 @@ public class ProductoNuevo extends javax.swing.JDialog {
 
                     txtSubGrupo.setText("Seleccione una Opcion..");
                     txtArticulo.setText("");
-                    txtTipoPresentacionMedida.setText("");
+                    txtPresentacionMedida.setText("");
+                    txtProducto.setText("");
                 }
             } catch (Exception e) {
             }
@@ -666,7 +679,8 @@ public class ProductoNuevo extends javax.swing.JDialog {
                 if (subgrupo.getNombre() != null) {
                     txtSubGrupo.setText(subgrupo.getNombre());
                     txtArticulo.setText("Seleccione una Opcion..");
-                    txtTipoPresentacionMedida.setText("");
+                    txtPresentacionMedida.setText("");
+                    txtProducto.setText("");
                 }
 
             } catch (Exception e) {
@@ -689,7 +703,8 @@ public class ProductoNuevo extends javax.swing.JDialog {
 
                 if (articulo.getNombreArticulo() != null) {
                     txtArticulo.setText(articulo.getNombreArticulo());
-                    txtTipoPresentacionMedida.setText("Seleccione una Opcion..");
+                    txtPresentacionMedida.setText("Seleccione una Opcion..");
+                    txtProducto.setText("");
                 }
 
             } catch (Exception e) {
@@ -698,7 +713,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtArticuloMousePressed
 
-    private void txtTipoPresentacionMedidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTipoPresentacionMedidaMousePressed
+    private void txtPresentacionMedidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPresentacionMedidaMousePressed
         int i = 0;
         String msg = null;
         if (evt.getClickCount() == 2) {
@@ -715,14 +730,15 @@ public class ProductoNuevo extends javax.swing.JDialog {
                         && presentacionMedida.getPrTipoMedidas().getNombreTipoMedida() != null) {
 
                     cadena = presentacionMedida.getPrTipoPresentacion().getNombre() + " De " + presentacionMedida.getPrTipoMedidas().getNombreTipoMedida();
-                    txtTipoPresentacionMedida.setText(cadena);
+                    txtPresentacionMedida.setText(cadena);
+                    txtProducto.setText("");
                 }
 
             } catch (Exception e) {
             }
 
         }
-    }//GEN-LAST:event_txtTipoPresentacionMedidaMousePressed
+    }//GEN-LAST:event_txtPresentacionMedidaMousePressed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
@@ -731,65 +747,128 @@ public class ProductoNuevo extends javax.swing.JDialog {
         List<PrProductos> list = new ArrayList<PrProductos>();
         list = productController.findPrProductosEntities();
 
-        list = presentacionMedida.getPrProductosList();
-
         if (r == JOptionPane.YES_OPTION) {
 
-            if (list.size() >= 1) {
-                JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
+            if (Arrays.asList(cadenaArray1).contains(txtGrupo.getText())) {
+                JOptionPane.showMessageDialog(null, "elija la Categoria!");
             } else {
-//
-                try {
-//
-                    obj.setSeEmpresa(seEmpresa);
-                    obj.setPrMedidas(presentacionMedida);
-                    obj.setNombreProducto(txtProducto.getText());
-                    obj.setEstado("A");
-                    obj.setUsuarioCreacion(seUsuario.getIdUsuario());
-                    obj.setFechaCreacion(d);
-                    obj.setCodigoBarra(txtCodigoBarra.getText());
-
-                    obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
-
-                    obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
-
-                    if (chReceta.isSelected()) {
-                        obj.setReceta("SI");
+                if (Arrays.asList(cadenaArray1).contains(txtSubGrupo.getText())) {
+                    JOptionPane.showMessageDialog(null, "elija la SubCategoria!");
+                } else {
+                    if (Arrays.asList(cadenaArray1).contains(txtArticulo.getText())) {
+                        JOptionPane.showMessageDialog(null, "elija el Articulo!");
                     } else {
-                        obj.setReceta("NO");
+                        if (Arrays.asList(cadenaArray1).contains(txtPresentacionMedida.getText())) {
+                            JOptionPane.showMessageDialog(null, "elija la Presentacion y Medida");
+                        } else {
+                            if (Arrays.asList(cadenaArray1).contains(txtProducto.getText())) {
+                                JOptionPane.showMessageDialog(null, "genere o escriba el Producto!");
+                            } else {
+                                list = presentacionMedida.getPrProductosList();
+                                if (list.size() >= 1) {
+                                    JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
+                                } else {
+//
+                                    try {
+
+//
+                                        obj.setSeEmpresa(seEmpresa);
+                                        obj.setPrMedidas(presentacionMedida);
+                                        obj.setNombreProducto(txtProducto.getText());
+                                        obj.setEstado("A");
+                                        obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                        obj.setFechaCreacion(d);
+
+                                        if (txtCodigoBarra.getText().equals("")) {
+
+                                        } else {
+                                            obj.setCodigoBarra(txtCodigoBarra.getText());
+                                        }
+                                        if (txtRegistroSanitarioExtranjero.getText().equals("")) {
+
+                                        } else {
+                                            obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
+                                        }
+
+                                        if (txtRegistroSanitarioLocal.getText().equals("")) {
+
+                                        } else {
+                                            obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
+                                        }
+
+                                        if (chReceta.isSelected()) {
+                                            obj.setReceta("SI");
+                                        } else {
+                                            obj.setReceta("NO");
+                                        }
+
+                                        if (chDescontinuado.isSelected()) {
+                                            obj.setDescontinuado("SI");
+                                        } else {
+                                            obj.setDescontinuado("NO");
+                                        }
+
+                                        if (Arrays.asList(cadenaArray1).contains(txtFabricante.getText())) {
+
+                                        } else {
+                                            obj.setCodFabricante(fabricante);
+                                        }
+                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra1.getText())) {
+
+                                        } else {
+                                            obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
+                                        }
+                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra2.getText())) {
+
+                                        } else {
+                                            obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
+                                        }
+                                        if (Arrays.asList(cadenaArray2).contains(txtUCompra.getText())) {
+
+                                        } else {
+                                            obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
+                                        }
+                                        if (Arrays.asList(cadenaArray2).contains(txtCCompra.getText())) {
+
+                                        } else {
+                                            obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
+                                        }
+                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta1.getText())) {
+
+                                        } else {
+                                            obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
+                                        }
+
+                                        if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta2.getText())) {
+
+                                        } else {
+
+                                            obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
+                                        }
+                                        if (Arrays.asList(cadenaArray2).contains(txtUVenta.getText())) {
+
+                                        } else {
+
+                                            obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
+                                        }
+                                        if (Arrays.asList(cadenaArray2).contains(txtCVenta.getText())) {
+
+                                        } else {
+                                            obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
+                                        }
+
+                                        productController.create(obj);
+
+                                        JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                        setVisible(false);
+
+                                    } catch (Exception e) {
+                                        Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, e);
+                                    }
+                                }
+                            }
+                        }
                     }
-
-                    if (chDescontinuado.isSelected()) {
-                        obj.setDescontinuado("SI");
-                    } else {
-                        obj.setDescontinuado("NO");
-                    }
-
-                    obj.setCodFabricante(fabricante);
-
-                    obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
-
-                    obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
-
-                    obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
-
-                    obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
-
-                    obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
-
-                    obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
-
-                    obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
-
-                    obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
-
-                    productController.create(obj);
-
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                    setVisible(false);
-
-                } catch (Exception e) {
-                    Logger.getLogger(ProductoNuevo.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
 
@@ -951,21 +1030,25 @@ public class ProductoNuevo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductoNuevo.class
+            java.util.logging.Logger.getLogger(NuevoProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductoNuevo.class
+            java.util.logging.Logger.getLogger(NuevoProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductoNuevo.class
+            java.util.logging.Logger.getLogger(NuevoProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductoNuevo.class
+            java.util.logging.Logger.getLogger(NuevoProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -974,7 +1057,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ProductoNuevo dialog = new ProductoNuevo(new javax.swing.JFrame(), true);
+                NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1030,6 +1113,7 @@ public class ProductoNuevo extends javax.swing.JDialog {
     private javax.swing.JTextField txtEmpaqueVenta2;
     private javax.swing.JTextField txtFabricante;
     private javax.swing.JTextField txtGrupo;
+    private javax.swing.JTextField txtPresentacionMedida;
     private javax.swing.JTextField txtProducto;
     private javax.swing.JTextField txtProveedor;
     private javax.swing.JTextField txtRegistroSanitarioExtranjero;
@@ -1037,7 +1121,6 @@ public class ProductoNuevo extends javax.swing.JDialog {
     private javax.swing.JTextField txtStockMax;
     private javax.swing.JTextField txtStockNin;
     private javax.swing.JTextField txtSubGrupo;
-    private javax.swing.JTextField txtTipoPresentacionMedida;
     private javax.swing.JTextField txtUCompra;
     private javax.swing.JTextField txtUVenta;
     // End of variables declaration//GEN-END:variables

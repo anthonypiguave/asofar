@@ -7,23 +7,29 @@ package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dto.PrProductos;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author admin1
  */
-public class ConsultaProducto extends javax.swing.JDialog {
+public class ConsultarProductoMantenimiento extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
+
     PrProductos ppro = new PrProductos();
-    
-    
     List<PrProductos> lista;
     PrProductosJpaController procont = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductos objeto = new PrProductos();
@@ -31,10 +37,20 @@ public class ConsultaProducto extends javax.swing.JDialog {
     /**
      * Creates new form ConsultaProducto
      */
-    public ConsultaProducto(java.awt.Frame parent, boolean modal) {
+    public ConsultarProductoMantenimiento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cargartabla();
+    }
+
+    public ConsultarProductoMantenimiento(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
         cargartabla();
     }
 
@@ -55,6 +71,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbproductos = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -127,10 +144,20 @@ public class ConsultaProducto extends javax.swing.JDialog {
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
-        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
+            }
+        });
+
+        btnNuevo.setBackground(new java.awt.Color(254, 254, 254));
+        btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
+        btnNuevo.setText("NUEVO");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
             }
         });
 
@@ -145,6 +172,8 @@ public class ConsultaProducto extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -165,8 +194,10 @@ public class ConsultaProducto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnsalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,11 +215,14 @@ public class ConsultaProducto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargartabla() {
+
+        txtfiltro.setText("");
+        tbproductos.setRowSorter(null); // quitar el filtro
+
+        lista = new ArrayList<PrProductos>();
         lista = procont.findPrProductosEntities();
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println("   productos : "+ lista.get(i).getPrProductosPK());
-        }
-        
+
+
         Tablas.ListarProductosConsulta(lista, tbproductos);
     }
 
@@ -223,7 +257,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
         int i = 0;
         String msg = null;
         if (evt.getClickCount() == 2) {
-            i = tbproductos.getSelectedRow(); 
+            i = tbproductos.getSelectedRow();
             objeto = devuelveObjeto(tbproductos.getValueAt(i, 0).toString(), lista);
 //            System.out.println("objeto" + objeto.getNombreProducto());
 
@@ -236,8 +270,13 @@ public class ConsultaProducto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbproductosMousePressed
 
-    
-    
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+        dialog.setVisible(true);
+        cargartabla();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
     public PrProductos getProducto() {
         return objeto;
     }
@@ -278,21 +317,27 @@ public class ConsultaProducto extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProductoMantenimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProductoMantenimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProductoMantenimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarProductoMantenimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultaProducto dialog = new ConsultaProducto(new javax.swing.JFrame(), true);
+                ConsultarProductoMantenimiento dialog = new ConsultarProductoMantenimiento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -305,6 +350,7 @@ public class ConsultaProducto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
