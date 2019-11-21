@@ -10,16 +10,19 @@ import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.dao.PrEmpaqueJpaController;
 import ec.com.asofar.dao.PrFabricanteJpaController;
 import ec.com.asofar.dao.PrGruposJpaController;
+import ec.com.asofar.dao.PrProductoBodegaJpaController;
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
 import ec.com.asofar.dto.CoProveedores;
+import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrEmpaque;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrProductoBodega;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
@@ -30,6 +33,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -59,6 +63,7 @@ public class NuevoProducto extends javax.swing.JDialog {
     PrEmpaqueJpaController EmpaqueController = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrFabricanteJpaController FabricanteController = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductosJpaController productController = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductoBodegaJpaController bodegaStockcontroller = new PrProductoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     List<PrGrupos> listGrupo = GrupoController.findPrGruposEntities();
     List<PrSubgrupos> listSubgrupo = SubgrupoController.findPrSubgruposEntities();
@@ -76,6 +81,8 @@ public class NuevoProducto extends javax.swing.JDialog {
     CoProveedores proveedor;
     PrEmpaque empaqueCompra1, empaqueCompra2, empaqueVenta1, empaqueVenta2;
     PrFabricante fabricante;
+    InBodega bodega;
+    PrProductoBodega bodegaStock;
 
     String[] cadenaArray1 = {"Seleccione una Opcion..", ""};
 
@@ -166,6 +173,8 @@ public class NuevoProducto extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         txtStockNin = new javax.swing.JTextField();
         txtStockMax = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        txtBodega = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -389,12 +398,24 @@ public class NuevoProducto extends javax.swing.JDialog {
 
         jLabel14.setText("Máximo:");
 
+        jLabel22.setText("bodega");
+
+        txtBodega.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtBodegaMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(txtBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -406,17 +427,20 @@ public class NuevoProducto extends javax.swing.JDialog {
                             .addComponent(jLabel14)
                             .addGap(18, 18, 18)
                             .addComponent(txtStockMax, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(660, Short.MAX_VALUE))
+                .addGap(359, 359, 359))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jLabel12)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel22))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtStockNin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStockNin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -863,6 +887,21 @@ public class NuevoProducto extends javax.swing.JDialog {
                                         }
 
                                         productController.create(obj);
+                                        
+                                        
+                                        bodegaStock = new PrProductoBodega();
+                                        
+                                        bodegaStock.setInBodega(bodega); 
+                                        bodegaStock.setStockMinimo(BigInteger.valueOf(Long.parseLong(txtStockNin.getText())));
+                                        bodegaStock.setStockMaximo(BigInteger.valueOf(Long.parseLong(txtStockMax.getText())));
+                                        bodegaStock.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                        bodegaStock.setFechaCreacion(d);
+                                        
+                                        bodegaStockcontroller.create(bodegaStock);
+                                        
+                                        
+                                        
+                                        
 
                                         JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                                         setVisible(false);
@@ -1017,6 +1056,31 @@ public class NuevoProducto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtFabricanteMousePressed
 
+    private void txtBodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBodegaMousePressed
+       
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarBodega dialog = new ConsultarBodega(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                bodega = dialog.getObjeto();
+
+                if (bodega.getNombreBodega() != null) {
+                    txtBodega.setText(bodega.getNombreBodega());
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        
+        
+        
+    }//GEN-LAST:event_txtBodegaMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -1094,6 +1158,7 @@ public class NuevoProducto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1109,6 +1174,7 @@ public class NuevoProducto extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane8;
     private javax.swing.JTextField txtArticulo;
+    private javax.swing.JTextField txtBodega;
     private javax.swing.JTextField txtCCompra;
     private javax.swing.JTextField txtCVenta;
     private javax.swing.JTextField txtCodigoBarra;

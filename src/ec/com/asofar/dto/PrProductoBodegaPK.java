@@ -21,31 +21,31 @@ public class PrProductoBodegaPK implements Serializable {
     @Column(name = "id_producto_bodega")
     private long idProductoBodega;
     @Basic(optional = false)
+    @Column(name = "id_producto")
+    private long idProducto;
+    @Basic(optional = false)
     @Column(name = "id_bodega")
     private long idBodega;
     @Basic(optional = false)
-    @Column(name = "id_producto")
-    private long idProducto;
+    @Column(name = "id_tipo_bodega")
+    private long idTipoBodega;
     @Basic(optional = false)
     @Column(name = "id_empresa")
     private long idEmpresa;
     @Basic(optional = false)
     @Column(name = "id_sucursal")
     private long idSucursal;
-    @Basic(optional = false)
-    @Column(name = "id_tipo_bodega")
-    private long idTipoBodega;
 
     public PrProductoBodegaPK() {
     }
 
-    public PrProductoBodegaPK(long idProductoBodega, long idBodega, long idProducto, long idEmpresa, long idSucursal, long idTipoBodega) {
+    public PrProductoBodegaPK(long idProductoBodega, long idProducto, long idBodega, long idTipoBodega, long idEmpresa, long idSucursal) {
         this.idProductoBodega = idProductoBodega;
-        this.idBodega = idBodega;
         this.idProducto = idProducto;
+        this.idBodega = idBodega;
+        this.idTipoBodega = idTipoBodega;
         this.idEmpresa = idEmpresa;
         this.idSucursal = idSucursal;
-        this.idTipoBodega = idTipoBodega;
     }
 
     public long getIdProductoBodega() {
@@ -56,6 +56,14 @@ public class PrProductoBodegaPK implements Serializable {
         this.idProductoBodega = idProductoBodega;
     }
 
+    public long getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(long idProducto) {
+        this.idProducto = idProducto;
+    }
+
     public long getIdBodega() {
         return idBodega;
     }
@@ -64,12 +72,12 @@ public class PrProductoBodegaPK implements Serializable {
         this.idBodega = idBodega;
     }
 
-    public long getIdProducto() {
-        return idProducto;
+    public long getIdTipoBodega() {
+        return idTipoBodega;
     }
 
-    public void setIdProducto(long idProducto) {
-        this.idProducto = idProducto;
+    public void setIdTipoBodega(long idTipoBodega) {
+        this.idTipoBodega = idTipoBodega;
     }
 
     public long getIdEmpresa() {
@@ -88,23 +96,15 @@ public class PrProductoBodegaPK implements Serializable {
         this.idSucursal = idSucursal;
     }
 
-    public long getIdTipoBodega() {
-        return idTipoBodega;
-    }
-
-    public void setIdTipoBodega(long idTipoBodega) {
-        this.idTipoBodega = idTipoBodega;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) idProductoBodega;
-        hash += (int) idBodega;
         hash += (int) idProducto;
+        hash += (int) idBodega;
+        hash += (int) idTipoBodega;
         hash += (int) idEmpresa;
         hash += (int) idSucursal;
-        hash += (int) idTipoBodega;
         return hash;
     }
 
@@ -118,10 +118,13 @@ public class PrProductoBodegaPK implements Serializable {
         if (this.idProductoBodega != other.idProductoBodega) {
             return false;
         }
+        if (this.idProducto != other.idProducto) {
+            return false;
+        }
         if (this.idBodega != other.idBodega) {
             return false;
         }
-        if (this.idProducto != other.idProducto) {
+        if (this.idTipoBodega != other.idTipoBodega) {
             return false;
         }
         if (this.idEmpresa != other.idEmpresa) {
@@ -130,15 +133,12 @@ public class PrProductoBodegaPK implements Serializable {
         if (this.idSucursal != other.idSucursal) {
             return false;
         }
-        if (this.idTipoBodega != other.idTipoBodega) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrProductoBodegaPK[ idProductoBodega=" + idProductoBodega + ", idBodega=" + idBodega + ", idProducto=" + idProducto + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + ", idTipoBodega=" + idTipoBodega + " ]";
+        return "ec.com.asofar.dto.PrProductoBodegaPK[ idProductoBodega=" + idProductoBodega + ", idProducto=" + idProducto + ", idBodega=" + idBodega + ", idTipoBodega=" + idTipoBodega + ", idEmpresa=" + idEmpresa + ", idSucursal=" + idSucursal + " ]";
     }
     
 }

@@ -87,8 +87,6 @@ public class SeSucursal implements Serializable {
     private SeEmpresa seEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<InKardex> inKardexList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
-    private List<PrProductoBodega> prProductoBodegaList;
 
     public SeSucursal() {
     }
@@ -259,15 +257,6 @@ public class SeSucursal implements Serializable {
 
     public void setInKardexList(List<InKardex> inKardexList) {
         this.inKardexList = inKardexList;
-    }
-
-    @XmlTransient
-    public List<PrProductoBodega> getPrProductoBodegaList() {
-        return prProductoBodegaList;
-    }
-
-    public void setPrProductoBodegaList(List<PrProductoBodega> prProductoBodegaList) {
-        this.prProductoBodegaList = prProductoBodegaList;
     }
 
     @Override

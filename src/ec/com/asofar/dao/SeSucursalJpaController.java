@@ -24,7 +24,6 @@ import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.SeUsuarioSucurRol;
 import ec.com.asofar.dto.InKardex;
-import ec.com.asofar.dto.PrProductoBodega;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeSucursalPK;
 import javax.persistence.EntityManager;
@@ -72,9 +71,6 @@ public class SeSucursalJpaController implements Serializable {
         }
         if (seSucursal.getInKardexList() == null) {
             seSucursal.setInKardexList(new ArrayList<InKardex>());
-        }
-        if (seSucursal.getPrProductoBodegaList() == null) {
-            seSucursal.setPrProductoBodegaList(new ArrayList<PrProductoBodega>());
         }
         seSucursal.getSeSucursalPK().setIdEmpresa(seSucursal.getSeEmpresa().getIdEmpresa());
         EntityManager em = null;
@@ -134,12 +130,6 @@ public class SeSucursalJpaController implements Serializable {
                 attachedInKardexList.add(inKardexListInKardexToAttach);
             }
             seSucursal.setInKardexList(attachedInKardexList);
-            List<PrProductoBodega> attachedPrProductoBodegaList = new ArrayList<PrProductoBodega>();
-            for (PrProductoBodega prProductoBodegaListPrProductoBodegaToAttach : seSucursal.getPrProductoBodegaList()) {
-                prProductoBodegaListPrProductoBodegaToAttach = em.getReference(prProductoBodegaListPrProductoBodegaToAttach.getClass(), prProductoBodegaListPrProductoBodegaToAttach.getPrProductoBodegaPK());
-                attachedPrProductoBodegaList.add(prProductoBodegaListPrProductoBodegaToAttach);
-            }
-            seSucursal.setPrProductoBodegaList(attachedPrProductoBodegaList);
             em.persist(seSucursal);
             if (seEmpresa != null) {
                 seEmpresa.getSeSucursalList().add(seSucursal);
@@ -217,15 +207,6 @@ public class SeSucursalJpaController implements Serializable {
                     oldSeSucursalOfInKardexListInKardex = em.merge(oldSeSucursalOfInKardexListInKardex);
                 }
             }
-            for (PrProductoBodega prProductoBodegaListPrProductoBodega : seSucursal.getPrProductoBodegaList()) {
-                SeSucursal oldSeSucursalOfPrProductoBodegaListPrProductoBodega = prProductoBodegaListPrProductoBodega.getSeSucursal();
-                prProductoBodegaListPrProductoBodega.setSeSucursal(seSucursal);
-                prProductoBodegaListPrProductoBodega = em.merge(prProductoBodegaListPrProductoBodega);
-                if (oldSeSucursalOfPrProductoBodegaListPrProductoBodega != null) {
-                    oldSeSucursalOfPrProductoBodegaListPrProductoBodega.getPrProductoBodegaList().remove(prProductoBodegaListPrProductoBodega);
-                    oldSeSucursalOfPrProductoBodegaListPrProductoBodega = em.merge(oldSeSucursalOfPrProductoBodegaListPrProductoBodega);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findSeSucursal(seSucursal.getSeSucursalPK()) != null) {
@@ -264,8 +245,6 @@ public class SeSucursalJpaController implements Serializable {
             List<SeUsuarioSucurRol> seUsuarioSucurRolListNew = seSucursal.getSeUsuarioSucurRolList();
             List<InKardex> inKardexListOld = persistentSeSucursal.getInKardexList();
             List<InKardex> inKardexListNew = seSucursal.getInKardexList();
-            List<PrProductoBodega> prProductoBodegaListOld = persistentSeSucursal.getPrProductoBodegaList();
-            List<PrProductoBodega> prProductoBodegaListNew = seSucursal.getPrProductoBodegaList();
             List<String> illegalOrphanMessages = null;
             for (InBodega inBodegaListOldInBodega : inBodegaListOld) {
                 if (!inBodegaListNew.contains(inBodegaListOldInBodega)) {
@@ -331,14 +310,6 @@ public class SeSucursalJpaController implements Serializable {
                     illegalOrphanMessages.add("You must retain InKardex " + inKardexListOldInKardex + " since its seSucursal field is not nullable.");
                 }
             }
-            for (PrProductoBodega prProductoBodegaListOldPrProductoBodega : prProductoBodegaListOld) {
-                if (!prProductoBodegaListNew.contains(prProductoBodegaListOldPrProductoBodega)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrProductoBodega " + prProductoBodegaListOldPrProductoBodega + " since its seSucursal field is not nullable.");
-                }
-            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
@@ -402,13 +373,6 @@ public class SeSucursalJpaController implements Serializable {
             }
             inKardexListNew = attachedInKardexListNew;
             seSucursal.setInKardexList(inKardexListNew);
-            List<PrProductoBodega> attachedPrProductoBodegaListNew = new ArrayList<PrProductoBodega>();
-            for (PrProductoBodega prProductoBodegaListNewPrProductoBodegaToAttach : prProductoBodegaListNew) {
-                prProductoBodegaListNewPrProductoBodegaToAttach = em.getReference(prProductoBodegaListNewPrProductoBodegaToAttach.getClass(), prProductoBodegaListNewPrProductoBodegaToAttach.getPrProductoBodegaPK());
-                attachedPrProductoBodegaListNew.add(prProductoBodegaListNewPrProductoBodegaToAttach);
-            }
-            prProductoBodegaListNew = attachedPrProductoBodegaListNew;
-            seSucursal.setPrProductoBodegaList(prProductoBodegaListNew);
             seSucursal = em.merge(seSucursal);
             if (seEmpresaOld != null && !seEmpresaOld.equals(seEmpresaNew)) {
                 seEmpresaOld.getSeSucursalList().remove(seSucursal);
@@ -506,17 +470,6 @@ public class SeSucursalJpaController implements Serializable {
                     }
                 }
             }
-            for (PrProductoBodega prProductoBodegaListNewPrProductoBodega : prProductoBodegaListNew) {
-                if (!prProductoBodegaListOld.contains(prProductoBodegaListNewPrProductoBodega)) {
-                    SeSucursal oldSeSucursalOfPrProductoBodegaListNewPrProductoBodega = prProductoBodegaListNewPrProductoBodega.getSeSucursal();
-                    prProductoBodegaListNewPrProductoBodega.setSeSucursal(seSucursal);
-                    prProductoBodegaListNewPrProductoBodega = em.merge(prProductoBodegaListNewPrProductoBodega);
-                    if (oldSeSucursalOfPrProductoBodegaListNewPrProductoBodega != null && !oldSeSucursalOfPrProductoBodegaListNewPrProductoBodega.equals(seSucursal)) {
-                        oldSeSucursalOfPrProductoBodegaListNewPrProductoBodega.getPrProductoBodegaList().remove(prProductoBodegaListNewPrProductoBodega);
-                        oldSeSucursalOfPrProductoBodegaListNewPrProductoBodega = em.merge(oldSeSucursalOfPrProductoBodegaListNewPrProductoBodega);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -602,13 +555,6 @@ public class SeSucursalJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This SeSucursal (" + seSucursal + ") cannot be destroyed since the InKardex " + inKardexListOrphanCheckInKardex + " in its inKardexList field has a non-nullable seSucursal field.");
-            }
-            List<PrProductoBodega> prProductoBodegaListOrphanCheck = seSucursal.getPrProductoBodegaList();
-            for (PrProductoBodega prProductoBodegaListOrphanCheckPrProductoBodega : prProductoBodegaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This SeSucursal (" + seSucursal + ") cannot be destroyed since the PrProductoBodega " + prProductoBodegaListOrphanCheckPrProductoBodega + " in its prProductoBodegaList field has a non-nullable seSucursal field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
