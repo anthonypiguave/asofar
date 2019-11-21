@@ -10,11 +10,13 @@ import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.dao.PrEmpaqueJpaController;
 import ec.com.asofar.dao.PrFabricanteJpaController;
 import ec.com.asofar.dao.PrGruposJpaController;
+import ec.com.asofar.dao.PrMedidasJpaController;
 import ec.com.asofar.dao.PrProductoBodegaJpaController;
 import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
+import ec.com.asofar.daoext.ProductoCadena;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.PrArticulo;
@@ -23,6 +25,7 @@ import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrProductoBodega;
+import ec.com.asofar.dto.PrProductoBodegaPK;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
@@ -63,7 +66,8 @@ public class NuevoProducto extends javax.swing.JDialog {
     PrEmpaqueJpaController EmpaqueController = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrFabricanteJpaController FabricanteController = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductosJpaController productController = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
-    PrProductoBodegaJpaController bodegaStockcontroller = new PrProductoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrProductoBodegaJpaController bodegaStockController = new PrProductoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    PrMedidasJpaController presentacionMedidaController = new PrMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     List<PrGrupos> listGrupo = GrupoController.findPrGruposEntities();
     List<PrSubgrupos> listSubgrupo = SubgrupoController.findPrSubgruposEntities();
@@ -115,7 +119,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-        
+
         chReceta.setSelected(false);
         chDescontinuado.setSelected(false);
 
@@ -769,7 +773,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         PrProductos obj = new PrProductos();
 
         List<PrProductos> list = new ArrayList<PrProductos>();
-        list = productController.findPrProductosEntities();
+//        list = productController.findPrProductosEntities();
 
         if (r == JOptionPane.YES_OPTION) {
 
@@ -887,21 +891,34 @@ public class NuevoProducto extends javax.swing.JDialog {
                                         }
 
                                         productController.create(obj);
-                                        
-                                        
+
+                                        list = new ArrayList<PrProductos>();
+
+                                        obj = new PrProductos();
+
+                                        list = productController.findPrProductosEntities();
+
+                                        for (int i = 0; i < list.size(); i++) {
+
+                                            if (list.get(i).getPrMedidas().equals(presentacionMedida)) {
+                                                obj = list.get(i);
+                                               
+                                            }
+                                        }
+
                                         bodegaStock = new PrProductoBodega();
-                                        
-                                        bodegaStock.setInBodega(bodega); 
+
+                                        bodegaStock.setPrProductoBodegaPK(new PrProductoBodegaPK());
+                                        bodegaStock.getPrProductoBodegaPK().setIdProducto(obj.getPrProductosPK().getIdProducto());
+
+                                        bodegaStock.setInBodega(bodega);
+
                                         bodegaStock.setStockMinimo(BigInteger.valueOf(Long.parseLong(txtStockNin.getText())));
                                         bodegaStock.setStockMaximo(BigInteger.valueOf(Long.parseLong(txtStockMax.getText())));
                                         bodegaStock.setUsuarioCreacion(seUsuario.getIdUsuario());
                                         bodegaStock.setFechaCreacion(d);
-                                        
-                                        bodegaStockcontroller.create(bodegaStock);
-                                        
-                                        
-                                        
-                                        
+
+                                        bodegaStockController.create(bodegaStock);
 
                                         JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                                         setVisible(false);
@@ -1057,7 +1074,7 @@ public class NuevoProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_txtFabricanteMousePressed
 
     private void txtBodegaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBodegaMousePressed
-       
+
         int i = 0;
         String msg = null;
         if (evt.getClickCount() == 2) {
@@ -1076,9 +1093,8 @@ public class NuevoProducto extends javax.swing.JDialog {
             }
 
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_txtBodegaMousePressed
 
     /**
