@@ -15,6 +15,8 @@ import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrMedidas;
+import ec.com.asofar.dto.PrEmpaque;
+import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrProductosPK;
 import java.util.List;
@@ -40,12 +42,12 @@ public class PrProductosJpaController implements Serializable {
         if (prProductos.getPrProductosPK() == null) {
             prProductos.setPrProductosPK(new PrProductosPK());
         }
-        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
-        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
-        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
-        prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
         prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
+        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
+        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
+        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -65,6 +67,31 @@ public class PrProductosJpaController implements Serializable {
                 prMedidas = em.getReference(prMedidas.getClass(), prMedidas.getPrMedidasPK());
                 prProductos.setPrMedidas(prMedidas);
             }
+            PrEmpaque medidaEmpaqueCompra = prProductos.getMedidaEmpaqueCompra();
+            if (medidaEmpaqueCompra != null) {
+                medidaEmpaqueCompra = em.getReference(medidaEmpaqueCompra.getClass(), medidaEmpaqueCompra.getId());
+                prProductos.setMedidaEmpaqueCompra(medidaEmpaqueCompra);
+            }
+            PrEmpaque medidaPorEmpaqueCompra = prProductos.getMedidaPorEmpaqueCompra();
+            if (medidaPorEmpaqueCompra != null) {
+                medidaPorEmpaqueCompra = em.getReference(medidaPorEmpaqueCompra.getClass(), medidaPorEmpaqueCompra.getId());
+                prProductos.setMedidaPorEmpaqueCompra(medidaPorEmpaqueCompra);
+            }
+            PrEmpaque medidaEmpaqueVenta = prProductos.getMedidaEmpaqueVenta();
+            if (medidaEmpaqueVenta != null) {
+                medidaEmpaqueVenta = em.getReference(medidaEmpaqueVenta.getClass(), medidaEmpaqueVenta.getId());
+                prProductos.setMedidaEmpaqueVenta(medidaEmpaqueVenta);
+            }
+            PrEmpaque medidaPorEmpaqueVenta = prProductos.getMedidaPorEmpaqueVenta();
+            if (medidaPorEmpaqueVenta != null) {
+                medidaPorEmpaqueVenta = em.getReference(medidaPorEmpaqueVenta.getClass(), medidaPorEmpaqueVenta.getId());
+                prProductos.setMedidaPorEmpaqueVenta(medidaPorEmpaqueVenta);
+            }
+            CoProveedores idProveedor = prProductos.getIdProveedor();
+            if (idProveedor != null) {
+                idProveedor = em.getReference(idProveedor.getClass(), idProveedor.getIdProveedor());
+                prProductos.setIdProveedor(idProveedor);
+            }
             em.persist(prProductos);
             if (seEmpresa != null) {
                 seEmpresa.getPrProductosList().add(prProductos);
@@ -77,6 +104,26 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidas != null) {
                 prMedidas.getPrProductosList().add(prProductos);
                 prMedidas = em.merge(prMedidas);
+            }
+            if (medidaEmpaqueCompra != null) {
+                medidaEmpaqueCompra.getPrProductosList().add(prProductos);
+                medidaEmpaqueCompra = em.merge(medidaEmpaqueCompra);
+            }
+            if (medidaPorEmpaqueCompra != null) {
+                medidaPorEmpaqueCompra.getPrProductosList().add(prProductos);
+                medidaPorEmpaqueCompra = em.merge(medidaPorEmpaqueCompra);
+            }
+            if (medidaEmpaqueVenta != null) {
+                medidaEmpaqueVenta.getPrProductosList().add(prProductos);
+                medidaEmpaqueVenta = em.merge(medidaEmpaqueVenta);
+            }
+            if (medidaPorEmpaqueVenta != null) {
+                medidaPorEmpaqueVenta.getPrProductosList().add(prProductos);
+                medidaPorEmpaqueVenta = em.merge(medidaPorEmpaqueVenta);
+            }
+            if (idProveedor != null) {
+                idProveedor.getPrProductosList().add(prProductos);
+                idProveedor = em.merge(idProveedor);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -92,12 +139,12 @@ public class PrProductosJpaController implements Serializable {
     }
 
     public void edit(PrProductos prProductos) throws NonexistentEntityException, Exception {
-        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
-        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
-        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
-        prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
         prProductos.getPrProductosPK().setIdEmpresa(prProductos.getSeEmpresa().getIdEmpresa());
+        prProductos.getPrProductosPK().setIdGrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdGrupo());
         prProductos.getPrProductosPK().setIdTipoPresentacion(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoPresentacion());
+        prProductos.getPrProductosPK().setIdTipoMedidas(prProductos.getPrMedidas().getPrMedidasPK().getIdTipoMedidas());
+        prProductos.getPrProductosPK().setIdArticulo(prProductos.getPrMedidas().getPrMedidasPK().getIdArticulo());
+        prProductos.getPrProductosPK().setIdSubgrupo(prProductos.getPrMedidas().getPrMedidasPK().getIdSubgrupo());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -109,6 +156,16 @@ public class PrProductosJpaController implements Serializable {
             PrFabricante codFabricanteNew = prProductos.getCodFabricante();
             PrMedidas prMedidasOld = persistentPrProductos.getPrMedidas();
             PrMedidas prMedidasNew = prProductos.getPrMedidas();
+            PrEmpaque medidaEmpaqueCompraOld = persistentPrProductos.getMedidaEmpaqueCompra();
+            PrEmpaque medidaEmpaqueCompraNew = prProductos.getMedidaEmpaqueCompra();
+            PrEmpaque medidaPorEmpaqueCompraOld = persistentPrProductos.getMedidaPorEmpaqueCompra();
+            PrEmpaque medidaPorEmpaqueCompraNew = prProductos.getMedidaPorEmpaqueCompra();
+            PrEmpaque medidaEmpaqueVentaOld = persistentPrProductos.getMedidaEmpaqueVenta();
+            PrEmpaque medidaEmpaqueVentaNew = prProductos.getMedidaEmpaqueVenta();
+            PrEmpaque medidaPorEmpaqueVentaOld = persistentPrProductos.getMedidaPorEmpaqueVenta();
+            PrEmpaque medidaPorEmpaqueVentaNew = prProductos.getMedidaPorEmpaqueVenta();
+            CoProveedores idProveedorOld = persistentPrProductos.getIdProveedor();
+            CoProveedores idProveedorNew = prProductos.getIdProveedor();
             if (seEmpresaNew != null) {
                 seEmpresaNew = em.getReference(seEmpresaNew.getClass(), seEmpresaNew.getIdEmpresa());
                 prProductos.setSeEmpresa(seEmpresaNew);
@@ -120,6 +177,26 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidasNew != null) {
                 prMedidasNew = em.getReference(prMedidasNew.getClass(), prMedidasNew.getPrMedidasPK());
                 prProductos.setPrMedidas(prMedidasNew);
+            }
+            if (medidaEmpaqueCompraNew != null) {
+                medidaEmpaqueCompraNew = em.getReference(medidaEmpaqueCompraNew.getClass(), medidaEmpaqueCompraNew.getId());
+                prProductos.setMedidaEmpaqueCompra(medidaEmpaqueCompraNew);
+            }
+            if (medidaPorEmpaqueCompraNew != null) {
+                medidaPorEmpaqueCompraNew = em.getReference(medidaPorEmpaqueCompraNew.getClass(), medidaPorEmpaqueCompraNew.getId());
+                prProductos.setMedidaPorEmpaqueCompra(medidaPorEmpaqueCompraNew);
+            }
+            if (medidaEmpaqueVentaNew != null) {
+                medidaEmpaqueVentaNew = em.getReference(medidaEmpaqueVentaNew.getClass(), medidaEmpaqueVentaNew.getId());
+                prProductos.setMedidaEmpaqueVenta(medidaEmpaqueVentaNew);
+            }
+            if (medidaPorEmpaqueVentaNew != null) {
+                medidaPorEmpaqueVentaNew = em.getReference(medidaPorEmpaqueVentaNew.getClass(), medidaPorEmpaqueVentaNew.getId());
+                prProductos.setMedidaPorEmpaqueVenta(medidaPorEmpaqueVentaNew);
+            }
+            if (idProveedorNew != null) {
+                idProveedorNew = em.getReference(idProveedorNew.getClass(), idProveedorNew.getIdProveedor());
+                prProductos.setIdProveedor(idProveedorNew);
             }
             prProductos = em.merge(prProductos);
             if (seEmpresaOld != null && !seEmpresaOld.equals(seEmpresaNew)) {
@@ -145,6 +222,46 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidasNew != null && !prMedidasNew.equals(prMedidasOld)) {
                 prMedidasNew.getPrProductosList().add(prProductos);
                 prMedidasNew = em.merge(prMedidasNew);
+            }
+            if (medidaEmpaqueCompraOld != null && !medidaEmpaqueCompraOld.equals(medidaEmpaqueCompraNew)) {
+                medidaEmpaqueCompraOld.getPrProductosList().remove(prProductos);
+                medidaEmpaqueCompraOld = em.merge(medidaEmpaqueCompraOld);
+            }
+            if (medidaEmpaqueCompraNew != null && !medidaEmpaqueCompraNew.equals(medidaEmpaqueCompraOld)) {
+                medidaEmpaqueCompraNew.getPrProductosList().add(prProductos);
+                medidaEmpaqueCompraNew = em.merge(medidaEmpaqueCompraNew);
+            }
+            if (medidaPorEmpaqueCompraOld != null && !medidaPorEmpaqueCompraOld.equals(medidaPorEmpaqueCompraNew)) {
+                medidaPorEmpaqueCompraOld.getPrProductosList().remove(prProductos);
+                medidaPorEmpaqueCompraOld = em.merge(medidaPorEmpaqueCompraOld);
+            }
+            if (medidaPorEmpaqueCompraNew != null && !medidaPorEmpaqueCompraNew.equals(medidaPorEmpaqueCompraOld)) {
+                medidaPorEmpaqueCompraNew.getPrProductosList().add(prProductos);
+                medidaPorEmpaqueCompraNew = em.merge(medidaPorEmpaqueCompraNew);
+            }
+            if (medidaEmpaqueVentaOld != null && !medidaEmpaqueVentaOld.equals(medidaEmpaqueVentaNew)) {
+                medidaEmpaqueVentaOld.getPrProductosList().remove(prProductos);
+                medidaEmpaqueVentaOld = em.merge(medidaEmpaqueVentaOld);
+            }
+            if (medidaEmpaqueVentaNew != null && !medidaEmpaqueVentaNew.equals(medidaEmpaqueVentaOld)) {
+                medidaEmpaqueVentaNew.getPrProductosList().add(prProductos);
+                medidaEmpaqueVentaNew = em.merge(medidaEmpaqueVentaNew);
+            }
+            if (medidaPorEmpaqueVentaOld != null && !medidaPorEmpaqueVentaOld.equals(medidaPorEmpaqueVentaNew)) {
+                medidaPorEmpaqueVentaOld.getPrProductosList().remove(prProductos);
+                medidaPorEmpaqueVentaOld = em.merge(medidaPorEmpaqueVentaOld);
+            }
+            if (medidaPorEmpaqueVentaNew != null && !medidaPorEmpaqueVentaNew.equals(medidaPorEmpaqueVentaOld)) {
+                medidaPorEmpaqueVentaNew.getPrProductosList().add(prProductos);
+                medidaPorEmpaqueVentaNew = em.merge(medidaPorEmpaqueVentaNew);
+            }
+            if (idProveedorOld != null && !idProveedorOld.equals(idProveedorNew)) {
+                idProveedorOld.getPrProductosList().remove(prProductos);
+                idProveedorOld = em.merge(idProveedorOld);
+            }
+            if (idProveedorNew != null && !idProveedorNew.equals(idProveedorOld)) {
+                idProveedorNew.getPrProductosList().add(prProductos);
+                idProveedorNew = em.merge(idProveedorNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -189,6 +306,31 @@ public class PrProductosJpaController implements Serializable {
             if (prMedidas != null) {
                 prMedidas.getPrProductosList().remove(prProductos);
                 prMedidas = em.merge(prMedidas);
+            }
+            PrEmpaque medidaEmpaqueCompra = prProductos.getMedidaEmpaqueCompra();
+            if (medidaEmpaqueCompra != null) {
+                medidaEmpaqueCompra.getPrProductosList().remove(prProductos);
+                medidaEmpaqueCompra = em.merge(medidaEmpaqueCompra);
+            }
+            PrEmpaque medidaPorEmpaqueCompra = prProductos.getMedidaPorEmpaqueCompra();
+            if (medidaPorEmpaqueCompra != null) {
+                medidaPorEmpaqueCompra.getPrProductosList().remove(prProductos);
+                medidaPorEmpaqueCompra = em.merge(medidaPorEmpaqueCompra);
+            }
+            PrEmpaque medidaEmpaqueVenta = prProductos.getMedidaEmpaqueVenta();
+            if (medidaEmpaqueVenta != null) {
+                medidaEmpaqueVenta.getPrProductosList().remove(prProductos);
+                medidaEmpaqueVenta = em.merge(medidaEmpaqueVenta);
+            }
+            PrEmpaque medidaPorEmpaqueVenta = prProductos.getMedidaPorEmpaqueVenta();
+            if (medidaPorEmpaqueVenta != null) {
+                medidaPorEmpaqueVenta.getPrProductosList().remove(prProductos);
+                medidaPorEmpaqueVenta = em.merge(medidaPorEmpaqueVenta);
+            }
+            CoProveedores idProveedor = prProductos.getIdProveedor();
+            if (idProveedor != null) {
+                idProveedor.getPrProductosList().remove(prProductos);
+                idProveedor = em.merge(idProveedor);
             }
             em.remove(prProductos);
             em.getTransaction().commit();

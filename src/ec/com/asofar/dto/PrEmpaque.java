@@ -7,6 +7,7 @@ package ec.com.asofar.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -58,6 +61,14 @@ public class PrEmpaque implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @OneToMany(mappedBy = "medidaEmpaqueCompra")
+    private List<PrProductos> prProductosList;
+    @OneToMany(mappedBy = "medidaPorEmpaqueCompra")
+    private List<PrProductos> prProductosList1;
+    @OneToMany(mappedBy = "medidaEmpaqueVenta")
+    private List<PrProductos> prProductosList2;
+    @OneToMany(mappedBy = "medidaPorEmpaqueVenta")
+    private List<PrProductos> prProductosList3;
 
     public PrEmpaque() {
     }
@@ -120,6 +131,42 @@ public class PrEmpaque implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    @XmlTransient
+    public List<PrProductos> getPrProductosList() {
+        return prProductosList;
+    }
+
+    public void setPrProductosList(List<PrProductos> prProductosList) {
+        this.prProductosList = prProductosList;
+    }
+
+    @XmlTransient
+    public List<PrProductos> getPrProductosList1() {
+        return prProductosList1;
+    }
+
+    public void setPrProductosList1(List<PrProductos> prProductosList1) {
+        this.prProductosList1 = prProductosList1;
+    }
+
+    @XmlTransient
+    public List<PrProductos> getPrProductosList2() {
+        return prProductosList2;
+    }
+
+    public void setPrProductosList2(List<PrProductos> prProductosList2) {
+        this.prProductosList2 = prProductosList2;
+    }
+
+    @XmlTransient
+    public List<PrProductos> getPrProductosList3() {
+        return prProductosList3;
+    }
+
+    public void setPrProductosList3(List<PrProductos> prProductosList3) {
+        this.prProductosList3 = prProductosList3;
     }
 
     @Override

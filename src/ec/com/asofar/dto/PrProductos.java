@@ -46,13 +46,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PrProductos.findByUsuarioActualizacion", query = "SELECT p FROM PrProductos p WHERE p.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "PrProductos.findByFechaActualizacion", query = "SELECT p FROM PrProductos p WHERE p.fechaActualizacion = :fechaActualizacion")
     , @NamedQuery(name = "PrProductos.findByUnidadEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.unidadEmpaqueCompra = :unidadEmpaqueCompra")
-    , @NamedQuery(name = "PrProductos.findByMedidaEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.medidaEmpaqueCompra = :medidaEmpaqueCompra")
     , @NamedQuery(name = "PrProductos.findByCantidadPorEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.cantidadPorEmpaqueCompra = :cantidadPorEmpaqueCompra")
-    , @NamedQuery(name = "PrProductos.findByMedidaPorEmpaqueCompra", query = "SELECT p FROM PrProductos p WHERE p.medidaPorEmpaqueCompra = :medidaPorEmpaqueCompra")
     , @NamedQuery(name = "PrProductos.findByUnidadEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.unidadEmpaqueVenta = :unidadEmpaqueVenta")
-    , @NamedQuery(name = "PrProductos.findByMedidaEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.medidaEmpaqueVenta = :medidaEmpaqueVenta")
-    , @NamedQuery(name = "PrProductos.findByCantidadPorEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.cantidadPorEmpaqueVenta = :cantidadPorEmpaqueVenta")
-    , @NamedQuery(name = "PrProductos.findByMedidaPorEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.medidaPorEmpaqueVenta = :medidaPorEmpaqueVenta")})
+    , @NamedQuery(name = "PrProductos.findByCantidadPorEmpaqueVenta", query = "SELECT p FROM PrProductos p WHERE p.cantidadPorEmpaqueVenta = :cantidadPorEmpaqueVenta")})
 public class PrProductos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,20 +84,12 @@ public class PrProductos implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "unidad_empaque_compra")
     private Double unidadEmpaqueCompra;
-    @Column(name = "medida_empaque_compra")
-    private String medidaEmpaqueCompra;
     @Column(name = "cantidad_por_empaque_compra")
     private Double cantidadPorEmpaqueCompra;
-    @Column(name = "medida_por_empaque_compra")
-    private String medidaPorEmpaqueCompra;
     @Column(name = "unidad_empaque_venta")
     private Double unidadEmpaqueVenta;
-    @Column(name = "medida_empaque_venta")
-    private String medidaEmpaqueVenta;
     @Column(name = "cantidad_por_empaque_venta")
     private Double cantidadPorEmpaqueVenta;
-    @Column(name = "medida_por_empaque_venta")
-    private String medidaPorEmpaqueVenta;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SeEmpresa seEmpresa;
@@ -116,6 +104,21 @@ public class PrProductos implements Serializable {
         , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private PrMedidas prMedidas;
+    @JoinColumn(name = "medida_empaque_compra", referencedColumnName = "id")
+    @ManyToOne
+    private PrEmpaque medidaEmpaqueCompra;
+    @JoinColumn(name = "medida_por_empaque_compra", referencedColumnName = "id")
+    @ManyToOne
+    private PrEmpaque medidaPorEmpaqueCompra;
+    @JoinColumn(name = "medida_empaque_venta", referencedColumnName = "id")
+    @ManyToOne
+    private PrEmpaque medidaEmpaqueVenta;
+    @JoinColumn(name = "medida_por_empaque_venta", referencedColumnName = "id")
+    @ManyToOne
+    private PrEmpaque medidaPorEmpaqueVenta;
+    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
+    @ManyToOne
+    private CoProveedores idProveedor;
 
     public PrProductos() {
     }
@@ -232,28 +235,12 @@ public class PrProductos implements Serializable {
         this.unidadEmpaqueCompra = unidadEmpaqueCompra;
     }
 
-    public String getMedidaEmpaqueCompra() {
-        return medidaEmpaqueCompra;
-    }
-
-    public void setMedidaEmpaqueCompra(String medidaEmpaqueCompra) {
-        this.medidaEmpaqueCompra = medidaEmpaqueCompra;
-    }
-
     public Double getCantidadPorEmpaqueCompra() {
         return cantidadPorEmpaqueCompra;
     }
 
     public void setCantidadPorEmpaqueCompra(Double cantidadPorEmpaqueCompra) {
         this.cantidadPorEmpaqueCompra = cantidadPorEmpaqueCompra;
-    }
-
-    public String getMedidaPorEmpaqueCompra() {
-        return medidaPorEmpaqueCompra;
-    }
-
-    public void setMedidaPorEmpaqueCompra(String medidaPorEmpaqueCompra) {
-        this.medidaPorEmpaqueCompra = medidaPorEmpaqueCompra;
     }
 
     public Double getUnidadEmpaqueVenta() {
@@ -264,28 +251,12 @@ public class PrProductos implements Serializable {
         this.unidadEmpaqueVenta = unidadEmpaqueVenta;
     }
 
-    public String getMedidaEmpaqueVenta() {
-        return medidaEmpaqueVenta;
-    }
-
-    public void setMedidaEmpaqueVenta(String medidaEmpaqueVenta) {
-        this.medidaEmpaqueVenta = medidaEmpaqueVenta;
-    }
-
     public Double getCantidadPorEmpaqueVenta() {
         return cantidadPorEmpaqueVenta;
     }
 
     public void setCantidadPorEmpaqueVenta(Double cantidadPorEmpaqueVenta) {
         this.cantidadPorEmpaqueVenta = cantidadPorEmpaqueVenta;
-    }
-
-    public String getMedidaPorEmpaqueVenta() {
-        return medidaPorEmpaqueVenta;
-    }
-
-    public void setMedidaPorEmpaqueVenta(String medidaPorEmpaqueVenta) {
-        this.medidaPorEmpaqueVenta = medidaPorEmpaqueVenta;
     }
 
     public SeEmpresa getSeEmpresa() {
@@ -310,6 +281,46 @@ public class PrProductos implements Serializable {
 
     public void setPrMedidas(PrMedidas prMedidas) {
         this.prMedidas = prMedidas;
+    }
+
+    public PrEmpaque getMedidaEmpaqueCompra() {
+        return medidaEmpaqueCompra;
+    }
+
+    public void setMedidaEmpaqueCompra(PrEmpaque medidaEmpaqueCompra) {
+        this.medidaEmpaqueCompra = medidaEmpaqueCompra;
+    }
+
+    public PrEmpaque getMedidaPorEmpaqueCompra() {
+        return medidaPorEmpaqueCompra;
+    }
+
+    public void setMedidaPorEmpaqueCompra(PrEmpaque medidaPorEmpaqueCompra) {
+        this.medidaPorEmpaqueCompra = medidaPorEmpaqueCompra;
+    }
+
+    public PrEmpaque getMedidaEmpaqueVenta() {
+        return medidaEmpaqueVenta;
+    }
+
+    public void setMedidaEmpaqueVenta(PrEmpaque medidaEmpaqueVenta) {
+        this.medidaEmpaqueVenta = medidaEmpaqueVenta;
+    }
+
+    public PrEmpaque getMedidaPorEmpaqueVenta() {
+        return medidaPorEmpaqueVenta;
+    }
+
+    public void setMedidaPorEmpaqueVenta(PrEmpaque medidaPorEmpaqueVenta) {
+        this.medidaPorEmpaqueVenta = medidaPorEmpaqueVenta;
+    }
+
+    public CoProveedores getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(CoProveedores idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     @Override

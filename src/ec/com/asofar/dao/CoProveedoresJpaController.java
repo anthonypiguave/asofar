@@ -14,9 +14,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ec.com.asofar.dto.SeTipoPersona;
 import ec.com.asofar.dto.SePais;
-import ec.com.asofar.dto.InMovimientos;
+import ec.com.asofar.dto.PrProductos;
 import java.util.ArrayList;
 import java.util.List;
+import ec.com.asofar.dto.InMovimientos;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -36,6 +37,9 @@ public class CoProveedoresJpaController implements Serializable {
     }
 
     public void create(CoProveedores coProveedores) {
+        if (coProveedores.getPrProductosList() == null) {
+            coProveedores.setPrProductosList(new ArrayList<PrProductos>());
+        }
         if (coProveedores.getInMovimientosList() == null) {
             coProveedores.setInMovimientosList(new ArrayList<InMovimientos>());
         }
@@ -53,6 +57,12 @@ public class CoProveedoresJpaController implements Serializable {
                 idPais = em.getReference(idPais.getClass(), idPais.getIdPais());
                 coProveedores.setIdPais(idPais);
             }
+            List<PrProductos> attachedPrProductosList = new ArrayList<PrProductos>();
+            for (PrProductos prProductosListPrProductosToAttach : coProveedores.getPrProductosList()) {
+                prProductosListPrProductosToAttach = em.getReference(prProductosListPrProductosToAttach.getClass(), prProductosListPrProductosToAttach.getPrProductosPK());
+                attachedPrProductosList.add(prProductosListPrProductosToAttach);
+            }
+            coProveedores.setPrProductosList(attachedPrProductosList);
             List<InMovimientos> attachedInMovimientosList = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListInMovimientosToAttach : coProveedores.getInMovimientosList()) {
                 inMovimientosListInMovimientosToAttach = em.getReference(inMovimientosListInMovimientosToAttach.getClass(), inMovimientosListInMovimientosToAttach.getInMovimientosPK());
@@ -67,6 +77,15 @@ public class CoProveedoresJpaController implements Serializable {
             if (idPais != null) {
                 idPais.getCoProveedoresList().add(coProveedores);
                 idPais = em.merge(idPais);
+            }
+            for (PrProductos prProductosListPrProductos : coProveedores.getPrProductosList()) {
+                CoProveedores oldIdProveedorOfPrProductosListPrProductos = prProductosListPrProductos.getIdProveedor();
+                prProductosListPrProductos.setIdProveedor(coProveedores);
+                prProductosListPrProductos = em.merge(prProductosListPrProductos);
+                if (oldIdProveedorOfPrProductosListPrProductos != null) {
+                    oldIdProveedorOfPrProductosListPrProductos.getPrProductosList().remove(prProductosListPrProductos);
+                    oldIdProveedorOfPrProductosListPrProductos = em.merge(oldIdProveedorOfPrProductosListPrProductos);
+                }
             }
             for (InMovimientos inMovimientosListInMovimientos : coProveedores.getInMovimientosList()) {
                 CoProveedores oldIdProveedorOfInMovimientosListInMovimientos = inMovimientosListInMovimientos.getIdProveedor();
@@ -95,6 +114,8 @@ public class CoProveedoresJpaController implements Serializable {
             SeTipoPersona tipoPersonaNew = coProveedores.getTipoPersona();
             SePais idPaisOld = persistentCoProveedores.getIdPais();
             SePais idPaisNew = coProveedores.getIdPais();
+            List<PrProductos> prProductosListOld = persistentCoProveedores.getPrProductosList();
+            List<PrProductos> prProductosListNew = coProveedores.getPrProductosList();
             List<InMovimientos> inMovimientosListOld = persistentCoProveedores.getInMovimientosList();
             List<InMovimientos> inMovimientosListNew = coProveedores.getInMovimientosList();
             if (tipoPersonaNew != null) {
@@ -105,6 +126,13 @@ public class CoProveedoresJpaController implements Serializable {
                 idPaisNew = em.getReference(idPaisNew.getClass(), idPaisNew.getIdPais());
                 coProveedores.setIdPais(idPaisNew);
             }
+            List<PrProductos> attachedPrProductosListNew = new ArrayList<PrProductos>();
+            for (PrProductos prProductosListNewPrProductosToAttach : prProductosListNew) {
+                prProductosListNewPrProductosToAttach = em.getReference(prProductosListNewPrProductosToAttach.getClass(), prProductosListNewPrProductosToAttach.getPrProductosPK());
+                attachedPrProductosListNew.add(prProductosListNewPrProductosToAttach);
+            }
+            prProductosListNew = attachedPrProductosListNew;
+            coProveedores.setPrProductosList(prProductosListNew);
             List<InMovimientos> attachedInMovimientosListNew = new ArrayList<InMovimientos>();
             for (InMovimientos inMovimientosListNewInMovimientosToAttach : inMovimientosListNew) {
                 inMovimientosListNewInMovimientosToAttach = em.getReference(inMovimientosListNewInMovimientosToAttach.getClass(), inMovimientosListNewInMovimientosToAttach.getInMovimientosPK());
@@ -128,6 +156,23 @@ public class CoProveedoresJpaController implements Serializable {
             if (idPaisNew != null && !idPaisNew.equals(idPaisOld)) {
                 idPaisNew.getCoProveedoresList().add(coProveedores);
                 idPaisNew = em.merge(idPaisNew);
+            }
+            for (PrProductos prProductosListOldPrProductos : prProductosListOld) {
+                if (!prProductosListNew.contains(prProductosListOldPrProductos)) {
+                    prProductosListOldPrProductos.setIdProveedor(null);
+                    prProductosListOldPrProductos = em.merge(prProductosListOldPrProductos);
+                }
+            }
+            for (PrProductos prProductosListNewPrProductos : prProductosListNew) {
+                if (!prProductosListOld.contains(prProductosListNewPrProductos)) {
+                    CoProveedores oldIdProveedorOfPrProductosListNewPrProductos = prProductosListNewPrProductos.getIdProveedor();
+                    prProductosListNewPrProductos.setIdProveedor(coProveedores);
+                    prProductosListNewPrProductos = em.merge(prProductosListNewPrProductos);
+                    if (oldIdProveedorOfPrProductosListNewPrProductos != null && !oldIdProveedorOfPrProductosListNewPrProductos.equals(coProveedores)) {
+                        oldIdProveedorOfPrProductosListNewPrProductos.getPrProductosList().remove(prProductosListNewPrProductos);
+                        oldIdProveedorOfPrProductosListNewPrProductos = em.merge(oldIdProveedorOfPrProductosListNewPrProductos);
+                    }
+                }
             }
             for (InMovimientos inMovimientosListOldInMovimientos : inMovimientosListOld) {
                 if (!inMovimientosListNew.contains(inMovimientosListOldInMovimientos)) {
@@ -184,6 +229,11 @@ public class CoProveedoresJpaController implements Serializable {
             if (idPais != null) {
                 idPais.getCoProveedoresList().remove(coProveedores);
                 idPais = em.merge(idPais);
+            }
+            List<PrProductos> prProductosList = coProveedores.getPrProductosList();
+            for (PrProductos prProductosListPrProductos : prProductosList) {
+                prProductosListPrProductos.setIdProveedor(null);
+                prProductosListPrProductos = em.merge(prProductosListPrProductos);
             }
             List<InMovimientos> inMovimientosList = coProveedores.getInMovimientosList();
             for (InMovimientos inMovimientosListInMovimientos : inMovimientosList) {

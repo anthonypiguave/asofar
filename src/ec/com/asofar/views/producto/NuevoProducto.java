@@ -813,15 +813,20 @@ public class NuevoProducto extends javax.swing.JDialog {
                                         } else {
                                             obj.setCodFabricante(fabricante);
                                         }
+                                        if (Arrays.asList(cadenaArray1).contains(txtProveedor.getText())) {
+
+                                        } else {
+                                            obj.setIdProveedor(proveedor);
+                                        }
                                         if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra1.getText())) {
 
                                         } else {
-                                            obj.setMedidaEmpaqueCompra(empaqueCompra1.getNombreEmpaque());
+                                            obj.setMedidaEmpaqueCompra(empaqueCompra1);
                                         }
                                         if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra2.getText())) {
 
                                         } else {
-                                            obj.setMedidaPorEmpaqueCompra(empaqueCompra2.getNombreEmpaque());
+                                            obj.setMedidaPorEmpaqueCompra(empaqueCompra2);
                                         }
                                         if (Arrays.asList(cadenaArray2).contains(txtUCompra.getText())) {
 
@@ -836,14 +841,14 @@ public class NuevoProducto extends javax.swing.JDialog {
                                         if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta1.getText())) {
 
                                         } else {
-                                            obj.setMedidaEmpaqueVenta(empaqueVenta1.getNombreEmpaque());
+                                            obj.setMedidaEmpaqueVenta(empaqueVenta1);
                                         }
 
                                         if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta2.getText())) {
 
                                         } else {
 
-                                            obj.setMedidaPorEmpaqueVenta(empaqueVenta2.getNombreEmpaque());
+                                            obj.setMedidaPorEmpaqueVenta(empaqueVenta2);
                                         }
                                         if (Arrays.asList(cadenaArray2).contains(txtUVenta.getText())) {
 

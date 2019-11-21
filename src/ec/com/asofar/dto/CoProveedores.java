@@ -94,6 +94,8 @@ public class CoProveedores implements Serializable {
     @Column(name = "estado")
     private Character estado;
     @OneToMany(mappedBy = "idProveedor")
+    private List<PrProductos> prProductosList;
+    @OneToMany(mappedBy = "idProveedor")
     private List<InMovimientos> inMovimientosList;
     @JoinColumn(name = "tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
@@ -243,6 +245,15 @@ public class CoProveedores implements Serializable {
 
     public void setEstado(Character estado) {
         this.estado = estado;
+    }
+
+    @XmlTransient
+    public List<PrProductos> getPrProductosList() {
+        return prProductosList;
+    }
+
+    public void setPrProductosList(List<PrProductos> prProductosList) {
+        this.prProductosList = prProductosList;
     }
 
     @XmlTransient
