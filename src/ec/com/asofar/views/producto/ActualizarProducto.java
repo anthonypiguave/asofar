@@ -24,7 +24,6 @@ import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrProductoBodega;
-import ec.com.asofar.dto.PrProductoBodegaPK;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTipoMedidas;
@@ -158,7 +157,20 @@ public class ActualizarProducto extends javax.swing.JDialog {
         txtGrupo.setText(grupo.getNombre());
         txtSubGrupo.setText(subgrupo.getNombre());
         txtArticulo.setText(articulo.getNombreArticulo());
-        txtPresentacionMedida.setText(presentacionMedida.getPrTipoPresentacion().getNombre() + " De " + presentacionMedida.getPrTipoMedidas().getNombreTipoMedida());
+        txtPresentacionMedida.setText(presentacionMedida.getPrTipoPresentacion().getNombre() + " DE " + presentacionMedida.getPrTipoMedidas().getNombreTipoMedida());
+
+        if (producto.getDescontinuado().equals(null) || producto.getDescontinuado().equals("NO") ) {
+            
+             chDescontinuado.setSelected(false);
+        } else {
+            chDescontinuado.setSelected(true);
+        }
+
+        if (producto.getReceta().equals(null) || producto.getReceta().equals("NO") ) {
+             chReceta.setSelected(false);
+        } else {
+            chReceta.setSelected(true);
+        }
 
         if (producto.getCodFabricante() == null) {
             txtFabricante.setText("Seleccione una Opcion..");
@@ -612,7 +624,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
         btnCrear.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnCrear.setForeground(new java.awt.Color(1, 1, 1));
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
-        btnCrear.setText("CREAR");
+        btnCrear.setText("ACTUALIZAR");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -746,8 +758,8 @@ public class ActualizarProducto extends javax.swing.JDialog {
                     .addComponent(jTabbedPane8)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
+                        .addComponent(btnCrear)
+                        .addGap(79, 79, 79)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(277, 277, 277)))
                 .addContainerGap())
@@ -907,8 +919,8 @@ public class ActualizarProducto extends javax.swing.JDialog {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-        PrProductos obj = new PrProductos();
-        bodegaStock = new PrProductoBodega();
+//        PrProductos obj = new PrProductos();
+//        bodegaStock = new PrProductoBodega();
 
         List<PrProductos> list = new ArrayList<PrProductos>();
 
@@ -930,153 +942,139 @@ public class ActualizarProducto extends javax.swing.JDialog {
                                 JOptionPane.showMessageDialog(null, "genere o escriba el Producto!");
                             } else {
 
-                                list = presentacionMedida.getPrProductosList();
-                                if (list.size() >= 1) {
-                                    JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
-
-                                } else {
+//                                list = presentacionMedida.getPrProductosList();
+//                                if (list.size() >= 1) {
+//                                    JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
+//
+//                                } else {
                                     if (Arrays.asList(cadenaArray1).contains(txtBodega.getText())) {
                                         JOptionPane.showMessageDialog(null, "elija una bodega en Datos de inventario!");
 
                                     } else {
 
-//                                        try {
-//
-//                                            obj.setSeEmpresa(seEmpresa);
-//                                            obj.setPrMedidas(presentacionMedida);
-//                                            obj.setNombreProducto(txtProducto.getText());
-//                                            obj.setEstado("A");
-//                                            obj.setUsuarioCreacion(seUsuario.getIdUsuario());
-//                                            obj.setFechaCreacion(d);
-//
-//                                            if (txtCodigoBarra.getText().equals("")) {
-//
-//                                            } else {
-//                                                obj.setCodigoBarra(txtCodigoBarra.getText());
-//                                            }
-//                                            if (txtRegistroSanitarioExtranjero.getText().equals("")) {
-//
-//                                            } else {
-//                                                obj.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
-//                                            }
-//
-//                                            if (txtRegistroSanitarioLocal.getText().equals("")) {
-//
-//                                            } else {
-//                                                obj.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
-//                                            }
-//
-//                                            if (chReceta.isSelected()) {
-//                                                obj.setReceta("SI");
-//                                            } else {
-//                                                obj.setReceta("NO");
-//                                            }
-//
-//                                            if (chDescontinuado.isSelected()) {
-//                                                obj.setDescontinuado("SI");
-//                                            } else {
-//                                                obj.setDescontinuado("NO");
-//                                            }
-//
-//                                            if (Arrays.asList(cadenaArray1).contains(txtFabricante.getText())) {
-//
-//                                            } else {
-//                                                obj.setCodFabricante(fabricante);
-//                                            }
-//                                            if (Arrays.asList(cadenaArray1).contains(txtProveedor.getText())) {
-//
-//                                            } else {
-//                                                obj.setIdProveedor(proveedor);
-//                                            }
-//                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra1.getText())) {
-//
-//                                            } else {
-//                                                obj.setMedidaEmpaqueCompra(empaqueCompra1);
-//                                            }
-//                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra2.getText())) {
-//
-//                                            } else {
-//                                                obj.setMedidaPorEmpaqueCompra(empaqueCompra2);
-//                                            }
-//                                            if (Arrays.asList(cadenaArray2).contains(txtUCompra.getText())) {
-//
-//                                            } else {
-//                                                obj.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
-//                                            }
-//                                            if (Arrays.asList(cadenaArray2).contains(txtCCompra.getText())) {
-//
-//                                            } else {
-//                                                obj.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
-//                                            }
-//                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta1.getText())) {
-//
-//                                            } else {
-//                                                obj.setMedidaEmpaqueVenta(empaqueVenta1);
-//                                            }
-//
-//                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta2.getText())) {
-//
-//                                            } else {
-//
-//                                                obj.setMedidaPorEmpaqueVenta(empaqueVenta2);
-//                                            }
-//                                            if (Arrays.asList(cadenaArray2).contains(txtUVenta.getText())) {
-//
-//                                            } else {
-//
-//                                                obj.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
-//                                            }
-//                                            if (Arrays.asList(cadenaArray2).contains(txtCVenta.getText())) {
-//
-//                                            } else {
-//                                                obj.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
-//                                            }
-//                                            ///////////////////////////////////////////////////////////////////////////
-//
-//                                            if (Arrays.asList(cadenaArray2).contains(txtStockMin.getText())) {
-//
-//                                            } else {
-//
-//                                                bodegaStock.setStockMinimo(BigInteger.valueOf(Long.parseLong(txtStockMin.getText())));
-//                                            }
-//                                            if (Arrays.asList(cadenaArray2).contains(txtStockMax.getText())) {
-//
-//                                            } else {
-//                                                bodegaStock.setStockMaximo(BigInteger.valueOf(Long.parseLong(txtStockMax.getText())));
-//                                            }
-//
-//                                            productController.create(obj);
-//
-//                                            list = new ArrayList<PrProductos>();
-//
-//                                            producto = new PrProductos();
-//
-//                                            list = productController.findPrProductosEntities();
-//
-//                                            for (int i = 0; i < list.size(); i++) {
-//
-//                                                if (list.get(i).getPrMedidas().equals(presentacionMedida)) {
-//                                                    producto = list.get(i);
-//
-//                                                }
-//                                            }
-//
-//                                            bodegaStock.setPrProductoBodegaPK(new PrProductoBodegaPK());
-//                                            bodegaStock.getPrProductoBodegaPK().setIdProducto(producto.getPrProductosPK().getIdProducto());
-//
-//                                            bodegaStock.setInBodega(bodega);
-//                                            bodegaStock.setUsuarioCreacion(seUsuario.getIdUsuario());
-//                                            bodegaStock.setFechaCreacion(d);
-//
-//                                            bodegaStockController.create(bodegaStock);
-//
-//                                            JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-//                                            setVisible(false);
-//
-//                                        } catch (Exception e) {
-//                                            Logger.getLogger(ActualizarProducto.class.getName()).log(Level.SEVERE, null, e);
-//                                        }
-                                    }
+                                        try {
+                                            
+                                            producto.setSeEmpresa(seEmpresa);
+                                            producto.setPrMedidas(presentacionMedida);
+                                            producto.setNombreProducto(txtProducto.getText());
+                                            producto.setEstado("A");
+                                            producto.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                            producto.setFechaActualizacion(d);
+
+                                            if (txtCodigoBarra.getText().equals("")) {
+
+                                            } else {
+                                                producto.setCodigoBarra(txtCodigoBarra.getText());
+                                            }
+                                            if (txtRegistroSanitarioExtranjero.getText().equals("")) {
+
+                                            } else {
+                                                producto.setRegistroSanitarioExtranjero(txtRegistroSanitarioExtranjero.getText());
+                                            }
+
+                                            if (txtRegistroSanitarioLocal.getText().equals("")) {
+
+                                            } else {
+                                                producto.setRegistroSanitarioLocal(txtRegistroSanitarioLocal.getText());
+                                            }
+
+                                            if (chReceta.isSelected()) {
+                                                producto.setReceta("SI");
+                                            } else {
+                                                producto.setReceta("NO");
+                                            }
+
+                                            if (chDescontinuado.isSelected()) {
+                                                producto.setDescontinuado("SI");
+                                            } else {
+                                                producto.setDescontinuado("NO");
+                                            }
+
+                                            if (Arrays.asList(cadenaArray1).contains(txtFabricante.getText())) {
+
+                                            } else {
+                                                producto.setCodFabricante(fabricante);
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtProveedor.getText())) {
+
+                                            } else {
+                                                producto.setIdProveedor(proveedor);
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra1.getText())) {
+
+                                            } else {
+                                                producto.setMedidaEmpaqueCompra(empaqueCompra1);
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueCompra2.getText())) {
+
+                                            } else {
+                                                producto.setMedidaPorEmpaqueCompra(empaqueCompra2);
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtUCompra.getText())) {
+
+                                            } else {
+                                                producto.setUnidadEmpaqueCompra(Double.parseDouble(txtUCompra.getText()));
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtCCompra.getText())) {
+
+                                            } else {
+                                                producto.setCantidadPorEmpaqueCompra(Double.parseDouble(txtCCompra.getText()));
+                                            }
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta1.getText())) {
+
+                                            } else {
+                                                producto.setMedidaEmpaqueVenta(empaqueVenta1);
+                                            }
+
+                                            if (Arrays.asList(cadenaArray1).contains(txtEmpaqueVenta2.getText())) {
+
+                                            } else {
+
+                                                producto.setMedidaPorEmpaqueVenta(empaqueVenta2);
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtUVenta.getText())) {
+
+                                            } else {
+
+                                                producto.setUnidadEmpaqueVenta(Double.parseDouble(txtUVenta.getText()));
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtCVenta.getText())) {
+
+                                            } else {
+                                                producto.setCantidadPorEmpaqueVenta(Double.parseDouble(txtCVenta.getText()));
+                                            }
+                                            ///////////////////////////////////////////////////////////////////////////
+
+                                            if (Arrays.asList(cadenaArray2).contains(txtStockMin.getText())) {
+
+                                            } else {
+
+                                                bodegaStock.setStockMinimo(BigInteger.valueOf(Long.parseLong(txtStockMin.getText())));
+                                            }
+                                            if (Arrays.asList(cadenaArray2).contains(txtStockMax.getText())) {
+
+                                            } else {
+                                                bodegaStock.setStockMaximo(BigInteger.valueOf(Long.parseLong(txtStockMax.getText())));
+                                            }
+
+                                            productController.edit(producto);
+
+                                          
+                                           
+
+                                            bodegaStock.setInBodega(bodega);
+                                            bodegaStock.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                            bodegaStock.setFechaActualizacion(d);
+
+                                            bodegaStockController.edit(bodegaStock);
+
+                                            JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                            setVisible(false);
+
+                                        } catch (Exception e) {
+                                            Logger.getLogger(ActualizarProducto.class.getName()).log(Level.SEVERE, null, e);
+                                        }
+//                                    }
                                 }
                             }
                         }
