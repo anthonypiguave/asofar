@@ -222,7 +222,6 @@ public class ConsultarProductoMantenimiento extends javax.swing.JDialog {
         lista = new ArrayList<PrProductos>();
         lista = procont.findPrProductosEntities();
 
-
         Tablas.ListarProductosConsulta(lista, tbproductos);
     }
 
@@ -259,12 +258,13 @@ public class ConsultarProductoMantenimiento extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             i = tbproductos.getSelectedRow();
             objeto = devuelveObjeto(tbproductos.getValueAt(i, 0).toString(), lista);
-//            System.out.println("objeto" + objeto.getNombreProducto());
 
             if (objeto != null) {
 
-//                msg = ordenPedidoEXT.validarProductosOrdenPedido(tbproductos, String.valueOf(objeto.getPrProductosPK().getIdProducto()));
-                this.setVisible(false);
+                ActualizarProducto dialog = new ActualizarProducto(new javax.swing.JFrame(), true, objeto, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                cargartabla();
 
             }
         }

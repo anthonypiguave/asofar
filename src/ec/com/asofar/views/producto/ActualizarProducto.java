@@ -48,7 +48,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin
  */
-public class NuevoProducto extends javax.swing.JDialog {
+public class ActualizarProducto extends javax.swing.JDialog {
 
     int x, y;
     SeUsuarios seUsuario;
@@ -92,32 +92,35 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     String[] cadenaArray2 = {"0", ""};
 
-    public NuevoProducto(java.awt.Frame parent, boolean modal) {
+    public ActualizarProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
 
     }
 
-    public NuevoProducto(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public ActualizarProducto(java.awt.Frame parent, boolean modal, PrProductos obj, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-        txtGrupo.setText("Seleccione una Opcion..");
-        txtFabricante.setText("Seleccione una Opcion..");
-        txtProveedor.setText("Seleccione una Opcion..");
-        txtEmpaqueVenta1.setText("Seleccione una Opcion..");
-        txtEmpaqueVenta2.setText("Seleccione una Opcion..");
-        txtEmpaqueCompra1.setText("Seleccione una Opcion..");
-        txtEmpaqueCompra2.setText("Seleccione una Opcion..");
-        txtBodega.setText("Seleccione una Opcion..");
-        txtUCompra.setText("0");
-        txtUVenta.setText("0");
-        txtCCompra.setText("0");
-        txtCVenta.setText("0");
-        txtStockMin.setText("0");
-        txtStockMax.setText("0");
+
+        producto = obj;
+
+//        txtGrupo.setText("Seleccione una Opcion..");
+//        txtFabricante.setText("Seleccione una Opcion..");
+//        txtProveedor.setText("Seleccione una Opcion..");
+//        txtEmpaqueVenta1.setText("Seleccione una Opcion..");
+//        txtEmpaqueVenta2.setText("Seleccione una Opcion..");
+//        txtEmpaqueCompra1.setText("Seleccione una Opcion..");
+//        txtEmpaqueCompra2.setText("Seleccione una Opcion..");
+//        txtBodega.setText("Seleccione una Opcion..");
+//        txtUCompra.setText("0");
+//        txtUVenta.setText("0");
+//        txtCCompra.setText("0");
+//        txtCVenta.setText("0");
+//        txtStockNin.setText("0");
+//        txtStockMax.setText("0");
         txtGrupo.setEditable(false);
         txtSubGrupo.setEditable(false);
         txtArticulo.setEditable(false);
@@ -129,15 +132,76 @@ public class NuevoProducto extends javax.swing.JDialog {
         txtEmpaqueCompra1.setEditable(false);
         txtEmpaqueCompra2.setEditable(false);
         txtBodega.setEditable(false);
-        
-        
 
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
 
-        chReceta.setSelected(false);
-        chDescontinuado.setSelected(false);
+//        chReceta.setSelected(false);
+//        chDescontinuado.setSelected(false);
+
+        LLenarFormulario();
+
+    }
+
+    public void LLenarFormulario() {
+        grupo = producto.getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos();
+        subgrupo = producto.getPrMedidas().getPrArticulo().getPrSubgrupos();
+        articulo = producto.getPrMedidas().getPrArticulo();
+        presentacionMedida = producto.getPrMedidas();
+        proveedor = producto.getIdProveedor();
+        empaqueCompra1 = producto.getMedidaEmpaqueCompra();
+        empaqueCompra2 = producto.getMedidaPorEmpaqueCompra();
+        empaqueVenta1 = producto.getMedidaEmpaqueVenta();
+        empaqueVenta2 = producto.getMedidaPorEmpaqueVenta();
+        fabricante = producto.getCodFabricante();
+
+        txtGrupo.setText(grupo.getNombre());
+        txtSubGrupo.setText(subgrupo.getNombre());
+        txtArticulo.setText(articulo.getNombreArticulo());
+        txtPresentacionMedida.setText(presentacionMedida.getPrTipoPresentacion().getNombre() + " De " + presentacionMedida.getPrTipoMedidas().getNombreTipoMedida());
+        txtFabricante.setText(producto.getCodFabricante().getNombre());
+        txtProveedor.setText(producto.getIdProveedor().getNombre());
+        txtEmpaqueCompra1.setText(producto.getMedidaEmpaqueCompra().getNombreEmpaque());
+        txtEmpaqueCompra2.setText(producto.getMedidaPorEmpaqueCompra().getNombreEmpaque());
+        txtEmpaqueVenta1.setText(producto.getMedidaEmpaqueVenta().getNombreEmpaque());
+        txtEmpaqueVenta2.setText(producto.getMedidaPorEmpaqueVenta().getNombreEmpaque());
+
+        String cadena = GenerarProductoNombre();
+        txtProducto.setText(cadena);
+
+        txtCodigoBarra.setText(producto.getCodigoBarra());
+        
+        txtUCompra.setText(producto.getUnidadEmpaqueCompra().toString());
+        txtCCompra.setText(producto.getCantidadPorEmpaqueCompra().toString());
+        txtUVenta.setText(producto.getUnidadEmpaqueVenta().toString());
+        txtCVenta.setText(producto.getCantidadPorEmpaqueVenta().toString());
+        
+        ObtenerBodegaStock();
+        bodega = bodegaStock.getInBodega();
+        txtBodega.setText(bodega.getNombreBodega());
+        txtStockMin.setText(bodegaStock.getStockMinimo().toString());
+        txtStockMax.setText(bodegaStock.getStockMaximo().toString());
+        
+        txtRegistroSanitarioExtranjero.setText(producto.getRegistroSanitarioExtranjero());
+        txtRegistroSanitarioLocal.setText(producto.getRegistroSanitarioLocal());
+                
+
+    }
+
+    public void ObtenerBodegaStock() {
+
+        PrProductoBodega obj = new PrProductoBodega();
+
+        List<PrProductoBodega> list = new ArrayList<PrProductoBodega>();
+
+        list = bodegaStockController.findPrProductoBodegaEntities();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getPrProductoBodegaPK().getIdProducto() == producto.getPrProductosPK().getIdProducto()) {
+                bodegaStock = list.get(i);
+            }
+        }
 
     }
 
@@ -474,7 +538,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(254, 254, 254));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("NUEVO PRODUCTO");
+        jLabel17.setText("EDITAR PRODUCTO");
         jLabel17.setOpaque(true);
         jLabel17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -816,7 +880,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                                 } else {
                                     if (Arrays.asList(cadenaArray1).contains(txtBodega.getText())) {
                                         JOptionPane.showMessageDialog(null, "elija una bodega en Datos de inventario!");
-                                        
+
                                     } else {
 
                                         try {
@@ -953,7 +1017,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                                             setVisible(false);
 
                                         } catch (Exception e) {
-                                            Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, e);
+                                            Logger.getLogger(ActualizarProducto.class.getName()).log(Level.SEVERE, null, e);
                                         }
                                     }
                                 }
@@ -1145,21 +1209,29 @@ public class NuevoProducto extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class
+            java.util.logging.Logger.getLogger(ActualizarProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class
+            java.util.logging.Logger.getLogger(ActualizarProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class
+            java.util.logging.Logger.getLogger(ActualizarProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto.class
+            java.util.logging.Logger.getLogger(ActualizarProducto.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1172,7 +1244,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true);
+                ActualizarProducto dialog = new ActualizarProducto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
