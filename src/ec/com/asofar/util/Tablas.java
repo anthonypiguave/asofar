@@ -127,27 +127,28 @@ public class Tablas {
     }
 
     public static void ListarProductosConsulta(List<PrProductos> listaproducto, JTable Tabla) {
-        int[] a = {60, 150, 150, 200, 400, 150};
+        int[] a = {60, 150, 150, 150, 200, 400, 150, 800};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "CATEGORIA", "SUBCATEGORIA", "ARTICULO",
-            "PRESENTACION", "MEDIDAS"};
-        String[] filas = new String[6];
+        String[] b = {"COD.", "COD. BARRA", "CATEGORIA", "SUBCATEGORIA", "ARTICULO",
+            "PRESENTACION", "MEDIDAS", "PRODUCTO"};
+        String[] filas = new String[8];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
 
         for (int i = 0; i < listaproducto.size(); i++) {
 
             filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
-            filas[1] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
-            filas[2] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre();
-            filas[3] = listaproducto.get(i).getPrMedidas().getPrArticulo().getNombreArticulo();
-//            filas[4] = listaproducto.get(i).getNombreProducto();
-            filas[4] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
-            filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+            filas[1] = "" + listaproducto.get(i).getCodigoBarra();
+            filas[2] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+            filas[3] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre();
+            filas[4] = listaproducto.get(i).getPrMedidas().getPrArticulo().getNombreArticulo();
+            filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+            filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+            filas[7] = listaproducto.get(i).getNombreProducto();
 
             model.addRow(filas);
             Tabla.setModel(model);
@@ -164,8 +165,10 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr2);
             Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr2);
-//            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-//            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr2);
+            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr2);
         }
 
     }
@@ -3335,8 +3338,8 @@ public class Tablas {
         }
 
     }
-    
-     public static void ListarBodegaConsulta(List<InBodega> lista, JTable Tabla) {
+
+    public static void ListarBodegaConsulta(List<InBodega> lista, JTable Tabla) {
         int[] a = {60, 500};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -3367,7 +3370,6 @@ public class Tablas {
         }
 
     }
-    
 
 }
 

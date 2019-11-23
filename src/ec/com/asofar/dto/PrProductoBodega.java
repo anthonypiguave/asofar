@@ -32,10 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PrProductoBodega.findAll", query = "SELECT p FROM PrProductoBodega p")
     , @NamedQuery(name = "PrProductoBodega.findByIdProductoBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idProductoBodega = :idProductoBodega")
     , @NamedQuery(name = "PrProductoBodega.findByIdProducto", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idProducto = :idProducto")
-    , @NamedQuery(name = "PrProductoBodega.findByIdBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idBodega = :idBodega")
-    , @NamedQuery(name = "PrProductoBodega.findByIdTipoBodega", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idTipoBodega = :idTipoBodega")
-    , @NamedQuery(name = "PrProductoBodega.findByIdEmpresa", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "PrProductoBodega.findByIdSucursal", query = "SELECT p FROM PrProductoBodega p WHERE p.prProductoBodegaPK.idSucursal = :idSucursal")
     , @NamedQuery(name = "PrProductoBodega.findByStockMinimo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMinimo = :stockMinimo")
     , @NamedQuery(name = "PrProductoBodega.findByStockMaximo", query = "SELECT p FROM PrProductoBodega p WHERE p.stockMaximo = :stockMaximo")
     , @NamedQuery(name = "PrProductoBodega.findByEstado", query = "SELECT p FROM PrProductoBodega p WHERE p.estado = :estado")
@@ -65,11 +61,11 @@ public class PrProductoBodega implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @JoinColumns({
-        @JoinColumn(name = "id_bodega", referencedColumnName = "id_bodega", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_tipo_bodega", referencedColumnName = "id_tipo_bodega", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
+        @JoinColumn(name = "id_bodega", referencedColumnName = "id_bodega")
+        , @JoinColumn(name = "id_tipo_bodega", referencedColumnName = "id_tipo_bodega")
+        , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
+        , @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")})
+    @ManyToOne
     private InBodega inBodega;
 
     public PrProductoBodega() {
@@ -79,8 +75,8 @@ public class PrProductoBodega implements Serializable {
         this.prProductoBodegaPK = prProductoBodegaPK;
     }
 
-    public PrProductoBodega(long idProductoBodega, long idProducto, long idBodega, long idTipoBodega, long idEmpresa, long idSucursal) {
-        this.prProductoBodegaPK = new PrProductoBodegaPK(idProductoBodega, idProducto, idBodega, idTipoBodega, idEmpresa, idSucursal);
+    public PrProductoBodega(long idProductoBodega, long idProducto) {
+        this.prProductoBodegaPK = new PrProductoBodegaPK(idProductoBodega, idProducto);
     }
 
     public PrProductoBodegaPK getPrProductoBodegaPK() {

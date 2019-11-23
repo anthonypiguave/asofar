@@ -32,24 +32,16 @@ public class PrProductosPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_subgrupo")
     private long idSubgrupo;
-    @Basic(optional = false)
-    @Column(name = "id_tipo_presentacion")
-    private long idTipoPresentacion;
-    @Basic(optional = false)
-    @Column(name = "id_tipo_medidas")
-    private long idTipoMedidas;
 
     public PrProductosPK() {
     }
 
-    public PrProductosPK(long idProducto, long idEmpresa, long idArticulo, long idGrupo, long idSubgrupo, long idTipoPresentacion, long idTipoMedidas) {
+    public PrProductosPK(long idProducto, long idEmpresa, long idArticulo, long idGrupo, long idSubgrupo) {
         this.idProducto = idProducto;
         this.idEmpresa = idEmpresa;
         this.idArticulo = idArticulo;
         this.idGrupo = idGrupo;
         this.idSubgrupo = idSubgrupo;
-        this.idTipoPresentacion = idTipoPresentacion;
-        this.idTipoMedidas = idTipoMedidas;
     }
 
     public long getIdProducto() {
@@ -92,22 +84,6 @@ public class PrProductosPK implements Serializable {
         this.idSubgrupo = idSubgrupo;
     }
 
-    public long getIdTipoPresentacion() {
-        return idTipoPresentacion;
-    }
-
-    public void setIdTipoPresentacion(long idTipoPresentacion) {
-        this.idTipoPresentacion = idTipoPresentacion;
-    }
-
-    public long getIdTipoMedidas() {
-        return idTipoMedidas;
-    }
-
-    public void setIdTipoMedidas(long idTipoMedidas) {
-        this.idTipoMedidas = idTipoMedidas;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -116,8 +92,6 @@ public class PrProductosPK implements Serializable {
         hash += (int) idArticulo;
         hash += (int) idGrupo;
         hash += (int) idSubgrupo;
-        hash += (int) idTipoPresentacion;
-        hash += (int) idTipoMedidas;
         return hash;
     }
 
@@ -143,18 +117,12 @@ public class PrProductosPK implements Serializable {
         if (this.idSubgrupo != other.idSubgrupo) {
             return false;
         }
-        if (this.idTipoPresentacion != other.idTipoPresentacion) {
-            return false;
-        }
-        if (this.idTipoMedidas != other.idTipoMedidas) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "ec.com.asofar.dto.PrProductosPK[ idProducto=" + idProducto + ", idEmpresa=" + idEmpresa + ", idArticulo=" + idArticulo + ", idGrupo=" + idGrupo + ", idSubgrupo=" + idSubgrupo + ", idTipoPresentacion=" + idTipoPresentacion + ", idTipoMedidas=" + idTipoMedidas + " ]";
+        return "ec.com.asofar.dto.PrProductosPK[ idProducto=" + idProducto + ", idEmpresa=" + idEmpresa + ", idArticulo=" + idArticulo + ", idGrupo=" + idGrupo + ", idSubgrupo=" + idSubgrupo + " ]";
     }
     
 }

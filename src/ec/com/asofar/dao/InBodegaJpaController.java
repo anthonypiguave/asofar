@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.dao;
 
-import ec.com.asofar.dao.exceptions.IllegalOrphanException;
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
 import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import ec.com.asofar.dto.InBodega;
@@ -45,9 +44,9 @@ public class InBodegaJpaController implements Serializable {
         if (inBodega.getPrProductoBodegaList() == null) {
             inBodega.setPrProductoBodegaList(new ArrayList<PrProductoBodega>());
         }
-        inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
         inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
+        inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,10 +98,10 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public void edit(InBodega inBodega) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
-        inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
+    public void edit(InBodega inBodega) throws NonexistentEntityException, Exception {
         inBodega.getInBodegaPK().setIdTipoBodega(inBodega.getInTipoBodega().getIdTipoBodega());
+        inBodega.getInBodegaPK().setIdSucursal(inBodega.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inBodega.getInBodegaPK().setIdEmpresa(inBodega.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -114,18 +113,6 @@ public class InBodegaJpaController implements Serializable {
             InTipoBodega inTipoBodegaNew = inBodega.getInTipoBodega();
             List<PrProductoBodega> prProductoBodegaListOld = persistentInBodega.getPrProductoBodegaList();
             List<PrProductoBodega> prProductoBodegaListNew = inBodega.getPrProductoBodegaList();
-            List<String> illegalOrphanMessages = null;
-            for (PrProductoBodega prProductoBodegaListOldPrProductoBodega : prProductoBodegaListOld) {
-                if (!prProductoBodegaListNew.contains(prProductoBodegaListOldPrProductoBodega)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain PrProductoBodega " + prProductoBodegaListOldPrProductoBodega + " since its inBodega field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 inBodega.setSeSucursal(seSucursalNew);
@@ -158,6 +145,12 @@ public class InBodegaJpaController implements Serializable {
                 inTipoBodegaNew.getInBodegaList().add(inBodega);
                 inTipoBodegaNew = em.merge(inTipoBodegaNew);
             }
+            for (PrProductoBodega prProductoBodegaListOldPrProductoBodega : prProductoBodegaListOld) {
+                if (!prProductoBodegaListNew.contains(prProductoBodegaListOldPrProductoBodega)) {
+                    prProductoBodegaListOldPrProductoBodega.setInBodega(null);
+                    prProductoBodegaListOldPrProductoBodega = em.merge(prProductoBodegaListOldPrProductoBodega);
+                }
+            }
             for (PrProductoBodega prProductoBodegaListNewPrProductoBodega : prProductoBodegaListNew) {
                 if (!prProductoBodegaListOld.contains(prProductoBodegaListNewPrProductoBodega)) {
                     InBodega oldInBodegaOfPrProductoBodegaListNewPrProductoBodega = prProductoBodegaListNewPrProductoBodega.getInBodega();
@@ -186,7 +179,7 @@ public class InBodegaJpaController implements Serializable {
         }
     }
 
-    public void destroy(InBodegaPK id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(InBodegaPK id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -198,17 +191,6 @@ public class InBodegaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inBodega with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<PrProductoBodega> prProductoBodegaListOrphanCheck = inBodega.getPrProductoBodegaList();
-            for (PrProductoBodega prProductoBodegaListOrphanCheckPrProductoBodega : prProductoBodegaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This InBodega (" + inBodega + ") cannot be destroyed since the PrProductoBodega " + prProductoBodegaListOrphanCheckPrProductoBodega + " in its prProductoBodegaList field has a non-nullable inBodega field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             SeSucursal seSucursal = inBodega.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal.getInBodegaList().remove(inBodega);
@@ -218,6 +200,11 @@ public class InBodegaJpaController implements Serializable {
             if (inTipoBodega != null) {
                 inTipoBodega.getInBodegaList().remove(inBodega);
                 inTipoBodega = em.merge(inTipoBodega);
+            }
+            List<PrProductoBodega> prProductoBodegaList = inBodega.getPrProductoBodegaList();
+            for (PrProductoBodega prProductoBodegaListPrProductoBodega : prProductoBodegaList) {
+                prProductoBodegaListPrProductoBodega.setInBodega(null);
+                prProductoBodegaListPrProductoBodega = em.merge(prProductoBodegaListPrProductoBodega);
             }
             em.remove(inBodega);
             em.getTransaction().commit();

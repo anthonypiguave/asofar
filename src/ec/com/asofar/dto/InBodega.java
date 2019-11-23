@@ -8,7 +8,6 @@ package ec.com.asofar.dto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -70,7 +69,7 @@ public class InBodega implements Serializable {
     @JoinColumn(name = "id_tipo_bodega", referencedColumnName = "id_tipo_bodega", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private InTipoBodega inTipoBodega;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inBodega")
+    @OneToMany(mappedBy = "inBodega")
     private List<PrProductoBodega> prProductoBodegaList;
 
     public InBodega() {

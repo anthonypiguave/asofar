@@ -35,8 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PrProductos.findByIdArticulo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idArticulo = :idArticulo")
     , @NamedQuery(name = "PrProductos.findByIdGrupo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idGrupo = :idGrupo")
     , @NamedQuery(name = "PrProductos.findByIdSubgrupo", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idSubgrupo = :idSubgrupo")
-    , @NamedQuery(name = "PrProductos.findByIdTipoPresentacion", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idTipoPresentacion = :idTipoPresentacion")
-    , @NamedQuery(name = "PrProductos.findByIdTipoMedidas", query = "SELECT p FROM PrProductos p WHERE p.prProductosPK.idTipoMedidas = :idTipoMedidas")
     , @NamedQuery(name = "PrProductos.findByDescontinuado", query = "SELECT p FROM PrProductos p WHERE p.descontinuado = :descontinuado")
     , @NamedQuery(name = "PrProductos.findByNombreProducto", query = "SELECT p FROM PrProductos p WHERE p.nombreProducto = :nombreProducto")
     , @NamedQuery(name = "PrProductos.findByReceta", query = "SELECT p FROM PrProductos p WHERE p.receta = :receta")
@@ -100,8 +98,8 @@ public class PrProductos implements Serializable {
         @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
         , @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", insertable = false, updatable = false)
         , @JoinColumn(name = "id_subgrupo", referencedColumnName = "id_subgrupo", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas", insertable = false, updatable = false)})
+        , @JoinColumn(name = "id_tipo_presentacion", referencedColumnName = "id_tipo_presentacion")
+        , @JoinColumn(name = "id_tipo_medidas", referencedColumnName = "id_tipo_medidas")})
     @ManyToOne(optional = false)
     private PrMedidas prMedidas;
     @JoinColumn(name = "medida_empaque_compra", referencedColumnName = "id")
@@ -127,8 +125,8 @@ public class PrProductos implements Serializable {
         this.prProductosPK = prProductosPK;
     }
 
-    public PrProductos(long idProducto, long idEmpresa, long idArticulo, long idGrupo, long idSubgrupo, long idTipoPresentacion, long idTipoMedidas) {
-        this.prProductosPK = new PrProductosPK(idProducto, idEmpresa, idArticulo, idGrupo, idSubgrupo, idTipoPresentacion, idTipoMedidas);
+    public PrProductos(long idProducto, long idEmpresa, long idArticulo, long idGrupo, long idSubgrupo) {
+        this.prProductosPK = new PrProductosPK(idProducto, idEmpresa, idArticulo, idGrupo, idSubgrupo);
     }
 
     public PrProductosPK getPrProductosPK() {
