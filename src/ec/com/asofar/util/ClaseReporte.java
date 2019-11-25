@@ -70,6 +70,18 @@ public class ClaseReporte {
         this.valor7 = valor7;
     }
 
+    public ClaseReporte(String valor1, String valor2, String valor3, String valor4, String valor5, String valor6, String valor7, String valor8) {
+        this.valor1 = valor1;
+        this.valor2 = valor2;
+        this.valor3 = valor3;
+        this.valor4 = valor4;
+        this.valor5 = valor5;
+        this.valor6 = valor6;
+        this.valor7 = valor7;
+        this.valor8 = valor8;
+    }
+
+    
     public ClaseReporte(String valor1, String valor2, String valor3, String valor4, String valor5, String valor6, String valor7, String valor8, String valor9) {
         this.valor1 = valor1;
         this.valor2 = valor2;

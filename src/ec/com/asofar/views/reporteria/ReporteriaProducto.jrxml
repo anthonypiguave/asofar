@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d267d5a0-c480-479e-9f60-829b31ea7db0">
-	<property name="ireport.zoom" value="1.100000000000009"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.4641000000000124"/>
+	<property name="ireport.x" value="90"/>
 	<property name="ireport.y" value="0"/>
 	<field name="valor1" class="java.lang.String"/>
 	<field name="valor2" class="java.lang.String"/>
@@ -64,47 +64,37 @@
 				<text><![CDATA[COD. DE BARRA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="154" y="3" width="140" height="21" uuid="21efb01d-bfd8-42aa-86e4-3b7e15910b60"/>
+				<reportElement x="154" y="3" width="170" height="21" uuid="21efb01d-bfd8-42aa-86e4-3b7e15910b60"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="295" y="3" width="55" height="21" uuid="56d9d33f-0b63-4f5d-b71f-e8c08100e380"/>
+				<reportElement x="325" y="3" width="55" height="21" uuid="56d9d33f-0b63-4f5d-b71f-e8c08100e380"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[STOCK]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="351" y="3" width="65" height="21" uuid="326c1918-0e5f-44be-a230-23edc486ba4a"/>
+				<reportElement x="381" y="3" width="91" height="21" uuid="83421a70-ff57-480a-a723-cabf5a79aba4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[COSTO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="417" y="3" width="65" height="21" uuid="83421a70-ff57-480a-a723-cabf5a79aba4"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PVP]]></text>
+				<text><![CDATA[PRECIO VENTA]]></text>
 			</staticText>
 			<line>
-				<reportElement x="294" y="3" width="1" height="21" uuid="74dc9d0c-fad5-4fb0-9f67-556e1b13f452"/>
+				<reportElement x="324" y="3" width="1" height="21" uuid="74dc9d0c-fad5-4fb0-9f67-556e1b13f452"/>
 			</line>
 			<line>
-				<reportElement x="350" y="3" width="1" height="21" uuid="25c50e5c-a8a2-49fb-ab05-673458330bd3"/>
+				<reportElement x="380" y="3" width="1" height="21" uuid="25c50e5c-a8a2-49fb-ab05-673458330bd3"/>
 			</line>
 			<line>
-				<reportElement x="416" y="3" width="1" height="21" uuid="89f31bf1-9286-4451-9bda-49bacbaccdd5"/>
-			</line>
-			<line>
-				<reportElement x="482" y="3" width="1" height="21" uuid="3f06bc22-2fc0-4fe9-9b31-3e4652e64a40"/>
+				<reportElement x="472" y="3" width="1" height="21" uuid="3f06bc22-2fc0-4fe9-9b31-3e4652e64a40"/>
 			</line>
 			<staticText>
-				<reportElement x="483" y="3" width="70" height="21" uuid="ebc21b65-71d8-45d8-999d-340ad30c328d"/>
+				<reportElement x="473" y="3" width="80" height="21" uuid="ebc21b65-71d8-45d8-999d-340ad30c328d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -144,47 +134,37 @@
 				<reportElement x="153" y="0" width="1" height="28" uuid="359bf71c-1bfc-4dc2-8450-ceff532dda3d"/>
 			</line>
 			<textField>
-				<reportElement x="154" y="0" width="140" height="28" uuid="bb796dfd-994d-42e5-a165-49df98c7d875"/>
+				<reportElement x="154" y="0" width="170" height="28" uuid="bb796dfd-994d-42e5-a165-49df98c7d875"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="295" y="0" width="55" height="28" uuid="8f4b82fc-7334-429a-bfdb-37e889a0655a"/>
+				<reportElement x="325" y="0" width="55" height="28" uuid="8f4b82fc-7334-429a-bfdb-37e889a0655a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor4}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="351" y="0" width="65" height="28" uuid="577db2d8-5224-4a4d-a92b-91fccf849dfa"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valor5}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="417" y="0" width="65" height="28" uuid="53581c2a-450c-4544-8c04-89ec77dc5e43"/>
+				<reportElement x="381" y="0" width="91" height="28" uuid="53581c2a-450c-4544-8c04-89ec77dc5e43"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor6}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="294" y="0" width="1" height="28" uuid="8e4443dd-67f5-40b5-9abb-02107433baf3"/>
+				<reportElement x="324" y="0" width="1" height="28" uuid="8e4443dd-67f5-40b5-9abb-02107433baf3"/>
 			</line>
 			<line>
-				<reportElement x="350" y="0" width="1" height="28" uuid="f832f0e5-f4b0-49b4-9ddb-6db890701e5c"/>
+				<reportElement x="380" y="0" width="1" height="28" uuid="f832f0e5-f4b0-49b4-9ddb-6db890701e5c"/>
 			</line>
 			<line>
-				<reportElement x="416" y="0" width="1" height="28" uuid="bac0590f-734b-4985-a235-18509cfdcc3f"/>
-			</line>
-			<line>
-				<reportElement x="482" y="0" width="1" height="28" uuid="d3cace1c-e452-46a8-994a-2b9d15e94610"/>
+				<reportElement x="472" y="0" width="1" height="28" uuid="d3cace1c-e452-46a8-994a-2b9d15e94610"/>
 			</line>
 			<textField>
-				<reportElement x="483" y="0" width="70" height="28" uuid="7e2f9823-85cb-486c-964b-e4148f23a7b2"/>
+				<reportElement x="473" y="0" width="80" height="28" uuid="7e2f9823-85cb-486c-964b-e4148f23a7b2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -193,7 +173,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch"/>
+		<band height="21" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="9" splitType="Stretch"/>
