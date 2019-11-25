@@ -16,7 +16,6 @@ import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
-import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.dto.CoProveedores;
 import ec.com.asofar.dto.InBodega;
 import ec.com.asofar.dto.PrArticulo;
@@ -960,21 +959,14 @@ public class ActualizarProducto extends javax.swing.JDialog {
                             } else {
                                 
                                 
-                                
-//                                PrMedidas objMedidas=  ObtenerDTO.ObtenerPrMedidas(producto.getPrMedidas().getPrMedidasPK());
-//
-//                                list = objMedidas.getPrProductosList();
-//
-//                                
-//                                for (int i = 0; i < list.size(); i++) {
-//                                    System.out.println(" medidas "+ list.get(0).getPrProductosPK().getIdProducto());
+                                list = presentacionMedida.getPrProductosList();
+
+
                                     if (presentacionMedida.getPrMedidasPK() == producto.getPrMedidas().getPrMedidasPK()) {
                                         
                                         System.out.println("entro");
                                         mismoProducto = false;
                                     }
-
-//                                }
 
                                 if (list.size() >= 1 && mismoProducto) {
                                     JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
