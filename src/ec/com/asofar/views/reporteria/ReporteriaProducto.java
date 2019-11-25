@@ -557,7 +557,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
         ArrayList lista = new ArrayList();
         for (int i = 0; i < tba_productos.getRowCount(); i++) {
-            ClaseReporte clase = new ClaseReporte(tba_productos.getValueAt(i, 0).toString(), tba_productos.getValueAt(i, 1).toString(), tba_productos.getValueAt(i, 2).toString(), tba_productos.getValueAt(i, 3).toString(), tba_productos.getValueAt(i, 4).toString(), tba_productos.getValueAt(i, 5).toString(), tba_productos.getValueAt(i, 6).toString(), Txt_Cantidad.getText(), txt_Costo.getText(), txt_total.getText());
+            ClaseReporte clase = new ClaseReporte(tba_productos.getValueAt(i, 0).toString(), tba_productos.getValueAt(i, 1).toString(), tba_productos.getValueAt(i, 2).toString(), tba_productos.getValueAt(i, 3).toString(), tba_productos.getValueAt(i, 4).toString(), tba_productos.getValueAt(i, 5).toString(), tba_productos.getValueAt(i, 6).toString(), Txt_Cantidad.getText(), txt_total.getText());
             lista.add(clase);
         }
         try {

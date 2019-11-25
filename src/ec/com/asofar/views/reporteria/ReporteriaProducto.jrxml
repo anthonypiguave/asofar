@@ -12,7 +12,6 @@
 	<field name="valor7" class="java.lang.String"/>
 	<field name="valor8" class="java.lang.String"/>
 	<field name="valor9" class="java.lang.String"/>
-	<field name="valor10" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -201,26 +200,12 @@
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch">
-			<staticText>
-				<reportElement x="186" y="0" width="75" height="20" uuid="3c463c1c-574f-4f8c-b3f1-db34a3ad1a98"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[COSTO:]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="2" y="20" width="67" height="20" uuid="eb50b611-6c00-468f-a85f-bc3d17b7d3bf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="261" y="0" width="100" height="20" uuid="bf88e54c-7114-4881-8a4e-398b89247072"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valor9}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="75" height="20" uuid="9344afe0-7841-491b-8440-f4eda240bdcb"/>
@@ -241,7 +226,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valor10}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valor9}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="75" y="0" width="100" height="20" uuid="c8903cc5-4cc2-46b0-9989-051493008d92"/>
