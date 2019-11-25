@@ -87,36 +87,38 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 
     /**/
     public ReporteriaProducto(java.awt.Frame parent, boolean modal) {
-        super(parent, modal=false);
+        super(parent, modal = false);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         cargarTbaProductoInventario();
         sumarCantidad();
         sumarTotalPvp();
-        sumarTotalCosto();
+//        sumarTotalCosto();
 //        Totalizar();
 //        TotalizarCantidad();
     }
 
     public ReporteriaProducto(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal=false);
+        super(parent, modal = false);
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         cargarTbaProductoInventario();
         sumarCantidad();
-        sumarTotalCosto();
+//        sumarTotalCosto();
         sumarTotalPvp();
 //        Totalizar();
 //        TotalizarCantidad();
 
     }
+
     public void cargarTbaProductoInventario() {
         ListProdVent = selectProdVent.listarProductoInventario();
         LisBod = BC.findInBodegaEntities();
         Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,8 +139,6 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         cbxFiltro = new javax.swing.JComboBox<>();
         btnBuscar1 = new javax.swing.JButton();
         Txt_buscar = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txt_Costo = new javax.swing.JTextField();
         btnimprimir = new javax.swing.JButton();
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -210,7 +210,6 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         btnsalir.setForeground(new java.awt.Color(1, 1, 1));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnsalir.setText("SALIR");
-        btnsalir.setOpaque(true);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -279,11 +278,6 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel6.setText("COSTO :");
-
-        txt_Costo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-
         btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnimprimir.setForeground(new java.awt.Color(1, 1, 1));
         btnimprimir.setText("IMPRIMIR");
@@ -305,10 +299,6 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Txt_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -336,8 +326,6 @@ public class ReporteriaProducto extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(Txt_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_Costo)
                     .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -482,10 +470,8 @@ public class ReporteriaProducto extends javax.swing.JDialog {
             ListProdVent = selectProdVent.listarProductoInventario();
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
-//            Totalizar();
-//            TotalizarCantidad();
             sumarCantidad();
-            sumarTotalCosto();
+//            sumarTotalCosto();
             sumarTotalPvp();
         }
         if (pos == "NOMBRE") {
@@ -493,7 +479,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
             sumarCantidad();
-            sumarTotalCosto();
+//            sumarTotalCosto();
             sumarTotalPvp();
         }
         if (pos == "CODIGO BARRA") {
@@ -501,7 +487,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
             sumarCantidad();
-            sumarTotalCosto();
+//            sumarTotalCosto();
             sumarTotalPvp();
         }
         if (index == 3) {
@@ -509,7 +495,7 @@ public class ReporteriaProducto extends javax.swing.JDialog {
             LisBod = BC.findInBodegaEntities();
             Tablas.ListarProductosInventario(ListProdVent, tba_productos, LisBod);
             sumarCantidad();
-            sumarTotalCosto();
+//            sumarTotalCosto();
             sumarTotalPvp();
         }
     }
@@ -526,7 +512,21 @@ public class ReporteriaProducto extends javax.swing.JDialog {
         }
         Txt_Cantidad.setText(t.toString());
     }
-    public void sumarTotalCosto() {
+
+//    public void sumarTotalCosto() {
+//        Double t = 0.0;
+//        Double p = 0.0;
+//        if (tba_productos.getRowCount() > 0) {
+//            for (int i = 0; i < tba_productos.getRowCount(); i++) {
+//                p = Double.parseDouble(tba_productos.getValueAt(i, 4).toString());
+//                t += p;
+////                System.out.println("sum " + t);
+//            }
+//        }
+//        txt_Costo.setText("$ " + t.toString());
+//    }
+
+    public void sumarTotalPvp() {
         Double t = 0.0;
         Double p = 0.0;
         if (tba_productos.getRowCount() > 0) {
@@ -536,25 +536,13 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 //                System.out.println("sum " + t);
             }
         }
-        txt_Costo.setText("$ "+t.toString());
-    }
-    public void sumarTotalPvp() {
-        Double t = 0.0;
-        Double p = 0.0;
-        if (tba_productos.getRowCount() > 0) {
-            for (int i = 0; i < tba_productos.getRowCount(); i++) {
-                p = Double.parseDouble(tba_productos.getValueAt(i, 5).toString());
-                t += p;
-//                System.out.println("sum " + t);
-            }
-        }
-        txt_total.setText("$ "+t.toString());
+        txt_total.setText("$ " + t.toString());
     }
     private void Txt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_buscarActionPerformed
 
     }//GEN-LAST:event_Txt_buscarActionPerformed
 
-    
+
     private void Txt_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_buscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Buscar();
@@ -568,17 +556,17 @@ public class ReporteriaProducto extends javax.swing.JDialog {
 
     private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
         ArrayList lista = new ArrayList();
-        for(int i=0;i<tba_productos.getRowCount();i++){
-            ClaseReporte clase = new ClaseReporte(tba_productos.getValueAt(i,0).toString(),tba_productos.getValueAt(i,1).toString(),tba_productos.getValueAt(i,2).toString(),tba_productos.getValueAt(i,3).toString(),tba_productos.getValueAt(i,4).toString(),tba_productos.getValueAt(i,5).toString(),tba_productos.getValueAt(i,6).toString(),Txt_Cantidad.getText(),txt_Costo.getText(),txt_total.getText());
+        for (int i = 0; i < tba_productos.getRowCount(); i++) {
+            ClaseReporte clase = new ClaseReporte(tba_productos.getValueAt(i, 0).toString(), tba_productos.getValueAt(i, 1).toString(), tba_productos.getValueAt(i, 2).toString(), tba_productos.getValueAt(i, 3).toString(), tba_productos.getValueAt(i, 4).toString(), tba_productos.getValueAt(i, 5).toString(), tba_productos.getValueAt(i, 3).toString(), Txt_Cantidad.getText(), txt_total.getText());
             lista.add(clase);
         }
         try {
-            JasperReport reporte = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir")+"/Reportes/ReporteriaProducto.jasper");
-            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+            JasperReport reporte = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ReporteriaProducto.jasper");
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
             JRViewer viewer = new JRViewer(jprint);
             JDialog ventana = new JDialog();
-            ventana.add(viewer);            
-            ventana.setSize(new Dimension(ancho/2,alto/2));
+            ventana.add(viewer);
+            ventana.setSize(new Dimension(ancho / 2, alto / 2));
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
             viewer.setFitWidthZoomRatio();
@@ -643,12 +631,10 @@ public class ReporteriaProducto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tba_productos;
-    private javax.swing.JTextField txt_Costo;
     private javax.swing.JTextField txt_total;
     // End of variables declaration//GEN-END:variables
 }
