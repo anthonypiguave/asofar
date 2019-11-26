@@ -7,6 +7,8 @@ package ec.com.asofar.views.DetallesTarifa;
 
 import ec.com.asofar.dao.PrDetalleTarifarioJpaController;
 import ec.com.asofar.dao.PrTarifarioJpaController;
+import ec.com.asofar.daoext.InKardexExt;
+import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
@@ -38,6 +40,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     PrDetalleTarifarioJpaController prp = new PrDetalleTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrTarifarioJpaController op = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrTarifario tp = new PrTarifario();
+    InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
 
     List< PrDetalleTarifario> listaTarifario;
     List<PrDetalleTarifario> lista = prp.findPrDetalleTarifarioEntities();
@@ -61,8 +64,10 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
-        cargar();
 
+        txt_valor_costo.setEditable(false);
+        
+        cargar();
 
     }
 
@@ -136,7 +141,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jLabel7.setText("VALOR DESCUENTO:");
 
         txt_valor_min.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txt_valor_min.setEnabled(false);
         txt_valor_min.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_valor_minKeyTyped(evt);
@@ -186,7 +190,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel8.setText("VALOR MINIMO DE VENTA:");
-        jLabel8.setEnabled(false);
 
         jButton3.setBackground(new java.awt.Color(254, 254, 254));
         jButton3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
@@ -208,16 +211,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         });
 
         txt_valor_costo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txt_valor_costo.setEnabled(false);
-        txt_valor_costo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_valor_costoKeyTyped(evt);
-            }
-        });
 
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel11.setText("VALOR DE COSTO :");
-        jLabel11.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -373,7 +369,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
             if (list.get(i).getIdPrestacion() != null) {
 
-
                 if (list.get(i).getIdPrestacion().intValue() == objpres.getInPrestacionesPorServiciosPK().getIdPrestacion()) {
                     deta.setEstado("I");
                     try {
@@ -437,6 +432,10 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
         txtPrestacion.setText(objpres.getPrPrestaciones().getNombrePrestacion());
         txtUnidadServicio.setText(objpres.getVeUnidadServicio().getNombreUnidadServicio());
+
+        InKardex objetoKardex = kardexExt.obtenerUltimoProductoKardex(objpres.getPrPrestaciones().getIdPoducto().longValue());
+        txt_valor_costo.setText(String.format("%.2f", objetoKardex.getCostoPromedio()));
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -500,10 +499,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         txtDescuent_valor.setText(res.toString());
 
     }//GEN-LAST:event_BtncalcularActionPerformed
-
-    private void txt_valor_costoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_costoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_valor_costoKeyTyped
 
     private void txt_porcentajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_porcentajeKeyReleased
         int largor = txt_porcentaje.getText().length();
