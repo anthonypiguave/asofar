@@ -27,6 +27,7 @@ import ec.com.asofar.dto.InMotivos;
 import ec.com.asofar.dto.InMovimientos;
 import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.InTipoMovimiento;
+import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
@@ -648,6 +649,10 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                             
                             for (int i = 0; i < listadet.size(); i++) {
                                 
+                                PrProductos prodObj = new PrProductos();
+                                
+                                prodObj= ObtenerDTO.ObtenerPrProductos(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
+                                
                                 InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listadet.get(i).getInDetalleMovimientoPK().getIdProducto());
                                 
                                 InKardex kardex = new InKardex();
@@ -658,7 +663,13 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
                                 kardex.setSeSucursal(seSucursal);
                                 
-                                kardex.setCantidad(listadet.get(i).getCantidad());
+                                Double empaqueXcantidadXunidad = (prodObj.getUnidadEmpaqueCompra() * listadet.get(i).getCantidad().doubleValue() )* prodObj.getCantidadPorEmpaqueCompra();
+                                
+                                
+                                kardex.setCantidad(BigInteger.valueOf(empaqueXcantidadXunidad.longValue()));/// revisar si stock hay que convertilo en double
+                                
+                                
+                                
                                 kardex.setAnioDocumento("" + listadet.get(i).getAnioDocumento());
                                 kardex.setNumeroDocumento(BigInteger.valueOf(cabCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
                                 kardex.setFechaSistema(d);
@@ -670,7 +681,9 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 if (objeto != null) {
                                     
                                     kardex.setSaldoAnterior(objeto.getSaldoActual());
-                                    kardex.setSaldoActual(objeto.getSaldoActual().add(listadet.get(i).getCantidad()));
+                                    
+                                    kardex.setSaldoActual(objeto.getSaldoActual().add(kardex.getCantidad()));
+                                    
                                     kardex.setCostoAnterior(objeto.getCostoActual());
                                      System.out.println(" costo"+kardex.getCostoAnterior());
                                      System.out.println("ccc " +(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue()))));
@@ -682,7 +695,8 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 } else {
                                     
                                     kardex.setSaldoAnterior(BigInteger.valueOf(0));
-                                    kardex.setSaldoActual(listadet.get(i).getCantidad());
+                                    kardex.setSaldoActual(kardex.getCantidad());
+                                    
                                     kardex.setCostoAnterior(BigDecimal.valueOf(0));
                                     kardex.setCostoActual(listadet.get(i).getPrecioUnitario().multiply(BigDecimal.valueOf(listadet.get(i).getCantidad().intValue())));
                                     kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
