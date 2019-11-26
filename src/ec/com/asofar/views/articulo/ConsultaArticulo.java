@@ -268,7 +268,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
                 if (tabla.getValueAt(id, 3).toString().equals(listap.get(i).getNombreArticulo())) {
                     obj = listap.get(i);
                     if (obj != null) {
-                        dispose();
+//                        dispose();
                         EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
                         es.setVisible(true);
                     }
