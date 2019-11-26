@@ -1351,6 +1351,8 @@ public class Venta extends javax.swing.JInternalFrame {
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
                     printerService.printString("EPSON-TM-T20II", " *     FARMACIA "+empresa+" "+sucursal+"    *\n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "         Direccion: " + direccion +"/n";
+                    printerService.printString("EPSON-TM-T20II", "               RUC: " + ruc +"/n";
                     printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "    IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
