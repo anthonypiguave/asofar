@@ -47,6 +47,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
     List<SeEmpresa> se;
     List<PrSubgrupos> subg;
     SeEmpresa empresa = new SeEmpresa();
+    SeUsuarios usuarios = new SeUsuarios();
     PrSubgrupos ps = new PrSubgrupos();
 
     public NuevoSubgrupo(java.awt.Frame parent, boolean modal) {
@@ -260,9 +261,9 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
                     ps.setIdEmpresa(empresa);
                     ps.setEstado("A");
                     ps.setPrGrupos(ObtenerDTO.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
-                    ps.setUsuarioActualizacion(String.valueOf(1));
-                    ps.setUsuarioCreacion(String.valueOf(1));
-                    ps.setFechaActualizacion(d);
+//                    ps.setUsuarioActualizacion(String.valueOf(1));
+                    ps.setUsuarioCreacion(usuarios.getIdUsuario());
+//                    ps.setFechaActualizacion(d);
                     ps.setFechaCreacion(d);
                     try {
                         psc.create(ps);

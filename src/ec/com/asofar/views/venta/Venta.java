@@ -1342,8 +1342,10 @@ public class Venta extends javax.swing.JInternalFrame {
                     /*    */
                     String empresa = emp.getNombreComercial();
                     String sucursal = suc.getNombreComercial();
-                    System.out.println(" empresa "+empresa+" "+ sucursal+" ");
-                    
+                    String ruc = emp.getRuc();
+                    String direccion = suc.getDireccion();
+                    System.out.println(" empresa " + empresa + " " + sucursal + " ");
+
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
                     System.out.println(printerService.getPrinters());
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
@@ -1502,7 +1504,8 @@ public class Venta extends javax.swing.JInternalFrame {
                         objKardex.getInKardexPK().setIdBodega(id_Bod);
                         objKardex.getInKardexPK().setIdProducto(id_Prod);
 //                        objKardex.getInKardexPK().setIdTipoDocumento(7);
-
+                        System.out.println("costo *" + ListKardex.get(k).getCostoPromedio() + "*");
+                        objKardex.setCostoPromedio(ListKardex.get(k).getCostoPromedio());
                         objKardex.setInTipoDocumento(tipoDocumento);
                         objKardex.setSeSucursal(suc);
                         objKardex.setFechaMovimiento(d);
