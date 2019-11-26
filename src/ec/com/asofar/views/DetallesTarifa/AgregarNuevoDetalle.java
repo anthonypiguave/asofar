@@ -19,6 +19,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeUnidadServicio;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Formato_Numeros;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigInteger;
@@ -401,7 +402,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         valor_min_venta
         valor_ventavalor_descuento
          */
-//        pre.setValorCosto(Double.parseDouble(txt_valor_costo.getText()));
+        pre.setValorCosto(Double.parseDouble(txt_valor_costo.getText().toString()));
 //        pre.setValorMinVenta(Double.parseDouble(txt_valor_min.getText()));
         pre.setValorDescuento(Double.parseDouble(txtDescuent_valor.getText()));
         pre.setValorVenta(Double.parseDouble(txt_valor_venta.getText()));
@@ -434,7 +435,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         txtUnidadServicio.setText(objpres.getVeUnidadServicio().getNombreUnidadServicio());
 
         InKardex objetoKardex = kardexExt.obtenerUltimoProductoKardex(objpres.getPrPrestaciones().getIdPoducto().longValue());
-        txt_valor_costo.setText(String.format("%.2f", objetoKardex.getCostoPromedio()));
+        txt_valor_costo.setText(String.format("%.2f", objetoKardex.getCostoPromedio()).replace(",", "."));
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -41,4 +41,16 @@ public class Formato_Numeros {
     public static String removeScientificNotation(String value) {
         return new BigDecimal(value).toPlainString();
     }
+        public static String formatoNumero3(String valor) {
+
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        String valorFormateado = formato.format(Double.parseDouble(valor));
+//        System.out.println(" val" + valor);
+        if (valorFormateado.charAt(0) == '.') {
+            String h = "0" + valorFormateado;
+            valorFormateado = h;
+        }
+
+        return valorFormateado;
+    }
 }
