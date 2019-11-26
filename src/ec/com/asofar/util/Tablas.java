@@ -736,7 +736,7 @@ public class Tablas {
     }
 
     public static void listarSubgrupos(List<PrSubgrupos> lista, JTable Tabla) {
-        int[] a = {5, 30, 30, 10, 15};
+        int[] a = {5, 30, 30, 10};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -764,8 +764,6 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
 

@@ -1342,6 +1342,8 @@ public class Venta extends javax.swing.JInternalFrame {
                     /*    */
                     String empresa = emp.getNombreComercial();
                     String sucursal = suc.getNombreComercial();
+                    String ruc = emp.getRuc();
+                    String direccion = suc.getDireccion();
                     System.out.println(" empresa " + empresa + " " + sucursal + " ");
 
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
