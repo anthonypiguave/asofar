@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.views.reporteria;
 
-
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeLocalidadClienteJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
@@ -47,19 +46,23 @@ import net.sf.jasperreports.view.JRViewer;
  * @author ineval
  */
 public class ReporteriaDetalleFactura extends javax.swing.JDialog {
+
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     int x, y;
- 
+    List<SeClientes> Cliente;
+    SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+
     BigDecimal VGiva = null, VGtotal = null, VGdescuento = null;
     ReporteFacturaDTO objeto = null;
-    ReporteriaExt rep =new ReporteriaExt();
-    List<ReporteDetalleFacturaDTO> listaDetalle=null;
+    ReporteriaExt rep = new ReporteriaExt();
+    List<ReporteDetalleFacturaDTO> listaDetalle = null;
     SeClientesJpaController client_Controler = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeTipoIdentificacionJpaController tipo_doc_Control = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+
     /**
      * Creates new form Reporte_DetalleCompra
      */
@@ -67,51 +70,83 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+
     public ReporteriaDetalleFactura(java.awt.Frame parent, boolean modal,
-        ReporteFacturaDTO obj, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+            ReporteFacturaDTO obj, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(this);
-        objeto=obj;
+        objeto = obj;
         usu = us;
         emp = em;
         suc = su;
         formularioProveedor();
         llenar_detalles();
         totaless();
-    } 
-    public void formularioProveedor(){
-        SeClientes cliente = new SeClientes();
-        SeTipoIdentificacion tip_ident = new SeTipoIdentificacion();
-        SeLocalidadCliente local_client = new SeLocalidadCliente();
-        cliente = client_Controler.findSeClientes(Long.valueOf(objeto.getId_cliente().toString()));
-        tip_ident = tipo_doc_Control.findSeTipoIdentificacion(cliente.getIdTipoIndentificacion().getIdTipoIdentificacion());
-        
-        
-        txtCodigoCliente.setText(cliente.getIdClientes().toString());
-        txtNombre.setText(cliente.getPrimerNombre()+" "+cliente.getSegundoNombre());
-        txtapellidos.setText(cliente.getPrimerApellido()+" "+ cliente.getSegundoApellido());
-        txtTelefono.setText(rep.buscarCelular(cliente.getIdClientes()));
-        txttipodoc.setText(tip_ident.getNombreIdentificacion());
-        txtn_doc.setText(cliente.getNumeroIdentificacion());
-        txtDireccion.setText(rep.buscarLocalidad(cliente.getIdClientes()));
-        txtcorreo.setText(rep.buscarCorreo(cliente.getIdClientes()));
-        txt_N_VENTA.setText(objeto.getId_factura().toString());
-        txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
-        txtCaja.setText(objeto.getNombre_caja());
-        txSucursal.setText(suc.getNombreComercial());
     }
-    public void llenar_detalles(){
+
+    public void formularioProveedor() {
+        System.out.println("id " + objeto.getId_cliente());
+        if (objeto.getId_cliente() == 1) {
+            consFinal();
+            System.out.println("consu ");
+        } else {
+            System.out.println("normak");
+            SeClientes cliente = new SeClientes();
+            SeTipoIdentificacion tip_ident = new SeTipoIdentificacion();
+            SeLocalidadCliente local_client = new SeLocalidadCliente();
+            cliente = client_Controler.findSeClientes(Long.valueOf(objeto.getId_cliente().toString()));
+            tip_ident = tipo_doc_Control.findSeTipoIdentificacion(cliente.getIdTipoIndentificacion().getIdTipoIdentificacion());
+
+            txtCodigoCliente.setText(cliente.getIdClientes().toString());
+            txtNombre.setText(cliente.getPrimerNombre() + " " + cliente.getSegundoNombre());
+            txtapellidos.setText(cliente.getPrimerApellido() + " " + cliente.getSegundoApellido());
+            txtTelefono.setText(rep.buscarCelular(cliente.getIdClientes()));
+            txttipodoc.setText(tip_ident.getNombreIdentificacion());
+            txtn_doc.setText(cliente.getNumeroIdentificacion());
+            txtDireccion.setText(rep.buscarLocalidad(cliente.getIdClientes()));
+            txtcorreo.setText(rep.buscarCorreo(cliente.getIdClientes()));
+            txt_N_VENTA.setText(objeto.getId_factura().toString());
+            txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
+            txtCaja.setText(objeto.getNombre_caja());
+            txSucursal.setText(suc.getNombreComercial());
+        }
+    }
+
+    public void consFinal() {
+        Cliente = Cc.findSeClientesEntities();
+        for (int i = 0; i < Cliente.size(); i++) {
+
+            if (Cliente.get(i).getIdClientes() == 1) {
+//                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
+                txtCaja.setText(objeto.getNombre_caja());
+                txSucursal.setText(suc.getNombreComercial());
+                txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
+                txt_N_VENTA.setText(objeto.getId_factura().toString());
+                txtNombre.setText(Cliente.get(i).getPrimerNombre());
+                txtapellidos.setText(Cliente.get(i).getPrimerApellido());
+                txtn_doc.setText("9999999999999");
+                txtCodigoCliente.setText(Cliente.get(i).getIdClientes().toString());
+                txttipodoc.setText("********************************");
+                txtcorreo.setText("********************************");
+                txtDireccion.setText("********************************");
+                txtTelefono.setText("********************************");
+            }
+        }
+    }
+
+    public void llenar_detalles() {
         listaDetalle = rep.listadoDetallesFactura(objeto);
-        Tablas.listarReporteDetalleFactura(listaDetalle, tbaListaComprasB); 
+        Tablas.listarReporteDetalleFactura(listaDetalle, tbaListaComprasB);
     }
-     public void totaless() {
-        Double total_iva= 0.00;
-        Double total_descuento= 0.00;
-        Double total_total= 0.00;
-        
-       // Double total = 0.00;
+
+    public void totaless() {
+        Double total_iva = 0.00;
+        Double total_descuento = 0.00;
+        Double total_total = 0.00;
+
+        // Double total = 0.00;
         for (int i = 0; i < listaDetalle.size(); i++) {
             for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
                 if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_factura_detalle().toString())) {
@@ -202,7 +237,6 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
 //        }
 //        return pro;
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -666,7 +700,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
                     txSucursal.getText(),
                     txtTelefono.getText(),
                     txtcorreo.getText(),
-                    txtCaja.getText(),                    
+                    txtCaja.getText(),
                     tbaListaComprasB.getValueAt(i, 0).toString(),
                     tbaListaComprasB.getValueAt(i, 1).toString(),
                     tbaListaComprasB.getValueAt(i, 2).toString(),
@@ -679,7 +713,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
             tablac.add(tabla1);
         }
         try {
-            String dir = System.getProperty("user.dir") + "/Reportes/" +"ReporteriaDetalleFactura.jasper";
+            String dir = System.getProperty("user.dir") + "/Reportes/" + "ReporteriaDetalleFactura.jasper";
             JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(tablac));
             JDialog frame = new JDialog(this);

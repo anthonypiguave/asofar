@@ -125,9 +125,9 @@ public class ReporteriaVentas extends javax.swing.JDialog {
 
     private void Keypress_jDateChoooser() { //salto al siguiente campo
         HashSet<AWTKeyStroke> conjForward = new HashSet<AWTKeyStroke>(
-        Chooser2.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
+                Chooser2.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
         conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
-        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_DOWN, 0)); 
+        conjForward.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_DOWN, 0));
         Chooser2.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conjForward);
 
     }
@@ -444,20 +444,21 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     private void tbaReporteCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbaReporteCompraMousePressed
         int x = 0;
         ReporteFacturaDTO obj = new ReporteFacturaDTO();
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             x = tbaReporteCompra.getSelectedRow();
             for (int i = 0; i < itemList.size(); i++) {
-                if(tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_factura().toString())){
-                    obj= itemList.get(i);
+                if (tbaReporteCompra.getValueAt(x, 0).toString().equals(itemList.get(i).getId_factura().toString())) {
+                    obj = itemList.get(i);
                     break;
                 }
             }
-            if(obj!=null){
+            if (obj != null) {
                 //JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
-                ReporteriaDetalleFactura win = new ReporteriaDetalleFactura(new javax.swing.JFrame(),true,obj,usu,emp,suc);
+                ReporteriaDetalleFactura win = new ReporteriaDetalleFactura(new javax.swing.JFrame(), true, obj, usu, emp, suc);
                 win.setVisible(true);
-            }else{
-                System.out.println("no encontramos al puto id error capa 8");
+            } else {
+//                System.out.println("no encontramos al puto id error capa 8");
+                System.out.println("id error ");
             }
         }
     }//GEN-LAST:event_tbaReporteCompraMousePressed
@@ -477,23 +478,23 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         String dia = Integer.toString(Chooser1.getCalendar().get(Calendar.DAY_OF_MONTH));
         String mes = Integer.toString(Chooser1.getCalendar().get(Calendar.MONTH));
         String año = Integer.toString(Chooser1.getCalendar().get(Calendar.YEAR));
-        String fecha = (dia+"-"+mes+"-"+año);
+        String fecha = (dia + "-" + mes + "-" + año);
         String dia2 = Integer.toString(Chooser2.getCalendar().get(Calendar.DAY_OF_MONTH));
         String mes2 = Integer.toString(Chooser2.getCalendar().get(Calendar.MONTH));
         String año2 = Integer.toString(Chooser2.getCalendar().get(Calendar.YEAR));
-        String fecha2 = (dia2+"-"+mes2+"-"+año2);
+        String fecha2 = (dia2 + "-" + mes2 + "-" + año2);
         for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
             ClaseReporte creporte = new ClaseReporte(fecha,
-                                                    fecha2,
-                                                    tbaReporteCompra.getValueAt(i,0).toString(),
-                                                    tbaReporteCompra.getValueAt(i,1).toString(),
-                                                    tbaReporteCompra.getValueAt(i,2).toString(),
-                                                    tbaReporteCompra.getValueAt(i,3).toString(),
-                                                    tbaReporteCompra.getValueAt(i,4).toString(),
-                                                    tbaReporteCompra.getValueAt(i,5).toString(),
-                                                    tbaReporteCompra.getValueAt(i,6).toString(),
-                                                    tbaReporteCompra.getValueAt(i,7).toString(),
-                                                    txtdescuento.getText(),txtiva.getText(),Txt_Total.getText());
+                    fecha2,
+                    tbaReporteCompra.getValueAt(i, 0).toString(),
+                    tbaReporteCompra.getValueAt(i, 1).toString(),
+                    tbaReporteCompra.getValueAt(i, 2).toString(),
+                    tbaReporteCompra.getValueAt(i, 3).toString(),
+                    tbaReporteCompra.getValueAt(i, 4).toString(),
+                    tbaReporteCompra.getValueAt(i, 5).toString(),
+                    tbaReporteCompra.getValueAt(i, 6).toString(),
+                    tbaReporteCompra.getValueAt(i, 7).toString(),
+                    txtdescuento.getText(), txtiva.getText(), Txt_Total.getText());
             lista.add(creporte);
         }
         try {
@@ -522,7 +523,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
             total();
         }
     }//GEN-LAST:event_buscar1KeyPressed
-    
+
     private void buscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscar1ActionPerformed
@@ -534,7 +535,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     }//GEN-LAST:event_Chooser2KeyPressed
 
     private void BtnBuscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBuscar1KeyPressed
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             System.out.println("valeeeeeeeeeeeeeeeeeeeee");
         }
     }//GEN-LAST:event_BtnBuscar1KeyPressed
