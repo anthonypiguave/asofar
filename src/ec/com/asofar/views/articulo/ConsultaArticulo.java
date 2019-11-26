@@ -254,7 +254,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
+        setVisible(false);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -269,6 +269,7 @@ public class ConsultaArticulo extends javax.swing.JDialog {
                     obj = listap.get(i);
                     if (obj != null) {
 //                        dispose();
+setVisible(false);
                         EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
                         es.setVisible(true);
                     }
