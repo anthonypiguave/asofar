@@ -10,8 +10,10 @@ import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.util.Cargar;
 import ec.com.asofar.util.Cargar1;
 import ec.com.asofar.util.EntityManagerUtil;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -22,15 +24,12 @@ import javax.swing.UIManager;
  * @author admin1
  */
 public class Frm_cargarSistema extends javax.swing.JFrame {
-    Cargar hilo;
+    Cargar hilo;    
     Cargar1 hilo1;
     PrSubgruposJpaController ed = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrSubgrupos pr = new PrSubgrupos();
     public Frm_cargarSistema() {
-        initComponents();
-                Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/util/Asofar.jpeg").getImage();
-
-        this.setIconImage(logof);
+        initComponents();        
         setLocationRelativeTo(null);
         carga_pb.setStringPainted(true);
         UIManager.put("nimbusOrange", new Color(38, 139, 210));
@@ -40,7 +39,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
         imagenes();
     }
         public void imagenes() {
-        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/util/Asofar.jpeg").getImage();
+        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/LogoInicio.png").getImage();
         Icon fondoLogo = new ImageIcon(logof.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
         lbImagen.setIcon(fondoLogo);
         this.repaint();
@@ -75,13 +74,13 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(carga_pb, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+            .addComponent(carga_pb, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(carga_pb, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
