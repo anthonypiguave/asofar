@@ -85,31 +85,31 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         
        // Double total = 0.00;
         for (int i = 0; i < listaDetalle.size(); i++) {
-            for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
-                if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
+//            for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
+//                if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
                     // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
                     total_iva = total_iva + listaDetalle.get(i).getIva();
                     txtIva.setText(rep.formatoNumero(total_iva.toString()));
-                }
-            }
+//                }
+//            }
         }
         for (int i = 0; i < listaDetalle.size(); i++) {
-            for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
-                if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
+//            for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
+//                if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
                     // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
                     total_descuento = total_descuento + listaDetalle.get(i).getDescuento();
                     txtDescuento.setText(rep.formatoNumero(total_descuento.toString()));
-                }
-            }
+//                }
+//            }
         }
         for (int i = 0; i < listaDetalle.size(); i++) {
-            for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
-                if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
-                    // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
+//            for (int j = 0; j < tbaListaComprasB.getRowCount(); j++) {
+//                if (tbaListaComprasB.getValueAt(j, 0).toString().equals(listaDetalle.get(i).getId_orden_compra().toString())) {
+//                    // System.out.println(tbaReporteCompra.getValueAt(j, 0).toString() + " " + (itemList.get(i).getId_orden_compra().toString()));
                     total_total = total_total + listaDetalle.get(i).getTotal();
                     txtTotal.setText(rep.formatoNumero(total_total.toString()));
-                }
-            }
+//                }
+//            }
         }
     }
 //    public ReporteriaDetalleCompras(java.awt.Frame parent, boolean modal, JoinListarNotaPedidosCabecera Obj) {

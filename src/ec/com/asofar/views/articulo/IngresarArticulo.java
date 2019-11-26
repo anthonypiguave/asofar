@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.views.articulo;
 
-import ec.com.asofar.dao.PrArticuloJpaController;
 import ec.com.asofar.dao.PrGruposJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
@@ -27,12 +26,12 @@ import javax.swing.JOptionPane;
  * @author ADMIN
  */
 public class IngresarArticulo extends javax.swing.JDialog {
-
+    
     PrGruposJpaController control = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrArticuloJpaControllerExt control2 = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
     List<PrGrupos> lista = control.findPrGruposEntities();
     int x, y, numerocaracter;
-
+    
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
@@ -43,18 +42,17 @@ public class IngresarArticulo extends javax.swing.JDialog {
     public IngresarArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(this);
-        ObtenerGrupo();
+        setLocationRelativeTo(null);
     }
-
+    
     public IngresarArticulo(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(this);
-        ObtenerGrupo();
+        setLocationRelativeTo(null);
         usu = us;
         emp = em;
         suc = su;
+        ObtenerGrupo();
     }
 
     /**
@@ -231,22 +229,20 @@ public class IngresarArticulo extends javax.swing.JDialog {
 
     private void grupoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_grupoItemStateChanged
         
-        
-    
         subgrupo.setEnabled(true);
-
+        
         String nombre = grupo.getSelectedItem().toString();
-
+        
         PrGrupos gru = ObtenerDTO.ObtenerPrGrupos(nombre);
-
+        
         subgrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione una Opcion.."}));
-
+        
         for (int i = 0; i < gru.getPrSubgruposList().size(); i++) {
-
+            
             subgrupo.addItem(gru.getPrSubgruposList().get(i).getNombre());
-
+            
         }
-
+        
 
     }//GEN-LAST:event_grupoItemStateChanged
 
@@ -263,13 +259,13 @@ public class IngresarArticulo extends javax.swing.JDialog {
                     valor = "A";
                 }
                 sub = ObtenerDTO.ObtenerPrSubGrupos(subgrupo.getSelectedItem().toString());
-
+                
                 arti.setNombreArticulo(articulo.getText());
                 arti.setPrSubgrupos(sub);
                 arti.setEstado(valor);
                 control2.create(arti);
                 JOptionPane.showMessageDialog(this, "Articulo Guardados");
-                Actualizar();
+                this.setVisible(false);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -278,9 +274,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_guardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-//       
-        Actualizar();
+        this.setVisible(false);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -305,11 +299,6 @@ public class IngresarArticulo extends javax.swing.JDialog {
     private void articuloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_articuloFocusLost
         articulo.setText(articulo.getText().toUpperCase());
     }//GEN-LAST:event_articuloFocusLost
-    public void Actualizar() {
-        setVisible(false);
-        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(), true);
-        cs.setVisible(true);
-    }
 
     /**
      * @param args the command line arguments
@@ -352,13 +341,13 @@ public class IngresarArticulo extends javax.swing.JDialog {
             }
         });
     }
-
+    
     public void ObtenerGrupo() {
-
+        
         for (int i = 0; i < lista.size(); i++) {
             grupo.addItem(lista.get(i).getNombre());
         }
-
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
