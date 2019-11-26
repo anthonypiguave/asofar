@@ -28,7 +28,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
     PrSubgrupos pr = new PrSubgrupos();
     public Frm_cargarSistema() {
         initComponents();
-                Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/util/Asofar.jpeg").getImage();
+                Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/Logo 44.png").getImage();
 
         this.setIconImage(logof);
         setLocationRelativeTo(null);
