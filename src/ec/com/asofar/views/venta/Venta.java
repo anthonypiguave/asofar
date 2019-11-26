@@ -1298,7 +1298,9 @@ public class Venta extends javax.swing.JInternalFrame {
         } else {
             int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
+                
                 guardarKardex2(listaDetFactura);
+                limpiar();
                 VeFactura cabFact = new VeFactura();
                 InMovimientos pkMovimiento = null;
                 VeFacturaDetalle detFact = new VeFacturaDetalle();
