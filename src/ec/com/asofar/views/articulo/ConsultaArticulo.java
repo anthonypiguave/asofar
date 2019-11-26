@@ -5,15 +5,13 @@
  */
 package ec.com.asofar.views.articulo;
 
-import ec.com.asofar.dao.PrArticuloJpaController;
-import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.supgrupos.EditarSubgrupos;
+import ec.com.asofar.dao.PrArticuloJpaController;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -25,20 +23,19 @@ import java.util.List;
  */
 public class ConsultaArticulo extends javax.swing.JDialog {
 
-    PrArticuloJpaControllerExt articon = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
+    PrArticuloJpaController articuloController = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
     int x, y;
-    List<PrArticulo> listap = new ArrayList<PrArticulo>();
-
+    List<PrArticulo> lista = new ArrayList<PrArticulo>();
     PrArticulo obj = new PrArticulo();
     String valor = "";
-
+    SeUsuarios seUsuario;
+    SeEmpresa seEmpresa;
+    SeSucursal seSucursal;
 
     public ConsultaArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        listap = articon.findPrArticuloEntities();
-        Tablas.listaArticulos(listap, tabla);
 
     }
 
@@ -46,8 +43,19 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        listap = articon.findPrArticuloEntities();
-        Tablas.listaArticulos(listap, tabla);
+        seUsuario = us;
+        seEmpresa = em;
+        seSucursal = su;
+        CargarTabla();
+
+    }
+
+    public void CargarTabla() {
+        txtfiltro.setText("");
+        tabla.setRowSorter(null); // quitar el filtro
+        lista = new ArrayList<PrArticulo>();
+        lista = articuloController.findPrArticuloEntities();
+        Tablas.listaArticulos(lista, tabla);
 
     }
 
@@ -62,8 +70,8 @@ public class ConsultaArticulo extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -92,27 +100,25 @@ public class ConsultaArticulo extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(254, 254, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(1, 1, 1));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
-        jButton2.setText("NUEVO");
-        jButton2.setOpaque(true);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevo.setBackground(new java.awt.Color(254, 254, 254));
+        btnNuevo.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(1, 1, 1));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
+        btnNuevo.setText("NUEVO");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnNuevoActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(254, 254, 254));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(1, 1, 1));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
-        jButton1.setText("SALIR");
-        jButton1.setOpaque(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(254, 254, 254));
+        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(1, 1, 1));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -158,11 +164,11 @@ public class ConsultaArticulo extends javax.swing.JDialog {
             }
         });
         txtfiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtfiltroKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtfiltroKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfiltroKeyReleased(evt);
             }
         });
 
@@ -183,9 +189,9 @@ public class ConsultaArticulo extends javax.swing.JDialog {
                         .addComponent(txtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(153, 153, 153)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(103, 103, 103)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -200,8 +206,8 @@ public class ConsultaArticulo extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -219,11 +225,13 @@ public class ConsultaArticulo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.setVisible(false);
-        IngresarArticulo ingre = new IngresarArticulo(new javax.swing.JFrame(), true);
-        ingre.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        IngresarArticulo dialog = new IngresarArticulo(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+        dialog.setVisible(true);
+        CargarTabla();
+
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         x = evt.getX();
@@ -250,29 +258,36 @@ public class ConsultaArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void txtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfiltroActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtfiltroActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.setVisible(false);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
 
-        int id = 0;
-        obj = null;
+        int row = 0;
+
         if (evt.getClickCount() == 2) {
-            id = tabla.getSelectedRow();
-            for (int i = 0; i < listap.size(); i++) {
-                if (tabla.getValueAt(id, 3).toString().equals(listap.get(i).getNombreArticulo())) {
-                    obj = listap.get(i);
-                    if (obj != null) {
-                        dispose();
-                        EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
-                        es.setVisible(true);
-                    }
+            row = tabla.getSelectedRow();
+
+            for (int i = 0; i < lista.size(); i++) {
+
+                if (tabla.getValueAt(row, 3).toString().equals(lista.get(i).getNombreArticulo())) {
+                    obj = lista.get(i);
+
                 }
+
+            }
+
+            if (obj != null) {
+
+                EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
+                es.setVisible(true);
+                CargarTabla();
+
             }
         }
     }//GEN-LAST:event_tablaMousePressed
@@ -321,8 +336,8 @@ public class ConsultaArticulo extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

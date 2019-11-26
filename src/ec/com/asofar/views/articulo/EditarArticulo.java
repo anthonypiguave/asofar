@@ -5,14 +5,12 @@
  */
 package ec.com.asofar.views.articulo;
 
-import ec.com.asofar.dao.PrArticuloJpaController;
+
 import ec.com.asofar.daoext.PrArticuloJpaControllerExt;
 import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrArticulo;
-import ec.com.asofar.dto.PrArticuloPK;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Estado;
-import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.JOptionPane;
@@ -22,11 +20,11 @@ import javax.swing.JOptionPane;
  * @author ADMIN
  */
 public class EditarArticulo extends javax.swing.JDialog {
-
+    
     int x, y, numerocaracter;
-
+    
     PrArticuloJpaControllerExt control = new PrArticuloJpaControllerExt(EntityManagerUtil.ObtenerEntityManager());
-
+    
     PrArticulo obj1 = new PrArticulo();
 
     /**
@@ -37,14 +35,14 @@ public class EditarArticulo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+    
     public EditarArticulo(java.awt.Frame parent, boolean modal, PrArticulo prar) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         obj1 = prar;
         llenar(prar);
-
+        
     }
 
     /**
@@ -235,16 +233,16 @@ public class EditarArticulo extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Articulo ya existente");
             } else {
                 arti = obj1;
-
+                
                 arti.setPrArticuloPK(obj1.getPrArticuloPK());
                 arti.setNombreArticulo(articulo.getText());
                 arti.setEstado(Estado.ObtenerEstado(estado.getSelectedItem().toString()));
-
+                
                 control.edit(arti);
                 JOptionPane.showMessageDialog(this, "Aticulo actualizado");
-                Actualizar();
+                this.setVisible(false);
             }
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -273,31 +271,24 @@ public class EditarArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_articuloKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
-        ConsultaArticulo dialog = new ConsultaArticulo(new javax.swing.JFrame(), true);
-        dialog.setVisible(true);
+       setVisible(false);
+//        ConsultaArticulo dialog = new ConsultaArticulo(new javax.swing.JFrame(), true);
+//        dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void articuloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_articuloFocusLost
         articulo.setText(articulo.getText().toUpperCase());
     }//GEN-LAST:event_articuloFocusLost
 
-    /**
-     * @param args the command line arguments
-     */
-    public void llenar(PrArticulo prar) {
 
+    public void llenar(PrArticulo prar) {
+        
         grupo.setText(prar.getPrSubgrupos().getPrGrupos().getNombre());
         subgrupo.setText(prar.getPrSubgrupos().getNombre());
         articulo.setText(prar.getNombreArticulo());
         estado.setSelectedItem(Estado.ObtenerEstado(prar.getEstado()));
     }
 
-    public void Actualizar() {
-        setVisible(false);
-        ConsultaArticulo cs = new ConsultaArticulo(new javax.swing.JFrame(), true);
-        cs.setVisible(true);
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
