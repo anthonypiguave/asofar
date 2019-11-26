@@ -736,14 +736,14 @@ public class Tablas {
     }
 
     public static void listarSubgrupos(List<PrSubgrupos> lista, JTable Tabla) {
-        int[] a = {5, 30, 30, 10};
+        int[] a = {5, 30};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"N.GRUPO", "N.SUBGRUPO", "FECHA CREACION", "FECHA ACTUALIZACION"};
-        String[] Filas = new String[5];
+        String[] Co = {"N.GRUPO", "N.SUBGRUPO"};
+        String[] Filas = new String[2];
         model = new DefaultTableModel(null, Co);
 
         Tabla.setShowGrid(true);
@@ -752,9 +752,9 @@ public class Tablas {
             if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getPrGrupos().getNombre();
                 Filas[1] = lista.get(i).getNombre();
-                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
+//                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
                 //Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
-                Filas[2] = lista.get(i).getUsuarioCreacion();
+//                Filas[2] = lista.get(i).getUsuarioCreacion();
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
@@ -762,8 +762,8 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+//                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+//                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
             }
         }
 
