@@ -8,37 +8,38 @@ package ec.com.asofar.daoext;
 import java.util.Date;
 
 public class ReporteFacturaDTO {
-public Long id_factura;
-public Long id_empresa;
-public Long id_sucursal;
-public Long id_caja;
-public Long id_usuario;
-public Long id_cliente;
-public Date fecha_facturacion;
-public String numero_establecimiento_sri;
-public String punto_emision_sri;
-public Long secuencia_sri;
-public Double subtotal;
-public Double total_ice;
-public Double total_descuento;
-public Double total_base_iva;
-public Double total_base_no_iva;
-public Double total_iva;
-public Double total_facturado;
-public String estado;
-public String despachado;
-public String usuario_creacion;
-public Date fecha_creacion;
-public String usuario_actualizacion;
-public Date fecha_actualizacion;
-public String nombre_caja;
-public String nombre_comercial_emp;
-public String nombre_comercial_suc;
+
+    public Long id_factura;
+    public Long id_empresa;
+    public Long id_sucursal;
+    public Long id_caja;
+    public String id_usuario;
+    public Long id_cliente;
+    public Date fecha_facturacion;
+    public String numero_establecimiento_sri;
+    public String punto_emision_sri;
+    public Long secuencia_sri;
+    public Double subtotal;
+    public Double total_ice;
+    public Double total_descuento;
+    public Double total_base_iva;
+    public Double total_base_no_iva;
+    public Double total_iva;
+    public Double total_facturado;
+    public String estado;
+    public String despachado;
+    public String usuario_creacion;
+    public Date fecha_creacion;
+    public String usuario_actualizacion;
+    public Date fecha_actualizacion;
+    public String nombre_caja;
+    public String nombre_comercial_emp;
+    public String nombre_comercial_suc;
 
     public ReporteFacturaDTO() {
     }
 
-    public ReporteFacturaDTO(Long id_factura, Long id_empresa, Long id_sucursal, Long id_caja, Long id_usuario, Long id_cliente, Date fecha_facturacion, String numero_establecimiento_sri, String punto_emision_sri, Long secuencia_sri, Double subtotal, Double total_ice, Double total_descuento, Double total_base_iva, Double total_base_no_iva, Double total_iva, Double total_facturado, String estado, String despachado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String nombre_caja, String nombre_comercial_emp, String nombre_comercial_suc) {
+    public ReporteFacturaDTO(Long id_factura, Long id_empresa, Long id_sucursal, Long id_caja, String id_usuario, Long id_cliente, Date fecha_facturacion, String numero_establecimiento_sri, String punto_emision_sri, Long secuencia_sri, Double subtotal, Double total_ice, Double total_descuento, Double total_base_iva, Double total_base_no_iva, Double total_iva, Double total_facturado, String estado, String despachado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String nombre_caja, String nombre_comercial_emp, String nombre_comercial_suc) {
         this.id_factura = id_factura;
         this.id_empresa = id_empresa;
         this.id_sucursal = id_sucursal;
@@ -99,11 +100,11 @@ public String nombre_comercial_suc;
         this.id_caja = id_caja;
     }
 
-    public Long getId_usuario() {
+    public String getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(Long id_usuario) {
+    public void setId_usuario(String id_usuario) {
         this.id_usuario = id_usuario;
     }
 
@@ -274,5 +275,5 @@ public String nombre_comercial_suc;
     public void setNombre_comercial_suc(String nombre_comercial_suc) {
         this.nombre_comercial_suc = nombre_comercial_suc;
     }
-    
+
 }

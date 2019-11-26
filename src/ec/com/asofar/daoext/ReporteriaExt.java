@@ -299,11 +299,12 @@ public class ReporteriaExt {
                 ob.setId_empresa(Long.parseLong(obj[1].toString()));
                 ob.setId_sucursal(Long.parseLong(obj[2].toString()));
                 ob.setId_caja(Long.parseLong(obj[3].toString()));
-                if(obj[4]!= null){
-                ob.setId_usuario(Long.parseLong(obj[4].toString()));
-                }else{
-                ob.setId_usuario(Long.valueOf("1"));
-                }
+                ob.setId_usuario(obj[4].toString());
+//                if(obj[4]!= null){
+//                ob.setId_usuario(Long.parseLong(obj[4].toString()));
+//                }else{
+//                ob.setId_usuario(Long.valueOf("1"));
+//                }
                 ob.setId_cliente(Long.parseLong(obj[5].toString()));
                 ob.setFecha_facturacion(Date.valueOf(obj[6].toString()));
                 ob.setSubtotal(Double.parseDouble(obj[7].toString()));
@@ -376,11 +377,12 @@ public class ReporteriaExt {
                 ob.setId_empresa(Long.parseLong(obj[1].toString()));
                 ob.setId_sucursal(Long.parseLong(obj[2].toString()));
                 ob.setId_caja(Long.parseLong(obj[3].toString()));
-                if(obj[4]!=null){
-                    ob.setId_usuario(Long.parseLong(obj[4].toString()));
-                }else{
-                    ob.setId_usuario(Long.valueOf("1"));
-                }
+                ob.setId_usuario(obj[4].toString());
+//                if(obj[4]!=null){
+//                    ob.setId_usuario(Long.parseLong(obj[4].toString()));
+//                }else{
+//                    ob.setId_usuario(Long.valueOf("1"));
+//                }
                 ob.setId_cliente(Long.parseLong(obj[5].toString()));
                 ob.setFecha_facturacion(Date.valueOf(obj[6].toString()));
                 ob.setSubtotal(Double.parseDouble(obj[7].toString()));
