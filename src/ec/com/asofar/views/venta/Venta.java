@@ -1339,7 +1339,11 @@ public class Venta extends javax.swing.JInternalFrame {
 
                         detFactController.create(detFact);
                     }
-
+                    /*    */
+                    String empresa = emp.getNombreComercial();
+                    String sucursal = suc.getNombreComercial();
+                    System.out.println(" empresa "+empresa+" "+ sucursal+" ");
+                    
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
                     System.out.println(printerService.getPrinters());
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");

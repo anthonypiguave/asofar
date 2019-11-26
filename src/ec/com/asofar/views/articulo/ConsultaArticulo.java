@@ -261,23 +261,23 @@ public class ConsultaArticulo extends javax.swing.JDialog {
 
     }//GEN-LAST:event_txtfiltroActionPerformed
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
 
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
 
         int row = 0;
 
         if (evt.getClickCount() == 2) {
+
             row = tabla.getSelectedRow();
 
             for (int i = 0; i < lista.size(); i++) {
 
                 if (tabla.getValueAt(row, 3).toString().equals(lista.get(i).getNombreArticulo())) {
                     obj = lista.get(i);
-
                 }
 
             }

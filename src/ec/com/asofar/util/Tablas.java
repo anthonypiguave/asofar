@@ -2548,7 +2548,7 @@ public class Tablas {
 //        ProductoCadena k = new ProductoCadena();
         for (int i = 0; i < lisProdVen.size(); i++) {
 
-            System.out.println("error " + lisProdVen.get(i).getId_prestacion());
+//            System.out.println("error " + lisProdVen.get(i).getId_prestacion());
             filas[0] = "" + lisProdVen.get(i).getId_prestacion();
             if (lisProdVen.get(i).getCodigoBarra() == "") {
                 filas[1] = "-";
