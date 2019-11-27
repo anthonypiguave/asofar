@@ -9,6 +9,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -40,6 +41,10 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
 
     private void cargarInformacion() {
         try {
+
+            txtfiltro.setText("");
+            tbGrupos.setRowSorter(null); // quitar el filtro
+            lista = new ArrayList<PrGrupos>();
 
             lista = pGrupos.findPrGruposEntities();
             Tablas.listarGrupos(lista, tbGrupos);
@@ -241,9 +246,10 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
-        setVisible(false);
+
         AgregarGruposForm ga = new AgregarGruposForm(new javax.swing.JFrame(), true);
         ga.setVisible(true);
+        cargarInformacion();
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -253,7 +259,6 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
         if (r == JOptionPane.YES_OPTION) {
             this.setVisible(false);
 
-//            asdfg12345
         } else {
 
         }
@@ -268,20 +273,21 @@ public class ConsultaGruposForm extends javax.swing.JDialog {
             for (int i = 0; i < lista.size(); i++) {
                 if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     pg = lista.get(i);
-                    if (pg != null) {
-//                        this.setVisible(false);
-                        ModificarGruposForm es = new ModificarGruposForm(new javax.swing.JFrame(), true, pg);
-                        es.setVisible(true);
-                    }
                 }
             }
-            
-                        cargarInformacion();
+
+            if (pg != null) {
+
+                ModificarGruposForm es = new ModificarGruposForm(new javax.swing.JFrame(), true, pg);
+                es.setVisible(true);
+                cargarInformacion();
+            }
+
         }
     }//GEN-LAST:event_tbGruposMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
         ConsultaGruposInactivosForm cgi = new ConsultaGruposInactivosForm(new javax.swing.JFrame(), true);
         cgi.setVisible(true);
 

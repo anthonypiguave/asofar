@@ -1,4 +1,3 @@
-
 package ec.com.asofar.views.grupo;
 
 import ec.com.asofar.dao.PrGruposJpaController;
@@ -31,7 +30,7 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
     }
 
     private void cargarInformacion() {
-        Object o[] = null;
+
         try {
 
             lista = pGrupos.findPrGruposEntities();
@@ -201,6 +200,9 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
+            ConsultaGruposForm dialog = new ConsultaGruposForm(new javax.swing.JFrame(), true);
+            dialog.setVisible(true);
+
         } else {
 
         }
@@ -215,13 +217,15 @@ public class ConsultaGruposInactivosForm extends javax.swing.JDialog {
             for (int i = 0; i < lista.size(); i++) {
                 if ((tbGrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     pg = lista.get(i);
-                    if (pg != null) {
-//                        this.setVisible(false);
-                        ModificarGruposInactivosForm es = new ModificarGruposInactivosForm(new javax.swing.JFrame(), true, pg);
-                        es.setVisible(true);
-                    }
                 }
             }
+
+            if (pg != null) {
+                setVisible(false);
+                ModificarGruposInactivosForm es = new ModificarGruposInactivosForm(new javax.swing.JFrame(), true, pg);
+                es.setVisible(true);
+            }
+
         }
     }//GEN-LAST:event_tbGruposMousePressed
 
