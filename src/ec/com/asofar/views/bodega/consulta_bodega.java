@@ -35,7 +35,7 @@ public class consulta_bodega extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    
+
     public consulta_bodega(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -251,17 +251,18 @@ public class consulta_bodega extends javax.swing.JDialog {
 
         int id = 0;
         if (evt.getClickCount() == 2) {
-            
+
             id = tbl_bodega.getSelectedRow();
-            
+
             bodegaL = devuelveObjeto(Long.valueOf(tbl_bodega.getValueAt(id, 0).toString()), lista);
             if (bodegaL != null) {
-                bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL,usu,emp,suc);
+                bodega_editar ep = new bodega_editar(new javax.swing.JFrame(), true, bodegaL, usu, emp, suc);
                 ep.setVisible(true);
-                
-                bodega = bc.findInBodegaEntities();
-                Tablas.listarBodega(bodega, tbl_bodega);
+
             }
+
+            bodega = bc.findInBodegaEntities();
+            Tablas.listarBodega(bodega, tbl_bodega);
         }
 
     }//GEN-LAST:event_tbl_bodegaMousePressed
@@ -317,7 +318,7 @@ public class consulta_bodega extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_inactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inactivosActionPerformed
-        consulta_bodega_inactivos inac = new consulta_bodega_inactivos(new javax.swing.JFrame(), true,usu,emp,suc);
+        consulta_bodega_inactivos inac = new consulta_bodega_inactivos(new javax.swing.JFrame(), true, usu, emp, suc);
         inac.setVisible(true);
         bodega = bc.findInBodegaEntities();
         Tablas.listarBodega(bodega, tbl_bodega);
