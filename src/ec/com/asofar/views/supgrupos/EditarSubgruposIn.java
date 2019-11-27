@@ -27,21 +27,23 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class EditarSubgruposIn extends javax.swing.JDialog {
-int x,y;
+
+    int x, y;
     /**
      * Creates new form NuevoSubgrupo
      */
-     PrSubgrupos pr;
-     SubGruposExt prc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
-     Date d = new Date();
+    PrSubgrupos pr;
+    SubGruposExt prc = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
+    Date d = new Date();
+
     public EditarSubgruposIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        ;
+        
     }
-    
-     public EditarSubgruposIn(java.awt.Frame parent, boolean modal,PrSubgrupos obj) {
+
+    public EditarSubgruposIn(java.awt.Frame parent, boolean modal, PrSubgrupos obj) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -65,10 +67,6 @@ int x,y;
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         btneliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -121,18 +119,6 @@ int x,y;
 
         jTextField2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel4.setText("FECHA DE CREACION:");
-
-        jTextField3.setEditable(false);
-        jTextField3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel5.setText("ULTIMA  ACTUALIZACION:");
-
-        jTextField4.setEditable(false);
-        jTextField4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-
         btneliminar.setBackground(new java.awt.Color(254, 254, 254));
         btneliminar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btneliminar.setForeground(new java.awt.Color(1, 1, 1));
@@ -152,23 +138,17 @@ int x,y;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(jTextField2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                 .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
         );
@@ -184,15 +164,7 @@ int x,y;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +175,9 @@ int x,y;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,17 +186,16 @@ int x,y;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void llenarCampos(PrSubgrupos obj){        
+
+    public void llenarCampos(PrSubgrupos obj) {
         jTextField1.setText(obj.getPrGrupos().getNombre());
         jTextField2.setText(obj.getNombre());
-        jTextField3.setText(Fecha.getStringFecha(new java.sql.Date(obj.getFechaCreacion().getTime())));
-        jTextField4.setText(Fecha.getStringFecha(new java.sql.Date(obj.getFechaActualizacion().getTime())));
-        
+       
+
     }
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         setVisible(false);
-        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
+        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
         cs.setVisible(true);
     }//GEN-LAST:event_btncancelarActionPerformed
 
@@ -233,7 +206,7 @@ int x,y;
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -246,7 +219,7 @@ int x,y;
             prc.edit(pr);
             JOptionPane.showMessageDialog(this, "Subgrupo Activado");
             setVisible(false);
-            ConsultaSubgruposIn cs = new ConsultaSubgruposIn(new javax.swing.JFrame(),true);
+            ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
             cs.setVisible(true);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(EditarSubgruposIn.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,7 +227,7 @@ int x,y;
             Logger.getLogger(EditarSubgruposIn.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btneliminarActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -318,12 +291,8 @@ int x,y;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

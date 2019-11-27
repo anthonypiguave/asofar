@@ -5,7 +5,6 @@
  */
 package ec.com.asofar.views.supgrupos;
 
-//import com.sun.javafx.sg.prism.NGArc;
 import ec.com.asofar.dao.PrSubgruposJpaController;
 import ec.com.asofar.daoext.SubGruposExt;
 import ec.com.asofar.dto.PrSubgrupos;
@@ -13,6 +12,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +20,9 @@ import java.util.List;
  * @author admin1
  */
 public class ConsultaSubgruposIn extends javax.swing.JDialog {
-int x,y;
- List<PrSubgrupos> lista;
+
+    int x, y;
+    List<PrSubgrupos> lista;
     PrSubgrupos obj;
     SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
 
@@ -178,10 +179,13 @@ int x,y;
     public void cargarDatos() {
 
         try {
-            Object o[] = null;
+            txtfiltro.setText("");
+            tbsubgrupos.setRowSorter(null); // quitar el filtro
+
+            lista = new ArrayList<PrSubgrupos>();
 
             lista = cSubgrupos.findPrSubgruposEntities();
-            
+
             Tablas.listarSubgruposIn(lista, tbsubgrupos);
 
         } catch (Exception e) {
@@ -189,7 +193,7 @@ int x,y;
     }
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -199,29 +203,30 @@ int x,y;
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         setVisible(false);
-        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(),true);
+        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
         cs.setVisible(true);
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void tbsubgruposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbsubgruposMousePressed
         int id = 0;
-                obj = null;
+        obj = null;
         if (evt.getClickCount() == 2) {
             id = tbsubgrupos.getSelectedRow();
-            for(int i = 0 ;i < lista.size();i++){
-                if((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))){
+            for (int i = 0; i < lista.size(); i++) {
+                if ((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     obj = lista.get(i);
-                  if(obj != null)  {
-                      setVisible(false);
-                      EditarSubgruposIn es = new EditarSubgruposIn(new  javax.swing.JFrame(),true,obj);
-                      ;
-                      es.setVisible(true);
-                  }
                 }
             }
+            if (obj != null) {
+                setVisible(false);
+                EditarSubgruposIn es = new EditarSubgruposIn(new javax.swing.JFrame(), true, obj);
+
+                es.setVisible(true);
+            }
+
         }
     }//GEN-LAST:event_tbsubgruposMousePressed
-    
+
     /**
      * @param args the command line arguments
      */

@@ -14,6 +14,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -230,7 +231,12 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        public void cargarDatos() {
+
+    public void cargarDatos() {
+
+        txtfiltro.setText("");
+        tbsubgrupos.setRowSorter(null); // quitar el filtro
+        lista = new ArrayList<PrSubgrupos>();
 
         lista = cSubgrupos.findPrSubgruposEntities();
         Tablas.listarSubgrupos(lista, tbsubgrupos);
@@ -247,9 +253,9 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
     private void btnagregarnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarnuevoActionPerformed
 
-        setVisible(false);
         NuevoSubgrupo ns = new NuevoSubgrupo(new javax.swing.JFrame(), true, us1, em1, su1);
         ns.setVisible(true);
+        cargarDatos();
     }//GEN-LAST:event_btnagregarnuevoActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -278,12 +284,13 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
             for (int i = 0; i < lista.size(); i++) {
                 if ((tbsubgrupos.getValueAt(id, 1).toString().equals(lista.get(i).getNombre()))) {
                     obj = lista.get(i);
-                    if (obj != null) {
-                        setVisible(false);
-                        EditarSubgrupos es = new EditarSubgrupos(new javax.swing.JFrame(), true, obj);
-                        es.setVisible(true);
-                    }
                 }
+            }
+            if (obj != null) {
+
+                EditarSubgrupos es = new EditarSubgrupos(new javax.swing.JFrame(), true, obj);
+                es.setVisible(true);
+                cargarDatos();
             }
 
         }

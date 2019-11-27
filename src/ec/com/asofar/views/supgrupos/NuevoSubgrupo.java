@@ -218,8 +218,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         setVisible(false);
-        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
-        cs.setVisible(true);
+
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -268,9 +267,8 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
                     try {
                         psc.create(ps);
                         JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
-                        ConsultaSubgrupos cs = new ConsultaSubgrupos(new javax.swing.JFrame(), true);
+
                         setVisible(false);
-                        cs.setVisible(true);
 
                     } catch (Exception ex) {
                         Logger.getLogger(NuevoSubgrupo.class.getName()).log(Level.SEVERE, null, ex);

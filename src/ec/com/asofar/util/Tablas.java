@@ -740,9 +740,9 @@ public class Tablas {
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"N.GRUPO", "N.SUBGRUPO"};
+        String[] Co = {"GRUPO", "SUBGRUPO"};
         String[] Filas = new String[2];
         model = new DefaultTableModel(null, Co);
 
@@ -752,18 +752,14 @@ public class Tablas {
             if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getPrGrupos().getNombre();
                 Filas[1] = lista.get(i).getNombre();
-//                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
-                //Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
-//                Filas[2] = lista.get(i).getUsuarioCreacion();
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-//                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-//                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
+
             }
         }
 
@@ -774,10 +770,10 @@ public class Tablas {
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
+        tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"N.GRUPO", "N.SUBGRUPO", "FECHA CREACION", "FECHA ACTUALIZACION"};
-        String[] Filas = new String[5];
+        String[] Co = {"GRUPO", "SUBGRUPO"};
+        String[] Filas = new String[2];
         model = new DefaultTableModel(null, Co);
 
         Tabla.setShowGrid(true);
@@ -786,19 +782,15 @@ public class Tablas {
             if (lista.get(i).getEstado().equals("I")) {
                 Filas[0] = lista.get(i).getPrGrupos().getNombre();
                 Filas[1] = lista.get(i).getNombre();
-                Filas[2] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
-                Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
+  
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
+
             }
         }
 
