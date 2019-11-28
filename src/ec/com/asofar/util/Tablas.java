@@ -1825,15 +1825,16 @@ public class Tablas {
     }
 
     public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
-        int[] a = {500, 150, 120, 120, 120};
+        int[] a = {475, 140, 65, 95, 130};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr2.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] b = {"NOMBRE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "FACTURABLE", "APLICA DESCUENTO"};
+        String[] b = {"NOMBRE DE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "FACTURABLE", "APLICA DESCUENTO"};
         String[] filas = new String[5];
         model = new DefaultTableModel(null, b);
+        
         Tabla.setShowGrid(true);
         for (int i = 0; i < listapresporserv.size(); i++) {
 //            filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
@@ -1843,11 +1844,9 @@ public class Tablas {
             filas[2] = listapresporserv.get(i).getEstado();
             filas[3] = listapresporserv.get(i).getEsFacturable();
             filas[4] = listapresporserv.get(i).getAplicaDescuento();
-
             model.addRow(filas);
             Tabla.setModel(model);
-            Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+            Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);            
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
             Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
