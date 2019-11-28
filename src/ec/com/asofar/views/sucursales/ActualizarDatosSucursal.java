@@ -37,7 +37,7 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 //    private String rutaimagen = "";
     public String fil;
     List<SeSucursal> listaSucursal;
-    SeSucursal sucursal = new SeSucursal();
+    SeSucursal sucursal1 = new SeSucursal();
     java.util.Date fechaActual = new java.util.Date();
     SeUsuarios us1;
     SeEmpresa em1;
@@ -55,7 +55,7 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.sucursal = sucursal;
+        sucursal1 = sucursal;
         us1 = us;
         em1 = em;
         su1 = su;
@@ -71,9 +71,9 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            sucursal.setEstado('I');
+            sucursal1.setEstado('I');
             try {
-                sucursalController.edit(sucursal);
+                sucursalController.edit(sucursal1);
                 JOptionPane.showMessageDialog(null, "SUCURSAL ELIMINADA");
                 ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true);
                 setVisible(false);
@@ -316,14 +316,14 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            sucursal.setNombreComercial(txtNombre.getText());
-            sucursal.setTelefono(txtTelefono.getText());
-            sucursal.setCorreo(txtCorreo.getText());
-            sucursal.setDireccion(txtDireccion.getText());
-            sucursal.setFechaActualizacion(fechaActual);
-            sucursal.setUsuarioActualizacion(us1.getUsuario());           
+            sucursal1.setNombreComercial(txtNombre.getText());
+            sucursal1.setTelefono(txtTelefono.getText());
+            sucursal1.setCorreo(txtCorreo.getText());
+            sucursal1.setDireccion(txtDireccion.getText());
+            sucursal1.setFechaActualizacion(fechaActual);
+            sucursal1.setUsuarioActualizacion(us1.getUsuario());           
             try {
-                sucursalController.edit(sucursal);
+                sucursalController.edit(sucursal1);
                 JOptionPane.showMessageDialog(null, "SUCURSAL ACTUALIZADA");
                 ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
                 setVisible(false);
@@ -434,19 +434,20 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarValores(SeSucursal persona) {
-        txtNombre.setText(persona.getNombreComercial());
-        txtDireccion.setText(persona.getDireccion());
-        txtCorreo.setText(persona.getCorreo());
-        txtTelefono.setText(persona.getTelefono());
-        txtCorreo.setText(persona.getCorreo());    
+    private void cargarValores(SeSucursal suc) {
+        txtNombre.setText(suc.getNombreComercial());
+        txtDireccion.setText(suc.getDireccion());
+        txtCorreo.setText(suc.getCorreo());
+        txtTelefono.setText(suc.getTelefono());
+        txtCorreo.setText(suc.getCorreo());    
         List<SeEmpresa> listaEmpresa;
         listaEmpresa = empresaController.findSeEmpresaEntities();
         for (int i = 0; i < listaEmpresa.size(); i++) {
-            SeEmpresa get = listaEmpresa.get(i);
-            cbEmpresa.addItem(get.getNombreComercial());
-            if((get.getNombreComercial()).equals(persona.getNombreComercial())){
-                cbEmpresa.setSelectedItem(get.getNombreComercial());
+            
+//            SeEmpresa get = listaEmpresa.get(i);
+            cbEmpresa.addItem(listaEmpresa.get(i).getNombreComercial());
+            if(suc.getSeEmpresa().getNombreComercial()==listaEmpresa.get(i).getNombreComercial()){
+                cbEmpresa.setSelectedItem(listaEmpresa.get(i).getNombreComercial());
             }
         }
     }
