@@ -128,7 +128,7 @@ public class Tablas {
     }
 
     public static void ListarProductosConsulta(List<PrProductos> listaproducto, JTable Tabla) {
-        int[] a = {60, 150, 150, 150, 200, 400, 150, 800};
+        int[] a = {60, 100, 130, 150, 150, 200, 130, 550};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
