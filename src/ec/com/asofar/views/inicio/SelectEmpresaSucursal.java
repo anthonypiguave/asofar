@@ -55,6 +55,7 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
         SeUsuarioSucurRolJpaController susrjc = new SeUsuarioSucurRolJpaController(EntityManagerUtil.ObtenerEntityManager());
         listausr = susrjc.findSeUsuarioSucurRolEntities();
         List<SeEmpresa> listaempresa = null;
+                
         SeEmpresaJpaController sejc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
         listaempresa = sejc.findSeEmpresaEntities();
         for (int j = 0; j < listausr.size(); j++) {
