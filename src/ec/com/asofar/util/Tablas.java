@@ -52,6 +52,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeFacturaDetalle;
@@ -3330,6 +3331,38 @@ public class Tablas {
             if (lista.get(i).getEstado().equals("A")) {
                 filas[0] = "" + lista.get(i).getInBodegaPK().getIdBodega();
                 filas[1] = lista.get(i).getNombreBodega();
+
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+
+            }
+
+        }
+
+    }
+    
+        public static void ListarTipoIdentificacionConsulta(List<SeTipoIdentificacion> lista, JTable Tabla) {
+        int[] a = {60, 200};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "IDENTIFICACIÓN"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+                filas[0] = "" + lista.get(i).getIdTipoIdentificacion();
+                filas[1] = lista.get(i).getNombreIdentificacion();
 
                 model.addRow(filas);
                 Tabla.setModel(model);

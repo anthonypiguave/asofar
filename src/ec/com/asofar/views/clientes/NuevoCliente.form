@@ -202,6 +202,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTipoIdentificacion">
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtTipoIdentificacionMousePressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
@@ -263,14 +266,14 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtNombre5" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtNombre4" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtNombre2" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtNombre1" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtNombre3" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtNombre7" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtNombre6" alignment="1" pref="450" max="32767" attributes="0"/>
-                                      <Component id="txtNombre8" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="txtProvincia" min="-2" pref="260" max="-2" attributes="0"/>
+                                      <Component id="txtPais" min="-2" pref="260" max="-2" attributes="0"/>
+                                      <Component id="txtEmail" min="-2" pref="260" max="-2" attributes="0"/>
+                                      <Component id="txtTelefono" min="-2" pref="260" max="-2" attributes="0"/>
+                                      <Component id="txtMovil" min="-2" pref="260" max="-2" attributes="0"/>
+                                      <Component id="txtCiudad" min="-2" pref="260" max="-2" attributes="0"/>
+                                      <Component id="txtDireccion" alignment="1" pref="450" max="32767" attributes="0"/>
+                                      <Component id="txtDireccionEntrega" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -284,41 +287,41 @@
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtTelefono" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtMovil" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtEmail" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtPais" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtProvincia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtCiudad" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre6" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtDireccion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtNombre8" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtDireccionEntrega" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -391,21 +394,21 @@
                     <Property name="text" type="java.lang.String" value="Direccion:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre1">
+                <Component class="javax.swing.JTextField" name="txtTelefono">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre2">
+                <Component class="javax.swing.JTextField" name="txtEmail">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre3">
+                <Component class="javax.swing.JTextField" name="txtMovil">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre4">
+                <Component class="javax.swing.JTextField" name="txtPais">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre5">
+                <Component class="javax.swing.JTextField" name="txtProvincia">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre6">
+                <Component class="javax.swing.JTextField" name="txtDireccion">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre7">
+                <Component class="javax.swing.JTextField" name="txtCiudad">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNombre8">
+                <Component class="javax.swing.JTextField" name="txtDireccionEntrega">
                 </Component>
               </SubComponents>
             </Container>

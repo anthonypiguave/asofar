@@ -7,49 +7,46 @@ package ec.com.asofar.views.clientes;
 
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-
-
-
 /**
  *
  * @author admin
  */
 public class NuevoCliente extends javax.swing.JDialog {
-
+    
     int x, y;
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
     Date d = new Date();
-
-
+    
+    SeTipoIdentificacion tipoIndentificacion = new SeTipoIdentificacion();
+    
     public NuevoCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-
+        
     }
-
+    
     public NuevoCliente(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-
+        
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-
+        
     }
-
     
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -78,14 +75,14 @@ public class NuevoCliente extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
-        txtNombre2 = new javax.swing.JTextField();
-        txtNombre3 = new javax.swing.JTextField();
-        txtNombre4 = new javax.swing.JTextField();
-        txtNombre5 = new javax.swing.JTextField();
-        txtNombre6 = new javax.swing.JTextField();
-        txtNombre7 = new javax.swing.JTextField();
-        txtNombre8 = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtMovil = new javax.swing.JTextField();
+        txtPais = new javax.swing.JTextField();
+        txtProvincia = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        txtCiudad = new javax.swing.JTextField();
+        txtDireccionEntrega = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -104,6 +101,12 @@ public class NuevoCliente extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Tipo de identificación:");
+
+        txtTipoIdentificacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtTipoIdentificacionMousePressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Razon social:");
@@ -220,14 +223,14 @@ public class NuevoCliente extends javax.swing.JDialog {
                             .addComponent(jLabel13))
                         .addGap(43, 43, 43)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                            .addComponent(txtNombre8, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(txtProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(txtDireccionEntrega, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -236,34 +239,34 @@ public class NuevoCliente extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(txtNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtNombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccionEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -363,23 +366,51 @@ public class NuevoCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel17MousePressed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-
-        String cadena = "jorge Muñoz Vera";
         
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
         
         String separador = Pattern.quote(" ");
-        String[] parts = cadena.split(separador);
+        String[] parts1 = nombre.split(separador);
+        String[] parts2 = apellido.split(separador);
         
-        System.out.println(" cadena 1 " + parts[0]);
-        System.out.println(" cadena 2 " + parts[1]);
-        System.out.println(" cadena 3 " + parts[2]);
-     
+        for (int i = 0; i < parts1.length; i++) {
+            System.out.println(" cadena 1 " + parts1[i]);
+            
+        }
+        
+        for (int i = 0; i < parts2.length; i++) {
+            System.out.println(" cadena 2 " + parts2[i]);
+            
+        }
+        
 
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtTipoIdentificacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTipoIdentificacionMousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+            try {
+                
+                ConsultarTipoIdentificacion dialog = new ConsultarTipoIdentificacion(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+                
+                tipoIndentificacion = dialog.getObjeto();
+                
+                if (tipoIndentificacion.getNombreIdentificacion() != null) {
+                    
+                    txtTipoIdentificacion.setText(tipoIndentificacion.getNombreIdentificacion());
+                }
+            } catch (Exception e) {
+            }
+            
+        }
+    }//GEN-LAST:event_txtTipoIdentificacionMousePressed
 
     /**
      * @param args the command line arguments
@@ -395,21 +426,21 @@ public class NuevoCliente extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NuevoCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(NuevoCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(NuevoCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NuevoCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -457,18 +488,18 @@ public class NuevoCliente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane8;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCiudad;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDireccionEntrega;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMovil;
     private javax.swing.JTextField txtNCedula;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtNombre2;
-    private javax.swing.JTextField txtNombre3;
-    private javax.swing.JTextField txtNombre4;
-    private javax.swing.JTextField txtNombre5;
-    private javax.swing.JTextField txtNombre6;
-    private javax.swing.JTextField txtNombre7;
-    private javax.swing.JTextField txtNombre8;
+    private javax.swing.JTextField txtPais;
+    private javax.swing.JTextField txtProvincia;
     private javax.swing.JTextField txtRazonSocial;
     private javax.swing.JTextField txtRazonSocial1;
+    private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTipoIdentificacion;
     // End of variables declaration//GEN-END:variables
 }
