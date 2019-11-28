@@ -113,14 +113,13 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("USUARIO :");
 
-        txtIdUsuario.setEditable(false);
         txtIdUsuario.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtIdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIdUsuarioKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdUsuarioKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIdUsuarioKeyReleased(evt);
             }
         });
 
@@ -246,7 +245,6 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir.setText("CANCELAR");
-        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -258,7 +256,6 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
-        btnGuardar.setOpaque(true);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -287,7 +284,6 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
         btnEliminar.setForeground(new java.awt.Color(1, 1, 1));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
-        btnEliminar.setOpaque(true);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -429,7 +425,7 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             usuario.setEstado("A");
             usuario.setFechaActualizacion(fechaActual);
             usuario.setFechaCreacion(fechaActual);
-//            usuario.setIdPersona(objPersona);
+            usuario.setUsuario(txtIdUsuario.getText());
             usuario.setUsuarioCreacion(us1.getUsuario());
             usuario.setUsuarioActualizacion(us1.getUsuario());
             usuario.setPassword(aes.encrypt(txtClave.getText()));

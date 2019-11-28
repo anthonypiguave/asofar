@@ -17,6 +17,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -26,6 +27,14 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
 
     int x, y;
     long id;
+
+    List<SeSucursal> ls = null;
+    SeEmpresaJpaController sejc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeSucursalJpaController sc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeUsuarioSucurRol> listausr = null;
+    SeEmpresa empresa = new SeEmpresa();
+    SeUsuarioSucurRolJpaController susrjc = new SeUsuarioSucurRolJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<SeEmpresa> listaempresa = null;
 
     /**
      * Creates new form SelectEmpresaSucursal
@@ -48,19 +57,16 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
     }
 
     public void comboEmpresa(SeUsuarios user) {
-        List<SeSucursal> ls = null;
-        SeSucursalJpaController sc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
-        List<SeUsuarioSucurRol> listausr = null;
-        SeEmpresa empresa = new SeEmpresa();
-        SeUsuarioSucurRolJpaController susrjc = new SeUsuarioSucurRolJpaController(EntityManagerUtil.ObtenerEntityManager());
+
         listausr = susrjc.findSeUsuarioSucurRolEntities();
-        List<SeEmpresa> listaempresa = null;
-        SeEmpresaJpaController sejc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        
         listaempresa = sejc.findSeEmpresaEntities();
-        for (int j = 0; j < listausr.size(); j++) {
-            if (listausr.get(j).getIdUsuario().getIdUsuario() == user.getIdUsuario()) {
-                cbempresa.addItem(listausr.get(j).getSeSucursal().getSeEmpresa().getNombreComercial());
-            }
+        
+        for (int j = 0; j < listaempresa.size(); j++) {
+//            if (Objects.equals(listausr.get(j).getIdUsuario().getIdUsuario(), user.getIdUsuario())) {
+                cbempresa.addItem(listaempresa.get(j).getNombreComercial());
+                System.out.println("lista: "+listaempresa.get(j).getNombreComercial());
+//            }
         }
     }
 
@@ -218,7 +224,7 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         SeUsuarios us = ObtenerDTO.ObtenerUsuarios(id);
         SeEmpresa em = ObtenerDTO.ObtenerSeEmpresa(cbempresa.getSelectedItem().toString());
         SeSucursal su = ObtenerDTO.ObtenerSeSucursal(cbsucursal.getSelectedItem().toString());
