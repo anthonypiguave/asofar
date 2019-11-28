@@ -1114,7 +1114,7 @@ public class Tablas {
     }
 
     public static void listarBodega(List<InBodega> lista, JTable Tabla) {
-        int[] a = {5, 30, 80, 20};
+        int[] a = {10, 100, 100, 10};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1139,12 +1139,14 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
     }
 
     public static void listarBodegaInactivos(List<InBodega> lista, JTable Tabla) {
-        int[] a = {5, 30, 80, 20};
+        int[] a = {10, 100, 100, 10};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1169,6 +1171,8 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             }
         }
     }
@@ -1202,13 +1206,13 @@ public class Tablas {
     }
 
     public static void TablaCajaActiva(List<VeCaja> lista, JTable Tabla) {
-        int[] a = {5, 100, 90, 120, 20};
+        int[] a = {5, 100, 100, 120, 20};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD.", "NOMBRE CAJA", "FECHA CREACION", "FECHA ACTUALIZACION", "ESTADO"};
+        String[] Co = {"CODIGO", "NOMBRE CAJA", "FECHA CREACION", "FECHA ACTUALIZACION", "ESTADO"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -1237,7 +1241,7 @@ public class Tablas {
     }
 
     public static void TablaCajaInactiva(List<VeCaja> lista, JTable Tabla) {
-        int[] a = {5, 100, 90, 120, 20};
+        int[] a = {5, 100, 100, 120, 20};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -3346,13 +3350,13 @@ public class Tablas {
     }
     
         public static void ListarTipoIdentificacionConsulta(List<SeTipoIdentificacion> lista, JTable Tabla) {
-        int[] a = {60, 200};
+        int[] a = {80,251};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "IDENTIFICACIÓN"};
+        String[] b = {"CODIGO", "IDENTIFICACIÓN"};
         String[] filas = new String[2];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
