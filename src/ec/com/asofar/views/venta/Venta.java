@@ -52,6 +52,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.caja.Cierre_Caja;
+import ec.com.asofar.views.clientes.NuevoCliente;
 import ec.com.asofar.views.clientes.cliente_agregar;
 import java.awt.Color;
 import java.awt.Font;
@@ -934,6 +935,7 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdentificacionKeyTyped
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
 //        CargarCliente2();
+
         ClienteVenta ingre = new ClienteVenta(new javax.swing.JFrame(), true, usu, emp, suc);
         ingre.setVisible(true);
         Clientesss = ingre.getCliente();

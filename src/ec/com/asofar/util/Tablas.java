@@ -46,11 +46,14 @@ import ec.com.asofar.dto.PrTarifario;
 import ec.com.asofar.dto.PrTarifarioPK;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrTipoPresentacion;
+import ec.com.asofar.dto.SeCiudad;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
+import ec.com.asofar.dto.SePais;
 import ec.com.asofar.dto.SePersonas;
+import ec.com.asofar.dto.SeProvincia;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
@@ -603,7 +606,6 @@ public class Tablas {
                 Filas[0] = lista.get(i).getIdGrupo().toString();
                 Filas[1] = lista.get(i).getNombre();
 
-                
                 model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -634,7 +636,6 @@ public class Tablas {
                 Filas[0] = lista.get(i).getIdGrupo().toString();
                 Filas[1] = lista.get(i).getNombre();
 
-           
                 model.addRow(Filas);
                 Tabla.setModel(model);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -700,10 +701,9 @@ public class Tablas {
         for (int i = 0; i < lista.size(); i++) {
 
             if (lista.get(i).getEstado().equals("A")) {
-                Filas[0] = ""+lista.get(i).getIdUsuario();
+                Filas[0] = "" + lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getUsuario();
                 Filas[2] = lista.get(i).getIdPersona().getCorreo();
-                
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
@@ -714,7 +714,6 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
 
-                
             }
         }
 
@@ -767,7 +766,6 @@ public class Tablas {
             if (lista.get(i).getEstado().equals("I")) {
                 Filas[0] = lista.get(i).getPrGrupos().getNombre();
                 Filas[1] = lista.get(i).getNombre();
-  
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
@@ -3345,8 +3343,8 @@ public class Tablas {
         }
 
     }
-    
-        public static void ListarTipoIdentificacionConsulta(List<SeTipoIdentificacion> lista, JTable Tabla) {
+
+    public static void ListarTipoIdentificacionConsulta(List<SeTipoIdentificacion> lista, JTable Tabla) {
         int[] a = {60, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
@@ -3377,6 +3375,133 @@ public class Tablas {
         }
 
     }
+
+    public static void ListarPaisConsulta(List<SePais> lista, JTable Tabla) {
+        int[] a = {60, 200};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "PAIS"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+                filas[0] = "" + lista.get(i).getIdPais();
+                filas[1] = lista.get(i).getNombre();
+
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+
+            }
+
+        }
+
+    }
+
+    public static void ListarProvinciaConsulta(List<SeProvincia> lista, JTable Tabla) {
+        int[] a = {60, 200};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "Provincia"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+
+        for (int i = 0; i < lista.size(); i++) {
+
+//            if (lista.get(i).getEstado().equals("A")) {
+            filas[0] = "" + lista.get(i).getIdProvincia();
+            filas[1] = lista.get(i).getNombre();
+
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+
+//            }
+        }
+
+    }
+    
+    public static void ListarCiudadConsulta(List<SeCiudad> lista, JTable Tabla) {
+        int[] a = {60, 200};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "CIUDAD"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+
+        for (int i = 0; i < lista.size(); i++) {
+
+//            if (lista.get(i).getEstado().equals("A")) {
+            filas[0] = "" + lista.get(i).getIdCiudad();
+            filas[1] = lista.get(i).getNombre();
+
+            model.addRow(filas);
+            Tabla.setModel(model);
+            Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+
+//            }
+        }
+
+    }
+    
+     public static void ListarClientesConsulta(List<SeClientes> lista, JTable Tabla) {
+        int[] a = {60, 400};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"COD.", "CLIENTE"};
+        String[] filas = new String[2];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+                filas[0] = "" + lista.get(i).getIdClientes();
+                filas[1] = lista.get(i).getNombreCompleto();
+
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+
+            }
+
+        }
+
+    }
+
 
 }
 
