@@ -56,7 +56,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           <Component id="btnagregarnuevo" min="-2" pref="120" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" pref="35" max="32767" attributes="0"/>
                           <Component id="btnimprimir" min="-2" pref="120" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnsalir" min="-2" pref="120" max="-2" attributes="0"/>
