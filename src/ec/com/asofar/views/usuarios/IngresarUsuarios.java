@@ -15,7 +15,6 @@ import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeRoles;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarioSucurRol;
-import static ec.com.asofar.dto.SeUsuarioSucurRol_.seUsuarioSucurRolPK;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.AES;
 import ec.com.asofar.util.EntityManagerUtil;
