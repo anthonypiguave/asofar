@@ -63,9 +63,9 @@ public class contacto_editar extends javax.swing.JDialog {
 
     public void llenar() {
         txt_nombre.setText(ContactoClientes.getNombre());
-        txt_celular.setText(ContactoClientes.getCelular());
-        txt_telefono.setText(ContactoClientes.getTelefono());
-        txt_correo.setText(ContactoClientes.getEmail());
+//        txt_celular.setText(ContactoClientes.getCelular());
+//        txt_telefono.setText(ContactoClientes.getTelefono());
+//        txt_correo.setText(ContactoClientes.getEmail());
     }
 
     /**
@@ -289,11 +289,11 @@ public class contacto_editar extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
         ContactoClientes.setNombre(txt_nombre.getText());
         ContactoClientes.setIdLocalidad(localidadclientes);
-        ContactoClientes.setTelefono(txt_telefono.getText());
-        ContactoClientes.setCelular(txt_celular.getText());
-        ContactoClientes.setEmail(txt_correo.getText());
+//        ContactoClientes.setTelefono(txt_telefono.getText());
+//        ContactoClientes.setCelular(txt_celular.getText());
+//        ContactoClientes.setEmail(txt_correo.getText());
         ContactoClientes.setFechaActualizacion(fechaActual);
-        ContactoClientes.setUsuarioActualizacion(usu.getNombreUsuario());
+        ContactoClientes.setUsuarioActualizacion(usu.getUsuario());
         ContactoClientes.setEstado("A");
         try {
             Ccc.edit(ContactoClientes);

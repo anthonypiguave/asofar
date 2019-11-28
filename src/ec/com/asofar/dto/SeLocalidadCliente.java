@@ -35,6 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SeLocalidadCliente.findAll", query = "SELECT s FROM SeLocalidadCliente s")
     , @NamedQuery(name = "SeLocalidadCliente.findByIdLocalidadCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.idLocalidadCliente = :idLocalidadCliente")
+    , @NamedQuery(name = "SeLocalidadCliente.findByTelefono", query = "SELECT s FROM SeLocalidadCliente s WHERE s.telefono = :telefono")
+    , @NamedQuery(name = "SeLocalidadCliente.findByCelular", query = "SELECT s FROM SeLocalidadCliente s WHERE s.celular = :celular")
+    , @NamedQuery(name = "SeLocalidadCliente.findByEmail", query = "SELECT s FROM SeLocalidadCliente s WHERE s.email = :email")
     , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionCliente", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionCliente = :dirreccionCliente")
     , @NamedQuery(name = "SeLocalidadCliente.findByDirreccionEntrega", query = "SELECT s FROM SeLocalidadCliente s WHERE s.dirreccionEntrega = :dirreccionEntrega")
     , @NamedQuery(name = "SeLocalidadCliente.findByEstado", query = "SELECT s FROM SeLocalidadCliente s WHERE s.estado = :estado")
@@ -50,6 +53,12 @@ public class SeLocalidadCliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_localidad_cliente")
     private Long idLocalidadCliente;
+    @Column(name = "telefono")
+    private String telefono;
+    @Column(name = "celular")
+    private String celular;
+    @Column(name = "email")
+    private String email;
     @Column(name = "dirreccion_cliente")
     private String dirreccionCliente;
     @Column(name = "dirreccion_entrega")
@@ -94,6 +103,30 @@ public class SeLocalidadCliente implements Serializable {
 
     public void setIdLocalidadCliente(Long idLocalidadCliente) {
         this.idLocalidadCliente = idLocalidadCliente;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDirreccionCliente() {

@@ -425,13 +425,13 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN");
         } else {
             //            usuario.setIdUsuario(txtIdUsuario.getText());
-            usuario.setNombreUsuario(txtPersona.getText());
-            usuario.setEstado('A');
+            usuario.setUsuario(txtPersona.getText());
+            usuario.setEstado("A");
             usuario.setFechaActualizacion(fechaActual);
             usuario.setFechaCreacion(fechaActual);
 //            usuario.setIdPersona(objPersona);
-            usuario.setUsuarioCreacion(us1.getNombreUsuario());
-            usuario.setUsuarioActualizacion(us1.getNombreUsuario());
+            usuario.setUsuarioCreacion(us1.getUsuario());
+            usuario.setUsuarioActualizacion(us1.getUsuario());
             usuario.setPassword(aes.encrypt(txtClave.getText()));
             System.out.println("calve: " + txtClave.getText());
             System.out.println("pass: " + aes.encrypt(txtClave.getText()));
@@ -490,8 +490,8 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatos(SeUsuarios usuario) {
-        txtIdUsuario.setText(usuario.getIdUsuario());
-        txtPersona.setText(usuario.getNombreUsuario());
+        txtIdUsuario.setText(usuario.getUsuario());
+        txtPersona.setText(usuario.getUsuario());
         txtClaveConfirm.setText(aes.decrypt(usuario.getPassword()));
         txtClave.setText(aes.decrypt(usuario.getPassword()));
         txtCorreo.setText(usuario.getIdPersona().getCorreo());
@@ -504,7 +504,7 @@ public class ActualizarDatosUsuarios extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            usuario.setEstado('I');
+            usuario.setEstado("I");
             try {
                 tpc.edit(usuario);
                 JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO");

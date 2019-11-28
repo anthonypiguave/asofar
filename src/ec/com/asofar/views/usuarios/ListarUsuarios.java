@@ -11,6 +11,7 @@ import java.awt.Point;
 import java.util.List;
 
 public class ListarUsuarios extends javax.swing.JDialog {
+
     String valor;
     int x, y;
     SeUsuarios obj;
@@ -20,7 +21,7 @@ public class ListarUsuarios extends javax.swing.JDialog {
     SeUsuariosJpaController usuario_controller
             = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
-    SeEmpresa em1; 
+    SeEmpresa em1;
     SeSucursal su1;
 
     public ListarUsuarios(java.awt.Frame parent, boolean modal) {
@@ -39,11 +40,11 @@ public class ListarUsuarios extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         us1 = us;
         em1 = em;
-        su1= su;
-      usuario_lista
+        su1 = su;
+        usuario_lista
                 = usuario_controller.findSeUsuariosEntities();
-      
-        System.out.println("ffffff  " + usuario_lista.get(0).getNombreUsuario()+"  "+ usuario_lista.get(0).getFechaCreacion());
+
+        System.out.println("ffffff  " + usuario_lista.get(0).getUsuario() + "  " + usuario_lista.get(0).getFechaCreacion());
         Tablas.listarUsuarios(usuario_lista, jtPersonas);
 
     }
@@ -213,13 +214,12 @@ public class ListarUsuarios extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-            setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-   
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IngresarUsuarios ru = new IngresarUsuarios(new javax.swing.JFrame(), true, us1,em1,su1);
+        IngresarUsuarios ru = new IngresarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -234,15 +234,16 @@ public class ListarUsuarios extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             id = jtPersonas.getSelectedRow();
             for (int i = 0; i < usuario_lista.size(); i++) {
-                if ((jtPersonas.getValueAt(id, 0).toString().equals(usuario_lista.get(i).getIdUsuario()))) {
+                if (jtPersonas.getValueAt(id, 0).toString().equals(usuario_lista.get(i).getIdUsuario().toString())) {
                     obj = usuario_lista.get(i);
-                    if (obj != null) {
-                        
-                        ActualizarDatosUsuarios es = new ActualizarDatosUsuarios(new javax.swing.JFrame(), true, obj,us1,em1,su1);
-                        setVisible(false);
-                        es.setVisible(true);
-                    }
                 }
+            }
+
+            if (obj != null) {
+
+                ActualizarDatosUsuarios es = new ActualizarDatosUsuarios(new javax.swing.JFrame(), true, obj, us1, em1, su1);
+                setVisible(false);
+                es.setVisible(true);
             }
 
         }
@@ -265,7 +266,7 @@ public class ListarUsuarios extends javax.swing.JDialog {
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
         char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }

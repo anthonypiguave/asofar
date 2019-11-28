@@ -453,7 +453,7 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
             persona1.setFechaNacimiento(persona1.getFechaNacimiento());
             persona1.setDireccion(txtDireccion.getText());
             persona1.setFechaActualizacion(fechaActual);
-            persona1.setUsuarioActualizacion(us1.getIdUsuario());
+            persona1.setUsuarioActualizacion(us1.getUsuario());
             SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona1.getSelectedItem().toString());
             persona1.setIdTipoPersona(tp);
 

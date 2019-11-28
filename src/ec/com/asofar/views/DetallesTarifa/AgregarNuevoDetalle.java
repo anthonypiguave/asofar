@@ -407,7 +407,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         pre.setValorDescuento(Double.parseDouble(txtDescuent_valor.getText()));
         pre.setValorVenta(Double.parseDouble(txt_valor_venta.getText()));
         pre.setEstado("A");
-        pre.setUsuarioCreacion(usu.getNombreUsuario());
+        pre.setUsuarioCreacion(usu.getUsuario());
         pre.setIdPrestacion(BigInteger.valueOf(objpres.getPrPrestaciones().getIdPrestacion()));
         pre.setIdUnidadServicio(BigInteger.valueOf(objpres.getVeUnidadServicio().getIdUnidadServicio()));
 

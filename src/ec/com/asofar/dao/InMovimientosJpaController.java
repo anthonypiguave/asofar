@@ -48,11 +48,11 @@ public class InMovimientosJpaController implements Serializable {
         if (inMovimientos.getInDetalleMovimientoList() == null) {
             inMovimientos.setInDetalleMovimientoList(new ArrayList<InDetalleMovimiento>());
         }
+        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
-        inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -132,11 +132,11 @@ public class InMovimientosJpaController implements Serializable {
     }
 
     public void edit(InMovimientos inMovimientos) throws IllegalOrphanException, NonexistentEntityException, Exception {
+        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
         inMovimientos.getInMovimientosPK().setIdEmpresa(inMovimientos.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         inMovimientos.getInMovimientosPK().setIdTipoMovimiento(inMovimientos.getInTipoMovimiento().getIdTipoMovimiento());
         inMovimientos.getInMovimientosPK().setIdMotivo(inMovimientos.getInMotivos().getIdMotivo());
-        inMovimientos.getInMovimientosPK().setIdTipoDocumento(inMovimientos.getInTipoDocumento().getIdTipoDocumento());
-        inMovimientos.getInMovimientosPK().setIdSucursal(inMovimientos.getSeSucursal().getSeSucursalPK().getIdSucursal());
         EntityManager em = null;
         try {
             em = getEntityManager();

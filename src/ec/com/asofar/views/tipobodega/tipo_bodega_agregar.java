@@ -198,7 +198,7 @@ public class tipo_bodega_agregar extends javax.swing.JDialog {
             } else {
                 tipobodega.setNombre(txtnom_bodega.getText());
                 tipobodega.setEstado("A");
-                tipobodega.setUsuarioCreacion(usu.getNombreUsuario());
+                tipobodega.setUsuarioCreacion(usu.getUsuario());
                 tipobodega.setFechaCreacion(fechaActual);
                 try {
                     tbc.create(tipobodega);

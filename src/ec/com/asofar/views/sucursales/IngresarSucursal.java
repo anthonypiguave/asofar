@@ -362,8 +362,8 @@ public class IngresarSucursal extends javax.swing.JDialog {
                     sucursal.setDireccion(txtDireccion.getText());
                     sucursal.setFechaActualizacion(fechaActual);
                     sucursal.setFechaCreacion(fechaActual);
-                    sucursal.setUsuarioCreacion(us1.getIdUsuario());
-                    sucursal.setUsuarioActualizacion(us1.getIdUsuario());
+                    sucursal.setUsuarioCreacion(us1.getUsuario());
+                    sucursal.setUsuarioActualizacion(us1.getUsuario());
 
                     try {
                         sucursalController.create(sucursal);

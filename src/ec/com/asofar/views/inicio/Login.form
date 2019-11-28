@@ -156,7 +156,6 @@
               <Image iconType="3" name="/ec/com/asofar/icon/aceptar_Mesa de trabajo 1.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="INGRESAR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btningresarActionPerformed"/>
@@ -181,7 +180,6 @@
               <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btningresar1ActionPerformed"/>

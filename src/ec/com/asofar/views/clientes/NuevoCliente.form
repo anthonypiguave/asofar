@@ -53,7 +53,11 @@
                   <EmptySpace min="-2" pref="287" max="-2" attributes="0"/>
               </Group>
               <Component id="jLabel17" alignment="0" max="32767" attributes="0"/>
-              <Component id="jTabbedPane8" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jTabbedPane8" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -129,7 +133,7 @@
                                   <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="222" max="32767" attributes="0"/>
+                          <EmptySpace pref="202" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -270,7 +274,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="175" max="32767" attributes="0"/>
+                          <EmptySpace pref="155" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

@@ -261,7 +261,7 @@ public class NuevoSubgrupo extends javax.swing.JDialog {
                     ps.setEstado("A");
                     ps.setPrGrupos(ObtenerDTO.ObtenerPrGrupos(cbgrupo.getSelectedItem().toString()));
 //                    ps.setUsuarioActualizacion(String.valueOf(1));
-                    ps.setUsuarioCreacion(usuarios.getIdUsuario());
+                    ps.setUsuarioCreacion(usuarios.getUsuario());
 //                    ps.setFechaActualizacion(d);
                     ps.setFechaCreacion(d);
                     try {

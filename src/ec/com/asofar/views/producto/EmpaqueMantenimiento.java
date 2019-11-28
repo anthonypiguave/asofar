@@ -322,7 +322,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
                     oe.setNombreEmpaque(txtNombre.getText());
                     oe.setEstado("A");
                     oe.setFechaCreacion(d);
-                    oe.setUsuarioCreacion(usuario.getNombreUsuario());
+                    oe.setUsuarioCreacion(usuario.getUsuario());
                     empcontrol.create(oe);
                     txtNombre.setText("");
                     JOptionPane.showMessageDialog(null, "Nuevo empaque guardado ");

@@ -356,7 +356,6 @@
               <Image iconType="3" name="/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CANCELAR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCancelarActionPerformed"/>
@@ -433,7 +432,6 @@
               <Image iconType="3" name="/ec/com/asofar/icon/aceptar_Mesa de trabajo 1.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="APROBAR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAprovarActionPerformed"/>
@@ -451,7 +449,6 @@
               <Color blue="1" green="1" red="1" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ANULAR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAnularActionPerformed"/>
@@ -469,7 +466,6 @@
               <Color blue="1" green="1" red="1" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="IMPRIMIR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnimprimirActionPerformed"/>

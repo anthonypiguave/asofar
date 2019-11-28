@@ -675,7 +675,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 kardex.setFechaSistema(d);
                                 SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY");
                                 kardex.setAnioDocumento(formatoFecha.format(d));
-                                kardex.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                kardex.setUsuarioCreacion(seUsuario.getUsuario());
                                 kardex.setFechaCreacion(d);
                                 
                                 if (objeto != null) {
@@ -707,7 +707,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 
                                 cabCompra.setEstado("C");
                                 cabCompra.setFechaAprobacion(d);
-                                cabCompra.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                cabCompra.setUsuarioActualizacion(seUsuario.getUsuario());
                                 cabCompra.setFechaActualizacion(d);
                                 cabCompraController.edit(cabCompra);
                                 
@@ -720,7 +720,7 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 
                                 cabMovimiento.setEstado("C");
                                 cabMovimiento.setObservacion(txtObservacion.getText());
-                                cabMovimiento.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                cabMovimiento.setUsuarioActualizacion(seUsuario.getUsuario());
                                 cabMovimiento.setFechaActualizacion(d);
                                 cabMovimiento.setFechaRecepcion(d);
                                 cabMovController.edit(cabMovimiento);

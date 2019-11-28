@@ -260,7 +260,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
                     dc.setFechaInicio(d_fecha);
                     dc.setHoraInicio(new java.sql.Time(d_hora.getTime()));
                     dc.setEstado("A");
-                    dc.setIdUsuario(seUsuario.getIdUsuario());
+                    dc.setIdUsuario(seUsuario.getUsuario());
                     dc.setVeCaja(veCaja);
                     if (ValidacionCaja.ValidacionApertura(veCaja, seUsuario) == true) {
                         cajadet.create(dc);

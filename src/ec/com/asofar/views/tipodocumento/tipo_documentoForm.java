@@ -63,7 +63,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         MostrarMedidaActiva();
         btn_guardar.setEnabled(false);
-        System.out.println("nombre es " + us.getNombreUsuario());
+        System.out.println("nombre es " + us.getUsuario());
         usu1 = us;
         su1 = su;
         em1 = em;

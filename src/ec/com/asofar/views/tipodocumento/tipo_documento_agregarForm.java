@@ -199,7 +199,7 @@ public class tipo_documento_agregarForm extends javax.swing.JDialog {
             InTipoDocumento listnue = new InTipoDocumento();
             listnue.setNombreDocumento(txtnom_documento.getText());
             listnue.setEstado("A");
-            listnue.setUsuarioCreacion(usu1.getNombreUsuario());
+            listnue.setUsuarioCreacion(usu1.getUsuario());
             listnue.setFechaCreacion(Fecha.fecha_Hora_actual_jx());
 
             try {

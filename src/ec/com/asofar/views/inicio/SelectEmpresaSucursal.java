@@ -25,7 +25,7 @@ import java.util.List;
 public class SelectEmpresaSucursal extends javax.swing.JDialog {
 
     int x, y;
-    String id;
+    long id;
 
     /**
      * Creates new form SelectEmpresaSucursal
@@ -36,18 +36,18 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
 
-    public SelectEmpresaSucursal(java.awt.Frame parent, boolean modal, String id) {
+    public SelectEmpresaSucursal(java.awt.Frame parent, boolean modal, SeUsuarios obj) {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
-        System.out.println(id);
-        comboEmpresa(id);
+        System.out.println(obj.getUsuario());
+        comboEmpresa(obj);
         comboSucursal();
-        this.id = id;
+        id = obj.getIdUsuario();
 
     }
 
-    public void comboEmpresa(String id) {
+    public void comboEmpresa(SeUsuarios user) {
         List<SeSucursal> ls = null;
         SeSucursalJpaController sc = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
         List<SeUsuarioSucurRol> listausr = null;
@@ -58,7 +58,7 @@ public class SelectEmpresaSucursal extends javax.swing.JDialog {
         SeEmpresaJpaController sejc = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
         listaempresa = sejc.findSeEmpresaEntities();
         for (int j = 0; j < listausr.size(); j++) {
-            if (listausr.get(j).getIdUsuario().getIdUsuario() == id) {
+            if (listausr.get(j).getIdUsuario().getIdUsuario() == user.getIdUsuario()) {
                 cbempresa.addItem(listausr.get(j).getSeSucursal().getSeEmpresa().getNombreComercial());
             }
         }

@@ -238,7 +238,7 @@ public class bodega_editar extends javax.swing.JDialog {
 //            } else {
         Bodega.setNombreBodega(txtNombre.getText());
         Bodega.setEstado(cbx_estado.getSelectedItem().toString());
-        Bodega.setUsuarioActualizacion(usu.getNombreUsuario());
+        Bodega.setUsuarioActualizacion(usu.getUsuario());
         Bodega.setFechaActualizacion(fechaActual);
         try {
             bc.edit(Bodega);

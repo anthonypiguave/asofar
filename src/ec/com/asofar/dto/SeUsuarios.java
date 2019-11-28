@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -39,16 +41,17 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SeUsuarios.findByFechaCreacion", query = "SELECT s FROM SeUsuarios s WHERE s.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "SeUsuarios.findByUsuarioActualizacion", query = "SELECT s FROM SeUsuarios s WHERE s.usuarioActualizacion = :usuarioActualizacion")
     , @NamedQuery(name = "SeUsuarios.findByFechaActualizacion", query = "SELECT s FROM SeUsuarios s WHERE s.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "SeUsuarios.findByNombreUsuario", query = "SELECT s FROM SeUsuarios s WHERE s.nombreUsuario = :nombreUsuario")})
+    , @NamedQuery(name = "SeUsuarios.findByUsuario", query = "SELECT s FROM SeUsuarios s WHERE s.usuario = :usuario")})
 public class SeUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_usuario")
-    private String idUsuario;
+    private Long idUsuario;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @Column(name = "usuario_creacion")
     private String usuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -59,8 +62,8 @@ public class SeUsuarios implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @Column(name = "nombre_usuario")
-    private String nombreUsuario;
+    @Column(name = "usuario")
+    private String usuario;
     @Lob
     @Column(name = "password")
     private String password;
@@ -73,23 +76,23 @@ public class SeUsuarios implements Serializable {
     public SeUsuarios() {
     }
 
-    public SeUsuarios(String idUsuario) {
+    public SeUsuarios(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public String getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -125,12 +128,12 @@ public class SeUsuarios implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getPassword() {

@@ -216,8 +216,8 @@ public class ActualizarUnidaddeservicio extends javax.swing.JDialog {
         vs.setFechaActualizacion(fechaActual);
 //        vs.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
         vs.setIdEmpresa(emp);
-        vs.setUsuarioActualizacion(usu.getNombreUsuario());
-        System.out.println("Usuario" + usu.getNombreUsuario());
+        vs.setUsuarioActualizacion(usu.getUsuario());
+        System.out.println("Usuario" + usu.getUsuario());
         try {
             uc.edit(vs);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");

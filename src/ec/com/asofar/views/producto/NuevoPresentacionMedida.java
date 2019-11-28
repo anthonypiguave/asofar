@@ -266,7 +266,7 @@ public class NuevoPresentacionMedida extends javax.swing.JDialog {
                 obj.setPrArticulo(articuloObjeto);
                 obj.setPrTipoPresentacion(tipopresentacion);
                 obj.setPrTipoMedidas(tipomedida);
-                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
 

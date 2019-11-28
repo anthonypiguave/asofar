@@ -503,7 +503,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                             cabOrden.setFechaEmision(d);
                             cabOrden.setSeSucursal(seSucursal);
 
-                            cabOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+                            cabOrden.setUsuarioCreacion(seUsuario.getUsuario());
                             cabOrden.setFechaCreacion(d);
 
                             try {
@@ -519,7 +519,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                                     detOrden.setDescripcion(listadet.get(i).getDescripcion());
                                     detOrden.setEstado("A");
                                     detOrden.setFechaCreacion(d);
-                                    detOrden.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                    detOrden.setUsuarioCreacion(seUsuario.getUsuario());
                                     detOrden.getCoOrdenPedido().setSeSucursal(seSucursal);
                                     detOrden.setFechaCreacion(d);
 

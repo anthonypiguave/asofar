@@ -229,7 +229,7 @@ public class caja_editar extends javax.swing.JDialog {
             } else {
                 vCaja.setNombre(txtNuevo.getText());
                 vCaja.setEstado(estado.getSelectedItem().toString());
-                vCaja.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                vCaja.setUsuarioActualizacion(seUsuario.getUsuario());
                 vCaja.setFechaActualizacion(d);
                 try {
                     vCajaController.edit(vCaja);

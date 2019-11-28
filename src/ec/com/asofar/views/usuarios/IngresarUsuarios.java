@@ -85,6 +85,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -103,7 +104,23 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         cbRol = new javax.swing.JComboBox<>();
         btnSalir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+
+        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("USUARIO NUEVO");
+        jLabel1.setOpaque(true);
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel1MouseDragged(evt);
+            }
+        });
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -253,7 +270,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir.setText("CANCELAR");
-        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -265,27 +281,9 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
-        btnGuardar.setOpaque(true);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("USUARIO NUEVO");
-        jLabel1.setOpaque(true);
-        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel1MouseDragged(evt);
-            }
-        });
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel1MousePressed(evt);
             }
         });
 
@@ -293,7 +291,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,8 +305,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(51, 51, 51)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -419,14 +415,14 @@ public void llenarCombo(List<SeRoles> TiBo) {
         }
         if (txtClave.getText().equals(txtClaveConfirm.getText())
                 ) {
-            usuario.setIdUsuario(txtIdUsuario.getText());
-            usuario.setNombreUsuario(txtPersona.getText());
-            usuario.setEstado('A');
+//            usuario.setIdUsuario(txtIdUsuario.getText());
+            usuario.setUsuario(txtPersona.getText());
+            usuario.setEstado("A");
             usuario.setFechaActualizacion(fechaActual);
             usuario.setFechaCreacion(fechaActual);
             usuario.setIdPersona(objPersona);
-            usuario.setUsuarioCreacion(us1.getNombreUsuario());
-            usuario.setUsuarioActualizacion(us1.getNombreUsuario());
+            usuario.setUsuarioCreacion(us1.getUsuario());
+            usuario.setUsuarioActualizacion(us1.getUsuario());
             usuario.setPassword(aes.encrypt(txtClave.getText()));
 
 //            Integer idRol = cbRol.getSelectedIndex();

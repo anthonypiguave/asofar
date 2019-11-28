@@ -206,7 +206,7 @@ public class tipo_documentoEditarForm extends javax.swing.JDialog {
                 listnue = documento;
                 listnue.setNombreDocumento(txtnom_documento.getText());
                 listnue.setEstado("A");
-                listnue.setUsuarioActualizacion(usu1.getNombreUsuario());
+                listnue.setUsuarioActualizacion(usu1.getUsuario());
                 listnue.setFechaActualizacion(Fecha.fecha_Hora_actual_jx());
                 //listnue.setIdTipoDocumento(documento.getIdTipoDocumento());
 

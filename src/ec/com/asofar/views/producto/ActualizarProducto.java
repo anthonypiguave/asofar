@@ -983,7 +983,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
                                             producto.setPrMedidas(presentacionMedida);
                                             producto.setNombreProducto(txtProducto.getText());
                                             producto.setEstado("A");
-                                            producto.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                            producto.setUsuarioActualizacion(seUsuario.getUsuario());
                                             producto.setFechaActualizacion(d);
 
                                             if (txtCodigoBarra.getText().equals("")) {
@@ -1090,7 +1090,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
                                                 obj.setPrProductoBodegaPK(new PrProductoBodegaPK());
                                                 obj.getPrProductoBodegaPK().setIdProducto(producto.getPrProductosPK().getIdProducto());
                                                 obj.setInBodega(bodega);
-                                                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                                obj.setUsuarioCreacion(seUsuario.getUsuario());
                                                 obj.setFechaCreacion(d);
 
                                                 bodegaStockController.create(obj);
@@ -1098,7 +1098,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
                                             } else {
 
                                                 bodegaStock.setInBodega(bodega);
-                                                bodegaStock.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                                bodegaStock.setUsuarioActualizacion(seUsuario.getUsuario());
                                                 bodegaStock.setFechaActualizacion(d);
 
                                                 bodegaStockController.edit(bodegaStock);

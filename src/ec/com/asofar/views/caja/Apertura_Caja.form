@@ -137,7 +137,6 @@
               <Color blue="1" green="1" red="1" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ACTIVAR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGrabarActionPerformed"/>
@@ -158,7 +157,6 @@
               <Image iconType="3" name="/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CANCELAR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>

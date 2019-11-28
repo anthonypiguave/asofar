@@ -63,7 +63,7 @@ public class SeOpcionesMenu implements Serializable {
     @Column(name = "ruta")
     private String ruta;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @Column(name = "usuario_creacion")
     private String usuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -129,11 +129,11 @@ public class SeOpcionesMenu implements Serializable {
         this.ruta = ruta;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

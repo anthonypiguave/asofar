@@ -54,14 +54,14 @@ public class SeUsuarioSucurRol implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
-    @JoinColumn(name = "id_roles", referencedColumnName = "id_roles")
-    @ManyToOne
-    private SeRoles idRoles;
     @JoinColumns({
         @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal", insertable = false, updatable = false)
         , @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private SeSucursal seSucursal;
+    @JoinColumn(name = "id_roles", referencedColumnName = "id_roles")
+    @ManyToOne
+    private SeRoles idRoles;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne
     private SeUsuarios idUsuario;
@@ -125,20 +125,20 @@ public class SeUsuarioSucurRol implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public SeRoles getIdRoles() {
-        return idRoles;
-    }
-
-    public void setIdRoles(SeRoles idRoles) {
-        this.idRoles = idRoles;
-    }
-
     public SeSucursal getSeSucursal() {
         return seSucursal;
     }
 
     public void setSeSucursal(SeSucursal seSucursal) {
         this.seSucursal = seSucursal;
+    }
+
+    public SeRoles getIdRoles() {
+        return idRoles;
+    }
+
+    public void setIdRoles(SeRoles idRoles) {
+        this.idRoles = idRoles;
     }
 
     public SeUsuarios getIdUsuario() {

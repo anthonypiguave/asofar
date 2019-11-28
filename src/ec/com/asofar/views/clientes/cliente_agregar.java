@@ -339,7 +339,7 @@ public class cliente_agregar extends javax.swing.JDialog {
                 clientes.setNombreCompleto(nombreCompleto);
                 clientes.setIdTipoIndentificacion(ti);
                 clientes.setFechaCreacion(fechaActual);
-                clientes.setUsuarioCreacion(usu.getNombreUsuario());
+                clientes.setUsuarioCreacion(usu.getUsuario());
                 clientes.setRazonSocial(txt_razon_social.getText());
                 clientes.setEstado("A");
                 try {

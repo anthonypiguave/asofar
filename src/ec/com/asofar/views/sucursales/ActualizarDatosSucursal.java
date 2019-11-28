@@ -321,7 +321,7 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
             sucursal.setCorreo(txtCorreo.getText());
             sucursal.setDireccion(txtDireccion.getText());
             sucursal.setFechaActualizacion(fechaActual);
-            sucursal.setUsuarioActualizacion(us1.getIdUsuario());           
+            sucursal.setUsuarioActualizacion(us1.getUsuario());           
             try {
                 sucursalController.edit(sucursal);
                 JOptionPane.showMessageDialog(null, "SUCURSAL ACTUALIZADA");

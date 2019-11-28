@@ -191,7 +191,7 @@ public class NuevoTipoPresentacion extends javax.swing.JDialog {
             try {
                 
                 obj.setNombre(txtTipoPresentacion.getText());
-                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
                 

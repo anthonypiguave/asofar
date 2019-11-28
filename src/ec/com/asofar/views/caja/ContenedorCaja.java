@@ -215,7 +215,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
 
             ObjetoPrueba op = new ObjetoPrueba(
                     listadetallecaja.get(i).getVeCaja().getNombre()
-                    + "/" + seUsuario.getNombreUsuario(),
+                    + "/" + seUsuario.getUsuario(),
                     hora1,
                     listadetallecaja.get(i).getDineroInicio().toString(),
                     hora2,

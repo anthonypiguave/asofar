@@ -274,7 +274,7 @@ public class bodega_agregar extends javax.swing.JDialog {
 
                 bod.setNombreBodega(txtNombre.getText());
                 bod.setEstado("A");
-                bod.setUsuarioCreacion(usu1.getNombreUsuario());
+                bod.setUsuarioCreacion(usu1.getUsuario());
                 bod.setFechaCreacion(fechaActual);
                 
                     bc.create(bod);

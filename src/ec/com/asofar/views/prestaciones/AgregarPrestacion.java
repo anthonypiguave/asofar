@@ -285,7 +285,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
                 PRE.setIdPoducto(null);
             }
 
-            PRE.setUsuarioCreacion(usu.getNombreUsuario());
+            PRE.setUsuarioCreacion(usu.getUsuario());
             PRE.setIdEmpresa(emp);
             PRE.setFechaCreacion(fechaActual);
             try {

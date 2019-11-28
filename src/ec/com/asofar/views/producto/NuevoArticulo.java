@@ -193,7 +193,7 @@ public class NuevoArticulo extends javax.swing.JDialog {
                 
                 obj.setNombreArticulo(txtArticulo.getText());
                 obj.setPrSubgrupos(subgruposObjeto);
-                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
                 

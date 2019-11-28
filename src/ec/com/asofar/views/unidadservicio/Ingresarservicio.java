@@ -197,7 +197,7 @@ public class Ingresarservicio extends javax.swing.JDialog {
             unidadservicio.setFechaCreacion(fechaActual);
 //        unidadservicio.setIdEmpresa(BigInteger.valueOf(emp.getIdEmpresa()));
             unidadservicio.setIdEmpresa(emp);
-            unidadservicio.setUsuarioCreacion(usu.getNombreUsuario());
+            unidadservicio.setUsuarioCreacion(usu.getUsuario());
 
             uc.create(unidadservicio);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");

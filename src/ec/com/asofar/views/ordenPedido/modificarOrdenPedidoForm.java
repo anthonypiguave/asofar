@@ -539,7 +539,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 detalle.setCantidadSolicitada(BigInteger.valueOf(0));
                 detalle.setEstado("A");
                 detalle.setFechaCreacion(d);
-                detalle.setUsuarioCreacion(seUsuario.getIdUsuario());
+                detalle.setUsuarioCreacion(seUsuario.getUsuario());
                 detalle.setCoOrdenPedido(cabOrden);
 
                 listadet.add(detalle);
@@ -732,7 +732,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                         detalle = list.get(j);
 
                         detalle.setFechaActualizacion(d);
-                        detalle.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                        detalle.setUsuarioActualizacion(seUsuario.getUsuario());
 
                         detOrdenController.edit(detalle);
                     }
@@ -741,7 +741,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 CoOrdenPedido cab = cabOrdenController.findCoOrdenPedido(cabOrden.getCoOrdenPedidoPK());
 
                 cab.setFechaActualizacion(d);
-                cab.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                cab.setUsuarioActualizacion(seUsuario.getUsuario());
                 cab.setEstado("A");
 
                 cabOrdenController.edit(cab);
@@ -774,7 +774,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                         detalle = list.get(j);
                         detalle.setEstado("I");
                         detalle.setFechaActualizacion(d);
-                        detalle.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                        detalle.setUsuarioActualizacion(seUsuario.getUsuario());
 
                         detOrdenController.edit(detalle);
                     }
@@ -783,7 +783,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
                 CoOrdenPedido cab = cabOrdenController.findCoOrdenPedido(cabOrden.getCoOrdenPedidoPK());
 
                 cab.setFechaActualizacion(d);
-                cab.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                cab.setUsuarioActualizacion(seUsuario.getUsuario());
                 cab.setEstado("I");
 
                 cabOrdenController.edit(cab);

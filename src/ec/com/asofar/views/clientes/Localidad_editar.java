@@ -328,7 +328,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         localidadclientes.setIdProvincia(provincia);
         localidadclientes.setIdPais(pais);
         localidadclientes.setEstado("A");
-        localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
+        localidadclientes.setUsuarioCreacion(usu.getUsuario());
         localidadclientes.setFechaCreacion(fechaActual);
         try {
             Lc.edit(localidadclientes);

@@ -825,7 +825,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                                             obj.setPrMedidas(presentacionMedida);
                                             obj.setNombreProducto(txtProducto.getText());
                                             obj.setEstado("A");
-                                            obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                            obj.setUsuarioCreacion(seUsuario.getUsuario());
                                             obj.setFechaCreacion(d);
 
                                             if (txtCodigoBarra.getText().equals("")) {
@@ -944,7 +944,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                                             bodegaStock.getPrProductoBodegaPK().setIdProducto(producto.getPrProductosPK().getIdProducto());
 
                                             bodegaStock.setInBodega(bodega);
-                                            bodegaStock.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                            bodegaStock.setUsuarioCreacion(seUsuario.getUsuario());
                                             bodegaStock.setFechaCreacion(d);
 
                                             bodegaStockController.create(bodegaStock);

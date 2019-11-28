@@ -192,7 +192,7 @@ public class NuevoSubGrupo extends javax.swing.JDialog {
                 obj.setNombre(txtSubGrupo.getText());
                 obj.setIdEmpresa(seEmpresa);
                 obj.setPrGrupos(gruposObjeto);
-                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
                 

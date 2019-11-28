@@ -6,7 +6,6 @@
 package ec.com.asofar.dao;
 
 import ec.com.asofar.dao.exceptions.NonexistentEntityException;
-import ec.com.asofar.dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -35,7 +34,7 @@ public class SeUsuariosJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(SeUsuarios seUsuarios) throws PreexistingEntityException, Exception {
+    public void create(SeUsuarios seUsuarios) {
         if (seUsuarios.getSeUsuarioSucurRolList() == null) {
             seUsuarios.setSeUsuarioSucurRolList(new ArrayList<SeUsuarioSucurRol>());
         }
@@ -69,11 +68,6 @@ public class SeUsuariosJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findSeUsuarios(seUsuarios.getIdUsuario()) != null) {
-                throw new PreexistingEntityException("SeUsuarios " + seUsuarios + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -132,7 +126,7 @@ public class SeUsuariosJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = seUsuarios.getIdUsuario();
+                Long id = seUsuarios.getIdUsuario();
                 if (findSeUsuarios(id) == null) {
                     throw new NonexistentEntityException("The seUsuarios with id " + id + " no longer exists.");
                 }
@@ -145,7 +139,7 @@ public class SeUsuariosJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -200,7 +194,7 @@ public class SeUsuariosJpaController implements Serializable {
         }
     }
 
-    public SeUsuarios findSeUsuarios(String id) {
+    public SeUsuarios findSeUsuarios(Long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(SeUsuarios.class, id);

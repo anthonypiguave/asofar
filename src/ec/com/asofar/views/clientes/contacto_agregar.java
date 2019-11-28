@@ -247,11 +247,11 @@ public class contacto_agregar extends javax.swing.JDialog {
         java.util.Date fechaActual = new java.util.Date();
         ContactoCliente.setNombre(txt_nombre.getText());
         ContactoCliente.setIdLocalidad(localidadclientes);
-        ContactoCliente.setTelefono(txt_telefono.getText());
-        ContactoCliente.setCelular(txt_celular.getText());
-        ContactoCliente.setEmail(txt_correo.getText());
-        ContactoCliente.setFechaCreacion(fechaActual);
-        ContactoCliente.setUsuarioCreacion(usu.getNombreUsuario());
+//        ContactoCliente.setTelefono(txt_telefono.getText());
+//        ContactoCliente.setCelular(txt_celular.getText());
+//        ContactoCliente.setEmail(txt_correo.getText());
+//        ContactoCliente.setFechaCreacion(fechaActual);
+//        ContactoCliente.setUsuarioCreacion(usu.getNombreUsuario());
         ContactoCliente.setEstado("A");
         try {
             Ccc.create(ContactoCliente);

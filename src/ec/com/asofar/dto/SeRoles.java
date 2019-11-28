@@ -51,7 +51,7 @@ public class SeRoles implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @Column(name = "usuario_creacion")
     private String usuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -90,11 +90,11 @@ public class SeRoles implements Serializable {
         this.nombre = nombre;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

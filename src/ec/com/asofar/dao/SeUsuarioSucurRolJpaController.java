@@ -12,8 +12,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ec.com.asofar.dto.SeRoles;
 import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeRoles;
 import ec.com.asofar.dto.SeUsuarioSucurRol;
 import ec.com.asofar.dto.SeUsuarioSucurRolPK;
 import ec.com.asofar.dto.SeUsuarios;
@@ -46,15 +46,15 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            SeRoles idRoles = seUsuarioSucurRol.getIdRoles();
-            if (idRoles != null) {
-                idRoles = em.getReference(idRoles.getClass(), idRoles.getIdRoles());
-                seUsuarioSucurRol.setIdRoles(idRoles);
-            }
             SeSucursal seSucursal = seUsuarioSucurRol.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal = em.getReference(seSucursal.getClass(), seSucursal.getSeSucursalPK());
                 seUsuarioSucurRol.setSeSucursal(seSucursal);
+            }
+            SeRoles idRoles = seUsuarioSucurRol.getIdRoles();
+            if (idRoles != null) {
+                idRoles = em.getReference(idRoles.getClass(), idRoles.getIdRoles());
+                seUsuarioSucurRol.setIdRoles(idRoles);
             }
             SeUsuarios idUsuario = seUsuarioSucurRol.getIdUsuario();
             if (idUsuario != null) {
@@ -62,13 +62,13 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
                 seUsuarioSucurRol.setIdUsuario(idUsuario);
             }
             em.persist(seUsuarioSucurRol);
-            if (idRoles != null) {
-                idRoles.getSeUsuarioSucurRolList().add(seUsuarioSucurRol);
-                idRoles = em.merge(idRoles);
-            }
             if (seSucursal != null) {
                 seSucursal.getSeUsuarioSucurRolList().add(seUsuarioSucurRol);
                 seSucursal = em.merge(seSucursal);
+            }
+            if (idRoles != null) {
+                idRoles.getSeUsuarioSucurRolList().add(seUsuarioSucurRol);
+                idRoles = em.merge(idRoles);
             }
             if (idUsuario != null) {
                 idUsuario.getSeUsuarioSucurRolList().add(seUsuarioSucurRol);
@@ -95,33 +95,25 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             SeUsuarioSucurRol persistentSeUsuarioSucurRol = em.find(SeUsuarioSucurRol.class, seUsuarioSucurRol.getSeUsuarioSucurRolPK());
-            SeRoles idRolesOld = persistentSeUsuarioSucurRol.getIdRoles();
-            SeRoles idRolesNew = seUsuarioSucurRol.getIdRoles();
             SeSucursal seSucursalOld = persistentSeUsuarioSucurRol.getSeSucursal();
             SeSucursal seSucursalNew = seUsuarioSucurRol.getSeSucursal();
+            SeRoles idRolesOld = persistentSeUsuarioSucurRol.getIdRoles();
+            SeRoles idRolesNew = seUsuarioSucurRol.getIdRoles();
             SeUsuarios idUsuarioOld = persistentSeUsuarioSucurRol.getIdUsuario();
             SeUsuarios idUsuarioNew = seUsuarioSucurRol.getIdUsuario();
-            if (idRolesNew != null) {
-                idRolesNew = em.getReference(idRolesNew.getClass(), idRolesNew.getIdRoles());
-                seUsuarioSucurRol.setIdRoles(idRolesNew);
-            }
             if (seSucursalNew != null) {
                 seSucursalNew = em.getReference(seSucursalNew.getClass(), seSucursalNew.getSeSucursalPK());
                 seUsuarioSucurRol.setSeSucursal(seSucursalNew);
+            }
+            if (idRolesNew != null) {
+                idRolesNew = em.getReference(idRolesNew.getClass(), idRolesNew.getIdRoles());
+                seUsuarioSucurRol.setIdRoles(idRolesNew);
             }
             if (idUsuarioNew != null) {
                 idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getIdUsuario());
                 seUsuarioSucurRol.setIdUsuario(idUsuarioNew);
             }
             seUsuarioSucurRol = em.merge(seUsuarioSucurRol);
-            if (idRolesOld != null && !idRolesOld.equals(idRolesNew)) {
-                idRolesOld.getSeUsuarioSucurRolList().remove(seUsuarioSucurRol);
-                idRolesOld = em.merge(idRolesOld);
-            }
-            if (idRolesNew != null && !idRolesNew.equals(idRolesOld)) {
-                idRolesNew.getSeUsuarioSucurRolList().add(seUsuarioSucurRol);
-                idRolesNew = em.merge(idRolesNew);
-            }
             if (seSucursalOld != null && !seSucursalOld.equals(seSucursalNew)) {
                 seSucursalOld.getSeUsuarioSucurRolList().remove(seUsuarioSucurRol);
                 seSucursalOld = em.merge(seSucursalOld);
@@ -129,6 +121,14 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
             if (seSucursalNew != null && !seSucursalNew.equals(seSucursalOld)) {
                 seSucursalNew.getSeUsuarioSucurRolList().add(seUsuarioSucurRol);
                 seSucursalNew = em.merge(seSucursalNew);
+            }
+            if (idRolesOld != null && !idRolesOld.equals(idRolesNew)) {
+                idRolesOld.getSeUsuarioSucurRolList().remove(seUsuarioSucurRol);
+                idRolesOld = em.merge(idRolesOld);
+            }
+            if (idRolesNew != null && !idRolesNew.equals(idRolesOld)) {
+                idRolesNew.getSeUsuarioSucurRolList().add(seUsuarioSucurRol);
+                idRolesNew = em.merge(idRolesNew);
             }
             if (idUsuarioOld != null && !idUsuarioOld.equals(idUsuarioNew)) {
                 idUsuarioOld.getSeUsuarioSucurRolList().remove(seUsuarioSucurRol);
@@ -167,15 +167,15 @@ public class SeUsuarioSucurRolJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The seUsuarioSucurRol with id " + id + " no longer exists.", enfe);
             }
-            SeRoles idRoles = seUsuarioSucurRol.getIdRoles();
-            if (idRoles != null) {
-                idRoles.getSeUsuarioSucurRolList().remove(seUsuarioSucurRol);
-                idRoles = em.merge(idRoles);
-            }
             SeSucursal seSucursal = seUsuarioSucurRol.getSeSucursal();
             if (seSucursal != null) {
                 seSucursal.getSeUsuarioSucurRolList().remove(seUsuarioSucurRol);
                 seSucursal = em.merge(seSucursal);
+            }
+            SeRoles idRoles = seUsuarioSucurRol.getIdRoles();
+            if (idRoles != null) {
+                idRoles.getSeUsuarioSucurRolList().remove(seUsuarioSucurRol);
+                idRoles = em.merge(idRoles);
             }
             SeUsuarios idUsuario = seUsuarioSucurRol.getIdUsuario();
             if (idUsuario != null) {

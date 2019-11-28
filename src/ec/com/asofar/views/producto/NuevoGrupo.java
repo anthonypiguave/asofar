@@ -190,7 +190,7 @@ public class NuevoGrupo extends javax.swing.JDialog {
 
                 obj.setNombre(txtGrupo.getText());
                 obj.setIdEmpresa(seEmpresa);
-                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
 

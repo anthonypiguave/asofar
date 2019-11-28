@@ -562,8 +562,8 @@ public class IngresarPersonas extends javax.swing.JDialog {
                     persona.setDireccion(txtDireccion.getText());
                     persona.setFechaActualizacion(fechaActual);
                     persona.setFechaCreacion(fechaActual);
-                    persona.setUsuarioCreacion(us1.getIdUsuario());
-                    persona.setUsuarioActualizacion(us1.getIdUsuario());
+                    persona.setUsuarioCreacion(us1.getUsuario());
+                    persona.setUsuarioActualizacion(us1.getUsuario());
                     SeTipoPersona tp = ObtenerDTO.ObtenerSeTipoPersona(cbTipoPersona.getSelectedItem().toString());
                     persona.setIdTipoPersona(tp);
 

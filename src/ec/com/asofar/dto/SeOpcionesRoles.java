@@ -42,7 +42,7 @@ public class SeOpcionesRoles implements Serializable {
     @EmbeddedId
     protected SeOpcionesRolesPK seOpcionesRolesPK;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @Column(name = "usuario_creacion")
     private String usuarioCreacion;
     @Column(name = "fecha_creacion")
@@ -79,11 +79,11 @@ public class SeOpcionesRoles implements Serializable {
         this.seOpcionesRolesPK = seOpcionesRolesPK;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

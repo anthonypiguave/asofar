@@ -363,8 +363,8 @@ public class cliente_editar extends javax.swing.JDialog {
         cliente.setNombreCompleto(nombreCompleto);
         cliente.setIdTipoIndentificacion(ti);
         cliente.setFechaActualizacion(fechaActual);
-        cliente.setUsuarioActualizacion(usu.getNombreUsuario());
-        System.out.println("usua "+usu.getNombreUsuario());
+        cliente.setUsuarioActualizacion(usu.getUsuario());
+        System.out.println("usua "+usu.getUsuario());
         cliente.setRazonSocial(txt_razon_social.getText());
         cliente.setEstado(cbx_estado.getSelectedItem().toString());
         try {

@@ -397,8 +397,8 @@ public class IngresarEmpresas extends javax.swing.JDialog {
                     empresa.setDireccion(txtDireccion.getText());
                     empresa.setFechaActualizacion(fechaActual);
                     empresa.setFechaCreacion(fechaActual);
-                    empresa.setUsuarioCreacion(us1.getIdUsuario());
-                    empresa.setUsuarioActualizacion(us1.getIdUsuario());
+                    empresa.setUsuarioCreacion(us1.getUsuario());
+                    empresa.setUsuarioActualizacion(us1.getUsuario());
 
                     empresaController.create(empresa);
                     JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");

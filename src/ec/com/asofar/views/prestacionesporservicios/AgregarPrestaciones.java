@@ -267,7 +267,7 @@ public class AgregarPrestaciones extends javax.swing.JDialog {
         objPresxServ.setEstado("A");
         objPresxServ.setEsFacturable(cbxfacturable.getSelectedItem().toString());
         objPresxServ.setAplicaDescuento(cbxaplicadescuento1.getSelectedItem().toString());
-        objPresxServ.setUsuarioCreacion(usu.getIdUsuario());
+        objPresxServ.setUsuarioCreacion(usu.getUsuario());
         objPresxServ.setFechaCreacion(fechaActual);
         try {
             pxs.create(objPresxServ);

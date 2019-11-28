@@ -950,8 +950,8 @@ public class Venta extends javax.swing.JInternalFrame {
                         + ListCedula.get(i).getSegundoApellido());
                 txtNombre.setText(ListCedula.get(i).getPrimerNombre());
                 txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
-                txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
-                txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
+//                txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
+//                txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
                 txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
                 txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
             }
@@ -970,8 +970,8 @@ public class Venta extends javax.swing.JInternalFrame {
                     + ListCedula.get(i).getSegundoApellido());
             txtNombre.setText(ListCedula.get(i).getPrimerNombre());
             txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
-            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
-            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
+//            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
+//            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
             txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
             txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
         }
@@ -1314,8 +1314,8 @@ public class Venta extends javax.swing.JInternalFrame {
                 cabFact.setTotalDescuento(VGTdescuento);
                 cabFact.setTotalFacturado(VGTtotal);
                 cabFact.setFechaFacturacion(d);
-                cabFact.setIdUsuario(usu.getIdUsuario());
-                cabFact.setUsuarioCreacion(usu.getIdUsuario());
+//                cabFact.setIdUsuario(usu.getIdUsuario());
+                cabFact.setUsuarioCreacion(usu.getUsuario());
                 cabFact.setFechaCreacion(d);
                 cabFact.setDespachado("SI");
                 try {
@@ -1336,7 +1336,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         detFact.setValorDescuento(listaDetFactura.get(i).getValorDescuento());
                         detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
                         detFact.setEstado("A");
-                        detFact.setUsuarioCreacion(usu.getIdUsuario());
+                        detFact.setUsuarioCreacion(usu.getUsuario());
                         detFact.setFechaCreacion(d);
 
                         detFactController.create(detFact);
@@ -1415,7 +1415,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
                         cabMovimiento.setEstado("F");
                         cabMovimiento.setFechaFactura(d);
-                        cabMovimiento.setUsuarioCreacion(usu.getIdUsuario());
+                        cabMovimiento.setUsuarioCreacion(usu.getUsuario());
                         cabMovimiento.setFechaCreacion(d);
 
                         pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
@@ -1435,7 +1435,7 @@ public class Venta extends javax.swing.JInternalFrame {
                             detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
                             detMovimiento.setEstado("A");
 
-                            detMovimiento.setUsuarioCreacion(usu.getNombreUsuario());
+                            detMovimiento.setUsuarioCreacion(usu.getUsuario());
                             detMovimiento.setFechaCreacion(d);
                             detMovController.create(detMovimiento);
                             limpiar();

@@ -235,7 +235,7 @@ public class ActualizarEmpaque extends javax.swing.JDialog {
             else {
 
             listEmpaq.setFechaActualizacion(d);
-            listEmpaq.setUsuarioActualizacion(usuario.getNombreUsuario());
+            listEmpaq.setUsuarioActualizacion(usuario.getUsuario());
             empcontrol.edit(listEmpaq);
             JOptionPane.showMessageDialog(null, "Nuevo empaque actualizado ");
             setVisible(false);

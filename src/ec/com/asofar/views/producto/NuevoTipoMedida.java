@@ -191,7 +191,7 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
             try {
                 
                 obj.setNombreTipoMedida(txtTipoMedida.getText());
-                obj.setUsuarioCreacion(seUsuario.getIdUsuario());
+                obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
                 

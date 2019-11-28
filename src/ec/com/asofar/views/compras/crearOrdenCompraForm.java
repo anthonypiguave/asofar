@@ -852,7 +852,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                 cabCompra.setEstado("P");
                                 cabCompra.setFechaEntrega(fecha);
 
-                                cabCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                cabCompra.setUsuarioCreacion(seUsuario.getUsuario());
                                 cabCompra.setFechaCreacion(d);
 
                                 cabCompra.setTotalSubtotal(TotalSubTotal);
@@ -885,7 +885,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                         detCompra.setSubtotal(listadetCompra.get(i).getSubtotal());
                                         detCompra.setTotal(listadetCompra.get(i).getTotal());
 
-                                        detCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                        detCompra.setUsuarioCreacion(seUsuario.getUsuario());
                                         detCompra.setFechaCreacion(d);
 
                                         detCompraController.create(detCompra);
@@ -894,7 +894,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                     CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
                                     cabOrden.setEstado("C");
-                                    cabOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                                    cabOrden.setUsuarioActualizacion(seUsuario.getUsuario());
                                     cabOrden.setFechaActualizacion(d);
 
                                     cabOrdenController.edit(cabOrden);
@@ -927,7 +927,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                     cabMovimiento.setIdOrdenCompra(BigInteger.valueOf(pkCompra.getCoOrdenComprasPK().getIdOrdenCompra()));
                                     cabMovimiento.setEstado("P");
 
-                                    cabMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                    cabMovimiento.setUsuarioCreacion(seUsuario.getUsuario());
                                     cabMovimiento.setFechaCreacion(d);
 
                                     pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
@@ -946,7 +946,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                         detMovimiento.setPrecioUnitario(listadetCompra.get(i).getPrecioUnitario());
                                         detMovimiento.setEstado("A");
 
-                                        detMovimiento.setUsuarioCreacion(seUsuario.getIdUsuario());
+                                        detMovimiento.setUsuarioCreacion(seUsuario.getUsuario());
                                         detMovimiento.setFechaCreacion(d);
 
                                         detMovController.create(detMovimiento);
@@ -993,7 +993,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             cabCompra.setEstado("I");
             cabCompra.setFechaEntrega(fecha);
 
-            cabCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+            cabCompra.setUsuarioCreacion(seUsuario.getUsuario());
             cabCompra.setFechaCreacion(d);
 
             cabCompra.setTotalSubtotal(TotalSubTotal);
@@ -1026,7 +1026,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                     detCompra.setSubtotal(listadetCompra.get(i).getSubtotal());
                     detCompra.setTotal(listadetCompra.get(i).getTotal());
 
-                    detCompra.setUsuarioCreacion(seUsuario.getIdUsuario());
+                    detCompra.setUsuarioCreacion(seUsuario.getUsuario());
                     detCompra.setFechaCreacion(d);
 
                     detCompraController.create(detCompra);
@@ -1035,7 +1035,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 CoOrdenPedidoJpaController cabOrdenController = new CoOrdenPedidoJpaController(EntityManagerUtil.ObtenerEntityManager());
 
                 cabOrden.setEstado("I");
-                cabOrden.setUsuarioActualizacion(seUsuario.getIdUsuario());
+                cabOrden.setUsuarioActualizacion(seUsuario.getUsuario());
                 cabOrden.setFechaActualizacion(d);
 
                 cabOrdenController.edit(cabOrden);

@@ -322,7 +322,7 @@ public class Localidad_agregar extends javax.swing.JDialog {
         localidadclientes.setIdProvincia(provincia);
         localidadclientes.setIdPais(pais);
         localidadclientes.setEstado("A");
-        localidadclientes.setUsuarioCreacion(usu.getNombreUsuario());
+        localidadclientes.setUsuarioCreacion(usu.getUsuario());
         localidadclientes.setFechaCreacion(fechaActual);
         try {
             Lc.create(localidadclientes);

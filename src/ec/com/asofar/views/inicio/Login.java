@@ -197,10 +197,10 @@ public class Login extends javax.swing.JDialog {
             SeUsuarios u = new SeUsuarios();
             ul = uc.findSeUsuariosEntities();
             for (int i = 0; i < ul.size(); i++) {
-                if (ul.get(i).getIdUsuario().equals(usuario)) {
+                if (ul.get(i).getUsuario().equals(usuario)) {
                     if (ul.get(i).getPassword().equals(dc)) {
                         setVisible(false);
-                        SelectEmpresaSucursal ses = new SelectEmpresaSucursal(new javax.swing.JFrame(), true, ul.get(i).getIdUsuario());
+                        SelectEmpresaSucursal ses = new SelectEmpresaSucursal(new javax.swing.JFrame(), true, ul.get(i));
                         entro = true;
                         ses.setVisible(true);
 

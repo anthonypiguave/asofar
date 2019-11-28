@@ -338,7 +338,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
             empresa.setCorreo(txtCorreo.getText());
             empresa.setDireccion(txtDireccion.getText());
             empresa.setFechaActualizacion(fechaActual);
-            empresa.setUsuarioActualizacion(us1.getIdUsuario());           
+            empresa.setUsuarioActualizacion(us1.getUsuario());           
             try {
                 empresaController.edit(empresa);
                 JOptionPane.showMessageDialog(null, "EMPRESA ACTUALIZADA");

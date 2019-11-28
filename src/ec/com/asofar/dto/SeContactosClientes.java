@@ -33,9 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SeContactosClientes.findAll", query = "SELECT s FROM SeContactosClientes s")
     , @NamedQuery(name = "SeContactosClientes.findByIdContactosClientes", query = "SELECT s FROM SeContactosClientes s WHERE s.idContactosClientes = :idContactosClientes")
     , @NamedQuery(name = "SeContactosClientes.findByNombre", query = "SELECT s FROM SeContactosClientes s WHERE s.nombre = :nombre")
-    , @NamedQuery(name = "SeContactosClientes.findByTelefono", query = "SELECT s FROM SeContactosClientes s WHERE s.telefono = :telefono")
-    , @NamedQuery(name = "SeContactosClientes.findByCelular", query = "SELECT s FROM SeContactosClientes s WHERE s.celular = :celular")
-    , @NamedQuery(name = "SeContactosClientes.findByEmail", query = "SELECT s FROM SeContactosClientes s WHERE s.email = :email")
     , @NamedQuery(name = "SeContactosClientes.findByEstado", query = "SELECT s FROM SeContactosClientes s WHERE s.estado = :estado")
     , @NamedQuery(name = "SeContactosClientes.findByUsuarioCreacion", query = "SELECT s FROM SeContactosClientes s WHERE s.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "SeContactosClientes.findByFechaCreacion", query = "SELECT s FROM SeContactosClientes s WHERE s.fechaCreacion = :fechaCreacion")
@@ -51,12 +48,6 @@ public class SeContactosClientes implements Serializable {
     private Long idContactosClientes;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "telefono")
-    private String telefono;
-    @Column(name = "celular")
-    private String celular;
-    @Column(name = "email")
-    private String email;
     @Column(name = "estado")
     private String estado;
     @Column(name = "usuario_creacion")
@@ -94,30 +85,6 @@ public class SeContactosClientes implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getEstado() {

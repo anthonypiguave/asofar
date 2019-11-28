@@ -199,7 +199,7 @@ public class caja_crear extends javax.swing.JDialog {
             } else {
                 vc.setNombre(txtNombre.getText());
                 vc.setEstado("A");
-                vc.setUsuarioCreacion(seUsuario.getIdUsuario());
+                vc.setUsuarioCreacion(seUsuario.getUsuario());
                 vc.setFechaCreacion(d);
                 vc.setFechaActualizacion(d);
                 try {
