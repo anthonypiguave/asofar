@@ -969,13 +969,13 @@ public class Venta extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < ListCedula.size(); i++) {
 
-//            System.out.println("cliente " + ListCedula.get(i).getNombreCompleto());
+      
             txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
                     + ListCedula.get(i).getSegundoApellido());
             txtNombre.setText(ListCedula.get(i).getPrimerNombre());
             txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
-//            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
-//            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
+            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getEmail());
+            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getTelefono());
             txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
             txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
         }

@@ -262,11 +262,15 @@ public class ConsultarCliente extends javax.swing.JDialog {
             objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
 
             if (objeto != null) {
+                
+                setVisible(false);
 
-                this.setVisible(false);
+                EditarCliente dialog = new EditarCliente(new javax.swing.JFrame(), true, objeto, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
 
             }
         }
+
     }//GEN-LAST:event_tablaMousePressed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
