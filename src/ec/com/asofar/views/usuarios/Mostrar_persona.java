@@ -207,6 +207,9 @@ public class Mostrar_persona extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
    
+    
+    
+    
 
     private void jtPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMouseClicked
         // TODO add your handling code here:

@@ -1295,10 +1295,10 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tba_detalleKeyReleased
 
     private void btn_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VentaActionPerformed
-        if ("".equals(txtIdentificacion.getText().toString())) {
-            if ("0.0".equals(txtTotal.getText().toString())) {
-                JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
-            }
+
+        System.out.println("*********" + txtTotal.getText().toString()+"******");
+        if ("0.0".equals(txtTotal.getText().toString())) {
+            JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
         } else {
             int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
