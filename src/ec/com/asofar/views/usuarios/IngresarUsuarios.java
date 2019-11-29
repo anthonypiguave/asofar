@@ -7,6 +7,7 @@ package ec.com.asofar.views.usuarios;
 
 import ec.com.asofar.dao.SePersonasJpaController;
 import ec.com.asofar.dao.SeRolesJpaController;
+import ec.com.asofar.dao.SeSucursalJpaController;
 import ec.com.asofar.dao.SeUsuarioSucurRolJpaController;
 import ec.com.asofar.dao.SeUsuariosJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
@@ -43,6 +44,9 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
     SeUsuarioSucurRolJpaController usrc
             = new SeUsuarioSucurRolJpaController(EntityManagerUtil.ObtenerEntityManager());
+    
+    SeSucursalJpaController sucur 
+            = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     private Date fecha1 = null;
     SeUsuarios us1;
@@ -55,6 +59,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
     AES aes = new AES();
 
     List<SeRoles> rol;
+    List<SeSucursal> suc;
 
     public IngresarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -78,7 +83,8 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         rol = mn.findSeRolesEntities();
         llenarCombo(rol);
-
+        suc = sucur.findSeSucursalEntities();
+        llenarCombosuc(suc);
     }
 
     @SuppressWarnings("unchecked")
@@ -102,6 +108,9 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         txtClave = new javax.swing.JPasswordField();
         txtClaveConfirm = new javax.swing.JPasswordField();
         cbRol = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cbSucursal = new javax.swing.JComboBox<>();
         btnSalir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
 
@@ -199,6 +208,10 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
         txtClaveConfirm.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
+        jLabel6.setText("ROL:");
+
+        jLabel7.setText("SUCURSAL:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,11 +236,15 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                             .addComponent(txtClave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtClaveConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(cbSucursal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotonFecha)
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -261,7 +278,13 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(cbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -296,7 +319,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(45, 45, 45)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,13 +328,13 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -330,9 +353,19 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 public void llenarCombo(List<SeRoles> TiBo) {
         cbRol.addItem("SELECCIONE...");
         for (int i = 0; i < TiBo.size(); i++) {
-            if (!"I".equals(TiBo.get(i).getEstado())) {
+            if (!"I".equals(TiBo.get(i).getEstado()) && !"SUPERADMIN".equals(TiBo.get(i).getNombre())) {
 
                 cbRol.addItem(TiBo.get(i).getNombre());
+            }
+        }
+    }
+
+public void llenarCombosuc(List<SeSucursal> TiBo) {
+        cbSucursal.addItem("SELECCIONE...");
+        for (int i = 0; i < TiBo.size(); i++) {
+            if (!"I".equals(TiBo.get(i).getEstado())) {
+
+                cbSucursal.addItem(TiBo.get(i).getNombreComercial());
             }
         }
     }
@@ -474,6 +507,7 @@ public void llenarCombo(List<SeRoles> TiBo) {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbRol;
+    private javax.swing.JComboBox<String> cbSucursal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -481,6 +515,8 @@ public void llenarCombo(List<SeRoles> TiBo) {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtCell;

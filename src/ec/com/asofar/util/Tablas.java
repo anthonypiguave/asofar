@@ -686,7 +686,7 @@ public class Tablas {
 
     }
 
-    public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla) {
+    public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla,SeSucursal suc) {
         int[] a ={5, 5, 5};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
@@ -699,7 +699,9 @@ public class Tablas {
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getEstado().equals("A")) {
+//            System.out.println("sucursal: "+lista.get(i).getSeUsuarioSucurRolList().get(0));
+//            System.out.println("suc:"+suc);
+            if ((lista.get(i).getEstado().equals("A") && lista.get(i).getSeUsuarioSucurRolList().get(0).getSeSucursal().equals(suc))) {
                 Filas[0] = "" + lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getUsuario();
                 Filas[2] = lista.get(i).getIdPersona().getCorreo();

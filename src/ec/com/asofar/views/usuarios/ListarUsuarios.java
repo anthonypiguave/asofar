@@ -28,9 +28,9 @@ public class ListarUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        usuario_lista
-                = usuario_controller.findSeUsuariosEntities();
-        Tablas.listarUsuarios(usuario_lista, jtPersonas);
+//        usuario_lista
+//                = usuario_controller.findSeUsuariosEntities();
+//        Tablas.listarUsuarios(usuario_lista, jtPersonas,su1);
 
     }
 
@@ -45,7 +45,7 @@ public class ListarUsuarios extends javax.swing.JDialog {
                 = usuario_controller.findSeUsuariosEntities();
 
         System.out.println("ffffff  " + usuario_lista.get(0).getUsuario() + "  " + usuario_lista.get(0).getFechaCreacion());
-        Tablas.listarUsuarios(usuario_lista, jtPersonas);
+        Tablas.listarUsuarios(usuario_lista, jtPersonas,su1);
 
     }
 
