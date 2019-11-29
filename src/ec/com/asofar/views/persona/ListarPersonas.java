@@ -42,8 +42,7 @@ public class ListarPersonas extends javax.swing.JDialog {
         us1 = us;
         em1 = em;
         su1= su;
-        lista_persona
-                = persona_controller.findSePersonasEntities();
+        lista_persona = persona_controller.findSePersonasEntities();
         Tablas.listarPersonas(lista_persona, jtPersonas);
 
     }

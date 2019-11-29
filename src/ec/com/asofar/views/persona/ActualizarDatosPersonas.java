@@ -78,7 +78,7 @@ public class ActualizarDatosPersonas extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            persona1.setEstado('I');
+            persona1.setEstado("I");
             try {
                 mp.edit(persona1);
                 JOptionPane.showMessageDialog(null, "PERSONA ELIMINADA");

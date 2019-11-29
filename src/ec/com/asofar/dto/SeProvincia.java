@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SeProvincia.findAll", query = "SELECT s FROM SeProvincia s")
     , @NamedQuery(name = "SeProvincia.findByIdProvincia", query = "SELECT s FROM SeProvincia s WHERE s.idProvincia = :idProvincia")
-    , @NamedQuery(name = "SeProvincia.findByNombre", query = "SELECT s FROM SeProvincia s WHERE s.nombre = :nombre")})
+    , @NamedQuery(name = "SeProvincia.findByNombre", query = "SELECT s FROM SeProvincia s WHERE s.nombre = :nombre")
+    , @NamedQuery(name = "SeProvincia.findByEstado", query = "SELECT s FROM SeProvincia s WHERE s.estado = :estado")})
 public class SeProvincia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +46,8 @@ public class SeProvincia implements Serializable {
     @Basic(optional = false)
     @Column(name = "Nombre")
     private String nombre;
+    @Column(name = "estado")
+    private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProvincia")
     private List<SeCiudad> seCiudadList;
     @JoinColumn(name = "id_Pais", referencedColumnName = "id_Pais")
@@ -79,6 +82,14 @@ public class SeProvincia implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @XmlTransient

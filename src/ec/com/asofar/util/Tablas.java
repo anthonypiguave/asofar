@@ -662,7 +662,7 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
 
-            if (lista.get(i).getEstado().equals('A')) {
+            if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getCedula();
                 Filas[1] = lista.get(i).getNombres();
                 Filas[2] = lista.get(i).getApellidos();
@@ -3473,14 +3473,14 @@ public class Tablas {
     }
     
      public static void ListarClientesConsulta(List<SeClientes> lista, JTable Tabla) {
-        int[] a = {60, 400};
+        int[] a = {60,200, 400,};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "CLIENTE"};
-        String[] filas = new String[2];
+        String[] b = {"COD.","N. IDENTIFICACION" ,"CLIENTE"};
+        String[] filas = new String[3];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
 
@@ -3488,7 +3488,8 @@ public class Tablas {
 
             if (lista.get(i).getEstado().equals("A")) {
                 filas[0] = "" + lista.get(i).getIdClientes();
-                filas[1] = lista.get(i).getNombreCompleto();
+                filas[1] = lista.get(i).getNumeroIdentificacion();
+                filas[2] = lista.get(i).getNombreCompleto();
 
                 model.addRow(filas);
                 Tabla.setModel(model);
@@ -3497,6 +3498,8 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr2);
 
             }
 

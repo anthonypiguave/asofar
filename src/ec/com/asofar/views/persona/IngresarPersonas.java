@@ -558,7 +558,7 @@ public class IngresarPersonas extends javax.swing.JDialog {
                     persona.setTelefono2(txtConven.getText());
                     persona.setCorreo(txtCorreo.getText());
                     persona.setFechaNacimiento(fecha1);
-                    persona.setEstado('A');
+                    persona.setEstado("A");
                     persona.setDireccion(txtDireccion.getText());
                     persona.setFechaActualizacion(fechaActual);
                     persona.setFechaCreacion(fechaActual);

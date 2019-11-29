@@ -35,7 +35,7 @@ public class ValidacionCaja {
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getFechaCierre() == null
                     && Character.valueOf('A').equals(lista.get(i).getEstado())
-                    && lista.get(i).getIdUsuario() == su.getUsuario()
+                    && lista.get(i).getIdUsuario().longValue() == su.getIdUsuario()
                     && lista.get(i).getVeCaja().getIdCaja() == caja.getIdCaja()) {
                 valor = false;
                 System.out.println("hola viejo que hay");

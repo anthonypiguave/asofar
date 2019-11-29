@@ -46,7 +46,7 @@ public class VeDetalleCaja implements Serializable {
     @EmbeddedId
     protected VeDetalleCajaPK veDetalleCajaPK;
     @Column(name = "id_usuario")
-    private String idUsuario;
+    private BigInteger idUsuario;
     @Column(name = "fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
@@ -91,11 +91,11 @@ public class VeDetalleCaja implements Serializable {
         this.veDetalleCajaPK = veDetalleCajaPK;
     }
 
-    public String getIdUsuario() {
+    public BigInteger getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(BigInteger idUsuario) {
         this.idUsuario = idUsuario;
     }
 

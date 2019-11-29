@@ -17,6 +17,7 @@ import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -48,11 +49,11 @@ public class Apertura_Caja extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        CargarCajas();
         seUsuario = se;
         seEmpresa = em;
         seSucursal = su;
         montocierre.setEditable(false);
+        CargarCajas();
     }
 
     public void CargarCajas() {
@@ -260,7 +261,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
                     dc.setFechaInicio(d_fecha);
                     dc.setHoraInicio(new java.sql.Time(d_hora.getTime()));
                     dc.setEstado("A");
-                    dc.setIdUsuario(seUsuario.getUsuario());
+                    dc.setIdUsuario(BigInteger.valueOf(seUsuario.getIdUsuario()));
                     dc.setVeCaja(veCaja);
                     if (ValidacionCaja.ValidacionApertura(veCaja, seUsuario) == true) {
                         cajadet.create(dc);
@@ -288,8 +289,8 @@ public class Apertura_Caja extends javax.swing.JDialog {
     public void buscador(VeCaja caja) {
         List<VeDetalleCaja> listadetallecaja = cajadet.findVeDetalleCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
-            if ("A".equals(listadetallecaja.get(i).getEstado())
-                    && listadetallecaja.get(i).getIdUsuario().equals(seUsuario.getIdUsuario())
+            if (listadetallecaja.get(i).getEstado().equals("A")
+                    && listadetallecaja.get(i).getIdUsuario().longValue() == seUsuario.getIdUsuario()
                     && listadetallecaja.get(i).getVeCaja().getIdCaja() == caja.getIdCaja()
                     && listadetallecaja.get(i).getFechaCierre() == null) {
                 System.out.println("hola ");

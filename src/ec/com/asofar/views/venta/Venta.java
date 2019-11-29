@@ -178,8 +178,8 @@ public class Venta extends javax.swing.JInternalFrame {
         usu = us;
         emp = em;
         suc = su;
-        cargartxt();
         pVender();
+        cargartxt();
         consFinal();
 
     }
@@ -301,8 +301,8 @@ public class Venta extends javax.swing.JInternalFrame {
         List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
         List<VeCaja> listaCaja = cajaC.findVeCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
-            if ("A".equals(listadetallecaja.get(i).getEstado())
-                    && listadetallecaja.get(i).getIdUsuario().equals(usu.getIdUsuario())
+            if (listadetallecaja.get(i).getEstado().equals("A")
+                    && listadetallecaja.get(i).getIdUsuario().longValue() == usu.getIdUsuario()
                     && listadetallecaja.get(i).getFechaCierre() == null
                     && listadetallecaja.get(i).getHoraCierre() == null) {
                 v = "si";

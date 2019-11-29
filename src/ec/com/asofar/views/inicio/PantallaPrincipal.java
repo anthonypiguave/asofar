@@ -26,6 +26,7 @@ import java.awt.PopupMenu;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.util.EventListener;
 import java.util.List;
 import javax.swing.JButton;
@@ -78,7 +79,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         us1 = us;
         em1 = em;
         su1 = su;
-        
 
         lista = cSubgrupos.ObtenerMenu(us);
         cargarMenu(lista);
@@ -131,7 +131,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
                                                 String permiso = pVender();
-                                                if (permiso=="no") {
+                                                if (permiso.equals("no")) {
                                                     JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
                                                 } else {
 
@@ -170,10 +170,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     public String pVender() {
         String v = null;
         List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
-        List<VeCaja> listaCaja = cajaC.findVeCajaEntities();
+//        List<VeCaja> listaCaja = cajaC.findVeCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
-            if ("A".equals(listadetallecaja.get(i).getEstado())
-                    && listadetallecaja.get(i).getIdUsuario().equals(us1.getIdUsuario())
+            if (listadetallecaja.get(i).getEstado().equals("A")
+                    && listadetallecaja.get(i).getIdUsuario().longValue() == us1.getIdUsuario()
                     && listadetallecaja.get(i).getFechaCierre() == null
                     && listadetallecaja.get(i).getHoraCierre() == null) {
                 v = "si";

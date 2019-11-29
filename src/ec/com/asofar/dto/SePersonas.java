@@ -84,7 +84,7 @@ public class SePersonas implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne
     private SeTipoPersona idTipoPersona;
@@ -202,11 +202,11 @@ public class SePersonas implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

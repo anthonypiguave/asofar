@@ -16,7 +16,6 @@ import ec.com.asofar.util.Documento;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.Date;
 import java.text.DateFormat;
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +63,8 @@ public class ContenedorCaja extends javax.swing.JDialog {
         VeDetalleCajaEXT v = new VeDetalleCajaEXT(EntityManagerUtil.ObtenerEntityManager());
         List<VeDetalleCaja> listadetallecaja = cajadet.findVeDetalleCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
-            if ("A".equals(listadetallecaja.get(i).getEstado())
-                    && listadetallecaja.get(i).getIdUsuario().equals(seUsuario.getIdUsuario())
+            if (listadetallecaja.get(i).getEstado().equals("A")
+                    && listadetallecaja.get(i).getIdUsuario().longValue() == seUsuario.getIdUsuario()
                     && listadetallecaja.get(i).getFechaCierre() == null
                     && listadetallecaja.get(i).getHoraCierre() == null) {
                 btnAperturaCaja.setEnabled(false);
