@@ -152,7 +152,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
     List<JoinProductoVenta> ListProdVent2 = null;
     JoinProductoVentaExt selectProdVent2 = new JoinProductoVentaExt();
-    SeClientes Clientesss = null;
+    SeClientes Clientes = null;
 
     List<SeContactosClientes> ContactoCliente;
     SeContactosClientesJpaController Ccl = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -934,33 +934,36 @@ public class Venta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtIdentificacionKeyTyped
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-//        CargarCliente2();
 
-        ClienteVenta ingre = new ClienteVenta(new javax.swing.JFrame(), true, usu, emp, suc);
+        ConsultarClienteVenta ingre = new ConsultarClienteVenta(new javax.swing.JFrame(), true, usu, emp, suc);
         ingre.setVisible(true);
-        Clientesss = ingre.getCliente();
-//        Long idCliente = Clientesss.getIdClientes();
+        Clientes = ingre.getObjeto();
+
         try {
 
-            String cedula = Clientesss.getNumeroIdentificacion().toString();
+            String cedula = Clientes.getNumeroIdentificacion().toString();
             ListCedula = selectCliente.obtenerClienteVenta(cedula);
 
-            for (int i = 0; i < ListCedula.size(); i++) {
+            SeLocalidadCliente localidad = new SeLocalidadCliente();
 
-                txtIdentificacion.setText(ListCedula.get(i).getNumeroIdentificacion());
-                txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
-                        + ListCedula.get(i).getSegundoApellido());
-                txtNombre.setText(ListCedula.get(i).getPrimerNombre());
-                txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
-//                txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getEmail());
-//                txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getSeContactosClientesList().get(i).getCelular());
-                txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
-                txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
-            }
+            localidad = Clientes.getSeLocalidadClienteList().get(0);
+
+            txtIdentificacion.setText(Clientes.getNumeroIdentificacion());
+            txtApellido.setText(Clientes.getPrimerApellido() + " "
+                    + Clientes.getSegundoApellido());
+            txtNombre.setText(Clientes.getPrimerNombre());
+            txt_idCliente.setText(Clientes.getIdClientes().toString());
+            txtEmail.setText(localidad.getEmail());
+            txtTelefono.setText(localidad.getTelefono());
+            txtDireccion.setText(localidad.getDirreccionCliente());
+            txtTipoIdent.setText(Clientes.getIdTipoIndentificacion().getNombreIdentificacion());
+//            }
         } catch (Exception e) {
             Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnbuscarActionPerformed
+    
+    
     public void CargarCliente2() {
         String cedula = txtIdentificacion.getText();
         ListCedula = selectCliente.obtenerClienteVenta(cedula);
@@ -1300,7 +1303,7 @@ public class Venta extends javax.swing.JInternalFrame {
         } else {
             int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
-                
+
                 guardarKardex2(listaDetFactura);
                 limpiar();
                 VeFactura cabFact = new VeFactura();
@@ -1353,7 +1356,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
                     System.out.println(printerService.getPrinters());
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
-                    printerService.printString("EPSON-TM-T20II", " *     FARMACIA "+empresa+" "+sucursal+"    *\n");
+                    printerService.printString("EPSON-TM-T20II", " *     FARMACIA " + empresa + " " + sucursal + "    *\n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "         Direccion: " + direccion + "\n");
                     printerService.printString("EPSON-TM-T20II", "               RUC: " + ruc + "\n");
@@ -1369,7 +1372,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "Producto             Cant Valor Subt Total\n");
                     for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-                        printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i,2).toString().substring(0,22).replaceAll("\n","") + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                        printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString().substring(0, 22).replaceAll("\n", "") + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
                     }
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: " + txtSubtotal.getText() + "\n");
