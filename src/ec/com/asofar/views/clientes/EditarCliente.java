@@ -37,7 +37,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin
  */
-public class NuevoCliente extends javax.swing.JDialog {
+public class EditarCliente extends javax.swing.JDialog {
 
     int x, y;
     SeUsuarios seUsuario;
@@ -68,14 +68,14 @@ public class NuevoCliente extends javax.swing.JDialog {
     SeTipoIdentificacionJpaController tipoIdentificacionController = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeContactosClientesJpaController contactosClientesController = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-    public NuevoCliente(java.awt.Frame parent, boolean modal) {
+    public EditarCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
 
     }
 
-    public NuevoCliente(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public EditarCliente(java.awt.Frame parent, boolean modal, SeClientes objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         this.setUndecorated(true);
         initComponents();
@@ -84,8 +84,8 @@ public class NuevoCliente extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-        txtTipoIdentificacion.setText("Seleccione una Opcion..");
-        txtPais.setText("Seleccione una Opcion..");
+        cliente = objeto;
+        CargarFormulario();
 
     }
 
@@ -349,7 +349,7 @@ public class NuevoCliente extends javax.swing.JDialog {
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(254, 254, 254));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("NUEVO CLIENTE");
+        jLabel17.setText("EDITAR CLIENTE");
         jLabel17.setOpaque(true);
         jLabel17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -366,7 +366,7 @@ public class NuevoCliente extends javax.swing.JDialog {
         btnCrear.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnCrear.setForeground(new java.awt.Color(1, 1, 1));
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
-        btnCrear.setText("CREAR");
+        btnCrear.setText("ACTUALIZAR");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -390,7 +390,7 @@ public class NuevoCliente extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(287, 287, 287))
@@ -426,6 +426,35 @@ public class NuevoCliente extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CargarFormulario() {
+        CargarTipoIndentificacionLocalidadContactoPaisProvinciaCiudad();
+
+        txtApellido.setText(cliente.getPrimerApellido() + " " + cliente.getSegundoApellido());
+        txtNombre.setText(cliente.getPrimerNombre() + " " + cliente.getSegundoNombre());
+        txtNCedula.setText(cliente.getNumeroIdentificacion());
+        txtRazonSocial.setText(cliente.getRazonSocial());
+        txtTipoIdentificacion.setText(cliente.getIdTipoIndentificacion().getNombreIdentificacion());
+
+        txtTelefono.setText(localidadCliente.getTelefono());
+        txtMovil.setText(localidadCliente.getCelular());
+        txtEmail.setText(localidadCliente.getEmail());
+        txtPais.setText(pais.getNombre());
+        txtProvincia.setText(provincia.getNombre());
+        txtCiudad.setText(ciudad.getNombre());
+        txtDireccion.setText(localidadCliente.getDirreccionCliente());
+        txtDireccionEntrega.setText(localidadCliente.getDirreccionEntrega());
+    }
+
+    private void CargarTipoIndentificacionLocalidadContactoPaisProvinciaCiudad() {
+        localidadCliente = cliente.getSeLocalidadClienteList().get(0);
+        contactosClientes = localidadCliente.getSeContactosClientesList().get(0);
+        pais = localidadCliente.getIdPais();
+        provincia = localidadCliente.getIdProvincia();
+        ciudad = localidadCliente.getIdCiudad();
+        tipoIndentificacion = cliente.getIdTipoIndentificacion();
+        
+    }
 
     private void ArmarCadenaUsuario() {
 
@@ -520,81 +549,53 @@ public class NuevoCliente extends javax.swing.JDialog {
                                                             JOptionPane.showMessageDialog(null, "falta Direccion Entrega!");
                                                         } else {
                                                             try {
+                                                                ArmarCadenaUsuario();
+                                                                
                                                                 cliente.setIdTipoIndentificacion(tipoIndentificacion);
                                                                 cliente.setNumeroIdentificacion(txtNCedula.getText());
-                                                                ArmarCadenaUsuario();
+             
                                                                 cliente.setRazonSocial(txtRazonSocial.getText());
                                                                 cliente.setEstado("A");
-                                                                cliente.setUsuarioCreacion(seUsuario.getUsuario());
-                                                                cliente.setFechaCreacion(d);
+                                                                cliente.setUsuarioActualizacion(seUsuario.getUsuario());
+                                                                cliente.setFechaActualizacion(d);
 
-                                                                clienteController.create(cliente);
+                                                                clienteController.edit(cliente);
 
                                                                 ////////////////////////////////////////////////
-                                                                SeClientes clienteObjeto = new SeClientes();
-
-                                                                lista = new ArrayList<SeClientes>();
-
-                                                                lista = clienteController.findSeClientesEntities();
-
-                                                                for (int i = 0; i < lista.size(); i++) {
-
-                                                                    if (lista.get(i).getNumeroIdentificacion().equals(cliente.getNumeroIdentificacion())) {
-
-                                                                        clienteObjeto = lista.get(i);
-
-                                                                    }
-
-                                                                }
-
+                                                          
                                                                 localidadCliente.setCelular(txtMovil.getText());
                                                                 localidadCliente.setTelefono(txtTelefono.getText());
                                                                 localidadCliente.setDirreccionCliente(txtDireccion.getText());
                                                                 localidadCliente.setDirreccionEntrega(txtDireccionEntrega.getText());
                                                                 localidadCliente.setEmail(txtEmail.getText());
-                                                                localidadCliente.setIdCliente(clienteObjeto);
-
+                                                                
                                                                 localidadCliente.setIdPais(pais);
                                                                 localidadCliente.setIdProvincia(provincia);
                                                                 localidadCliente.setIdCiudad(ciudad);
 
                                                                 localidadCliente.setEstado("A");
-                                                                localidadCliente.setUsuarioCreacion(seUsuario.getUsuario());
-                                                                localidadCliente.setFechaCreacion(d);
+                                                                localidadCliente.setUsuarioActualizacion(seUsuario.getUsuario());
+                                                                localidadCliente.setFechaActualizacion(d);
 
-                                                                localidadClienteController.create(localidadCliente);
+                                                                localidadClienteController.edit(localidadCliente);
 
                                                                 //////////////////////////////////////
-                                                                SeLocalidadCliente localidadClienteObjeto = new SeLocalidadCliente();
+          
 
-                                                                lista1 = new ArrayList<SeLocalidadCliente>();
-                                                                lista1 = localidadClienteController.findSeLocalidadClienteEntities();
-
-                                                                for (int i = 0; i < lista1.size(); i++) {
-
-                                                                    if (lista1.get(i).getIdCliente().equals(localidadCliente.getIdCliente())) {
-
-                                                                        localidadClienteObjeto = lista1.get(i);
-
-                                                                    }
-
-                                                                }
-
-                                                                contactosClientes.setIdLocalidad(localidadClienteObjeto);
                                                                 contactosClientes.setNombre("PROPIO");
 
                                                                 contactosClientes.setEstado("A");
-                                                                contactosClientes.setUsuarioCreacion(seUsuario.getUsuario());
-                                                                contactosClientes.setFechaCreacion(d);
+                                                                contactosClientes.setUsuarioActualizacion(seUsuario.getUsuario());
+                                                                contactosClientes.setFechaActualizacion(d);
 
-                                                                contactosClientesController.create(contactosClientes);
+                                                                contactosClientesController.edit(contactosClientes);
 
                                                                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                                                                 setVisible(false);
 
                                                             } catch (Exception e) {
 
-                                                                Logger.getLogger(NuevoCliente.class.getName()).log(Level.SEVERE, null, e);
+                                                                Logger.getLogger(EditarCliente.class.getName()).log(Level.SEVERE, null, e);
 
                                                             }
 
@@ -762,21 +763,24 @@ public class NuevoCliente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(EditarCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(EditarCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(EditarCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(EditarCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -785,7 +789,7 @@ public class NuevoCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoCliente dialog = new NuevoCliente(new javax.swing.JFrame(), true);
+                EditarCliente dialog = new EditarCliente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
