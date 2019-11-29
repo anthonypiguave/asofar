@@ -699,7 +699,7 @@ public class NuevoCliente extends javax.swing.JDialog {
         int i = 0;
         String msg = null;
         if (evt.getClickCount() == 2) {
-
+            System.out.println("************cuiusdiucs");
             try {
                 ConsultarCiudad dialog = new ConsultarCiudad(new javax.swing.JFrame(), true, provincia, seUsuario, seEmpresa, seSucursal);
                 dialog.setVisible(true);
@@ -711,7 +711,6 @@ public class NuevoCliente extends javax.swing.JDialog {
                     txtCiudad.setText(ciudad.getNombre());
 
                 }
-
             } catch (Exception e) {
 
             }
