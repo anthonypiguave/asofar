@@ -210,13 +210,15 @@ public class ConsultarCiudad extends javax.swing.JDialog {
         tabla.setRowSorter(null); // quitar el filtro
 
         lista = new ArrayList<SeCiudad>();
-        lista = cont.findSeCiudadEntities();
         list = new ArrayList<SeCiudad>();
+        lista = cont.findSeCiudadEntities();
+        
 
         for (int i = 0; i < lista.size(); i++) {
-
+//            System.out.println("88**");
             if (lista.get(i).getIdProvincia().getIdProvincia() == provincia.getIdProvincia()) {
                 list.add(lista.get(i));
+//                System.out.println("lista"+list.get(i).getNombre());
             }
 
         }
