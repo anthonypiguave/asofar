@@ -67,7 +67,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         suc = su;
 
         txt_valor_costo.setEditable(false);
-        
+
         cargar();
 
     }
@@ -83,7 +83,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         txtUnidadServicio = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnAgrgarPrestacion = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtidtarifario = new javax.swing.JTextField();
@@ -104,7 +104,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPrestacion = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         btnGrabar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -115,11 +115,11 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
         txtUnidadServicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jButton2.setText("+");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAgrgarPrestacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        btnAgrgarPrestacion.setText("+");
+        btnAgrgarPrestacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAgrgarPrestacionActionPerformed(evt);
             }
         });
 
@@ -276,14 +276,14 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(254, 254, 254));
-        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(1, 1, 1));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
-        jButton3.setText("SALIR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(254, 254, 254));
+        btnSalir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(1, 1, 1));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -319,7 +319,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton2))
+                                    .addComponent(btnAgrgarPrestacion))
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel3)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -332,7 +332,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(154, 154, 154)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -347,7 +347,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addGap(18, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton2))
+                    .addComponent(btnAgrgarPrestacion))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -361,7 +361,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
@@ -378,6 +378,13 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void CalcularValorMinimo() {
+        double porcentajeMinVenta = Double.parseDouble(txt_valor_min_porcentaje.getText());
+        double valorCosto = Double.parseDouble(txt_valor_costo.getText());
+        double valor = ((valorCosto * porcentajeMinVenta) / 100) + valorCosto;
+        txt_valor_min.setText(String.valueOf(valor));
+    }
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
 
@@ -402,26 +409,16 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
         PrDetalleTarifario pre = new PrDetalleTarifario();
 
-//        ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
-//        objpres = cp.obtener89();
-/////enviar el detalle tarifario a I donde la pretacion sea igua a la prestacion
-        //que envias y el estado sea A
         PrTarifarioPK prTarifarioPK = new PrTarifarioPK();
         prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
         prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
         prTarifarioPK.setIdTarifario(tp.getPrTarifarioPK().getIdTarifario());
-//        prTarifarioPK.setIdTarifario(Long.valueOf(txtidtarifario.getText()));
-        //setear compuestas
+
         PrTarifario prTarifario = new PrTarifario();
         prTarifario.setPrTarifarioPK(prTarifarioPK);
         pre.setPrTarifario(prTarifario);
-        /*
-        valor_costo
-        valor_min_venta
-        valor_ventavalor_descuento
-         */
+
         pre.setValorCosto(Double.parseDouble(txt_valor_costo.getText().toString()));
-//        pre.setValorMinVenta(Double.parseDouble(txt_valor_min.getText()));
         pre.setValorDescuento(Double.parseDouble(txtDescuent_valor.getText()));
         pre.setValorVenta(Double.parseDouble(txt_valor_venta.getText()));
         pre.setEstado("A");
@@ -432,9 +429,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         try {
 
             prp.create(pre);
-//            op.create(pr);
 
-//            prp.create(pre);
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception e) {
@@ -444,7 +439,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnGrabarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAgrgarPrestacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgrgarPrestacionActionPerformed
         ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
         cp.setVisible(true);
         objpres = cp.getObjeto();
@@ -455,7 +450,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         InKardex objetoKardex = kardexExt.obtenerUltimoProductoKardex(objpres.getPrPrestaciones().getIdPoducto().longValue());
         txt_valor_costo.setText(String.format("%.2f", objetoKardex.getCostoPromedio()).replace(",", "."));
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAgrgarPrestacionActionPerformed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         x = evt.getX();
@@ -467,12 +462,12 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel2MouseDragged
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
 
         setVisible(false);
 
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txt_valor_ventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_ventaKeyTyped
         char c = evt.getKeyChar();
@@ -522,7 +517,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_porcentajeKeyReleased
 
     private void txt_valor_min_porcentajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_min_porcentajeKeyTyped
-        // TODO add your handling code here:
+        CalcularValorMinimo();
     }//GEN-LAST:event_txt_valor_min_porcentajeKeyTyped
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getDescripcion()));
@@ -596,9 +591,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgrgarPrestacion;
     private javax.swing.JButton btnGrabar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
