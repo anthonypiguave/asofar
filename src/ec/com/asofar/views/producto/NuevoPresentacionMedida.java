@@ -64,6 +64,8 @@ public class NuevoPresentacionMedida extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
+        txtTipoMedida.setEditable(false);
+        txtTipoPresentacion.setEditable(false);
 
     }
 
