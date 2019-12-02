@@ -6,8 +6,6 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.dao.InBodegaJpaController;
-import ec.com.asofar.dao.InTipoDocumentoJpaController;
-import ec.com.asofar.dao.PrPrestacionesJpaController;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ProductoCadena;
@@ -20,7 +18,6 @@ import ec.com.asofar.dto.CoDetItemsCotizacion;
 import ec.com.asofar.dto.CoDetalleCotizacionPorProveedor;
 import ec.com.asofar.dto.CoDetalleOrdenCompra;
 import ec.com.asofar.dto.CoDetalleOrdenPedido;
-import ec.com.asofar.dto.CoDetallesTarifa;
 import ec.com.asofar.dto.CoItemsCotizacion;
 import ec.com.asofar.dto.CoOrdenCompras;
 import ec.com.asofar.dto.CoOrdenPedido;
@@ -43,7 +40,6 @@ import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTarifario;
-import ec.com.asofar.dto.PrTarifarioPK;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.PrTipoPresentacion;
 import ec.com.asofar.dto.SeCiudad;
@@ -60,9 +56,7 @@ import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeUnidadServicio;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.TextArea;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
@@ -72,16 +66,13 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
@@ -686,8 +677,8 @@ public class Tablas {
 
     }
 
-    public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla,SeSucursal suc) {
-        int[] a ={5, 5, 5};
+    public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla, SeSucursal suc) {
+        int[] a = {5, 5, 5};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1837,7 +1828,7 @@ public class Tablas {
         String[] b = {"NOMBRE DE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "FACTURABLE", "APLICA DESCUENTO"};
         String[] filas = new String[5];
         model = new DefaultTableModel(null, b);
-        
+
         Tabla.setShowGrid(true);
         for (int i = 0; i < listapresporserv.size(); i++) {
 //            filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
@@ -1849,7 +1840,7 @@ public class Tablas {
             filas[4] = listapresporserv.get(i).getAplicaDescuento();
             model.addRow(filas);
             Tabla.setModel(model);
-            Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);            
+            Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
             Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
@@ -2409,7 +2400,7 @@ public class Tablas {
     }
 
     public static void listarDetalleRecepcion(List<InDetalleMovimiento> lista, JTable tabla, String[] nLote, String[] fecha) {
-        int[] a = {10, 30, 200, 30, 50, 30, 40, 100, 30};
+        int[] a = {60, 150, 600, 150, 150, 150, 150, 200, 100};
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2486,6 +2477,9 @@ public class Tablas {
 
         tabla.setModel(dt);
         tabla.setRowHeight(24);
+
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
         tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
         tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
@@ -2862,15 +2856,15 @@ public class Tablas {
     }
 
     public static void ListarProductosConsulta2(List<PrProductos> listaproducto, JTable Tabla) {
-        int[] a = {60, 150, 150, 200, 400, 150};
+        int[] a = {60, 150, 150, 150, 150, 150, 150, 800};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "CATEGORIA", "SUBCATEGORIA", "ARTICULO",
-            "PRESENTACION", "MEDIDAS"};
-        String[] filas = new String[6];
+        String[] b = {"COD.", "COD. BARRA", "CATEGORIA", "SUBCATEGORIA", "ARTICULO",
+            "PRESENTACION", "MEDIDAS", "PRODUCTO"};
+        String[] filas = new String[8];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listaproducto.size(); i++) {
@@ -2878,12 +2872,14 @@ public class Tablas {
             if (listaproducto.get(i) != null) {
 
                 filas[0] = "" + listaproducto.get(i).getPrProductosPK().getIdProducto();
-                filas[1] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
-                filas[2] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre();
-                filas[3] = listaproducto.get(i).getPrMedidas().getPrArticulo().getNombreArticulo();
-//                filas[4] = listaproducto.get(i).getNombreProducto();
-                filas[4] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
-                filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+                filas[1] = listaproducto.get(i).getCodigoBarra();
+                filas[2] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getPrGrupos().getNombre();
+                filas[3] = listaproducto.get(i).getPrMedidas().getPrArticulo().getPrSubgrupos().getNombre();
+                filas[4] = listaproducto.get(i).getPrMedidas().getPrArticulo().getNombreArticulo();
+
+                filas[5] = listaproducto.get(i).getPrMedidas().getPrTipoPresentacion().getNombre();
+                filas[6] = listaproducto.get(i).getPrMedidas().getPrTipoMedidas().getNombreTipoMedida();
+                filas[7] = listaproducto.get(i).getNombreProducto();
 
                 model.addRow(filas);
 
@@ -2898,6 +2894,8 @@ public class Tablas {
         Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
         Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
         Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+        Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+        Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
         Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
         Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr2);
         Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
@@ -2906,8 +2904,10 @@ public class Tablas {
         Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr2);
         Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
         Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr2);
-//        Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-//        Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr2);
+        Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+        Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr2);
+        Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+        Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr2);
 
     }
 
@@ -3442,7 +3442,7 @@ public class Tablas {
         }
 
     }
-    
+
     public static void ListarCiudadConsulta(List<SeCiudad> lista, JTable Tabla) {
         int[] a = {60, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -3473,15 +3473,15 @@ public class Tablas {
         }
 
     }
-    
-     public static void ListarClientesConsulta(List<SeClientes> lista, JTable Tabla) {
-        int[] a = {60,200, 400,};
+
+    public static void ListarClientesConsulta(List<SeClientes> lista, JTable Tabla) {
+        int[] a = {60, 200, 400,};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.","N. IDENTIFICACION" ,"CLIENTE"};
+        String[] b = {"COD.", "N. IDENTIFICACION", "CLIENTE"};
         String[] filas = new String[3];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
@@ -3508,7 +3508,6 @@ public class Tablas {
         }
 
     }
-
 
 }
 

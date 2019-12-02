@@ -34,7 +34,7 @@ import javax.swing.JOptionPane;
  * @author Luis Alberto Mero
  */
 public class AgregarNuevoDetalle extends javax.swing.JDialog {
-
+    
     int x, y;
     PrPrestaciones pr = new PrPrestaciones();
     VeUnidadServicio ve = new VeUnidadServicio();
@@ -42,21 +42,20 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     PrTarifarioJpaController op = new PrTarifarioJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrTarifario tp = new PrTarifario();
     InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
-
+    
     List< PrDetalleTarifario> listaTarifario;
     List<PrDetalleTarifario> lista = prp.findPrDetalleTarifarioEntities();
-
+    
     InPrestacionesPorServicios objpres = new InPrestacionesPorServicios();
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    String CADENA = "";
-
+    
     public AgregarNuevoDetalle(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
+    
     public AgregarNuevoDetalle(java.awt.Frame parent, boolean modal, PrTarifario tr, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
@@ -65,11 +64,16 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
-
+        
         txt_valor_costo.setEditable(false);
-
+        txt_valor_min.setEditable(false);
+        txtDescuent_valor.setEditable(false);
+        txtidtarifario.setEditable(false);
+        txtPrestacion.setEditable(false);
+        txtUnidadServicio.setEditable(false);
+        
         cargar();
-
+        
     }
 
     /**
@@ -92,7 +96,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txt_valor_min = new javax.swing.JTextField();
-        txt_porcentaje = new javax.swing.JTextField();
+        txt_porcentaje_descuento = new javax.swing.JTextField();
         txtDescuent_valor = new javax.swing.JTextField();
         txt_valor_venta = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -149,28 +153,23 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             }
         });
 
-        txt_porcentaje.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txt_porcentaje.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_porcentaje_descuento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txt_porcentaje_descuento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_porcentajeKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_porcentajeKeyTyped(evt);
+                txt_porcentaje_descuentoKeyReleased(evt);
             }
         });
 
         txtDescuent_valor.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txtDescuent_valor.setMinimumSize(new java.awt.Dimension(6, 30));
-        txtDescuent_valor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDescuent_valorKeyTyped(evt);
-            }
-        });
 
         txt_valor_venta.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_valor_venta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_valor_ventaKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_valor_ventaKeyReleased(evt);
             }
         });
 
@@ -187,8 +186,8 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
         txt_valor_min_porcentaje.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         txt_valor_min_porcentaje.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_valor_min_porcentajeKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_valor_min_porcentajeKeyReleased(evt);
             }
         });
 
@@ -216,7 +215,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addGap(18, 23, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(txt_porcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_porcentaje_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -252,7 +251,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                     .addComponent(txt_valor_venta, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_porcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_porcentaje_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescuent_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -381,20 +380,35 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
 
     public void CalcularValorMinimo() {
         double porcentajeMinVenta = Double.parseDouble(txt_valor_min_porcentaje.getText());
+        
         double valorCosto = Double.parseDouble(txt_valor_costo.getText());
-        double valor = ((valorCosto * porcentajeMinVenta) / 100) + valorCosto;
-        txt_valor_min.setText(String.valueOf(valor));
+        
+        double valor = (((valorCosto * porcentajeMinVenta) / 100)) + valorCosto;
+        
+        txt_valor_min.setText(String.format("%.2f", valor).replace(",", "."));
+        
+    }
+    
+    public void CalcularDescuento() {
+        double porcentajeDescuento = Double.parseDouble(txt_porcentaje_descuento.getText());
+        
+        double valorVenta = Double.parseDouble(txt_valor_venta.getText());
+        
+        double valor = (((valorVenta * porcentajeDescuento) / 100));
+        System.out.println(" valor" + valor);
+        txtDescuent_valor.setText(String.format("%.2f", valor).replace(",", "."));
+        
     }
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-
+        
         List<PrDetalleTarifario> list = prp.findPrDetalleTarifarioEntities();
         for (int i = 0; i < list.size(); i++) {
             PrDetalleTarifario deta = new PrDetalleTarifario();
             deta = list.get(i);
-
+            
             if (list.get(i).getIdPrestacion() != null) {
-
+                
                 if (list.get(i).getIdPrestacion().intValue() == objpres.getInPrestacionesPorServiciosPK().getIdPrestacion()) {
                     deta.setEstado("I");
                     try {
@@ -402,40 +416,41 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                     } catch (Exception ex) {
                         Logger.getLogger(AgregarNuevoDetalle.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    
                 }
             }
         }
-
+        
         PrDetalleTarifario pre = new PrDetalleTarifario();
-
+        
         PrTarifarioPK prTarifarioPK = new PrTarifarioPK();
         prTarifarioPK.setIdEmpresa(emp.getIdEmpresa());
         prTarifarioPK.setIdSurcusal(suc.getSeSucursalPK().getIdSucursal());
         prTarifarioPK.setIdTarifario(tp.getPrTarifarioPK().getIdTarifario());
-
+        
         PrTarifario prTarifario = new PrTarifario();
         prTarifario.setPrTarifarioPK(prTarifarioPK);
         pre.setPrTarifario(prTarifario);
-
+        
         pre.setValorCosto(Double.parseDouble(txt_valor_costo.getText().toString()));
         pre.setValorDescuento(Double.parseDouble(txtDescuent_valor.getText()));
         pre.setValorVenta(Double.parseDouble(txt_valor_venta.getText()));
+        pre.setValorMinVenta(Double.parseDouble(txt_valor_min.getText()));
         pre.setEstado("A");
         pre.setUsuarioCreacion(usu.getUsuario());
         pre.setIdPrestacion(BigInteger.valueOf(objpres.getPrPrestaciones().getIdPrestacion()));
         pre.setIdUnidadServicio(BigInteger.valueOf(objpres.getVeUnidadServicio().getIdUnidadServicio()));
-
+        
         try {
-
+            
             prp.create(pre);
-
+            
             JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
             setVisible(false);
         } catch (Exception e) {
             Logger.getLogger(Listar_PrestacionesPorServicio.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
 
     }//GEN-LAST:event_btnGrabarActionPerformed
 
@@ -443,10 +458,10 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         ConsultaPrestacionesporServicio cp = new ConsultaPrestacionesporServicio(new javax.swing.JFrame(), true);
         cp.setVisible(true);
         objpres = cp.getObjeto();
-
+        
         txtPrestacion.setText(objpres.getPrPrestaciones().getNombrePrestacion());
         txtUnidadServicio.setText(objpres.getVeUnidadServicio().getNombreUnidadServicio());
-
+        
         InKardex objetoKardex = kardexExt.obtenerUltimoProductoKardex(objpres.getPrPrestaciones().getIdPoducto().longValue());
         txt_valor_costo.setText(String.format("%.2f", objetoKardex.getCostoPromedio()).replace(",", "."));
 
@@ -463,9 +478,9 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel2MouseDragged
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
+        
         setVisible(false);
-
+        
 
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -477,22 +492,6 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txt_valor_ventaKeyTyped
 
-    private void txt_porcentajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_porcentajeKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_porcentajeKeyTyped
-
-    private void txtDescuent_valorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuent_valorKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDescuent_valorKeyTyped
-
     private void txt_valor_minKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_minKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
@@ -501,50 +500,53 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txt_valor_minKeyTyped
 
-    private void txt_porcentajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_porcentajeKeyReleased
-        int largor = txt_porcentaje.getText().length();
-        if (largor > 2) {
-            if (Integer.parseInt(txt_porcentaje.getText()) == 100) {
-                CADENA = txt_porcentaje.getText();
-                txt_porcentaje.setText(CADENA);
-            } else {
-                CADENA = txt_porcentaje.getText().substring(0, 2);
-                txt_porcentaje.setText(CADENA);
-                JOptionPane.showMessageDialog(null, "INGRESE VALOR CORRECTO");
-            }
+    private void txt_valor_min_porcentajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_min_porcentajeKeyReleased
+        try {
+            CalcularValorMinimo();
+        } catch (Exception e) {
         }
 
-    }//GEN-LAST:event_txt_porcentajeKeyReleased
+    }//GEN-LAST:event_txt_valor_min_porcentajeKeyReleased
 
-    private void txt_valor_min_porcentajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_min_porcentajeKeyTyped
-        CalcularValorMinimo();
-    }//GEN-LAST:event_txt_valor_min_porcentajeKeyTyped
+    private void txt_porcentaje_descuentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_porcentaje_descuentoKeyReleased
+        
+        try {
+            CalcularDescuento();
+        } catch (Exception e) {
+        }
+        
+
+    }//GEN-LAST:event_txt_porcentaje_descuentoKeyReleased
+
+    private void txt_valor_ventaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valor_ventaKeyReleased
+        txt_porcentaje_descuento.setText("");
+    }//GEN-LAST:event_txt_valor_ventaKeyReleased
     public void cargar() {
         txtidtarifario.setText(String.valueOf(tp.getDescripcion()));
 //        emp1.setText(String.valueOf(tp.getPrTarifarioPK().getIdEmpresa()));
 //        sucur.setText(String.valueOf(tp.getPrTarifarioPK().getIdSurcusal()));
 //        USER.setText(String.valueOf(tp.getUsuarioCreacion()));
     }
-
+    
     public void ValiEstado() {
         PrDetalleTarifario pre = new PrDetalleTarifario();
-
+        
         for (int i = 0; i < listaTarifario.size(); i++) {
             if (listaTarifario.get(i).getEstado().equals("A")) {
                 if (listaTarifario.get(i).getIdPrestacion().equals(listaTarifario.get(i).getIdPrestacion())) {
-
+                    
                     pre.setEstado("I");
-
+                    
                 } else {
-
+                    
                     System.out.println("no se encontro otra prestacion activa");
-
+                    
                 }
-
+                
             }
-
+            
         }
-
+        
     }
 
     /**
@@ -610,7 +612,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     private javax.swing.JTextField txtDescuent_valor;
     private javax.swing.JTextField txtPrestacion;
     private javax.swing.JTextField txtUnidadServicio;
-    private javax.swing.JTextField txt_porcentaje;
+    private javax.swing.JTextField txt_porcentaje_descuento;
     private javax.swing.JTextField txt_valor_costo;
     private javax.swing.JTextField txt_valor_min;
     private javax.swing.JTextField txt_valor_min_porcentaje;

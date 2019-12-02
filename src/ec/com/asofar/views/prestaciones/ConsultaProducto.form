@@ -51,7 +51,7 @@
                   <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtfiltro" min="-2" pref="160" max="-2" attributes="0"/>
+                  <Component id="txtfiltro" min="-2" pref="260" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
