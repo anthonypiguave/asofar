@@ -219,27 +219,27 @@ public class ReporteriaExt {
         try {
             for (Object[] obj : listobj) {
                 ReporteDetalleComprasDTO ob = new ReporteDetalleComprasDTO();
-              ob.setId_detalle_orden_compra(Long.parseLong(obj[0].toString()));              
-              ob.setId_orden_compra(Long.parseLong(obj[1].toString()));
-              ob.setId_empresa(Long.parseLong(obj[2].toString()));//
-              ob.setId_surcusal(Long.parseLong(obj[3].toString()));
-              ob.setId_producto(Long.parseLong(obj[4].toString()));
-              ob.setLinea_detalle(Long.parseLong(obj[5].toString()));
-              ob.setDescripcion((obj[6].toString()));
-              ob.setPrecio_unitario(Double.parseDouble(obj[7].toString()));
-              ob.setCantidad_recibida(Long.parseLong(obj[8].toString()));
-              ob.setSubtotal(Double.parseDouble(obj[9].toString()));
-              ob.setIva(Double.parseDouble(obj[10].toString()));
-              ob.setDescuento(Double.parseDouble(obj[11].toString()));
-              ob.setTotal(Double.parseDouble(obj[12].toString()));
-              ob.setCodigo_barra(String.valueOf(obj[13].toString()));
-              ob.setId_tipo_presentacion(String.valueOf(obj[14].toString()));
-              ob.setNombre_producto(String.valueOf(obj[15].toString()));
-              ob.setReceta(String.valueOf(obj[16].toString()));
-              ob.setNombrePresentacion(String.valueOf(obj[17].toString()));
-              ob.setLote_fabricacion(String.valueOf(obj[18].toString()));
-              ob.setFecha_caducidad(Date.valueOf(obj[19].toString()));
-              listaDetalle.add(ob);
+                ob.setId_detalle_orden_compra(Long.parseLong(obj[0].toString()));
+                ob.setId_orden_compra(Long.parseLong(obj[1].toString()));
+                ob.setId_empresa(Long.parseLong(obj[2].toString()));//
+                ob.setId_surcusal(Long.parseLong(obj[3].toString()));
+                ob.setId_producto(Long.parseLong(obj[4].toString()));
+                ob.setLinea_detalle(Long.parseLong(obj[5].toString()));
+                ob.setDescripcion((obj[6].toString()));
+                ob.setPrecio_unitario(Double.parseDouble(obj[7].toString()));
+                ob.setCantidad_recibida(Long.parseLong(obj[8].toString()));
+                ob.setSubtotal(Double.parseDouble(obj[9].toString()));
+                ob.setIva(Double.parseDouble(obj[10].toString()));
+                ob.setDescuento(Double.parseDouble(obj[11].toString()));
+                ob.setTotal(Double.parseDouble(obj[12].toString()));
+                ob.setCodigo_barra(String.valueOf(obj[13].toString()));
+                ob.setId_tipo_presentacion(String.valueOf(obj[14].toString()));
+                ob.setNombre_producto(String.valueOf(obj[15].toString()));
+                ob.setReceta(String.valueOf(obj[16].toString()));
+                ob.setNombrePresentacion(String.valueOf(obj[17].toString()));
+                ob.setLote_fabricacion(String.valueOf(obj[18].toString()));
+                ob.setFecha_caducidad(Date.valueOf(obj[19].toString()));
+                listaDetalle.add(ob);
             }
 
         } catch (Exception e) {
@@ -248,48 +248,49 @@ public class ReporteriaExt {
         return listaDetalle;
 
     }
+
     public static List<ReporteFacturaDTO> reporteFactura() {
 
         Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
         List<ReporteFacturaDTO> listaCompra = null;
-        Query q = em.createNativeQuery("SELECT  DISTINCT\n" +
-                            "         c.id_factura,\n" +
-                            "         c.id_empresa,\n" +
-                            "         c.id_sucursal,\n" +
-                            "         c.id_caja,\n" +
-                            "         c.id_usuario,\n" +
-                            "         c.id_cliente,\n" +
-                            "         DATE_FORMAT(c.fecha_facturacion,'%Y-%m-%d') AS fecha_facturacion,\n" +
-                            "         IFNULL(c.subtotal,0) AS total_subtotal,\n" +
-                            "         IFNULL(c.total_ice,0) AS total_ice,\n" +
-                            "         IFNULL(c.total_descuento,0) AS total_descuento,\n" +
-                            "         IFNULL(c.total_base_iva,0) AS base_iva,\n" +
-                            "         IFNULL(c.total_base_no_iva,0) AS base_no_iva,\n" +
-                            "         IFNULL(c.total_iva,0) AS base_no_iva,\n" +
-                            " 		IFNULL(c.total_facturado,0) AS total_fact,\n" +
-                            "         c.despachado,\n" +
-                            "         caja.nombre,\n" +
-                            "         e.nombre_comercial,\n" +
-                            "         s.nombre_comercial,\n" +
-                            "         d.cantidad,\n" +
-                            "         pres.id_poducto\n" +
-                            "    FROM ve_factura AS c\n" +
-                            "    INNER JOIN ve_factura_detalle AS d\n" +
-                            "    	  ON  c.id_factura = d.id_factura\n" +
-                            "      -- and  c.estado = 'C'\n" +
-                            "	AND  c.fecha_facturacion\n" +
-                            "	BETWEEN CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 00:00:00')\n" +
-                            "        AND CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 23:59:59')\n" +
-                            "    INNER JOIN ve_caja AS caja\n" +
-                            "     ON caja.id_caja = c.id_caja\n" +
-                            "    INNER JOIN se_empresa AS e\n" +
-                            " 	ON e.id_empresa = c.id_empresa\n" +
-                            "    INNER JOIN se_sucursal AS s\n" +
-                            "     ON s.id_sucursal = c.id_sucursal\n" +
-                            "    INNER JOIN pr_prestaciones AS pres\n" +
-                            "     ON pres.id_prestacion = d.id_prestaciones;");
+        Query q = em.createNativeQuery("SELECT  DISTINCT\n"
+                + "         c.id_factura,\n"
+                + "         c.id_empresa,\n"
+                + "         c.id_sucursal,\n"
+                + "         c.id_caja,\n"
+                + "         c.id_usuario,\n"
+                + "         c.id_cliente,\n"
+                + "         DATE_FORMAT(c.fecha_facturacion,'%Y-%m-%d') AS fecha_facturacion,\n"
+                + "         IFNULL(c.subtotal,0) AS total_subtotal,\n"
+                + "         IFNULL(c.total_ice,0) AS total_ice,\n"
+                + "         IFNULL(c.total_descuento,0) AS total_descuento,\n"
+                + "         IFNULL(c.total_base_iva,0) AS base_iva,\n"
+                + "         IFNULL(c.total_base_no_iva,0) AS base_no_iva,\n"
+                + "         IFNULL(c.total_iva,0) AS base_no_iva,\n"
+                + " 		IFNULL(c.total_facturado,0) AS total_fact,\n"
+                + "         c.despachado,\n"
+                + "         caja.nombre,\n"
+                + "         e.nombre_comercial,\n"
+                + "         s.nombre_comercial,\n"
+                + "         d.cantidad,\n"
+                + "         pres.id_poducto\n"
+                + "    FROM ve_factura AS c\n"
+                + "    INNER JOIN ve_factura_detalle AS d\n"
+                + "    	  ON  c.id_factura = d.id_factura\n"
+                + "      -- and  c.estado = 'C'\n"
+                + "	AND  c.fecha_facturacion\n"
+                + "	BETWEEN CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 00:00:00')\n"
+                + "        AND CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 23:59:59')\n"
+                + "    INNER JOIN ve_caja AS caja\n"
+                + "     ON caja.id_caja = c.id_caja\n"
+                + "    INNER JOIN se_empresa AS e\n"
+                + " 	ON e.id_empresa = c.id_empresa\n"
+                + "    INNER JOIN se_sucursal AS s\n"
+                + "     ON s.id_sucursal = c.id_sucursal\n"
+                + "    INNER JOIN pr_prestaciones AS pres\n"
+                + "     ON pres.id_prestacion = d.id_prestaciones;");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteFacturaDTO>();
         try {
@@ -318,7 +319,7 @@ public class ReporteriaExt {
                 ob.setNombre_caja(String.valueOf(obj[15].toString()));
                 ob.setNombre_comercial_emp(String.valueOf(obj[16].toString()));
                 ob.setNombre_comercial_suc(String.valueOf(obj[17].toString()));
-           
+
                 listaCompra.add(ob);
             }
         } catch (Exception e) {
@@ -326,48 +327,49 @@ public class ReporteriaExt {
         }
         return listaCompra;
     }
+
     public static List<ReporteFacturaDTO> reporteFacturaFechas(String desde, String hasta) {
 
         Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
         List<ReporteFacturaDTO> listaCompra = null;
-        Query q = em.createNativeQuery("SELECT  DISTINCT\n" +
-                            "         c.id_factura,\n" +
-                            "         c.id_empresa,\n" +
-                            "         c.id_sucursal,\n" +
-                            "         c.id_caja,\n" +
-                            "         c.id_usuario,\n" +
-                            "         c.id_cliente,\n" +
-                            "         DATE_FORMAT(c.fecha_facturacion,'%Y-%m-%d') AS fecha_facturacion,\n" +
-                            "         IFNULL(c.subtotal,0) AS total_subtotal,\n" +
-                            "         IFNULL(c.total_ice,0) AS total_ice,\n" +
-                            "         IFNULL(c.total_descuento,0) AS total_descuento,\n" +
-                            "         IFNULL(c.total_base_iva,0) AS base_iva,\n" +
-                            "         IFNULL(c.total_base_no_iva,0) AS base_no_iva,\n" +
-                            "         IFNULL(c.total_iva,0) AS base_no_iva,\n" +
-                            " 		IFNULL(c.total_facturado,0) AS total_fact,\n" +
-                            "         c.despachado,\n" +
-                            "         caja.nombre,\n" +
-                            "         e.nombre_comercial,\n" +
-                            "         s.nombre_comercial,\n" +
-                            "         d.cantidad,\n" +
-                            "         pres.id_poducto\n" +
-                            "    FROM ve_factura AS c\n" +
-                            "    INNER JOIN ve_factura_detalle AS d\n" +
-                            "    	  ON  c.id_factura = d.id_factura\n" +
-                            "      -- and  c.estado = 'C'\n" +
-                            "	AND  c.fecha_facturacion\n" +
-                            "         BETWEEN concat('" + desde + "',' 00:00:00')\n"+
-                            "         and concat('" + hasta + "',' 23:59:59')\n"+
-                            "    INNER JOIN ve_caja AS caja\n" +
-                            "     ON caja.id_caja = c.id_caja\n" +
-                            "    INNER JOIN se_empresa AS e\n" +
-                            " 	ON e.id_empresa = c.id_empresa\n" +
-                            "    INNER JOIN se_sucursal AS s\n" +
-                            "     ON s.id_sucursal = c.id_sucursal\n" +
-                            "    INNER JOIN pr_prestaciones AS pres\n" +
-                            "     ON pres.id_prestacion = d.id_prestaciones;");
+        Query q = em.createNativeQuery("SELECT  DISTINCT\n"
+                + "         c.id_factura,\n"
+                + "         c.id_empresa,\n"
+                + "         c.id_sucursal,\n"
+                + "         c.id_caja,\n"
+                + "         c.id_usuario,\n"
+                + "         c.id_cliente,\n"
+                + "         DATE_FORMAT(c.fecha_facturacion,'%Y-%m-%d') AS fecha_facturacion,\n"
+                + "         IFNULL(c.subtotal,0) AS total_subtotal,\n"
+                + "         IFNULL(c.total_ice,0) AS total_ice,\n"
+                + "         IFNULL(c.total_descuento,0) AS total_descuento,\n"
+                + "         IFNULL(c.total_base_iva,0) AS base_iva,\n"
+                + "         IFNULL(c.total_base_no_iva,0) AS base_no_iva,\n"
+                + "         IFNULL(c.total_iva,0) AS base_no_iva,\n"
+                + " 		IFNULL(c.total_facturado,0) AS total_fact,\n"
+                + "         c.despachado,\n"
+                + "         caja.nombre,\n"
+                + "         e.nombre_comercial,\n"
+                + "         s.nombre_comercial,\n"
+                + "         d.cantidad,\n"
+                + "         pres.id_poducto\n"
+                + "    FROM ve_factura AS c\n"
+                + "    INNER JOIN ve_factura_detalle AS d\n"
+                + "    	  ON  c.id_factura = d.id_factura\n"
+                + "      -- and  c.estado = 'C'\n"
+                + "	AND  c.fecha_facturacion\n"
+                + "         BETWEEN concat('" + desde + "',' 00:00:00')\n"
+                + "         and concat('" + hasta + "',' 23:59:59')\n"
+                + "    INNER JOIN ve_caja AS caja\n"
+                + "     ON caja.id_caja = c.id_caja\n"
+                + "    INNER JOIN se_empresa AS e\n"
+                + " 	ON e.id_empresa = c.id_empresa\n"
+                + "    INNER JOIN se_sucursal AS s\n"
+                + "     ON s.id_sucursal = c.id_sucursal\n"
+                + "    INNER JOIN pr_prestaciones AS pres\n"
+                + "     ON pres.id_prestacion = d.id_prestaciones;");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteFacturaDTO>();
         try {
@@ -413,49 +415,49 @@ public class ReporteriaExt {
         }
         return listaCompra;
     }
-    
+
     public static List<ReporteDetalleFacturaDTO> listadoDetallesFactura(ReporteFacturaDTO objcab) {
         Calendario fechaEntrega = new Calendario(new javax.swing.JFrame(), true);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
         List<ReporteDetalleFacturaDTO> listaDetalle = null;
-        Query q = em.createNativeQuery("select \n" +
-                    "	ve_factura_detalle.id_factura,\n" +
-                    "    ve_factura_detalle.id_factura_detalle,\n" +
-                    "    ve_factura_detalle.linea_detalle,\n" +
-                    "    ve_factura_detalle.descripcion,\n" +
-                    "    ve_factura_detalle.precio_unitario_venta,\n" +
-                    "    ve_factura_detalle.subtotal,\n" +
-                    "    ve_factura_detalle.valor_iva,\n" +
-                    "    ve_factura_detalle.valor_descuento,\n" +
-                    "    ve_factura_detalle.valor_total,\n" +
-                    "    ve_factura_detalle.estado,\n" +
-                    "    ve_factura_detalle.cantidad,\n" +
-                    "    pr_prestaciones.id_poducto\n" +
-                    "from ve_factura \n" +
-                    "inner join ve_factura_detalle\n" +
-                    "on ve_factura.id_factura = ve_factura_detalle.id_factura\n" +
-                    "inner join pr_prestaciones \n" +
-                    "on pr_prestaciones.id_prestacion = ve_factura_detalle.id_prestaciones\n" +
-                    "where ve_factura_detalle.id_factura = " + objcab.getId_factura().toString() + ";");
+        Query q = em.createNativeQuery("select \n"
+                + "	ve_factura_detalle.id_factura,\n"
+                + "    ve_factura_detalle.id_factura_detalle,\n"
+                + "    ve_factura_detalle.linea_detalle,\n"
+                + "    ve_factura_detalle.descripcion,\n"
+                + "    ve_factura_detalle.precio_unitario_venta,\n"
+                + "    ve_factura_detalle.subtotal,\n"
+                + "    ve_factura_detalle.valor_iva,\n"
+                + "    ve_factura_detalle.valor_descuento,\n"
+                + "    ve_factura_detalle.valor_total,\n"
+                + "    ve_factura_detalle.estado,\n"
+                + "    ve_factura_detalle.cantidad,\n"
+                + "    pr_prestaciones.id_poducto\n"
+                + "from ve_factura \n"
+                + "inner join ve_factura_detalle\n"
+                + "on ve_factura.id_factura = ve_factura_detalle.id_factura\n"
+                + "inner join pr_prestaciones \n"
+                + "on pr_prestaciones.id_prestacion = ve_factura_detalle.id_prestaciones\n"
+                + "where ve_factura_detalle.id_factura = " + objcab.getId_factura().toString() + ";");
         List<Object[]> listobj = q.getResultList();
         listaDetalle = new ArrayList<ReporteDetalleFacturaDTO>();
         try {
             for (Object[] obj : listobj) {
                 ReporteDetalleFacturaDTO ob = new ReporteDetalleFacturaDTO();
-              ob.setId_factura(Long.parseLong(obj[0].toString()));              
-              ob.setId_factura_detalle(Long.parseLong(obj[1].toString()));
-              ob.setLinea_detalle(Long.parseLong(obj[2].toString()));//
-              ob.setDescripcion((obj[3].toString()));
-              ob.setPrecio_unitario_venta(Double.parseDouble(obj[4].toString()));
-              ob.setSubtotal(Double.parseDouble(obj[5].toString()));
-              ob.setValor_iva(Double.parseDouble(obj[6].toString()));
-              ob.setValor_descuento(Double.parseDouble(obj[7].toString()));
-              ob.setValor_total(Double.parseDouble(obj[8].toString()));
-              ob.setEstado(String.valueOf(obj[9].toString()));
-              ob.setCantidad(Long.parseLong(obj[10].toString()));
-              ob.setId_producto(Long.parseLong(obj[11].toString()));
-              listaDetalle.add(ob);
+                ob.setId_factura(Long.parseLong(obj[0].toString()));
+                ob.setId_factura_detalle(Long.parseLong(obj[1].toString()));
+                ob.setLinea_detalle(Long.parseLong(obj[2].toString()));//
+                ob.setDescripcion((obj[3].toString()));
+                ob.setPrecio_unitario_venta(Double.parseDouble(obj[4].toString()));
+                ob.setSubtotal(Double.parseDouble(obj[5].toString()));
+                ob.setValor_iva(Double.parseDouble(obj[6].toString()));
+                ob.setValor_descuento(Double.parseDouble(obj[7].toString()));
+                ob.setValor_total(Double.parseDouble(obj[8].toString()));
+                ob.setEstado(String.valueOf(obj[9].toString()));
+                ob.setCantidad(Long.parseLong(obj[10].toString()));
+                ob.setId_producto(Long.parseLong(obj[11].toString()));
+                listaDetalle.add(ob);
             }
 
         } catch (Exception e) {
@@ -464,6 +466,7 @@ public class ReporteriaExt {
         return listaDetalle;
 
     }
+
     private long showId(EntityManager em) {
         String nativeQuery = "SELECT max(id_orden_compra) FROM co_orden_compras;";
         Query query = em.createNativeQuery(nativeQuery);
@@ -501,7 +504,7 @@ public class ReporteriaExt {
 
     public ReporteProveedorDTO obtenerProveedor(Long id) {
         List<ReporteProveedorDTO> lista = null;
-        ReporteProveedorDTO obj =null;
+        ReporteProveedorDTO obj = null;
         String nativeQuery = "SELECT\n"
                 + "  `id_proveedor`,\n"
                 + "  `nombre`,\n"
@@ -543,7 +546,7 @@ public class ReporteriaExt {
                 obj.setObservaciones((String) (oo[12]));
                 obj.setNombre_comercial((String) (oo[13]));
                 obj.setEstado((String) (oo[14]));
-              //  lista.add(obj);
+                //  lista.add(obj);
             }
 
         } catch (Exception ex) {
@@ -551,7 +554,7 @@ public class ReporteriaExt {
         }
         return obj;
     }
-    
+
     public static java.util.Date fechaActual() {
         java.util.Date fechaParseada = new java.util.Date();
         return fechaParseada;
@@ -582,33 +585,57 @@ public class ReporteriaExt {
     public static String removeScientificNotation(String value) {
         return new BigDecimal(value).toPlainString();
     }
-    public static String buscarLocalidad(Long id){
-    String cadena="";
-    String nativeQuery = "SELECT DISTINCT IFNULL(lc.`dirreccion_cliente`,'---') FROM `se_localidad_cliente` lc \n" +
-                         "WHERE lc.`id_cliente` = "+id+" limit 0,1;";
-    Query query = em.createNativeQuery(nativeQuery);
-     cadena = query.getSingleResult().toString();
+
+    public static String buscarLocalidad(Long id) {
+        String cadena = "";
+        String nativeQuery = "SELECT DISTINCT IFNULL(lc.`dirreccion_cliente`,'---') FROM `se_localidad_cliente` lc \n"
+                + "WHERE lc.`id_cliente` = " + id + " limit 0,1;";
+        Query query = em.createNativeQuery(nativeQuery);
+        cadena = query.getSingleResult().toString();
         return cadena;
     }
-    
-    public static String buscarCelular(Long id){
-    String cadena="";
-    String nativeQuery = "SELECT DISTINCT IFNULL(lv.`celular`,'---') FROM `se_localidad_cliente` lc,`se_contactos_clientes` lv \n" +
-                    "WHERE lv.`id_localidad` = lc.`id_localidad_cliente`\n" +
-                    "AND lc.`id_cliente` = "+id+"\n" +
-                    "AND lv.`nombre` = 'PROPIO';";
-    Query query = em.createNativeQuery(nativeQuery);
-    cadena = query.getSingleResult().toString();
+
+    public static String buscarCelular8(Long id) {
+        String cadena = "";
+        String nativeQuery = "SELECT DISTINCT IFNULL(lv.`celular`,'---') FROM `se_localidad_cliente` lc,`se_contactos_clientes` lv \n"
+                + "WHERE lv.`id_localidad` = lc.`id_localidad_cliente`\n"
+                + "AND lc.`id_cliente` = " + id + "\n"
+                + "AND lv.`nombre` = 'PROPIO';";
+        Query query = em.createNativeQuery(nativeQuery);
+        cadena = query.getSingleResult().toString();
         return cadena;
     }
-    public static String buscarCorreo(Long id){
-    String cadena="";
-    String nativeQuery = "SELECT DISTINCT IFNULL(lv.`email`,'---') FROM `se_localidad_cliente` lc,`se_contactos_clientes` lv \n" +
-                    "WHERE lv.`id_localidad` = lc.`id_localidad_cliente`\n" +
-                    "AND lc.`id_cliente` = "+id+"\n" +
-                    "AND lv.`nombre` = 'PROPIO';";
-    Query query = em.createNativeQuery(nativeQuery);
-    cadena = query.getSingleResult().toString();
+
+    public static String buscarCelular(Long id) {
+        String cadena = "";
+        String nativeQuery = "SELECT se_localidad_cliente.`celular` FROM `se_localidad_cliente`\n"
+                + "INNER JOIN `se_contactos_clientes` \n"
+                + "ON se_contactos_clientes.`id_localidad` = `se_localidad_cliente`.`id_localidad_cliente`\n"
+                + "WHERE se_contactos_clientes.`nombre`='PROPIO' AND se_localidad_cliente.`id_cliente`= " + id + ";";
+        Query query = em.createNativeQuery(nativeQuery);
+        cadena = query.getSingleResult().toString();
+        return cadena;
+    }
+
+    public static String buscarCorreo1(Long id) {
+        String cadena = "";
+        String nativeQuery = "SELECT se_localidad_cliente.`email` FROM `se_localidad_cliente`\n"
+                + "INNER JOIN `se_contactos_clientes` \n"
+                + "ON se_contactos_clientes.`id_localidad` = `se_localidad_cliente`.`id_localidad_cliente`\n"
+                + "WHERE se_contactos_clientes.`nombre`='PROPIO' AND se_localidad_cliente.`id_cliente`= " + id + ";";
+        Query query = em.createNativeQuery(nativeQuery);
+        cadena = query.getSingleResult().toString();
+        return cadena;
+    }
+
+    public static String buscarCorreo(Long id) {
+        String cadena = "";
+        String nativeQuery = "SELECT se_localidad_cliente.`email` FROM `se_localidad_cliente`\n"
+                + "INNER JOIN `se_contactos_clientes` \n"
+                + "ON se_contactos_clientes.`id_localidad` = `se_localidad_cliente`.`id_localidad_cliente`\n"
+                + "WHERE se_contactos_clientes.`nombre`='PROPIO' AND se_localidad_cliente.`id_cliente`= " + id + ";";
+        Query query = em.createNativeQuery(nativeQuery);
+        cadena = query.getSingleResult().toString();
         return cadena;
     }
 }
