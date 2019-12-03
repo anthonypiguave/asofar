@@ -1463,7 +1463,6 @@ public class Venta extends javax.swing.JInternalFrame {
                 }
 //             JOptionPane.showMessageDialog(null, "");
             } else {
-
             }
         }
     }//GEN-LAST:event_btn_VentaActionPerformed
