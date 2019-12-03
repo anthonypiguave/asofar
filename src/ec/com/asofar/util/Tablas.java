@@ -3157,13 +3157,13 @@ public class Tablas {
     }
 
     public static void ListarTipoPresentacionConsulta(List<PrTipoPresentacion> lista, JTable Tabla) {
-        int[] a = {60, 500};
+        int[] a = {60, 300};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"COD.", "TIPO PRESENTACION"};
+        String[] b = {"CODIGO", "TIPO PRESENTACION"};
         String[] filas = new String[2];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
@@ -3189,7 +3189,7 @@ public class Tablas {
     }
 
     public static void ListarTipoMedidasConsulta(List<PrTipoMedidas> lista, JTable Tabla) {
-        int[] a = {60, 500};
+        int[] a = {60, 250};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
