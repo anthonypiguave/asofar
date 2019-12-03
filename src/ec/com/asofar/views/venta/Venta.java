@@ -121,7 +121,7 @@ public class Venta extends javax.swing.JInternalFrame {
     SeSucursal suc;
     VeDetalleCaja vdc;
     List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-    List<VeFacturaDetalle> listaDetFacturaPrueba = new ArrayList<VeFacturaDetalle>();
+//    List<VeFacturaDetalle> listaDetFacturaPrueba = new ArrayList<VeFacturaDetalle>();
     BigInteger cantidad, cantidadModi, idCliente, id_uni, cantidadStock;
     Double precio, precioIva, total, descuento, subtotal;
     Double VGTsubtotal, VGTtotal, VGTiva, VGTdescuento;
@@ -1051,7 +1051,7 @@ public class Venta extends javax.swing.JInternalFrame {
             FactDeta.setSubtotal(subtotal);
 
             listaDetFactura.add(FactDeta);
-            listaDetFacturaPrueba.add(FactDeta);
+//            listaDetFacturaPrueba.add(FactDeta);
 
             for (int i = 0; i < listaDetFactura.size(); i++) {
                 Cont = i + 1;
@@ -1304,12 +1304,12 @@ public class Venta extends javax.swing.JInternalFrame {
             if (r == JOptionPane.YES_OPTION) {
 
                 guardarKardex2(listaDetFactura);
-                limpiar();
+                
                 VeFactura cabFact = new VeFactura();
                 InMovimientos pkMovimiento = null;
                 VeFacturaDetalle detFact = new VeFacturaDetalle();
                 VeFacturaDetalleJpaController detFactController = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+               
                 cabFact.setIdCaja(BigInteger.valueOf(idCaja));
                 cabFact.setSeSucursal(suc);
                 cabFact.setIdCliente(new BigInteger(txt_idCliente.getText().toString()));
@@ -1318,18 +1318,20 @@ public class Venta extends javax.swing.JInternalFrame {
                 cabFact.setTotalDescuento(VGTdescuento);
                 cabFact.setTotalFacturado(VGTtotal);
                 cabFact.setFechaFacturacion(d);
-//                cabFact.setIdUsuario(usu.getIdUsuario());
+                cabFact.setIdUsuario(usu.getUsuario());
                 cabFact.setUsuarioCreacion(usu.getUsuario());
                 cabFact.setFechaCreacion(d);
                 cabFact.setDespachado("SI");
                 try {
                     VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
+                     System.out.println("err "+pkFactura);
+                     System.out.println(" ffff "+listaDetFactura);
                     for (int i = 0; i < listaDetFactura.size(); i++) {
 
                         detFact.setVeFactura(pkFactura);
                         detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
                         detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-
+                        System.out.println("*******");
                         detFact.getVeFacturaDetallePK().setIdPrestaciones(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones());
                         detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
                         detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
@@ -1450,7 +1452,8 @@ public class Venta extends javax.swing.JInternalFrame {
                     }
 
 //                    guardarKardex2(listaDetFactura);
-                    JOptionPane.showMessageDialog(null, "");
+                    JOptionPane.showMessageDialog(null, "VENTA REALIZADA CON EXITO");
+                    limpiar();
 //                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
 //                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
 //                Iv.setVisible(true);
