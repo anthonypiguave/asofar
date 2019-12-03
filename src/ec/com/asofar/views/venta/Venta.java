@@ -1351,9 +1351,9 @@ public class Venta extends javax.swing.JInternalFrame {
                     String empresa = emp.getNombreComercial();
                     String sucursal = suc.getNombreComercial();
                     String ruc = emp.getRuc();
-                    String direccion = suc.getDireccion();
-                    System.out.println(" empresa " + empresa + " " + sucursal + " ");
-
+                    String direccion = suc.getDireccion();                    
+                    int im = JOptionPane.showConfirmDialog(null, "¿Desea Imprimir la factura?", "", JOptionPane.YES_NO_OPTION);
+                    if(im == JOptionPane.YES_OPTION){
                     Venta.PrintEpson printerService = new Venta.PrintEpson();
                     System.out.println(printerService.getPrinters());
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
@@ -1382,6 +1382,9 @@ public class Venta extends javax.swing.JInternalFrame {
                     printerService.printString("EPSON-TM-T20II", "                        TOTAL: " + txtTotal.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "--------- GRACIAS POR PREFERIRNOS --------\n");
+                    }else{
+                        
+                    }
 //                    byte[] cutP = new byte[]{0x1d, 'V', 1};
 //                    printerService.printBytes("EPSON-TM-T20II", cutP);
 

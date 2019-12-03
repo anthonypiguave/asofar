@@ -51,6 +51,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     public tipo_documentoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         MostrarMedidaActiva();
         System.out.println("holaaa");
         listaDocumento = ptm.findInTipoDocumentoEntities();
@@ -60,7 +61,7 @@ public class tipo_documentoForm extends javax.swing.JDialog {
     public tipo_documentoForm(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         MostrarMedidaActiva();
         btn_guardar.setEnabled(false);
         System.out.println("nombre es " + us.getUsuario());
