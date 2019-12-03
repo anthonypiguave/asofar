@@ -234,11 +234,11 @@ public class AgregarGruposForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isSpaceChar(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
+//        char c = evt.getKeyChar();
+//        if (Character.isSpaceChar(c)) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
