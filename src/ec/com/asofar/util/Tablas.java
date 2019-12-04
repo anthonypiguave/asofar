@@ -6,8 +6,11 @@
 package ec.com.asofar.util;
 
 import ec.com.asofar.dao.InBodegaJpaController;
+import ec.com.asofar.dao.PrProductosJpaController;
+import ec.com.asofar.daoext.InKardexExt;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
+import static ec.com.asofar.daoext.ObtenerDTO.ObtenerPrProductos;
 import ec.com.asofar.daoext.ProductoCadena;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
@@ -37,6 +40,7 @@ import ec.com.asofar.dto.PrFabricante;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrMedidas;
 import ec.com.asofar.dto.PrPrestaciones;
+import ec.com.asofar.dto.PrProductoBodega;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.PrTarifario;
@@ -60,6 +64,7 @@ import java.awt.Font;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
@@ -2479,7 +2484,7 @@ public class Tablas {
         tabla.setRowHeight(24);
 
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
         tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
@@ -3502,6 +3507,55 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr2);
+
+            }
+
+        }
+
+    }
+
+    public static void ListarProductoBodegaConsulta(List<PrProductoBodega> lista, JTable Tabla) {
+        int[] a = {400, 250, 250};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr2.setHorizontalAlignment(SwingConstants.LEFT);
+        model = VaciarTabla(Tabla);
+        String[] b = {"PRODUCTO", "BODEGA", "STOCK", };
+        String[] filas = new String[3];
+        model = new DefaultTableModel(null, b);
+        Tabla.setShowGrid(true);
+        
+        InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
+
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            if (lista.get(i).getEstado().equals("A")) {
+
+                PrProductos prod =  ObtenerPrProductos(lista.get(i).getPrProductoBodegaPK().getIdProducto());
+                
+                InKardex kard = kardexExt.obtenerUltimoProductoKardex(lista.get(i).getPrProductoBodegaPK().getIdProducto());
+                
+                filas[0] = prod.getNombreProducto();
+                filas[1] = lista.get(i).getInBodega().getNombreBodega();
+                
+                if(kard != null){
+                   filas[2] = kard.getSaldoActual().toString(); 
+                }else{
+                    filas[2] = "0";
+                }
+                
+
+                model.addRow(filas);
+                Tabla.setModel(model);
+                Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
 
             }
 
