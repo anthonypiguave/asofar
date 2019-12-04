@@ -1583,7 +1583,6 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       
         CotizacionVenta ses = new CotizacionVenta(new javax.swing.JFrame(), true,usu, emp, suc);
          setVisible(false);
         ses.setVisible(true);
