@@ -32,6 +32,7 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
+
     /**
      * Creates new form tipo_bodega_inactivos
      */
@@ -48,9 +49,9 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         MostrarMedidaInactiva();
-        usu=us;
-        emp=em;
-        suc=su;
+        usu = us;
+        emp = em;
+        suc = su;
     }
 
     private void MostrarMedidaInactiva() {
@@ -222,12 +223,11 @@ public class consulta_tipo_bodega_inactivos extends javax.swing.JDialog {
             tipobodega = devuelveObjeto(Long.valueOf(tbl_tipobodegainactivos.getValueAt(id, 0).toString()), lista);
 
             if (tipobodega != null) {
-                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega,usu,emp,suc);
+                tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega, usu, emp, suc);
                 ep.setVisible(true);
-
-                TipoBodega = tbc.findInTipoBodegaEntities();
-                Tablas.TablaTipoBodegaInactivo(TipoBodega, tbl_tipobodegainactivos);
             }
+            TipoBodega = tbc.findInTipoBodegaEntities();
+            Tablas.TablaTipoBodegaInactivo(TipoBodega, tbl_tipobodegainactivos);
         }
     }//GEN-LAST:event_tbl_tipobodegainactivosMousePressed
     public InTipoBodega devuelveObjeto(Long id, List<InTipoBodega> listabod) {

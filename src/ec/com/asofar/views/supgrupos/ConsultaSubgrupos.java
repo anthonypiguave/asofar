@@ -290,8 +290,8 @@ public class ConsultaSubgrupos extends javax.swing.JDialog {
 
                 EditarSubgrupos es = new EditarSubgrupos(new javax.swing.JFrame(), true, obj);
                 es.setVisible(true);
-                cargarDatos();
             }
+            cargarDatos();
 
         }
     }//GEN-LAST:event_tbsubgruposMousePressed
