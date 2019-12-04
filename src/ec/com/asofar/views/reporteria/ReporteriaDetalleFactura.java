@@ -110,7 +110,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
             txt_N_VENTA.setText(objeto.getId_factura().toString());
             txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
             txtCaja.setText(objeto.getNombre_caja());
-            txSucursal.setText(suc.getNombreComercial());
+                txSucursal.setText(objeto.getNombre_comercial_suc());
         }
     }
 
