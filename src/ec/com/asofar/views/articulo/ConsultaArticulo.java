@@ -286,9 +286,8 @@ public class ConsultaArticulo extends javax.swing.JDialog {
 
                 EditarArticulo es = new EditarArticulo(new javax.swing.JFrame(), true, obj);
                 es.setVisible(true);
-                CargarTabla();
-
             }
+                CargarTabla();
         }
     }//GEN-LAST:event_tablaMousePressed
 
