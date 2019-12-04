@@ -85,7 +85,7 @@ public class ValidacionCaja {
                     valor = false;
                 }
             }
-            if (detallecaja.getDineroCierre() > detallecaja.getDineroInicio()) {
+            if (detallecaja.getDineroCierre() >= detallecaja.getDineroInicio()) {
                 Double DineroCierre = detallecaja.getDineroCierre();
                 Double DineroApertura = detallecaja.getDineroInicio();
                 Double resta = DineroCierre - DineroApertura;
