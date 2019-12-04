@@ -130,8 +130,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         item.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                String permiso = "si";
-//                                                String permiso = pVender();
+//                                                String permiso = "si";
+                                                String permiso = pVender();
                                                 if (permiso.equals("no")) {
                                                     JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
                                                 } else {
