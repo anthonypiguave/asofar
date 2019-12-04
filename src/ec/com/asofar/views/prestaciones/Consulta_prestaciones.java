@@ -20,7 +20,7 @@ import java.util.Objects;
  * @author Usuario
  */
 public class Consulta_prestaciones extends javax.swing.JDialog {
-    
+
     /**
      * Creates new form Consulta_prestaciones
      */
@@ -31,7 +31,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
     PrPrestaciones prestacionesP = new PrPrestaciones();
     PrPrestaciones objeto;
     List<PrPrestaciones> prestacion;
-    
+
     PrPrestaciones prc;
     PrPrestaciones prpk;
     SeUsuarios usu;
@@ -43,6 +43,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         initComponents();
         MostrarTabla();
     }
+
     public Consulta_prestaciones(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
 
         super(parent, modal);
@@ -54,7 +55,8 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         emp = em;
         suc = su;
     }
-        public void MostrarTabla() {
+
+    public void MostrarTabla() {
         try {
 
             lista = pr.findPrPrestacionesEntities();
@@ -62,6 +64,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,11 +233,11 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
     public PrPrestaciones devuelvePrestaciones(Long id, List<PrPrestaciones> listapre) {
         PrPrestaciones doc = null;
         for (int i = 0; i < listapre.size(); i++) {
-            if(Objects.equals(listapre.get(i).getIdPrestacion(), id)){
-                System.out.println("holala"+listapre.get(i).getIdPrestacion());
+            if (Objects.equals(listapre.get(i).getIdPrestacion(), id)) {
+                System.out.println("holala" + listapre.get(i).getIdPrestacion());
                 doc = listapre.get(i);
                 break;
-                
+
             }
         }
         return doc;
@@ -246,13 +249,13 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
             id = tblPrestacion.getSelectedRow();
             prestacionesP = devuelvePrestaciones(Long.valueOf(tblPrestacion.getValueAt(id, 0).toString()), lista);
             if (prestacionesP != null) {
-               ActualizarPrestacion Ap = new ActualizarPrestacion(new javax.swing.JFrame(),true,prestacionesP,usu,emp,suc);
-               
+                ActualizarPrestacion Ap = new ActualizarPrestacion(new javax.swing.JFrame(), true, prestacionesP, usu, emp, suc);
+
                 Ap.setVisible(true);
 
-                prestacion = pr.findPrPrestacionesEntities();
-                Tablas.TablaPrestaciones(prestacion, tblPrestacion);
             }
+            prestacion = pr.findPrPrestacionesEntities();
+            Tablas.TablaPrestaciones(prestacion, tblPrestacion);
         }
 
         // TODO add your handling code here:
@@ -269,7 +272,7 @@ public class Consulta_prestaciones extends javax.swing.JDialog {
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
         char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }

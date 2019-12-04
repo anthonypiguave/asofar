@@ -26,7 +26,6 @@ public class ConsultaFab extends javax.swing.JDialog {
     PrFabricanteJpaController cfab = new PrFabricanteJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrFabricante obj = null;
 
-
     public ConsultaFab(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -257,8 +256,8 @@ public class ConsultaFab extends javax.swing.JDialog {
 //                        setVisible(false);
                         EditarFabricante ef = new EditarFabricante(new javax.swing.JFrame(), true, obj);
                         ef.setVisible(true);
-                        CargarTabla();
                     }
+                    CargarTabla();
                 }
             }
         }

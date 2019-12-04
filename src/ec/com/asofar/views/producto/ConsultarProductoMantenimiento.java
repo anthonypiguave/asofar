@@ -265,10 +265,8 @@ public class ConsultarProductoMantenimiento extends javax.swing.JDialog {
 
                 ActualizarProducto dialog = new ActualizarProducto(new javax.swing.JFrame(), true, objeto, seUsuario, seEmpresa, seSucursal);
                 dialog.setVisible(true);
-
-                cargartabla();
-
             }
+            cargartabla();
         }
     }//GEN-LAST:event_tbproductosMousePressed
 

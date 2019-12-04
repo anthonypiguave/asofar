@@ -287,10 +287,9 @@ public class consulta_tipo_bodega extends javax.swing.JDialog {
                 tipo_bodega_editar ep = new tipo_bodega_editar(new javax.swing.JFrame(), true, tipobodega, usu, emp, suc);
 //                setVisible(false);
                 ep.setVisible(true);
-
+            }
                 TipoBodega = Tbc.findInTipoBodegaEntities();
                 Tablas.TablaTipobodegaActivo(TipoBodega, tbl_bodega);
-            }
         }
     }//GEN-LAST:event_tbl_bodegaMousePressed
     public InTipoBodega devuelveObjeto(Long id, List<InTipoBodega> listabod) {
