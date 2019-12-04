@@ -591,7 +591,11 @@ public class ReporteriaExt {
         String nativeQuery = "SELECT DISTINCT IFNULL(lc.`dirreccion_cliente`,'---') FROM `se_localidad_cliente` lc \n"
                 + "WHERE lc.`id_cliente` = " + id + " limit 0,1;";
         Query query = em.createNativeQuery(nativeQuery);
-        cadena = query.getSingleResult().toString();
+        if (cadena.equals("")) {
+            cadena = "*******";
+        } else {
+            cadena = query.getSingleResult().toString();
+        }
         return cadena;
     }
 
@@ -613,8 +617,14 @@ public class ReporteriaExt {
                 + "ON se_contactos_clientes.`id_localidad` = `se_localidad_cliente`.`id_localidad_cliente`\n"
                 + "WHERE se_contactos_clientes.`nombre`='PROPIO' AND se_localidad_cliente.`id_cliente`= " + id + ";";
         Query query = em.createNativeQuery(nativeQuery);
-        cadena = query.getSingleResult().toString();
+        if (cadena.equals("")) {
+            cadena = "*******";
+        } else {
+            cadena = query.getSingleResult().toString();
+            System.out.println("poooooooooooo " + cadena);
+        }
         return cadena;
+
     }
 
     public static String buscarCorreo1(Long id) {
@@ -635,7 +645,12 @@ public class ReporteriaExt {
                 + "ON se_contactos_clientes.`id_localidad` = `se_localidad_cliente`.`id_localidad_cliente`\n"
                 + "WHERE se_contactos_clientes.`nombre`='PROPIO' AND se_localidad_cliente.`id_cliente`= " + id + ";";
         Query query = em.createNativeQuery(nativeQuery);
-        cadena = query.getSingleResult().toString();
+        if (cadena.equals("")) {
+            cadena = "********";
+
+        } else {
+            cadena = query.getSingleResult().toString();
+        }
         return cadena;
     }
 }
