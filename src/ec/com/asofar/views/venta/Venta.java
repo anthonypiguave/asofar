@@ -48,6 +48,7 @@ import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
 import ec.com.asofar.dto.VeFacturaPK;
+import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
@@ -85,6 +86,12 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  *
@@ -1388,8 +1395,43 @@ public class Venta extends javax.swing.JInternalFrame {
                         printerService.printString("EPSON-TM-T20II", "                        TOTAL: " + txtTotal.getText() + "\n");
                         printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                         printerService.printString("EPSON-TM-T20II", "--------- GRACIAS POR PREFERIRNOS --------\n");
+                        ArrayList listap =new ArrayList();
+                        for(int i=0;i<tba_detalle.getRowCount();i++){
+                        ClaseReporte clase =new ClaseReporte(txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
+                                                            tba_detalle.getValueAt(i,0).toString(),
+                                                            tba_detalle.getValueAt(i,1).toString(),
+                                                            tba_detalle.getValueAt(i,2).toString(),
+                                                            tba_detalle.getValueAt(i,3).toString(),
+                                                            tba_detalle.getValueAt(i,4).toString(),
+                                                            tba_detalle.getValueAt(i,5).toString(),
+                                                            tba_detalle.getValueAt(i,6).toString(),
+                                                            tba_detalle.getValueAt(i,7).toString(),
+                                                            tba_detalle.getValueAt(i,8).toString(),
+                                                            txtSubtotal.getText(),txtDescuento.getText(),txtIva.getText(),txtTotal.getText());
+                        listap.add(clase);                       
+                        }
+                        JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
+                        JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
+                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"++".pdf");
                     } else {
-
+                        ArrayList listap =new ArrayList();
+                        for(int i=0;i<tba_detalle.getRowCount();i++){
+                        ClaseReporte clase =new ClaseReporte(txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
+                                                            tba_detalle.getValueAt(i,0).toString(),
+                                                            tba_detalle.getValueAt(i,1).toString(),
+                                                            tba_detalle.getValueAt(i,2).toString(),
+                                                            tba_detalle.getValueAt(i,3).toString(),
+                                                            tba_detalle.getValueAt(i,4).toString(),
+                                                            tba_detalle.getValueAt(i,5).toString(),
+                                                            tba_detalle.getValueAt(i,6).toString(),
+                                                            tba_detalle.getValueAt(i,7).toString(),
+                                                            tba_detalle.getValueAt(i,8).toString(),
+                                                            txtSubtotal.getText(),txtDescuento.getText(),txtIva.getText(),txtTotal.getText());
+                        listap.add(clase);                       
+                        }
+                        JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
+                        JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
+                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"ceduladecliente-idderegistro-fecha"+".pdf");
                     }
 //                    byte[] cutP = new byte[]{0x1d, 'V', 1};
 //                    printerService.printBytes("EPSON-TM-T20II", cutP);
