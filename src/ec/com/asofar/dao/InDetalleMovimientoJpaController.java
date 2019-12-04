@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author jorge
+ * @author admini
  */
 public class InDetalleMovimientoJpaController implements Serializable {
 
@@ -39,10 +39,10 @@ public class InDetalleMovimientoJpaController implements Serializable {
             inDetalleMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK());
         }
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoDocumento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoDocumento());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdEmpresa(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdEmpresa());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdSucursal(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdSucursal());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoMovimiento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoMovimiento());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdEmpresa(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdEmpresa());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdMovimientos(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMovimientos());
         EntityManager em = null;
         try {
@@ -73,10 +73,10 @@ public class InDetalleMovimientoJpaController implements Serializable {
 
     public void edit(InDetalleMovimiento inDetalleMovimiento) throws NonexistentEntityException, Exception {
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoDocumento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoDocumento());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdEmpresa(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdEmpresa());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdSucursal(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdSucursal());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoMovimiento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoMovimiento());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdEmpresa(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdEmpresa());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdMovimientos(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMovimientos());
         EntityManager em = null;
         try {

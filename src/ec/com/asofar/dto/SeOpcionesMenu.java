@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jorge
+ * @author admini
  */
 @Entity
 @Table(name = "se_opciones_menu")
@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SeOpcionesMenu.findByOrden", query = "SELECT s FROM SeOpcionesMenu s WHERE s.orden = :orden")
     , @NamedQuery(name = "SeOpcionesMenu.findByDescripcion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.descripcion = :descripcion")
     , @NamedQuery(name = "SeOpcionesMenu.findByRuta", query = "SELECT s FROM SeOpcionesMenu s WHERE s.ruta = :ruta")
+    , @NamedQuery(name = "SeOpcionesMenu.findByRutaIcono", query = "SELECT s FROM SeOpcionesMenu s WHERE s.rutaIcono = :rutaIcono")
     , @NamedQuery(name = "SeOpcionesMenu.findByEstado", query = "SELECT s FROM SeOpcionesMenu s WHERE s.estado = :estado")
     , @NamedQuery(name = "SeOpcionesMenu.findByUsuarioCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "SeOpcionesMenu.findByFechaCreacion", query = "SELECT s FROM SeOpcionesMenu s WHERE s.fechaCreacion = :fechaCreacion")
@@ -62,6 +63,8 @@ public class SeOpcionesMenu implements Serializable {
     private String descripcion;
     @Column(name = "ruta")
     private String ruta;
+    @Column(name = "ruta_icono")
+    private String rutaIcono;
     @Column(name = "estado")
     private String estado;
     @Column(name = "usuario_creacion")
@@ -127,6 +130,14 @@ public class SeOpcionesMenu implements Serializable {
 
     public void setRuta(String ruta) {
         this.ruta = ruta;
+    }
+
+    public String getRutaIcono() {
+        return rutaIcono;
+    }
+
+    public void setRutaIcono(String rutaIcono) {
+        this.rutaIcono = rutaIcono;
     }
 
     public String getEstado() {

@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jorge
+ * @author admini
  */
 @Entity
 @Table(name = "co_cotizaciones_por_proveedor")

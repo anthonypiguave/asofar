@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jorge
+ * @author admini
  */
 @Entity
 @Table(name = "co_orden_pedido")
