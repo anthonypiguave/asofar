@@ -124,7 +124,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //                                        }
 
                                     String nombre = "GENERAR VENTA ";
-//                                    System.out.println("itemvgdfd "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                     if (lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)) {
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         item.addActionListener(new ActionListener() {
