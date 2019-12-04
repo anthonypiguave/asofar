@@ -1,343 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ec.com.asofar.views.venta;
 
-import ec.com.asofar.dao.InDetalleMovimientoJpaController;
-import ec.com.asofar.dao.InKardexJpaController;
-import ec.com.asofar.dao.InMotivosJpaController;
-import ec.com.asofar.dao.InMovimientosJpaController;
-import ec.com.asofar.dao.InTipoDocumentoJpaController;
-import ec.com.asofar.dao.InTipoMovimientoJpaController;
-import ec.com.asofar.dao.PrPrestacionesJpaController;
-import ec.com.asofar.dao.PrProductosJpaController;
 import ec.com.asofar.dao.SeClientesJpaController;
-import ec.com.asofar.dao.SeContactosClientesJpaController;
 import ec.com.asofar.dao.SeLocalidadClienteJpaController;
-import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
-import ec.com.asofar.dao.VeCajaJpaController;
-import ec.com.asofar.dao.VeDetalleCajaJpaController;
-import ec.com.asofar.dao.VeFacturaDetalleJpaController;
-import ec.com.asofar.dao.VeFacturaJpaController;
-import ec.com.asofar.daoext.InKardexExt;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.JoinProductoVentaExt;
-import ec.com.asofar.daoext.MovimientosDaoExt;
-import ec.com.asofar.daoext.ObtenerDTO;
-import ec.com.asofar.daoext.OrdenPedidoDaoExt;
 import ec.com.asofar.daoext.SeClientesExt;
-import ec.com.asofar.daoext.VeFacturaEXT;
-import ec.com.asofar.dto.InDetalleMovimiento;
-import ec.com.asofar.dto.InDetalleMovimientoPK;
-import ec.com.asofar.dto.InKardex;
-import ec.com.asofar.dto.InKardexPK;
-import ec.com.asofar.dto.InMotivos;
-import ec.com.asofar.dto.InMovimientos;
-import ec.com.asofar.dto.InTipoDocumento;
-import ec.com.asofar.dto.InTipoMovimiento;
-import ec.com.asofar.dto.PrDetalleTarifario;
 import ec.com.asofar.dto.PrPrestaciones;
-import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
-import ec.com.asofar.dto.SeContactosClientes;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
-import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
-import ec.com.asofar.dto.VeCaja;
-import ec.com.asofar.dto.VeDetalleCaja;
-import ec.com.asofar.dto.VeFactura;
 import ec.com.asofar.dto.VeFacturaDetalle;
 import ec.com.asofar.dto.VeFacturaDetallePK;
-import ec.com.asofar.dto.VeFacturaPK;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Formato_Numeros;
 import ec.com.asofar.util.Tablas;
-import ec.com.asofar.views.caja.Cierre_Caja;
-import ec.com.asofar.views.clientes.NuevoCliente;
-import ec.com.asofar.views.clientes.cliente_agregar;
-import ec.com.asofar.views.inicio.PantallaPrincipal;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import static java.awt.print.Printable.NO_SUCH_PAGE;
-import static java.awt.print.Printable.PAGE_EXISTS;
-import java.awt.print.PrinterException;
-import java.beans.PropertyVetoException;
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.SimpleDoc;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Administrador
+ * @author nuevouser
  */
-public class Venta extends javax.swing.JInternalFrame {
+public class CotizacionVenta extends javax.swing.JDialog {
 
+    int x, y;
     /**
-     * Creates new form Factura
+     * Creates new form CotizacionVenta
      */
-    Date d = new Date();
-    List<InKardex> listaKardex;
-    InKardexJpaController Kc = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<PrPrestaciones> listaPresta;
-    PrPrestacionesJpaController Prestc = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<SeClientes> Cliente;
-    SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
-    List<SeTipoIdentificacion> TiIden;
-    SeTipoIdentificacionJpaController tic = new SeTipoIdentificacionJpaController(EntityManagerUtil.ObtenerEntityManager());
-    PrProductos objetoProducto = new PrProductos();
-    List<PrProductos> ListProduct;
-    PrProductosJpaController ProducC = new PrProductosJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-    PrPrestaciones objetoPrestacion = new PrPrestaciones();
-    VeFacturaDetalle objetoFactDeta = new VeFacturaDetalle();
-    PrDetalleTarifario objetoDetTarif = new PrDetalleTarifario();
-//    InKardex objetoKardex = new InKardex();
-    SeClientes objetoCli = new SeClientes();
-    List<PrPrestaciones> listaPrest;
-    List<VeFactura> Factura;
-    VeFacturaJpaController FactC = new VeFacturaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    Long id_prest, idCaja;
     SeUsuarios usu;
     SeEmpresa emp;
     SeSucursal suc;
-    VeDetalleCaja vdc;
-    List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
-//    List<VeFacturaDetalle> listaDetFacturaPrueba = new ArrayList<VeFacturaDetalle>();
-    BigInteger cantidad, cantidadModi, idCliente, id_uni, cantidadStock;
-    Double precio, precioIva, total, descuento, subtotal;
-    Double VGTsubtotal, VGTtotal, VGTiva, VGTdescuento;
-    int Cont = 1;
-    VeFacturaEXT obtenerId_Factura = new VeFacturaEXT(EntityManagerUtil.ObtenerEntityManager());
-    VeDetalleCajaJpaController cajaDetC = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    InTipoDocumentoJpaController docCon = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    InTipoMovimientoJpaController tipoMovCon = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-    InMotivosJpaController motivoCon = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
-    Date fecha = null;
-    VeCajaJpaController cajaC = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    MovimientosDaoExt obtenerIdMovimiento = new MovimientosDaoExt(EntityManagerUtil.ObtenerEntityManager());
-////
-
-    List<InKardex> lisKar;
-    InKardex objetoKardex = new InKardex();
-    List<InKardex> ListKardex = null;
-    InKardexExt selectKardex = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
-    InKardexExt guardarKard = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
-//    InKardex objKardex = new InKardex();
-    InKardexJpaController KC = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
-//    InKardexExtJpaController KcExt = new InKardexExtJpaController(EntityManagerUtil.ObtenerEntityManager());
-    JoinProductoVenta objJoinProVen = new JoinProductoVenta();
     List<SeClientes> ListCedula = null;
-    SeClientesExt selectCliente = new SeClientesExt(EntityManagerUtil.ObtenerEntityManager());
-    List<JoinProductoVenta> ListProdVent = null;
-    JoinProductoVentaExt selectProdVent = new JoinProductoVentaExt();
-
-    List<JoinProductoVenta> ListProdVent2 = null;
-    JoinProductoVentaExt selectProdVent2 = new JoinProductoVentaExt();
     SeClientes Clientes = null;
-
-    List<SeContactosClientes> ContactoCliente;
-    SeContactosClientesJpaController Ccl = new SeContactosClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+    List<SeClientes> Cliente;
+    SeClientesExt selectCliente = new SeClientesExt(EntityManagerUtil.ObtenerEntityManager());
     List<SeLocalidadCliente> LocalidadCliente;
     SeLocalidadClienteJpaController Lc = new SeLocalidadClienteJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeClientesJpaController Cc = new SeClientesJpaController(EntityManagerUtil.ObtenerEntityManager());
+    List<VeFacturaDetalle> listaDetFactura = new ArrayList<VeFacturaDetalle>();
+    Double VGTsubtotal, VGTtotal, VGTiva, VGTdescuento;
+    int Cont = 1;
+    Double precio, precioIva, total, descuento, subtotal;
+    BigInteger cantidad, cantidadModi, idCliente, id_uni, cantidadStock;
+    List<JoinProductoVenta> ListProdVent = null;
+    JoinProductoVentaExt selectProdVent = new JoinProductoVentaExt();
+    List<JoinProductoVenta> ListProdVent2 = null;
+    JoinProductoVentaExt selectProdVent2 = new JoinProductoVentaExt();
+    PrPrestaciones objetoPrestacion = new PrPrestaciones();
+    JoinProductoVenta objJoinProVen = new JoinProductoVenta();
 
-    public Venta() {
+    public CotizacionVenta(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        this.setLocation(350, 15);
-        this.toFront();
-        btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
-        cargarLisCliente();
-        TiIden = tic.findSeTipoIdentificacionEntities();
     }
 
-    public Venta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+    public CotizacionVenta(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
         initComponents();
-        this.setLocation(250, 15);
-        cargarLisCliente();
-        btn_agregar_prod.setMnemonic(KeyEvent.VK_ENTER);
-        TiIden = tic.findSeTipoIdentificacionEntities();
         usu = us;
         emp = em;
         suc = su;
-        pVender();
-        cargartxt();
-        consFinal();
-
-    }
-
-    public class PrintEpson implements Printable {
-
-        public List<String> getPrinters() {
-            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-            PrintService printServices[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-            List<String> printerList = new ArrayList<String>();
-            for (PrintService printerService : printServices) {
-                printerList.add(printerService.getName());
-            }
-            return printerList;
-        }
-
-        @Override
-        public int print(Graphics g, PageFormat pf, int page)
-                throws PrinterException {
-            if (page > 0) {
-                /* We have only one page, and 'page' is zero-based */
-                return NO_SUCH_PAGE;
-            }
-            /*
-	         * User (0,0) is typically outside the imageable area, so we must
-	         * translate by the X and Y values in the PageFormat to avoid clipping
-             */
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.translate(pf.getImageableX(), pf.getImageableY());
-            /* Now we perform our rendering */
-            g.setFont(new Font("Arial", 4, 4));
-            g.drawString("Hello world !", 0, 10);
-            return PAGE_EXISTS;
-        }
-
-        public void printString(String printerName, String text) {
-            // find the printService of name printerName
-            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-            PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-            PrintService service = findPrintService("JAPOS1", printService);
-
-            DocPrintJob job = service.createPrintJob();
-            try {
-                byte[] bytes;
-                // important for umlaut chars
-                bytes = text.getBytes("CP437");
-                Doc doc = new SimpleDoc(bytes, flavor, null);
-                job.print(doc, null);
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-        public void printBytes(String printerName, byte[] bytes) {
-            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-            PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-            PrintService service = findPrintService(printerName, printService);
-            DocPrintJob job = service.createPrintJob();
-            try {
-                Doc doc = new SimpleDoc(bytes, flavor, null);
-                job.print(doc, null);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        private PrintService findPrintService(String printerName,
-                PrintService[] services) {
-            for (PrintService service : services) {
-                if (service.getName().equalsIgnoreCase(printerName)) {
-                    return service;
-                }
-            }
-            return null;
-        }
-    }
-
-    public void consFinal() {
-        Cliente = Cc.findSeClientesEntities();
-        for (int i = 0; i < Cliente.size(); i++) {
-
-            if (Cliente.get(i).getIdClientes() == 1) {
-//                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
-                txtNombre.setText(Cliente.get(i).getPrimerNombre());
-                txtApellido.setText(Cliente.get(i).getPrimerApellido());
-                txtIdentificacion.setText("9999999999999");
-                txt_idCliente.setText(Cliente.get(i).getIdClientes().toString());
-                txtTipoIdent.setText("********************************");
-                txtEmail.setText("********************************");
-                txtDireccion.setText("********************************");
-                txtTelefono.setText("********************************");
-            }
-        }
-//        txtNombre.setText("CONSUMIDOR");
-//        txtApellido.setText("FINAL");
-//        txtIdentificacion.setText("9999999999999");
-//        txtTipoIdent.setText("********************************");
-//        txtEmail.setText("********************************");
-//        txtDireccion.setText("********************************");
-//        txtTelefono.setText("********************************");
-    }
-
-//    public void Prueba() {
-//
-//        ListKardex = selectKardex.obtenerProductoKardex(Long.valueOf(18));
-//        for (int i = 0; i < ListKardex.size(); i++) {
-//            System.out.println("prueba " + ListKardex.get(i).getCantidad());
-//            System.out.println(" " + ListKardex.get(i).getSaldoActual());
-//            System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
-//
-//        }
-//    }
-    public void pVender() {
-        String v = null;
-        List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
-        List<VeCaja> listaCaja = cajaC.findVeCajaEntities();
-        for (int i = 0; i < listadetallecaja.size(); i++) {
-            if (listadetallecaja.get(i).getEstado().equals("A")
-                    && listadetallecaja.get(i).getIdUsuario().longValue() == usu.getIdUsuario()
-                    && listadetallecaja.get(i).getFechaCierre() == null
-                    && listadetallecaja.get(i).getHoraCierre() == null) {
-                v = "si";
-                for (int j = 0; j < listaCaja.size(); j++) {
-                    if (listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja()
-                            == listaCaja.get(j).getIdCaja()) {
-                        txt_NumeroCaja.setText("" + listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja());
-                        txt_NombreCaja.setText(listaCaja.get(j).getNombre());
-                        idCaja = listadetallecaja.get(i).getVeDetalleCajaPK().getIdCaja();
-                    }
-                }
-            } else {
-                v = "no";
-            }
-        }
-        if (v.equals("no")) {
-            JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-
-        }
-    }
-
-    public void cargartxt() {
-        txtSubtotal.setText("0.0");
-        txtDescuento.setText("0.0");
-        txtIva.setText("0.0");
-        txtTotal.setText("0.0");
-    }
-
-    public void cargarLisCliente() {
-        Cliente = Cc.findSeClientesEntities();
-        for (int i = 0; i < Cliente.size(); i++) {
-//            System.out.println("sdfbsdhjfbvjsdf");
-//            System.out.println("prin "+Cliente.get(i).getPrimerNombre()+" "+Cliente.get(i).getNumeroIdentificacion());
-        }
     }
 
     /**
@@ -349,9 +84,6 @@ public class Venta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
@@ -387,7 +119,6 @@ public class Venta extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tba_detalle = new javax.swing.JTable();
         btn_agregar_prod = new javax.swing.JButton();
-        btn_Venta = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txt_NumeroCaja = new javax.swing.JTextField();
         txt_NombreCaja = new javax.swing.JTextField();
@@ -395,23 +126,7 @@ public class Venta extends javax.swing.JInternalFrame {
         jLabel20 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        setClosable(true);
-        setIconifiable(true);
-        setTitle("FACTURA");
-        setPreferredSize(new java.awt.Dimension(0, 0));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -775,16 +490,6 @@ public class Venta extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
         );
 
-        btn_Venta.setBackground(new java.awt.Color(254, 254, 254));
-        btn_Venta.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
-        btn_Venta.setForeground(new java.awt.Color(1, 1, 1));
-        btn_Venta.setText("GENERAR VENTA ");
-        btn_Venta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_VentaActionPerformed(evt);
-            }
-        });
-
         jButton2.setBackground(new java.awt.Color(254, 254, 254));
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
@@ -841,10 +546,7 @@ public class Venta extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9))))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -866,7 +568,6 @@ public class Venta extends javax.swing.JInternalFrame {
                         .addComponent(txt_NumeroCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_NombreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -878,21 +579,16 @@ public class Venta extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 872, 694);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -940,6 +636,28 @@ public class Venta extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtIdentificacionKeyTyped
+    public void CargarCliente2() {
+        String cedula = txtIdentificacion.getText();
+        ListCedula = selectCliente.obtenerClienteVenta(cedula);
+
+        for (int i = 0; i < ListCedula.size(); i++) {
+
+            txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
+                    + ListCedula.get(i).getSegundoApellido());
+            txtNombre.setText(ListCedula.get(i).getPrimerNombre());
+            txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
+            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getEmail());
+            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getTelefono());
+            txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
+            txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
+        }
+    }
+    private void txtIdentificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            CargarCliente2();
+        }
+    }//GEN-LAST:event_txtIdentificacionKeyPressed
+
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
 
         ConsultarClienteVenta ingre = new ConsultarClienteVenta(new javax.swing.JFrame(), true, usu, emp, suc);
@@ -964,28 +682,49 @@ public class Venta extends javax.swing.JInternalFrame {
             txtTelefono.setText(localidad.getTelefono());
             txtDireccion.setText(localidad.getDirreccionCliente());
             txtTipoIdent.setText(Clientes.getIdTipoIndentificacion().getNombreIdentificacion());
-//            }
+            //            }
         } catch (Exception e) {
             Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnbuscarActionPerformed
 
-    public void CargarCliente2() {
-        String cedula = txtIdentificacion.getText();
-        ListCedula = selectCliente.obtenerClienteVenta(cedula);
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDireccionActionPerformed
 
-        for (int i = 0; i < ListCedula.size(); i++) {
+    private void txtTipoIdentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoIdentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTipoIdentActionPerformed
 
-            txtApellido.setText(ListCedula.get(i).getPrimerApellido() + " "
-                    + ListCedula.get(i).getSegundoApellido());
-            txtNombre.setText(ListCedula.get(i).getPrimerNombre());
-            txt_idCliente.setText(ListCedula.get(i).getIdClientes().toString());
-            txtEmail.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getEmail());
-            txtTelefono.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getTelefono());
-            txtDireccion.setText(ListCedula.get(i).getSeLocalidadClienteList().get(i).getDirreccionCliente());
-            txtTipoIdent.setText(ListCedula.get(i).getIdTipoIndentificacion().getNombreIdentificacion());
+    private void txtTipoIdentKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoIdentKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTipoIdentKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        consFinal();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void consFinal() {
+        Cliente = Cc.findSeClientesEntities();
+        for (int i = 0; i < Cliente.size(); i++) {
+
+            if (Cliente.get(i).getIdClientes() == 1) {
+//                System.out.println("clie " + Cliente.get(i).getPrimerNombre());
+                txtNombre.setText(Cliente.get(i).getPrimerNombre());
+                txtApellido.setText(Cliente.get(i).getPrimerApellido());
+                txtIdentificacion.setText("9999999999999");
+                txt_idCliente.setText(Cliente.get(i).getIdClientes().toString());
+                txtTipoIdent.setText("********************************");
+                txtEmail.setText("********************************");
+                txtDireccion.setText("********************************");
+                txtTelefono.setText("********************************");
+            }
         }
     }
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        setVisible(false);
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
 
     }//GEN-LAST:event_jLabel1MouseDragged
@@ -993,84 +732,6 @@ public class Venta extends javax.swing.JInternalFrame {
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
 
     }//GEN-LAST:event_jLabel1MousePressed
-    public void limpiarTxt() {
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtTelefono.setText("");
-        txtEmail.setText("");
-        consFinal();
-    }
-
-    public String validarProductos(String datos) {
-        String obj1 = "no";
-
-        for (int i = 0; i < listaDetFactura.size(); i++) {
-
-            if (datos.equals("" + (listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones()))) {
-                obj1 = "si";
-
-                break;
-            }
-
-        }
-
-        return obj1;
-
-    }
-    private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
-        ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
-        ingre.setVisible(true);
-        objJoinProVen = ingre.obtObjProdVent();
-//        if (objJoinProVen != null) {
-//        } else {
-//
-//            JOptionPane.showMessageDialog(null, "Seleccione");
-//        }
-        if (validarProductos("" + (objJoinProVen.getId_prestacion())).equals("si")) {
-            JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
-        } else {
-            cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
-            System.out.println(" fff " + cantidadStock);
-
-            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
-            FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
-            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
-
-            FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
-            cantidad = BigInteger.ONE;
-            precio = objJoinProVen.getValor_venta();
-            precioIva = calcularIvaItem();
-            descuento = objJoinProVen.getValor_descuento();
-//            if (objJoinProVen.getSaldo_actual() != 0) {
-            FactDeta.setCantidad(BigInteger.ONE);
-//            }
-//            else {
-//                JOptionPane.showMessageDialog(null, " Verifique Stock");
-//                FactDeta.setCantidad(BigInteger.ZERO);
-//            }
-            FactDeta.setValorDescuento(descuento);
-            FactDeta.setValorIva(precioIva);
-            FactDeta.setPrecioUnitarioVenta(objJoinProVen.getValor_venta());
-            subtotal = calcularSubtotal();
-            total = calcularTotalItem();
-            FactDeta.setValorTotal(total);
-            FactDeta.setSubtotal(subtotal);
-
-            listaDetFactura.add(FactDeta);
-//            listaDetFacturaPrueba.add(FactDeta);
-
-            for (int i = 0; i < listaDetFactura.size(); i++) {
-                Cont = i + 1;
-                FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
-            }
-
-            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-            Totalizar();
-            TotalizarIva();
-            TotalizarDescuento();
-            TotalizarSubtotal();
-        }
-    }//GEN-LAST:event_btn_agregar_prodActionPerformed
     private void Totalizar() {
         Double t = 0.0;
         Double p = 0.0;
@@ -1135,58 +796,6 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         }
     }
-
-    public Double calcularSubtotal() {
-        BigInteger cant;
-        Double pre;
-        Double subt;
-        cant = cantidad;
-        pre = precio;
-        subt = cant.doubleValue() * pre;
-
-        return subt;
-    }
-
-    public Double calcularTotalItem() {
-        BigInteger cant;
-        Double pre;
-        Double preIva;
-        Double total2;
-        Double desc;
-        /**/
-        preIva = calcularIvaItem();
-        cant = cantidad;
-        pre = precio;
-        desc = descuento;
-        total2 = (cant.doubleValue() * pre) + preIva - desc;
-
-        return total2;
-    }
-
-    public Double calcularIvaItem() {
-        BigInteger cant;
-        Double pre;
-        Double precioIva = null;
-        String aplica = objJoinProVen.getAplica_iva();
-        if (aplica.equals("SI")) {
-            cant = cantidad;
-            pre = precio;
-            precioIva = (cant.doubleValue() * pre) * 12 / 100;
-        } else {
-            precioIva = 0.0;
-        }
-        return precioIva;
-    }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void txtIdentificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            CargarCliente2();
-        }
-    }//GEN-LAST:event_txtIdentificacionKeyPressed
-
     private void tba_detalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_detalleMousePressed
         int row = tba_detalle.rowAtPoint(evt.getPoint());
         int col = tba_detalle.columnAtPoint(evt.getPoint());
@@ -1205,34 +814,24 @@ public class Venta extends javax.swing.JInternalFrame {
                         TotalizarIva();
                         TotalizarDescuento();
                         TotalizarSubtotal();
-//                        listaDetFactura.remove(i);
+                        //                        listaDetFactura.remove(i);
                         Cont = Cont - 1;
                         for (int j = 0; j < listaDetFactura.size(); j++) {
                             Cont = j + 1;
                             listaDetFactura.get(j).getVeFacturaDetallePK().setLineaDetalle(Cont);
                         }
                         /**/
-//                        Totalizar();
-//                        TotalizarIva();
-//                        TotalizarDescuento();
-//                        TotalizarSubtotal();
-//                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                        //                        Totalizar();
+                        //                        TotalizarIva();
+                        //                        TotalizarDescuento();
+                        //                        TotalizarSubtotal();
+                        //                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
                     }
                 } catch (Exception e) {
                 }
             }
         }
-
     }//GEN-LAST:event_tba_detalleMousePressed
-
-    private void tba_detalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyTyped
-        char car = evt.getKeyChar();
-        if (car < '0' || car > '9') {
-            evt.consume();
-        }
-
-
-    }//GEN-LAST:event_tba_detalleKeyTyped
 
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
         try {
@@ -1246,11 +845,11 @@ public class Venta extends javax.swing.JInternalFrame {
             ListProdVent = selectProdVent.listarProductoVenta();
             for (int j = 0; j < ListProdVent.size(); j++) {
                 if (ListProdVent.get(j).getId_prestacion().equals(id)) {
-//                    System.out.println("cantidadaadd "+id);
+                    //                    System.out.println("cantidadaadd "+id);
                     BigInteger ca = BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
 
                     int out = cantidadMod.compareTo(ca);
-//            int out = cantidadMod.compareTo(cantidadStock);
+                    //            int out = cantidadMod.compareTo(cantidadStock);
                     if (out == 1) {
 
                         JOptionPane.showMessageDialog(null, "Verifique Stock");
@@ -1264,13 +863,13 @@ public class Venta extends javax.swing.JInternalFrame {
                         String precioS = tba_detalle.getValueAt(i, 4).toString();
                         Double precioT = Double.valueOf(precioS.replace(",", "."));
 
-//                        String descuentoS = tba_detalle.getValueAt(i, 5).toString();
-//                        Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
+                        //                        String descuentoS = tba_detalle.getValueAt(i, 5).toString();
+                        //                        Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
                         ListProdVent2 = selectProdVent2.listarProductoVenta();
                         for (int k = 0; k < ListProdVent2.size(); k++) {
-//                            System.out.println("lista /// " + ListProdVent2.get(k).getValor_descuento());
+                            //                            System.out.println("lista /// " + ListProdVent2.get(k).getValor_descuento());
                             if (ListProdVent2.get(k).getId_prestacion() == ListProdVent.get(j).getId_prestacion()) {
-//                                System.out.println("valor " + ListProdVent2.get(k).getValor_descuento());
+                                //                                System.out.println("valor " + ListProdVent2.get(k).getValor_descuento());
                                 descuentoT = ListProdVent2.get(k).getValor_descuento();
                             }
                         }
@@ -1297,371 +896,7 @@ public class Venta extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }//GEN-LAST:event_tba_detalleKeyReleased
-
-    private void btn_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VentaActionPerformed
-
-        System.out.println("*********" + txtTotal.getText().toString() + "******");
-        if ("0.0".equals(txtTotal.getText().toString())) {
-            JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS!");
-        } else {
-            int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Vender?", "", JOptionPane.YES_NO_OPTION);
-            if (r == JOptionPane.YES_OPTION) {
-
-                guardarKardex2(listaDetFactura);
-
-                VeFactura cabFact = new VeFactura();
-                InMovimientos pkMovimiento = null;
-                VeFacturaDetalle detFact = new VeFacturaDetalle();
-                VeFacturaDetalleJpaController detFactController = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-                cabFact.setIdCaja(BigInteger.valueOf(idCaja));
-                cabFact.setSeSucursal(suc);
-                cabFact.setIdCliente(new BigInteger(txt_idCliente.getText().toString()));
-                cabFact.setSubtotal(VGTsubtotal);
-                cabFact.setTotalIva(VGTiva);
-                cabFact.setTotalDescuento(VGTdescuento);
-                cabFact.setTotalFacturado(VGTtotal);
-                cabFact.setFechaFacturacion(d);
-                cabFact.setIdUsuario(usu.getUsuario());
-                cabFact.setUsuarioCreacion(usu.getUsuario());
-                cabFact.setFechaCreacion(d);
-                cabFact.setDespachado("SI");
-                try {
-                    VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
-                    System.out.println("err " + pkFactura);
-                    System.out.println(" ffff " + listaDetFactura);
-                    for (int i = 0; i < listaDetFactura.size(); i++) {
-
-                        detFact.setVeFactura(pkFactura);
-                        detFact.setVeFacturaDetallePK(new VeFacturaDetallePK());
-                        detFact.getVeFacturaDetallePK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-                        System.out.println("*******");
-                        detFact.getVeFacturaDetallePK().setIdPrestaciones(listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones());
-                        detFact.getVeFacturaDetallePK().setIdUnidadServicio(objJoinProVen.getId_unidad_servicio().longValue());
-                        detFact.setDescripcion(listaDetFactura.get(i).getDescripcion());
-                        detFact.setCantidad(listaDetFactura.get(i).getCantidad());
-                        detFact.setPrecioUnitarioVenta(listaDetFactura.get(i).getPrecioUnitarioVenta());
-                        detFact.setSubtotal(listaDetFactura.get(i).getSubtotal());
-                        detFact.setValorIva(listaDetFactura.get(i).getValorIva());
-                        detFact.setValorDescuento(listaDetFactura.get(i).getValorDescuento());
-                        detFact.setValorTotal(listaDetFactura.get(i).getValorTotal());
-                        detFact.setEstado("A");
-                        detFact.setUsuarioCreacion(usu.getUsuario());
-                        detFact.setFechaCreacion(d);
-
-                        detFactController.create(detFact);
-                    }
-                    /*    */
-                    String empresa = emp.getNombreComercial();
-                    String sucursal = suc.getNombreComercial();
-                    String ruc = emp.getRuc();
-                    String direccion = suc.getDireccion();
-                    int im = JOptionPane.showConfirmDialog(null, "¿Desea Imprimir la factura?", "", JOptionPane.YES_NO_OPTION);
-                    if (im == JOptionPane.YES_OPTION) {
-                        Venta.PrintEpson printerService = new Venta.PrintEpson();
-                        System.out.println(printerService.getPrinters());
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
-                        printerService.printString("EPSON-TM-T20II", " *     FARMACIA " + empresa + " " + sucursal + "    *\n");
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "         Direccion: " + direccion + "\n");
-                        printerService.printString("EPSON-TM-T20II", "               RUC: " + ruc + "\n");
-                        printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "    IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", " N° IDENTIFICACION: " + txtIdentificacion.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "    NOMBRE DE CLTE: " + txtNombre.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "  APELLIDO DE CLTE: " + txtApellido.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "    CORREO DE CLTE: " + txtEmail.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "  TELEFONO DE CLTE: " + txtTelefono.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", " DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "Producto             Cant Valor Subt Total\n");
-                        for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-                            printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString().substring(0, 22).replaceAll("\n", "") + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
-                        }
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: " + txtSubtotal.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: " + txtDescuento.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "                          IVA: " + txtIva.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "                        TOTAL: " + txtTotal.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "--------- GRACIAS POR PREFERIRNOS --------\n");
-                    } else {
-
-                    }
-//                    byte[] cutP = new byte[]{0x1d, 'V', 1};
-//                    printerService.printBytes("EPSON-TM-T20II", cutP);
-
-/////////// AGREGANDO A MOVIMIENTO
-                    InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
-                    InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-                    InMovimientos cabMovimiento = new InMovimientos();
-                    InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("VENTAS");
-                    InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
-                    InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("VENTA CLIENTE FINAL");
-
-                    InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
-                    try {
-                        /*
-                    240  
-                    160  
-                    
-                    ASOFAR institucion acojedora
-                    tutor institucional  el de asofar 
-                    tutor academico --------
-                    noviembre a marzo yaaaaaaa
-                    
-                         */
-                        cabMovimiento.setSeSucursal(suc);
-//              InTipoDocumento tipoDocumento =new InTipoDocumento();
-//              tipoDocumento.setIdTipoDocumento(Long.valueOf(5));
-                        cabMovimiento.setInTipoDocumento(tipoDocumento);
-//                    System.out.println(" gf "+tipoDocumento.getNombreDocumento());
-//InTipoMovimiento tipoMovimiento = new InTipoMovimiento();
-//tipoMovimiento.setIdTipoMovimiento(Long.valueOf(1));
-                        cabMovimiento.setInTipoMovimiento(tipoMovimiento);
-//              InMotivos tipoMotivos = new InMotivos();
-//              tipoMotivos.setIdMotivo(Long.valueOf(2));
-                        cabMovimiento.setInMotivos(tipoMotivos);
-                        cabMovimiento.setFechaSistema(d);
-                        cabMovimiento.setAnioDocumento(fecha);
-                        cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
-                        cabMovimiento.setEstado("F");
-                        cabMovimiento.setFechaFactura(d);
-                        cabMovimiento.setUsuarioCreacion(usu.getUsuario());
-                        cabMovimiento.setFechaCreacion(d);
-
-                        pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
-
-                        for (int i = 0; i < listaDetFactura.size(); i++) {
-                            detMovimiento.setInMovimientos(pkMovimiento);
-                            detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
-                            detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-
-                            Long id_pro = IdProductoDsdObPres(listaDetFactura);
-                            Long id_Bod = IdBodegD(id_pro);
-
-                            detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
-                            detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
-                            detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
-                            detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
-                            detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
-                            detMovimiento.setEstado("A");
-
-                            detMovimiento.setUsuarioCreacion(usu.getUsuario());
-                            detMovimiento.setFechaCreacion(d);
-                            detMovController.create(detMovimiento);
-                            limpiar();
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-//                    guardarKardex2(listaDetFactura);
-                    JOptionPane.showMessageDialog(null, "VENTA REALIZADA CON EXITO");
-                    limpiar();
-//                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-//                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
-//                Iv.setVisible(true);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-//             JOptionPane.showMessageDialog(null, "");
-            } else {
-            }
-        }
-    }//GEN-LAST:event_btn_VentaActionPerformed
-
-    public void limpiar() {
-        consFinal();
-        listaDetFactura.clear();
-        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-        txtSubtotal.setText("");
-        txtDescuento.setText("");
-        txtIva.setText("");
-        txtTotal.setText("");
-    }
-
-    public void guardarKardex2(List<VeFacturaDetalle> listaDetFactura) {
-        listaPresta = Prestc.findPrPrestacionesEntities();
-        Long id_Prod = null;
-        InKardexJpaController KCon = new InKardexJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-        InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("Venta");
-        InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
-        InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("Venta Cliente Final");
-//        System.out.println("111");
-        for (int i = 0; i < listaPresta.size(); i++) {
-            for (int j = 0; j < listaDetFactura.size(); j++) {
-                if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())
-                        && listaPresta.get(i).getIdPoducto() != null /*
-                        
-                         */) {
-
-                    id_Prod = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
-
-                    ListKardex = selectKardex.obtenerProductoKardex(id_Prod);
-//                    System.out.println(" - "+ListKardex);
-                    for (int k = 0; k < ListKardex.size(); k++) {
-//                        System.out.println("8888");
-                        BigInteger cantVenta = listaDetFactura.get(j).getCantidad();
-                        System.out.println("cant venta " + cantVenta);
-                        BigInteger cantActual = ListKardex.get(k).getSaldoActual();
-                        System.out.println("cant actu " + cantActual);
-                        BigInteger resta = cantActual.subtract(cantVenta);
-                        System.out.println("resta " + resta);
-
-                        Long id_Bod = IdBodegD(id_Prod);
-
-                        InKardex objKardex = new InKardex();
-                        objKardex.setInKardexPK(new InKardexPK());
-
-                        objKardex.getInKardexPK().setIdBodega(id_Bod);
-                        objKardex.getInKardexPK().setIdProducto(id_Prod);
-//                        objKardex.getInKardexPK().setIdTipoDocumento(7);
-                        System.out.println("costo *" + ListKardex.get(k).getCostoPromedio() + "*");
-                        objKardex.setCostoPromedio(ListKardex.get(k).getCostoPromedio());
-                        objKardex.setInTipoDocumento(tipoDocumento);
-                        objKardex.setSeSucursal(suc);
-                        objKardex.setFechaMovimiento(d);
-                        objKardex.setFechaCreacion(d);
-//                        objKardex.getInKardexPK().setIdTipoDocumento(7);
-//                        objKar.setAnioDocumento(fecha.toString());
-//                        objKardex.setFechaSistema(fecha);
-                        objKardex.setCantidad(cantVenta);
-                        objKardex.setSaldoActual(resta);
-                        objKardex.setSaldoAnterior(cantActual);
-//                        objKardex.setUsuarioCreacion(usu.getIdUsuario());
-//                        objKardex.setFechaCreacion(fecha);
-                        ////////  costo actual y anterior/////
-
-                        objKardex.setCostoActual(ListKardex.get(k).getCostoActual());
-                        try {
-                            KCon.create(objKardex);
-                        } catch (Exception ex) {
-                            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
-    public void selectKardex(Long id) {
-        ListKardex = selectKardex.obtenerProductoKardex(id);
-        for (int i = 0; i < ListKardex.size(); i++) {
-            System.out.println("select ultimo id  " + ListKardex.get(i).getCantidad());
-            System.out.println(" " + ListKardex.get(i).getSaldoActual());
-            System.out.println(" " + ListKardex.get(i).getSaldoAnterior());
-            System.out.println(" --");
-
-        }
-    }
-    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDireccionActionPerformed
-
-    private void txtTipoIdentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoIdentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoIdentActionPerformed
-
-    private void txtTipoIdentKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoIdentKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoIdentKeyTyped
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        limpiar();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        consFinal();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       
-        CotizacionVenta ses = new CotizacionVenta(new javax.swing.JFrame(), true,usu, emp, suc);
-         setVisible(false);
-        ses.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    public Long IdProductoDsdObPres(List<VeFacturaDetalle> listaDetFactura) {
-        Long id_producto = null;
-        listaPresta = Prestc.findPrPrestacionesEntities();
-
-        for (int i = 0; i < listaPresta.size(); i++) {
-            for (int j = 0; j < listaDetFactura.size(); j++) {
-                if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
-                    id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
-
-                }
-            }
-        }
-        return id_producto;
-
-    }
-
-    public Long IdBodegD(Long id_Pro) {
-        Long id_bog = null;
-        lisKar = KC.findInKardexEntities();
-
-        for (int k = 0; k < lisKar.size(); k++) {
-            if (id_Pro.equals(lisKar.get(k).getInKardexPK().getIdProducto())) {
-                id_bog = lisKar.get(k).getInKardexPK().getIdBodega();
-                System.out.println("bodeha " + id_bog);
-            }
-        }
-        return id_bog;
-    }
-
-    public Double calcularSubtotalItemCantMod(BigInteger cantMod, Double PrecioIva) {
-        Double subto = null;
-        subto = cantMod.doubleValue() * PrecioIva;
-        return subto;
-    }
-
-    public Double calcularTotalItemCantMod(BigInteger cantMod, Double PrecioIva, Double desc) {
-
-        Double pre;
-        Double total2;
-        /**/
-        pre = precio;
-        total2 = (cantMod.doubleValue() * pre) + PrecioIva - desc;
-
-        return total2;
-    }
-
-    public Double calcularTotalItemCantMod(BigInteger cantMod, Double PrecioIva, Double desc, Double precio) {
-
-        Double pre;
-        Double total2;
-        /**/
-        pre = precio;
-        total2 = (cantMod.doubleValue() * pre) + PrecioIva - desc;
-
-        return total2;
-    }
-
-    public Double calcularDescuentoItemCantMod(BigInteger cantMod, Double descuento) {
-        Double descuent = null;
-        descuent = cantMod.doubleValue() * descuento;
-        return descuent;
-    }
-
-    public Double calcularDescuentoItemCantMod(BigInteger cantMod, Double descuento, Double posicionDescuento) {
-        Double descuent = null;
-        if (posicionDescuento != 0.0) {
-            descuent = cantMod.doubleValue() * descuento;
-        } else {
-            descuent = 0.0;
-        }
-        return descuent;
-    }
-
     public Double calcularIvaItemCantMod(BigInteger cantMod, Double posicionIva, Double posicionPrecio) {
 
 //        BigInteger cant;
@@ -1679,25 +914,210 @@ public class Venta extends javax.swing.JInternalFrame {
         return precioIva2;
     }
 
-    public Double calcularIvaItemCantMod(BigInteger cantMod) {
+    public Double calcularDescuentoItemCantMod(BigInteger cantMod, Double descuento) {
+        Double descuent = null;
+        descuent = cantMod.doubleValue() * descuento;
+        return descuent;
+    }
 
-//        BigInteger cant;
+    public Double calcularSubtotalItemCantMod(BigInteger cantMod, Double PrecioIva) {
+        Double subto = null;
+        subto = cantMod.doubleValue() * PrecioIva;
+        return subto;
+    }
+
+    public Double calcularTotalItemCantMod(BigInteger cantMod, Double PrecioIva, Double desc, Double precio) {
+
         Double pre;
-        Double precioIva2 = null;
-        String aplica = objetoPrestacion.getAplicaIva();
+        Double total2;
+        /**/
+        pre = precio;
+        total2 = (cantMod.doubleValue() * pre) + PrecioIva - desc;
 
-        if (aplica.equals("SI")) {
-//            cant = cantidad;
-            pre = precio;
-            precioIva2 = (cantMod.doubleValue() * pre) * 12 / 100;
-        } else {
-            precioIva2 = 0.0;
+        return total2;
+    }
+
+    private void tba_detalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyTyped
+        char car = evt.getKeyChar();
+        if (car < '0' || car > '9') {
+            evt.consume();
         }
-        return precioIva2;
+
+    }//GEN-LAST:event_tba_detalleKeyTyped
+
+    private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
+        ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
+        ingre.setVisible(true);
+        objJoinProVen = ingre.obtObjProdVent();
+        //        if (objJoinProVen != null) {
+        //        } else {
+        //
+        //            JOptionPane.showMessageDialog(null, "Seleccione");
+        //        }
+        if (validarProductos("" + (objJoinProVen.getId_prestacion())).equals("si")) {
+            JOptionPane.showMessageDialog(rootPane, "El producto ya se fue seleccionado!");
+        } else {
+            cantidadStock = BigInteger.valueOf(objJoinProVen.getSaldo_actual());
+            System.out.println(" fff " + cantidadStock);
+
+            VeFacturaDetalle FactDeta = new VeFacturaDetalle();
+            FactDeta.setVeFacturaDetallePK(new VeFacturaDetallePK());
+            FactDeta.getVeFacturaDetallePK().setIdPrestaciones(objJoinProVen.getId_prestacion());
+
+            FactDeta.setDescripcion(objJoinProVen.getNombre_producto());
+            cantidad = BigInteger.ONE;
+            precio = objJoinProVen.getValor_venta();
+            precioIva = calcularIvaItem();
+            descuento = objJoinProVen.getValor_descuento();
+            //            if (objJoinProVen.getSaldo_actual() != 0) {
+            FactDeta.setCantidad(BigInteger.ONE);
+            //            }
+            //            else {
+            //                JOptionPane.showMessageDialog(null, " Verifique Stock");
+            //                FactDeta.setCantidad(BigInteger.ZERO);
+            //            }
+            FactDeta.setValorDescuento(descuento);
+            FactDeta.setValorIva(precioIva);
+            FactDeta.setPrecioUnitarioVenta(objJoinProVen.getValor_venta());
+            subtotal = calcularSubtotal();
+            total = calcularTotalItem();
+            FactDeta.setValorTotal(total);
+            FactDeta.setSubtotal(subtotal);
+
+            listaDetFactura.add(FactDeta);
+            //            listaDetFacturaPrueba.add(FactDeta);
+
+            for (int i = 0; i < listaDetFactura.size(); i++) {
+                Cont = i + 1;
+                FactDeta.getVeFacturaDetallePK().setLineaDetalle(Cont);
+            }
+
+            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+            Totalizar();
+            TotalizarIva();
+            TotalizarDescuento();
+            TotalizarSubtotal();
+        }
+    }//GEN-LAST:event_btn_agregar_prodActionPerformed
+
+    public Double calcularTotalItem() {
+        BigInteger cant;
+        Double pre;
+        Double preIva;
+        Double total2;
+        Double desc;
+        /**/
+        preIva = calcularIvaItem();
+        cant = cantidad;
+        pre = precio;
+        desc = descuento;
+        total2 = (cant.doubleValue() * pre) + preIva - desc;
+
+        return total2;
+    }
+
+    public Double calcularSubtotal() {
+        BigInteger cant;
+        Double pre;
+        Double subt;
+        cant = cantidad;
+        pre = precio;
+        subt = cant.doubleValue() * pre;
+
+        return subt;
+    }
+
+    public String validarProductos(String datos) {
+        String obj1 = "no";
+
+        for (int i = 0; i < listaDetFactura.size(); i++) {
+
+            if (datos.equals("" + (listaDetFactura.get(i).getVeFacturaDetallePK().getIdPrestaciones()))) {
+                obj1 = "si";
+
+                break;
+            }
+
+        }
+
+        return obj1;
+
+    }
+
+    public Double calcularIvaItem() {
+        BigInteger cant;
+        Double pre;
+        Double precioIva = null;
+        String aplica = objJoinProVen.getAplica_iva();
+        if (aplica.equals("SI")) {
+            cant = cantidad;
+            pre = precio;
+            precioIva = (cant.doubleValue() * pre) * 12 / 100;
+        } else {
+            precioIva = 0.0;
+        }
+        return precioIva;
+    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+    public void limpiar() {
+        consFinal();
+        listaDetFactura.clear();
+        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+        txtSubtotal.setText("");
+        txtDescuento.setText("");
+        txtIva.setText("");
+        txtTotal.setText("");
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CotizacionVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CotizacionVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CotizacionVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CotizacionVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                CotizacionVenta dialog = new CotizacionVenta(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Venta;
     private javax.swing.JButton btn_agregar_prod;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JButton jButton1;
@@ -1715,7 +1135,6 @@ public class Venta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1724,9 +1143,7 @@ public class Venta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable tba_detalle;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JLabel txtDescuento;
@@ -1743,5 +1160,4 @@ public class Venta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_NumeroCaja;
     private javax.swing.JTextField txt_idCliente;
     // End of variables declaration//GEN-END:variables
-
 }
