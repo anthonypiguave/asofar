@@ -962,6 +962,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                                                             bodegaStock.setInBodega(bodega);
                                                             bodegaStock.setUsuarioCreacion(seUsuario.getUsuario());
                                                             bodegaStock.setFechaCreacion(d);
+                                                            bodegaStock.setEstado("A");
 
                                                             bodegaStockController.create(bodegaStock);
 

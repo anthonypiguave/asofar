@@ -1100,6 +1100,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
                                                 bodegaStock.setInBodega(bodega);
                                                 bodegaStock.setUsuarioActualizacion(seUsuario.getUsuario());
                                                 bodegaStock.setFechaActualizacion(d);
+                                                bodegaStock.setEstado("A");
 
                                                 bodegaStockController.edit(bodegaStock);
                                             }
