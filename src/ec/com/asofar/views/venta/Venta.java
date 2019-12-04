@@ -1412,7 +1412,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         }
                         JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
                         JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
-                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"++".pdf");
+                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+""+".pdf");
                     } else {
                         ArrayList listap =new ArrayList();
                         for(int i=0;i<tba_detalle.getRowCount();i++){
