@@ -21,7 +21,6 @@ import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Validacion;
-import ec.com.asofar.views.producto.NuevoProducto;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -500,120 +499,122 @@ public class NuevoCliente extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(null, "falta N. Indentificacion!");
                         } else {
 
-                            if (Arrays.asList(cadenaArray1).contains(txtTelefono.getText())) {
-                                JOptionPane.showMessageDialog(null, "falta telefono!");
-                            } else {
+//                            if (Arrays.asList(cadenaArray1).contains(txtTelefono.getText())) {
+//                                JOptionPane.showMessageDialog(null, "falta telefono!");
+//                            } else {
+//
+//                                if (Arrays.asList(cadenaArray1).contains(txtMovil.getText())) {
+//                                    JOptionPane.showMessageDialog(null, "falta Movil!");
+//                                } else {
+//                                    if (Arrays.asList(cadenaArray1).contains(txtEmail.getText())) {
+//                                        JOptionPane.showMessageDialog(null, "falta Email!");
+//                                    } else {
+//                                        if (Arrays.asList(cadenaArray1).contains(txtPais.getText())) {
+//                                            JOptionPane.showMessageDialog(null, "elija la Pais!");
+//                                        } else {
+//                                            if (Arrays.asList(cadenaArray1).contains(txtProvincia.getText())) {
+//                                                JOptionPane.showMessageDialog(null, "elija la Provincia!");
+//                                            } else {
+//
+//                                                if (Arrays.asList(cadenaArray1).contains(txtCiudad.getText())) {
+//                                                    JOptionPane.showMessageDialog(null, "elija la Ciudad!");
+//                                                } else {
+//                                                    if (Arrays.asList(cadenaArray1).contains(txtDireccion.getText())) {
+//                                                        JOptionPane.showMessageDialog(null, "falta Direccion");
+//                                                    } else {
+//
+//                                                        if (Arrays.asList(cadenaArray1).contains(txtDireccionEntrega.getText())) {
+//                                                            JOptionPane.showMessageDialog(null, "falta Direccion Entrega!");
+//                                                        } else {
+                            try {
+                                cliente.setIdTipoIndentificacion(tipoIndentificacion);
+                                cliente.setNumeroIdentificacion(txtNCedula.getText());
+                                ArmarCadenaUsuario();
+                                cliente.setRazonSocial(txtRazonSocial.getText());
+                                cliente.setEstado("A");
+                                cliente.setUsuarioCreacion(seUsuario.getUsuario());
+                                cliente.setFechaCreacion(d);
 
-                                if (Arrays.asList(cadenaArray1).contains(txtMovil.getText())) {
-                                    JOptionPane.showMessageDialog(null, "falta Movil!");
-                                } else {
-                                    if (Arrays.asList(cadenaArray1).contains(txtEmail.getText())) {
-                                        JOptionPane.showMessageDialog(null, "falta Email!");
-                                    } else {
-                                        if (Arrays.asList(cadenaArray1).contains(txtPais.getText())) {
-                                            JOptionPane.showMessageDialog(null, "elija la Pais!");
-                                        } else {
-                                            if (Arrays.asList(cadenaArray1).contains(txtProvincia.getText())) {
-                                                JOptionPane.showMessageDialog(null, "elija la Provincia!");
-                                            } else {
+                                clienteController.create(cliente);
 
-                                                if (Arrays.asList(cadenaArray1).contains(txtCiudad.getText())) {
-                                                    JOptionPane.showMessageDialog(null, "elija la Ciudad!");
-                                                } else {
-                                                    if (Arrays.asList(cadenaArray1).contains(txtDireccion.getText())) {
-                                                        JOptionPane.showMessageDialog(null, "falta Direccion");
-                                                    } else {
+                                ////////////////////////////////////////////////
+                                SeClientes clienteObjeto = new SeClientes();
 
-                                                        if (Arrays.asList(cadenaArray1).contains(txtDireccionEntrega.getText())) {
-                                                            JOptionPane.showMessageDialog(null, "falta Direccion Entrega!");
-                                                        } else {
-                                                            try {
-                                                                cliente.setIdTipoIndentificacion(tipoIndentificacion);
-                                                                cliente.setNumeroIdentificacion(txtNCedula.getText());
-                                                                ArmarCadenaUsuario();
-                                                                cliente.setRazonSocial(txtRazonSocial.getText());
-                                                                cliente.setEstado("A");
-                                                                cliente.setUsuarioCreacion(seUsuario.getUsuario());
-                                                                cliente.setFechaCreacion(d);
+                                lista = new ArrayList<SeClientes>();
 
-                                                                clienteController.create(cliente);
+                                lista = clienteController.findSeClientesEntities();
 
-                                                                ////////////////////////////////////////////////
-                                                                SeClientes clienteObjeto = new SeClientes();
+                                for (int i = 0; i < lista.size(); i++) {
 
-                                                                lista = new ArrayList<SeClientes>();
+                                    if (lista.get(i).getNumeroIdentificacion().equals(cliente.getNumeroIdentificacion())) {
 
-                                                                lista = clienteController.findSeClientesEntities();
+                                        clienteObjeto = lista.get(i);
 
-                                                                for (int i = 0; i < lista.size(); i++) {
-
-                                                                    if (lista.get(i).getNumeroIdentificacion().equals(cliente.getNumeroIdentificacion())) {
-
-                                                                        clienteObjeto = lista.get(i);
-
-                                                                    }
-
-                                                                }
-
-                                                                localidadCliente.setCelular(txtMovil.getText());
-                                                                localidadCliente.setTelefono(txtTelefono.getText());
-                                                                localidadCliente.setDirreccionCliente(txtDireccion.getText());
-                                                                localidadCliente.setDirreccionEntrega(txtDireccionEntrega.getText());
-                                                                localidadCliente.setEmail(txtEmail.getText());
-                                                                localidadCliente.setIdCliente(clienteObjeto);
-
-                                                                localidadCliente.setIdPais(pais);
-                                                                localidadCliente.setIdProvincia(provincia);
-                                                                localidadCliente.setIdCiudad(ciudad);
-
-                                                                localidadCliente.setEstado("A");
-                                                                localidadCliente.setUsuarioCreacion(seUsuario.getUsuario());
-                                                                localidadCliente.setFechaCreacion(d);
-
-                                                                localidadClienteController.create(localidadCliente);
-
-                                                                //////////////////////////////////////
-                                                                SeLocalidadCliente localidadClienteObjeto = new SeLocalidadCliente();
-
-                                                                lista1 = new ArrayList<SeLocalidadCliente>();
-                                                                lista1 = localidadClienteController.findSeLocalidadClienteEntities();
-
-                                                                for (int i = 0; i < lista1.size(); i++) {
-
-                                                                    if (lista1.get(i).getIdCliente().equals(localidadCliente.getIdCliente())) {
-
-                                                                        localidadClienteObjeto = lista1.get(i);
-
-                                                                    }
-
-                                                                }
-
-                                                                contactosClientes.setIdLocalidad(localidadClienteObjeto);
-                                                                contactosClientes.setNombre("PROPIO");
-
-                                                                contactosClientes.setEstado("A");
-                                                                contactosClientes.setUsuarioCreacion(seUsuario.getUsuario());
-                                                                contactosClientes.setFechaCreacion(d);
-
-                                                                contactosClientesController.create(contactosClientes);
-
-                                                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                                                                setVisible(false);
-
-                                                            } catch (Exception e) {
-
-                                                                Logger.getLogger(NuevoCliente.class.getName()).log(Level.SEVERE, null, e);
-
-                                                            }
-
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
                                     }
+
                                 }
+
+                                localidadCliente.setCelular(txtMovil.getText());
+                                localidadCliente.setTelefono(txtTelefono.getText());
+                                localidadCliente.setDirreccionCliente(txtDireccion.getText());
+                                localidadCliente.setDirreccionEntrega(txtDireccionEntrega.getText());
+                                localidadCliente.setEmail(txtEmail.getText());
+                                localidadCliente.setIdCliente(clienteObjeto);
+
+                                if (pais.getNombre() !=null && provincia.getNombre() != null && ciudad.getNombre() != null) {
+                                    localidadCliente.setIdPais(pais);
+                                    localidadCliente.setIdProvincia(provincia);
+                                    localidadCliente.setIdCiudad(ciudad);
+                                }
+
+                                localidadCliente.setEstado("A");
+                                localidadCliente.setUsuarioCreacion(seUsuario.getUsuario());
+                                localidadCliente.setFechaCreacion(d);
+
+                                localidadClienteController.create(localidadCliente);
+
+                                //////////////////////////////////////
+                                SeLocalidadCliente localidadClienteObjeto = new SeLocalidadCliente();
+
+                                lista1 = new ArrayList<SeLocalidadCliente>();
+                                lista1 = localidadClienteController.findSeLocalidadClienteEntities();
+
+                                for (int i = 0; i < lista1.size(); i++) {
+
+                                    if (lista1.get(i).getIdCliente().equals(localidadCliente.getIdCliente())) {
+
+                                        localidadClienteObjeto = lista1.get(i);
+
+                                    }
+
+                                }
+
+                                contactosClientes.setIdLocalidad(localidadClienteObjeto);
+                                contactosClientes.setNombre("PROPIO");
+
+                                contactosClientes.setEstado("A");
+                                contactosClientes.setUsuarioCreacion(seUsuario.getUsuario());
+                                contactosClientes.setFechaCreacion(d);
+
+                                contactosClientesController.create(contactosClientes);
+
+                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                setVisible(false);
+
+                            } catch (Exception e) {
+
+                                Logger.getLogger(NuevoCliente.class.getName()).log(Level.SEVERE, null, e);
+
                             }
+
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
                         }
                     }
 
