@@ -94,6 +94,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             if (lis.get(i).getIdPadre() == null) {
                 if (lis.get(i).getRuta() == null) {
                     JMenu menu = new JMenu(lis.get(i).getNombre());
+                    //Ruta
+                    System.out.println("Ruta.."+lis.get(i).getRutaIcono());
+                    menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
                     for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
                         for (int k = 0; k < lis.size(); k++) {
                             if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
