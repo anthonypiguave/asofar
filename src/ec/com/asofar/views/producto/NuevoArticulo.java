@@ -110,6 +110,12 @@ public class NuevoArticulo extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("NOMBRE:");
 
+        txtArticulo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtArticuloFocusLost(evt);
+            }
+        });
+
         btnAceptar.setBackground(new java.awt.Color(254, 254, 254));
         btnAceptar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(1, 1, 1));
@@ -207,6 +213,10 @@ public class NuevoArticulo extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtArticuloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtArticuloFocusLost
+        txtArticulo.setText(txtArticulo.getText().toUpperCase());
+    }//GEN-LAST:event_txtArticuloFocusLost
 
     /**
      * @param args the command line arguments

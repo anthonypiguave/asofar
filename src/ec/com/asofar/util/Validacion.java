@@ -24,4 +24,40 @@ public class Validacion {
             return false;
         }
     }
+
+    public static boolean FiltroLetraNumeroSinEspacio(java.awt.event.KeyEvent evt) {
+
+        char c = evt.getKeyChar();
+        if (!Character.isLetterOrDigit(c) || Character.isSpaceChar(c)) {
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static boolean FiltroLetraSinEspacio(java.awt.event.KeyEvent evt) {
+
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static boolean FiltroNumeroSinEspacio(java.awt.event.KeyEvent evt) {
+
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

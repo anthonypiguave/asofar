@@ -135,6 +135,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTipoPresentacion">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTipoPresentacionFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAceptar">
           <Properties>

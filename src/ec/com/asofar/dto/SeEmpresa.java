@@ -73,7 +73,7 @@ public class SeEmpresa implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seEmpresa")
     private List<PrProductos> prProductosList;
     @OneToMany(mappedBy = "idEmpresa")
@@ -176,11 +176,11 @@ public class SeEmpresa implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

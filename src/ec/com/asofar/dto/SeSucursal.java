@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SeSucursal.findByIdSucursal", query = "SELECT s FROM SeSucursal s WHERE s.seSucursalPK.idSucursal = :idSucursal")
     , @NamedQuery(name = "SeSucursal.findByIdEmpresa", query = "SELECT s FROM SeSucursal s WHERE s.seSucursalPK.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "SeSucursal.findByNombreComercial", query = "SELECT s FROM SeSucursal s WHERE s.nombreComercial = :nombreComercial")
+    , @NamedQuery(name = "SeSucursal.findByRuc", query = "SELECT s FROM SeSucursal s WHERE s.ruc = :ruc")
     , @NamedQuery(name = "SeSucursal.findByTelefono", query = "SELECT s FROM SeSucursal s WHERE s.telefono = :telefono")
     , @NamedQuery(name = "SeSucursal.findByDireccion", query = "SELECT s FROM SeSucursal s WHERE s.direccion = :direccion")
     , @NamedQuery(name = "SeSucursal.findByCorreo", query = "SELECT s FROM SeSucursal s WHERE s.correo = :correo")
@@ -50,6 +51,8 @@ public class SeSucursal implements Serializable {
     protected SeSucursalPK seSucursalPK;
     @Column(name = "nombre_comercial")
     private String nombreComercial;
+    @Column(name = "ruc")
+    private String ruc;
     @Column(name = "telefono")
     private String telefono;
     @Column(name = "direccion")
@@ -67,7 +70,7 @@ public class SeSucursal implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
     @Column(name = "estado")
-    private Character estado;
+    private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
     private List<InBodega> inBodegaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seSucursal")
@@ -113,6 +116,14 @@ public class SeSucursal implements Serializable {
 
     public void setNombreComercial(String nombreComercial) {
         this.nombreComercial = nombreComercial;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
     public String getTelefono() {
@@ -171,11 +182,11 @@ public class SeSucursal implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public Character getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

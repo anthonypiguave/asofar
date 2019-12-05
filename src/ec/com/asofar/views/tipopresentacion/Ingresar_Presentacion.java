@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class Ingresar_Presentacion extends javax.swing.JDialog {
-
+    
     PrTipoPresentacionJpaController Prtipo = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
@@ -64,6 +64,11 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
         lblnombre.setText("NOMBRE:");
 
         txtnombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtnombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtnombreFocusLost(evt);
+            }
+        });
 
         btnguardar.setBackground(new java.awt.Color(254, 254, 254));
         btnguardar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
@@ -139,7 +144,7 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         try {
             PrTipoPresentacion tipo = new PrTipoPresentacion();
-
+            
             tipo.setNombre(txtnombre.getText());
             tipo.setEstado("A");
             tipo.setFechaCreacion(Fecha.FechaSql());
@@ -159,6 +164,10 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
         Tipo_presentacion a = new Tipo_presentacion(new javax.swing.JFrame(), true);
         a.setVisible(true);
     }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void txtnombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnombreFocusLost
+        txtnombre.setText(txtnombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtnombreFocusLost
 
     /**
      * @param args the command line arguments

@@ -5,13 +5,13 @@
  */
 package ec.com.asofar.views.producto;
 
-
 import ec.com.asofar.dao.PrTipoMedidasJpaController;
 import ec.com.asofar.dto.PrTipoMedidas;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Validacion;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.Date;
@@ -25,15 +25,14 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class NuevoTipoMedida extends javax.swing.JDialog {
-    
+
     int x, y;
     String valor = "";
     Date d = new Date();
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
-   
-    
+
     List<PrTipoMedidas> lista;
     PrTipoMedidasJpaController cont = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
 
@@ -44,9 +43,9 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
+
     }
-    
+
     public NuevoTipoMedida(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
@@ -54,7 +53,7 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-        
+
     }
 
     /**
@@ -108,6 +107,17 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("NOMBRE:");
+
+        txtTipoMedida.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTipoMedidaFocusLost(evt);
+            }
+        });
+        txtTipoMedida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTipoMedidaKeyTyped(evt);
+            }
+        });
 
         btnAceptar.setBackground(new java.awt.Color(254, 254, 254));
         btnAceptar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
@@ -186,25 +196,37 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         PrTipoMedidas obj = new PrTipoMedidas();
-        
+
         if (r == JOptionPane.YES_OPTION) {
             try {
-                
+
                 obj.setNombreTipoMedida(txtTipoMedida.getText());
                 obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
-                
+
                 cont.create(obj);
-                
+
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                 setVisible(false);
-                
+
             } catch (Exception ex) {
                 Logger.getLogger(NuevoTipoMedida.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtTipoMedidaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTipoMedidaFocusLost
+        txtTipoMedida.setText(txtTipoMedida.getText().toUpperCase());
+    }//GEN-LAST:event_txtTipoMedidaFocusLost
+
+    private void txtTipoMedidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoMedidaKeyTyped
+        boolean estado = Validacion.FiltroLetraNumeroSinEspacio(evt);
+        if (estado) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTipoMedidaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -277,8 +299,6 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
-
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {

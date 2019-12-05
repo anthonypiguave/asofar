@@ -17,11 +17,11 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class Editar_Presentacion extends javax.swing.JDialog {
-
+    
     int x, y;
     PrTipoPresentacionJpaController tipo = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrTipoPresentacion objeto;
-
+    
     public Editar_Presentacion(java.awt.Frame parent, boolean modal, PrTipoPresentacion tipop) {
         super(parent, modal);
         initComponents();
@@ -31,18 +31,18 @@ public class Editar_Presentacion extends javax.swing.JDialog {
         objeto = tipop;
         // llenarDatos();
     }
-
+    
     public Editar_Presentacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(this);
         // llenarDatos();
     }
-
+    
     public void llenarDatos() {
         txtnombre.setText(objeto.getNombre());
         combo.setSelectedItem(objeto.getEstado());
-
+        
     }
 
     /**
@@ -90,6 +90,11 @@ public class Editar_Presentacion extends javax.swing.JDialog {
         jLabel1.setText("NOMBRE:");
 
         txtnombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        txtnombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtnombreFocusLost(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
@@ -191,7 +196,7 @@ public class Editar_Presentacion extends javax.swing.JDialog {
         } catch (Exception e) {
             System.err.println(e.getMessage() + "Hola");
         }
-
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -211,6 +216,10 @@ public class Editar_Presentacion extends javax.swing.JDialog {
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel2MouseDragged
 
+    private void txtnombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnombreFocusLost
+        txtnombre.setText(txtnombre.getText().toUpperCase());
+    }//GEN-LAST:event_txtnombreFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -225,21 +234,21 @@ public class Editar_Presentacion extends javax.swing.JDialog {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Editar_Presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(Editar_Presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Editar_Presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Editar_Presentacion.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);

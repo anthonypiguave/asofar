@@ -93,7 +93,6 @@ public class cliente_agregar extends javax.swing.JDialog {
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton1.setText("SALIR");
-        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -178,7 +177,6 @@ public class cliente_agregar extends javax.swing.JDialog {
         btnguardar.setForeground(new java.awt.Color(1, 1, 1));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnguardar.setText("GUARDAR");
-        btnguardar.setOpaque(true);
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
@@ -241,24 +239,25 @@ public class cliente_agregar extends javax.swing.JDialog {
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_numero_identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(9, 23, Short.MAX_VALUE))
+                        .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbxtipo_identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(28, 28, 28)
+                                .addGap(25, 25, 25)
                                 .addComponent(txt_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,11 +307,88 @@ public class cliente_agregar extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
-        for (int i = 0; i < TiIden.size(); i++) {
-            cbxtipo_identificacion.addItem(TiIden.get(i).getNombreIdentificacion());
+
+    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel7MousePressed
+
+    private void jLabel7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_jLabel7MouseDragged
+
+    private void txt_razon_socialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_razon_socialKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
         }
-    }
+    }//GEN-LAST:event_txt_razon_socialKeyTyped
+
+    private void txt_razon_socialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_razon_socialFocusLost
+        txt_razon_social.setText(txt_razon_social.getText().toUpperCase());
+    }//GEN-LAST:event_txt_razon_socialFocusLost
+
+    private void txt_segundo_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_segundo_apellidoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_segundo_apellidoKeyTyped
+
+    private void txt_segundo_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_apellidoFocusLost
+        txt_segundo_apellido.setText(txt_segundo_apellido.getText().toUpperCase());
+    }//GEN-LAST:event_txt_segundo_apellidoFocusLost
+
+    private void txt_primer_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_primer_apellidoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_primer_apellidoKeyTyped
+
+    private void txt_primer_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_apellidoFocusLost
+        txt_primer_apellido.setText(txt_primer_apellido.getText().toUpperCase());
+    }//GEN-LAST:event_txt_primer_apellidoFocusLost
+
+    private void txt_segundo_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_segundo_nombreKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_segundo_nombreKeyTyped
+
+    private void txt_segundo_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_nombreFocusLost
+        txt_segundo_nombre.setText(txt_segundo_nombre.getText().toUpperCase());
+    }//GEN-LAST:event_txt_segundo_nombreFocusLost
+
+    private void txt_primer_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_primer_nombreKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_primer_nombreKeyTyped
+
+    private void txt_primer_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_primer_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_primer_nombreActionPerformed
+
+    private void txt_primer_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_nombreFocusLost
+        txt_primer_nombre.setText(txt_primer_nombre.getText().toUpperCase());
+    }//GEN-LAST:event_txt_primer_nombreFocusLost
+
+    private void txt_numero_identificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numero_identificacionKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_numero_identificacionKeyTyped
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
         consulta_cliente ccli = new consulta_cliente(new javax.swing.JFrame(), true, usu, emp, suc);
@@ -325,7 +401,7 @@ public class cliente_agregar extends javax.swing.JDialog {
         ti = ObtenerDTO.ObtenerSeTipoIdentificacion(cbxtipo_identificacion.getSelectedItem().toString());
 
         String nombreCompleto = txt_primer_nombre.getText() + " " + txt_segundo_nombre.getText() + " "
-                + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
+        + txt_primer_apellido.getText() + " " + txt_segundo_apellido.getText();
         try {
             boolean valor1 = ValidarDTO.ValidarSeClienteCedula(txt_numero_identificacion.getText());
             if (valor1 == true) {
@@ -356,88 +432,11 @@ public class cliente_agregar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnguardarActionPerformed
-
-    private void txt_numero_identificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numero_identificacionKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            evt.consume();
+    public void llenarCombo(List<SeTipoIdentificacion> TiIden) {
+        for (int i = 0; i < TiIden.size(); i++) {
+            cbxtipo_identificacion.addItem(TiIden.get(i).getNombreIdentificacion());
         }
-    }//GEN-LAST:event_txt_numero_identificacionKeyTyped
-
-    private void txt_primer_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_primer_nombreKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_primer_nombreKeyTyped
-
-    private void txt_primer_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_nombreFocusLost
-        txt_primer_nombre.setText(txt_primer_nombre.getText().toUpperCase());
-    }//GEN-LAST:event_txt_primer_nombreFocusLost
-
-    private void txt_segundo_nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_nombreFocusLost
-        txt_segundo_nombre.setText(txt_segundo_nombre.getText().toUpperCase());
-    }//GEN-LAST:event_txt_segundo_nombreFocusLost
-
-    private void txt_primer_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_primer_apellidoFocusLost
-        txt_primer_apellido.setText(txt_primer_apellido.getText().toUpperCase());
-    }//GEN-LAST:event_txt_primer_apellidoFocusLost
-
-    private void txt_segundo_apellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_segundo_apellidoFocusLost
-        txt_segundo_apellido.setText(txt_segundo_apellido.getText().toUpperCase());
-    }//GEN-LAST:event_txt_segundo_apellidoFocusLost
-
-    private void txt_razon_socialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_razon_socialFocusLost
-        txt_razon_social.setText(txt_razon_social.getText().toUpperCase());
-    }//GEN-LAST:event_txt_razon_socialFocusLost
-
-    private void jLabel7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseDragged
-        Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x, point.y - y);
-    }//GEN-LAST:event_jLabel7MouseDragged
-
-    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jLabel7MousePressed
-
-    private void txt_segundo_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_segundo_nombreKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_segundo_nombreKeyTyped
-
-    private void txt_primer_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_primer_apellidoKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_primer_apellidoKeyTyped
-
-    private void txt_segundo_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_segundo_apellidoKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_segundo_apellidoKeyTyped
-
-    private void txt_razon_socialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_razon_socialKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_razon_socialKeyTyped
-
-    private void txt_primer_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_primer_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_primer_nombreActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */

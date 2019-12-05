@@ -11,6 +11,8 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Validacion;
+
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
@@ -23,7 +25,8 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class tipo_medida_agregar extends javax.swing.JDialog {
-    int x,y;
+
+    int x, y;
     PrTipoMedidas medidas = new PrTipoMedidas();
     List<PrTipoMedidas> listamedida;
     SeUsuarios usuarios;
@@ -224,6 +227,13 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
 //            getToolkit().beep();
 //            evt.consume();
 //        }
+
+        boolean estado = Validacion.FiltroLetraNumeroSinEspacio(evt);
+        if (estado) {
+            getToolkit().beep();
+            evt.consume();
+        }
+
     }//GEN-LAST:event_nombre_tfKeyTyped
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
@@ -233,7 +243,7 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel4MouseDragged
 
     /**

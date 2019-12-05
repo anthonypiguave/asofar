@@ -33,6 +33,7 @@ import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Validacion;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigInteger;
@@ -416,6 +417,24 @@ public class NuevoProducto extends javax.swing.JDialog {
 
         jLabel14.setText("Máximo:");
 
+        txtStockMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockMinKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtStockMinKeyReleased(evt);
+            }
+        });
+
+        txtStockMax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockMaxKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtStockMaxKeyReleased(evt);
+            }
+        });
+
         jLabel22.setText("bodega");
 
         txtBodega.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -549,6 +568,12 @@ public class NuevoProducto extends javax.swing.JDialog {
         jLabel3.setText("Categoría:");
 
         jLabel4.setText("Articulo:");
+
+        txtProducto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtProductoFocusLost(evt);
+            }
+        });
 
         jLabel5.setText("Producto:");
 
@@ -1147,6 +1172,47 @@ public class NuevoProducto extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_txtBodegaMousePressed
+
+    private void txtProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProductoFocusLost
+        txtProducto.setText(txtProducto.getText().toUpperCase());
+    }//GEN-LAST:event_txtProductoFocusLost
+
+    private void txtStockMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockMinKeyTyped
+        boolean estado = Validacion.FiltroNumeroSinEspacio(evt);
+        if (estado) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockMinKeyTyped
+
+    private void txtStockMaxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockMaxKeyTyped
+        boolean estado = Validacion.FiltroNumeroSinEspacio(evt);
+        if (estado) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockMaxKeyTyped
+
+    private void txtStockMinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockMinKeyReleased
+        txtStockMax.setText("");
+
+    }//GEN-LAST:event_txtStockMinKeyReleased
+
+    private void txtStockMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockMaxKeyReleased
+        try {
+            int min = Integer.parseInt(txtStockMin.getText());
+            int max = Integer.parseInt(txtStockMax.getText());
+
+            if (min > max) {
+                JOptionPane.showMessageDialog(null, "elija Stock Maximo tiene que ser superior al Minimo!");
+
+            }
+
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_txtStockMaxKeyReleased
 
     /**
      * @param args the command line arguments
