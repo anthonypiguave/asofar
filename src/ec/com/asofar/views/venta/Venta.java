@@ -1416,7 +1416,7 @@ public class Venta extends javax.swing.JInternalFrame {
                     } else {
                         ArrayList listap =new ArrayList();
                         for(int i=0;i<tba_detalle.getRowCount();i++){
-                        ClaseReporte clase =new ClaseReporte(txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
+                        ClaseReporte clase =new ClaseReporte(txt_NumeroCaja.getText(),txt_NombreCaja.getText(),txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
                                                             tba_detalle.getValueAt(i,0).toString(),
                                                             tba_detalle.getValueAt(i,1).toString(),
                                                             tba_detalle.getValueAt(i,2).toString(),
