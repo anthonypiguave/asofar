@@ -143,9 +143,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         });
                                         menu.add(item);
                                     } else {
-
 //                                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
-//                                            System.out.println("menu ffg "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+//                                    System.out.println("menu ffg "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
                                         menu.add(item);
