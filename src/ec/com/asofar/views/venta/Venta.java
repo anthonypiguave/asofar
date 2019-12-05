@@ -1358,6 +1358,10 @@ public class Venta extends javax.swing.JInternalFrame {
                     String sucursal = suc.getNombreComercial();
                     String ruc = emp.getRuc();
                     String direccion = suc.getDireccion();
+                    Long idFac = pkFactura.getVeFacturaPK().getIdFactura();
+                    String idFactura = idFac.toString();/*   */
+//                    System.out.println(""+idFactura);///
+
                     int im = JOptionPane.showConfirmDialog(null, "¿Desea Imprimir la factura?", "", JOptionPane.YES_NO_OPTION);
                     if (im == JOptionPane.YES_OPTION) {
                         Venta.PrintEpson printerService = new Venta.PrintEpson();
@@ -1583,7 +1587,6 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       
         CotizacionVenta ses = new CotizacionVenta(new javax.swing.JFrame(), true,usu, emp, suc);
          setVisible(false);
         ses.setVisible(true);

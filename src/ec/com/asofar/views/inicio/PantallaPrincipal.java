@@ -127,14 +127,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //                                        }
 
                                     String nombre = "GENERAR VENTA ";
-//                                    System.out.println("itemvgdfd "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                     if (lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)) {
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         item.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                String permiso = "si";
-//                                                String permiso = pVender();
+//                                                String permiso = "si";
+                                                String permiso = pVender();
                                                 if (permiso.equals("no")) {
                                                     JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
                                                 } else {
@@ -147,9 +146,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         });
                                         menu.add(item);
                                     } else {
-
 //                                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
-//                                            System.out.println("menu ffg "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+//                                    System.out.println("menu ffg "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
                                         item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
                                         menu.add(item);
