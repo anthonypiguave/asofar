@@ -361,11 +361,12 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     Double cierre = Double.parseDouble(montocierre.getText());
                     if (cierre < apertura) {
                         Double resta = cierre - apertura;
-                        Cadena = "El Valor de cierre es menor al de Apertura";
+                        Cadena = "El Valor de cierre es menor al de Apertura "+resta;
                         System.out.println(" "+Cadena);
                     }
                     if (cierre > apertura) {
-                        Cadena = "El Valor de cierre es mayor al de Apertura";
+                        Double resta = cierre - apertura;
+                        Cadena = "El Valor de cierre es mayor al de Apertura "+resta;
                         System.out.println(" "+Cadena);
                     }
                     /*   */

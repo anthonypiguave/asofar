@@ -63,11 +63,17 @@ public class ValidacionCaja {
         List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
 
         for (int i = 0; i < lista.size(); i++) {
-            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
+//            System.out.println("caja id"+lista.get(i).getIdCaja());
+//            System.out.println("c"+detallecaja.getVeCaja().getIdCaja());
+//            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
+            if (lista.get(i).getIdCaja().toString().equals(detallecaja.getVeCaja().getIdCaja())) {
+                System.out.println("**************");
                 for (int j = 0; j < listafactura.size(); j++) {
-                    if (listafactura.get(j).getIdUsuario()== detallecaja.getIdUsuario()) {
                         System.out.println("fact "+listafactura.get(j).getIdUsuario());
                         System.out.println("detaCaja "+detallecaja.getIdUsuario());
+                    if (listafactura.get(j).getIdUsuario().equals(detallecaja.getIdUsuario())) {
+//                        System.out.println("fact "+listafactura.get(j).getIdUsuario());
+//                        System.out.println("detaCaja "+detallecaja.getIdUsuario());
                         factura += listafactura.get(j).getTotalFacturado();
                         total = factura + detallecaja.getDineroInicio();
                     }
