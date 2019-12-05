@@ -60,14 +60,14 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnimprimir" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="BtnCancelar" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="BtnAnular" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="BtnAprovar" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="BtnCancelar" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnimprimir" min="-2" pref="120" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,10 +83,10 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BtnAprovar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="BtnAnular" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="BtnCancelar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="btnimprimir" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="BtnCancelar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
