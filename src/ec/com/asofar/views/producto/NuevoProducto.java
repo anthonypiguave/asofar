@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -51,7 +52,7 @@ import javax.swing.JOptionPane;
  */
 public class NuevoProducto extends javax.swing.JDialog {
 
-    int x, y;
+    int x, y, con = 0;
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
@@ -1200,11 +1201,20 @@ public class NuevoProducto extends javax.swing.JDialog {
 
     private void txtStockMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockMaxKeyReleased
         try {
+//            TimeUnit.SECONDS.sleep(3);
+//            evt.
             int min = Integer.parseInt(txtStockMin.getText());
             int max = Integer.parseInt(txtStockMax.getText());
 
-            if (min > max) {
-                JOptionPane.showMessageDialog(null, "elija Stock Maximo tiene que ser superior al Minimo!");
+            long startTime = System.currentTimeMillis();
+            long endTime = 100000;
+
+            if (startTime >  endTime) {
+                if (min > max) {
+
+                    JOptionPane.showMessageDialog(null, "elija Stock Maximo tiene que ser superior al Minimo!");
+
+                }
 
             }
 
