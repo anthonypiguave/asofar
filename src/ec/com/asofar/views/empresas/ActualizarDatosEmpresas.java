@@ -75,7 +75,7 @@ public class ActualizarDatosEmpresas extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            empresa.setEstado('I');
+            empresa.setEstado("I");
             try {
                 empresaController.edit(empresa);
                 JOptionPane.showMessageDialog(null, "EMPRESA ELIMINADA");

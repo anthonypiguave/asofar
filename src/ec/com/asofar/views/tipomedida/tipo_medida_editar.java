@@ -13,6 +13,7 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fecha;
+import ec.com.asofar.util.Validacion;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.math.BigInteger;
@@ -27,7 +28,8 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class tipo_medida_editar extends javax.swing.JDialog {
-int x,y;
+    
+    int x, y;
     static PrTipoMedidas staticmedidas;
     PrTipoMedidas medidas;
     SeUsuarios usuarios;
@@ -35,8 +37,6 @@ int x,y;
     SeSucursal sucursal;
     List<PrTipoMedidas> listamedida;
     PrTipoMedidasJpaController pjc = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
-
-    
 
     /**
      * Creates new form tipo_medida_agregar
@@ -46,7 +46,7 @@ int x,y;
         setUndecorated(true);
         initComponents();
     }
-
+    
     public tipo_medida_editar(java.awt.Frame parent, boolean modal, PrTipoMedidas staticmedidas, SeUsuarios staticusuarios, SeEmpresa staticempresa) {
         super(parent, modal);
         setUndecorated(false);
@@ -107,6 +107,16 @@ int x,y;
         });
 
         nombre_tf.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        nombre_tf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombre_tfFocusLost(evt);
+            }
+        });
+        nombre_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre_tfKeyTyped(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
@@ -222,8 +232,20 @@ int x,y;
 
     private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x-x,point.y-y);
+        setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jLabel4MouseDragged
+
+    private void nombre_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_tfKeyTyped
+        boolean estado = Validacion.FiltroLetraNumeroSinEspacio(evt);
+        if (estado) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_nombre_tfKeyTyped
+
+    private void nombre_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombre_tfFocusLost
+        nombre_tf.setText(nombre_tf.getText().toUpperCase());
+    }//GEN-LAST:event_nombre_tfFocusLost
 
     /**
      * @param args the command line arguments

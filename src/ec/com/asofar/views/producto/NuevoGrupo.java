@@ -107,6 +107,12 @@ public class NuevoGrupo extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel3.setText("NOMBRE:");
 
+        txtGrupo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtGrupoFocusLost(evt);
+            }
+        });
+
         btnAceptar.setBackground(new java.awt.Color(254, 254, 254));
         btnAceptar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(1, 1, 1));
@@ -203,6 +209,10 @@ public class NuevoGrupo extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtGrupoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGrupoFocusLost
+        txtGrupo.setText(txtGrupo.getText().toUpperCase());
+    }//GEN-LAST:event_txtGrupoFocusLost
 
     /**
      * @param args the command line arguments

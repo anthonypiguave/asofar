@@ -1331,7 +1331,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 cabFact.setTotalDescuento(VGTdescuento);
                 cabFact.setTotalFacturado(VGTtotal);
                 cabFact.setFechaFacturacion(d);
-                cabFact.setIdUsuario(usu.getUsuario());
+                cabFact.setIdUsuario(BigInteger.valueOf(usu.getIdUsuario()));
                 cabFact.setUsuarioCreacion(usu.getUsuario());
                 cabFact.setFechaCreacion(d);
                 cabFact.setDespachado("SI");

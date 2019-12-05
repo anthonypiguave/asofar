@@ -65,7 +65,7 @@ public class VeFactura implements Serializable {
     @Column(name = "id_caja")
     private BigInteger idCaja;
     @Column(name = "id_usuario")
-    private String idUsuario;
+    private BigInteger idUsuario;
     @Column(name = "id_cliente")
     private BigInteger idCliente;
     @Column(name = "fecha_facturacion")
@@ -141,11 +141,11 @@ public class VeFactura implements Serializable {
         this.idCaja = idCaja;
     }
 
-    public String getIdUsuario() {
+    public BigInteger getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(BigInteger idUsuario) {
         this.idUsuario = idUsuario;
     }
 

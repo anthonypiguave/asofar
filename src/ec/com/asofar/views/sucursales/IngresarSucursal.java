@@ -358,7 +358,7 @@ public class IngresarSucursal extends javax.swing.JDialog {
                     sucursal.setNombreComercial(txtNombre.getText());
                     sucursal.setTelefono(txtTelefono.getText());
                     sucursal.setCorreo(txtCorreo.getText());
-                    sucursal.setEstado('A');
+                    sucursal.setEstado("A");
                     sucursal.setDireccion(txtDireccion.getText());
                     sucursal.setFechaActualizacion(fechaActual);
                     sucursal.setFechaCreacion(fechaActual);

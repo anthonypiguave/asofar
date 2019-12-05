@@ -71,7 +71,7 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            sucursal1.setEstado('I');
+            sucursal1.setEstado("I");
             try {
                 sucursalController.edit(sucursal1);
                 JOptionPane.showMessageDialog(null, "SUCURSAL ELIMINADA");

@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.7.25-log : Database - bd_farmacia_desa
+MySQL - 5.7.28-0ubuntu0.16.04.2 : Database - bd_farmacia_desa
 *********************************************************************
 */
 
@@ -1068,7 +1068,7 @@ CREATE TABLE `se_empresa` (
   `fecha_creacion` datetime DEFAULT NULL,
   `usuario_actualizacion` varchar(20) DEFAULT NULL,
   `fecha_actualizacion` datetime DEFAULT NULL,
-  `estado` char(1) DEFAULT NULL,
+  `estado` char(2) DEFAULT NULL,
   PRIMARY KEY (`id_empresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -1122,6 +1122,7 @@ CREATE TABLE `se_opciones_menu` (
   `orden` bigint(20) DEFAULT NULL,
   `descripcion` varchar(70) DEFAULT NULL,
   `ruta` varchar(200) DEFAULT NULL,
+  `ruta_icono` varchar(200) DEFAULT NULL,
   `estado` char(2) DEFAULT NULL,
   `usuario_creacion` varchar(20) DEFAULT NULL,
   `fecha_creacion` datetime DEFAULT NULL,
@@ -1134,7 +1135,7 @@ CREATE TABLE `se_opciones_menu` (
 
 /*Data for the table `se_opciones_menu` */
 
-insert  into `se_opciones_menu`(`id_opciones_menu`,`nombre`,`id_padre`,`orden`,`descripcion`,`ruta`,`estado`,`usuario_creacion`,`fecha_creacion`,`usuario_actualizacion`,`fecha_actualizacion`) values (1,'INVENTARIO',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'COMPRAS',NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'VENTAS',NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'FACTURACION',NULL,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,'REPORTERIA',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,'SEGURIDAD',NULL,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'MANTENIMIENTO PRODUCTO',1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'GRUPO',7,1,NULL,'ec.com.asofar.views.grupo.ConsultaGruposForm',NULL,NULL,NULL,NULL,NULL),(9,'SUBGRUPO',7,2,NULL,'ec.com.asofar.views.supgrupos.ConsultaSubgrupos',NULL,NULL,NULL,NULL,NULL),(10,'ARTICULO',7,3,NULL,'ec.com.asofar.views.articulo.ConsultaArticulo',NULL,NULL,NULL,NULL,NULL),(11,'TIPO MEDIDA',7,4,NULL,'ec.com.asofar.views.tipomedida.tipo_medida',NULL,NULL,NULL,NULL,NULL),(12,'TIPO PRESENTACION',7,5,NULL,'ec.com.asofar.views.tipopresentacion.Tipo_presentacion',NULL,NULL,NULL,NULL,NULL),(13,'PRODUCTO',7,6,NULL,'ec.com.asofar.views.producto.ConsultarProductoMantenimiento',NULL,NULL,NULL,NULL,NULL),(14,'MANTENIMIENTO BODEGA',1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,'BODEGA',14,1,NULL,'ec.com.asofar.views.bodega.consulta_bodega',NULL,NULL,NULL,NULL,NULL),(16,'TIPO BODEGA ',14,2,NULL,'ec.com.asofar.views.tipobodega.consulta_tipo_bodega',NULL,NULL,NULL,NULL,NULL),(17,'MANTENIMIENTO DOCUMENTO',1,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,'TIPO DOCUMENTO',17,1,NULL,'ec.com.asofar.views.tipodocumento.tipo_documentoForm',NULL,NULL,NULL,NULL,NULL),(19,'MANTENIMIENTO TARIFARIO',1,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,'TARIFARIO',19,1,NULL,'ec.com.asofar.views.DetallesTarifa.CargarTarifario',NULL,NULL,NULL,NULL,NULL),(21,'UNIDAD DE SERVICIO',19,2,NULL,'ec.com.asofar.views.unidadservicio.ConsultaUnidadServicio',NULL,NULL,NULL,NULL,NULL),(22,'PRESTACIONES',19,3,NULL,'ec.com.asofar.views.prestaciones.Consulta_prestaciones',NULL,NULL,NULL,NULL,NULL),(23,'PRESTACIONES POR UNIDADES DE SERVICIO',19,4,NULL,'ec.com.asofar.views.prestacionesporservicios.ConsultaPrestacionesporServicio',NULL,NULL,NULL,NULL,NULL),(24,'ORDEN DE PEDIDO',2,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,'CREAR ORDEN DE PEDIDO',24,1,NULL,'ec.com.asofar.views.ordenPedido.crearOrdenPedidoForm',NULL,NULL,NULL,NULL,NULL),(26,'APROBAR ORDEN DE PEDIDO',24,2,NULL,'ec.com.asofar.views.ordenPedido.aprobarOrdendePedidoForm',NULL,NULL,NULL,NULL,NULL),(27,'ORDEN DE COMPRA',2,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,'CREAR ORDEN DE COMPRA',27,1,NULL,'ec.com.asofar.views.compras.seleccionarOrdenPedidoCompraForm',NULL,NULL,NULL,NULL,NULL),(29,'RECIBIR ORDEN DE COMPRA',27,2,NULL,'ec.com.asofar.views.compras.seleccionarOrdenCompraRecibidoForm',NULL,NULL,NULL,NULL,NULL),(30,'CAJA OPCIONES',3,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(31,'CONSULTA CAJA',30,1,NULL,'ec.com.asofar.views.caja.caja',NULL,NULL,NULL,NULL,NULL),(32,'CAJA',30,2,NULL,'ec.com.asofar.views.caja.ContenedorCaja',NULL,NULL,NULL,NULL,NULL),(33,'GENERAR VENTA ',3,2,NULL,'ec.com.asofar.views.venta.Venta',NULL,NULL,NULL,NULL,NULL),(34,'REPORTE DE COMPRA',5,1,NULL,'ec.com.asofar.views.reporteria.ReporteriaCompras',NULL,NULL,NULL,NULL,NULL),(35,'REPORTE DE VENTA',5,2,NULL,'ec.com.asofar.views.reporteria.ReporteriaVentas',NULL,NULL,NULL,NULL,NULL),(36,'MANTENIMIENTO SEGURIDAD',6,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(37,'PERSONAS',36,1,NULL,'ec.com.asofar.views.persona.ListarPersonas',NULL,NULL,NULL,NULL,NULL),(38,'USUARIOS',36,2,NULL,'ec.com.asofar.views.usuarios.ListarUsuarios',NULL,NULL,NULL,NULL,NULL),(39,'CLIENTES',36,3,NULL,'ec.com.asofar.views.clientes.ConsultarCliente',NULL,NULL,NULL,NULL,NULL),(40,'EMPRESAS',36,4,NULL,'ec.com.asofar.views.empresas.ListaEmpresas',NULL,NULL,NULL,NULL,NULL),(41,'SUCURSALES',36,5,NULL,'ec.com.asofar.views.sucursales.ListaSucursales',NULL,NULL,NULL,NULL,NULL),(42,'MANTENIMIENTO PROVEEDOR',1,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(43,'PROVEEDOR',42,1,NULL,'ec.com.asofar.views.proveedor.ConsultaProveedor',NULL,NULL,NULL,NULL,NULL);
+insert  into `se_opciones_menu`(`id_opciones_menu`,`nombre`,`id_padre`,`orden`,`descripcion`,`ruta`,`ruta_icono`,`estado`,`usuario_creacion`,`fecha_creacion`,`usuario_actualizacion`,`fecha_actualizacion`) values (1,'INVENTARIO',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'COMPRAS',NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'VENTAS',NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'FACTURACION',NULL,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,'REPORTERIA',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,'SEGURIDAD',NULL,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'MANTENIMIENTO PRODUCTO',1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'GRUPO',7,1,NULL,'ec.com.asofar.views.grupo.ConsultaGruposForm',NULL,NULL,NULL,NULL,NULL,NULL),(9,'SUBGRUPO',7,2,NULL,'ec.com.asofar.views.supgrupos.ConsultaSubgrupos',NULL,NULL,NULL,NULL,NULL,NULL),(10,'ARTICULO',7,3,NULL,'ec.com.asofar.views.articulo.ConsultaArticulo',NULL,NULL,NULL,NULL,NULL,NULL),(11,'TIPO MEDIDA',7,4,NULL,'ec.com.asofar.views.tipomedida.tipo_medida',NULL,NULL,NULL,NULL,NULL,NULL),(12,'TIPO PRESENTACION',7,5,NULL,'ec.com.asofar.views.tipopresentacion.Tipo_presentacion',NULL,NULL,NULL,NULL,NULL,NULL),(13,'PRODUCTO',7,6,NULL,'ec.com.asofar.views.producto.ConsultarProductoMantenimiento',NULL,NULL,NULL,NULL,NULL,NULL),(14,'MANTENIMIENTO BODEGA',1,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,'BODEGA',14,1,NULL,'ec.com.asofar.views.bodega.consulta_bodega',NULL,NULL,NULL,NULL,NULL,NULL),(16,'TIPO BODEGA ',14,2,NULL,'ec.com.asofar.views.tipobodega.consulta_tipo_bodega',NULL,NULL,NULL,NULL,NULL,NULL),(17,'MANTENIMIENTO DOCUMENTO',1,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,'TIPO DOCUMENTO',17,1,NULL,'ec.com.asofar.views.tipodocumento.tipo_documentoForm',NULL,NULL,NULL,NULL,NULL,NULL),(19,'MANTENIMIENTO TARIFARIO',1,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,'TARIFARIO',19,1,NULL,'ec.com.asofar.views.DetallesTarifa.CargarTarifario',NULL,NULL,NULL,NULL,NULL,NULL),(21,'UNIDAD DE SERVICIO',19,2,NULL,'ec.com.asofar.views.unidadservicio.ConsultaUnidadServicio',NULL,NULL,NULL,NULL,NULL,NULL),(22,'PRESTACIONES',19,3,NULL,'ec.com.asofar.views.prestaciones.Consulta_prestaciones',NULL,NULL,NULL,NULL,NULL,NULL),(23,'PRESTACIONES POR UNIDADES DE SERVICIO',19,4,NULL,'ec.com.asofar.views.prestacionesporservicios.ConsultaPrestacionesporServicio',NULL,NULL,NULL,NULL,NULL,NULL),(24,'ORDEN DE PEDIDO',2,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,'CREAR ORDEN DE PEDIDO',24,1,NULL,'ec.com.asofar.views.ordenPedido.crearOrdenPedidoForm',NULL,NULL,NULL,NULL,NULL,NULL),(26,'APROBAR ORDEN DE PEDIDO',24,2,NULL,'ec.com.asofar.views.ordenPedido.aprobarOrdendePedidoForm',NULL,NULL,NULL,NULL,NULL,NULL),(27,'ORDEN DE COMPRA',2,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,'CREAR ORDEN DE COMPRA',27,1,NULL,'ec.com.asofar.views.compras.seleccionarOrdenPedidoCompraForm',NULL,NULL,NULL,NULL,NULL,NULL),(29,'RECIBIR ORDEN DE COMPRA',27,2,NULL,'ec.com.asofar.views.compras.seleccionarOrdenCompraRecibidoForm',NULL,NULL,NULL,NULL,NULL,NULL),(30,'CAJA OPCIONES',3,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(31,'CONSULTA CAJA',30,1,NULL,'ec.com.asofar.views.caja.caja',NULL,NULL,NULL,NULL,NULL,NULL),(32,'CAJA',30,2,NULL,'ec.com.asofar.views.caja.ContenedorCaja',NULL,NULL,NULL,NULL,NULL,NULL),(33,'GENERAR VENTA ',3,2,NULL,'ec.com.asofar.views.venta.Venta',NULL,NULL,NULL,NULL,NULL,NULL),(34,'REPORTE DE COMPRA',5,1,NULL,'ec.com.asofar.views.reporteria.ReporteriaCompras',NULL,NULL,NULL,NULL,NULL,NULL),(35,'REPORTE DE VENTA',5,2,NULL,'ec.com.asofar.views.reporteria.ReporteriaVentas',NULL,NULL,NULL,NULL,NULL,NULL),(36,'MANTENIMIENTO SEGURIDAD',6,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(37,'PERSONAS',36,1,NULL,'ec.com.asofar.views.persona.ListarPersonas',NULL,NULL,NULL,NULL,NULL,NULL),(38,'USUARIOS',36,2,NULL,'ec.com.asofar.views.usuarios.ListarUsuarios',NULL,NULL,NULL,NULL,NULL,NULL),(39,'CLIENTES',36,3,NULL,'ec.com.asofar.views.clientes.ConsultarCliente',NULL,NULL,NULL,NULL,NULL,NULL),(40,'EMPRESAS',36,4,NULL,'ec.com.asofar.views.empresas.ListaEmpresas',NULL,NULL,NULL,NULL,NULL,NULL),(41,'SUCURSALES',36,5,NULL,'ec.com.asofar.views.sucursales.ListaSucursales',NULL,NULL,NULL,NULL,NULL,NULL),(42,'MANTENIMIENTO PROVEEDOR',1,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(43,'PROVEEDOR',42,1,NULL,'ec.com.asofar.views.proveedor.ConsultaProveedor',NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `se_opciones_roles` */
 
@@ -1249,6 +1250,7 @@ CREATE TABLE `se_sucursal` (
   `id_sucursal` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_empresa` bigint(20) NOT NULL,
   `nombre_comercial` varchar(50) DEFAULT NULL,
+  `ruc` varchar(13) DEFAULT NULL,
   `telefono` varchar(10) DEFAULT NULL,
   `direccion` varchar(70) DEFAULT NULL,
   `correo` varchar(50) DEFAULT NULL,
@@ -1256,7 +1258,7 @@ CREATE TABLE `se_sucursal` (
   `fecha_creacion` datetime DEFAULT NULL,
   `usuario_actualizacion` varchar(20) DEFAULT NULL,
   `fecha_actualizacion` datetime DEFAULT NULL,
-  `estado` char(1) DEFAULT NULL,
+  `estado` char(2) DEFAULT NULL,
   PRIMARY KEY (`id_sucursal`,`id_empresa`),
   KEY `sucursal_empresa` (`id_empresa`),
   CONSTRAINT `fk_empresa_sucursal$1` FOREIGN KEY (`id_empresa`) REFERENCES `se_empresa` (`id_empresa`)
@@ -1264,7 +1266,7 @@ CREATE TABLE `se_sucursal` (
 
 /*Data for the table `se_sucursal` */
 
-insert  into `se_sucursal`(`id_sucursal`,`id_empresa`,`nombre_comercial`,`telefono`,`direccion`,`correo`,`usuario_creacion`,`fecha_creacion`,`usuario_actualizacion`,`fecha_actualizacion`,`estado`) values (1,1,'SUCURSAL 1','222222','xxx','admin@admin.com','admin','2019-10-31 16:54:30','admin','2019-10-31 18:34:30','A');
+insert  into `se_sucursal`(`id_sucursal`,`id_empresa`,`nombre_comercial`,`ruc`,`telefono`,`direccion`,`correo`,`usuario_creacion`,`fecha_creacion`,`usuario_actualizacion`,`fecha_actualizacion`,`estado`) values (1,1,'SUCURSAL 1',NULL,'222222','xxx','admin@admin.com','admin','2019-10-31 16:54:30','admin','2019-10-31 18:34:30','A');
 
 /*Table structure for table `se_tipo_identificacion` */
 
@@ -1408,7 +1410,7 @@ CREATE TABLE `ve_factura` (
   `id_empresa` bigint(20) NOT NULL,
   `id_sucursal` bigint(20) NOT NULL,
   `id_caja` bigint(20) DEFAULT NULL,
-  `id_usuario` varchar(20) DEFAULT NULL,
+  `id_usuario` bigint(20) DEFAULT NULL,
   `id_cliente` bigint(20) DEFAULT NULL,
   `fecha_facturacion` datetime DEFAULT NULL,
   `numero_establecimiento_sri` varchar(45) DEFAULT NULL,

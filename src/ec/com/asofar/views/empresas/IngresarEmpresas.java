@@ -393,7 +393,7 @@ public class IngresarEmpresas extends javax.swing.JDialog {
                     empresa.setNombreComercial(txtNombre.getText());
                     empresa.setTelefono(txtTelefono.getText());
                     empresa.setCorreo(txtCorreo.getText());
-                    empresa.setEstado('A');
+                    empresa.setEstado("A");
                     empresa.setDireccion(txtDireccion.getText());
                     empresa.setFechaActualizacion(fechaActual);
                     empresa.setFechaCreacion(fechaActual);
