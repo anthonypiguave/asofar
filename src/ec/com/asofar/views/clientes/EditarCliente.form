@@ -55,7 +55,7 @@
                   <EmptySpace min="-2" pref="238" max="-2" attributes="0"/>
                   <Component id="btnSalir" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                  <Component id="btnCrear" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="btnCrear" min="-2" pref="136" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
