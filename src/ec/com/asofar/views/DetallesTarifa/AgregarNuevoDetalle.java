@@ -401,7 +401,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
     }
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-        
+       
         List<PrDetalleTarifario> list = prp.findPrDetalleTarifarioEntities();
         for (int i = 0; i < list.size(); i++) {
             PrDetalleTarifario deta = new PrDetalleTarifario();
@@ -445,7 +445,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             
             prp.create(pre);
             
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            JOptionPane.showMessageDialog(null, " GUARDADO EXITOSAMENTE");
             setVisible(false);
         } catch (Exception e) {
             Logger.getLogger(Listar_PrestacionesPorServicio.class.getName()).log(Level.SEVERE, null, e);
