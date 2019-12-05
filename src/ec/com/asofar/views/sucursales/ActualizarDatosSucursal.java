@@ -119,7 +119,6 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
         btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir.setText("SALIR");
-        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -131,7 +130,6 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
         btnGuardar.setForeground(new java.awt.Color(1, 1, 1));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/GUARDAR_Mesa de trabajo 1.png"))); // NOI18N
         btnGuardar.setText("ACTUALIZAR");
-        btnGuardar.setOpaque(true);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -143,7 +141,6 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
         btnHabilitar.setForeground(new java.awt.Color(1, 1, 1));
         btnHabilitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btnHabilitar.setText("ELIMINAR");
-        btnHabilitar.setOpaque(true);
         btnHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHabilitarActionPerformed(evt);
@@ -273,9 +270,9 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(47, 47, 47)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(56, 56, 56)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
         );
@@ -325,9 +322,9 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
             try {
                 sucursalController.edit(sucursal1);
                 JOptionPane.showMessageDialog(null, "SUCURSAL ACTUALIZADA");
-                ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
+//                ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
                 setVisible(false);
-                mp.setVisible(true);
+//                mp.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(ActualizarDatosSucursal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -336,9 +333,9 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
+//        ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
-        mp.setVisible(true);
+//        mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilitarActionPerformed
@@ -351,7 +348,7 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char c = evt.getKeyChar();
-        if (Character.isDigit(c) || Character.isSpaceChar(c)) {
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }

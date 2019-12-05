@@ -1,6 +1,5 @@
 package ec.com.asofar.views.sucursales;
 
-
 import ec.com.asofar.dao.SeSucursalJpaController;
 import ec.com.asofar.dto.SeEmpresa;
 
@@ -14,6 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ListaSucursales extends javax.swing.JDialog {
+
     String valor;
     int x, y;
     SeSucursal obj;
@@ -23,8 +23,9 @@ public class ListaSucursales extends javax.swing.JDialog {
     SeSucursalJpaController sucursalController
             = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
-    SeEmpresa em1; 
+    SeEmpresa em1;
     SeSucursal su1;
+    SeSucursal objeto = new SeSucursal();
 
     public ListaSucursales(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -42,7 +43,7 @@ public class ListaSucursales extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         us1 = us;
         em1 = em;
-        su1= su;
+        su1 = su;
         listaSucursal
                 = sucursalController.findSeSucursalEntities();
         Tablas.listarSucursal(listaSucursal, tablaSucursal);
@@ -216,19 +217,18 @@ public class ListaSucursales extends javax.swing.JDialog {
         int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
-             setVisible(false);
+            setVisible(false);
 
 //            asdfg12345
         } else {
 
         }
-           
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
-   
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IngresarSucursal ru = new IngresarSucursal(new javax.swing.JFrame(), true, us1,em1,su1);
+        IngresarSucursal ru = new IngresarSucursal(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         ru.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -236,6 +236,29 @@ public class ListaSucursales extends javax.swing.JDialog {
     private void tablaSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaSucursalMouseClicked
+
+//    public SeSucursal getObjeto() {
+//        return objeto;
+//    }
+//
+//    public SeSucursal devuelveObjeto(String datos, List<SeSucursal> listaobjeto) {
+//
+//        SeSucursal objeto1 = null;
+//
+//        for (int i = 0; i < listaobjeto.size(); i++) {
+//
+//            if (datos.equals("" + listaobjeto.get(i).getSeSucursalPK().getIdSucursal())) {
+//                objeto1 = listaobjeto.get(i);
+//
+//                break;
+//
+//            }
+//
+//        }
+//
+//        return objeto1;
+//
+//    }
 
     private void tablaSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalMousePressed
         int id = 0;
@@ -245,16 +268,34 @@ public class ListaSucursales extends javax.swing.JDialog {
             for (int i = 0; i < listaSucursal.size(); i++) {
                 if ((tablaSucursal.getValueAt(id, 0).toString().equals(listaSucursal.get(i).getNombreComercial()))) {
                     obj = listaSucursal.get(i);
-                    if (obj != null) {
-                        
-                        ActualizarDatosSucursal es = new ActualizarDatosSucursal(new javax.swing.JFrame(), true, obj,us1,em1,su1);
-                        setVisible(false);
-                        es.setVisible(true);
-                    }
+
                 }
             }
+            if (obj != null) {
+
+                        ActualizarDatosSucursal es = new ActualizarDatosSucursal(new javax.swing.JFrame(), true, obj, us1, em1, su1);
+//                        setVisible(false);
+                        es.setVisible(true);
+                    }
+            listaSucursal
+                    = sucursalController.findSeSucursalEntities();
+            Tablas.listarSucursal(listaSucursal, tablaSucursal);
 
         }
+
+//        int i = 0;
+//        String msg = null;
+//        if (evt.getClickCount() == 2) {
+//            i = tablaSucursal.getSelectedRow();
+//            obj = devuelveObjeto(tablaSucursal.getValueAt(i, 0).toString(), listaSucursal);
+//
+//            if (obj != null) {
+//                this.setVisible(false);
+//            }
+//            listaSucursal
+//                            = sucursalController.findSeSucursalEntities();
+//                    Tablas.listarSucursal(listaSucursal, tablaSucursal);
+//        }
     }//GEN-LAST:event_tablaSucursalMousePressed
 
     private void SUCURSALMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SUCURSALMousePressed
@@ -274,7 +315,7 @@ public class ListaSucursales extends javax.swing.JDialog {
 
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfiltroKeyTyped
         char c = evt.getKeyChar();
-        if(Character.isSpaceChar(c)){
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
