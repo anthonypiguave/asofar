@@ -75,25 +75,30 @@ public class ValidacionCaja {
         if (Objects.equals(total, detallecaja.getDineroCierre())) {
             valor = true;
             JOptionPane.showMessageDialog(null, "REGISTRO COMPLETADO EXITOSAMENTE!", "CAJA CERRADA",
-                     JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
         } else {/*inicio*/
             if (detallecaja.getDineroCierre() < detallecaja.getDineroInicio()) {
-                int r = JOptionPane.showConfirmDialog(null, "El Valor de cierre es menor al de Apertura","¿Desea Cerrar?", JOptionPane.YES_NO_OPTION);
-                if (r == JOptionPane.YES_OPTION) {
-                    valor = true;
-                }else{
-                    valor = false;
-                }
-            }
-            if (detallecaja.getDineroCierre() >= detallecaja.getDineroInicio()) {
                 Double DineroCierre = detallecaja.getDineroCierre();
                 Double DineroApertura = detallecaja.getDineroInicio();
                 Double resta = DineroCierre - DineroApertura;
-                int r = JOptionPane.showConfirmDialog(null,"¿Desea Cerrar?","", JOptionPane.YES_NO_OPTION);
+                System.out.println(" valor de cierre " + resta);
+                int r = JOptionPane.showConfirmDialog(null, "El Valor de cierre es menor al de Apertura", "¿Desea Cerrar?", JOptionPane.YES_NO_OPTION);
+                if (r == JOptionPane.YES_OPTION) {
+                    valor = true;
+                } else {
+                    valor = false;
+                }
+            }
+            if (detallecaja.getDineroCierre() > detallecaja.getDineroInicio()) {
+                Double DineroCierre = detallecaja.getDineroCierre();
+                Double DineroApertura = detallecaja.getDineroInicio();
+                Double resta = DineroCierre - DineroApertura;
+                System.out.println("valor de cierre " + resta);
+                int r = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar?", "", JOptionPane.YES_NO_OPTION);
 //                int r = JOptionPane.showConfirmDialog(null, "DIFERENCIA ES : $  " + resta,"¿Desea Cerrar?", JOptionPane.YES_NO_OPTION);
                 if (r == JOptionPane.YES_OPTION) {
                     valor = true;
-                }else{
+                } else {
                     valor = false;
                 }
             }
@@ -107,7 +112,8 @@ public class ValidacionCaja {
 //                valor = true;
 //            }
         }/*final*/
+//        int[] bolleanValores = {posFila, posColumna};
         return valor;
     }
-
+    
 }

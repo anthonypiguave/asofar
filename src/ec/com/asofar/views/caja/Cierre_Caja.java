@@ -350,7 +350,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 vdc.setHoraCierre(d_hora);
                 vdc.setEstado("I");
                 if(ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true){
-                cajadet.edit(vdc); 
+                cajadet.edit(vdc);
                 setVisible(false);
                 Cierre_Caja.PrintEpson printerService = new Cierre_Caja.PrintEpson();
         System.out.println(printerService.getPrinters());
