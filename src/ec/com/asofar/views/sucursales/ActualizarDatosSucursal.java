@@ -351,7 +351,7 @@ public class ActualizarDatosSucursal extends javax.swing.JDialog {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
+        if (Character.isDigit(c) || Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
