@@ -430,8 +430,18 @@ public class EditarCliente extends javax.swing.JDialog {
     private void CargarFormulario() {
         CargarTipoIndentificacionLocalidadContactoPaisProvinciaCiudad();
 
-        txtApellido.setText(cliente.getPrimerApellido() + " " + cliente.getSegundoApellido());
-        txtNombre.setText(cliente.getPrimerNombre() + " " + cliente.getSegundoNombre());
+        if (cliente.getSegundoApellido() != null) {
+            txtApellido.setText(cliente.getPrimerApellido() + " " + cliente.getSegundoApellido());
+        } else {
+            txtApellido.setText(cliente.getPrimerApellido());
+        }
+
+        if (cliente.getSegundoNombre() != null) {
+            txtNombre.setText(cliente.getPrimerNombre() + " " + cliente.getSegundoNombre());
+        } else {
+            txtNombre.setText(cliente.getPrimerNombre());
+        }
+
         txtNCedula.setText(cliente.getNumeroIdentificacion());
         txtRazonSocial.setText(cliente.getRazonSocial());
         txtTipoIdentificacion.setText(cliente.getIdTipoIndentificacion().getNombreIdentificacion());
@@ -439,9 +449,16 @@ public class EditarCliente extends javax.swing.JDialog {
         txtTelefono.setText(localidadCliente.getTelefono());
         txtMovil.setText(localidadCliente.getCelular());
         txtEmail.setText(localidadCliente.getEmail());
-        txtPais.setText(pais.getNombre());
-        txtProvincia.setText(provincia.getNombre());
-        txtCiudad.setText(ciudad.getNombre());
+
+        if (pais != null && provincia != null && ciudad != null) {
+            txtPais.setText(pais.getNombre());
+            txtProvincia.setText(provincia.getNombre());
+            txtCiudad.setText(ciudad.getNombre());
+        } else {
+            txtPais.setText("Seleccione una Opcion..");
+
+        }
+
         txtDireccion.setText(localidadCliente.getDirreccionCliente());
         txtDireccionEntrega.setText(localidadCliente.getDirreccionEntrega());
     }
@@ -453,7 +470,7 @@ public class EditarCliente extends javax.swing.JDialog {
         provincia = localidadCliente.getIdProvincia();
         ciudad = localidadCliente.getIdCiudad();
         tipoIndentificacion = cliente.getIdTipoIndentificacion();
-        
+
     }
 
     private void ArmarCadenaUsuario() {
@@ -521,92 +538,91 @@ public class EditarCliente extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(null, "falta N. Indentificacion!");
                         } else {
 
-                            if (Arrays.asList(cadenaArray1).contains(txtTelefono.getText())) {
-                                JOptionPane.showMessageDialog(null, "falta telefono!");
-                            } else {
+//                            if (Arrays.asList(cadenaArray1).contains(txtTelefono.getText())) {
+//                                JOptionPane.showMessageDialog(null, "falta telefono!");
+//                            } else {
+//
+//                                if (Arrays.asList(cadenaArray1).contains(txtMovil.getText())) {
+//                                    JOptionPane.showMessageDialog(null, "falta Movil!");
+//                                } else {
+//                                    if (Arrays.asList(cadenaArray1).contains(txtEmail.getText())) {
+//                                        JOptionPane.showMessageDialog(null, "falta Email!");
+//                                    } else {
+//                                        if (Arrays.asList(cadenaArray1).contains(txtPais.getText())) {
+//                                            JOptionPane.showMessageDialog(null, "elija la Pais!");
+//                                        } else {
+//                                            if (Arrays.asList(cadenaArray1).contains(txtProvincia.getText())) {
+//                                                JOptionPane.showMessageDialog(null, "elija la Provincia!");
+//                                            } else {
+//
+//                                                if (Arrays.asList(cadenaArray1).contains(txtCiudad.getText())) {
+//                                                    JOptionPane.showMessageDialog(null, "elija la Ciuada!");
+//                                                } else {
+//                                                    if (Arrays.asList(cadenaArray1).contains(txtDireccion.getText())) {
+//                                                        JOptionPane.showMessageDialog(null, "falta Direccion");
+//                                                    } else {
+//
+//                                                        if (Arrays.asList(cadenaArray1).contains(txtDireccionEntrega.getText())) {
+//                                                            JOptionPane.showMessageDialog(null, "falta Direccion Entrega!");
+//                                                        } else {
+                            try {
+                                ArmarCadenaUsuario();
 
-                                if (Arrays.asList(cadenaArray1).contains(txtMovil.getText())) {
-                                    JOptionPane.showMessageDialog(null, "falta Movil!");
-                                } else {
-                                    if (Arrays.asList(cadenaArray1).contains(txtEmail.getText())) {
-                                        JOptionPane.showMessageDialog(null, "falta Email!");
-                                    } else {
-                                        if (Arrays.asList(cadenaArray1).contains(txtPais.getText())) {
-                                            JOptionPane.showMessageDialog(null, "elija la Pais!");
-                                        } else {
-                                            if (Arrays.asList(cadenaArray1).contains(txtProvincia.getText())) {
-                                                JOptionPane.showMessageDialog(null, "elija la Provincia!");
-                                            } else {
+                                cliente.setIdTipoIndentificacion(tipoIndentificacion);
+                                cliente.setNumeroIdentificacion(txtNCedula.getText());
 
-                                                if (Arrays.asList(cadenaArray1).contains(txtCiudad.getText())) {
-                                                    JOptionPane.showMessageDialog(null, "elija la Ciuada!");
-                                                } else {
-                                                    if (Arrays.asList(cadenaArray1).contains(txtDireccion.getText())) {
-                                                        JOptionPane.showMessageDialog(null, "falta Direccion");
-                                                    } else {
+                                cliente.setRazonSocial(txtRazonSocial.getText());
+                                cliente.setEstado("A");
+                                cliente.setUsuarioActualizacion(seUsuario.getUsuario());
+                                cliente.setFechaActualizacion(d);
 
-                                                        if (Arrays.asList(cadenaArray1).contains(txtDireccionEntrega.getText())) {
-                                                            JOptionPane.showMessageDialog(null, "falta Direccion Entrega!");
-                                                        } else {
-                                                            try {
-                                                                ArmarCadenaUsuario();
-                                                                
-                                                                cliente.setIdTipoIndentificacion(tipoIndentificacion);
-                                                                cliente.setNumeroIdentificacion(txtNCedula.getText());
-             
-                                                                cliente.setRazonSocial(txtRazonSocial.getText());
-                                                                cliente.setEstado("A");
-                                                                cliente.setUsuarioActualizacion(seUsuario.getUsuario());
-                                                                cliente.setFechaActualizacion(d);
+                                clienteController.edit(cliente);
 
-                                                                clienteController.edit(cliente);
+                                ////////////////////////////////////////////////
+                                localidadCliente.setCelular(txtMovil.getText());
+                                localidadCliente.setTelefono(txtTelefono.getText());
+                                localidadCliente.setDirreccionCliente(txtDireccion.getText());
+                                localidadCliente.setDirreccionEntrega(txtDireccionEntrega.getText());
+                                localidadCliente.setEmail(txtEmail.getText());
 
-                                                                ////////////////////////////////////////////////
-                                                          
-                                                                localidadCliente.setCelular(txtMovil.getText());
-                                                                localidadCliente.setTelefono(txtTelefono.getText());
-                                                                localidadCliente.setDirreccionCliente(txtDireccion.getText());
-                                                                localidadCliente.setDirreccionEntrega(txtDireccionEntrega.getText());
-                                                                localidadCliente.setEmail(txtEmail.getText());
-                                                                
-                                                                localidadCliente.setIdPais(pais);
-                                                                localidadCliente.setIdProvincia(provincia);
-                                                                localidadCliente.setIdCiudad(ciudad);
-
-                                                                localidadCliente.setEstado("A");
-                                                                localidadCliente.setUsuarioActualizacion(seUsuario.getUsuario());
-                                                                localidadCliente.setFechaActualizacion(d);
-
-                                                                localidadClienteController.edit(localidadCliente);
-
-                                                                //////////////////////////////////////
-          
-
-                                                                contactosClientes.setNombre("PROPIO");
-
-                                                                contactosClientes.setEstado("A");
-                                                                contactosClientes.setUsuarioActualizacion(seUsuario.getUsuario());
-                                                                contactosClientes.setFechaActualizacion(d);
-
-                                                                contactosClientesController.edit(contactosClientes);
-
-                                                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                                                                setVisible(false);
-
-                                                            } catch (Exception e) {
-
-                                                                Logger.getLogger(EditarCliente.class.getName()).log(Level.SEVERE, null, e);
-
-                                                            }
-
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                if (pais.getNombre() != null && provincia.getNombre() != null && ciudad.getNombre() != null) {
+                                    localidadCliente.setIdPais(pais);
+                                    localidadCliente.setIdProvincia(provincia);
+                                    localidadCliente.setIdCiudad(ciudad);
                                 }
+
+                                localidadCliente.setEstado("A");
+                                localidadCliente.setUsuarioActualizacion(seUsuario.getUsuario());
+                                localidadCliente.setFechaActualizacion(d);
+
+                                localidadClienteController.edit(localidadCliente);
+
+                                //////////////////////////////////////
+                                contactosClientes.setNombre("PROPIO");
+
+                                contactosClientes.setEstado("A");
+                                contactosClientes.setUsuarioActualizacion(seUsuario.getUsuario());
+                                contactosClientes.setFechaActualizacion(d);
+
+                                contactosClientesController.edit(contactosClientes);
+
+                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                setVisible(false);
+
+                            } catch (Exception e) {
+
+                                Logger.getLogger(EditarCliente.class.getName()).log(Level.SEVERE, null, e);
+
                             }
+
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
                         }
                     }
 
