@@ -295,7 +295,7 @@ public class IngresarSucursal extends javax.swing.JDialog {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -371,9 +371,9 @@ public class IngresarSucursal extends javax.swing.JDialog {
                         Logger.getLogger(IngresarSucursal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
-                    ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
+//                    ListaSucursales mp = new ListaSucursales(new javax.swing.JFrame(), true, us1, em1, su1);
                     setVisible(false);
-                    mp.setVisible(true);
+//                    mp.setVisible(true);
                 }
 
             }

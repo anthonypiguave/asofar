@@ -262,9 +262,7 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
             objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
 
             if (objeto != null) {
-
                 this.setVisible(false);
-
             }
         }
     }//GEN-LAST:event_tablaMousePressed
@@ -274,7 +272,6 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
         EmpaqueMantenimiento dialog = new EmpaqueMantenimiento(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
         dialog.setVisible(true);
         cargartabla();
-
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     public PrEmpaque getObjeto() {
