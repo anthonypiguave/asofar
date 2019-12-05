@@ -54,6 +54,7 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author ms24m
  */
 public class Cierre_Caja extends javax.swing.JDialog {
+
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int x, y;
@@ -94,75 +95,81 @@ public class Cierre_Caja extends javax.swing.JDialog {
         llenarCampos(veCaja);
         nombreCaja.setEditable(false);
     }
+
     public class PrintEpson implements Printable {
-    public List<String> getPrinters() {
-        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-        PrintService printServices[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-        List<String> printerList = new ArrayList<String>();
-        for (PrintService printerService : printServices) {
-            printerList.add(printerService.getName());
+
+        public List<String> getPrinters() {
+            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            PrintService printServices[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+            List<String> printerList = new ArrayList<String>();
+            for (PrintService printerService : printServices) {
+                printerList.add(printerService.getName());
+            }
+            return printerList;
         }
-        return printerList;
-    }
-    @Override
-    public int print(Graphics g, PageFormat pf, int page)
-            throws PrinterException {
-        if (page > 0) {
-            /* We have only one page, and 'page' is zero-based */
-            return NO_SUCH_PAGE;
-        }
-        /*
+
+        @Override
+        public int print(Graphics g, PageFormat pf, int page)
+                throws PrinterException {
+            if (page > 0) {
+                /* We have only one page, and 'page' is zero-based */
+                return NO_SUCH_PAGE;
+            }
+            /*
 	         * User (0,0) is typically outside the imageable area, so we must
 	         * translate by the X and Y values in the PageFormat to avoid clipping
-         */
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.translate(pf.getImageableX(), pf.getImageableY());
-        /* Now we perform our rendering */
-        g.setFont(new Font("Roman", 0, 8));
-        g.drawString("Hello world !", 0, 10);
-        return PAGE_EXISTS;
-    }
-    public void printString(String printerName, String text) {
-        // find the printService of name printerName
-        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-        PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-        PrintService service = findPrintService("JAPOS", printService);
-        DocPrintJob job = service.createPrintJob();
-        try {
-            byte[] bytes;
-            // important for umlaut chars
-            bytes = text.getBytes("CP437");
-            Doc doc = new SimpleDoc(bytes, flavor, null);
-            job.print(doc, null);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+             */
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.translate(pf.getImageableX(), pf.getImageableY());
+            /* Now we perform our rendering */
+            g.setFont(new Font("Roman", 0, 8));
+            g.drawString("Hello world !", 0, 10);
+            return PAGE_EXISTS;
         }
-    }
-    public void printBytes(String printerName, byte[] bytes) {
-        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-        PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-        PrintService service = findPrintService(printerName, printService);
-        DocPrintJob job = service.createPrintJob();
-        try {
-            Doc doc = new SimpleDoc(bytes, flavor, null);
-            job.print(doc, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private PrintService findPrintService(String printerName,
-            PrintService[] services) {
-        for (PrintService service : services) {
-            if (service.getName().equalsIgnoreCase(printerName)) {
-                return service;
+
+        public void printString(String printerName, String text) {
+            // find the printService of name printerName
+            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+            PrintService service = findPrintService("JAPOS", printService);
+            DocPrintJob job = service.createPrintJob();
+            try {
+                byte[] bytes;
+                // important for umlaut chars
+                bytes = text.getBytes("CP437");
+                Doc doc = new SimpleDoc(bytes, flavor, null);
+                job.print(doc, null);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
-        return null;
-    }
+
+        public void printBytes(String printerName, byte[] bytes) {
+            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+            PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+            PrintService service = findPrintService(printerName, printService);
+            DocPrintJob job = service.createPrintJob();
+            try {
+                Doc doc = new SimpleDoc(bytes, flavor, null);
+                job.print(doc, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        private PrintService findPrintService(String printerName,
+                PrintService[] services) {
+            for (PrintService service : services) {
+                if (service.getName().equalsIgnoreCase(printerName)) {
+                    return service;
+                }
+            }
+            return null;
+        }
     }
 
     private void llenarCampos(VeDetalleCaja veCaja) {
@@ -345,27 +352,40 @@ public class Cierre_Caja extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
+                String Cadena = "";
                 vdc.setDineroCierre(Double.parseDouble(montocierre.getText()));
                 vdc.setFechaCierre(d_fecha);
                 vdc.setHoraCierre(d_hora);
                 vdc.setEstado("I");
-                if(ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true){
-                cajadet.edit(vdc);
-                setVisible(false);
-                Cierre_Caja.PrintEpson printerService = new Cierre_Caja.PrintEpson();
-        System.out.println(printerService.getPrinters());
-        //print some stuff. Change the printer name to your thermal printer name.
-        printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-        printerService.printString("EPSON-TM-T20II", "  *       CIERRE DE CAJA          *  \n");
-        printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-        printerService.printString("EPSON-TM-T20II", "\n    NOMBRE DE CAJA: "+nombreCaja.getText()+"\n");
-        printerService.printString("EPSON-TM-T20II", "      MONTO INICIAL: "+montoInicial.getText()+"\n");
-        printerService.printString("EPSON-TM-T20II", "      HORA DE INICIO: "+horaInicio.getText()+"\n");
-        printerService.printString("EPSON-TM-T20II", "      MONTO DE CIERRE: "+montocierre.getText()+"\n\n\n\n\n\n\n\n-");
-        printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");                
-        byte[] cutP = new byte[]{0x1d, 'V', 1};
-        printerService.printBytes("EPSON-TM-T20II", cutP);
-                }                
+                if (ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true) {
+                    Double apertura = ValidacionCaja.valoresCaja(vdc);
+                    Double cierre = Double.parseDouble(montocierre.getText());
+                    if (cierre < apertura) {
+                        Double resta = cierre - apertura;
+                        Cadena = "El Valor de cierre es menor al de Apertura";
+                        System.out.println(" "+Cadena);
+                    }
+                    if (cierre > apertura) {
+                        Cadena = "El Valor de cierre es mayor al de Apertura";
+                        System.out.println(" "+Cadena);
+                    }
+                    /*   */
+                    cajadet.edit(vdc);
+                    setVisible(false);
+                    Cierre_Caja.PrintEpson printerService = new Cierre_Caja.PrintEpson();
+                    System.out.println(printerService.getPrinters());
+                    //print some stuff. Change the printer name to your thermal printer name.
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "  *       CIERRE DE CAJA          *  \n");
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    printerService.printString("EPSON-TM-T20II", "\n    NOMBRE DE CAJA: " + nombreCaja.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "      MONTO INICIAL: " + montoInicial.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "      HORA DE INICIO: " + horaInicio.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "      MONTO DE CIERRE: " + montocierre.getText() + "\n\n\n\n\n\n\n\n-");
+                    printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
+                    byte[] cutP = new byte[]{0x1d, 'V', 1};
+                    printerService.printBytes("EPSON-TM-T20II", cutP);
+                }
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }
