@@ -56,11 +56,11 @@
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace pref="459" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                  <EmptySpace pref="470" max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="120" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

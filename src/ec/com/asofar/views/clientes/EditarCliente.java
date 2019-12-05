@@ -389,11 +389,11 @@ public class EditarCliente extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addGap(198, 198, 198)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(287, 287, 287))
+                .addGap(140, 140, 140)
+                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -406,7 +406,7 @@ public class EditarCliente extends javax.swing.JDialog {
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -426,6 +426,258 @@ public class EditarCliente extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+
+        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+
+            if (Arrays.asList(cadenaArray1).contains(txtNombre.getText())) {
+                JOptionPane.showMessageDialog(null, "falta Nombres!");
+            } else {
+                if (Arrays.asList(cadenaArray1).contains(txtApellido.getText())) {
+                    JOptionPane.showMessageDialog(null, "falta Apellidos!");
+                } else {
+                    if (Arrays.asList(cadenaArray1).contains(txtTipoIdentificacion.getText())) {
+                        JOptionPane.showMessageDialog(null, "elija Tipo Identificacion!");
+                    } else {
+
+                        if (Arrays.asList(cadenaArray1).contains(txtNCedula.getText())) {
+                            JOptionPane.showMessageDialog(null, "falta N. Indentificacion!");
+                        } else {
+
+                            if (Arrays.asList(cadenaArray1).contains(txtTelefono.getText())) {
+                                JOptionPane.showMessageDialog(null, "falta telefono!");
+                            } else {
+
+                                if (Arrays.asList(cadenaArray1).contains(txtMovil.getText())) {
+                                    JOptionPane.showMessageDialog(null, "falta Movil!");
+                                } else {
+                                    if (Arrays.asList(cadenaArray1).contains(txtEmail.getText())) {
+                                        JOptionPane.showMessageDialog(null, "falta Email!");
+                                    } else {
+                                        if (Arrays.asList(cadenaArray1).contains(txtPais.getText())) {
+                                            JOptionPane.showMessageDialog(null, "elija la Pais!");
+                                        } else {
+                                            if (Arrays.asList(cadenaArray1).contains(txtProvincia.getText())) {
+                                                JOptionPane.showMessageDialog(null, "elija la Provincia!");
+                                            } else {
+
+                                                if (Arrays.asList(cadenaArray1).contains(txtCiudad.getText())) {
+                                                    JOptionPane.showMessageDialog(null, "elija la Ciuada!");
+                                                } else {
+                                                    if (Arrays.asList(cadenaArray1).contains(txtDireccion.getText())) {
+                                                        JOptionPane.showMessageDialog(null, "falta Direccion");
+                                                    } else {
+
+                                                        if (Arrays.asList(cadenaArray1).contains(txtDireccionEntrega.getText())) {
+                                                            JOptionPane.showMessageDialog(null, "falta Direccion Entrega!");
+                                                        } else {
+                                                            try {
+                                                                ArmarCadenaUsuario();
+
+                                                                cliente.setIdTipoIndentificacion(tipoIndentificacion);
+                                                                cliente.setNumeroIdentificacion(txtNCedula.getText());
+
+                                                                cliente.setRazonSocial(txtRazonSocial.getText());
+                                                                cliente.setEstado("A");
+                                                                cliente.setUsuarioActualizacion(seUsuario.getUsuario());
+                                                                cliente.setFechaActualizacion(d);
+
+                                                                clienteController.edit(cliente);
+
+                                                                ////////////////////////////////////////////////
+
+                                                                localidadCliente.setCelular(txtMovil.getText());
+                                                                localidadCliente.setTelefono(txtTelefono.getText());
+                                                                localidadCliente.setDirreccionCliente(txtDireccion.getText());
+                                                                localidadCliente.setDirreccionEntrega(txtDireccionEntrega.getText());
+                                                                localidadCliente.setEmail(txtEmail.getText());
+
+                                                                localidadCliente.setIdPais(pais);
+                                                                localidadCliente.setIdProvincia(provincia);
+                                                                localidadCliente.setIdCiudad(ciudad);
+
+                                                                localidadCliente.setEstado("A");
+                                                                localidadCliente.setUsuarioActualizacion(seUsuario.getUsuario());
+                                                                localidadCliente.setFechaActualizacion(d);
+
+                                                                localidadClienteController.edit(localidadCliente);
+
+                                                                //////////////////////////////////////
+
+                                                                contactosClientes.setNombre("PROPIO");
+
+                                                                contactosClientes.setEstado("A");
+                                                                contactosClientes.setUsuarioActualizacion(seUsuario.getUsuario());
+                                                                contactosClientes.setFechaActualizacion(d);
+
+                                                                contactosClientesController.edit(contactosClientes);
+
+                                                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                                                setVisible(false);
+
+                                                            } catch (Exception e) {
+
+                                                                Logger.getLogger(EditarCliente.class.getName()).log(Level.SEVERE, null, e);
+
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel17MousePressed
+
+    private void jLabel17MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_jLabel17MouseDragged
+
+    private void txtCiudadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCiudadMousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarCiudad dialog = new ConsultarCiudad(new javax.swing.JFrame(), true, provincia, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                ciudad = dialog.getObjeto();
+
+                if (ciudad.getNombre() != null) {
+
+                    txtCiudad.setText(ciudad.getNombre());
+
+                }
+
+            } catch (Exception e) {
+
+            }
+
+        }
+    }//GEN-LAST:event_txtCiudadMousePressed
+
+    private void txtProvinciaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtProvinciaMousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+
+            try {
+                ConsultarProvincia dialog = new ConsultarProvincia(new javax.swing.JFrame(), true, pais, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                provincia = dialog.getObjeto();
+
+                if (provincia.getNombre() != null) {
+
+                    txtProvincia.setText(provincia.getNombre());
+
+                    txtCiudad.setText("Seleccione una Opcion..");
+
+                }
+
+            } catch (Exception e) {
+
+            }
+
+        }
+    }//GEN-LAST:event_txtProvinciaMousePressed
+
+    private void txtPaisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPaisMousePressed
+
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+            try {
+
+                ConsultarPais dialog = new ConsultarPais(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                dialog.setVisible(true);
+
+                pais = dialog.getObjeto();
+                if (pais.getNombre() != null) {
+                    txtPais.setText(pais.getNombre());
+
+                    txtProvincia.setText("Seleccione una Opcion..");
+                    txtCiudad.setText("");
+
+                }
+            } catch (Exception e) {
+            }
+
+        }
+
+    }//GEN-LAST:event_txtPaisMousePressed
+
+    private void txtMovilKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMovilKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMovilKeyTyped
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        correo = Validacion.Email(txtEmail.getText());
+        if (correo != true) {
+            //msge = msge + "\n Correo invalido";
+            JOptionPane.showMessageDialog(null, "Correo invalido");
+        }
+    }//GEN-LAST:event_txtEmailFocusLost
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtNCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNCedulaKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNCedulaKeyTyped
+
+    private void txtTipoIdentificacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTipoIdentificacionMousePressed
+        int i = 0;
+        String msg = null;
+        if (evt.getClickCount() == 2) {
+            try {
+
+                ConsultarTipoIdentificacion dialog = new ConsultarTipoIdentificacion(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+
+                tipoIndentificacion = dialog.getObjeto();
+
+                if (tipoIndentificacion.getNombreIdentificacion() != null) {
+
+                    txtTipoIdentificacion.setText(tipoIndentificacion.getNombreIdentificacion());
+                }
+            } catch (Exception e) {
+            }
+
+        }
+    }//GEN-LAST:event_txtTipoIdentificacionMousePressed
 
     private void CargarFormulario() {
         CargarTipoIndentificacionLocalidadContactoPaisProvinciaCiudad();
@@ -490,260 +742,6 @@ public class EditarCliente extends javax.swing.JDialog {
 
     }
 
-
-    private void jLabel17MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseDragged
-        Point point = MouseInfo.getPointerInfo().getLocation();
-        setLocation(point.x - x, point.y - y);
-    }//GEN-LAST:event_jLabel17MouseDragged
-
-    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jLabel17MousePressed
-
-    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-
-        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-
-        if (r == JOptionPane.YES_OPTION) {
-
-            if (Arrays.asList(cadenaArray1).contains(txtNombre.getText())) {
-                JOptionPane.showMessageDialog(null, "falta Nombres!");
-            } else {
-                if (Arrays.asList(cadenaArray1).contains(txtApellido.getText())) {
-                    JOptionPane.showMessageDialog(null, "falta Apellidos!");
-                } else {
-                    if (Arrays.asList(cadenaArray1).contains(txtTipoIdentificacion.getText())) {
-                        JOptionPane.showMessageDialog(null, "elija Tipo Identificacion!");
-                    } else {
-
-                        if (Arrays.asList(cadenaArray1).contains(txtNCedula.getText())) {
-                            JOptionPane.showMessageDialog(null, "falta N. Indentificacion!");
-                        } else {
-
-                            if (Arrays.asList(cadenaArray1).contains(txtTelefono.getText())) {
-                                JOptionPane.showMessageDialog(null, "falta telefono!");
-                            } else {
-
-                                if (Arrays.asList(cadenaArray1).contains(txtMovil.getText())) {
-                                    JOptionPane.showMessageDialog(null, "falta Movil!");
-                                } else {
-                                    if (Arrays.asList(cadenaArray1).contains(txtEmail.getText())) {
-                                        JOptionPane.showMessageDialog(null, "falta Email!");
-                                    } else {
-                                        if (Arrays.asList(cadenaArray1).contains(txtPais.getText())) {
-                                            JOptionPane.showMessageDialog(null, "elija la Pais!");
-                                        } else {
-                                            if (Arrays.asList(cadenaArray1).contains(txtProvincia.getText())) {
-                                                JOptionPane.showMessageDialog(null, "elija la Provincia!");
-                                            } else {
-
-                                                if (Arrays.asList(cadenaArray1).contains(txtCiudad.getText())) {
-                                                    JOptionPane.showMessageDialog(null, "elija la Ciuada!");
-                                                } else {
-                                                    if (Arrays.asList(cadenaArray1).contains(txtDireccion.getText())) {
-                                                        JOptionPane.showMessageDialog(null, "falta Direccion");
-                                                    } else {
-
-                                                        if (Arrays.asList(cadenaArray1).contains(txtDireccionEntrega.getText())) {
-                                                            JOptionPane.showMessageDialog(null, "falta Direccion Entrega!");
-                                                        } else {
-                                                            try {
-                                                                ArmarCadenaUsuario();
-                                                                
-                                                                cliente.setIdTipoIndentificacion(tipoIndentificacion);
-                                                                cliente.setNumeroIdentificacion(txtNCedula.getText());
-             
-                                                                cliente.setRazonSocial(txtRazonSocial.getText());
-                                                                cliente.setEstado("A");
-                                                                cliente.setUsuarioActualizacion(seUsuario.getUsuario());
-                                                                cliente.setFechaActualizacion(d);
-
-                                                                clienteController.edit(cliente);
-
-                                                                ////////////////////////////////////////////////
-                                                          
-                                                                localidadCliente.setCelular(txtMovil.getText());
-                                                                localidadCliente.setTelefono(txtTelefono.getText());
-                                                                localidadCliente.setDirreccionCliente(txtDireccion.getText());
-                                                                localidadCliente.setDirreccionEntrega(txtDireccionEntrega.getText());
-                                                                localidadCliente.setEmail(txtEmail.getText());
-                                                                
-                                                                localidadCliente.setIdPais(pais);
-                                                                localidadCliente.setIdProvincia(provincia);
-                                                                localidadCliente.setIdCiudad(ciudad);
-
-                                                                localidadCliente.setEstado("A");
-                                                                localidadCliente.setUsuarioActualizacion(seUsuario.getUsuario());
-                                                                localidadCliente.setFechaActualizacion(d);
-
-                                                                localidadClienteController.edit(localidadCliente);
-
-                                                                //////////////////////////////////////
-          
-
-                                                                contactosClientes.setNombre("PROPIO");
-
-                                                                contactosClientes.setEstado("A");
-                                                                contactosClientes.setUsuarioActualizacion(seUsuario.getUsuario());
-                                                                contactosClientes.setFechaActualizacion(d);
-
-                                                                contactosClientesController.edit(contactosClientes);
-
-                                                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-                                                                setVisible(false);
-
-                                                            } catch (Exception e) {
-
-                                                                Logger.getLogger(EditarCliente.class.getName()).log(Level.SEVERE, null, e);
-
-                                                            }
-
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
-    }//GEN-LAST:event_btnCrearActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        setVisible(false);
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void txtTipoIdentificacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTipoIdentificacionMousePressed
-        int i = 0;
-        String msg = null;
-        if (evt.getClickCount() == 2) {
-            try {
-
-                ConsultarTipoIdentificacion dialog = new ConsultarTipoIdentificacion(new javax.swing.JFrame(), true);
-                dialog.setVisible(true);
-
-                tipoIndentificacion = dialog.getObjeto();
-
-                if (tipoIndentificacion.getNombreIdentificacion() != null) {
-
-                    txtTipoIdentificacion.setText(tipoIndentificacion.getNombreIdentificacion());
-                }
-            } catch (Exception e) {
-            }
-
-        }
-    }//GEN-LAST:event_txtTipoIdentificacionMousePressed
-
-    private void txtPaisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPaisMousePressed
-
-        int i = 0;
-        String msg = null;
-        if (evt.getClickCount() == 2) {
-            try {
-
-                ConsultarPais dialog = new ConsultarPais(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
-                dialog.setVisible(true);
-
-                pais = dialog.getObjeto();
-                if (pais.getNombre() != null) {
-                    txtPais.setText(pais.getNombre());
-
-                    txtProvincia.setText("Seleccione una Opcion..");
-                    txtCiudad.setText("");
-
-                }
-            } catch (Exception e) {
-            }
-
-        }
-
-
-    }//GEN-LAST:event_txtPaisMousePressed
-
-    private void txtProvinciaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtProvinciaMousePressed
-        int i = 0;
-        String msg = null;
-        if (evt.getClickCount() == 2) {
-
-            try {
-                ConsultarProvincia dialog = new ConsultarProvincia(new javax.swing.JFrame(), true, pais, seUsuario, seEmpresa, seSucursal);
-                dialog.setVisible(true);
-
-                provincia = dialog.getObjeto();
-
-                if (provincia.getNombre() != null) {
-
-                    txtProvincia.setText(provincia.getNombre());
-
-                    txtCiudad.setText("Seleccione una Opcion..");
-
-                }
-
-            } catch (Exception e) {
-
-            }
-
-        }
-    }//GEN-LAST:event_txtProvinciaMousePressed
-
-    private void txtCiudadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCiudadMousePressed
-        int i = 0;
-        String msg = null;
-        if (evt.getClickCount() == 2) {
-
-            try {
-                ConsultarCiudad dialog = new ConsultarCiudad(new javax.swing.JFrame(), true, provincia, seUsuario, seEmpresa, seSucursal);
-                dialog.setVisible(true);
-
-                ciudad = dialog.getObjeto();
-
-                if (ciudad.getNombre() != null) {
-
-                    txtCiudad.setText(ciudad.getNombre());
-
-                }
-
-            } catch (Exception e) {
-
-            }
-
-        }
-    }//GEN-LAST:event_txtCiudadMousePressed
-
-    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        correo = Validacion.Email(txtEmail.getText());
-        if (correo != true) {
-            //msge = msge + "\n Correo invalido";
-            JOptionPane.showMessageDialog(null, "Correo invalido");
-        }
-    }//GEN-LAST:event_txtEmailFocusLost
-
-    private void txtMovilKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMovilKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtMovilKeyTyped
-
-    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtTelefonoKeyTyped
-
-    private void txtNCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNCedulaKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtNCedulaKeyTyped
 
     /**
      * @param args the command line arguments
