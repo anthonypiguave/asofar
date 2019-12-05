@@ -5,8 +5,7 @@
  */
 package ec.com.asofar.views.clientes;
 
-import ec.com.asofar.views.producto.*;
-import ec.com.asofar.dao.PrGruposJpaController;
+
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.SeClientes;
@@ -256,20 +255,20 @@ public class ConsultarCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
-        int i = 0;
-        String msg = null;
-        if (evt.getClickCount() == 2) {
-            i = tabla.getSelectedRow();
-            objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
-
-            if (objeto != null) {
-
-                EditarCliente dialog = new EditarCliente(new javax.swing.JFrame(), true, objeto, seUsuario, seEmpresa, seSucursal);
-                dialog.setVisible(true);
-                cargartabla();
-
-            }
-        }
+//        int i = 0;
+//        String msg = null;
+//        if (evt.getClickCount() == 2) {
+//            i = tabla.getSelectedRow();
+//            objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
+//
+//            if (objeto != null) {
+//
+//                EditarCliente dialog = new EditarCliente(new javax.swing.JFrame(), true, objeto, seUsuario, seEmpresa, seSucursal);
+//                dialog.setVisible(true);
+//                cargartabla();
+//
+//            }
+//        }
 
     }//GEN-LAST:event_tablaMousePressed
 

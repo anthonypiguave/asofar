@@ -65,7 +65,7 @@ public class ValidacionCaja {
         for (int i = 0; i < lista.size(); i++) {
             if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
                 for (int j = 0; j < listafactura.size(); j++) {
-                    if (listafactura.get(j).getIdUsuario()==detallecaja.getIdUsuario().toString()) {
+                    if (listafactura.get(j).getIdUsuario()== detallecaja.getIdUsuario()) {
                         System.out.println("fact "+listafactura.get(j).getIdUsuario());
                         System.out.println("detaCaja "+detallecaja.getIdUsuario());
                         factura += listafactura.get(j).getTotalFacturado();
