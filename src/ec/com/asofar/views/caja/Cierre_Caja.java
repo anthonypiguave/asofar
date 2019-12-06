@@ -375,7 +375,6 @@ public class Cierre_Caja extends javax.swing.JDialog {
 //                    if (cierre == total) {
 //                        Cadena = "Cierre Correcto!";
 //                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total);
-//
 //                    }
                     /*   */
                     cajadet.edit(vdc);
