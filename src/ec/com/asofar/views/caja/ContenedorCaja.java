@@ -117,6 +117,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
 
         jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(1, 1, 1));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/imprimir_mesa.png"))); // NOI18N
         jButton5.setText("IMPRIMIR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
