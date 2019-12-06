@@ -153,6 +153,7 @@ public class seleccionarOrdenCompraRecibidoForm extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/imprimir_mesa.png"))); // NOI18N
         jButton1.setText("IMPRIMIR");
         jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
