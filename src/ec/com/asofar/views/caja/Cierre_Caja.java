@@ -363,12 +363,12 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     if (cierre < total) {
                         Double resta = cierre - total;
                         Cadena = "El Valor de cierre es menor al de Apertura " + resta;
-                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
+//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
                     }
                     if (cierre > total) {
                         Double resta = cierre - total;
                         Cadena = "El Valor de cierre es mayor al de Apertura " + resta;
-                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
+//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
                     }
 //                    if (cierre == total) {
 //                        Cadena = "Cierre Correcto!";
