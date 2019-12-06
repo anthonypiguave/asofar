@@ -46,34 +46,29 @@ public class ValidacionCaja {
 
     public static boolean ValidacionCierre(VeDetalleCaja detallecaja, SeUsuarios su) {
         boolean valor = false;
-        DateFormat df1 = new SimpleDateFormat("hh:mm:ss");
+        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
 
         java.sql.Date fecha1 = new java.sql.Date(detallecaja.getFechaInicio().getTime());
-        String fecha2 = df1.format(detallecaja.getHoraInicio());
+        String fecha2 = df1.format(detallecaja.getHoraInicio().getTime());
         String resultado1 = fecha1 + " " + fecha2;
-
         java.sql.Date fecha3 = new java.sql.Date(detallecaja.getFechaCierre().getTime());
-        String fecha4 = df1.format(detallecaja.getHoraCierre());
+//        String fecha4 = detallecaja.getHoraCierre().toString();
+        String fecha4 = df1.format(detallecaja.getHoraCierre().getTime());
         String resultado2 = fecha3 + " " + fecha4;
-
         Double factura = 0.0;
         Double total = 0.0;
 
         List<VeFactura> lista = facturaController.findVeFacturaEntities();
         List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
-
         for (int i = 0; i < lista.size(); i++) {
 //            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
             String idCaja = lista.get(i).getIdCaja().toString();
             String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
             if (idCaja.equals(detIdCaja)) {
                 for (int j = 0; j < listafactura.size(); j++) {
-                    if (listafactura.get(j).getIdUsuario().equals(detallecaja.getIdUsuario())) {
+                    if (listafactura.get(j).getIdUsuario()==detallecaja.getIdUsuario()) {
                         factura += listafactura.get(j).getTotalFacturado();
-//                        facturadoRetorno(factura);
-                        System.out.println("factutado " + factura);
                         total = factura + detallecaja.getDineroInicio();
-                        System.out.println(" total " + total);
                         break;
                     }
                 }

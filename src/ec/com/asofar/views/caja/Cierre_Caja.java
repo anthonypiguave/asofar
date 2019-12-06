@@ -361,7 +361,6 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     Double total = ValidacionCaja.facturadoRetorno(vdc);
                     Double cierre = Double.parseDouble(montocierre.getText());
                     if (cierre < total) {
-                        
                         Double resta = cierre - total;
                         Cadena = "El Valor de cierre es menor al de Apertura "+resta;
                         System.out.println(" "+Cadena);
@@ -370,6 +369,8 @@ public class Cierre_Caja extends javax.swing.JDialog {
                         Double resta = cierre - total;
                         Cadena = "El Valor de cierre es mayor al de Apertura "+resta;
                         System.out.println(" "+Cadena);
+                    }if(cierre < total){
+                        Cadena = "Cierre Correcto!";
                     }
                     /*   */
                     cajadet.edit(vdc);
