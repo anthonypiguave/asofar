@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 public class Apertura_Caja extends javax.swing.JDialog {
 
     int x, y;
+    
     Date d_hora = new Date();
     Date d_fecha = new Date();
     SeUsuarios seUsuario;
