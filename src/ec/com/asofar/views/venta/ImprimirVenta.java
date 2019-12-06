@@ -75,7 +75,6 @@ public class ImprimirVenta extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(254, 254, 254));
         jButton1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(3, 3, 3));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/imprimir_mesa.png"))); // NOI18N
         jButton1.setText("IMPRIMIR");
 
         jButton2.setBackground(new java.awt.Color(254, 254, 254));

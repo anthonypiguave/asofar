@@ -1,144 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f55d83e9-8113-45fd-89ae-01d99b8b4dbd">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<field name="valor1" class="java.lang.String"/>
-	<field name="valor2" class="java.lang.String"/>
-	<field name="valor3" class="java.lang.String"/>
-	<field name="valor4" class="java.lang.String"/>
-	<field name="valor5" class="java.lang.String"/>
-	<field name="valor6" class="java.lang.String"/>
-	<field name="valor7" class="java.lang.String"/>
-	<field name="valor8" class="java.lang.String"/>
-	<field name="valor9" class="java.lang.String"/>
-	<field name="valor10" class="java.lang.String"/>
-	<field name="valor11" class="java.lang.String"/>
-	<field name="valor12" class="java.lang.String"/>
-	<field name="valor13" class="java.lang.String"/>
-	<field name="valor14" class="java.lang.String"/>
-	<field name="valor15" class="java.lang.String"/>
-	<field name="valor16" class="java.lang.String"/>
-	<field name="valor17" class="java.lang.String"/>
-	<field name="valor18" class="java.lang.String"/>
-	<field name="valor19" class="java.lang.String"/>
-	<field name="valor20" class="java.lang.String"/>
-	<field name="valor21" class="java.lang.String"/>
-	<field name="valor22" class="java.lang.String"/>
-	<field name="valor23" class="java.lang.String"/>
-	<field name="valor24" class="java.lang.String"/>
-	<field name="valor25" class="java.lang.String"/>
-	<field name="valor26" class="java.lang.String"/>
-	<field name="valor27" class="java.lang.String"/>
-	<field name="valor28" class="java.lang.String"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="59" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="4" width="240" height="25" uuid="16144fbf-560a-4854-b1cd-9d4d3badb186"/>
-				<textElement textAlignment="Right">
-					<font size="20" isBold="true"/>
-				</textElement>
-				<text><![CDATA[FARMACIA ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="240" y="4" width="185" height="25" uuid="2da98e35-d077-4599-81d0-6b4d6eb56714"/>
-				<textElement>
-					<font size="20" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valor1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="425" y="4" width="130" height="25" uuid="a8a0ce62-668c-4972-8910-040310e3595b"/>
-				<textElement>
-					<font size="20" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valor2}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="10" y="29" width="300" height="25" uuid="b04eaea1-67c7-4066-9d63-bf8b78e78459"/>
-				<textElement textAlignment="Right">
-					<font size="20" isBold="true"/>
-				</textElement>
-				<text><![CDATA[N° DE FACTURA #]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="310" y="29" width="153" height="25" uuid="2aad6d11-04f9-49fe-bb95-65b866ce32e0"/>
-				<textElement>
-					<font size="20" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valor3}]]></textFieldExpression>
-			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="96" splitType="Stretch">
-			<staticText>
-				<reportElement x="4" y="3" width="146" height="20" uuid="36707498-fbc1-4230-8c8d-d0fdb6d131e0"/>
-				<textElement>
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DIRECCION:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="275" y="3" width="163" height="20" uuid="549f45fb-a79d-4b99-ac3d-f398c1a5fd3b"/>
-				<textElement>
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[RUC:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="4" y="23" width="146" height="20" uuid="937c5a45-6219-4c00-9f8d-500cdabbe225"/>
-				<textElement>
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[N° CAJA:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="275" y="23" width="163" height="20" uuid="fe87fe65-a4ac-47c3-a47c-a634e969e0e3"/>
-				<textElement>
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[NOMBRE CAJA:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="4" y="43" width="146" height="20" uuid="dc0f5d94-770e-43c1-9739-cdb6dfe8ddda"/>
-				<textElement>
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[COD. CLIENTE:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="275" y="43" width="163" height="20" uuid="cb8a3f65-8cd5-432e-84b9-5d37f28baa1b"/>
-				<textElement>
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TIPO IDENTIFICACION:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="4" y="63" width="146" height="20" uuid="d20c06f6-17f9-4beb-903b-0931704f0cfe"/>
-				<textElement>
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[N° IDENTIFICACION:]]></text>
-			</staticText>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch"/>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="79"/>
+    </title>
+    <pageHeader>
+        <band height="35"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="61"/>
+    </columnHeader>
+    <detail>
+        <band height="125"/>
+    </detail>
+    <columnFooter>
+        <band height="45"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="54"/>
+    </pageFooter>
+    <summary>
+        <band height="42"/>
+    </summary>
 </jasperReport>

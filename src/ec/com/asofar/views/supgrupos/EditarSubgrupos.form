@@ -95,7 +95,7 @@
                       <Component id="jLabel2" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="txtNombre" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnguardar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="btncancelar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
