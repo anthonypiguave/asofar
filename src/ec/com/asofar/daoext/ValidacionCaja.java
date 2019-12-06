@@ -61,21 +61,19 @@ public class ValidacionCaja {
 
         List<VeFactura> lista = facturaController.findVeFacturaEntities();
         List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
-
+      
         for (int i = 0; i < lista.size(); i++) {
-//            System.out.println("caja id"+lista.get(i).getIdCaja());
-//            System.out.println("c"+detallecaja.getVeCaja().getIdCaja());
 //            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
-            if (lista.get(i).getIdCaja().toString().equals(detallecaja.getVeCaja().getIdCaja())) {
-                System.out.println("**************");
+            String idCaja = lista.get(i).getIdCaja().toString();
+            String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
+            if (idCaja.equals(detIdCaja)) {
                 for (int j = 0; j < listafactura.size(); j++) {
-                        System.out.println("fact "+listafactura.get(j).getIdUsuario());
-                        System.out.println("detaCaja "+detallecaja.getIdUsuario());
                     if (listafactura.get(j).getIdUsuario().equals(detallecaja.getIdUsuario())) {
-//                        System.out.println("fact "+listafactura.get(j).getIdUsuario());
-//                        System.out.println("detaCaja "+detallecaja.getIdUsuario());
                         factura += listafactura.get(j).getTotalFacturado();
+                        System.out.println("factutado "+factura);
                         total = factura + detallecaja.getDineroInicio();
+                        System.out.println(" total "+total );
+                        break;
                     }
                 }
             }
@@ -87,11 +85,11 @@ public class ValidacionCaja {
         } else {/*inicio*/
             int confirmar = JOptionPane.showConfirmDialog(null, "VALOR DEL CIERRE NO CONCUERDA "
                     + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: "
-                    + total + "\n CIERRE ACTUAL: " + detallecaja.getDineroCierre(), 
-                    "¿DESEA CERRAR CAJA IGUALMENTE?"
-            , JOptionPane.YES_NO_OPTION);
+                    + total + "\n CIERRE ACTUAL: " + detallecaja.getDineroCierre(),
+                    "¿DESEA CERRAR CAJA IGUALMENTE?",
+                     JOptionPane.YES_NO_OPTION);
 
-            if(confirmar == JOptionPane.YES_OPTION){
+            if (confirmar == JOptionPane.YES_OPTION) {
                 valor = true;
             }
         }/*final*/
@@ -124,7 +122,7 @@ public class ValidacionCaja {
                 }
             }
         }
-        Double valorApertura = detallecaja.getDineroInicio(); 
+        Double valorApertura = detallecaja.getDineroInicio();
 //        if (detallecaja.getDineroCierre() < detallecaja.getDineroInicio()) {
 //            Double DineroCierre = detallecaja.getDineroCierre();
 //            Double DineroApertura = detallecaja.getDineroInicio();
