@@ -351,8 +351,8 @@ public class Cierre_Caja extends javax.swing.JDialog {
         if (" ".equals(montocierre.getText())) {
             JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
         } else {
-            try {
-
+            try{
+                
                 vdc.setDineroCierre(Double.parseDouble(montocierre.getText()));
                 vdc.setFechaCierre(d_fecha);
                 vdc.setHoraCierre(d_hora);
@@ -360,13 +360,15 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 if (ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true) {
                     Double total = ValidacionCaja.facturadoRetorno(vdc);
                     Double cierre = Double.parseDouble(montocierre.getText());
+                    Double resta = 0.0;
+                    Double resta1 = 0.0;                    
                     if (cierre < total) {
-                        Double resta = cierre - total;
-                        Cadena = "El Valor de cierre es menor al de Apertura " + resta;
-//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
+                        resta = cierre - total;
+                        Cadena = "El Valor de cierre es menor al de Apertura "+resta;
+                        System.out.println(" "+Cadena);                        
                     }
                     if (cierre > total) {
-                        Double resta = cierre - total;
+                        resta = cierre - total;
                         Cadena = "El Valor de cierre es mayor al de Apertura " + resta;
 //                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
                     }
@@ -394,7 +396,9 @@ public class Cierre_Caja extends javax.swing.JDialog {
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }
+        
         }
+        
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
