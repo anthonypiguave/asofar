@@ -29,6 +29,8 @@
 	<field name="valor24" class="java.lang.String"/>
 	<field name="valor25" class="java.lang.String"/>
 	<field name="valor26" class="java.lang.String"/>
+	<field name="valor27" class="java.lang.String"/>
+	<field name="valor28" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -72,20 +74,55 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="52" splitType="Stretch">
+		<band height="96" splitType="Stretch">
 			<staticText>
-				<reportElement x="4" y="3" width="100" height="20" uuid="36707498-fbc1-4230-8c8d-d0fdb6d131e0"/>
+				<reportElement x="4" y="3" width="146" height="20" uuid="36707498-fbc1-4230-8c8d-d0fdb6d131e0"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIRECCION:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="264" y="3" width="100" height="20" uuid="549f45fb-a79d-4b99-ac3d-f398c1a5fd3b"/>
+				<reportElement x="275" y="3" width="163" height="20" uuid="549f45fb-a79d-4b99-ac3d-f398c1a5fd3b"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="23" width="146" height="20" uuid="937c5a45-6219-4c00-9f8d-500cdabbe225"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° CAJA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="23" width="163" height="20" uuid="fe87fe65-a4ac-47c3-a47c-a634e969e0e3"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE CAJA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="43" width="146" height="20" uuid="dc0f5d94-770e-43c1-9739-cdb6dfe8ddda"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD. CLIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="43" width="163" height="20" uuid="cb8a3f65-8cd5-432e-84b9-5d37f28baa1b"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO IDENTIFICACION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="63" width="146" height="20" uuid="d20c06f6-17f9-4beb-903b-0931704f0cfe"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° IDENTIFICACION:]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
