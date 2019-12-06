@@ -347,12 +347,12 @@ public class Cierre_Caja extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-      String Cadena = "";
+        String Cadena = "";
         if (" ".equals(montocierre.getText())) {
             JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                
+
                 vdc.setDineroCierre(Double.parseDouble(montocierre.getText()));
                 vdc.setFechaCierre(d_fecha);
                 vdc.setHoraCierre(d_hora);
@@ -362,16 +362,19 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     Double cierre = Double.parseDouble(montocierre.getText());
                     if (cierre < total) {
                         Double resta = cierre - total;
-                        Cadena = "El Valor de cierre es menor al de Apertura "+resta;
-                        System.out.println(" "+Cadena);
+                        Cadena = "El Valor de cierre es menor al de Apertura " + resta;
+                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
                     }
                     if (cierre > total) {
                         Double resta = cierre - total;
-                        Cadena = "El Valor de cierre es mayor al de Apertura "+resta;
-                        System.out.println(" "+Cadena);
-                    }if(cierre < total){
-                        Cadena = "Cierre Correcto!";
+                        Cadena = "El Valor de cierre es mayor al de Apertura " + resta;
+                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
                     }
+//                    if (cierre == total) {
+//                        Cadena = "Cierre Correcto!";
+//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total);
+//
+//                    }
                     /*   */
                     cajadet.edit(vdc);
                     setVisible(false);
