@@ -82,6 +82,11 @@ public class NuevoFabricante extends javax.swing.JDialog {
         });
 
         nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreFocusLost(evt);
+            }
+        });
         nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nombreKeyTyped(evt);
@@ -198,6 +203,10 @@ public class NuevoFabricante extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_nombreKeyTyped
+
+    private void nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusLost
+       nombre.setText(nombre.getText().toUpperCase());
+    }//GEN-LAST:event_nombreFocusLost
 
     /**
      * @param args the command line arguments
