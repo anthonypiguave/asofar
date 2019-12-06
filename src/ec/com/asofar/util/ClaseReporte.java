@@ -35,6 +35,10 @@ public class ClaseReporte {
      String valor23;
      String valor24;
      String valor25;
+     String valor26;
+     String valor27;
+     String valor28;
+     
     public ClaseReporte() {
     }
 
@@ -218,7 +222,38 @@ public class ClaseReporte {
         this.valor22 = valor22;
         this.valor23 = valor23;
     }
-    
+
+    public ClaseReporte(String valor1, String valor2, String valor3, String valor4, String valor5, String valor6, String valor7, String valor8, String valor9, String valor10, String valor11, String valor12, String valor13, String valor14, String valor15, String valor16, String valor17, String valor18, String valor19, String valor20, String valor21, String valor22, String valor23, String valor24, String valor25, String valor26, String valor27, String valor28) {
+        this.valor1 = valor1;
+        this.valor2 = valor2;
+        this.valor3 = valor3;
+        this.valor4 = valor4;
+        this.valor5 = valor5;
+        this.valor6 = valor6;
+        this.valor7 = valor7;
+        this.valor8 = valor8;
+        this.valor9 = valor9;
+        this.valor10 = valor10;
+        this.valor11 = valor11;
+        this.valor12 = valor12;
+        this.valor13 = valor13;
+        this.valor14 = valor14;
+        this.valor15 = valor15;
+        this.valor16 = valor16;
+        this.valor17 = valor17;
+        this.valor18 = valor18;
+        this.valor19 = valor19;
+        this.valor20 = valor20;
+        this.valor21 = valor21;
+        this.valor22 = valor22;
+        this.valor23 = valor23;
+        this.valor24 = valor24;
+        this.valor25 = valor25;
+        this.valor26 = valor26;
+        this.valor27 = valor27;
+        this.valor28 = valor28;
+    }
+        
     public String getValor1() {
         return valor1;
     }
@@ -417,6 +452,30 @@ public class ClaseReporte {
 
     public void setValor25(String valor25) {
         this.valor25 = valor25;
+    }
+
+    public String getValor26() {
+        return valor26;
+    }
+
+    public void setValor26(String valor26) {
+        this.valor26 = valor26;
+    }
+
+    public String getValor27() {
+        return valor27;
+    }
+
+    public void setValor27(String valor27) {
+        this.valor27 = valor27;
+    }
+
+    public String getValor28() {
+        return valor28;
+    }
+
+    public void setValor28(String valor28) {
+        this.valor28 = valor28;
     }
      
     
