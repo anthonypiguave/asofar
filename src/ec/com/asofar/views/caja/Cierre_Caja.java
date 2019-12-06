@@ -347,28 +347,35 @@ public class Cierre_Caja extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
+        String Cadena = "";
         if (" ".equals(montocierre.getText())) {
             JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
         } else {
-            try {
-                String Cadena = "";
+            try{
+                
                 vdc.setDineroCierre(Double.parseDouble(montocierre.getText()));
                 vdc.setFechaCierre(d_fecha);
                 vdc.setHoraCierre(d_hora);
                 vdc.setEstado("I");
                 if (ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true) {
-                    Double apertura = ValidacionCaja.valoresCaja(vdc);
+                    Double total = ValidacionCaja.facturadoRetorno(vdc);
                     Double cierre = Double.parseDouble(montocierre.getText());
-                    if (cierre < apertura) {
-                        Double resta = cierre - apertura;
+                    Double resta = 0.0;
+                    Double resta1 = 0.0;                    
+                    if (cierre < total) {
+                        resta = cierre - total;
                         Cadena = "El Valor de cierre es menor al de Apertura "+resta;
-                        System.out.println(" "+Cadena);
+                        System.out.println(" "+Cadena);                        
                     }
-                    if (cierre > apertura) {
-                        Double resta = cierre - apertura;
-                        Cadena = "El Valor de cierre es mayor al de Apertura "+resta;
-                        System.out.println(" "+Cadena);
+                    if (cierre > total) {
+                        resta = cierre - total;
+                        Cadena = "El Valor de cierre es mayor al de Apertura " + resta;
+//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
                     }
+//                    if (cierre == total) {
+//                        Cadena = "Cierre Correcto!";
+//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total);
+//                    }
                     /*   */
                     cajadet.edit(vdc);
                     setVisible(false);
@@ -389,7 +396,9 @@ public class Cierre_Caja extends javax.swing.JDialog {
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }
+        
         }
+        
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

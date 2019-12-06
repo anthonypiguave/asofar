@@ -38,7 +38,6 @@ public class VeFacturaEXT extends VeFacturaJpaController {
                 + "and ve_factura.fecha_facturacion \n"
                 + "between '" + resultado1 + "' and '" + resultado2 + "';";
         Query query = em.createNativeQuery(nativeQuery, VeFactura.class);
-
         lista = query.getResultList();
 
         return lista;
