@@ -1379,7 +1379,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         printerService.printString("EPSON-TM-T20II", "         Direccion: " + direccion + "\n");
                         printerService.printString("EPSON-TM-T20II", "               RUC: " + ruc + "\n");
                         printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
+                        printerService.printString("EPSON-TM-T20II", "    CODIGO DE CLTE: " + txt_idCliente.getText() + "\n");
                         printerService.printString("EPSON-TM-T20II", "    IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
                         printerService.printString("EPSON-TM-T20II", " N° IDENTIFICACION: " + txtIdentificacion.getText() + "\n");
                         printerService.printString("EPSON-TM-T20II", "    NOMBRE DE CLTE: " + txtNombre.getText() + "\n");
@@ -1401,7 +1401,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         printerService.printString("EPSON-TM-T20II", "--------- GRACIAS POR PREFERIRNOS --------\n");
                         ArrayList listap =new ArrayList();
                         for(int i=0;i<tba_detalle.getRowCount();i++){
-                        ClaseReporte clase =new ClaseReporte(txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
+                        ClaseReporte clase =new ClaseReporte(empresa,sucursal,idFactura,direccion,ruc,txt_NumeroCaja.getText(),txt_NombreCaja.getText(),txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
                                                             tba_detalle.getValueAt(i,0).toString(),
                                                             tba_detalle.getValueAt(i,1).toString(),
                                                             tba_detalle.getValueAt(i,2).toString(),
