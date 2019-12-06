@@ -358,15 +358,15 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 vdc.setHoraCierre(d_hora);
                 vdc.setEstado("I");
                 if (ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true) {
-                    Double apertura = ValidacionCaja.valoresCaja(vdc);
+                    Double total = ValidacionCaja.facturadoRetorno(vdc);
                     Double cierre = Double.parseDouble(montocierre.getText());
-                    if (cierre < apertura) {
-                        Double resta = cierre - apertura;
+                    if (cierre < total) {
+                        Double resta = cierre - total;
                         Cadena = "El Valor de cierre es menor al de Apertura "+resta;
                         System.out.println(" "+Cadena);
                     }
-                    if (cierre > apertura) {
-                        Double resta = cierre - apertura;
+                    if (cierre > total) {
+                        Double resta = cierre - total;
                         Cadena = "El Valor de cierre es mayor al de Apertura "+resta;
                         System.out.println(" "+Cadena);
                     }

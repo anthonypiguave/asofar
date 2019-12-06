@@ -61,7 +61,7 @@ public class ValidacionCaja {
 
         List<VeFactura> lista = facturaController.findVeFacturaEntities();
         List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
-      
+
         for (int i = 0; i < lista.size(); i++) {
 //            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
             String idCaja = lista.get(i).getIdCaja().toString();
@@ -70,9 +70,10 @@ public class ValidacionCaja {
                 for (int j = 0; j < listafactura.size(); j++) {
                     if (listafactura.get(j).getIdUsuario().equals(detallecaja.getIdUsuario())) {
                         factura += listafactura.get(j).getTotalFacturado();
-                        System.out.println("factutado "+factura);
+//                        facturadoRetorno(factura);
+                        System.out.println("factutado " + factura);
                         total = factura + detallecaja.getDineroInicio();
-                        System.out.println(" total "+total );
+                        System.out.println(" total " + total);
                         break;
                     }
                 }
@@ -87,13 +88,50 @@ public class ValidacionCaja {
                     + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: "
                     + total + "\n CIERRE ACTUAL: " + detallecaja.getDineroCierre(),
                     "¿DESEA CERRAR CAJA IGUALMENTE?",
-                     JOptionPane.YES_NO_OPTION);
+                    JOptionPane.YES_NO_OPTION);
 
             if (confirmar == JOptionPane.YES_OPTION) {
                 valor = true;
             }
         }/*final*/
         return valor;
+    }
+
+    public static Double facturadoRetorno(VeDetalleCaja detallecaja) {
+        DateFormat df1 = new SimpleDateFormat("hh:mm:ss");
+
+        java.sql.Date fecha1 = new java.sql.Date(detallecaja.getFechaInicio().getTime());
+        String fecha2 = df1.format(detallecaja.getHoraInicio());
+        String resultado1 = fecha1 + " " + fecha2;
+
+        java.sql.Date fecha3 = new java.sql.Date(detallecaja.getFechaCierre().getTime());
+        String fecha4 = df1.format(detallecaja.getHoraCierre());
+        String resultado2 = fecha3 + " " + fecha4;
+
+        Double factura = 0.0;
+        Double total = 0.0;
+
+        List<VeFactura> lista = facturaController.findVeFacturaEntities();
+        List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
+
+        for (int i = 0; i < lista.size(); i++) {
+//            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
+            String idCaja = lista.get(i).getIdCaja().toString();
+            String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
+            if (idCaja.equals(detIdCaja)) {
+                for (int j = 0; j < listafactura.size(); j++) {
+                    if (listafactura.get(j).getIdUsuario().equals(detallecaja.getIdUsuario())) {
+                        factura += listafactura.get(j).getTotalFacturado();
+//                        facturadoRetorno(factura);
+                        System.out.println("factutado " + factura);
+                        total = factura + detallecaja.getDineroInicio();
+                        System.out.println(" total " + total);
+                        break;
+                    }
+                }
+            }
+        }
+        return total;
     }
 
     public static Double valoresCaja(VeDetalleCaja detallecaja) {
@@ -123,32 +161,6 @@ public class ValidacionCaja {
             }
         }
         Double valorApertura = detallecaja.getDineroInicio();
-//        if (detallecaja.getDineroCierre() < detallecaja.getDineroInicio()) {
-//            Double DineroCierre = detallecaja.getDineroCierre();
-//            Double DineroApertura = detallecaja.getDineroInicio();
-//            Double resta = DineroCierre - DineroApertura;
-//            System.out.println(" valor de cierre " + resta);
-//            int r = JOptionPane.showConfirmDialog(null, "El Valor de cierre es menor al de Apertura", "¿Desea Cerrar?", JOptionPane.YES_NO_OPTION);
-//            if (r == JOptionPane.YES_OPTION) {
-//                valor = true;
-//            } else {
-//                valor = false;
-//            }
-//        }
-//        if (detallecaja.getDineroCierre() > detallecaja.getDineroInicio()) {
-//            Double DineroCierre = detallecaja.getDineroCierre();
-//            Double DineroApertura = detallecaja.getDineroInicio();
-//            Double resta = DineroCierre - DineroApertura;
-//            System.out.println("valor de cierre " + resta);
-//            int r = JOptionPane.showConfirmDialog(null, "¿Desea Cerrar?", "", JOptionPane.YES_NO_OPTION);
-//                int r = JOptionPane.showConfirmDialog(null, "DIFERENCIA ES : $  " + resta,"¿Desea Cerrar?", JOptionPane.YES_NO_OPTION);
-//            if (r == JOptionPane.YES_OPTION) {
-//                valor = true;
-//            } else {
-//                valor = false;
-//            }
-//        }
         return valorApertura;
-
     }
 }
