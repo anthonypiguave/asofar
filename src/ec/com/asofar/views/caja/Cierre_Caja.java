@@ -351,7 +351,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
         if (" ".equals(montocierre.getText())) {
             JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
         } else {
-            try {
+            try{
                 
                 vdc.setDineroCierre(Double.parseDouble(montocierre.getText()));
                 vdc.setFechaCierre(d_fecha);
@@ -361,11 +361,9 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     Double total = ValidacionCaja.facturadoRetorno(vdc);
                     Double cierre = Double.parseDouble(montocierre.getText());
                     Double resta = 0.0;
-                    Double resta1 = 0.0;
-                    if (cierre < total) {                        
-                        resta = cierre - total;
+                    Double resta1 = 0.0;                    
                     if (cierre < total) {
-                        Double resta = cierre - total;
+                        resta = cierre - total;
                         Cadena = "El Valor de cierre es menor al de Apertura "+resta;
                         System.out.println(" "+Cadena);                        
                     }
@@ -399,7 +397,9 @@ public class Cierre_Caja extends javax.swing.JDialog {
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }
+        
         }
+        
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
