@@ -707,6 +707,8 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
                     tbaListaComprasB.getValueAt(i, 3).toString(),
                     tbaListaComprasB.getValueAt(i, 4).toString(),
                     tbaListaComprasB.getValueAt(i, 5).toString(),
+                    tbaListaComprasB.getValueAt(i, 6).toString(),
+                    tbaListaComprasB.getValueAt(i, 7).toString(),
                     txtDescuento.getText(),
                     txtIva.getText(),
                     txtTotal.getText());

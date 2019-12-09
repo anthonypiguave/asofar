@@ -1361,6 +1361,9 @@ public class Venta extends javax.swing.JInternalFrame {
                         detFactController.create(detFact);
                     }
                     /*    */
+//                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                //    String fechagenerada = formatter.format(d);
+                    java.sql.Date fechact = new java.sql.Date(d.getTime());
                     String empresa = emp.getNombreComercial();
                     String sucursal = suc.getNombreComercial();
                     String ruc = emp.getRuc();
@@ -1416,11 +1419,11 @@ public class Venta extends javax.swing.JInternalFrame {
                         }
                         JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
                         JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
-                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+""+".pdf");
+                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"CI."+txtIdentificacion.getText()+" Factura#"+idFactura+" Fecha:"+fechact.toString()+".pdf");
                     } else {
                         ArrayList listap =new ArrayList();
                         for(int i=0;i<tba_detalle.getRowCount();i++){
-                        ClaseReporte clase =new ClaseReporte(txt_NumeroCaja.getText(),txt_NombreCaja.getText(),txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
+                        ClaseReporte clase =new ClaseReporte(empresa,sucursal,idFactura,direccion,ruc,txt_NumeroCaja.getText(),txt_NombreCaja.getText(),txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
                                                             tba_detalle.getValueAt(i,0).toString(),
                                                             tba_detalle.getValueAt(i,1).toString(),
                                                             tba_detalle.getValueAt(i,2).toString(),
@@ -1435,7 +1438,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         }
                         JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
                         JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
-                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"ceduladecliente-idderegistro-fecha"+".pdf");
+                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"CI."+txtIdentificacion.getText()+" Factura#"+idFactura+" Fecha:"+fechact.toString()+".pdf");
                     }
 //                    byte[] cutP = new byte[]{0x1d, 'V', 1};
 //                    printerService.printBytes("EPSON-TM-T20II", cutP);
@@ -1641,7 +1644,7 @@ public class Venta extends javax.swing.JInternalFrame {
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
-                    id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
+                     id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 
                 }
             }

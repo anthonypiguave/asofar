@@ -57,7 +57,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     List<ReporteFacturaDTO> itemList = null;
 
     public ReporteriaVentas(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal=false);
         initComponents();
         this.setLocationRelativeTo(this);
         itemList = rep.reporteFactura();
@@ -70,7 +70,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     }
 
     public ReporteriaVentas(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal);
+        super(parent, modal=false);
         initComponents();
         this.setLocationRelativeTo(this);
         usu = us;
