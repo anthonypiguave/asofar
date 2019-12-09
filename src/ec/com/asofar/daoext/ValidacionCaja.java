@@ -79,10 +79,10 @@ public class ValidacionCaja {
                     JOptionPane.INFORMATION_MESSAGE);
         } else {/*inicio*/
             int confirmar = JOptionPane.showConfirmDialog(null, "VALOR DEL CIERRE NO CONCUERDA "
-                    + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: $ "
+                   /* + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: $ "
                     + total + "\n CIERRE ACTUAL: $ " + detallecaja.getDineroCierre(),
                     "¿DESEA CERRAR CAJA IGUALMENTE?",
-                    JOptionPane.YES_NO_OPTION);
+                    JOptionPane.YES_NO_OPTION*/);
 
             if (confirmar == JOptionPane.YES_OPTION) {
                 valor = true;
