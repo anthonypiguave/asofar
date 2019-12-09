@@ -78,12 +78,11 @@ public class ValidacionCaja {
             JOptionPane.showMessageDialog(null, "REGISTRO COMPLETADO EXITOSAMENTE!", "CAJA CERRADA",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {/*inicio*/
-            int confirmar = JOptionPane.showConfirmDialog(null, "VALOR DEL CIERRE NO CONCUERDA "
-                   /* + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: $ "
+            int confirmar = JOptionPane.showConfirmDialog(null, "VALOR DEL CIERRE NO CONCUERDA ","¿DESEA CERRAR CAJA ?",
+                /*    + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: $ "
                     + total + "\n CIERRE ACTUAL: $ " + detallecaja.getDineroCierre(),
-                    "¿DESEA CERRAR CAJA IGUALMENTE?",
-                    JOptionPane.YES_NO_OPTION*/);
-
+                    "¿DESEA CERRAR CAJA IGUALMENTE?"*/
+                    JOptionPane.YES_NO_OPTION);
             if (confirmar == JOptionPane.YES_OPTION) {
                 valor = true;
             }
