@@ -378,7 +378,6 @@ public class Cierre_Caja extends javax.swing.JDialog {
 //                    }
                     /*   */
                     cajadet.edit(vdc);
-                    setVisible(false);
                     Cierre_Caja.PrintEpson printerService = new Cierre_Caja.PrintEpson();
                     System.out.println(printerService.getPrinters());
                     //print some stuff. Change the printer name to your thermal printer name.
@@ -392,6 +391,8 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
                     byte[] cutP = new byte[]{0x1d, 'V', 1};
                     printerService.printBytes("EPSON-TM-T20II", cutP);
+                    
+                    setVisible(false);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
