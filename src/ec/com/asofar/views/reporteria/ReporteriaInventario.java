@@ -8,7 +8,6 @@ package ec.com.asofar.views.reporteria;
 
 
 import ec.com.asofar.dao.PrProductoBodegaJpaController;
-import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrProductoBodega;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -87,7 +86,7 @@ public class ReporteriaInventario extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INVENTARIO");
+        jLabel1.setText("REPORTE DE INVENTARIO");
         jLabel1.setOpaque(true);
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
