@@ -439,7 +439,7 @@ public void llenarCombo(List<SeRoles> TiBo) {
         if (txtClave.getText().equals(txtClaveConfirm.getText())
                 ) {
 //            usuario.setIdUsuario(txtIdUsuario.getText());
-            usuario.setUsuario(txtPersona.getText());
+            usuario.setUsuario(txtIdUsuario.getText());
             usuario.setEstado("A");
             usuario.setFechaActualizacion(fechaActual);
             usuario.setFechaCreacion(fechaActual);

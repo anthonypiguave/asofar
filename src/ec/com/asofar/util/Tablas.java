@@ -385,7 +385,7 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
 
-            if (lista.get(i).getEstado().equals('A')) {
+            if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getRuc();
                 Filas[1] = lista.get(i).getNombreComercial();
                 Filas[2] = lista.get(i).getDireccion();
@@ -421,7 +421,7 @@ public class Tablas {
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
 
-            if (lista.get(i).getEstado().equals('A')) {
+            if (lista.get(i).getEstado().equals("A")) {
 
                 Filas[0] = lista.get(i).getNombreComercial();
                 Filas[1] = lista.get(i).getDireccion();
@@ -683,14 +683,14 @@ public class Tablas {
     }
 
     public static void listarUsuarios(List<SeUsuarios> lista, JTable Tabla, SeSucursal suc) {
-        int[] a = {5, 5, 5};
+        int[] a = {5, 5, 30, 5};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"ID", "USUARIO", "CORREO"};
-        String[] Filas = new String[3];
+        String[] Co = {"ID", "USUARIO", "CORREO", "ROL"};
+        String[] Filas = new String[4];
         model = new DefaultTableModel(null, Co);
 
         Tabla.setShowGrid(true);
@@ -701,6 +701,7 @@ public class Tablas {
                 Filas[0] = "" + lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getUsuario();
                 Filas[2] = lista.get(i).getIdPersona().getCorreo();
+                Filas[3] = lista.get(i).getSeUsuarioSucurRolList().get(0).getIdRoles().getNombre();
 
                 model.addRow(Filas);
                 Tabla.setModel(model);
@@ -710,6 +711,8 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
 
             }
         }

@@ -1,6 +1,5 @@
 package ec.com.asofar.views.empresas;
 
-
 import ec.com.asofar.dao.SeEmpresaJpaController;
 import ec.com.asofar.dto.SeEmpresa;
 
@@ -10,6 +9,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -20,19 +20,16 @@ public class ListaEmpresas extends javax.swing.JDialog {
     List<SeEmpresa> listaEmpresa;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-    SeEmpresaJpaController empresaController
-            = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
+    SeEmpresaJpaController empresaController = new SeEmpresaJpaController(EntityManagerUtil.ObtenerEntityManager());
     SeUsuarios us1;
-    SeEmpresa em1; 
+    SeEmpresa em1;
     SeSucursal su1;
 
     public ListaEmpresas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        listaEmpresa
-                = empresaController.findSeEmpresaEntities();
-        Tablas.listarEmpresa(listaEmpresa, jtPersonas);
+        cargarTabla();
 
     }
 
@@ -42,11 +39,17 @@ public class ListaEmpresas extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         us1 = us;
         em1 = em;
-        su1= su;
-        listaEmpresa
-                = empresaController.findSeEmpresaEntities();
-        Tablas.listarEmpresa(listaEmpresa, jtPersonas);
+        su1 = su;
+        cargarTabla();
 
+    }
+
+    public void cargarTabla() {
+
+        listaEmpresa = new ArrayList<SeEmpresa>();
+
+        listaEmpresa = empresaController.findSeEmpresaEntities();
+        Tablas.listarEmpresa(listaEmpresa, jtPersonas);
     }
 
     @SuppressWarnings("unchecked")
@@ -193,21 +196,20 @@ public class ListaEmpresas extends javax.swing.JDialog {
         int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
-             setVisible(false);
+            setVisible(false);
 
 //            asdfg12345
         } else {
 
         }
-           
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
-   
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IngresarEmpresas ru = new IngresarEmpresas(new javax.swing.JFrame(), true, us1,em1,su1);
-        setVisible(false);
+        IngresarEmpresas ru = new IngresarEmpresas(new javax.swing.JFrame(), true, us1, em1, su1);
         ru.setVisible(true);
+        cargarTabla();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jtPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonasMouseClicked
@@ -223,8 +225,8 @@ public class ListaEmpresas extends javax.swing.JDialog {
                 if ((jtPersonas.getValueAt(id, 0).toString().equals(listaEmpresa.get(i).getRuc()))) {
                     obj = listaEmpresa.get(i);
                     if (obj != null) {
-                        
-                        ActualizarDatosEmpresas es = new ActualizarDatosEmpresas(new javax.swing.JFrame(), true, obj,us1,em1,su1);
+
+                        ActualizarDatosEmpresas es = new ActualizarDatosEmpresas(new javax.swing.JFrame(), true, obj, us1, em1, su1);
                         setVisible(false);
                         es.setVisible(true);
                     }

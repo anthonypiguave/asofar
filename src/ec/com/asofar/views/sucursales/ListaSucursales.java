@@ -9,6 +9,7 @@ import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -31,9 +32,7 @@ public class ListaSucursales extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        listaSucursal
-                = sucursalController.findSeSucursalEntities();
-        Tablas.listarSucursal(listaSucursal, tablaSucursal);
+        cargarTabla();
 
     }
 
@@ -44,10 +43,15 @@ public class ListaSucursales extends javax.swing.JDialog {
         us1 = us;
         em1 = em;
         su1 = su;
-        listaSucursal
-                = sucursalController.findSeSucursalEntities();
-        Tablas.listarSucursal(listaSucursal, tablaSucursal);
+        cargarTabla();
 
+    }
+
+    public void cargarTabla() {
+
+        listaSucursal = new ArrayList<SeSucursal>();
+        listaSucursal = sucursalController.findSeSucursalEntities();
+        Tablas.listarSucursal(listaSucursal, tablaSucursal);
     }
 
     @SuppressWarnings("unchecked")
@@ -229,8 +233,8 @@ public class ListaSucursales extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         IngresarSucursal ru = new IngresarSucursal(new javax.swing.JFrame(), true, us1, em1, su1);
-        setVisible(false);
         ru.setVisible(true);
+        cargarTabla();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tablaSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalMouseClicked
@@ -273,10 +277,10 @@ public class ListaSucursales extends javax.swing.JDialog {
             }
             if (obj != null) {
 
-                        ActualizarDatosSucursal es = new ActualizarDatosSucursal(new javax.swing.JFrame(), true, obj, us1, em1, su1);
+                ActualizarDatosSucursal es = new ActualizarDatosSucursal(new javax.swing.JFrame(), true, obj, us1, em1, su1);
 //                        setVisible(false);
-                        es.setVisible(true);
-                    }
+                es.setVisible(true);
+            }
             listaSucursal
                     = sucursalController.findSeSucursalEntities();
             Tablas.listarSucursal(listaSucursal, tablaSucursal);
