@@ -368,7 +368,7 @@ public class cliente_editar extends javax.swing.JDialog {
         cliente.setEstado(cbx_estado.getSelectedItem().toString());
         try {
             scc.edit(cliente);
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
             setVisible(false);
         } catch (Exception ex) {
             Logger.getLogger(cliente_agregar.class.getName()).log(Level.SEVERE, null, ex);

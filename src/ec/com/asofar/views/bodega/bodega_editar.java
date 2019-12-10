@@ -245,7 +245,7 @@ public class bodega_editar extends javax.swing.JDialog {
         try {
             bc.edit(Bodega);
             setVisible(false);
-            JOptionPane.showMessageDialog(this, "Bodega  actualizada");
+            JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
         } catch (Exception ex) {
             Logger.getLogger(bodega_editar.class.getName()).log(Level.SEVERE, null, ex);
         }

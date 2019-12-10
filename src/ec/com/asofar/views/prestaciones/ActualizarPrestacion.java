@@ -259,7 +259,7 @@ public class ActualizarPrestacion extends javax.swing.JDialog {
         try {
             tbc.edit(Bodega);
             setVisible(false);
-            JOptionPane.showMessageDialog(this, "Prestacion Actualizacion");
+            JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
         } catch (Exception ex) {
             Logger.getLogger(ActualizarPrestacion.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -279,7 +279,7 @@ public class contacto_editar extends javax.swing.JDialog {
         ContactoClientes.setEstado("A");
         try {
             Ccc.edit(ContactoClientes);
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
             setVisible(false);
         } catch (Exception ex) {
             Logger.getLogger(contacto_agregar.class.getName()).log(Level.SEVERE, null, ex);

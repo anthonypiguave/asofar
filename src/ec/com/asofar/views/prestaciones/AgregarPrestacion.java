@@ -292,7 +292,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
             try {
 
                 pr.create(PRE);
-                JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+                JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                 setVisible(false);
             } catch (Exception e) {
                 Logger.getLogger(AgregarPrestacion.class.getName()).log(Level.SEVERE, null, e);

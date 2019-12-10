@@ -196,7 +196,7 @@ public class EditarMotivo extends javax.swing.JDialog {
         imo.setFechaActualizacion(d);
     try {
         imcont.edit(imo);
-        JOptionPane.showMessageDialog(this, "MOTIVO ACTUALIZADO");
+        JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
         setVisible(false);
         ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
         cm.setVisible(true);

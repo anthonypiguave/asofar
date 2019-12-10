@@ -275,7 +275,7 @@ public class bodega_agregar extends javax.swing.JDialog {
                 bod.setFechaCreacion(fechaActual);
                 
                     bc.create(bod);
-                    JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
                 } catch (Exception ex) {
                     Logger.getLogger(bodega_agregar.class.getName()).log(Level.SEVERE, null, ex);

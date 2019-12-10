@@ -280,7 +280,7 @@ public class IngresarEmpresas extends javax.swing.JDialog {
 
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Guardar();
+      Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -399,7 +399,7 @@ public class IngresarEmpresas extends javax.swing.JDialog {
                     empresa.setUsuarioActualizacion(us1.getUsuario());
 
                     empresaController.create(empresa);
-                    JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     ListaEmpresas mp = new ListaEmpresas(new javax.swing.JFrame(), true,us1,em1,su1);
                     setVisible(false);
                     mp.setVisible(true);

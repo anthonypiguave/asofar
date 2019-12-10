@@ -237,7 +237,7 @@ public class EditarArticulo extends javax.swing.JDialog {
                 arti.setEstado(Estado.ObtenerEstado(estado.getSelectedItem().toString()));
                 
                 control.edit(arti);
-                JOptionPane.showMessageDialog(this, "Aticulo actualizado");
+                JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
                 this.setVisible(false);
             }
             

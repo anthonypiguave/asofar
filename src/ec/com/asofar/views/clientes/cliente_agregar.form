@@ -134,9 +134,9 @@
                       <Component id="txt_razon_social" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton1" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="btnguardar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnguardar" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>

@@ -331,7 +331,7 @@ public class Localidad_editar extends javax.swing.JDialog {
         localidadclientes.setFechaCreacion(fechaActual);
         try {
             Lc.edit(localidadclientes);
-            JOptionPane.showMessageDialog(null, " GUARDADO CON EXITO");
+            JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
             setVisible(false);
         } catch (Exception ex) {
             Logger.getLogger(Localidad_agregar.class.getName()).log(Level.SEVERE, null, ex);
