@@ -5,11 +5,19 @@
  */
 package ec.com.asofar.views.reporteria;
 
+import ec.com.asofar.dao.InDetalleMovimientoJpaController;
 import ec.com.asofar.dao.InKardexJpaController;
+import ec.com.asofar.dao.InMotivosJpaController;
+import ec.com.asofar.dao.InMovimientosJpaController;
+import ec.com.asofar.dao.InTipoDocumentoJpaController;
+import ec.com.asofar.dao.InTipoMovimientoJpaController;
 import ec.com.asofar.dao.SeClientesJpaController;
 import ec.com.asofar.dao.SeLocalidadClienteJpaController;
 import ec.com.asofar.dao.SeTipoIdentificacionJpaController;
+import ec.com.asofar.dao.VeFacturaDetalleJpaController;
+import ec.com.asofar.dao.VeFacturaJpaController;
 import ec.com.asofar.daoext.InKardexExt;
+import ec.com.asofar.daoext.MovimientosDaoExt;
 import ec.com.asofar.daoext.ObtenerDTO;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
@@ -18,8 +26,14 @@ import ec.com.asofar.daoext.ReporteFacturaDTO;
 import ec.com.asofar.daoext.ReporteProveedorDTO;
 import ec.com.asofar.daoext.ReporteriaExt;
 import ec.com.asofar.daoext.SeClientesExt;
+import ec.com.asofar.dto.InDetalleMovimiento;
+import ec.com.asofar.dto.InDetalleMovimientoPK;
 import ec.com.asofar.dto.InKardex;
 import ec.com.asofar.dto.InKardexPK;
+import ec.com.asofar.dto.InMotivos;
+import ec.com.asofar.dto.InMovimientos;
+import ec.com.asofar.dto.InTipoDocumento;
+import ec.com.asofar.dto.InTipoMovimiento;
 import ec.com.asofar.dto.PrProductos;
 import ec.com.asofar.dto.SeClientes;
 import ec.com.asofar.dto.SeEmpresa;
@@ -27,6 +41,9 @@ import ec.com.asofar.dto.SeLocalidadCliente;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeTipoIdentificacion;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeFactura;
+import ec.com.asofar.dto.VeFacturaDetalle;
+import ec.com.asofar.dto.VeFacturaPK;
 import ec.com.asofar.util.ClaseReporte;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
@@ -75,6 +92,9 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
     SeSucursal suc;
     Date d = new Date();
 
+    InKardex objetoKardex = new InKardex();
+    InTipoDocumento documento = new InTipoDocumento();
+
     /**
      * Creates new form Reporte_DetalleCompra
      */
@@ -96,6 +116,14 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
         formularioProveedor();
         llenar_detalles();
         totaless();
+        verificarEstadoDevuelto();
+
+    }
+
+    public void verificarEstadoDevuelto() {
+        if (objeto.getEstado().equals("D")){
+            btnAnular.setEnabled(false);
+        }
     }
 
     public void formularioProveedor() {
@@ -773,58 +801,177 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
+            //////////// agregar al kardex
             try {
 
                 for (int i = 0; i < listaDetalle.size(); i++) {
 
-                    PrProductos prodObj = new PrProductos();
-
-//                    prodObj = ObtenerDTO.ObtenerPrProductos(listaDetalle.get(i).getId_producto());
-
-                    InKardex objeto = kardexExt.obtenerUltimoProductoKardex(listaDetalle.get(i).getId_producto());
+                    objetoKardex = kardexExt.obtenerUltimoProductoKardex(listaDetalle.get(i).getId_producto());
 
                     InKardex kardex = new InKardex();
 
                     kardex.setInKardexPK(new InKardexPK());
-                    
+
                     kardex.getInKardexPK().setIdBodega(1);
-                    
+
                     kardex.getInKardexPK().setIdProducto(listaDetalle.get(i).getId_producto());
 
-//                    kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
+                    InTipoDocumentoJpaController docuCont = new InTipoDocumentoJpaController(EntityManagerUtil.ObtenerEntityManager());
+                    List<InTipoDocumento> listaD = docuCont.findInTipoDocumentoEntities();
+                    for (int j = 0; j < listaD.size(); j++) {
+                        if (listaD.get(j).getNombreDocumento().equals("DEVOLUCION DE VENTAS")) {
+                            documento = listaD.get(j);
+                        }
+                    }
+
+                    kardex.setInTipoDocumento(documento);
+
                     kardex.setSeSucursal(suc);
 
-//                    Double empaqueXcantidadXunidad = (prodObj.getUnidadEmpaqueCompra() * listadet.get(i).getCantidad().doubleValue()) * prodObj.getCantidadPorEmpaqueCompra();
-
-                    kardex.setCantidad(BigInteger.valueOf(listaDetalle.get(i).getCantidad().longValue()));/// revisar si stock hay que convertilo en double
+                    kardex.setCantidad(BigInteger.valueOf(listaDetalle.get(i).getCantidad()));
 
                     kardex.setNumeroDocumento(BigInteger.valueOf(listaDetalle.get(i).getId_factura()));
                     kardex.setFechaSistema(d);
                     SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY");
-                    kardex.setAnioDocumento(formatoFecha.format(listaDetalle.get(i).getFecha_creacion()));
+                    kardex.setAnioDocumento(formatoFecha.format(d));
                     kardex.setUsuarioCreacion(usu.getUsuario());
                     kardex.setFechaCreacion(d);
 
-                    
-                    
-                    kardex.setSaldoAnterior(objeto.getSaldoActual());
-              
-                    kardex.setSaldoActual(objeto.getSaldoActual().add(kardex.getCantidad()));
+                    kardex.setSaldoAnterior(objetoKardex.getSaldoActual());
 
-                    kardex.setCostoAnterior(objeto.getCostoActual());
-//                  
+                    kardex.setSaldoActual(objetoKardex.getSaldoActual().add(kardex.getCantidad()));
+
+                    kardex.setCostoAnterior(objetoKardex.getCostoActual());
+
                     kardex.setCostoActual(kardex.getCostoAnterior().add(
-                            ((kardex.getCostoAnterior().multiply(BigDecimal.valueOf(listaDetalle.get(i).getCantidad().intValue()))))));
+                            ((objetoKardex.getCostoPromedio().multiply(BigDecimal.valueOf(listaDetalle.get(i).getCantidad().intValue()))))));
 
                     kardex.setCostoPromedio(kardex.getCostoActual().divide(BigDecimal.valueOf(kardex.getSaldoActual().intValue()), 5, RoundingMode.HALF_EVEN));
 
                     kardexController.create(kardex);
+
                 }
 
             } catch (Exception e) {
 
                 e.printStackTrace();
 
+            }
+
+            /////////// AGREGAR AL MOVIMIENTO
+            InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
+            InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+            InMovimientos cabMovimiento = new InMovimientos();
+            InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
+            InMovimientos pkMovimiento = new InMovimientos();
+            MovimientosDaoExt obtenerIdMovimiento = new MovimientosDaoExt(EntityManagerUtil.ObtenerEntityManager());
+
+            try {
+
+                InTipoMovimiento movimiento = new InTipoMovimiento();
+                InTipoMovimientoJpaController moviCont = new InTipoMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+                List<InTipoMovimiento> listaM = moviCont.findInTipoMovimientoEntities();
+                for (int j = 0; j < listaM.size(); j++) {
+                    if (listaM.get(j).getNombreMovimiento().equals("DEVOLUCION DE VENTAS")) {
+                        movimiento = listaM.get(j);
+                    }
+                }
+
+                InMotivos motivo = new InMotivos();
+                InMotivosJpaController motiCont = new InMotivosJpaController(EntityManagerUtil.ObtenerEntityManager());
+                List<InMotivos> listaT = motiCont.findInMotivosEntities();
+                for (int j = 0; j < listaT.size(); j++) {
+                    if (listaT.get(j).getNombre().equals("DEVOLUCION DE VENTAS")) {
+                        motivo = listaT.get(j);
+                    }
+                }
+
+                ////////////setear para la pk cab movimientos
+                cabMovimiento.setSeSucursal(suc);
+                cabMovimiento.setInTipoDocumento(documento);
+                cabMovimiento.setInTipoMovimiento(movimiento);
+                cabMovimiento.setInMotivos(motivo);
+                cabMovimiento.setObservacion("DEVOLUCION DE VENTAS");
+
+                ///////////setear cab movimientos
+                cabMovimiento.setFechaSistema(d);
+                cabMovimiento.setAnioDocumento(d);
+
+                cabMovimiento.setIdFactura(BigInteger.valueOf(listaDetalle.get(0).getId_factura()));
+                cabMovimiento.setEstado("D");
+
+                cabMovimiento.setUsuarioCreacion(usu.getUsuario());
+                cabMovimiento.setFechaCreacion(d);
+
+                pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
+                System.out.println(" IDcabedcera movimiento" + pkMovimiento);
+
+                for (int i = 0; i < listaDetalle.size(); i++) {
+
+                    objetoKardex = kardexExt.obtenerUltimoProductoKardex(listaDetalle.get(i).getId_producto());
+
+                    ////////////setear para la pk detalle con cab movimiento
+                    detMovimiento.setInMovimientos(pkMovimiento);
+                    ///////////setear detalle movimientos
+                    detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
+                    detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetalle.get(i).getLinea_detalle());
+                    detMovimiento.getInDetalleMovimientoPK().setIdProducto(listaDetalle.get(i).getId_producto());
+
+                    detMovimiento.setDescripcion(listaDetalle.get(i).getDescripcion());
+                    detMovimiento.setCantidad(BigInteger.valueOf(listaDetalle.get(i).getCantidad()));
+                    detMovimiento.setPrecioUnitario(objetoKardex.getCostoPromedio());
+                    detMovimiento.setEstado("A");
+
+                    detMovimiento.setUsuarioCreacion(usu.getUsuario());
+                    detMovimiento.setFechaCreacion(d);
+
+                    detMovController.create(detMovimiento);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            /////////// modificar la  factura
+            try {
+
+                VeFacturaJpaController facCont = new VeFacturaJpaController(EntityManagerUtil.ObtenerEntityManager());
+                VeFacturaDetalleJpaController facDetCont = new VeFacturaDetalleJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+                VeFactura facturaPk = new VeFactura();
+                VeFactura facturaObj = new VeFactura();
+
+                facturaPk.setVeFacturaPK(new VeFacturaPK());
+                facturaPk.getVeFacturaPK().setIdEmpresa(objeto.getId_empresa());
+                facturaPk.getVeFacturaPK().setIdSucursal(objeto.getId_sucursal());
+                facturaPk.getVeFacturaPK().setIdFactura(objeto.getId_factura());
+
+                facturaObj = facCont.findVeFactura(facturaPk.getVeFacturaPK());
+
+                List<VeFacturaDetalle> listDet = facturaObj.getVeFacturaDetalleList();
+
+                facturaObj.setEstado("D");
+                facturaObj.setUsuarioActualizacion(usu.getUsuario());
+                facturaObj.setFechaActualizacion(d);
+
+                facCont.edit(facturaObj);
+
+                for (int i = 0; i < listDet.size(); i++) {
+                    VeFacturaDetalle detalleObj = new VeFacturaDetalle();
+
+                    detalleObj = listDet.get(i);
+
+                    detalleObj.setEstado("D");
+                    detalleObj.setUsuarioActualizacion(usu.getUsuario());
+                    detalleObj.setFechaActualizacion(d);
+
+                    facDetCont.edit(detalleObj);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
@@ -846,16 +993,24 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteriaDetalleFactura.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

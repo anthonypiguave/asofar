@@ -274,8 +274,9 @@ public class ReporteriaExt {
                 + "         caja.nombre,\n"
                 + "         e.nombre_comercial,\n"
                 + "         s.nombre_comercial,\n"
-                + "         d.cantidad,\n"
-                + "         pres.id_poducto\n"
+                + "         c.estado\n"
+//                + "         d.cantidad,\n"
+//                + "         pres.id_poducto\n"
                 + "    FROM ve_factura AS c\n"
                 + "    INNER JOIN ve_factura_detalle AS d\n"
                 + "    	  ON  c.id_factura = d.id_factura\n"
@@ -319,6 +320,7 @@ public class ReporteriaExt {
                 ob.setNombre_caja(String.valueOf(obj[15].toString()));
                 ob.setNombre_comercial_emp(String.valueOf(obj[16].toString()));
                 ob.setNombre_comercial_suc(String.valueOf(obj[17].toString()));
+                ob.setEstado(String.valueOf(obj[18].toString()));
 
                 listaCompra.add(ob);
             }

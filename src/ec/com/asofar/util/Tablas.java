@@ -2743,14 +2743,14 @@ public class Tablas {
 
     public static void listarReporteFactura(List<ReporteFacturaDTO> lista, JTable Tabla) {
 
-        int[] a = {5, 5, 20, 15, 15, 15, 15, 15};
+        int[] a = {5, 5, 20, 15, 15, 15, 15, 15, 15};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD.FACT", "CAJA", "FECHA FACTURACION", "COMERCIAL", "SUBTOTAL", "T.DESCUENTO", "T.IVA", "T.FACTURA"};
-        String[] Filas = new String[8];
+        String[] Co = {"COD.FACT", "CAJA", "FECHA FACTURACION", "COMERCIAL", "SUBTOTAL", "T.DESCUENTO", "T.IVA", "T.FACTURA", "ESTADO"};
+        String[] Filas = new String[9];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -2768,6 +2768,7 @@ public class Tablas {
             Filas[5] = lista.get(i).getTotal_descuento().toString();
             Filas[6] = lista.get(i).getTotal_iva().toString();
             Filas[7] = lista.get(i).getTotal_facturado().toString();
+            Filas[8] = lista.get(i).getEstado();
 
             model.addRow(Filas);
             Tabla.setModel(model);
@@ -2787,6 +2788,8 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
             Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+            Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
 
         }
     }
