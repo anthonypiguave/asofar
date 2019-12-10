@@ -1363,7 +1363,72 @@ public class Venta extends javax.swing.JInternalFrame {
                     /*    */
 //                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 //    String fechagenerada = formatter.format(d);
-                    java.sql.Date fechact = new java.sql.Date(d.getTime());
+                    
+//                    byte[] cutP = new byte[]{0x1d, 'V', 1};
+//                    printerService.printBytes("EPSON-TM-T20II", cutP);
+
+/////////// AGREGANDO A MOVIMIENTO
+                    InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
+                    InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
+                    InMovimientos cabMovimiento = new InMovimientos();
+                    InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("VENTAS");
+                    InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
+                    InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("VENTA CLIENTE FINAL");
+
+                    InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
+                    try {
+                        /*
+                    240  
+                    160  
+                    
+                    ASOFAR institucion acojedora
+                    tutor institucional  el de asofar 
+                    tutor academico --------
+                    noviembre a marzo yaaaaaaa
+                    
+                         */
+                        cabMovimiento.setSeSucursal(suc);
+//              InTipoDocumento tipoDocumento =new InTipoDocumento();
+//              tipoDocumento.setIdTipoDocumento(Long.valueOf(5));
+                        cabMovimiento.setInTipoDocumento(tipoDocumento);
+//                    System.out.println(" gf "+tipoDocumento.getNombreDocumento());
+//InTipoMovimiento tipoMovimiento = new InTipoMovimiento();
+//tipoMovimiento.setIdTipoMovimiento(Long.valueOf(1));
+                        cabMovimiento.setInTipoMovimiento(tipoMovimiento);
+//              InMotivos tipoMotivos = new InMotivos();
+//              tipoMotivos.setIdMotivo(Long.valueOf(2));
+                        cabMovimiento.setInMotivos(tipoMotivos);
+                        cabMovimiento.setFechaSistema(d);
+                        cabMovimiento.setAnioDocumento(fecha);
+                        cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
+                        cabMovimiento.setEstado("F");
+                        cabMovimiento.setFechaFactura(d);
+                        cabMovimiento.setUsuarioCreacion(usu.getUsuario());
+                        cabMovimiento.setFechaCreacion(d);
+
+                        pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
+
+                        for (int i = 0; i < listaDetFactura.size(); i++) {
+                            detMovimiento.setInMovimientos(pkMovimiento);
+                            detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
+                            detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
+
+                            Long id_pro = IdProductoDsdObPres(listaDetFactura);
+                            Long id_Bod = IdBodegD(id_pro);
+
+                            detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
+                            detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
+                            detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
+                            detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
+                            detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
+                            detMovimiento.setEstado("A");
+
+                            detMovimiento.setUsuarioCreacion(usu.getUsuario());
+                            detMovimiento.setFechaCreacion(d);
+                            detMovController.create(detMovimiento);
+                            
+                        }
+                                            java.sql.Date fechact = new java.sql.Date(d.getTime());
                     String empresa = emp.getNombreComercial();
                     String sucursal = suc.getNombreComercial();
                     String ruc = emp.getRuc();
@@ -1440,86 +1505,16 @@ public class Venta extends javax.swing.JInternalFrame {
                         JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
                         JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"CI."+txtIdentificacion.getText()+" Factura#"+idFactura+" Fecha:"+fechact.toString()+".pdf");
                     }
-//                    byte[] cutP = new byte[]{0x1d, 'V', 1};
-//                    printerService.printBytes("EPSON-TM-T20II", cutP);
-
-/////////// AGREGANDO A MOVIMIENTO
-                    InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
-                    InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
-                    InMovimientos cabMovimiento = new InMovimientos();
-                    InTipoMovimiento tipoMovimiento = ObtenerDTO.ObtenerInTipoMovimiento("VENTAS");
-                    InTipoDocumento tipoDocumento = ObtenerDTO.ObtenerDocumentoPedido("FACTURA");
-                    InMotivos tipoMotivos = ObtenerDTO.ObtenerInMotivos("VENTA CLIENTE FINAL");
-
-                    InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
-                    try {
-                        /*
-                    240  
-                    160  
-                    
-                    ASOFAR institucion acojedora
-                    tutor institucional  el de asofar 
-                    tutor academico --------
-                    noviembre a marzo yaaaaaaa
-                    
-                         */
-                        cabMovimiento.setSeSucursal(suc);
-//              InTipoDocumento tipoDocumento =new InTipoDocumento();
-//              tipoDocumento.setIdTipoDocumento(Long.valueOf(5));
-                        cabMovimiento.setInTipoDocumento(tipoDocumento);
-//                    System.out.println(" gf "+tipoDocumento.getNombreDocumento());
-//InTipoMovimiento tipoMovimiento = new InTipoMovimiento();
-//tipoMovimiento.setIdTipoMovimiento(Long.valueOf(1));
-                        cabMovimiento.setInTipoMovimiento(tipoMovimiento);
-//              InMotivos tipoMotivos = new InMotivos();
-//              tipoMotivos.setIdMotivo(Long.valueOf(2));
-                        cabMovimiento.setInMotivos(tipoMotivos);
-                        cabMovimiento.setFechaSistema(d);
-                        cabMovimiento.setAnioDocumento(fecha);
-                        cabMovimiento.setIdFactura(BigInteger.valueOf(pkFactura.getVeFacturaPK().getIdFactura()));
-                        cabMovimiento.setEstado("F");
-                        cabMovimiento.setFechaFactura(d);
-                        cabMovimiento.setUsuarioCreacion(usu.getUsuario());
-                        cabMovimiento.setFechaCreacion(d);
-
-                        pkMovimiento = obtenerIdMovimiento.guardarPedido(cabMovimiento);
-
-                        for (int i = 0; i < listaDetFactura.size(); i++) {
-                            detMovimiento.setInMovimientos(pkMovimiento);
-                            detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
-                            detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
-
-                            Long id_pro = IdProductoDsdObPres(listaDetFactura);
-                            Long id_Bod = IdBodegD(id_pro);
-
-                            detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
-                            detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
-                            detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
-                            detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
-                            detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
-                            detMovimiento.setEstado("A");
-
-                            detMovimiento.setUsuarioCreacion(usu.getUsuario());
-                            detMovimiento.setFechaCreacion(d);
-                            detMovController.create(detMovimiento);
-                            limpiar();
-                        }
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
 //                    guardarKardex2(listaDetFactura);
                     JOptionPane.showMessageDialog(null, "VENTA REALIZADA CON EXITO");
                     limpiar();
-//                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
-//                ImprimirVenta Iv = new ImprimirVenta(new javax.swing.JFrame(), true, pkFactura.getVeFacturaPK().getIdFactura());
-//                Iv.setVisible(true);
-
+                    /*limpiar();*/
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-//             JOptionPane.showMessageDialog(null, "");
             } else {
             }
         }
