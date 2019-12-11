@@ -711,7 +711,7 @@ public class Tablas {
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
                 Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
-                 Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
                 Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
 
             }
@@ -3521,47 +3521,78 @@ public class Tablas {
     }
 
     public static void ListarProductoBodegaConsulta(List<PrProductoBodega> lista, JTable Tabla) {
-        int[] a = {400, 250, 250};
+        int[] a = {60,500, 150, 150, 150, 60, 60};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"PRODUCTO", "BODEGA", "STOCK", };
-        String[] filas = new String[3];
+        String[] b = {"ID.Prod","PRODUCTO", "BODEGA DE ORIGEN", "STOCK en UNIDADES", "EMPAQUE x UNIDAD", "Min", "Max "};
+        String[] filas = new String[7];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
-        
-        InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
 
+        InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
 
         for (int i = 0; i < lista.size(); i++) {
 
             if (lista.get(i).getEstado().equals("A")) {
 
-                PrProductos prod =  ObtenerPrProductos(lista.get(i).getPrProductoBodegaPK().getIdProducto());
-                
+                PrProductos prod = ObtenerPrProductos(lista.get(i).getPrProductoBodegaPK().getIdProducto());
+
                 InKardex kard = kardexExt.obtenerUltimoProductoKardex(lista.get(i).getPrProductoBodegaPK().getIdProducto());
-                
-                filas[0] = prod.getNombreProducto();
-                filas[1] = lista.get(i).getInBodega().getNombreBodega();
-                
-                if(kard != null){
-                   filas[2] = kard.getSaldoActual().toString(); 
-                }else{
-                    filas[2] = "0";
+
+                if (prod != null) {
+                    filas[0] = ""+prod.getPrProductosPK().getIdProducto();
+                    
+                    filas[1] = prod.getNombreProducto();
+
+                    filas[4] = String.format("%.0f", prod.getUnidadEmpaqueCompra()) + " " + prod.getMedidaEmpaqueCompra().getNombreEmpaque() + " / " + String.format("%.0f", prod.getCantidadPorEmpaqueCompra()) + " " + prod.getMedidaPorEmpaqueCompra().getNombreEmpaque();
+                } else {
+                    filas[0] = "null";
+                    filas[1] = "null";
+                    filas[4] = "null";
+                    
                 }
                 
+                filas[2] = lista.get(i).getInBodega().getNombreBodega();
+
+                if (kard != null) {
+                    filas[3] = kard.getSaldoActual().toString();
+                } else {
+                    filas[3] = "0";
+                }
+                
+                
+                if (lista.get(i).getStockMinimo() != null) {
+                    filas[5] = lista.get(i).getStockMinimo().toString();
+                } else {
+                    filas[5] = "null";
+                }
+
+                if (lista.get(i).getStockMaximo() != null) {
+                    filas[6] = lista.get(i).getStockMaximo().toString();
+                } else {
+                    filas[6] = "null";
+                }
 
                 model.addRow(filas);
                 Tabla.setModel(model);
                 Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                 Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
                 Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
-                 Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+                Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+                Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+                Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 
             }
 
