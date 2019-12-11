@@ -67,6 +67,7 @@ import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.beans.PropertyVetoException;
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.*;
@@ -1484,7 +1485,8 @@ public class Venta extends javax.swing.JInternalFrame {
                         listap.add(clase);                       
                         }
                         JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
-                        JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
+                        JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));                        
+                        File directorio = new File("ReporteDeFacturas");                        
                         JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"CI."+txtIdentificacion.getText()+" Factura#"+idFactura+" Fecha:"+fechact.toString()+".pdf");
                     } else {
                         ArrayList listap =new ArrayList();
@@ -1504,6 +1506,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         }
                         JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
                         JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
+                        File directorio = new File("ReporteDeFacturas");
                         JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"CI."+txtIdentificacion.getText()+" Factura#"+idFactura+" Fecha:"+fechact.toString()+".pdf");
                     }
                     } catch (Exception e) {
