@@ -275,8 +275,6 @@ public class ReporteriaExt {
                 + "         e.nombre_comercial,\n"
                 + "         s.nombre_comercial,\n"
                 + "         c.estado\n"
-//                + "         d.cantidad,\n"
-//                + "         pres.id_poducto\n"
                 + "    FROM ve_factura AS c\n"
                 + "    INNER JOIN ve_factura_detalle AS d\n"
                 + "    	  ON  c.id_factura = d.id_factura\n"

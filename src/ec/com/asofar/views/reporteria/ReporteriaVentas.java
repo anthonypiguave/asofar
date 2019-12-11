@@ -60,7 +60,8 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         super(parent, modal=false);
         initComponents();
         this.setLocationRelativeTo(this);
-        itemList = rep.reporteFactura();
+        cargartabala();
+//        itemList = rep.reporteFactura();
         //Tablas.listarReporteCompras(itemList, tbaReporteCompra);
         //java.util.Date fechaParseada= new SimpleDateFormat("yyyy/MM/dd").parse(tuFecha);
         Chooser1.setDate(rep.fechaActual());
@@ -76,13 +77,22 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
-        itemList = rep.reporteFactura();
-        Tablas.listarReporteFactura(itemList, tbaReporteCompra);
+        cargartabala();
         Chooser1.setDate(rep.fechaActual());
         Chooser2.setDate(rep.fechaActual());
         total();
         Keypress_jDateChoooser();
     }
+    
+    
+    public void cargartabala(){
+        
+        itemList = new ArrayList<ReporteFacturaDTO>();
+        itemList = rep.reporteFactura();
+        Tablas.listarReporteFactura(itemList, tbaReporteCompra);
+        
+    }
+    
 
     public void total() {
         Double total_total = 0.00;
@@ -459,6 +469,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
                 //JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
                 ReporteriaDetalleFactura win = new ReporteriaDetalleFactura(new javax.swing.JFrame(), true, obj, usu, emp, suc);
                 win.setVisible(true);
+                cargartabala();
             } else {
 //                System.out.println("no encontramos al puto id error capa 8");
                 System.out.println("id error ");
@@ -517,6 +528,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
 
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
         busquedaChosserQuery();
+        cargartabala();
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
 
     private void buscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyPressed
