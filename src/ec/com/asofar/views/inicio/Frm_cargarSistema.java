@@ -10,6 +10,8 @@ import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.util.Cargar;
 import ec.com.asofar.util.Cargar1;
 import ec.com.asofar.util.EntityManagerUtil;
+import ec.com.asofar.util.Fondo;
+import ec.com.asofar.util.Fondo2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -36,7 +38,8 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
         hilo = new Cargar(carga_pb);
         hilo.start();
         hilo = null;
-        imagenes();
+        //imagenes();
+        lbImagen.add(new Fondo2(lbImagen.getWidth(),lbImagen.getHeight()),BorderLayout.CENTER);
     }
         public void imagenes() {
         Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/LogoInicio.png").getImage();
