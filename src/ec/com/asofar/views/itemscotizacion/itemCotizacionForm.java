@@ -505,7 +505,7 @@ public class itemCotizacionForm extends javax.swing.JDialog {
                 lproductos.add(obj);
                 Tablas.listarProductoItemsCotizacion(lproductos, tb_prod);
             } else {
-                JOptionPane.showMessageDialog(rootPane, "PRODUCTO YA ESTA EN LISTA");
+                JOptionPane.showMessageDialog(rootPane, "GUARDADO EXITOSAMENTE");
             }
         }
     }

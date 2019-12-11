@@ -258,7 +258,7 @@ public class ModificarGruposForm extends javax.swing.JDialog {
                 pr.setFechaActualizacion(d);
                 try {
                     prj.edit(pr);
-                    JOptionPane.showMessageDialog(null, "Datos modificados correctamente!");
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
 
                 } catch (Exception ex) {

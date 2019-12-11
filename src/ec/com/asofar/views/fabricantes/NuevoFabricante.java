@@ -167,7 +167,7 @@ public class NuevoFabricante extends javax.swing.JDialog {
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea guardar el fabricante " + nombre.getText() + "?");
                 if (a == 0) {
                     cfab.create(obj);
-                    JOptionPane.showMessageDialog(null, "Fabricante guardado con exito");
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
 //                    ConsultaFab cf = new ConsultaFab(new javax.swing.JFrame(), true);
 //                    cf.setVisible(true);

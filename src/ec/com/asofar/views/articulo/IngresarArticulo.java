@@ -264,7 +264,7 @@ public class IngresarArticulo extends javax.swing.JDialog {
                 arti.setPrSubgrupos(sub);
                 arti.setEstado(valor);
                 control2.create(arti);
-                JOptionPane.showMessageDialog(this, "Articulo Guardados");
+                JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
                 this.setVisible(false);
             }
         } catch (Exception e) {

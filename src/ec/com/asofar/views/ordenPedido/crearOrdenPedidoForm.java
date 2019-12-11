@@ -525,7 +525,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                                     detOrdencontroller.create(detOrden);
                                 }
 
-                                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                                JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                                 setVisible(false);
 
                             } catch (Exception ex) {

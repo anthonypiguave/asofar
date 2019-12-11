@@ -231,7 +231,7 @@ public class caja_editar extends javax.swing.JDialog {
                 vCaja.setFechaActualizacion(d);
                 try {
                     vCajaController.edit(vCaja);
-                    JOptionPane.showMessageDialog(null, "Datos modificados correctamente!");
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
                     caja cg = new caja(new javax.swing.JFrame(), true);
                     cg.setVisible(true);

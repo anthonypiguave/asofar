@@ -736,6 +736,11 @@ public class ActualizarProducto extends javax.swing.JDialog {
                 txtGrupoMousePressed(evt);
             }
         });
+        txtGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGrupoActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Código de barra:");
 
@@ -971,7 +976,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
     private void txtPresentacionMedidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPresentacionMedidaMousePressed
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarPresentacionMedida dialog = new ConsultarPresentacionMedida(new javax.swing.JFrame(), true, articulo, seUsuario, seEmpresa, seSucursal);
@@ -1226,7 +1231,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
 
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarProveedor dialog = new ConsultarProveedor(new javax.swing.JFrame(), true);
@@ -1252,7 +1257,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
 
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
@@ -1277,7 +1282,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
     private void txtEmpaqueCompra2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmpaqueCompra2MousePressed
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
@@ -1299,7 +1304,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
     private void txtEmpaqueVenta1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmpaqueVenta1MousePressed
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
@@ -1321,7 +1326,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
     private void txtEmpaqueVenta2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmpaqueVenta2MousePressed
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarEmpaque dialog = new ConsultarEmpaque(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
@@ -1343,7 +1348,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
     private void txtFabricanteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFabricanteMousePressed
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarFabricante dialog = new ConsultarFabricante(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
@@ -1366,7 +1371,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
 
         int i = 0;
         String msg = null;
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
 
             try {
                 ConsultarBodega dialog = new ConsultarBodega(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
@@ -1454,6 +1459,10 @@ public class ActualizarProducto extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtStockMaxKeyTyped
+
+    private void txtGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGrupoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGrupoActionPerformed
 
     /**
      * @param args the command line arguments

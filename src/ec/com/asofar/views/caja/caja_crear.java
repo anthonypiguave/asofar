@@ -202,7 +202,7 @@ public class caja_crear extends javax.swing.JDialog {
                 vc.setFechaActualizacion(d);
                 try {
                     vCaja.create(vc);
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
                     caja cg = new caja(new javax.swing.JFrame(), true);
                     cg.setVisible(true);

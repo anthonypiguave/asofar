@@ -444,7 +444,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
             
             prp.create(pre);
             
-            JOptionPane.showMessageDialog(null, " GUARDADO EXITOSAMENTE");
+            JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
             setVisible(false);
         } catch (Exception e) {
             Logger.getLogger(Listar_PrestacionesPorServicio.class.getName()).log(Level.SEVERE, null, e);

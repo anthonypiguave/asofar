@@ -220,7 +220,7 @@ public class AgregarGruposForm extends javax.swing.JDialog {
                 pr.setFechaActualizacion(d);
                 try {
                     prj.create(pr);
-                    JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
 
 

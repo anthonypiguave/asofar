@@ -1334,6 +1334,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 cabFact.setIdUsuario(BigInteger.valueOf(usu.getIdUsuario()));
                 cabFact.setUsuarioCreacion(usu.getUsuario());
                 cabFact.setFechaCreacion(d);
+                cabFact.setEstado("A");
                 cabFact.setDespachado("SI");
                 try {
                     VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);

@@ -183,7 +183,7 @@ public class NuevoMotivo extends javax.swing.JDialog {
         imo.setEstado("A");
     try {
         imcont.create(imo);
-        JOptionPane.showMessageDialog(this, "NUEVO MOTIVO AGREGADO");
+        JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
         setVisible(false);
         ConsultaMotivo cm = new ConsultaMotivo(new javax.swing.JFrame(),true);
         cm.setVisible(true);    
