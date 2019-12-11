@@ -105,21 +105,24 @@ public class ValidacionCaja {
 
         List<VeFactura> lista = facturaController.findVeFacturaEntities();
         List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
-        for (int i = 0; i < lista.size(); i++) {
+//        for (int i = 0; i < lista.size(); i++) {
 //            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
-            String idCaja = lista.get(i).getIdCaja().toString();
-            String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
-            if (idCaja.equals(detIdCaja)) {
+//            String idCaja = lista.get(i).getIdCaja().toString();
+//            String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
+//            if (idCaja.equals(detIdCaja)) {
                 for (int j = 0; j < listafactura.size(); j++) {
                     if (listafactura.get(j).getIdUsuario()==detallecaja.getIdUsuario()) {
-                        factura += listafactura.get(j).getTotalFacturado();
+                        System.out.println("Lista "+listafactura.get(j).getTotalFacturado());
+                        factura = factura +listafactura.get(j).getTotalFacturado();
                         total = factura + detallecaja.getDineroInicio();
-                        break;
+//                        break;
+//                        System.out.println("VALOR "+total);
+//                        break;
                     }
                 }
-            }
-        }
-        return total;
+//            }
+//        }
+        return factura;
     }
 
     public static Double valoresCaja(VeDetalleCaja detallecaja) {

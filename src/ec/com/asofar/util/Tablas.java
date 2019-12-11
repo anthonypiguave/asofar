@@ -3591,10 +3591,10 @@ public class Tablas {
                 Filas[2] = lista.get(i).getDineroInicio().toString();
                 Filas[3] = lista.get(i).getDineroCierre().toString();
                 Double total = ValidacionCaja.facturadoRetorno( lista.get(i));
-                Double resta = total -lista.get(i).getDineroInicio();
-                Filas[4] = resta.toString();
-                System.out.println(" cierre "+lista.get(i).getDineroCierre());
-                System.out.println(" total "+total);
+//                Double resta = total -lista.get(i).getDineroInicio();
+
+                Filas[4] = total.toString();
+   
                 if(lista.get(i).getDineroCierre()<total){
                 Filas[5] = "PERDIDA";
                 }if(lista.get(i).getDineroCierre()<total){
