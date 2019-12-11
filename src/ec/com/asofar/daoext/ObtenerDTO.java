@@ -1158,5 +1158,17 @@ public class ObtenerDTO {
         return dto;
 
     }
+    public static VeCaja ObtenerVeCaja(Long id) {
+        VeCajaJpaController control = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
+        VeCaja dto = new VeCaja();
+        List<VeCaja> lista = control.findVeCajaEntities();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdCaja() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+        return dto;
 
+    }
 }
