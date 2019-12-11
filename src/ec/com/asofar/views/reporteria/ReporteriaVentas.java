@@ -21,6 +21,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -482,6 +483,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         String mes2 = Integer.toString(Chooser2.getCalendar().get(Calendar.MONTH));
         String año2 = Integer.toString(Chooser2.getCalendar().get(Calendar.YEAR));
         String fecha2 = (dia2 + "-" + mes2 + "-" + año2);
+        
         for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
             ClaseReporte creporte = new ClaseReporte(fecha,
                     fecha2,

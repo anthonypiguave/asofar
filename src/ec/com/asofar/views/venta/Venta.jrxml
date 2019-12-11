@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d6c983ff-b77c-455c-ade9-c882c9d842cb">
-	<property name="ireport.zoom" value="1.1000000000000083"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="4.177248169415689"/>
+	<property name="ireport.x" value="919"/>
 	<property name="ireport.y" value="0"/>
 	<field name="valor1" class="java.lang.String"/>
 	<field name="valor2" class="java.lang.String"/>
@@ -48,25 +48,25 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
-				<text><![CDATA[FACTURA N° ]]></text>
+				<text><![CDATA[FACTURA N°  ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="259" y="2" width="132" height="25" uuid="ef13334e-f70b-45db-84c8-8cf9a5578e54"/>
-				<textElement>
+				<reportElement x="264" y="2" width="100" height="25" uuid="ef13334e-f70b-45db-84c8-8cf9a5578e54"/>
+				<textElement verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="391" y="2" width="100" height="25" uuid="0d9aefab-d6ed-4cc5-ab10-394de0ddb5da"/>
-				<textElement>
+				<reportElement x="368" y="2" width="100" height="25" uuid="0d9aefab-d6ed-4cc5-ab10-394de0ddb5da"/>
+				<textElement verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="289" y="27" width="129" height="25" uuid="b8c9b448-49d7-488d-bc3b-171ded325a9f"/>
-				<textElement>
+				<reportElement x="293" y="27" width="129" height="25" uuid="b8c9b448-49d7-488d-bc3b-171ded325a9f"/>
+				<textElement verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor3}]]></textFieldExpression>
