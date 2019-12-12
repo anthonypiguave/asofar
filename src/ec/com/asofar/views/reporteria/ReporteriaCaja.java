@@ -9,6 +9,9 @@ import com.toedter.calendar.JDateChooser;
 import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
 import ec.com.asofar.dao.VeFacturaJpaController;
+import ec.com.asofar.dto.SeEmpresa;
+import ec.com.asofar.dto.SeSucursal;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.dto.VeFactura;
@@ -49,6 +52,14 @@ public class ReporteriaCaja extends javax.swing.JDialog {
     public ReporteriaCaja(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarTablaCaja();
+    }
+
+    public ReporteriaCaja(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        setLocationRelativeTo(null);
         cargarTablaCaja();
     }
 
