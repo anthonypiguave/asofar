@@ -97,6 +97,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     //Ruta
                     System.out.println("Ruta.."+lis.get(i).getRutaIcono());
                     menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
+                    menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                    menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                    menu.setPreferredSize(new java.awt.Dimension(90, 55));
+                    menu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
                     for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
                         for (int k = 0; k < lis.size(); k++) {
                             if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
@@ -119,13 +123,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     }
                                     menu.add(menu2);
                                 } else {
-//                                    String permiso = pVender();
-//                                    if(permiso.equals("no")){
-//                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-//                                    }else{/*puede vender*/
-//                                        
-//                                        }
-
+                                    String permiso = pVender();
+                                    if(permiso.equals("no")){
+                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
+                                    }else{/*puede vender*/
+                                        
+                                        }
                                     String nombre = "GENERAR VENTA ";
                                     if (lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)) {
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
@@ -166,6 +169,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
             }
         }
+        salida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/B_SALIR.jpeg")));
+        salida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        salida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        salida.setPreferredSize(new java.awt.Dimension(5, 55));
+        salida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         meMenuBase.add(salida);
     }
 
