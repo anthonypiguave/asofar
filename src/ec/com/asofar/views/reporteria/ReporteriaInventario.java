@@ -5,8 +5,6 @@
  */
 package ec.com.asofar.views.reporteria;
 
-
-
 import ec.com.asofar.dao.PrProductoBodegaJpaController;
 import ec.com.asofar.dto.PrProductoBodega;
 import ec.com.asofar.dto.SeEmpresa;
@@ -27,7 +25,7 @@ public class ReporteriaInventario extends javax.swing.JDialog {
 
     int x, y;
     String valor = "";
-  
+
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
@@ -35,9 +33,6 @@ public class ReporteriaInventario extends javax.swing.JDialog {
     List<PrProductoBodega> lista;
     PrProductoBodegaJpaController cont = new PrProductoBodegaJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrProductoBodega objeto = new PrProductoBodega();
-    
-    
-    
 
     /**
      * Creates new form ConsultaProducto
