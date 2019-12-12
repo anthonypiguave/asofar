@@ -3547,14 +3547,13 @@ public class Tablas {
 
                 if (prod != null) {
 
-                    filas[0] = ""+prod.getPrProductosPK().getIdProducto();
+                    filas[0] = "" + prod.getPrProductosPK().getIdProducto();
                     filas[1] = prod.getNombreProducto();
 
                 } else {
                     filas[0] = "null";
                     filas[1] = "null";
                 }
-
 
                 filas[2] = lista.get(i).getInBodega().getNombreBodega();
 
@@ -3611,21 +3610,28 @@ public class Tablas {
             Filas[0] = caja.getNombre();
             Filas[1] = usu.getUsuario();
             Filas[2] = lista.get(i).getDineroInicio().toString();
-            Filas[3] = lista.get(i).getDineroCierre().toString();
-            Double total = ValidacionCaja.facturadoRetorno(lista.get(i));
-//                Double resta = total -lista.get(i).getDineroInicio();
+            if (lista.get(i).getDineroCierre() == null) {
+                Filas[3] = "NO CERRADO";
+                Filas[4] = "";
+                Filas[5] = "";
+            } else {
+                Filas[3] = lista.get(i).getDineroCierre().toString();
+                Double facturado = ValidacionCaja.facturadoRetorno(lista.get(i));
+                Double total = facturado + lista.get(i).getDineroInicio();
 
-            Filas[4] = total.toString();
+                Filas[4] = facturado.toString();
 
-            if (lista.get(i).getDineroCierre() < total) {
-                Filas[5] = "PERDIDA";
+                if (lista.get(i).getDineroCierre() < total) {
+                    Filas[5] = "PERDIDA";
+                }
+                if (lista.get(i).getDineroCierre() < total) {
+                    Filas[5] = "SOBRANTE";
+                }
+                if (lista.get(i).getDineroCierre().equals(total)) {
+                    Filas[5] = "CORRECTO";
+                }
             }
-            if (lista.get(i).getDineroCierre() < total) {
-                Filas[5] = "SOBRANTE";
-            }
-            if (lista.get(i).getDineroCierre().equals(total)) {
-                Filas[5] = "CORRECTO";
-            }
+
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);

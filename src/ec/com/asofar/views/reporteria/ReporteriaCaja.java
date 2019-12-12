@@ -5,6 +5,7 @@
  */
 package ec.com.asofar.views.reporteria;
 
+import com.toedter.calendar.JDateChooser;
 import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dao.VeDetalleCajaJpaController;
 import ec.com.asofar.dao.VeFacturaJpaController;
@@ -16,7 +17,16 @@ import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import static java.lang.String.format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,9 +35,13 @@ import java.util.List;
 public class ReporteriaCaja extends javax.swing.JDialog {
 
     int x, y;
+    String valor = "";
+    Date d = new Date();
     VeDetalleCajaJpaController cc = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     VeFacturaJpaController fc = new VeFacturaJpaController(EntityManagerUtil.ObtenerEntityManager());
-    String fechaInicio, fechaFinal;
+    VeDetalleCaja obj = new VeDetalleCaja();
+    SimpleDateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+    List<VeDetalleCaja> listaFecha = new ArrayList<VeDetalleCaja>();
 
     /**
      * Creates new form ReporteriaCaja
@@ -41,7 +55,39 @@ public class ReporteriaCaja extends javax.swing.JDialog {
     public void cargarTablaCaja() {
         List<VeDetalleCaja> lista = cc.findVeDetalleCajaEntities();
         List<VeFactura> listaFactura = fc.findVeFacturaEntities();
-        Tablas.listarVeDetalleCaja(lista, tbaReporteCaja);
+        List<VeDetalleCaja> lista2 = new ArrayList<VeDetalleCaja>();
+        for (int i = 0; i < lista.size(); i++) {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+            if (formatoFecha.format(lista.get(i).getFechaInicio()).equals(FechaActual())) {
+                lista2.add(lista.get(i));
+            }
+        }
+        Tablas.listarVeDetalleCaja(lista2, tbaReporteCaja);
+    }
+
+    public List<VeDetalleCaja> buscarFecha(String fecha1, String fecha2) throws ParseException {
+        List<VeDetalleCaja> lista = cc.findVeDetalleCajaEntities();
+        List<VeDetalleCaja> lista2 = new ArrayList<VeDetalleCaja>();
+        for (int i = 0; i < lista.size(); i++) {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+            Date date = Formato.parse(fecha1);
+            Date date2 = Formato.parse(fecha2);
+            System.out.println("fecha 1  " + date);
+            System.out.println("fecha 2  " + lista.get(i).getFechaInicio());
+            if ((lista.get(i).getFechaInicio().after(date) || lista.get(i).getFechaInicio().equals(date))
+                    && (lista.get(i).getFechaCierre().before(date2) || lista.get(i).getFechaCierre().equals(date2))) {
+                System.out.println("***");
+                lista2.add(lista.get(i));
+            }
+        }
+
+        return lista2;
+    }
+
+    public static String FechaActual() {
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        return formatoFecha.format(fecha);
     }
 
     /**
@@ -55,22 +101,16 @@ public class ReporteriaCaja extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         buscar1 = new javax.swing.JTextField();
-        Txt_Total = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         btnSalir2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         tblProduc = new javax.swing.JScrollPane();
         tbaReporteCaja = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        txtiva = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Chooser1 = new com.toedter.calendar.JDateChooser();
         Chooser2 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         BtnBuscar1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        txtdescuento = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,13 +131,6 @@ public class ReporteriaCaja extends javax.swing.JDialog {
                 buscar1KeyReleased(evt);
             }
         });
-
-        Txt_Total.setEditable(false);
-        Txt_Total.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Txt_Total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel2.setText("TOTAL VENTAS:");
 
         btnSalir2.setBackground(new java.awt.Color(254, 254, 254));
         btnSalir2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
@@ -141,13 +174,6 @@ public class ReporteriaCaja extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tblProduc, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel3.setText("TOTAL IVA:");
-
-        txtiva.setEditable(false);
-        txtiva.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtiva.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel1.setText("ENTRE");
@@ -197,13 +223,6 @@ public class ReporteriaCaja extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel5.setText("FILTRO:");
 
-        txtdescuento.setEditable(false);
-        txtdescuento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        txtdescuento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel6.setText("TOTAL DESCUENTO:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -212,18 +231,6 @@ public class ReporteriaCaja extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(Txt_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtiva, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Chooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,25 +266,9 @@ public class ReporteriaCaja extends javax.swing.JDialog {
                         .addComponent(BtnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtiva, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Txt_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(48, 48, 48))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -306,7 +297,8 @@ public class ReporteriaCaja extends javax.swing.JDialog {
     }//GEN-LAST:event_buscar1KeyPressed
 
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
-//        refrescar();
+        valor = buscar1.getText();
+        Tablas.filtro(valor, tbaReporteCaja);
 //        total();
     }//GEN-LAST:event_buscar1KeyReleased
 
@@ -336,10 +328,59 @@ public class ReporteriaCaja extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
-//        busquedaChosserQuery();
+        try {
+            busquedaChosserQuery();
 //        cargartabala();
+        } catch (ParseException ex) {
+            Logger.getLogger(ReporteriaCaja.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
 
+    public String getFecha(JDateChooser jd) {
+        if (jd.getDate() != null) {
+            return Formato.format(jd.getDate());
+        } else {
+            return null;
+        }
+    }
+
+    public void busquedaChosserQuery() throws ParseException {
+        buscar1.setText("");
+        tbaReporteCaja.setRowSorter(null);
+
+        String valor = getFecha(Chooser1);
+        String valor2 = getFecha(Chooser2);
+
+        if (valor == null || valor2 == null) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS");
+        } else {
+
+            int x = valor.compareTo(valor2);
+            System.out.println("valor " + x);
+            switch (x) {
+                case -1:
+                    System.out.println("correcto");
+                    listaFecha = buscarFecha(valor, valor2);
+                    Tablas.listarVeDetalleCaja(listaFecha, tbaReporteCaja);
+                    break;
+                case 0:
+                    System.out.println("correcto");
+                    listaFecha = buscarFecha(valor, valor2);
+                    Tablas.listarVeDetalleCaja(listaFecha, tbaReporteCaja);
+                    break;
+                case -2:
+                    System.out.println("correcto");
+                    listaFecha = buscarFecha(valor, valor2);
+                    Tablas.listarVeDetalleCaja(listaFecha, tbaReporteCaja);
+                    break;
+                default:
+                    System.out.println("error");
+                    JOptionPane.showMessageDialog(rootPane, "INGRESE LAS FECHAS CORRECTAS \nINGRESE FECHA DESDE - HASTA");
+                    break;
+            }
+        }
+//        total();
+    }
     private void BtnBuscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBuscar1KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             System.out.println("valeeeeeeeeeeeeeeeeeeeee");
@@ -392,20 +433,14 @@ public class ReporteriaCaja extends javax.swing.JDialog {
     private javax.swing.JButton BtnBuscar1;
     private com.toedter.calendar.JDateChooser Chooser1;
     private com.toedter.calendar.JDateChooser Chooser2;
-    private javax.swing.JTextField Txt_Total;
     private javax.swing.JButton btnSalir2;
     private javax.swing.JTextField buscar1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTable tbaReporteCaja;
     private javax.swing.JScrollPane tblProduc;
-    private javax.swing.JTextField txtdescuento;
-    private javax.swing.JTextField txtiva;
     // End of variables declaration//GEN-END:variables
 }

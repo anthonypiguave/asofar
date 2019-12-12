@@ -59,30 +59,30 @@ public class ValidacionCaja {
 
         List<VeFactura> lista = facturaController.findVeFacturaEntities();
         List<VeFactura> listafactura = vf.RecorrerFecha(resultado1, resultado2, detallecaja);
-        for (int i = 0; i < lista.size(); i++) {
+//        for (int i = 0; i < lista.size(); i++) {
 //            if (Objects.equals(lista.get(i).getIdCaja(), detallecaja.getVeCaja().getIdCaja())) {
-            String idCaja = lista.get(i).getIdCaja().toString();
-            String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
-            if (idCaja.equals(detIdCaja)) {
+//            String idCaja = lista.get(i).getIdCaja().toString();
+//            String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
+//            if (idCaja.equals(detIdCaja)) {
                 for (int j = 0; j < listafactura.size(); j++) {
                     if (listafactura.get(j).getIdUsuario()==detallecaja.getIdUsuario()) {
                         factura += listafactura.get(j).getTotalFacturado();
                         total = factura + detallecaja.getDineroInicio();
-                        break;
+//                        break;
                     }
                 }
-            }
-        }
+//            }
+//        }
         if (Objects.equals(total, detallecaja.getDineroCierre())) {
             valor = true;
             JOptionPane.showMessageDialog(null, "REGISTRO COMPLETADO EXITOSAMENTE!", "CAJA CERRADA",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {/*inicio*/
-            int confirmar = JOptionPane.showConfirmDialog(null, "VALOR DEL CIERRE NO CONCUERDA ","¿DESEA CERRAR CAJA ?",
-                /*    + "CON LOS MOVIMIENTOS.. \n CIERRE REQUERIDO: $ "
+            
+            int confirmar = JOptionPane.showConfirmDialog(null,"¿DESEA CERRAR CAJA ?"
+                    + "CON LOS MOVIMIENTOS..  CIERRE REQUERIDO: $ "
                     + total + "\n CIERRE ACTUAL: $ " + detallecaja.getDineroCierre(),
-                    "¿DESEA CERRAR CAJA IGUALMENTE?"*/
-                    JOptionPane.YES_NO_OPTION);
+                    "¿DESEA CERRAR CAJA IGUALMENTE?",JOptionPane.YES_NO_OPTION);
             if (confirmar == JOptionPane.YES_OPTION) {
                 valor = true;
             }
