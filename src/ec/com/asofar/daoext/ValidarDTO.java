@@ -37,6 +37,7 @@ import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrEmpaque;
 import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
 
@@ -297,8 +298,9 @@ public class ValidarDTO {
         return valor;
 
     }
+
     public static boolean ValidarPresta(String nomPres) {
-        
+
         InPrestacionesPorServiciosJpaController control1 = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor = false;
         List<InPrestacionesPorServicios> lista = control1.findInPrestacionesPorServiciosEntities();
@@ -310,8 +312,9 @@ public class ValidarDTO {
         }
         return valor;
     }
-        public static boolean ValidarUnidadServicio(String nomUnidad) {
-        
+
+    public static boolean ValidarUnidadServicio(String nomUnidad) {
+
         InPrestacionesPorServiciosJpaController control1 = new InPrestacionesPorServiciosJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor = false;
         List<InPrestacionesPorServicios> lista = control1.findInPrestacionesPorServiciosEntities();
@@ -323,8 +326,8 @@ public class ValidarDTO {
         }
         return valor;
     }
-        
-        public static boolean ValidarEmpaques(String nombre) {
+
+    public static boolean ValidarEmpaques(String nombre) {
         PrEmpaqueJpaController control = new PrEmpaqueJpaController(EntityManagerUtil.ObtenerEntityManager());
         boolean valor = false;
         List<PrEmpaque> lista = control.findPrEmpaqueEntities();
@@ -336,6 +339,18 @@ public class ValidarDTO {
         }
 
         return valor;
-
     }
-}
+
+    public static boolean ValidarSeUsuario(String nombre) {
+        SeUsuariosJpaController control = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
+        boolean valor = false;
+        List<SeUsuarios> lista = control.findSeUsuariosEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getUsuario().equals(nombre)) {
+                valor = true;
+            }
+        }
+        return valor;
+        }
+    }
