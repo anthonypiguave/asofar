@@ -123,12 +123,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     }
                                     menu.add(menu2);
                                 } else {
-                                    String permiso = pVender();
-                                    if(permiso.equals("no")){
-                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-                                    }else{/*puede vender*/
-                                        
-                                        }
+//                                    String permiso = pVender();
+//                                    if(permiso.equals("no")){
+//                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
+//                                    }else{/*puede vender*/
+//                                        
+//                                        }
                                     String nombre = "GENERAR VENTA ";
                                     if (lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)) {
                                         JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());

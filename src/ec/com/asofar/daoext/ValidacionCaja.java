@@ -79,10 +79,11 @@ public class ValidacionCaja {
                     JOptionPane.INFORMATION_MESSAGE);
         } else {/*inicio*/
             
-            int confirmar = JOptionPane.showConfirmDialog(null,"¿DESEA CERRAR CAJA ?"
-                    + "CON LOS MOVIMIENTOS..  CIERRE REQUERIDO: $ "
-                    + total + "\n CIERRE ACTUAL: $ " + detallecaja.getDineroCierre(),
-                    "¿DESEA CERRAR CAJA IGUALMENTE?",JOptionPane.YES_NO_OPTION);
+//            int confirmar = JOptionPane.showConfirmDialog(null,"¿DESEA CERRAR CAJA ?"
+//                    + "CON LOS MOVIMIENTOS..  CIERRE REQUERIDO: $ "
+//                    + total + "\n CIERRE ACTUAL: $ " + detallecaja.getDineroCierre(),
+//                    "¿DESEA CERRAR CAJA IGUALMENTE?",JOptionPane.YES_NO_OPTION);
+            int confirmar = JOptionPane.showConfirmDialog(null,"¿DESEA CERRAR CAJA ?","",JOptionPane.YES_NO_OPTION);
             if (confirmar == JOptionPane.YES_OPTION) {
                 valor = true;
             }
