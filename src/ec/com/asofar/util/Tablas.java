@@ -3626,7 +3626,7 @@ public class Tablas {
                 if (lista.get(i).getDineroCierre() < total) {
                     Filas[5] = "PERDIDA";
                 }
-                if (lista.get(i).getDineroCierre() < total) {
+                if (lista.get(i).getDineroCierre() > total) {
                     Filas[5] = "SOBRANTE";
                 }
                 if (lista.get(i).getDineroCierre().equals(total)) {
