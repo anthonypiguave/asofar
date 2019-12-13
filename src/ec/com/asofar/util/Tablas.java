@@ -2829,12 +2829,14 @@ public class Tablas {
         };
 
         for (int i = 0; i < lista.size(); i++) {
-            Detalle = ProductoCadena.obtenerCadena(lista.get(i).getId_producto());
+//            Detalle = ProductoCadena.obtenerCadena(lista.get(i).getId_producto());
             Object Filas[] = new Object[8];
             Filas[0] = "" + lista.get(i).getId_factura_detalle().toString();
             JTextArea textArea = new JTextArea();
-            textArea.append(Detalle);
+
+            textArea.append(lista.get(i).getDescripcion());
             Filas[1] = textArea;
+          
             //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
             Filas[2] = "" + lista.get(i).getCantidad().toString();
             Filas[3] = lista.get(i).getPrecio_unitario_venta().toString();
