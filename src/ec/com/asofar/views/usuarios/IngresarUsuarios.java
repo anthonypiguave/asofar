@@ -11,6 +11,7 @@ import ec.com.asofar.dao.SeSucursalJpaController;
 import ec.com.asofar.dao.SeUsuarioSucurRolJpaController;
 import ec.com.asofar.dao.SeUsuariosJpaController;
 import ec.com.asofar.daoext.ObtenerDTO;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SePersonas;
 import ec.com.asofar.dto.SeRoles;
@@ -44,8 +45,8 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
     SeUsuarioSucurRolJpaController usrc
             = new SeUsuarioSucurRolJpaController(EntityManagerUtil.ObtenerEntityManager());
-    
-    SeSucursalJpaController sucur 
+
+    SeSucursalJpaController sucur
             = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     private Date fecha1 = null;
@@ -430,45 +431,50 @@ public void llenarCombo(List<SeRoles> TiBo) {
     }//GEN-LAST:event_jLabel1MouseDragged
 
     public void Guardar() {
-        if(txtIdUsuario.getText().length() < 5){
+        if (txtIdUsuario.getText().length() < 5) {
             JOptionPane.showMessageDialog(this, "Debe tener al menos 6 caracteres");
         }
-        if(cbRol.getSelectedIndex() == 0){
+        if (cbRol.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Elija un rol");
         }
-        if (txtClave.getText().equals(txtClaveConfirm.getText())
-                ) {
+        if (txtClave.getText().equals(txtClaveConfirm.getText())) {
 //            usuario.setIdUsuario(txtIdUsuario.getText());
-            usuario.setUsuario(txtIdUsuario.getText());
-            usuario.setEstado("A");
-            usuario.setFechaActualizacion(fechaActual);
-            usuario.setFechaCreacion(fechaActual);
-            usuario.setIdPersona(objPersona);
-            usuario.setUsuarioCreacion(us1.getUsuario());
-            usuario.setUsuarioActualizacion(us1.getUsuario());
-            usuario.setPassword(aes.encrypt(txtClave.getText()));
+            boolean valor1 = ValidarDTO.ValidarSeUsuario(txtIdUsuario.getText());
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El Usuario ya existente");
+            } else {
+
+                usuario.setUsuario(txtIdUsuario.getText());
+                usuario.setEstado("A");
+                usuario.setFechaActualizacion(fechaActual);
+                usuario.setFechaCreacion(fechaActual);
+                usuario.setIdPersona(objPersona);
+                usuario.setUsuarioCreacion(us1.getUsuario());
+                usuario.setUsuarioActualizacion(us1.getUsuario());
+                usuario.setPassword(aes.encrypt(txtClave.getText()));
 
 //            Integer idRol = cbRol.getSelectedIndex();
-            SeRoles tb = new SeRoles();
-            tb = ObtenerDTO.ObtenerSeRoles(cbRol.getSelectedItem().toString());
-            
-            usr.setIdUsuario(usuario);
-            usr.setIdRoles(tb);
-            usr.setEstado('A');
-            usr.setSeSucursal(su1);
+                SeRoles tb = new SeRoles();
+                tb = ObtenerDTO.ObtenerSeRoles(cbRol.getSelectedItem().toString());
 
-            try {
-                tpc.create(usuario);
+                usr.setIdUsuario(usuario);
+                usr.setIdRoles(tb);
+                usr.setEstado('A');
+                usr.setSeSucursal(su1);
 
-                usrc.create(usr);
-                JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
+                try {
+                    tpc.create(usuario);
+
+                    usrc.create(usr);
+                    JOptionPane.showMessageDialog(this, "GUARDADO EXITOSAMENTE");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+
+                ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
+                setVisible(false);
+                mp.setVisible(true);
             }
-
-            ListarUsuarios mp = new ListarUsuarios(new javax.swing.JFrame(), true, us1, em1, su1);
-            setVisible(false);
-            mp.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN");
         }

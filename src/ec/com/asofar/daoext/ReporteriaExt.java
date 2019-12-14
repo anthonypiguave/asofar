@@ -456,7 +456,12 @@ public class ReporteriaExt {
                 ob.setValor_total(Double.parseDouble(obj[8].toString()));
                 ob.setEstado(String.valueOf(obj[9].toString()));
                 ob.setCantidad(Long.parseLong(obj[10].toString()));
-                ob.setId_producto(Long.parseLong(obj[11].toString()));
+                if(obj[11]==null){
+                ob.setId_producto(Long.valueOf(0));
+            }else{
+                    ob.setId_producto(Long.parseLong(obj[11].toString()));
+                }
+                
                 listaDetalle.add(ob);
             }
 
