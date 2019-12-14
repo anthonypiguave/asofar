@@ -50,7 +50,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     SeEmpresa em1;
     SeSucursal su1;
     SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
-    static JMenuItem salida = new JMenuItem("SALIR");
+    //static JMenuItem salida = new JMenuItem("SALIR");
 
     public PantallaPrincipal() {
         initComponents();
@@ -66,9 +66,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         mei.add(mei2);
         meOpciones.add(mei);
         meMenuBase.add(meOpciones);
-        salida.addActionListener((e) -> {
-            System.exit(0);
-        });
+      
     }
 
     public PantallaPrincipal(SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -82,9 +80,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         lista = cSubgrupos.ObtenerMenu(us);
         cargarMenu(lista);
-        salida.addActionListener((e) -> {
-            System.exit(0);
-        });
+//        salida.addActionListener((e) -> {
+//            System.exit(0);
+//        });
 
         jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height - 75), BorderLayout.CENTER);
     }
@@ -93,14 +91,40 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < lis.size(); i++) {
             if (lis.get(i).getIdPadre() == null) {
                 if (lis.get(i).getRuta() == null) {
+                    if (lis.get(i).getNombre().equals("SALIR")){
+                        JMenuItem item = new JMenuItem(lis.get(i).getNombre());
+                        item.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
+                        item.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                        item.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                        item.setPreferredSize(new java.awt.Dimension(90, 65));
+                        item.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+                       item.addActionListener( new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    
+                                    System.exit(0);
+                                    //To change body of generated methods, choose Tools | Templates.
+                                }
+                            });
+                       meMenuBase.add(item);
+                       
+                    }
+                    else {
+                    
+                     
                     JMenu menu = new JMenu(lis.get(i).getNombre());
+                     
+                    
                     //Ruta
                     System.out.println("Ruta.."+lis.get(i).getRutaIcono());
                     menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
                     menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                     menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-                    menu.setPreferredSize(new java.awt.Dimension(90, 55));
+                    menu.setPreferredSize(new java.awt.Dimension(90, 65));
                     menu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+                    
+                    
+                    
                     for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
                         for (int k = 0; k < lis.size(); k++) {
                             if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
@@ -161,6 +185,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         }
                     }
                     meMenuBase.add(menu);
+                            }
                 } else {
                     JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                     item.addActionListener(ActionItem.Obtener(lis.get(i).getRuta(), us1, em1, su1));
@@ -168,14 +193,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 }
 
             }
+            
+            
         }
-        salida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/B_SALIR.jpeg")));
-        salida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        salida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        salida.setPreferredSize(new java.awt.Dimension(5, 55));
-        salida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        meMenuBase.add(salida);
+//        salida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/B_SALIR.jpeg")));
+//        salida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+//        salida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+//       // salida.setPreferredSize(new java.awt.Dimension(5, 55));
+//        salida.setPreferredSize(new java.awt.Dimension(40, 65));
+//        salida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+//        meMenuBase.add(salida);
     }
+    
 
     public String pVender() {
         String v = null;
