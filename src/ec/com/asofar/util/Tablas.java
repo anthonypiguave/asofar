@@ -2681,45 +2681,30 @@ public class Tablas {
     }
 
     public static void listarPrestacionesDetalleTarifario(List<PrDetalleTarifario> listDetalleTari, List<PrPrestaciones> listaPrestacion, JTable Tabla) {
-        int[] a = {400, 500, 500, 600, 500, 800, 300, 300, 250, 300, 250};
+        int[] a = {400, 500, 500, 500, 800, 300, 300, 250, 300, 250};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.LEFT);
         model = VaciarTabla(Tabla);
-        String[] b = {"De tarifario", "Tarifario", "U. servicio", "Empresa", "Sucursal", "Nom. prestacion", "V.Costo", "V.Min. Venta", "V. venta", "V.Descuento", "Estado",};
-        String[] Filas = new String[11];
+        String[] b = {"De tarifario", "Tarifario", "U. servicio", "Sucursal", "Nom. prestacion", "V.Costo", "V.Min. Venta", "V. venta", "V.Descuento", "Estado",};
+        String[] Filas = new String[10];
         model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
         for (int i = 0; i < listDetalleTari.size(); i++) {
             Filas[0] = listDetalleTari.get(i).getIdDetalleTarifario().toString();
-//            PrTarifario pt = ObtenerDTO.ObtenerPrTarifario((listDetalleTari.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario()));
-//            Filas[1] = pt.getDescripcion();
-            //Filas[1] = "" + listDetalleTari.get(i).getPrTarifario().getPrTarifarioPK().getIdTarifario();
             Filas[1] = "" + listDetalleTari.get(i).getPrTarifario().getDescripcion();
             VeUnidadServicio ve = ObtenerDTO.ObtenerVeUnidadServiciON(listDetalleTari.get(i).getIdUnidadServicio());
             Filas[2] = ve.getNombreUnidadServicio();
-//            Filas[2] = "" + listDetalleTari.get(i).getIdUnidadServicio();
-            Filas[3] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getSeEmpresa().getNombreComercial();
-            Filas[4] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getNombreComercial();
-//            System.out.println("deta lle "+listDetalleTari.get(i).getIdPrestacion());
-//            for (int j = 0; j < listaPrestacion.size(); j++) {
-//                System.out.println("prest "+listaPrestacion.get(j).getIdPrestacion());
-//                System.out.println("detalle "+listDetalleTari.get(i).getIdPrestacion());
-
-//                if (listaPrestacion.get(j).getIdPrestacion().equals(listDetalleTari.get(i).getIdPrestacion())) {
-//                    System.out.println("siiiiii");
-//                    
+//            Filas[3] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getSeEmpresa().getNombreComercial();
+            Filas[3] = "" + listDetalleTari.get(i).getPrTarifario().getSeSucursal().getNombreComercial();
             PrPrestaciones pr = ObtenerDTO.ObtenerPrPrestacionesOn(listDetalleTari.get(i).getIdPrestacion());
-            Filas[5] = pr.getNombrePrestacion();
-//                    Filas[5] = listDetalleTari.get(i).getUsuarioCreacion();
-//                }
-//            }
-            Filas[6] = "" + listDetalleTari.get(i).getValorCosto();
-            Filas[7] = "" + listDetalleTari.get(i).getValorMinVenta();
-            Filas[8] = "" + listDetalleTari.get(i).getValorVenta();
-            Filas[9] = "" + listDetalleTari.get(i).getValorDescuento();
-            Filas[10] = "" + listDetalleTari.get(i).getEstado();
+            Filas[4] = pr.getNombrePrestacion();
+            Filas[5] = "" + listDetalleTari.get(i).getValorCosto();
+            Filas[6] = "" + listDetalleTari.get(i).getValorMinVenta();
+            Filas[7] = "" + listDetalleTari.get(i).getValorVenta();
+            Filas[8] = "" + listDetalleTari.get(i).getValorDescuento();
+            Filas[9] = "" + listDetalleTari.get(i).getEstado();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -2742,8 +2727,8 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
             Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
-            Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
+//            Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
+//            Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
         }
     }
 
@@ -2836,7 +2821,7 @@ public class Tablas {
 
             textArea.append(lista.get(i).getDescripcion());
             Filas[1] = textArea;
-          
+
             //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
             Filas[2] = "" + lista.get(i).getCantidad().toString();
             Filas[3] = lista.get(i).getPrecio_unitario_venta().toString();
