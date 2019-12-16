@@ -381,8 +381,14 @@ public void llenarCombo(List<SeRoles> TiBo) {
     }//GEN-LAST:event_txtIdUsuarioKeyTyped
 
     private void txtPersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPersonaKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
+//        char c = evt.getKeyChar();
+//        if (Character.isDigit(c)) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
+
+char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }
