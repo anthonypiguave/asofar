@@ -100,7 +100,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
 
     private void carga_pbStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_carga_pbStateChanged
         // TODO add your handling code here:
-            if (carga_pb.getValue() == 70) {
+            if (carga_pb.getValue() == 99) {
             if (!EntityManagerUtil.ObtenerEntityManagerConnection()) {
                 JOptionPane.showMessageDialog(this, "LA BASE DE DATOS NO ESTÁ ACTIVA");
             } else {
