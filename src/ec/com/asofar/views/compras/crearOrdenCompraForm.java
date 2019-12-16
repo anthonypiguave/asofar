@@ -95,8 +95,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
-        CargarMovimiento();
-        CargarMotivos();
+//        CargarMovimiento();
+//        CargarMotivos();
         CargarFormulario();
 
         Timer tiempo = new Timer(100, new crearOrdenCompraForm.horas());
@@ -116,8 +116,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         cabOrden = objeto;
         txtFecha.setText(FechaActual());
 
-        CargarMovimiento();
-        CargarMotivos();
+//        CargarMovimiento();
+//        CargarMotivos();
         CargarFormulario();
 
     }
@@ -169,17 +169,17 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     }
 
     public void CargarMovimiento() {
-        List<InTipoMovimiento> listcaja = movimientoController.findInTipoMovimientoEntities();
-        for (int i = 0; i < listcaja.size(); i++) {
-            cbx_movimiento.addItem(listcaja.get(i).getNombreMovimiento());
-        }
+//        List<InTipoMovimiento> listcaja = movimientoController.findInTipoMovimientoEntities();
+//        for (int i = 0; i < listcaja.size(); i++) {
+//            cbx_movimiento.addItem(listcaja.get(i).getNombreMovimiento());
+//        }
     }
 
     public void CargarMotivos() {
-        List<InMotivos> listcaja = motivoController.findInMotivosEntities();
-        for (int i = 0; i < listcaja.size(); i++) {
-            cbx_motivo.addItem(listcaja.get(i).getNombre());
-        }
+//        List<InMotivos> listcaja = motivoController.findInMotivosEntities();
+//        for (int i = 0; i < listcaja.size(); i++) {
+//            cbx_motivo.addItem(listcaja.get(i).getNombre());
+//        }
     }
 
     public void CargarFormulario() {
@@ -297,10 +297,10 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         System.out.println("total descuento " + TotalDescuento);
         System.out.println("total compra " + TotalCompra);
 
-        txtSubtotal.setText(TotalSubTotal.toEngineeringString());
-        txtDescuento.setText(TotalDescuento.toEngineeringString());
-        txtIva.setText(TotalIva.toEngineeringString());
-        txtTotal.setText(TotalCompra.toEngineeringString());
+        txtSubtotal.setText(String.format("%.2f",TotalSubTotal));
+        txtDescuento.setText(String.format("%.2f",TotalDescuento));
+        txtIva.setText(String.format("%.2f",TotalIva));
+        txtTotal.setText(String.format("%.2f",TotalCompra));
 
         Tablas.listarDetalleCompra(listadetCompra, jTable1);
 
@@ -326,10 +326,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         txtHora = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtFechaEntrega = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        cbx_motivo = new javax.swing.JComboBox<>();
-        cbx_movimiento = new javax.swing.JComboBox<>();
         TxtProveedor = new javax.swing.JTextField();
         TxtDocumento = new javax.swing.JTextField();
         BtnCancelar = new javax.swing.JButton();
@@ -420,18 +416,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel18.setText("MOTIVO:");
-
-        jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel19.setText("MOVIMIENTO:");
-
-        cbx_motivo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbx_motivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-
-        cbx_movimiento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbx_movimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-
         TxtProveedor.setEditable(false);
         TxtProveedor.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         TxtProveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -447,32 +431,24 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(46, 46, 46))
-                            .addComponent(jLabel12))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(46, 46, 46)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addGap(40, 40, 40)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(37, 37, 37))
+                            .addComponent(jLabel12)))
+                    .addComponent(jLabel13))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbx_movimiento, 0, 169, Short.MAX_VALUE)
                             .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbx_motivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TxtProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(TxtDocumento, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jLabel10)
@@ -507,15 +483,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_movimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_motivo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -698,7 +666,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                     .addComponent(BtnAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -709,7 +677,7 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -794,8 +762,8 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     private void BtnAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAprovarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
 
-        InTipoMovimiento Movimiento = ObtenerDTO.ObtenerInTipoMovimiento(cbx_movimiento.getSelectedItem().toString());
-        InMotivos Motivos = ObtenerDTO.ObtenerInMotivos(cbx_motivo.getSelectedItem().toString());
+        InTipoMovimiento Movimiento = ObtenerDTO.ObtenerInTipoMovimiento("COMPRAS");
+        InMotivos Motivos = ObtenerDTO.ObtenerInMotivos("COMPRAS");
         InTipoDocumento Documento = ObtenerDTO.ObtenerInTipoDocumento(cabOrden.getIdDocumento().intValue());
         CoProveedores Proveedor = ObtenerDTO.ObtenerCoProveedores(cabOrden.getIdProveedor().intValue());
 
@@ -806,13 +774,13 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
 
-            if (cbx_movimiento.getSelectedItem().toString().equals("--SELECCIONE--")) {
-                JOptionPane.showMessageDialog(null, "LLENE MOVIMIENTO!");
-            } else {
-
-                if (cbx_motivo.getSelectedItem().toString().equals("--SELECCIONE--")) {
-                    JOptionPane.showMessageDialog(null, "LLENE MOTIVO!");
-                } else {
+//            if (cbx_movimiento.getSelectedItem().toString().equals("--SELECCIONE--")) {
+//                JOptionPane.showMessageDialog(null, "LLENE MOVIMIENTO!");
+//            } else {
+//
+//                if (cbx_motivo.getSelectedItem().toString().equals("--SELECCIONE--")) {
+//                    JOptionPane.showMessageDialog(null, "LLENE MOTIVO!");
+//                } else {
                     if (txtObservacion.getText().equals("")) {
                         JOptionPane.showMessageDialog(null, "LLENE OBSERVACIÓN!");
                     } else {
@@ -956,9 +924,9 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
                                 setVisible(false);
 
-                            }
-
-                        }
+//                            }
+//
+//                        }
                     }
                 }
 
@@ -1161,8 +1129,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JTextField TxtDocumento;
     private javax.swing.JTextField TxtProveedor;
-    private javax.swing.JComboBox<String> cbx_motivo;
-    private javax.swing.JComboBox<String> cbx_movimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1172,8 +1138,6 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
