@@ -68,10 +68,8 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         usu = us;
         emp = em;
         suc = su;
-
         tp = tr;
         MostrarTabla2();
-//       listarPrestacionesDetalleTarifario
     }
 
     public void MostrarTabla2() {
