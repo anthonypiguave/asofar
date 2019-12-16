@@ -21,7 +21,9 @@ import ec.com.asofar.util.Reflection;
 import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
 import ec.com.asofar.views.venta.Venta;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.PopupMenu;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -33,10 +35,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.EventListener;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.border.BevelBorder;
 
 /**
  *
@@ -109,6 +113,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         item.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         item.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
                         item.setPreferredSize(new java.awt.Dimension(90, 65));
+                        item.setMinimumSize(new Dimension(20,20));
+                        item.setMaximumSize(new Dimension(80,60));
+                        item.setPreferredSize(new Dimension(120,30));
                         item.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
                         item.addActionListener(new ActionListener() {
                             @Override
