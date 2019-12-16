@@ -105,7 +105,6 @@
               <Image iconType="3" name="/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="AGREGAR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
@@ -126,7 +125,6 @@
               <Image iconType="3" name="/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

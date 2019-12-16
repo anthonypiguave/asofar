@@ -65,14 +65,11 @@ public class Listar_PrestacionesPorServicio extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-
         usu = us;
         emp = em;
         suc = su;
-
         tp = tr;
         MostrarTabla2();
-//       listarPrestacionesDetalleTarifario
     }
 
     public void MostrarTabla2() {
