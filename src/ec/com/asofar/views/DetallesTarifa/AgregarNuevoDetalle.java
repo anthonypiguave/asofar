@@ -174,7 +174,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
         });
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel8.setText("PORCENTAJE MINIMO DE VENTA:");
+        jLabel8.setText("PORCENTAJE GANANCIA:");
 
         txt_valor_costo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
