@@ -133,7 +133,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
             DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
             PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
             PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-            PrintService service = findPrintService("JAPOS", printService);
+            PrintService service = findPrintService("JAPOS1", printService);
             DocPrintJob job = service.createPrintJob();
             try {
                 byte[] bytes;
@@ -358,24 +358,30 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 vdc.setHoraCierre(d_hora);
                 vdc.setEstado("I");
                 if (ValidacionCaja.ValidacionCierre(vdc, seUsuario) == true) {
-                    Double total = ValidacionCaja.facturadoRetorno(vdc);
+                    Double factura = ValidacionCaja.facturadoRetorno(vdc);
                     Double cierre = Double.parseDouble(montocierre.getText());
                     Double resta = 0.0;
                     Double resta1 = 0.0;                    
+                    Double total = factura + Double.parseDouble(montoInicial.getText());
+                    System.out.println("total "+total);
+                    System.out.println("ini  "+Double.parseDouble(montoInicial.getText()));
+                    System.out.println("factura "+factura);
+                    System.out.println("cierre "+cierre);
+                    
                     if (cierre < total) {
                         resta = cierre - total;
-                        Cadena = "El Valor de cierre es menor al de Apertura "+resta;
+                        Cadena = "PERDIDA : "+resta;
                         System.out.println(" "+Cadena);                        
                     }
                     if (cierre > total) {
                         resta = cierre - total;
-                        Cadena = "El Valor de cierre es mayor al de Apertura " + resta;
-//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
+                        Cadena = "SOBRANTE : " + resta;
+                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total + "resta " + resta);
                     }
-//                    if (cierre == total) {
-//                        Cadena = "Cierre Correcto!";
-//                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total);
-//                    }
+                    if (cierre.equals(total)) {
+                        Cadena = "Cierre Correcto!";
+                        System.out.println(" " + Cadena + " cierre " + cierre + "total " + total);
+                    }
                     /*   */
                     cajadet.edit(vdc);
                     setVisible(false);
@@ -388,10 +394,20 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     printerService.printString("EPSON-TM-T20II", "\n    NOMBRE DE CAJA: " + nombreCaja.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "      MONTO INICIAL: " + montoInicial.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "      HORA DE INICIO: " + horaInicio.getText() + "\n");
-                    printerService.printString("EPSON-TM-T20II", "      MONTO DE CIERRE: " + montocierre.getText() + "\n\n\n\n\n\n\n\n-");
+                    printerService.printString("EPSON-TM-T20II", "      MONTO DE CIERRE: " + montocierre.getText() + "\n");
+                    printerService.printString("EPSON-TM-T20II", "      ESTADO: " + Cadena + "\n");
                     printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
-                    byte[] cutP = new byte[]{0x1d, 'V', 1};
-                    printerService.printBytes("EPSON-TM-T20II", cutP);
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    printerService.printString("EPSON-TM-T20II", "\n");
+                    
+//                    byte[] cutP = new byte[]{0x1d, 'V', 1};
+//                    printerService.printBytes("EPSON-TM-T20II", cutP);
                     
                     
                 }

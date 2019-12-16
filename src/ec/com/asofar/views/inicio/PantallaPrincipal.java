@@ -82,7 +82,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         us1 = us;
         em1 = em;
         su1 = su;
-
         lista = cSubgrupos.ObtenerMenu(us);
         cargarMenu(lista);
 //        salida.addActionListener((e) -> {

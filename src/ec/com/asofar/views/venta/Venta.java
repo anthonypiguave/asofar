@@ -213,8 +213,8 @@ public class Venta extends javax.swing.JInternalFrame {
                 return NO_SUCH_PAGE;
             }
             /*
-	         * User (0,0) is typically outside the imageable area, so we must
-	         * translate by the X and Y values in the PageFormat to avoid clipping
+             * User (0,0) is typically outside the imageable area, so we must
+             * translate by the X and Y values in the PageFormat to avoid clipping
              */
             Graphics2D g2d = (Graphics2D) g;
             g2d.translate(pf.getImageableX(), pf.getImageableY());
@@ -1299,8 +1299,11 @@ public class Venta extends javax.swing.JInternalFrame {
                         TotalizarDescuento();
                         TotalizarSubtotal();
                     }/**/
+
                 }/**/
+
             }/**/
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1363,11 +1366,10 @@ public class Venta extends javax.swing.JInternalFrame {
                     }
                     /*    */
 //                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                //    String fechagenerada = formatter.format(d);
-                    
+                    //    String fechagenerada = formatter.format(d);
+
 //                    byte[] cutP = new byte[]{0x1d, 'V', 1};
 //                    printerService.printBytes("EPSON-TM-T20II", cutP);
-
 /////////// AGREGANDO A MOVIMIENTO
                     InMovimientosJpaController cabMovController = new InMovimientosJpaController(EntityManagerUtil.ObtenerEntityManager());
                     InDetalleMovimientoJpaController detMovController = new InDetalleMovimientoJpaController(EntityManagerUtil.ObtenerEntityManager());
@@ -1379,13 +1381,13 @@ public class Venta extends javax.swing.JInternalFrame {
                     InDetalleMovimiento detMovimiento = new InDetalleMovimiento();
                     try {
                         /*
-                    240  
-                    160  
+                         240  
+                         160  
                     
-                    ASOFAR institucion acojedora
-                    tutor institucional  el de asofar 
-                    tutor academico --------
-                    noviembre a marzo yaaaaaaa
+                         ASOFAR institucion acojedora
+                         tutor institucional  el de asofar 
+                         tutor academico --------
+                         noviembre a marzo yaaaaaaa
                     
                          */
                         cabMovimiento.setSeSucursal(suc);
@@ -1427,85 +1429,96 @@ public class Venta extends javax.swing.JInternalFrame {
                             detMovimiento.setUsuarioCreacion(usu.getUsuario());
                             detMovimiento.setFechaCreacion(d);
                             detMovController.create(detMovimiento);
-                            
+
                         }
-                                            java.sql.Date fechact = new java.sql.Date(d.getTime());
-                    String empresa = emp.getNombreComercial();
-                    String sucursal = suc.getNombreComercial();
-                    String ruc = emp.getRuc();
-                    String direccion = suc.getDireccion();
-                    Long idFac = pkFactura.getVeFacturaPK().getIdFactura();
-                    String idFactura = idFac.toString();/*   */
+                        java.sql.Date fechact = new java.sql.Date(d.getTime());
+                        String empresa = emp.getNombreComercial();
+                        String sucursal = suc.getNombreComercial();
+                        String ruc = emp.getRuc();
+                        String direccion = suc.getDireccion();
+                        Long idFac = pkFactura.getVeFacturaPK().getIdFactura();
+                        String idFactura = idFac.toString();/*   */
 //                    System.out.println(""+idFactura);///
 
-                    int im = JOptionPane.showConfirmDialog(null, "¿Desea Imprimir la factura?", "", JOptionPane.YES_NO_OPTION);
-                    if (im == JOptionPane.YES_OPTION) {
-                        Venta.PrintEpson printerService = new Venta.PrintEpson();
-                        System.out.println(printerService.getPrinters());
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
-                        printerService.printString("EPSON-TM-T20II", " *     FARMACIA " + empresa + " " + sucursal + "    *\n");
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "         Direccion: " + direccion + "\n");
-                        printerService.printString("EPSON-TM-T20II", "               RUC: " + ruc + "\n");
-                        printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "    IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", " N° IDENTIFICACION: " + txtIdentificacion.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "    NOMBRE DE CLTE: " + txtNombre.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "  APELLIDO DE CLTE: " + txtApellido.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "    CORREO DE CLTE: " + txtEmail.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "  TELEFONO DE CLTE: " + txtTelefono.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", " DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "Producto             Cant Valor Subt Total\n");
-                        for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-                            printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString().substring(0, 22).replaceAll("\n", "") + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                        int im = JOptionPane.showConfirmDialog(null, "¿Desea Imprimir la factura?", "", JOptionPane.YES_NO_OPTION);
+                        if (im == JOptionPane.YES_OPTION) {
+                            Venta.PrintEpson printerService = new Venta.PrintEpson();
+                            System.out.println(printerService.getPrinters());
+                            printerService.printString("EPSON-TM-T20II", "------------------------------------------\n\n");
+                            printerService.printString("EPSON-TM-T20II", " *     FARMACIA " + empresa + " " + sucursal + "    *\n");
+                            printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
+                            printerService.printString("EPSON-TM-T20II", "         Direccion: " + direccion + "\n");
+                            printerService.printString("EPSON-TM-T20II", "               RUC: " + ruc + "\n");
+                            printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "    IDENTIFICACION: " + txtTipoIdent.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", " N° IDENTIFICACION: " + txtIdentificacion.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "    NOMBRE DE CLTE: " + txtNombre.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "  APELLIDO DE CLTE: " + txtApellido.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "    CORREO DE CLTE: " + txtEmail.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "  TELEFONO DE CLTE: " + txtTelefono.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", " DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
+                            printerService.printString("EPSON-TM-T20II", "Producto             Cant Valor Subt Total\n");
+                            for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+                                printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString().substring(0, 22).replaceAll("\n", "") + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                            }
+                            printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
+                            printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: " + txtSubtotal.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: " + txtDescuento.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "                          IVA: " + txtIva.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "                        TOTAL: " + txtTotal.getText() + "\n");
+                            printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
+                            printerService.printString("EPSON-TM-T20II", "--------- GRACIAS POR PREFERIRNOS --------\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            printerService.printString("EPSON-TM-T20II", "\n");
+                            ArrayList listap = new ArrayList();
+                            for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+                                ClaseReporte clase = new ClaseReporte(empresa, sucursal, idFactura, direccion, ruc, txt_NumeroCaja.getText(), txt_NombreCaja.getText(), txt_idCliente.getText(), txtTipoIdent.getText(), txtIdentificacion.getText(), txtEmail.getText(), txtNombre.getText(), txtTelefono.getText(), txtApellido.getText(), txtDireccion.getText(),
+                                        tba_detalle.getValueAt(i, 0).toString(),
+                                        tba_detalle.getValueAt(i, 1).toString(),
+                                        tba_detalle.getValueAt(i, 2).toString(),
+                                        tba_detalle.getValueAt(i, 3).toString(),
+                                        tba_detalle.getValueAt(i, 4).toString(),
+                                        tba_detalle.getValueAt(i, 5).toString(),
+                                        tba_detalle.getValueAt(i, 6).toString(),
+                                        tba_detalle.getValueAt(i, 7).toString(),
+                                        tba_detalle.getValueAt(i, 8).toString(),
+                                        txtSubtotal.getText(), txtDescuento.getText(), txtIva.getText(), txtTotal.getText());
+                                listap.add(clase);
+                            }
+                            JasperReport jreport = (JasperReport) JRLoader.loadObject("Reportes/Venta.jasper");
+                            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, new JRBeanCollectionDataSource(listap));
+                            JasperExportManager.exportReportToPdfFile(jprint, System.getProperty("user.dir") + "/ReporteDeFacturas/" + "CI." + txtIdentificacion.getText() + " Factura#" + idFactura + " Fecha:" + fechact.toString() + ".pdf");
+                        } else {
+                            ArrayList listap = new ArrayList();
+                            for (int i = 0; i < tba_detalle.getRowCount(); i++) {
+                                ClaseReporte clase = new ClaseReporte(empresa, sucursal, idFactura, direccion, ruc, txt_NumeroCaja.getText(), txt_NombreCaja.getText(), txt_idCliente.getText(), txtTipoIdent.getText(), txtIdentificacion.getText(), txtEmail.getText(), txtNombre.getText(), txtTelefono.getText(), txtApellido.getText(), txtDireccion.getText(),
+                                        tba_detalle.getValueAt(i, 0).toString(),
+                                        tba_detalle.getValueAt(i, 1).toString(),
+                                        tba_detalle.getValueAt(i, 2).toString(),
+                                        tba_detalle.getValueAt(i, 3).toString(),
+                                        tba_detalle.getValueAt(i, 4).toString(),
+                                        tba_detalle.getValueAt(i, 5).toString(),
+                                        tba_detalle.getValueAt(i, 6).toString(),
+                                        tba_detalle.getValueAt(i, 7).toString(),
+                                        tba_detalle.getValueAt(i, 8).toString(),
+                                        txtSubtotal.getText(), txtDescuento.getText(), txtIva.getText(), txtTotal.getText());
+                                listap.add(clase);
+                            }
+                            JasperReport jreport = (JasperReport) JRLoader.loadObject("Reportes/Venta.jasper");
+                            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, new JRBeanCollectionDataSource(listap));
+                            JasperExportManager.exportReportToPdfFile(jprint, System.getProperty("user.dir") + "/ReporteDeFacturas/" + "CI." + txtIdentificacion.getText() + " Factura#" + idFactura + " Fecha:" + fechact.toString() + ".pdf");
                         }
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: " + txtSubtotal.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "                    DESCUENTO: " + txtDescuento.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "                          IVA: " + txtIva.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "                        TOTAL: " + txtTotal.getText() + "\n");
-                        printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                        printerService.printString("EPSON-TM-T20II", "--------- GRACIAS POR PREFERIRNOS --------\n");
-                        ArrayList listap =new ArrayList();
-                        for(int i=0;i<tba_detalle.getRowCount();i++){
-                        ClaseReporte clase =new ClaseReporte(empresa,sucursal,idFactura,direccion,ruc,txt_NumeroCaja.getText(),txt_NombreCaja.getText(),txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
-                                                            tba_detalle.getValueAt(i,0).toString(),
-                                                            tba_detalle.getValueAt(i,1).toString(),
-                                                            tba_detalle.getValueAt(i,2).toString(),
-                                                            tba_detalle.getValueAt(i,3).toString(),
-                                                            tba_detalle.getValueAt(i,4).toString(),
-                                                            tba_detalle.getValueAt(i,5).toString(),
-                                                            tba_detalle.getValueAt(i,6).toString(),
-                                                            tba_detalle.getValueAt(i,7).toString(),
-                                                            tba_detalle.getValueAt(i,8).toString(),
-                                                            txtSubtotal.getText(),txtDescuento.getText(),txtIva.getText(),txtTotal.getText());
-                        listap.add(clase);                       
-                        }
-                        JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
-                        JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
-                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"CI."+txtIdentificacion.getText()+" Factura#"+idFactura+" Fecha:"+fechact.toString()+".pdf");
-                    } else {
-                        ArrayList listap =new ArrayList();
-                        for(int i=0;i<tba_detalle.getRowCount();i++){
-                        ClaseReporte clase =new ClaseReporte(empresa,sucursal,idFactura,direccion,ruc,txt_NumeroCaja.getText(),txt_NombreCaja.getText(),txt_idCliente.getText(),txtTipoIdent.getText(),txtIdentificacion.getText(),txtEmail.getText(),txtNombre.getText(),txtTelefono.getText(),txtApellido.getText(),txtDireccion.getText(),
-                                                            tba_detalle.getValueAt(i,0).toString(),
-                                                            tba_detalle.getValueAt(i,1).toString(),
-                                                            tba_detalle.getValueAt(i,2).toString(),
-                                                            tba_detalle.getValueAt(i,3).toString(),
-                                                            tba_detalle.getValueAt(i,4).toString(),
-                                                            tba_detalle.getValueAt(i,5).toString(),
-                                                            tba_detalle.getValueAt(i,6).toString(),
-                                                            tba_detalle.getValueAt(i,7).toString(),
-                                                            tba_detalle.getValueAt(i,8).toString(),
-                                                            txtSubtotal.getText(),txtDescuento.getText(),txtIva.getText(),txtTotal.getText());
-                        listap.add(clase);                       
-                        }
-                        JasperReport jreport = (JasperReport)JRLoader.loadObject("Reportes/Venta.jasper");
-                        JasperPrint jprint = JasperFillManager.fillReport(jreport,null,new JRBeanCollectionDataSource(listap));
-                        JasperExportManager.exportReportToPdfFile( jprint, System.getProperty("user.dir")+"/ReporteDeFacturas/"+"CI."+txtIdentificacion.getText()+" Factura#"+idFactura+" Fecha:"+fechact.toString()+".pdf");
-                    }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1628,8 +1641,8 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        CotizacionVenta ses = new CotizacionVenta(new javax.swing.JFrame(), true,usu, emp, suc);
-         setVisible(false);
+        CotizacionVenta ses = new CotizacionVenta(new javax.swing.JFrame(), true, usu, emp, suc);
+        setVisible(false);
         ses.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1640,7 +1653,7 @@ public class Venta extends javax.swing.JInternalFrame {
         for (int i = 0; i < listaPresta.size(); i++) {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
-                     id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
+                    id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
 
                 }
             }
