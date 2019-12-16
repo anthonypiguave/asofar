@@ -27,6 +27,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.EventListener;
 import java.util.List;
 import javax.swing.JButton;
@@ -51,6 +55,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     SeSucursal su1;
     SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
     //static JMenuItem salida = new JMenuItem("SALIR");
+    java.util.Date fechaActual = new java.util.Date();
 
     public PantallaPrincipal() {
         initComponents();
@@ -66,7 +71,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         mei.add(mei2);
         meOpciones.add(mei);
         meMenuBase.add(meOpciones);
-      
+
     }
 
     public PantallaPrincipal(SeUsuarios us, SeEmpresa em, SeSucursal su) {
@@ -87,105 +92,108 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height - 75), BorderLayout.CENTER);
     }
 
+    public static String FechaActual() {
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        return formatoFecha.format(fecha);
+    }
+
     public void cargarMenu(List<SeOpcionesMenu> lis) {
+        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
+        txtFechaHora.setText(FechaActual() + "  " + df1.format(fechaActual));
         for (int i = 0; i < lis.size(); i++) {
             if (lis.get(i).getIdPadre() == null) {
                 if (lis.get(i).getRuta() == null) {
-                    if (lis.get(i).getNombre().equals("SALIR")){
+                    if (lis.get(i).getNombre().equals("SALIR")) {
                         JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                         item.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
                         item.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         item.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
                         item.setPreferredSize(new java.awt.Dimension(90, 65));
                         item.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-                       item.addActionListener( new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    
-                                    System.exit(0);
-                                    //To change body of generated methods, choose Tools | Templates.
-                                }
-                            });
-                       meMenuBase.add(item);
-                       
-                    }
-                    else {
-                    
-                     
-                    JMenu menu = new JMenu(lis.get(i).getNombre());
-                     
-                    
-                    //Ruta
-                    System.out.println("Ruta.."+lis.get(i).getRutaIcono());
-                    menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
-                    menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                    menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-                    menu.setPreferredSize(new java.awt.Dimension(90, 65));
-                    menu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-                    
-                    
-                    
-                    for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
-                        for (int k = 0; k < lis.size(); k++) {
-                            if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
-                                if (lis.get(i).getSeOpcionesMenuList().get(j).getRuta() == null) {
-                                    JMenu menu2 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                        item.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+
+                                System.exit(0);
+                                //To change body of generated methods, choose Tools | Templates.
+                            }
+                        });
+                        meMenuBase.add(item);
+
+                    } else {
+
+                        JMenu menu = new JMenu(lis.get(i).getNombre());
+
+                        //Ruta
+                        System.out.println("Ruta.." + lis.get(i).getRutaIcono());
+                        menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
+                        menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                        menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                        menu.setPreferredSize(new java.awt.Dimension(90, 65));
+                        menu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+                        for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
+                            for (int k = 0; k < lis.size(); k++) {
+                                if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
+                                    if (lis.get(i).getSeOpcionesMenuList().get(j).getRuta() == null) {
+                                        JMenu menu2 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
 //                                    System.out.println(" meg "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
-                                    for (int l = 0; l < lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().size(); l++) {
-                                        for (int m = 0; m < lis.size(); m++) {
-                                            if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l) == lis.get(m)) {
-                                                if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta() == null) {
-                                                    JMenu menu3 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
-                                                    menu2.add(menu3);
-                                                } else {
-                                                    JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
-                                                    item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta(), us1, em1, su1));
-                                                    menu2.add(item);
+                                        for (int l = 0; l < lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().size(); l++) {
+                                            for (int m = 0; m < lis.size(); m++) {
+                                                if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l) == lis.get(m)) {
+                                                    if (lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta() == null) {
+                                                        JMenu menu3 = new JMenu(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
+                                                        menu2.add(menu3);
+                                                    } else {
+                                                        JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getNombre());
+                                                        item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getSeOpcionesMenuList().get(l).getRuta(), us1, em1, su1));
+                                                        menu2.add(item);
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                    menu.add(menu2);
-                                } else {
+                                        menu.add(menu2);
+                                    } else {
 //                                    String permiso = pVender();
 //                                    if(permiso.equals("no")){
 //                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
 //                                    }else{/*puede vender*/
 //                                        
 //                                        }
-                                    String nombre = "GENERAR VENTA ";
-                                    if (lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)) {
-                                        JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
-                                        item.addActionListener(new ActionListener() {
-                                            @Override
-                                            public void actionPerformed(ActionEvent e) {
+                                        String nombre = "GENERAR VENTA ";
+                                        if (lis.get(i).getSeOpcionesMenuList().get(j).getNombre().equals(nombre)) {
+                                            JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                                            item.addActionListener(new ActionListener() {
+                                                @Override
+                                                public void actionPerformed(ActionEvent e) {
 //                                                String permiso = "si";
-                                                String permiso = pVender();
-                                                if (permiso.equals("no")) {
-                                                    JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-                                                } else {
+                                                    String permiso = pVender();
+                                                    if (permiso.equals("no")) {
+                                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
+                                                    } else {
 
-                                                    Venta fac = new Venta(new javax.swing.JFrame(), true, us1, em1, su1);
-                                                    jdpescritorio.add(fac);
-                                                    fac.show();
+                                                        Venta fac = new Venta(new javax.swing.JFrame(), true, us1, em1, su1);
+                                                        jdpescritorio.add(fac);
+                                                        fac.show();
+                                                    }
                                                 }
-                                            }
-                                        });
-                                        menu.add(item);
-                                    } else {
+                                            });
+                                            menu.add(item);
+                                        } else {
 //                                    JMenuItem item = new JMenuItem(lis.get(i).getNombre());
 //                                    System.out.println("menu ffg "+lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
-                                        JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
-                                        item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
-                                        menu.add(item);
-                                    }
+                                            JMenuItem item = new JMenuItem(lis.get(i).getSeOpcionesMenuList().get(j).getNombre());
+                                            item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
+                                            menu.add(item);
+                                        }
 
+                                    }
                                 }
                             }
                         }
+                        meMenuBase.add(menu);
                     }
-                    meMenuBase.add(menu);
-                            }
                 } else {
                     JMenuItem item = new JMenuItem(lis.get(i).getNombre());
                     item.addActionListener(ActionItem.Obtener(lis.get(i).getRuta(), us1, em1, su1));
@@ -193,8 +201,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 }
 
             }
-            
-            
+
         }
 //        salida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/B_SALIR.jpeg")));
 //        salida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,7 +211,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //        salida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 //        meMenuBase.add(salida);
     }
-    
 
     public String pVender() {
         String v = null;
@@ -235,6 +241,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jdpescritorio = new javax.swing.JDesktopPane();
+        txtFechaHora = new javax.swing.JTextField();
         meMenuBase = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -244,16 +251,24 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jdpescritorio.setBackground(new java.awt.Color(255, 255, 255));
 
+        txtFechaHora.setEditable(false);
+        txtFechaHora.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+
         javax.swing.GroupLayout jdpescritorioLayout = new javax.swing.GroupLayout(jdpescritorio);
         jdpescritorio.setLayout(jdpescritorioLayout);
         jdpescritorioLayout.setHorizontalGroup(
             jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpescritorioLayout.createSequentialGroup()
+                .addGap(0, 562, Short.MAX_VALUE)
+                .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jdpescritorioLayout.setVerticalGroup(
             jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGroup(jdpescritorioLayout.createSequentialGroup()
+                .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 429, Short.MAX_VALUE))
         );
+        jdpescritorio.setLayer(txtFechaHora, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         setJMenuBar(meMenuBase);
 
@@ -374,5 +389,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JDesktopPane jdpescritorio;
     private javax.swing.JMenuBar meMenuBase;
+    private javax.swing.JTextField txtFechaHora;
     // End of variables declaration//GEN-END:variables
 }
