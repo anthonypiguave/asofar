@@ -37,6 +37,7 @@ import ec.com.asofar.dao.*;
 import ec.com.asofar.dto.InPrestacionesPorServicios;
 import ec.com.asofar.dto.PrEmpaque;
 import ec.com.asofar.dto.SeClientes;
+import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.util.List;
@@ -353,4 +354,17 @@ public class ValidarDTO {
         }
         return valor;
         }
+    
+//    public static boolean ValidarSeSucursal(String nombre) {
+//        SeSucursalJpaController control = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
+//        boolean valor = false;
+//        List<SeSucursal> lista = control.findSeSucursalEntities();
+//
+//        for (int i = 0; i < lista.size(); i++) {
+//            if (lista.get(i).getNombreComercial().equals(nombre)) {
+//                valor = true;
+//            }
+//        }
+//        return valor;
+//        }
     }
