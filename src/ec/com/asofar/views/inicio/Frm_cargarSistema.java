@@ -23,12 +23,14 @@ import javax.swing.UIManager;
  * @author admin1
  */
 public class Frm_cargarSistema extends javax.swing.JFrame {
-    Cargar hilo;    
+
+    Cargar hilo;
     Cargar1 hilo1;
     PrSubgruposJpaController ed = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
     PrSubgrupos pr = new PrSubgrupos();
+
     public Frm_cargarSistema() {
-        initComponents();        
+        initComponents();
         setLocationRelativeTo(null);
         carga_pb.setStringPainted(true);
         UIManager.put("nimbusOrange", new Color(38, 139, 210));
@@ -37,7 +39,8 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
         hilo = null;
         imagenes();
     }
-        public void imagenes() {
+
+    public void imagenes() {
         Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/3.png").getImage();
         Icon fondoLogo = new ImageIcon(logof.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
         lbImagen.setIcon(fondoLogo);
@@ -99,13 +102,13 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
 
     private void carga_pbStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_carga_pbStateChanged
         // TODO add your handling code here:
-            if (carga_pb.getValue() == 99) {
+        if (carga_pb.getValue() == 99) {
             if (!EntityManagerUtil.ObtenerEntityManagerConnection()) {
                 JOptionPane.showMessageDialog(this, "LA BASE DE DATOS NO ESTÁ ACTIVA");
             } else {
                 dispose();
-                    Login fl = new Login(new javax.swing.JFrame(),true);
-                    fl.setVisible(true);
+                Login fl = new Login(new javax.swing.JFrame(), true);
+                fl.setVisible(true);
             }
         }
     }//GEN-LAST:event_carga_pbStateChanged
