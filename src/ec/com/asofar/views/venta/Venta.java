@@ -955,7 +955,7 @@ public class Venta extends javax.swing.JInternalFrame {
 
         try {
 
-            String cedula = Clientes.getNumeroIdentificacion().toString();
+            String cedula = Clientes.getNumeroIdentificacion();
             ListCedula = selectCliente.obtenerClienteVenta(cedula);
 
             SeLocalidadCliente localidad = new SeLocalidadCliente();
