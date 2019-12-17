@@ -39,7 +39,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
         imagenes();
     }
         public void imagenes() {
-        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/LogoInicio.png").getImage();
+        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/3.png").getImage();
         Icon fondoLogo = new ImageIcon(logof.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
         lbImagen.setIcon(fondoLogo);
         this.repaint();
