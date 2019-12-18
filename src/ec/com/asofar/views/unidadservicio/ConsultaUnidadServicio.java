@@ -122,7 +122,6 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         JbAgregar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         JbAgregar.setForeground(new java.awt.Color(1, 1, 1));
         JbAgregar.setText("ACTUALIZAR");
-        JbAgregar.setOpaque(true);
         JbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbAgregarActionPerformed(evt);
@@ -134,7 +133,6 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         Jbcancelar.setForeground(new java.awt.Color(1, 1, 1));
         Jbcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         Jbcancelar.setText("SALIR");
-        Jbcancelar.setOpaque(true);
         Jbcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbcancelarActionPerformed(evt);
@@ -172,7 +170,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLabel3.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel3.setBackground(java.awt.Color.red);
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -194,7 +192,6 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
         JbAgregar1.setForeground(new java.awt.Color(1, 1, 1));
         JbAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         JbAgregar1.setText("AGREGAR");
-        JbAgregar1.setOpaque(true);
         JbAgregar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JbAgregar1ActionPerformed(evt);
@@ -215,7 +212,7 @@ public class ConsultaUnidadServicio extends javax.swing.JDialog {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Jbcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)

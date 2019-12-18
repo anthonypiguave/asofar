@@ -74,7 +74,7 @@ public class EditarSubgruposIn extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel1.setBackground(java.awt.Color.red);
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -96,7 +96,6 @@ public class EditarSubgruposIn extends javax.swing.JDialog {
         btncancelar.setForeground(new java.awt.Color(1, 1, 1));
         btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Cancelar_Mesa de trabajo 1.jpg"))); // NOI18N
         btncancelar.setText("CANCELAR");
-        btncancelar.setOpaque(true);
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarActionPerformed(evt);
@@ -123,7 +122,6 @@ public class EditarSubgruposIn extends javax.swing.JDialog {
         btneliminar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btneliminar.setForeground(new java.awt.Color(1, 1, 1));
         btneliminar.setText("ACTIVAR");
-        btneliminar.setOpaque(true);
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneliminarActionPerformed(evt);

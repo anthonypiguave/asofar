@@ -229,7 +229,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         btnSalir2.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir2.setText("SALIR");
-        btnSalir2.setOpaque(true);
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalir2ActionPerformed(evt);
@@ -287,7 +286,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel4.setBackground(java.awt.Color.red);
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -308,7 +307,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setText("IMPRIMIR");
-        jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -319,7 +317,6 @@ public class ReporteriaCompras extends javax.swing.JDialog {
         BtnBuscar1.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         BtnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/buscar_Mesa de trabajo 1.png"))); // NOI18N
         BtnBuscar1.setText("BUSCAR");
-        BtnBuscar1.setOpaque(true);
         BtnBuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBuscar1ActionPerformed(evt);
