@@ -367,6 +367,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     System.out.println("ini  " + Double.parseDouble(montoInicial.getText()));
                     System.out.println("factura " + factura);
                     System.out.println("cierre " + cierre);
+                    Double anuladas = ValidacionCaja.facturasAnuladas(vdc);
                     if (cierre < total) {
                         resta = cierre - total;
                         Cadena = "PERDIDA : " + resta;
@@ -380,6 +381,8 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     if (cierre.equals(total)) {
                         Cadena = "Cierre Correcto!";
                         System.out.println(" " + Cadena + " cierre " + cierre + "total " + total);
+                    }if(anuladas.equals(null)){
+                        anuladas =0.0;
                     }
                     /*   */
                     cajadet.edit(vdc);
@@ -395,6 +398,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     printerService.printString("EPSON-TM-T20II", "      HORA DE INICIO: " + horaInicio.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "      MONTO DE CIERRE: " + montocierre.getText() + "\n");
                     printerService.printString("EPSON-TM-T20II", "      ESTADO: " + Cadena + "\n");
+                    printerService.printString("EPSON-TM-T20II", "      ANULACION: " + anuladas + "\n");
                     printerService.printString("EPSON-TM-T20II", "--------------------------------------\n");
                     printerService.printString("EPSON-TM-T20II", "\n");
                     printerService.printString("EPSON-TM-T20II", "\n");
