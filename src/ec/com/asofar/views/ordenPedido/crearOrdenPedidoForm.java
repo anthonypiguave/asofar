@@ -75,7 +75,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
 //        txtCod.setText(String.format("%06d", ordenExt.obtenerNumeroOrden()));
         CargarProveedor();
-        CargarDocumento();
+//        CargarDocumento();
 
         Timer tiempo = new Timer(100, new crearOrdenPedidoForm.horas());
         tiempo.start();
@@ -88,7 +88,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         txtFecha.setText(FechaActual());
         CargarProveedor();
-        CargarDocumento();
+//        CargarDocumento();
 
         seUsuario = us;
         seEmpresa = em;
@@ -125,10 +125,10 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     }
 
     public void CargarDocumento() {
-        List<InTipoDocumento> listcaja = movcontroller.findInTipoDocumentoEntities();
-        for (int i = 0; i < listcaja.size(); i++) {
-            cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
-        }
+//        List<InTipoDocumento> listcaja = movcontroller.findInTipoDocumentoEntities();
+//        for (int i = 0; i < listcaja.size(); i++) {
+//            cbx_documento.addItem(listcaja.get(i).getNombreDocumento());
+//        }
     }
 
     @SuppressWarnings("unchecked")
@@ -142,8 +142,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         cbxProveedor = new javax.swing.JComboBox<>();
         txtFecha = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        cbx_documento = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -195,12 +193,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel8.setText("FECHA EMISION:");
 
-        jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel9.setText("DOCUMENTO:");
-
-        cbx_documento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        cbx_documento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONE--" }));
-
         jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel12.setText("CODIGO DE ORDEN:");
 
@@ -245,9 +237,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(46, 46, 46))
                                 .addComponent(jLabel12))
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -255,9 +245,8 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                                 .addGap(36, 36, 36)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbxProveedor, 0, 169, Short.MAX_VALUE)
-                                    .addComponent(cbx_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +260,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,15 +277,11 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                     .addComponent(cbxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -353,7 +338,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,16 +352,16 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(192, 192, 192)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 139, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,7 +375,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -481,9 +466,9 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "LLENE PROVEEDOR!");
             } else {
 
-                if (cbx_documento.getSelectedItem().toString().equals("--SELECCIONE--")) {
-                    JOptionPane.showMessageDialog(null, "LLENE DOCUMENTO!");
-                } else {
+//                if (cbx_documento.getSelectedItem().toString().equals("--SELECCIONE--")) {
+//                    JOptionPane.showMessageDialog(null, "LLENE DOCUMENTO!");
+//                } else {
                     if (txtObservacion.getText().equals("")) {
                         JOptionPane.showMessageDialog(null, "LLENE OBSERVACIÒN!");
                     } else {
@@ -493,7 +478,7 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                         } else {
 
                             CoProveedores coOrdenp = ObtenerDTO.ObtenerProveedorPedido(cbxProveedor.getSelectedItem().toString());
-                            InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido(cbx_documento.getSelectedItem().toString());
+                            InTipoDocumento coOrdend = ObtenerDTO.ObtenerDocumentoPedido("COMPRAS");
 
                             cabOrden.setIdProveedor(BigInteger.valueOf(coOrdenp.getIdProveedor()));
                             cabOrden.setIdDocumento(BigInteger.valueOf(coOrdend.getIdTipoDocumento()));
@@ -531,7 +516,8 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
                             } catch (Exception ex) {
                                 Logger.getLogger(crearOrdenPedidoForm.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        }
+//                        }
+//                        }
                     }
 
                 }
@@ -640,6 +626,8 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -658,7 +646,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxProveedor;
-    private javax.swing.JComboBox<String> cbx_documento;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -668,7 +655,6 @@ public class crearOrdenPedidoForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
