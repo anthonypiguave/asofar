@@ -604,7 +604,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLabel7.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel7.setBackground(java.awt.Color.red);
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(254, 254, 254));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

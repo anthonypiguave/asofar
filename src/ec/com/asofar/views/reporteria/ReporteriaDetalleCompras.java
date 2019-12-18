@@ -430,7 +430,6 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
         btnSalir2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnSalir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir2.setText("SALIR");
-        btnSalir2.setOpaque(true);
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalir2ActionPerformed(evt);
@@ -439,7 +438,6 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
 
         btnReporte.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnReporte.setText("IMPRIMIR");
-        btnReporte.setOpaque(true);
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteActionPerformed(evt);
@@ -477,7 +475,7 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLabel7.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel7.setBackground(java.awt.Color.red);
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(254, 254, 254));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

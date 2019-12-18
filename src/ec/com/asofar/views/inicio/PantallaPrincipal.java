@@ -92,7 +92,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //            System.exit(0);
 //        });
 
-        jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height - 75), BorderLayout.CENTER);
+        jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width - 0, Toolkit.getDefaultToolkit().getScreenSize().height - 30), BorderLayout.CENTER);
     }
 
     public static String FechaActual() {
@@ -260,21 +260,22 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         txtFechaHora.setEditable(false);
         txtFechaHora.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
 
+        jdpescritorio.setLayer(txtFechaHora, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jdpescritorioLayout = new javax.swing.GroupLayout(jdpescritorio);
         jdpescritorio.setLayout(jdpescritorioLayout);
         jdpescritorioLayout.setHorizontalGroup(
             jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpescritorioLayout.createSequentialGroup()
-                .addGap(0, 562, Short.MAX_VALUE)
-                .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 525, Short.MAX_VALUE)
+                .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jdpescritorioLayout.setVerticalGroup(
             jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdpescritorioLayout.createSequentialGroup()
-                .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 429, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpescritorioLayout.createSequentialGroup()
+                .addGap(0, 415, Short.MAX_VALUE)
+                .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jdpescritorio.setLayer(txtFechaHora, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         setJMenuBar(meMenuBase);
 

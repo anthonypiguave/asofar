@@ -125,7 +125,7 @@ public class tipo_bodega_editar extends javax.swing.JDialog {
 
         cbx_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        jLabel1.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel1.setBackground(java.awt.Color.red);
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

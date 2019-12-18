@@ -79,7 +79,6 @@ public class ListaSucursales extends javax.swing.JDialog {
         btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         btnSalir.setText("SALIR");
-        btnSalir.setOpaque(true);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -125,14 +124,13 @@ public class ListaSucursales extends javax.swing.JDialog {
         jButton2.setForeground(new java.awt.Color(1, 1, 1));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         jButton2.setText("NUEVO");
-        jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        SUCURSAL.setBackground(new java.awt.Color(6, 162, 213));
+        SUCURSAL.setBackground(java.awt.Color.red);
         SUCURSAL.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         SUCURSAL.setForeground(new java.awt.Color(254, 254, 254));
         SUCURSAL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

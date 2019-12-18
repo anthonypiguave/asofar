@@ -244,7 +244,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         btn_ingresar_localidad.setForeground(new java.awt.Color(1, 1, 1));
         btn_ingresar_localidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_localidad.setText("INGRESAR");
-        btn_ingresar_localidad.setOpaque(true);
         btn_ingresar_localidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ingresar_localidadActionPerformed(evt);
@@ -255,7 +254,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         btn_editar.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_editar.setForeground(new java.awt.Color(1, 1, 1));
         btn_editar.setText("EDITAR");
-        btn_editar.setOpaque(true);
         btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editarActionPerformed(evt);
@@ -267,7 +265,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         btn_eliminar_localidad.setForeground(new java.awt.Color(1, 1, 1));
         btn_eliminar_localidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         btn_eliminar_localidad.setText("ELIMINAR");
-        btn_eliminar_localidad.setOpaque(true);
         btn_eliminar_localidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_eliminar_localidadActionPerformed(evt);
@@ -334,7 +331,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         btn_ingresar_contacto.setForeground(new java.awt.Color(1, 1, 1));
         btn_ingresar_contacto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/nuevo_Mesa de trabajo 1.png"))); // NOI18N
         btn_ingresar_contacto.setText("INGRESAR");
-        btn_ingresar_contacto.setOpaque(true);
         btn_ingresar_contacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ingresar_contactoActionPerformed(evt);
@@ -344,7 +340,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         jButton5.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton5.setForeground(new java.awt.Color(1, 1, 1));
         jButton5.setText("EDITAR");
-        jButton5.setOpaque(true);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -355,7 +350,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         jButton7.setForeground(new java.awt.Color(1, 1, 1));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/Eliminar_Mesa de trabajo 1.png"))); // NOI18N
         jButton7.setText("ELIMINAR");
-        jButton7.setOpaque(true);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -391,7 +385,7 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel3.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel3.setBackground(java.awt.Color.red);
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -431,7 +425,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/salir_Mesa de trabajo 10.jpg"))); // NOI18N
         jButton1.setText("SALIR");
-        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -441,7 +434,6 @@ public class ConsultaClienteVenta extends javax.swing.JDialog {
         btnimprimir.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btnimprimir.setForeground(new java.awt.Color(1, 1, 1));
         btnimprimir.setText("IMPRIMIR");
-        btnimprimir.setOpaque(true);
         btnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnimprimirActionPerformed(evt);

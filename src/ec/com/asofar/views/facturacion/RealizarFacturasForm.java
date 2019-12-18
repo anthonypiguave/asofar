@@ -91,7 +91,7 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
 
         jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel2.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel2.setBackground(java.awt.Color.red);
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -273,7 +273,6 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         BtnAddIten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
         BtnAddIten.setText("ADICIONAR ITEM");
         BtnAddIten.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 0), 1, true));
-        BtnAddIten.setOpaque(true);
         BtnAddIten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAddItenActionPerformed(evt);
@@ -300,7 +299,6 @@ public class RealizarFacturasForm extends javax.swing.JDialog {
         jButton2.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         jButton2.setText("EDITAR");
         jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 0), 1, true));
-        jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

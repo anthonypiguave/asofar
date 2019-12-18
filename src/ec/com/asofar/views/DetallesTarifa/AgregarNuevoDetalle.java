@@ -258,7 +258,7 @@ public class AgregarNuevoDetalle extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel2.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel2.setBackground(java.awt.Color.red);
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

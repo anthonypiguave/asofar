@@ -91,7 +91,7 @@ public class contacto_agregar extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel3.setBackground(java.awt.Color.red);
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

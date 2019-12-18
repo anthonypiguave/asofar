@@ -675,7 +675,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
 
         jTabbedPane8.addTab("Datos de inventario", jPanel4);
 
-        jLabel17.setBackground(new java.awt.Color(6, 162, 213));
+        jLabel17.setBackground(java.awt.Color.red);
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(254, 254, 254));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
