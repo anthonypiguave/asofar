@@ -112,7 +112,7 @@ public class ValidacionCaja {
 //            String detIdCaja = detallecaja.getVeCaja().getIdCaja().toString();
 //            if (idCaja.equals(detIdCaja)) {
                 for (int j = 0; j < listafactura.size(); j++) {
-                    if (listafactura.get(j).getIdUsuario()==detallecaja.getIdUsuario()) {
+                    if (listafactura.get(j).getIdUsuario()==detallecaja.getIdUsuario()&&listafactura.get(j).getEstado()=="A") {
                         System.out.println("Lista "+listafactura.get(j).getTotalFacturado());
                         factura = factura +listafactura.get(j).getTotalFacturado();
                         total = factura + detallecaja.getDineroInicio();
