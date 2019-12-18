@@ -117,8 +117,8 @@ public class Cierre_Caja extends javax.swing.JDialog {
                 return NO_SUCH_PAGE;
             }
             /*
-	         * User (0,0) is typically outside the imageable area, so we must
-	         * translate by the X and Y values in the PageFormat to avoid clipping
+             * User (0,0) is typically outside the imageable area, so we must
+             * translate by the X and Y values in the PageFormat to avoid clipping
              */
             Graphics2D g2d = (Graphics2D) g;
             g2d.translate(pf.getImageableX(), pf.getImageableY());
@@ -351,8 +351,8 @@ public class Cierre_Caja extends javax.swing.JDialog {
         if (" ".equals(montocierre.getText())) {
             JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
         } else {
-            try{
-                
+            try {
+
                 vdc.setDineroCierre(Double.parseDouble(montocierre.getText()));
                 vdc.setFechaCierre(d_fecha);
                 vdc.setHoraCierre(d_hora);
@@ -361,17 +361,16 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     Double factura = ValidacionCaja.facturadoRetorno(vdc);
                     Double cierre = Double.parseDouble(montocierre.getText());
                     Double resta = 0.0;
-                    Double resta1 = 0.0;                    
+                    Double resta1 = 0.0;
                     Double total = factura + Double.parseDouble(montoInicial.getText());
-                    System.out.println("total "+total);
-                    System.out.println("ini  "+Double.parseDouble(montoInicial.getText()));
-                    System.out.println("factura "+factura);
-                    System.out.println("cierre "+cierre);
-                    
+                    System.out.println("total " + total);
+                    System.out.println("ini  " + Double.parseDouble(montoInicial.getText()));
+                    System.out.println("factura " + factura);
+                    System.out.println("cierre " + cierre);
                     if (cierre < total) {
                         resta = cierre - total;
-                        Cadena = "PERDIDA : "+resta;
-                        System.out.println(" "+Cadena);                        
+                        Cadena = "PERDIDA : " + resta;
+                        System.out.println(" " + Cadena);
                     }
                     if (cierre > total) {
                         resta = cierre - total;
@@ -405,18 +404,16 @@ public class Cierre_Caja extends javax.swing.JDialog {
                     printerService.printString("EPSON-TM-T20II", "\n");
                     printerService.printString("EPSON-TM-T20II", "\n");
                     printerService.printString("EPSON-TM-T20II", "\n");
-                    
+
 //                    byte[] cutP = new byte[]{0x1d, 'V', 1};
 //                    printerService.printBytes("EPSON-TM-T20II", cutP);
-                    
-                    
                 }
             } catch (Exception ex) {
                 Logger.getLogger(Cierre_Caja.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
+
         }
-        
+
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
