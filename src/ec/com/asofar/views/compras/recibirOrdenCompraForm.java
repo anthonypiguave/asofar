@@ -170,31 +170,31 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     }
     
     public void CargarMovimiento(InMovimientos obj) {
-        List<InTipoMovimiento> listcaja = movimientoController.findInTipoMovimientoEntities();
-        for (int i = 0; i < listcaja.size(); i++) {
-            
-            if (listcaja.get(i).getIdTipoMovimiento() != null) {
-                if (listcaja.get(i).getIdTipoMovimiento() == obj.getInTipoMovimiento().getIdTipoMovimiento()) {
-                    TxtMovimiento.setText(listcaja.get(i).getNombreMovimiento());
-                    
-                }
-            }
-            
-        }
+//        List<InTipoMovimiento> listcaja = movimientoController.findInTipoMovimientoEntities();
+//        for (int i = 0; i < listcaja.size(); i++) {
+//            
+//            if (listcaja.get(i).getIdTipoMovimiento() != null) {
+//                if (listcaja.get(i).getIdTipoMovimiento() == obj.getInTipoMovimiento().getIdTipoMovimiento()) {
+//                    TxtMovimiento.setText(listcaja.get(i).getNombreMovimiento());
+//                    
+//                }
+//            }
+//            
+//        }
     }
     
     public void CargarMotivos(InMovimientos obj) {
-        List<InMotivos> listcaja = motivoController.findInMotivosEntities();
-        for (int i = 0; i < listcaja.size(); i++) {
-            
-            if (listcaja.get(i).getIdMotivo() != null) {
-                if (listcaja.get(i).getIdMotivo() == obj.getInMotivos().getIdMotivo()) {
-                    TxtMotivo.setText(listcaja.get(i).getNombre());
-                    
-                }
-            }
-            
-        }
+//        List<InMotivos> listcaja = motivoController.findInMotivosEntities();
+//        for (int i = 0; i < listcaja.size(); i++) {
+//            
+//            if (listcaja.get(i).getIdMotivo() != null) {
+//                if (listcaja.get(i).getIdMotivo() == obj.getInMotivos().getIdMotivo()) {
+//                    TxtMotivo.setText(listcaja.get(i).getNombre());
+//                    
+//                }
+//            }
+//            
+//        }
     }
     
     public void CargarFormulario() {
@@ -280,12 +280,8 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         TxtFechaRecibo = new javax.swing.JTextField();
         TxtDocumento = new javax.swing.JTextField();
-        TxtMovimiento = new javax.swing.JTextField();
-        TxtMotivo = new javax.swing.JTextField();
         TxtProveedor = new javax.swing.JTextField();
         BtnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -355,12 +351,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel11.setText("FECHA DE RECIBO:");
 
-        jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel18.setText("MOTIVO:");
-
-        jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel19.setText("MOVIMIENTO:");
-
         TxtFechaRecibo.setEditable(false);
         TxtFechaRecibo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         TxtFechaRecibo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -368,14 +358,6 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         TxtDocumento.setEditable(false);
         TxtDocumento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         TxtDocumento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        TxtMovimiento.setEditable(false);
-        TxtMovimiento.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        TxtMovimiento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        TxtMotivo.setEditable(false);
-        TxtMotivo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        TxtMotivo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         TxtProveedor.setEditable(false);
         TxtProveedor.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -393,20 +375,17 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(46, 46, 46))
+                            .addGap(54, 54, 54))
                         .addComponent(jLabel12))
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(8, 8, 8)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtMovimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtMotivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TxtDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -433,34 +412,25 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TxtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TxtFechaRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -562,13 +532,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -920,6 +888,70 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -941,16 +973,12 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JTextField TxtDocumento;
     private javax.swing.JTextField TxtFechaRecibo;
-    private javax.swing.JTextField TxtMotivo;
-    private javax.swing.JTextField TxtMovimiento;
     private javax.swing.JTextField TxtProveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
