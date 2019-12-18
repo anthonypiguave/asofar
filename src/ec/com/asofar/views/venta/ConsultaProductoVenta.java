@@ -72,6 +72,8 @@ public class ConsultaProductoVenta extends javax.swing.JDialog {
     public void Prueba() {
         ListProdVent = selectProdVent.listarProductoVenta();
         for (int i = 0; i < ListProdVent.size(); i++) {
+            System.out.println(""+ListProdVent.get(i).getId_prestacion()+
+                    " pro "+listaProVent.get(i).getId_producto());
 //            System.out.println("prueba " + ListProdVent.get(i).getId_kardex());
 //            System.out.println(" " + ListProdVent.get(i).getSaldo_actual());
 //            System.out.println(" " + ListProdVent.get(i).getAplica_iva());

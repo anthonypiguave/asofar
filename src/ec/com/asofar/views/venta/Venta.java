@@ -1415,21 +1415,36 @@ public class Venta extends javax.swing.JInternalFrame {
                             detMovimiento.setInMovimientos(pkMovimiento);
                             detMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK()); // inicializar pk
                             detMovimiento.getInDetalleMovimientoPK().setLineaDetalle(listaDetFactura.get(i).getVeFacturaDetallePK().getLineaDetalle());
+                            try {
 
-                            Long id_pro = IdProductoDsdObPres(listaDetFactura);
-                            Long id_Bod = IdBodegD(id_pro);
+                                Long id_pro = IdProductoDsdObPres(listaDetFactura);
+                                Long id_Bod = IdBodegD(id_pro);
 
-                            detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
-                            detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
-                            detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
-                            detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
-                            detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
-                            detMovimiento.setEstado("A");
+                                detMovimiento.setIdBodegaOrigen(BigInteger.valueOf(id_Bod));
+//                            if (id_pro.equals(null)) {
+//                                detMovimiento.getInDetalleMovimientoPK().setIdProducto(Long.valueOf(" "));
+//                                detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
+//                                detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
+//                                detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
+//                                detMovimiento.setEstado("A");
+//
+//                                detMovimiento.setUsuarioCreacion(usu.getUsuario());
+//                                detMovimiento.setFechaCreacion(d);
+//                                detMovController.create(detMovimiento);
+//                            } else {
+                                detMovimiento.getInDetalleMovimientoPK().setIdProducto(id_pro);
+                                detMovimiento.setDescripcion(listaDetFactura.get(i).getDescripcion());
+                                detMovimiento.setCantidad(listaDetFactura.get(i).getCantidad());
+                                detMovimiento.setPrecioUnitario(BigDecimal.valueOf(listaDetFactura.get(i).getPrecioUnitarioVenta()));
+                                detMovimiento.setEstado("A");
 
-                            detMovimiento.setUsuarioCreacion(usu.getUsuario());
-                            detMovimiento.setFechaCreacion(d);
-                            detMovController.create(detMovimiento);
+                                detMovimiento.setUsuarioCreacion(usu.getUsuario());
+                                detMovimiento.setFechaCreacion(d);
+                                detMovController.create(detMovimiento);
+//                            }/*id producto problema imprimir*/
 
+                            } catch (Exception e) {
+                            }
                         }
                         java.sql.Date fechact = new java.sql.Date(d.getTime());
                         String empresa = emp.getNombreComercial();
@@ -1459,9 +1474,17 @@ public class Venta extends javax.swing.JInternalFrame {
                             printerService.printString("EPSON-TM-T20II", "  TELEFONO DE CLTE: " + txtTelefono.getText() + "\n");
                             printerService.printString("EPSON-TM-T20II", " DIRECCION DE CLTE: " + txtDireccion.getText() + "\n");
                             printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
-                            printerService.printString("EPSON-TM-T20II", "Producto             Cant Valor Subt Total\n");
+                            printerService.printString("EPSON-TM-T20II", "Producto             Cant Precio SubTotal\n");
                             for (int i = 0; i < tba_detalle.getRowCount(); i++) {
-                                printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString().substring(0, 22).replaceAll("\n", "") + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                                if (!"0,00".equals(tba_detalle.getValueAt(i, 6).toString())) {
+                                    printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString() + "\n");
+//                                printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString() + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                                    printerService.printString("EPSON-TM-T20II", "                       " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString()+"   *" + "\n");
+                                } else {
+                                    printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString() + "\n");
+//                                printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString() + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                                    printerService.printString("EPSON-TM-T20II", "                       " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
+                                }
                             }
                             printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                             printerService.printString("EPSON-TM-T20II", "                     SUBTOTAL: " + txtSubtotal.getText() + "\n");
@@ -1654,7 +1677,6 @@ public class Venta extends javax.swing.JInternalFrame {
             for (int j = 0; j < listaDetFactura.size(); j++) {
                 if (listaPresta.get(i).getIdPrestacion().equals(listaDetFactura.get(j).getVeFacturaDetallePK().getIdPrestaciones())) {
                     id_producto = Long.parseLong(listaPresta.get(i).getIdPoducto().toString());
-
                 }
             }
         }
