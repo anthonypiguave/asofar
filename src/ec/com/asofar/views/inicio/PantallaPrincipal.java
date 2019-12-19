@@ -114,7 +114,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         item.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
                         item.setPreferredSize(new java.awt.Dimension(90, 65));
                         item.setMinimumSize(new Dimension(20,20));
-                        item.setMaximumSize(new Dimension(80,60));
+                        item.setMaximumSize(new Dimension(90,70));
                         item.setPreferredSize(new Dimension(120,30));
                         item.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
                         item.addActionListener(new ActionListener() {
@@ -136,6 +136,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
                         menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                        menu.setMinimumSize(new Dimension(20,20));
+                        menu.setMaximumSize(new Dimension(90,70));
+                        //menu.setPreferredSize(new Dimension(120,30));
                         menu.setPreferredSize(new java.awt.Dimension(90, 65));
                         menu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
@@ -256,6 +259,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextPane1);
 
         jdpescritorio.setBackground(new java.awt.Color(255, 255, 255));
+        jdpescritorio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         txtFechaHora.setEditable(false);
         txtFechaHora.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N

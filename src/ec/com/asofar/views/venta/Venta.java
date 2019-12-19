@@ -754,6 +754,7 @@ public class Venta extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tba_detalle);
 
+        btn_agregar_prod.setBackground(new java.awt.Color(255, 255, 255));
         btn_agregar_prod.setFont(new java.awt.Font("Ubuntu", 1, 10)); // NOI18N
         btn_agregar_prod.setForeground(new java.awt.Color(1, 1, 1));
         btn_agregar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/agregar_Mesa de trabajo 1.png"))); // NOI18N
