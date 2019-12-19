@@ -116,6 +116,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         item.setMinimumSize(new Dimension(20,20));
                         item.setMaximumSize(new Dimension(90,70));
                         item.setPreferredSize(new Dimension(120,30));
+                      /*  item.setOpaque(true);
+                        item.setBackground(Color.white);*/
                         item.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
                         item.addActionListener(new ActionListener() {
                             @Override
@@ -136,6 +138,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
                         menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                        /*menu.setOpaque(true);
+                        menu.setBackground(Color.white);*/
                         menu.setMinimumSize(new Dimension(20,20));
                         menu.setMaximumSize(new Dimension(90,70));
                         //menu.setPreferredSize(new Dimension(120,30));
