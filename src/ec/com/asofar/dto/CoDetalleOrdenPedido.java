@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 @Entity
 @Table(name = "co_detalle_orden_pedido")
@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdSurcusal", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.idSurcusal = :idSurcusal")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.coDetalleOrdenPedidoPK.idProducto = :idProducto")
+    , @NamedQuery(name = "CoDetalleOrdenPedido.findByFormaPago", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.formaPago = :formaPago")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByCantidadSolicitada", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.cantidadSolicitada = :cantidadSolicitada")
     , @NamedQuery(name = "CoDetalleOrdenPedido.findByEstado", query = "SELECT c FROM CoDetalleOrdenPedido c WHERE c.estado = :estado")
@@ -48,6 +49,8 @@ public class CoDetalleOrdenPedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoDetalleOrdenPedidoPK coDetalleOrdenPedidoPK;
+    @Column(name = "forma_pago")
+    private String formaPago;
     @Column(name = "descripcion")
     private String descripcion;
     @Column(name = "cantidad_solicitada")
@@ -88,6 +91,14 @@ public class CoDetalleOrdenPedido implements Serializable {
 
     public void setCoDetalleOrdenPedidoPK(CoDetalleOrdenPedidoPK coDetalleOrdenPedidoPK) {
         this.coDetalleOrdenPedidoPK = coDetalleOrdenPedidoPK;
+    }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
     }
 
     public String getDescripcion() {

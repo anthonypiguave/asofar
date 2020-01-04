@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 @Entity
 @Table(name = "co_orden_compras")
@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoOrdenCompras.findByIdProveedor", query = "SELECT c FROM CoOrdenCompras c WHERE c.idProveedor = :idProveedor")
     , @NamedQuery(name = "CoOrdenCompras.findByIdTipoDocumento", query = "SELECT c FROM CoOrdenCompras c WHERE c.idTipoDocumento = :idTipoDocumento")
     , @NamedQuery(name = "CoOrdenCompras.findByObservacion", query = "SELECT c FROM CoOrdenCompras c WHERE c.observacion = :observacion")
+    , @NamedQuery(name = "CoOrdenCompras.findByFormaPago", query = "SELECT c FROM CoOrdenCompras c WHERE c.formaPago = :formaPago")
     , @NamedQuery(name = "CoOrdenCompras.findByFechaEntrega", query = "SELECT c FROM CoOrdenCompras c WHERE c.fechaEntrega = :fechaEntrega")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalSubtotal", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalSubtotal = :totalSubtotal")
     , @NamedQuery(name = "CoOrdenCompras.findByTotalDescuento", query = "SELECT c FROM CoOrdenCompras c WHERE c.totalDescuento = :totalDescuento")
@@ -64,6 +65,8 @@ public class CoOrdenCompras implements Serializable {
     private BigInteger idTipoDocumento;
     @Column(name = "observacion")
     private String observacion;
+    @Column(name = "forma_pago")
+    private String formaPago;
     @Column(name = "fecha_entrega")
     @Temporal(TemporalType.DATE)
     private Date fechaEntrega;
@@ -142,6 +145,14 @@ public class CoOrdenCompras implements Serializable {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
     }
 
     public Date getFechaEntrega() {

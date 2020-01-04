@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 public class CoDetallesTarifaJpaController implements Serializable {
 
@@ -39,9 +39,9 @@ public class CoDetallesTarifaJpaController implements Serializable {
         if (coDetallesTarifa.getCoDetallesTarifaPK() == null) {
             coDetallesTarifa.setCoDetallesTarifaPK(new CoDetallesTarifaPK());
         }
-        coDetallesTarifa.getCoDetallesTarifaPK().setIdSucursal(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdSurcusal());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdEmpresa(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdEmpresa());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdPrestacion(coDetallesTarifa.getInPrestacionesPorServicios().getInPrestacionesPorServiciosPK().getIdPrestacion());
+        coDetallesTarifa.getCoDetallesTarifaPK().setIdSucursal(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdSurcusal());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdTarifa(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdTarifario());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdUnidadServicio(coDetallesTarifa.getInPrestacionesPorServicios().getInPrestacionesPorServiciosPK().getIdUnidadServicio());
         EntityManager em = null;
@@ -81,9 +81,9 @@ public class CoDetallesTarifaJpaController implements Serializable {
     }
 
     public void edit(CoDetallesTarifa coDetallesTarifa) throws NonexistentEntityException, Exception {
-        coDetallesTarifa.getCoDetallesTarifaPK().setIdSucursal(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdSurcusal());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdEmpresa(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdEmpresa());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdPrestacion(coDetallesTarifa.getInPrestacionesPorServicios().getInPrestacionesPorServiciosPK().getIdPrestacion());
+        coDetallesTarifa.getCoDetallesTarifaPK().setIdSucursal(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdSurcusal());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdTarifa(coDetallesTarifa.getPrTarifario().getPrTarifarioPK().getIdTarifario());
         coDetallesTarifa.getCoDetallesTarifaPK().setIdUnidadServicio(coDetallesTarifa.getInPrestacionesPorServicios().getInPrestacionesPorServiciosPK().getIdUnidadServicio());
         EntityManager em = null;

@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 @Entity
 @Table(name = "pr_tipo_medidas")

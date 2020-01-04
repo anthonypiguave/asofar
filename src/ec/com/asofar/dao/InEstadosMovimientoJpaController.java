@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 public class InEstadosMovimientoJpaController implements Serializable {
 

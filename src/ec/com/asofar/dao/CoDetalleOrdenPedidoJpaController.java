@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 public class CoDetalleOrdenPedidoJpaController implements Serializable {
 
@@ -38,8 +38,8 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
         if (coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK() == null) {
             coDetalleOrdenPedido.setCoDetalleOrdenPedidoPK(new CoDetalleOrdenPedidoPK());
         }
-        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdSurcusal(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdSucursal());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdOrdenPedido(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdOrdenPedido());
+        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdSurcusal(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdSucursal());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdEmpresa(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdEmpresa());
         EntityManager em = null;
         try {
@@ -69,8 +69,8 @@ public class CoDetalleOrdenPedidoJpaController implements Serializable {
     }
 
     public void edit(CoDetalleOrdenPedido coDetalleOrdenPedido) throws NonexistentEntityException, Exception {
-        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdSurcusal(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdSucursal());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdOrdenPedido(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdOrdenPedido());
+        coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdSurcusal(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdSucursal());
         coDetalleOrdenPedido.getCoDetalleOrdenPedidoPK().setIdEmpresa(coDetalleOrdenPedido.getCoOrdenPedido().getCoOrdenPedidoPK().getIdEmpresa());
         EntityManager em = null;
         try {

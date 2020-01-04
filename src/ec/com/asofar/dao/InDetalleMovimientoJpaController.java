@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 public class InDetalleMovimientoJpaController implements Serializable {
 
@@ -39,11 +39,11 @@ public class InDetalleMovimientoJpaController implements Serializable {
             inDetalleMovimiento.setInDetalleMovimientoPK(new InDetalleMovimientoPK());
         }
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdSucursal(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdSucursal());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoDocumento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoDocumento());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMovimientos(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMovimientos());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoMovimiento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoMovimiento());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdEmpresa(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdEmpresa());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMovimientos(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMovimientos());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoDocumento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoDocumento());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoMovimiento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoMovimiento());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -73,11 +73,11 @@ public class InDetalleMovimientoJpaController implements Serializable {
 
     public void edit(InDetalleMovimiento inDetalleMovimiento) throws NonexistentEntityException, Exception {
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdSucursal(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdSucursal());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoDocumento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoDocumento());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMovimientos(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMovimientos());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoMovimiento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoMovimiento());
-        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
         inDetalleMovimiento.getInDetalleMovimientoPK().setIdEmpresa(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdEmpresa());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMovimientos(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMovimientos());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoDocumento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoDocumento());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdMotivo(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdMotivo());
+        inDetalleMovimiento.getInDetalleMovimientoPK().setIdTipoMovimiento(inDetalleMovimiento.getInMovimientos().getInMovimientosPK().getIdTipoMovimiento());
         EntityManager em = null;
         try {
             em = getEntityManager();

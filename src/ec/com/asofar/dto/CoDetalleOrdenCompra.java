@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 @Entity
 @Table(name = "co_detalle_orden_compra")
@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByLineaDetalle", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.lineaDetalle = :lineaDetalle")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByIdProducto", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.coDetalleOrdenCompraPK.idProducto = :idProducto")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByDescripcion", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.descripcion = :descripcion")
+    , @NamedQuery(name = "CoDetalleOrdenCompra.findByFormaPago", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.formaPago = :formaPago")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByPrecioUnitario", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.precioUnitario = :precioUnitario")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findByCantidadRecibida", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.cantidadRecibida = :cantidadRecibida")
     , @NamedQuery(name = "CoDetalleOrdenCompra.findBySubtotal", query = "SELECT c FROM CoDetalleOrdenCompra c WHERE c.subtotal = :subtotal")
@@ -59,6 +60,8 @@ public class CoDetalleOrdenCompra implements Serializable {
     protected CoDetalleOrdenCompraPK coDetalleOrdenCompraPK;
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "forma_pago")
+    private String formaPago;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "precio_unitario")
     private BigDecimal precioUnitario;
@@ -123,6 +126,14 @@ public class CoDetalleOrdenCompra implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
     }
 
     public BigDecimal getPrecioUnitario() {

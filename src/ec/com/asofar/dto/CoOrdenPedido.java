@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author admini
+ * @author Usuario
  */
 @Entity
 @Table(name = "co_orden_pedido")
@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CoOrdenPedido.findByEstado", query = "SELECT c FROM CoOrdenPedido c WHERE c.estado = :estado")
     , @NamedQuery(name = "CoOrdenPedido.findByIdDocumento", query = "SELECT c FROM CoOrdenPedido c WHERE c.idDocumento = :idDocumento")
     , @NamedQuery(name = "CoOrdenPedido.findByObservacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.observacion = :observacion")
+    , @NamedQuery(name = "CoOrdenPedido.findByFormaPago", query = "SELECT c FROM CoOrdenPedido c WHERE c.formaPago = :formaPago")
     , @NamedQuery(name = "CoOrdenPedido.findByFechaEmision", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaEmision = :fechaEmision")
     , @NamedQuery(name = "CoOrdenPedido.findByUsuarioCreacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "CoOrdenPedido.findByFechaCreacion", query = "SELECT c FROM CoOrdenPedido c WHERE c.fechaCreacion = :fechaCreacion")
@@ -59,6 +60,8 @@ public class CoOrdenPedido implements Serializable {
     private BigInteger idDocumento;
     @Column(name = "observacion")
     private String observacion;
+    @Column(name = "forma_pago")
+    private String formaPago;
     @Column(name = "fecha_emision")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEmision;
@@ -129,6 +132,14 @@ public class CoOrdenPedido implements Serializable {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
     }
 
     public Date getFechaEmision() {
