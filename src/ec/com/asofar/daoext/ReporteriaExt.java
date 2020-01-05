@@ -256,40 +256,41 @@ public class ReporteriaExt {
 
         List<ReporteFacturaDTO> listaCompra = null;
         Query q = em.createNativeQuery("SELECT  DISTINCT\n"
-                + "         c.id_factura,\n"
-                + "         c.id_empresa,\n"
-                + "         c.id_sucursal,\n"
-                + "         c.id_caja,\n"
-                + "         c.id_usuario,\n"
-                + "         c.id_cliente,\n"
-                + "         DATE_FORMAT(c.fecha_facturacion,'%Y-%m-%d') AS fecha_facturacion,\n"
-                + "         IFNULL(c.subtotal,0) AS total_subtotal,\n"
-                + "         IFNULL(c.total_ice,0) AS total_ice,\n"
-                + "         IFNULL(c.total_descuento,0) AS total_descuento,\n"
-                + "         IFNULL(c.total_base_iva,0) AS base_iva,\n"
-                + "         IFNULL(c.total_base_no_iva,0) AS base_no_iva,\n"
-                + "         IFNULL(c.total_iva,0) AS base_no_iva,\n"
-                + " 		IFNULL(c.total_facturado,0) AS total_fact,\n"
-                + "         c.despachado,\n"
-                + "         caja.nombre,\n"
-                + "         e.nombre_comercial,\n"
-                + "         s.nombre_comercial,\n"
-                + "         c.estado\n"
-                + "    FROM ve_factura AS c\n"
-                + "    INNER JOIN ve_factura_detalle AS d\n"
-                + "    	  ON  c.id_factura = d.id_factura\n"
-                + "      -- and  c.estado = 'C'\n"
-                + "	AND  c.fecha_facturacion\n"
-                + "	BETWEEN CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 00:00:00')\n"
-                + "        AND CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 23:59:59')\n"
-                + "    INNER JOIN ve_caja AS caja\n"
-                + "     ON caja.id_caja = c.id_caja\n"
-                + "    INNER JOIN se_empresa AS e\n"
-                + " 	ON e.id_empresa = c.id_empresa\n"
-                + "    INNER JOIN se_sucursal AS s\n"
-                + "     ON s.id_sucursal = c.id_sucursal\n"
-                + "    INNER JOIN pr_prestaciones AS pres\n"
-                + "     ON pres.id_prestacion = d.id_prestaciones;");
+                + "                     c.id_factura,\n"
+                + "                    c.id_empresa,\n"
+                + "                    c.id_sucursal,\n"
+                + "                      c.id_caja,\n"
+                + "                    c.id_usuario,\n"
+                + "                    c.id_cliente,\n"
+                + "                      DATE_FORMAT(c.fecha_facturacion,'%Y-%m-%d') AS fecha_facturacion,\n"
+                + "                        IFNULL(c.subtotal,0) AS total_subtotal,\n"
+                + "                      IFNULL(c.total_ice,0) AS total_ice,\n"
+                + "                    IFNULL(c.total_descuento,0) AS total_descuento,\n"
+                + "                      IFNULL(c.total_base_iva,0) AS base_iva,\n"
+                + "                        IFNULL(c.total_base_no_iva,0) AS base_no_iva,\n"
+                + "                      IFNULL(c.total_iva,0) AS base_no_iva,\n"
+                + "                		IFNULL(c.total_facturado,0) AS total_fact,\n"
+                + "                        c.despachado,\n"
+                + "                       caja.nombre,\n"
+                + "                       e.nombre_comercial,\n"
+                + "                       s.nombre_comercial,\n"
+                + "                       c.estado,\n"
+                + "                       c.`forma_pago`\n"
+                + "                  FROM ve_factura AS c\n"
+                + "                  INNER JOIN ve_factura_detalle AS d\n"
+                + "                  	  ON  c.id_factura = d.id_factura\n"
+                + "                     -- and  c.estado = 'C'\n"
+                + "               	AND  c.fecha_facturacion\n"
+                + "               	BETWEEN CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 00:00:00')\n"
+                + "                       AND CONCAT(DATE_FORMAT(SYSDATE(),'%Y-%m-%d'),' 23:59:59')\n"
+                + "                   INNER JOIN ve_caja AS caja\n"
+                + "                     ON caja.id_caja = c.id_caja\n"
+                + "                    INNER JOIN se_empresa AS e\n"
+                + "                 	ON e.id_empresa = c.id_empresa\n"
+                + "                    INNER JOIN se_sucursal AS s\n"
+                + "                     ON s.id_sucursal = c.id_sucursal\n"
+                + "                    INNER JOIN pr_prestaciones AS pres\n"
+                + "                     ON pres.id_prestacion = d.id_prestaciones;");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteFacturaDTO>();
         try {
@@ -319,6 +320,7 @@ public class ReporteriaExt {
                 ob.setNombre_comercial_emp(String.valueOf(obj[16].toString()));
                 ob.setNombre_comercial_suc(String.valueOf(obj[17].toString()));
                 ob.setEstado(String.valueOf(obj[18].toString()));
+                ob.setForma_pago(String.valueOf(obj[19].toString()));
 
                 listaCompra.add(ob);
             }
@@ -456,12 +458,12 @@ public class ReporteriaExt {
                 ob.setValor_total(Double.parseDouble(obj[8].toString()));
                 ob.setEstado(String.valueOf(obj[9].toString()));
                 ob.setCantidad(Long.parseLong(obj[10].toString()));
-                if(obj[11]==null){
-                ob.setId_producto(Long.valueOf(0));
-            }else{
+                if (obj[11] == null) {
+                    ob.setId_producto(Long.valueOf(0));
+                } else {
                     ob.setId_producto(Long.parseLong(obj[11].toString()));
                 }
-                
+
                 listaDetalle.add(ob);
             }
 

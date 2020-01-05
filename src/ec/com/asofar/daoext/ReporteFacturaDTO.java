@@ -18,6 +18,7 @@ public class ReporteFacturaDTO {
     public Date fecha_facturacion;
     public String numero_establecimiento_sri;
     public String punto_emision_sri;
+    public String forma_pago;
     public Long secuencia_sri;
     public Double subtotal;
     public Double total_ice;
@@ -39,7 +40,7 @@ public class ReporteFacturaDTO {
     public ReporteFacturaDTO() {
     }
 
-    public ReporteFacturaDTO(Long id_factura, Long id_empresa, Long id_sucursal, Long id_caja, String id_usuario, Long id_cliente, Date fecha_facturacion, String numero_establecimiento_sri, String punto_emision_sri, Long secuencia_sri, Double subtotal, Double total_ice, Double total_descuento, Double total_base_iva, Double total_base_no_iva, Double total_iva, Double total_facturado, String estado, String despachado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String nombre_caja, String nombre_comercial_emp, String nombre_comercial_suc) {
+    public ReporteFacturaDTO(Long id_factura, Long id_empresa, Long id_sucursal, Long id_caja, String id_usuario, Long id_cliente, Date fecha_facturacion, String numero_establecimiento_sri, String punto_emision_sri, String forma_pago, Long secuencia_sri, Double subtotal, Double total_ice, Double total_descuento, Double total_base_iva, Double total_base_no_iva, Double total_iva, Double total_facturado, String estado, String despachado, String usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String nombre_caja, String nombre_comercial_emp, String nombre_comercial_suc) {
         this.id_factura = id_factura;
         this.id_empresa = id_empresa;
         this.id_sucursal = id_sucursal;
@@ -49,6 +50,7 @@ public class ReporteFacturaDTO {
         this.fecha_facturacion = fecha_facturacion;
         this.numero_establecimiento_sri = numero_establecimiento_sri;
         this.punto_emision_sri = punto_emision_sri;
+        this.forma_pago = forma_pago;
         this.secuencia_sri = secuencia_sri;
         this.subtotal = subtotal;
         this.total_ice = total_ice;
@@ -138,6 +140,14 @@ public class ReporteFacturaDTO {
 
     public void setPunto_emision_sri(String punto_emision_sri) {
         this.punto_emision_sri = punto_emision_sri;
+    }
+
+    public String getForma_pago() {
+        return forma_pago;
+    }
+
+    public void setForma_pago(String forma_pago) {
+        this.forma_pago = forma_pago;
     }
 
     public Long getSecuencia_sri() {
