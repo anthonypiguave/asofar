@@ -628,9 +628,11 @@ public class recibirOrdenCompraForm extends javax.swing.JDialog {
                                 
                                 kardex.setInTipoDocumento(cabMovimiento.getInTipoDocumento());
                                 kardex.setSeSucursal(seSucursal);
-                                
+//                                System.out.println(" error 1 "+prodObj.getUnidadEmpaqueCompra());
+//                                System.out.println(" error 2 "+listadet.get(i).getCantidad().doubleValue());
+//                                System.out.println(" error 3 "+prodObj.getCantidadPorEmpaqueCompra());
                                 Double empaqueXcantidadXunidad = (prodObj.getUnidadEmpaqueCompra() * listadet.get(i).getCantidad().doubleValue() )* prodObj.getCantidadPorEmpaqueCompra();
-                                
+//                                System.out.println(" em error "+empaqueXcantidadXunidad);
                                 
                                 kardex.setCantidad(BigInteger.valueOf(empaqueXcantidadXunidad.longValue()));/// revisar si stock hay que convertilo en double
                                 

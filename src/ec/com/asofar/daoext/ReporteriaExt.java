@@ -60,29 +60,30 @@ public class ReporteriaExt {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
         List<ReporteComprasDTO> listaCompra = null;
-        Query q = em.createNativeQuery("SELECT  distinct\n"
-                + "   		c.id_orden_compra,\n"
-                + "   		c.id_tipo_documento,\n"
-                + "        c.fecha_entrega,\n"
-                + "        c.id_proveedor,\n"
-                + "        ifnull(c.total_subtotal,0) as total_subtotal,\n"
-                + "        ifnull(c.total_ice,0) as total_ice,\n"
-                + "        ifnull(c.total_iva,0) as total_iva,\n"
-                + "        c.total_compra,\n"
-                + "        f.nombre_documento,\n"
-                + "        g.nombre_comercial,\n"
-                + "        ifnull(c.total_descuento,0) as total_descuento\n"
-                + "   FROM co_orden_compras as c\n"
-                + "   inner join co_detalle_orden_compra as d\n"
-                + "   	  on   c.id_orden_compra = d.id_orden_compra\n"
-                + "         and  c.estado = 'C'\n"
-                + "         and  c.fecha_aprobacion\n"
-                + "         BETWEEN concat(date_format(sysdate(),'%Y-%m-%d'),' 00:00:00')\n"
-                + "         and concat(date_format(sysdate(),'%Y-%m-%d'),' 23:59:59')\n"
-                + "   inner join in_tipo_documento as f\n"
-                + "	  on f.id_tipo_documento = c.id_tipo_documento\n"
-                + "	inner join co_proveedores as g\n"
-                + "      on g.id_proveedor = c.id_proveedor;");
+        Query q = em.createNativeQuery("SELECT  DISTINCT\n"
+                + "                  		c.id_orden_compra,\n"
+                + "                  		c.id_tipo_documento,\n"
+                + "                       c.fecha_entrega,\n"
+                + "                       c.id_proveedor,\n"
+                + "                        IFNULL(c.total_subtotal,0) AS total_subtotal,\n"
+                + "                        IFNULL(c.total_ice,0) AS total_ice,\n"
+                + "                        IFNULL(c.total_iva,0) AS total_iva,\n"
+                + "                       c.total_compra,\n"
+                + "                        f.nombre_documento,\n"
+                + "                       g.nombre_comercial,\n"
+                + "                      IFNULL(c.total_descuento,0) AS total_descuento,\n"
+                + "                      c.`forma_pago`\n"
+                + "                   FROM co_orden_compras AS c\n"
+                + "                  INNER JOIN co_detalle_orden_compra AS d\n"
+                + "              	  ON   c.id_orden_compra = d.id_orden_compra\n"
+                + "                       AND  c.estado = 'C'\n"
+                + "                     AND  c.fecha_aprobacion\n"
+                + "                     BETWEEN concat(date_format(sysdate(),'%Y-%m-%d'),' 00:00:00')\n"
+                + "                      and concat(date_format(sysdate(),'%Y-%m-%d'),' 23:59:59')\n"
+                + "                  INNER JOIN in_tipo_documento AS f\n"
+                + "                	  ON f.id_tipo_documento = c.id_tipo_documento\n"
+                + "                	INNER JOIN co_proveedores AS g\n"
+                + "                    ON g.id_proveedor = c.id_proveedor;");
         List<Object[]> listobj = q.getResultList();
         listaCompra = new ArrayList<ReporteComprasDTO>();
         try {
@@ -99,6 +100,7 @@ public class ReporteriaExt {
                 ob.setNombre_documento(String.valueOf(obj[8].toString()));
                 ob.setNombre_proveedor(String.valueOf(obj[9].toString()));
                 ob.setDescuento(Double.parseDouble(obj[10].toString()));
+                ob.setForma_pago(String.valueOf(obj[11].toString()));
                 listaCompra.add(ob);
             }
 //        

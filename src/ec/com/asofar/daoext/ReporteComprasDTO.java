@@ -19,6 +19,7 @@ public class ReporteComprasDTO {
     public Long id_proveedor;    
     public Long id_tipo_documento;
     public String observacion;
+    public String forma_pago;
     public Date fecha_entrega;
     public Double total_subtotal; 
     public Double total_descuento;
@@ -57,13 +58,14 @@ public class ReporteComprasDTO {
     public ReporteComprasDTO() {
     }
 
-    public ReporteComprasDTO(Long id_orden_compra, Long id_empresa, Long id_sucursal, Long id_proveedor, Long id_tipo_documento, String observacion, Date fecha_entrega, Double total_subtotal, Double total_descuento, Double total_ice, Double total_iva, Double total_compra, Date fecha_aprobacion, Long usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String estado, String nombre_documento, String nombre_proveedor, Long id_detalle_orden_compra, Long id_orden_comprad, Long id_empresa2, Long id_surcusal, Long linea_detalle, Long id_producto, String descripcion, Double precio_unitario, Long cantidad_recibida, Double subtotal, Double iva, Double ice, Double descuento, Double total, String estado2, Long usuario_creacion2, Date fecha_creacion2, String usuario_actualizacion2, Date fecha_actualizacion2) {
+    public ReporteComprasDTO(Long id_orden_compra, Long id_empresa, Long id_sucursal, Long id_proveedor, Long id_tipo_documento, String observacion, String forma_pago, Date fecha_entrega, Double total_subtotal, Double total_descuento, Double total_ice, Double total_iva, Double total_compra, Date fecha_aprobacion, Long usuario_creacion, Date fecha_creacion, String usuario_actualizacion, Date fecha_actualizacion, String estado, String nombre_documento, String nombre_proveedor, Long id_detalle_orden_compra, Long id_orden_comprad, Long id_empresa2, Long id_surcusal, Long linea_detalle, Long id_producto, String descripcion, Double precio_unitario, Long cantidad_recibida, Double subtotal, Double iva, Double ice, Double descuento, Double total, String estado2, Long usuario_creacion2, Date fecha_creacion2, String usuario_actualizacion2, Date fecha_actualizacion2) {
         this.id_orden_compra = id_orden_compra;
         this.id_empresa = id_empresa;
         this.id_sucursal = id_sucursal;
         this.id_proveedor = id_proveedor;
         this.id_tipo_documento = id_tipo_documento;
         this.observacion = observacion;
+        this.forma_pago = forma_pago;
         this.fecha_entrega = fecha_entrega;
         this.total_subtotal = total_subtotal;
         this.total_descuento = total_descuento;
@@ -145,6 +147,14 @@ public class ReporteComprasDTO {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getForma_pago() {
+        return forma_pago;
+    }
+
+    public void setForma_pago(String forma_pago) {
+        this.forma_pago = forma_pago;
     }
 
     public Date getFecha_entrega() {
@@ -410,6 +420,5 @@ public class ReporteComprasDTO {
     public void setFecha_actualizacion2(Date fecha_actualizacion2) {
         this.fecha_actualizacion2 = fecha_actualizacion2;
     }
-
         
 }

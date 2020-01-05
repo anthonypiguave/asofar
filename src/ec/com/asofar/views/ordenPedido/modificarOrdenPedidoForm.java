@@ -677,7 +677,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
         List<CoDetalleOrdenPedido> list = new ArrayList<CoDetalleOrdenPedido>();
         list = detOrdenController.findCoDetalleOrdenPedidoEntities();
-        int r = JOptionPane.showConfirmDialog(null, "Desea aprobarb los datos?", "", JOptionPane.YES_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "Desea aprobar los datos?", "", JOptionPane.YES_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             try {
                 for (int j = 0; j < list.size(); j++) {
@@ -701,7 +701,7 @@ public class modificarOrdenPedidoForm extends javax.swing.JDialog {
 
                 cabOrdenController.edit(cab);
 
-                JOptionPane.showMessageDialog(null, "Datos guardados correctamente!");
+                JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                 setVisible(false);
 
             } catch (Exception ex) {
