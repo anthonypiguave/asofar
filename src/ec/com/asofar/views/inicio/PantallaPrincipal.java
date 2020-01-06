@@ -18,6 +18,7 @@ import ec.com.asofar.util.ActionItem;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Fondo;
 import ec.com.asofar.util.Reflection;
+import ec.com.asofar.views.compras.crearOrdenCompraForm;
 import ec.com.asofar.views.supgrupos.ConsultaSubgrupos;
 import ec.com.asofar.views.venta.Venta;
 import java.awt.BorderLayout;
@@ -40,6 +41,7 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.border.BevelBorder;
 
 /**
@@ -91,8 +93,21 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //        salida.addActionListener((e) -> {
 //            System.exit(0);
 //        });
-
+        Timer tiempo = new Timer(100, new PantallaPrincipal.horas());
+        tiempo.start();
         jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width - 0, Toolkit.getDefaultToolkit().getScreenSize().height - 30), BorderLayout.CENTER);
+    }
+
+    class horas implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            java.util.Date sistHora = new java.util.Date();
+            String pmAm = "HH:mm:ss";
+            SimpleDateFormat format = new SimpleDateFormat(pmAm);
+            Calendar hoy = Calendar.getInstance();
+            txtFechaHora.setText( FechaActual()+" "+String.format(format.format(sistHora), hoy));
+
+        }
     }
 
     public static String FechaActual() {
@@ -102,8 +117,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     public void cargarMenu(List<SeOpcionesMenu> lis) {
-        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
-        txtFechaHora.setText(FechaActual() + "  " + df1.format(fechaActual));
+//        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
+//        txtFechaHora.setText(FechaActual() + "  " + df1.format(fechaActual));
         for (int i = 0; i < lis.size(); i++) {
             if (lis.get(i).getIdPadre() == null) {
                 if (lis.get(i).getRuta() == null) {
@@ -113,10 +128,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         item.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         item.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
                         item.setPreferredSize(new java.awt.Dimension(90, 65));
-                        item.setMinimumSize(new Dimension(20,20));
-                        item.setMaximumSize(new Dimension(90,70));
-                        item.setPreferredSize(new Dimension(120,30));
-                      /*  item.setOpaque(true);
+                        item.setMinimumSize(new Dimension(20, 20));
+                        item.setMaximumSize(new Dimension(90, 70));
+                        item.setPreferredSize(new Dimension(120, 30));
+                        /*  item.setOpaque(true);
                         item.setBackground(Color.white);*/
                         item.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
                         item.addActionListener(new ActionListener() {
@@ -140,8 +155,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
                         /*menu.setOpaque(true);
                         menu.setBackground(Color.white);*/
-                        menu.setMinimumSize(new Dimension(20,20));
-                        menu.setMaximumSize(new Dimension(90,70));
+                        menu.setMinimumSize(new Dimension(20, 20));
+                        menu.setMaximumSize(new Dimension(90, 70));
                         //menu.setPreferredSize(new Dimension(120,30));
                         menu.setPreferredSize(new java.awt.Dimension(90, 65));
                         menu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
