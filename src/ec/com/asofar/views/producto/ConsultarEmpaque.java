@@ -39,6 +39,7 @@ public class ConsultarEmpaque extends javax.swing.JDialog {
      */
     public ConsultarEmpaque(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         cargartabla();

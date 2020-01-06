@@ -130,6 +130,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
         System.out.println("id " + objeto.getId_cliente());
         if (objeto.getId_cliente() == 1) {
             consFinal();
+            txt_forma_pago.setText(objeto.getForma_pago());
             System.out.println("consu ");
         } else {
             System.out.println("normak");
@@ -140,6 +141,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
             tip_ident = tipo_doc_Control.findSeTipoIdentificacion(cliente.getIdTipoIndentificacion().getIdTipoIdentificacion());
 
             txt_forma_pago.setText(objeto.getForma_pago());
+            System.out.println("null " + objeto.getForma_pago());
             txtCodigoCliente.setText(cliente.getIdClientes().toString());
             txtNombre.setText(cliente.getPrimerNombre() + " " + cliente.getSegundoNombre());
             txtapellidos.setText(cliente.getPrimerApellido() + " " + cliente.getSegundoApellido());

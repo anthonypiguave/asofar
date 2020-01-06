@@ -37,6 +37,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 
     public EmpaqueMantenimiento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         tabla();
@@ -46,6 +47,7 @@ public class EmpaqueMantenimiento extends javax.swing.JDialog {
 
     public EmpaqueMantenimiento(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         tabla();

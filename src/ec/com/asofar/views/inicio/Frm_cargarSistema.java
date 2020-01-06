@@ -30,6 +30,7 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
     PrSubgrupos pr = new PrSubgrupos();
 
     public Frm_cargarSistema() {
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         carga_pb.setStringPainted(true);

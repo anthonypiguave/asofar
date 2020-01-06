@@ -243,7 +243,7 @@
                                   <Component id="txtProveedor" min="-2" pref="324" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="263" max="32767" attributes="0"/>
+                          <EmptySpace pref="313" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -275,12 +275,12 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="unidad de medida de empaque:"/>
+                    <Property name="text" type="java.lang.String" value="Unidad de medida de empaque:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="cantidad por unidad de empaque:"/>
+                    <Property name="text" type="java.lang.String" value="Cantidad por unidad de empaque:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtUCompra">
@@ -295,7 +295,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="proveedor por defecto:"/>
+                    <Property name="text" type="java.lang.String" value="Proveedor por defecto:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtProveedor">
@@ -343,7 +343,7 @@
                               <Component id="txtEmpaqueVenta1" min="-2" pref="200" max="-2" attributes="0"/>
                               <Component id="txtEmpaqueVenta2" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="270" max="32767" attributes="0"/>
+                          <EmptySpace pref="320" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -370,12 +370,12 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel15">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="unidad de medida de empaque:"/>
+                    <Property name="text" type="java.lang.String" value="Unidad de medida de empaque:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="cantidad por unidad de empaque:"/>
+                    <Property name="text" type="java.lang.String" value="Cantidad por unidad de empaque:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEmpaqueVenta1">
@@ -492,7 +492,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel22">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="bodega"/>
+                    <Property name="text" type="java.lang.String" value="Bodega"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtBodega">

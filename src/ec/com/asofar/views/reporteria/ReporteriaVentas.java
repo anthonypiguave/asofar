@@ -58,7 +58,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     List<ReporteFacturaDTO> itemList = null;
 
     public ReporteriaVentas(java.awt.Frame parent, boolean modal) {
-        super(parent, modal=false);
+        super(parent, modal = false);
         initComponents();
         this.setLocationRelativeTo(this);
         cargartabala();
@@ -72,9 +72,10 @@ public class ReporteriaVentas extends javax.swing.JDialog {
     }
 
     public ReporteriaVentas(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
-        super(parent, modal=false);
+        super(parent, modal = false);
+        setUndecorated(true);
         initComponents();
-        this.setLocationRelativeTo(this);
+        this.setLocationRelativeTo(null);
         usu = us;
         emp = em;
         suc = su;
@@ -84,16 +85,14 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         total();
         Keypress_jDateChoooser();
     }
-    
-    
-    public void cargartabala(){
-        
+
+    public void cargartabala() {
+
         itemList = new ArrayList<ReporteFacturaDTO>();
         itemList = rep.reporteFactura();
         Tablas.listarReporteFactura(itemList, tbaReporteCompra);
-        
+
     }
-    
 
     public void total() {
         Double total_total = 0.00;
@@ -469,6 +468,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
             if (obj != null) {
                 //JOptionPane.showMessageDialog(null, "el id es: "+obj.getId_orden_compra());
                 ReporteriaDetalleFactura win = new ReporteriaDetalleFactura(new javax.swing.JFrame(), true, obj, usu, emp, suc);
+                System.out.println(" yy " + obj.getForma_pago());
                 win.setVisible(true);
                 cargartabala();
             } else {
@@ -498,7 +498,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
         String mes2 = Integer.toString(Chooser2.getCalendar().get(Calendar.MONTH));
         String año2 = Integer.toString(Chooser2.getCalendar().get(Calendar.YEAR));
         String fecha2 = (dia2 + "-" + mes2 + "-" + año2);
-        
+
         for (int i = 0; i < tbaReporteCompra.getRowCount(); i++) {
             ClaseReporte creporte = new ClaseReporte(fecha,
                     fecha2,

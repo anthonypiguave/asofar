@@ -449,9 +449,9 @@ public class ActualizarProducto extends javax.swing.JDialog {
 
         jTabbedPane8.addTab("General", jPanel11);
 
-        jLabel6.setText("unidad de medida de empaque:");
+        jLabel6.setText("Unidad de medida de empaque:");
 
-        jLabel7.setText("cantidad por unidad de empaque:");
+        jLabel7.setText("Cantidad por unidad de empaque:");
 
         txtUCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -465,7 +465,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setText("proveedor por defecto:");
+        jLabel8.setText("Proveedor por defecto:");
 
         txtProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -508,7 +508,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,9 +532,9 @@ public class ActualizarProducto extends javax.swing.JDialog {
 
         jTabbedPane8.addTab("Datos de compras", jPanel2);
 
-        jLabel15.setText("unidad de medida de empaque:");
+        jLabel15.setText("Unidad de medida de empaque:");
 
-        jLabel16.setText("cantidad por unidad de empaque:");
+        jLabel16.setText("Cantidad por unidad de empaque:");
 
         txtEmpaqueVenta1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -577,7 +577,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEmpaqueVenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmpaqueVenta2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(320, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,7 +623,7 @@ public class ActualizarProducto extends javax.swing.JDialog {
             }
         });
 
-        jLabel22.setText("bodega");
+        jLabel22.setText("Bodega");
 
         txtBodega.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
