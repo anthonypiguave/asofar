@@ -772,8 +772,11 @@ public class crearOrdenCompraForm extends javax.swing.JDialog {
                 for (int j = 0; j < listadetCompra.size(); j++) {
                     
                     if (j == i) {
-                        
+                        if(valor1.doubleValue() < listadetCompra.get(j).getTotal().doubleValue()){
                         listadetCompra.get(j).setDescuento(valor1);
+                      }  
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Valor incorrecto");
                     }
                     
                 }
