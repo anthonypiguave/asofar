@@ -69,6 +69,7 @@ public class ReporteriaCompras extends javax.swing.JDialog {
 
     public ReporteriaCompras(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal=false);
+        setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(this);
         usu = us;
