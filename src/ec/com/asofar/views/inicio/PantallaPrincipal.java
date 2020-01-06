@@ -62,7 +62,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     SubGruposExt cSubgrupos = new SubGruposExt(EntityManagerUtil.ObtenerEntityManager());
     //static JMenuItem salida = new JMenuItem("SALIR");
     java.util.Date fechaActual = new java.util.Date();
-
+    
     public PantallaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -77,9 +77,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         mei.add(mei2);
         meOpciones.add(mei);
         meMenuBase.add(meOpciones);
-
+        
     }
-
+    
     public PantallaPrincipal(SeUsuarios us, SeEmpresa em, SeSucursal su) {
         initComponents();
         setLocationRelativeTo(null);
@@ -93,29 +93,30 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //        salida.addActionListener((e) -> {
 //            System.exit(0);
 //        });
+        txtUsuario.setText(us1.getUsuario());
         Timer tiempo = new Timer(100, new PantallaPrincipal.horas());
         tiempo.start();
         jdpescritorio.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width - 0, Toolkit.getDefaultToolkit().getScreenSize().height - 30), BorderLayout.CENTER);
     }
-
+    
     class horas implements ActionListener {
-
+        
         public void actionPerformed(ActionEvent e) {
             java.util.Date sistHora = new java.util.Date();
             String pmAm = "HH:mm:ss";
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             Calendar hoy = Calendar.getInstance();
-            txtFechaHora.setText( FechaActual()+" "+String.format(format.format(sistHora), hoy));
-
+            txtFechaHora.setText(FechaActual() + " " + String.format(format.format(sistHora), hoy));
+            
         }
     }
-
+    
     public static String FechaActual() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         return formatoFecha.format(fecha);
     }
-
+    
     public void cargarMenu(List<SeOpcionesMenu> lis) {
 //        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
 //        txtFechaHora.setText(FechaActual() + "  " + df1.format(fechaActual));
@@ -137,15 +138,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         item.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-
+                                
                                 System.exit(0);
                                 //To change body of generated methods, choose Tools | Templates.
                             }
                         });
                         meMenuBase.add(item);
-
+                        
                     } else {
-
+                        
                         JMenu menu = new JMenu(lis.get(i).getNombre());
 
                         //Ruta
@@ -160,7 +161,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         //menu.setPreferredSize(new Dimension(120,30));
                         menu.setPreferredSize(new java.awt.Dimension(90, 65));
                         menu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
+                        
                         for (int j = 0; j < lis.get(i).getSeOpcionesMenuList().size(); j++) {
                             for (int k = 0; k < lis.size(); k++) {
                                 if (lis.get(i).getSeOpcionesMenuList().get(j) == lis.get(k)) {
@@ -200,7 +201,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                                     if (permiso.equals("no")) {
                                                         JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
                                                     } else {
-
+                                                        
                                                         Venta fac = new Venta(new javax.swing.JFrame(), true, us1, em1, su1);
                                                         jdpescritorio.add(fac);
                                                         fac.show();
@@ -215,7 +216,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                             item.addActionListener(ActionItem.Obtener(lis.get(i).getSeOpcionesMenuList().get(j).getRuta(), us1, em1, su1));
                                             menu.add(item);
                                         }
-
+                                        
                                     }
                                 }
                             }
@@ -227,9 +228,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     item.addActionListener(ActionItem.Obtener(lis.get(i).getRuta(), us1, em1, su1));
                     meMenuBase.add(item);
                 }
-
+                
             }
-
+            
         }
 //        salida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/asofar/icon/B_SALIR.jpeg")));
 //        salida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -239,7 +240,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 //        salida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 //        meMenuBase.add(salida);
     }
-
+    
     public String pVender() {
         String v = null;
         List<VeDetalleCaja> listadetallecaja = cajaDetC.findVeDetalleCajaEntities();
@@ -270,6 +271,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
         jdpescritorio = new javax.swing.JDesktopPane();
         txtFechaHora = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         meMenuBase = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -283,21 +285,28 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         txtFechaHora.setEditable(false);
         txtFechaHora.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
 
+        txtUsuario.setEditable(false);
+
         jdpescritorio.setLayer(txtFechaHora, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdpescritorio.setLayer(txtUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jdpescritorioLayout = new javax.swing.GroupLayout(jdpescritorio);
         jdpescritorio.setLayout(jdpescritorioLayout);
         jdpescritorioLayout.setHorizontalGroup(
             jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpescritorioLayout.createSequentialGroup()
-                .addGap(0, 525, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
                 .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jdpescritorioLayout.setVerticalGroup(
             jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpescritorioLayout.createSequentialGroup()
                 .addGap(0, 415, Short.MAX_VALUE)
-                .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jdpescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         setJMenuBar(meMenuBase);
@@ -352,10 +361,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public static SeUsuarios obtenerUsuario() {
         return null;
-
+        
     }
 
 //        JMenu menu=null;
@@ -420,5 +429,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jdpescritorio;
     private javax.swing.JMenuBar meMenuBase;
     private javax.swing.JTextField txtFechaHora;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
