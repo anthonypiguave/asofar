@@ -1286,8 +1286,10 @@ public class Venta extends javax.swing.JInternalFrame {
                 if (ListProdVent.get(j).getId_prestacion().equals(id)) {
 //                    System.out.println("cantidadaadd "+id);
                     BigInteger ca = BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
-
+//                    System.out.println("err " + cantidadMod);
+//                    System.out.println("err " + ca);
                     int out = cantidadMod.compareTo(ca);
+//                    System.out.println("err " + out);
 //            int out = cantidadMod.compareTo(cantidadStock);
                     if (out == 1) {
 
@@ -1296,39 +1298,45 @@ public class Venta extends javax.swing.JInternalFrame {
                         Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
 
                     } else {
-
-                        String ivaS = tba_detalle.getValueAt(i, 6).toString();
-                        Double ivaT = Double.valueOf(ivaS.replace(",", "."));
-                        String precioS = tba_detalle.getValueAt(i, 4).toString();
-                        Double precioT = Double.valueOf(precioS.replace(",", "."));
+                        System.out.println("can t "+cantidadMod);
+                        if (cantidadMod.intValue() > 1) {
+                            String ivaS = tba_detalle.getValueAt(i, 6).toString();
+                            Double ivaT = Double.valueOf(ivaS.replace(",", "."));
+                            String precioS = tba_detalle.getValueAt(i, 4).toString();
+                            Double precioT = Double.valueOf(precioS.replace(",", "."));
 
 //                        String descuentoS = tba_detalle.getValueAt(i, 5).toString();
 //                        Double descuentoT = Double.valueOf(descuentoS.replace(",", "."));
-                        ListProdVent2 = selectProdVent2.listarProductoVenta();
-                        for (int k = 0; k < ListProdVent2.size(); k++) {
+                            ListProdVent2 = selectProdVent2.listarProductoVenta();
+                            for (int k = 0; k < ListProdVent2.size(); k++) {
 //                            System.out.println("lista /// " + ListProdVent2.get(k).getValor_descuento());
-                            if (ListProdVent2.get(k).getId_prestacion() == ListProdVent.get(j).getId_prestacion()) {
+                                if (ListProdVent2.get(k).getId_prestacion() == ListProdVent.get(j).getId_prestacion()) {
 //                                System.out.println("valor " + ListProdVent2.get(k).getValor_descuento());
-                                descuentoT = ListProdVent2.get(k).getValor_descuento();
+                                    descuentoT = ListProdVent2.get(k).getValor_descuento();
+                                }
                             }
-                        }
 
-                        Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
-                        Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
-                        Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
-                        Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
+                            Double IvaMod = calcularIvaItemCantMod(cantidadModi, ivaT, precioT);
+                            Double Desc = calcularDescuentoItemCantMod(cantidadModi, descuentoT);
+                            Double subt = calcularSubtotalItemCantMod(cantidadModi, precioT);
+                            Double total = calcularTotalItemCantMod(cantidadModi, IvaMod, Desc, precioT);
 
-                        listaDetFactura.get(i).setCantidad(cantidadMod);
-                        listaDetFactura.get(i).setValorIva(IvaMod);
-                        listaDetFactura.get(i).setSubtotal(subt);
-                        listaDetFactura.get(i).setValorTotal(total);
-                        listaDetFactura.get(i).setValorDescuento(Desc);
+                            listaDetFactura.get(i).setCantidad(cantidadMod);
+                            listaDetFactura.get(i).setValorIva(IvaMod);
+                            listaDetFactura.get(i).setSubtotal(subt);
+                            listaDetFactura.get(i).setValorTotal(total);
+                            listaDetFactura.get(i).setValorDescuento(Desc);
+                            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+
+                            Totalizar();
+                            TotalizarIva();
+                            TotalizarDescuento();
+                            TotalizarSubtotal();
+                        }else{
+                        JOptionPane.showMessageDialog(null,"Valor Incorrecto");
+                        listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
                         Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-
-                        Totalizar();
-                        TotalizarIva();
-                        TotalizarDescuento();
-                        TotalizarSubtotal();
+                        }
                     }/**/
 
                 }/**/
@@ -1511,7 +1519,7 @@ public class Venta extends javax.swing.JInternalFrame {
                                 if (!"0,00".equals(tba_detalle.getValueAt(i, 6).toString())) {
                                     printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString() + "\n");
 //                                printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString() + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
-                                    printerService.printString("EPSON-TM-T20II", "                       " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString()+"   *" + "\n");
+                                    printerService.printString("EPSON-TM-T20II", "                       " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "   *" + "\n");
                                 } else {
                                     printerService.printString("EPSON-TM-T20II", tba_detalle.getValueAt(i, 2).toString() + "\n");
 //                                printerService.printString("EPSON-TM-T20II",tba_detalle.getValueAt(i, 2).toString() + "  " + tba_detalle.getValueAt(i, 3).toString() + "  " + tba_detalle.getValueAt(i, 4).toString() + "  " + tba_detalle.getValueAt(i, 7).toString() + "  " + tba_detalle.getValueAt(i, 8).toString() + "\n");
