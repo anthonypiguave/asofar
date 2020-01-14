@@ -3552,7 +3552,7 @@ public class Tablas {
 
                 filas[4] = String.format("%.0f", prod.getUnidadEmpaqueCompra()) + " " + prod.getMedidaEmpaqueCompra().getNombreEmpaque() + " / " + String.format("%.0f", prod.getCantidadPorEmpaqueCompra()) + " " + prod.getMedidaPorEmpaqueCompra().getNombreEmpaque();
 
-                filas[5] = lista.get(i).getStockMaximo().toString();
+                filas[5] = lista.get(i).getStockMinimo().toString();
                 filas[6] = lista.get(i).getStockMaximo().toString();
 
                 model.addRow(filas);

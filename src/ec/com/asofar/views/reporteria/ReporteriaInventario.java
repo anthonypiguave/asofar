@@ -237,42 +237,42 @@ public class ReporteriaInventario extends javax.swing.JDialog {
     }//GEN-LAST:event_txtfiltroKeyReleased
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
-        int i = 0;
-        String msg = null;
-        if (evt.getClickCount() == 2) {
-            i = tabla.getSelectedRow();
-            objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
-
-            if (objeto != null) {
-
-                this.setVisible(false);
-
-            }
-        }
+//        int i = 0;
+//        String msg = null;
+//        if (evt.getClickCount() == 2) {
+//            i = tabla.getSelectedRow();
+//            objeto = devuelveObjeto(tabla.getValueAt(i, 0).toString(), lista);
+//
+//            if (objeto != null) {
+//
+//                this.setVisible(false);
+//
+//            }
+//        }
     }//GEN-LAST:event_tablaMousePressed
 
     public PrProductoBodega getObjeto() {
         return objeto;
     }
 
-    public PrProductoBodega devuelveObjeto(String datos, List<PrProductoBodega> listaobjeto) {
-
-        PrProductoBodega objeto1 = null;
-
-        for (int i = 0; i < listaobjeto.size(); i++) {
-
-            if (datos.equals("" + listaobjeto.get(i).getPrProductoBodegaPK().getIdProducto())) {
-                objeto1 = listaobjeto.get(i);
-
-                break;
-
-            }
-
-        }
-
-        return objeto1;
-
-    }
+//    public PrProductoBodega devuelveObjeto(String datos, List<PrProductoBodega> listaobjeto) {
+//
+//        PrProductoBodega objeto1 = null;
+//
+//        for (int i = 0; i < listaobjeto.size(); i++) {
+//
+//            if (datos.equals("" + listaobjeto.get(i).getPrProductoBodegaPK().getIdProducto())) {
+//                objeto1 = listaobjeto.get(i);
+//
+//                break;
+//
+//            }
+//
+//        }
+//
+//        return objeto1;
+//
+//    }
 
     /**
      * @param args the command line arguments
