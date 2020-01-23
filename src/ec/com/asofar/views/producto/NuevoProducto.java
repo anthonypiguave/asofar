@@ -607,6 +607,11 @@ public class NuevoProducto extends javax.swing.JDialog {
                 txtPresentacionMedidaMousePressed(evt);
             }
         });
+        txtPresentacionMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPresentacionMedidaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Subcategoría:");
 
@@ -1319,6 +1324,10 @@ public class NuevoProducto extends javax.swing.JDialog {
     private void txtGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGrupoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGrupoActionPerformed
+
+    private void txtPresentacionMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPresentacionMedidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPresentacionMedidaActionPerformed
 
     /**
      * @param args the command line arguments

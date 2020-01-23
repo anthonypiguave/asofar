@@ -12,6 +12,8 @@ import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Validacion;
+import ec.com.asofar.views.tipomedida.tipo_medida;
+import ec.com.asofar.views.tipomedida.tipo_medida_agregar;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.Date;
@@ -35,7 +37,7 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
 
     List<PrTipoMedidas> lista;
     PrTipoMedidasJpaController cont = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
-
+PrTipoMedidas medidas = new PrTipoMedidas();
     /**
      * Creates new form ConsultaProducto
      */
@@ -193,25 +195,52 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
-        PrTipoMedidas obj = new PrTipoMedidas();
-
-        if (r == JOptionPane.YES_OPTION) {
-            try {
-
-                obj.setNombreTipoMedida(txtTipoMedida.getText());
-                obj.setUsuarioCreacion(seUsuario.getUsuario());
-                obj.setFechaCreacion(d);
-                obj.setEstado("A");
-
-                cont.create(obj);
-
+//        int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
+//        PrTipoMedidas obj = new PrTipoMedidas();
+//
+//        if (r == JOptionPane.YES_OPTION) {
+//            try {
+//                obj.setNombreTipoMedida(txtTipoMedida.getText());
+//                obj.setUsuarioCreacion(seUsuario.getUsuario());
+//                obj.setFechaCreacion(d);
+//                obj.setEstado("A");
+//
+//                cont.create(obj);
+//
+//                JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
+//                setVisible(false);
+//
+//            } catch (Exception ex) {
+//                Logger.getLogger(NuevoTipoMedida.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+        java.util.Date fechaActual = new java.util.Date();
+        boolean pru = true;
+        medidas.setIdEmpresa(seEmpresa);
+        medidas.setNombreTipoMedida(txtTipoMedida.getText());
+        medidas.setEstado("A");
+        medidas.setUsuarioCreacion(String.valueOf(seUsuario.getIdUsuario()));
+        medidas.setFechaCreacion(fechaActual);
+        try {
+            lista = cont.findPrTipoMedidasEntities();
+            for (int i = 0; i < lista.size(); i++) {
+                System.out.println(lista.get(i).getNombreTipoMedida());
+                if (lista.get(i).getNombreTipoMedida().equals(txtTipoMedida.getText())) {
+                    JOptionPane.showMessageDialog(null, "REGISTRO EXISTENTE");
+                    pru = false;
+                    break;
+                }
+            }
+            if (pru == true) {
+                cont.create(medidas);
                 JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                 setVisible(false);
-
-            } catch (Exception ex) {
-                Logger.getLogger(NuevoTipoMedida.class.getName()).log(Level.SEVERE, null, ex);
+                tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                tm.setVisible(true);
             }
+        } catch (Exception ex) {
+            Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
