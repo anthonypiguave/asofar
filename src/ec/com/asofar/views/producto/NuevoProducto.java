@@ -889,8 +889,7 @@ public class NuevoProducto extends javax.swing.JDialog {
 
                                 list = presentacionMedida.getPrProductosList();
                                 if (list.size() >= 1) {
-                                    JOptionPane.showMessageDialog(null, "ya existe ese Producto!");
-
+                                    JOptionPane.showMessageDialog(null, "Producto ya existe!");
                                 } else {
                                     if (Arrays.asList(cadenaArray1).contains(txtBodega.getText())) {
                                         JOptionPane.showMessageDialog(null, "elija una bodega en Datos de inventario!");
