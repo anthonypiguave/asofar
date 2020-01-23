@@ -37,7 +37,8 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
 
     List<PrTipoMedidas> lista;
     PrTipoMedidasJpaController cont = new PrTipoMedidasJpaController(EntityManagerUtil.ObtenerEntityManager());
-PrTipoMedidas medidas = new PrTipoMedidas();
+    PrTipoMedidas medidas = new PrTipoMedidas();
+
     /**
      * Creates new form ConsultaProducto
      */
@@ -214,33 +215,38 @@ PrTipoMedidas medidas = new PrTipoMedidas();
 //                Logger.getLogger(NuevoTipoMedida.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //        }
-        java.util.Date fechaActual = new java.util.Date();
-        boolean pru = true;
-        medidas.setIdEmpresa(seEmpresa);
-        medidas.setNombreTipoMedida(txtTipoMedida.getText());
-        medidas.setEstado("A");
-        medidas.setUsuarioCreacion(String.valueOf(seUsuario.getIdUsuario()));
-        medidas.setFechaCreacion(fechaActual);
-        try {
-            lista = cont.findPrTipoMedidasEntities();
-            for (int i = 0; i < lista.size(); i++) {
-                System.out.println(lista.get(i).getNombreTipoMedida());
-                if (lista.get(i).getNombreTipoMedida().equals(txtTipoMedida.getText())) {
-                    JOptionPane.showMessageDialog(null, "REGISTRO EXISTENTE");
-                    pru = false;
-                    break;
+        if (txtTipoMedida.getText().equals(null)) {
+            JOptionPane.showMessageDialog(null, "LLENE EL CAMPO");
+        } else {
+
+            java.util.Date fechaActual = new java.util.Date();
+            boolean pru = true;
+            medidas.setIdEmpresa(seEmpresa);
+            medidas.setNombreTipoMedida(txtTipoMedida.getText());
+            medidas.setEstado("A");
+            medidas.setUsuarioCreacion(String.valueOf(seUsuario.getIdUsuario()));
+            medidas.setFechaCreacion(fechaActual);
+            try {
+                lista = cont.findPrTipoMedidasEntities();
+                for (int i = 0; i < lista.size(); i++) {
+                    System.out.println(lista.get(i).getNombreTipoMedida());
+                    if (lista.get(i).getNombreTipoMedida().equals(txtTipoMedida.getText())) {
+                        JOptionPane.showMessageDialog(null, "REGISTRO EXISTENTE");
+                        pru = false;
+                        break;
+                    }
                 }
+                if (pru == true) {
+                    cont.create(medidas);
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
+                    setVisible(false);
+                    tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                    tm.setVisible(true);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
-            if (pru == true) {
-                cont.create(medidas);
-                JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
-                setVisible(false);
-                tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
-                tm.setVisible(true);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 

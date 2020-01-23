@@ -29,14 +29,13 @@ public class Validacion {
 
         char c = evt.getKeyChar();
         if (!Character.isLetterOrDigit(c) || Character.isSpaceChar(c)) {
-
+            System.out.println("true");
             return true;
         } else {
+                System.out.println("false");
             return false;
         }
-
     }
-
     public static boolean FiltroLetraSinEspacio(java.awt.event.KeyEvent evt) {
 
         char c = evt.getKeyChar();
