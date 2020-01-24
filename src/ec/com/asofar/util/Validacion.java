@@ -29,13 +29,28 @@ public class Validacion {
 
         char c = evt.getKeyChar();
         if (!Character.isLetterOrDigit(c) || Character.isSpaceChar(c)) {
-            System.out.println("true");
+
+            System.out.println("true1");
             return true;
         } else {
-                System.out.println("false");
+
+            System.out.println("false");
             return false;
         }
     }
+
+    public static boolean FiltroLetraNumeroSinEspacio2(java.awt.event.KeyEvent evt) {
+
+        char car = evt.getKeyChar();
+        if ((car < '0' || car > '9') && (car < ',' || car > '.')
+                && Character.isSpaceChar(car)&& !Character.isLetterOrDigit(car)
+                ){
+            evt.consume();
+        }
+        return true;
+
+    }
+
     public static boolean FiltroLetraSinEspacio(java.awt.event.KeyEvent evt) {
 
         char c = evt.getKeyChar();

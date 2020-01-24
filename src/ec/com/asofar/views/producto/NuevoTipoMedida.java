@@ -255,11 +255,12 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTipoMedidaFocusLost
 
     private void txtTipoMedidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoMedidaKeyTyped
-        boolean estado = Validacion.FiltroLetraNumeroSinEspacio(evt);
-        if (estado) {
-            getToolkit().beep();
-            evt.consume();
-        }
+//        boolean estado = Validacion.FiltroLetraNumeroSinEspacio(evt);
+//        if (estado) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
+         boolean estado2 = Validacion.FiltroLetraNumeroSinEspacio2(evt);
     }//GEN-LAST:event_txtTipoMedidaKeyTyped
 
     /**

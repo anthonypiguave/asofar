@@ -228,11 +228,12 @@ public class tipo_medida_agregar extends javax.swing.JDialog {
 //            evt.consume();
 //        }
 
-        boolean estado = Validacion.FiltroLetraNumeroSinEspacio(evt);
-        if (estado) {
-            getToolkit().beep();
-            evt.consume();
-        }
+//        boolean estado = Validacion.FiltroLetraNumeroSinEspacio(evt);
+//        if (estado) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
+        boolean estado2 = Validacion.FiltroLetraNumeroSinEspacio2(evt);
 
     }//GEN-LAST:event_nombre_tfKeyTyped
 
