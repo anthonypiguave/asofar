@@ -7,6 +7,7 @@ package ec.com.asofar.views.producto;
 
 
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrTipoPresentacion;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -153,7 +154,7 @@ public class NuevoTipoPresentacion extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtTipoPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,17 +196,19 @@ public class NuevoTipoPresentacion extends javax.swing.JDialog {
         
         if (r == JOptionPane.YES_OPTION) {
             try {
-                
+                            boolean valor1 = ValidarDTO.ValidarPrTipoPresentacion(txtTipoPresentacion.getText());
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El tipo de Presentacion ya existente");
+            } else {
                 obj.setNombre(txtTipoPresentacion.getText());
                 obj.setUsuarioCreacion(seUsuario.getUsuario());
                 obj.setFechaCreacion(d);
                 obj.setEstado("A");
                 
                 cont.create(obj);
-                
                 JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                 setVisible(false);
-                
+            }  
             } catch (Exception ex) {
                 Logger.getLogger(NuevoTipoPresentacion.class.getName()).log(Level.SEVERE, null, ex);
             }

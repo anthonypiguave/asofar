@@ -6,6 +6,7 @@
 package ec.com.asofar.views.tipopresentacion;
 
 import ec.com.asofar.dao.PrTipoPresentacionJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrPrestaciones;
 import ec.com.asofar.dto.PrTipoPresentacion;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class Ingresar_Presentacion extends javax.swing.JDialog {
-    
+
     PrTipoPresentacionJpaController Prtipo = new PrTipoPresentacionJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     /**
@@ -141,16 +142,22 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         try {
-            PrTipoPresentacion tipo = new PrTipoPresentacion();
-            
-            tipo.setNombre(txtnombre.getText());
-            tipo.setEstado("A");
-            tipo.setFechaCreacion(Fecha.FechaSql());
-            Prtipo.create(tipo);
-            JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
-            this.setVisible(false);
-            Tipo_presentacion c = new Tipo_presentacion(new javax.swing.JFrame(), true);
-            c.setVisible(true);
+            boolean valor1 = ValidarDTO.ValidarPrTipoPresentacion(txtnombre.getText());
+            if (valor1 == true) {
+                JOptionPane.showMessageDialog(this, "El tipo de Presentacion ya existente");
+            } else {
+                PrTipoPresentacion tipo = new PrTipoPresentacion();
+
+                tipo.setNombre(txtnombre.getText());
+                tipo.setEstado("A");
+                tipo.setFechaCreacion(Fecha.FechaSql());
+                Prtipo.create(tipo);
+                JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
+                this.setVisible(false);
+                Tipo_presentacion c = new Tipo_presentacion(new javax.swing.JFrame(), true);
+                c.setVisible(true);
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error...");
         }
