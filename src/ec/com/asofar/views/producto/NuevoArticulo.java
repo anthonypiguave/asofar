@@ -6,6 +6,7 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrArticuloJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrArticulo;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
@@ -25,7 +26,7 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class NuevoArticulo extends javax.swing.JDialog {
-    
+
     int x, y;
     String valor = "";
     Date d = new Date();
@@ -33,7 +34,7 @@ public class NuevoArticulo extends javax.swing.JDialog {
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
     PrSubgrupos subgruposObjeto;
-    
+
     List<PrArticulo> lista;
     PrArticuloJpaController cont = new PrArticuloJpaController(EntityManagerUtil.ObtenerEntityManager());
 
@@ -44,9 +45,9 @@ public class NuevoArticulo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
+
     }
-    
+
     public NuevoArticulo(java.awt.Frame parent, boolean modal, PrSubgrupos objeto, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
@@ -55,7 +56,7 @@ public class NuevoArticulo extends javax.swing.JDialog {
         seUsuario = us;
         seEmpresa = em;
         seSucursal = su;
-        
+
     }
 
     /**
@@ -193,21 +194,25 @@ public class NuevoArticulo extends javax.swing.JDialog {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar los datos?", "", JOptionPane.YES_NO_OPTION);
         PrArticulo obj = new PrArticulo();
-        
+
         if (r == JOptionPane.YES_OPTION) {
             try {
-                
-                obj.setNombreArticulo(txtArticulo.getText());
-                obj.setPrSubgrupos(subgruposObjeto);
-                obj.setUsuarioCreacion(seUsuario.getUsuario());
-                obj.setFechaCreacion(d);
-                obj.setEstado("A");
-                
-                cont.create(obj);
-                
-                JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
-                setVisible(false);
-                
+//                boolean valor1 = ValidarDTO.ValidarPrArticulo(txtArticulo.getText());
+//                if (valor1 == true) {
+//                    JOptionPane.showMessageDialog(this, "Articulo ya existente");
+//                } else {
+
+                    obj.setNombreArticulo(txtArticulo.getText());
+                    obj.setPrSubgrupos(subgruposObjeto);
+                    obj.setUsuarioCreacion(seUsuario.getUsuario());
+                    obj.setFechaCreacion(d);
+                    obj.setEstado("A");
+
+                    cont.create(obj);
+
+                    JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
+                    setVisible(false);
+//                }
             } catch (Exception ex) {
                 Logger.getLogger(NuevoArticulo.class.getName()).log(Level.SEVERE, null, ex);
             }
