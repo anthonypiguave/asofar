@@ -154,8 +154,8 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
                 Prtipo.create(tipo);
                 JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                 this.setVisible(false);
-//                Tipo_presentacion c = new Tipo_presentacion(new javax.swing.JFrame(), true);
-//                c.setVisible(true);
+                Tipo_presentacion c = new Tipo_presentacion(new javax.swing.JFrame(), true);
+                c.setVisible(true);
             }
 
         } catch (Exception e) {

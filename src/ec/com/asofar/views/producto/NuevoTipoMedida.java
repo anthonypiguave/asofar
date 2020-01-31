@@ -240,8 +240,8 @@ public class NuevoTipoMedida extends javax.swing.JDialog {
                     cont.create(medidas);
                     JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
-                    tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
-                    tm.setVisible(true);
+//                    tipo_medida tm = new tipo_medida(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+//                    tm.setVisible(true);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(tipo_medida_agregar.class.getName()).log(Level.SEVERE, null, ex);
