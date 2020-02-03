@@ -6,6 +6,7 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrSubgruposJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.PrSubgrupos;
 import ec.com.asofar.dto.SeEmpresa;
@@ -194,7 +195,8 @@ public class NuevoSubGrupo extends javax.swing.JDialog {
         
         if (r == JOptionPane.YES_OPTION) {
             try {
-                
+                 boolean valor1 = ValidarDTO.ValidarPrSubGrupos(txtSubGrupo.getText());
+                 if(valor1 == false){
                 obj.setNombre(txtSubGrupo.getText());
                 obj.setIdEmpresa(seEmpresa);
                 obj.setPrGrupos(gruposObjeto);
@@ -206,7 +208,9 @@ public class NuevoSubGrupo extends javax.swing.JDialog {
                 
                 JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                 setVisible(false);
-                
+                 }else{
+                         JOptionPane.showMessageDialog(this, "El Subgrupo ya existente");
+                 }
             } catch (Exception e) {
             }
         }

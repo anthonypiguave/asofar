@@ -353,8 +353,34 @@ public class ValidarDTO {
             }
         }
         return valor;
+    }
+
+    public static boolean ValidarSubgrupo(String nombre) {
+        PrSubgruposJpaController control = new PrSubgruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+        boolean valor = false;
+        List<PrSubgrupos> lista = control.findPrSubgruposEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getPrSubgruposPK().equals(nombre)) {
+                valor = true;
+            }
         }
+        return valor;
+    }
     
+     public static boolean ValidarGrupo(String nombre) {
+        PrGruposJpaController control = new PrGruposJpaController(EntityManagerUtil.ObtenerEntityManager());
+        boolean valor = false;
+        List<PrGrupos> lista = control.findPrGruposEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equals(nombre)) {
+                valor = true;
+            }
+        }
+        return valor;
+    }
+
 //    public static boolean ValidarSeSucursal(String nombre) {
 //        SeSucursalJpaController control = new SeSucursalJpaController(EntityManagerUtil.ObtenerEntityManager());
 //        boolean valor = false;
@@ -367,4 +393,4 @@ public class ValidarDTO {
 //        }
 //        return valor;
 //        }
-    }
+}

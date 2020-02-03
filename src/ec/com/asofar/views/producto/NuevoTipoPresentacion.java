@@ -196,7 +196,7 @@ public class NuevoTipoPresentacion extends javax.swing.JDialog {
         
         if (r == JOptionPane.YES_OPTION) {
             try {
-                            boolean valor1 = ValidarDTO.ValidarPrTipoPresentacion(txtTipoPresentacion.getText());
+             boolean valor1 = ValidarDTO.ValidarPrTipoPresentacion(txtTipoPresentacion.getText());
             if (valor1 == true) {
                 JOptionPane.showMessageDialog(this, "El tipo de Presentacion ya existente");
             } else {

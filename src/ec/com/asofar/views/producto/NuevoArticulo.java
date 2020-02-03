@@ -197,10 +197,10 @@ public class NuevoArticulo extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
             try {
-//                boolean valor1 = ValidarDTO.ValidarPrArticulo(txtArticulo.getText());
-//                if (valor1 == true) {
-//                    JOptionPane.showMessageDialog(this, "Articulo ya existente");
-//                } else {
+           boolean valor1 = ValidarDTO.ValidarPrArticulo(txtArticulo.getText());
+        //       if (valor1 == true) {
+        //           JOptionPane.showMessageDialog(this, "Articulo ya existente");
+         //      } else {
 
                     obj.setNombreArticulo(txtArticulo.getText());
                     obj.setPrSubgrupos(subgruposObjeto);
@@ -212,7 +212,7 @@ public class NuevoArticulo extends javax.swing.JDialog {
 
                     JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                     setVisible(false);
-//                }
+             // }
             } catch (Exception ex) {
                 Logger.getLogger(NuevoArticulo.class.getName()).log(Level.SEVERE, null, ex);
             }

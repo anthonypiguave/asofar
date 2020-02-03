@@ -143,9 +143,7 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         try {
             boolean valor1 = ValidarDTO.ValidarPrTipoPresentacion(txtnombre.getText());
-            if (valor1 == true) {
-                JOptionPane.showMessageDialog(this, "El tipo de Presentacion ya existente");
-            } else {
+            if (valor1 == false) {
                 PrTipoPresentacion tipo = new PrTipoPresentacion();
 
                 tipo.setNombre(txtnombre.getText());
@@ -156,6 +154,9 @@ public class Ingresar_Presentacion extends javax.swing.JDialog {
                 this.setVisible(false);
                 Tipo_presentacion c = new Tipo_presentacion(new javax.swing.JFrame(), true);
                 c.setVisible(true);
+            } else {
+
+                JOptionPane.showMessageDialog(this, "El tipo de Presentacion ya existe");
             }
 
         } catch (Exception e) {

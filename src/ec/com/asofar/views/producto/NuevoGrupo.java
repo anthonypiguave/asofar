@@ -6,6 +6,7 @@
 package ec.com.asofar.views.producto;
 
 import ec.com.asofar.dao.PrGruposJpaController;
+import ec.com.asofar.daoext.ValidarDTO;
 import ec.com.asofar.dto.PrGrupos;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
@@ -193,7 +194,9 @@ public class NuevoGrupo extends javax.swing.JDialog {
 
         if (r == JOptionPane.YES_OPTION) {
             try {
-
+                boolean valor1 = ValidarDTO.ValidarGrupo(txtGrupo.getText());
+                if (valor1 == false) {
+                 
                 obj.setNombre(txtGrupo.getText());
                 obj.setIdEmpresa(seEmpresa);
                 obj.setUsuarioCreacion(seUsuario.getUsuario());
@@ -204,7 +207,9 @@ public class NuevoGrupo extends javax.swing.JDialog {
 
                 JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
                 setVisible(false);
-
+                  }else{
+                    JOptionPane.showMessageDialog(this, "El Grupo ya existente");
+                }
             } catch (Exception e) {
             }
         }
