@@ -85,9 +85,12 @@ public class GenerarXml {
                 itemNode.appendChild(valueNode);
                 //append itemNode to raiz
                 raiz.appendChild(itemNode); //pegamos el elemento a la raiz "Documento"
+   
             }
             //Generate XML
             Source source = new DOMSource(document);
+            
+            
             //Indicamos donde lo queremos almacenar
             Result result = new StreamResult(new java.io.File(name + ".xml")); //nombre del archivo
             //StreamResult result1 = new StreamResult(new File("C:\\xml"+ name + ".xml"));
