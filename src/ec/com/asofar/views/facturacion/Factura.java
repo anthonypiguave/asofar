@@ -6,6 +6,7 @@
 package ec.com.asofar.views.facturacion;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -61,11 +62,12 @@ public class Factura {
     public Factura() {
 
     }
+     
 
     public Long getIdFactura() {
         return idFactura;
     }
-
+    @XmlAttribute(name = "IdFactura")
     public void setIdFactura(Long idFactura) {
         this.idFactura = idFactura;
     }
@@ -233,7 +235,7 @@ public class Factura {
     public Long getIdFacturaDetalle() {
         return idFacturaDetalle;
     }
-
+    @XmlAttribute(name = "IdFacturaDetalle")
     public void setIdFacturaDetalle(Long idFacturaDetalle) {
         this.idFacturaDetalle = idFacturaDetalle;
     }

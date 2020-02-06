@@ -6,6 +6,8 @@
 package ec.com.asofar.views.facturacion;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +21,7 @@ import javax.xml.bind.Marshaller;
  */
 public class GenerarXml2 {
 
-    public static void main(String[] args) throws JAXBException {
+    public static void main(String[] args) throws JAXBException, IOException {
 
         List<Factura> listaCab = new ArrayList<Factura>();
         List<Factura> listaDet = new ArrayList<Factura>();
@@ -52,9 +54,6 @@ public class GenerarXml2 {
         objCab.setTotalBaseNoIva(0.0);
         objCab.setTotalIva(12.0);
         objCab.setTotalFacturado(45.0);
-        
-        
-        
 
         objDet.setIdFacturaDetalle(Long.valueOf("1"));
         objDet.setLineaDetalle(Long.valueOf("1"));
@@ -73,7 +72,7 @@ public class GenerarXml2 {
 
         listaCab.add(objCab);
         listaDet.add(objDet);
-        
+
         objDet = new Factura();
         objDet.setIdFacturaDetalle(Long.valueOf("2"));
         objDet.setLineaDetalle(Long.valueOf("1"));
@@ -89,14 +88,13 @@ public class GenerarXml2 {
         objDet.setFechaCreacion(d);
         objDet.setUsuarioActualizacion("admin");
         objDet.setFechaActualizacion(d);
-        
+
         listaDet.add(objDet);
-        
 
         FacturaOrden factOrden = new FacturaOrden();
 
-        factOrden.setFacturaOrdenCabecera(listaCab);
-        factOrden.setFacturaOrdenDetalle(listaDet);
+        factOrden.setFacturaCabecera(listaCab);
+        factOrden.setFacturaDetalle(listaDet);
 
         //contexto      
         JAXBContext ctx = JAXBContext.newInstance(FacturaOrden.class);
@@ -107,10 +105,11 @@ public class GenerarXml2 {
         // formato delarchivo xml
         ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         // realiza conversion a xml
-        ms.marshal(factOrden, new File("/home/admin1/prueba.xml"));
-        
-        ///  c://xml
+//        ms.marshal(factOrden, new File("/home/admin1/prueba.xml"));
+        ms.marshal(factOrden, System.out);
+        ms.marshal(factOrden, new FileWriter("prueba.xml"));
 
+        ///  c://xml
     }
 
 }
