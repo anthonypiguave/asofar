@@ -55,6 +55,8 @@ import ec.com.asofar.util.Tablas;
 import ec.com.asofar.views.caja.Cierre_Caja;
 import ec.com.asofar.views.clientes.NuevoCliente;
 import ec.com.asofar.views.clientes.cliente_agregar;
+import ec.com.asofar.views.facturacion.Factura;
+import ec.com.asofar.views.facturacion.GenerarXml2;
 import ec.com.asofar.views.inicio.PantallaPrincipal;
 import java.awt.Color;
 import java.awt.Font;
@@ -1298,7 +1300,7 @@ public class Venta extends javax.swing.JInternalFrame {
                         Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
 
                     } else {
-                        System.out.println("can t "+cantidadMod);
+                        System.out.println("can t " + cantidadMod);
                         if (cantidadMod.intValue() > 1) {
                             String ivaS = tba_detalle.getValueAt(i, 6).toString();
                             Double ivaT = Double.valueOf(ivaS.replace(",", "."));
@@ -1332,10 +1334,10 @@ public class Venta extends javax.swing.JInternalFrame {
                             TotalizarIva();
                             TotalizarDescuento();
                             TotalizarSubtotal();
-                        }else{
-                        JOptionPane.showMessageDialog(null,"Valor Incorrecto");
-                        listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
-                        Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Valor Incorrecto");
+                            listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
+                            Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
                         }
                     }/**/
 
@@ -1381,7 +1383,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 cabFact.setFormaPago(cbx_FormaPago.getSelectedItem().toString());
                 try {
                     VeFactura pkFactura = obtenerId_Factura.guardarVenta(cabFact);
-                    
+
                     for (int i = 0; i < listaDetFactura.size(); i++) {
 
                         detFact.setVeFactura(pkFactura);
@@ -1485,6 +1487,88 @@ public class Venta extends javax.swing.JInternalFrame {
                             } catch (Exception e) {
                             }
                         }
+
+                        // generar xml//////
+                        ////cabecera///
+                        List<Factura> listaCab = new ArrayList<Factura>();
+                        Factura objCab = new Factura();
+
+                        objCab.setIdFactura(pkFactura.getVeFacturaPK().getIdFactura());
+                        objCab.setEmpresa(suc.getSeEmpresa().getNombreComercial());
+                        objCab.setSucursal(suc.getNombreComercial());
+                        objCab.setFecha(cabFact.getFechaCreacion());
+
+                        objCab.setFormaPago(cabFact.getFormaPago());
+                        objCab.setNumeroEstablecimientoSri(cabFact.getPuntoEmisionSri());
+                        objCab.setPuntoEmisionSri(cabFact.getPuntoEmisionSri());
+                        objCab.setDespachado(cabFact.getDespachado());
+
+//                        objCab.setCaja();
+//                        objCab.setUsuario();
+//
+//                        objCab.setClienteID(cabFact);
+//                        objCab.setClienteNombreApellido(cabFact);
+//                        objCab.setClienteTelefono(cabFact);
+//                        objCab.setClienteCorreo(cabFact);
+//                        objCab.setClienteDireccion(cabFact);
+
+                        objCab.setTotalSubtotal(cabFact.getSubtotal());
+                        objCab.setTotalDescuento(cabFact.getTotalDescuento());
+                        objCab.setTotalBaseIva(cabFact.getTotalBaseIva());
+                        objCab.setTotalBaseNoIva(cabFact.getTotalBaseNoIva());
+                        objCab.setTotalIva(cabFact.getTotalIva());
+                        objCab.setTotalFacturado(cabFact.getTotalFacturado());
+                        
+                        listaCab.add(objCab);
+                        
+                        
+                        List<Factura> listaDet = new ArrayList<Factura>();
+                        List<VeFacturaDetalle> listadet1 = new ArrayList<VeFacturaDetalle>();
+                        List<VeFacturaDetalle> listadet2 = new ArrayList<VeFacturaDetalle>();
+                        
+                        listadet1 = detFactController.findVeFacturaDetalleEntities();
+                        
+                        
+                         for (int i = 0; i < listadet1.size(); i++) {
+                             if(listadet1.get(i).getVeFacturaDetallePK().getIdFactura() == (pkFactura.getVeFacturaPK().getIdFactura())){
+                                 
+                                 listadet2.add(listadet1.get(i));
+                                 
+                             }
+                             
+                         }
+                        
+                        
+                        for (int i = 0; i < listadet2.size(); i++) {
+                                     
+                            Factura objDet = new Factura();
+                            
+                            
+//                            objDet.setIdFacturaDetalle(listadet2.get(i).getVeFacturaDetallePK().getIdFacturaDetalle());
+//                            objDet.setLineaDetalle(listadet2.get(i).getVeFacturaDetallePK().getLineaDetalle());
+//                            objDet.setIdProducto(listadet2.get(i).getVeFacturaDetallePK().get);
+//                            objDet.setDescripcion(listadet2.get(i));
+//                            objDet.setCantidad(listadet2.get(i));
+//                            objDet.setPrecioUnitario(listadet2.get(i));
+//                            objDet.setSubtotal(listadet2.get(i));
+//                            objDet.setValorIva(listadet2.get(i));
+//                            objDet.setValorDescuento(listadet2.get(i));
+//                            objDet.setValorTotal(listadet2.get(i));
+//                            objDet.setUsuarioCreacion(listadet2.get(i));
+         
+                            
+             
+                            
+                            listaDet.add(objDet);
+                        }
+                        
+                        
+                        
+                        GenerarXml2.generarXml(listaCab, listaDet);
+                        
+                        
+                        
+
                         java.sql.Date fechact = new java.sql.Date(d.getTime());
                         String empresa = emp.getNombreComercial();
                         String sucursal = suc.getNombreComercial();

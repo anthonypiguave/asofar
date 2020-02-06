@@ -3,7 +3,7 @@
     <facturaCabecera IdFactura="1">
         <empresa>asofar</empresa>
         <sucursal>sucursal1</sucursal>
-        <fecha>2020-02-06T01:49:59.766-05:00</fecha>
+        <fecha>2020-02-06T17:46:06.967-05:00</fecha>
         <formaPago>contado</formaPago>
         <numeroEstablecimientoSri>11454121444</numeroEstablecimientoSri>
         <puntoEmisionSri>0001</puntoEmisionSri>
@@ -34,9 +34,9 @@
             <valorDescuento>0.0</valorDescuento>
             <valorTotal>88.0</valorTotal>
             <usuarioCreacion>admin</usuarioCreacion>
-            <fechaCreacion>2020-02-06T01:49:59.766-05:00</fechaCreacion>
+            <fechaCreacion>2020-02-06T17:46:06.967-05:00</fechaCreacion>
             <usuarioActualizacion>admin</usuarioActualizacion>
-            <fechaActualizacion>2020-02-06T01:49:59.766-05:00</fechaActualizacion>
+            <fechaActualizacion>2020-02-06T17:46:06.967-05:00</fechaActualizacion>
         </detalle>
         <detalle IdFacturaDetalle="2">
             <lineaDetalle>1</lineaDetalle>
@@ -49,9 +49,9 @@
             <valorDescuento>0.0</valorDescuento>
             <valorTotal>88.0</valorTotal>
             <usuarioCreacion>admin</usuarioCreacion>
-            <fechaCreacion>2020-02-06T01:49:59.766-05:00</fechaCreacion>
+            <fechaCreacion>2020-02-06T17:46:06.967-05:00</fechaCreacion>
             <usuarioActualizacion>admin</usuarioActualizacion>
-            <fechaActualizacion>2020-02-06T01:49:59.766-05:00</fechaActualizacion>
+            <fechaActualizacion>2020-02-06T17:46:06.967-05:00</fechaActualizacion>
         </detalle>
     </facturaDetalle>
 </facturaOrden>

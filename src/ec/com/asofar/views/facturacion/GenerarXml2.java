@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -21,95 +23,104 @@ import javax.xml.bind.Marshaller;
  */
 public class GenerarXml2 {
 
-    public static void main(String[] args) throws JAXBException, IOException {
+//    public static void main(String[] args) throws JAXBException, IOException {
+//
+//        List<Factura> listaCab = new ArrayList<Factura>();
+//        List<Factura> listaDet = new ArrayList<Factura>();
+//        Factura objCab = new Factura();
+//        Factura objDet = new Factura();
+//        Date d = new Date();
+//
+//        objCab.setIdFactura(Long.valueOf("1"));
+//        objCab.setEmpresa("asofar");
+//        objCab.setSucursal("sucursal1");
+//        objCab.setFecha(d);
+//
+//        objCab.setFormaPago("contado");
+//        objCab.setNumeroEstablecimientoSri("11454121444");
+//        objCab.setPuntoEmisionSri("0001");
+//        objCab.setDespachado("si");
+//
+//        objCab.setCaja("caja1");
+//        objCab.setUsuario("admin");
+//
+//        objCab.setClienteID("099999999");
+//        objCab.setClienteNombreApellido("cliente final");
+//        objCab.setClienteTelefono("222222");
+//        objCab.setClienteCorreo("s@sss.com");
+//        objCab.setClienteDireccion("xxxx");
+//
+//        objCab.setTotalSubtotal(10.5);
+//        objCab.setTotalDescuento(10.0);
+//        objCab.setTotalBaseIva(12.0);
+//        objCab.setTotalBaseNoIva(0.0);
+//        objCab.setTotalIva(12.0);
+//        objCab.setTotalFacturado(45.0);
+//
+//        objDet.setIdFacturaDetalle(Long.valueOf("1"));
+//        objDet.setLineaDetalle(Long.valueOf("1"));
+//        objDet.setIdProducto(Long.valueOf("1555"));
+//        objDet.setDescripcion("producto a ");
+//        objDet.setCantidad(Long.valueOf("5"));
+//        objDet.setPrecioUnitario(12.5);
+//        objDet.setSubtotal(20.0);
+//        objDet.setValorIva(1.2);
+//        objDet.setValorDescuento(0.0);
+//        objDet.setValorTotal(88.0);
+//        objDet.setUsuarioCreacion("admin");
+//        objDet.setFechaCreacion(d);
+//        objDet.setUsuarioActualizacion("admin");
+//        objDet.setFechaActualizacion(d);
+//
+//        listaCab.add(objCab);
+//        listaDet.add(objDet);
+//
+//        objDet = new Factura();
+//        objDet.setIdFacturaDetalle(Long.valueOf("2"));
+//        objDet.setLineaDetalle(Long.valueOf("1"));
+//        objDet.setIdProducto(Long.valueOf("1555"));
+//        objDet.setDescripcion("producto b ");
+//        objDet.setCantidad(Long.valueOf("5"));
+//        objDet.setPrecioUnitario(12.5);
+//        objDet.setSubtotal(20.0);
+//        objDet.setValorIva(1.2);
+//        objDet.setValorDescuento(0.0);
+//        objDet.setValorTotal(88.0);
+//        objDet.setUsuarioCreacion("admin");
+//        objDet.setFechaCreacion(d);
+//        objDet.setUsuarioActualizacion("admin");
+//        objDet.setFechaActualizacion(d);
+////
+//
+//
+//    }
 
-        List<Factura> listaCab = new ArrayList<Factura>();
-        List<Factura> listaDet = new ArrayList<Factura>();
-        Factura objCab = new Factura();
-        Factura objDet = new Factura();
-        Date d = new Date();
+    public static void generarXml(List<Factura> listaCab, List<Factura> listaDet) {
 
-        objCab.setIdFactura(Long.valueOf("1"));
-        objCab.setEmpresa("asofar");
-        objCab.setSucursal("sucursal1");
-        objCab.setFecha(d);
+        try {
 
-        objCab.setFormaPago("contado");
-        objCab.setNumeroEstablecimientoSri("11454121444");
-        objCab.setPuntoEmisionSri("0001");
-        objCab.setDespachado("si");
+            FacturaOrden factOrden = new FacturaOrden();
 
-        objCab.setCaja("caja1");
-        objCab.setUsuario("admin");
+            factOrden.setFacturaCabecera(listaCab);
+            factOrden.setFacturaDetalle(listaDet);
 
-        objCab.setClienteID("099999999");
-        objCab.setClienteNombreApellido("cliente final");
-        objCab.setClienteTelefono("222222");
-        objCab.setClienteCorreo("s@sss.com");
-        objCab.setClienteDireccion("xxxx");
+            //contexto      
+            JAXBContext ctx = JAXBContext.newInstance(FacturaOrden.class);
 
-        objCab.setTotalSubtotal(10.5);
-        objCab.setTotalDescuento(10.0);
-        objCab.setTotalBaseIva(12.0);
-        objCab.setTotalBaseNoIva(0.0);
-        objCab.setTotalIva(12.0);
-        objCab.setTotalFacturado(45.0);
+            //convercion obj a xml
+            Marshaller ms = ctx.createMarshaller();
 
-        objDet.setIdFacturaDetalle(Long.valueOf("1"));
-        objDet.setLineaDetalle(Long.valueOf("1"));
-        objDet.setIdProducto(Long.valueOf("1555"));
-        objDet.setDescripcion("producto a ");
-        objDet.setCantidad(Long.valueOf("5"));
-        objDet.setPrecioUnitario(12.5);
-        objDet.setSubtotal(20.0);
-        objDet.setValorIva(1.2);
-        objDet.setValorDescuento(0.0);
-        objDet.setValorTotal(88.0);
-        objDet.setUsuarioCreacion("admin");
-        objDet.setFechaCreacion(d);
-        objDet.setUsuarioActualizacion("admin");
-        objDet.setFechaActualizacion(d);
+            // formato delarchivo xml
+            ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            // realiza conversion a xml
+//            ms.marshal(factOrden, new File("/home/admin1/prueba.xml"));
+            ms.marshal(factOrden, System.out);
+            ms.marshal(factOrden, new FileWriter("prueba.xml"));
 
-        listaCab.add(objCab);
-        listaDet.add(objDet);
+        } catch (IOException | JAXBException e) {
+            Logger.getLogger(GenerarXml2.class.getName()).log(Level.SEVERE, null, e);
+        }
 
-        objDet = new Factura();
-        objDet.setIdFacturaDetalle(Long.valueOf("2"));
-        objDet.setLineaDetalle(Long.valueOf("1"));
-        objDet.setIdProducto(Long.valueOf("1555"));
-        objDet.setDescripcion("producto b ");
-        objDet.setCantidad(Long.valueOf("5"));
-        objDet.setPrecioUnitario(12.5);
-        objDet.setSubtotal(20.0);
-        objDet.setValorIva(1.2);
-        objDet.setValorDescuento(0.0);
-        objDet.setValorTotal(88.0);
-        objDet.setUsuarioCreacion("admin");
-        objDet.setFechaCreacion(d);
-        objDet.setUsuarioActualizacion("admin");
-        objDet.setFechaActualizacion(d);
-
-        listaDet.add(objDet);
-
-        FacturaOrden factOrden = new FacturaOrden();
-
-        factOrden.setFacturaCabecera(listaCab);
-        factOrden.setFacturaDetalle(listaDet);
-
-        //contexto      
-        JAXBContext ctx = JAXBContext.newInstance(FacturaOrden.class);
-
-        //convercion obj a xml
-        Marshaller ms = ctx.createMarshaller();
-
-        // formato delarchivo xml
-        ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        // realiza conversion a xml
-//        ms.marshal(factOrden, new File("/home/admin1/prueba.xml"));
-        ms.marshal(factOrden, System.out);
-        ms.marshal(factOrden, new FileWriter("prueba.xml"));
-
-        ///  c://xml
     }
 
 }
