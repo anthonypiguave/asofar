@@ -1490,87 +1490,84 @@ public class Venta extends javax.swing.JInternalFrame {
 
                         // generar xml//////
                         ////cabecera///
-                        List<Factura> listaCab = new ArrayList<Factura>();
-                        Factura objCab = new Factura();
+                        try {
+                            List<Factura> listaCab = new ArrayList<Factura>();
+                            Factura objCab = new Factura();
 
-                        objCab.setIdFactura(pkFactura.getVeFacturaPK().getIdFactura());
-                        objCab.setEmpresa(suc.getSeEmpresa().getNombreComercial());
-                        objCab.setSucursal(suc.getNombreComercial());
-                        objCab.setFecha(cabFact.getFechaCreacion());
+                            objCab.setIdFactura(pkFactura.getVeFacturaPK().getIdFactura());
+                            objCab.setEmpresa(suc.getSeEmpresa().getNombreComercial());
+                            objCab.setSucursal(suc.getNombreComercial());
+                            objCab.setFecha(cabFact.getFechaCreacion());
 
-                        objCab.setFormaPago(cabFact.getFormaPago());
-                        objCab.setNumeroEstablecimientoSri(cabFact.getPuntoEmisionSri());
-                        objCab.setPuntoEmisionSri(cabFact.getPuntoEmisionSri());
-                        objCab.setDespachado(cabFact.getDespachado());
+                            objCab.setFormaPago(cabFact.getFormaPago());
+                            objCab.setNumeroEstablecimientoSri(cabFact.getPuntoEmisionSri());
+                            objCab.setPuntoEmisionSri(cabFact.getPuntoEmisionSri());
+                            objCab.setDespachado(cabFact.getDespachado());
 
-//                        objCab.setCaja();
-//                        objCab.setUsuario();
-//
-//                        objCab.setClienteID(Cliente.);
-//                        objCab.setClienteNombreApellido(cabFact);
-//                        objCab.setClienteTelefono(cabFact);
-//                        objCab.setClienteCorreo(cabFact);
-//                        objCab.setClienteDireccion(cabFact);
+                            VeCaja caja2 = new VeCaja();
+                            caja2 = cajaC.findVeCaja(idCaja);
+                            objCab.setCaja(caja2.getNombre());
+                            objCab.setUsuario(usu.getUsuario());
 
-                        objCab.setTotalSubtotal(cabFact.getSubtotal());
-                        objCab.setTotalDescuento(cabFact.getTotalDescuento());
-                        objCab.setTotalBaseIva(cabFact.getTotalBaseIva());
-                        objCab.setTotalBaseNoIva(cabFact.getTotalBaseNoIva());
-                        objCab.setTotalIva(cabFact.getTotalIva());
-                        objCab.setTotalFacturado(cabFact.getTotalFacturado());
-                        
-                        listaCab.add(objCab);
-                        
-                        
-                        List<Factura> listaDet = new ArrayList<Factura>();
-                        List<VeFacturaDetalle> listadet1 = new ArrayList<VeFacturaDetalle>();
-                        List<VeFacturaDetalle> listadet2 = new ArrayList<VeFacturaDetalle>();
-                        
-                        listadet1 = detFactController.findVeFacturaDetalleEntities();
-                        
-                        
-                         for (int i = 0; i < listadet1.size(); i++) {
-                             if(listadet1.get(i).getVeFacturaDetallePK().getIdFactura() == (pkFactura.getVeFacturaPK().getIdFactura())){
-                                 
-                                 listadet2.add(listadet1.get(i));
-                                 
-                             }
-                             
-                         }
-                        
-                        
-                        PrPrestacionesJpaController prestacionCont = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
-                         
-                        for (int i = 0; i < listadet2.size(); i++) {
-                                     
-                            Factura objDet = new Factura();
-                            PrPrestaciones objPres = new PrPrestaciones();
-                            
-                            objDet.setIdFacturaDetalle(listadet2.get(i).getVeFacturaDetallePK().getIdFacturaDetalle());
-                            objDet.setLineaDetalle(listadet2.get(i).getVeFacturaDetallePK().getLineaDetalle());
-                            
-                            
-                            objPres = prestacionCont.findPrPrestaciones(listadet2.get(i).getVeFacturaDetallePK().getIdPrestaciones());
-                            objDet.setIdProducto(objPres.getIdPoducto().longValue());
-                            objDet.setDescripcion(objPres.getNombrePrestacion());
-                            objDet.setCantidad(listadet2.get(i).getCantidad().longValue());
-                            objDet.setPrecioUnitario(listadet2.get(i).getPrecioUnitarioVenta());
-                            objDet.setSubtotal(listadet2.get(i).getSubtotal());
-                            objDet.setValorIva(listadet2.get(i).getValorIva());
-                            objDet.setValorDescuento(listadet2.get(i).getValorDescuento());
-                            objDet.setValorTotal(listadet2.get(i).getValorTotal());
-                      
-             
-                            
-                            listaDet.add(objDet);
+                            objCab.setClienteID(txtIdentificacion.getText());
+                            objCab.setClienteNombreApellido(txtApellido.getText() + "  " + txtNombre.getText());
+                            objCab.setClienteTelefono(txtTelefono.getText());
+                            objCab.setClienteCorreo(txtEmail.getText());
+                            objCab.setClienteDireccion(txtDireccion.getText());
+
+                            objCab.setTotalSubtotal(cabFact.getSubtotal());
+                            objCab.setTotalDescuento(cabFact.getTotalDescuento());
+                            objCab.setTotalBaseIva(cabFact.getTotalBaseIva());
+                            objCab.setTotalBaseNoIva(cabFact.getTotalBaseNoIva());
+                            objCab.setTotalIva(cabFact.getTotalIva());
+                            objCab.setTotalFacturado(cabFact.getTotalFacturado());
+
+                            listaCab.add(objCab);
+
+                            List<Factura> listaDet = new ArrayList<Factura>();
+                            List<VeFacturaDetalle> listadet1 = new ArrayList<VeFacturaDetalle>();
+                            List<VeFacturaDetalle> listadet2 = new ArrayList<VeFacturaDetalle>();
+
+                            listadet1 = detFactController.findVeFacturaDetalleEntities();
+
+                            for (int i = 0; i < listadet1.size(); i++) {
+                                if (listadet1.get(i).getVeFacturaDetallePK().getIdFactura() == (pkFactura.getVeFacturaPK().getIdFactura())) {
+
+                                    listadet2.add(listadet1.get(i));
+
+                                }
+
+                            }
+
+                            PrPrestacionesJpaController prestacionCont = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+
+                            for (int i = 0; i < listadet2.size(); i++) {
+
+                                Factura objDet = new Factura();
+                                PrPrestaciones objPres = new PrPrestaciones();
+
+                                objDet.setIdFacturaDetalle(listadet2.get(i).getVeFacturaDetallePK().getIdFacturaDetalle());
+                                objDet.setLineaDetalle(listadet2.get(i).getVeFacturaDetallePK().getLineaDetalle());
+
+                                objPres = prestacionCont.findPrPrestaciones(listadet2.get(i).getVeFacturaDetallePK().getIdPrestaciones());
+                                objDet.setIdProducto(objPres.getIdPoducto().longValue());
+                                objDet.setDescripcion(objPres.getNombrePrestacion());
+                                objDet.setCantidad(listadet2.get(i).getCantidad().longValue());
+                                objDet.setPrecioUnitario(listadet2.get(i).getPrecioUnitarioVenta());
+                                objDet.setSubtotal(listadet2.get(i).getSubtotal());
+                                objDet.setValorIva(listadet2.get(i).getValorIva());
+
+                                GenerarXml2.generarXml(listaCab, listaDet);
+                                objDet.setValorDescuento(listadet2.get(i).getValorDescuento());
+                                objDet.setValorTotal(listadet2.get(i).getValorTotal());
+
+                                listaDet.add(objDet);
+                            }
+
+                            GenerarXml2.generarXml(listaCab, listaDet);
+
+                        } catch (Exception e) {
                         }
-                        
-                        
-                        
-                        GenerarXml2.generarXml(listaCab, listaDet);
-                        
-                        
-                        
 
                         java.sql.Date fechact = new java.sql.Date(d.getTime());
                         String empresa = emp.getNombreComercial();
