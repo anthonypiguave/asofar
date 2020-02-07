@@ -1506,7 +1506,7 @@ public class Venta extends javax.swing.JInternalFrame {
 //                        objCab.setCaja();
 //                        objCab.setUsuario();
 //
-//                        objCab.setClienteID(cabFact);
+//                        objCab.setClienteID(Cliente.);
 //                        objCab.setClienteNombreApellido(cabFact);
 //                        objCab.setClienteTelefono(cabFact);
 //                        objCab.setClienteCorreo(cabFact);
@@ -1539,24 +1539,27 @@ public class Venta extends javax.swing.JInternalFrame {
                          }
                         
                         
+                        PrPrestacionesJpaController prestacionCont = new PrPrestacionesJpaController(EntityManagerUtil.ObtenerEntityManager());
+                         
                         for (int i = 0; i < listadet2.size(); i++) {
                                      
                             Factura objDet = new Factura();
+                            PrPrestaciones objPres = new PrPrestaciones();
+                            
+                            objDet.setIdFacturaDetalle(listadet2.get(i).getVeFacturaDetallePK().getIdFacturaDetalle());
+                            objDet.setLineaDetalle(listadet2.get(i).getVeFacturaDetallePK().getLineaDetalle());
                             
                             
-//                            objDet.setIdFacturaDetalle(listadet2.get(i).getVeFacturaDetallePK().getIdFacturaDetalle());
-//                            objDet.setLineaDetalle(listadet2.get(i).getVeFacturaDetallePK().getLineaDetalle());
-//                            objDet.setIdProducto(listadet2.get(i).getVeFacturaDetallePK().get);
-//                            objDet.setDescripcion(listadet2.get(i));
-//                            objDet.setCantidad(listadet2.get(i));
-//                            objDet.setPrecioUnitario(listadet2.get(i));
-//                            objDet.setSubtotal(listadet2.get(i));
-//                            objDet.setValorIva(listadet2.get(i));
-//                            objDet.setValorDescuento(listadet2.get(i));
-//                            objDet.setValorTotal(listadet2.get(i));
-//                            objDet.setUsuarioCreacion(listadet2.get(i));
-         
-                            
+                            objPres = prestacionCont.findPrPrestaciones(listadet2.get(i).getVeFacturaDetallePK().getIdPrestaciones());
+                            objDet.setIdProducto(objPres.getIdPoducto().longValue());
+                            objDet.setDescripcion(objPres.getNombrePrestacion());
+                            objDet.setCantidad(listadet2.get(i).getCantidad().longValue());
+                            objDet.setPrecioUnitario(listadet2.get(i).getPrecioUnitarioVenta());
+                            objDet.setSubtotal(listadet2.get(i).getSubtotal());
+                            objDet.setValorIva(listadet2.get(i).getValorIva());
+                            objDet.setValorDescuento(listadet2.get(i).getValorDescuento());
+                            objDet.setValorTotal(listadet2.get(i).getValorTotal());
+                      
              
                             
                             listaDet.add(objDet);
