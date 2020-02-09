@@ -1,57 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <facturaOrden>
-    <facturaCabecera IdFactura="1">
-        <empresa>asofar</empresa>
-        <sucursal>sucursal1</sucursal>
-        <fecha>2020-02-06T17:46:06.967-05:00</fecha>
-        <formaPago>contado</formaPago>
-        <numeroEstablecimientoSri>11454121444</numeroEstablecimientoSri>
-        <puntoEmisionSri>0001</puntoEmisionSri>
-        <despachado>si</despachado>
-        <caja>caja1</caja>
+    <facturaCabecera IdFactura="19">
+        <empresa>ASOFAR</empresa>
+        <sucursal>SUCURSAL 1</sucursal>
+        <fecha>2020-02-09T15:23:05.815-05:00</fecha>
+        <formaPago>CONTADO</formaPago>
+        <despachado>SI</despachado>
+        <caja>caja 1</caja>
         <usuario>admin</usuario>
-        <clienteID>099999999</clienteID>
-        <clienteNombreApellido>cliente final</clienteNombreApellido>
-        <clienteTelefono>222222</clienteTelefono>
-        <clienteCorreo>s@sss.com</clienteCorreo>
-        <clienteDireccion>xxxx</clienteDireccion>
-        <totalSubtotal>10.5</totalSubtotal>
-        <totalDescuento>10.0</totalDescuento>
-        <totalBaseIva>12.0</totalBaseIva>
-        <totalBaseNoIva>0.0</totalBaseNoIva>
-        <totalIva>12.0</totalIva>
-        <totalFacturado>45.0</totalFacturado>
+        <clienteID>0925241796</clienteID>
+        <clienteNombreApellido>MUÑOZ VERA JORGE</clienteNombreApellido>
+        <clienteTelefono></clienteTelefono>
+        <clienteCorreo></clienteCorreo>
+        <clienteDireccion>ALBORADA X</clienteDireccion>
+        <totalSubtotal>1.0</totalSubtotal>
+        <totalDescuento>0.0</totalDescuento>
+        <totalIva>0.12</totalIva>
+        <totalFacturado>1.12</totalFacturado>
     </facturaCabecera>
     <facturaDetalle>
-        <detalle IdFacturaDetalle="1">
+        <detalle IdFacturaDetalle="19">
             <lineaDetalle>1</lineaDetalle>
-            <idProducto>1555</idProducto>
-            <descripcion>producto a </descripcion>
-            <cantidad>5</cantidad>
-            <precioUnitario>12.5</precioUnitario>
-            <subtotal>20.0</subtotal>
-            <valorIva>1.2</valorIva>
+            <descripcion>ENTRAGA A DOMICILIO</descripcion>
+            <cantidad>1</cantidad>
+            <precioUnitario>1.0</precioUnitario>
+            <subtotal>1.0</subtotal>
+            <valorIva>0.12</valorIva>
             <valorDescuento>0.0</valorDescuento>
-            <valorTotal>88.0</valorTotal>
-            <usuarioCreacion>admin</usuarioCreacion>
-            <fechaCreacion>2020-02-06T17:46:06.967-05:00</fechaCreacion>
-            <usuarioActualizacion>admin</usuarioActualizacion>
-            <fechaActualizacion>2020-02-06T17:46:06.967-05:00</fechaActualizacion>
-        </detalle>
-        <detalle IdFacturaDetalle="2">
-            <lineaDetalle>1</lineaDetalle>
-            <idProducto>1555</idProducto>
-            <descripcion>producto b </descripcion>
-            <cantidad>5</cantidad>
-            <precioUnitario>12.5</precioUnitario>
-            <subtotal>20.0</subtotal>
-            <valorIva>1.2</valorIva>
-            <valorDescuento>0.0</valorDescuento>
-            <valorTotal>88.0</valorTotal>
-            <usuarioCreacion>admin</usuarioCreacion>
-            <fechaCreacion>2020-02-06T17:46:06.967-05:00</fechaCreacion>
-            <usuarioActualizacion>admin</usuarioActualizacion>
-            <fechaActualizacion>2020-02-06T17:46:06.967-05:00</fechaActualizacion>
+            <valorTotal>1.12</valorTotal>
         </detalle>
     </facturaDetalle>
 </facturaOrden>

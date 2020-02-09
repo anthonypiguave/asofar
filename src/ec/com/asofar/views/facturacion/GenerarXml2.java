@@ -90,13 +90,19 @@ public class GenerarXml2 {
 //        objDet.setFechaCreacion(d);
 //        objDet.setUsuarioActualizacion("admin");
 //        objDet.setFechaActualizacion(d);
-////
+//            
+//        generarXml(listaCab, listaDet);
 //
 //
 //    }
 
-    public static void generarXml(List<Factura> listaCab, List<Factura> listaDet) {
-
+    public static void generarXml(List<Factura> listaCab, List<Factura> listaDet) throws IOException {
+        
+//        System.out.println("ffffffffff " + listaCab.get(0).getIdFactura());
+        
+        
+        
+        
         try {
 
             FacturaOrden factOrden = new FacturaOrden();
@@ -117,7 +123,7 @@ public class GenerarXml2 {
             ms.marshal(factOrden, System.out);
             ms.marshal(factOrden, new FileWriter("prueba.xml"));
 
-        } catch (IOException | JAXBException e) {
+        } catch (JAXBException e) {
             Logger.getLogger(GenerarXml2.class.getName()).log(Level.SEVERE, null, e);
         }
 

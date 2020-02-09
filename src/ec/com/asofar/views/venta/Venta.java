@@ -69,6 +69,7 @@ import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.*;
@@ -1489,8 +1490,8 @@ public class Venta extends javax.swing.JInternalFrame {
                         }
 
                         // generar xml//////
-                        ////cabecera///
                         try {
+
                             List<Factura> listaCab = new ArrayList<Factura>();
                             Factura objCab = new Factura();
 
@@ -1510,7 +1511,7 @@ public class Venta extends javax.swing.JInternalFrame {
                             objCab.setUsuario(usu.getUsuario());
 
                             objCab.setClienteID(txtIdentificacion.getText());
-                            objCab.setClienteNombreApellido(txtApellido.getText() + "  " + txtNombre.getText());
+                            objCab.setClienteNombreApellido(txtApellido.getText() + " " + txtNombre.getText());
                             objCab.setClienteTelefono(txtTelefono.getText());
                             objCab.setClienteCorreo(txtEmail.getText());
                             objCab.setClienteDireccion(txtDireccion.getText());
@@ -1531,6 +1532,7 @@ public class Venta extends javax.swing.JInternalFrame {
                             listadet1 = detFactController.findVeFacturaDetalleEntities();
 
                             for (int i = 0; i < listadet1.size(); i++) {
+
                                 if (listadet1.get(i).getVeFacturaDetallePK().getIdFactura() == (pkFactura.getVeFacturaPK().getIdFactura())) {
 
                                     listadet2.add(listadet1.get(i));
@@ -1550,23 +1552,34 @@ public class Venta extends javax.swing.JInternalFrame {
                                 objDet.setLineaDetalle(listadet2.get(i).getVeFacturaDetallePK().getLineaDetalle());
 
                                 objPres = prestacionCont.findPrPrestaciones(listadet2.get(i).getVeFacturaDetallePK().getIdPrestaciones());
-                                objDet.setIdProducto(objPres.getIdPoducto().longValue());
+
+                                if (objPres.getIdPoducto() != null) {
+
+                                    objDet.setIdProducto(objPres.getIdPoducto().longValue());
+                                }
+
                                 objDet.setDescripcion(objPres.getNombrePrestacion());
+
                                 objDet.setCantidad(listadet2.get(i).getCantidad().longValue());
+
                                 objDet.setPrecioUnitario(listadet2.get(i).getPrecioUnitarioVenta());
+
                                 objDet.setSubtotal(listadet2.get(i).getSubtotal());
+
                                 objDet.setValorIva(listadet2.get(i).getValorIva());
 
-                                GenerarXml2.generarXml(listaCab, listaDet);
                                 objDet.setValorDescuento(listadet2.get(i).getValorDescuento());
+
                                 objDet.setValorTotal(listadet2.get(i).getValorTotal());
 
                                 listaDet.add(objDet);
+
                             }
 
                             GenerarXml2.generarXml(listaCab, listaDet);
-
-                        } catch (Exception e) {
+                            
+                        } catch (IOException e) {
+                            Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, e);
                         }
 
                         java.sql.Date fechact = new java.sql.Date(d.getTime());
