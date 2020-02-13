@@ -206,6 +206,12 @@ public class ReporteriaInventario extends javax.swing.JDialog {
 
         lista = new ArrayList<PrProductoBodega>();
         lista = cont.findPrProductoBodegaEntities();
+        for (int i = 0; i < lista.size(); i++) {
+            
+            
+          
+            
+        }
         Tablas.ListarProductoBodegaConsulta(lista, tabla);
     }
 
