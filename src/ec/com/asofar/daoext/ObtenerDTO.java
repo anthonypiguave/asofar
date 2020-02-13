@@ -952,10 +952,7 @@ public class ObtenerDTO {
         List<PrProductos> lista = control.findPrProductosEntities();
 
         for (int i = 0; i < lista.size(); i++) {
-            System.out.println("lis " + lista.get(i).getPrProductosPK().getIdProducto());
-            System.out.println("id " + id);
             if (lista.get(i).getPrProductosPK().getIdProducto() == id) {
-                System.out.println("siiiii");
                 dto = lista.get(i);
                 break;
             }

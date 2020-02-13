@@ -6,7 +6,6 @@
 package ec.com.asofar.daoext;
 
 import ec.com.asofar.dao.PrProductosJpaController;
-import ec.com.asofar.dto.InTipoDocumento;
 import ec.com.asofar.dto.PrProductos;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -32,6 +31,17 @@ public class Pr_ProductoExt extends PrProductosJpaController {
                 + "WHERE P.estado='A';";
         Query query = em.createNativeQuery(nativeQuery, PrProductos.class);
         lprod = query.getResultList();
+        return lprod;
+    }
+    
+        public  PrProductos obtenerProductoObj( Long id) {
+        EntityManager em = getEntityManager();
+        PrProductos lprod = null;
+        String nativeQuery = "SELECT P.*"
+                + " FROM pr_productos P\n"
+                + " WHERE P.id_producto = " + id + ";";
+        Query query = em.createNativeQuery(nativeQuery, PrProductos.class);
+        lprod = ( PrProductos) query.getSingleResult();
         return lprod;
     }
     

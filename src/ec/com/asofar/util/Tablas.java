@@ -11,6 +11,7 @@ import ec.com.asofar.daoext.InKardexExt;
 import ec.com.asofar.daoext.JoinProductoVenta;
 import ec.com.asofar.daoext.ObtenerDTO;
 import static ec.com.asofar.daoext.ObtenerDTO.ObtenerPrProductos;
+import ec.com.asofar.daoext.Pr_ProductoExt;
 import ec.com.asofar.daoext.ProductoCadena;
 import ec.com.asofar.daoext.ReporteComprasDTO;
 import ec.com.asofar.daoext.ReporteDetalleComprasDTO;
@@ -3523,16 +3524,25 @@ public class Tablas {
         Tabla.setShowGrid(true);
 
         InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
+        
+        Pr_ProductoExt productoExt = new Pr_ProductoExt(EntityManagerUtil.ObtenerEntityManager());
 
         for (int i = 0; i < lista.size(); i++) {
+            
+            System.out.println(" entro 1");
 
             if (lista.get(i).getEstado().equals("A")) {
-
-                PrProductos prod = ObtenerPrProductos(lista.get(i).getPrProductoBodegaPK().getIdProducto());
+                
+                System.out.println(" entro 2");
+                
+                PrProductos prod = productoExt.obtenerProductoObj(lista.get(i).getPrProductoBodegaPK().getIdProducto());
+                System.out.println(" entro 3    "+ prod.getPrProductosPK());
+//                PrProductos prod = ObtenerPrProductos(lista.get(i).getPrProductoBodegaPK().getIdProducto());
 
                 InKardex kard = kardexExt.obtenerUltimoProductoKardex(lista.get(i).getPrProductoBodegaPK().getIdProducto());
-
+                 
                 if (prod != null) {
+                    
 
                     filas[0] = "" + prod.getPrProductosPK().getIdProducto();
                     filas[1] = prod.getNombreProducto();
@@ -3545,6 +3555,7 @@ public class Tablas {
                 filas[2] = lista.get(i).getInBodega().getNombreBodega();
 
                 if (kard != null) {
+                    System.out.println(" entro 4    "+ kard.getInKardexPK());
                     filas[3] = kard.getSaldoActual().toString();
                 } else {
                     filas[3] = "0";
