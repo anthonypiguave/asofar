@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class ActualizarPrestacion extends javax.swing.JDialog {
 
-    int x, y;
+    int x,y;
     ObtenerDTO od = new ObtenerDTO();
     List<PrPrestaciones> TiBo;
 
@@ -62,6 +62,13 @@ public class ActualizarPrestacion extends javax.swing.JDialog {
         cbx_estado.addItem("Inactivo");
         cbx_aplica_iva.addItem("SI");
         cbx_aplica_iva.addItem("NO");
+            if(bod.getAplicaIva().equals("NO")){
+            cbx_aplica_iva.setSelectedItem("NO");
+            }else{
+            cbx_aplica_iva.setSelectedItem("SI");
+            }
+        
+        
 
         emp = em;
         suc = su;
@@ -85,10 +92,10 @@ public class ActualizarPrestacion extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cbx_estado = new javax.swing.JComboBox<>();
+        cbx_estado = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbx_aplica_iva = new javax.swing.JComboBox<>();
+        cbx_aplica_iva = new javax.swing.JComboBox<String>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
@@ -146,7 +153,6 @@ public class ActualizarPrestacion extends javax.swing.JDialog {
         jLabel3.setText("APLICA IVA:");
 
         cbx_estado.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        cbx_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel1.setText("NOMBRE DE PRESTACION:");
@@ -195,7 +201,7 @@ public class ActualizarPrestacion extends javax.swing.JDialog {
                                 .addComponent(cbx_aplica_iva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cbx_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -1289,9 +1289,9 @@ public class Venta extends javax.swing.JInternalFrame {
 //            } else {
             int i = tba_detalle.getSelectedRow();
             Double descuentoT = 0.00;
+            
             String valor = (String) tba_detalle.getValueAt(i, 3);
             char o = valor.charAt(0);
-
             if (o < '0' || o > '9') {
                 System.out.println("error "+o);
                 JOptionPane.showMessageDialog(null, "Valor Incorrecto!");
