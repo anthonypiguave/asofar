@@ -383,7 +383,7 @@ public class Venta extends javax.swing.JInternalFrame {
         txtTipoIdent = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        cbx_FormaPago = new javax.swing.JComboBox<>();
+        cbx_FormaPago = new javax.swing.JComboBox<String>();
         jLabel21 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -565,7 +565,7 @@ public class Venta extends javax.swing.JInternalFrame {
             }
         });
 
-        cbx_FormaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONTADO", "CREDITO" }));
+        cbx_FormaPago.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CONTADO", "CREDITO" }));
 
         jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel21.setText("CORREO: ");
@@ -1059,6 +1059,9 @@ public class Venta extends javax.swing.JInternalFrame {
 
     }
     private void btn_agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_prodActionPerformed
+        try {
+            
+
         ConsultaProductoVenta ingre = new ConsultaProductoVenta(new javax.swing.JFrame(), true);
         ingre.setVisible(true);
         objJoinProVen = ingre.obtObjProdVent();
@@ -1110,6 +1113,7 @@ public class Venta extends javax.swing.JInternalFrame {
             TotalizarIva();
             TotalizarDescuento();
             TotalizarSubtotal();
+        }        } catch (Exception e) {
         }
     }//GEN-LAST:event_btn_agregar_prodActionPerformed
     private void Totalizar() {
@@ -1267,42 +1271,51 @@ public class Venta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tba_detalleMousePressed
 
     private void tba_detalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyTyped
-        char car = evt.getKeyChar();
-        if (car < '0' || car > '9') {
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
             evt.consume();
         }
-
-
+//                char c = evt.getKeyChar();
+//        if (c < '0' || c > '9') {
+//            evt.consume();
+//        }
     }//GEN-LAST:event_tba_detalleKeyTyped
 
     private void tba_detalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tba_detalleKeyReleased
         try {
+//            char c = evt.getKeyChar();
+//            if (c < '0' || c > '9') {
+//                evt.consume();
+//            } else {
             int i = tba_detalle.getSelectedRow();
             Double descuentoT = 0.00;
             String valor = (String) tba_detalle.getValueAt(i, 3);
+            char o = valor.charAt(0);
 
+            if (o < '0' || o > '9') {
+                System.out.println("error "+o);
+                JOptionPane.showMessageDialog(null, "Valor Incorrecto!");
+                listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
+                Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
+            } else {
+                System.out.println("puedes ");
+//            }
             BigInteger cantidadMod = new BigInteger(valor);
+
             cantidadModi = cantidadMod;
             Long id = (Long) tba_detalle.getValueAt(i, 1);
             ListProdVent = selectProdVent.listarProductoVenta();
             for (int j = 0; j < ListProdVent.size(); j++) {
                 if (ListProdVent.get(j).getId_prestacion().equals(id)) {
-//                    System.out.println("cantidadaadd "+id);
                     BigInteger ca = BigInteger.valueOf(ListProdVent.get(j).getSaldo_actual());
-//                    System.out.println("err " + cantidadMod);
-//                    System.out.println("err " + ca);
                     int out = cantidadMod.compareTo(ca);
-//                    System.out.println("err " + out);
-//            int out = cantidadMod.compareTo(cantidadStock);
                     if (out == 1) {
-
                         JOptionPane.showMessageDialog(null, "Verifique Stock");
                         listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
                         Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
-
                     } else {
                         System.out.println("can t " + cantidadMod);
-                        if (cantidadMod.intValue() > 1) {
+                        if (cantidadMod.intValue() > 0) {
                             String ivaS = tba_detalle.getValueAt(i, 6).toString();
                             Double ivaT = Double.valueOf(ivaS.replace(",", "."));
                             String precioS = tba_detalle.getValueAt(i, 4).toString();
@@ -1335,8 +1348,10 @@ public class Venta extends javax.swing.JInternalFrame {
                             TotalizarIva();
                             TotalizarDescuento();
                             TotalizarSubtotal();
+                            /**/
+                            
                         } else {
-                            JOptionPane.showMessageDialog(null, "Valor Incorrecto");
+                            JOptionPane.showMessageDialog(null, "Valor Incorrecto4747");
                             listaDetFactura.get(i).setCantidad(BigInteger.valueOf(1));
                             Tablas.llenarDetalleVenta(tba_detalle, listaDetFactura);
                         }
@@ -1345,7 +1360,7 @@ public class Venta extends javax.swing.JInternalFrame {
                 }/**/
 
             }/**/
-
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1577,9 +1592,10 @@ public class Venta extends javax.swing.JInternalFrame {
                             }
 
                             GenerarXml2.generarXml(listaCab, listaDet);
-                            
+
                         } catch (IOException e) {
-                            Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, e);
+                            Logger.getLogger(Venta.class
+                                    .getName()).log(Level.SEVERE, null, e);
                         }
 
                         java.sql.Date fechact = new java.sql.Date(d.getTime());
@@ -1761,8 +1777,10 @@ public class Venta extends javax.swing.JInternalFrame {
                         objKardex.setCostoActual(ListKardex.get(k).getCostoActual());
                         try {
                             KCon.create(objKardex);
+
                         } catch (Exception ex) {
-                            Logger.getLogger(InKardex.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(InKardex.class
+                                    .getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
