@@ -1831,25 +1831,25 @@ public class Tablas {
     }
 
     public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
-        int[] a = {475, 140, 65, 95, 130};
+        int[] a = {130,475, 140, 65, 95, 130};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] b = {"NOMBRE DE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "FACTURABLE", "APLICA DESCUENTO"};
-        String[] filas = new String[5];
+        String[] b = {"ID PRESTACION","NOMBRE DE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "FACTURABLE", "APLICA DESCUENTO"};
+        String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < listapresporserv.size(); i++) {
-//            filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
-            filas[0] = listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion();
+            filas[0] = String.valueOf(listapresporserv.get(i).getPrPrestaciones().getIdPrestacion());
+            filas[1] = listapresporserv.get(i).getPrPrestaciones().getNombrePrestacion();
 //            filas[2] = "" + listapresporserv.get(i).getVeUnidadServicio().getIdUnidadServicio();
-            filas[1] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
-            filas[2] = listapresporserv.get(i).getEstado();
-            filas[3] = listapresporserv.get(i).getEsFacturable();
-            filas[4] = listapresporserv.get(i).getAplicaDescuento();
+            filas[2] = listapresporserv.get(i).getVeUnidadServicio().getNombreUnidadServicio();
+            filas[3] = listapresporserv.get(i).getEstado();
+            filas[4] = listapresporserv.get(i).getEsFacturable();
+            filas[5] = listapresporserv.get(i).getAplicaDescuento();
             model.addRow(filas);
             Tabla.setModel(model);
             Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -1863,8 +1863,8 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
-//            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-//            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
 //            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
 //            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
 

@@ -52,19 +52,18 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
-        listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
-        Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
+        cargartabla();
+
     }
 
     public ConsultaPrestacionesporServicio(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
-        listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
-        Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
         usu = us;
         emp = em;
         suc = su;
+        cargartabla();
     }
 
     /**
@@ -151,6 +150,11 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             }
         ));
         tba_prestacionesporservicios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tba_prestacionesporservicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tba_prestacionesporserviciosMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tba_prestacionesporservicios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -268,6 +272,16 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
     }//GEN-LAST:event_agregarActionPerformed
 
+    public void cargartabla() {
+        txtFILTRO.setText("");
+        tba_prestacionesporservicios.setRowSorter(null); // quitar el filtro
+        listapresporserv = new ArrayList<InPrestacionesPorServicios>();
+        listapresporserv = preposer.findInPrestacionesPorServiciosEntities();
+        Tablas.TablaPrestacionesPorServicios(listapresporserv, tba_prestacionesporservicios);
+
+    }
+
+
     private void txtFILTROKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFILTROKeyPressed
         valor = txtFILTRO.getText();
         Tablas.filtro(valor, tba_prestacionesporservicios);
@@ -306,6 +320,31 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             Logger.getLogger(ConsultaPrestacionesporServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnimprimirActionPerformed
+
+    private void tba_prestacionesporserviciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tba_prestacionesporserviciosMousePressed
+
+        int i = 0;
+
+        if (evt.getClickCount() == 2) {
+            i = tba_prestacionesporservicios.getSelectedRow();
+
+            InPrestacionesPorServicios objeto = devuelveObjeto(tba_prestacionesporservicios.getValueAt(i, 0).toString(), listapresporserv);
+
+            System.out.println(" datos tomado " + objeto.getInPrestacionesPorServiciosPK());
+
+            if (objeto != null) {
+
+                this.setVisible(false);
+
+                ActualizarPrestaciones ventana = new ActualizarPrestaciones(new javax.swing.JFrame(), true, usu, emp, suc, objeto);
+                ventana.setVisible(true);
+                cargartabla();
+
+            }
+        }
+
+
+    }//GEN-LAST:event_tba_prestacionesporserviciosMousePressed
     private void txtfiltroKeyTyped(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
         if (Character.isSpaceChar(c)) {
@@ -321,6 +360,17 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
             getToolkit().beep();
             evt.consume();
         }
+    }
+
+    public InPrestacionesPorServicios devuelveObjeto(String datos, List<InPrestacionesPorServicios> listarobj) {
+        InPrestacionesPorServicios objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals("" + listarobj.get(i).getInPrestacionesPorServiciosPK().getIdPrestacion())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
     }
 
     public static void main(String args[]) {

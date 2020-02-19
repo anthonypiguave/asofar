@@ -250,8 +250,6 @@ public class ConsultaPrestacion extends javax.swing.JDialog {
             objeto = devuelveObjeto(jtablaprestaciones.getValueAt(i, 0).toString(), lista);
 
             pre.txtpresta.setText(objeto.getNombrePrestacion());
-//            System.out.println("000" + 
-//            objeto.getInPrestacionesPorServiciosList().get(i).getVeUnidadServicio().getIdUnidadServicio());
 
             if (objeto != null) {
                 System.out.println("entro");
