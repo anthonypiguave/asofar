@@ -292,6 +292,7 @@ public class AgregarPrestacion extends javax.swing.JDialog {
 
 
      txtProducto.setText(proc.getNombreProducto());
+     txtPrestacion.setText("");
     }//GEN-LAST:event_btnbuscarPActionPerformed
 
     private void btngrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngrabarActionPerformed
