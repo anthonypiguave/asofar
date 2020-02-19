@@ -282,10 +282,10 @@ public class Venta extends javax.swing.JInternalFrame {
                 txtApellido.setText(Cliente.get(i).getPrimerApellido());
                 txtIdentificacion.setText("9999999999999");
                 txt_idCliente.setText(Cliente.get(i).getIdClientes().toString());
-                txtTipoIdent.setText("********************************");
-                txtEmail.setText("********************************");
-                txtDireccion.setText("********************************");
-                txtTelefono.setText("********************************");
+                txtTipoIdent.setText("***********************");
+                txtEmail.setText("***********************");
+                txtDireccion.setText("***********************");
+                txtTelefono.setText("***********************");
             }
         }
 //        txtNombre.setText("CONSUMIDOR");
@@ -1605,7 +1605,8 @@ public class Venta extends javax.swing.JInternalFrame {
                         String direccion = suc.getDireccion();
                         Long idFac = pkFactura.getVeFacturaPK().getIdFactura();
                         String idFactura = idFac.toString();/*   */
-//                    System.out.println(""+idFactura);///
+//                        String.format("%06d", idFactura);
+                    System.out.println("ID FACTURA "+ String.format("%06d", idFac));///
 
                         int im = JOptionPane.showConfirmDialog(null, "¿Desea Imprimir la factura?", "", JOptionPane.YES_NO_OPTION);
                         if (im == JOptionPane.YES_OPTION) {
@@ -1616,6 +1617,7 @@ public class Venta extends javax.swing.JInternalFrame {
                             printerService.printString("EPSON-TM-T20II", "------------------------------------------\n");
                             printerService.printString("EPSON-TM-T20II", "         Direccion: " + direccion + "\n");
                             printerService.printString("EPSON-TM-T20II", "               RUC: " + ruc + "\n");
+                            printerService.printString("EPSON-TM-T20II", "               Nº FACTURA: " + String.format("%06d", idFac) + "\n");
                             printerService.printString("EPSON-TM-T20II", "  N° CAJA: " + txt_NumeroCaja.getText() + "          CAJA:" + txt_NombreCaja.getText() + "\n");
                             printerService.printString("EPSON-TM-T20II", "   CODIGO DE VENTA: " + txt_idCliente.getText() + "\n");
                             printerService.printString("EPSON-TM-T20II", "    IDENTIFICACION: " + txtTipoIdent.getText() + "\n");

@@ -150,7 +150,9 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
             txtn_doc.setText(cliente.getNumeroIdentificacion());
             txtDireccion.setText(rep.buscarLocalidad(cliente.getIdClientes()));
             txtcorreo.setText(rep.buscarCorreo(cliente.getIdClientes()));
-            txt_N_VENTA.setText(objeto.getId_factura().toString());
+            System.out.println("**");
+            txt_N_VENTA.setText(String.format("%06d", objeto.getId_factura()));
+//            txt_N_VENTA.setText(objeto.getId_factura().toString());
             txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
             txtCaja.setText(objeto.getNombre_caja());
             txSucursal.setText(objeto.getNombre_comercial_suc());
@@ -166,7 +168,7 @@ public class ReporteriaDetalleFactura extends javax.swing.JDialog {
                 txtCaja.setText(objeto.getNombre_caja());
                 txSucursal.setText(suc.getNombreComercial());
                 txtFechaCreacion.setText(objeto.getFecha_facturacion().toString());
-                txt_N_VENTA.setText(objeto.getId_factura().toString());
+                txt_N_VENTA.setText(String.format("%06d", objeto.getId_factura()));
                 txtNombre.setText(Cliente.get(i).getPrimerNombre());
                 txtapellidos.setText(Cliente.get(i).getPrimerApellido());
                 txtn_doc.setText("9999999999999");
