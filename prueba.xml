@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <facturaOrden>
-    <facturaCabecera IdFactura="123">
+    <facturaCabecera IdFactura="2">
         <empresa>ASOFAR</empresa>
         <sucursal>MADRID</sucursal>
-        <fecha>2020-02-19T22:52:18.814-05:00</fecha>
+        <fecha>2020-02-20T17:48:50.604-05:00</fecha>
         <formaPago>CONTADO</formaPago>
         <despachado>SI</despachado>
         <caja>caja 1</caja>
         <usuario>admin</usuario>
         <clienteID>9999999999999</clienteID>
         <clienteNombreApellido>FINAL CONSUMIDOR</clienteNombreApellido>
-        <clienteTelefono>********************************</clienteTelefono>
-        <clienteCorreo>********************************</clienteCorreo>
-        <clienteDireccion>********************************</clienteDireccion>
-        <totalSubtotal>1.0</totalSubtotal>
+        <clienteTelefono>***********************</clienteTelefono>
+        <clienteCorreo>***********************</clienteCorreo>
+        <clienteDireccion>***********************</clienteDireccion>
+        <totalSubtotal>2.8</totalSubtotal>
         <totalDescuento>0.0</totalDescuento>
-        <totalIva>0.0</totalIva>
-        <totalFacturado>1.0</totalFacturado>
+        <totalIva>0.24</totalIva>
+        <totalFacturado>3.04</totalFacturado>
     </facturaCabecera>
     <facturaDetalle>
-        <detalle IdFacturaDetalle="4">
+        <detalle IdFacturaDetalle="3">
             <lineaDetalle>1</lineaDetalle>
             <idProducto>1</idProducto>
             <descripcion>GENFARGRIP DIA EN SOBRES  DE 18G</descripcion>
-            <cantidad>10</cantidad>
-            <precioUnitario>0.1</precioUnitario>
-            <subtotal>1.0</subtotal>
+            <cantidad>4</cantidad>
+            <precioUnitario>0.2</precioUnitario>
+            <subtotal>0.8</subtotal>
             <valorIva>0.0</valorIva>
             <valorDescuento>0.0</valorDescuento>
-            <valorTotal>1.0</valorTotal>
+            <valorTotal>0.8</valorTotal>
+        </detalle>
+        <detalle IdFacturaDetalle="4">
+            <lineaDetalle>2</lineaDetalle>
+            <idProducto>2</idProducto>
+            <descripcion>PROBINEX EN COMPRIMIDOS  DE 600MG</descripcion>
+            <cantidad>4</cantidad>
+            <precioUnitario>0.5</precioUnitario>
+            <subtotal>2.0</subtotal>
+            <valorIva>0.24</valorIva>
+            <valorDescuento>0.0</valorDescuento>
+            <valorTotal>2.24</valorTotal>
         </detalle>
     </facturaDetalle>
 </facturaOrden>

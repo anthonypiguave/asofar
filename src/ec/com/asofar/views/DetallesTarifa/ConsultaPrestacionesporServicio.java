@@ -228,7 +228,7 @@ public class ConsultaPrestacionesporServicio extends javax.swing.JDialog {
 
             if (evt.getClickCount() == 2) {
                 i = tba_prestacionesporservicios.getSelectedRow();
-                objeto = devuelveObjeto(tba_prestacionesporservicios.getValueAt(i, 0).toString(), tba_prestacionesporservicios.getValueAt(i, 1).toString(), listapresporserv);
+                objeto = devuelveObjeto(tba_prestacionesporservicios.getValueAt(i, 1).toString(), tba_prestacionesporservicios.getValueAt(i, 2).toString(), listapresporserv);
 
 
                 if (objeto != null) {
