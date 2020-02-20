@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <facturaOrden>
-    <facturaCabecera IdFactura="19">
+    <facturaCabecera IdFactura="123">
         <empresa>ASOFAR</empresa>
-        <sucursal>SUCURSAL 1</sucursal>
-        <fecha>2020-02-09T15:23:05.815-05:00</fecha>
+        <sucursal>MADRID</sucursal>
+        <fecha>2020-02-19T22:52:18.814-05:00</fecha>
         <formaPago>CONTADO</formaPago>
         <despachado>SI</despachado>
         <caja>caja 1</caja>
         <usuario>admin</usuario>
-        <clienteID>0925241796</clienteID>
-        <clienteNombreApellido>MUÑOZ VERA JORGE</clienteNombreApellido>
-        <clienteTelefono></clienteTelefono>
-        <clienteCorreo></clienteCorreo>
-        <clienteDireccion>ALBORADA X</clienteDireccion>
+        <clienteID>9999999999999</clienteID>
+        <clienteNombreApellido>FINAL CONSUMIDOR</clienteNombreApellido>
+        <clienteTelefono>********************************</clienteTelefono>
+        <clienteCorreo>********************************</clienteCorreo>
+        <clienteDireccion>********************************</clienteDireccion>
         <totalSubtotal>1.0</totalSubtotal>
         <totalDescuento>0.0</totalDescuento>
-        <totalIva>0.12</totalIva>
-        <totalFacturado>1.12</totalFacturado>
+        <totalIva>0.0</totalIva>
+        <totalFacturado>1.0</totalFacturado>
     </facturaCabecera>
     <facturaDetalle>
-        <detalle IdFacturaDetalle="19">
+        <detalle IdFacturaDetalle="4">
             <lineaDetalle>1</lineaDetalle>
-            <descripcion>ENTRAGA A DOMICILIO</descripcion>
-            <cantidad>1</cantidad>
-            <precioUnitario>1.0</precioUnitario>
+            <idProducto>1</idProducto>
+            <descripcion>GENFARGRIP DIA EN SOBRES  DE 18G</descripcion>
+            <cantidad>10</cantidad>
+            <precioUnitario>0.1</precioUnitario>
             <subtotal>1.0</subtotal>
-            <valorIva>0.12</valorIva>
+            <valorIva>0.0</valorIva>
             <valorDescuento>0.0</valorDescuento>
-            <valorTotal>1.12</valorTotal>
+            <valorTotal>1.0</valorTotal>
         </detalle>
     </facturaDetalle>
 </facturaOrden>
