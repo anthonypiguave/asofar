@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author admin1
+ * @author admin1Icon
  */
 public class Frm_cargarSistema extends javax.swing.JFrame {
 
@@ -42,7 +42,9 @@ public class Frm_cargarSistema extends javax.swing.JFrame {
     }
 
     public void imagenes() {
-        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/3.png").getImage();
+        
+        Image logof = new ImageIcon(getClass().getResource("/ec/com/asofar/imagenes/3.png")).getImage();
+//        Image logof = new ImageIcon(System.getProperty("user.dir") + "/src/ec/com/asofar/imagenes/3.png").getImage();
         Icon fondoLogo = new ImageIcon(logof.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
         lbImagen.setIcon(fondoLogo);
         this.repaint();

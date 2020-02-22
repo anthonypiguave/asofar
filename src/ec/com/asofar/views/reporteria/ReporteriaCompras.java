@@ -496,6 +496,8 @@ public class ReporteriaCompras extends javax.swing.JDialog {
             lista.add(creporte);
         }
         try {
+
+//             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("//Reportes/ReporteriaCompras.jasper"));
             JasperReport report = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ReporteriaCompras.jasper");
             JasperPrint jprint = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
             JDialog ventana = new JDialog();
