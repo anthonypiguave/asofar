@@ -25,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Usuario
+ * @author usuario
  */
 public class PrSubgruposJpaController implements Serializable {
 

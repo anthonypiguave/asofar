@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Usuario
+ * @author usuario
  */
 public class InTipoCompraJpaController implements Serializable {
 

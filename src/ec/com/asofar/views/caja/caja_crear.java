@@ -14,6 +14,7 @@ import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -25,7 +26,7 @@ import javax.swing.JOptionPane;
  * @author admin1
  */
 public class caja_crear extends javax.swing.JDialog {
-    
+
     int x, y;
     Date d = new Date();
     ObtenerDTO od = new ObtenerDTO();
@@ -34,6 +35,7 @@ public class caja_crear extends javax.swing.JDialog {
     SeUsuarios seUsuario;
     SeEmpresa seEmpresa;
     SeSucursal seSucursal;
+    SeUsuarios obj;
 
     /**
      * Creates new form tipo_medida_agregar
@@ -43,7 +45,7 @@ public class caja_crear extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     public caja_crear(java.awt.Frame parent, boolean modal, SeUsuarios us, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
@@ -53,13 +55,13 @@ public class caja_crear extends javax.swing.JDialog {
         this.seSucursal = su;
         txt_usuario.setEnabled(false);
     }
-    
+
     public static String FechaActual() {
         java.util.Date fecha = new java.util.Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         return formatoFecha.format(fecha);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -240,7 +242,7 @@ public class caja_crear extends javax.swing.JDialog {
                 vc.setUsuarioCreacion(seUsuario.getUsuario());
                 vc.setFechaCreacion(d);
                 vc.setFechaActualizacion(d);
-//                vc.set
+                vc.setIdUsuario(BigInteger.valueOf(obj.getIdUsuario()));
                 try {
                     vCaja.create(vc);
                     JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
@@ -275,7 +277,7 @@ public class caja_crear extends javax.swing.JDialog {
         ListarUsuariosEscogerCaja ep
                 = new ListarUsuariosEscogerCaja(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
         ep.setVisible(true);
-        SeUsuarios obj = ep.obtenerObj();
+        obj = ep.obtenerObj();
         if (!obj.getIdUsuario().equals(null)) {
             txt_usuario.setText(obj.getUsuario());
             txt_usuario.setEnabled(true);

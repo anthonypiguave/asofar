@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Usuario
+ * @author usuario
  */
 public class SePaisJpaController implements Serializable {
 

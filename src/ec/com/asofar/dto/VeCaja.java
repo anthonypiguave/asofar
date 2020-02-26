@@ -6,6 +6,7 @@
 package ec.com.asofar.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author usuario
  */
 @Entity
 @Table(name = "ve_caja")
@@ -39,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "VeCaja.findByFechaCreacion", query = "SELECT v FROM VeCaja v WHERE v.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "VeCaja.findByUsuarioCreacion", query = "SELECT v FROM VeCaja v WHERE v.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "VeCaja.findByFechaActualizacion", query = "SELECT v FROM VeCaja v WHERE v.fechaActualizacion = :fechaActualizacion")
-    , @NamedQuery(name = "VeCaja.findByUsuarioActualizacion", query = "SELECT v FROM VeCaja v WHERE v.usuarioActualizacion = :usuarioActualizacion")})
+    , @NamedQuery(name = "VeCaja.findByUsuarioActualizacion", query = "SELECT v FROM VeCaja v WHERE v.usuarioActualizacion = :usuarioActualizacion")
+    , @NamedQuery(name = "VeCaja.findByIdUsuario", query = "SELECT v FROM VeCaja v WHERE v.idUsuario = :idUsuario")})
 public class VeCaja implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,6 +64,8 @@ public class VeCaja implements Serializable {
     private Date fechaActualizacion;
     @Column(name = "usuario_actualizacion")
     private String usuarioActualizacion;
+    @Column(name = "id_usuario")
+    private BigInteger idUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veCaja")
     private List<VeDetalleCaja> veDetalleCajaList;
 
@@ -126,6 +130,14 @@ public class VeCaja implements Serializable {
 
     public void setUsuarioActualizacion(String usuarioActualizacion) {
         this.usuarioActualizacion = usuarioActualizacion;
+    }
+
+    public BigInteger getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(BigInteger idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @XmlTransient

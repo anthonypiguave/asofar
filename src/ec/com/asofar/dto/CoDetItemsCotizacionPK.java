@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Usuario
+ * @author usuario
  */
 @Embeddable
 public class CoDetItemsCotizacionPK implements Serializable {

@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author usuario
  */
 @Entity
 @Table(name = "ve_factura")
@@ -41,7 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "VeFactura.findByIdUsuario", query = "SELECT v FROM VeFactura v WHERE v.idUsuario = :idUsuario")
     , @NamedQuery(name = "VeFactura.findByIdCliente", query = "SELECT v FROM VeFactura v WHERE v.idCliente = :idCliente")
     , @NamedQuery(name = "VeFactura.findByFechaFacturacion", query = "SELECT v FROM VeFactura v WHERE v.fechaFacturacion = :fechaFacturacion")
-    , @NamedQuery(name = "VeFactura.findByFormaPago", query = "SELECT v FROM VeFactura v WHERE v.formaPago = :formaPago")
     , @NamedQuery(name = "VeFactura.findByNumeroEstablecimientoSri", query = "SELECT v FROM VeFactura v WHERE v.numeroEstablecimientoSri = :numeroEstablecimientoSri")
     , @NamedQuery(name = "VeFactura.findByPuntoEmisionSri", query = "SELECT v FROM VeFactura v WHERE v.puntoEmisionSri = :puntoEmisionSri")
     , @NamedQuery(name = "VeFactura.findBySecuenciaSri", query = "SELECT v FROM VeFactura v WHERE v.secuenciaSri = :secuenciaSri")
@@ -57,7 +56,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "VeFactura.findByUsuarioCreacion", query = "SELECT v FROM VeFactura v WHERE v.usuarioCreacion = :usuarioCreacion")
     , @NamedQuery(name = "VeFactura.findByFechaCreacion", query = "SELECT v FROM VeFactura v WHERE v.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "VeFactura.findByUsuarioActualizacion", query = "SELECT v FROM VeFactura v WHERE v.usuarioActualizacion = :usuarioActualizacion")
-    , @NamedQuery(name = "VeFactura.findByFechaActualizacion", query = "SELECT v FROM VeFactura v WHERE v.fechaActualizacion = :fechaActualizacion")})
+    , @NamedQuery(name = "VeFactura.findByFechaActualizacion", query = "SELECT v FROM VeFactura v WHERE v.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "VeFactura.findByFormaPago", query = "SELECT v FROM VeFactura v WHERE v.formaPago = :formaPago")})
 public class VeFactura implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,8 +72,6 @@ public class VeFactura implements Serializable {
     @Column(name = "fecha_facturacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFacturacion;
-    @Column(name = "forma_pago")
-    private String formaPago;
     @Column(name = "numero_establecimiento_sri")
     private String numeroEstablecimientoSri;
     @Column(name = "punto_emision_sri")
@@ -109,6 +107,8 @@ public class VeFactura implements Serializable {
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
+    @Column(name = "forma_pago")
+    private String formaPago;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veFactura")
     private List<VeFacturaDetalle> veFacturaDetalleList;
     @JoinColumns({
@@ -166,14 +166,6 @@ public class VeFactura implements Serializable {
 
     public void setFechaFacturacion(Date fechaFacturacion) {
         this.fechaFacturacion = fechaFacturacion;
-    }
-
-    public String getFormaPago() {
-        return formaPago;
-    }
-
-    public void setFormaPago(String formaPago) {
-        this.formaPago = formaPago;
     }
 
     public String getNumeroEstablecimientoSri() {
@@ -302,6 +294,14 @@ public class VeFactura implements Serializable {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
     }
 
     @XmlTransient

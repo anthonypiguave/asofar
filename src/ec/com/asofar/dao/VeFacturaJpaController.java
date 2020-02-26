@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Usuario
+ * @author usuario
  */
 public class VeFacturaJpaController implements Serializable {
 
@@ -44,8 +44,8 @@ public class VeFacturaJpaController implements Serializable {
         if (veFactura.getVeFacturaDetalleList() == null) {
             veFactura.setVeFacturaDetalleList(new ArrayList<VeFacturaDetalle>());
         }
-        veFactura.getVeFacturaPK().setIdEmpresa(veFactura.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         veFactura.getVeFacturaPK().setIdSucursal(veFactura.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        veFactura.getVeFacturaPK().setIdEmpresa(veFactura.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -89,8 +89,8 @@ public class VeFacturaJpaController implements Serializable {
     }
 
     public void edit(VeFactura veFactura) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        veFactura.getVeFacturaPK().setIdEmpresa(veFactura.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         veFactura.getVeFacturaPK().setIdSucursal(veFactura.getSeSucursal().getSeSucursalPK().getIdSucursal());
+        veFactura.getVeFacturaPK().setIdEmpresa(veFactura.getSeSucursal().getSeSucursalPK().getIdEmpresa());
         EntityManager em = null;
         try {
             em = getEntityManager();
