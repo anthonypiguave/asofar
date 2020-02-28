@@ -248,6 +248,7 @@ public class ObtenerDTO {
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getIdUsuario().equals(id)) {
                 dto = lista.get(i);
+                System.out.println("** "+dto);
                 break;
             }
         }
@@ -1169,6 +1170,22 @@ public class ObtenerDTO {
                 break;
             }
         }
+        return dto;
+
+    }
+
+    public static SeUsuarios ObtenerSeUsuarios(int id) {
+        SeUsuariosJpaController control = new SeUsuariosJpaController(EntityManagerUtil.ObtenerEntityManager());
+        SeUsuarios dto = new SeUsuarios();
+        List<SeUsuarios> lista = control.findSeUsuariosEntities();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdUsuario() == id) {
+                dto = lista.get(i);
+                break;
+            }
+        }
+
         return dto;
 
     }
