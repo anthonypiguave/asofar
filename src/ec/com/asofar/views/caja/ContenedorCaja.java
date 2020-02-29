@@ -11,6 +11,7 @@ import ec.com.asofar.daoext.VeDetalleCajaEXT;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.dto.VeDetalleCaja;
 import ec.com.asofar.util.Documento;
 import ec.com.asofar.util.EntityManagerUtil;
@@ -189,11 +190,24 @@ public class ContenedorCaja extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAperturaCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAperturaCajaActionPerformed
-        Apertura_Caja acaja = new Apertura_Caja(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
-        this.setVisible(false);
-        acaja.setVisible(true);
+        CargarCajas();
     }//GEN-LAST:event_btnAperturaCajaActionPerformed
-
+    public void CargarCajas() {
+        List<VeCaja> listcaja = cajacon.findVeCajaEntities();
+        String valor = null;
+        for (int i = 0; i < listcaja.size(); i++) {
+            if (seUsuario.getIdUsuario().equals(listcaja.get(i).getIdUsuario().longValue())) {
+                System.out.println("**88");
+                Apertura_Caja1 acaja = new Apertura_Caja1(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
+                this.setVisible(false);
+                acaja.setVisible(true);
+            } else {
+                valor = "NO";
+            }
+        }
+        if(valor == "NO"){
+        JOptionPane.showMessageDialog(null,"USUARIO NO TIENE CAJA");}
+    }
     private void btnCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCierreActionPerformed
         Cierre_Caja cierre = new Cierre_Caja(new javax.swing.JFrame(), true, vdc, seUsuario, seEmpresa, seSucursal);
         this.setVisible(false);
@@ -227,7 +241,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
         if (!btnCierre.isEnabled()) {
             Documento.Reporte("Cajas Activas", lista, "/src/ec/com/asofar/views/caja/caja.jasper");
             setVisible(false);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "LA CAJA DEBE ESTAR CERRADA", "ACCION DENEGADA", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed

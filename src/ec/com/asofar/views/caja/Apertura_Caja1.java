@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  *
  * @author admin1
  */
-public class Apertura_Caja extends javax.swing.JDialog {
+public class Apertura_Caja1 extends javax.swing.JDialog {
 
     int x, y;
 
@@ -39,14 +39,14 @@ public class Apertura_Caja extends javax.swing.JDialog {
     VeCajaJpaController cajacon = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
     VeDetalleCajaJpaController cajadet = new VeDetalleCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
-    public Apertura_Caja(java.awt.Frame parent, boolean modal) {
+    public Apertura_Caja1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         CargarCajas();
     }
 
-    public Apertura_Caja(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
+    public Apertura_Caja1(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -60,7 +60,9 @@ public class Apertura_Caja extends javax.swing.JDialog {
     public void CargarCajas() {
         List<VeCaja> listcaja = cajacon.findVeCajaEntities();
         for (int i = 0; i < listcaja.size(); i++) {
-            caja.addItem(listcaja.get(i).getNombre());
+            if (seUsuario.getIdUsuario().equals(listcaja.get(i).getIdUsuario().longValue())) {
+                txt_caja.setText(listcaja.get(i).getNombre());
+            }
         }
     }
 
@@ -75,14 +77,12 @@ public class Apertura_Caja extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         monto = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        caja = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         montocierre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
-        monto1 = new javax.swing.JLabel();
-        txt_usuario = new javax.swing.JTextField();
+        txt_caja = new javax.swing.JTextField();
 
         jLabel3.setText("jLabel3");
 
@@ -135,14 +135,6 @@ public class Apertura_Caja extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel4.setText("CAJA:");
 
-        caja.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        caja.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
-        caja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cajaActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("MONTO DE CIERRE:");
 
@@ -165,10 +157,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
             }
         });
 
-        monto1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        monto1.setText("USUARIO :");
-
-        txt_usuario.setEditable(false);
+        txt_caja.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -186,10 +175,6 @@ public class Apertura_Caja extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(monto1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_usuario))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(monto)
                                     .addComponent(jLabel2))
@@ -201,10 +186,10 @@ public class Apertura_Caja extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(montocierre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(49, 49, 49)
+                                .addComponent(txt_caja)))
                         .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,12 +199,8 @@ public class Apertura_Caja extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(monto1)
-                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_caja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
@@ -270,15 +251,12 @@ public class Apertura_Caja extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-        try {
-            if (caja.getSelectedIndex() == 0) {
-                JOptionPane.showMessageDialog(null, "SELECCIONE UNA OPCION VALIDA", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
-            } else {
+          try {
                 if (" ".equals(txtMonto.getText())) {
                     JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
                 } else {
                     VeDetalleCaja dc = new VeDetalleCaja();
-                    VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
+                    VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(txt_caja.getText());
                     dc.setDineroInicio(Double.parseDouble(txtMonto.getText()));
                     dc.setFechaInicio(d_fecha);
                     dc.setHoraInicio(new java.sql.Time(d_hora.getTime()));
@@ -293,7 +271,7 @@ public class Apertura_Caja extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(null, "LA CAJA YA ESTA ACTIVA", "ERROR!", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            }
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -307,14 +285,6 @@ public class Apertura_Caja extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtMontoKeyTyped
-
-    private void cajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaActionPerformed
-        VeCaja o
-                = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
-        SeUsuarios V
-                = ObtenerDTO.ObtenerUsuarios(o.getIdUsuario().longValue());
-        txt_usuario.setText(V.getUsuario());
-    }//GEN-LAST:event_cajaActionPerformed
 
     public void buscador(VeCaja caja) {
         List<VeDetalleCaja> listadetallecaja = cajadet.findVeDetalleCajaEntities();
@@ -349,18 +319,18 @@ public class Apertura_Caja extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Apertura_Caja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Apertura_Caja1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Apertura_Caja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Apertura_Caja1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Apertura_Caja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Apertura_Caja1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Apertura_Caja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Apertura_Caja1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Apertura_Caja dialog = new Apertura_Caja(new javax.swing.JFrame(), true);
+                Apertura_Caja1 dialog = new Apertura_Caja1(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -375,7 +345,6 @@ public class Apertura_Caja extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGrabar;
-    private javax.swing.JComboBox<String> caja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -384,10 +353,9 @@ public class Apertura_Caja extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel monto;
-    private javax.swing.JLabel monto1;
     private javax.swing.JTextField montocierre;
     private javax.swing.JTextField txtMonto;
-    private javax.swing.JTextField txt_usuario;
+    private javax.swing.JTextField txt_caja;
     // End of variables declaration//GEN-END:variables
 
 }

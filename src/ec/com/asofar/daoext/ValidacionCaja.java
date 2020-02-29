@@ -42,6 +42,28 @@ public class ValidacionCaja {
         }
         return valor;
     }
+    public static boolean ValidacionApertura1(VeCaja caja, SeUsuarios su) {
+        boolean valor = true;
+        List<VeDetalleCaja> lista = cajaController.findVeDetalleCajaEntities();
+        for (int i = 0; i < lista.size(); i++) {
+            System.out.println(" == null "+lista.get(i).getFechaCierre());
+            //lista.get(i).getFechaCierre() == null
+            System.out.println("='A' "+lista.get(i).getEstado());
+              //  && Character.valueOf('A').equals(lista.get(i).getEstado())
+            System.out.println("id udua_Login + id usu guar "+su.getIdUsuario()+" "+lista.get(i).getIdUsuario().longValue());
+                   // && lista.get(i).getIdUsuario().longValue() == su.getIdUsuario()
+            System.out.println("id _caja "+lista.get(i).getVeCaja().getIdCaja()+" "+caja.getIdCaja());
+//                    && lista.get(i).getVeCaja().getIdCaja() == caja.getIdCaja()
+            if (lista.get(i).getFechaCierre() == null
+                    && Character.valueOf('A').equals(lista.get(i).getEstado())
+                    && lista.get(i).getIdUsuario().longValue() == su.getIdUsuario()
+                    && lista.get(i).getVeCaja().getIdCaja() == caja.getIdCaja()) {
+                valor = false;
+            }
+        }
+        System.out.println("caloer"+valor);
+        return valor;
+    }
 
     public static boolean ValidacionCierre(VeDetalleCaja detallecaja, SeUsuarios su) {
         boolean valor = false;
