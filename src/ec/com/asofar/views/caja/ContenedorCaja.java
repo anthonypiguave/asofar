@@ -204,6 +204,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
                 Apertura_Caja1 acaja = new Apertura_Caja1(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
 //                this.setVisible(false);
                 acaja.setVisible(true);
+                break;
             } else {
                 valor = "NO";
             }
