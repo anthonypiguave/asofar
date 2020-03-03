@@ -62,22 +62,45 @@ public class ContenedorCaja extends javax.swing.JDialog {
         seEmpresa = em;
         seSucursal = su;
         VeDetalleCajaEXT v = new VeDetalleCajaEXT(EntityManagerUtil.ObtenerEntityManager());
-        List<VeDetalleCaja> listadetallecaja = cajadet.findVeDetalleCajaEntities();
+        List<VeDetalleCaja> listadetallecaja = new ArrayList<VeDetalleCaja>();
+        listadetallecaja = cajadet.findVeDetalleCajaEntities();
         for (int i = 0; i < listadetallecaja.size(); i++) {
             if (listadetallecaja.get(i).getEstado().equals("A")
                     && listadetallecaja.get(i).getIdUsuario().longValue() == seUsuario.getIdUsuario()
                     && listadetallecaja.get(i).getFechaCierre() == null
                     && listadetallecaja.get(i).getHoraCierre() == null) {
+//            System.out.println("ESTADO A :"+listadetallecaja.get(i).getEstado());
+//            System.out.println("ID U :"+listadetallecaja.get(i).getIdUsuario()+"-"+seUsuario.getIdUsuario());
+//            System.out.println("CIERRE FECHA :"+listadetallecaja.get(i).getFechaCierre());
+//            System.out.println("CIERRE HORA :"+listadetallecaja.get(i).getHoraCierre());
                 btnAperturaCaja.setEnabled(false);
+                System.out.println("cerrar caja");
                 btnCierre.setEnabled(true);
                 vdc = listadetallecaja.get(i);
-
+                break;
             } else {
+//                String valor = "F";
+//                act(valor);
+                System.out.println("**");
+                System.out.println("ESTADO A :" + listadetallecaja.get(i).getEstado());
+                System.out.println("ID U :" + listadetallecaja.get(i).getIdUsuario() + "-" + seUsuario.getIdUsuario());
+                System.out.println("CIERRE FECHA :" + listadetallecaja.get(i).getFechaCierre());
+                System.out.println("CIERRE HORA :" + listadetallecaja.get(i).getHoraCierre());
+                System.out.println("esle cierre false");
+                System.out.println("**");
                 btnCierre.setEnabled(false);
+//                break;
             }
 
         }
         if (listadetallecaja.isEmpty()) {
+            System.out.println(" empty btn cierre ");
+            btnCierre.setEnabled(false);
+        }
+    }
+
+    public void act(String valor) {
+        if (valor == "F") {
             btnCierre.setEnabled(false);
         }
     }
@@ -205,8 +228,9 @@ public class ContenedorCaja extends javax.swing.JDialog {
                 valor = "NO";
             }
         }
-        if(valor == "NO"){
-        JOptionPane.showMessageDialog(null,"USUARIO NO TIENE CAJA");}
+        if (valor == "NO") {
+            JOptionPane.showMessageDialog(null, "USUARIO NO TIENE CAJA");
+        }
     }
     private void btnCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCierreActionPerformed
         Cierre_Caja cierre = new Cierre_Caja(new javax.swing.JFrame(), true, vdc, seUsuario, seEmpresa, seSucursal);
