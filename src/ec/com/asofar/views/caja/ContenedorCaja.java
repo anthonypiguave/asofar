@@ -199,7 +199,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
             if (seUsuario.getIdUsuario().equals(listcaja.get(i).getIdUsuario().longValue())) {
                 System.out.println("**88");
                 Apertura_Caja1 acaja = new Apertura_Caja1(new javax.swing.JFrame(), true, seUsuario, seEmpresa, seSucursal);
-                this.setVisible(false);
+//                this.setVisible(false);
                 acaja.setVisible(true);
             } else {
                 valor = "NO";

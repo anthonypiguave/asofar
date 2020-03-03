@@ -61,6 +61,7 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
         List<VeCaja> listcaja = cajacon.findVeCajaEntities();
         for (int i = 0; i < listcaja.size(); i++) {
             if (seUsuario.getIdUsuario().equals(listcaja.get(i).getIdUsuario().longValue())) {
+                txt_usuario.setText(seUsuario.getUsuario());
                 txt_caja.setText(listcaja.get(i).getNombre());
             }
         }
@@ -82,6 +83,8 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
+        txt_usuario = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         txt_caja = new javax.swing.JTextField();
 
         jLabel3.setText("jLabel3");
@@ -133,7 +136,7 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
         monto.setText("MONTO INICIAL:");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel4.setText("CAJA:");
+        jLabel4.setText("USUARIO:");
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel2.setText("MONTO DE CIERRE:");
@@ -156,6 +159,11 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
                 txtMontoKeyTyped(evt);
             }
         });
+
+        txt_usuario.setEditable(false);
+
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabel7.setText("CAJA:");
 
         txt_caja.setEditable(false);
 
@@ -186,20 +194,28 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(montocierre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(49, 49, 49)
-                                .addComponent(txt_caja)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel4))
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_usuario)
+                                    .addComponent(txt_caja))))
                         .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_caja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txt_caja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,12 +267,16 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-          try {
+              try {
+//            if (caja.getSelectedIndex() == 0) {
+//                JOptionPane.showMessageDialog(null, "SELECCIONE UNA OPCION VALIDA", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
+//            } else {
                 if (" ".equals(txtMonto.getText())) {
                     JOptionPane.showMessageDialog(null, "INGRESE UN DATO VALIDO", "ACCION NO PERMITIDA!", JOptionPane.ERROR_MESSAGE);
                 } else {
                     VeDetalleCaja dc = new VeDetalleCaja();
                     VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(txt_caja.getText());
+//                    VeCaja veCaja = ObtenerDTO.ObtenerVeCaja(caja.getSelectedItem().toString());
                     dc.setDineroInicio(Double.parseDouble(txtMonto.getText()));
                     dc.setFechaInicio(d_fecha);
                     dc.setHoraInicio(new java.sql.Time(d_hora.getTime()));
@@ -271,7 +291,7 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(null, "LA CAJA YA ESTA ACTIVA", "ERROR!", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            
+            //}
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -295,7 +315,6 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
                     && listadetallecaja.get(i).getFechaCierre() == null) {
                 System.out.println("hola ");
                 ContenedorCaja cCaja = new ContenedorCaja(new javax.swing.JFrame(), true, listadetallecaja.get(i), seUsuario, seEmpresa, seSucursal);
-
                 this.setVisible(false);
                 cCaja.setVisible(true);
             }
@@ -351,11 +370,13 @@ public class Apertura_Caja1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel monto;
     private javax.swing.JTextField montocierre;
     private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txt_caja;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 
 }
