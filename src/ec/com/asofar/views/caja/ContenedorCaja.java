@@ -69,27 +69,12 @@ public class ContenedorCaja extends javax.swing.JDialog {
                     && listadetallecaja.get(i).getIdUsuario().longValue() == seUsuario.getIdUsuario()
                     && listadetallecaja.get(i).getFechaCierre() == null
                     && listadetallecaja.get(i).getHoraCierre() == null) {
-//            System.out.println("ESTADO A :"+listadetallecaja.get(i).getEstado());
-//            System.out.println("ID U :"+listadetallecaja.get(i).getIdUsuario()+"-"+seUsuario.getIdUsuario());
-//            System.out.println("CIERRE FECHA :"+listadetallecaja.get(i).getFechaCierre());
-//            System.out.println("CIERRE HORA :"+listadetallecaja.get(i).getHoraCierre());
                 btnAperturaCaja.setEnabled(false);
-                System.out.println("cerrar caja");
                 btnCierre.setEnabled(true);
                 vdc = listadetallecaja.get(i);
                 break;
             } else {
-//                String valor = "F";
-//                act(valor);
-                System.out.println("**");
-                System.out.println("ESTADO A :" + listadetallecaja.get(i).getEstado());
-                System.out.println("ID U :" + listadetallecaja.get(i).getIdUsuario() + "-" + seUsuario.getIdUsuario());
-                System.out.println("CIERRE FECHA :" + listadetallecaja.get(i).getFechaCierre());
-                System.out.println("CIERRE HORA :" + listadetallecaja.get(i).getHoraCierre());
-                System.out.println("esle cierre false");
-                System.out.println("**");
                 btnCierre.setEnabled(false);
-//                break;
             }
 
         }
@@ -99,11 +84,6 @@ public class ContenedorCaja extends javax.swing.JDialog {
         }
     }
 
-    public void act(String valor) {
-        if (valor == "F") {
-            btnCierre.setEnabled(false);
-        }
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
