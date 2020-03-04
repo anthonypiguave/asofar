@@ -412,7 +412,7 @@ public class IngresarPersonas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-         ListarPersonas mp = new ListarPersonas(new javax.swing.JFrame(), true,us1,em1,su1);
+        ListarPersonas mp = new ListarPersonas(new javax.swing.JFrame(), true, us1, em1, su1);
         setVisible(false);
         mp.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -569,13 +569,13 @@ public class IngresarPersonas extends javax.swing.JDialog {
 
                     mp.create(persona);
                     JOptionPane.showMessageDialog(null, "GUARDADO EXITOSAMENTE");
-                   ListarPersonas lp = new ListarPersonas(new javax.swing.JFrame(), true,us1,em1,su1);
+                    ListarPersonas lp = new ListarPersonas(new javax.swing.JFrame(), true, us1, em1, su1);
                     setVisible(false);
                     lp.setVisible(true);
                 }
 
             }
-        } 
+        }
     }
 
     public void CargarRol() {
