@@ -3666,9 +3666,16 @@ public class Tablas {
 
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
+            System.out.println("id-U " + lista.get(i).getIdUsuario());
+            for (int j = 0; j < listaCaja.size(); j++) {
+//                if (listaCaja.get(j).getIdUsuario().longValue() > 1) {
+//                    if(lista.get(i).getIdUsuario()!=listaCaja.get(j).getIdUsuario().longValue()){
+                    System.out.println("iddesdecaja " + listaCaja.get(j).getIdUsuario());
+//                }
+            }
             if ((lista.get(i).getEstado().equals("A")
                     && lista.get(i).getSeUsuarioSucurRolList().get(0).getSeSucursal().equals(suc))) {
-                
+
                 Filas[0] = "" + lista.get(i).getIdUsuario();
                 Filas[1] = lista.get(i).getUsuario();
                 Filas[2] = lista.get(i).getIdPersona().getCorreo();
