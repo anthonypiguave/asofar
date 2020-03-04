@@ -77,6 +77,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
     
     public Cierre_Caja(java.awt.Frame parent, boolean modal, SeUsuarios se, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         seUsuario = se;
@@ -87,6 +88,7 @@ public class Cierre_Caja extends javax.swing.JDialog {
 
     public Cierre_Caja(java.awt.Frame parent, boolean modal, VeDetalleCaja veCaja, SeUsuarios se, SeEmpresa em, SeSucursal su) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         seUsuario = se;
