@@ -2,9 +2,11 @@ package ec.com.asofar.views.caja;
 
 import ec.com.asofar.views.usuarios.*;
 import ec.com.asofar.dao.SeUsuariosJpaController;
+import ec.com.asofar.dao.VeCajaJpaController;
 import ec.com.asofar.dto.SeEmpresa;
 import ec.com.asofar.dto.SeSucursal;
 import ec.com.asofar.dto.SeUsuarios;
+import ec.com.asofar.dto.VeCaja;
 import ec.com.asofar.util.EntityManagerUtil;
 import ec.com.asofar.util.Tablas;
 import java.awt.MouseInfo;
@@ -26,6 +28,8 @@ public class ListarUsuariosEscogerCaja extends javax.swing.JDialog {
     SeUsuarios us1;
     SeEmpresa em1;
     SeSucursal su1;
+    List<VeCaja> listaCaja;
+    VeCajaJpaController cc = new VeCajaJpaController(EntityManagerUtil.ObtenerEntityManager());
 
     public ListarUsuariosEscogerCaja(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -51,8 +55,8 @@ public class ListarUsuariosEscogerCaja extends javax.swing.JDialog {
         usuario_lista = new ArrayList<SeUsuarios>();
 
         usuario_lista = usuario_controller.findSeUsuariosEntities();
-
-        Tablas.listarUsuarios(usuario_lista, jtPersonas, su1);
+        listaCaja = cc.findVeCajaEntities();
+        Tablas.listarUsuariosEscoger(usuario_lista, jtPersonas, su1, listaCaja);
     }
 
     @SuppressWarnings("unchecked")

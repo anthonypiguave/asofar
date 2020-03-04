@@ -150,7 +150,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         JMenu menu = new JMenu(lis.get(i).getNombre());
 
                         //Ruta
-                        System.out.println("Ruta.." + lis.get(i).getRutaIcono());
+//                        System.out.println("Ruta.." + lis.get(i).getRutaIcono());
                         menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(lis.get(i).getRutaIcono())));
                         menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

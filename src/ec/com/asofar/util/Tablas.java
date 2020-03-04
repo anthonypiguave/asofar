@@ -1209,13 +1209,13 @@ public class Tablas {
     }
 
     public static void TablaCajaActiva(List<VeCaja> lista, JTable Tabla) {
-        int[] a = {5, 100,100, 100, 120, 20};
+        int[] a = {5, 100, 100, 100, 120, 20};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"CODIGO", "NOMBRE CAJA","USUARIO", "FECHA CREACION", "FECHA ACTUALIZACION", "ESTADO"};
+        String[] Co = {"CODIGO", "NOMBRE CAJA", "USUARIO", "FECHA CREACION", "FECHA ACTUALIZACION", "ESTADO"};
         String[] Filas = new String[6];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -1223,9 +1223,9 @@ public class Tablas {
             if (lista.get(i).getEstado().equals("A")) {
                 Filas[0] = lista.get(i).getIdCaja().toString();
                 Filas[1] = lista.get(i).getNombre();
-                SeUsuarios o = 
-                        ObtenerDTO.ObtenerUsuarios(lista.get(i).getIdUsuario().longValue());
-                Filas[2] = ""+o.getUsuario();
+                SeUsuarios o
+                        = ObtenerDTO.ObtenerUsuarios(lista.get(i).getIdUsuario().longValue());
+                Filas[2] = "" + o.getUsuario();
                 Filas[3] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaCreacion().getTime()));
                 Filas[4] = Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFechaActualizacion().getTime()));
                 Filas[5] = lista.get(i).getEstado();
@@ -1837,13 +1837,13 @@ public class Tablas {
     }
 
     public static void TablaPrestacionesPorServicios(List<InPrestacionesPorServicios> listapresporserv, JTable Tabla) {
-        int[] a = {130,475, 140, 65, 95, 130};
+        int[] a = {130, 475, 140, 65, 95, 130};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr2.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] b = {"ID PRESTACION","NOMBRE DE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "FACTURABLE", "APLICA DESCUENTO"};
+        String[] b = {"ID PRESTACION", "NOMBRE DE PRESTACIONES", "UNIDAD DE SERVICIO", "ESTADO", "FACTURABLE", "APLICA DESCUENTO"};
         String[] filas = new String[6];
         model = new DefaultTableModel(null, b);
 
@@ -3530,25 +3530,24 @@ public class Tablas {
         Tabla.setShowGrid(true);
 
         InKardexExt kardexExt = new InKardexExt(EntityManagerUtil.ObtenerEntityManager());
-        
+
         Pr_ProductoExt productoExt = new Pr_ProductoExt(EntityManagerUtil.ObtenerEntityManager());
 
         for (int i = 0; i < lista.size(); i++) {
-            
+
             System.out.println(" entro 1");
 
             if (lista.get(i).getEstado().equals("A")) {
-                
+
                 System.out.println(" entro 2");
-                
+
                 PrProductos prod = productoExt.obtenerProductoObj(lista.get(i).getPrProductoBodegaPK().getIdProducto());
-                System.out.println(" entro 3    "+ prod.getPrProductosPK());
+                System.out.println(" entro 3    " + prod.getPrProductosPK());
 //                PrProductos prod = ObtenerPrProductos(lista.get(i).getPrProductoBodegaPK().getIdProducto());
 
                 InKardex kard = kardexExt.obtenerUltimoProductoKardex(lista.get(i).getPrProductoBodegaPK().getIdProducto());
-                 
+
                 if (prod != null) {
-                    
 
                     filas[0] = "" + prod.getPrProductosPK().getIdProducto();
                     filas[1] = prod.getNombreProducto();
@@ -3561,7 +3560,7 @@ public class Tablas {
                 filas[2] = lista.get(i).getInBodega().getNombreBodega();
 
                 if (kard != null) {
-                    System.out.println(" entro 4    "+ kard.getInKardexPK());
+                    System.out.println(" entro 4    " + kard.getInKardexPK());
                     filas[3] = kard.getSaldoActual().toString();
                 } else {
                     filas[3] = "0";
@@ -3652,6 +3651,42 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
 
         }
+    }
+
+    public static void listarUsuariosEscoger(List<SeUsuarios> lista, JTable Tabla, SeSucursal suc, List<VeCaja> listaCaja) {
+        int[] a = {5, 5, 30, 5};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tcr1.setHorizontalAlignment(SwingConstants.LEFT);
+        model = Tablas.VaciarTabla(Tabla);
+        String[] Co = {"ID", "USUARIO", "CORREO", "ROL"};
+        String[] Filas = new String[4];
+        model = new DefaultTableModel(null, Co);
+
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            if ((lista.get(i).getEstado().equals("A")
+                    && lista.get(i).getSeUsuarioSucurRolList().get(0).getSeSucursal().equals(suc))) {
+                
+                Filas[0] = "" + lista.get(i).getIdUsuario();
+                Filas[1] = lista.get(i).getUsuario();
+                Filas[2] = lista.get(i).getIdPersona().getCorreo();
+                Filas[3] = lista.get(i).getSeUsuarioSucurRolList().get(0).getIdRoles().getNombre();
+
+                model.addRow(Filas);
+                Tabla.setModel(model);
+                Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+                Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+                Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+                Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+                Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+                Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            }
+        }
+
     }
 
 }
