@@ -2751,23 +2751,37 @@ public class Tablas {
         String[] Filas = new String[9];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
-        for (int i = 0; i < lista.size(); i++) {
+//        for (int i = 0; i < lista.size(); i++) {
+//            
+//            System.out.println("ffffffffffffff  "+ lista.get(0).getEstado());
             // if (lista.get(i).getEstado().equals("P")) {
-            Filas[0] = "" + lista.get(i).getId_factura().toString();
-            Filas[1] = lista.get(i).getNombre_caja().toString();
+            Filas[0] = "" + lista.get(0).getId_factura().toString();
+            Filas[1] = lista.get(0).getNombre_caja();
             //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
-            if (lista.get(i).getFecha_facturacion() == null) {
-                Filas[2] = "---";
-            } else {
-                Filas[2] = lista.get(i).getFecha_facturacion().toString();
-            }
-            Filas[3] = lista.get(i).getNombre_comercial_suc().toString();
-            Filas[4] = lista.get(i).getSubtotal().toString();
-            Filas[5] = lista.get(i).getTotal_descuento().toString();
-            Filas[6] = lista.get(i).getTotal_iva().toString();
-            Filas[7] = lista.get(i).getTotal_facturado().toString();
-            Filas[8] = lista.get(i).getEstado();
+//            if (lista.get(0).getFecha_facturacion() == null) {
+//                Filas[2] = "---";
+//            } else {
+//                Filas[2] = lista.get(0).getFecha_facturacion().toString();
+//            }
+Filas[2] = "ok";
+            Filas[3] = lista.get(0).getNombre_comercial_suc();
+            Filas[4] = lista.get(0).getSubtotal().toString();
+            Filas[5] = lista.get(0).getTotal_descuento().toString();
+            Filas[6] = lista.get(0).getTotal_iva().toString();
+            Filas[7] = lista.get(0).getTotal_facturado().toString();
+            Filas[8] = "A";
+//Filas[0]= "ok";
+//Filas[1]= "ok";
+//Filas[2]= "ok";
+//Filas[3]= "ok";
+//Filas[4]= "ok";
+//Filas[5]= "ok";
+//Filas[6]= "ok";
+//Filas[7]= "ok";
+//Filas[8]= "ok";
 
+        
+        
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -2789,7 +2803,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
             Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
 
-        }
+//        }
     }
 
     public static void listarReporteDetalleFactura(List<ReporteDetalleFacturaDTO> lista, JTable Tabla) {

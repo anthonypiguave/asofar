@@ -495,18 +495,26 @@ public class ReporteriaCompras extends javax.swing.JDialog {
                                                     txtDescuentlo.getText(),Txt_iva.getText(),Txt_Total.getText());
             lista.add(creporte);
         }
+
         try {
 
-//             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("//Reportes/ReporteriaCompras.jasper"));
-            JasperReport report = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ReporteriaCompras.jasper");
+
+//            JasperReport report = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ReporteriaCompras.jasper");
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/ReporteriaCompras.jasper"));
             JasperPrint jprint = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
             JDialog ventana = new JDialog();
-            JRViewer jviewer = new JRViewer(jprint);
+           
+//            JRViewer jviewer = new JRViewer(jprint);
+            net.sf.jasperreports.view.JRViewer jviewer = new net.sf.jasperreports.view.JRViewer(jprint);
             ventana.add(jviewer);
             ventana.setSize(new Dimension(ancho/2,alto/2));
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
             jviewer.setFitWidthZoomRatio();
+           
+
+           
+           
         } catch (JRException ex) {
             Logger.getLogger(ReporteriaCompras.class.getName()).log(Level.SEVERE, null, ex);
         }

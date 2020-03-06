@@ -514,10 +514,11 @@ public class ReporteriaVentas extends javax.swing.JDialog {
             lista.add(creporte);
         }
         try {
-            JasperReport report = (JasperReport) JRLoader.loadObject(System.getProperty("user.dir") + "/Reportes/ReporteriaVentas.jasper");
+
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/ReporteriaVentas.jasper"));
             JasperPrint jprint = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
             JDialog ventana = new JDialog();
-            JRViewer jviewer = new JRViewer(jprint);
+            net.sf.jasperreports.view.JRViewer jviewer = new net.sf.jasperreports.view.JRViewer(jprint);
             ventana.add(jviewer);
             ventana.setSize(new Dimension(ancho / 2, alto / 2));
             ventana.setLocationRelativeTo(null);

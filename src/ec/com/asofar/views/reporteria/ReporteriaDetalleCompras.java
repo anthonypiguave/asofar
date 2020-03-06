@@ -639,11 +639,12 @@ public class ReporteriaDetalleCompras extends javax.swing.JDialog {
             tablac.add(tabla1);
         }
         try {
-            String dir = System.getProperty("user.dir")+"/Reportes/"+"ReporteriaDetalleCompras.jasper";
-            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
-            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(tablac));
+
+
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/ReporteriaDetalleCompras.jasper"));
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(tablac));
             JDialog frame = new JDialog(this);
-            JRViewer viewer = new JRViewer(jprint);
+            net.sf.jasperreports.view.JRViewer viewer = new net.sf.jasperreports.view.JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));
             frame.setLocationRelativeTo(null);

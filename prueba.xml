@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <facturaOrden>
-    <facturaCabecera IdFactura="1">
+    <facturaCabecera IdFactura="2">
         <empresa>ASOFAR</empresa>
         <sucursal>MADRID</sucursal>
-        <fecha>2020-03-02T23:28:58.964-05:00</fecha>
+        <fecha>2020-03-06T18:07:36.790-05:00</fecha>
         <formaPago>CONTADO</formaPago>
         <despachado>SI</despachado>
-        <caja>prueba 2</caja>
+        <caja>caja admin</caja>
         <usuario>admin</usuario>
         <clienteID>9999999999999</clienteID>
         <clienteNombreApellido>FINAL CONSUMIDOR</clienteNombreApellido>
@@ -19,7 +19,7 @@
         <totalFacturado>0.2</totalFacturado>
     </facturaCabecera>
     <facturaDetalle>
-        <detalle IdFacturaDetalle="1">
+        <detalle IdFacturaDetalle="2">
             <lineaDetalle>1</lineaDetalle>
             <idProducto>1</idProducto>
             <descripcion>GENFARGRIP DIA EN SOBRES  DE 18G</descripcion>
