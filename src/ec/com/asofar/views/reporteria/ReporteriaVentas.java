@@ -158,16 +158,19 @@ public class ReporteriaVentas extends javax.swing.JDialog {
             switch (x) {
                 case -1:
                     System.out.println("correcto");
+                    itemList = new ArrayList<ReporteFacturaDTO>();
                     itemList = rep.reporteFacturaFechas(valor, valor2);
                     Tablas.listarReporteFactura(itemList, tbaReporteCompra);
                     break;
                 case 0:
                     System.out.println("correcto");
+                    itemList = new ArrayList<ReporteFacturaDTO>();
                     itemList = rep.reporteFacturaFechas(valor, valor2);
                     Tablas.listarReporteFactura(itemList, tbaReporteCompra);
                     break;
                 case -2:
                     System.out.println("correcto");
+                    itemList = new ArrayList<ReporteFacturaDTO>();
                     itemList = rep.reporteFacturaFechas(valor, valor2);
                     Tablas.listarReporteFactura(itemList, tbaReporteCompra);
                     break;
@@ -531,7 +534,7 @@ public class ReporteriaVentas extends javax.swing.JDialog {
 
     private void BtnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscar1ActionPerformed
         busquedaChosserQuery();
-        cargartabala();
+
     }//GEN-LAST:event_BtnBuscar1ActionPerformed
 
     private void buscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyPressed

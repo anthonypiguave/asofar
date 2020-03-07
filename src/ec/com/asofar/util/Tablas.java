@@ -2747,42 +2747,26 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.RIGHT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"COD.FACT", "CAJA", "FECHA FACTURACION", "COMERCIAL", "SUBTOTAL", "T.DESCUENTO", "T.IVA", "T.FACTURA", "ESTADO"};
+        String[] b = {"COD.FACT", "CAJA", "FECHA FACTURACION", "COMERCIAL", "SUBTOTAL", "T.DESCUENTO", "T.IVA", "T.FACTURA", "ESTADO"};
         String[] Filas = new String[9];
-        model = new DefaultTableModel(null, Co);
+        model = new DefaultTableModel(null, b);
         Tabla.setShowGrid(true);
-//        for (int i = 0; i < lista.size(); i++) {
-//            
-//            System.out.println("ffffffffffffff  "+ lista.get(0).getEstado());
-            // if (lista.get(i).getEstado().equals("P")) {
-            Filas[0] = "" + lista.get(0).getId_factura().toString();
+
+        for (int i = 0; i < lista.size(); i++) {
+           
+
+            Filas[0] = lista.get(i).getId_factura().toString();
             Filas[1] = lista.get(0).getNombre_caja();
-            //Filas[2] = "" + Fecha.getStringFecha(new java.sql.Date(lista.get(i).getFecha_aprobacion().getTime()));
-//            if (lista.get(0).getFecha_facturacion() == null) {
-//                Filas[2] = "---";
-//            } else {
-//                Filas[2] = lista.get(0).getFecha_facturacion().toString();
-//            }
-Filas[2] = "ok";
+            Filas[2] = lista.get(0).getFecha_facturacion().toString();
             Filas[3] = lista.get(0).getNombre_comercial_suc();
             Filas[4] = lista.get(0).getSubtotal().toString();
             Filas[5] = lista.get(0).getTotal_descuento().toString();
             Filas[6] = lista.get(0).getTotal_iva().toString();
             Filas[7] = lista.get(0).getTotal_facturado().toString();
-            Filas[8] = "A";
-//Filas[0]= "ok";
-//Filas[1]= "ok";
-//Filas[2]= "ok";
-//Filas[3]= "ok";
-//Filas[4]= "ok";
-//Filas[5]= "ok";
-//Filas[6]= "ok";
-//Filas[7]= "ok";
-//Filas[8]= "ok";
+            Filas[8] = lista.get(i).getEstado();
 
-        
-        
             model.addRow(Filas);
+
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
@@ -2802,8 +2786,8 @@ Filas[2] = "ok";
             Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
             Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+        }
 
-//        }
     }
 
     public static void listarReporteDetalleFactura(List<ReporteDetalleFacturaDTO> lista, JTable Tabla) {
@@ -3684,7 +3668,7 @@ Filas[2] = "ok";
             for (int j = 0; j < listaCaja.size(); j++) {
 //                if (listaCaja.get(j).getIdUsuario().longValue() > 1) {
 //                    if(lista.get(i).getIdUsuario()!=listaCaja.get(j).getIdUsuario().longValue()){
-                    System.out.println("iddesdecaja " + listaCaja.get(j).getIdUsuario());
+                System.out.println("iddesdecaja " + listaCaja.get(j).getIdUsuario());
 //                }
             }
             if ((lista.get(i).getEstado().equals("A")
