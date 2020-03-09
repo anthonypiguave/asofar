@@ -92,7 +92,6 @@ public class ContenedorCaja extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         btnAperturaCaja = new javax.swing.JButton();
         btnCierre = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -116,15 +115,6 @@ public class ContenedorCaja extends javax.swing.JDialog {
         btnCierre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCierreActionPerformed(evt);
-            }
-        });
-
-        jButton5.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(1, 1, 1));
-        jButton5.setText("IMPRIMIR");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
             }
         });
 
@@ -152,15 +142,15 @@ public class ContenedorCaja extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                    .addComponent(btnAperturaCaja, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                            .addComponent(btnAperturaCaja, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,9 +162,7 @@ public class ContenedorCaja extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(btnCierre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -218,38 +206,6 @@ public class ContenedorCaja extends javax.swing.JDialog {
         this.setVisible(false);
         cierre.setVisible(true);
     }//GEN-LAST:event_btnCierreActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        VeDetalleCajaEXT v = new VeDetalleCajaEXT(EntityManagerUtil.ObtenerEntityManager());
-        List<VeDetalleCaja> listadetallecaja = v.ObtenerResultados(seUsuario);
-
-        List lista = new ArrayList<>();
-
-        for (int i = 0; i < listadetallecaja.size(); i++) {
-
-            Date fecha = new Date();
-            DateFormat df1 = new SimpleDateFormat("hh:mm:ss");
-            String hora1 = df1.format(listadetallecaja.get(i).getHoraInicio());
-            String hora2 = df1.format(listadetallecaja.get(i).getHoraCierre());
-
-            ObjetoPrueba op = new ObjetoPrueba(
-                    listadetallecaja.get(i).getVeCaja().getNombre()
-                    + "/" + seUsuario.getUsuario(),
-                    hora1,
-                    listadetallecaja.get(i).getDineroInicio().toString(),
-                    hora2,
-                    listadetallecaja.get(i).getDineroCierre().toString());
-
-            lista.add(op);
-
-        }
-        if (!btnCierre.isEnabled()) {
-            Documento.Reporte("Cajas Activas", lista, "/src/ec/com/asofar/views/caja/caja.jasper");
-            setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "LA CAJA DEBE ESTAR CERRADA", "ACCION DENEGADA", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -302,7 +258,6 @@ public class ContenedorCaja extends javax.swing.JDialog {
     private javax.swing.JButton btnAperturaCaja;
     private javax.swing.JButton btnCierre;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
