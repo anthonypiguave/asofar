@@ -198,13 +198,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                                 public void actionPerformed(ActionEvent e) {
 //                                                String permiso = "si";
                                                     String permiso = pVender();
-                                                    if (permiso.equals("no")) {
-                                                        JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
-                                                    } else {
-                                                        
-                                                        Venta fac = new Venta(new javax.swing.JFrame(), true, us1, em1, su1);
+                                                    if (permiso.equals("si")) {
+                                                         Venta fac = new Venta(new javax.swing.JFrame(), true, us1, em1, su1);
                                                         jdpescritorio.add(fac);
                                                         fac.show();
+                                                    } else {
+                                                         JOptionPane.showMessageDialog(null, "Debe abrir Caja para Vender");
                                                     }
                                                 }
                                             });
